@@ -1,0 +1,5 @@
+FileVersion = 1
+Projects = {BfEngine = {Path = "."}}
+
+[Workspace]
+StartupProject = "BfEngine"
