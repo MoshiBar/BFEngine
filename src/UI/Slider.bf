@@ -30,6 +30,38 @@ namespace BfEngine.UI
 			this.flags = flags;
 			this.callback = callback;
 			callback?.Invoke(value);
+
+			OnMouseEnter.Add(new (_) =>
+			{
+				var toTween = flags.HasFlag(.Vertical) ? &scale.x : &scale.y;
+				Tweenie.AddTween(toTween, 1.5f, 0.25f, .OutExpo);
+				//slider.color = .red;
+				dirty = true;
+				dirtytimeout = Math.Max(dirtytimeout, (float)Time.Time + 0.25f);
+			});
+
+			OnMouseLeave.Add(new (_) =>
+			{
+				var toTween = flags.HasFlag(.Vertical) ? &scale.x : &scale.y;
+				Tweenie.AddTween(toTween, 1f, 0.5f, .OutElastic);
+				//slider.color = .white;
+				dirty = true;
+				dirtytimeout = Math.Max(dirtytimeout, (float)Time.Time + 0.5f);
+			});
+
+			OnMouseHold.Add(new (_) =>
+			{
+
+				var norPos = GetNormalizedPosition(CursorPos);
+
+				float fill = (flags.HasFlag(.Vertical) ? norPos.y + 1 : norPos.x + 1) / 2;
+
+				if(flags.HasFlag(.Inverse)) fill = 1 - fill;
+
+				((Self)_).value = Math.Clamp(fill * (max - min) + min, min, max);
+
+				callback?.Invoke(value);
+			});
 		}
 
 		public override Vector2 GetNormalizedPosition(Vector2 pos) => base.GetNormalizedPosition(pos) / scale;
@@ -129,7 +161,7 @@ namespace BfEngine.UI
 			}
 		}
 
-		public override void OnMouseEnter()
+		/*public override void OnMouseEnter()
 		{
 			var toTween = flags.HasFlag(.Vertical) ? &scale.x : &scale.y;
 			Tweenie.AddTween(toTween, 1.5f, 0.25f, .OutExpo);
@@ -158,6 +190,6 @@ namespace BfEngine.UI
 			value = Math.Clamp(fill * (max - min) + min, min, max);
 
 			callback?.Invoke(value);
-		}
+		}*/
 	}
 }

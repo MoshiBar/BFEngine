@@ -265,7 +265,7 @@ namespace BfEngine
 		}
 
 
-		public void Draw(Matrix4 modelView, Matrix4 projection/*, Color4 color = .white*/)
+		public void Draw(Matrix4 modelView, Matrix4 projection, Color4 color = .white)
 		{
 			var shader = Shader.text;
 
@@ -274,14 +274,13 @@ namespace BfEngine
 			shader.SetMatrix(0, modelView);// transform
 			shader.SetMatrix(1, projection);// projectionMatrix
 			shader.SetVec2(2, .(font.scaleW, font.scaleH));
-			//shader.SetFloat(2, spriteSize);
 
 
 			GL.ActiveTexture(.TEXTURE0);
 			GL.BindTexture(.TEXTURE_2D, texture);
 
 
-			//shader.SetColor(3, .white);//color
+			shader.SetColor(3, .white);//color
 
 			GL.BindVertexArray(VAO);
 			GL.DrawArrays(.POINTS, 0, (.)count);

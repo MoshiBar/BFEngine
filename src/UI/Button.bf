@@ -17,6 +17,38 @@ namespace BfEngine.UI
 		{
 			this.color = color;
 			this.callback = callback;
+
+
+			OnMouseEnter.Add(new (_) =>
+			{
+				Tweenie.AddTween(&scale, .(1.1f), 0.25f, .OutExpo);
+				dirty = true;
+				dirtytimeout = Math.Max(dirtytimeout, (float)Time.Time + 0.25f);
+			});
+
+			OnMouseLeave.Add(new (_) =>
+			{
+				Tweenie.AddTween(&scale, .(1f), 0.5f, .OutElastic);
+				dirty = true;
+				dirtytimeout = Math.Max(dirtytimeout, (float)Time.Time + 0.5f);
+			});
+
+			OnMouseDown.Add(new (_) =>
+			{
+				Tweenie.AddTween(&scale, .(0.9f), 0.25f, .OutExpo);
+				dirty = true;
+				dirtytimeout = Math.Max(dirtytimeout, (float)Time.Time + 0.25f);
+			});
+
+			OnMouseUp.Add(new (_) =>
+			{
+				Tweenie.AddTween(&scale, .(1.1f), 0.5f, .OutElastic);
+				dirty = true;
+				dirtytimeout = Math.Max(dirtytimeout, (float)Time.Time + 0.5f);
+
+				if(GetNormalizedPosition(UI.CursorPos).InUnitSquare)
+					callback?.Invoke();
+			});
 		}
 
 		public override void GenerateMesh(List<Vector2> positions, List<Color4> colors, List<uint32> indices, ref uint32 index)
@@ -101,7 +133,7 @@ namespace BfEngine.UI
 			index += ind;
 		}
 
-		public override void OnMouseEnter()
+		/*public override void OnMouseEnter()
 		{
 			Tweenie.AddTween(&scale, .(1.1f), 0.25f, .OutExpo);
 			dirty = true;
@@ -130,6 +162,6 @@ namespace BfEngine.UI
 
 			if(GetNormalizedPosition(UI.CursorPos).InUnitSquare)
 				callback?.Invoke();
-		}
+		}*/
 	}
 }

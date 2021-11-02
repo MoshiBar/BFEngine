@@ -12,7 +12,7 @@ namespace BfEngine.UI
 		[Inline]public ref Vector2 scale => ref transform.scale;
 		//[Inline]public ref Vector2 skew => ref transform.skew;
 		[Inline]public ref float rotation => ref transform.rotation;
-		public Color4 color;
+		public Color4 color = .white;
 		public uint32 parent;
 
 		public float bevelwidth = 30f;
@@ -66,20 +66,22 @@ namespace BfEngine.UI
 
 		public virtual Vector2 GetNormalizedPosition(Vector2 pos){
 			//var appliedTransform = transform.GetAppliedTransform(parentTransform);
+			//applied transform should refer to its global transform but we don't have any hierarchy (yet?)
 			var appliedTransform = transform;
-			var normalizedPosition = pos - (appliedTransform.position + appliedTransform.anchorPos * UI.UIScale * .(Screen.AspectRatio, 1));
+			var normalizedPosition = pos - (appliedTransform.position - appliedTransform.anchorPos * size * scale * 0.5f /** UI.UIScale * .(Screen.AspectRatio, 1)*/);
 			normalizedPosition = Vector2.Rotate(normalizedPosition, -appliedTransform.rotation);
 			/*normalizedPosition = Vector2(normalizedPosition.x - skew.x * normalizedPosition.y * 2 / size.y, normalizedPosition.y - skew.y * normalizedPosition.x * 2 / size.x);*/
-			return normalizedPosition * 2 / (appliedTransform.size/* * scale*/);
+			return normalizedPosition * 2 / (appliedTransform.size * scale);
 		}
 
-		public virtual void OnMouseEnter(){}
-		public virtual void OnMouseLeave(){}
-		public virtual void OnMouseDown(){}
-		public virtual void OnMouseUp(){}
-		public virtual void OnMouseHold(){}
+		public Event<delegate void(Self)> OnMouseEnter = .() ~ _.Dispose();
+		public Event<delegate void(Self)> OnMouseLeave = .() ~ _.Dispose();
+		public Event<delegate void(Self)> OnMouseDown  = .() ~ _.Dispose();
+		public Event<delegate void(Self)> OnMouseUp    = .() ~ _.Dispose();
+		public Event<delegate void(Self)> OnMouseHold  = .() ~ _.Dispose();
 
 		public virtual void Draw(){
+
 			var transform = Matrix4.CreateTransform(position - transform.anchorPos * size * scale * 0.5f, size * scale * 0.5f, .());
 
 			var rect = UI.[Friend]rect;

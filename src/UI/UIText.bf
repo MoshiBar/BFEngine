@@ -10,11 +10,21 @@ namespace BfEngine.UI
 		public this(RectTransform rect) : base(rect){
 			var text = append Text();
 			this.text = text;
+
+			OnMouseEnter.Add(new (pfp) => {
+				Engine.SetCursor(Engine.ibeam);
+				});
+			OnMouseLeave.Add(new (pfp) => {
+				Engine.SetCursor(Engine.pointer);
+					});
 		}
 
 		public float textScale = 1;
 
 		public override void Draw(){
+			base.Draw();
+			return;
+
 			var ssize = size * scale;
 
 			
@@ -26,7 +36,6 @@ namespace BfEngine.UI
 			UI.[Friend]rect.Draw(dbgtransform, UI.UIMatrix, (3, Variant.Create(size)), (4, Variant.Create(Color4.red)), (5, Variant.Create(bevelwidth))    );*/
 
 			var rect = UI.[Friend]rect;
-
 			text.Draw(transform, UI.UIMatrix);
 
 			//rect.Textures[0] = texture;

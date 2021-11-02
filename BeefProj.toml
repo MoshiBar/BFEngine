@@ -1,7 +1,11 @@
 FileVersion = 1
-Dependencies = {corlib = "*", SDL2 = "*"}
+Dependencies = {corlib = "*", OpenAL = "*", Windows = "*"}
 
 [Project]
 Name = "BfEngine"
 TargetType = "BeefLib"
 StartupObject = "BfEngine.Program"
+
+[[ProjectFolder.Items]]
+Type = "IgnoreSource"
+Name = "lodepng.bf"

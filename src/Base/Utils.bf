@@ -3,46 +3,11 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections;
 using System.Security.Cryptography;
-using SDL2;
 
 namespace BfEngine
 {
 	public static class Utils
 	{
-		public static int32 ShowMessageBoxOK(String title, String message)
-		{
-			var messageBoxData = SDL.MessageBoxData();
-			SDL.MessageBoxButtonData[1] buttons;
-			buttons[0].buttonid = 0;
-			buttons[0].text = "OK";
-			messageBoxData.buttons = &buttons[0];
-			messageBoxData.window = null;
-			messageBoxData.numbuttons = 1;
-			messageBoxData.message = message;
-			messageBoxData.title = title;
-			int32 buttonId = 0;
-			SDL.ShowMessageBox(ref messageBoxData, out buttonId);
-			return buttonId;
-		}
-
-		public static int32 ShowMessageBoxOKCancel(StringView title, StringView message)
-		{
-			var messageBoxData = SDL.MessageBoxData();
-			SDL.MessageBoxButtonData[2] buttons;
-			buttons[0].buttonid = 0;
-			buttons[0].text = "OK";
-			buttons[1].buttonid = 1;
-			buttons[1].text = "Cancel";
-			messageBoxData.buttons = &buttons[0];
-			messageBoxData.window = null;
-			messageBoxData.numbuttons = 1;
-			messageBoxData.message = message.Ptr;
-			messageBoxData.title = title.Ptr;
-			int32 buttonId = 0;
-			SDL.ShowMessageBox(ref messageBoxData, out buttonId);
-			return buttonId;
-		}
-
 		public static int ExecuteProcess(StringView executable, StringView commandLine)
 		{
 			Log.Info("Executing: {0} {1}", executable, commandLine);

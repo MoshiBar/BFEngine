@@ -119,34 +119,38 @@ namespace BfEngine.UI
 			if(!Input.mouseDown)
 			{
 				int newSelectedIndex = -1;
-				for(int i = 0; i < UIElements.Count; i++){
+				if(Input.cursorInBounds)
+				for(int i = UIElements.Count - 1; i >= 0; i--){
 					var norPos = UIElements[i].GetNormalizedPosition(CursorPos);
 					if(norPos.InUnitSquare)
-					/*if( norPos.x > -1 && norPos.x < 1 &&
-						norPos.y > -1 && norPos.y < 1)*/{
+					{
 						newSelectedIndex = i;
 						break;
 					}
 				}
 				//dont question it i have no idea how this works
 				if(newSelectedIndex != selectedIndex){
-					if(newSelectedIndex >= 0){
-						UIElements[newSelectedIndex].OnMouseEnter();
-					}
+
 					if(selectedIndex >= 0){
-						UIElements[selectedIndex].OnMouseLeave();
+						UIElements[selectedIndex].color = .white;//just for debugging input
+						UIElements[selectedIndex].OnMouseLeave(UIElements[selectedIndex]);
+					}
+					if(newSelectedIndex >= 0){
+						UIElements[newSelectedIndex].color = .red;//just for debugging input
+						UIElements[newSelectedIndex].OnMouseEnter(UIElements[newSelectedIndex]);
 					}
 					selectedIndex = newSelectedIndex;
 				}
-				if(selectedIndex >= 0 && Input.onMouseUp)UIElements[selectedIndex].OnMouseDown();
+				if(selectedIndex >= 0 && Input.onMouseUp)
+					UIElements[selectedIndex].OnMouseDown(UIElements[selectedIndex]);
 			}
 
 			if(selectedIndex >= 0)
 			{
 				var element = UIElements[selectedIndex];
-				if(Input.onMouseDown)element.OnMouseDown();
-				if(Input.onMouseUp)element.OnMouseUp();
-				if(Input.mouseDown)element.OnMouseHold();
+				if(Input.onMouseDown)element.OnMouseDown(element);
+				if(Input.onMouseUp)element.OnMouseUp(element);
+				if(Input.mouseDown)element.OnMouseHold(element);
 			}
 		}
 

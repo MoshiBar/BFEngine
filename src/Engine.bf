@@ -1,16 +1,19 @@
-using SDL2;
 using BfEngine;
 using System;
 using BfEngine.UI;
 using System.Diagnostics;
-using static SDL2.SDL;
+using Windows;
+using static Windows.GDI32;
+using static Windows.OpenGL32;
+using static Windows.User32;
+using static Windows.Kernel32;
 
 namespace BfEngine
 {
 	class Engine
 	{
-		public static Window* window;
-		public static Renderer* renderer;
+		//public static Window* window;
+		//public static Renderer* renderer;
 
 		public static bool Running;
 
@@ -20,40 +23,60 @@ namespace BfEngine
 
 		public static function void() UpdateFunc;
 
-//#define WIN32 //use
+#define WIN32 //use
 
 #if WIN32
-
 		static HDC hdc;
+		static HWND hwnd;
+
+		public static HCURSOR handcursor, pointer, ibeam;
+		public static HCURSOR currentCursor;
 
 		[CallingConvention(.Stdcall)]
-		static int testWndProc(HWND hwnd, Win32.WndProcMessage uMsg, LPVOID wParam, LPVOID lParam){
-			/*if(uMsg != .MouseMove && uMsg != .NCHitTest && uMsg != .SetCursor)
-				Console.WriteLine($"{hwnd}, {uMsg:x}, {wParam}, {lParam}");*/
-
+		static int testWndProc(HWND hwnd, WndProcMessage uMsg, int wParam, int lParam){
 			switch(uMsg){
 			case .Size:{
 				var size = *(uint16[2]*)&lParam;
+				Console.WriteLine($"sizemsg: {Vector2(size[0], size[1])}");
 				Screen.Resolution = .(size[0], size[1]);
+				break;
 			}
 			case .NCDestroy: Engine.Running = false;
 			case .MouseMove:{
 				var pos = *(uint16[2]*)&lParam;
+				Console.WriteLine(pos);
 				Input.CursorPosition = .(pos[0], pos[1]);
+				break;
 			}
 			case .LButtonDown:{
 				Input.mouseDown = true;
 				Input.onMouseDown = true;
+				break;
 				}
 			case .LButtonUp:{
 				Input.mouseDown = false;
 				Input.onMouseUp = true;
+				break;
 				}
-			case .NCHitTest: break;
-			case .SetCursor: break;
+			case .NCHitTest: {
+				var result = (HitTestResult)DefWindowProcA(hwnd, uMsg, wParam, lParam);
+				Input.cursorInBounds = ((HitTestResult)result & (.)int16.MaxValue) == .Client;//cursor is only considered in bounds if it is inside the client area(inner area)
+				
+				return (.)result;
+			}
+			case .SetCursor: {
+				//Console.WriteLine(lParam);
+				if(((HitTestResult)(int)lParam & (.)int16.MaxValue) == .Client){
+					User32.SetCursor(currentCursor);
+				}
+				break;
+			}
 			case .GetIcon: break;
-			case .NCMouseMove: break;
-			case .NCMouseLeave: break;
+			case .NCMouseMove: {
+				
+				break;
+			}
+			//case .NCMouseLeave: break;
 			/*case .SysCommand:{
 				var cmd = (SysCommand)((int)wParam & ~0xF);
 				var flag = (int)wParam & 0xF;
@@ -77,33 +100,58 @@ namespace BfEngine
 				default: break;
 				}
 			}*/
+			/*case (.)356:{
+				var size = *(uint16[2]*)&lParam;
+				//Screen.Resolution = .(size[0], size[1]);
+				//Debug.Break();
+			}*/
 			default:{
 				//Console.WriteLine($"{hwnd}, {uMsg:x}, {wParam}, {lParam}");
-				
-			}
+				var size = *(uint16[2]*)&lParam;
+				Console.WriteLine($"{hwnd}, {uMsg:x}, {lParam}, ({size[0]}, {size[1]})");
+				break;
+				}
 			}
 
-			return Win32.DefWindowProcA(hwnd, uMsg, wParam, lParam);
+			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 		}
 
 		/*static int SysCommandProc(LPVOID wParam, LPVOID lParam){
 
 		}*/
+
+		public static void SetCursor(HCURSOR cursor){
+			//testWndProc(hwnd, .SetCursor, cursor, null);
+			//User32.SetCursor(cursor);
+			//User32.PostMessageA(hwnd, .SetCursor, cursor, hwnd);
+			currentCursor = cursor;
+		}
+#else
+		public static Vector2Int GetWindowSize(){
+			int32 x, y;
+			SDL.GetWindowSize(window, out x, out y);
+			return .((int32)x, (int32)y);	
+		}
 #endif
 
 		public static void Init(){
-			
 #if WIN32
 			// Register the window class.
 			char8* CLASS_NAME  = "Sample Window Class";
 
 			HINSTANCE hInstance = GetModuleHandleA(null);
 
+			handcursor = LoadCursorA(null, IDC_HAND);
+			pointer = LoadCursorA(null, IDC_ARROW);
+			ibeam = LoadCursorA(null, IDC_IBEAM);
+
+			currentCursor = pointer;
+
 			WNDCLASSEXA wc = default;
 			wc.cbSize = sizeof(WNDCLASSEXA);
 			wc.cbClsExtra = 0;
 			wc.cbWndExtra = 0;
-			wc.hCursor = LoadCursorA(null, IDC_ARROW);
+			wc.hCursor = null;//pointer;
 			wc.hIcon = LoadIconA(null, IDI_WINLOGO);
 			wc.hIconSm = null;
 			wc.lpszMenuName = null;
@@ -114,15 +162,15 @@ namespace BfEngine
 			wc.hInstance     = hInstance;
 			wc.lpszClassName = CLASS_NAME;
 
-			var _class = Win32.RegisterClassExA(&wc);
+			var _class = RegisterClassExA(&wc);
 
 			// Create the window.
 
-			Win32.HWND hwnd = Win32.CreateWindowExA(
+			hwnd = CreateWindowExA(
 			    0,                              // Optional window styles.
 			    CLASS_NAME,                     // Window class
 			    "Learn to Program Windows",    // Window text
-			    .OverlappedWindow | .Maximized/*OVERLAPPEDWINDOW*/,            // Window style
+			    .OverlappedWindow | .Maximized,            // Window style
 
 			    // Size and position
 			    0, 0, 600, 400,
@@ -133,13 +181,12 @@ namespace BfEngine
 			    null        // Additional application data
 			    );
 
-			
 			if (hwnd == null)
 			{
 			    Debug.Break();
 			}
 
-			var showwindow = ShowWindow(hwnd, 1);
+			var showwindow = ShowWindow(hwnd, .Normal);
 
 
 			PIXELFORMATDESCRIPTOR pfd =
@@ -147,7 +194,7 @@ namespace BfEngine
 					sizeof(PIXELFORMATDESCRIPTOR),
 					1,
 					.DrawToWindow | .SupportOpenGL | .DoubleBuffer,    // Flags
-					.PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
+					.PFD_TYPE_RGBA,       // The kind of framebuffer. RGBA or palette.
 					32,                   // Colordepth of the framebuffer.
 					0, 0, 0, 0, 0, 0,
 					0,
@@ -163,31 +210,40 @@ namespace BfEngine
 				);
 			hdc = GetDC(hwnd);
 
-			int32 iPixelformat = wglChoosePixelFormat(hdc, &pfd);
+			var current = wglMakeCurrent(hdc, null);
 
-			var result = wglSetPixelFormat(hdc, iPixelformat, &pfd);
-
+			int32 iPixelformat = ChoosePixelFormat(hdc, &pfd);
+			/*var result =*/ SetPixelFormat(hdc, iPixelformat, &pfd);
 			var context = wglCreateContext(hdc);
-			wglMakeCurrent(hdc, context);
+			current = wglMakeCurrent(hdc, context);
 
 
 			var ctx = wglGetCurrentContext();
 
 
 			GL.Init((_) => {
-					var addr = wglGetProcAddress(_);
+					var addr = OpenGL32.wglGetProcAddress(_);
 					if(addr == null) {
 						addr = GetProcAddress(LoadLibraryA("opengl32.dll"), _);
 						//var error = Win32.GetLastError();
 						//Debug.Break();
 					}
+					//if(addr == null) Debug.Break();
 					return addr;
 				});
+			var version = GL.GetString(.VERSION);
+			//Utils.ShowMessageBoxOK("OPENGL VERSION", scope String(version));
 
-			//Utils.ShowMessageBoxOK("OPENGL VERSION", scope String(GL.GetString(.VERSION)));
+			SetWindowTextA(hwnd, GL.GetString(.VERSION));
+			//SDL.Init(.Everything);
 
-			Win32.SetWindowTextA(hwnd, GL.GetString(.VERSION));
-			SDL.Init(.Everything);
+			{
+				int32 x = 900, y = 640;
+				var rect = GetWindowRect(Engine.[Friend]hwnd, ..var _);
+				SetWindowPos(Engine.[Friend]hwnd, default, rect.x, rect.y, x, y, default);
+				Console.WriteLine($"getrect: {Vector2(x, y)}");
+				//Screen.Resolution = .((.)x, (.)y);
+			}
 #else
 			/*Context init stuff*/
 
@@ -247,7 +303,6 @@ namespace BfEngine
 
 			Audio.Init();
 
-			Screen.[Friend]Update();
 			Camera.[Friend]Update();
 			Shader.Load();
 			Text.Init();
@@ -264,6 +319,8 @@ namespace BfEngine
 			Running = true;
 
 			GL.Clear(.COLOR_BUFFER_BIT);
+
+			User32.SetCursor(pointer);
 		}
 
 		public static void Update()
@@ -286,7 +343,7 @@ namespace BfEngine
 			Time.tweenieTime = sw.ElapsedMicroseconds / 1000f;
 			sw.Restart();
 
-
+			
 			UpdateFunc();
 
 			sw.Stop();
@@ -300,7 +357,9 @@ namespace BfEngine
 			//statsText.GenerateTextBuffer(scope $"{Math.Round(1 / Time.SmoothDeltaTime)} FPS\n<size=25%><color=#FF0055>Engine Update Time: {engineTime:0.00}\n<color=yellow>Tweenie Update Time: {tweenieTime:0.00}\nGame Update Time: {averager.average:0.00}\nUI Update Time: {UITime:0.00}", .Default);
 			//statsText.Draw(Matrix4.CreateTransform(.(Input.CursorPosition.x, -Input.CursorPosition.y)/*.(0, 0, 0)*/, .(1, 1, 1), .()), Camera.ScreenSpaceMatrix);
 #if WIN32
-			Win32.SwapBuffers(hdc);
+			Input.cursorInBounds &= WindowFromPoint(GetCursorPos()) == hwnd;//cursor is considered out of bounds if the mouse is over another window that is obscuring it
+			
+			Windows.GDI32.SwapBuffers(hdc);
 #else
 			SDL.GL_SwapWindow(Engine.window);
 #endif

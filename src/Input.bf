@@ -5,9 +5,10 @@ namespace BfEngine
 {
 	class Input
 	{
+
 		public static Vector2 CursorPosition;
 
-		public static bool mouseDown, onMouseDown, onMouseUp;
+		public static bool mouseDown, onMouseDown, onMouseUp, cursorInBounds;
 
 
 		public struct Controller : this(
@@ -49,13 +50,9 @@ namespace BfEngine
 			
 			Vector2 stickL = Vector2(state.Gamepad.sThumbLX / 32767f, state.Gamepad.sThumbLY / 32767f);
 			controller.leftStick = Deadzone!(stickL);
-			//Console.WriteLine(controller.leftStick);
 
 			Vector2 stickR = Vector2(state.Gamepad.sThumbRX / 32767f, state.Gamepad.sThumbRY / 32767f);
 			controller.rightStick = Deadzone!(stickR);
-			//Console.WriteLine(controller.rightStick);
-
-			
 		}
 
 		static mixin Deadzone(Vector2 stickInput){

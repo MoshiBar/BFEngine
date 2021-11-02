@@ -19,6 +19,6 @@ void main(void){
 
     float mask = float(distance(position, clampedposition) < bevel);
 
-    fragColor = texColor * mask;
+    fragColor = texColor * color * mask;
     //fragColor = texColor * color;
 }

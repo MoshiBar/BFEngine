@@ -1,5 +1,4 @@
 using BfEngine;
-using SDL2;
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -18,101 +17,101 @@ namespace BfEngine
 		public uint32 ID;
 
 		public static void Init(){
-			white = Texture.LoadRaw(scope uint32[]((.)-1), .(1, 1), .RGBA, 0);
+			white = Texture.LoadRaw(scope uint8[](255, 255, 255, 255).Ptr, .(1, 1), .RGBA, 0);
 		}
 
 
 		public this(uint32 ID) => this.ID = ID;
 
-		public static Texture Load(StringView fileName) => Load(fileName, var size);
+		public static Texture Load(StringView fileName) => Load(fileName, var size, .LCT_RGBA);
 
-		public static Texture Load(StringView fileName, out Vector2 size){
+		public static Texture Load(StringView fileName, out Vector2 size, LodePNG.LodePNGColorType colortype){
 			int hash = fileName.GetHashCode();
-
-			if(textures.TryGetValue(hash, var tex)){
+			{
+			if(textures.TryGetValue(hash, var tex)) {
 				size = tex.size;
 				return tex.tex;
 			}
+			}
+			uint8* data = default;
+			uint32 width = default, height = default;
+			var result = LodePNG.lodepng_decode_file(&data, &width, &height, fileName.ToScopeCStr!(), colortype, 8);
 
-			var surface = SDLImage.Load(fileName.ToScopeCStr!());
+			if(result != 0) Internal.FatalError(scope $"{result}");
 
-			Debug.Assert(surface != null, scope $"Texture loading failed. Is your file name correct? \"{fileName}\"");
+			size = .(width, height);
 
-			size = .(surface.w, surface.h);
+			GL.PixelFormat pformat;
 
-			return LoadFromSurface(surface, hash);
+			switch(colortype){
+
+				case .LCT_RGB: pformat = .RGB; break;
+				case .LCT_GREY: pformat = .RED; break;
+
+				case .LCT_RGBA: pformat = .RGBA; break;
+				default: pformat = .RGBA; break;
+			}
+
+			var tex = LoadRaw(data, size, pformat, hash);
+			delete data;
+			return tex;
 		}
 
-		public static Texture Load(Span<uint8> mem){
-			//int hash = mem.Length.GetHashCode();
+		public static Texture Load(Span<uint8> mem, LodePNG.LodePNGColorType colortype){
+			uint8* data = default;
+			uint32 width = default, height = default;
+			var result = LodePNG.lodepng_decode_memory(&data, &width, &height, mem.Ptr, (.)mem.Length, .LCT_RGBA, 8);
 
-			//if(textures.TryGetValue(hash, var tex)) return tex;
+			GL.PixelFormat pformat;
 
-			var rwops = SDL.RWFromMem(mem.Ptr, (int32)mem.Length);
-
-			var surface = SDLImage.Load_RW(rwops, 1);
-
-			return LoadFromSurface(surface, 0, true);
-		}
-
-		public static Texture LoadFromSurface(SDL.Surface* surface, int hash, bool interpolate = true, bool freesurface = true){
-			var surface;
+			switch(colortype){
 			
-			//Console.WriteLine(surface.format.format);
-			if(surface.format.format == SDL.PIXELFORMAT_INDEX8){
-				SDL.PixelFormat* targetformat = SDL.AllocFormat(SDL.PIXELFORMAT_ABGR8888);
-				SDL.Surface * newsurface = SDL.ConvertSurface(surface, targetformat, 0);
-				SDL.FreeSurface(surface);
-				surface = newsurface;
-				SDL.FreeFormat(targetformat);
-			}
-			InternalFormat internalformat;
-			PixelFormat pixelformat;
-
-			switch(surface.format.format){
-			case SDL.PIXELFORMAT_RGB24: {
-				internalformat = .RGB;
-				pixelformat = .RGB;
-			}
-			default: {
-				internalformat = .RGBA;
-				pixelformat = .RGBA;
-				}
+			case .LCT_RGB: pformat = .RGB; break;
+			case .LCT_GREY: pformat = .RED; break;
+			
+			case .LCT_RGBA: pformat = .RGBA; break;
+			default: pformat = .RGBA; break;
 			}
 
-			/*uint32 texture = default;
-
-			GL.ActiveTexture(.TEXTURE0);
-			GL.GenTextures(1, &texture);
-			GL.BindTexture(.TEXTURE_2D, texture);
-
-			GL.TexParameteri(.TEXTURE_2D, .TEXTURE_WRAP_S, /*.CLAMP_TO_BORDER*/.REPEAT);	
-			GL.TexParameteri(.TEXTURE_2D, .TEXTURE_WRAP_T, /*.CLAMP_TO_BORDER*/.REPEAT);
-
-			GL.TexParameteri(.TEXTURE_2D, .TEXTURE_MIN_FILTER, (interpolate ? .LINEAR : .NEAREST));
-			GL.TexParameteri(.TEXTURE_2D, .TEXTURE_MAG_FILTER, (interpolate ? .LINEAR : .NEAREST));
-
-			//GL.GenerateMipmap(.TEXTURE_2D);
-
-
-			GL.TexImage2D(.TEXTURE_2D, 0, internalformat, surface.w, surface.h, 0, pixelformat, .UNSIGNED_BYTE, surface.pixels);
-			//SDL.FreeSurface(surface);
-			if(hash != 0)
-				textures.Add(hash, (texture, .(surface.w, surface.h)));*/
-
-
-
-			var texture = LoadRaw(.((.)surface.pixels, surface.w * surface.h), .(surface.w, surface.h), pixelformat, hash, interpolate);
-
-			if(freesurface) SDL.FreeSurface(surface);
-
-			return texture;
+			return LoadRaw(data, .(width, height), pformat, *(int*)&data[0]);
 		}
 
+			static int GetHashCode(uint8* ptr, int length)
+			{
+				int charsLeft = length;
+				int hash = 0;
+				uint8* curPtr = ptr;
+				let intSize = sizeof(int);
+				while (charsLeft >= intSize)
+				{
+					hash = (hash ^ *((int*)curPtr)) + (hash * 16777619);
+					charsLeft -= intSize;
+					curPtr += intSize;
+				}
+
+				while (charsLeft > 1)
+				{
+					hash = ((hash ^ (int)*curPtr) << 5) - hash;
+					charsLeft--;
+					curPtr++;
+				}
+
+				return hash;
+			}
+		
 
 
+		public static Texture LoadRaw(uint8* pixels, Vector2 size, PixelFormat pixelformat, int hash = 0, bool interpolate = true, bool clamp = false){
+			int pitch;
+			switch(pixelformat){
+			case .RGB: pitch = 3;
+			case .RGBA: pitch = 4;
+				default: pitch = 1; break;}
 
-		public static Texture LoadRaw(Span<uint32> pixels, Vector2 size, PixelFormat pixelformat, int hash, bool interpolate = true, bool clamp = false){
+			var hash;
+			if(hash == 0){
+				hash = GetHashCode(pixels, (int)size.x * (int)size.y * pitch);
+			}
 			uint32 texture = default;
 
 			GL.ActiveTexture(.TEXTURE0);
@@ -132,12 +131,12 @@ namespace BfEngine
 			InternalFormat internalformat = (.)pixelformat;
 
 
-			GL.TexImage2D(.TEXTURE_2D, 0, internalformat, (int32)size.x, (int32)size.y, 0, pixelformat, .UNSIGNED_BYTE, pixels.Ptr);
+			GL.TexImage2D(.TEXTURE_2D, 0, internalformat, (int32)size.x, (int32)size.y, 0, pixelformat, .UNSIGNED_BYTE, pixels);
 
 			GL.GenerateMipmap(.TEXTURE_2D);
 
-			if(hash != 0)
-				textures.Add(hash, (texture, size));
+			/*if(hash != 0)
+				textures.Add(hash, (texture, size));*/
 
 			return texture;
 		}
@@ -145,6 +144,7 @@ namespace BfEngine
 
 
 		public static void FreeTexture(Texture t){
+#unwarn			
 			GL.DeleteTextures(1, (.)&t);
 		}
 
