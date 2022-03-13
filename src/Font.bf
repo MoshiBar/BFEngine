@@ -26,7 +26,7 @@ namespace BfEngine
 		public float ascent;
 		/** The distance from the bottom of the glyph that extends the lowest to the baseline. This number is negative. */
 		public float descent;
-		/** The distance to move down when \n is encountered. */
+ 		/** The distance to move down when \n is encountered. */
 		public float down;
 		/** Multiplier for the line height of blank lines. down * blankLineHeight is used as the distance to move down for a blank
 		 * line. */
@@ -55,7 +55,7 @@ namespace BfEngine
 
 		public this (StringView fontFile, bool flip = false) {
 			this.flipped = flip;
-			load(fontFile, flip);
+			this.load(fontFile, flip);
 		}
 
 		static StringView getVal(StringView buffer, StringView valName){

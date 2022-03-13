@@ -76,7 +76,6 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		//
 		// Constants for gamepad buttons
 		//
-
 		public enum Buttons : WORD{
 			DpadUp			= 0x0001,
 			DpadDown		= 0x0002,

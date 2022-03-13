@@ -33,11 +33,9 @@ namespace BfEngine
 		/*---------------*/
 
 		uint32 VAO, VBO, TBO, CBO, EBO;
-		public Shader shader;
 		uint32 IndicesCount;
 		uint32 MaxIndicesCount;
 		uint32 elementcount;
-		public List<Texture> Textures = new List<Texture>() ~ delete _;
 
 		public this()
 		{
@@ -60,7 +58,7 @@ namespace BfEngine
 			GL.VertexAttribPointer(1, 2, .FLOAT, .FALSE, sizeof(Vector2), (void*)0);
 			//GL.BufferData(.ARRAY_BUFFER, testuvs.Count * sizeof(Vector2), testuvs.CArray(), .DYNAMIC_DRAW);
 
-			GL.BindBuffer(.ARRAY_BUFFER, CBO);// texture coordinates
+			GL.BindBuffer(.ARRAY_BUFFER, CBO);// colors
 			GL.EnableVertexAttribArray(2);
 			GL.VertexAttribPointer(2, 4, .FLOAT, .FALSE, sizeof(Color4), (void*)0);
 			//GL.BufferData(.ARRAY_BUFFER, testuvs.Count * sizeof(Vector2), testuvs.CArray(), .DYNAMIC_DRAW);
@@ -121,48 +119,11 @@ namespace BfEngine
 			IndicesCount = indicesCount;
 		}
 
-		public void Draw(Matrix4 modelView, Matrix4 projection, params (int32 location, Variant value)[] uniforms)
+		public void Draw()
 		{
-			GL.UseProgram(shader);
-
-			shader.SetMatrix(0, modelView);// transform
-			shader.SetMatrix(1, projection);// projectionMatrix
-
-			for (int i = 0; i < Textures.Count; i++)
-			{
-				GL.ActiveTexture(.TEXTURE0 + (uint)i);
-				GL.BindTexture(.TEXTURE_2D, Textures[i]);
-			}
-
-			//shader.SetColor(3, color); //color
-
-			for (var i in uniforms)
-			{
-				switch (i.value.VariantType) {
-				case typeof(float):
-					{
-						shader.SetFloat(i.location, i.value.Get<float>());
-					}
-				case typeof(Vector2):
-					{
-						var val = i.value.Get<Vector2>();
-						GL.Uniform2f(i.location, val.x, val.y);
-					}
-				case typeof(Color4):
-					{
-						var val = i.value.Get<Color4>();
-						GL.Uniform4f(i.location, val.r, val.g, val.b, val.a);
-					}
-
-				default: Internal.FatalError("unsupported uniform value");
-				}
-				i.value.Dispose();
-			}
-
-
 			GL.BindVertexArray(VAO);
+
 			GL.DrawElements(.TRIANGLES, (.)IndicesCount, .UNSIGNED_INT, (void*)0);
-			GL.BindVertexArray(0);
 		}
 
 		public static Model CreateRect(Model model)

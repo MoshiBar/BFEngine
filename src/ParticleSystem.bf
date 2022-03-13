@@ -149,16 +149,16 @@ namespace BfEngine
 
 			GL.UseProgram(shader);
 
-			shader.SetMatrix(0, modelView); // transform
-			shader.SetMatrix(1, projection);// projectionMatrix
-			shader.SetFloat(2, spriteSize);
+			Shader.SetMatrix(0, modelView); // transform
+			Shader.SetMatrix(1, projection);// projectionMatrix
+			Shader.SetFloat(2, spriteSize);
 
 
 			GL.ActiveTexture(.TEXTURE0);
 			GL.BindTexture(.TEXTURE_2D, texture);
 
 
-			shader.SetColor(3, .white);//color
+			Shader.SetColor(3, .white);//color
 
 			GL.BindVertexArray(VAO);
 			GL.DrawArrays(.POINTS, 0, (.)particleCount);

@@ -74,6 +74,25 @@ namespace BfEngine.UI
 			return normalizedPosition * 2 / (appliedTransform.size * scale);
 		}
 
+		public virtual Vector2 GetRelativePosition(Vector2 pos){
+			//var appliedTransform = transform.GetAppliedTransform(parentTransform);
+			//applied transform should refer to its global transform but we don't have any hierarchy (yet?)
+			var appliedTransform = transform;
+			var normalizedPosition = pos - (appliedTransform.position - appliedTransform.anchorPos * size * scale * 0.5f /** UI.UIScale * .(Screen.AspectRatio, 1)*/);
+			normalizedPosition = Vector2.Rotate(normalizedPosition, -appliedTransform.rotation);
+			/*normalizedPosition = Vector2(normalizedPosition.x - skew.x * normalizedPosition.y * 2 / size.y, normalizedPosition.y - skew.y * normalizedPosition.x * 2 / size.x);*/
+			return normalizedPosition /** 2 / (appliedTransform.size * scale)*/;
+		}
+
+		public virtual bool InBounds(Vector2 pos){
+			var bevelwidth = Math.Min(this.bevelwidth, this.transform.size.min / 2f);
+			var relativepos = GetRelativePosition(pos);
+			var inner = (size * scale) / 2 - bevelwidth;
+			var clampedpos = relativepos.Clamp(-inner, inner);
+
+			return Vector2.Distance(relativepos, clampedpos) <= bevelwidth;
+		}
+
 		public Event<delegate void(Self)> OnMouseEnter = .() ~ _.Dispose();
 		public Event<delegate void(Self)> OnMouseLeave = .() ~ _.Dispose();
 		public Event<delegate void(Self)> OnMouseDown  = .() ~ _.Dispose();
@@ -86,9 +105,20 @@ namespace BfEngine.UI
 
 			var rect = UI.[Friend]rect;
 
-			rect.Textures[0] = texture;
+			//rect.Textures[0] = texture;
+			Shader.ui.UseProgram();
 
-			rect.Draw(transform, UI.UIMatrix, (3, Variant.Create(size)), (4, Variant.Create(color)), (5, Variant.Create(bevelwidth))    );
+			Texture.white.Bind(0);
+
+			Shader.SetMatrix(0, transform);
+			Shader.SetMatrix(1, UI.UIMatrix);
+
+			Shader.SetVec2(3, size);
+			Shader.SetColor(4, color);
+			Shader.SetFloat(5, Math.Min(bevelwidth, this.transform.size.min / 2f));
+
+
+			rect.Draw();
 		}
 	}
 }

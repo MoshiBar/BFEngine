@@ -1,4 +1,5 @@
 using System;
+using Windows;
 
 static class GL {
     public const uint32 RESCALE_NORMAL = 0x803A;
@@ -4050,7 +4051,7 @@ static class GL {
     public static function void(PointParameterNameARB pname, int32 param) PointParameteri;
     public static function void(PointParameterNameARB pname, int32* parameters) PointParameteriv;
     public static function void(float size) PointSize;
-    public static function void(MaterialFace face, PolygonMode mode) PolygonMode;
+    public static function void(MaterialFace face, PolygonMode mode) PolygonMode_;
     public static function void(float factor, float units) PolygonOffset;
     public static function void(float factor, float units, float clamp) PolygonOffsetClamp;
     public static function void(uint8* mask) PolygonStipple;
@@ -4509,6 +4510,7 @@ static class GL {
     public static function void(int32* v) WindowPos3iv;
     public static function void(int16 x, int16 y, int16 z) WindowPos3s;
     public static function void(int16* v) WindowPos3sv;
+
     public static void Init(function void*(char8*/*StringView*/ procname) func) {
         TexGendv = (.)func("glTexGendv");
         PointParameteriv = (.)func("glPointParameteriv");
@@ -5044,7 +5046,7 @@ static class GL {
         VertexAttrib4ubv = (.)func("glVertexAttrib4ubv");
         MultiDrawElementsIndirectCount = (.)func("glMultiDrawElementsIndirectCount");
         GetProgramResourceIndex = (.)func("glGetProgramResourceIndex");
-        PolygonMode = (.)func("glPolygonMode");
+        PolygonMode_ = (.)func("glPolygonMode");
         Normal3s = (.)func("glNormal3s");
         LightModelf = (.)func("glLightModelf");
         CompressedTexSubImage2D = (.)func("glCompressedTexSubImage2D");

@@ -3,6 +3,9 @@ using System;
 using BfEngine.UI;
 using System.Diagnostics;
 using Windows;
+using System.Collections;
+using ImGui;
+using static System.Windows;
 using static Windows.GDI32;
 using static Windows.OpenGL32;
 using static Windows.User32;
@@ -23,28 +26,32 @@ namespace BfEngine
 
 		public static function void() UpdateFunc;
 
+		public static volatile List<IReloadable> toReload = new List<IReloadable>() ~ delete _;//does not own its items
+
 #define WIN32 //use
 
-#if WIN32
 		static HDC hdc;
-		static HWND hwnd;
+		static HWnd hwnd;
+		static HINSTANCE hInstance;
 
 		public static HCURSOR handcursor, pointer, ibeam;
 		public static HCURSOR currentCursor;
 
+		static ImGui.Context* imctx;
+
 		[CallingConvention(.Stdcall)]
-		static int testWndProc(HWND hwnd, WndProcMessage uMsg, int wParam, int lParam){
+		static int testWndProc(HWnd hwnd, WndProcMessage uMsg, int wParam, int lParam){
 			switch(uMsg){
 			case .Size:{
+#unwarn
 				var size = *(uint16[2]*)&lParam;
-				Console.WriteLine($"sizemsg: {Vector2(size[0], size[1])}");
 				Screen.Resolution = .(size[0], size[1]);
 				break;
 			}
 			case .NCDestroy: Engine.Running = false;
 			case .MouseMove:{
+#unwarn
 				var pos = *(uint16[2]*)&lParam;
-				Console.WriteLine(pos);
 				Input.CursorPosition = .(pos[0], pos[1]);
 				break;
 			}
@@ -58,6 +65,16 @@ namespace BfEngine
 				Input.onMouseUp = true;
 				break;
 				}
+			case .RButtonDown:{
+				Input.mouse2Down = true;
+				Input.onMouse2Down = true;
+				break;
+				}
+			case .RButtonUp:{
+				Input.mouse2Down = false;
+				Input.onMouse2Up = true;
+				break;
+				}
 			case .NCHitTest: {
 				var result = (HitTestResult)DefWindowProcA(hwnd, uMsg, wParam, lParam);
 				Input.cursorInBounds = ((HitTestResult)result & (.)int16.MaxValue) == .Client;//cursor is only considered in bounds if it is inside the client area(inner area)
@@ -65,7 +82,6 @@ namespace BfEngine
 				return (.)result;
 			}
 			case .SetCursor: {
-				//Console.WriteLine(lParam);
 				if(((HitTestResult)(int)lParam & (.)int16.MaxValue) == .Client){
 					User32.SetCursor(currentCursor);
 				}
@@ -76,76 +92,52 @@ namespace BfEngine
 				
 				break;
 			}
-			//case .NCMouseLeave: break;
-			/*case .SysCommand:{
-				var cmd = (SysCommand)((int)wParam & ~0xF);
-				var flag = (int)wParam & 0xF;
-				Console.WriteLine($"{cmd}, {flag}");
-				switch(cmd)
-				{
-				case .SC_SIZE:{
-
-
-					var size = *(uint16[2]*)&lParam;
-
-					/*Win32.Rect rc = .(0, 0, size[0], size[1]);
-
-					AdjustWindowRectEx( &rc, 0, 0, dwExStyle );*/
-
-					Win32.SetWindowPos(hwnd, null, 0, 0, size[0] + 8, size[1] + 8, .NOMOVE | .NOZORDER);
-					//var result = Win32.DefWindowProcA(hwnd, uMsg, wParam, lParam);
-					//Console.WriteLine($"0x{result:x}");
-					return 0;
-				}
-				default: break;
-				}
-			}*/
-			/*case (.)356:{
-				var size = *(uint16[2]*)&lParam;
-				//Screen.Resolution = .(size[0], size[1]);
-				//Debug.Break();
-			}*/
+			case .MouseWheel:{
+#unwarn
+				var size = *(uint16[2]*)&wParam;
+				Input.scroll = (int16)size[1] / 600f;
+			}
+			case .Char:{
+				imctx.IO.AddInputCharacter((.)wParam);
+			}
+			case .KeyDown, .KeyUp, .SysKeyDown, .SysKeyUp:{
+				bool down = (uMsg == .KeyDown || uMsg == .SysKeyDown);
+				if(wParam < 256)
+					imctx.IO.KeysDown[wParam] = down;
+				if(wParam == 0x10)//VK_SHIFT
+					imctx.IO.KeyShift = down;
+				else if(wParam == 0x11)//VK_CONTROL
+					imctx.IO.KeyCtrl = down;
+				else if(wParam == 0x12)//VK_MENU
+					imctx.IO.KeyAlt = down;
+			}
 			default:{
-				//Console.WriteLine($"{hwnd}, {uMsg:x}, {wParam}, {lParam}");
-				var size = *(uint16[2]*)&lParam;
-				Console.WriteLine($"{hwnd}, {uMsg:x}, {lParam}, ({size[0]}, {size[1]})");
-				break;
+
 				}
 			}
 
 			return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 		}
 
-		/*static int SysCommandProc(LPVOID wParam, LPVOID lParam){
-
-		}*/
-
 		public static void SetCursor(HCURSOR cursor){
-			//testWndProc(hwnd, .SetCursor, cursor, null);
-			//User32.SetCursor(cursor);
-			//User32.PostMessageA(hwnd, .SetCursor, cursor, hwnd);
 			currentCursor = cursor;
 		}
-#else
-		public static Vector2Int GetWindowSize(){
-			int32 x, y;
-			SDL.GetWindowSize(window, out x, out y);
-			return .((int32)x, (int32)y);	
-		}
-#endif
+
 
 		public static void Init(){
-#if WIN32
-			// Register the window class.
-			char8* CLASS_NAME  = "Sample Window Class";
 
-			HINSTANCE hInstance = GetModuleHandleA(null);
+			// Register the window class.
+			char8* CLASS_NAME  = "wclass";
+
+			hInstance = GetModuleHandleA(null);
 
 			handcursor = LoadCursorA(null, IDC_HAND);
 			pointer = LoadCursorA(null, IDC_ARROW);
 			ibeam = LoadCursorA(null, IDC_IBEAM);
 
+			//defaults to arrow pointer
 			currentCursor = pointer;
+
 
 			WNDCLASSEXA wc = default;
 			wc.cbSize = sizeof(WNDCLASSEXA);
@@ -162,32 +154,23 @@ namespace BfEngine
 			wc.hInstance     = hInstance;
 			wc.lpszClassName = CLASS_NAME;
 
-			var _class = RegisterClassExA(&wc);
+			RegisterClassExA(&wc);
 
-			// Create the window.
-
+			//creates window for false opengl context
 			hwnd = CreateWindowExA(
 			    0,                              // Optional window styles.
 			    CLASS_NAME,                     // Window class
-			    "Learn to Program Windows",    // Window text
-			    .OverlappedWindow | .Maximized,            // Window style
-
-			    // Size and position
-			    0, 0, 600, 400,
-
-			    null,       // Parent window    
+			    "False Window",    // Window text
+			    default,            // Window style
+			    0, 0, 0, 0, // Size and position
+			    0,       // Parent window    
 			    null,       // Menu
 			    hInstance,  // Instance handle
 			    null        // Additional application data
 			    );
 
-			if (hwnd == null)
-			{
-			    Debug.Break();
-			}
-
-			var showwindow = ShowWindow(hwnd, .Normal);
-
+			if (hwnd == 0)
+			    Internal.FatalError("Can't Create false window");
 
 			PIXELFORMATDESCRIPTOR pfd =
 				.(
@@ -214,13 +197,77 @@ namespace BfEngine
 
 			int32 iPixelformat = ChoosePixelFormat(hdc, &pfd);
 			/*var result =*/ SetPixelFormat(hdc, iPixelformat, &pfd);
-			var context = wglCreateContext(hdc);
-			current = wglMakeCurrent(hdc, context);
+			var context1 = wglCreateContext(hdc);
+			current = wglMakeCurrent(hdc, context1);
+			//var ctx = wglGetCurrentContext();
+
+			WGL.Init( => OpenGL32.wglGetProcAddress);
+
+			int32 nPixelFormat2 = default;
+
+			BOOL bValidPixFormat;
+			UINT nMaxFormats = 1;
+			UINT nNumFormats;
+			float[?] pfAttribFList = .( 0, 0 );
+			WGL.ARBEnum[?] piAttribIList = .( 
+			    .DrawToWindow, .True,
+			    .SupportOpengl, .True,
+			    .ColorBits, (.)32,
+			    .RedBits, (.)8,
+			    .GreenBits, (.)8,
+			    .BlueBits, (.)8,
+			    .AlphaBits, (.)8,
+			    .DepthBits, (.)16,
+			    .StencilBits, (.)0,
+			    .DoubleBuffer, .True,
+			    .PixelType, .TypeRgba,
+			    .SampleBuffers, .True,
+			    .Samples, (.)16,
+			    0, 0 );
+
+			bValidPixFormat = WGL.ChoosePixelFormatARB(hdc, &piAttribIList, &pfAttribFList, nMaxFormats, &nPixelFormat2, &nNumFormats);
+
+			if (bValidPixFormat == 0)
+			{
+				Debug.Break();
+			}
+			//destroy false window
+			DestroyWindow(hwnd);
+			//create true window
+			hwnd = CreateWindowExA(
+			    0,                              // Optional window styles.
+			    CLASS_NAME,                     // Window class
+			    "True Window",    // Window text
+			    .OverlappedWindow | .Maximized,            // Window style
+
+			    // Size and position
+			    0, 0, 600, 400,
+
+			    0,       // Parent window    
+			    null,       // Menu
+			    hInstance,  // Instance handle
+			    null        // Additional application data
+			    );
+
+			if (hwnd == 0)
+			{
+			    Debug.Break();
+			}
+
+			/*var showwindow =*/ ShowWindow(hwnd, .Normal);
+			hdc = GetDC(hwnd);
+
+			SetPixelFormat(hdc, nPixelFormat2, &pfd);
 
 
-			var ctx = wglGetCurrentContext();
+			var mGLRenderContext = wglCreateContext(hdc);
 
+			wglMakeCurrent(hdc, null);
+			wglDeleteContext(context1);
+			wglMakeCurrent(hdc, mGLRenderContext);
+			
 
+			
 			GL.Init((_) => {
 					var addr = OpenGL32.wglGetProcAddress(_);
 					if(addr == null) {
@@ -231,77 +278,37 @@ namespace BfEngine
 					//if(addr == null) Debug.Break();
 					return addr;
 				});
-			var version = GL.GetString(.VERSION);
-			//Utils.ShowMessageBoxOK("OPENGL VERSION", scope String(version));
 
 			SetWindowTextA(hwnd, GL.GetString(.VERSION));
-			//SDL.Init(.Everything);
 
-			{
-				int32 x = 900, y = 640;
-				var rect = GetWindowRect(Engine.[Friend]hwnd, ..var _);
-				SetWindowPos(Engine.[Friend]hwnd, default, rect.x, rect.y, x, y, default);
-				Console.WriteLine($"getrect: {Vector2(x, y)}");
-				//Screen.Resolution = .((.)x, (.)y);
-			}
-#else
-			/*Context init stuff*/
-
-			SDL.Init(.Everything);
-
-			Time.Init();
+			int32 x = 900, y = 640;
+			var rect = GetWindowRect(Engine.[Friend]hwnd, ..var _);
+			SetWindowPos(Engine.[Friend]hwnd, default, rect.x, rect.y, x, y, default);
+			Console.WriteLine($"getrect: {Vector2(x, y)}");
 
 
-			SDL.GL_SetSwapInterval(1);
-
-			SDL.GL_SetAttribute(.GL_CONTEXT_MAJOR_VERSION, 4);
-			SDL.GL_SetAttribute(.GL_CONTEXT_MINOR_VERSION, 6);
-
-
-			SDL.GL_SetAttribute(.GL_MULTISAMPLEBUFFERS, 1);
-			SDL.GL_SetAttribute(.GL_MULTISAMPLESAMPLES,16);
-
-
-
-			window = SDL.CreateWindow("OpenGL -- SDL", .Centered, .Centered, 800, 480, .OpenGL);
-			renderer = SDL.GetRenderer(window);
-
-
-			SDL.SetWindowResizable(window, .True);
-			SDL.GL_SetSwapInterval(0);
-			SDL.GL_SetAttribute(.GL_DOUBLEBUFFER, 0);
-			SDL.GL_SetAttribute(.GL_DEPTH_SIZE, 24);
-
-
-			/*var GLContext = */SDL.GL_CreateContext(window);
-
-			GL.Init(=> SDL.SDL_GL_GetProcAddress);
-
-			GL.CreateProgram();
-#endif
-			
-
-			//GL.CreateProgram();
-			
 			
 			//GL.Enable(.CULL_FACE);
 			//GL.CullFace(.BACK);
 			//GL.BlendFunc(.SRC_ALPHA, .ONE_MINUS_SRC_ALPHA);
 			//GL.BlendFuncSeparate(.SRC_ALPHA, .ONE_MINUS_SRC_ALPHA, .ONE, .ONE_MINUS_SRC_ALPHA);
+			GL.Enable(.MULTISAMPLE);
+
 			GL.Enable(.BLEND);
 			//GL.BlendFunc(.SRC_ALPHA, .ONE_MINUS_SRC_ALPHA);
 			GL.BlendFunc(.ONE, .ONE_MINUS_SRC_ALPHA);
 
-			GL.Disable(.DEPTH_TEST);
+			GL.Enable(.DEPTH_TEST);
 
-			//GL.PolygonMode(.FRONT_AND_BACK, .LINE);
+			GL.PolygonMode_(.FRONT, .FILL);
 			/*Engine init stuff*/
 
 			Texture.Init();
 
 			Time.Init();
+			Input.Init();
 
-			Audio.Init();
+			//Audio.Init();
 
 			Camera.[Friend]Update();
 			Shader.Load();
@@ -309,26 +316,52 @@ namespace BfEngine
 
 			UI.Init();
 
-			//SDL.SetWindowBordered(window, false);
-			//SDL.SetWindowPosition(window, 0, 0);
-			//var bounds = SDL.GetDisplayBounds(0, ..let a);
-			//SDL.SetWindowSize(window, bounds.w, bounds.h);
-
-			
 
 			Running = true;
 
 			GL.Clear(.COLOR_BUFFER_BIT);
 
 			User32.SetCursor(pointer);
-		}
 
+			imctx = ImGui.CreateContext();
+			imctx.IO.KeyMap[(.)ImGui.Key.Tab] = 9;
+			imctx.IO.KeyMap[(.)ImGui.Key.LeftArrow] = 37;
+			imctx.IO.KeyMap[(.)ImGui.Key.RightArrow] = 39;
+			imctx.IO.KeyMap[(.)ImGui.Key.UpArrow] = 38;
+			imctx.IO.KeyMap[(.)ImGui.Key.DownArrow] = 40;
+			imctx.IO.KeyMap[(.)ImGui.Key.PageUp] = 0x21;
+			imctx.IO.KeyMap[(.)ImGui.Key.PageDown] = 0x22;
+			imctx.IO.KeyMap[(.)ImGui.Key.Home] = 0x24;
+			imctx.IO.KeyMap[(.)ImGui.Key.End] = 0x23;
+			imctx.IO.KeyMap[(.)ImGui.Key.Insert] = 0x2D;
+			imctx.IO.KeyMap[(.)ImGui.Key.Delete] = 46;
+			imctx.IO.KeyMap[(.)ImGui.Key.Backspace] = 8;
+			imctx.IO.KeyMap[(.)ImGui.Key.Space] = 32;
+			imctx.IO.KeyMap[(.)ImGui.Key.Enter] = 13;
+			imctx.IO.KeyMap[(.)ImGui.Key.Escape] = 27;
+			imctx.IO.KeyMap[(.)ImGui.Key.KeyPadEnter] = 13;
+			imctx.IO.KeyMap[(.)ImGui.Key.A] = (.)'Z';
+			imctx.IO.KeyMap[(.)ImGui.Key.C] = (.)'C';
+			imctx.IO.KeyMap[(.)ImGui.Key.V] = (.)'V';
+			imctx.IO.KeyMap[(.)ImGui.Key.X] = (.)'X';
+			imctx.IO.KeyMap[(.)ImGui.Key.Y] = (.)'Y';
+			imctx.IO.KeyMap[(.)ImGui.Key.Z] = (.)'Z';
+
+			ImGuiImplOpenGL3.Init();
+			ImGui.StyleColorsDark();
+		}
+		static float[4] color;
 		public static void Update()
 		{
+			
+
 			sw.Restart();
 
+			for(var r in toReload) r.Reload();
+			toReload.Clear();
+
 			GL.ClearColor(BGColor.r, BGColor.g, BGColor.b, 1);
-			GL.Clear(.COLOR_BUFFER_BIT);
+			GL.Clear(.COLOR_BUFFER_BIT | .DEPTH_BUFFER_BIT);
 
 			Time.Update();
 			Events.Update();
@@ -343,7 +376,18 @@ namespace BfEngine
 			Time.tweenieTime = sw.ElapsedMicroseconds / 1000f;
 			sw.Restart();
 
+			imctx.IO.DisplaySize = .(Screen.Resolution.x, Screen.Resolution.y);
+			imctx.IO.MousePos = .(Input.CursorPosition.x, Input.CursorPosition.y);
+			imctx.IO.MouseDown[0] = Input.mouseDown;
+			imctx.IO.MouseDown[1] = Input.mouse2Down;
+			imctx.IO.MouseWheel = Input.scroll;
+
+			ImGuiImplOpenGL3.NewFrame();
+			ImGui.NewFrame();
+
+
 			
+
 			UpdateFunc();
 
 			sw.Stop();
@@ -353,16 +397,17 @@ namespace BfEngine
 			sw.Stop();
 			Time.UITime = sw.ElapsedMicroseconds / 1000f;
 
+
+			ImGui.Render();
+			ImGuiImplOpenGL3.RenderDrawData(ImGui.GetDrawData());
+
 			//statsText.scale = textScale;
 			//statsText.GenerateTextBuffer(scope $"{Math.Round(1 / Time.SmoothDeltaTime)} FPS\n<size=25%><color=#FF0055>Engine Update Time: {engineTime:0.00}\n<color=yellow>Tweenie Update Time: {tweenieTime:0.00}\nGame Update Time: {averager.average:0.00}\nUI Update Time: {UITime:0.00}", .Default);
 			//statsText.Draw(Matrix4.CreateTransform(.(Input.CursorPosition.x, -Input.CursorPosition.y)/*.(0, 0, 0)*/, .(1, 1, 1), .()), Camera.ScreenSpaceMatrix);
-#if WIN32
+
 			Input.cursorInBounds &= WindowFromPoint(GetCursorPos()) == hwnd;//cursor is considered out of bounds if the mouse is over another window that is obscuring it
 			
 			Windows.GDI32.SwapBuffers(hdc);
-#else
-			SDL.GL_SwapWindow(Engine.window);
-#endif
 		}
 
 		public static void LateUpdate()

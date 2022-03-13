@@ -9,9 +9,10 @@ namespace BfEngine
 		public static uint64 ElapsedTicks;
 		public static double UnscaledTime;
 		public static double Time;
-		public static float Time_f => (float)Time;
+		public static float Time_f => (.)Time;
 		public static double UnscaledDeltaTime;
 		public static double DeltaTime;
+		public static float DeltaTime_f => (.)DeltaTime;
 		public static double SmoothDeltaTime;
 		public static double TimeScale = 1f;
 

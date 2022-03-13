@@ -1,5 +1,8 @@
 using BfEngine;
 using System;
+using System.Collections;
+using System.Diagnostics;
+using static BfEngine.DInput;
 
 namespace BfEngine
 {
@@ -7,8 +10,10 @@ namespace BfEngine
 	{
 
 		public static Vector2 CursorPosition;
-
+		public static Vector2 CursorNormalizedPosition => (CursorPosition * 2 - Screen.Resolution).x_y / Screen.Resolution.y;
+		public static float scroll;
 		public static bool mouseDown, onMouseDown, onMouseUp, cursorInBounds;
+		public static bool mouse2Down, onMouse2Down, onMouse2Up;
 
 
 		public struct Controller : this(
@@ -27,7 +32,112 @@ namespace BfEngine
 
 		public static float deadzone = 0.1f;
 
+		static IDirectInput8A* dinput;
+		static List<IDirectInputDevice8A*> inputDevices = new .() ~ delete _;
+		static DInput.LPDIENUMDEVICESCALLBACKA enumDevicesCallback = (val1, val2) => {
+			Console.WriteLine(StringView(&val1.tszInstanceName[0]));
+			Console.WriteLine(StringView(&val1.tszProductName[0]));
+			IDirectInputDevice8A* device = default;
+			IDirectInput8_CreateDevice(dinput, &val1.guidInstance, &device, null);
+#unwarn
+			IDirectInputDevice8_SetDataFormat(device, &c_dfDIJoystick2);
+			IDirectInputDevice8_Acquire(device);
+			inputDevices.Add(device);
+			return .Continue;
+		};
+
+		public static void Init(){
+#unwarn			
+			var dinputresult = DInput.DirectInput8Create(Engine.[Friend]hInstance, 0x0800, &DInput.IID_IDirectInput8A, (void**)&dinput, null);
+			Console.WriteLine($"Dinput init result {dinputresult}");
+
+			IDirectInput8_EnumDevices(dinput, .GameController, enumDevicesCallback, null, .AllDevices);
+		}
+		static void AppendBinary(String str, uint32 val){
+			for(int i < 32){
+				str.Append((val & (1 << (31 - i)) != 0) ? '1' : '0');
+			}
+		}
+
+		static void AppendBinary(String str, uint16 val){
+			for(int i < 16){
+				str.Append((val & (1 << (15 - i)) != 0) ? '1' : '0');
+			}
+		}
+
+		static void AppendBinary(String str, uint8 val){
+			for(int i < 8){
+				str.Append((val & (1 << (7 - i)) != 0) ? '1' : '0');
+			}
+		}
+
+		/*private enum SwitchButtons1{
+			Y			= 0x1,
+			X			= 0x2,
+			B			= 0x4,
+			A			= 0x8,
+
+			R			= 0x40,
+			ZR			= 0x80,
+
+			Select		= 0x100,
+			Start		= 0x200,
+
+			RStick		= 0x400,
+			LStick		= 0x800,
+
+			Home		= 0x1000,
+			Screenshot	= 0x2000,
+		}
+
+		private enum SwitchButtons2{
+			Down 	= 0x1,
+			Up 		= 0x2,
+			Right 	= 0x4,
+			Left 	= 0x8,
+
+			L		= 0x40,
+			ZL		= 0x80,
+		}*/
+
+		static uint32 mask = 0xFFFFFFFF;
+
 		public static void Update(){
+			/*DIJOYSTATE2 js = default;
+			/*DIDEVICEOBJECTDATA[64] data = default;
+			uint32 count = 64;//data.Count;
+			const int size = sizeof(DIDEVICEOBJECTDATA);
+			IDirectInputDevice8_GetDeviceData(inputDevices[0], size, &data, &count, 0);
+			
+			if(count > 0 && count != 64) Debug.Break();*/
+			IDirectInputDevice8_GetDeviceState(inputDevices[0], sizeof(DIJOYSTATE2), &js);
+
+			//Console.WriteLine($"({js.lX:X}, {js.lY:X}, {js.lZ:X})\n({js.lRx}, {js.lRy}, {js.lRz})\n({js.rglSlider[0]}, {js.rglSlider[0]})\n");
+			String str = scope .();
+			AppendBinary(str, (uint32)js.rglVSlider[0]);
+			str.Append(',');
+
+			AppendBinary(str, (uint32)js.rglVSlider[1]);
+			str.Append(',');
+
+			AppendBinary(str, (uint32)js.lVRz);
+
+
+			//Xinput.Buttons b = default;
+			SwitchButtons1 sb1 = (.)(js.lX - 0x7fff);
+			SwitchButtons2 sb2 = (.)((js.lY & 0x30 != 0) ? (js.lY - 0x7FFF) & 0xFF : js.lY & 0xFF);
+
+			
+			str.AppendF($"\n{sb1}, {sb2}, {(uint8)((js.lZ & 15) << 4 | (js.lY >> 12) & 15)}, {(uint8)((js.lZ >> 8) & 255)}, {(js.lRz >> 4) & 0xFF}");
+			//if((int8)((js.lY >> 10) & 15) != 0)
+
+			Console.WriteLine(str);*/
+
+
+
+
+
+
 			Xinput.XINPUT_STATE state = default;
 			Xinput.XInputGetState(0, &state);
 			if(state.dwPacketNumber == controllerPacket){
@@ -53,6 +163,8 @@ namespace BfEngine
 
 			Vector2 stickR = Vector2(state.Gamepad.sThumbRX / 32767f, state.Gamepad.sThumbRY / 32767f);
 			controller.rightStick = Deadzone!(stickR);
+
+			
 		}
 
 		static mixin Deadzone(Vector2 stickInput){

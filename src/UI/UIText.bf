@@ -21,7 +21,7 @@ namespace BfEngine.UI
 
 		public float textScale = 1;
 
-		public override void Draw(){
+		/*public override void Draw(){
 			base.Draw();
 			return;
 
@@ -35,13 +35,13 @@ namespace BfEngine.UI
 
 			UI.[Friend]rect.Draw(dbgtransform, UI.UIMatrix, (3, Variant.Create(size)), (4, Variant.Create(Color4.red)), (5, Variant.Create(bevelwidth))    );*/
 
-			var rect = UI.[Friend]rect;
+			//var rect = UI.[Friend]rect;
 			text.Draw(transform, UI.UIMatrix);
 
 			//rect.Textures[0] = texture;
 
 			
-		}
+		}*/
 
 		public void GenerateTextBuffer(StringView Text)
 		{

@@ -69,7 +69,7 @@ namespace BfEngine.UI
 			skews[2] = .(skew.x, skew.y);
 			skews[3] = .(-skew.x, skew.y);*/
 
-			var size = appliedTransform.size * scale;
+			//var size = appliedTransform.size * scale;
 
 			/*for(int i = 0; i < basePos.Count; i++)
 			{

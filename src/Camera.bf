@@ -6,7 +6,7 @@ namespace BfEngine
 	class Camera
 	{
 		/*PROJECTION MATIX*/
-		const float near = 0.1f, far = 10000;
+		const float near = 0.1f, far = 1000;
 		public static float FOV = 90;
 		public static Matrix4 ProjectionMatrix;
 		public static Matrix4 OrthoMatrix;

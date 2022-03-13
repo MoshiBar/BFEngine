@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
+using ImGui;
 
 namespace BfEngine
 {
-	[CRepr]
+	//[UnderlyingArray(typeof(float), 3, true)]
+	[CRepr, VectorDebug(.Float, 3)]
 	public struct Vector3 : IHashable, IEquatable<Vector3>
 	{
 		[Reflect]
@@ -142,6 +144,15 @@ namespace BfEngine
 		public static bool operator!=(Vector3 value1, Vector3 value2)
 		{
 			return !(value1 == value2);
+		}
+
+		[Inline, Commutable]
+		public static bool3 operator<(Vector3 value1, Vector3 value2)
+		{
+			return .(
+				value1.x < value2.x,
+				value1.y < value2.y,
+				value1.z < value2.z);
 		}
 
 		[Inline]

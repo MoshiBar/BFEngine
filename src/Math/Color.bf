@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 namespace BfEngine
 {
 	struct Color4
@@ -12,6 +13,16 @@ namespace BfEngine
 			this.a = a;
 		}
 
+		public this(uint32 color){
+#unwarn
+			var channels = *(uint8[4]*)&color;
+			this.r = channels[3] / 255f;
+			this.g = channels[2] / 255f;
+			this.b = channels[1] / 255f;
+			this.a = channels[0] / 255f;
+			//Debug.Break();
+		}
+
 		public this(float r, float g, float b) : this(r, g, b, 1){}
 
 		//public static explicit operator Color3(Color4 c) => .(c.r, c.g, c.b);
@@ -19,6 +30,7 @@ namespace BfEngine
 		public static explicit operator Color32(Color4 c) => .((uint8)(c.r * 255), (uint8)(c.r * 255), (uint8)(c.r * 255), (uint8)(c.r * 255));
 
 		public static readonly Color4 black = .(0, 0, 0);
+		public static readonly Color4 gray = .(0.5f, 0.5f, 0.5f);
 		public static readonly Color4 blue = .(0, 0, 1);
 		public static readonly Color4 green = .(0, 1, 0);
 		public static readonly Color4 orange = .(1, 0.65f, 0);
@@ -26,6 +38,8 @@ namespace BfEngine
 		public static readonly Color4 red = .(1, 0, 0);
 		public static readonly Color4 white = .(1, 1, 1);
 		public static readonly Color4 yellow = .(1, 1, 0);
+		public static readonly Color4 transparent = .(0, 0, 0, 0);
+		public static readonly Color4 clear = .(0, 0, 0, 0);
 		
 
 		public static Result<Color4> Parse(StringView string){

@@ -83,8 +83,6 @@ namespace BfEngine.UI
 			GL.BindVertexArray(0);
 
 			rect = Model.CreateRect(new Model());
-			rect.shader = Shader.ui;
-			rect.Textures.Add(Texture.white);
 		}
 
 		public static void Update(){
@@ -121,8 +119,8 @@ namespace BfEngine.UI
 				int newSelectedIndex = -1;
 				if(Input.cursorInBounds)
 				for(int i = UIElements.Count - 1; i >= 0; i--){
-					var norPos = UIElements[i].GetNormalizedPosition(CursorPos);
-					if(norPos.InUnitSquare)
+					//var norPos = UIElements[i].GetNormalizedPosition(CursorPos);
+					if(UIElements[i].InBounds(CursorPos))
 					{
 						newSelectedIndex = i;
 						break;
@@ -132,11 +130,11 @@ namespace BfEngine.UI
 				if(newSelectedIndex != selectedIndex){
 
 					if(selectedIndex >= 0){
-						UIElements[selectedIndex].color = .white;//just for debugging input
+						//UIElements[selectedIndex].color = .white;//just for debugging input
 						UIElements[selectedIndex].OnMouseLeave(UIElements[selectedIndex]);
 					}
 					if(newSelectedIndex >= 0){
-						UIElements[newSelectedIndex].color = .red;//just for debugging input
+						//UIElements[newSelectedIndex].color = .red;//just for debugging input
 						UIElements[newSelectedIndex].OnMouseEnter(UIElements[newSelectedIndex]);
 					}
 					selectedIndex = newSelectedIndex;

@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Text;
+using ImGui;
 
 namespace BfEngine
 {
-	[CRepr]
+	//[UnderlyingArray(typeof(int32), 2, true)]
+	[CRepr, VectorDebug(.S32, 2)]
 	public struct Vector2Int
 	{
 		typealias int_size = int32;
@@ -97,5 +99,28 @@ namespace BfEngine
 		public override void ToString(String buffer){
 			buffer.AppendF($"({x}, {y})");
 		}
+
+		public Self xx => .(x, x);
+		public Self xy => .(x, y);
+		public Self yy => .(y, y);
+		public Self yx => .(y, x);
+
+		public Self _xx => .(-x, x);
+		public Self _xy => .(-x, y);
+		public Self _yy => .(-y, y);
+		public Self _yx => .(-y, x);
+
+		public Self x_x => .(x, -x);
+		public Self x_y => .(x, -y);
+		public Self y_y => .(y, -y);
+		public Self y_x => .(y, -x);
+
+		public Self _x_x => .(-x, -x);
+		public Self _x_y => .(-x, -y);
+		public Self _y_y => .(-y, -y);
+		public Self _y_x => .(-y, -x);
+
+		public Self Abs => .(Math.Abs(x), Math.Abs(y));
+		public Self Abs() => Abs;
 	}
 }

@@ -1,11 +1,22 @@
 FileVersion = 1
-Dependencies = {corlib = "*", OpenAL = "*", Windows = "*"}
+Dependencies = {corlib = "*", Windows = "*", ImGui = "*", ImGuiImplOpenGL3 = "*"}
 
 [Project]
 Name = "BfEngine"
 TargetType = "BeefLib"
 StartupObject = "BfEngine.Program"
 
+[Configs.Debug.Win64]
+OptimizationLevel = "O3"
+
 [[ProjectFolder.Items]]
+Type = "AutoFolder"
+Name = "Audio"
+
+[[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
-Name = "lodepng.bf"
+Name = "Ogg.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "VorbisDecoder.bf"

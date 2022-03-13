@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using BfEngine;
+using System.Diagnostics;
 using static System.String;
 
 namespace BfEngine
@@ -78,20 +79,23 @@ namespace BfEngine
 
 			mixin NewLine()
 			{
-				if (options.HasFlag(.Center))
-				{
-					float offset = (glyphs[newLineIndex].position.x - cursor.x) / 2;
-					for (int i = newLineIndex; i < glyphs.Count; i++)
+				if(newLineIndex != glyphs.Count){
+					if (options.HasFlag(.Center))
 					{
-						glyphs[i].position.x += offset;
+						float offset = (glyphs[newLineIndex].position.x - cursor.x) / 2;
+
+						for (int i = newLineIndex; i < glyphs.Count; i++)
+						{
+							glyphs[i].position.x += offset;
+						}
 					}
-				}
-				else if (options.HasFlag(.RightAlign))
-				{
-					float offset = (glyphs[newLineIndex].position.x - cursor.x);
-					for (int i = newLineIndex; i < glyphs.Count; i++)
+					else if (options.HasFlag(.RightAlign))
 					{
-						glyphs[i].position.x += offset;
+						float offset = (glyphs[newLineIndex].position.x - cursor.x);
+						for (int i = newLineIndex; i < glyphs.Count; i++)
+						{
+							glyphs[i].position.x += offset;
+						}
 					}
 				}
 				newLineIndex = glyphs.Count;
@@ -112,13 +116,15 @@ namespace BfEngine
 					//potentially rewind and split on a space
 					if(rewindIndex > newLineIndex){
 						textEnumerator = lastBreakablePoint;
+						character = textEnumerator.GetNext();
 						glyphs.Count = rewindIndex;
 					}
 
 					//newline
 					NewLine!();
+					if (character == ' ') continue;
 				}
-				else if (character == '\r' || character == '\n')
+				/*else*/ if (character == '\r' || character == '\n')
 				{
 					//newline
 					NewLine!();
@@ -130,6 +136,7 @@ namespace BfEngine
 
 					rewindIndex = glyphs.Count;
 					lastBreakablePoint = textEnumerator;
+					//lastBreakablePoint.MoveNext();
 				}
 				else
 				{
@@ -271,16 +278,16 @@ namespace BfEngine
 
 			GL.UseProgram(shader);
 
-			shader.SetMatrix(0, modelView);// transform
-			shader.SetMatrix(1, projection);// projectionMatrix
-			shader.SetVec2(2, .(font.scaleW, font.scaleH));
+			Shader.SetMatrix(0, modelView);// transform
+			Shader.SetMatrix(1, projection);// projectionMatrix
+			Shader.SetVec2(2, .(font.scaleW, font.scaleH));
 
 
 			GL.ActiveTexture(.TEXTURE0);
 			GL.BindTexture(.TEXTURE_2D, texture);
 
 
-			shader.SetColor(3, .white);//color
+			Shader.SetColor(3, .white);//color
 
 			GL.BindVertexArray(VAO);
 			GL.DrawArrays(.POINTS, 0, (.)count);

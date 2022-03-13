@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Text;
 using System.Numerics;
+using ImGui;
 
 namespace BfEngine
 {
 	//[CRepr]
 	//[UnderlyingArray(typeof(float), 2, true)]
+	[Reflect, VectorDebug(.Float, 2)]
 	public struct Vector2
 	{
+
 		public float x;
 		public float y;
 
@@ -50,8 +53,15 @@ namespace BfEngine
 			this.y = y;
 		}
 
-		public const Vector2 zero = default;
-		public const Vector2 one = .(1, 1);
+		public const Self zero = default;
+		public const Self one = .(1, 1);
+		public const Self unitX = .(1f, 0f);
+		public const Self unitY = .(0f, 1f);
+		public const Self up = .(0f, 1f);
+		public const Self down = .(0f, -1f);
+		public const Self right = .(1f, 0f);
+		public const Self left = .(-1f, 0f);
+		
 
 		public static void DistanceSquared(Vector2 value1, Vector2 value2, out float result)
 		{
@@ -96,15 +106,27 @@ namespace BfEngine
 		}
 
 		[Inline]
+		public Vector2 Clamp(Vector2 min, Vector2 max)
+		{
+			return .(Math.Clamp(x, min.x, max.x), Math.Clamp(y, min.y, max.y));
+		}
+
+		[Inline]
 		public static Vector2 operator-(Vector2 vec) => Vector2(-vec.x, -vec.y);
 
 		[Inline]
 		public static Vector2 operator+(Vector2 vec1, Vector2 vec2) => Vector2(vec1.x + vec2.x, vec1.y + vec2.y);
+
+		[Inline]
+		public static Vector2 operator+(Vector2 vec1, float f) => Vector2(vec1.x + f, vec1.y + f);
 		
 		[Inline]
 		public static Vector2 operator-(Vector2 vec1, Vector2 vec2) => Vector2(vec1.x - vec2.x, vec1.y - vec2.y);
 
 		[Inline]
+		public static Vector2 operator-(Vector2 vec1, float f) => Vector2(vec1.x - f, vec1.y - f);
+
+		[Inline, Commutable]
 		public static Vector2 operator*(Vector2 vec, float factor) => Vector2(vec.x * factor, vec.y * factor);
 
 		[Inline]
@@ -129,10 +151,29 @@ namespace BfEngine
 		public float max => Math.Max(x, y);
 		public float min => Math.Min(x, y);
 
-		public Vector2 xx => .(x, x);
-		public Vector2 xy => .(x, y);
-		public Vector2 yy => .(y, y);
-		public Vector2 yx => .(y, x);
+		public Self xx => .(x, x);
+		public Self xy => .(x, y);
+		public Self yy => .(y, y);
+		public Self yx => .(y, x);
+
+		public Self _xx => .(-x, x);
+		public Self _xy => .(-x, y);
+		public Self _yy => .(-y, y);
+		public Self _yx => .(-y, x);
+
+		public Self x_x => .(x, -x);
+		public Self x_y => .(x, -y);
+		public Self y_y => .(y, -y);
+		public Self y_x => .(y, -x);
+
+		public Self _x_x => .(-x, -x);
+		public Self _x_y => .(-x, -y);
+		public Self _y_y => .(-y, -y);
+		public Self _y_x => .(-y, -x);
+
+
+		public Self Abs => .(Math.Abs(x), Math.Abs(y));
+		public Self Abs() => Abs;
 
 		[Inline]
 		public Vector2 normalized => this / Length;
