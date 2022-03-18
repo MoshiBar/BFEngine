@@ -1,3 +1,4 @@
+#if IMGUI_ENABLE
 using System;
 
 namespace ImGui
@@ -101,4 +102,6 @@ namespace ImGui
 			this.vectorlength = vectorlength;
 		}
 	}
+
 }
+#endif //IMGUI_ENABLE

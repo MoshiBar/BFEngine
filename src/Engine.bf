@@ -4,12 +4,16 @@ using BfEngine.UI;
 using System.Diagnostics;
 using Windows;
 using System.Collections;
+#if IMGUI_ENABLE
 using ImGui;
+#endif //IMGUI_ENABLE
+using BfEngine.Text;
 using static System.Windows;
 using static Windows.GDI32;
 using static Windows.OpenGL32;
 using static Windows.User32;
 using static Windows.Kernel32;
+
 
 namespace BfEngine
 {
@@ -31,13 +35,15 @@ namespace BfEngine
 #define WIN32 //use
 
 		static HDC hdc;
-		static HWnd hwnd;
+		public static HWnd hwnd;
 		static HINSTANCE hInstance;
 
 		public static HCURSOR handcursor, pointer, ibeam;
 		public static HCURSOR currentCursor;
 
+#if IMGUI_ENABLE
 		static ImGui.Context* imctx;
+#endif //IMGUI_ENABLE
 
 		[CallingConvention(.Stdcall)]
 		static int testWndProc(HWnd hwnd, WndProcMessage uMsg, int wParam, int lParam){
@@ -98,9 +104,12 @@ namespace BfEngine
 				Input.scroll = (int16)size[1] / 600f;
 			}
 			case .Char:{
+				#if IMGUI_ENABLE
 				imctx.IO.AddInputCharacter((.)wParam);
+				#endif //IMGUI_ENABLE
 			}
 			case .KeyDown, .KeyUp, .SysKeyDown, .SysKeyUp:{
+				#if IMGUI_ENABLE
 				bool down = (uMsg == .KeyDown || uMsg == .SysKeyDown);
 				if(wParam < 256)
 					imctx.IO.KeysDown[wParam] = down;
@@ -110,6 +119,7 @@ namespace BfEngine
 					imctx.IO.KeyCtrl = down;
 				else if(wParam == 0x12)//VK_MENU
 					imctx.IO.KeyAlt = down;
+				#endif //IMGUI_ENABLE
 			}
 			default:{
 
@@ -283,7 +293,7 @@ namespace BfEngine
 
 			int32 x = 900, y = 640;
 			var rect = GetWindowRect(Engine.[Friend]hwnd, ..var _);
-			SetWindowPos(Engine.[Friend]hwnd, default, rect.x, rect.y, x, y, default);
+			SetWindowPos(Engine.[Friend]hwnd, default, rect.left, rect.top, x, y, default);
 			Console.WriteLine($"getrect: {Vector2(x, y)}");
 
 
@@ -312,7 +322,7 @@ namespace BfEngine
 
 			Camera.[Friend]Update();
 			Shader.Load();
-			Text.Init();
+			RenderableText.Init();
 
 			UI.Init();
 
@@ -323,6 +333,7 @@ namespace BfEngine
 
 			User32.SetCursor(pointer);
 
+#if IMGUI_ENABLE
 			imctx = ImGui.CreateContext();
 			imctx.IO.KeyMap[(.)ImGui.Key.Tab] = 9;
 			imctx.IO.KeyMap[(.)ImGui.Key.LeftArrow] = 37;
@@ -349,6 +360,7 @@ namespace BfEngine
 
 			ImGuiImplOpenGL3.Init();
 			ImGui.StyleColorsDark();
+#endif //IMGUI_ENABLE
 		}
 		static float[4] color;
 		public static void Update()
@@ -376,15 +388,17 @@ namespace BfEngine
 			Time.tweenieTime = sw.ElapsedMicroseconds / 1000f;
 			sw.Restart();
 
+			#if IMGUI_ENABLE
 			imctx.IO.DisplaySize = .(Screen.Resolution.x, Screen.Resolution.y);
 			imctx.IO.MousePos = .(Input.CursorPosition.x, Input.CursorPosition.y);
 			imctx.IO.MouseDown[0] = Input.mouseDown;
 			imctx.IO.MouseDown[1] = Input.mouse2Down;
 			imctx.IO.MouseWheel = Input.scroll;
+			
 
 			ImGuiImplOpenGL3.NewFrame();
 			ImGui.NewFrame();
-
+			#endif //IMGUI_ENABLE
 
 			
 
@@ -397,9 +411,10 @@ namespace BfEngine
 			sw.Stop();
 			Time.UITime = sw.ElapsedMicroseconds / 1000f;
 
-
+			#if IMGUI_ENABLE
 			ImGui.Render();
 			ImGuiImplOpenGL3.RenderDrawData(ImGui.GetDrawData());
+			#endif //IMGUI_ENABLE
 
 			//statsText.scale = textScale;
 			//statsText.GenerateTextBuffer(scope $"{Math.Round(1 / Time.SmoothDeltaTime)} FPS\n<size=25%><color=#FF0055>Engine Update Time: {engineTime:0.00}\n<color=yellow>Tweenie Update Time: {tweenieTime:0.00}\nGame Update Time: {averager.average:0.00}\nUI Update Time: {UITime:0.00}", .Default);

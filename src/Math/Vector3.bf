@@ -2,12 +2,17 @@ using System;
 using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
+#if IMGUI_ENABLE
 using ImGui;
+#endif //IMGUI_ENABLE
 
 namespace BfEngine
 {
 	//[UnderlyingArray(typeof(float), 3, true)]
-	[CRepr, VectorDebug(.Float, 3)]
+	#if IMGUI_ENABLE
+	[VectorDebug(.Float, 3)]
+	#endif //IMGUI_ENABLE
+	[CRepr]
 	public struct Vector3 : IHashable, IEquatable<Vector3>
 	{
 		[Reflect]

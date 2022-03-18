@@ -2,13 +2,18 @@ using System;
 using System.Collections;
 using System.Text;
 using System.Numerics;
+#if IMGUI_ENABLE
 using ImGui;
+#endif //IMGUI_ENABLE
 
 namespace BfEngine
 {
 	//[CRepr]
 	//[UnderlyingArray(typeof(float), 2, true)]
-	[Reflect, VectorDebug(.Float, 2)]
+	#if IMGUI_ENABLE
+	[VectorDebug(.Float, 2)]
+	#endif //IMGUI_ENABLE
+	[Reflect]
 	public struct Vector2
 	{
 
@@ -62,7 +67,7 @@ namespace BfEngine
 		public const Self right = .(1f, 0f);
 		public const Self left = .(-1f, 0f);
 		
-
+		[Optimize, Inline]
 		public static void DistanceSquared(Vector2 value1, Vector2 value2, out float result)
 		{
 			result = (value1.x - value2.x) * (value1.x - value2.x) +

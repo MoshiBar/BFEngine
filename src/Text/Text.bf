@@ -4,9 +4,9 @@ using BfEngine;
 using System.Diagnostics;
 using static System.String;
 
-namespace BfEngine
+namespace BfEngine.Text
 {
-	class Text
+	class RenderableText
 	{
 		public static Font defaultFont ~ delete _;
 

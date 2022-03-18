@@ -1,13 +1,16 @@
 FileVersion = 1
-Dependencies = {corlib = "*", Windows = "*", ImGui = "*", ImGuiImplOpenGL3 = "*"}
+Dependencies = {corlib = "*", Windows = "*"}
 
 [Project]
 Name = "BfEngine"
 TargetType = "BeefLib"
 StartupObject = "BfEngine.Program"
 
-[Configs.Debug.Win64]
+[Configs.Release.Win64]
 OptimizationLevel = "O3"
+LTOType = "Thin"
+VectorizeLoops = true
+VectorizeSLP = true
 
 [[ProjectFolder.Items]]
 Type = "AutoFolder"
@@ -20,3 +23,927 @@ Name = "Ogg.bf"
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
 Name = "VorbisDecoder.bf"
+
+[[ProjectFolder.Items]]
+Type = "AutoFolder"
+Name = "Text"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "TrueType.bf"
+
+[[ProjectFolder.Items]]
+Type = "AutoFolder"
+Name = "Win32"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "AI.MachineLearning.DirectML.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "AI.MachineLearning.WinML.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Data.HtmlHelp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Data.RightsManagement.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Data.Xml.XmlLite.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.AllJoyn.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.BiometricFramework.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Bluetooth.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Communication.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.DeviceAccess.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.DeviceAndDriverInstallation.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.DeviceQuery.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Display.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Enumeration.Pnp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Fax.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.FunctionDiscovery.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Geolocation.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.HumanInterfaceDevice.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.ImageAcquisition.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.PortableDevices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Properties.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Pwm.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Sensors.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.SerialCommunication.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Tapi.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.Usb.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Devices.WebServicesOnDevices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.ActiveDirectory.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.BackgroundIntelligentTransferService.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.Clustering.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.HttpServer.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.Ldap.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.NetworkListManager.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.RemoteDifferentialCompression.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.WebSocket.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.WindowsWebServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.WinHttp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.WinInet.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Networking.WinSock.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.Dhcp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.Dns.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.InternetConnectionWizard.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.IpHelper.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.MobileBroadband.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.Multicast.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.Ndis.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.NetBios.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.NetManagement.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.NetShell.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.NetworkDiagnosticsFramework.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.NetworkPolicyServer.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.P2P.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.QoS.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.Rras.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.Snmp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WebDav.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WiFi.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WindowsConnectionManager.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WindowsConnectNow.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WindowsFilteringPlatform.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WindowsFirewall.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "NetworkManagement.WindowsNetworkVirtualization.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.AppLocker.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Authentication.Identity.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Authentication.Identity.Provider.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Authorization.UI.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.ConfigurationSnapin.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Credentials.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Cryptography.Certificates.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Cryptography.UI.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.DiagnosticDataQuery.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.DirectoryServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.EnterpriseData.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.ExtensibleAuthenticationProtocol.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Isolation.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.LicenseProtection.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.NetworkAccessProtection.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.Tpm.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Security.WinWlx.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Graphics.Printing.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Graphics.Printing.PrintTicket.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Management.MobileDeviceManagementRegistration.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.Audio.XAudio2.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.DeviceManager.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.DirectShow.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.DirectShow.Xml.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.DxMediaObjects.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.LibrarySharingServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.MediaFoundation.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.MediaPlayer.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.PictureAcquisition.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.Speech.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.Streaming.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Media.WindowsMediaFormat.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Cabinets.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.CloudFilters.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Compression.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.DataDeduplication.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.DistributedFileSystem.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.EnhancedStorage.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.FileHistory.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.FileServerResourceManager.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Imapi.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.InstallableFileSystems.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.IscsiDisc.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Jet.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.OfflineFiles.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.OperationRecorder.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Packaging.Appx.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.ProjectedFileSystem.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.StructuredStorage.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Vhd.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.VirtualDiskService.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Storage.Vss.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.AddressBook.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Antimalware.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ApplicationInstallationAndServicing.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ApplicationVerifier.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.AssessmentTool.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Com.CallObj.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Com.ChannelCredentials.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Com.Events.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Com.UI.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ComponentServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Contacts.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.CorrelationVector.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.DataExchange.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.DeploymentServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.DesktopSharing.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.DeveloperLicensing.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Diagnostics.Ceip.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Diagnostics.Debug.WebApp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Diagnostics.Etw.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Diagnostics.ProcessSnapshotting.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Diagnostics.ToolHelp.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Environment.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ErrorReporting.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.EventCollector.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.EventLog.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.EventNotificationService.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.GroupPolicy.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.HostCompute.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.HostComputeNetwork.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.HostComputeSystem.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Hypervisor.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Iis.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Ioctl.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.JobObjects.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Js.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.LibraryLoader.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Mailslots.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Mapi.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Memory.NonVolatile.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.MessageQueuing.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.MixedReality.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Mmc.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ParentalControls.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.PasswordManagement.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Performance.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Performance.HardwareCounterProfiling.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Pipes.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ProcessStatus.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.RealTimeCommunications.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Recovery.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.RemoteAssistance.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.RemoteDesktop.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.RemoteManagement.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.RestartManager.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Restore.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Rpc.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.SecurityCenter.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.ServerBackup.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Services.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.SettingsManagementInfrastructure.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.SetupAndMigration.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Shutdown.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.SideShow.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.SqlLite.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.StationsAndDesktops.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.SubsystemForLinux.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.TaskScheduler.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.TpmBaseServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.TransactionServer.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.UpdateAgent.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.UpdateAssessment.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.UserAccessLogging.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.VirtualDosMachines.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WindowsSync.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.AllJoyn.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Composition.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.CoreInputView.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Direct3D11.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Display.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Graphics.Capture.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Graphics.Direct2D.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Graphics.Imaging.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Holographic.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Isolation.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Media.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.ML.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Pdf.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Printing.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Shell.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Storage.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.WinRT.Xaml.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "System.Wmi.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Accessibility.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Animation.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.ColorSystem.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Controls.RichEdit.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.HiDpi.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.Ime.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.Ink.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.KeyboardAndMouse.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.Radial.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.Touch.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Input.XboxController.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.InteractionContext.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.LegacyWindowsEnvironmentFeatures.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Magnification.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Notifications.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Ribbon.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.TabletPC.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.TextServices.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Wpf.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "UI.Xaml.Diagnostics.bf"
+
+[[ProjectFolder.Items.Items]]
+Type = "IgnoreSource"
+Name = "Web.MsHtml.bf"

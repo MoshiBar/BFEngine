@@ -1,14 +1,14 @@
 using System;
-using static BfEngine.Text;
+using BfEngine.Text;
 namespace BfEngine.UI
 {
 	class UIText : UIElement
 	{
-		public Text text;
+		public RenderableText text;
 
 		[AllowAppend]
 		public this(RectTransform rect) : base(rect){
-			var text = append Text();
+			var text = append RenderableText();
 			this.text = text;
 
 			OnMouseEnter.Add(new (pfp) => {

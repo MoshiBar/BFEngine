@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Text;
+#if IMGUI_ENABLE
 using ImGui;
+#endif //IMGUI_ENABLE
 
 namespace BfEngine
 {
 	//[UnderlyingArray(typeof(int32), 2, true)]
-	[CRepr, VectorDebug(.S32, 2)]
+	#if IMGUI_ENABLE
+	[VectorDebug(.S32, 2)]
+	#endif //IMGUI_ENABLE
+	[CRepr]
 	public struct Vector2Int
 	{
 		typealias int_size = int32;
