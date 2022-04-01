@@ -3729,7 +3729,7 @@ namespace Win32
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HRESULT CoSwitchCallContext(IUnknown* pNewObject, out IUnknown* ppOldObject);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCreateInstance(in Guid rclsid, IUnknown* pUnkOuter, CLSCTX dwClsContext, in Guid riid, void** ppv);
+		public static extern HRESULT CoCreateInstance<T>(in Guid rclsid, IUnknown* pUnkOuter, CLSCTX dwClsContext, in Guid riid, out T* ppv) where T : IUnknown;
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HRESULT CoCreateInstanceEx(in Guid Clsid, IUnknown* punkOuter, CLSCTX dwClsCtx, COSERVERINFO* pServerInfo, uint32 dwCount, MULTI_QI* pResults);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]

@@ -19,9 +19,6 @@ namespace BfEngine
 {
 	class Engine
 	{
-		//public static Window* window;
-		//public static Renderer* renderer;
-
 		public static bool Running;
 
 		public static Color4 BGColor = .(0.5f, 0.5f, 1f, 1);
@@ -32,14 +29,14 @@ namespace BfEngine
 
 		public static volatile List<IReloadable> toReload = new List<IReloadable>() ~ delete _;//does not own its items
 
-#define WIN32 //use
-
 		static HDC hdc;
 		public static HWnd hwnd;
 		static HINSTANCE hInstance;
 
 		public static HCURSOR handcursor, pointer, ibeam;
 		public static HCURSOR currentCursor;
+
+		public static Model defaultRect ~ delete _;
 
 #if IMGUI_ENABLE
 		static ImGui.Context* imctx;
@@ -133,6 +130,13 @@ namespace BfEngine
 			currentCursor = cursor;
 		}
 
+		public static void SetDefaultBlendFunc(){
+			GL.BlendFunc(.ONE, .ONE_MINUS_SRC_ALPHA);
+		}
+
+		public static void SetDefaultBlendEquation(){
+			GL.BlendEquation(.FUNC_ADD);
+		}
 
 		public static void Init(){
 
@@ -300,15 +304,17 @@ namespace BfEngine
 			
 			//GL.Enable(.CULL_FACE);
 			//GL.CullFace(.BACK);
-			//GL.BlendFunc(.SRC_ALPHA, .ONE_MINUS_SRC_ALPHA);
-			//GL.BlendFuncSeparate(.SRC_ALPHA, .ONE_MINUS_SRC_ALPHA, .ONE, .ONE_MINUS_SRC_ALPHA);
+
 			GL.Enable(.MULTISAMPLE);
 
 			GL.Enable(.BLEND);
 			//GL.BlendFunc(.SRC_ALPHA, .ONE_MINUS_SRC_ALPHA);
-			GL.BlendFunc(.ONE, .ONE_MINUS_SRC_ALPHA);
+			//GL.BlendFunc(.ONE, .ONE_MINUS_SRC_ALPHA);
+			SetDefaultBlendFunc();
+			SetDefaultBlendEquation();
 
 			GL.Enable(.DEPTH_TEST);
+			GL.DepthFunc(.LEQUAL);
 
 			GL.PolygonMode_(.FRONT, .FILL);
 			/*Engine init stuff*/
@@ -322,6 +328,8 @@ namespace BfEngine
 
 			Camera.[Friend]Update();
 			Shader.Load();
+
+			defaultRect = .CreateRect(new Model());
 			RenderableText.Init();
 
 			UI.Init();
@@ -361,8 +369,10 @@ namespace BfEngine
 			ImGuiImplOpenGL3.Init();
 			ImGui.StyleColorsDark();
 #endif //IMGUI_ENABLE
+
+			
 		}
-		static float[4] color;
+
 		public static void Update()
 		{
 			

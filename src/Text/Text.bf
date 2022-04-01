@@ -8,15 +8,29 @@ namespace BfEngine.Text
 {
 	class RenderableText
 	{
+#define DWRITE
+
+#if DWRITE
+		public static DWFont defaultFont ~ delete _;
+
+		public DWFont font = defaultFont;
+
+		public static void Init()
+		{
+			//defaultFont = new .("Segoe UI");
+			defaultFont = new .("BIZ UDGothic");
+		}
+#else
 		public static Font defaultFont ~ delete _;
 
 		public Font font = defaultFont;
 
 		public static void Init()
 		{
-			//defaultFont = new .("Assets/futura.fnt");
 			defaultFont = new .("Assets/fonts/Segoe UI.fnt");
 		}
+#endif
+
 
 		private uint32 VAO, VBO, texture, count, maxCount;
 
@@ -56,6 +70,8 @@ namespace BfEngine.Text
 
 		public void GenerateTextBuffer(StringView Text, float width, TextOptions options = .Default, function void (int index, ref GGlyph glyph) postProcess = null)
 		{
+			font.GenerateGlyphs(Text);
+
 			float scale = this.scale;
 			/*List<Vector3> positions = scope .(Text.Length * 4);
 			List<Vector2> UVs = scope .(Text.Length * 4);
@@ -185,7 +201,15 @@ namespace BfEngine.Text
 							continue;
 						}
 					}
-					var glyph = font.getGlyph(character) ?? font.missingGlyph;
+					var glyph = font.getGlyph(character);// ?? font.missingGlyph;
+#if DWRITE
+					if(glyph == null){
+						font.GenerateGlyphs(character);
+						glyph = font.getGlyph(character) ?? font.missingGlyph;
+					}
+#endif
+
+
 
 					glyphs.Add(GGlyph()
 						{
@@ -200,7 +224,11 @@ namespace BfEngine.Text
 					var newEnumerator = textEnumerator;
 					if (newEnumerator.MoveNext())
 					{
+#if DWRITE
+						cursor.x += font.getKerningAdjustment(character, newEnumerator.Current) * font.scale * scale;
+#else
 						cursor.x += glyph.getKerning(newEnumerator.Current) * scale;
+#endif
 					}
 				}
 
@@ -231,10 +259,6 @@ namespace BfEngine.Text
 				GL.BindBuffer(.ARRAY_BUFFER, VBO);
 				GL.BufferSubData(.ARRAY_BUFFER, 0, maxCount * strideof(GGlyph), glyphs.Ptr);
 			}*/
-
-			/*model.SetVertices(positions, .DYNAMIC_DRAW);
-			model.SetUVs(UVs, .DYNAMIC_DRAW);
-			model.SetTriangles(indices, .DYNAMIC_DRAW);*/
 
 			texture = font.textures[0];
 

@@ -904,14 +904,14 @@ namespace Win32
 			
 			public HRESULT SetStandardDeviation(ref IDCompositionAnimation animation) mut => VT.SetStandardDeviation(ref this, ref animation);
 			public HRESULT SetStandardDeviation(float amount) mut => VT.SetStandardDeviation2(ref this, amount);
-			public HRESULT SetBorderMode(D2D1_BORDER_MODE mode) mut => VT.SetBorderMode(ref this, mode);
+			public HRESULT SetBorderMode(BorderMode mode) mut => VT.SetBorderMode(ref this, mode);
 
 			[CRepr]
 			public struct VTable : IDCompositionFilterEffect.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionGaussianBlurEffect self, ref IDCompositionAnimation animation) SetStandardDeviation;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionGaussianBlurEffect self, float amount) SetStandardDeviation2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionGaussianBlurEffect self, D2D1_BORDER_MODE mode) SetBorderMode;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionGaussianBlurEffect self, BorderMode mode) SetBorderMode;
 			}
 		}
 		[CRepr]
@@ -1190,12 +1190,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetMode(D2D1_BLEND_MODE mode) mut => VT.SetMode(ref this, mode);
+			public HRESULT SetMode(BlendMode mode) mut => VT.SetMode(ref this, mode);
 
 			[CRepr]
 			public struct VTable : IDCompositionFilterEffect.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionBlendEffect self, D2D1_BLEND_MODE mode) SetMode;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionBlendEffect self, BlendMode mode) SetMode;
 			}
 		}
 		[CRepr]
@@ -1239,7 +1239,7 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public HRESULT SetInterpolationMode(D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE interpolationMode) mut => VT.SetInterpolationMode(ref this, interpolationMode);
-			public HRESULT SetBorderMode(D2D1_BORDER_MODE borderMode) mut => VT.SetBorderMode(ref this, borderMode);
+			public HRESULT SetBorderMode(BorderMode borderMode) mut => VT.SetBorderMode(ref this, borderMode);
 			public HRESULT SetTransformMatrix(in D2D_MATRIX_3X2_F transformMatrix) mut => VT.SetTransformMatrix(ref this, transformMatrix);
 			public HRESULT SetTransformMatrixElement(int32 row, int32 column, ref IDCompositionAnimation animation) mut => VT.SetTransformMatrixElement(ref this, row, column, ref animation);
 			public HRESULT SetTransformMatrixElement(int32 row, int32 column, float value) mut => VT.SetTransformMatrixElement2(ref this, row, column, value);
@@ -1250,7 +1250,7 @@ namespace Win32
 			public struct VTable : IDCompositionFilterEffect.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionAffineTransform2DEffect self, D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE interpolationMode) SetInterpolationMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionAffineTransform2DEffect self, D2D1_BORDER_MODE borderMode) SetBorderMode;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionAffineTransform2DEffect self, BorderMode borderMode) SetBorderMode;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionAffineTransform2DEffect self, in D2D_MATRIX_3X2_F transformMatrix) SetTransformMatrix;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionAffineTransform2DEffect self, int32 row, int32 column, ref IDCompositionAnimation animation) SetTransformMatrixElement;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDCompositionAffineTransform2DEffect self, int32 row, int32 column, float value) SetTransformMatrixElement2;

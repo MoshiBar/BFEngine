@@ -1,4 +1,5 @@
 using System;
+using BfEngine;
 
 // namespace Graphics.Direct2D.Common
 namespace Win32
@@ -9,120 +10,110 @@ namespace Win32
 		
 		public enum AlphaMode : uint32
 		{
-			UNKNOWN = 0,
-			PREMULTIPLIED = 1,
-			STRAIGHT = 2,
-			IGNORE = 3,
-			FORCE_DWORD = 4294967295,
+			Unknown = 0,
+			Premultiplied = 1,
+			Straight = 2,
+			Ignore = 3
 		}
-		public enum D2D1_FIGURE_BEGIN : uint32
+		public enum FigureBegin : uint32
 		{
-			FILLED = 0,
-			HOLLOW = 1,
-			FORCE_DWORD = 4294967295,
+			Filled = 0,
+			Hollow = 1
 		}
-		public enum D2D1_FIGURE_END : uint32
+		public enum FigureEnd : uint32
 		{
-			OPEN = 0,
-			CLOSED = 1,
-			FORCE_DWORD = 4294967295,
+			Open = 0,
+			Closed = 1
 		}
-		public enum D2D1_PATH_SEGMENT : uint32
+		public enum PathSegment : uint32
 		{
-			NONE = 0,
-			FORCE_UNSTROKED = 1,
-			FORCE_ROUND_LINE_JOIN = 2,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			ForceUnstroked = 1,
+			ForceRoundLineJoin = 2
 		}
-		public enum D2D1_FILL_MODE : uint32
+		public enum FillMode : uint32
 		{
-			ALTERNATE = 0,
-			WINDING = 1,
-			FORCE_DWORD = 4294967295,
+			Alternate = 0,
+			Winding = 1
 		}
-		public enum D2D1_BORDER_MODE : uint32
+		public enum BorderMode : uint32
 		{
-			SOFT = 0,
-			HARD = 1,
-			FORCE_DWORD = 4294967295,
+			Soft = 0,
+			Hard = 1
 		}
-		public enum D2D1_BLEND_MODE : uint32
+		public enum BlendMode : uint32
 		{
-			MULTIPLY = 0,
-			SCREEN = 1,
-			DARKEN = 2,
-			LIGHTEN = 3,
-			DISSOLVE = 4,
-			COLOR_BURN = 5,
-			LINEAR_BURN = 6,
-			DARKER_COLOR = 7,
-			LIGHTER_COLOR = 8,
-			COLOR_DODGE = 9,
-			LINEAR_DODGE = 10,
-			OVERLAY = 11,
-			SOFT_LIGHT = 12,
-			HARD_LIGHT = 13,
-			VIVID_LIGHT = 14,
-			LINEAR_LIGHT = 15,
-			PIN_LIGHT = 16,
-			HARD_MIX = 17,
-			DIFFERENCE = 18,
-			EXCLUSION = 19,
-			HUE = 20,
-			SATURATION = 21,
-			COLOR = 22,
-			LUMINOSITY = 23,
-			SUBTRACT = 24,
-			DIVISION = 25,
-			FORCE_DWORD = 4294967295,
+			Multiply = 0,
+			Screen = 1,
+			Darken = 2,
+			Lighten = 3,
+			Dissolve = 4,
+			ColorBurn = 5,
+			LinearBurn = 6,
+			DarkerColor = 7,
+			LighterColor = 8,
+			ColorDodge = 9,
+			LinearDodge = 10,
+			Overlay = 11,
+			SoftLight = 12,
+			HardLight = 13,
+			VividLight = 14,
+			LinearLight = 15,
+			PinLight = 16,
+			HardMix = 17,
+			Difference = 18,
+			Exclusion = 19,
+			Hue = 20,
+			Saturation = 21,
+			Color = 22,
+			Luminosity = 23,
+			Subtract = 24,
+			Division = 25
 		}
 		public enum D2D1_COLORMATRIX_ALPHA_MODE : uint32
 		{
-			PREMULTIPLIED = 1,
-			STRAIGHT = 2,
-			FORCE_DWORD = 4294967295,
+			Premultiplied = 1,
+			Straight = 2
 		}
 		public enum D2D1_TURBULENCE_NOISE : uint32
 		{
-			FRACTAL_SUM = 0,
-			TURBULENCE = 1,
-			FORCE_DWORD = 4294967295,
+			FractalSum = 0,
+			Turbulence = 1
 		}
 		public enum D2D1_COMPOSITE_MODE : uint32
 		{
-			SOURCE_OVER = 0,
-			DESTINATION_OVER = 1,
-			SOURCE_IN = 2,
-			DESTINATION_IN = 3,
-			SOURCE_OUT = 4,
-			DESTINATION_OUT = 5,
-			SOURCE_ATOP = 6,
-			DESTINATION_ATOP = 7,
+			SourceOver = 0,
+			DestinationOver = 1,
+			SourceIn = 2,
+			DestinationIn = 3,
+			SourceOut = 4,
+			DestinationOut = 5,
+			SourceAtop = 6,
+			DestinationAtop = 7,
 			XOR = 8,
-			PLUS = 9,
-			SOURCE_COPY = 10,
-			BOUNDED_SOURCE_COPY = 11,
-			MASK_INVERT = 12,
-			FORCE_DWORD = 4294967295,
+			Plus = 9,
+			SourceCopy = 10,
+			BoundedSourceCopy = 11,
+			MaskInvert = 12
 		}
 		
 		// --- Structs ---
 		
-		[CRepr]
+		/*[CRepr]
 		public struct D2D_COLOR_F
 		{
 			public float r;
 			public float g;
 			public float b;
 			public float a;
-		}
-		[CRepr]
+		}*/
+		/*[CRepr]
 		public struct ColorF : this(
 			float r,
 			float g,
 			float b,
 			float a
-		){}
+		){}*/
 		[CRepr]
 		public struct PixelFormat : this(
 			DXGIFormat format,
@@ -133,12 +124,6 @@ namespace Win32
 		{
 			public uint32 x;
 			public uint32 y;
-		}
-		[CRepr]
-		public struct D2D_POINT_2F
-		{
-			public float x;
-			public float y;
 		}
 		[CRepr]
 		public struct D2D_VECTOR_2F
@@ -323,11 +308,11 @@ namespace Win32
 			}
 		}
 		[CRepr]
-		public struct D2D1_BEZIER_SEGMENT
+		public struct BezierSegment
 		{
-			public D2D_POINT_2F point1;
-			public D2D_POINT_2F point2;
-			public D2D_POINT_2F point3;
+			public Vector2 point1;
+			public Vector2 point2;
+			public Vector2 point3;
 		}
 		
 		// --- COM Interfaces ---
@@ -339,24 +324,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void SetFillMode(D2D1_FILL_MODE fillMode) mut => VT.SetFillMode(ref this, fillMode);
-			public void SetSegmentFlags(D2D1_PATH_SEGMENT vertexFlags) mut => VT.SetSegmentFlags(ref this, vertexFlags);
-			public void BeginFigure(D2D_POINT_2F startPoint, D2D1_FIGURE_BEGIN figureBegin) mut => VT.BeginFigure(ref this, startPoint, figureBegin);
-			public void AddLines(D2D_POINT_2F* points, uint32 pointsCount) mut => VT.AddLines(ref this, points, pointsCount);
-			public void AddBeziers(D2D1_BEZIER_SEGMENT* beziers, uint32 beziersCount) mut => VT.AddBeziers(ref this, beziers, beziersCount);
-			public void EndFigure(D2D1_FIGURE_END figureEnd) mut => VT.EndFigure(ref this, figureEnd);
-			public HRESULT Close() mut => VT.Close(ref this);
+			public void SetFillMode(FillMode fillMode)								mut => VT.SetFillMode(&this, fillMode);
+			public void SetSegmentFlags(PathSegment vertexFlags)					mut => VT.SetSegmentFlags(&this, vertexFlags);
+			public void BeginFigure(Vector2 startPoint, FigureBegin figureBegin)	mut => VT.BeginFigure(&this, startPoint, figureBegin);
+			public void AddLines(Vector2* points, uint32 pointsCount)				mut => VT.AddLines(&this, points, pointsCount);
+			public void AddBeziers(BezierSegment* beziers, uint32 beziersCount)		mut => VT.AddBeziers(&this, beziers, beziersCount);
+			public void EndFigure(FigureEnd figureEnd)								mut => VT.EndFigure(&this, figureEnd);
+			public HRESULT Close()													mut => VT.Close(&this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1SimplifiedGeometrySink self, D2D1_FILL_MODE fillMode) SetFillMode;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1SimplifiedGeometrySink self, D2D1_PATH_SEGMENT vertexFlags) SetSegmentFlags;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1SimplifiedGeometrySink self, D2D_POINT_2F startPoint, D2D1_FIGURE_BEGIN figureBegin) BeginFigure;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1SimplifiedGeometrySink self, D2D_POINT_2F* points, uint32 pointsCount) AddLines;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1SimplifiedGeometrySink self, D2D1_BEZIER_SEGMENT* beziers, uint32 beziersCount) AddBeziers;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1SimplifiedGeometrySink self, D2D1_FIGURE_END figureEnd) EndFigure;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SimplifiedGeometrySink self) Close;
+				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, FillMode fillMode) SetFillMode;
+				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, PathSegment vertexFlags) SetSegmentFlags;
+				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, Vector2 startPoint, FigureBegin figureBegin) BeginFigure;
+				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, Vector2* points, uint32 pointsCount) AddLines;
+				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, BezierSegment* beziers, uint32 beziersCount) AddBeziers;
+				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, FigureEnd figureEnd) EndFigure;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ID2D1SimplifiedGeometrySink* self) Close;
 			}
 		}
 		

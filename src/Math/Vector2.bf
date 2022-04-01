@@ -13,7 +13,7 @@ namespace BfEngine
 	#if IMGUI_ENABLE
 	[VectorDebug(.Float, 2)]
 	#endif //IMGUI_ENABLE
-	[Reflect]
+	[Reflect, CRepr]
 	public struct Vector2
 	{
 
@@ -71,6 +71,13 @@ namespace BfEngine
 		public static void DistanceSquared(Vector2 value1, Vector2 value2, out float result)
 		{
 			result = (value1.x - value2.x) * (value1.x - value2.x) +
+				(value1.y - value2.y) * (value1.y - value2.y);
+		}
+
+		[Optimize, Inline]
+		public static float DistanceSquared(Vector2 value1, Vector2 value2)
+		{
+			return (value1.x - value2.x) * (value1.x - value2.x) +
 				(value1.y - value2.y) * (value1.y - value2.y);
 		}
 

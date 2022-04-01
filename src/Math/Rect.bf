@@ -92,6 +92,14 @@ namespace BfEngine
 			}
 		}
 
+		public this(Vector2 pos, Vector2 size)
+		{
+			mX = pos.x;
+			mY = pos.y;
+			mWidth = size.x;
+			mHeight = size.y;
+		}
+
 		public this(float x = 0, float y = 0, float width = 0, float height = 0)
 		{
 			mX = x;
@@ -225,5 +233,10 @@ namespace BfEngine
 			Scale(scaleX, scaleY);
 			Offset(centerX, centerY);
 		}
+
+		public Vector2 Pos => .(mX, mY);
+		public Vector2 Size => .(mWidth, mHeight);
+		public Vector2 Center => .(mX + mWidth / 2f, mY + mHeight / 2f);
+
 	}
 }

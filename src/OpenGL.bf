@@ -391,6 +391,7 @@ static class GL {
         case COLOR_ATTACHMENT9 = 0x8CE9;
         case COLOR_ATTACHMENT19 = 0x8CF3;
         case COLOR_ATTACHMENT18 = 0x8CF2;
+		case DEPTH_STENCIL_ATTACHMENT = 0x821A;
     }
     [AllowDuplicates]
     public enum BlendingFactor : uint32 {

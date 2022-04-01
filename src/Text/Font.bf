@@ -1,7 +1,7 @@
 using System.IO;
 using System;
 
-namespace BfEngine
+namespace BfEngine.Text
 {
 	class Font
 	{
@@ -49,9 +49,9 @@ namespace BfEngine
 
 		public float xHeight = 1;
 
-		public char16[] breakChars;
-		public char16[] xChars = new char16[]('x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z') ~ delete _;
-		public char16[] capChars = new char16[]('M', 'N', 'B', 'D', 'C', 'E', 'F', 'K', 'A', 'G', 'H', 'I', 'J', 'L', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z') ~ delete _;
+		//public char16[] breakChars;
+		const char16[?] xChars = .('x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z');
+		const char16[?] capChars = .('M', 'N', 'B', 'D', 'C', 'E', 'F', 'K', 'A', 'G', 'H', 'I', 'J', 'L', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
 
 		public this (StringView fontFile, bool flip = false) {
 			this.flipped = flip;

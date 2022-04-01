@@ -40,7 +40,7 @@ namespace BfEngine
 
 		public static void SetVec2(int32 location, Vector2 value)  => GL.Uniform2f(location, value.x, value.y);
 
-		public void BindTexture(uint32 texture, uint unit){
+		public static void BindTexture(uint32 texture, uint unit){
 			GL.ActiveTexture(.TEXTURE0 + (uint)unit);
 			GL.BindTexture(.TEXTURE_2D, texture);
 		}
@@ -58,6 +58,7 @@ namespace BfEngine
 		}
 
 		public void LoadShader(StringView vertexPath, StringView fragmentPath){
+			Console.WriteLine($"Loading Shader {vertexPath} {fragmentPath}");
 			String vertSource = scope String();
 			File.ReadAllText(vertexPath, vertSource);
 

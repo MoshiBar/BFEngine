@@ -419,9 +419,8 @@ namespace Win32
 		}
 		public enum WICBitmapLockFlags : int32
 		{
-			WICBitmapLockRead = 1,
-			WICBitmapLockWrite = 2,
-			WICBITMAPLOCKFLAGS_FORCE_DWORD = 2147483647,
+			LockRead = 1,
+			LockWrite = 2,
 		}
 		public enum WICBitmapDecoderCapabilities : int32
 		{
@@ -1064,7 +1063,7 @@ namespace Win32
 			
 			public HRESULT GetSize(out uint32 puiWidth, out uint32 puiHeight) mut => VT.GetSize(ref this, out puiWidth, out puiHeight);
 			public HRESULT GetStride(out uint32 pcbStride) mut => VT.GetStride(ref this, out pcbStride);
-			public HRESULT GetDataPointer(out uint32 pcbBufferSize, uint8** ppbData) mut => VT.GetDataPointer(ref this, out pcbBufferSize, ppbData);
+			public HRESULT GetDataPointer(out uint32 pcbBufferSize, out uint8* ppbData) mut => VT.GetDataPointer(ref this, out pcbBufferSize, out ppbData);
 			public HRESULT GetPixelFormat(out Guid pPixelFormat) mut => VT.GetPixelFormat(ref this, out pPixelFormat);
 
 			[CRepr]
@@ -1072,7 +1071,7 @@ namespace Win32
 			{
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmapLock self, out uint32 puiWidth, out uint32 puiHeight) GetSize;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmapLock self, out uint32 pcbStride) GetStride;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmapLock self, out uint32 pcbBufferSize, uint8** ppbData) GetDataPointer;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmapLock self, out uint32 pcbBufferSize, out uint8* ppbData) GetDataPointer;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmapLock self, out Guid pPixelFormat) GetPixelFormat;
 			}
 		}
@@ -1083,14 +1082,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Lock(in WICRect prcLock, uint32 flags, out IWICBitmapLock* ppILock) mut => VT.Lock(ref this, prcLock, flags, out ppILock);
+			public HRESULT Lock(in WICRect prcLock, WICBitmapLockFlags flags, out IWICBitmapLock* ppILock) mut => VT.Lock(ref this, prcLock, flags, out ppILock);
 			public HRESULT SetPalette(ref IWICPalette pIPalette) mut => VT.SetPalette(ref this, ref pIPalette);
 			public HRESULT SetResolution(double dpiX, double dpiY) mut => VT.SetResolution(ref this, dpiX, dpiY);
 
 			[CRepr]
 			public struct VTable : IWICBitmapSource.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmap self, in WICRect prcLock, uint32 flags, out IWICBitmapLock* ppILock) Lock;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmap self, in WICRect prcLock, WICBitmapLockFlags flags, out IWICBitmapLock* ppILock) Lock;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmap self, ref IWICPalette pIPalette) SetPalette;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICBitmap self, double dpiX, double dpiY) SetResolution;
 			}

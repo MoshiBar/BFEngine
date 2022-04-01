@@ -1,4 +1,5 @@
 using System;
+using BfEngine;
 
 // namespace Graphics.Direct2D
 namespace Win32
@@ -81,190 +82,165 @@ namespace Win32
 		
 		public enum D2D1_INTERPOLATION_MODE_DEFINITION : int32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FANT = 6,
-			MIPMAP_LINEAR = 7,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
+			Fant = 6,
+			MipmapLinear = 7,
 		}
 		public enum D2D1_GAMMA : uint32
 		{
 			_2_2 = 0,
 			_1_0 = 1,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_OPACITY_MASK_CONTENT : uint32
 		{
-			GRAPHICS = 0,
-			TEXT_NATURAL = 1,
-			TEXT_GDI_COMPATIBLE = 2,
-			FORCE_DWORD = 4294967295,
+			Graphics = 0,
+			TextNatural = 1,
+			TextGdiCompatible = 2,
 		}
 		public enum D2D1_EXTEND_MODE : uint32
 		{
-			CLAMP = 0,
-			WRAP = 1,
-			MIRROR = 2,
-			FORCE_DWORD = 4294967295,
+			Clamp = 0,
+			Wrap = 1,
+			Mirror = 2,
 		}
 		public enum D2D1_ANTIALIAS_MODE : uint32
 		{
-			PER_PRIMITIVE = 0,
-			ALIASED = 1,
-			FORCE_DWORD = 4294967295,
+			PerPrimitive = 0,
+			Aliased = 1,
 		}
 		public enum D2D1_TEXT_ANTIALIAS_MODE : uint32
 		{
-			DEFAULT = 0,
-			CLEARTYPE = 1,
-			GRAYSCALE = 2,
-			ALIASED = 3,
-			FORCE_DWORD = 4294967295,
+			Default = 0,
+			Cleartype = 1,
+			Grayscale = 2,
+			Aliased = 3,
 		}
 		public enum D2D1_BITMAP_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
 		}
 		public enum D2D1_DRAW_TEXT_OPTIONS : uint32
 		{
-			NO_SNAP = 1,
-			CLIP = 2,
-			ENABLE_COLOR_FONT = 4,
-			DISABLE_COLOR_BITMAP_SNAPPING = 8,
-			NONE = 0,
-			FORCE_DWORD = 4294967295,
+			NoSnap = 1,
+			Clip = 2,
+			EnableColorFont = 4,
+			DisableColorBitmapSnapping = 8,
+			None = 0,
 		}
 		public enum D2D1_ARC_SIZE : uint32
 		{
 			SMALL = 0,
 			LARGE = 1,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_CAP_STYLE : uint32
 		{
-			FLAT = 0,
-			SQUARE = 1,
-			ROUND = 2,
-			TRIANGLE = 3,
-			FORCE_DWORD = 4294967295,
+			Flat = 0,
+			Square = 1,
+			Round = 2,
+			Triangle = 3,
 		}
 		public enum D2D1_DASH_STYLE : uint32
 		{
-			SOLID = 0,
-			DASH = 1,
-			DOT = 2,
-			DASH_DOT = 3,
-			DASH_DOT_DOT = 4,
-			CUSTOM = 5,
-			FORCE_DWORD = 4294967295,
+			Solid = 0,
+			Dash = 1,
+			Dot = 2,
+			DashDot = 3,
+			DashDotDot = 4,
+			Custom = 5,
 		}
 		public enum D2D1_LINE_JOIN : uint32
 		{
-			MITER = 0,
-			BEVEL = 1,
-			ROUND = 2,
-			MITER_OR_BEVEL = 3,
-			FORCE_DWORD = 4294967295,
+			Miter = 0,
+			Bevel = 1,
+			Round = 2,
+			MiterOrBevel = 3,
 		}
 		public enum D2D1_COMBINE_MODE : uint32
 		{
-			UNION = 0,
-			INTERSECT = 1,
-			XOR = 2,
-			EXCLUDE = 3,
-			FORCE_DWORD = 4294967295,
+			Union = 0,
+			Intersect = 1,
+			Xor = 2,
+			Exclude = 3,
 		}
 		public enum D2D1_GEOMETRY_RELATION : uint32
 		{
-			UNKNOWN = 0,
-			DISJOINT = 1,
-			IS_CONTAINED = 2,
-			CONTAINS = 3,
-			OVERLAP = 4,
-			FORCE_DWORD = 4294967295,
+			Unknown = 0,
+			Disjoint = 1,
+			IsContained = 2,
+			Contains = 3,
+			Overlap = 4,
 		}
 		public enum D2D1_GEOMETRY_SIMPLIFICATION_OPTION : uint32
 		{
-			CUBICS_AND_LINES = 0,
-			LINES = 1,
-			FORCE_DWORD = 4294967295,
+			CubicsAndLines = 0,
+			Lines = 1,
 		}
 		public enum D2D1_SWEEP_DIRECTION : uint32
 		{
-			COUNTER_CLOCKWISE = 0,
-			CLOCKWISE = 1,
-			FORCE_DWORD = 4294967295,
+			CounterClockwise = 0,
+			Clockwise = 1,
 		}
 		public enum D2D1_LAYER_OPTIONS : uint32
 		{
-			NONE = 0,
-			INITIALIZE_FOR_CLEARTYPE = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			InitializeForCleartype = 1,
 		}
 		public enum D2D1_WINDOW_STATE : uint32
 		{
-			NONE = 0,
-			OCCLUDED = 1,
-			//FORCE_DWORD = 4294967295,
+			None = 0,
+			Occluded = 1,
 		}
 		public enum RenderTargetType : uint32
 		{
 			Default = 0,
 			Software = 1,
 			Hardware = 2,
-			//FORCE_DWORD = 4294967295,
 		}
 		public enum FeatureLevel : uint32
 		{
-			DEFAULT = 0,
+			Default = 0,
 			_9 = 37120,
 			_10 = 40960,
-			//FORCE_DWORD = 4294967295,
 		}
 		public enum RenderTargetUsage : uint32
 		{
-			NONE = 0,
-			FORCE_BITMAP_REMOTING = 1,
-			GDI_COMPATIBLE = 2,
-			//FORCE_DWORD = 4294967295,
+			None = 0,
+			ForceBitmapRemoting = 1,
+			GdiCompatible = 2,
 		}
 		public enum PresentOptions : uint32
 		{
 			None = 0,
 			RetainContents = 1,
 			Immediately = 2,
-			//FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS : uint32
 		{
-			NONE = 0,
-			GDI_COMPATIBLE = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			GdiCompatible = 1,
 		}
 		public enum D2D1_DC_INITIALIZE_MODE : uint32
 		{
-			COPY = 0,
-			CLEAR = 1,
-			FORCE_DWORD = 4294967295,
+			Copy = 0,
+			Clear = 1,
 		}
 		public enum D2D1_DEBUG_LEVEL : uint32
 		{
-			NONE = 0,
-			ERROR = 1,
-			WARNING = 2,
-			INFORMATION = 3,
-			//FORCE_DWORD = 4294967295,
+			None = 0,
+			Error = 1,
+			Warning = 2,
+			Information = 3,
 		}
 		public enum FactoryType : uint32
 		{
 			SingleThreaded = 0,
 			MultiThreaded = 1
-			//FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_CHANNEL_SELECTOR : uint32
 		{
@@ -272,1152 +248,1013 @@ namespace Win32
 			G = 1,
 			B = 2,
 			A = 3,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_BITMAPSOURCE_ORIENTATION : uint32
 		{
-			DEFAULT = 1,
-			FLIP_HORIZONTAL = 2,
-			ROTATE_CLOCKWISE180 = 3,
-			ROTATE_CLOCKWISE180_FLIP_HORIZONTAL = 4,
-			ROTATE_CLOCKWISE270_FLIP_HORIZONTAL = 5,
-			ROTATE_CLOCKWISE90 = 6,
-			ROTATE_CLOCKWISE90_FLIP_HORIZONTAL = 7,
-			ROTATE_CLOCKWISE270 = 8,
-			FORCE_DWORD = 4294967295,
+			Default = 1,
+			FlipHorizontal = 2,
+			RotateClockwise180 = 3,
+			RotateClockwise180FlipHorizontal = 4,
+			RotateClockwise270FlipHorizontal = 5,
+			RotateClockwise90 = 6,
+			RotateClockwise90FlipHorizontal = 7,
+			RotateClockwise270 = 8,
 		}
 		public enum D2D1_GAUSSIANBLUR_PROP : uint32
 		{
-			STANDARD_DEVIATION = 0,
-			OPTIMIZATION = 1,
-			BORDER_MODE = 2,
-			FORCE_DWORD = 4294967295,
+			StandardDeviation = 0,
+			Optimization = 1,
+			BorderMode = 2,
 		}
 		public enum D2D1_GAUSSIANBLUR_OPTIMIZATION : uint32
 		{
-			SPEED = 0,
-			BALANCED = 1,
-			QUALITY = 2,
-			FORCE_DWORD = 4294967295,
+			Speed = 0,
+			Balanced = 1,
+			Quality = 2,
 		}
 		public enum D2D1_DIRECTIONALBLUR_PROP : uint32
 		{
-			STANDARD_DEVIATION = 0,
-			ANGLE = 1,
-			OPTIMIZATION = 2,
-			BORDER_MODE = 3,
-			FORCE_DWORD = 4294967295,
+			StandardDeviation = 0,
+			Angle = 1,
+			Optimization = 2,
+			BorderMode = 3,
 		}
 		public enum D2D1_DIRECTIONALBLUR_OPTIMIZATION : uint32
 		{
-			SPEED = 0,
-			BALANCED = 1,
-			QUALITY = 2,
-			FORCE_DWORD = 4294967295,
+			Speed = 0,
+			Balanced = 1,
+			Quality = 2,
 		}
 		public enum D2D1_SHADOW_PROP : uint32
 		{
-			BLUR_STANDARD_DEVIATION = 0,
-			COLOR = 1,
-			OPTIMIZATION = 2,
-			FORCE_DWORD = 4294967295,
+			BlurStandardDeviation = 0,
+			Color = 1,
+			Optimization = 2,
 		}
 		public enum D2D1_SHADOW_OPTIMIZATION : uint32
 		{
-			SPEED = 0,
-			BALANCED = 1,
-			QUALITY = 2,
-			FORCE_DWORD = 4294967295,
+			Speed = 0,
+			Balanced = 1,
+			Quality = 2,
 		}
 		public enum D2D1_BLEND_PROP : uint32
 		{
-			MODE = 0,
-			FORCE_DWORD = 4294967295,
+			Mode = 0,
 		}
 		public enum D2D1_SATURATION_PROP : uint32
 		{
-			SATURATION = 0,
-			FORCE_DWORD = 4294967295,
+			Saturation = 0,
 		}
 		public enum D2D1_HUEROTATION_PROP : uint32
 		{
-			ANGLE = 0,
-			FORCE_DWORD = 4294967295,
+			Angle = 0,
 		}
 		public enum D2D1_COLORMATRIX_PROP : uint32
 		{
-			COLOR_MATRIX = 0,
-			ALPHA_MODE = 1,
-			CLAMP_OUTPUT = 2,
-			FORCE_DWORD = 4294967295,
+			ColorMatrix = 0,
+			AlphaMode = 1,
+			ClampOutput = 2,
 		}
 		public enum D2D1_BITMAPSOURCE_PROP : uint32
 		{
-			WIC_BITMAP_SOURCE = 0,
-			SCALE = 1,
-			INTERPOLATION_MODE = 2,
-			ENABLE_DPI_CORRECTION = 3,
-			ALPHA_MODE = 4,
-			ORIENTATION = 5,
-			FORCE_DWORD = 4294967295,
+			WicBitmapSource = 0,
+			Scale = 1,
+			InterpolationMode = 2,
+			EnableDpiCorrection = 3,
+			AlphaMode = 4,
+			Orientation = 5,
 		}
 		public enum D2D1_BITMAPSOURCE_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			FANT = 6,
-			MIPMAP_LINEAR = 7,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			Fant = 6,
+			MipmapLinear = 7,
 		}
 		public enum D2D1_BITMAPSOURCE_ALPHA_MODE : uint32
 		{
-			PREMULTIPLIED = 1,
-			STRAIGHT = 2,
-			FORCE_DWORD = 4294967295,
+			Premultiplied = 1,
+			Straight = 2,
 		}
 		public enum D2D1_COMPOSITE_PROP : uint32
 		{
-			MODE = 0,
-			FORCE_DWORD = 4294967295,
+			Mode = 0,
 		}
 		public enum D2D1_3DTRANSFORM_PROP : uint32
 		{
-			INTERPOLATION_MODE = 0,
-			BORDER_MODE = 1,
-			TRANSFORM_MATRIX = 2,
-			FORCE_DWORD = 4294967295,
+			InterpolationMode = 0,
+			BorderMode = 1,
+			TransformMatrix = 2,
 		}
 		public enum D2D1_3DTRANSFORM_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
 		}
 		public enum D2D1_3DPERSPECTIVETRANSFORM_PROP : uint32
 		{
-			INTERPOLATION_MODE = 0,
-			BORDER_MODE = 1,
-			DEPTH = 2,
-			PERSPECTIVE_ORIGIN = 3,
-			LOCAL_OFFSET = 4,
-			GLOBAL_OFFSET = 5,
-			ROTATION_ORIGIN = 6,
-			ROTATION = 7,
-			FORCE_DWORD = 4294967295,
+			InterpolationMode = 0,
+			BorderMode = 1,
+			Depth = 2,
+			PerspectiveOrigin = 3,
+			LocalOffset = 4,
+			GlobalOffset = 5,
+			RotationOrigin = 6,
+			Rotation = 7,
 		}
 		public enum D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
 		}
 		public enum D2D1_2DAFFINETRANSFORM_PROP : uint32
 		{
-			INTERPOLATION_MODE = 0,
-			BORDER_MODE = 1,
-			TRANSFORM_MATRIX = 2,
-			SHARPNESS = 3,
-			FORCE_DWORD = 4294967295,
+			InterpolationMode = 0,
+			BorderMode = 1,
+			TransformMatrix = 2,
+			Sharpness = 3,
 		}
 		public enum D2D1_DPICOMPENSATION_PROP : uint32
 		{
-			INTERPOLATION_MODE = 0,
-			BORDER_MODE = 1,
-			INPUT_DPI = 2,
-			FORCE_DWORD = 4294967295,
+			InterpolationMode = 0,
+			BorderMode = 1,
+			InputDpi = 2,
 		}
 		public enum D2D1_DPICOMPENSATION_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_SCALE_PROP : uint32
 		{
-			SCALE = 0,
-			CENTER_POINT = 1,
-			INTERPOLATION_MODE = 2,
-			BORDER_MODE = 3,
-			SHARPNESS = 4,
-			FORCE_DWORD = 4294967295,
+			Scale = 0,
+			CenterPoint = 1,
+			InterpolationMode = 2,
+			BorderMode = 3,
+			Sharpness = 4,
 		}
 		public enum D2D1_SCALE_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_TURBULENCE_PROP : uint32
 		{
-			OFFSET = 0,
-			SIZE = 1,
-			BASE_FREQUENCY = 2,
-			NUM_OCTAVES = 3,
-			SEED = 4,
-			NOISE = 5,
-			STITCHABLE = 6,
-			FORCE_DWORD = 4294967295,
+			Offset = 0,
+			Size = 1,
+			BaseFrequency = 2,
+			NumOctaves = 3,
+			Seed = 4,
+			Noise = 5,
+			Stitchable = 6,
 		}
 		public enum D2D1_DISPLACEMENTMAP_PROP : uint32
 		{
-			SCALE = 0,
-			X_CHANNEL_SELECT = 1,
-			Y_CHANNEL_SELECT = 2,
-			FORCE_DWORD = 4294967295,
+			Scale = 0,
+			XChannelSelect = 1,
+			YChannelSelect = 2,
 		}
 		public enum D2D1_COLORMANAGEMENT_PROP : uint32
 		{
-			SOURCE_COLOR_CONTEXT = 0,
-			SOURCE_RENDERING_INTENT = 1,
-			DESTINATION_COLOR_CONTEXT = 2,
-			DESTINATION_RENDERING_INTENT = 3,
-			ALPHA_MODE = 4,
-			QUALITY = 5,
-			FORCE_DWORD = 4294967295,
+			SourceColorContext = 0,
+			SourceRenderingIntent = 1,
+			DestinationColorContext = 2,
+			DestinationRenderingIntent = 3,
+			AlphaMode = 4,
+			Quality = 5,
 		}
 		public enum D2D1_COLORMANAGEMENT_ALPHA_MODE : uint32
 		{
-			PREMULTIPLIED = 1,
-			STRAIGHT = 2,
-			FORCE_DWORD = 4294967295,
+			Premultiplied = 1,
+			Straight = 2,
 		}
 		public enum D2D1_COLORMANAGEMENT_QUALITY : uint32
 		{
-			PROOF = 0,
-			NORMAL = 1,
-			BEST = 2,
-			FORCE_DWORD = 4294967295,
+			Proof = 0,
+			Normal = 1,
+			Best = 2,
 		}
 		public enum D2D1_COLORMANAGEMENT_RENDERING_INTENT : uint32
 		{
-			PERCEPTUAL = 0,
-			RELATIVE_COLORIMETRIC = 1,
-			SATURATION = 2,
-			ABSOLUTE_COLORIMETRIC = 3,
-			FORCE_DWORD = 4294967295,
+			Perceptual = 0,
+			RelativeColorimetric = 1,
+			Saturation = 2,
+			AbsoluteColorimetric = 3,
 		}
 		public enum D2D1_HISTOGRAM_PROP : uint32
 		{
-			NUM_BINS = 0,
-			CHANNEL_SELECT = 1,
-			HISTOGRAM_OUTPUT = 2,
-			FORCE_DWORD = 4294967295,
+			NumBins = 0,
+			ChannelSelect = 1,
+			HistogramOutput = 2,
 		}
 		public enum D2D1_POINTSPECULAR_PROP : uint32
 		{
-			LIGHT_POSITION = 0,
-			SPECULAR_EXPONENT = 1,
-			SPECULAR_CONSTANT = 2,
-			SURFACE_SCALE = 3,
-			COLOR = 4,
-			KERNEL_UNIT_LENGTH = 5,
-			SCALE_MODE = 6,
-			FORCE_DWORD = 4294967295,
+			LightPosition = 0,
+			SpecularExponent = 1,
+			SpecularConstant = 2,
+			SurfaceScale = 3,
+			Color = 4,
+			KernelUnitLength = 5,
+			ScaleMode = 6,
 		}
 		public enum D2D1_POINTSPECULAR_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_SPOTSPECULAR_PROP : uint32
 		{
-			LIGHT_POSITION = 0,
-			POINTS_AT = 1,
-			FOCUS = 2,
-			LIMITING_CONE_ANGLE = 3,
-			SPECULAR_EXPONENT = 4,
-			SPECULAR_CONSTANT = 5,
-			SURFACE_SCALE = 6,
-			COLOR = 7,
-			KERNEL_UNIT_LENGTH = 8,
-			SCALE_MODE = 9,
-			FORCE_DWORD = 4294967295,
+			LightPosition = 0,
+			PointsAt = 1,
+			Focus = 2,
+			LimitingConeAngle = 3,
+			SpecularExponent = 4,
+			SpecularConstant = 5,
+			SurfaceScale = 6,
+			Color = 7,
+			KernelUnitLength = 8,
+			ScaleMode = 9,
 		}
 		public enum D2D1_SPOTSPECULAR_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_DISTANTSPECULAR_PROP : uint32
 		{
-			AZIMUTH = 0,
-			ELEVATION = 1,
-			SPECULAR_EXPONENT = 2,
-			SPECULAR_CONSTANT = 3,
-			SURFACE_SCALE = 4,
-			COLOR = 5,
-			KERNEL_UNIT_LENGTH = 6,
-			SCALE_MODE = 7,
-			FORCE_DWORD = 4294967295,
+			Azimuth = 0,
+			Elevation = 1,
+			SpecularExponent = 2,
+			SpecularConstant = 3,
+			SurfaceScale = 4,
+			Color = 5,
+			KernelUnitLength = 6,
+			ScaleMode = 7,
 		}
 		public enum D2D1_DISTANTSPECULAR_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_POINTDIFFUSE_PROP : uint32
 		{
-			LIGHT_POSITION = 0,
-			DIFFUSE_CONSTANT = 1,
-			SURFACE_SCALE = 2,
-			COLOR = 3,
-			KERNEL_UNIT_LENGTH = 4,
-			SCALE_MODE = 5,
-			FORCE_DWORD = 4294967295,
+			LightPosition = 0,
+			DiffuseConstant = 1,
+			SurfaceScale = 2,
+			Color = 3,
+			KernelUnitLength = 4,
+			ScaleMode = 5,
 		}
 		public enum D2D1_POINTDIFFUSE_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_SPOTDIFFUSE_PROP : uint32
 		{
-			LIGHT_POSITION = 0,
-			POINTS_AT = 1,
-			FOCUS = 2,
-			LIMITING_CONE_ANGLE = 3,
-			DIFFUSE_CONSTANT = 4,
-			SURFACE_SCALE = 5,
-			COLOR = 6,
-			KERNEL_UNIT_LENGTH = 7,
-			SCALE_MODE = 8,
-			FORCE_DWORD = 4294967295,
+			LightPosition = 0,
+			PointsAt = 1,
+			Focus = 2,
+			LimitingConeAngle = 3,
+			DiffuseConstant = 4,
+			SurfaceScale = 5,
+			Color = 6,
+			KernelUnitLength = 7,
+			ScaleMode = 8,
 		}
 		public enum D2D1_SPOTDIFFUSE_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_DISTANTDIFFUSE_PROP : uint32
 		{
-			AZIMUTH = 0,
-			ELEVATION = 1,
-			DIFFUSE_CONSTANT = 2,
-			SURFACE_SCALE = 3,
-			COLOR = 4,
-			KERNEL_UNIT_LENGTH = 5,
-			SCALE_MODE = 6,
-			FORCE_DWORD = 4294967295,
+			Azimuth = 0,
+			Elevation = 1,
+			DiffuseConstant = 2,
+			SurfaceScale = 3,
+			Color = 4,
+			KernelUnitLength = 5,
+			ScaleMode = 6,
 		}
 		public enum D2D1_DISTANTDIFFUSE_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_FLOOD_PROP : uint32
 		{
-			COLOR = 0,
-			FORCE_DWORD = 4294967295,
+			Color = 0,
 		}
 		public enum D2D1_LINEARTRANSFER_PROP : uint32
 		{
-			RED_Y_INTERCEPT = 0,
-			RED_SLOPE = 1,
-			RED_DISABLE = 2,
-			GREEN_Y_INTERCEPT = 3,
-			GREEN_SLOPE = 4,
-			GREEN_DISABLE = 5,
-			BLUE_Y_INTERCEPT = 6,
-			BLUE_SLOPE = 7,
-			BLUE_DISABLE = 8,
-			ALPHA_Y_INTERCEPT = 9,
-			ALPHA_SLOPE = 10,
-			ALPHA_DISABLE = 11,
-			CLAMP_OUTPUT = 12,
-			FORCE_DWORD = 4294967295,
+			RedYIntercept = 0,
+			RedSlope = 1,
+			RedDisable = 2,
+			GreenYIntercept = 3,
+			GreenSlope = 4,
+			GreenDisable = 5,
+			BlueYIntercept = 6,
+			BlueSlope = 7,
+			BlueDisable = 8,
+			AlphaYIntercept = 9,
+			AlphaSlope = 10,
+			AlphaDisable = 11,
+			ClampOutput = 12,
 		}
 		public enum D2D1_GAMMATRANSFER_PROP : uint32
 		{
-			RED_AMPLITUDE = 0,
-			RED_EXPONENT = 1,
-			RED_OFFSET = 2,
-			RED_DISABLE = 3,
-			GREEN_AMPLITUDE = 4,
-			GREEN_EXPONENT = 5,
-			GREEN_OFFSET = 6,
-			GREEN_DISABLE = 7,
-			BLUE_AMPLITUDE = 8,
-			BLUE_EXPONENT = 9,
-			BLUE_OFFSET = 10,
-			BLUE_DISABLE = 11,
-			ALPHA_AMPLITUDE = 12,
-			ALPHA_EXPONENT = 13,
-			ALPHA_OFFSET = 14,
-			ALPHA_DISABLE = 15,
-			CLAMP_OUTPUT = 16,
-			FORCE_DWORD = 4294967295,
+			RedAmplitude = 0,
+			RedExponent = 1,
+			RedOffset = 2,
+			RedDisable = 3,
+			GreenAmplitude = 4,
+			GreenExponent = 5,
+			GreenOffset = 6,
+			GreenDisable = 7,
+			BlueAmplitude = 8,
+			BlueExponent = 9,
+			BlueOffset = 10,
+			BlueDisable = 11,
+			AlphaAmplitude = 12,
+			AlphaExponent = 13,
+			AlphaOffset = 14,
+			AlphaDisable = 15,
+			ClampOutput = 16,
 		}
 		public enum D2D1_TABLETRANSFER_PROP : uint32
 		{
-			RED_TABLE = 0,
-			RED_DISABLE = 1,
-			GREEN_TABLE = 2,
-			GREEN_DISABLE = 3,
-			BLUE_TABLE = 4,
-			BLUE_DISABLE = 5,
-			ALPHA_TABLE = 6,
-			ALPHA_DISABLE = 7,
-			CLAMP_OUTPUT = 8,
-			FORCE_DWORD = 4294967295,
+			RedTable = 0,
+			RedDisable = 1,
+			GreenTable = 2,
+			GreenDisable = 3,
+			BlueTable = 4,
+			BlueDisable = 5,
+			AlphaTable = 6,
+			AlphaDisable = 7,
+			ClampOutput = 8,
 		}
 		public enum D2D1_DISCRETETRANSFER_PROP : uint32
 		{
-			RED_TABLE = 0,
-			RED_DISABLE = 1,
-			GREEN_TABLE = 2,
-			GREEN_DISABLE = 3,
-			BLUE_TABLE = 4,
-			BLUE_DISABLE = 5,
-			ALPHA_TABLE = 6,
-			ALPHA_DISABLE = 7,
-			CLAMP_OUTPUT = 8,
-			FORCE_DWORD = 4294967295,
+			RedTable = 0,
+			RedDisable = 1,
+			GreenTable = 2,
+			GreenDisable = 3,
+			BlueTable = 4,
+			BlueDisable = 5,
+			AlphaTable = 6,
+			AlphaDisable = 7,
+			ClampOutput = 8,
 		}
 		public enum D2D1_CONVOLVEMATRIX_PROP : uint32
 		{
-			KERNEL_UNIT_LENGTH = 0,
-			SCALE_MODE = 1,
-			KERNEL_SIZE_X = 2,
-			KERNEL_SIZE_Y = 3,
-			KERNEL_MATRIX = 4,
-			DIVISOR = 5,
-			BIAS = 6,
-			KERNEL_OFFSET = 7,
-			PRESERVE_ALPHA = 8,
-			BORDER_MODE = 9,
-			CLAMP_OUTPUT = 10,
-			FORCE_DWORD = 4294967295,
+			KernelUnitLength = 0,
+			ScaleMode = 1,
+			KernelSizeX = 2,
+			KernelSizeY = 3,
+			KernelMatrix = 4,
+			Divisor = 5,
+			Bias = 6,
+			KernelOffset = 7,
+			PreserveAlpha = 8,
+			BorderMode = 9,
+			ClampOutput = 10,
 		}
 		public enum D2D1_CONVOLVEMATRIX_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_BRIGHTNESS_PROP : uint32
 		{
-			WHITE_POINT = 0,
-			BLACK_POINT = 1,
-			FORCE_DWORD = 4294967295,
+			WhitePoint = 0,
+			BlackPoint = 1,
 		}
 		public enum D2D1_ARITHMETICCOMPOSITE_PROP : uint32
 		{
-			COEFFICIENTS = 0,
-			CLAMP_OUTPUT = 1,
-			FORCE_DWORD = 4294967295,
+			Coefficients = 0,
+			ClampOutput = 1,
 		}
 		public enum D2D1_CROP_PROP : uint32
 		{
-			RECT = 0,
-			BORDER_MODE = 1,
-			FORCE_DWORD = 4294967295,
+			Rect = 0,
+			BorderMode = 1,
 		}
 		public enum D2D1_BORDER_PROP : uint32
 		{
-			EDGE_MODE_X = 0,
-			EDGE_MODE_Y = 1,
-			FORCE_DWORD = 4294967295,
+			EdgeModeX = 0,
+			EdgeModeY = 1,
 		}
 		public enum D2D1_BORDER_EDGE_MODE : uint32
 		{
-			CLAMP = 0,
-			WRAP = 1,
-			MIRROR = 2,
-			FORCE_DWORD = 4294967295,
+			Clamp = 0,
+			Wrap = 1,
+			Mirror = 2,
 		}
 		public enum D2D1_MORPHOLOGY_PROP : uint32
 		{
-			MODE = 0,
-			WIDTH = 1,
-			HEIGHT = 2,
-			FORCE_DWORD = 4294967295,
+			Mode = 0,
+			Width = 1,
+			Height = 2,
 		}
 		public enum D2D1_MORPHOLOGY_MODE : uint32
 		{
-			ERODE = 0,
-			DILATE = 1,
-			FORCE_DWORD = 4294967295,
+			Erode = 0,
+			Dilate = 1,
 		}
 		public enum D2D1_TILE_PROP : uint32
 		{
-			RECT = 0,
-			FORCE_DWORD = 4294967295,
+			Rect = 0,
 		}
 		public enum D2D1_ATLAS_PROP : uint32
 		{
-			INPUT_RECT = 0,
-			INPUT_PADDING_RECT = 1,
-			FORCE_DWORD = 4294967295,
+			InputRect = 0,
+			InputPaddingRect = 1,
 		}
 		public enum D2D1_OPACITYMETADATA_PROP : uint32
 		{
-			INPUT_OPAQUE_RECT = 0,
-			FORCE_DWORD = 4294967295,
+			InputOpaqueRect = 0,
 		}
 		public enum D2D1_PROPERTY_TYPE : uint32
 		{
-			UNKNOWN = 0,
-			STRING = 1,
-			BOOL = 2,
-			UINT32 = 3,
-			INT32 = 4,
-			FLOAT = 5,
-			VECTOR2 = 6,
-			VECTOR3 = 7,
-			VECTOR4 = 8,
-			BLOB = 9,
-			IUNKNOWN = 10,
-			ENUM = 11,
-			ARRAY = 12,
+			Unknown = 0,
+			String = 1,
+			Bool = 2,
+			Uint32 = 3,
+			Int32 = 4,
+			Float = 5,
+			Vector2 = 6,
+			Vector3 = 7,
+			Vector4 = 8,
+			Blob = 9,
+			Iunknown = 10,
+			Enum = 11,
+			Array = 12,
 			CLSID = 13,
-			MATRIX_3X2 = 14,
-			MATRIX_4X3 = 15,
-			MATRIX_4X4 = 16,
-			MATRIX_5X4 = 17,
-			COLOR_CONTEXT = 18,
-			FORCE_DWORD = 4294967295,
+			Matrix_3X2 = 14,
+			Matrix_4X3 = 15,
+			Matrix_4X4 = 16,
+			Matrix_5X4 = 17,
+			ColorContext = 18,
 		}
 		public enum D2D1_PROPERTY : uint32
 		{
 			CLSID = 2147483648,
-			DISPLAYNAME = 2147483649,
-			AUTHOR = 2147483650,
-			CATEGORY = 2147483651,
-			DESCRIPTION = 2147483652,
-			INPUTS = 2147483653,
-			CACHED = 2147483654,
-			PRECISION = 2147483655,
-			MIN_INPUTS = 2147483656,
-			MAX_INPUTS = 2147483657,
-			FORCE_DWORD = 4294967295,
+			Displayname = 2147483649,
+			Author = 2147483650,
+			Category = 2147483651,
+			Description = 2147483652,
+			Inputs = 2147483653,
+			Cached = 2147483654,
+			Precision = 2147483655,
+			MinInputs = 2147483656,
+			MaxInputs = 2147483657,
 		}
 		public enum D2D1_SUBPROPERTY : uint32
 		{
-			DISPLAYNAME = 2147483648,
-			ISREADONLY = 2147483649,
-			MIN = 2147483650,
-			MAX = 2147483651,
-			DEFAULT = 2147483652,
-			FIELDS = 2147483653,
-			INDEX = 2147483654,
-			FORCE_DWORD = 4294967295,
+			Displayname = 2147483648,
+			Isreadonly = 2147483649,
+			Min = 2147483650,
+			Max = 2147483651,
+			Default = 2147483652,
+			Fields = 2147483653,
+			Index = 2147483654,
 		}
 		public enum D2D1_BITMAP_OPTIONS : uint32
 		{
-			NONE = 0,
-			TARGET = 1,
-			CANNOT_DRAW = 2,
-			CPU_READ = 4,
-			GDI_COMPATIBLE = 8,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			Target = 1,
+			CannotDraw = 2,
+			CpuRead = 4,
+			GdiCompatible = 8,
 		}
 		public enum D2D1_BUFFER_PRECISION : uint32
 		{
-			UNKNOWN = 0,
+			Unknown = 0,
 			_8BPC_UNORM = 1,
 			_8BPC_UNORM_SRGB = 2,
 			_16BPC_UNORM = 3,
 			_16BPC_FLOAT = 4,
 			_32BPC_FLOAT = 5,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_MAP_OPTIONS : uint32
 		{
-			NONE = 0,
-			READ = 1,
-			WRITE = 2,
-			DISCARD = 4,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			Read = 1,
+			Write = 2,
+			Discard = 4,
 		}
 		public enum D2D1_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_UNIT_MODE : uint32
 		{
-			DIPS = 0,
-			PIXELS = 1,
-			FORCE_DWORD = 4294967295,
+			Dips = 0,
+			Pixels = 1,
 		}
 		public enum D2D1_COLOR_SPACE : uint32
 		{
-			CUSTOM = 0,
+			Custom = 0,
 			SRGB = 1,
 			SCRGB = 2,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_DEVICE_CONTEXT_OPTIONS : uint32
 		{
-			NONE = 0,
-			ENABLE_MULTITHREADED_OPTIMIZATIONS = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			EnableMultithreadedOptimizations = 1,
 		}
 		public enum D2D1_STROKE_TRANSFORM_TYPE : uint32
 		{
-			NORMAL = 0,
-			FIXED = 1,
-			HAIRLINE = 2,
-			FORCE_DWORD = 4294967295,
+			Normal = 0,
+			Fixed = 1,
+			Hairline = 2,
 		}
 		public enum D2D1_PRIMITIVE_BLEND : uint32
 		{
-			SOURCE_OVER = 0,
-			COPY = 1,
-			MIN = 2,
-			ADD = 3,
-			MAX = 4,
-			FORCE_DWORD = 4294967295,
+			SourceOver = 0,
+			Copy = 1,
+			Min = 2,
+			Add = 3,
+			Max = 4,
 		}
 		public enum D2D1_THREADING_MODE : uint32
 		{
-			SINGLE_THREADED = 0,
-			MULTI_THREADED = 1,
-			FORCE_DWORD = 4294967295,
+			SingleThreaded = 0,
+			MultiThreaded = 1,
 		}
 		public enum D2D1_COLOR_INTERPOLATION_MODE : uint32
 		{
-			STRAIGHT = 0,
-			PREMULTIPLIED = 1,
-			FORCE_DWORD = 4294967295,
+			Straight = 0,
+			Premultiplied = 1,
 		}
 		public enum D2D1_LAYER_OPTIONS1 : uint32
 		{
-			NONE = 0,
-			INITIALIZE_FROM_BACKGROUND = 1,
-			IGNORE_ALPHA = 2,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			InitializeFromBackground = 1,
+			IgnoreAlpha = 2,
 		}
 		public enum D2D1_PRINT_FONT_SUBSET_MODE : uint32
 		{
-			DEFAULT = 0,
-			EACHPAGE = 1,
-			NONE = 2,
-			FORCE_DWORD = 4294967295,
+			Default = 0,
+			Eachpage = 1,
+			None = 2,
 		}
 		public enum D2D1_CHANGE_TYPE : uint32
 		{
-			NONE = 0,
-			PROPERTIES = 1,
-			CONTEXT = 2,
-			GRAPH = 3,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			Properties = 1,
+			Context = 2,
+			Graph = 3,
 		}
 		public enum D2D1_PIXEL_OPTIONS : uint32
 		{
-			NONE = 0,
-			TRIVIAL_SAMPLING = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			TrivialSampling = 1,
 		}
 		public enum D2D1_VERTEX_OPTIONS : uint32
 		{
-			NONE = 0,
-			DO_NOT_CLEAR = 1,
-			USE_DEPTH_BUFFER = 2,
-			ASSUME_NO_OVERLAP = 4,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			DoNotClear = 1,
+			UseDepthBuffer = 2,
+			AssumeNoOverlap = 4,
 		}
 		public enum D2D1_VERTEX_USAGE : uint32
 		{
-			STATIC = 0,
-			DYNAMIC = 1,
-			FORCE_DWORD = 4294967295,
+			Static = 0,
+			Dynamic = 1,
 		}
 		public enum D2D1_BLEND_OPERATION : uint32
 		{
-			ADD = 1,
-			SUBTRACT = 2,
-			REV_SUBTRACT = 3,
-			MIN = 4,
-			MAX = 5,
-			FORCE_DWORD = 4294967295,
+			Add = 1,
+			Subtract = 2,
+			RevSubtract = 3,
+			Min = 4,
+			Max = 5,
 		}
 		public enum D2D1_BLEND : uint32
 		{
-			ZERO = 1,
-			ONE = 2,
-			SRC_COLOR = 3,
-			INV_SRC_COLOR = 4,
-			SRC_ALPHA = 5,
-			INV_SRC_ALPHA = 6,
-			DEST_ALPHA = 7,
-			INV_DEST_ALPHA = 8,
-			DEST_COLOR = 9,
-			INV_DEST_COLOR = 10,
-			SRC_ALPHA_SAT = 11,
-			BLEND_FACTOR = 14,
-			INV_BLEND_FACTOR = 15,
-			FORCE_DWORD = 4294967295,
+			Zero = 1,
+			One = 2,
+			SrcColor = 3,
+			InvSrcColor = 4,
+			SrcAlpha = 5,
+			InvSrcAlpha = 6,
+			DestAlpha = 7,
+			InvDestAlpha = 8,
+			DestColor = 9,
+			InvDestColor = 10,
+			SrcAlphaSat = 11,
+			BlendFactor = 14,
+			InvBlendFactor = 15,
 		}
 		public enum D2D1_CHANNEL_DEPTH : uint32
 		{
-			DEFAULT = 0,
+			Default = 0,
 			_1 = 1,
 			_4 = 4,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_FILTER : uint32
 		{
-			MIN_MAG_MIP_POINT = 0,
-			MIN_MAG_POINT_MIP_LINEAR = 1,
-			MIN_POINT_MAG_LINEAR_MIP_POINT = 4,
-			MIN_POINT_MAG_MIP_LINEAR = 5,
-			MIN_LINEAR_MAG_MIP_POINT = 16,
-			MIN_LINEAR_MAG_POINT_MIP_LINEAR = 17,
-			MIN_MAG_LINEAR_MIP_POINT = 20,
-			MIN_MAG_MIP_LINEAR = 21,
-			ANISOTROPIC = 85,
-			FORCE_DWORD = 4294967295,
+			MinMagMipPoint = 0,
+			MinMagPointMipLinear = 1,
+			MinPointMagLinearMipPoint = 4,
+			MinPointMagMipLinear = 5,
+			MinLinearMagMipPoint = 16,
+			MinLinearMagPointMipLinear = 17,
+			MinMagLinearMipPoint = 20,
+			MinMagMipLinear = 21,
+			Anisotropic = 85,
 		}
 		public enum D2D1_FEATURE : uint32
 		{
-			DOUBLES = 0,
-			D3D10_X_HARDWARE_OPTIONS = 1,
-			FORCE_DWORD = 4294967295,
+			Doubles = 0,
+			D3D10XHardwareOptions = 1,
 		}
 		public enum D2D1_YCBCR_PROP : uint32
 		{
-			CHROMA_SUBSAMPLING = 0,
-			TRANSFORM_MATRIX = 1,
-			INTERPOLATION_MODE = 2,
-			FORCE_DWORD = 4294967295,
+			ChromaSubsampling = 0,
+			TransformMatrix = 1,
+			InterpolationMode = 2,
 		}
 		public enum D2D1_YCBCR_CHROMA_SUBSAMPLING : uint32
 		{
-			AUTO = 0,
+			Auto = 0,
 			_420 = 1,
 			_422 = 2,
 			_444 = 3,
 			_440 = 4,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_YCBCR_INTERPOLATION_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			HIGH_QUALITY_CUBIC = 5,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
+			HighQualityCubic = 5,
 		}
 		public enum D2D1_CONTRAST_PROP : uint32
 		{
-			CONTRAST = 0,
-			CLAMP_INPUT = 1,
-			FORCE_DWORD = 4294967295,
+			Contrast = 0,
+			ClampInput = 1,
 		}
 		public enum D2D1_RGBTOHUE_PROP : uint32
 		{
-			OUTPUT_COLOR_SPACE = 0,
-			FORCE_DWORD = 4294967295,
+			OutputColorSpace = 0,
 		}
 		public enum D2D1_RGBTOHUE_OUTPUT_COLOR_SPACE : uint32
 		{
-			HUE_SATURATION_VALUE = 0,
-			HUE_SATURATION_LIGHTNESS = 1,
-			FORCE_DWORD = 4294967295,
+			HueSaturationValue = 0,
+			HueSaturationLightness = 1,
 		}
 		public enum D2D1_HUETORGB_PROP : uint32
 		{
-			INPUT_COLOR_SPACE = 0,
-			FORCE_DWORD = 4294967295,
+			InputColorSpace = 0,
 		}
 		public enum D2D1_HUETORGB_INPUT_COLOR_SPACE : uint32
 		{
-			HUE_SATURATION_VALUE = 0,
-			HUE_SATURATION_LIGHTNESS = 1,
-			FORCE_DWORD = 4294967295,
+			HueSaturationValue = 0,
+			HueSaturationLightness = 1,
 		}
 		public enum D2D1_CHROMAKEY_PROP : uint32
 		{
-			COLOR = 0,
-			TOLERANCE = 1,
-			INVERT_ALPHA = 2,
-			FEATHER = 3,
-			FORCE_DWORD = 4294967295,
+			Color = 0,
+			Tolerance = 1,
+			InvertAlpha = 2,
+			Feather = 3,
 		}
 		public enum D2D1_EMBOSS_PROP : uint32
 		{
-			HEIGHT = 0,
-			DIRECTION = 1,
-			FORCE_DWORD = 4294967295,
+			Height = 0,
+			Direction = 1,
 		}
 		public enum D2D1_EXPOSURE_PROP : uint32
 		{
-			EXPOSURE_VALUE = 0,
-			FORCE_DWORD = 4294967295,
+			ExposureValue = 0,
 		}
 		public enum D2D1_POSTERIZE_PROP : uint32
 		{
-			RED_VALUE_COUNT = 0,
-			GREEN_VALUE_COUNT = 1,
-			BLUE_VALUE_COUNT = 2,
-			FORCE_DWORD = 4294967295,
+			RedValueCount = 0,
+			GreenValueCount = 1,
+			BlueValueCount = 2,
 		}
 		public enum D2D1_SEPIA_PROP : uint32
 		{
-			INTENSITY = 0,
-			ALPHA_MODE = 1,
-			FORCE_DWORD = 4294967295,
+			Intensity = 0,
+			AlphaMode = 1,
 		}
 		public enum D2D1_SHARPEN_PROP : uint32
 		{
-			SHARPNESS = 0,
-			THRESHOLD = 1,
-			FORCE_DWORD = 4294967295,
+			Sharpness = 0,
+			Threshold = 1,
 		}
 		public enum D2D1_STRAIGHTEN_PROP : uint32
 		{
-			ANGLE = 0,
-			MAINTAIN_SIZE = 1,
-			SCALE_MODE = 2,
-			FORCE_DWORD = 4294967295,
+			Angle = 0,
+			MaintainSize = 1,
+			ScaleMode = 2,
 		}
 		public enum D2D1_STRAIGHTEN_SCALE_MODE : uint32
 		{
-			NEAREST_NEIGHBOR = 0,
-			LINEAR = 1,
-			CUBIC = 2,
-			MULTI_SAMPLE_LINEAR = 3,
-			ANISOTROPIC = 4,
-			FORCE_DWORD = 4294967295,
+			NearestNeighbor = 0,
+			Linear = 1,
+			Cubic = 2,
+			MultiSampleLinear = 3,
+			Anisotropic = 4,
 		}
 		public enum D2D1_TEMPERATUREANDTINT_PROP : uint32
 		{
-			TEMPERATURE = 0,
-			TINT = 1,
-			FORCE_DWORD = 4294967295,
+			Temperature = 0,
+			Tint = 1,
 		}
 		public enum D2D1_VIGNETTE_PROP : uint32
 		{
-			COLOR = 0,
-			TRANSITION_SIZE = 1,
-			STRENGTH = 2,
-			FORCE_DWORD = 4294967295,
+			Color = 0,
+			TransitionSize = 1,
+			Strength = 2,
 		}
 		public enum D2D1_EDGEDETECTION_PROP : uint32
 		{
-			STRENGTH = 0,
-			BLUR_RADIUS = 1,
-			MODE = 2,
-			OVERLAY_EDGES = 3,
-			ALPHA_MODE = 4,
-			FORCE_DWORD = 4294967295,
+			Strength = 0,
+			BlurRadius = 1,
+			Mode = 2,
+			OverlayEdges = 3,
+			AlphaMode = 4,
 		}
 		public enum D2D1_EDGEDETECTION_MODE : uint32
 		{
-			SOBEL = 0,
-			PREWITT = 1,
-			FORCE_DWORD = 4294967295,
+			Sobel = 0,
+			Prewitt = 1,
 		}
 		public enum D2D1_HIGHLIGHTSANDSHADOWS_PROP : uint32
 		{
-			HIGHLIGHTS = 0,
-			SHADOWS = 1,
-			CLARITY = 2,
-			INPUT_GAMMA = 3,
-			MASK_BLUR_RADIUS = 4,
-			FORCE_DWORD = 4294967295,
+			Highlights = 0,
+			Shadows = 1,
+			Clarity = 2,
+			InputGamma = 3,
+			MaskBlurRadius = 4,
 		}
 		public enum D2D1_HIGHLIGHTSANDSHADOWS_INPUT_GAMMA : uint32
 		{
-			LINEAR = 0,
+			Linear = 0,
 			SRGB = 1,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_LOOKUPTABLE3D_PROP : uint32
 		{
 			LUT = 0,
-			ALPHA_MODE = 1,
-			FORCE_DWORD = 4294967295,
+			AlphaMode = 1,
 		}
 		public enum D2D1_OPACITY_PROP : uint32
 		{
-			OPACITY = 0,
-			FORCE_DWORD = 4294967295,
+			Opacity = 0,
 		}
 		public enum D2D1_CROSSFADE_PROP : uint32
 		{
-			WEIGHT = 0,
-			FORCE_DWORD = 4294967295,
+			Weight = 0,
 		}
 		public enum D2D1_TINT_PROP : uint32
 		{
-			COLOR = 0,
-			CLAMP_OUTPUT = 1,
-			FORCE_DWORD = 4294967295,
+			Color = 0,
+			ClampOutput = 1,
 		}
 		public enum D2D1_WHITELEVELADJUSTMENT_PROP : uint32
 		{
-			INPUT_WHITE_LEVEL = 0,
-			OUTPUT_WHITE_LEVEL = 1,
-			FORCE_DWORD = 4294967295,
+			InputWhiteLevel = 0,
+			OutputWhiteLevel = 1,
 		}
 		public enum D2D1_HDRTONEMAP_PROP : uint32
 		{
-			INPUT_MAX_LUMINANCE = 0,
-			OUTPUT_MAX_LUMINANCE = 1,
-			DISPLAY_MODE = 2,
-			FORCE_DWORD = 4294967295,
+			InputMaxLuminance = 0,
+			OutputMaxLuminance = 1,
+			DisplayMode = 2,
 		}
 		public enum D2D1_HDRTONEMAP_DISPLAY_MODE : uint32
 		{
 			SDR = 0,
 			HDR = 1,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_RENDERING_PRIORITY : uint32
 		{
-			NORMAL = 0,
-			LOW = 1,
-			FORCE_DWORD = 4294967295,
+			Normal = 0,
+			Low = 1,
 		}
 		public enum D2D1_SVG_PAINT_TYPE : uint32
 		{
-			NONE = 0,
-			COLOR = 1,
-			CURRENT_COLOR = 2,
-			URI = 3,
-			URI_NONE = 4,
-			URI_COLOR = 5,
-			URI_CURRENT_COLOR = 6,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			Color = 1,
+			CurrentColor = 2,
+			Uri = 3,
+			UriNone = 4,
+			UriColor = 5,
+			UriCurrentColor = 6,
 		}
 		public enum D2D1_SVG_LENGTH_UNITS : uint32
 		{
-			NUMBER = 0,
-			PERCENTAGE = 1,
-			FORCE_DWORD = 4294967295,
+			Number = 0,
+			Percentage = 1,
 		}
 		public enum D2D1_SVG_DISPLAY : uint32
 		{
-			INLINE = 0,
-			NONE = 1,
-			FORCE_DWORD = 4294967295,
+			Inline = 0,
+			None = 1,
 		}
 		public enum D2D1_SVG_VISIBILITY : uint32
 		{
-			VISIBLE = 0,
-			HIDDEN = 1,
-			FORCE_DWORD = 4294967295,
+			Visible = 0,
+			Hidden = 1,
 		}
 		public enum D2D1_SVG_OVERFLOW : uint32
 		{
-			VISIBLE = 0,
-			HIDDEN = 1,
-			FORCE_DWORD = 4294967295,
+			Visible = 0,
+			Hidden = 1,
 		}
 		public enum D2D1_SVG_LINE_CAP : uint32
 		{
-			BUTT = 0,
-			SQUARE = 1,
-			ROUND = 2,
-			FORCE_DWORD = 4294967295,
+			Butt = 0,
+			Square = 1,
+			Round = 2,
 		}
 		public enum D2D1_SVG_LINE_JOIN : uint32
 		{
-			BEVEL = 1,
-			MITER = 3,
-			ROUND = 2,
-			FORCE_DWORD = 4294967295,
+			Bevel = 1,
+			Miter = 3,
+			Round = 2,
 		}
 		public enum D2D1_SVG_ASPECT_ALIGN : uint32
 		{
-			NONE = 0,
-			X_MIN_Y_MIN = 1,
-			X_MID_Y_MIN = 2,
-			X_MAX_Y_MIN = 3,
-			X_MIN_Y_MID = 4,
-			X_MID_Y_MID = 5,
-			X_MAX_Y_MID = 6,
-			X_MIN_Y_MAX = 7,
-			X_MID_Y_MAX = 8,
-			X_MAX_Y_MAX = 9,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			XMinYMin = 1,
+			XMidYMin = 2,
+			XMaxYMin = 3,
+			XMinYMid = 4,
+			XMidYMid = 5,
+			XMaxYMid = 6,
+			XMinYMax = 7,
+			XMidYMax = 8,
+			XMaxYMax = 9,
 		}
 		public enum D2D1_SVG_ASPECT_SCALING : uint32
 		{
-			MEET = 0,
-			SLICE = 1,
-			FORCE_DWORD = 4294967295,
+			Meet = 0,
+			Slice = 1,
 		}
 		public enum D2D1_SVG_PATH_COMMAND : uint32
 		{
-			CLOSE_PATH = 0,
-			MOVE_ABSOLUTE = 1,
-			MOVE_RELATIVE = 2,
-			LINE_ABSOLUTE = 3,
-			LINE_RELATIVE = 4,
-			CUBIC_ABSOLUTE = 5,
-			CUBIC_RELATIVE = 6,
-			QUADRADIC_ABSOLUTE = 7,
-			QUADRADIC_RELATIVE = 8,
-			ARC_ABSOLUTE = 9,
-			ARC_RELATIVE = 10,
-			HORIZONTAL_ABSOLUTE = 11,
-			HORIZONTAL_RELATIVE = 12,
-			VERTICAL_ABSOLUTE = 13,
-			VERTICAL_RELATIVE = 14,
-			CUBIC_SMOOTH_ABSOLUTE = 15,
-			CUBIC_SMOOTH_RELATIVE = 16,
-			QUADRADIC_SMOOTH_ABSOLUTE = 17,
-			QUADRADIC_SMOOTH_RELATIVE = 18,
-			FORCE_DWORD = 4294967295,
+			ClosePath = 0,
+			MoveAbsolute = 1,
+			MoveRelative = 2,
+			LineAbsolute = 3,
+			LineRelative = 4,
+			CubicAbsolute = 5,
+			CubicRelative = 6,
+			QuadradicAbsolute = 7,
+			QuadradicRelative = 8,
+			ArcAbsolute = 9,
+			ArcRelative = 10,
+			HorizontalAbsolute = 11,
+			HorizontalRelative = 12,
+			VerticalAbsolute = 13,
+			VerticalRelative = 14,
+			CubicSmoothAbsolute = 15,
+			CubicSmoothRelative = 16,
+			QuadradicSmoothAbsolute = 17,
+			QuadradicSmoothRelative = 18,
 		}
 		public enum D2D1_SVG_UNIT_TYPE : uint32
 		{
-			USER_SPACE_ON_USE = 0,
-			OBJECT_BOUNDING_BOX = 1,
-			FORCE_DWORD = 4294967295,
+			UserSpaceOnUse = 0,
+			ObjectBoundingBox = 1,
 		}
 		public enum D2D1_SVG_ATTRIBUTE_STRING_TYPE : uint32
 		{
 			SVG = 0,
 			ID = 1,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_SVG_ATTRIBUTE_POD_TYPE : uint32
 		{
-			FLOAT = 0,
-			COLOR = 1,
-			FILL_MODE = 2,
-			DISPLAY = 3,
-			OVERFLOW = 4,
-			LINE_CAP = 5,
-			LINE_JOIN = 6,
-			VISIBILITY = 7,
-			MATRIX = 8,
-			UNIT_TYPE = 9,
-			EXTEND_MODE = 10,
-			PRESERVE_ASPECT_RATIO = 11,
-			VIEWBOX = 12,
-			LENGTH = 13,
-			FORCE_DWORD = 4294967295,
+			Float = 0,
+			Color = 1,
+			FillMode = 2,
+			Display = 3,
+			Overflow = 4,
+			LineCap = 5,
+			LineJoin = 6,
+			Visibility = 7,
+			Matrix = 8,
+			UnitType = 9,
+			ExtendMode = 10,
+			PreserveAspectRatio = 11,
+			Viewbox = 12,
+			Length = 13,
 		}
 		public enum D2D1_INK_NIB_SHAPE : uint32
 		{
-			ROUND = 0,
-			SQUARE = 1,
-			FORCE_DWORD = 4294967295,
+			Round = 0,
+			Square = 1,
 		}
 		public enum D2D1_ORIENTATION : uint32
 		{
-			DEFAULT = 1,
-			FLIP_HORIZONTAL = 2,
-			ROTATE_CLOCKWISE180 = 3,
-			ROTATE_CLOCKWISE180_FLIP_HORIZONTAL = 4,
-			ROTATE_CLOCKWISE90_FLIP_HORIZONTAL = 5,
-			ROTATE_CLOCKWISE270 = 6,
-			ROTATE_CLOCKWISE270_FLIP_HORIZONTAL = 7,
-			ROTATE_CLOCKWISE90 = 8,
-			FORCE_DWORD = 4294967295,
+			Default = 1,
+			FlipHorizontal = 2,
+			RotateClockwise180 = 3,
+			RotateClockwise180FlipHorizontal = 4,
+			RotateClockwise90FlipHorizontal = 5,
+			RotateClockwise270 = 6,
+			RotateClockwise270FlipHorizontal = 7,
+			RotateClockwise90 = 8,
 		}
 		public enum D2D1_IMAGE_SOURCE_LOADING_OPTIONS : uint32
 		{
-			NONE = 0,
-			RELEASE_SOURCE = 1,
-			CACHE_ON_DEMAND = 2,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			ReleaseSource = 1,
+			CacheOnDemand = 2,
 		}
 		public enum D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS : uint32
 		{
-			NONE = 0,
-			LOW_QUALITY_PRIMARY_CONVERSION = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			LowQualityPrimaryConversion = 1,
 		}
 		public enum D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS : uint32
 		{
-			NONE = 0,
-			DISABLE_DPI_SCALE = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			DisableDpiScale = 1,
 		}
 		public enum D2D1_PATCH_EDGE_MODE : uint32
 		{
-			ALIASED = 0,
-			ANTIALIASED = 1,
-			ALIASED_INFLATED = 2,
-			FORCE_DWORD = 4294967295,
+			Aliased = 0,
+			Antialiased = 1,
+			AliasedInflated = 2,
 		}
 		public enum D2D1_SPRITE_OPTIONS : uint32
 		{
-			NONE = 0,
-			CLAMP_TO_SOURCE_RECTANGLE = 1,
-			FORCE_DWORD = 4294967295,
+			None = 0,
+			ClampToSourceRectangle = 1,
 		}
 		public enum D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION : uint32
 		{
-			DEFAULT = 0,
-			DISABLE = 1,
-			FORCE_DWORD = 4294967295,
+			Default = 0,
+			Disable = 1,
 		}
 		public enum D2D1_GAMMA1 : uint32
 		{
 			G22 = 0,
 			G10 = 1,
 			G2084 = 2,
-			FORCE_DWORD = 4294967295,
 		}
 		public enum D2D1_COLOR_CONTEXT_TYPE : uint32
 		{
 			ICC = 0,
-			SIMPLE = 1,
+			Simple = 1,
 			DXGI = 2,
-			FORCE_DWORD = 4294967295,
 		}
 		
 		// --- Function Pointers ---
@@ -1457,28 +1294,28 @@ namespace Win32
 		[CRepr]
 		public struct D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES
 		{
-			public D2D_POINT_2F startPoint;
-			public D2D_POINT_2F endPoint;
+			public Vector2 startPoint;
+			public Vector2 endPoint;
 		}
 		[CRepr]
 		public struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES
 		{
-			public D2D_POINT_2F center;
-			public D2D_POINT_2F gradientOriginOffset;
+			public Vector2 center;
+			public Vector2 gradientOriginOffset;
 			public float radiusX;
 			public float radiusY;
 		}
 		[CRepr]
 		public struct D2D1_TRIANGLE
 		{
-			public D2D_POINT_2F point1;
-			public D2D_POINT_2F point2;
-			public D2D_POINT_2F point3;
+			public Vector2 point1;
+			public Vector2 point2;
+			public Vector2 point3;
 		}
 		[CRepr]
 		public struct D2D1_ARC_SEGMENT
 		{
-			public D2D_POINT_2F point;
+			public Vector2 point;
 			public D2D_SIZE_F size;
 			public float rotationAngle;
 			public D2D1_SWEEP_DIRECTION sweepDirection;
@@ -1487,13 +1324,13 @@ namespace Win32
 		[CRepr]
 		public struct D2D1_QUADRATIC_BEZIER_SEGMENT
 		{
-			public D2D_POINT_2F point1;
-			public D2D_POINT_2F point2;
+			public Vector2 point1;
+			public Vector2 point2;
 		}
 		[CRepr]
 		public struct D2D1_ELLIPSE
 		{
-			public D2D_POINT_2F point;
+			public Vector2 point;
 			public float radiusX;
 			public float radiusY;
 		}
@@ -1587,8 +1424,8 @@ namespace Win32
 		[CRepr]
 		public struct D2D1_POINT_DESCRIPTION
 		{
-			public D2D_POINT_2F point;
-			public D2D_POINT_2F unitTangentVector;
+			public Vector2 point;
+			public Vector2 unitTangentVector;
 			public uint32 endSegment;
 			public uint32 endFigure;
 			public float lengthToEndSegment;
@@ -1800,22 +1637,22 @@ namespace Win32
 		[CRepr]
 		public struct D2D1_GRADIENT_MESH_PATCH
 		{
-			public D2D_POINT_2F point00;
-			public D2D_POINT_2F point01;
-			public D2D_POINT_2F point02;
-			public D2D_POINT_2F point03;
-			public D2D_POINT_2F point10;
-			public D2D_POINT_2F point11;
-			public D2D_POINT_2F point12;
-			public D2D_POINT_2F point13;
-			public D2D_POINT_2F point20;
-			public D2D_POINT_2F point21;
-			public D2D_POINT_2F point22;
-			public D2D_POINT_2F point23;
-			public D2D_POINT_2F point30;
-			public D2D_POINT_2F point31;
-			public D2D_POINT_2F point32;
-			public D2D_POINT_2F point33;
+			public Vector2 point00;
+			public Vector2 point01;
+			public Vector2 point02;
+			public Vector2 point03;
+			public Vector2 point10;
+			public Vector2 point11;
+			public Vector2 point12;
+			public Vector2 point13;
+			public Vector2 point20;
+			public Vector2 point21;
+			public Vector2 point22;
+			public Vector2 point23;
+			public Vector2 point30;
+			public Vector2 point31;
+			public Vector2 point32;
+			public Vector2 point33;
 			public ColorF color00;
 			public ColorF color03;
 			public ColorF color30;
@@ -1828,10 +1665,10 @@ namespace Win32
 		[CRepr]
 		public struct D2D1_SIMPLE_COLOR_PROFILE
 		{
-			public D2D_POINT_2F redPrimary;
-			public D2D_POINT_2F greenPrimary;
-			public D2D_POINT_2F bluePrimary;
-			public D2D_POINT_2F whitePointXZ;
+			public Vector2 redPrimary;
+			public Vector2 greenPrimary;
+			public Vector2 bluePrimary;
+			public Vector2 whitePointXZ;
 			public D2D1_GAMMA1 gamma;
 		}
 		
@@ -1984,19 +1821,19 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void SetStartPoint(D2D_POINT_2F startPoint) mut => VT.SetStartPoint(ref this, startPoint);
-			public void SetEndPoint(D2D_POINT_2F endPoint) mut => VT.SetEndPoint(ref this, endPoint);
-			public D2D_POINT_2F GetStartPoint() mut => VT.GetStartPoint(ref this);
-			public D2D_POINT_2F GetEndPoint() mut => VT.GetEndPoint(ref this);
+			public void SetStartPoint(Vector2 startPoint) mut => VT.SetStartPoint(ref this, startPoint);
+			public void SetEndPoint(Vector2 endPoint) mut => VT.SetEndPoint(ref this, endPoint);
+			public Vector2 GetStartPoint() mut => VT.GetStartPoint(ref this);
+			public Vector2 GetEndPoint() mut => VT.GetEndPoint(ref this);
 			public void GetGradientStopCollection(out ID2D1GradientStopCollection* gradientStopCollection) mut => VT.GetGradientStopCollection(ref this, out gradientStopCollection);
 
 			[CRepr]
 			public struct VTable : ID2D1Brush.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1LinearGradientBrush self, D2D_POINT_2F startPoint) SetStartPoint;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1LinearGradientBrush self, D2D_POINT_2F endPoint) SetEndPoint;
-				public new function [CallingConvention(.Stdcall)] D2D_POINT_2F(ref ID2D1LinearGradientBrush self) GetStartPoint;
-				public new function [CallingConvention(.Stdcall)] D2D_POINT_2F(ref ID2D1LinearGradientBrush self) GetEndPoint;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1LinearGradientBrush self, Vector2 startPoint) SetStartPoint;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1LinearGradientBrush self, Vector2 endPoint) SetEndPoint;
+				public new function [CallingConvention(.Stdcall)] Vector2(ref ID2D1LinearGradientBrush self) GetStartPoint;
+				public new function [CallingConvention(.Stdcall)] Vector2(ref ID2D1LinearGradientBrush self) GetEndPoint;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1LinearGradientBrush self, out ID2D1GradientStopCollection* gradientStopCollection) GetGradientStopCollection;
 			}
 		}
@@ -2007,12 +1844,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void SetCenter(D2D_POINT_2F center) mut => VT.SetCenter(ref this, center);
-			public void SetGradientOriginOffset(D2D_POINT_2F gradientOriginOffset) mut => VT.SetGradientOriginOffset(ref this, gradientOriginOffset);
+			public void SetCenter(Vector2 center) mut => VT.SetCenter(ref this, center);
+			public void SetGradientOriginOffset(Vector2 gradientOriginOffset) mut => VT.SetGradientOriginOffset(ref this, gradientOriginOffset);
 			public void SetRadiusX(float radiusX) mut => VT.SetRadiusX(ref this, radiusX);
 			public void SetRadiusY(float radiusY) mut => VT.SetRadiusY(ref this, radiusY);
-			public D2D_POINT_2F GetCenter() mut => VT.GetCenter(ref this);
-			public D2D_POINT_2F GetGradientOriginOffset() mut => VT.GetGradientOriginOffset(ref this);
+			public Vector2 GetCenter() mut => VT.GetCenter(ref this);
+			public Vector2 GetGradientOriginOffset() mut => VT.GetGradientOriginOffset(ref this);
 			public float GetRadiusX() mut => VT.GetRadiusX(ref this);
 			public float GetRadiusY() mut => VT.GetRadiusY(ref this);
 			public void GetGradientStopCollection(out ID2D1GradientStopCollection* gradientStopCollection) mut => VT.GetGradientStopCollection(ref this, out gradientStopCollection);
@@ -2020,12 +1857,12 @@ namespace Win32
 			[CRepr]
 			public struct VTable : ID2D1Brush.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, D2D_POINT_2F center) SetCenter;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, D2D_POINT_2F gradientOriginOffset) SetGradientOriginOffset;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, Vector2 center) SetCenter;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, Vector2 gradientOriginOffset) SetGradientOriginOffset;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, float radiusX) SetRadiusX;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, float radiusY) SetRadiusY;
-				public new function [CallingConvention(.Stdcall)] D2D_POINT_2F(ref ID2D1RadialGradientBrush self) GetCenter;
-				public new function [CallingConvention(.Stdcall)] D2D_POINT_2F(ref ID2D1RadialGradientBrush self) GetGradientOriginOffset;
+				public new function [CallingConvention(.Stdcall)] Vector2(ref ID2D1RadialGradientBrush self) GetCenter;
+				public new function [CallingConvention(.Stdcall)] Vector2(ref ID2D1RadialGradientBrush self) GetGradientOriginOffset;
 				public new function [CallingConvention(.Stdcall)] float(ref ID2D1RadialGradientBrush self) GetRadiusX;
 				public new function [CallingConvention(.Stdcall)] float(ref ID2D1RadialGradientBrush self) GetRadiusY;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RadialGradientBrush self, out ID2D1GradientStopCollection* gradientStopCollection) GetGradientStopCollection;
@@ -2071,8 +1908,8 @@ namespace Win32
 			
 			public HRESULT GetBounds(D2D_MATRIX_3X2_F* worldTransform, out RectF bounds) mut => VT.GetBounds(ref this, worldTransform, out bounds);
 			public HRESULT GetWidenedBounds(float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out RectF bounds) mut => VT.GetWidenedBounds(ref this, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, out bounds);
-			public HRESULT StrokeContainsPoint(D2D_POINT_2F point, float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) mut => VT.StrokeContainsPoint(ref this, point, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, out contains);
-			public HRESULT FillContainsPoint(D2D_POINT_2F point, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) mut => VT.FillContainsPoint(ref this, point, worldTransform, flatteningTolerance, out contains);
+			public HRESULT StrokeContainsPoint(Vector2 point, float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) mut => VT.StrokeContainsPoint(ref this, point, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, out contains);
+			public HRESULT FillContainsPoint(Vector2 point, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) mut => VT.FillContainsPoint(ref this, point, worldTransform, flatteningTolerance, out contains);
 			public HRESULT CompareWithGeometry(ref ID2D1Geometry inputGeometry, D2D_MATRIX_3X2_F* inputGeometryTransform, float flatteningTolerance, out D2D1_GEOMETRY_RELATION relation) mut => VT.CompareWithGeometry(ref this, ref inputGeometry, inputGeometryTransform, flatteningTolerance, out relation);
 			public HRESULT Simplify(D2D1_GEOMETRY_SIMPLIFICATION_OPTION simplificationOption, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1SimplifiedGeometrySink geometrySink) mut => VT.Simplify(ref this, simplificationOption, worldTransform, flatteningTolerance, ref geometrySink);
 			public HRESULT Tessellate(D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1TessellationSink tessellationSink) mut => VT.Tessellate(ref this, worldTransform, flatteningTolerance, ref tessellationSink);
@@ -2080,7 +1917,7 @@ namespace Win32
 			public HRESULT Outline(D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1SimplifiedGeometrySink geometrySink) mut => VT.Outline(ref this, worldTransform, flatteningTolerance, ref geometrySink);
 			public HRESULT ComputeArea(D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out float area) mut => VT.ComputeArea(ref this, worldTransform, flatteningTolerance, out area);
 			public HRESULT ComputeLength(D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out float length) mut => VT.ComputeLength(ref this, worldTransform, flatteningTolerance, out length);
-			public HRESULT ComputePointAtLength(float length, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, D2D_POINT_2F* point, D2D_POINT_2F* unitTangentVector) mut => VT.ComputePointAtLength(ref this, length, worldTransform, flatteningTolerance, point, unitTangentVector);
+			public HRESULT ComputePointAtLength(float length, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, Vector2* point, Vector2* unitTangentVector) mut => VT.ComputePointAtLength(ref this, length, worldTransform, flatteningTolerance, point, unitTangentVector);
 			public HRESULT Widen(float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1SimplifiedGeometrySink geometrySink) mut => VT.Widen(ref this, strokeWidth, strokeStyle, worldTransform, flatteningTolerance, ref geometrySink);
 
 			[CRepr]
@@ -2088,8 +1925,8 @@ namespace Win32
 			{
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_MATRIX_3X2_F* worldTransform, out RectF bounds) GetBounds;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out RectF bounds) GetWidenedBounds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_POINT_2F point, float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) StrokeContainsPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_POINT_2F point, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) FillContainsPoint;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, Vector2 point, float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) StrokeContainsPoint;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, Vector2 point, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out BOOL contains) FillContainsPoint;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, ref ID2D1Geometry inputGeometry, D2D_MATRIX_3X2_F* inputGeometryTransform, float flatteningTolerance, out D2D1_GEOMETRY_RELATION relation) CompareWithGeometry;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D1_GEOMETRY_SIMPLIFICATION_OPTION simplificationOption, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1SimplifiedGeometrySink geometrySink) Simplify;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1TessellationSink tessellationSink) Tessellate;
@@ -2097,7 +1934,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1SimplifiedGeometrySink geometrySink) Outline;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out float area) ComputeArea;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, out float length) ComputeLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, float length, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, D2D_POINT_2F* point, D2D_POINT_2F* unitTangentVector) ComputePointAtLength;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, float length, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, Vector2* point, Vector2* unitTangentVector) ComputePointAtLength;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Geometry self, float strokeWidth, ID2D1StrokeStyle* strokeStyle, D2D_MATRIX_3X2_F* worldTransform, float flatteningTolerance, ref ID2D1SimplifiedGeometrySink geometrySink) Widen;
 			}
 		}
@@ -2153,14 +1990,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public D2D1_FILL_MODE GetFillMode() mut => VT.GetFillMode(ref this);
+			public FillMode GetFillMode() mut => VT.GetFillMode(ref this);
 			public uint32 GetSourceGeometryCount() mut => VT.GetSourceGeometryCount(ref this);
 			public void GetSourceGeometries(ID2D1Geometry** geometries, uint32 geometriesCount) mut => VT.GetSourceGeometries(ref this, geometries, geometriesCount);
 
 			[CRepr]
 			public struct VTable : ID2D1Geometry.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] D2D1_FILL_MODE(ref ID2D1GeometryGroup self) GetFillMode;
+				public new function [CallingConvention(.Stdcall)] FillMode(ref ID2D1GeometryGroup self) GetFillMode;
 				public new function [CallingConvention(.Stdcall)] uint32(ref ID2D1GeometryGroup self) GetSourceGeometryCount;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometryGroup self, ID2D1Geometry** geometries, uint32 geometriesCount) GetSourceGeometries;
 			}
@@ -2189,8 +2026,8 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void AddLine(D2D_POINT_2F point) mut => VT.AddLine(ref this, point);
-			public void AddBezier(in D2D1_BEZIER_SEGMENT bezier) mut => VT.AddBezier(ref this, bezier);
+			public void AddLine(Vector2 point) mut => VT.AddLine(ref this, point);
+			public void AddBezier(in BezierSegment bezier) mut => VT.AddBezier(ref this, bezier);
 			public void AddQuadraticBezier(in D2D1_QUADRATIC_BEZIER_SEGMENT bezier) mut => VT.AddQuadraticBezier(ref this, bezier);
 			public void AddQuadraticBeziers(D2D1_QUADRATIC_BEZIER_SEGMENT* beziers, uint32 beziersCount) mut => VT.AddQuadraticBeziers(ref this, beziers, beziersCount);
 			public void AddArc(in D2D1_ARC_SEGMENT arc) mut => VT.AddArc(ref this, arc);
@@ -2198,8 +2035,8 @@ namespace Win32
 			[CRepr]
 			public struct VTable : ID2D1SimplifiedGeometrySink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, D2D_POINT_2F point) AddLine;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, in D2D1_BEZIER_SEGMENT bezier) AddBezier;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, Vector2 point) AddLine;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, in BezierSegment bezier) AddBezier;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, in D2D1_QUADRATIC_BEZIER_SEGMENT bezier) AddQuadraticBezier;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, D2D1_QUADRATIC_BEZIER_SEGMENT* beziers, uint32 beziersCount) AddQuadraticBeziers;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1GeometrySink self, in D2D1_ARC_SEGMENT arc) AddArc;
@@ -2312,7 +2149,7 @@ namespace Win32
 			public HRESULT CreateCompatibleRenderTarget(D2D_SIZE_F* desiredSize, SizeU* desiredPixelSize, PixelFormat* desiredFormat, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS options, out ID2D1BitmapRenderTarget* bitmapRenderTarget) mut => VT.CreateCompatibleRenderTarget(ref this, desiredSize, desiredPixelSize, desiredFormat, options, out bitmapRenderTarget);
 			public HRESULT CreateLayer(D2D_SIZE_F* size, out ID2D1Layer* layer) mut => VT.CreateLayer(ref this, size, out layer);
 			public HRESULT CreateMesh(out ID2D1Mesh* mesh) mut => VT.CreateMesh(ref this, out mesh);
-			public void DrawLine(D2D_POINT_2F point0, D2D_POINT_2F point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawLine(ref this, point0, point1, ref brush, strokeWidth, strokeStyle);
+			public void DrawLine(Vector2 point0, Vector2 point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawLine(ref this, point0, point1, ref brush, strokeWidth, strokeStyle);
 			public void DrawRectangle(in RectF rect, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawRectangle(ref this, rect, ref brush, strokeWidth, strokeStyle);
 			public void FillRectangle(in RectF rect, ref ID2D1Brush brush) mut => VT.FillRectangle(ref this, rect, ref brush);
 			public void DrawRoundedRectangle(in D2D1_ROUNDED_RECT roundedRect, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawRoundedRectangle(ref this, roundedRect, ref brush, strokeWidth, strokeStyle);
@@ -2324,9 +2161,9 @@ namespace Win32
 			public void FillMesh(ref ID2D1Mesh mesh, ref ID2D1Brush brush) mut => VT.FillMesh(ref this, ref mesh, ref brush);
 			public void FillOpacityMask(ref ID2D1Bitmap opacityMask, ref ID2D1Brush brush, D2D1_OPACITY_MASK_CONTENT content, RectF* destinationRectangle, RectF* sourceRectangle) mut => VT.FillOpacityMask(ref this, ref opacityMask, ref brush, content, destinationRectangle, sourceRectangle);
 			public void DrawBitmap(ref ID2D1Bitmap bitmap, RectF* destinationRectangle, float opacity, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode, RectF* sourceRectangle) mut => VT.DrawBitmap(ref this, ref bitmap, destinationRectangle, opacity, interpolationMode, sourceRectangle);
-			public void DrawText(char16* string, uint32 stringLength, IDWriteTextFormat* textFormat, in RectF layoutRect, ID2D1Brush* defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options = .NONE, DWRITE_MEASURING_MODE measuringMode = .NATURAL) mut => VT.DrawText(ref this, string, stringLength, textFormat, layoutRect, defaultFillBrush, options, measuringMode);
-			public void DrawTextLayout(D2D_POINT_2F origin, ref IDWriteTextLayout textLayout, ref ID2D1Brush defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options) mut => VT.DrawTextLayout(ref this, origin, ref textLayout, ref defaultFillBrush, options);
-			public void DrawGlyphRun(D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawGlyphRun(ref this, baselineOrigin, glyphRun, ref foregroundBrush, measuringMode);
+			public void DrawText(char16* string, uint32 stringLength, IDWriteTextFormat* textFormat, in RectF layoutRect, ID2D1Brush* defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options = .None, DWRITE_MEASURING_MODE measuringMode = .Natural) mut => VT.DrawText(ref this, string, stringLength, textFormat, layoutRect, defaultFillBrush, options, measuringMode);
+			public void DrawTextLayout(Vector2 origin, ref IDWriteTextLayout textLayout, ref ID2D1Brush defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options) mut => VT.DrawTextLayout(ref this, origin, ref textLayout, ref defaultFillBrush, options);
+			public void DrawGlyphRun(Vector2 baselineOrigin, in GlyphRun glyphRun, ID2D1Brush* foregroundBrush, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawGlyphRun(ref this, baselineOrigin, glyphRun, foregroundBrush, measuringMode);
 			public void SetTransform(in D2D_MATRIX_3X2_F transform) mut => VT.SetTransform(ref this, transform);
 			public void GetTransform(out D2D_MATRIX_3X2_F transform) mut => VT.GetTransform(ref this, out transform);
 			public void SetAntialiasMode(D2D1_ANTIALIAS_MODE antialiasMode) mut => VT.SetAntialiasMode(ref this, antialiasMode);
@@ -2369,7 +2206,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1RenderTarget self, D2D_SIZE_F* desiredSize, SizeU* desiredPixelSize, PixelFormat* desiredFormat, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS options, out ID2D1BitmapRenderTarget* bitmapRenderTarget) CreateCompatibleRenderTarget;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1RenderTarget self, D2D_SIZE_F* size, out ID2D1Layer* layer) CreateLayer;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1RenderTarget self, out ID2D1Mesh* mesh) CreateMesh;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, D2D_POINT_2F point0, D2D_POINT_2F point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawLine;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, Vector2 point0, Vector2 point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawLine;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, in RectF rect, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawRectangle;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, in RectF rect, ref ID2D1Brush brush) FillRectangle;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, in D2D1_ROUNDED_RECT roundedRect, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawRoundedRectangle;
@@ -2382,8 +2219,8 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, ref ID2D1Bitmap opacityMask, ref ID2D1Brush brush, D2D1_OPACITY_MASK_CONTENT content, RectF* destinationRectangle, RectF* sourceRectangle) FillOpacityMask;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, ref ID2D1Bitmap bitmap, RectF* destinationRectangle, float opacity, D2D1_BITMAP_INTERPOLATION_MODE interpolationMode, RectF* sourceRectangle) DrawBitmap;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, char16* string, uint32 stringLength, IDWriteTextFormat* textFormat, in RectF layoutRect, ID2D1Brush* defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options, DWRITE_MEASURING_MODE measuringMode) DrawText;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, D2D_POINT_2F origin, ref IDWriteTextLayout textLayout, ref ID2D1Brush defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options) DrawTextLayout;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) DrawGlyphRun;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, Vector2 origin, ref IDWriteTextLayout textLayout, ref ID2D1Brush defaultFillBrush, D2D1_DRAW_TEXT_OPTIONS options) DrawTextLayout;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, Vector2 baselineOrigin, in GlyphRun glyphRun, ID2D1Brush* foregroundBrush, DWRITE_MEASURING_MODE measuringMode) DrawGlyphRun;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, in D2D_MATRIX_3X2_F transform) SetTransform;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, out D2D_MATRIX_3X2_F transform) GetTransform;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1RenderTarget self, D2D1_ANTIALIAS_MODE antialiasMode) SetAntialiasMode;
@@ -2491,7 +2328,7 @@ namespace Win32
 			public HRESULT CreateRectangleGeometry(in RectF rectangle, out ID2D1RectangleGeometry* rectangleGeometry) mut => VT.CreateRectangleGeometry(ref this, rectangle, out rectangleGeometry);
 			public HRESULT CreateRoundedRectangleGeometry(in D2D1_ROUNDED_RECT roundedRectangle, out ID2D1RoundedRectangleGeometry* roundedRectangleGeometry) mut => VT.CreateRoundedRectangleGeometry(ref this, roundedRectangle, out roundedRectangleGeometry);
 			public HRESULT CreateEllipseGeometry(in D2D1_ELLIPSE ellipse, out ID2D1EllipseGeometry* ellipseGeometry) mut => VT.CreateEllipseGeometry(ref this, ellipse, out ellipseGeometry);
-			public HRESULT CreateGeometryGroup(D2D1_FILL_MODE fillMode, ID2D1Geometry** geometries, uint32 geometriesCount, out ID2D1GeometryGroup* geometryGroup) mut => VT.CreateGeometryGroup(ref this, fillMode, geometries, geometriesCount, out geometryGroup);
+			public HRESULT CreateGeometryGroup(FillMode fillMode, ID2D1Geometry** geometries, uint32 geometriesCount, out ID2D1GeometryGroup* geometryGroup) mut => VT.CreateGeometryGroup(ref this, fillMode, geometries, geometriesCount, out geometryGroup);
 			public HRESULT CreateTransformedGeometry(ref ID2D1Geometry sourceGeometry, in D2D_MATRIX_3X2_F transform, out ID2D1TransformedGeometry* transformedGeometry) mut => VT.CreateTransformedGeometry(ref this, ref sourceGeometry, transform, out transformedGeometry);
 			public HRESULT CreatePathGeometry(out ID2D1PathGeometry* pathGeometry) mut => VT.CreatePathGeometry(ref this, out pathGeometry);
 			public HRESULT CreateStrokeStyle(in D2D1_STROKE_STYLE_PROPERTIES strokeStyleProperties, float* dashes, uint32 dashesCount, out ID2D1StrokeStyle* strokeStyle) mut => VT.CreateStrokeStyle(ref this, strokeStyleProperties, dashes, dashesCount, out strokeStyle);
@@ -2509,7 +2346,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, in RectF rectangle, out ID2D1RectangleGeometry* rectangleGeometry) CreateRectangleGeometry;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, in D2D1_ROUNDED_RECT roundedRectangle, out ID2D1RoundedRectangleGeometry* roundedRectangleGeometry) CreateRoundedRectangleGeometry;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, in D2D1_ELLIPSE ellipse, out ID2D1EllipseGeometry* ellipseGeometry) CreateEllipseGeometry;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, D2D1_FILL_MODE fillMode, ID2D1Geometry** geometries, uint32 geometriesCount, out ID2D1GeometryGroup* geometryGroup) CreateGeometryGroup;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, FillMode fillMode, ID2D1Geometry** geometries, uint32 geometriesCount, out ID2D1GeometryGroup* geometryGroup) CreateGeometryGroup;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, ref ID2D1Geometry sourceGeometry, in D2D_MATRIX_3X2_F transform, out ID2D1TransformedGeometry* transformedGeometry) CreateTransformedGeometry;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, out ID2D1PathGeometry* pathGeometry) CreatePathGeometry;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1Factory self, in D2D1_STROKE_STYLE_PROPERTIES strokeStyleProperties, float* dashes, uint32 dashesCount, out ID2D1StrokeStyle* strokeStyle) CreateStrokeStyle;
@@ -2569,13 +2406,13 @@ namespace Win32
 			public HRESULT SetPrimitiveBlend(D2D1_PRIMITIVE_BLEND primitiveBlend) mut => VT.SetPrimitiveBlend(ref this, primitiveBlend);
 			public HRESULT SetUnitMode(D2D1_UNIT_MODE unitMode) mut => VT.SetUnitMode(ref this, unitMode);
 			public HRESULT Clear(ColorF* color) mut => VT.Clear(ref this, color);
-			public HRESULT DrawGlyphRun(D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawGlyphRun(ref this, baselineOrigin, glyphRun, glyphRunDescription, ref foregroundBrush, measuringMode);
-			public HRESULT DrawLine(D2D_POINT_2F point0, D2D_POINT_2F point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawLine(ref this, point0, point1, ref brush, strokeWidth, strokeStyle);
+			public HRESULT DrawGlyphRun(Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawGlyphRun(ref this, baselineOrigin, glyphRun, glyphRunDescription, ref foregroundBrush, measuringMode);
+			public HRESULT DrawLine(Vector2 point0, Vector2 point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawLine(ref this, point0, point1, ref brush, strokeWidth, strokeStyle);
 			public HRESULT DrawGeometry(ref ID2D1Geometry geometry, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawGeometry(ref this, ref geometry, ref brush, strokeWidth, strokeStyle);
 			public HRESULT DrawRectangle(in RectF rect, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) mut => VT.DrawRectangle(ref this, rect, ref brush, strokeWidth, strokeStyle);
 			public HRESULT DrawBitmap(ref ID2D1Bitmap bitmap, RectF* destinationRectangle, float opacity, D2D1_INTERPOLATION_MODE interpolationMode, RectF* sourceRectangle, D2D_MATRIX_4X4_F* perspectiveTransform) mut => VT.DrawBitmap(ref this, ref bitmap, destinationRectangle, opacity, interpolationMode, sourceRectangle, perspectiveTransform);
-			public HRESULT DrawImage(ref ID2D1Image image, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) mut => VT.DrawImage(ref this, ref image, targetOffset, imageRectangle, interpolationMode, compositeMode);
-			public HRESULT DrawGdiMetafile(ref ID2D1GdiMetafile gdiMetafile, D2D_POINT_2F* targetOffset) mut => VT.DrawGdiMetafile(ref this, ref gdiMetafile, targetOffset);
+			public HRESULT DrawImage(ref ID2D1Image image, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) mut => VT.DrawImage(ref this, ref image, targetOffset, imageRectangle, interpolationMode, compositeMode);
+			public HRESULT DrawGdiMetafile(ref ID2D1GdiMetafile gdiMetafile, Vector2* targetOffset) mut => VT.DrawGdiMetafile(ref this, ref gdiMetafile, targetOffset);
 			public HRESULT FillMesh(ref ID2D1Mesh mesh, ref ID2D1Brush brush) mut => VT.FillMesh(ref this, ref mesh, ref brush);
 			public HRESULT FillOpacityMask(ref ID2D1Bitmap opacityMask, ref ID2D1Brush brush, RectF* destinationRectangle, RectF* sourceRectangle) mut => VT.FillOpacityMask(ref this, ref opacityMask, ref brush, destinationRectangle, sourceRectangle);
 			public HRESULT FillGeometry(ref ID2D1Geometry geometry, ref ID2D1Brush brush, ID2D1Brush* opacityBrush) mut => VT.FillGeometry(ref this, ref geometry, ref brush, opacityBrush);
@@ -2598,13 +2435,13 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, D2D1_PRIMITIVE_BLEND primitiveBlend) SetPrimitiveBlend;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, D2D1_UNIT_MODE unitMode) SetUnitMode;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ColorF* color) Clear;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) DrawGlyphRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, D2D_POINT_2F point0, D2D_POINT_2F point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawLine;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) DrawGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, Vector2 point0, Vector2 point1, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawLine;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Geometry geometry, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawGeometry;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, in RectF rect, ref ID2D1Brush brush, float strokeWidth, ID2D1StrokeStyle* strokeStyle) DrawRectangle;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Bitmap bitmap, RectF* destinationRectangle, float opacity, D2D1_INTERPOLATION_MODE interpolationMode, RectF* sourceRectangle, D2D_MATRIX_4X4_F* perspectiveTransform) DrawBitmap;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Image image, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) DrawImage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1GdiMetafile gdiMetafile, D2D_POINT_2F* targetOffset) DrawGdiMetafile;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Image image, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) DrawImage;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1GdiMetafile gdiMetafile, Vector2* targetOffset) DrawGdiMetafile;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Mesh mesh, ref ID2D1Brush brush) FillMesh;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Bitmap opacityMask, ref ID2D1Brush brush, RectF* destinationRectangle, RectF* sourceRectangle) FillOpacityMask;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink self, ref ID2D1Geometry geometry, ref ID2D1Brush brush, ID2D1Brush* opacityBrush) FillGeometry;
@@ -2891,7 +2728,7 @@ namespace Win32
 			public BOOL IsBufferPrecisionSupported(D2D1_BUFFER_PRECISION bufferPrecision) mut => VT.IsBufferPrecisionSupported(ref this, bufferPrecision);
 			public HRESULT GetImageLocalBounds(ref ID2D1Image image, out RectF localBounds) mut => VT.GetImageLocalBounds(ref this, ref image, out localBounds);
 			public HRESULT GetImageWorldBounds(ref ID2D1Image image, out RectF worldBounds) mut => VT.GetImageWorldBounds(ref this, ref image, out worldBounds);
-			public HRESULT GetGlyphRunWorldBounds(D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_MEASURING_MODE measuringMode, out RectF bounds) mut => VT.GetGlyphRunWorldBounds(ref this, baselineOrigin, glyphRun, measuringMode, out bounds);
+			public HRESULT GetGlyphRunWorldBounds(Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, out RectF bounds) mut => VT.GetGlyphRunWorldBounds(ref this, baselineOrigin, glyphRun, measuringMode, out bounds);
 			public void GetDevice(out ID2D1Device* device) mut => VT.GetDevice(ref this, out device);
 			public void SetTarget(ID2D1Image* image) mut => VT.SetTarget(ref this, image);
 			public void GetTarget(ID2D1Image** image) mut => VT.GetTarget(ref this, image);
@@ -2901,9 +2738,9 @@ namespace Win32
 			public D2D1_PRIMITIVE_BLEND GetPrimitiveBlend() mut => VT.GetPrimitiveBlend(ref this);
 			public void SetUnitMode(D2D1_UNIT_MODE unitMode) mut => VT.SetUnitMode(ref this, unitMode);
 			public D2D1_UNIT_MODE GetUnitMode() mut => VT.GetUnitMode(ref this);
-			public void DrawGlyphRun(D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawGlyphRun(ref this, baselineOrigin, glyphRun, glyphRunDescription, ref foregroundBrush, measuringMode);
-			public void DrawImage(ref ID2D1Image image, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) mut => VT.DrawImage(ref this, ref image, targetOffset, imageRectangle, interpolationMode, compositeMode);
-			public void DrawGdiMetafile(ref ID2D1GdiMetafile gdiMetafile, D2D_POINT_2F* targetOffset) mut => VT.DrawGdiMetafile(ref this, ref gdiMetafile, targetOffset);
+			public void DrawGlyphRun(Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawGlyphRun(ref this, baselineOrigin, glyphRun, glyphRunDescription, ref foregroundBrush, measuringMode);
+			public void DrawImage(ref ID2D1Image image, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) mut => VT.DrawImage(ref this, ref image, targetOffset, imageRectangle, interpolationMode, compositeMode);
+			public void DrawGdiMetafile(ref ID2D1GdiMetafile gdiMetafile, Vector2* targetOffset) mut => VT.DrawGdiMetafile(ref this, ref gdiMetafile, targetOffset);
 			public void DrawBitmap(ref ID2D1Bitmap bitmap, RectF* destinationRectangle, float opacity, D2D1_INTERPOLATION_MODE interpolationMode, RectF* sourceRectangle, D2D_MATRIX_4X4_F* perspectiveTransform) mut => VT.DrawBitmap(ref this, ref bitmap, destinationRectangle, opacity, interpolationMode, sourceRectangle, perspectiveTransform);
 			public void PushLayer(in D2D1_LAYER_PARAMETERS1 layerParameters, ID2D1Layer* layer) mut => VT.PushLayer(ref this, layerParameters, layer);
 			public HRESULT InvalidateEffectInputRectangle(ref ID2D1Effect effect, uint32 input, in RectF inputRectangle) mut => VT.InvalidateEffectInputRectangle(ref this, ref effect, input, inputRectangle);
@@ -2930,7 +2767,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] BOOL(ref ID2D1DeviceContext self, D2D1_BUFFER_PRECISION bufferPrecision) IsBufferPrecisionSupported;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext self, ref ID2D1Image image, out RectF localBounds) GetImageLocalBounds;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext self, ref ID2D1Image image, out RectF worldBounds) GetImageWorldBounds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext self, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_MEASURING_MODE measuringMode, out RectF bounds) GetGlyphRunWorldBounds;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext self, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, out RectF bounds) GetGlyphRunWorldBounds;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, out ID2D1Device* device) GetDevice;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ID2D1Image* image) SetTarget;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ID2D1Image** image) GetTarget;
@@ -2940,9 +2777,9 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] D2D1_PRIMITIVE_BLEND(ref ID2D1DeviceContext self) GetPrimitiveBlend;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, D2D1_UNIT_MODE unitMode) SetUnitMode;
 				public new function [CallingConvention(.Stdcall)] D2D1_UNIT_MODE(ref ID2D1DeviceContext self) GetUnitMode;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) DrawGlyphRun;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ref ID2D1Image image, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) DrawImage;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ref ID2D1GdiMetafile gdiMetafile, D2D_POINT_2F* targetOffset) DrawGdiMetafile;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, ref ID2D1Brush foregroundBrush, DWRITE_MEASURING_MODE measuringMode) DrawGlyphRun;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ref ID2D1Image image, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode, D2D1_COMPOSITE_MODE compositeMode) DrawImage;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ref ID2D1GdiMetafile gdiMetafile, Vector2* targetOffset) DrawGdiMetafile;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, ref ID2D1Bitmap bitmap, RectF* destinationRectangle, float opacity, D2D1_INTERPOLATION_MODE interpolationMode, RectF* sourceRectangle, D2D_MATRIX_4X4_F* perspectiveTransform) DrawBitmap;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext self, in D2D1_LAYER_PARAMETERS1 layerParameters, ID2D1Layer* layer) PushLayer;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext self, ref ID2D1Effect effect, uint32 input, in RectF inputRectangle) InvalidateEffectInputRectangle;
@@ -3569,16 +3406,16 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public HRESULT RemovePointsAtEnd(uint32 pointsCount) mut => VT.RemovePointsAtEnd(ref this, pointsCount);
-			public HRESULT UpdatePoints(D2D_POINT_2F* points, uint32 pointsCount, uint32 startIndex) mut => VT.UpdatePoints(ref this, points, pointsCount, startIndex);
-			public HRESULT GetPoints(D2D_POINT_2F* points, uint32 pointsCount, uint32 startIndex) mut => VT.GetPoints(ref this, points, pointsCount, startIndex);
+			public HRESULT UpdatePoints(Vector2* points, uint32 pointsCount, uint32 startIndex) mut => VT.UpdatePoints(ref this, points, pointsCount, startIndex);
+			public HRESULT GetPoints(Vector2* points, uint32 pointsCount, uint32 startIndex) mut => VT.GetPoints(ref this, points, pointsCount, startIndex);
 			public uint32 GetPointsCount() mut => VT.GetPointsCount(ref this);
 
 			[CRepr]
 			public struct VTable : ID2D1SvgAttribute.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPointCollection self, uint32 pointsCount) RemovePointsAtEnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPointCollection self, D2D_POINT_2F* points, uint32 pointsCount, uint32 startIndex) UpdatePoints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPointCollection self, D2D_POINT_2F* points, uint32 pointsCount, uint32 startIndex) GetPoints;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPointCollection self, Vector2* points, uint32 pointsCount, uint32 startIndex) UpdatePoints;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPointCollection self, Vector2* points, uint32 pointsCount, uint32 startIndex) GetPoints;
 				public new function [CallingConvention(.Stdcall)] uint32(ref ID2D1SvgPointCollection self) GetPointsCount;
 			}
 		}
@@ -3597,7 +3434,7 @@ namespace Win32
 			public HRESULT UpdateCommands(D2D1_SVG_PATH_COMMAND* commands, uint32 commandsCount, uint32 startIndex) mut => VT.UpdateCommands(ref this, commands, commandsCount, startIndex);
 			public HRESULT GetCommands(D2D1_SVG_PATH_COMMAND* commands, uint32 commandsCount, uint32 startIndex) mut => VT.GetCommands(ref this, commands, commandsCount, startIndex);
 			public uint32 GetCommandsCount() mut => VT.GetCommandsCount(ref this);
-			public HRESULT CreatePathGeometry(D2D1_FILL_MODE fillMode, out ID2D1PathGeometry1* pathGeometry) mut => VT.CreatePathGeometry(ref this, fillMode, out pathGeometry);
+			public HRESULT CreatePathGeometry(FillMode fillMode, out ID2D1PathGeometry1* pathGeometry) mut => VT.CreatePathGeometry(ref this, fillMode, out pathGeometry);
 
 			[CRepr]
 			public struct VTable : ID2D1SvgAttribute.VTable
@@ -3610,7 +3447,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPathData self, D2D1_SVG_PATH_COMMAND* commands, uint32 commandsCount, uint32 startIndex) UpdateCommands;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPathData self, D2D1_SVG_PATH_COMMAND* commands, uint32 commandsCount, uint32 startIndex) GetCommands;
 				public new function [CallingConvention(.Stdcall)] uint32(ref ID2D1SvgPathData self) GetCommandsCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPathData self, D2D1_FILL_MODE fillMode, out ID2D1PathGeometry1* pathGeometry) CreatePathGeometry;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgPathData self, FillMode fillMode, out ID2D1PathGeometry1* pathGeometry) CreatePathGeometry;
 			}
 		}
 		[CRepr]
@@ -3702,7 +3539,7 @@ namespace Win32
 			public HRESULT Deserialize(ref IStream inputXmlStream, out ID2D1SvgElement* subtree) mut => VT.Deserialize(ref this, ref inputXmlStream, out subtree);
 			public HRESULT CreatePaint(D2D1_SVG_PAINT_TYPE paintType, ColorF* color, PWSTR id, out ID2D1SvgPaint* paint) mut => VT.CreatePaint(ref this, paintType, color, id, out paint);
 			public HRESULT CreateStrokeDashArray(D2D1_SVG_LENGTH* dashes, uint32 dashesCount, out ID2D1SvgStrokeDashArray* strokeDashArray) mut => VT.CreateStrokeDashArray(ref this, dashes, dashesCount, out strokeDashArray);
-			public HRESULT CreatePointCollection(D2D_POINT_2F* points, uint32 pointsCount, out ID2D1SvgPointCollection* pointCollection) mut => VT.CreatePointCollection(ref this, points, pointsCount, out pointCollection);
+			public HRESULT CreatePointCollection(Vector2* points, uint32 pointsCount, out ID2D1SvgPointCollection* pointCollection) mut => VT.CreatePointCollection(ref this, points, pointsCount, out pointCollection);
 			public HRESULT CreatePathData(float* segmentData, uint32 segmentDataCount, D2D1_SVG_PATH_COMMAND* commands, uint32 commandsCount, out ID2D1SvgPathData* pathData) mut => VT.CreatePathData(ref this, segmentData, segmentDataCount, commands, commandsCount, out pathData);
 
 			[CRepr]
@@ -3717,7 +3554,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgDocument self, ref IStream inputXmlStream, out ID2D1SvgElement* subtree) Deserialize;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgDocument self, D2D1_SVG_PAINT_TYPE paintType, ColorF* color, PWSTR id, out ID2D1SvgPaint* paint) CreatePaint;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgDocument self, D2D1_SVG_LENGTH* dashes, uint32 dashesCount, out ID2D1SvgStrokeDashArray* strokeDashArray) CreateStrokeDashArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgDocument self, D2D_POINT_2F* points, uint32 pointsCount, out ID2D1SvgPointCollection* pointCollection) CreatePointCollection;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgDocument self, Vector2* points, uint32 pointsCount, out ID2D1SvgPointCollection* pointCollection) CreatePointCollection;
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1SvgDocument self, float* segmentData, uint32 segmentDataCount, D2D1_SVG_PATH_COMMAND* commands, uint32 commandsCount, out ID2D1SvgPathData* pathData) CreatePathData;
 			}
 		}
@@ -4092,22 +3929,22 @@ namespace Win32
 			
 			public HRESULT CreateSvgGlyphStyle(out ID2D1SvgGlyphStyle* svgGlyphStyle) mut => VT.CreateSvgGlyphStyle(ref this, out svgGlyphStyle);
 			public void DrawText(char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, in RectF layoutRect, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, D2D1_DRAW_TEXT_OPTIONS options, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawText(ref this, string, stringLength, ref textFormat, layoutRect, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, options, measuringMode);
-			public void DrawTextLayout(D2D_POINT_2F origin, ref IDWriteTextLayout textLayout, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, D2D1_DRAW_TEXT_OPTIONS options) mut => VT.DrawTextLayout(ref this, origin, ref textLayout, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, options);
-			public void DrawColorBitmapGlyphRun(DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_MEASURING_MODE measuringMode, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION bitmapSnapOption) mut => VT.DrawColorBitmapGlyphRun(ref this, glyphImageFormat, baselineOrigin, glyphRun, measuringMode, bitmapSnapOption);
-			public void DrawSvgGlyphRun(D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawSvgGlyphRun(ref this, baselineOrigin, glyphRun, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, measuringMode);
-			public HRESULT GetColorBitmapGlyphImage(DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, D2D_POINT_2F glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, float dpiX, float dpiY, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1Image* glyphImage) mut => VT.GetColorBitmapGlyphImage(ref this, glyphImageFormat, glyphOrigin, ref fontFace, fontEmSize, glyphIndex, isSideways, worldTransform, dpiX, dpiY, out glyphTransform, out glyphImage);
-			public HRESULT GetSvgGlyphImage(D2D_POINT_2F glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1CommandList* glyphImage) mut => VT.GetSvgGlyphImage(ref this, glyphOrigin, ref fontFace, fontEmSize, glyphIndex, isSideways, worldTransform, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, out glyphTransform, out glyphImage);
+			public void DrawTextLayout(Vector2 origin, ref IDWriteTextLayout textLayout, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, D2D1_DRAW_TEXT_OPTIONS options) mut => VT.DrawTextLayout(ref this, origin, ref textLayout, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, options);
+			public void DrawColorBitmapGlyphRun(DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION bitmapSnapOption) mut => VT.DrawColorBitmapGlyphRun(ref this, glyphImageFormat, baselineOrigin, glyphRun, measuringMode, bitmapSnapOption);
+			public void DrawSvgGlyphRun(Vector2 baselineOrigin, in GlyphRun glyphRun, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, DWRITE_MEASURING_MODE measuringMode) mut => VT.DrawSvgGlyphRun(ref this, baselineOrigin, glyphRun, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, measuringMode);
+			public HRESULT GetColorBitmapGlyphImage(DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, Vector2 glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, float dpiX, float dpiY, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1Image* glyphImage) mut => VT.GetColorBitmapGlyphImage(ref this, glyphImageFormat, glyphOrigin, ref fontFace, fontEmSize, glyphIndex, isSideways, worldTransform, dpiX, dpiY, out glyphTransform, out glyphImage);
+			public HRESULT GetSvgGlyphImage(Vector2 glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1CommandList* glyphImage) mut => VT.GetSvgGlyphImage(ref this, glyphOrigin, ref fontFace, fontEmSize, glyphIndex, isSideways, worldTransform, defaultFillBrush, svgGlyphStyle, colorPaletteIndex, out glyphTransform, out glyphImage);
 
 			[CRepr]
 			public struct VTable : ID2D1DeviceContext3.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext4 self, out ID2D1SvgGlyphStyle* svgGlyphStyle) CreateSvgGlyphStyle;
 				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, in RectF layoutRect, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, D2D1_DRAW_TEXT_OPTIONS options, DWRITE_MEASURING_MODE measuringMode) DrawText;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, D2D_POINT_2F origin, ref IDWriteTextLayout textLayout, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, D2D1_DRAW_TEXT_OPTIONS options) DrawTextLayout;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, DWRITE_MEASURING_MODE measuringMode, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION bitmapSnapOption) DrawColorBitmapGlyphRun;
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, D2D_POINT_2F baselineOrigin, in DWRITE_GLYPH_RUN glyphRun, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, DWRITE_MEASURING_MODE measuringMode) DrawSvgGlyphRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext4 self, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, D2D_POINT_2F glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, float dpiX, float dpiY, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1Image* glyphImage) GetColorBitmapGlyphImage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext4 self, D2D_POINT_2F glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1CommandList* glyphImage) GetSvgGlyphImage;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, Vector2 origin, ref IDWriteTextLayout textLayout, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, D2D1_DRAW_TEXT_OPTIONS options) DrawTextLayout;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION bitmapSnapOption) DrawColorBitmapGlyphRun;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext4 self, Vector2 baselineOrigin, in GlyphRun glyphRun, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, DWRITE_MEASURING_MODE measuringMode) DrawSvgGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext4 self, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, Vector2 glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, float dpiX, float dpiY, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1Image* glyphImage) GetColorBitmapGlyphImage;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1DeviceContext4 self, Vector2 glyphOrigin, ref IDWriteFontFace fontFace, float fontEmSize, uint16 glyphIndex, BOOL isSideways, D2D_MATRIX_3X2_F* worldTransform, ID2D1Brush* defaultFillBrush, ID2D1SvgGlyphStyle* svgGlyphStyle, uint32 colorPaletteIndex, out D2D_MATRIX_3X2_F glyphTransform, out ID2D1CommandList* glyphImage) GetSvgGlyphImage;
 			}
 		}
 		[CRepr]
@@ -4236,12 +4073,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BlendImage(ref ID2D1Image image, D2D1_BLEND_MODE blendMode, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) mut => VT.BlendImage(ref this, ref image, blendMode, targetOffset, imageRectangle, interpolationMode);
+			public HRESULT BlendImage(ref ID2D1Image image, BlendMode blendMode, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) mut => VT.BlendImage(ref this, ref image, blendMode, targetOffset, imageRectangle, interpolationMode);
 
 			[CRepr]
 			public struct VTable : ID2D1CommandSink4.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink5 self, ref ID2D1Image image, D2D1_BLEND_MODE blendMode, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) BlendImage;
+				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID2D1CommandSink5 self, ref ID2D1Image image, BlendMode blendMode, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) BlendImage;
 			}
 		}
 		[CRepr]
@@ -4251,12 +4088,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void BlendImage(ref ID2D1Image image, D2D1_BLEND_MODE blendMode, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) mut => VT.BlendImage(ref this, ref image, blendMode, targetOffset, imageRectangle, interpolationMode);
+			public void BlendImage(ref ID2D1Image image, BlendMode blendMode, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) mut => VT.BlendImage(ref this, ref image, blendMode, targetOffset, imageRectangle, interpolationMode);
 
 			[CRepr]
 			public struct VTable : ID2D1DeviceContext5.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext6 self, ref ID2D1Image image, D2D1_BLEND_MODE blendMode, D2D_POINT_2F* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) BlendImage;
+				public new function [CallingConvention(.Stdcall)] void(ref ID2D1DeviceContext6 self, ref ID2D1Image image, BlendMode blendMode, Vector2* targetOffset, RectF* imageRectangle, D2D1_INTERPOLATION_MODE interpolationMode) BlendImage;
 			}
 		}
 		[CRepr]
@@ -4325,11 +4162,11 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT D2D1CreateFactory(FactoryType factoryType, in Guid riid, D2D1_FACTORY_OPTIONS* pFactoryOptions, void** ppIFactory);
+		public static extern HRESULT D2D1CreateFactory<T>(FactoryType factoryType, in Guid riid, D2D1_FACTORY_OPTIONS* pFactoryOptions, out T* ppIFactory) where T : IUnknown;
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void D2D1MakeRotateMatrix(float angle, D2D_POINT_2F center, out D2D_MATRIX_3X2_F matrix);
+		public static extern void D2D1MakeRotateMatrix(float angle, Vector2 center, out D2D_MATRIX_3X2_F matrix);
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void D2D1MakeSkewMatrix(float angleX, float angleY, D2D_POINT_2F center, out D2D_MATRIX_3X2_F matrix);
+		public static extern void D2D1MakeSkewMatrix(float angleX, float angleY, Vector2 center, out D2D_MATRIX_3X2_F matrix);
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern BOOL D2D1IsMatrixInvertible(in D2D_MATRIX_3X2_F matrix);
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
@@ -4349,6 +4186,6 @@ namespace Win32
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern float D2D1ComputeMaximumScaleFactor(in D2D_MATRIX_3X2_F matrix);
 		[Import("d2d1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void D2D1GetGradientMeshInteriorPointsFromCoonsPatch(in D2D_POINT_2F pPoint0, in D2D_POINT_2F pPoint1, in D2D_POINT_2F pPoint2, in D2D_POINT_2F pPoint3, in D2D_POINT_2F pPoint4, in D2D_POINT_2F pPoint5, in D2D_POINT_2F pPoint6, in D2D_POINT_2F pPoint7, in D2D_POINT_2F pPoint8, in D2D_POINT_2F pPoint9, in D2D_POINT_2F pPoint10, in D2D_POINT_2F pPoint11, out D2D_POINT_2F pTensorPoint11, out D2D_POINT_2F pTensorPoint12, out D2D_POINT_2F pTensorPoint21, out D2D_POINT_2F pTensorPoint22);
+		public static extern void D2D1GetGradientMeshInteriorPointsFromCoonsPatch(in Vector2 pPoint0, in Vector2 pPoint1, in Vector2 pPoint2, in Vector2 pPoint3, in Vector2 pPoint4, in Vector2 pPoint5, in Vector2 pPoint6, in Vector2 pPoint7, in Vector2 pPoint8, in Vector2 pPoint9, in Vector2 pPoint10, in Vector2 pPoint11, out Vector2 pTensorPoint11, out Vector2 pTensorPoint12, out Vector2 pTensorPoint21, out Vector2 pTensorPoint22);
 	}
 }

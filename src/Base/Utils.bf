@@ -95,5 +95,38 @@ namespace BfEngine
 			}
 		}
 
+		public static Rect GetCurveBounds(Span<Vector2> span) => GetCurveBounds(span[0], span[1], span[2], span[3]);
+
+		public static Rect GetCurveBounds(Vector2 a, Vector2 b, Vector2 c, Vector2 d) => GetCurveBounds(a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y);
+
+		public static Rect GetCurveBounds(float ax, float ay, float bx, float by, float cx, float cy, float dx, float dy)
+		{
+		        float minx = float.PositiveInfinity;
+				float miny = float.PositiveInfinity;
+		        float maxx = float.NegativeInfinity;
+				float maxy = float.NegativeInfinity;
+
+		        var tobx = bx - ax;  var toby = by - ay;  // directions
+		        var tocx = cx - bx;  var tocy = cy - by;
+		        var todx = dx - cx;  var tody = dy - cy;
+		        var step = 1f/40f;      // precision
+		        for(var d=0f; d<1.001; d+=step)
+		        {
+		            var px = ax +d*tobx;  var py = ay +d*toby;
+		            var qx = bx +d*tocx;  var qy = by +d*tocy;
+		            var rx = cx +d*todx;  var ry = cy +d*tody;
+		            var toqx = qx - px;      var toqy = qy - py;
+		            var torx = rx - qx;      var tory = ry - qy;
+
+		            var sx = px +d*toqx;  var sy = py +d*toqy;
+		            var tx = qx +d*torx;  var ty = qy +d*tory;
+		            var totx = tx - sx;   var toty = ty - sy;
+
+		            var x = sx + d*totx;  var y = sy + d*toty;                
+		            minx = Math.Min(minx, x); miny = Math.Min(miny, y);
+		            maxx = Math.Max(maxx, x); maxy = Math.Max(maxy, y);
+		        }
+			return .(minx, miny, maxx-minx, maxy-miny);
+		}
 	}
 }

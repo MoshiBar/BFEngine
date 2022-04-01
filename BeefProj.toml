@@ -26,14 +26,6 @@ Name = "VorbisDecoder.bf"
 
 [[ProjectFolder.Items]]
 Type = "AutoFolder"
-Name = "Text"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "TrueType.bf"
-
-[[ProjectFolder.Items]]
-Type = "AutoFolder"
 Name = "Win32"
 
 [[ProjectFolder.Items.Items]]
