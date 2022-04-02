@@ -60,7 +60,7 @@ namespace BfEngine.Text
 			}
 			delete _;
 		};
-		public Glyph missingGlyph ~ delete _;
+		public Glyph missingGlyph;
 
 		public float spaceXadvance;
 
