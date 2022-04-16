@@ -74,15 +74,15 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function uint32 PGET_RESOURCE_STRING_FN(uint32 dwMsgID, PWSTR lpBuffer, uint32 nBufferMax);
+		public function uint32 PGET_RESOURCE_STRING_FN(uint32 dwMsgID, char16* lpBuffer, uint32 nBufferMax);
 		public function uint32 PNS_CONTEXT_COMMIT_FN(uint32 dwAction);
-		public function uint32 PNS_CONTEXT_CONNECT_FN(PWSTR pwszMachine);
-		public function uint32 PNS_CONTEXT_DUMP_FN(PWSTR pwszRouter, PWSTR* ppwcArguments, uint32 dwArgCount, void* pvData);
+		public function uint32 PNS_CONTEXT_CONNECT_FN(char16* pwszMachine);
+		public function uint32 PNS_CONTEXT_DUMP_FN(char16* pwszRouter, char16** ppwcArguments, uint32 dwArgCount, void* pvData);
 		public function uint32 PNS_DLL_STOP_FN(uint32 dwReserved);
 		public function uint32 PNS_HELPER_START_FN(in Guid pguidParent, uint32 dwVersion);
 		public function uint32 PNS_HELPER_STOP_FN(uint32 dwReserved);
-		public function uint32 PFN_HANDLE_CMD(PWSTR pwszMachine, PWSTR* ppwcArguments, uint32 dwCurrentIndex, uint32 dwArgCount, uint32 dwFlags, void* pvData, out BOOL pbDone);
-		public function BOOL PNS_OSVERSIONCHECK(uint32 CIMOSType, uint32 CIMOSProductSuite, PWSTR CIMOSVersion, PWSTR CIMOSBuildNumber, PWSTR CIMServicePackMajorVersion, PWSTR CIMServicePackMinorVersion, uint32 uiReserved, uint32 dwReserved);
+		public function uint32 PFN_HANDLE_CMD(char16* pwszMachine, char16** ppwcArguments, uint32 dwCurrentIndex, uint32 dwArgCount, uint32 dwFlags, void* pvData, out IntBool pbDone);
+		public function IntBool PNS_OSVERSIONCHECK(uint32 CIMOSType, uint32 CIMOSProductSuite, char16* CIMOSVersion, char16* CIMOSBuildNumber, char16* CIMServicePackMajorVersion, char16* CIMServicePackMinorVersion, uint32 uiReserved, uint32 dwReserved);
 		public function uint32 PNS_DLL_INIT_FN(uint32 dwNetshVersion, void* pReserved);
 		
 		// --- Structs ---
@@ -90,7 +90,7 @@ namespace Win32
 		[CRepr]
 		public struct TOKEN_VALUE
 		{
-			public PWSTR pwszToken;
+			public char16* pwszToken;
 			public uint32 dwValue;
 		}
 		[CRepr]
@@ -118,7 +118,7 @@ namespace Win32
 		[CRepr]
 		public struct CMD_ENTRY
 		{
-			public PWSTR pwszCmdToken;
+			public char16* pwszCmdToken;
 			public PFN_HANDLE_CMD pfnCmdHandler;
 			public uint32 dwShortCmdHelpToken;
 			public uint32 dwCmdHlpToken;
@@ -128,7 +128,7 @@ namespace Win32
 		[CRepr]
 		public struct CMD_GROUP_ENTRY
 		{
-			public PWSTR pwszCmdGroupToken;
+			public char16* pwszCmdGroupToken;
 			public uint32 dwShortCmdHelpToken;
 			public uint32 ulCmdGroupSize;
 			public uint32 dwFlags;
@@ -139,7 +139,7 @@ namespace Win32
 		public struct NS_CONTEXT_ATTRIBUTES
 		{
 			public _Anonymous_e__Union Anonymous;
-			public PWSTR pwszContext;
+			public char16* pwszContext;
 			public Guid guidHelper;
 			public uint32 dwFlags;
 			public uint32 ulPriority;
@@ -170,25 +170,25 @@ namespace Win32
 		[CRepr]
 		public struct TAG_TYPE
 		{
-			public PWSTR pwszTag;
+			public char16* pwszTag;
 			public uint32 dwRequired;
-			public BOOL bPresent;
+			public IntBool bPresent;
 		}
 		
 		// --- Functions ---
 		
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MatchEnumTag(HANDLE hModule, PWSTR pwcArg, uint32 dwNumArg, in TOKEN_VALUE pEnumTable, out uint32 pdwValue);
+		public static extern uint32 MatchEnumTag(Handle hModule, char16* pwcArg, uint32 dwNumArg, in TOKEN_VALUE pEnumTable, out uint32 pdwValue);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL MatchToken(PWSTR pwszUserToken, PWSTR pwszCmdToken);
+		public static extern IntBool MatchToken(char16* pwszUserToken, char16* pwszCmdToken);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PreprocessCommand(HANDLE hModule, PWSTR* ppwcArguments, uint32 dwCurrentIndex, uint32 dwArgCount, TAG_TYPE* pttTags, uint32 dwTagCount, uint32 dwMinArgs, uint32 dwMaxArgs, uint32* pdwTagType);
+		public static extern uint32 PreprocessCommand(Handle hModule, char16** ppwcArguments, uint32 dwCurrentIndex, uint32 dwArgCount, TAG_TYPE* pttTags, uint32 dwTagCount, uint32 dwMinArgs, uint32 dwMaxArgs, uint32* pdwTagType);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PrintError(HANDLE hModule, uint32 dwErrId);
+		public static extern uint32 PrintError(Handle hModule, uint32 dwErrId);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PrintMessageFromModule(HANDLE hModule, uint32 dwMsgId);
+		public static extern uint32 PrintMessageFromModule(Handle hModule, uint32 dwMsgId);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PrintMessage(PWSTR pwszFormat);
+		public static extern uint32 PrintMessage(char16* pwszFormat);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RegisterContext(in NS_CONTEXT_ATTRIBUTES pChildContext);
 		[Import("netsh.dll"), CLink, CallingConvention(.Stdcall)]

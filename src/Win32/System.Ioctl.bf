@@ -1924,10 +1924,10 @@ namespace Win32
 		public struct STORAGE_HOTPLUG_INFO
 		{
 			public uint32 Size;
-			public BOOLEAN MediaRemovable;
-			public BOOLEAN MediaHotplug;
-			public BOOLEAN DeviceHotplug;
-			public BOOLEAN WriteCacheEnableOverride;
+			public bool MediaRemovable;
+			public bool MediaHotplug;
+			public bool DeviceHotplug;
+			public bool WriteCacheEnableOverride;
 		}
 		[CRepr]
 		public struct STORAGE_DEVICE_NUMBER
@@ -1972,7 +1972,7 @@ namespace Win32
 		[CRepr]
 		public struct PREVENT_MEDIA_REMOVAL
 		{
-			public BOOLEAN PreventMediaRemoval;
+			public bool PreventMediaRemoval;
 		}
 		[CRepr]
 		public struct CLASS_MEDIA_CHANGE_CONTEXT
@@ -2073,8 +2073,8 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN Set;
-			public BOOLEAN Enabled;
+			public bool Set;
+			public bool Enabled;
 			public uint16 Reserved;
 		}
 		[CRepr]
@@ -2104,8 +2104,8 @@ namespace Win32
 			public uint32 Size;
 			public uint8 DeviceType;
 			public uint8 DeviceTypeModifier;
-			public BOOLEAN RemovableMedia;
-			public BOOLEAN CommandQueueing;
+			public bool RemovableMedia;
+			public bool CommandQueueing;
 			public uint32 VendorIdOffset;
 			public uint32 ProductIdOffset;
 			public uint32 ProductRevisionOffset;
@@ -2122,10 +2122,10 @@ namespace Win32
 			public uint32 MaximumTransferLength;
 			public uint32 MaximumPhysicalPages;
 			public uint32 AlignmentMask;
-			public BOOLEAN AdapterUsesPio;
-			public BOOLEAN AdapterScansDown;
-			public BOOLEAN CommandQueueing;
-			public BOOLEAN AcceleratedTransfer;
+			public bool AdapterUsesPio;
+			public bool AdapterScansDown;
+			public bool CommandQueueing;
+			public bool AcceleratedTransfer;
 			public uint8 BusType;
 			public uint16 BusMajorVersion;
 			public uint16 BusMinorVersion;
@@ -2156,10 +2156,10 @@ namespace Win32
 			public uint32 Version;
 			public uint32 Size;
 			public STORAGE_PORT_CODE_SET Portdriver;
-			public BOOLEAN LUNResetSupported;
-			public BOOLEAN TargetResetSupported;
+			public bool LUNResetSupported;
+			public bool TargetResetSupported;
 			public uint16 IoTimeoutValue;
-			public BOOLEAN ExtraIoInfoSupported;
+			public bool ExtraIoInfoSupported;
 			public _Flags_e__Union Flags;
 			public uint8[2] Reserved0;
 			public uint32 Reserved1;
@@ -2200,21 +2200,21 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN IncursSeekPenalty;
+			public bool IncursSeekPenalty;
 		}
 		[CRepr]
 		public struct DEVICE_WRITE_AGGREGATION_DESCRIPTOR
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN BenefitsFromWriteAggregation;
+			public bool BenefitsFromWriteAggregation;
 		}
 		[CRepr]
 		public struct DEVICE_TRIM_DESCRIPTOR
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN TrimEnabled;
+			public bool TrimEnabled;
 		}
 		[CRepr]
 		public struct DEVICE_LB_PROVISIONING_DESCRIPTOR
@@ -2245,12 +2245,12 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN DeviceAttentionSupported;
-			public BOOLEAN AsynchronousNotificationSupported;
-			public BOOLEAN IdlePowerManagementEnabled;
-			public BOOLEAN D3ColdEnabled;
-			public BOOLEAN D3ColdSupported;
-			public BOOLEAN NoVerifyDuringIdlePower;
+			public bool DeviceAttentionSupported;
+			public bool AsynchronousNotificationSupported;
+			public bool IdlePowerManagementEnabled;
+			public bool D3ColdEnabled;
+			public bool D3ColdSupported;
+			public bool NoVerifyDuringIdlePower;
 			public uint8[2] Reserved;
 			public uint32 IdleTimeoutInMS;
 		}
@@ -2401,9 +2401,9 @@ namespace Win32
 			public int16 Temperature;
 			public int16 OverThreshold;
 			public int16 UnderThreshold;
-			public BOOLEAN OverThresholdChangable;
-			public BOOLEAN UnderThresholdChangable;
-			public BOOLEAN EventGenerated;
+			public bool OverThresholdChangable;
+			public bool UnderThresholdChangable;
+			public bool EventGenerated;
 			public uint8 Reserved0;
 			public uint32 Reserved1;
 		}
@@ -2427,7 +2427,7 @@ namespace Win32
 			public uint16 Flags;
 			public uint16 Index;
 			public int16 Threshold;
-			public BOOLEAN OverThreshold;
+			public bool OverThreshold;
 			public uint8 Reserved;
 		}
 		[CRepr, Union]
@@ -2484,7 +2484,7 @@ namespace Win32
 			public uint8[40] Model;
 			public uint8[16] FirmwareRevision;
 			public uint8[32] PhysicalLocation;
-			public BOOLEAN ExpanderConnected;
+			public bool ExpanderConnected;
 			public uint8[3] Reserved0;
 			public uint32[3] Reserved1;
 		}
@@ -2602,7 +2602,7 @@ namespace Win32
 				public struct _SequentialRequiredZone_e__Struct
 				{
 					public uint32 MaxOpenZoneCount;
-					public BOOLEAN UnrestrictedRead;
+					public bool UnrestrictedRead;
 					public uint8[3] Reserved;
 				}
 				[CRepr]
@@ -2699,7 +2699,7 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN SupportsSelfEncryption;
+			public bool SupportsSelfEncryption;
 		}
 		[CRepr]
 		public struct STORAGE_FRU_ID_DESCRIPTOR
@@ -2743,10 +2743,10 @@ namespace Win32
 		public struct DEVICE_DSM_DEFINITION
 		{
 			public uint32 Action;
-			public BOOLEAN SingleRange;
+			public bool SingleRange;
 			public uint32 ParameterBlockAlignment;
 			public uint32 ParameterBlockLength;
-			public BOOLEAN HasOutput;
+			public bool HasOutput;
 			public uint32 OutputBlockAlignment;
 			public uint32 OutputBlockLength;
 		}
@@ -2938,7 +2938,7 @@ namespace Win32
 			public uint32 Size;
 			public STORAGE_ZONE_TYPES ZoneType;
 			public STORAGE_ZONE_CONDITION ZoneCondition;
-			public BOOLEAN ResetWritePointerRecommend;
+			public bool ResetWritePointerRecommend;
 			public uint8[3] Reserved0;
 			public uint64 ZoneSize;
 			public uint64 WritePointerOffset;
@@ -3024,9 +3024,9 @@ namespace Win32
 			public uint32 Version;
 			public uint32 RequestsPerPeriod;
 			public uint32 Period;
-			public BOOLEAN RetryFailures;
-			public BOOLEAN Discardable;
-			public BOOLEAN[2] Reserved1;
+			public bool RetryFailures;
+			public bool Discardable;
+			public bool[2] Reserved1;
 			public uint32 AccessType;
 			public uint32 AccessMode;
 		}
@@ -3165,9 +3165,9 @@ namespace Win32
 			public WRITE_CACHE_ENABLE WriteCacheEnabled;
 			public WRITE_CACHE_CHANGE WriteCacheChangeable;
 			public WRITE_THROUGH WriteThroughSupported;
-			public BOOLEAN FlushCacheSupported;
-			public BOOLEAN UserDefinedPowerProtection;
-			public BOOLEAN NVCacheEnabled;
+			public bool FlushCacheSupported;
+			public bool UserDefinedPowerProtection;
+			public bool NVCacheEnabled;
 		}
 		[CRepr]
 		public struct PERSISTENT_RESERVE_COMMAND
@@ -3235,7 +3235,7 @@ namespace Win32
 		{
 			public uint32 dwFlags;
 			public GP_LOG_PAGE_DESCRIPTOR[16] GPLogTable;
-			public CHAR[16] szDescription;
+			public char8[16] szDescription;
 			public uint8[0] bData;
 		}
 		[CRepr]
@@ -3403,7 +3403,7 @@ namespace Win32
 			public uint8 SlotCount;
 			public uint8 ActiveSlot;
 			public uint8 PendingActivateSlot;
-			public BOOLEAN FirmwareShared;
+			public bool FirmwareShared;
 			public uint8[3] Reserved;
 			public uint32 ImagePayloadAlignment;
 			public uint32 ImagePayloadMaxSize;
@@ -3550,7 +3550,7 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 Size;
-			public BOOLEAN RuntimeFwActivationSupported;
+			public bool RuntimeFwActivationSupported;
 			public SCM_BUS_FIRMWARE_ACTIVATION_STATE FirmwareActivationState;
 			public _FirmwareActivationCapability_e__Struct FirmwareActivationCapability;
 			public uint64 EstimatedFirmwareActivationTimeInUSecs;
@@ -3598,7 +3598,7 @@ namespace Win32
 		[CRepr]
 		public struct SCM_BUS_DEDICATED_MEMORY_STATE
 		{
-			public BOOLEAN ActivateState;
+			public bool ActivateState;
 		}
 		[CRepr]
 		public struct SCM_INTERLEAVED_PD_INFO
@@ -3635,7 +3635,7 @@ namespace Win32
 		[CRepr]
 		public struct SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE
 		{
-			public BOOLEAN ArmState;
+			public bool ArmState;
 		}
 		[CRepr]
 		public struct SCM_PD_DESCRIPTOR_HEADER
@@ -3675,7 +3675,7 @@ namespace Win32
 			public uint8 ManufacturingYear;
 			public uint32 SerialNumber4Byte;
 			public uint32 SerialNumberLengthInChars;
-			public CHAR[0] SerialNumber;
+			public char8[0] SerialNumber;
 		}
 		[CRepr]
 		public struct SCM_PD_DEVICE_SPECIFIC_PROPERTY
@@ -3856,9 +3856,9 @@ namespace Win32
 			public uint32 HiddenSectors;
 			public uint32 PartitionNumber;
 			public uint8 PartitionType;
-			public BOOLEAN BootIndicator;
-			public BOOLEAN RecognizedPartition;
-			public BOOLEAN RewritePartition;
+			public bool BootIndicator;
+			public bool RecognizedPartition;
+			public bool RewritePartition;
 		}
 		[CRepr]
 		public struct SET_PARTITION_INFORMATION
@@ -3904,8 +3904,8 @@ namespace Win32
 		public struct PARTITION_INFORMATION_MBR
 		{
 			public uint8 PartitionType;
-			public BOOLEAN BootIndicator;
-			public BOOLEAN RecognizedPartition;
+			public bool BootIndicator;
+			public bool RecognizedPartition;
 			public uint32 HiddenSectors;
 			public Guid PartitionId;
 		}
@@ -3958,8 +3958,8 @@ namespace Win32
 			public LARGE_INTEGER StartingOffset;
 			public LARGE_INTEGER PartitionLength;
 			public uint32 PartitionNumber;
-			public BOOLEAN RewritePartition;
-			public BOOLEAN IsServicePartition;
+			public bool RewritePartition;
+			public bool IsServicePartition;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -4081,13 +4081,13 @@ namespace Win32
 		[CRepr]
 		public struct DISK_CACHE_INFORMATION
 		{
-			public BOOLEAN ParametersSavable;
-			public BOOLEAN ReadCacheEnabled;
-			public BOOLEAN WriteCacheEnabled;
+			public bool ParametersSavable;
+			public bool ReadCacheEnabled;
+			public bool WriteCacheEnabled;
 			public DISK_CACHE_RETENTION_PRIORITY ReadRetentionPriority;
 			public DISK_CACHE_RETENTION_PRIORITY WriteRetentionPriority;
 			public uint16 DisablePrefetchTransferLength;
-			public BOOLEAN PrefetchScalar;
+			public bool PrefetchScalar;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -4163,7 +4163,7 @@ namespace Win32
 			public void* VirtualAddress;
 			public uint32 NumberOfBytes;
 			public uint8 DeviceNumber;
-			public BOOLEAN ReadRequest;
+			public bool ReadRequest;
 		}
 		[CRepr]
 		public struct DISK_LOGGING
@@ -4255,7 +4255,7 @@ namespace Win32
 		public struct SET_DISK_ATTRIBUTES
 		{
 			public uint32 Version;
-			public BOOLEAN Persist;
+			public bool Persist;
 			public uint8[3] Reserved1;
 			public uint64 Attributes;
 			public uint64 AttributesMask;
@@ -4324,7 +4324,7 @@ namespace Win32
 		public struct CHANGER_READ_ELEMENT_STATUS
 		{
 			public CHANGER_ELEMENT_LIST ElementList;
-			public BOOLEAN VolumeTagInfo;
+			public bool VolumeTagInfo;
 		}
 		[CRepr]
 		public struct CHANGER_ELEMENT_STATUS
@@ -4359,14 +4359,14 @@ namespace Win32
 		public struct CHANGER_INITIALIZE_ELEMENT_STATUS
 		{
 			public CHANGER_ELEMENT_LIST ElementList;
-			public BOOLEAN BarCodeScan;
+			public bool BarCodeScan;
 		}
 		[CRepr]
 		public struct CHANGER_SET_POSITION
 		{
 			public CHANGER_ELEMENT Transport;
 			public CHANGER_ELEMENT Destination;
-			public BOOLEAN Flip;
+			public bool Flip;
 		}
 		[CRepr]
 		public struct CHANGER_EXCHANGE_MEDIUM
@@ -4375,8 +4375,8 @@ namespace Win32
 			public CHANGER_ELEMENT Source;
 			public CHANGER_ELEMENT Destination1;
 			public CHANGER_ELEMENT Destination2;
-			public BOOLEAN Flip1;
-			public BOOLEAN Flip2;
+			public bool Flip1;
+			public bool Flip2;
 		}
 		[CRepr]
 		public struct CHANGER_MOVE_MEDIUM
@@ -4384,7 +4384,7 @@ namespace Win32
 			public CHANGER_ELEMENT Transport;
 			public CHANGER_ELEMENT Source;
 			public CHANGER_ELEMENT Destination;
-			public BOOLEAN Flip;
+			public bool Flip;
 		}
 		[CRepr]
 		public struct CHANGER_SEND_VOLUME_TAG_INFORMATION
@@ -4534,7 +4534,7 @@ namespace Win32
 		[CRepr]
 		public struct MOVE_FILE_DATA
 		{
-			public HANDLE FileHandle;
+			public Handle FileHandle;
 			public LARGE_INTEGER StartingVcn;
 			public LARGE_INTEGER StartingLcn;
 			public uint32 ClusterCount;
@@ -4542,7 +4542,7 @@ namespace Win32
 		[CRepr]
 		public struct MOVE_FILE_RECORD_DATA
 		{
-			public HANDLE FileHandle;
+			public Handle FileHandle;
 			public LARGE_INTEGER SourceFileRecord;
 			public LARGE_INTEGER TargetFileRecord;
 		}
@@ -4752,7 +4752,7 @@ namespace Win32
 		public struct MARK_HANDLE_INFO
 		{
 			public _Anonymous_e__Union Anonymous;
-			public HANDLE VolumeHandle;
+			public Handle VolumeHandle;
 			public uint32 HandleInfo;
 			
 			[CRepr, Union]
@@ -5089,7 +5089,7 @@ namespace Win32
 		[CRepr]
 		public struct FILE_SET_SPARSE_BUFFER
 		{
-			public BOOLEAN SetSparse;
+			public bool SetSparse;
 		}
 		[CRepr]
 		public struct FILE_ZERO_DATA_INFORMATION
@@ -5119,7 +5119,7 @@ namespace Win32
 		[CRepr]
 		public struct DECRYPTION_STATUS_BUFFER
 		{
-			public BOOLEAN NoEncryptedStreams;
+			public bool NoEncryptedStreams;
 		}
 		[CRepr]
 		public struct REQUEST_RAW_ENCRYPTED_DATA
@@ -5168,18 +5168,18 @@ namespace Win32
 		[CRepr]
 		public struct FILE_MAKE_COMPATIBLE_BUFFER
 		{
-			public BOOLEAN CloseDisc;
+			public bool CloseDisc;
 		}
 		[CRepr]
 		public struct FILE_SET_DEFECT_MGMT_BUFFER
 		{
-			public BOOLEAN Disable;
+			public bool Disable;
 		}
 		[CRepr]
 		public struct FILE_QUERY_SPARING_BUFFER
 		{
 			public uint32 SparingUnitBytes;
-			public BOOLEAN SoftwareSparing;
+			public bool SoftwareSparing;
 			public uint32 TotalSpareBlocks;
 			public uint32 FreeSpareBlocks;
 		}
@@ -5357,7 +5357,7 @@ namespace Win32
 		[CRepr]
 		public struct TXFS_SAVEPOINT_INFORMATION
 		{
-			public HANDLE KtmTransaction;
+			public Handle KtmTransaction;
 			public uint32 ActionCode;
 			public uint32 SavepointId;
 		}
@@ -5372,7 +5372,7 @@ namespace Win32
 		[CRepr]
 		public struct TXFS_TRANSACTION_ACTIVE_INFO
 		{
-			public BOOLEAN TransactionsActiveAtSnapshot;
+			public bool TransactionsActiveAtSnapshot;
 		}
 		[CRepr]
 		public struct BOOT_AREA_INFO
@@ -5402,7 +5402,7 @@ namespace Win32
 		[CRepr]
 		public struct FILE_SYSTEM_RECOGNITION_INFORMATION
 		{
-			public CHAR[9] FileSystem;
+			public char8[9] FileSystem;
 		}
 		[CRepr]
 		public struct REQUEST_OPLOCK_INPUT_BUFFER
@@ -5611,7 +5611,7 @@ namespace Win32
 		{
 			public uint32 MdsNodeId;
 			public uint32 DsNodeId;
-			public BOOLEAN FileRedirected;
+			public bool FileRedirected;
 		}
 		[CRepr]
 		public struct CSV_QUERY_FILE_REVISION
@@ -5638,8 +5638,8 @@ namespace Win32
 		{
 			public uint32 MdsNodeId;
 			public uint32 DsNodeId;
-			public BOOLEAN IsDiskConnected;
-			public BOOLEAN ClusterEnableDirectIo;
+			public bool IsDiskConnected;
+			public bool ClusterEnableDirectIo;
 			public CSVFS_DISK_CONNECTIVITY DiskConnectivity;
 		}
 		[CRepr]
@@ -5677,7 +5677,7 @@ namespace Win32
 		[CRepr]
 		public struct CSV_IS_OWNED_BY_CSVFS
 		{
-			public BOOLEAN OwnedByCSVFS;
+			public bool OwnedByCSVFS;
 		}
 		[CRepr]
 		public struct FILE_LEVEL_TRIM_RANGE
@@ -6028,7 +6028,7 @@ namespace Win32
 		[CRepr]
 		public struct DUPLICATE_EXTENTS_DATA
 		{
-			public HANDLE FileHandle;
+			public Handle FileHandle;
 			public LARGE_INTEGER SourceFileOffset;
 			public LARGE_INTEGER TargetFileOffset;
 			public LARGE_INTEGER ByteCount;
@@ -6045,7 +6045,7 @@ namespace Win32
 		public struct DUPLICATE_EXTENTS_DATA_EX
 		{
 			public uint Size;
-			public HANDLE FileHandle;
+			public Handle FileHandle;
 			public LARGE_INTEGER SourceFileOffset;
 			public LARGE_INTEGER TargetFileOffset;
 			public LARGE_INTEGER ByteCount;

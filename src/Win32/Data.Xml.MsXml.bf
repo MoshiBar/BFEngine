@@ -1,9 +1,13 @@
 using System;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows.COM_IUnknown;
+using static System.Windows;
 
 // namespace Data.Xml.MsXml
-namespace Win32
+namespace Win32.Data.MsXml
 {
-	extension Win32
+	static class MsXml
 	{
 		// --- Constants ---
 		
@@ -628,7 +632,7 @@ namespace Win32
 			DATATYPE_ANYTYPE = 8449,
 			DATATYPE_ANYURI = 8450,
 			DATATYPE_BASE64BINARY = 8451,
-			DATATYPE_BOOLEAN = 8452,
+			DATATYPE_Boolean = 8452,
 			DATATYPE_BYTE = 8453,
 			DATATYPE_DATE = 8454,
 			DATATYPE_DATETIME = 8455,
@@ -807,11 +811,11 @@ namespace Win32
 		public struct XML_ERROR
 		{
 			public uint32 _nLine;
-			public BSTR _pchBuf;
+			public char16* _pchBuf;
 			public uint32 _cchBuf;
 			public uint32 _ich;
-			public BSTR _pszFound;
-			public BSTR _pszExpected;
+			public char16* _pszFound;
+			public char16* _pszExpected;
 			public uint32 _reserved1;
 			public uint32 _reserved2;
 		}
@@ -844,11 +848,11 @@ namespace Win32
 		[CRepr]
 		public struct XHR_COOKIE
 		{
-			public PWSTR pwszUrl;
-			public PWSTR pwszName;
-			public PWSTR pwszValue;
-			public PWSTR pwszP3PPolicy;
-			public FILETIME ftExpires;
+			public char16* pwszUrl;
+			public char16* pwszName;
+			public char16* pwszValue;
+			public char16* pwszP3PPolicy;
+			public FileTime ftExpires;
 			public uint32 dwFlags;
 		}
 		[CRepr]
@@ -887,12 +891,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT hasFeature(BSTR feature, BSTR version, out int16 hasFeature) mut => VT.hasFeature(ref this, feature, version, out hasFeature);
+			public HResult hasFeature(char16* feature, char16* version, out int16 hasFeature) mut => VT.hasFeature(ref this, feature, version, out hasFeature);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMImplementation self, BSTR feature, BSTR version, out int16 hasFeature) hasFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMImplementation self, char16* feature, char16* version, out int16 hasFeature) hasFeature;
 			}
 		}
 		[CRepr]
@@ -902,82 +906,82 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_nodeName(out BSTR name) mut => VT.get_nodeName(ref this, out name);
-			public HRESULT get_nodeValue(out VARIANT value) mut => VT.get_nodeValue(ref this, out value);
-			public HRESULT put_nodeValue(VARIANT value) mut => VT.put_nodeValue(ref this, value);
-			public HRESULT get_nodeType(out DOMNodeType type) mut => VT.get_nodeType(ref this, out type);
-			public HRESULT get_parentNode(out IXMLDOMNode* parent) mut => VT.get_parentNode(ref this, out parent);
-			public HRESULT get_childNodes(out IXMLDOMNodeList* childList) mut => VT.get_childNodes(ref this, out childList);
-			public HRESULT get_firstChild(out IXMLDOMNode* firstChild) mut => VT.get_firstChild(ref this, out firstChild);
-			public HRESULT get_lastChild(out IXMLDOMNode* lastChild) mut => VT.get_lastChild(ref this, out lastChild);
-			public HRESULT get_previousSibling(out IXMLDOMNode* previousSibling) mut => VT.get_previousSibling(ref this, out previousSibling);
-			public HRESULT get_nextSibling(out IXMLDOMNode* nextSibling) mut => VT.get_nextSibling(ref this, out nextSibling);
-			public HRESULT get_attributes(out IXMLDOMNamedNodeMap* attributeMap) mut => VT.get_attributes(ref this, out attributeMap);
-			public HRESULT insertBefore(ref IXMLDOMNode newChild, VARIANT refChild, out IXMLDOMNode* outNewChild) mut => VT.insertBefore(ref this, ref newChild, refChild, out outNewChild);
-			public HRESULT replaceChild(ref IXMLDOMNode newChild, ref IXMLDOMNode oldChild, out IXMLDOMNode* outOldChild) mut => VT.replaceChild(ref this, ref newChild, ref oldChild, out outOldChild);
-			public HRESULT removeChild(ref IXMLDOMNode childNode, out IXMLDOMNode* oldChild) mut => VT.removeChild(ref this, ref childNode, out oldChild);
-			public HRESULT appendChild(ref IXMLDOMNode newChild, out IXMLDOMNode* outNewChild) mut => VT.appendChild(ref this, ref newChild, out outNewChild);
-			public HRESULT hasChildNodes(out int16 hasChild) mut => VT.hasChildNodes(ref this, out hasChild);
-			public HRESULT get_ownerDocument(out IXMLDOMDocument* XMLDOMDocument) mut => VT.get_ownerDocument(ref this, out XMLDOMDocument);
-			public HRESULT cloneNode(int16 deep, out IXMLDOMNode* cloneRoot) mut => VT.cloneNode(ref this, deep, out cloneRoot);
-			public HRESULT get_nodeTypeString(out BSTR nodeType) mut => VT.get_nodeTypeString(ref this, out nodeType);
-			public HRESULT get_text(out BSTR text) mut => VT.get_text(ref this, out text);
-			public HRESULT put_text(BSTR text) mut => VT.put_text(ref this, text);
-			public HRESULT get_specified(out int16 isSpecified) mut => VT.get_specified(ref this, out isSpecified);
-			public HRESULT get_definition(out IXMLDOMNode* definitionNode) mut => VT.get_definition(ref this, out definitionNode);
-			public HRESULT get_nodeTypedValue(out VARIANT typedValue) mut => VT.get_nodeTypedValue(ref this, out typedValue);
-			public HRESULT put_nodeTypedValue(VARIANT typedValue) mut => VT.put_nodeTypedValue(ref this, typedValue);
-			public HRESULT get_dataType(out VARIANT dataTypeName) mut => VT.get_dataType(ref this, out dataTypeName);
-			public HRESULT put_dataType(BSTR dataTypeName) mut => VT.put_dataType(ref this, dataTypeName);
-			public HRESULT get_xml(out BSTR xmlString) mut => VT.get_xml(ref this, out xmlString);
-			public HRESULT transformNode(ref IXMLDOMNode stylesheet, out BSTR xmlString) mut => VT.transformNode(ref this, ref stylesheet, out xmlString);
-			public HRESULT selectNodes(BSTR queryString, out IXMLDOMNodeList* resultList) mut => VT.selectNodes(ref this, queryString, out resultList);
-			public HRESULT selectSingleNode(BSTR queryString, out IXMLDOMNode* resultNode) mut => VT.selectSingleNode(ref this, queryString, out resultNode);
-			public HRESULT get_parsed(out int16 isParsed) mut => VT.get_parsed(ref this, out isParsed);
-			public HRESULT get_namespaceURI(out BSTR namespaceURI) mut => VT.get_namespaceURI(ref this, out namespaceURI);
-			public HRESULT get_prefix(out BSTR prefixString) mut => VT.get_prefix(ref this, out prefixString);
-			public HRESULT get_baseName(out BSTR nameString) mut => VT.get_baseName(ref this, out nameString);
-			public HRESULT transformNodeToObject(ref IXMLDOMNode stylesheet, VARIANT outputObject) mut => VT.transformNodeToObject(ref this, ref stylesheet, outputObject);
+			public HResult get_nodeName(out char16* name) mut => VT.get_nodeName(ref this, out name);
+			public HResult get_nodeValue(out VARIANT value) mut => VT.get_nodeValue(ref this, out value);
+			public HResult put_nodeValue(VARIANT value) mut => VT.put_nodeValue(ref this, value);
+			public HResult get_nodeType(out DOMNodeType type) mut => VT.get_nodeType(ref this, out type);
+			public HResult get_parentNode(out IXMLDOMNode* parent) mut => VT.get_parentNode(ref this, out parent);
+			public HResult get_childNodes(out IXMLDOMNodeList* childList) mut => VT.get_childNodes(ref this, out childList);
+			public HResult get_firstChild(out IXMLDOMNode* firstChild) mut => VT.get_firstChild(ref this, out firstChild);
+			public HResult get_lastChild(out IXMLDOMNode* lastChild) mut => VT.get_lastChild(ref this, out lastChild);
+			public HResult get_previousSibling(out IXMLDOMNode* previousSibling) mut => VT.get_previousSibling(ref this, out previousSibling);
+			public HResult get_nextSibling(out IXMLDOMNode* nextSibling) mut => VT.get_nextSibling(ref this, out nextSibling);
+			public HResult get_attributes(out IXMLDOMNamedNodeMap* attributeMap) mut => VT.get_attributes(ref this, out attributeMap);
+			public HResult insertBefore(ref IXMLDOMNode newChild, VARIANT refChild, out IXMLDOMNode* outNewChild) mut => VT.insertBefore(ref this, ref newChild, refChild, out outNewChild);
+			public HResult replaceChild(ref IXMLDOMNode newChild, ref IXMLDOMNode oldChild, out IXMLDOMNode* outOldChild) mut => VT.replaceChild(ref this, ref newChild, ref oldChild, out outOldChild);
+			public HResult removeChild(ref IXMLDOMNode childNode, out IXMLDOMNode* oldChild) mut => VT.removeChild(ref this, ref childNode, out oldChild);
+			public HResult appendChild(ref IXMLDOMNode newChild, out IXMLDOMNode* outNewChild) mut => VT.appendChild(ref this, ref newChild, out outNewChild);
+			public HResult hasChildNodes(out int16 hasChild) mut => VT.hasChildNodes(ref this, out hasChild);
+			public HResult get_ownerDocument(out IXMLDOMDocument* XMLDOMDocument) mut => VT.get_ownerDocument(ref this, out XMLDOMDocument);
+			public HResult cloneNode(int16 deep, out IXMLDOMNode* cloneRoot) mut => VT.cloneNode(ref this, deep, out cloneRoot);
+			public HResult get_nodeTypeString(out char16* nodeType) mut => VT.get_nodeTypeString(ref this, out nodeType);
+			public HResult get_text(out char16* text) mut => VT.get_text(ref this, out text);
+			public HResult put_text(char16* text) mut => VT.put_text(ref this, text);
+			public HResult get_specified(out int16 isSpecified) mut => VT.get_specified(ref this, out isSpecified);
+			public HResult get_definition(out IXMLDOMNode* definitionNode) mut => VT.get_definition(ref this, out definitionNode);
+			public HResult get_nodeTypedValue(out VARIANT typedValue) mut => VT.get_nodeTypedValue(ref this, out typedValue);
+			public HResult put_nodeTypedValue(VARIANT typedValue) mut => VT.put_nodeTypedValue(ref this, typedValue);
+			public HResult get_dataType(out VARIANT dataTypeName) mut => VT.get_dataType(ref this, out dataTypeName);
+			public HResult put_dataType(char16* dataTypeName) mut => VT.put_dataType(ref this, dataTypeName);
+			public HResult get_xml(out char16* xmlString) mut => VT.get_xml(ref this, out xmlString);
+			public HResult transformNode(ref IXMLDOMNode stylesheet, out char16* xmlString) mut => VT.transformNode(ref this, ref stylesheet, out xmlString);
+			public HResult selectNodes(char16* queryString, out IXMLDOMNodeList* resultList) mut => VT.selectNodes(ref this, queryString, out resultList);
+			public HResult selectSingleNode(char16* queryString, out IXMLDOMNode* resultNode) mut => VT.selectSingleNode(ref this, queryString, out resultNode);
+			public HResult get_parsed(out int16 isParsed) mut => VT.get_parsed(ref this, out isParsed);
+			public HResult get_namespaceURI(out char16* namespaceURI) mut => VT.get_namespaceURI(ref this, out namespaceURI);
+			public HResult get_prefix(out char16* prefixString) mut => VT.get_prefix(ref this, out prefixString);
+			public HResult get_baseName(out char16* nameString) mut => VT.get_baseName(ref this, out nameString);
+			public HResult transformNodeToObject(ref IXMLDOMNode stylesheet, VARIANT outputObject) mut => VT.transformNodeToObject(ref this, ref stylesheet, outputObject);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR name) get_nodeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out VARIANT value) get_nodeValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, VARIANT value) put_nodeValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out DOMNodeType type) get_nodeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNode* parent) get_parentNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNodeList* childList) get_childNodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNode* firstChild) get_firstChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNode* lastChild) get_lastChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNode* previousSibling) get_previousSibling;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNode* nextSibling) get_nextSibling;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNamedNodeMap* attributeMap) get_attributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, ref IXMLDOMNode newChild, VARIANT refChild, out IXMLDOMNode* outNewChild) insertBefore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, ref IXMLDOMNode newChild, ref IXMLDOMNode oldChild, out IXMLDOMNode* outOldChild) replaceChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, ref IXMLDOMNode childNode, out IXMLDOMNode* oldChild) removeChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, ref IXMLDOMNode newChild, out IXMLDOMNode* outNewChild) appendChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out int16 hasChild) hasChildNodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMDocument* XMLDOMDocument) get_ownerDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, int16 deep, out IXMLDOMNode* cloneRoot) cloneNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR nodeType) get_nodeTypeString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR text) get_text;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, BSTR text) put_text;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out int16 isSpecified) get_specified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out IXMLDOMNode* definitionNode) get_definition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out VARIANT typedValue) get_nodeTypedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, VARIANT typedValue) put_nodeTypedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out VARIANT dataTypeName) get_dataType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, BSTR dataTypeName) put_dataType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR xmlString) get_xml;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, ref IXMLDOMNode stylesheet, out BSTR xmlString) transformNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, BSTR queryString, out IXMLDOMNodeList* resultList) selectNodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, BSTR queryString, out IXMLDOMNode* resultNode) selectSingleNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out int16 isParsed) get_parsed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR namespaceURI) get_namespaceURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR prefixString) get_prefix;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, out BSTR nameString) get_baseName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNode self, ref IXMLDOMNode stylesheet, VARIANT outputObject) transformNodeToObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* name) get_nodeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out VARIANT value) get_nodeValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, VARIANT value) put_nodeValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out DOMNodeType type) get_nodeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNode* parent) get_parentNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNodeList* childList) get_childNodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNode* firstChild) get_firstChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNode* lastChild) get_lastChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNode* previousSibling) get_previousSibling;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNode* nextSibling) get_nextSibling;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNamedNodeMap* attributeMap) get_attributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, ref IXMLDOMNode newChild, VARIANT refChild, out IXMLDOMNode* outNewChild) insertBefore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, ref IXMLDOMNode newChild, ref IXMLDOMNode oldChild, out IXMLDOMNode* outOldChild) replaceChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, ref IXMLDOMNode childNode, out IXMLDOMNode* oldChild) removeChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, ref IXMLDOMNode newChild, out IXMLDOMNode* outNewChild) appendChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out int16 hasChild) hasChildNodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMDocument* XMLDOMDocument) get_ownerDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, int16 deep, out IXMLDOMNode* cloneRoot) cloneNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* nodeType) get_nodeTypeString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* text) get_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, char16* text) put_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out int16 isSpecified) get_specified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out IXMLDOMNode* definitionNode) get_definition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out VARIANT typedValue) get_nodeTypedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, VARIANT typedValue) put_nodeTypedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out VARIANT dataTypeName) get_dataType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, char16* dataTypeName) put_dataType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* xmlString) get_xml;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, ref IXMLDOMNode stylesheet, out char16* xmlString) transformNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, char16* queryString, out IXMLDOMNodeList* resultList) selectNodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, char16* queryString, out IXMLDOMNode* resultNode) selectSingleNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out int16 isParsed) get_parsed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* namespaceURI) get_namespaceURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* prefixString) get_prefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, out char16* nameString) get_baseName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNode self, ref IXMLDOMNode stylesheet, VARIANT outputObject) transformNodeToObject;
 			}
 		}
 		[CRepr]
@@ -997,76 +1001,76 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_doctype(out IXMLDOMDocumentType* documentType) mut => VT.get_doctype(ref this, out documentType);
-			public HRESULT get_implementation(out IXMLDOMImplementation* impl) mut => VT.get_implementation(ref this, out impl);
-			public HRESULT get_documentElement(out IXMLDOMElement* DOMElement) mut => VT.get_documentElement(ref this, out DOMElement);
-			public HRESULT putref_documentElement(ref IXMLDOMElement DOMElement) mut => VT.putref_documentElement(ref this, ref DOMElement);
-			public HRESULT createElement(BSTR tagName, out IXMLDOMElement* element) mut => VT.createElement(ref this, tagName, out element);
-			public HRESULT createDocumentFragment(out IXMLDOMDocumentFragment* docFrag) mut => VT.createDocumentFragment(ref this, out docFrag);
-			public HRESULT createTextNode(BSTR data, out IXMLDOMText* text) mut => VT.createTextNode(ref this, data, out text);
-			public HRESULT createComment(BSTR data, out IXMLDOMComment* comment) mut => VT.createComment(ref this, data, out comment);
-			public HRESULT createCDATASection(BSTR data, out IXMLDOMCDATASection* cdata) mut => VT.createCDATASection(ref this, data, out cdata);
-			public HRESULT createProcessingInstruction(BSTR target, BSTR data, out IXMLDOMProcessingInstruction* pi) mut => VT.createProcessingInstruction(ref this, target, data, out pi);
-			public HRESULT createAttribute(BSTR name, out IXMLDOMAttribute* attribute) mut => VT.createAttribute(ref this, name, out attribute);
-			public HRESULT createEntityReference(BSTR name, out IXMLDOMEntityReference* entityRef) mut => VT.createEntityReference(ref this, name, out entityRef);
-			public HRESULT getElementsByTagName(BSTR tagName, out IXMLDOMNodeList* resultList) mut => VT.getElementsByTagName(ref this, tagName, out resultList);
-			public HRESULT createNode(VARIANT Type, BSTR name, BSTR namespaceURI, out IXMLDOMNode* node) mut => VT.createNode(ref this, Type, name, namespaceURI, out node);
-			public HRESULT nodeFromID(BSTR idString, out IXMLDOMNode* node) mut => VT.nodeFromID(ref this, idString, out node);
-			public HRESULT load(VARIANT xmlSource, out int16 isSuccessful) mut => VT.load(ref this, xmlSource, out isSuccessful);
-			public HRESULT get_readyState(out int32 value) mut => VT.get_readyState(ref this, out value);
-			public HRESULT get_parseError(out IXMLDOMParseError* errorObj) mut => VT.get_parseError(ref this, out errorObj);
-			public HRESULT get_url(out BSTR urlString) mut => VT.get_url(ref this, out urlString);
-			public HRESULT get_async(out int16 isAsync) mut => VT.get_async(ref this, out isAsync);
-			public HRESULT put_async(int16 isAsync) mut => VT.put_async(ref this, isAsync);
-			public HRESULT abort() mut => VT.abort(ref this);
-			public HRESULT loadXML(BSTR bstrXML, out int16 isSuccessful) mut => VT.loadXML(ref this, bstrXML, out isSuccessful);
-			public HRESULT save(VARIANT destination) mut => VT.save(ref this, destination);
-			public HRESULT get_validateOnParse(out int16 isValidating) mut => VT.get_validateOnParse(ref this, out isValidating);
-			public HRESULT put_validateOnParse(int16 isValidating) mut => VT.put_validateOnParse(ref this, isValidating);
-			public HRESULT get_resolveExternals(out int16 isResolving) mut => VT.get_resolveExternals(ref this, out isResolving);
-			public HRESULT put_resolveExternals(int16 isResolving) mut => VT.put_resolveExternals(ref this, isResolving);
-			public HRESULT get_preserveWhiteSpace(out int16 isPreserving) mut => VT.get_preserveWhiteSpace(ref this, out isPreserving);
-			public HRESULT put_preserveWhiteSpace(int16 isPreserving) mut => VT.put_preserveWhiteSpace(ref this, isPreserving);
-			public HRESULT put_onreadystatechange(VARIANT readystatechangeSink) mut => VT.put_onreadystatechange(ref this, readystatechangeSink);
-			public HRESULT put_ondataavailable(VARIANT ondataavailableSink) mut => VT.put_ondataavailable(ref this, ondataavailableSink);
-			public HRESULT put_ontransformnode(VARIANT ontransformnodeSink) mut => VT.put_ontransformnode(ref this, ontransformnodeSink);
+			public HResult get_doctype(out IXMLDOMDocumentType* documentType) mut => VT.get_doctype(ref this, out documentType);
+			public HResult get_implementation(out IXMLDOMImplementation* impl) mut => VT.get_implementation(ref this, out impl);
+			public HResult get_documentElement(out IXMLDOMElement* DOMElement) mut => VT.get_documentElement(ref this, out DOMElement);
+			public HResult putref_documentElement(ref IXMLDOMElement DOMElement) mut => VT.putref_documentElement(ref this, ref DOMElement);
+			public HResult createElement(char16* tagName, out IXMLDOMElement* element) mut => VT.createElement(ref this, tagName, out element);
+			public HResult createDocumentFragment(out IXMLDOMDocumentFragment* docFrag) mut => VT.createDocumentFragment(ref this, out docFrag);
+			public HResult createTextNode(char16* data, out IXMLDOMText* text) mut => VT.createTextNode(ref this, data, out text);
+			public HResult createComment(char16* data, out IXMLDOMComment* comment) mut => VT.createComment(ref this, data, out comment);
+			public HResult createCDATASection(char16* data, out IXMLDOMCDATASection* cdata) mut => VT.createCDATASection(ref this, data, out cdata);
+			public HResult createProcessingInstruction(char16* target, char16* data, out IXMLDOMProcessingInstruction* pi) mut => VT.createProcessingInstruction(ref this, target, data, out pi);
+			public HResult createAttribute(char16* name, out IXMLDOMAttribute* attribute) mut => VT.createAttribute(ref this, name, out attribute);
+			public HResult createEntityReference(char16* name, out IXMLDOMEntityReference* entityRef) mut => VT.createEntityReference(ref this, name, out entityRef);
+			public HResult getElementsByTagName(char16* tagName, out IXMLDOMNodeList* resultList) mut => VT.getElementsByTagName(ref this, tagName, out resultList);
+			public HResult createNode(VARIANT Type, char16* name, char16* namespaceURI, out IXMLDOMNode* node) mut => VT.createNode(ref this, Type, name, namespaceURI, out node);
+			public HResult nodeFromID(char16* idString, out IXMLDOMNode* node) mut => VT.nodeFromID(ref this, idString, out node);
+			public HResult load(VARIANT xmlSource, out int16 isSuccessful) mut => VT.load(ref this, xmlSource, out isSuccessful);
+			public HResult get_readyState(out int32 value) mut => VT.get_readyState(ref this, out value);
+			public HResult get_parseError(out IXMLDOMParseError* errorObj) mut => VT.get_parseError(ref this, out errorObj);
+			public HResult get_url(out char16* urlString) mut => VT.get_url(ref this, out urlString);
+			public HResult get_async(out int16 isAsync) mut => VT.get_async(ref this, out isAsync);
+			public HResult put_async(int16 isAsync) mut => VT.put_async(ref this, isAsync);
+			public HResult abort() mut => VT.abort(ref this);
+			public HResult loadXML(char16* bstrXML, out int16 isSuccessful) mut => VT.loadXML(ref this, bstrXML, out isSuccessful);
+			public HResult save(VARIANT destination) mut => VT.save(ref this, destination);
+			public HResult get_validateOnParse(out int16 isValidating) mut => VT.get_validateOnParse(ref this, out isValidating);
+			public HResult put_validateOnParse(int16 isValidating) mut => VT.put_validateOnParse(ref this, isValidating);
+			public HResult get_resolveExternals(out int16 isResolving) mut => VT.get_resolveExternals(ref this, out isResolving);
+			public HResult put_resolveExternals(int16 isResolving) mut => VT.put_resolveExternals(ref this, isResolving);
+			public HResult get_preserveWhiteSpace(out int16 isPreserving) mut => VT.get_preserveWhiteSpace(ref this, out isPreserving);
+			public HResult put_preserveWhiteSpace(int16 isPreserving) mut => VT.put_preserveWhiteSpace(ref this, isPreserving);
+			public HResult put_onreadystatechange(VARIANT readystatechangeSink) mut => VT.put_onreadystatechange(ref this, readystatechangeSink);
+			public HResult put_ondataavailable(VARIANT ondataavailableSink) mut => VT.put_ondataavailable(ref this, ondataavailableSink);
+			public HResult put_ontransformnode(VARIANT ontransformnodeSink) mut => VT.put_ontransformnode(ref this, ontransformnodeSink);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out IXMLDOMDocumentType* documentType) get_doctype;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out IXMLDOMImplementation* impl) get_implementation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out IXMLDOMElement* DOMElement) get_documentElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, ref IXMLDOMElement DOMElement) putref_documentElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR tagName, out IXMLDOMElement* element) createElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out IXMLDOMDocumentFragment* docFrag) createDocumentFragment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR data, out IXMLDOMText* text) createTextNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR data, out IXMLDOMComment* comment) createComment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR data, out IXMLDOMCDATASection* cdata) createCDATASection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR target, BSTR data, out IXMLDOMProcessingInstruction* pi) createProcessingInstruction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR name, out IXMLDOMAttribute* attribute) createAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR name, out IXMLDOMEntityReference* entityRef) createEntityReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR tagName, out IXMLDOMNodeList* resultList) getElementsByTagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, VARIANT Type, BSTR name, BSTR namespaceURI, out IXMLDOMNode* node) createNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR idString, out IXMLDOMNode* node) nodeFromID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, VARIANT xmlSource, out int16 isSuccessful) load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out int32 value) get_readyState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out IXMLDOMParseError* errorObj) get_parseError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out BSTR urlString) get_url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out int16 isAsync) get_async;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, int16 isAsync) put_async;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self) abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, BSTR bstrXML, out int16 isSuccessful) loadXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, VARIANT destination) save;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out int16 isValidating) get_validateOnParse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, int16 isValidating) put_validateOnParse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out int16 isResolving) get_resolveExternals;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, int16 isResolving) put_resolveExternals;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, out int16 isPreserving) get_preserveWhiteSpace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, int16 isPreserving) put_preserveWhiteSpace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, VARIANT readystatechangeSink) put_onreadystatechange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, VARIANT ondataavailableSink) put_ondataavailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument self, VARIANT ontransformnodeSink) put_ontransformnode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out IXMLDOMDocumentType* documentType) get_doctype;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out IXMLDOMImplementation* impl) get_implementation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out IXMLDOMElement* DOMElement) get_documentElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, ref IXMLDOMElement DOMElement) putref_documentElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* tagName, out IXMLDOMElement* element) createElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out IXMLDOMDocumentFragment* docFrag) createDocumentFragment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* data, out IXMLDOMText* text) createTextNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* data, out IXMLDOMComment* comment) createComment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* data, out IXMLDOMCDATASection* cdata) createCDATASection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* target, char16* data, out IXMLDOMProcessingInstruction* pi) createProcessingInstruction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* name, out IXMLDOMAttribute* attribute) createAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* name, out IXMLDOMEntityReference* entityRef) createEntityReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* tagName, out IXMLDOMNodeList* resultList) getElementsByTagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, VARIANT Type, char16* name, char16* namespaceURI, out IXMLDOMNode* node) createNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* idString, out IXMLDOMNode* node) nodeFromID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, VARIANT xmlSource, out int16 isSuccessful) load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out int32 value) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out IXMLDOMParseError* errorObj) get_parseError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out char16* urlString) get_url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out int16 isAsync) get_async;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, int16 isAsync) put_async;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self) abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, char16* bstrXML, out int16 isSuccessful) loadXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, VARIANT destination) save;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out int16 isValidating) get_validateOnParse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, int16 isValidating) put_validateOnParse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out int16 isResolving) get_resolveExternals;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, int16 isResolving) put_resolveExternals;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, out int16 isPreserving) get_preserveWhiteSpace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, int16 isPreserving) put_preserveWhiteSpace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, VARIANT readystatechangeSink) put_onreadystatechange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, VARIANT ondataavailableSink) put_ondataavailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument self, VARIANT ontransformnodeSink) put_ontransformnode;
 			}
 		}
 		[CRepr]
@@ -1076,20 +1080,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_item(int32 index, out IXMLDOMNode* listItem) mut => VT.get_item(ref this, index, out listItem);
-			public HRESULT get_length(out int32 listLength) mut => VT.get_length(ref this, out listLength);
-			public HRESULT nextNode(out IXMLDOMNode* nextItem) mut => VT.nextNode(ref this, out nextItem);
-			public HRESULT reset() mut => VT.reset(ref this);
-			public HRESULT get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
+			public HResult get_item(int32 index, out IXMLDOMNode* listItem) mut => VT.get_item(ref this, index, out listItem);
+			public HResult get_length(out int32 listLength) mut => VT.get_length(ref this, out listLength);
+			public HResult nextNode(out IXMLDOMNode* nextItem) mut => VT.nextNode(ref this, out nextItem);
+			public HResult reset() mut => VT.reset(ref this);
+			public HResult get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNodeList self, int32 index, out IXMLDOMNode* listItem) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNodeList self, out int32 listLength) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNodeList self, out IXMLDOMNode* nextItem) nextNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNodeList self) reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNodeList self, out IUnknown* ppUnk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNodeList self, int32 index, out IXMLDOMNode* listItem) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNodeList self, out int32 listLength) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNodeList self, out IXMLDOMNode* nextItem) nextNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNodeList self) reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNodeList self, out IUnknown* ppUnk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -1099,30 +1103,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getNamedItem(BSTR name, out IXMLDOMNode* namedItem) mut => VT.getNamedItem(ref this, name, out namedItem);
-			public HRESULT setNamedItem(ref IXMLDOMNode newItem, out IXMLDOMNode* nameItem) mut => VT.setNamedItem(ref this, ref newItem, out nameItem);
-			public HRESULT removeNamedItem(BSTR name, out IXMLDOMNode* namedItem) mut => VT.removeNamedItem(ref this, name, out namedItem);
-			public HRESULT get_item(int32 index, out IXMLDOMNode* listItem) mut => VT.get_item(ref this, index, out listItem);
-			public HRESULT get_length(out int32 listLength) mut => VT.get_length(ref this, out listLength);
-			public HRESULT getQualifiedItem(BSTR baseName, BSTR namespaceURI, out IXMLDOMNode* qualifiedItem) mut => VT.getQualifiedItem(ref this, baseName, namespaceURI, out qualifiedItem);
-			public HRESULT removeQualifiedItem(BSTR baseName, BSTR namespaceURI, out IXMLDOMNode* qualifiedItem) mut => VT.removeQualifiedItem(ref this, baseName, namespaceURI, out qualifiedItem);
-			public HRESULT nextNode(out IXMLDOMNode* nextItem) mut => VT.nextNode(ref this, out nextItem);
-			public HRESULT reset() mut => VT.reset(ref this);
-			public HRESULT get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
+			public HResult getNamedItem(char16* name, out IXMLDOMNode* namedItem) mut => VT.getNamedItem(ref this, name, out namedItem);
+			public HResult setNamedItem(ref IXMLDOMNode newItem, out IXMLDOMNode* nameItem) mut => VT.setNamedItem(ref this, ref newItem, out nameItem);
+			public HResult removeNamedItem(char16* name, out IXMLDOMNode* namedItem) mut => VT.removeNamedItem(ref this, name, out namedItem);
+			public HResult get_item(int32 index, out IXMLDOMNode* listItem) mut => VT.get_item(ref this, index, out listItem);
+			public HResult get_length(out int32 listLength) mut => VT.get_length(ref this, out listLength);
+			public HResult getQualifiedItem(char16* baseName, char16* namespaceURI, out IXMLDOMNode* qualifiedItem) mut => VT.getQualifiedItem(ref this, baseName, namespaceURI, out qualifiedItem);
+			public HResult removeQualifiedItem(char16* baseName, char16* namespaceURI, out IXMLDOMNode* qualifiedItem) mut => VT.removeQualifiedItem(ref this, baseName, namespaceURI, out qualifiedItem);
+			public HResult nextNode(out IXMLDOMNode* nextItem) mut => VT.nextNode(ref this, out nextItem);
+			public HResult reset() mut => VT.reset(ref this);
+			public HResult get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, BSTR name, out IXMLDOMNode* namedItem) getNamedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, ref IXMLDOMNode newItem, out IXMLDOMNode* nameItem) setNamedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, BSTR name, out IXMLDOMNode* namedItem) removeNamedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, int32 index, out IXMLDOMNode* listItem) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, out int32 listLength) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, BSTR baseName, BSTR namespaceURI, out IXMLDOMNode* qualifiedItem) getQualifiedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, BSTR baseName, BSTR namespaceURI, out IXMLDOMNode* qualifiedItem) removeQualifiedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, out IXMLDOMNode* nextItem) nextNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self) reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNamedNodeMap self, out IUnknown* ppUnk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, char16* name, out IXMLDOMNode* namedItem) getNamedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, ref IXMLDOMNode newItem, out IXMLDOMNode* nameItem) setNamedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, char16* name, out IXMLDOMNode* namedItem) removeNamedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, int32 index, out IXMLDOMNode* listItem) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, out int32 listLength) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, char16* baseName, char16* namespaceURI, out IXMLDOMNode* qualifiedItem) getQualifiedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, char16* baseName, char16* namespaceURI, out IXMLDOMNode* qualifiedItem) removeQualifiedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, out IXMLDOMNode* nextItem) nextNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self) reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNamedNodeMap self, out IUnknown* ppUnk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -1132,26 +1136,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_data(out BSTR data) mut => VT.get_data(ref this, out data);
-			public HRESULT put_data(BSTR data) mut => VT.put_data(ref this, data);
-			public HRESULT get_length(out int32 dataLength) mut => VT.get_length(ref this, out dataLength);
-			public HRESULT substringData(int32 offset, int32 count, out BSTR data) mut => VT.substringData(ref this, offset, count, out data);
-			public HRESULT appendData(BSTR data) mut => VT.appendData(ref this, data);
-			public HRESULT insertData(int32 offset, BSTR data) mut => VT.insertData(ref this, offset, data);
-			public HRESULT deleteData(int32 offset, int32 count) mut => VT.deleteData(ref this, offset, count);
-			public HRESULT replaceData(int32 offset, int32 count, BSTR data) mut => VT.replaceData(ref this, offset, count, data);
+			public HResult get_data(out char16* data) mut => VT.get_data(ref this, out data);
+			public HResult put_data(char16* data) mut => VT.put_data(ref this, data);
+			public HResult get_length(out int32 dataLength) mut => VT.get_length(ref this, out dataLength);
+			public HResult substringData(int32 offset, int32 count, out char16* data) mut => VT.substringData(ref this, offset, count, out data);
+			public HResult appendData(char16* data) mut => VT.appendData(ref this, data);
+			public HResult insertData(int32 offset, char16* data) mut => VT.insertData(ref this, offset, data);
+			public HResult deleteData(int32 offset, int32 count) mut => VT.deleteData(ref this, offset, count);
+			public HResult replaceData(int32 offset, int32 count, char16* data) mut => VT.replaceData(ref this, offset, count, data);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, out BSTR data) get_data;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, BSTR data) put_data;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, out int32 dataLength) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, int32 offset, int32 count, out BSTR data) substringData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, BSTR data) appendData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, int32 offset, BSTR data) insertData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, int32 offset, int32 count) deleteData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMCharacterData self, int32 offset, int32 count, BSTR data) replaceData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, out char16* data) get_data;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, char16* data) put_data;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, out int32 dataLength) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, int32 offset, int32 count, out char16* data) substringData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, char16* data) appendData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, int32 offset, char16* data) insertData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, int32 offset, int32 count) deleteData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMCharacterData self, int32 offset, int32 count, char16* data) replaceData;
 			}
 		}
 		[CRepr]
@@ -1161,16 +1165,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_name(out BSTR attributeName) mut => VT.get_name(ref this, out attributeName);
-			public HRESULT get_value(out VARIANT attributeValue) mut => VT.get_value(ref this, out attributeValue);
-			public HRESULT put_value(VARIANT attributeValue) mut => VT.put_value(ref this, attributeValue);
+			public HResult get_name(out char16* attributeName) mut => VT.get_name(ref this, out attributeName);
+			public HResult get_value(out VARIANT attributeValue) mut => VT.get_value(ref this, out attributeValue);
+			public HResult put_value(VARIANT attributeValue) mut => VT.put_value(ref this, attributeValue);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMAttribute self, out BSTR attributeName) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMAttribute self, out VARIANT attributeValue) get_value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMAttribute self, VARIANT attributeValue) put_value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMAttribute self, out char16* attributeName) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMAttribute self, out VARIANT attributeValue) get_value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMAttribute self, VARIANT attributeValue) put_value;
 			}
 		}
 		[CRepr]
@@ -1180,28 +1184,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_tagName(out BSTR tagName) mut => VT.get_tagName(ref this, out tagName);
-			public HRESULT getAttribute(BSTR name, out VARIANT value) mut => VT.getAttribute(ref this, name, out value);
-			public HRESULT setAttribute(BSTR name, VARIANT value) mut => VT.setAttribute(ref this, name, value);
-			public HRESULT removeAttribute(BSTR name) mut => VT.removeAttribute(ref this, name);
-			public HRESULT getAttributeNode(BSTR name, out IXMLDOMAttribute* attributeNode) mut => VT.getAttributeNode(ref this, name, out attributeNode);
-			public HRESULT setAttributeNode(ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) mut => VT.setAttributeNode(ref this, ref DOMAttribute, out attributeNode);
-			public HRESULT removeAttributeNode(ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) mut => VT.removeAttributeNode(ref this, ref DOMAttribute, out attributeNode);
-			public HRESULT getElementsByTagName(BSTR tagName, out IXMLDOMNodeList* resultList) mut => VT.getElementsByTagName(ref this, tagName, out resultList);
-			public HRESULT normalize() mut => VT.normalize(ref this);
+			public HResult get_tagName(out char16* tagName) mut => VT.get_tagName(ref this, out tagName);
+			public HResult getAttribute(char16* name, out VARIANT value) mut => VT.getAttribute(ref this, name, out value);
+			public HResult setAttribute(char16* name, VARIANT value) mut => VT.setAttribute(ref this, name, value);
+			public HResult removeAttribute(char16* name) mut => VT.removeAttribute(ref this, name);
+			public HResult getAttributeNode(char16* name, out IXMLDOMAttribute* attributeNode) mut => VT.getAttributeNode(ref this, name, out attributeNode);
+			public HResult setAttributeNode(ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) mut => VT.setAttributeNode(ref this, ref DOMAttribute, out attributeNode);
+			public HResult removeAttributeNode(ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) mut => VT.removeAttributeNode(ref this, ref DOMAttribute, out attributeNode);
+			public HResult getElementsByTagName(char16* tagName, out IXMLDOMNodeList* resultList) mut => VT.getElementsByTagName(ref this, tagName, out resultList);
+			public HResult normalize() mut => VT.normalize(ref this);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, out BSTR tagName) get_tagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, BSTR name, out VARIANT value) getAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, BSTR name, VARIANT value) setAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, BSTR name) removeAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, BSTR name, out IXMLDOMAttribute* attributeNode) getAttributeNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) setAttributeNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) removeAttributeNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self, BSTR tagName, out IXMLDOMNodeList* resultList) getElementsByTagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMElement self) normalize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, out char16* tagName) get_tagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, char16* name, out VARIANT value) getAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, char16* name, VARIANT value) setAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, char16* name) removeAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, char16* name, out IXMLDOMAttribute* attributeNode) getAttributeNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) setAttributeNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, ref IXMLDOMAttribute DOMAttribute, out IXMLDOMAttribute* attributeNode) removeAttributeNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self, char16* tagName, out IXMLDOMNodeList* resultList) getElementsByTagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMElement self) normalize;
 			}
 		}
 		[CRepr]
@@ -1211,12 +1215,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT splitText(int32 offset, out IXMLDOMText* rightHandTextNode) mut => VT.splitText(ref this, offset, out rightHandTextNode);
+			public HResult splitText(int32 offset, out IXMLDOMText* rightHandTextNode) mut => VT.splitText(ref this, offset, out rightHandTextNode);
 
 			[CRepr]
 			public struct VTable : IXMLDOMCharacterData.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMText self, int32 offset, out IXMLDOMText* rightHandTextNode) splitText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMText self, int32 offset, out IXMLDOMText* rightHandTextNode) splitText;
 			}
 		}
 		[CRepr]
@@ -1236,16 +1240,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_target(out BSTR name) mut => VT.get_target(ref this, out name);
-			public HRESULT get_data(out BSTR value) mut => VT.get_data(ref this, out value);
-			public HRESULT put_data(BSTR value) mut => VT.put_data(ref this, value);
+			public HResult get_target(out char16* name) mut => VT.get_target(ref this, out name);
+			public HResult get_data(out char16* value) mut => VT.get_data(ref this, out value);
+			public HResult put_data(char16* value) mut => VT.put_data(ref this, value);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMProcessingInstruction self, out BSTR name) get_target;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMProcessingInstruction self, out BSTR value) get_data;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMProcessingInstruction self, BSTR value) put_data;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMProcessingInstruction self, out char16* name) get_target;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMProcessingInstruction self, out char16* value) get_data;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMProcessingInstruction self, char16* value) put_data;
 			}
 		}
 		[CRepr]
@@ -1265,16 +1269,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_name(out BSTR rootName) mut => VT.get_name(ref this, out rootName);
-			public HRESULT get_entities(out IXMLDOMNamedNodeMap* entityMap) mut => VT.get_entities(ref this, out entityMap);
-			public HRESULT get_notations(out IXMLDOMNamedNodeMap* notationMap) mut => VT.get_notations(ref this, out notationMap);
+			public HResult get_name(out char16* rootName) mut => VT.get_name(ref this, out rootName);
+			public HResult get_entities(out IXMLDOMNamedNodeMap* entityMap) mut => VT.get_entities(ref this, out entityMap);
+			public HResult get_notations(out IXMLDOMNamedNodeMap* notationMap) mut => VT.get_notations(ref this, out notationMap);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocumentType self, out BSTR rootName) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocumentType self, out IXMLDOMNamedNodeMap* entityMap) get_entities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocumentType self, out IXMLDOMNamedNodeMap* notationMap) get_notations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocumentType self, out char16* rootName) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocumentType self, out IXMLDOMNamedNodeMap* entityMap) get_entities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocumentType self, out IXMLDOMNamedNodeMap* notationMap) get_notations;
 			}
 		}
 		[CRepr]
@@ -1284,14 +1288,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_publicId(out VARIANT publicID) mut => VT.get_publicId(ref this, out publicID);
-			public HRESULT get_systemId(out VARIANT systemID) mut => VT.get_systemId(ref this, out systemID);
+			public HResult get_publicId(out VARIANT publicID) mut => VT.get_publicId(ref this, out publicID);
+			public HResult get_systemId(out VARIANT systemID) mut => VT.get_systemId(ref this, out systemID);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNotation self, out VARIANT publicID) get_publicId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMNotation self, out VARIANT systemID) get_systemId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNotation self, out VARIANT publicID) get_publicId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMNotation self, out VARIANT systemID) get_systemId;
 			}
 		}
 		[CRepr]
@@ -1301,16 +1305,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_publicId(out VARIANT publicID) mut => VT.get_publicId(ref this, out publicID);
-			public HRESULT get_systemId(out VARIANT systemID) mut => VT.get_systemId(ref this, out systemID);
-			public HRESULT get_notationName(out BSTR name) mut => VT.get_notationName(ref this, out name);
+			public HResult get_publicId(out VARIANT publicID) mut => VT.get_publicId(ref this, out publicID);
+			public HResult get_systemId(out VARIANT systemID) mut => VT.get_systemId(ref this, out systemID);
+			public HResult get_notationName(out char16* name) mut => VT.get_notationName(ref this, out name);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMEntity self, out VARIANT publicID) get_publicId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMEntity self, out VARIANT systemID) get_systemId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMEntity self, out BSTR name) get_notationName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMEntity self, out VARIANT publicID) get_publicId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMEntity self, out VARIANT systemID) get_systemId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMEntity self, out char16* name) get_notationName;
 			}
 		}
 		[CRepr]
@@ -1330,24 +1334,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_errorCode(out int32 errorCode) mut => VT.get_errorCode(ref this, out errorCode);
-			public HRESULT get_url(out BSTR urlString) mut => VT.get_url(ref this, out urlString);
-			public HRESULT get_reason(out BSTR reasonString) mut => VT.get_reason(ref this, out reasonString);
-			public HRESULT get_srcText(out BSTR sourceString) mut => VT.get_srcText(ref this, out sourceString);
-			public HRESULT get_line(out int32 lineNumber) mut => VT.get_line(ref this, out lineNumber);
-			public HRESULT get_linepos(out int32 linePosition) mut => VT.get_linepos(ref this, out linePosition);
-			public HRESULT get_filepos(out int32 filePosition) mut => VT.get_filepos(ref this, out filePosition);
+			public HResult get_errorCode(out int32 errorCode) mut => VT.get_errorCode(ref this, out errorCode);
+			public HResult get_url(out char16* urlString) mut => VT.get_url(ref this, out urlString);
+			public HResult get_reason(out char16* reasonString) mut => VT.get_reason(ref this, out reasonString);
+			public HResult get_srcText(out char16* sourceString) mut => VT.get_srcText(ref this, out sourceString);
+			public HResult get_line(out int32 lineNumber) mut => VT.get_line(ref this, out lineNumber);
+			public HResult get_linepos(out int32 linePosition) mut => VT.get_linepos(ref this, out linePosition);
+			public HResult get_filepos(out int32 filePosition) mut => VT.get_filepos(ref this, out filePosition);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out int32 errorCode) get_errorCode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out BSTR urlString) get_url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out BSTR reasonString) get_reason;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out BSTR sourceString) get_srcText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out int32 lineNumber) get_line;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out int32 linePosition) get_linepos;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError self, out int32 filePosition) get_filepos;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out int32 errorCode) get_errorCode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out char16* urlString) get_url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out char16* reasonString) get_reason;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out char16* sourceString) get_srcText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out int32 lineNumber) get_line;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out int32 linePosition) get_linepos;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError self, out int32 filePosition) get_filepos;
 			}
 		}
 		[CRepr]
@@ -1357,28 +1361,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT uniqueID(ref IXMLDOMNode pNode, out int32 pID) mut => VT.uniqueID(ref this, ref pNode, out pID);
-			public HRESULT depth(ref IXMLDOMNode pNode, out int32 pDepth) mut => VT.depth(ref this, ref pNode, out pDepth);
-			public HRESULT childNumber(ref IXMLDOMNode pNode, out int32 pNumber) mut => VT.childNumber(ref this, ref pNode, out pNumber);
-			public HRESULT ancestorChildNumber(BSTR bstrNodeName, ref IXMLDOMNode pNode, out int32 pNumber) mut => VT.ancestorChildNumber(ref this, bstrNodeName, ref pNode, out pNumber);
-			public HRESULT absoluteChildNumber(ref IXMLDOMNode pNode, out int32 pNumber) mut => VT.absoluteChildNumber(ref this, ref pNode, out pNumber);
-			public HRESULT formatIndex(int32 lIndex, BSTR bstrFormat, out BSTR pbstrFormattedString) mut => VT.formatIndex(ref this, lIndex, bstrFormat, out pbstrFormattedString);
-			public HRESULT formatNumber(double dblNumber, BSTR bstrFormat, out BSTR pbstrFormattedString) mut => VT.formatNumber(ref this, dblNumber, bstrFormat, out pbstrFormattedString);
-			public HRESULT formatDate(VARIANT varDate, BSTR bstrFormat, VARIANT varDestLocale, out BSTR pbstrFormattedString) mut => VT.formatDate(ref this, varDate, bstrFormat, varDestLocale, out pbstrFormattedString);
-			public HRESULT formatTime(VARIANT varTime, BSTR bstrFormat, VARIANT varDestLocale, out BSTR pbstrFormattedString) mut => VT.formatTime(ref this, varTime, bstrFormat, varDestLocale, out pbstrFormattedString);
+			public HResult uniqueID(ref IXMLDOMNode pNode, out int32 pID) mut => VT.uniqueID(ref this, ref pNode, out pID);
+			public HResult depth(ref IXMLDOMNode pNode, out int32 pDepth) mut => VT.depth(ref this, ref pNode, out pDepth);
+			public HResult childNumber(ref IXMLDOMNode pNode, out int32 pNumber) mut => VT.childNumber(ref this, ref pNode, out pNumber);
+			public HResult ancestorChildNumber(char16* bstrNodeName, ref IXMLDOMNode pNode, out int32 pNumber) mut => VT.ancestorChildNumber(ref this, bstrNodeName, ref pNode, out pNumber);
+			public HResult absoluteChildNumber(ref IXMLDOMNode pNode, out int32 pNumber) mut => VT.absoluteChildNumber(ref this, ref pNode, out pNumber);
+			public HResult formatIndex(int32 lIndex, char16* bstrFormat, out char16* pbstrFormattedString) mut => VT.formatIndex(ref this, lIndex, bstrFormat, out pbstrFormattedString);
+			public HResult formatNumber(double dblNumber, char16* bstrFormat, out char16* pbstrFormattedString) mut => VT.formatNumber(ref this, dblNumber, bstrFormat, out pbstrFormattedString);
+			public HResult formatDate(VARIANT varDate, char16* bstrFormat, VARIANT varDestLocale, out char16* pbstrFormattedString) mut => VT.formatDate(ref this, varDate, bstrFormat, varDestLocale, out pbstrFormattedString);
+			public HResult formatTime(VARIANT varTime, char16* bstrFormat, VARIANT varDestLocale, out char16* pbstrFormattedString) mut => VT.formatTime(ref this, varTime, bstrFormat, varDestLocale, out pbstrFormattedString);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNode.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pID) uniqueID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pDepth) depth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pNumber) childNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, BSTR bstrNodeName, ref IXMLDOMNode pNode, out int32 pNumber) ancestorChildNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pNumber) absoluteChildNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, int32 lIndex, BSTR bstrFormat, out BSTR pbstrFormattedString) formatIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, double dblNumber, BSTR bstrFormat, out BSTR pbstrFormattedString) formatNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, VARIANT varDate, BSTR bstrFormat, VARIANT varDestLocale, out BSTR pbstrFormattedString) formatDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXTLRuntime self, VARIANT varTime, BSTR bstrFormat, VARIANT varDestLocale, out BSTR pbstrFormattedString) formatTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pID) uniqueID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pDepth) depth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pNumber) childNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, char16* bstrNodeName, ref IXMLDOMNode pNode, out int32 pNumber) ancestorChildNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, ref IXMLDOMNode pNode, out int32 pNumber) absoluteChildNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, int32 lIndex, char16* bstrFormat, out char16* pbstrFormattedString) formatIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, double dblNumber, char16* bstrFormat, out char16* pbstrFormattedString) formatNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, VARIANT varDate, char16* bstrFormat, VARIANT varDestLocale, out char16* pbstrFormattedString) formatDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXTLRuntime self, VARIANT varTime, char16* bstrFormat, VARIANT varDestLocale, out char16* pbstrFormattedString) formatTime;
 			}
 		}
 		[CRepr]
@@ -1398,38 +1402,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT open(BSTR bstrMethod, BSTR bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) mut => VT.open(ref this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
-			public HRESULT setRequestHeader(BSTR bstrHeader, BSTR bstrValue) mut => VT.setRequestHeader(ref this, bstrHeader, bstrValue);
-			public HRESULT getResponseHeader(BSTR bstrHeader, BSTR* pbstrValue) mut => VT.getResponseHeader(ref this, bstrHeader, pbstrValue);
-			public HRESULT getAllResponseHeaders(BSTR* pbstrHeaders) mut => VT.getAllResponseHeaders(ref this, pbstrHeaders);
-			public HRESULT send(VARIANT varBody) mut => VT.send(ref this, varBody);
-			public HRESULT abort() mut => VT.abort(ref this);
-			public HRESULT get_status(out int32 plStatus) mut => VT.get_status(ref this, out plStatus);
-			public HRESULT get_statusText(BSTR* pbstrStatus) mut => VT.get_statusText(ref this, pbstrStatus);
-			public HRESULT get_responseXML(IDispatch** ppBody) mut => VT.get_responseXML(ref this, ppBody);
-			public HRESULT get_responseText(BSTR* pbstrBody) mut => VT.get_responseText(ref this, pbstrBody);
-			public HRESULT get_responseBody(out VARIANT pvarBody) mut => VT.get_responseBody(ref this, out pvarBody);
-			public HRESULT get_responseStream(out VARIANT pvarBody) mut => VT.get_responseStream(ref this, out pvarBody);
-			public HRESULT get_readyState(out int32 plState) mut => VT.get_readyState(ref this, out plState);
-			public HRESULT put_onreadystatechange(IDispatch* pReadyStateSink) mut => VT.put_onreadystatechange(ref this, pReadyStateSink);
+			public HResult open(char16* bstrMethod, char16* bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) mut => VT.open(ref this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
+			public HResult setRequestHeader(char16* bstrHeader, char16* bstrValue) mut => VT.setRequestHeader(ref this, bstrHeader, bstrValue);
+			public HResult getResponseHeader(char16* bstrHeader, char16** pbstrValue) mut => VT.getResponseHeader(ref this, bstrHeader, pbstrValue);
+			public HResult getAllResponseHeaders(char16** pbstrHeaders) mut => VT.getAllResponseHeaders(ref this, pbstrHeaders);
+			public HResult send(VARIANT varBody) mut => VT.send(ref this, varBody);
+			public HResult abort() mut => VT.abort(ref this);
+			public HResult get_status(out int32 plStatus) mut => VT.get_status(ref this, out plStatus);
+			public HResult get_statusText(char16** pbstrStatus) mut => VT.get_statusText(ref this, pbstrStatus);
+			public HResult get_responseXML(IDispatch** ppBody) mut => VT.get_responseXML(ref this, ppBody);
+			public HResult get_responseText(char16** pbstrBody) mut => VT.get_responseText(ref this, pbstrBody);
+			public HResult get_responseBody(out VARIANT pvarBody) mut => VT.get_responseBody(ref this, out pvarBody);
+			public HResult get_responseStream(out VARIANT pvarBody) mut => VT.get_responseStream(ref this, out pvarBody);
+			public HResult get_readyState(out int32 plState) mut => VT.get_readyState(ref this, out plState);
+			public HResult put_onreadystatechange(IDispatch* pReadyStateSink) mut => VT.put_onreadystatechange(ref this, pReadyStateSink);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, BSTR bstrMethod, BSTR bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, BSTR bstrHeader, BSTR bstrValue) setRequestHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, BSTR bstrHeader, BSTR* pbstrValue) getResponseHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, BSTR* pbstrHeaders) getAllResponseHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, VARIANT varBody) send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self) abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, out int32 plStatus) get_status;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, BSTR* pbstrStatus) get_statusText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, IDispatch** ppBody) get_responseXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, BSTR* pbstrBody) get_responseText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, out VARIANT pvarBody) get_responseBody;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, out VARIANT pvarBody) get_responseStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, out int32 plState) get_readyState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHttpRequest self, IDispatch* pReadyStateSink) put_onreadystatechange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, char16* bstrMethod, char16* bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, char16* bstrHeader, char16* bstrValue) setRequestHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, char16* bstrHeader, char16** pbstrValue) getResponseHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, char16** pbstrHeaders) getAllResponseHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, VARIANT varBody) send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self) abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, out int32 plStatus) get_status;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, char16** pbstrStatus) get_statusText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, IDispatch** ppBody) get_responseXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, char16** pbstrBody) get_responseText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, out VARIANT pvarBody) get_responseBody;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, out VARIANT pvarBody) get_responseStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, out int32 plState) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHttpRequest self, IDispatch* pReadyStateSink) put_onreadystatechange;
 			}
 		}
 		[CRepr]
@@ -1439,20 +1443,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_XMLDocument(out IXMLDOMDocument* ppDoc) mut => VT.get_XMLDocument(ref this, out ppDoc);
-			public HRESULT put_XMLDocument(ref IXMLDOMDocument ppDoc) mut => VT.put_XMLDocument(ref this, ref ppDoc);
-			public HRESULT get_JavaDSOCompatible(out BOOL fJavaDSOCompatible) mut => VT.get_JavaDSOCompatible(ref this, out fJavaDSOCompatible);
-			public HRESULT put_JavaDSOCompatible(BOOL fJavaDSOCompatible) mut => VT.put_JavaDSOCompatible(ref this, fJavaDSOCompatible);
-			public HRESULT get_readyState(out int32 state) mut => VT.get_readyState(ref this, out state);
+			public HResult get_XMLDocument(out IXMLDOMDocument* ppDoc) mut => VT.get_XMLDocument(ref this, out ppDoc);
+			public HResult put_XMLDocument(ref IXMLDOMDocument ppDoc) mut => VT.put_XMLDocument(ref this, ref ppDoc);
+			public HResult get_JavaDSOCompatible(out IntBool fJavaDSOCompatible) mut => VT.get_JavaDSOCompatible(ref this, out fJavaDSOCompatible);
+			public HResult put_JavaDSOCompatible(IntBool fJavaDSOCompatible) mut => VT.put_JavaDSOCompatible(ref this, fJavaDSOCompatible);
+			public HResult get_readyState(out int32 state) mut => VT.get_readyState(ref this, out state);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDSOControl self, out IXMLDOMDocument* ppDoc) get_XMLDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDSOControl self, ref IXMLDOMDocument ppDoc) put_XMLDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDSOControl self, out BOOL fJavaDSOCompatible) get_JavaDSOCompatible;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDSOControl self, BOOL fJavaDSOCompatible) put_JavaDSOCompatible;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDSOControl self, out int32 state) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDSOControl self, out IXMLDOMDocument* ppDoc) get_XMLDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDSOControl self, ref IXMLDOMDocument ppDoc) put_XMLDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDSOControl self, out IntBool fJavaDSOCompatible) get_JavaDSOCompatible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDSOControl self, IntBool fJavaDSOCompatible) put_JavaDSOCompatible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDSOControl self, out int32 state) get_readyState;
 			}
 		}
 		[CRepr]
@@ -1462,18 +1466,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_length(int32 v) mut => VT.put_length(ref this, v);
-			public HRESULT get_length(out int32 p) mut => VT.get_length(ref this, out p);
-			public HRESULT get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
-			public HRESULT item(VARIANT var1, VARIANT var2, out IDispatch* ppDisp) mut => VT.item(ref this, var1, var2, out ppDisp);
+			public HResult put_length(int32 v) mut => VT.put_length(ref this, v);
+			public HResult get_length(out int32 p) mut => VT.get_length(ref this, out p);
+			public HResult get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
+			public HResult item(VARIANT var1, VARIANT var2, out IDispatch* ppDisp) mut => VT.item(ref this, var1, var2, out ppDisp);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElementCollection self, int32 v) put_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElementCollection self, out int32 p) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElementCollection self, out IUnknown* ppUnk) get__newEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElementCollection self, VARIANT var1, VARIANT var2, out IDispatch* ppDisp) item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElementCollection self, int32 v) put_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElementCollection self, out int32 p) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElementCollection self, out IUnknown* ppUnk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElementCollection self, VARIANT var1, VARIANT var2, out IDispatch* ppDisp) item;
 			}
 		}
 		[CRepr]
@@ -1483,38 +1487,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_root(out IXMLElement* p) mut => VT.get_root(ref this, out p);
-			public HRESULT get_fileSize(out BSTR p) mut => VT.get_fileSize(ref this, out p);
-			public HRESULT get_fileModifiedDate(out BSTR p) mut => VT.get_fileModifiedDate(ref this, out p);
-			public HRESULT get_fileUpdatedDate(out BSTR p) mut => VT.get_fileUpdatedDate(ref this, out p);
-			public HRESULT get_URL(out BSTR p) mut => VT.get_URL(ref this, out p);
-			public HRESULT put_URL(BSTR p) mut => VT.put_URL(ref this, p);
-			public HRESULT get_mimeType(out BSTR p) mut => VT.get_mimeType(ref this, out p);
-			public HRESULT get_readyState(out int32 pl) mut => VT.get_readyState(ref this, out pl);
-			public HRESULT get_charset(out BSTR p) mut => VT.get_charset(ref this, out p);
-			public HRESULT put_charset(BSTR p) mut => VT.put_charset(ref this, p);
-			public HRESULT get_version(out BSTR p) mut => VT.get_version(ref this, out p);
-			public HRESULT get_doctype(out BSTR p) mut => VT.get_doctype(ref this, out p);
-			public HRESULT get_dtdURL(out BSTR p) mut => VT.get_dtdURL(ref this, out p);
-			public HRESULT createElement(VARIANT vType, VARIANT var1, out IXMLElement* ppElem) mut => VT.createElement(ref this, vType, var1, out ppElem);
+			public HResult get_root(out IXMLElement* p) mut => VT.get_root(ref this, out p);
+			public HResult get_fileSize(out char16* p) mut => VT.get_fileSize(ref this, out p);
+			public HResult get_fileModifiedDate(out char16* p) mut => VT.get_fileModifiedDate(ref this, out p);
+			public HResult get_fileUpdatedDate(out char16* p) mut => VT.get_fileUpdatedDate(ref this, out p);
+			public HResult get_URL(out char16* p) mut => VT.get_URL(ref this, out p);
+			public HResult put_URL(char16* p) mut => VT.put_URL(ref this, p);
+			public HResult get_mimeType(out char16* p) mut => VT.get_mimeType(ref this, out p);
+			public HResult get_readyState(out int32 pl) mut => VT.get_readyState(ref this, out pl);
+			public HResult get_charset(out char16* p) mut => VT.get_charset(ref this, out p);
+			public HResult put_charset(char16* p) mut => VT.put_charset(ref this, p);
+			public HResult get_version(out char16* p) mut => VT.get_version(ref this, out p);
+			public HResult get_doctype(out char16* p) mut => VT.get_doctype(ref this, out p);
+			public HResult get_dtdURL(out char16* p) mut => VT.get_dtdURL(ref this, out p);
+			public HResult createElement(VARIANT vType, VARIANT var1, out IXMLElement* ppElem) mut => VT.createElement(ref this, vType, var1, out ppElem);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out IXMLElement* p) get_root;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_fileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_fileModifiedDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_fileUpdatedDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_URL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, BSTR p) put_URL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_mimeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out int32 pl) get_readyState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_charset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, BSTR p) put_charset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_doctype;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, out BSTR p) get_dtdURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument self, VARIANT vType, VARIANT var1, out IXMLElement* ppElem) createElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out IXMLElement* p) get_root;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_fileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_fileModifiedDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_fileUpdatedDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, char16* p) put_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_mimeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out int32 pl) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_charset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, char16* p) put_charset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_doctype;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, out char16* p) get_dtdURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument self, VARIANT vType, VARIANT var1, out IXMLElement* ppElem) createElement;
 			}
 		}
 		[CRepr]
@@ -1524,42 +1528,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_root(out IXMLElement2* p) mut => VT.get_root(ref this, out p);
-			public HRESULT get_fileSize(out BSTR p) mut => VT.get_fileSize(ref this, out p);
-			public HRESULT get_fileModifiedDate(out BSTR p) mut => VT.get_fileModifiedDate(ref this, out p);
-			public HRESULT get_fileUpdatedDate(out BSTR p) mut => VT.get_fileUpdatedDate(ref this, out p);
-			public HRESULT get_URL(out BSTR p) mut => VT.get_URL(ref this, out p);
-			public HRESULT put_URL(BSTR p) mut => VT.put_URL(ref this, p);
-			public HRESULT get_mimeType(out BSTR p) mut => VT.get_mimeType(ref this, out p);
-			public HRESULT get_readyState(out int32 pl) mut => VT.get_readyState(ref this, out pl);
-			public HRESULT get_charset(out BSTR p) mut => VT.get_charset(ref this, out p);
-			public HRESULT put_charset(BSTR p) mut => VT.put_charset(ref this, p);
-			public HRESULT get_version(out BSTR p) mut => VT.get_version(ref this, out p);
-			public HRESULT get_doctype(out BSTR p) mut => VT.get_doctype(ref this, out p);
-			public HRESULT get_dtdURL(out BSTR p) mut => VT.get_dtdURL(ref this, out p);
-			public HRESULT createElement(VARIANT vType, VARIANT var1, out IXMLElement2* ppElem) mut => VT.createElement(ref this, vType, var1, out ppElem);
-			public HRESULT get_async(out int16 pf) mut => VT.get_async(ref this, out pf);
-			public HRESULT put_async(int16 f) mut => VT.put_async(ref this, f);
+			public HResult get_root(out IXMLElement2* p) mut => VT.get_root(ref this, out p);
+			public HResult get_fileSize(out char16* p) mut => VT.get_fileSize(ref this, out p);
+			public HResult get_fileModifiedDate(out char16* p) mut => VT.get_fileModifiedDate(ref this, out p);
+			public HResult get_fileUpdatedDate(out char16* p) mut => VT.get_fileUpdatedDate(ref this, out p);
+			public HResult get_URL(out char16* p) mut => VT.get_URL(ref this, out p);
+			public HResult put_URL(char16* p) mut => VT.put_URL(ref this, p);
+			public HResult get_mimeType(out char16* p) mut => VT.get_mimeType(ref this, out p);
+			public HResult get_readyState(out int32 pl) mut => VT.get_readyState(ref this, out pl);
+			public HResult get_charset(out char16* p) mut => VT.get_charset(ref this, out p);
+			public HResult put_charset(char16* p) mut => VT.put_charset(ref this, p);
+			public HResult get_version(out char16* p) mut => VT.get_version(ref this, out p);
+			public HResult get_doctype(out char16* p) mut => VT.get_doctype(ref this, out p);
+			public HResult get_dtdURL(out char16* p) mut => VT.get_dtdURL(ref this, out p);
+			public HResult createElement(VARIANT vType, VARIANT var1, out IXMLElement2* ppElem) mut => VT.createElement(ref this, vType, var1, out ppElem);
+			public HResult get_async(out int16 pf) mut => VT.get_async(ref this, out pf);
+			public HResult put_async(int16 f) mut => VT.put_async(ref this, f);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out IXMLElement2* p) get_root;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_fileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_fileModifiedDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_fileUpdatedDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_URL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, BSTR p) put_URL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_mimeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out int32 pl) get_readyState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_charset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, BSTR p) put_charset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_doctype;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out BSTR p) get_dtdURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, VARIANT vType, VARIANT var1, out IXMLElement2* ppElem) createElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, out int16 pf) get_async;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDocument2 self, int16 f) put_async;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out IXMLElement2* p) get_root;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_fileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_fileModifiedDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_fileUpdatedDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, char16* p) put_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_mimeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out int32 pl) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_charset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, char16* p) put_charset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_doctype;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out char16* p) get_dtdURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, VARIANT vType, VARIANT var1, out IXMLElement2* ppElem) createElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, out int16 pf) get_async;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDocument2 self, int16 f) put_async;
 			}
 		}
 		[CRepr]
@@ -1569,34 +1573,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_tagName(out BSTR p) mut => VT.get_tagName(ref this, out p);
-			public HRESULT put_tagName(BSTR p) mut => VT.put_tagName(ref this, p);
-			public HRESULT get_parent(out IXMLElement* ppParent) mut => VT.get_parent(ref this, out ppParent);
-			public HRESULT setAttribute(BSTR strPropertyName, VARIANT PropertyValue) mut => VT.setAttribute(ref this, strPropertyName, PropertyValue);
-			public HRESULT getAttribute(BSTR strPropertyName, out VARIANT PropertyValue) mut => VT.getAttribute(ref this, strPropertyName, out PropertyValue);
-			public HRESULT removeAttribute(BSTR strPropertyName) mut => VT.removeAttribute(ref this, strPropertyName);
-			public HRESULT get_children(out IXMLElementCollection* pp) mut => VT.get_children(ref this, out pp);
-			public HRESULT get_type(out int32 plType) mut => VT.get_type(ref this, out plType);
-			public HRESULT get_text(out BSTR p) mut => VT.get_text(ref this, out p);
-			public HRESULT put_text(BSTR p) mut => VT.put_text(ref this, p);
-			public HRESULT addChild(ref IXMLElement pChildElem, int32 lIndex, int32 lReserved) mut => VT.addChild(ref this, ref pChildElem, lIndex, lReserved);
-			public HRESULT removeChild(ref IXMLElement pChildElem) mut => VT.removeChild(ref this, ref pChildElem);
+			public HResult get_tagName(out char16* p) mut => VT.get_tagName(ref this, out p);
+			public HResult put_tagName(char16* p) mut => VT.put_tagName(ref this, p);
+			public HResult get_parent(out IXMLElement* ppParent) mut => VT.get_parent(ref this, out ppParent);
+			public HResult setAttribute(char16* strPropertyName, VARIANT PropertyValue) mut => VT.setAttribute(ref this, strPropertyName, PropertyValue);
+			public HResult getAttribute(char16* strPropertyName, out VARIANT PropertyValue) mut => VT.getAttribute(ref this, strPropertyName, out PropertyValue);
+			public HResult removeAttribute(char16* strPropertyName) mut => VT.removeAttribute(ref this, strPropertyName);
+			public HResult get_children(out IXMLElementCollection* pp) mut => VT.get_children(ref this, out pp);
+			public HResult get_type(out int32 plType) mut => VT.get_type(ref this, out plType);
+			public HResult get_text(out char16* p) mut => VT.get_text(ref this, out p);
+			public HResult put_text(char16* p) mut => VT.put_text(ref this, p);
+			public HResult addChild(ref IXMLElement pChildElem, int32 lIndex, int32 lReserved) mut => VT.addChild(ref this, ref pChildElem, lIndex, lReserved);
+			public HResult removeChild(ref IXMLElement pChildElem) mut => VT.removeChild(ref this, ref pChildElem);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, out BSTR p) get_tagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, BSTR p) put_tagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, out IXMLElement* ppParent) get_parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, BSTR strPropertyName, VARIANT PropertyValue) setAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, BSTR strPropertyName, out VARIANT PropertyValue) getAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, BSTR strPropertyName) removeAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, out IXMLElementCollection* pp) get_children;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, out int32 plType) get_type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, out BSTR p) get_text;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, BSTR p) put_text;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, ref IXMLElement pChildElem, int32 lIndex, int32 lReserved) addChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement self, ref IXMLElement pChildElem) removeChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, out char16* p) get_tagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, char16* p) put_tagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, out IXMLElement* ppParent) get_parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, char16* strPropertyName, VARIANT PropertyValue) setAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, char16* strPropertyName, out VARIANT PropertyValue) getAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, char16* strPropertyName) removeAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, out IXMLElementCollection* pp) get_children;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, out int32 plType) get_type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, out char16* p) get_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, char16* p) put_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, ref IXMLElement pChildElem, int32 lIndex, int32 lReserved) addChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement self, ref IXMLElement pChildElem) removeChild;
 			}
 		}
 		[CRepr]
@@ -1606,36 +1610,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_tagName(out BSTR p) mut => VT.get_tagName(ref this, out p);
-			public HRESULT put_tagName(BSTR p) mut => VT.put_tagName(ref this, p);
-			public HRESULT get_parent(out IXMLElement2* ppParent) mut => VT.get_parent(ref this, out ppParent);
-			public HRESULT setAttribute(BSTR strPropertyName, VARIANT PropertyValue) mut => VT.setAttribute(ref this, strPropertyName, PropertyValue);
-			public HRESULT getAttribute(BSTR strPropertyName, out VARIANT PropertyValue) mut => VT.getAttribute(ref this, strPropertyName, out PropertyValue);
-			public HRESULT removeAttribute(BSTR strPropertyName) mut => VT.removeAttribute(ref this, strPropertyName);
-			public HRESULT get_children(out IXMLElementCollection* pp) mut => VT.get_children(ref this, out pp);
-			public HRESULT get_type(out int32 plType) mut => VT.get_type(ref this, out plType);
-			public HRESULT get_text(out BSTR p) mut => VT.get_text(ref this, out p);
-			public HRESULT put_text(BSTR p) mut => VT.put_text(ref this, p);
-			public HRESULT addChild(ref IXMLElement2 pChildElem, int32 lIndex, int32 lReserved) mut => VT.addChild(ref this, ref pChildElem, lIndex, lReserved);
-			public HRESULT removeChild(ref IXMLElement2 pChildElem) mut => VT.removeChild(ref this, ref pChildElem);
-			public HRESULT get_attributes(out IXMLElementCollection* pp) mut => VT.get_attributes(ref this, out pp);
+			public HResult get_tagName(out char16* p) mut => VT.get_tagName(ref this, out p);
+			public HResult put_tagName(char16* p) mut => VT.put_tagName(ref this, p);
+			public HResult get_parent(out IXMLElement2* ppParent) mut => VT.get_parent(ref this, out ppParent);
+			public HResult setAttribute(char16* strPropertyName, VARIANT PropertyValue) mut => VT.setAttribute(ref this, strPropertyName, PropertyValue);
+			public HResult getAttribute(char16* strPropertyName, out VARIANT PropertyValue) mut => VT.getAttribute(ref this, strPropertyName, out PropertyValue);
+			public HResult removeAttribute(char16* strPropertyName) mut => VT.removeAttribute(ref this, strPropertyName);
+			public HResult get_children(out IXMLElementCollection* pp) mut => VT.get_children(ref this, out pp);
+			public HResult get_type(out int32 plType) mut => VT.get_type(ref this, out plType);
+			public HResult get_text(out char16* p) mut => VT.get_text(ref this, out p);
+			public HResult put_text(char16* p) mut => VT.put_text(ref this, p);
+			public HResult addChild(ref IXMLElement2 pChildElem, int32 lIndex, int32 lReserved) mut => VT.addChild(ref this, ref pChildElem, lIndex, lReserved);
+			public HResult removeChild(ref IXMLElement2 pChildElem) mut => VT.removeChild(ref this, ref pChildElem);
+			public HResult get_attributes(out IXMLElementCollection* pp) mut => VT.get_attributes(ref this, out pp);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, out BSTR p) get_tagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, BSTR p) put_tagName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, out IXMLElement2* ppParent) get_parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, BSTR strPropertyName, VARIANT PropertyValue) setAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, BSTR strPropertyName, out VARIANT PropertyValue) getAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, BSTR strPropertyName) removeAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, out IXMLElementCollection* pp) get_children;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, out int32 plType) get_type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, out BSTR p) get_text;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, BSTR p) put_text;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, ref IXMLElement2 pChildElem, int32 lIndex, int32 lReserved) addChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, ref IXMLElement2 pChildElem) removeChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLElement2 self, out IXMLElementCollection* pp) get_attributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, out char16* p) get_tagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, char16* p) put_tagName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, out IXMLElement2* ppParent) get_parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, char16* strPropertyName, VARIANT PropertyValue) setAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, char16* strPropertyName, out VARIANT PropertyValue) getAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, char16* strPropertyName) removeAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, out IXMLElementCollection* pp) get_children;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, out int32 plType) get_type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, out char16* p) get_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, char16* p) put_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, ref IXMLElement2 pChildElem, int32 lIndex, int32 lReserved) addChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, ref IXMLElement2 pChildElem) removeChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLElement2 self, out IXMLElementCollection* pp) get_attributes;
 			}
 		}
 		[CRepr]
@@ -1645,14 +1649,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_name(out BSTR n) mut => VT.get_name(ref this, out n);
-			public HRESULT get_value(out BSTR v) mut => VT.get_value(ref this, out v);
+			public HResult get_name(out char16* n) mut => VT.get_name(ref this, out n);
+			public HResult get_value(out char16* v) mut => VT.get_value(ref this, out v);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLAttribute self, out BSTR n) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLAttribute self, out BSTR v) get_value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLAttribute self, out char16* n) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLAttribute self, out char16* v) get_value;
 			}
 		}
 		[CRepr]
@@ -1662,12 +1666,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetErrorInfo(out XML_ERROR pErrorReturn) mut => VT.GetErrorInfo(ref this, out pErrorReturn);
+			public HResult GetErrorInfo(out XML_ERROR pErrorReturn) mut => VT._GetErrorInfo(ref this, out pErrorReturn);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLError self, out XML_ERROR pErrorReturn) GetErrorInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLError self, out XML_ERROR pErrorReturn) _GetErrorInfo;
 			}
 		}
 		[CRepr]
@@ -1677,22 +1681,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_namespaces(out IXMLDOMSchemaCollection* namespaceCollection) mut => VT.get_namespaces(ref this, out namespaceCollection);
-			public HRESULT get_schemas(out VARIANT otherCollection) mut => VT.get_schemas(ref this, out otherCollection);
-			public HRESULT putref_schemas(VARIANT otherCollection) mut => VT.putref_schemas(ref this, otherCollection);
-			public HRESULT validate(out IXMLDOMParseError* errorObj) mut => VT.validate(ref this, out errorObj);
-			public HRESULT setProperty(BSTR name, VARIANT value) mut => VT.setProperty(ref this, name, value);
-			public HRESULT getProperty(BSTR name, out VARIANT value) mut => VT.getProperty(ref this, name, out value);
+			public HResult get_namespaces(out IXMLDOMSchemaCollection* namespaceCollection) mut => VT.get_namespaces(ref this, out namespaceCollection);
+			public HResult get_schemas(out VARIANT otherCollection) mut => VT.get_schemas(ref this, out otherCollection);
+			public HResult putref_schemas(VARIANT otherCollection) mut => VT.putref_schemas(ref this, otherCollection);
+			public HResult validate(out IXMLDOMParseError* errorObj) mut => VT.validate(ref this, out errorObj);
+			public HResult setProperty(char16* name, VARIANT value) mut => VT.setProperty(ref this, name, value);
+			public HResult getProperty(char16* name, out VARIANT value) mut => VT.getProperty(ref this, name, out value);
 
 			[CRepr]
 			public struct VTable : IXMLDOMDocument.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument2 self, out IXMLDOMSchemaCollection* namespaceCollection) get_namespaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument2 self, out VARIANT otherCollection) get_schemas;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument2 self, VARIANT otherCollection) putref_schemas;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument2 self, out IXMLDOMParseError* errorObj) validate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument2 self, BSTR name, VARIANT value) setProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument2 self, BSTR name, out VARIANT value) getProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument2 self, out IXMLDOMSchemaCollection* namespaceCollection) get_namespaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument2 self, out VARIANT otherCollection) get_schemas;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument2 self, VARIANT otherCollection) putref_schemas;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument2 self, out IXMLDOMParseError* errorObj) validate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument2 self, char16* name, VARIANT value) setProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument2 self, char16* name, out VARIANT value) getProperty;
 			}
 		}
 		[CRepr]
@@ -1702,14 +1706,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT validateNode(ref IXMLDOMNode node, out IXMLDOMParseError* errorObj) mut => VT.validateNode(ref this, ref node, out errorObj);
-			public HRESULT importNode(ref IXMLDOMNode node, int16 deep, out IXMLDOMNode* clone) mut => VT.importNode(ref this, ref node, deep, out clone);
+			public HResult validateNode(ref IXMLDOMNode node, out IXMLDOMParseError* errorObj) mut => VT.validateNode(ref this, ref node, out errorObj);
+			public HResult importNode(ref IXMLDOMNode node, int16 deep, out IXMLDOMNode* clone) mut => VT.importNode(ref this, ref node, deep, out clone);
 
 			[CRepr]
 			public struct VTable : IXMLDOMDocument2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument3 self, ref IXMLDOMNode node, out IXMLDOMParseError* errorObj) validateNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMDocument3 self, ref IXMLDOMNode node, int16 deep, out IXMLDOMNode* clone) importNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument3 self, ref IXMLDOMNode node, out IXMLDOMParseError* errorObj) validateNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMDocument3 self, ref IXMLDOMNode node, int16 deep, out IXMLDOMNode* clone) importNode;
 			}
 		}
 		[CRepr]
@@ -1719,24 +1723,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT add(BSTR namespaceURI, VARIANT @var) mut => VT.add(ref this, namespaceURI, @var);
-			public HRESULT get(BSTR namespaceURI, out IXMLDOMNode* schemaNode) mut => VT.get(ref this, namespaceURI, out schemaNode);
-			public HRESULT remove(BSTR namespaceURI) mut => VT.remove(ref this, namespaceURI);
-			public HRESULT get_length(out int32 length) mut => VT.get_length(ref this, out length);
-			public HRESULT get_namespaceURI(int32 index, out BSTR length) mut => VT.get_namespaceURI(ref this, index, out length);
-			public HRESULT addCollection(ref IXMLDOMSchemaCollection otherCollection) mut => VT.addCollection(ref this, ref otherCollection);
-			public HRESULT get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
+			public HResult add(char16* namespaceURI, VARIANT @var) mut => VT.add(ref this, namespaceURI, @var);
+			public HResult get(char16* namespaceURI, out IXMLDOMNode* schemaNode) mut => VT.get(ref this, namespaceURI, out schemaNode);
+			public HResult remove(char16* namespaceURI) mut => VT.remove(ref this, namespaceURI);
+			public HResult get_length(out int32 length) mut => VT.get_length(ref this, out length);
+			public HResult get_namespaceURI(int32 index, out char16* length) mut => VT.get_namespaceURI(ref this, index, out length);
+			public HResult addCollection(ref IXMLDOMSchemaCollection otherCollection) mut => VT.addCollection(ref this, ref otherCollection);
+			public HResult get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, BSTR namespaceURI, VARIANT @var) add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, BSTR namespaceURI, out IXMLDOMNode* schemaNode) get;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, BSTR namespaceURI) remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, out int32 length) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, int32 index, out BSTR length) get_namespaceURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, ref IXMLDOMSchemaCollection otherCollection) addCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection self, out IUnknown* ppUnk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, char16* namespaceURI, VARIANT @var) add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, char16* namespaceURI, out IXMLDOMNode* schemaNode) get;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, char16* namespaceURI) remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, out int32 length) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, int32 index, out char16* length) get_namespaceURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, ref IXMLDOMSchemaCollection otherCollection) addCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection self, out IUnknown* ppUnk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -1746,32 +1750,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_expr(out BSTR expression) mut => VT.get_expr(ref this, out expression);
-			public HRESULT put_expr(BSTR expression) mut => VT.put_expr(ref this, expression);
-			public HRESULT get_context(out IXMLDOMNode* ppNode) mut => VT.get_context(ref this, out ppNode);
-			public HRESULT putref_context(ref IXMLDOMNode pNode) mut => VT.putref_context(ref this, ref pNode);
-			public HRESULT peekNode(out IXMLDOMNode* ppNode) mut => VT.peekNode(ref this, out ppNode);
-			public HRESULT matches(ref IXMLDOMNode pNode, out IXMLDOMNode* ppNode) mut => VT.matches(ref this, ref pNode, out ppNode);
-			public HRESULT removeNext(out IXMLDOMNode* ppNode) mut => VT.removeNext(ref this, out ppNode);
-			public HRESULT removeAll() mut => VT.removeAll(ref this);
-			public HRESULT clone(out IXMLDOMSelection* ppNode) mut => VT.clone(ref this, out ppNode);
-			public HRESULT getProperty(BSTR name, out VARIANT value) mut => VT.getProperty(ref this, name, out value);
-			public HRESULT setProperty(BSTR name, VARIANT value) mut => VT.setProperty(ref this, name, value);
+			public HResult get_expr(out char16* expression) mut => VT.get_expr(ref this, out expression);
+			public HResult put_expr(char16* expression) mut => VT.put_expr(ref this, expression);
+			public HResult get_context(out IXMLDOMNode* ppNode) mut => VT.get_context(ref this, out ppNode);
+			public HResult putref_context(ref IXMLDOMNode pNode) mut => VT.putref_context(ref this, ref pNode);
+			public HResult peekNode(out IXMLDOMNode* ppNode) mut => VT.peekNode(ref this, out ppNode);
+			public HResult matches(ref IXMLDOMNode pNode, out IXMLDOMNode* ppNode) mut => VT.matches(ref this, ref pNode, out ppNode);
+			public HResult removeNext(out IXMLDOMNode* ppNode) mut => VT.removeNext(ref this, out ppNode);
+			public HResult removeAll() mut => VT.removeAll(ref this);
+			public HResult clone(out IXMLDOMSelection* ppNode) mut => VT.clone(ref this, out ppNode);
+			public HResult getProperty(char16* name, out VARIANT value) mut => VT.getProperty(ref this, name, out value);
+			public HResult setProperty(char16* name, VARIANT value) mut => VT.setProperty(ref this, name, value);
 
 			[CRepr]
 			public struct VTable : IXMLDOMNodeList.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, out BSTR expression) get_expr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, BSTR expression) put_expr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, out IXMLDOMNode* ppNode) get_context;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, ref IXMLDOMNode pNode) putref_context;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, out IXMLDOMNode* ppNode) peekNode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, ref IXMLDOMNode pNode, out IXMLDOMNode* ppNode) matches;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, out IXMLDOMNode* ppNode) removeNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self) removeAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, out IXMLDOMSelection* ppNode) clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, BSTR name, out VARIANT value) getProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSelection self, BSTR name, VARIANT value) setProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, out char16* expression) get_expr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, char16* expression) put_expr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, out IXMLDOMNode* ppNode) get_context;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, ref IXMLDOMNode pNode) putref_context;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, out IXMLDOMNode* ppNode) peekNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, ref IXMLDOMNode pNode, out IXMLDOMNode* ppNode) matches;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, out IXMLDOMNode* ppNode) removeNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self) removeAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, out IXMLDOMSelection* ppNode) clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, char16* name, out VARIANT value) getProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSelection self, char16* name, VARIANT value) setProperty;
 			}
 		}
 		[CRepr]
@@ -1781,18 +1785,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_errorXPath(out BSTR xpathexpr) mut => VT.get_errorXPath(ref this, out xpathexpr);
-			public HRESULT get_allErrors(out IXMLDOMParseErrorCollection* allErrors) mut => VT.get_allErrors(ref this, out allErrors);
-			public HRESULT errorParameters(int32 index, out BSTR param1) mut => VT.errorParameters(ref this, index, out param1);
-			public HRESULT get_errorParametersCount(out int32 count) mut => VT.get_errorParametersCount(ref this, out count);
+			public HResult get_errorXPath(out char16* xpathexpr) mut => VT.get_errorXPath(ref this, out xpathexpr);
+			public HResult get_allErrors(out IXMLDOMParseErrorCollection* allErrors) mut => VT.get_allErrors(ref this, out allErrors);
+			public HResult errorParameters(int32 index, out char16* param1) mut => VT.errorParameters(ref this, index, out param1);
+			public HResult get_errorParametersCount(out int32 count) mut => VT.get_errorParametersCount(ref this, out count);
 
 			[CRepr]
 			public struct VTable : IXMLDOMParseError.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError2 self, out BSTR xpathexpr) get_errorXPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError2 self, out IXMLDOMParseErrorCollection* allErrors) get_allErrors;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError2 self, int32 index, out BSTR param1) errorParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseError2 self, out int32 count) get_errorParametersCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError2 self, out char16* xpathexpr) get_errorXPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError2 self, out IXMLDOMParseErrorCollection* allErrors) get_allErrors;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError2 self, int32 index, out char16* param1) errorParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseError2 self, out int32 count) get_errorParametersCount;
 			}
 		}
 		[CRepr]
@@ -1802,20 +1806,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_item(int32 index, out IXMLDOMParseError2* error) mut => VT.get_item(ref this, index, out error);
-			public HRESULT get_length(out int32 length) mut => VT.get_length(ref this, out length);
-			public HRESULT get_next(out IXMLDOMParseError2* error) mut => VT.get_next(ref this, out error);
-			public HRESULT reset() mut => VT.reset(ref this);
-			public HRESULT get__newEnum(out IUnknown* ppunk) mut => VT.get__newEnum(ref this, out ppunk);
+			public HResult get_item(int32 index, out IXMLDOMParseError2* error) mut => VT.get_item(ref this, index, out error);
+			public HResult get_length(out int32 length) mut => VT.get_length(ref this, out length);
+			public HResult get_next(out IXMLDOMParseError2* error) mut => VT.get_next(ref this, out error);
+			public HResult reset() mut => VT.reset(ref this);
+			public HResult get__newEnum(out IUnknown* ppunk) mut => VT.get__newEnum(ref this, out ppunk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseErrorCollection self, int32 index, out IXMLDOMParseError2* error) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseErrorCollection self, out int32 length) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseErrorCollection self, out IXMLDOMParseError2* error) get_next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseErrorCollection self) reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMParseErrorCollection self, out IUnknown* ppunk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseErrorCollection self, int32 index, out IXMLDOMParseError2* error) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseErrorCollection self, out int32 length) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseErrorCollection self, out IXMLDOMParseError2* error) get_next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseErrorCollection self) reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMParseErrorCollection self, out IUnknown* ppunk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -1825,38 +1829,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_input(VARIANT @var) mut => VT.put_input(ref this, @var);
-			public HRESULT get_input(out VARIANT pVar) mut => VT.get_input(ref this, out pVar);
-			public HRESULT get_ownerTemplate(out IXSLTemplate* ppTemplate) mut => VT.get_ownerTemplate(ref this, out ppTemplate);
-			public HRESULT setStartMode(BSTR mode, BSTR namespaceURI) mut => VT.setStartMode(ref this, mode, namespaceURI);
-			public HRESULT get_startMode(out BSTR mode) mut => VT.get_startMode(ref this, out mode);
-			public HRESULT get_startModeURI(out BSTR namespaceURI) mut => VT.get_startModeURI(ref this, out namespaceURI);
-			public HRESULT put_output(VARIANT output) mut => VT.put_output(ref this, output);
-			public HRESULT get_output(out VARIANT pOutput) mut => VT.get_output(ref this, out pOutput);
-			public HRESULT transform(out int16 pDone) mut => VT.transform(ref this, out pDone);
-			public HRESULT reset() mut => VT.reset(ref this);
-			public HRESULT get_readyState(out int32 pReadyState) mut => VT.get_readyState(ref this, out pReadyState);
-			public HRESULT addParameter(BSTR baseName, VARIANT parameter, BSTR namespaceURI) mut => VT.addParameter(ref this, baseName, parameter, namespaceURI);
-			public HRESULT addObject(ref IDispatch obj, BSTR namespaceURI) mut => VT.addObject(ref this, ref obj, namespaceURI);
-			public HRESULT get_stylesheet(out IXMLDOMNode* stylesheet) mut => VT.get_stylesheet(ref this, out stylesheet);
+			public HResult put_input(VARIANT @var) mut => VT.put_input(ref this, @var);
+			public HResult get_input(out VARIANT pVar) mut => VT.get_input(ref this, out pVar);
+			public HResult get_ownerTemplate(out IXSLTemplate* ppTemplate) mut => VT.get_ownerTemplate(ref this, out ppTemplate);
+			public HResult setStartMode(char16* mode, char16* namespaceURI) mut => VT.setStartMode(ref this, mode, namespaceURI);
+			public HResult get_startMode(out char16* mode) mut => VT.get_startMode(ref this, out mode);
+			public HResult get_startModeURI(out char16* namespaceURI) mut => VT.get_startModeURI(ref this, out namespaceURI);
+			public HResult put_output(VARIANT output) mut => VT.put_output(ref this, output);
+			public HResult get_output(out VARIANT pOutput) mut => VT.get_output(ref this, out pOutput);
+			public HResult transform(out int16 pDone) mut => VT.transform(ref this, out pDone);
+			public HResult reset() mut => VT.reset(ref this);
+			public HResult get_readyState(out int32 pReadyState) mut => VT.get_readyState(ref this, out pReadyState);
+			public HResult addParameter(char16* baseName, VARIANT parameter, char16* namespaceURI) mut => VT.addParameter(ref this, baseName, parameter, namespaceURI);
+			public HResult addObject(ref IDispatch obj, char16* namespaceURI) mut => VT.addObject(ref this, ref obj, namespaceURI);
+			public HResult get_stylesheet(out IXMLDOMNode* stylesheet) mut => VT.get_stylesheet(ref this, out stylesheet);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, VARIANT @var) put_input;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out VARIANT pVar) get_input;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out IXSLTemplate* ppTemplate) get_ownerTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, BSTR mode, BSTR namespaceURI) setStartMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out BSTR mode) get_startMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out BSTR namespaceURI) get_startModeURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, VARIANT output) put_output;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out VARIANT pOutput) get_output;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out int16 pDone) transform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self) reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out int32 pReadyState) get_readyState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, BSTR baseName, VARIANT parameter, BSTR namespaceURI) addParameter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, ref IDispatch obj, BSTR namespaceURI) addObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLProcessor self, out IXMLDOMNode* stylesheet) get_stylesheet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, VARIANT @var) put_input;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out VARIANT pVar) get_input;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out IXSLTemplate* ppTemplate) get_ownerTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, char16* mode, char16* namespaceURI) setStartMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out char16* mode) get_startMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out char16* namespaceURI) get_startModeURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, VARIANT output) put_output;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out VARIANT pOutput) get_output;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out int16 pDone) transform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self) reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out int32 pReadyState) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, char16* baseName, VARIANT parameter, char16* namespaceURI) addParameter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, ref IDispatch obj, char16* namespaceURI) addObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLProcessor self, out IXMLDOMNode* stylesheet) get_stylesheet;
 			}
 		}
 		[CRepr]
@@ -1866,16 +1870,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT putref_stylesheet(ref IXMLDOMNode stylesheet) mut => VT.putref_stylesheet(ref this, ref stylesheet);
-			public HRESULT get_stylesheet(out IXMLDOMNode* stylesheet) mut => VT.get_stylesheet(ref this, out stylesheet);
-			public HRESULT createProcessor(out IXSLProcessor* ppProcessor) mut => VT.createProcessor(ref this, out ppProcessor);
+			public HResult putref_stylesheet(ref IXMLDOMNode stylesheet) mut => VT.putref_stylesheet(ref this, ref stylesheet);
+			public HResult get_stylesheet(out IXMLDOMNode* stylesheet) mut => VT.get_stylesheet(ref this, out stylesheet);
+			public HResult createProcessor(out IXSLProcessor* ppProcessor) mut => VT.createProcessor(ref this, out ppProcessor);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLTemplate self, ref IXMLDOMNode stylesheet) putref_stylesheet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLTemplate self, out IXMLDOMNode* stylesheet) get_stylesheet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXSLTemplate self, out IXSLProcessor* ppProcessor) createProcessor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLTemplate self, ref IXMLDOMNode stylesheet) putref_stylesheet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLTemplate self, out IXMLDOMNode* stylesheet) get_stylesheet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXSLTemplate self, out IXSLProcessor* ppProcessor) createProcessor;
 			}
 		}
 		[CRepr]
@@ -1885,38 +1889,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT open(BSTR bstrMethod, BSTR bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) mut => VT.open(ref this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
-			public HRESULT setRequestHeader(BSTR bstrHeader, BSTR bstrValue) mut => VT.setRequestHeader(ref this, bstrHeader, bstrValue);
-			public HRESULT getResponseHeader(BSTR bstrHeader, out BSTR pbstrValue) mut => VT.getResponseHeader(ref this, bstrHeader, out pbstrValue);
-			public HRESULT getAllResponseHeaders(out BSTR pbstrHeaders) mut => VT.getAllResponseHeaders(ref this, out pbstrHeaders);
-			public HRESULT send(VARIANT varBody) mut => VT.send(ref this, varBody);
-			public HRESULT abort() mut => VT.abort(ref this);
-			public HRESULT get_status(out int32 plStatus) mut => VT.get_status(ref this, out plStatus);
-			public HRESULT get_statusText(out BSTR pbstrStatus) mut => VT.get_statusText(ref this, out pbstrStatus);
-			public HRESULT get_responseXML(out IDispatch* ppBody) mut => VT.get_responseXML(ref this, out ppBody);
-			public HRESULT get_responseText(out BSTR pbstrBody) mut => VT.get_responseText(ref this, out pbstrBody);
-			public HRESULT get_responseBody(out VARIANT pvarBody) mut => VT.get_responseBody(ref this, out pvarBody);
-			public HRESULT get_responseStream(out VARIANT pvarBody) mut => VT.get_responseStream(ref this, out pvarBody);
-			public HRESULT get_readyState(out int32 plState) mut => VT.get_readyState(ref this, out plState);
-			public HRESULT put_onreadystatechange(ref IDispatch pReadyStateSink) mut => VT.put_onreadystatechange(ref this, ref pReadyStateSink);
+			public HResult open(char16* bstrMethod, char16* bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) mut => VT.open(ref this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword);
+			public HResult setRequestHeader(char16* bstrHeader, char16* bstrValue) mut => VT.setRequestHeader(ref this, bstrHeader, bstrValue);
+			public HResult getResponseHeader(char16* bstrHeader, out char16* pbstrValue) mut => VT.getResponseHeader(ref this, bstrHeader, out pbstrValue);
+			public HResult getAllResponseHeaders(out char16* pbstrHeaders) mut => VT.getAllResponseHeaders(ref this, out pbstrHeaders);
+			public HResult send(VARIANT varBody) mut => VT.send(ref this, varBody);
+			public HResult abort() mut => VT.abort(ref this);
+			public HResult get_status(out int32 plStatus) mut => VT.get_status(ref this, out plStatus);
+			public HResult get_statusText(out char16* pbstrStatus) mut => VT.get_statusText(ref this, out pbstrStatus);
+			public HResult get_responseXML(out IDispatch* ppBody) mut => VT.get_responseXML(ref this, out ppBody);
+			public HResult get_responseText(out char16* pbstrBody) mut => VT.get_responseText(ref this, out pbstrBody);
+			public HResult get_responseBody(out VARIANT pvarBody) mut => VT.get_responseBody(ref this, out pvarBody);
+			public HResult get_responseStream(out VARIANT pvarBody) mut => VT.get_responseStream(ref this, out pvarBody);
+			public HResult get_readyState(out int32 plState) mut => VT.get_readyState(ref this, out plState);
+			public HResult put_onreadystatechange(ref IDispatch pReadyStateSink) mut => VT.put_onreadystatechange(ref this, ref pReadyStateSink);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, BSTR bstrMethod, BSTR bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, BSTR bstrHeader, BSTR bstrValue) setRequestHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, BSTR bstrHeader, out BSTR pbstrValue) getResponseHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out BSTR pbstrHeaders) getAllResponseHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, VARIANT varBody) send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self) abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out int32 plStatus) get_status;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out BSTR pbstrStatus) get_statusText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out IDispatch* ppBody) get_responseXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out BSTR pbstrBody) get_responseText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out VARIANT pvarBody) get_responseBody;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out VARIANT pvarBody) get_responseStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, out int32 plState) get_readyState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest self, ref IDispatch pReadyStateSink) put_onreadystatechange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, char16* bstrMethod, char16* bstrUrl, VARIANT varAsync, VARIANT bstrUser, VARIANT bstrPassword) open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, char16* bstrHeader, char16* bstrValue) setRequestHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, char16* bstrHeader, out char16* pbstrValue) getResponseHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out char16* pbstrHeaders) getAllResponseHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, VARIANT varBody) send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self) abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out int32 plStatus) get_status;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out char16* pbstrStatus) get_statusText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out IDispatch* ppBody) get_responseXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out char16* pbstrBody) get_responseText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out VARIANT pvarBody) get_responseBody;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out VARIANT pvarBody) get_responseStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, out int32 plState) get_readyState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest self, ref IDispatch pReadyStateSink) put_onreadystatechange;
 			}
 		}
 		[CRepr]
@@ -1926,18 +1930,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT setTimeouts(int32 resolveTimeout, int32 connectTimeout, int32 sendTimeout, int32 receiveTimeout) mut => VT.setTimeouts(ref this, resolveTimeout, connectTimeout, sendTimeout, receiveTimeout);
-			public HRESULT waitForResponse(VARIANT timeoutInSeconds, out int16 isSuccessful) mut => VT.waitForResponse(ref this, timeoutInSeconds, out isSuccessful);
-			public HRESULT getOption(SERVERXMLHTTP_OPTION option, out VARIANT value) mut => VT.getOption(ref this, option, out value);
-			public HRESULT setOption(SERVERXMLHTTP_OPTION option, VARIANT value) mut => VT.setOption(ref this, option, value);
+			public HResult setTimeouts(int32 resolveTimeout, int32 connectTimeout, int32 sendTimeout, int32 receiveTimeout) mut => VT.setTimeouts(ref this, resolveTimeout, connectTimeout, sendTimeout, receiveTimeout);
+			public HResult waitForResponse(VARIANT timeoutInSeconds, out int16 isSuccessful) mut => VT.waitForResponse(ref this, timeoutInSeconds, out isSuccessful);
+			public HResult getOption(SERVERXMLHTTP_OPTION option, out VARIANT value) mut => VT.getOption(ref this, option, out value);
+			public HResult setOption(SERVERXMLHTTP_OPTION option, VARIANT value) mut => VT.setOption(ref this, option, value);
 
 			[CRepr]
 			public struct VTable : IXMLHTTPRequest.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerXMLHTTPRequest self, int32 resolveTimeout, int32 connectTimeout, int32 sendTimeout, int32 receiveTimeout) setTimeouts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerXMLHTTPRequest self, VARIANT timeoutInSeconds, out int16 isSuccessful) waitForResponse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerXMLHTTPRequest self, SERVERXMLHTTP_OPTION option, out VARIANT value) getOption;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerXMLHTTPRequest self, SERVERXMLHTTP_OPTION option, VARIANT value) setOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerXMLHTTPRequest self, int32 resolveTimeout, int32 connectTimeout, int32 sendTimeout, int32 receiveTimeout) setTimeouts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerXMLHTTPRequest self, VARIANT timeoutInSeconds, out int16 isSuccessful) waitForResponse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerXMLHTTPRequest self, SERVERXMLHTTP_OPTION option, out VARIANT value) getOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerXMLHTTPRequest self, SERVERXMLHTTP_OPTION option, VARIANT value) setOption;
 			}
 		}
 		[CRepr]
@@ -1947,14 +1951,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT setProxy(SXH_PROXY_SETTING proxySetting, VARIANT varProxyServer, VARIANT varBypassList) mut => VT.setProxy(ref this, proxySetting, varProxyServer, varBypassList);
-			public HRESULT setProxyCredentials(BSTR bstrUserName, BSTR bstrPassword) mut => VT.setProxyCredentials(ref this, bstrUserName, bstrPassword);
+			public HResult setProxy(SXH_PROXY_SETTING proxySetting, VARIANT varProxyServer, VARIANT varBypassList) mut => VT.setProxy(ref this, proxySetting, varProxyServer, varBypassList);
+			public HResult setProxyCredentials(char16* bstrUserName, char16* bstrPassword) mut => VT.setProxyCredentials(ref this, bstrUserName, bstrPassword);
 
 			[CRepr]
 			public struct VTable : IServerXMLHTTPRequest.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerXMLHTTPRequest2 self, SXH_PROXY_SETTING proxySetting, VARIANT varProxyServer, VARIANT varBypassList) setProxy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerXMLHTTPRequest2 self, BSTR bstrUserName, BSTR bstrPassword) setProxyCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerXMLHTTPRequest2 self, SXH_PROXY_SETTING proxySetting, VARIANT varProxyServer, VARIANT varBypassList) setProxy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerXMLHTTPRequest2 self, char16* bstrUserName, char16* bstrPassword) setProxyCredentials;
 			}
 		}
 		[CRepr]
@@ -1964,46 +1968,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getFeature(PWSTR pwchName, out int16 pvfValue) mut => VT.getFeature(ref this, pwchName, out pvfValue);
-			public HRESULT putFeature(PWSTR pwchName, int16 vfValue) mut => VT.putFeature(ref this, pwchName, vfValue);
-			public HRESULT getProperty(PWSTR pwchName, out VARIANT pvarValue) mut => VT.getProperty(ref this, pwchName, out pvarValue);
-			public HRESULT putProperty(PWSTR pwchName, VARIANT varValue) mut => VT.putProperty(ref this, pwchName, varValue);
-			public HRESULT getEntityResolver(out ISAXEntityResolver* ppResolver) mut => VT.getEntityResolver(ref this, out ppResolver);
-			public HRESULT putEntityResolver(ref ISAXEntityResolver pResolver) mut => VT.putEntityResolver(ref this, ref pResolver);
-			public HRESULT getContentHandler(out ISAXContentHandler* ppHandler) mut => VT.getContentHandler(ref this, out ppHandler);
-			public HRESULT putContentHandler(ref ISAXContentHandler pHandler) mut => VT.putContentHandler(ref this, ref pHandler);
-			public HRESULT getDTDHandler(out ISAXDTDHandler* ppHandler) mut => VT.getDTDHandler(ref this, out ppHandler);
-			public HRESULT putDTDHandler(ref ISAXDTDHandler pHandler) mut => VT.putDTDHandler(ref this, ref pHandler);
-			public HRESULT getErrorHandler(out ISAXErrorHandler* ppHandler) mut => VT.getErrorHandler(ref this, out ppHandler);
-			public HRESULT putErrorHandler(ref ISAXErrorHandler pHandler) mut => VT.putErrorHandler(ref this, ref pHandler);
-			public HRESULT getBaseURL(out uint16* ppwchBaseUrl) mut => VT.getBaseURL(ref this, out ppwchBaseUrl);
-			public HRESULT putBaseURL(PWSTR pwchBaseUrl) mut => VT.putBaseURL(ref this, pwchBaseUrl);
-			public HRESULT getSecureBaseURL(out uint16* ppwchSecureBaseUrl) mut => VT.getSecureBaseURL(ref this, out ppwchSecureBaseUrl);
-			public HRESULT putSecureBaseURL(PWSTR pwchSecureBaseUrl) mut => VT.putSecureBaseURL(ref this, pwchSecureBaseUrl);
-			public HRESULT parse(VARIANT varInput) mut => VT.parse(ref this, varInput);
-			public HRESULT parseURL(PWSTR pwchUrl) mut => VT.parseURL(ref this, pwchUrl);
+			public HResult getFeature(char16* pwchName, out int16 pvfValue) mut => VT.getFeature(ref this, pwchName, out pvfValue);
+			public HResult putFeature(char16* pwchName, int16 vfValue) mut => VT.putFeature(ref this, pwchName, vfValue);
+			public HResult getProperty(char16* pwchName, out VARIANT pvarValue) mut => VT.getProperty(ref this, pwchName, out pvarValue);
+			public HResult putProperty(char16* pwchName, VARIANT varValue) mut => VT.putProperty(ref this, pwchName, varValue);
+			public HResult getEntityResolver(out ISAXEntityResolver* ppResolver) mut => VT.getEntityResolver(ref this, out ppResolver);
+			public HResult putEntityResolver(ref ISAXEntityResolver pResolver) mut => VT.putEntityResolver(ref this, ref pResolver);
+			public HResult getContentHandler(out ISAXContentHandler* ppHandler) mut => VT.getContentHandler(ref this, out ppHandler);
+			public HResult putContentHandler(ref ISAXContentHandler pHandler) mut => VT.putContentHandler(ref this, ref pHandler);
+			public HResult getDTDHandler(out ISAXDTDHandler* ppHandler) mut => VT.getDTDHandler(ref this, out ppHandler);
+			public HResult putDTDHandler(ref ISAXDTDHandler pHandler) mut => VT.putDTDHandler(ref this, ref pHandler);
+			public HResult getErrorHandler(out ISAXErrorHandler* ppHandler) mut => VT.getErrorHandler(ref this, out ppHandler);
+			public HResult putErrorHandler(ref ISAXErrorHandler pHandler) mut => VT.putErrorHandler(ref this, ref pHandler);
+			public HResult getBaseURL(out uint16* ppwchBaseUrl) mut => VT.getBaseURL(ref this, out ppwchBaseUrl);
+			public HResult putBaseURL(char16* pwchBaseUrl) mut => VT.putBaseURL(ref this, pwchBaseUrl);
+			public HResult getSecureBaseURL(out uint16* ppwchSecureBaseUrl) mut => VT.getSecureBaseURL(ref this, out ppwchSecureBaseUrl);
+			public HResult putSecureBaseURL(char16* pwchSecureBaseUrl) mut => VT.putSecureBaseURL(ref this, pwchSecureBaseUrl);
+			public HResult parse(VARIANT varInput) mut => VT.parse(ref this, varInput);
+			public HResult parseURL(char16* pwchUrl) mut => VT.parseURL(ref this, pwchUrl);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchName, out int16 pvfValue) getFeature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchName, int16 vfValue) putFeature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchName, out VARIANT pvarValue) getProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchName, VARIANT varValue) putProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, out ISAXEntityResolver* ppResolver) getEntityResolver;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, ref ISAXEntityResolver pResolver) putEntityResolver;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, out ISAXContentHandler* ppHandler) getContentHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, ref ISAXContentHandler pHandler) putContentHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, out ISAXDTDHandler* ppHandler) getDTDHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, ref ISAXDTDHandler pHandler) putDTDHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, out ISAXErrorHandler* ppHandler) getErrorHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, ref ISAXErrorHandler pHandler) putErrorHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, out uint16* ppwchBaseUrl) getBaseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchBaseUrl) putBaseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, out uint16* ppwchSecureBaseUrl) getSecureBaseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchSecureBaseUrl) putSecureBaseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, VARIANT varInput) parse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLReader self, PWSTR pwchUrl) parseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchName, out int16 pvfValue) getFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchName, int16 vfValue) putFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchName, out VARIANT pvarValue) getProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchName, VARIANT varValue) putProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, out ISAXEntityResolver* ppResolver) getEntityResolver;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, ref ISAXEntityResolver pResolver) putEntityResolver;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, out ISAXContentHandler* ppHandler) getContentHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, ref ISAXContentHandler pHandler) putContentHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, out ISAXDTDHandler* ppHandler) getDTDHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, ref ISAXDTDHandler pHandler) putDTDHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, out ISAXErrorHandler* ppHandler) getErrorHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, ref ISAXErrorHandler pHandler) putErrorHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, out uint16* ppwchBaseUrl) getBaseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchBaseUrl) putBaseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, out uint16* ppwchSecureBaseUrl) getSecureBaseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchSecureBaseUrl) putSecureBaseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, VARIANT varInput) parse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLReader self, char16* pwchUrl) parseURL;
 			}
 		}
 		[CRepr]
@@ -2013,14 +2017,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getParent(out ISAXXMLReader* ppReader) mut => VT.getParent(ref this, out ppReader);
-			public HRESULT putParent(ref ISAXXMLReader pReader) mut => VT.putParent(ref this, ref pReader);
+			public HResult getParent(out ISAXXMLReader* ppReader) mut => VT.getParent(ref this, out ppReader);
+			public HResult putParent(ref ISAXXMLReader pReader) mut => VT.putParent(ref this, ref pReader);
 
 			[CRepr]
 			public struct VTable : ISAXXMLReader.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLFilter self, out ISAXXMLReader* ppReader) getParent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXXMLFilter self, ref ISAXXMLReader pReader) putParent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLFilter self, out ISAXXMLReader* ppReader) getParent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXXMLFilter self, ref ISAXXMLReader pReader) putParent;
 			}
 		}
 		[CRepr]
@@ -2030,18 +2034,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getColumnNumber(out int32 pnColumn) mut => VT.getColumnNumber(ref this, out pnColumn);
-			public HRESULT getLineNumber(out int32 pnLine) mut => VT.getLineNumber(ref this, out pnLine);
-			public HRESULT getPublicId(out uint16* ppwchPublicId) mut => VT.getPublicId(ref this, out ppwchPublicId);
-			public HRESULT getSystemId(out uint16* ppwchSystemId) mut => VT.getSystemId(ref this, out ppwchSystemId);
+			public HResult getColumnNumber(out int32 pnColumn) mut => VT.getColumnNumber(ref this, out pnColumn);
+			public HResult getLineNumber(out int32 pnLine) mut => VT.getLineNumber(ref this, out pnLine);
+			public HResult getPublicId(out uint16* ppwchPublicId) mut => VT.getPublicId(ref this, out ppwchPublicId);
+			public HResult getSystemId(out uint16* ppwchSystemId) mut => VT.getSystemId(ref this, out ppwchSystemId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLocator self, out int32 pnColumn) getColumnNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLocator self, out int32 pnLine) getLineNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLocator self, out uint16* ppwchPublicId) getPublicId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLocator self, out uint16* ppwchSystemId) getSystemId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLocator self, out int32 pnColumn) getColumnNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLocator self, out int32 pnLine) getLineNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLocator self, out uint16* ppwchPublicId) getPublicId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLocator self, out uint16* ppwchSystemId) getSystemId;
 			}
 		}
 		[CRepr]
@@ -2051,12 +2055,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT resolveEntity(PWSTR pwchPublicId, PWSTR pwchSystemId, out VARIANT pvarInput) mut => VT.resolveEntity(ref this, pwchPublicId, pwchSystemId, out pvarInput);
+			public HResult resolveEntity(char16* pwchPublicId, char16* pwchSystemId, out VARIANT pvarInput) mut => VT.resolveEntity(ref this, pwchPublicId, pwchSystemId, out pvarInput);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXEntityResolver self, PWSTR pwchPublicId, PWSTR pwchSystemId, out VARIANT pvarInput) resolveEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXEntityResolver self, char16* pwchPublicId, char16* pwchSystemId, out VARIANT pvarInput) resolveEntity;
 			}
 		}
 		[CRepr]
@@ -2066,32 +2070,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT putDocumentLocator(ref ISAXLocator pLocator) mut => VT.putDocumentLocator(ref this, ref pLocator);
-			public HRESULT startDocument() mut => VT.startDocument(ref this);
-			public HRESULT endDocument() mut => VT.endDocument(ref this);
-			public HRESULT startPrefixMapping(PWSTR pwchPrefix, int32 cchPrefix, PWSTR pwchUri, int32 cchUri) mut => VT.startPrefixMapping(ref this, pwchPrefix, cchPrefix, pwchUri, cchUri);
-			public HRESULT endPrefixMapping(PWSTR pwchPrefix, int32 cchPrefix) mut => VT.endPrefixMapping(ref this, pwchPrefix, cchPrefix);
-			public HRESULT startElement(PWSTR pwchNamespaceUri, int32 cchNamespaceUri, PWSTR pwchLocalName, int32 cchLocalName, PWSTR pwchQName, int32 cchQName, ref ISAXAttributes pAttributes) mut => VT.startElement(ref this, pwchNamespaceUri, cchNamespaceUri, pwchLocalName, cchLocalName, pwchQName, cchQName, ref pAttributes);
-			public HRESULT endElement(PWSTR pwchNamespaceUri, int32 cchNamespaceUri, PWSTR pwchLocalName, int32 cchLocalName, PWSTR pwchQName, int32 cchQName) mut => VT.endElement(ref this, pwchNamespaceUri, cchNamespaceUri, pwchLocalName, cchLocalName, pwchQName, cchQName);
-			public HRESULT characters(PWSTR pwchChars, int32 cchChars) mut => VT.characters(ref this, pwchChars, cchChars);
-			public HRESULT ignorableWhitespace(PWSTR pwchChars, int32 cchChars) mut => VT.ignorableWhitespace(ref this, pwchChars, cchChars);
-			public HRESULT processingInstruction(PWSTR pwchTarget, int32 cchTarget, PWSTR pwchData, int32 cchData) mut => VT.processingInstruction(ref this, pwchTarget, cchTarget, pwchData, cchData);
-			public HRESULT skippedEntity(PWSTR pwchName, int32 cchName) mut => VT.skippedEntity(ref this, pwchName, cchName);
+			public HResult putDocumentLocator(ref ISAXLocator pLocator) mut => VT.putDocumentLocator(ref this, ref pLocator);
+			public HResult startDocument() mut => VT.startDocument(ref this);
+			public HResult endDocument() mut => VT.endDocument(ref this);
+			public HResult startPrefixMapping(char16* pwchPrefix, int32 cchPrefix, char16* pwchUri, int32 cchUri) mut => VT.startPrefixMapping(ref this, pwchPrefix, cchPrefix, pwchUri, cchUri);
+			public HResult endPrefixMapping(char16* pwchPrefix, int32 cchPrefix) mut => VT.endPrefixMapping(ref this, pwchPrefix, cchPrefix);
+			public HResult startElement(char16* pwchNamespaceUri, int32 cchNamespaceUri, char16* pwchLocalName, int32 cchLocalName, char16* pwchQName, int32 cchQName, ref ISAXAttributes pAttributes) mut => VT.startElement(ref this, pwchNamespaceUri, cchNamespaceUri, pwchLocalName, cchLocalName, pwchQName, cchQName, ref pAttributes);
+			public HResult endElement(char16* pwchNamespaceUri, int32 cchNamespaceUri, char16* pwchLocalName, int32 cchLocalName, char16* pwchQName, int32 cchQName) mut => VT.endElement(ref this, pwchNamespaceUri, cchNamespaceUri, pwchLocalName, cchLocalName, pwchQName, cchQName);
+			public HResult characters(char16* pwchChars, int32 cchChars) mut => VT.characters(ref this, pwchChars, cchChars);
+			public HResult ignorableWhitespace(char16* pwchChars, int32 cchChars) mut => VT.ignorableWhitespace(ref this, pwchChars, cchChars);
+			public HResult processingInstruction(char16* pwchTarget, int32 cchTarget, char16* pwchData, int32 cchData) mut => VT.processingInstruction(ref this, pwchTarget, cchTarget, pwchData, cchData);
+			public HResult skippedEntity(char16* pwchName, int32 cchName) mut => VT.skippedEntity(ref this, pwchName, cchName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, ref ISAXLocator pLocator) putDocumentLocator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self) startDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self) endDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchPrefix, int32 cchPrefix, PWSTR pwchUri, int32 cchUri) startPrefixMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchPrefix, int32 cchPrefix) endPrefixMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchNamespaceUri, int32 cchNamespaceUri, PWSTR pwchLocalName, int32 cchLocalName, PWSTR pwchQName, int32 cchQName, ref ISAXAttributes pAttributes) startElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchNamespaceUri, int32 cchNamespaceUri, PWSTR pwchLocalName, int32 cchLocalName, PWSTR pwchQName, int32 cchQName) endElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchChars, int32 cchChars) characters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchChars, int32 cchChars) ignorableWhitespace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchTarget, int32 cchTarget, PWSTR pwchData, int32 cchData) processingInstruction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXContentHandler self, PWSTR pwchName, int32 cchName) skippedEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, ref ISAXLocator pLocator) putDocumentLocator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self) startDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self) endDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchPrefix, int32 cchPrefix, char16* pwchUri, int32 cchUri) startPrefixMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchPrefix, int32 cchPrefix) endPrefixMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchNamespaceUri, int32 cchNamespaceUri, char16* pwchLocalName, int32 cchLocalName, char16* pwchQName, int32 cchQName, ref ISAXAttributes pAttributes) startElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchNamespaceUri, int32 cchNamespaceUri, char16* pwchLocalName, int32 cchLocalName, char16* pwchQName, int32 cchQName) endElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchChars, int32 cchChars) characters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchChars, int32 cchChars) ignorableWhitespace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchTarget, int32 cchTarget, char16* pwchData, int32 cchData) processingInstruction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXContentHandler self, char16* pwchName, int32 cchName) skippedEntity;
 			}
 		}
 		[CRepr]
@@ -2101,14 +2105,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT notationDecl(PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId) mut => VT.notationDecl(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId);
-			public HRESULT unparsedEntityDecl(PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId, PWSTR pwchNotationName, int32 cchNotationName) mut => VT.unparsedEntityDecl(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId, pwchNotationName, cchNotationName);
+			public HResult notationDecl(char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId) mut => VT.notationDecl(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId);
+			public HResult unparsedEntityDecl(char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId, char16* pwchNotationName, int32 cchNotationName) mut => VT.unparsedEntityDecl(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId, pwchNotationName, cchNotationName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXDTDHandler self, PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId) notationDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXDTDHandler self, PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId, PWSTR pwchNotationName, int32 cchNotationName) unparsedEntityDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXDTDHandler self, char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId) notationDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXDTDHandler self, char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId, char16* pwchNotationName, int32 cchNotationName) unparsedEntityDecl;
 			}
 		}
 		[CRepr]
@@ -2118,16 +2122,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT error(ref ISAXLocator pLocator, PWSTR pwchErrorMessage, HRESULT hrErrorCode) mut => VT.error(ref this, ref pLocator, pwchErrorMessage, hrErrorCode);
-			public HRESULT fatalError(ref ISAXLocator pLocator, PWSTR pwchErrorMessage, HRESULT hrErrorCode) mut => VT.fatalError(ref this, ref pLocator, pwchErrorMessage, hrErrorCode);
-			public HRESULT ignorableWarning(ref ISAXLocator pLocator, PWSTR pwchErrorMessage, HRESULT hrErrorCode) mut => VT.ignorableWarning(ref this, ref pLocator, pwchErrorMessage, hrErrorCode);
+			public HResult error(ref ISAXLocator pLocator, char16* pwchErrorMessage, HResult hrErrorCode) mut => VT.error(ref this, ref pLocator, pwchErrorMessage, hrErrorCode);
+			public HResult fatalError(ref ISAXLocator pLocator, char16* pwchErrorMessage, HResult hrErrorCode) mut => VT.fatalError(ref this, ref pLocator, pwchErrorMessage, hrErrorCode);
+			public HResult ignorableWarning(ref ISAXLocator pLocator, char16* pwchErrorMessage, HResult hrErrorCode) mut => VT.ignorableWarning(ref this, ref pLocator, pwchErrorMessage, hrErrorCode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXErrorHandler self, ref ISAXLocator pLocator, PWSTR pwchErrorMessage, HRESULT hrErrorCode) error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXErrorHandler self, ref ISAXLocator pLocator, PWSTR pwchErrorMessage, HRESULT hrErrorCode) fatalError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXErrorHandler self, ref ISAXLocator pLocator, PWSTR pwchErrorMessage, HRESULT hrErrorCode) ignorableWarning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXErrorHandler self, ref ISAXLocator pLocator, char16* pwchErrorMessage, HResult hrErrorCode) error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXErrorHandler self, ref ISAXLocator pLocator, char16* pwchErrorMessage, HResult hrErrorCode) fatalError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXErrorHandler self, ref ISAXLocator pLocator, char16* pwchErrorMessage, HResult hrErrorCode) ignorableWarning;
 			}
 		}
 		[CRepr]
@@ -2137,24 +2141,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT startDTD(PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId) mut => VT.startDTD(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId);
-			public HRESULT endDTD() mut => VT.endDTD(ref this);
-			public HRESULT startEntity(PWSTR pwchName, int32 cchName) mut => VT.startEntity(ref this, pwchName, cchName);
-			public HRESULT endEntity(PWSTR pwchName, int32 cchName) mut => VT.endEntity(ref this, pwchName, cchName);
-			public HRESULT startCDATA() mut => VT.startCDATA(ref this);
-			public HRESULT endCDATA() mut => VT.endCDATA(ref this);
-			public HRESULT comment(PWSTR pwchChars, int32 cchChars) mut => VT.comment(ref this, pwchChars, cchChars);
+			public HResult startDTD(char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId) mut => VT.startDTD(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId);
+			public HResult endDTD() mut => VT.endDTD(ref this);
+			public HResult startEntity(char16* pwchName, int32 cchName) mut => VT.startEntity(ref this, pwchName, cchName);
+			public HResult endEntity(char16* pwchName, int32 cchName) mut => VT.endEntity(ref this, pwchName, cchName);
+			public HResult startCDATA() mut => VT.startCDATA(ref this);
+			public HResult endCDATA() mut => VT.endCDATA(ref this);
+			public HResult comment(char16* pwchChars, int32 cchChars) mut => VT.comment(ref this, pwchChars, cchChars);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self, PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId) startDTD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self) endDTD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self, PWSTR pwchName, int32 cchName) startEntity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self, PWSTR pwchName, int32 cchName) endEntity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self) startCDATA;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self) endCDATA;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXLexicalHandler self, PWSTR pwchChars, int32 cchChars) comment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self, char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId) startDTD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self) endDTD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self, char16* pwchName, int32 cchName) startEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self, char16* pwchName, int32 cchName) endEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self) startCDATA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self) endCDATA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXLexicalHandler self, char16* pwchChars, int32 cchChars) comment;
 			}
 		}
 		[CRepr]
@@ -2164,18 +2168,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT elementDecl(PWSTR pwchName, int32 cchName, PWSTR pwchModel, int32 cchModel) mut => VT.elementDecl(ref this, pwchName, cchName, pwchModel, cchModel);
-			public HRESULT attributeDecl(PWSTR pwchElementName, int32 cchElementName, PWSTR pwchAttributeName, int32 cchAttributeName, PWSTR pwchType, int32 cchType, PWSTR pwchValueDefault, int32 cchValueDefault, PWSTR pwchValue, int32 cchValue) mut => VT.attributeDecl(ref this, pwchElementName, cchElementName, pwchAttributeName, cchAttributeName, pwchType, cchType, pwchValueDefault, cchValueDefault, pwchValue, cchValue);
-			public HRESULT internalEntityDecl(PWSTR pwchName, int32 cchName, PWSTR pwchValue, int32 cchValue) mut => VT.internalEntityDecl(ref this, pwchName, cchName, pwchValue, cchValue);
-			public HRESULT externalEntityDecl(PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId) mut => VT.externalEntityDecl(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId);
+			public HResult elementDecl(char16* pwchName, int32 cchName, char16* pwchModel, int32 cchModel) mut => VT.elementDecl(ref this, pwchName, cchName, pwchModel, cchModel);
+			public HResult attributeDecl(char16* pwchElementName, int32 cchElementName, char16* pwchAttributeName, int32 cchAttributeName, char16* pwchType, int32 cchType, char16* pwchValueDefault, int32 cchValueDefault, char16* pwchValue, int32 cchValue) mut => VT.attributeDecl(ref this, pwchElementName, cchElementName, pwchAttributeName, cchAttributeName, pwchType, cchType, pwchValueDefault, cchValueDefault, pwchValue, cchValue);
+			public HResult internalEntityDecl(char16* pwchName, int32 cchName, char16* pwchValue, int32 cchValue) mut => VT.internalEntityDecl(ref this, pwchName, cchName, pwchValue, cchValue);
+			public HResult externalEntityDecl(char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId) mut => VT.externalEntityDecl(ref this, pwchName, cchName, pwchPublicId, cchPublicId, pwchSystemId, cchSystemId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXDeclHandler self, PWSTR pwchName, int32 cchName, PWSTR pwchModel, int32 cchModel) elementDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXDeclHandler self, PWSTR pwchElementName, int32 cchElementName, PWSTR pwchAttributeName, int32 cchAttributeName, PWSTR pwchType, int32 cchType, PWSTR pwchValueDefault, int32 cchValueDefault, PWSTR pwchValue, int32 cchValue) attributeDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXDeclHandler self, PWSTR pwchName, int32 cchName, PWSTR pwchValue, int32 cchValue) internalEntityDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXDeclHandler self, PWSTR pwchName, int32 cchName, PWSTR pwchPublicId, int32 cchPublicId, PWSTR pwchSystemId, int32 cchSystemId) externalEntityDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXDeclHandler self, char16* pwchName, int32 cchName, char16* pwchModel, int32 cchModel) elementDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXDeclHandler self, char16* pwchElementName, int32 cchElementName, char16* pwchAttributeName, int32 cchAttributeName, char16* pwchType, int32 cchType, char16* pwchValueDefault, int32 cchValueDefault, char16* pwchValue, int32 cchValue) attributeDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXDeclHandler self, char16* pwchName, int32 cchName, char16* pwchValue, int32 cchValue) internalEntityDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXDeclHandler self, char16* pwchName, int32 cchName, char16* pwchPublicId, int32 cchPublicId, char16* pwchSystemId, int32 cchSystemId) externalEntityDecl;
 			}
 		}
 		[CRepr]
@@ -2185,36 +2189,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getLength(out int32 pnLength) mut => VT.getLength(ref this, out pnLength);
-			public HRESULT getURI(int32 nIndex, out uint16* ppwchUri, out int32 pcchUri) mut => VT.getURI(ref this, nIndex, out ppwchUri, out pcchUri);
-			public HRESULT getLocalName(int32 nIndex, out uint16* ppwchLocalName, out int32 pcchLocalName) mut => VT.getLocalName(ref this, nIndex, out ppwchLocalName, out pcchLocalName);
-			public HRESULT getQName(int32 nIndex, out uint16* ppwchQName, out int32 pcchQName) mut => VT.getQName(ref this, nIndex, out ppwchQName, out pcchQName);
-			public HRESULT getName(int32 nIndex, out uint16* ppwchUri, out int32 pcchUri, out uint16* ppwchLocalName, out int32 pcchLocalName, out uint16* ppwchQName, out int32 pcchQName) mut => VT.getName(ref this, nIndex, out ppwchUri, out pcchUri, out ppwchLocalName, out pcchLocalName, out ppwchQName, out pcchQName);
-			public HRESULT getIndexFromName(PWSTR pwchUri, int32 cchUri, PWSTR pwchLocalName, int32 cchLocalName, out int32 pnIndex) mut => VT.getIndexFromName(ref this, pwchUri, cchUri, pwchLocalName, cchLocalName, out pnIndex);
-			public HRESULT getIndexFromQName(PWSTR pwchQName, int32 cchQName, out int32 pnIndex) mut => VT.getIndexFromQName(ref this, pwchQName, cchQName, out pnIndex);
-			public HRESULT getType(int32 nIndex, out uint16* ppwchType, out int32 pcchType) mut => VT.getType(ref this, nIndex, out ppwchType, out pcchType);
-			public HRESULT getTypeFromName(PWSTR pwchUri, int32 cchUri, PWSTR pwchLocalName, int32 cchLocalName, out uint16* ppwchType, out int32 pcchType) mut => VT.getTypeFromName(ref this, pwchUri, cchUri, pwchLocalName, cchLocalName, out ppwchType, out pcchType);
-			public HRESULT getTypeFromQName(PWSTR pwchQName, int32 cchQName, out uint16* ppwchType, out int32 pcchType) mut => VT.getTypeFromQName(ref this, pwchQName, cchQName, out ppwchType, out pcchType);
-			public HRESULT getValue(int32 nIndex, out uint16* ppwchValue, out int32 pcchValue) mut => VT.getValue(ref this, nIndex, out ppwchValue, out pcchValue);
-			public HRESULT getValueFromName(PWSTR pwchUri, int32 cchUri, PWSTR pwchLocalName, int32 cchLocalName, out uint16* ppwchValue, out int32 pcchValue) mut => VT.getValueFromName(ref this, pwchUri, cchUri, pwchLocalName, cchLocalName, out ppwchValue, out pcchValue);
-			public HRESULT getValueFromQName(PWSTR pwchQName, int32 cchQName, out uint16* ppwchValue, out int32 pcchValue) mut => VT.getValueFromQName(ref this, pwchQName, cchQName, out ppwchValue, out pcchValue);
+			public HResult getLength(out int32 pnLength) mut => VT.getLength(ref this, out pnLength);
+			public HResult getURI(int32 nIndex, out uint16* ppwchUri, out int32 pcchUri) mut => VT.getURI(ref this, nIndex, out ppwchUri, out pcchUri);
+			public HResult getLocalName(int32 nIndex, out uint16* ppwchLocalName, out int32 pcchLocalName) mut => VT.getLocalName(ref this, nIndex, out ppwchLocalName, out pcchLocalName);
+			public HResult getQName(int32 nIndex, out uint16* ppwchQName, out int32 pcchQName) mut => VT.getQName(ref this, nIndex, out ppwchQName, out pcchQName);
+			public HResult getName(int32 nIndex, out uint16* ppwchUri, out int32 pcchUri, out uint16* ppwchLocalName, out int32 pcchLocalName, out uint16* ppwchQName, out int32 pcchQName) mut => VT.getName(ref this, nIndex, out ppwchUri, out pcchUri, out ppwchLocalName, out pcchLocalName, out ppwchQName, out pcchQName);
+			public HResult getIndexFromName(char16* pwchUri, int32 cchUri, char16* pwchLocalName, int32 cchLocalName, out int32 pnIndex) mut => VT.getIndexFromName(ref this, pwchUri, cchUri, pwchLocalName, cchLocalName, out pnIndex);
+			public HResult getIndexFromQName(char16* pwchQName, int32 cchQName, out int32 pnIndex) mut => VT.getIndexFromQName(ref this, pwchQName, cchQName, out pnIndex);
+			public HResult getType(int32 nIndex, out uint16* ppwchType, out int32 pcchType) mut => VT.getType(ref this, nIndex, out ppwchType, out pcchType);
+			public HResult getTypeFromName(char16* pwchUri, int32 cchUri, char16* pwchLocalName, int32 cchLocalName, out uint16* ppwchType, out int32 pcchType) mut => VT.getTypeFromName(ref this, pwchUri, cchUri, pwchLocalName, cchLocalName, out ppwchType, out pcchType);
+			public HResult getTypeFromQName(char16* pwchQName, int32 cchQName, out uint16* ppwchType, out int32 pcchType) mut => VT.getTypeFromQName(ref this, pwchQName, cchQName, out ppwchType, out pcchType);
+			public HResult getValue(int32 nIndex, out uint16* ppwchValue, out int32 pcchValue) mut => VT.getValue(ref this, nIndex, out ppwchValue, out pcchValue);
+			public HResult getValueFromName(char16* pwchUri, int32 cchUri, char16* pwchLocalName, int32 cchLocalName, out uint16* ppwchValue, out int32 pcchValue) mut => VT.getValueFromName(ref this, pwchUri, cchUri, pwchLocalName, cchLocalName, out ppwchValue, out pcchValue);
+			public HResult getValueFromQName(char16* pwchQName, int32 cchQName, out uint16* ppwchValue, out int32 pcchValue) mut => VT.getValueFromQName(ref this, pwchQName, cchQName, out ppwchValue, out pcchValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, out int32 pnLength) getLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchUri, out int32 pcchUri) getURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchLocalName, out int32 pcchLocalName) getLocalName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchQName, out int32 pcchQName) getQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchUri, out int32 pcchUri, out uint16* ppwchLocalName, out int32 pcchLocalName, out uint16* ppwchQName, out int32 pcchQName) getName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, PWSTR pwchUri, int32 cchUri, PWSTR pwchLocalName, int32 cchLocalName, out int32 pnIndex) getIndexFromName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, PWSTR pwchQName, int32 cchQName, out int32 pnIndex) getIndexFromQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchType, out int32 pcchType) getType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, PWSTR pwchUri, int32 cchUri, PWSTR pwchLocalName, int32 cchLocalName, out uint16* ppwchType, out int32 pcchType) getTypeFromName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, PWSTR pwchQName, int32 cchQName, out uint16* ppwchType, out int32 pcchType) getTypeFromQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchValue, out int32 pcchValue) getValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, PWSTR pwchUri, int32 cchUri, PWSTR pwchLocalName, int32 cchLocalName, out uint16* ppwchValue, out int32 pcchValue) getValueFromName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISAXAttributes self, PWSTR pwchQName, int32 cchQName, out uint16* ppwchValue, out int32 pcchValue) getValueFromQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, out int32 pnLength) getLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchUri, out int32 pcchUri) getURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchLocalName, out int32 pcchLocalName) getLocalName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchQName, out int32 pcchQName) getQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchUri, out int32 pcchUri, out uint16* ppwchLocalName, out int32 pcchLocalName, out uint16* ppwchQName, out int32 pcchQName) getName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, char16* pwchUri, int32 cchUri, char16* pwchLocalName, int32 cchLocalName, out int32 pnIndex) getIndexFromName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, char16* pwchQName, int32 cchQName, out int32 pnIndex) getIndexFromQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchType, out int32 pcchType) getType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, char16* pwchUri, int32 cchUri, char16* pwchLocalName, int32 cchLocalName, out uint16* ppwchType, out int32 pcchType) getTypeFromName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, char16* pwchQName, int32 cchQName, out uint16* ppwchType, out int32 pcchType) getTypeFromQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, int32 nIndex, out uint16* ppwchValue, out int32 pcchValue) getValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, char16* pwchUri, int32 cchUri, char16* pwchLocalName, int32 cchLocalName, out uint16* ppwchValue, out int32 pcchValue) getValueFromName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISAXAttributes self, char16* pwchQName, int32 cchQName, out uint16* ppwchValue, out int32 pcchValue) getValueFromQName;
 			}
 		}
 		[CRepr]
@@ -2224,46 +2228,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getFeature(BSTR strName, out int16 fValue) mut => VT.getFeature(ref this, strName, out fValue);
-			public HRESULT putFeature(BSTR strName, int16 fValue) mut => VT.putFeature(ref this, strName, fValue);
-			public HRESULT getProperty(BSTR strName, out VARIANT varValue) mut => VT.getProperty(ref this, strName, out varValue);
-			public HRESULT putProperty(BSTR strName, VARIANT varValue) mut => VT.putProperty(ref this, strName, varValue);
-			public HRESULT get_entityResolver(out IVBSAXEntityResolver* oResolver) mut => VT.get_entityResolver(ref this, out oResolver);
-			public HRESULT putref_entityResolver(ref IVBSAXEntityResolver oResolver) mut => VT.putref_entityResolver(ref this, ref oResolver);
-			public HRESULT get_contentHandler(out IVBSAXContentHandler* oHandler) mut => VT.get_contentHandler(ref this, out oHandler);
-			public HRESULT putref_contentHandler(ref IVBSAXContentHandler oHandler) mut => VT.putref_contentHandler(ref this, ref oHandler);
-			public HRESULT get_dtdHandler(out IVBSAXDTDHandler* oHandler) mut => VT.get_dtdHandler(ref this, out oHandler);
-			public HRESULT putref_dtdHandler(ref IVBSAXDTDHandler oHandler) mut => VT.putref_dtdHandler(ref this, ref oHandler);
-			public HRESULT get_errorHandler(out IVBSAXErrorHandler* oHandler) mut => VT.get_errorHandler(ref this, out oHandler);
-			public HRESULT putref_errorHandler(ref IVBSAXErrorHandler oHandler) mut => VT.putref_errorHandler(ref this, ref oHandler);
-			public HRESULT get_baseURL(out BSTR strBaseURL) mut => VT.get_baseURL(ref this, out strBaseURL);
-			public HRESULT put_baseURL(BSTR strBaseURL) mut => VT.put_baseURL(ref this, strBaseURL);
-			public HRESULT get_secureBaseURL(out BSTR strSecureBaseURL) mut => VT.get_secureBaseURL(ref this, out strSecureBaseURL);
-			public HRESULT put_secureBaseURL(BSTR strSecureBaseURL) mut => VT.put_secureBaseURL(ref this, strSecureBaseURL);
-			public HRESULT parse(VARIANT varInput) mut => VT.parse(ref this, varInput);
-			public HRESULT parseURL(BSTR strURL) mut => VT.parseURL(ref this, strURL);
+			public HResult getFeature(char16* strName, out int16 fValue) mut => VT.getFeature(ref this, strName, out fValue);
+			public HResult putFeature(char16* strName, int16 fValue) mut => VT.putFeature(ref this, strName, fValue);
+			public HResult getProperty(char16* strName, out VARIANT varValue) mut => VT.getProperty(ref this, strName, out varValue);
+			public HResult putProperty(char16* strName, VARIANT varValue) mut => VT.putProperty(ref this, strName, varValue);
+			public HResult get_entityResolver(out IVBSAXEntityResolver* oResolver) mut => VT.get_entityResolver(ref this, out oResolver);
+			public HResult putref_entityResolver(ref IVBSAXEntityResolver oResolver) mut => VT.putref_entityResolver(ref this, ref oResolver);
+			public HResult get_contentHandler(out IVBSAXContentHandler* oHandler) mut => VT.get_contentHandler(ref this, out oHandler);
+			public HResult putref_contentHandler(ref IVBSAXContentHandler oHandler) mut => VT.putref_contentHandler(ref this, ref oHandler);
+			public HResult get_dtdHandler(out IVBSAXDTDHandler* oHandler) mut => VT.get_dtdHandler(ref this, out oHandler);
+			public HResult putref_dtdHandler(ref IVBSAXDTDHandler oHandler) mut => VT.putref_dtdHandler(ref this, ref oHandler);
+			public HResult get_errorHandler(out IVBSAXErrorHandler* oHandler) mut => VT.get_errorHandler(ref this, out oHandler);
+			public HResult putref_errorHandler(ref IVBSAXErrorHandler oHandler) mut => VT.putref_errorHandler(ref this, ref oHandler);
+			public HResult get_baseURL(out char16* strBaseURL) mut => VT.get_baseURL(ref this, out strBaseURL);
+			public HResult put_baseURL(char16* strBaseURL) mut => VT.put_baseURL(ref this, strBaseURL);
+			public HResult get_secureBaseURL(out char16* strSecureBaseURL) mut => VT.get_secureBaseURL(ref this, out strSecureBaseURL);
+			public HResult put_secureBaseURL(char16* strSecureBaseURL) mut => VT.put_secureBaseURL(ref this, strSecureBaseURL);
+			public HResult parse(VARIANT varInput) mut => VT.parse(ref this, varInput);
+			public HResult parseURL(char16* strURL) mut => VT.parseURL(ref this, strURL);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strName, out int16 fValue) getFeature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strName, int16 fValue) putFeature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strName, out VARIANT varValue) getProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strName, VARIANT varValue) putProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, out IVBSAXEntityResolver* oResolver) get_entityResolver;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, ref IVBSAXEntityResolver oResolver) putref_entityResolver;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, out IVBSAXContentHandler* oHandler) get_contentHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, ref IVBSAXContentHandler oHandler) putref_contentHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, out IVBSAXDTDHandler* oHandler) get_dtdHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, ref IVBSAXDTDHandler oHandler) putref_dtdHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, out IVBSAXErrorHandler* oHandler) get_errorHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, ref IVBSAXErrorHandler oHandler) putref_errorHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, out BSTR strBaseURL) get_baseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strBaseURL) put_baseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, out BSTR strSecureBaseURL) get_secureBaseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strSecureBaseURL) put_secureBaseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, VARIANT varInput) parse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLReader self, BSTR strURL) parseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strName, out int16 fValue) getFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strName, int16 fValue) putFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strName, out VARIANT varValue) getProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strName, VARIANT varValue) putProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, out IVBSAXEntityResolver* oResolver) get_entityResolver;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, ref IVBSAXEntityResolver oResolver) putref_entityResolver;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, out IVBSAXContentHandler* oHandler) get_contentHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, ref IVBSAXContentHandler oHandler) putref_contentHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, out IVBSAXDTDHandler* oHandler) get_dtdHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, ref IVBSAXDTDHandler oHandler) putref_dtdHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, out IVBSAXErrorHandler* oHandler) get_errorHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, ref IVBSAXErrorHandler oHandler) putref_errorHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, out char16* strBaseURL) get_baseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strBaseURL) put_baseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, out char16* strSecureBaseURL) get_secureBaseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strSecureBaseURL) put_secureBaseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, VARIANT varInput) parse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLReader self, char16* strURL) parseURL;
 			}
 		}
 		[CRepr]
@@ -2273,14 +2277,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_parent(out IVBSAXXMLReader* oReader) mut => VT.get_parent(ref this, out oReader);
-			public HRESULT putref_parent(ref IVBSAXXMLReader oReader) mut => VT.putref_parent(ref this, ref oReader);
+			public HResult get_parent(out IVBSAXXMLReader* oReader) mut => VT.get_parent(ref this, out oReader);
+			public HResult putref_parent(ref IVBSAXXMLReader oReader) mut => VT.putref_parent(ref this, ref oReader);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLFilter self, out IVBSAXXMLReader* oReader) get_parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXXMLFilter self, ref IVBSAXXMLReader oReader) putref_parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLFilter self, out IVBSAXXMLReader* oReader) get_parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXXMLFilter self, ref IVBSAXXMLReader oReader) putref_parent;
 			}
 		}
 		[CRepr]
@@ -2290,18 +2294,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_columnNumber(out int32 nColumn) mut => VT.get_columnNumber(ref this, out nColumn);
-			public HRESULT get_lineNumber(out int32 nLine) mut => VT.get_lineNumber(ref this, out nLine);
-			public HRESULT get_publicId(out BSTR strPublicId) mut => VT.get_publicId(ref this, out strPublicId);
-			public HRESULT get_systemId(out BSTR strSystemId) mut => VT.get_systemId(ref this, out strSystemId);
+			public HResult get_columnNumber(out int32 nColumn) mut => VT.get_columnNumber(ref this, out nColumn);
+			public HResult get_lineNumber(out int32 nLine) mut => VT.get_lineNumber(ref this, out nLine);
+			public HResult get_publicId(out char16* strPublicId) mut => VT.get_publicId(ref this, out strPublicId);
+			public HResult get_systemId(out char16* strSystemId) mut => VT.get_systemId(ref this, out strSystemId);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLocator self, out int32 nColumn) get_columnNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLocator self, out int32 nLine) get_lineNumber;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLocator self, out BSTR strPublicId) get_publicId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLocator self, out BSTR strSystemId) get_systemId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLocator self, out int32 nColumn) get_columnNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLocator self, out int32 nLine) get_lineNumber;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLocator self, out char16* strPublicId) get_publicId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLocator self, out char16* strSystemId) get_systemId;
 			}
 		}
 		[CRepr]
@@ -2311,12 +2315,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT resolveEntity(out BSTR strPublicId, out BSTR strSystemId, out VARIANT varInput) mut => VT.resolveEntity(ref this, out strPublicId, out strSystemId, out varInput);
+			public HResult resolveEntity(out char16* strPublicId, out char16* strSystemId, out VARIANT varInput) mut => VT.resolveEntity(ref this, out strPublicId, out strSystemId, out varInput);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXEntityResolver self, out BSTR strPublicId, out BSTR strSystemId, out VARIANT varInput) resolveEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXEntityResolver self, out char16* strPublicId, out char16* strSystemId, out VARIANT varInput) resolveEntity;
 			}
 		}
 		[CRepr]
@@ -2326,32 +2330,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT putref_documentLocator(ref IVBSAXLocator oLocator) mut => VT.putref_documentLocator(ref this, ref oLocator);
-			public HRESULT startDocument() mut => VT.startDocument(ref this);
-			public HRESULT endDocument() mut => VT.endDocument(ref this);
-			public HRESULT startPrefixMapping(out BSTR strPrefix, out BSTR strURI) mut => VT.startPrefixMapping(ref this, out strPrefix, out strURI);
-			public HRESULT endPrefixMapping(out BSTR strPrefix) mut => VT.endPrefixMapping(ref this, out strPrefix);
-			public HRESULT startElement(out BSTR strNamespaceURI, out BSTR strLocalName, out BSTR strQName, ref IVBSAXAttributes oAttributes) mut => VT.startElement(ref this, out strNamespaceURI, out strLocalName, out strQName, ref oAttributes);
-			public HRESULT endElement(out BSTR strNamespaceURI, out BSTR strLocalName, out BSTR strQName) mut => VT.endElement(ref this, out strNamespaceURI, out strLocalName, out strQName);
-			public HRESULT characters(out BSTR strChars) mut => VT.characters(ref this, out strChars);
-			public HRESULT ignorableWhitespace(out BSTR strChars) mut => VT.ignorableWhitespace(ref this, out strChars);
-			public HRESULT processingInstruction(out BSTR strTarget, out BSTR strData) mut => VT.processingInstruction(ref this, out strTarget, out strData);
-			public HRESULT skippedEntity(out BSTR strName) mut => VT.skippedEntity(ref this, out strName);
+			public HResult putref_documentLocator(ref IVBSAXLocator oLocator) mut => VT.putref_documentLocator(ref this, ref oLocator);
+			public HResult startDocument() mut => VT.startDocument(ref this);
+			public HResult endDocument() mut => VT.endDocument(ref this);
+			public HResult startPrefixMapping(out char16* strPrefix, out char16* strURI) mut => VT.startPrefixMapping(ref this, out strPrefix, out strURI);
+			public HResult endPrefixMapping(out char16* strPrefix) mut => VT.endPrefixMapping(ref this, out strPrefix);
+			public HResult startElement(out char16* strNamespaceURI, out char16* strLocalName, out char16* strQName, ref IVBSAXAttributes oAttributes) mut => VT.startElement(ref this, out strNamespaceURI, out strLocalName, out strQName, ref oAttributes);
+			public HResult endElement(out char16* strNamespaceURI, out char16* strLocalName, out char16* strQName) mut => VT.endElement(ref this, out strNamespaceURI, out strLocalName, out strQName);
+			public HResult characters(out char16* strChars) mut => VT.characters(ref this, out strChars);
+			public HResult ignorableWhitespace(out char16* strChars) mut => VT.ignorableWhitespace(ref this, out strChars);
+			public HResult processingInstruction(out char16* strTarget, out char16* strData) mut => VT.processingInstruction(ref this, out strTarget, out strData);
+			public HResult skippedEntity(out char16* strName) mut => VT.skippedEntity(ref this, out strName);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, ref IVBSAXLocator oLocator) putref_documentLocator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self) startDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self) endDocument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strPrefix, out BSTR strURI) startPrefixMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strPrefix) endPrefixMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strNamespaceURI, out BSTR strLocalName, out BSTR strQName, ref IVBSAXAttributes oAttributes) startElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strNamespaceURI, out BSTR strLocalName, out BSTR strQName) endElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strChars) characters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strChars) ignorableWhitespace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strTarget, out BSTR strData) processingInstruction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXContentHandler self, out BSTR strName) skippedEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, ref IVBSAXLocator oLocator) putref_documentLocator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self) startDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self) endDocument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strPrefix, out char16* strURI) startPrefixMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strPrefix) endPrefixMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strNamespaceURI, out char16* strLocalName, out char16* strQName, ref IVBSAXAttributes oAttributes) startElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strNamespaceURI, out char16* strLocalName, out char16* strQName) endElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strChars) characters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strChars) ignorableWhitespace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strTarget, out char16* strData) processingInstruction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXContentHandler self, out char16* strName) skippedEntity;
 			}
 		}
 		[CRepr]
@@ -2361,14 +2365,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT notationDecl(out BSTR strName, out BSTR strPublicId, out BSTR strSystemId) mut => VT.notationDecl(ref this, out strName, out strPublicId, out strSystemId);
-			public HRESULT unparsedEntityDecl(out BSTR strName, out BSTR strPublicId, out BSTR strSystemId, out BSTR strNotationName) mut => VT.unparsedEntityDecl(ref this, out strName, out strPublicId, out strSystemId, out strNotationName);
+			public HResult notationDecl(out char16* strName, out char16* strPublicId, out char16* strSystemId) mut => VT.notationDecl(ref this, out strName, out strPublicId, out strSystemId);
+			public HResult unparsedEntityDecl(out char16* strName, out char16* strPublicId, out char16* strSystemId, out char16* strNotationName) mut => VT.unparsedEntityDecl(ref this, out strName, out strPublicId, out strSystemId, out strNotationName);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXDTDHandler self, out BSTR strName, out BSTR strPublicId, out BSTR strSystemId) notationDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXDTDHandler self, out BSTR strName, out BSTR strPublicId, out BSTR strSystemId, out BSTR strNotationName) unparsedEntityDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXDTDHandler self, out char16* strName, out char16* strPublicId, out char16* strSystemId) notationDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXDTDHandler self, out char16* strName, out char16* strPublicId, out char16* strSystemId, out char16* strNotationName) unparsedEntityDecl;
 			}
 		}
 		[CRepr]
@@ -2378,16 +2382,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT error(ref IVBSAXLocator oLocator, out BSTR strErrorMessage, int32 nErrorCode) mut => VT.error(ref this, ref oLocator, out strErrorMessage, nErrorCode);
-			public HRESULT fatalError(ref IVBSAXLocator oLocator, out BSTR strErrorMessage, int32 nErrorCode) mut => VT.fatalError(ref this, ref oLocator, out strErrorMessage, nErrorCode);
-			public HRESULT ignorableWarning(ref IVBSAXLocator oLocator, out BSTR strErrorMessage, int32 nErrorCode) mut => VT.ignorableWarning(ref this, ref oLocator, out strErrorMessage, nErrorCode);
+			public HResult error(ref IVBSAXLocator oLocator, out char16* strErrorMessage, int32 nErrorCode) mut => VT.error(ref this, ref oLocator, out strErrorMessage, nErrorCode);
+			public HResult fatalError(ref IVBSAXLocator oLocator, out char16* strErrorMessage, int32 nErrorCode) mut => VT.fatalError(ref this, ref oLocator, out strErrorMessage, nErrorCode);
+			public HResult ignorableWarning(ref IVBSAXLocator oLocator, out char16* strErrorMessage, int32 nErrorCode) mut => VT.ignorableWarning(ref this, ref oLocator, out strErrorMessage, nErrorCode);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXErrorHandler self, ref IVBSAXLocator oLocator, out BSTR strErrorMessage, int32 nErrorCode) error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXErrorHandler self, ref IVBSAXLocator oLocator, out BSTR strErrorMessage, int32 nErrorCode) fatalError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXErrorHandler self, ref IVBSAXLocator oLocator, out BSTR strErrorMessage, int32 nErrorCode) ignorableWarning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXErrorHandler self, ref IVBSAXLocator oLocator, out char16* strErrorMessage, int32 nErrorCode) error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXErrorHandler self, ref IVBSAXLocator oLocator, out char16* strErrorMessage, int32 nErrorCode) fatalError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXErrorHandler self, ref IVBSAXLocator oLocator, out char16* strErrorMessage, int32 nErrorCode) ignorableWarning;
 			}
 		}
 		[CRepr]
@@ -2397,24 +2401,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT startDTD(out BSTR strName, out BSTR strPublicId, out BSTR strSystemId) mut => VT.startDTD(ref this, out strName, out strPublicId, out strSystemId);
-			public HRESULT endDTD() mut => VT.endDTD(ref this);
-			public HRESULT startEntity(out BSTR strName) mut => VT.startEntity(ref this, out strName);
-			public HRESULT endEntity(out BSTR strName) mut => VT.endEntity(ref this, out strName);
-			public HRESULT startCDATA() mut => VT.startCDATA(ref this);
-			public HRESULT endCDATA() mut => VT.endCDATA(ref this);
-			public HRESULT comment(out BSTR strChars) mut => VT.comment(ref this, out strChars);
+			public HResult startDTD(out char16* strName, out char16* strPublicId, out char16* strSystemId) mut => VT.startDTD(ref this, out strName, out strPublicId, out strSystemId);
+			public HResult endDTD() mut => VT.endDTD(ref this);
+			public HResult startEntity(out char16* strName) mut => VT.startEntity(ref this, out strName);
+			public HResult endEntity(out char16* strName) mut => VT.endEntity(ref this, out strName);
+			public HResult startCDATA() mut => VT.startCDATA(ref this);
+			public HResult endCDATA() mut => VT.endCDATA(ref this);
+			public HResult comment(out char16* strChars) mut => VT.comment(ref this, out strChars);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self, out BSTR strName, out BSTR strPublicId, out BSTR strSystemId) startDTD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self) endDTD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self, out BSTR strName) startEntity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self, out BSTR strName) endEntity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self) startCDATA;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self) endCDATA;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXLexicalHandler self, out BSTR strChars) comment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self, out char16* strName, out char16* strPublicId, out char16* strSystemId) startDTD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self) endDTD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self, out char16* strName) startEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self, out char16* strName) endEntity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self) startCDATA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self) endCDATA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXLexicalHandler self, out char16* strChars) comment;
 			}
 		}
 		[CRepr]
@@ -2424,18 +2428,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT elementDecl(out BSTR strName, out BSTR strModel) mut => VT.elementDecl(ref this, out strName, out strModel);
-			public HRESULT attributeDecl(out BSTR strElementName, out BSTR strAttributeName, out BSTR strType, out BSTR strValueDefault, out BSTR strValue) mut => VT.attributeDecl(ref this, out strElementName, out strAttributeName, out strType, out strValueDefault, out strValue);
-			public HRESULT internalEntityDecl(out BSTR strName, out BSTR strValue) mut => VT.internalEntityDecl(ref this, out strName, out strValue);
-			public HRESULT externalEntityDecl(out BSTR strName, out BSTR strPublicId, out BSTR strSystemId) mut => VT.externalEntityDecl(ref this, out strName, out strPublicId, out strSystemId);
+			public HResult elementDecl(out char16* strName, out char16* strModel) mut => VT.elementDecl(ref this, out strName, out strModel);
+			public HResult attributeDecl(out char16* strElementName, out char16* strAttributeName, out char16* strType, out char16* strValueDefault, out char16* strValue) mut => VT.attributeDecl(ref this, out strElementName, out strAttributeName, out strType, out strValueDefault, out strValue);
+			public HResult internalEntityDecl(out char16* strName, out char16* strValue) mut => VT.internalEntityDecl(ref this, out strName, out strValue);
+			public HResult externalEntityDecl(out char16* strName, out char16* strPublicId, out char16* strSystemId) mut => VT.externalEntityDecl(ref this, out strName, out strPublicId, out strSystemId);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXDeclHandler self, out BSTR strName, out BSTR strModel) elementDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXDeclHandler self, out BSTR strElementName, out BSTR strAttributeName, out BSTR strType, out BSTR strValueDefault, out BSTR strValue) attributeDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXDeclHandler self, out BSTR strName, out BSTR strValue) internalEntityDecl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXDeclHandler self, out BSTR strName, out BSTR strPublicId, out BSTR strSystemId) externalEntityDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXDeclHandler self, out char16* strName, out char16* strModel) elementDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXDeclHandler self, out char16* strElementName, out char16* strAttributeName, out char16* strType, out char16* strValueDefault, out char16* strValue) attributeDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXDeclHandler self, out char16* strName, out char16* strValue) internalEntityDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXDeclHandler self, out char16* strName, out char16* strPublicId, out char16* strSystemId) externalEntityDecl;
 			}
 		}
 		[CRepr]
@@ -2445,34 +2449,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_length(out int32 nLength) mut => VT.get_length(ref this, out nLength);
-			public HRESULT getURI(int32 nIndex, out BSTR strURI) mut => VT.getURI(ref this, nIndex, out strURI);
-			public HRESULT getLocalName(int32 nIndex, out BSTR strLocalName) mut => VT.getLocalName(ref this, nIndex, out strLocalName);
-			public HRESULT getQName(int32 nIndex, out BSTR strQName) mut => VT.getQName(ref this, nIndex, out strQName);
-			public HRESULT getIndexFromName(BSTR strURI, BSTR strLocalName, out int32 nIndex) mut => VT.getIndexFromName(ref this, strURI, strLocalName, out nIndex);
-			public HRESULT getIndexFromQName(BSTR strQName, out int32 nIndex) mut => VT.getIndexFromQName(ref this, strQName, out nIndex);
-			public HRESULT getType(int32 nIndex, out BSTR strType) mut => VT.getType(ref this, nIndex, out strType);
-			public HRESULT getTypeFromName(BSTR strURI, BSTR strLocalName, out BSTR strType) mut => VT.getTypeFromName(ref this, strURI, strLocalName, out strType);
-			public HRESULT getTypeFromQName(BSTR strQName, out BSTR strType) mut => VT.getTypeFromQName(ref this, strQName, out strType);
-			public HRESULT getValue(int32 nIndex, out BSTR strValue) mut => VT.getValue(ref this, nIndex, out strValue);
-			public HRESULT getValueFromName(BSTR strURI, BSTR strLocalName, out BSTR strValue) mut => VT.getValueFromName(ref this, strURI, strLocalName, out strValue);
-			public HRESULT getValueFromQName(BSTR strQName, out BSTR strValue) mut => VT.getValueFromQName(ref this, strQName, out strValue);
+			public HResult get_length(out int32 nLength) mut => VT.get_length(ref this, out nLength);
+			public HResult getURI(int32 nIndex, out char16* strURI) mut => VT.getURI(ref this, nIndex, out strURI);
+			public HResult getLocalName(int32 nIndex, out char16* strLocalName) mut => VT.getLocalName(ref this, nIndex, out strLocalName);
+			public HResult getQName(int32 nIndex, out char16* strQName) mut => VT.getQName(ref this, nIndex, out strQName);
+			public HResult getIndexFromName(char16* strURI, char16* strLocalName, out int32 nIndex) mut => VT.getIndexFromName(ref this, strURI, strLocalName, out nIndex);
+			public HResult getIndexFromQName(char16* strQName, out int32 nIndex) mut => VT.getIndexFromQName(ref this, strQName, out nIndex);
+			public HResult getType(int32 nIndex, out char16* strType) mut => VT.getType(ref this, nIndex, out strType);
+			public HResult getTypeFromName(char16* strURI, char16* strLocalName, out char16* strType) mut => VT.getTypeFromName(ref this, strURI, strLocalName, out strType);
+			public HResult getTypeFromQName(char16* strQName, out char16* strType) mut => VT.getTypeFromQName(ref this, strQName, out strType);
+			public HResult getValue(int32 nIndex, out char16* strValue) mut => VT.getValue(ref this, nIndex, out strValue);
+			public HResult getValueFromName(char16* strURI, char16* strLocalName, out char16* strValue) mut => VT.getValueFromName(ref this, strURI, strLocalName, out strValue);
+			public HResult getValueFromQName(char16* strQName, out char16* strValue) mut => VT.getValueFromQName(ref this, strQName, out strValue);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, out int32 nLength) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, int32 nIndex, out BSTR strURI) getURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, int32 nIndex, out BSTR strLocalName) getLocalName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, int32 nIndex, out BSTR strQName) getQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, BSTR strURI, BSTR strLocalName, out int32 nIndex) getIndexFromName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, BSTR strQName, out int32 nIndex) getIndexFromQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, int32 nIndex, out BSTR strType) getType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, BSTR strURI, BSTR strLocalName, out BSTR strType) getTypeFromName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, BSTR strQName, out BSTR strType) getTypeFromQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, int32 nIndex, out BSTR strValue) getValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, BSTR strURI, BSTR strLocalName, out BSTR strValue) getValueFromName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBSAXAttributes self, BSTR strQName, out BSTR strValue) getValueFromQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, out int32 nLength) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, int32 nIndex, out char16* strURI) getURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, int32 nIndex, out char16* strLocalName) getLocalName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, int32 nIndex, out char16* strQName) getQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, char16* strURI, char16* strLocalName, out int32 nIndex) getIndexFromName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, char16* strQName, out int32 nIndex) getIndexFromQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, int32 nIndex, out char16* strType) getType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, char16* strURI, char16* strLocalName, out char16* strType) getTypeFromName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, char16* strQName, out char16* strType) getTypeFromQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, int32 nIndex, out char16* strValue) getValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, char16* strURI, char16* strLocalName, out char16* strValue) getValueFromName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBSAXAttributes self, char16* strQName, out char16* strValue) getValueFromQName;
 			}
 		}
 		[CRepr]
@@ -2482,44 +2486,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_output(VARIANT varDestination) mut => VT.put_output(ref this, varDestination);
-			public HRESULT get_output(out VARIANT varDestination) mut => VT.get_output(ref this, out varDestination);
-			public HRESULT put_encoding(BSTR strEncoding) mut => VT.put_encoding(ref this, strEncoding);
-			public HRESULT get_encoding(out BSTR strEncoding) mut => VT.get_encoding(ref this, out strEncoding);
-			public HRESULT put_byteOrderMark(int16 fWriteByteOrderMark) mut => VT.put_byteOrderMark(ref this, fWriteByteOrderMark);
-			public HRESULT get_byteOrderMark(out int16 fWriteByteOrderMark) mut => VT.get_byteOrderMark(ref this, out fWriteByteOrderMark);
-			public HRESULT put_indent(int16 fIndentMode) mut => VT.put_indent(ref this, fIndentMode);
-			public HRESULT get_indent(out int16 fIndentMode) mut => VT.get_indent(ref this, out fIndentMode);
-			public HRESULT put_standalone(int16 fValue) mut => VT.put_standalone(ref this, fValue);
-			public HRESULT get_standalone(out int16 fValue) mut => VT.get_standalone(ref this, out fValue);
-			public HRESULT put_omitXMLDeclaration(int16 fValue) mut => VT.put_omitXMLDeclaration(ref this, fValue);
-			public HRESULT get_omitXMLDeclaration(out int16 fValue) mut => VT.get_omitXMLDeclaration(ref this, out fValue);
-			public HRESULT put_version(BSTR strVersion) mut => VT.put_version(ref this, strVersion);
-			public HRESULT get_version(out BSTR strVersion) mut => VT.get_version(ref this, out strVersion);
-			public HRESULT put_disableOutputEscaping(int16 fValue) mut => VT.put_disableOutputEscaping(ref this, fValue);
-			public HRESULT get_disableOutputEscaping(out int16 fValue) mut => VT.get_disableOutputEscaping(ref this, out fValue);
-			public HRESULT flush() mut => VT.flush(ref this);
+			public HResult put_output(VARIANT varDestination) mut => VT.put_output(ref this, varDestination);
+			public HResult get_output(out VARIANT varDestination) mut => VT.get_output(ref this, out varDestination);
+			public HResult put_encoding(char16* strEncoding) mut => VT.put_encoding(ref this, strEncoding);
+			public HResult get_encoding(out char16* strEncoding) mut => VT.get_encoding(ref this, out strEncoding);
+			public HResult put_byteOrderMark(int16 fWriteByteOrderMark) mut => VT.put_byteOrderMark(ref this, fWriteByteOrderMark);
+			public HResult get_byteOrderMark(out int16 fWriteByteOrderMark) mut => VT.get_byteOrderMark(ref this, out fWriteByteOrderMark);
+			public HResult put_indent(int16 fIndentMode) mut => VT.put_indent(ref this, fIndentMode);
+			public HResult get_indent(out int16 fIndentMode) mut => VT.get_indent(ref this, out fIndentMode);
+			public HResult put_standalone(int16 fValue) mut => VT.put_standalone(ref this, fValue);
+			public HResult get_standalone(out int16 fValue) mut => VT.get_standalone(ref this, out fValue);
+			public HResult put_omitXMLDeclaration(int16 fValue) mut => VT.put_omitXMLDeclaration(ref this, fValue);
+			public HResult get_omitXMLDeclaration(out int16 fValue) mut => VT.get_omitXMLDeclaration(ref this, out fValue);
+			public HResult put_version(char16* strVersion) mut => VT.put_version(ref this, strVersion);
+			public HResult get_version(out char16* strVersion) mut => VT.get_version(ref this, out strVersion);
+			public HResult put_disableOutputEscaping(int16 fValue) mut => VT.put_disableOutputEscaping(ref this, fValue);
+			public HResult get_disableOutputEscaping(out int16 fValue) mut => VT.get_disableOutputEscaping(ref this, out fValue);
+			public HResult flush() mut => VT.flush(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, VARIANT varDestination) put_output;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out VARIANT varDestination) get_output;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, BSTR strEncoding) put_encoding;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out BSTR strEncoding) get_encoding;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, int16 fWriteByteOrderMark) put_byteOrderMark;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out int16 fWriteByteOrderMark) get_byteOrderMark;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, int16 fIndentMode) put_indent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out int16 fIndentMode) get_indent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, int16 fValue) put_standalone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out int16 fValue) get_standalone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, int16 fValue) put_omitXMLDeclaration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out int16 fValue) get_omitXMLDeclaration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, BSTR strVersion) put_version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out BSTR strVersion) get_version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, int16 fValue) put_disableOutputEscaping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self, out int16 fValue) get_disableOutputEscaping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXWriter self) flush;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, VARIANT varDestination) put_output;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out VARIANT varDestination) get_output;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, char16* strEncoding) put_encoding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out char16* strEncoding) get_encoding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, int16 fWriteByteOrderMark) put_byteOrderMark;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out int16 fWriteByteOrderMark) get_byteOrderMark;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, int16 fIndentMode) put_indent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out int16 fIndentMode) get_indent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, int16 fValue) put_standalone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out int16 fValue) get_standalone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, int16 fValue) put_omitXMLDeclaration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out int16 fValue) get_omitXMLDeclaration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, char16* strVersion) put_version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out char16* strVersion) get_version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, int16 fValue) put_disableOutputEscaping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self, out int16 fValue) get_disableOutputEscaping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXWriter self) flush;
 			}
 		}
 		[CRepr]
@@ -2529,32 +2533,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT addAttribute(BSTR strURI, BSTR strLocalName, BSTR strQName, BSTR strType, BSTR strValue) mut => VT.addAttribute(ref this, strURI, strLocalName, strQName, strType, strValue);
-			public HRESULT addAttributeFromIndex(VARIANT varAtts, int32 nIndex) mut => VT.addAttributeFromIndex(ref this, varAtts, nIndex);
-			public HRESULT clear() mut => VT.clear(ref this);
-			public HRESULT removeAttribute(int32 nIndex) mut => VT.removeAttribute(ref this, nIndex);
-			public HRESULT setAttribute(int32 nIndex, BSTR strURI, BSTR strLocalName, BSTR strQName, BSTR strType, BSTR strValue) mut => VT.setAttribute(ref this, nIndex, strURI, strLocalName, strQName, strType, strValue);
-			public HRESULT setAttributes(VARIANT varAtts) mut => VT.setAttributes(ref this, varAtts);
-			public HRESULT setLocalName(int32 nIndex, BSTR strLocalName) mut => VT.setLocalName(ref this, nIndex, strLocalName);
-			public HRESULT setQName(int32 nIndex, BSTR strQName) mut => VT.setQName(ref this, nIndex, strQName);
-			public HRESULT setType(int32 nIndex, BSTR strType) mut => VT.setType(ref this, nIndex, strType);
-			public HRESULT setURI(int32 nIndex, BSTR strURI) mut => VT.setURI(ref this, nIndex, strURI);
-			public HRESULT setValue(int32 nIndex, BSTR strValue) mut => VT.setValue(ref this, nIndex, strValue);
+			public HResult addAttribute(char16* strURI, char16* strLocalName, char16* strQName, char16* strType, char16* strValue) mut => VT.addAttribute(ref this, strURI, strLocalName, strQName, strType, strValue);
+			public HResult addAttributeFromIndex(VARIANT varAtts, int32 nIndex) mut => VT.addAttributeFromIndex(ref this, varAtts, nIndex);
+			public HResult clear() mut => VT.clear(ref this);
+			public HResult removeAttribute(int32 nIndex) mut => VT.removeAttribute(ref this, nIndex);
+			public HResult setAttribute(int32 nIndex, char16* strURI, char16* strLocalName, char16* strQName, char16* strType, char16* strValue) mut => VT.setAttribute(ref this, nIndex, strURI, strLocalName, strQName, strType, strValue);
+			public HResult setAttributes(VARIANT varAtts) mut => VT.setAttributes(ref this, varAtts);
+			public HResult setLocalName(int32 nIndex, char16* strLocalName) mut => VT.setLocalName(ref this, nIndex, strLocalName);
+			public HResult setQName(int32 nIndex, char16* strQName) mut => VT.setQName(ref this, nIndex, strQName);
+			public HResult setType(int32 nIndex, char16* strType) mut => VT.setType(ref this, nIndex, strType);
+			public HResult setURI(int32 nIndex, char16* strURI) mut => VT.setURI(ref this, nIndex, strURI);
+			public HResult setValue(int32 nIndex, char16* strValue) mut => VT.setValue(ref this, nIndex, strValue);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, BSTR strURI, BSTR strLocalName, BSTR strQName, BSTR strType, BSTR strValue) addAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, VARIANT varAtts, int32 nIndex) addAttributeFromIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self) clear;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex) removeAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex, BSTR strURI, BSTR strLocalName, BSTR strQName, BSTR strType, BSTR strValue) setAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, VARIANT varAtts) setAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex, BSTR strLocalName) setLocalName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex, BSTR strQName) setQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex, BSTR strType) setType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex, BSTR strURI) setURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXAttributes self, int32 nIndex, BSTR strValue) setValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, char16* strURI, char16* strLocalName, char16* strQName, char16* strType, char16* strValue) addAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, VARIANT varAtts, int32 nIndex) addAttributeFromIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self) clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex) removeAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex, char16* strURI, char16* strLocalName, char16* strQName, char16* strType, char16* strValue) setAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, VARIANT varAtts) setAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex, char16* strLocalName) setLocalName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex, char16* strQName) setQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex, char16* strType) setType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex, char16* strURI) setURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXAttributes self, int32 nIndex, char16* strValue) setValue;
 			}
 		}
 		[CRepr]
@@ -2564,16 +2568,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT abort() mut => VT.abort(ref this);
-			public HRESULT resume() mut => VT.resume(ref this);
-			public HRESULT suspend() mut => VT.suspend(ref this);
+			public HResult abort() mut => VT.abort(ref this);
+			public HResult resume() mut => VT.resume(ref this);
+			public HResult suspend() mut => VT.suspend(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXReaderControl self) abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXReaderControl self) resume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXReaderControl self) suspend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXReaderControl self) abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXReaderControl self) resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXReaderControl self) suspend;
 			}
 		}
 		[CRepr]
@@ -2583,12 +2587,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT schemaElementDecl(ref ISchemaElement oSchemaElement) mut => VT.schemaElementDecl(ref this, ref oSchemaElement);
+			public HResult schemaElementDecl(ref ISchemaElement oSchemaElement) mut => VT.schemaElementDecl(ref this, ref oSchemaElement);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXSchemaDeclHandler self, ref ISchemaElement oSchemaElement) schemaElementDecl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXSchemaDeclHandler self, ref ISchemaElement oSchemaElement) schemaElementDecl;
 			}
 		}
 		[CRepr]
@@ -2598,16 +2602,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_item(int32 index, out BSTR prefix) mut => VT.get_item(ref this, index, out prefix);
-			public HRESULT get_length(out int32 length) mut => VT.get_length(ref this, out length);
-			public HRESULT get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
+			public HResult get_item(int32 index, out char16* prefix) mut => VT.get_item(ref this, index, out prefix);
+			public HResult get_length(out int32 length) mut => VT.get_length(ref this, out length);
+			public HResult get__newEnum(out IUnknown* ppUnk) mut => VT.get__newEnum(ref this, out ppUnk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespacePrefixes self, int32 index, out BSTR prefix) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespacePrefixes self, out int32 length) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespacePrefixes self, out IUnknown* ppUnk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespacePrefixes self, int32 index, out char16* prefix) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespacePrefixes self, out int32 length) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespacePrefixes self, out IUnknown* ppUnk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -2617,32 +2621,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_allowOverride(int16 fOverride) mut => VT.put_allowOverride(ref this, fOverride);
-			public HRESULT get_allowOverride(out int16 fOverride) mut => VT.get_allowOverride(ref this, out fOverride);
-			public HRESULT reset() mut => VT.reset(ref this);
-			public HRESULT pushContext() mut => VT.pushContext(ref this);
-			public HRESULT pushNodeContext(ref IXMLDOMNode contextNode, int16 fDeep) mut => VT.pushNodeContext(ref this, ref contextNode, fDeep);
-			public HRESULT popContext() mut => VT.popContext(ref this);
-			public HRESULT declarePrefix(BSTR prefix, BSTR namespaceURI) mut => VT.declarePrefix(ref this, prefix, namespaceURI);
-			public HRESULT getDeclaredPrefixes(out IMXNamespacePrefixes* prefixes) mut => VT.getDeclaredPrefixes(ref this, out prefixes);
-			public HRESULT getPrefixes(BSTR namespaceURI, out IMXNamespacePrefixes* prefixes) mut => VT.getPrefixes(ref this, namespaceURI, out prefixes);
-			public HRESULT getURI(BSTR prefix, out VARIANT uri) mut => VT.getURI(ref this, prefix, out uri);
-			public HRESULT getURIFromNode(BSTR strPrefix, ref IXMLDOMNode contextNode, out VARIANT uri) mut => VT.getURIFromNode(ref this, strPrefix, ref contextNode, out uri);
+			public HResult put_allowOverride(int16 fOverride) mut => VT.put_allowOverride(ref this, fOverride);
+			public HResult get_allowOverride(out int16 fOverride) mut => VT.get_allowOverride(ref this, out fOverride);
+			public HResult reset() mut => VT.reset(ref this);
+			public HResult pushContext() mut => VT.pushContext(ref this);
+			public HResult pushNodeContext(ref IXMLDOMNode contextNode, int16 fDeep) mut => VT.pushNodeContext(ref this, ref contextNode, fDeep);
+			public HResult popContext() mut => VT.popContext(ref this);
+			public HResult declarePrefix(char16* prefix, char16* namespaceURI) mut => VT.declarePrefix(ref this, prefix, namespaceURI);
+			public HResult getDeclaredPrefixes(out IMXNamespacePrefixes* prefixes) mut => VT.getDeclaredPrefixes(ref this, out prefixes);
+			public HResult getPrefixes(char16* namespaceURI, out IMXNamespacePrefixes* prefixes) mut => VT.getPrefixes(ref this, namespaceURI, out prefixes);
+			public HResult getURI(char16* prefix, out VARIANT uri) mut => VT.getURI(ref this, prefix, out uri);
+			public HResult getURIFromNode(char16* strPrefix, ref IXMLDOMNode contextNode, out VARIANT uri) mut => VT.getURIFromNode(ref this, strPrefix, ref contextNode, out uri);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, int16 fOverride) put_allowOverride;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, out int16 fOverride) get_allowOverride;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self) reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self) pushContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, ref IXMLDOMNode contextNode, int16 fDeep) pushNodeContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self) popContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, BSTR prefix, BSTR namespaceURI) declarePrefix;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, out IMXNamespacePrefixes* prefixes) getDeclaredPrefixes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, BSTR namespaceURI, out IMXNamespacePrefixes* prefixes) getPrefixes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, BSTR prefix, out VARIANT uri) getURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVBMXNamespaceManager self, BSTR strPrefix, ref IXMLDOMNode contextNode, out VARIANT uri) getURIFromNode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, int16 fOverride) put_allowOverride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, out int16 fOverride) get_allowOverride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self) reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self) pushContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, ref IXMLDOMNode contextNode, int16 fDeep) pushNodeContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self) popContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, char16* prefix, char16* namespaceURI) declarePrefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, out IMXNamespacePrefixes* prefixes) getDeclaredPrefixes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, char16* namespaceURI, out IMXNamespacePrefixes* prefixes) getPrefixes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, char16* prefix, out VARIANT uri) getURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVBMXNamespaceManager self, char16* strPrefix, ref IXMLDOMNode contextNode, out VARIANT uri) getURIFromNode;
 			}
 		}
 		[CRepr]
@@ -2652,30 +2656,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT putAllowOverride(int16 fOverride) mut => VT.putAllowOverride(ref this, fOverride);
-			public HRESULT getAllowOverride(out int16 fOverride) mut => VT.getAllowOverride(ref this, out fOverride);
-			public HRESULT reset() mut => VT.reset(ref this);
-			public HRESULT pushContext() mut => VT.pushContext(ref this);
-			public HRESULT pushNodeContext(ref IXMLDOMNode contextNode, int16 fDeep) mut => VT.pushNodeContext(ref this, ref contextNode, fDeep);
-			public HRESULT popContext() mut => VT.popContext(ref this);
-			public HRESULT declarePrefix(PWSTR prefix, PWSTR namespaceURI) mut => VT.declarePrefix(ref this, prefix, namespaceURI);
-			public HRESULT getDeclaredPrefix(int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) mut => VT.getDeclaredPrefix(ref this, nIndex, pwchPrefix, out pcchPrefix);
-			public HRESULT getPrefix(PWSTR pwszNamespaceURI, int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) mut => VT.getPrefix(ref this, pwszNamespaceURI, nIndex, pwchPrefix, out pcchPrefix);
-			public HRESULT getURI(PWSTR pwchPrefix, ref IXMLDOMNode pContextNode, char16* pwchUri, out int32 pcchUri) mut => VT.getURI(ref this, pwchPrefix, ref pContextNode, pwchUri, out pcchUri);
+			public HResult putAllowOverride(int16 fOverride) mut => VT.putAllowOverride(ref this, fOverride);
+			public HResult getAllowOverride(out int16 fOverride) mut => VT.getAllowOverride(ref this, out fOverride);
+			public HResult reset() mut => VT.reset(ref this);
+			public HResult pushContext() mut => VT.pushContext(ref this);
+			public HResult pushNodeContext(ref IXMLDOMNode contextNode, int16 fDeep) mut => VT.pushNodeContext(ref this, ref contextNode, fDeep);
+			public HResult popContext() mut => VT.popContext(ref this);
+			public HResult declarePrefix(char16* prefix, char16* namespaceURI) mut => VT.declarePrefix(ref this, prefix, namespaceURI);
+			public HResult getDeclaredPrefix(int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) mut => VT.getDeclaredPrefix(ref this, nIndex, pwchPrefix, out pcchPrefix);
+			public HResult getPrefix(char16* pwszNamespaceURI, int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) mut => VT.getPrefix(ref this, pwszNamespaceURI, nIndex, pwchPrefix, out pcchPrefix);
+			public HResult getURI(char16* pwchPrefix, ref IXMLDOMNode pContextNode, char16* pwchUri, out int32 pcchUri) mut => VT.getURI(ref this, pwchPrefix, ref pContextNode, pwchUri, out pcchUri);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, int16 fOverride) putAllowOverride;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, out int16 fOverride) getAllowOverride;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self) reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self) pushContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, ref IXMLDOMNode contextNode, int16 fDeep) pushNodeContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self) popContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, PWSTR prefix, PWSTR namespaceURI) declarePrefix;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) getDeclaredPrefix;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, PWSTR pwszNamespaceURI, int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) getPrefix;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXNamespaceManager self, PWSTR pwchPrefix, ref IXMLDOMNode pContextNode, char16* pwchUri, out int32 pcchUri) getURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, int16 fOverride) putAllowOverride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, out int16 fOverride) getAllowOverride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self) reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self) pushContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, ref IXMLDOMNode contextNode, int16 fDeep) pushNodeContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self) popContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, char16* prefix, char16* namespaceURI) declarePrefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) getDeclaredPrefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, char16* pwszNamespaceURI, int32 nIndex, char16* pwchPrefix, out int32 pcchPrefix) getPrefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXNamespaceManager self, char16* pwchPrefix, ref IXMLDOMNode pContextNode, char16* pwchUri, out int32 pcchUri) getURI;
 			}
 		}
 		[CRepr]
@@ -2685,34 +2689,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getFeature(BSTR strName, out int16 fValue) mut => VT.getFeature(ref this, strName, out fValue);
-			public HRESULT putFeature(BSTR strName, int16 fValue) mut => VT.putFeature(ref this, strName, fValue);
-			public HRESULT getProperty(BSTR strName, out VARIANT varValue) mut => VT.getProperty(ref this, strName, out varValue);
-			public HRESULT putProperty(BSTR strName, VARIANT varValue) mut => VT.putProperty(ref this, strName, varValue);
-			public HRESULT get_entityResolver(out IUnknown* oResolver) mut => VT.get_entityResolver(ref this, out oResolver);
-			public HRESULT putref_entityResolver(ref IUnknown oResolver) mut => VT.putref_entityResolver(ref this, ref oResolver);
-			public HRESULT get_contentHandler(out IUnknown* oHandler) mut => VT.get_contentHandler(ref this, out oHandler);
-			public HRESULT putref_contentHandler(ref IUnknown oHandler) mut => VT.putref_contentHandler(ref this, ref oHandler);
-			public HRESULT get_dtdHandler(out IUnknown* oHandler) mut => VT.get_dtdHandler(ref this, out oHandler);
-			public HRESULT putref_dtdHandler(ref IUnknown oHandler) mut => VT.putref_dtdHandler(ref this, ref oHandler);
-			public HRESULT get_errorHandler(out IUnknown* oHandler) mut => VT.get_errorHandler(ref this, out oHandler);
-			public HRESULT putref_errorHandler(ref IUnknown oHandler) mut => VT.putref_errorHandler(ref this, ref oHandler);
+			public HResult getFeature(char16* strName, out int16 fValue) mut => VT.getFeature(ref this, strName, out fValue);
+			public HResult putFeature(char16* strName, int16 fValue) mut => VT.putFeature(ref this, strName, fValue);
+			public HResult getProperty(char16* strName, out VARIANT varValue) mut => VT.getProperty(ref this, strName, out varValue);
+			public HResult putProperty(char16* strName, VARIANT varValue) mut => VT.putProperty(ref this, strName, varValue);
+			public HResult get_entityResolver(out IUnknown* oResolver) mut => VT.get_entityResolver(ref this, out oResolver);
+			public HResult putref_entityResolver(ref IUnknown oResolver) mut => VT.putref_entityResolver(ref this, ref oResolver);
+			public HResult get_contentHandler(out IUnknown* oHandler) mut => VT.get_contentHandler(ref this, out oHandler);
+			public HResult putref_contentHandler(ref IUnknown oHandler) mut => VT.putref_contentHandler(ref this, ref oHandler);
+			public HResult get_dtdHandler(out IUnknown* oHandler) mut => VT.get_dtdHandler(ref this, out oHandler);
+			public HResult putref_dtdHandler(ref IUnknown oHandler) mut => VT.putref_dtdHandler(ref this, ref oHandler);
+			public HResult get_errorHandler(out IUnknown* oHandler) mut => VT.get_errorHandler(ref this, out oHandler);
+			public HResult putref_errorHandler(ref IUnknown oHandler) mut => VT.putref_errorHandler(ref this, ref oHandler);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, BSTR strName, out int16 fValue) getFeature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, BSTR strName, int16 fValue) putFeature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, BSTR strName, out VARIANT varValue) getProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, BSTR strName, VARIANT varValue) putProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, out IUnknown* oResolver) get_entityResolver;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, ref IUnknown oResolver) putref_entityResolver;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, out IUnknown* oHandler) get_contentHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, ref IUnknown oHandler) putref_contentHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, out IUnknown* oHandler) get_dtdHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, ref IUnknown oHandler) putref_dtdHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, out IUnknown* oHandler) get_errorHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMXXMLFilter self, ref IUnknown oHandler) putref_errorHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, char16* strName, out int16 fValue) getFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, char16* strName, int16 fValue) putFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, char16* strName, out VARIANT varValue) getProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, char16* strName, VARIANT varValue) putProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, out IUnknown* oResolver) get_entityResolver;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, ref IUnknown oResolver) putref_entityResolver;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, out IUnknown* oHandler) get_contentHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, ref IUnknown oHandler) putref_contentHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, out IUnknown* oHandler) get_dtdHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, ref IUnknown oHandler) putref_dtdHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, out IUnknown* oHandler) get_errorHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMXXMLFilter self, ref IUnknown oHandler) putref_errorHandler;
 			}
 		}
 		[CRepr]
@@ -2722,20 +2726,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT validate() mut => VT.validate(ref this);
-			public HRESULT put_validateOnLoad(int16 validateOnLoad) mut => VT.put_validateOnLoad(ref this, validateOnLoad);
-			public HRESULT get_validateOnLoad(out int16 validateOnLoad) mut => VT.get_validateOnLoad(ref this, out validateOnLoad);
-			public HRESULT getSchema(BSTR namespaceURI, out ISchema* schema) mut => VT.getSchema(ref this, namespaceURI, out schema);
-			public HRESULT getDeclaration(ref IXMLDOMNode node, out ISchemaItem* item) mut => VT.getDeclaration(ref this, ref node, out item);
+			public HResult validate() mut => VT.validate(ref this);
+			public HResult put_validateOnLoad(int16 validateOnLoad) mut => VT.put_validateOnLoad(ref this, validateOnLoad);
+			public HResult get_validateOnLoad(out int16 validateOnLoad) mut => VT.get_validateOnLoad(ref this, out validateOnLoad);
+			public HResult getSchema(char16* namespaceURI, out ISchema* schema) mut => VT.getSchema(ref this, namespaceURI, out schema);
+			public HResult getDeclaration(ref IXMLDOMNode node, out ISchemaItem* item) mut => VT.getDeclaration(ref this, ref node, out item);
 
 			[CRepr]
 			public struct VTable : IXMLDOMSchemaCollection.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection2 self) validate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection2 self, int16 validateOnLoad) put_validateOnLoad;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection2 self, out int16 validateOnLoad) get_validateOnLoad;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection2 self, BSTR namespaceURI, out ISchema* schema) getSchema;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLDOMSchemaCollection2 self, ref IXMLDOMNode node, out ISchemaItem* item) getDeclaration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection2 self) validate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection2 self, int16 validateOnLoad) put_validateOnLoad;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection2 self, out int16 validateOnLoad) get_validateOnLoad;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection2 self, char16* namespaceURI, out ISchema* schema) getSchema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLDOMSchemaCollection2 self, ref IXMLDOMNode node, out ISchemaItem* item) getDeclaration;
 			}
 		}
 		[CRepr]
@@ -2745,16 +2749,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_item(int32 index, out BSTR bstr) mut => VT.get_item(ref this, index, out bstr);
-			public HRESULT get_length(out int32 length) mut => VT.get_length(ref this, out length);
-			public HRESULT get__newEnum(out IUnknown* ppunk) mut => VT.get__newEnum(ref this, out ppunk);
+			public HResult get_item(int32 index, out char16* bstr) mut => VT.get_item(ref this, index, out bstr);
+			public HResult get_length(out int32 length) mut => VT.get_length(ref this, out length);
+			public HResult get__newEnum(out IUnknown* ppunk) mut => VT.get__newEnum(ref this, out ppunk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaStringCollection self, int32 index, out BSTR bstr) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaStringCollection self, out int32 length) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaStringCollection self, out IUnknown* ppunk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaStringCollection self, int32 index, out char16* bstr) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaStringCollection self, out int32 length) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaStringCollection self, out IUnknown* ppunk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -2764,20 +2768,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_item(int32 index, out ISchemaItem* item) mut => VT.get_item(ref this, index, out item);
-			public HRESULT itemByName(BSTR name, out ISchemaItem* item) mut => VT.itemByName(ref this, name, out item);
-			public HRESULT itemByQName(BSTR name, BSTR namespaceURI, out ISchemaItem* item) mut => VT.itemByQName(ref this, name, namespaceURI, out item);
-			public HRESULT get_length(out int32 length) mut => VT.get_length(ref this, out length);
-			public HRESULT get__newEnum(out IUnknown* ppunk) mut => VT.get__newEnum(ref this, out ppunk);
+			public HResult get_item(int32 index, out ISchemaItem* item) mut => VT.get_item(ref this, index, out item);
+			public HResult itemByName(char16* name, out ISchemaItem* item) mut => VT.itemByName(ref this, name, out item);
+			public HResult itemByQName(char16* name, char16* namespaceURI, out ISchemaItem* item) mut => VT.itemByQName(ref this, name, namespaceURI, out item);
+			public HResult get_length(out int32 length) mut => VT.get_length(ref this, out length);
+			public HResult get__newEnum(out IUnknown* ppunk) mut => VT.get__newEnum(ref this, out ppunk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItemCollection self, int32 index, out ISchemaItem* item) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItemCollection self, BSTR name, out ISchemaItem* item) itemByName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItemCollection self, BSTR name, BSTR namespaceURI, out ISchemaItem* item) itemByQName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItemCollection self, out int32 length) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItemCollection self, out IUnknown* ppunk) get__newEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItemCollection self, int32 index, out ISchemaItem* item) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItemCollection self, char16* name, out ISchemaItem* item) itemByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItemCollection self, char16* name, char16* namespaceURI, out ISchemaItem* item) itemByQName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItemCollection self, out int32 length) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItemCollection self, out IUnknown* ppunk) get__newEnum;
 			}
 		}
 		[CRepr]
@@ -2787,24 +2791,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_name(out BSTR name) mut => VT.get_name(ref this, out name);
-			public HRESULT get_namespaceURI(out BSTR namespaceURI) mut => VT.get_namespaceURI(ref this, out namespaceURI);
-			public HRESULT get_schema(out ISchema* schema) mut => VT.get_schema(ref this, out schema);
-			public HRESULT get_id(out BSTR id) mut => VT.get_id(ref this, out id);
-			public HRESULT get_itemType(out SOMITEMTYPE itemType) mut => VT.get_itemType(ref this, out itemType);
-			public HRESULT get_unhandledAttributes(out IVBSAXAttributes* attributes) mut => VT.get_unhandledAttributes(ref this, out attributes);
-			public HRESULT writeAnnotation(ref IUnknown annotationSink, out int16 isWritten) mut => VT.writeAnnotation(ref this, ref annotationSink, out isWritten);
+			public HResult get_name(out char16* name) mut => VT.get_name(ref this, out name);
+			public HResult get_namespaceURI(out char16* namespaceURI) mut => VT.get_namespaceURI(ref this, out namespaceURI);
+			public HResult get_schema(out ISchema* schema) mut => VT.get_schema(ref this, out schema);
+			public HResult get_id(out char16* id) mut => VT.get_id(ref this, out id);
+			public HResult get_itemType(out SOMITEMTYPE itemType) mut => VT.get_itemType(ref this, out itemType);
+			public HResult get_unhandledAttributes(out IVBSAXAttributes* attributes) mut => VT.get_unhandledAttributes(ref this, out attributes);
+			public HResult writeAnnotation(ref IUnknown annotationSink, out int16 isWritten) mut => VT.writeAnnotation(ref this, ref annotationSink, out isWritten);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, out BSTR name) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, out BSTR namespaceURI) get_namespaceURI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, out ISchema* schema) get_schema;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, out BSTR id) get_id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, out SOMITEMTYPE itemType) get_itemType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, out IVBSAXAttributes* attributes) get_unhandledAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaItem self, ref IUnknown annotationSink, out int16 isWritten) writeAnnotation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, out char16* name) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, out char16* namespaceURI) get_namespaceURI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, out ISchema* schema) get_schema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, out char16* id) get_id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, out SOMITEMTYPE itemType) get_itemType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, out IVBSAXAttributes* attributes) get_unhandledAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaItem self, ref IUnknown annotationSink, out int16 isWritten) writeAnnotation;
 			}
 		}
 		[CRepr]
@@ -2814,28 +2818,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_targetNamespace(out BSTR targetNamespace) mut => VT.get_targetNamespace(ref this, out targetNamespace);
-			public HRESULT get_version(out BSTR version) mut => VT.get_version(ref this, out version);
-			public HRESULT get_types(out ISchemaItemCollection* types) mut => VT.get_types(ref this, out types);
-			public HRESULT get_elements(out ISchemaItemCollection* elements) mut => VT.get_elements(ref this, out elements);
-			public HRESULT get_attributes(out ISchemaItemCollection* attributes) mut => VT.get_attributes(ref this, out attributes);
-			public HRESULT get_attributeGroups(out ISchemaItemCollection* attributeGroups) mut => VT.get_attributeGroups(ref this, out attributeGroups);
-			public HRESULT get_modelGroups(out ISchemaItemCollection* modelGroups) mut => VT.get_modelGroups(ref this, out modelGroups);
-			public HRESULT get_notations(out ISchemaItemCollection* notations) mut => VT.get_notations(ref this, out notations);
-			public HRESULT get_schemaLocations(out ISchemaStringCollection* schemaLocations) mut => VT.get_schemaLocations(ref this, out schemaLocations);
+			public HResult get_targetNamespace(out char16* targetNamespace) mut => VT.get_targetNamespace(ref this, out targetNamespace);
+			public HResult get_version(out char16* version) mut => VT.get_version(ref this, out version);
+			public HResult get_types(out ISchemaItemCollection* types) mut => VT.get_types(ref this, out types);
+			public HResult get_elements(out ISchemaItemCollection* elements) mut => VT.get_elements(ref this, out elements);
+			public HResult get_attributes(out ISchemaItemCollection* attributes) mut => VT.get_attributes(ref this, out attributes);
+			public HResult get_attributeGroups(out ISchemaItemCollection* attributeGroups) mut => VT.get_attributeGroups(ref this, out attributeGroups);
+			public HResult get_modelGroups(out ISchemaItemCollection* modelGroups) mut => VT.get_modelGroups(ref this, out modelGroups);
+			public HResult get_notations(out ISchemaItemCollection* notations) mut => VT.get_notations(ref this, out notations);
+			public HResult get_schemaLocations(out ISchemaStringCollection* schemaLocations) mut => VT.get_schemaLocations(ref this, out schemaLocations);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out BSTR targetNamespace) get_targetNamespace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out BSTR version) get_version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaItemCollection* types) get_types;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaItemCollection* elements) get_elements;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaItemCollection* attributes) get_attributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaItemCollection* attributeGroups) get_attributeGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaItemCollection* modelGroups) get_modelGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaItemCollection* notations) get_notations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchema self, out ISchemaStringCollection* schemaLocations) get_schemaLocations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out char16* targetNamespace) get_targetNamespace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out char16* version) get_version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaItemCollection* types) get_types;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaItemCollection* elements) get_elements;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaItemCollection* attributes) get_attributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaItemCollection* attributeGroups) get_attributeGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaItemCollection* modelGroups) get_modelGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaItemCollection* notations) get_notations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchema self, out ISchemaStringCollection* schemaLocations) get_schemaLocations;
 			}
 		}
 		[CRepr]
@@ -2845,14 +2849,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_minOccurs(out VARIANT minOccurs) mut => VT.get_minOccurs(ref this, out minOccurs);
-			public HRESULT get_maxOccurs(out VARIANT maxOccurs) mut => VT.get_maxOccurs(ref this, out maxOccurs);
+			public HResult get_minOccurs(out VARIANT minOccurs) mut => VT.get_minOccurs(ref this, out minOccurs);
+			public HResult get_maxOccurs(out VARIANT maxOccurs) mut => VT.get_maxOccurs(ref this, out maxOccurs);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaParticle self, out VARIANT minOccurs) get_minOccurs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaParticle self, out VARIANT maxOccurs) get_maxOccurs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaParticle self, out VARIANT minOccurs) get_minOccurs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaParticle self, out VARIANT maxOccurs) get_maxOccurs;
 			}
 		}
 		[CRepr]
@@ -2862,22 +2866,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_type(out ISchemaType* type) mut => VT.get_type(ref this, out type);
-			public HRESULT get_scope(out ISchemaComplexType* @scope) mut => VT.get_scope(ref this, out @scope);
-			public HRESULT get_defaultValue(out BSTR defaultValue) mut => VT.get_defaultValue(ref this, out defaultValue);
-			public HRESULT get_fixedValue(out BSTR fixedValue) mut => VT.get_fixedValue(ref this, out fixedValue);
-			public HRESULT get_use(out SCHEMAUSE use) mut => VT.get_use(ref this, out use);
-			public HRESULT get_isReference(out int16 reference) mut => VT.get_isReference(ref this, out reference);
+			public HResult get_type(out ISchemaType* type) mut => VT.get_type(ref this, out type);
+			public HResult get_scope(out ISchemaComplexType* @scope) mut => VT.get_scope(ref this, out @scope);
+			public HResult get_defaultValue(out char16* defaultValue) mut => VT.get_defaultValue(ref this, out defaultValue);
+			public HResult get_fixedValue(out char16* fixedValue) mut => VT.get_fixedValue(ref this, out fixedValue);
+			public HResult get_use(out SCHEMAUSE use) mut => VT.get_use(ref this, out use);
+			public HResult get_isReference(out int16 reference) mut => VT.get_isReference(ref this, out reference);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttribute self, out ISchemaType* type) get_type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttribute self, out ISchemaComplexType* @scope) get_scope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttribute self, out BSTR defaultValue) get_defaultValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttribute self, out BSTR fixedValue) get_fixedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttribute self, out SCHEMAUSE use) get_use;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttribute self, out int16 reference) get_isReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttribute self, out ISchemaType* type) get_type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttribute self, out ISchemaComplexType* @scope) get_scope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttribute self, out char16* defaultValue) get_defaultValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttribute self, out char16* fixedValue) get_fixedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttribute self, out SCHEMAUSE use) get_use;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttribute self, out int16 reference) get_isReference;
 			}
 		}
 		[CRepr]
@@ -2887,32 +2891,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_type(out ISchemaType* type) mut => VT.get_type(ref this, out type);
-			public HRESULT get_scope(out ISchemaComplexType* @scope) mut => VT.get_scope(ref this, out @scope);
-			public HRESULT get_defaultValue(out BSTR defaultValue) mut => VT.get_defaultValue(ref this, out defaultValue);
-			public HRESULT get_fixedValue(out BSTR fixedValue) mut => VT.get_fixedValue(ref this, out fixedValue);
-			public HRESULT get_isNillable(out int16 nillable) mut => VT.get_isNillable(ref this, out nillable);
-			public HRESULT get_identityConstraints(out ISchemaItemCollection* constraints) mut => VT.get_identityConstraints(ref this, out constraints);
-			public HRESULT get_substitutionGroup(out ISchemaElement* element) mut => VT.get_substitutionGroup(ref this, out element);
-			public HRESULT get_substitutionGroupExclusions(out SCHEMADERIVATIONMETHOD exclusions) mut => VT.get_substitutionGroupExclusions(ref this, out exclusions);
-			public HRESULT get_disallowedSubstitutions(out SCHEMADERIVATIONMETHOD disallowed) mut => VT.get_disallowedSubstitutions(ref this, out disallowed);
-			public HRESULT get_isAbstract(out int16 @abstract) mut => VT.get_isAbstract(ref this, out @abstract);
-			public HRESULT get_isReference(out int16 reference) mut => VT.get_isReference(ref this, out reference);
+			public HResult get_type(out ISchemaType* type) mut => VT.get_type(ref this, out type);
+			public HResult get_scope(out ISchemaComplexType* @scope) mut => VT.get_scope(ref this, out @scope);
+			public HResult get_defaultValue(out char16* defaultValue) mut => VT.get_defaultValue(ref this, out defaultValue);
+			public HResult get_fixedValue(out char16* fixedValue) mut => VT.get_fixedValue(ref this, out fixedValue);
+			public HResult get_isNillable(out int16 nillable) mut => VT.get_isNillable(ref this, out nillable);
+			public HResult get_identityConstraints(out ISchemaItemCollection* constraints) mut => VT.get_identityConstraints(ref this, out constraints);
+			public HResult get_substitutionGroup(out ISchemaElement* element) mut => VT.get_substitutionGroup(ref this, out element);
+			public HResult get_substitutionGroupExclusions(out SCHEMADERIVATIONMETHOD exclusions) mut => VT.get_substitutionGroupExclusions(ref this, out exclusions);
+			public HResult get_disallowedSubstitutions(out SCHEMADERIVATIONMETHOD disallowed) mut => VT.get_disallowedSubstitutions(ref this, out disallowed);
+			public HResult get_isAbstract(out int16 @abstract) mut => VT.get_isAbstract(ref this, out @abstract);
+			public HResult get_isReference(out int16 reference) mut => VT.get_isReference(ref this, out reference);
 
 			[CRepr]
 			public struct VTable : ISchemaParticle.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out ISchemaType* type) get_type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out ISchemaComplexType* @scope) get_scope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out BSTR defaultValue) get_defaultValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out BSTR fixedValue) get_fixedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out int16 nillable) get_isNillable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out ISchemaItemCollection* constraints) get_identityConstraints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out ISchemaElement* element) get_substitutionGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out SCHEMADERIVATIONMETHOD exclusions) get_substitutionGroupExclusions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out SCHEMADERIVATIONMETHOD disallowed) get_disallowedSubstitutions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out int16 @abstract) get_isAbstract;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaElement self, out int16 reference) get_isReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out ISchemaType* type) get_type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out ISchemaComplexType* @scope) get_scope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out char16* defaultValue) get_defaultValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out char16* fixedValue) get_fixedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out int16 nillable) get_isNillable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out ISchemaItemCollection* constraints) get_identityConstraints;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out ISchemaElement* element) get_substitutionGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out SCHEMADERIVATIONMETHOD exclusions) get_substitutionGroupExclusions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out SCHEMADERIVATIONMETHOD disallowed) get_disallowedSubstitutions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out int16 @abstract) get_isAbstract;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaElement self, out int16 reference) get_isReference;
 			}
 		}
 		[CRepr]
@@ -2922,44 +2926,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_baseTypes(out ISchemaItemCollection* baseTypes) mut => VT.get_baseTypes(ref this, out baseTypes);
-			public HRESULT get_final(out SCHEMADERIVATIONMETHOD final) mut => VT.get_final(ref this, out final);
-			public HRESULT get_variety(out SCHEMATYPEVARIETY variety) mut => VT.get_variety(ref this, out variety);
-			public HRESULT get_derivedBy(out SCHEMADERIVATIONMETHOD derivedBy) mut => VT.get_derivedBy(ref this, out derivedBy);
-			public HRESULT isValid(BSTR data, out int16 valid) mut => VT.isValid(ref this, data, out valid);
-			public HRESULT get_minExclusive(out BSTR minExclusive) mut => VT.get_minExclusive(ref this, out minExclusive);
-			public HRESULT get_minInclusive(out BSTR minInclusive) mut => VT.get_minInclusive(ref this, out minInclusive);
-			public HRESULT get_maxExclusive(out BSTR maxExclusive) mut => VT.get_maxExclusive(ref this, out maxExclusive);
-			public HRESULT get_maxInclusive(out BSTR maxInclusive) mut => VT.get_maxInclusive(ref this, out maxInclusive);
-			public HRESULT get_totalDigits(out VARIANT totalDigits) mut => VT.get_totalDigits(ref this, out totalDigits);
-			public HRESULT get_fractionDigits(out VARIANT fractionDigits) mut => VT.get_fractionDigits(ref this, out fractionDigits);
-			public HRESULT get_length(out VARIANT length) mut => VT.get_length(ref this, out length);
-			public HRESULT get_minLength(out VARIANT minLength) mut => VT.get_minLength(ref this, out minLength);
-			public HRESULT get_maxLength(out VARIANT maxLength) mut => VT.get_maxLength(ref this, out maxLength);
-			public HRESULT get_enumeration(out ISchemaStringCollection* enumeration) mut => VT.get_enumeration(ref this, out enumeration);
-			public HRESULT get_whitespace(out SCHEMAWHITESPACE whitespace) mut => VT.get_whitespace(ref this, out whitespace);
-			public HRESULT get_patterns(out ISchemaStringCollection* patterns) mut => VT.get_patterns(ref this, out patterns);
+			public HResult get_baseTypes(out ISchemaItemCollection* baseTypes) mut => VT.get_baseTypes(ref this, out baseTypes);
+			public HResult get_final(out SCHEMADERIVATIONMETHOD final) mut => VT.get_final(ref this, out final);
+			public HResult get_variety(out SCHEMATYPEVARIETY variety) mut => VT.get_variety(ref this, out variety);
+			public HResult get_derivedBy(out SCHEMADERIVATIONMETHOD derivedBy) mut => VT.get_derivedBy(ref this, out derivedBy);
+			public HResult isValid(char16* data, out int16 valid) mut => VT.isValid(ref this, data, out valid);
+			public HResult get_minExclusive(out char16* minExclusive) mut => VT.get_minExclusive(ref this, out minExclusive);
+			public HResult get_minInclusive(out char16* minInclusive) mut => VT.get_minInclusive(ref this, out minInclusive);
+			public HResult get_maxExclusive(out char16* maxExclusive) mut => VT.get_maxExclusive(ref this, out maxExclusive);
+			public HResult get_maxInclusive(out char16* maxInclusive) mut => VT.get_maxInclusive(ref this, out maxInclusive);
+			public HResult get_totalDigits(out VARIANT totalDigits) mut => VT.get_totalDigits(ref this, out totalDigits);
+			public HResult get_fractionDigits(out VARIANT fractionDigits) mut => VT.get_fractionDigits(ref this, out fractionDigits);
+			public HResult get_length(out VARIANT length) mut => VT.get_length(ref this, out length);
+			public HResult get_minLength(out VARIANT minLength) mut => VT.get_minLength(ref this, out minLength);
+			public HResult get_maxLength(out VARIANT maxLength) mut => VT.get_maxLength(ref this, out maxLength);
+			public HResult get_enumeration(out ISchemaStringCollection* enumeration) mut => VT.get_enumeration(ref this, out enumeration);
+			public HResult get_whitespace(out SCHEMAWHITESPACE whitespace) mut => VT.get_whitespace(ref this, out whitespace);
+			public HResult get_patterns(out ISchemaStringCollection* patterns) mut => VT.get_patterns(ref this, out patterns);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out ISchemaItemCollection* baseTypes) get_baseTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out SCHEMADERIVATIONMETHOD final) get_final;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out SCHEMATYPEVARIETY variety) get_variety;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out SCHEMADERIVATIONMETHOD derivedBy) get_derivedBy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, BSTR data, out int16 valid) isValid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out BSTR minExclusive) get_minExclusive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out BSTR minInclusive) get_minInclusive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out BSTR maxExclusive) get_maxExclusive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out BSTR maxInclusive) get_maxInclusive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out VARIANT totalDigits) get_totalDigits;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out VARIANT fractionDigits) get_fractionDigits;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out VARIANT length) get_length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out VARIANT minLength) get_minLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out VARIANT maxLength) get_maxLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out ISchemaStringCollection* enumeration) get_enumeration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out SCHEMAWHITESPACE whitespace) get_whitespace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaType self, out ISchemaStringCollection* patterns) get_patterns;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out ISchemaItemCollection* baseTypes) get_baseTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out SCHEMADERIVATIONMETHOD final) get_final;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out SCHEMATYPEVARIETY variety) get_variety;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out SCHEMADERIVATIONMETHOD derivedBy) get_derivedBy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, char16* data, out int16 valid) isValid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out char16* minExclusive) get_minExclusive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out char16* minInclusive) get_minInclusive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out char16* maxExclusive) get_maxExclusive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out char16* maxInclusive) get_maxInclusive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out VARIANT totalDigits) get_totalDigits;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out VARIANT fractionDigits) get_fractionDigits;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out VARIANT length) get_length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out VARIANT minLength) get_minLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out VARIANT maxLength) get_maxLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out ISchemaStringCollection* enumeration) get_enumeration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out SCHEMAWHITESPACE whitespace) get_whitespace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaType self, out ISchemaStringCollection* patterns) get_patterns;
 			}
 		}
 		[CRepr]
@@ -2969,22 +2973,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_isAbstract(out int16 @abstract) mut => VT.get_isAbstract(ref this, out @abstract);
-			public HRESULT get_anyAttribute(out ISchemaAny* anyAttribute) mut => VT.get_anyAttribute(ref this, out anyAttribute);
-			public HRESULT get_attributes(out ISchemaItemCollection* attributes) mut => VT.get_attributes(ref this, out attributes);
-			public HRESULT get_contentType(out SCHEMACONTENTTYPE contentType) mut => VT.get_contentType(ref this, out contentType);
-			public HRESULT get_contentModel(out ISchemaModelGroup* contentModel) mut => VT.get_contentModel(ref this, out contentModel);
-			public HRESULT get_prohibitedSubstitutions(out SCHEMADERIVATIONMETHOD prohibited) mut => VT.get_prohibitedSubstitutions(ref this, out prohibited);
+			public HResult get_isAbstract(out int16 @abstract) mut => VT.get_isAbstract(ref this, out @abstract);
+			public HResult get_anyAttribute(out ISchemaAny* anyAttribute) mut => VT.get_anyAttribute(ref this, out anyAttribute);
+			public HResult get_attributes(out ISchemaItemCollection* attributes) mut => VT.get_attributes(ref this, out attributes);
+			public HResult get_contentType(out SCHEMACONTENTTYPE contentType) mut => VT.get_contentType(ref this, out contentType);
+			public HResult get_contentModel(out ISchemaModelGroup* contentModel) mut => VT.get_contentModel(ref this, out contentModel);
+			public HResult get_prohibitedSubstitutions(out SCHEMADERIVATIONMETHOD prohibited) mut => VT.get_prohibitedSubstitutions(ref this, out prohibited);
 
 			[CRepr]
 			public struct VTable : ISchemaType.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaComplexType self, out int16 @abstract) get_isAbstract;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaComplexType self, out ISchemaAny* anyAttribute) get_anyAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaComplexType self, out ISchemaItemCollection* attributes) get_attributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaComplexType self, out SCHEMACONTENTTYPE contentType) get_contentType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaComplexType self, out ISchemaModelGroup* contentModel) get_contentModel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaComplexType self, out SCHEMADERIVATIONMETHOD prohibited) get_prohibitedSubstitutions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaComplexType self, out int16 @abstract) get_isAbstract;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaComplexType self, out ISchemaAny* anyAttribute) get_anyAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaComplexType self, out ISchemaItemCollection* attributes) get_attributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaComplexType self, out SCHEMACONTENTTYPE contentType) get_contentType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaComplexType self, out ISchemaModelGroup* contentModel) get_contentModel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaComplexType self, out SCHEMADERIVATIONMETHOD prohibited) get_prohibitedSubstitutions;
 			}
 		}
 		[CRepr]
@@ -2994,14 +2998,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_anyAttribute(out ISchemaAny* anyAttribute) mut => VT.get_anyAttribute(ref this, out anyAttribute);
-			public HRESULT get_attributes(out ISchemaItemCollection* attributes) mut => VT.get_attributes(ref this, out attributes);
+			public HResult get_anyAttribute(out ISchemaAny* anyAttribute) mut => VT.get_anyAttribute(ref this, out anyAttribute);
+			public HResult get_attributes(out ISchemaItemCollection* attributes) mut => VT.get_attributes(ref this, out attributes);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttributeGroup self, out ISchemaAny* anyAttribute) get_anyAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAttributeGroup self, out ISchemaItemCollection* attributes) get_attributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttributeGroup self, out ISchemaAny* anyAttribute) get_anyAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAttributeGroup self, out ISchemaItemCollection* attributes) get_attributes;
 			}
 		}
 		[CRepr]
@@ -3011,12 +3015,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_particles(out ISchemaItemCollection* particles) mut => VT.get_particles(ref this, out particles);
+			public HResult get_particles(out ISchemaItemCollection* particles) mut => VT.get_particles(ref this, out particles);
 
 			[CRepr]
 			public struct VTable : ISchemaParticle.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaModelGroup self, out ISchemaItemCollection* particles) get_particles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaModelGroup self, out ISchemaItemCollection* particles) get_particles;
 			}
 		}
 		[CRepr]
@@ -3026,14 +3030,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_namespaces(out ISchemaStringCollection* namespaces) mut => VT.get_namespaces(ref this, out namespaces);
-			public HRESULT get_processContents(out SCHEMAPROCESSCONTENTS processContents) mut => VT.get_processContents(ref this, out processContents);
+			public HResult get_namespaces(out ISchemaStringCollection* namespaces) mut => VT.get_namespaces(ref this, out namespaces);
+			public HResult get_processContents(out SCHEMAPROCESSCONTENTS processContents) mut => VT.get_processContents(ref this, out processContents);
 
 			[CRepr]
 			public struct VTable : ISchemaParticle.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAny self, out ISchemaStringCollection* namespaces) get_namespaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaAny self, out SCHEMAPROCESSCONTENTS processContents) get_processContents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAny self, out ISchemaStringCollection* namespaces) get_namespaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaAny self, out SCHEMAPROCESSCONTENTS processContents) get_processContents;
 			}
 		}
 		[CRepr]
@@ -3043,16 +3047,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_selector(out BSTR selector) mut => VT.get_selector(ref this, out selector);
-			public HRESULT get_fields(out ISchemaStringCollection* fields) mut => VT.get_fields(ref this, out fields);
-			public HRESULT get_referencedKey(out ISchemaIdentityConstraint* key) mut => VT.get_referencedKey(ref this, out key);
+			public HResult get_selector(out char16* selector) mut => VT.get_selector(ref this, out selector);
+			public HResult get_fields(out ISchemaStringCollection* fields) mut => VT.get_fields(ref this, out fields);
+			public HResult get_referencedKey(out ISchemaIdentityConstraint* key) mut => VT.get_referencedKey(ref this, out key);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaIdentityConstraint self, out BSTR selector) get_selector;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaIdentityConstraint self, out ISchemaStringCollection* fields) get_fields;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaIdentityConstraint self, out ISchemaIdentityConstraint* key) get_referencedKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaIdentityConstraint self, out char16* selector) get_selector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaIdentityConstraint self, out ISchemaStringCollection* fields) get_fields;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaIdentityConstraint self, out ISchemaIdentityConstraint* key) get_referencedKey;
 			}
 		}
 		[CRepr]
@@ -3062,14 +3066,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_systemIdentifier(out BSTR uri) mut => VT.get_systemIdentifier(ref this, out uri);
-			public HRESULT get_publicIdentifier(out BSTR uri) mut => VT.get_publicIdentifier(ref this, out uri);
+			public HResult get_systemIdentifier(out char16* uri) mut => VT.get_systemIdentifier(ref this, out uri);
+			public HResult get_publicIdentifier(out char16* uri) mut => VT.get_publicIdentifier(ref this, out uri);
 
 			[CRepr]
 			public struct VTable : ISchemaItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaNotation self, out BSTR uri) get_systemIdentifier;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISchemaNotation self, out BSTR uri) get_publicIdentifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaNotation self, out char16* uri) get_systemIdentifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISchemaNotation self, out char16* uri) get_publicIdentifier;
 			}
 		}
 		[CRepr]
@@ -3079,20 +3083,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnRedirect(ref IXMLHTTPRequest2 pXHR, PWSTR pwszRedirectUrl) mut => VT.OnRedirect(ref this, ref pXHR, pwszRedirectUrl);
-			public HRESULT OnHeadersAvailable(ref IXMLHTTPRequest2 pXHR, uint32 dwStatus, PWSTR pwszStatus) mut => VT.OnHeadersAvailable(ref this, ref pXHR, dwStatus, pwszStatus);
-			public HRESULT OnDataAvailable(ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) mut => VT.OnDataAvailable(ref this, ref pXHR, ref pResponseStream);
-			public HRESULT OnResponseReceived(ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) mut => VT.OnResponseReceived(ref this, ref pXHR, ref pResponseStream);
-			public HRESULT OnError(ref IXMLHTTPRequest2 pXHR, HRESULT hrError) mut => VT.OnError(ref this, ref pXHR, hrError);
+			public HResult OnRedirect(ref IXMLHTTPRequest2 pXHR, char16* pwszRedirectUrl) mut => VT.OnRedirect(ref this, ref pXHR, pwszRedirectUrl);
+			public HResult OnHeadersAvailable(ref IXMLHTTPRequest2 pXHR, uint32 dwStatus, char16* pwszStatus) mut => VT.OnHeadersAvailable(ref this, ref pXHR, dwStatus, pwszStatus);
+			public HResult OnDataAvailable(ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) mut => VT.OnDataAvailable(ref this, ref pXHR, ref pResponseStream);
+			public HResult OnResponseReceived(ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) mut => VT.OnResponseReceived(ref this, ref pXHR, ref pResponseStream);
+			public HResult OnError(ref IXMLHTTPRequest2 pXHR, HResult hrError) mut => VT.OnError(ref this, ref pXHR, hrError);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, PWSTR pwszRedirectUrl) OnRedirect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, uint32 dwStatus, PWSTR pwszStatus) OnHeadersAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) OnDataAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) OnResponseReceived;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, HRESULT hrError) OnError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, char16* pwszRedirectUrl) OnRedirect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, uint32 dwStatus, char16* pwszStatus) OnHeadersAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) OnDataAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, ref ISequentialStream pResponseStream) OnResponseReceived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2Callback self, ref IXMLHTTPRequest2 pXHR, HResult hrError) OnError;
 			}
 		}
 		[CRepr]
@@ -3102,30 +3106,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Open(PWSTR pwszMethod, PWSTR pwszUrl, ref IXMLHTTPRequest2Callback pStatusCallback, PWSTR pwszUserName, PWSTR pwszPassword, PWSTR pwszProxyUserName, PWSTR pwszProxyPassword) mut => VT.Open(ref this, pwszMethod, pwszUrl, ref pStatusCallback, pwszUserName, pwszPassword, pwszProxyUserName, pwszProxyPassword);
-			public HRESULT Send(ref ISequentialStream pBody, uint64 cbBody) mut => VT.Send(ref this, ref pBody, cbBody);
-			public HRESULT Abort() mut => VT.Abort(ref this);
-			public HRESULT SetCookie(in XHR_COOKIE pCookie, out uint32 pdwCookieState) mut => VT.SetCookie(ref this, pCookie, out pdwCookieState);
-			public HRESULT SetCustomResponseStream(ref ISequentialStream pSequentialStream) mut => VT.SetCustomResponseStream(ref this, ref pSequentialStream);
-			public HRESULT SetProperty(XHR_PROPERTY eProperty, uint64 ullValue) mut => VT.SetProperty(ref this, eProperty, ullValue);
-			public HRESULT SetRequestHeader(PWSTR pwszHeader, PWSTR pwszValue) mut => VT.SetRequestHeader(ref this, pwszHeader, pwszValue);
-			public HRESULT GetAllResponseHeaders(out uint16* ppwszHeaders) mut => VT.GetAllResponseHeaders(ref this, out ppwszHeaders);
-			public HRESULT GetCookie(PWSTR pwszUrl, PWSTR pwszName, uint32 dwFlags, out uint32 pcCookies, XHR_COOKIE** ppCookies) mut => VT.GetCookie(ref this, pwszUrl, pwszName, dwFlags, out pcCookies, ppCookies);
-			public HRESULT GetResponseHeader(PWSTR pwszHeader, out uint16* ppwszValue) mut => VT.GetResponseHeader(ref this, pwszHeader, out ppwszValue);
+			public HResult Open(char16* pwszMethod, char16* pwszUrl, ref IXMLHTTPRequest2Callback pStatusCallback, char16* pwszUserName, char16* pwszPassword, char16* pwszProxyUserName, char16* pwszProxyPassword) mut => VT.Open(ref this, pwszMethod, pwszUrl, ref pStatusCallback, pwszUserName, pwszPassword, pwszProxyUserName, pwszProxyPassword);
+			public HResult Send(ref ISequentialStream pBody, uint64 cbBody) mut => VT.Send(ref this, ref pBody, cbBody);
+			public HResult Abort() mut => VT.Abort(ref this);
+			public HResult SetCookie(in XHR_COOKIE pCookie, out uint32 pdwCookieState) mut => VT.SetCookie(ref this, pCookie, out pdwCookieState);
+			public HResult SetCustomResponseStream(ref ISequentialStream pSequentialStream) mut => VT.SetCustomResponseStream(ref this, ref pSequentialStream);
+			public HResult SetProperty(XHR_PROPERTY eProperty, uint64 ullValue) mut => VT.SetProperty(ref this, eProperty, ullValue);
+			public HResult SetRequestHeader(char16* pwszHeader, char16* pwszValue) mut => VT.SetRequestHeader(ref this, pwszHeader, pwszValue);
+			public HResult GetAllResponseHeaders(out uint16* ppwszHeaders) mut => VT.GetAllResponseHeaders(ref this, out ppwszHeaders);
+			public HResult GetCookie(char16* pwszUrl, char16* pwszName, uint32 dwFlags, out uint32 pcCookies, XHR_COOKIE** ppCookies) mut => VT.GetCookie(ref this, pwszUrl, pwszName, dwFlags, out pcCookies, ppCookies);
+			public HResult GetResponseHeader(char16* pwszHeader, out uint16* ppwszValue) mut => VT.GetResponseHeader(ref this, pwszHeader, out ppwszValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, PWSTR pwszMethod, PWSTR pwszUrl, ref IXMLHTTPRequest2Callback pStatusCallback, PWSTR pwszUserName, PWSTR pwszPassword, PWSTR pwszProxyUserName, PWSTR pwszProxyPassword) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, ref ISequentialStream pBody, uint64 cbBody) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self) Abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, in XHR_COOKIE pCookie, out uint32 pdwCookieState) SetCookie;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, ref ISequentialStream pSequentialStream) SetCustomResponseStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, XHR_PROPERTY eProperty, uint64 ullValue) SetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, PWSTR pwszHeader, PWSTR pwszValue) SetRequestHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, out uint16* ppwszHeaders) GetAllResponseHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, PWSTR pwszUrl, PWSTR pwszName, uint32 dwFlags, out uint32 pcCookies, XHR_COOKIE** ppCookies) GetCookie;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest2 self, PWSTR pwszHeader, out uint16* ppwszValue) GetResponseHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, char16* pwszMethod, char16* pwszUrl, ref IXMLHTTPRequest2Callback pStatusCallback, char16* pwszUserName, char16* pwszPassword, char16* pwszProxyUserName, char16* pwszProxyPassword) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, ref ISequentialStream pBody, uint64 cbBody) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self) Abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, in XHR_COOKIE pCookie, out uint32 pdwCookieState) SetCookie;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, ref ISequentialStream pSequentialStream) SetCustomResponseStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, XHR_PROPERTY eProperty, uint64 ullValue) SetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, char16* pwszHeader, char16* pwszValue) SetRequestHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, out uint16* ppwszHeaders) GetAllResponseHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, char16* pwszUrl, char16* pwszName, uint32 dwFlags, out uint32 pcCookies, XHR_COOKIE** ppCookies) GetCookie;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest2 self, char16* pwszHeader, out uint16* ppwszValue) GetResponseHeader;
 			}
 		}
 		[CRepr]
@@ -3135,14 +3139,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnServerCertificateReceived(ref IXMLHTTPRequest3 pXHR, uint32 dwCertificateErrors, uint32 cServerCertificateChain, XHR_CERT* rgServerCertificateChain) mut => VT.OnServerCertificateReceived(ref this, ref pXHR, dwCertificateErrors, cServerCertificateChain, rgServerCertificateChain);
-			public HRESULT OnClientCertificateRequested(ref IXMLHTTPRequest3 pXHR, uint32 cIssuerList, uint16** rgpwszIssuerList) mut => VT.OnClientCertificateRequested(ref this, ref pXHR, cIssuerList, rgpwszIssuerList);
+			public HResult OnServerCertificateReceived(ref IXMLHTTPRequest3 pXHR, uint32 dwCertificateErrors, uint32 cServerCertificateChain, XHR_CERT* rgServerCertificateChain) mut => VT.OnServerCertificateReceived(ref this, ref pXHR, dwCertificateErrors, cServerCertificateChain, rgServerCertificateChain);
+			public HResult OnClientCertificateRequested(ref IXMLHTTPRequest3 pXHR, uint32 cIssuerList, uint16** rgpwszIssuerList) mut => VT.OnClientCertificateRequested(ref this, ref pXHR, cIssuerList, rgpwszIssuerList);
 
 			[CRepr]
 			public struct VTable : IXMLHTTPRequest2Callback.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest3Callback self, ref IXMLHTTPRequest3 pXHR, uint32 dwCertificateErrors, uint32 cServerCertificateChain, XHR_CERT* rgServerCertificateChain) OnServerCertificateReceived;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest3Callback self, ref IXMLHTTPRequest3 pXHR, uint32 cIssuerList, uint16** rgpwszIssuerList) OnClientCertificateRequested;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest3Callback self, ref IXMLHTTPRequest3 pXHR, uint32 dwCertificateErrors, uint32 cServerCertificateChain, XHR_CERT* rgServerCertificateChain) OnServerCertificateReceived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest3Callback self, ref IXMLHTTPRequest3 pXHR, uint32 cIssuerList, uint16** rgpwszIssuerList) OnClientCertificateRequested;
 			}
 		}
 		[CRepr]
@@ -3152,12 +3156,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetClientCertificate(uint32 cbClientCertificateHash, uint8* pbClientCertificateHash, PWSTR pwszPin) mut => VT.SetClientCertificate(ref this, cbClientCertificateHash, pbClientCertificateHash, pwszPin);
+			public HResult SetClientCertificate(uint32 cbClientCertificateHash, uint8* pbClientCertificateHash, char16* pwszPin) mut => VT.SetClientCertificate(ref this, cbClientCertificateHash, pbClientCertificateHash, pwszPin);
 
 			[CRepr]
 			public struct VTable : IXMLHTTPRequest2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLHTTPRequest3 self, uint32 cbClientCertificateHash, uint8* pbClientCertificateHash, PWSTR pwszPin) SetClientCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLHTTPRequest3 self, uint32 cbClientCertificateHash, uint8* pbClientCertificateHash, char16* pwszPin) SetClientCertificate;
 			}
 		}
 		

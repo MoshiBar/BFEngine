@@ -19,8 +19,8 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("licenseprotection.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterLicenseKeyWithExpiration(PWSTR licenseKey, uint32 validityInDays, out LicenseProtectionStatus status);
+		public static extern HResult RegisterLicenseKeyWithExpiration(char16* licenseKey, uint32 validityInDays, out LicenseProtectionStatus status);
 		[Import("licenseprotection.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ValidateLicenseKeyProtection(PWSTR licenseKey, out FILETIME notValidBefore, out FILETIME notValidAfter, out LicenseProtectionStatus status);
+		public static extern HResult ValidateLicenseKeyProtection(char16* licenseKey, out FileTime notValidBefore, out FileTime notValidAfter, out LicenseProtectionStatus status);
 	}
 }

@@ -156,7 +156,7 @@ namespace Win32
 		[Import("xinputuap.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 XInputGetCapabilities(uint32 dwUserIndex, uint32 dwFlags, out XINPUT_CAPABILITIES pCapabilities);
 		[Import("xinputuap.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void XInputEnable(BOOL enable);
+		public static extern void XInputEnable(IntBool enable);
 		[Import("xinputuap.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 XInputGetAudioDeviceIds(uint32 dwUserIndex, char16* pRenderDeviceId, uint32* pRenderCount, char16* pCaptureDeviceId, uint32* pCaptureCount);
 		[Import("xinputuap.dll"), CLink, CallingConvention(.Stdcall)]

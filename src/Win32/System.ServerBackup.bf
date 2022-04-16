@@ -9,7 +9,7 @@ namespace Win32
 		
 		public const uint32 WSB_MAX_OB_STATUS_VALUE_TYPE_PAIR = 5;
 		public const uint32 WSB_MAX_OB_STATUS_ENTRY = 5;
-		public const HRESULT WSBAPP_ASYNC_IN_PROGRESS = 7995396;
+		public const HResult WSBAPP_ASYNC_IN_PROGRESS = 7995396;
 		
 		// --- Enums ---
 		
@@ -29,7 +29,7 @@ namespace Win32
 		[CRepr]
 		public struct WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR
 		{
-			public PWSTR m_wszObStatusEntryPairValue;
+			public char16* m_wszObStatusEntryPairValue;
 			public WSB_OB_STATUS_ENTRY_PAIR_TYPE m_ObStatusEntryPairType;
 		}
 		[CRepr]
@@ -51,11 +51,11 @@ namespace Win32
 		[CRepr]
 		public struct WSB_OB_REGISTRATION_INFO
 		{
-			public PWSTR m_wszResourceDLL;
+			public char16* m_wszResourceDLL;
 			public Guid m_guidSnapinId;
 			public uint32 m_dwProviderName;
 			public uint32 m_dwProviderIcon;
-			public BOOLEAN m_bSupportsRemoting;
+			public bool m_bSupportsRemoting;
 		}
 		
 		// --- COM Interfaces ---
@@ -67,12 +67,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CheckConsistency(PWSTR wszWriterMetadata, PWSTR wszComponentName, PWSTR wszComponentLogicalPath, uint32 cVolumes, PWSTR* rgwszSourceVolumePath, PWSTR* rgwszSnapshotVolumePath, out IWsbApplicationAsync* ppAsync) mut => VT.CheckConsistency(ref this, wszWriterMetadata, wszComponentName, wszComponentLogicalPath, cVolumes, rgwszSourceVolumePath, rgwszSnapshotVolumePath, out ppAsync);
+			public HResult CheckConsistency(char16* wszWriterMetadata, char16* wszComponentName, char16* wszComponentLogicalPath, uint32 cVolumes, char16** rgwszSourceVolumePath, char16** rgwszSnapshotVolumePath, out IWsbApplicationAsync* ppAsync) mut => VT.CheckConsistency(ref this, wszWriterMetadata, wszComponentName, wszComponentLogicalPath, cVolumes, rgwszSourceVolumePath, rgwszSnapshotVolumePath, out ppAsync);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationBackupSupport self, PWSTR wszWriterMetadata, PWSTR wszComponentName, PWSTR wszComponentLogicalPath, uint32 cVolumes, PWSTR* rgwszSourceVolumePath, PWSTR* rgwszSnapshotVolumePath, out IWsbApplicationAsync* ppAsync) CheckConsistency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationBackupSupport self, char16* wszWriterMetadata, char16* wszComponentName, char16* wszComponentLogicalPath, uint32 cVolumes, char16** rgwszSourceVolumePath, char16** rgwszSnapshotVolumePath, out IWsbApplicationAsync* ppAsync) CheckConsistency;
 			}
 		}
 		[CRepr]
@@ -82,18 +82,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PreRestore(PWSTR wszWriterMetadata, PWSTR wszComponentName, PWSTR wszComponentLogicalPath, BOOLEAN bNoRollForward) mut => VT.PreRestore(ref this, wszWriterMetadata, wszComponentName, wszComponentLogicalPath, bNoRollForward);
-			public HRESULT PostRestore(PWSTR wszWriterMetadata, PWSTR wszComponentName, PWSTR wszComponentLogicalPath, BOOLEAN bNoRollForward) mut => VT.PostRestore(ref this, wszWriterMetadata, wszComponentName, wszComponentLogicalPath, bNoRollForward);
-			public HRESULT OrderComponents(uint32 cComponents, PWSTR* rgComponentName, PWSTR* rgComponentLogicalPaths, PWSTR** prgComponentName, PWSTR** prgComponentLogicalPath) mut => VT.OrderComponents(ref this, cComponents, rgComponentName, rgComponentLogicalPaths, prgComponentName, prgComponentLogicalPath);
-			public HRESULT IsRollForwardSupported(out uint8 pbRollForwardSupported) mut => VT.IsRollForwardSupported(ref this, out pbRollForwardSupported);
+			public HResult PreRestore(char16* wszWriterMetadata, char16* wszComponentName, char16* wszComponentLogicalPath, bool bNoRollForward) mut => VT.PreRestore(ref this, wszWriterMetadata, wszComponentName, wszComponentLogicalPath, bNoRollForward);
+			public HResult PostRestore(char16* wszWriterMetadata, char16* wszComponentName, char16* wszComponentLogicalPath, bool bNoRollForward) mut => VT.PostRestore(ref this, wszWriterMetadata, wszComponentName, wszComponentLogicalPath, bNoRollForward);
+			public HResult OrderComponents(uint32 cComponents, char16** rgComponentName, char16** rgComponentLogicalPaths, PWSTR** prgComponentName, PWSTR** prgComponentLogicalPath) mut => VT.OrderComponents(ref this, cComponents, rgComponentName, rgComponentLogicalPaths, prgComponentName, prgComponentLogicalPath);
+			public HResult IsRollForwardSupported(out uint8 pbRollForwardSupported) mut => VT.IsRollForwardSupported(ref this, out pbRollForwardSupported);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationRestoreSupport self, PWSTR wszWriterMetadata, PWSTR wszComponentName, PWSTR wszComponentLogicalPath, BOOLEAN bNoRollForward) PreRestore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationRestoreSupport self, PWSTR wszWriterMetadata, PWSTR wszComponentName, PWSTR wszComponentLogicalPath, BOOLEAN bNoRollForward) PostRestore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationRestoreSupport self, uint32 cComponents, PWSTR* rgComponentName, PWSTR* rgComponentLogicalPaths, PWSTR** prgComponentName, PWSTR** prgComponentLogicalPath) OrderComponents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationRestoreSupport self, out uint8 pbRollForwardSupported) IsRollForwardSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationRestoreSupport self, char16* wszWriterMetadata, char16* wszComponentName, char16* wszComponentLogicalPath, bool bNoRollForward) PreRestore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationRestoreSupport self, char16* wszWriterMetadata, char16* wszComponentName, char16* wszComponentLogicalPath, bool bNoRollForward) PostRestore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationRestoreSupport self, uint32 cComponents, char16** rgComponentName, char16** rgComponentLogicalPaths, PWSTR** prgComponentName, PWSTR** prgComponentLogicalPath) OrderComponents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationRestoreSupport self, out uint8 pbRollForwardSupported) IsRollForwardSupported;
 			}
 		}
 		[CRepr]
@@ -103,14 +103,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryStatus(out HRESULT phrResult) mut => VT.QueryStatus(ref this, out phrResult);
-			public HRESULT Abort() mut => VT.Abort(ref this);
+			public HResult QueryStatus(out HResult phrResult) mut => VT.QueryStatus(ref this, out phrResult);
+			public HResult Abort() mut => VT.Abort(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationAsync self, out HRESULT phrResult) QueryStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWsbApplicationAsync self) Abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationAsync self, out HResult phrResult) QueryStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWsbApplicationAsync self) Abort;
 			}
 		}
 		

@@ -252,8 +252,8 @@ namespace Win32
 			public uint32 wLastError;
 			public HCONVLIST hConvList;
 			public CONVCONTEXT ConvCtxt;
-			public HWND hwnd;
-			public HWND hwndPartner;
+			public HWnd hwnd;
+			public HWnd hwndPartner;
 		}
 		[CRepr]
 		public struct DDEML_MSG_HOOK_DATA
@@ -267,9 +267,9 @@ namespace Win32
 		public struct MONMSGSTRUCT
 		{
 			public uint32 cb;
-			public HWND hwndTo;
+			public HWnd hwndTo;
 			public uint32 dwTime;
-			public HANDLE hTask;
+			public Handle hTask;
 			public uint32 wMsg;
 			public WPARAM wParam;
 			public LPARAM lParam;
@@ -280,7 +280,7 @@ namespace Win32
 		{
 			public uint32 cb;
 			public uint32 dwTime;
-			public HANDLE hTask;
+			public Handle hTask;
 			public uint32 dwRet;
 			public uint32 wType;
 			public uint32 wFmt;
@@ -298,20 +298,20 @@ namespace Win32
 		public struct MONHSZSTRUCTA
 		{
 			public uint32 cb;
-			public BOOL fsAction;
+			public IntBool fsAction;
 			public uint32 dwTime;
 			public HSZ hsz;
-			public HANDLE hTask;
-			public CHAR[0] str;
+			public Handle hTask;
+			public char8[0] str;
 		}
 		[CRepr]
 		public struct MONHSZSTRUCTW
 		{
 			public uint32 cb;
-			public BOOL fsAction;
+			public IntBool fsAction;
 			public uint32 dwTime;
 			public HSZ hsz;
-			public HANDLE hTask;
+			public Handle hTask;
 			public char16[0] str;
 		}
 		[CRepr]
@@ -320,21 +320,21 @@ namespace Win32
 			public uint32 cb;
 			public uint32 wLastError;
 			public uint32 dwTime;
-			public HANDLE hTask;
+			public Handle hTask;
 		}
 		[CRepr]
 		public struct MONLINKSTRUCT
 		{
 			public uint32 cb;
 			public uint32 dwTime;
-			public HANDLE hTask;
-			public BOOL fEstablished;
-			public BOOL fNoData;
+			public Handle hTask;
+			public IntBool fEstablished;
+			public IntBool fNoData;
 			public HSZ hszSvc;
 			public HSZ hszTopic;
 			public HSZ hszItem;
 			public uint32 wFmt;
-			public BOOL fServer;
+			public IntBool fServer;
 			public HCONV hConvServer;
 			public HCONV hConvClient;
 		}
@@ -342,9 +342,9 @@ namespace Win32
 		public struct MONCONVSTRUCT
 		{
 			public uint32 cb;
-			public BOOL fConnect;
+			public IntBool fConnect;
 			public uint32 dwTime;
-			public HANDLE hTask;
+			public Handle hTask;
 			public HSZ hszSvc;
 			public HSZ hszTopic;
 			public HCONV hConvClient;
@@ -369,15 +369,15 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeSetQualityOfService(HWND hwndClient, in SECURITY_QUALITY_OF_SERVICE pqosNew, out SECURITY_QUALITY_OF_SERVICE pqosPrev);
+		public static extern IntBool DdeSetQualityOfService(HWnd hwndClient, in SECURITY_QUALITY_OF_SERVICE pqosNew, out SECURITY_QUALITY_OF_SERVICE pqosPrev);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ImpersonateDdeClientWindow(HWND hWndClient, HWND hWndServer);
+		public static extern IntBool ImpersonateDdeClientWindow(HWnd hWndClient, HWnd hWndServer);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern LPARAM PackDDElParam(uint32 msg, uint uiLo, uint uiHi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnpackDDElParam(uint32 msg, LPARAM lParam, out uint puiLo, out uint puiHi);
+		public static extern IntBool UnpackDDElParam(uint32 msg, LPARAM lParam, out uint puiLo, out uint puiHi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FreeDDElParam(uint32 msg, LPARAM lParam);
+		public static extern IntBool FreeDDElParam(uint32 msg, LPARAM lParam);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern LPARAM ReuseDDElParam(LPARAM lParam, uint32 msgIn, uint32 msgOut, uint uiLo, uint uiHi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -385,31 +385,31 @@ namespace Win32
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DdeInitializeW(out uint32 pidInst, PFNCALLBACK pfnCallback, DDE_INITIALIZE_COMMAND afCmd, uint32 ulRes);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeUninitialize(uint32 idInst);
+		public static extern IntBool DdeUninitialize(uint32 idInst);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCONVLIST DdeConnectList(uint32 idInst, HSZ hszService, HSZ hszTopic, HCONVLIST hConvList, CONVCONTEXT* pCC);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCONV DdeQueryNextServer(HCONVLIST hConvList, HCONV hConvPrev);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeDisconnectList(HCONVLIST hConvList);
+		public static extern IntBool DdeDisconnectList(HCONVLIST hConvList);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCONV DdeConnect(uint32 idInst, HSZ hszService, HSZ hszTopic, CONVCONTEXT* pCC);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeDisconnect(HCONV hConv);
+		public static extern IntBool DdeDisconnect(HCONV hConv);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCONV DdeReconnect(HCONV hConv);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DdeQueryConvInfo(HCONV hConv, uint32 idTransaction, out CONVINFO pConvInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeSetUserHandle(HCONV hConv, uint32 id, uint hUser);
+		public static extern IntBool DdeSetUserHandle(HCONV hConv, uint32 id, uint hUser);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeAbandonTransaction(uint32 idInst, HCONV hConv, uint32 idTransaction);
+		public static extern IntBool DdeAbandonTransaction(uint32 idInst, HCONV hConv, uint32 idTransaction);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdePostAdvise(uint32 idInst, HSZ hszTopic, HSZ hszItem);
+		public static extern IntBool DdePostAdvise(uint32 idInst, HSZ hszTopic, HSZ hszItem);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeEnableCallback(uint32 idInst, HCONV hConv, DDE_ENABLE_CALLBACK_CMD wCmd);
+		public static extern IntBool DdeEnableCallback(uint32 idInst, HCONV hConv, DDE_ENABLE_CALLBACK_CMD wCmd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeImpersonateClient(HCONV hConv);
+		public static extern IntBool DdeImpersonateClient(HCONV hConv);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HDDEDATA DdeNameService(uint32 idInst, HSZ hsz1, HSZ hsz2, DDE_NAME_SERVICE_CMD afCmd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -423,49 +423,49 @@ namespace Win32
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint8* DdeAccessData(HDDEDATA hData, uint32* pcbDataSize);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeUnaccessData(HDDEDATA hData);
+		public static extern IntBool DdeUnaccessData(HDDEDATA hData);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeFreeDataHandle(HDDEDATA hData);
+		public static extern IntBool DdeFreeDataHandle(HDDEDATA hData);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DdeGetLastError(uint32 idInst);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HSZ DdeCreateStringHandleA(uint32 idInst, PSTR psz, int32 iCodePage);
+		public static extern HSZ DdeCreateStringHandleA(uint32 idInst, char8* psz, int32 iCodePage);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HSZ DdeCreateStringHandleW(uint32 idInst, PWSTR psz, int32 iCodePage);
+		public static extern HSZ DdeCreateStringHandleW(uint32 idInst, char16* psz, int32 iCodePage);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DdeQueryStringA(uint32 idInst, HSZ hsz, uint8* psz, uint32 cchMax, int32 iCodePage);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DdeQueryStringW(uint32 idInst, HSZ hsz, char16* psz, uint32 cchMax, int32 iCodePage);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeFreeStringHandle(uint32 idInst, HSZ hsz);
+		public static extern IntBool DdeFreeStringHandle(uint32 idInst, HSZ hsz);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DdeKeepStringHandle(uint32 idInst, HSZ hsz);
+		public static extern IntBool DdeKeepStringHandle(uint32 idInst, HSZ hsz);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DdeCmpStringHandles(HSZ hsz1, HSZ hsz2);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HENHMETAFILE SetWinMetaFileBits(uint32 nSize, in uint8 lpMeta16Data, HDC hdcRef, METAFILEPICT* lpMFP);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL OpenClipboard(HWND hWndNewOwner);
+		public static extern IntBool OpenClipboard(HWnd hWndNewOwner);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CloseClipboard();
+		public static extern IntBool CloseClipboard();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetClipboardSequenceNumber();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND GetClipboardOwner();
+		public static extern HWnd GetClipboardOwner();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND SetClipboardViewer(HWND hWndNewViewer);
+		public static extern HWnd SetClipboardViewer(HWnd hWndNewViewer);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND GetClipboardViewer();
+		public static extern HWnd GetClipboardViewer();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ChangeClipboardChain(HWND hWndRemove, HWND hWndNewNext);
+		public static extern IntBool ChangeClipboardChain(HWnd hWndRemove, HWnd hWndNewNext);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE SetClipboardData(uint32 uFormat, HANDLE hMem);
+		public static extern Handle SetClipboardData(uint32 uFormat, Handle hMem);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE GetClipboardData(uint32 uFormat);
+		public static extern Handle GetClipboardData(uint32 uFormat);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RegisterClipboardFormatA(PSTR lpszFormat);
+		public static extern uint32 RegisterClipboardFormatA(char8* lpszFormat);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RegisterClipboardFormatW(PWSTR lpszFormat);
+		public static extern uint32 RegisterClipboardFormatW(char16* lpszFormat);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 CountClipboardFormats();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -475,49 +475,49 @@ namespace Win32
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetClipboardFormatNameW(uint32 format, char16* lpszFormatName, int32 cchMaxCount);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EmptyClipboard();
+		public static extern IntBool EmptyClipboard();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsClipboardFormatAvailable(uint32 format);
+		public static extern IntBool IsClipboardFormatAvailable(uint32 format);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetPriorityClipboardFormat(uint32* paFormatPriorityList, int32 cFormats);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND GetOpenClipboardWindow();
+		public static extern HWnd GetOpenClipboardWindow();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AddClipboardFormatListener(HWND hwnd);
+		public static extern IntBool AddClipboardFormatListener(HWnd hwnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RemoveClipboardFormatListener(HWND hwnd);
+		public static extern IntBool RemoveClipboardFormatListener(HWnd hwnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUpdatedClipboardFormats(uint32* lpuiFormats, uint32 cFormats, out uint32 pcFormatsOut);
+		public static extern IntBool GetUpdatedClipboardFormats(uint32* lpuiFormats, uint32 cFormats, out uint32 pcFormatsOut);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 GlobalDeleteAtom(uint16 nAtom);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitAtomTable(uint32 nSize);
+		public static extern IntBool InitAtomTable(uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 DeleteAtom(uint16 nAtom);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 GlobalAddAtomA(PSTR lpString);
+		public static extern uint16 GlobalAddAtomA(char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 GlobalAddAtomW(PWSTR lpString);
+		public static extern uint16 GlobalAddAtomW(char16* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 GlobalAddAtomExA(PSTR lpString, uint32 Flags);
+		public static extern uint16 GlobalAddAtomExA(char8* lpString, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 GlobalAddAtomExW(PWSTR lpString, uint32 Flags);
+		public static extern uint16 GlobalAddAtomExW(char16* lpString, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 GlobalFindAtomA(PSTR lpString);
+		public static extern uint16 GlobalFindAtomA(char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 GlobalFindAtomW(PWSTR lpString);
+		public static extern uint16 GlobalFindAtomW(char16* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GlobalGetAtomNameA(uint16 nAtom, uint8* lpBuffer, int32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GlobalGetAtomNameW(uint16 nAtom, char16* lpBuffer, int32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 AddAtomA(PSTR lpString);
+		public static extern uint16 AddAtomA(char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 AddAtomW(PWSTR lpString);
+		public static extern uint16 AddAtomW(char16* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 FindAtomA(PSTR lpString);
+		public static extern uint16 FindAtomA(char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 FindAtomW(PWSTR lpString);
+		public static extern uint16 FindAtomW(char16* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetAtomNameA(uint16 nAtom, uint8* lpBuffer, int32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]

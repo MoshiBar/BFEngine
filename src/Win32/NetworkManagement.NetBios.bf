@@ -109,7 +109,7 @@ namespace Win32
 			public uint8 ncb_lana_num;
 			public uint8 ncb_cmd_cplt;
 			public uint8[18] ncb_reserve;
-			public HANDLE ncb_event;
+			public Handle ncb_event;
 		}
 		[CRepr]
 		public struct ADAPTER_STATUS

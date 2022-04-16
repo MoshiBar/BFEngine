@@ -1,4 +1,6 @@
 using System;
+using static System.Windows;
+using static Win32.Diagnostics.Debug;
 
 // namespace System.Kernel
 namespace Win32
@@ -140,25 +142,25 @@ namespace Win32
 		{
 			public uint16 Length;
 			public uint16 MaximumLength;
-			public PSTR Buffer;
+			public char8* Buffer;
 		}
 		[CRepr]
 		public struct CSTRING
 		{
 			public uint16 Length;
 			public uint16 MaximumLength;
-			public PSTR Buffer;
+			public char8* Buffer;
 		}
 		[CRepr]
-		public struct LIST_ENTRY
+		public struct ListEntry
 		{
-			public LIST_ENTRY* Flink;
-			public LIST_ENTRY* Blink;
+			public ListEntry* Flink;
+			public ListEntry* Blink;
 		}
 		[CRepr]
-		public struct SINGLE_LIST_ENTRY
+		public struct SingleListEntry
 		{
-			public SINGLE_LIST_ENTRY* Next;
+			public SingleListEntry* Next;
 		}
 		[CRepr]
 		public struct RTL_BALANCED_NODE

@@ -1868,8 +1868,8 @@ namespace Win32
 			public WDMUSB_POWER_STATE RhDeviceWake;
 			public WDMUSB_POWER_STATE RhSystemWake;
 			public WDMUSB_POWER_STATE LastSystemSleepState;
-			public BOOLEAN CanWakeup;
-			public BOOLEAN IsPowered;
+			public bool CanWakeup;
+			public bool IsPowered;
 		}
 		[CRepr]
 		public struct USBUSER_POWER_INFO_REQUEST
@@ -1957,7 +1957,7 @@ namespace Win32
 			public uint32 WorkerSignalCount;
 			public uint32 CommonBufferBytes;
 			public uint32 WorkerIdleTimeMs;
-			public BOOLEAN RootHubEnabled;
+			public bool RootHubEnabled;
 			public uint8 RootHubDevicePowerState;
 			public uint8 Unused;
 			public uint8 NameIndex;
@@ -1974,8 +1974,8 @@ namespace Win32
 			public uint32 DriverTrackingCode;
 			public uint32 USBDI_Version;
 			public uint32 USBUSER_Version;
-			public BOOLEAN CheckedPortDriver;
-			public BOOLEAN CheckedMiniportDriver;
+			public bool CheckedPortDriver;
+			public bool CheckedMiniportDriver;
 			public uint16 USB_Version;
 		}
 		[CRepr]
@@ -2030,18 +2030,18 @@ namespace Win32
 		[CRepr, Packed(1)]
 		public struct USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION
 		{
-			public HANDLE TimeTrackingHandle;
-			public BOOLEAN IsStartupDelayTolerable;
+			public Handle TimeTrackingHandle;
+			public bool IsStartupDelayTolerable;
 		}
 		[CRepr, Packed(1)]
 		public struct USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION
 		{
-			public HANDLE TimeTrackingHandle;
+			public Handle TimeTrackingHandle;
 		}
 		[CRepr, Packed(1)]
 		public struct USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION
 		{
-			public HANDLE TimeTrackingHandle;
+			public Handle TimeTrackingHandle;
 			public uint32 InputFrameNumber;
 			public uint32 InputMicroFrameNumber;
 			public LARGE_INTEGER QueryPerformanceCounterAtInputFrameOrMicroFrame;
@@ -2095,7 +2095,7 @@ namespace Win32
 			public USBFN_CLASS_INTERFACE HighSpeedClassInterface;
 			public char16[40] InterfaceName;
 			public char16[39] InterfaceGuid;
-			public BOOLEAN HasInterfaceGuid;
+			public bool HasInterfaceGuid;
 			public USBFN_CLASS_INTERFACE SuperSpeedClassInterface;
 		}
 		[CRepr]
@@ -2114,7 +2114,7 @@ namespace Win32
 			public USBFN_CLASS_INTERFACE_EX SuperSpeedClassInterfaceEx;
 			public char16[40] InterfaceName;
 			public char16[39] InterfaceGuid;
-			public BOOLEAN HasInterfaceGuid;
+			public bool HasInterfaceGuid;
 		}
 		[CRepr]
 		public struct USBFN_INTERFACE_INFO
@@ -2134,8 +2134,8 @@ namespace Win32
 		public struct USBFN_BUS_CONFIGURATION_INFO
 		{
 			public char16[40] ConfigurationName;
-			public BOOLEAN IsCurrent;
-			public BOOLEAN IsActive;
+			public bool IsCurrent;
+			public bool IsActive;
 		}
 		[CRepr]
 		public struct DRV_VERSION
@@ -2210,72 +2210,72 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_Initialize(HANDLE DeviceHandle, void** InterfaceHandle);
+		public static extern IntBool WinUsb_Initialize(Handle DeviceHandle, void** InterfaceHandle);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_Free(void* InterfaceHandle);
+		public static extern IntBool WinUsb_Free(void* InterfaceHandle);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetAssociatedInterface(void* InterfaceHandle, uint8 AssociatedInterfaceIndex, void** AssociatedInterfaceHandle);
+		public static extern IntBool WinUsb_GetAssociatedInterface(void* InterfaceHandle, uint8 AssociatedInterfaceIndex, void** AssociatedInterfaceHandle);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetDescriptor(void* InterfaceHandle, uint8 DescriptorType, uint8 Index, uint16 LanguageID, uint8* Buffer, uint32 BufferLength, out uint32 LengthTransferred);
+		public static extern IntBool WinUsb_GetDescriptor(void* InterfaceHandle, uint8 DescriptorType, uint8 Index, uint16 LanguageID, uint8* Buffer, uint32 BufferLength, out uint32 LengthTransferred);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_QueryInterfaceSettings(void* InterfaceHandle, uint8 AlternateInterfaceNumber, out USB_INTERFACE_DESCRIPTOR UsbAltInterfaceDescriptor);
+		public static extern IntBool WinUsb_QueryInterfaceSettings(void* InterfaceHandle, uint8 AlternateInterfaceNumber, out USB_INTERFACE_DESCRIPTOR UsbAltInterfaceDescriptor);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_QueryDeviceInformation(void* InterfaceHandle, uint32 InformationType, out uint32 BufferLength, void* Buffer);
+		public static extern IntBool WinUsb_QueryDeviceInformation(void* InterfaceHandle, uint32 InformationType, out uint32 BufferLength, void* Buffer);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_SetCurrentAlternateSetting(void* InterfaceHandle, uint8 SettingNumber);
+		public static extern IntBool WinUsb_SetCurrentAlternateSetting(void* InterfaceHandle, uint8 SettingNumber);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetCurrentAlternateSetting(void* InterfaceHandle, out uint8 SettingNumber);
+		public static extern IntBool WinUsb_GetCurrentAlternateSetting(void* InterfaceHandle, out uint8 SettingNumber);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_QueryPipe(void* InterfaceHandle, uint8 AlternateInterfaceNumber, uint8 PipeIndex, out WINUSB_PIPE_INFORMATION PipeInformation);
+		public static extern IntBool WinUsb_QueryPipe(void* InterfaceHandle, uint8 AlternateInterfaceNumber, uint8 PipeIndex, out WINUSB_PIPE_INFORMATION PipeInformation);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_QueryPipeEx(void* InterfaceHandle, uint8 AlternateSettingNumber, uint8 PipeIndex, out WINUSB_PIPE_INFORMATION_EX PipeInformationEx);
+		public static extern IntBool WinUsb_QueryPipeEx(void* InterfaceHandle, uint8 AlternateSettingNumber, uint8 PipeIndex, out WINUSB_PIPE_INFORMATION_EX PipeInformationEx);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_SetPipePolicy(void* InterfaceHandle, uint8 PipeID, uint32 PolicyType, uint32 ValueLength, void* Value);
+		public static extern IntBool WinUsb_SetPipePolicy(void* InterfaceHandle, uint8 PipeID, uint32 PolicyType, uint32 ValueLength, void* Value);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetPipePolicy(void* InterfaceHandle, uint8 PipeID, uint32 PolicyType, out uint32 ValueLength, void* Value);
+		public static extern IntBool WinUsb_GetPipePolicy(void* InterfaceHandle, uint8 PipeID, uint32 PolicyType, out uint32 ValueLength, void* Value);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_ReadPipe(void* InterfaceHandle, uint8 PipeID, uint8* Buffer, uint32 BufferLength, uint32* LengthTransferred, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_ReadPipe(void* InterfaceHandle, uint8 PipeID, uint8* Buffer, uint32 BufferLength, uint32* LengthTransferred, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_WritePipe(void* InterfaceHandle, uint8 PipeID, ref uint8 Buffer, uint32 BufferLength, uint32* LengthTransferred, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_WritePipe(void* InterfaceHandle, uint8 PipeID, ref uint8 Buffer, uint32 BufferLength, uint32* LengthTransferred, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_ControlTransfer(void* InterfaceHandle, WINUSB_SETUP_PACKET SetupPacket, uint8* Buffer, uint32 BufferLength, uint32* LengthTransferred, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_ControlTransfer(void* InterfaceHandle, WINUSB_SETUP_PACKET SetupPacket, uint8* Buffer, uint32 BufferLength, uint32* LengthTransferred, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_ResetPipe(void* InterfaceHandle, uint8 PipeID);
+		public static extern IntBool WinUsb_ResetPipe(void* InterfaceHandle, uint8 PipeID);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_AbortPipe(void* InterfaceHandle, uint8 PipeID);
+		public static extern IntBool WinUsb_AbortPipe(void* InterfaceHandle, uint8 PipeID);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_FlushPipe(void* InterfaceHandle, uint8 PipeID);
+		public static extern IntBool WinUsb_FlushPipe(void* InterfaceHandle, uint8 PipeID);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_SetPowerPolicy(void* InterfaceHandle, uint32 PolicyType, uint32 ValueLength, void* Value);
+		public static extern IntBool WinUsb_SetPowerPolicy(void* InterfaceHandle, uint32 PolicyType, uint32 ValueLength, void* Value);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetPowerPolicy(void* InterfaceHandle, uint32 PolicyType, out uint32 ValueLength, void* Value);
+		public static extern IntBool WinUsb_GetPowerPolicy(void* InterfaceHandle, uint32 PolicyType, out uint32 ValueLength, void* Value);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetOverlappedResult(void* InterfaceHandle, ref OVERLAPPED lpOverlapped, out uint32 lpNumberOfBytesTransferred, BOOL bWait);
+		public static extern IntBool WinUsb_GetOverlappedResult(void* InterfaceHandle, ref OVERLAPPED lpOverlapped, out uint32 lpNumberOfBytesTransferred, IntBool bWait);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USB_INTERFACE_DESCRIPTOR* WinUsb_ParseConfigurationDescriptor(ref USB_CONFIGURATION_DESCRIPTOR ConfigurationDescriptor, void* StartPosition, int32 InterfaceNumber, int32 AlternateSetting, int32 InterfaceClass, int32 InterfaceSubClass, int32 InterfaceProtocol);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USB_COMMON_DESCRIPTOR* WinUsb_ParseDescriptors(void* DescriptorBuffer, uint32 TotalLength, void* StartPosition, int32 DescriptorType);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetCurrentFrameNumber(void* InterfaceHandle, out uint32 CurrentFrameNumber, out LARGE_INTEGER TimeStamp);
+		public static extern IntBool WinUsb_GetCurrentFrameNumber(void* InterfaceHandle, out uint32 CurrentFrameNumber, out LARGE_INTEGER TimeStamp);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetAdjustedFrameNumber(out uint32 CurrentFrameNumber, LARGE_INTEGER TimeStamp);
+		public static extern IntBool WinUsb_GetAdjustedFrameNumber(out uint32 CurrentFrameNumber, LARGE_INTEGER TimeStamp);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_RegisterIsochBuffer(void* InterfaceHandle, uint8 PipeID, out uint8 Buffer, uint32 BufferLength, void** IsochBufferHandle);
+		public static extern IntBool WinUsb_RegisterIsochBuffer(void* InterfaceHandle, uint8 PipeID, out uint8 Buffer, uint32 BufferLength, void** IsochBufferHandle);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_UnregisterIsochBuffer(void* IsochBufferHandle);
+		public static extern IntBool WinUsb_UnregisterIsochBuffer(void* IsochBufferHandle);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_WriteIsochPipe(void* BufferHandle, uint32 Offset, uint32 Length, out uint32 FrameNumber, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_WriteIsochPipe(void* BufferHandle, uint32 Offset, uint32 Length, out uint32 FrameNumber, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_ReadIsochPipe(void* BufferHandle, uint32 Offset, uint32 Length, out uint32 FrameNumber, uint32 NumberOfPackets, USBD_ISO_PACKET_DESCRIPTOR* IsoPacketDescriptors, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_ReadIsochPipe(void* BufferHandle, uint32 Offset, uint32 Length, out uint32 FrameNumber, uint32 NumberOfPackets, USBD_ISO_PACKET_DESCRIPTOR* IsoPacketDescriptors, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_WriteIsochPipeAsap(void* BufferHandle, uint32 Offset, uint32 Length, BOOL ContinueStream, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_WriteIsochPipeAsap(void* BufferHandle, uint32 Offset, uint32 Length, IntBool ContinueStream, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_ReadIsochPipeAsap(void* BufferHandle, uint32 Offset, uint32 Length, BOOL ContinueStream, uint32 NumberOfPackets, USBD_ISO_PACKET_DESCRIPTOR* IsoPacketDescriptors, OVERLAPPED* Overlapped);
+		public static extern IntBool WinUsb_ReadIsochPipeAsap(void* BufferHandle, uint32 Offset, uint32 Length, IntBool ContinueStream, uint32 NumberOfPackets, USBD_ISO_PACKET_DESCRIPTOR* IsoPacketDescriptors, OVERLAPPED* Overlapped);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_StartTrackingForTimeSync(void* InterfaceHandle, ref USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION StartTrackingInfo);
+		public static extern IntBool WinUsb_StartTrackingForTimeSync(void* InterfaceHandle, ref USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION StartTrackingInfo);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_GetCurrentFrameNumberAndQpc(void* InterfaceHandle, ref USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION FrameQpcInfo);
+		public static extern IntBool WinUsb_GetCurrentFrameNumberAndQpc(void* InterfaceHandle, ref USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION FrameQpcInfo);
 		[Import("winusb.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinUsb_StopTrackingForTimeSync(void* InterfaceHandle, ref USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION StopTrackingInfo);
+		public static extern IntBool WinUsb_StopTrackingForTimeSync(void* InterfaceHandle, ref USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION StopTrackingInfo);
 	}
 }

@@ -519,7 +519,7 @@ namespace Win32
 		public function uint32 LPDHCP_GIVE_ADDRESS(out uint8 Packet, uint32 PacketSize, uint32 ControlCode, uint32 IpAddress, uint32 AltAddress, uint32 AddrType, uint32 LeaseTime, void* Reserved, void* PktContext);
 		public function uint32 LPDHCP_HANDLE_OPTIONS(out uint8 Packet, uint32 PacketSize, void* Reserved, void* PktContext, out DHCP_SERVER_OPTIONS ServerOptions);
 		public function uint32 LPDHCP_DELETE_CLIENT(uint32 IpAddress, out uint8 HwAddress, uint32 HwAddressLength, uint32 Reserved, uint32 ClientType);
-		public function uint32 LPDHCP_ENTRY_POINT_FUNC(PWSTR ChainDlls, uint32 CalloutVersion, out DHCP_CALLOUT_TABLE CalloutTbl);
+		public function uint32 LPDHCP_ENTRY_POINT_FUNC(char16* ChainDlls, uint32 CalloutVersion, out DHCP_CALLOUT_TABLE CalloutTbl);
 		
 		// --- Structs ---
 		
@@ -528,7 +528,7 @@ namespace Win32
 		{
 			public uint32 Flags;
 			public uint32 OptionId;
-			public BOOL IsVendor;
+			public IntBool IsVendor;
 			public uint8* Data;
 			public uint32 nBytesData;
 		}
@@ -573,7 +573,7 @@ namespace Win32
 		{
 			public uint32 Flags;
 			public uint32 OptionId;
-			public BOOL IsVendor;
+			public IntBool IsVendor;
 			public uint8* Data;
 			public uint32 nBytesData;
 		}
@@ -602,20 +602,20 @@ namespace Win32
 			public uint32* Server;
 			public uint8* ParameterRequestList;
 			public uint32 ParameterRequestListLength;
-			public PSTR MachineName;
+			public char8* MachineName;
 			public uint32 MachineNameLength;
 			public uint8 ClientHardwareAddressType;
 			public uint8 ClientHardwareAddressLength;
 			public uint8* ClientHardwareAddress;
-			public PSTR ClassIdentifier;
+			public char8* ClassIdentifier;
 			public uint32 ClassIdentifierLength;
 			public uint8* VendorClass;
 			public uint32 VendorClassLength;
 			public uint32 DNSFlags;
 			public uint32 DNSNameLength;
 			public uint8* DNSName;
-			public BOOLEAN DSDomainNameRequested;
-			public PSTR DSDomainName;
+			public bool DSDomainNameRequested;
+			public char8* DSDomainName;
 			public uint32 DSDomainNameLen;
 			public uint32* ScopeId;
 		}
@@ -655,8 +655,8 @@ namespace Win32
 		public struct DHCP_HOST_INFO
 		{
 			public uint32 IpAddress;
-			public PWSTR NetBiosName;
-			public PWSTR HostName;
+			public char16* NetBiosName;
+			public char16* HostName;
 		}
 		[CRepr]
 		public struct DWORD_DWORD
@@ -669,8 +669,8 @@ namespace Win32
 		{
 			public uint32 SubnetAddress;
 			public uint32 SubnetMask;
-			public PWSTR SubnetName;
-			public PWSTR SubnetComment;
+			public char16* SubnetName;
+			public char16* SubnetComment;
 			public DHCP_HOST_INFO PrimaryHost;
 			public DHCP_SUBNET_STATE SubnetState;
 		}
@@ -679,8 +679,8 @@ namespace Win32
 		{
 			public uint32 SubnetAddress;
 			public uint32 SubnetMask;
-			public PWSTR SubnetName;
-			public PWSTR SubnetComment;
+			public char16* SubnetName;
+			public char16* SubnetComment;
 			public DHCP_HOST_INFO PrimaryHost;
 			public DHCP_SUBNET_STATE SubnetState;
 			public uint32 QuarantineOn;
@@ -740,9 +740,9 @@ namespace Win32
 		[CRepr]
 		public struct DHCP_ADDR_PATTERN
 		{
-			public BOOL MatchHWType;
+			public IntBool MatchHWType;
 			public uint8 HWType;
-			public BOOL IsWildcard;
+			public IntBool IsWildcard;
 			public uint8 Length;
 			public uint8[255] Pattern;
 		}
@@ -750,20 +750,20 @@ namespace Win32
 		public struct DHCP_FILTER_ADD_INFO
 		{
 			public DHCP_ADDR_PATTERN AddrPatt;
-			public PWSTR Comment;
+			public char16* Comment;
 			public DHCP_FILTER_LIST_TYPE ListType;
 		}
 		[CRepr]
 		public struct DHCP_FILTER_GLOBAL_INFO
 		{
-			public BOOL EnforceAllowList;
-			public BOOL EnforceDenyList;
+			public IntBool EnforceAllowList;
+			public IntBool EnforceDenyList;
 		}
 		[CRepr]
 		public struct DHCP_FILTER_RECORD
 		{
 			public DHCP_ADDR_PATTERN AddrPatt;
-			public PWSTR Comment;
+			public char16* Comment;
 		}
 		[CRepr]
 		public struct DHCP_FILTER_ENUM_INFO
@@ -785,10 +785,10 @@ namespace Win32
 				public uint32 DWordOption;
 				public DWORD_DWORD DWordDWordOption;
 				public uint32 IpAddressOption;
-				public PWSTR StringDataOption;
+				public char16* StringDataOption;
 				public DHCP_BINARY_DATA BinaryDataOption;
 				public DHCP_BINARY_DATA EncapsulatedDataOption;
-				public PWSTR Ipv6AddressDataOption;
+				public char16* Ipv6AddressDataOption;
 			}
 		}
 		[CRepr, Union]
@@ -803,8 +803,8 @@ namespace Win32
 		public struct DHCP_OPTION
 		{
 			public uint32 OptionID;
-			public PWSTR OptionName;
-			public PWSTR OptionComment;
+			public char16* OptionName;
+			public char16* OptionComment;
 			public DHCP_OPTION_DATA DefaultValue;
 			public DHCP_OPTION_TYPE OptionType;
 		}
@@ -845,7 +845,7 @@ namespace Win32
 				public void* GlobalScopeInfo;
 				public uint32 SubnetScopeInfo;
 				public DHCP_RESERVED_SCOPE ReservedScopeInfo;
-				public PWSTR MScopeInfo;
+				public char16* MScopeInfo;
 			}
 		}
 		[CRepr]
@@ -882,8 +882,8 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 		}
@@ -899,15 +899,15 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
 			public uint8 AddressState;
 			public QuarantineStatus Status;
 			public DATE_TIME ProbationEnds;
-			public BOOL QuarantineCapable;
+			public IntBool QuarantineCapable;
 		}
 		[CRepr]
 		public struct DHCP_CLIENT_INFO_ARRAY_VQ
@@ -921,15 +921,15 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
 			public uint8 AddressState;
 			public QuarantineStatus Status;
 			public DATE_TIME ProbationEnds;
-			public BOOL QuarantineCapable;
+			public IntBool QuarantineCapable;
 			public uint32 FilterStatus;
 		}
 		[CRepr]
@@ -944,17 +944,17 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
 			public uint8 AddressState;
 			public QuarantineStatus Status;
 			public DATE_TIME ProbationEnds;
-			public BOOL QuarantineCapable;
+			public IntBool QuarantineCapable;
 			public uint32 FilterStatus;
-			public PWSTR PolicyName;
+			public char16* PolicyName;
 		}
 		[CRepr]
 		public struct DHCP_CLIENT_INFO_PB_ARRAY
@@ -973,7 +973,7 @@ namespace Win32
 			{
 				public uint32 ClientIpAddress;
 				public DHCP_BINARY_DATA ClientHardwareAddress;
-				public PWSTR ClientName;
+				public char16* ClientName;
 			}
 		}
 		[CRepr, Union]
@@ -991,7 +991,7 @@ namespace Win32
 				public uint8 ByteValue;
 				public uint16 WordValue;
 				public uint32 DWordValue;
-				public PWSTR StringValue;
+				public char16* StringValue;
 				public DHCP_BINARY_DATA BinaryValue;
 			}
 		}
@@ -1007,17 +1007,17 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
 			public uint8 AddressState;
 			public QuarantineStatus Status;
 			public DATE_TIME ProbationEnds;
-			public BOOL QuarantineCapable;
+			public IntBool QuarantineCapable;
 			public uint32 FilterStatus;
-			public PWSTR PolicyName;
+			public char16* PolicyName;
 			public DHCP_PROPERTY_ARRAY* Properties;
 		}
 		[CRepr]
@@ -1118,9 +1118,9 @@ namespace Win32
 		public struct DHCP_SERVER_CONFIG_INFO
 		{
 			public uint32 APIProtocolSupport;
-			public PWSTR DatabaseName;
-			public PWSTR DatabasePath;
-			public PWSTR BackupPath;
+			public char16* DatabaseName;
+			public char16* DatabasePath;
+			public char16* BackupPath;
 			public uint32 BackupInterval;
 			public uint32 DatabaseLoggingFlag;
 			public uint32 RestoreFlag;
@@ -1142,10 +1142,10 @@ namespace Win32
 		[CRepr]
 		public struct DHCP_CLASS_INFO
 		{
-			public PWSTR ClassName;
-			public PWSTR ClassComment;
+			public char16* ClassName;
+			public char16* ClassComment;
 			public uint32 ClassDataLength;
-			public BOOL IsVendor;
+			public IntBool IsVendor;
 			public uint32 Flags;
 			public uint8* ClassData;
 		}
@@ -1158,10 +1158,10 @@ namespace Win32
 		[CRepr]
 		public struct DHCP_CLASS_INFO_V6
 		{
-			public PWSTR ClassName;
-			public PWSTR ClassComment;
+			public char16* ClassName;
+			public char16* ClassComment;
 			public uint32 ClassDataLength;
-			public BOOL IsVendor;
+			public IntBool IsVendor;
 			public uint32 EnterpriseNumber;
 			public uint32 Flags;
 			public uint8* ClassData;
@@ -1175,8 +1175,8 @@ namespace Win32
 		[CRepr]
 		public struct DHCP_SERVER_SPECIFIC_STRINGS
 		{
-			public PWSTR DefaultVendorClassName;
-			public PWSTR DefaultUserClassName;
+			public char16* DefaultVendorClassName;
+			public char16* DefaultUserClassName;
 		}
 		[CRepr]
 		public struct DHCP_IP_RESERVATION_V4
@@ -1190,8 +1190,8 @@ namespace Win32
 		{
 			public uint32 ReservedIpAddress;
 			public DHCP_BINARY_DATA ReservedForClient;
-			public PWSTR ReservedClientName;
-			public PWSTR ReservedClientDesc;
+			public char16* ReservedClientName;
+			public char16* ReservedClientDesc;
 			public uint8 bAllowedClientTypes;
 			public uint8 fOptionsPresent;
 		}
@@ -1231,8 +1231,8 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
@@ -1247,9 +1247,9 @@ namespace Win32
 		public struct DHCP_SERVER_CONFIG_INFO_V4
 		{
 			public uint32 APIProtocolSupport;
-			public PWSTR DatabaseName;
-			public PWSTR DatabasePath;
-			public PWSTR BackupPath;
+			public char16* DatabaseName;
+			public char16* DatabasePath;
+			public char16* BackupPath;
 			public uint32 BackupInterval;
 			public uint32 DatabaseLoggingFlag;
 			public uint32 RestoreFlag;
@@ -1257,16 +1257,16 @@ namespace Win32
 			public uint32 DebugFlag;
 			public uint32 dwPingRetries;
 			public uint32 cbBootTableString;
-			public PWSTR wszBootTableString;
-			public BOOL fAuditLog;
+			public char16* wszBootTableString;
+			public IntBool fAuditLog;
 		}
 		[CRepr]
 		public struct DHCP_SERVER_CONFIG_INFO_VQ
 		{
 			public uint32 APIProtocolSupport;
-			public PWSTR DatabaseName;
-			public PWSTR DatabasePath;
-			public PWSTR BackupPath;
+			public char16* DatabaseName;
+			public char16* DatabasePath;
+			public char16* BackupPath;
 			public uint32 BackupInterval;
 			public uint32 DatabaseLoggingFlag;
 			public uint32 RestoreFlag;
@@ -1274,24 +1274,24 @@ namespace Win32
 			public uint32 DebugFlag;
 			public uint32 dwPingRetries;
 			public uint32 cbBootTableString;
-			public PWSTR wszBootTableString;
-			public BOOL fAuditLog;
-			public BOOL QuarantineOn;
+			public char16* wszBootTableString;
+			public IntBool fAuditLog;
+			public IntBool QuarantineOn;
 			public uint32 QuarDefFail;
-			public BOOL QuarRuntimeStatus;
+			public IntBool QuarRuntimeStatus;
 		}
 		[CRepr]
 		public struct DHCP_SERVER_CONFIG_INFO_V6
 		{
-			public BOOL UnicastFlag;
-			public BOOL RapidCommitFlag;
+			public IntBool UnicastFlag;
+			public IntBool RapidCommitFlag;
 			public uint32 PreferredLifetime;
 			public uint32 ValidLifetime;
 			public uint32 T1;
 			public uint32 T2;
 			public uint32 PreferredLifetimeIATA;
 			public uint32 ValidLifetimeIATA;
-			public BOOL fAuditLog;
+			public IntBool fAuditLog;
 		}
 		[CRepr]
 		public struct DHCP_SUPER_SCOPE_TABLE_ENTRY
@@ -1299,7 +1299,7 @@ namespace Win32
 			public uint32 SubnetAddress;
 			public uint32 SuperScopeNumber;
 			public uint32 NextInSuperScope;
-			public PWSTR SuperScopeName;
+			public char16* SuperScopeName;
 		}
 		[CRepr]
 		public struct DHCP_SUPER_SCOPE_TABLE
@@ -1313,8 +1313,8 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
@@ -1338,8 +1338,8 @@ namespace Win32
 			public struct _Anonymous_e__Struct
 			{
 				public DHCP_OPTION Option;
-				public PWSTR VendorName;
-				public PWSTR ClassName;
+				public char16* VendorName;
+				public char16* ClassName;
 			}
 		}
 		[CRepr]
@@ -1352,9 +1352,9 @@ namespace Win32
 			[CRepr]
 			public struct _Anonymous_e__Struct
 			{
-				public PWSTR ClassName;
-				public PWSTR VendorName;
-				public BOOL IsVendor;
+				public char16* ClassName;
+				public char16* VendorName;
+				public IntBool IsVendor;
 				public DHCP_OPTION_VALUE_ARRAY* OptionsArray;
 			}
 		}
@@ -1368,9 +1368,9 @@ namespace Win32
 			[CRepr]
 			public struct _Anonymous_e__Struct
 			{
-				public PWSTR PolicyName;
-				public PWSTR VendorName;
-				public BOOL IsVendor;
+				public char16* PolicyName;
+				public char16* VendorName;
+				public IntBool IsVendor;
 				public DHCP_OPTION_VALUE_ARRAY* OptionsArray;
 			}
 		}
@@ -1378,11 +1378,11 @@ namespace Win32
 		public struct DHCPDS_SERVER
 		{
 			public uint32 Version;
-			public PWSTR ServerName;
+			public char16* ServerName;
 			public uint32 ServerAddress;
 			public uint32 Flags;
 			public uint32 State;
-			public PWSTR DsLocation;
+			public char16* DsLocation;
 			public uint32 DsLocType;
 		}
 		[CRepr]
@@ -1402,7 +1402,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public BOOL DhcpAttribBool;
+				public IntBool DhcpAttribBool;
 				public uint32 DhcpAttribUlong;
 			}
 		}
@@ -1469,10 +1469,10 @@ namespace Win32
 		public struct DHCP_BIND_ELEMENT
 		{
 			public uint32 Flags;
-			public BOOL fBoundToDHCPServer;
+			public IntBool fBoundToDHCPServer;
 			public uint32 AdapterPrimaryAddress;
 			public uint32 AdapterSubnetAddress;
-			public PWSTR IfDescription;
+			public char16* IfDescription;
 			public uint32 IfIdSize;
 			public uint8* IfId;
 		}
@@ -1486,10 +1486,10 @@ namespace Win32
 		public struct DHCPV6_BIND_ELEMENT
 		{
 			public uint32 Flags;
-			public BOOL fBoundToDHCPServer;
+			public IntBool fBoundToDHCPServer;
 			public DHCP_IPV6_ADDRESS AdapterPrimaryAddress;
 			public DHCP_IPV6_ADDRESS AdapterSubnetAddress;
-			public PWSTR IfDescription;
+			public char16* IfDescription;
 			public uint32 IpV6IfIndex;
 			public uint32 IfIdSize;
 			public uint8* IfId;
@@ -1510,8 +1510,8 @@ namespace Win32
 		public struct DHCP_HOST_INFO_V6
 		{
 			public DHCP_IPV6_ADDRESS IpAddress;
-			public PWSTR NetBiosName;
-			public PWSTR HostName;
+			public char16* NetBiosName;
+			public char16* HostName;
 		}
 		[CRepr]
 		public struct DHCP_SUBNET_INFO_V6
@@ -1519,8 +1519,8 @@ namespace Win32
 			public DHCP_IPV6_ADDRESS SubnetAddress;
 			public uint32 Prefix;
 			public uint16 Preference;
-			public PWSTR SubnetName;
-			public PWSTR SubnetComment;
+			public char16* SubnetName;
+			public char16* SubnetComment;
 			public uint32 State;
 			public uint32 ScopeId;
 		}
@@ -1585,8 +1585,8 @@ namespace Win32
 			public DHCP_BINARY_DATA ClientDUID;
 			public uint32 AddressType;
 			public uint32 IAID;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientValidLeaseExpires;
 			public DATE_TIME ClientPrefLeaseExpires;
 			public DHCP_HOST_INFO_V6 OwnerHost;
@@ -1614,7 +1614,7 @@ namespace Win32
 			{
 				public DHCP_IPV6_ADDRESS ClientIpAddress;
 				public DHCP_BINARY_DATA ClientDUID;
-				public PWSTR ClientName;
+				public char16* ClientName;
 			}
 		}
 		[CRepr]
@@ -1624,7 +1624,7 @@ namespace Win32
 			public DHCP_POL_ATTR_TYPE Type;
 			public uint32 OptionID;
 			public uint32 SubOptionID;
-			public PWSTR VendorName;
+			public char16* VendorName;
 			public DHCP_POL_COMPARATOR Operator;
 			public uint8* Value;
 			public uint32 ValueLength;
@@ -1656,15 +1656,15 @@ namespace Win32
 		[CRepr]
 		public struct DHCP_POLICY
 		{
-			public PWSTR PolicyName;
-			public BOOL IsGlobalPolicy;
+			public char16* PolicyName;
+			public IntBool IsGlobalPolicy;
 			public uint32 Subnet;
 			public uint32 ProcessingOrder;
 			public DHCP_POL_COND_ARRAY* Conditions;
 			public DHCP_POL_EXPR_ARRAY* Expressions;
 			public DHCP_IP_RANGE_ARRAY* Ranges;
-			public PWSTR Description;
-			public BOOL Enabled;
+			public char16* Description;
+			public IntBool Enabled;
 		}
 		[CRepr]
 		public struct DHCP_POLICY_ARRAY
@@ -1675,15 +1675,15 @@ namespace Win32
 		[CRepr]
 		public struct DHCP_POLICY_EX
 		{
-			public PWSTR PolicyName;
-			public BOOL IsGlobalPolicy;
+			public char16* PolicyName;
+			public IntBool IsGlobalPolicy;
 			public uint32 Subnet;
 			public uint32 ProcessingOrder;
 			public DHCP_POL_COND_ARRAY* Conditions;
 			public DHCP_POL_EXPR_ARRAY* Expressions;
 			public DHCP_IP_RANGE_ARRAY* Ranges;
-			public PWSTR Description;
-			public BOOL Enabled;
+			public char16* Description;
+			public IntBool Enabled;
 			public DHCP_PROPERTY_ARRAY* Properties;
 		}
 		[CRepr]
@@ -1695,7 +1695,7 @@ namespace Win32
 		[CRepr]
 		public struct DHCPV6_STATELESS_PARAMS
 		{
-			public BOOL Status;
+			public IntBool Status;
 			public uint32 PurgeInterval;
 		}
 		[CRepr]
@@ -1722,12 +1722,12 @@ namespace Win32
 			public FSM_STATE PrevState;
 			public uint32 Mclt;
 			public uint32 SafePeriod;
-			public PWSTR RelationshipName;
-			public PWSTR PrimaryServerName;
-			public PWSTR SecondaryServerName;
+			public char16* RelationshipName;
+			public char16* PrimaryServerName;
+			public char16* SecondaryServerName;
 			public DHCP_IP_ARRAY* pScopes;
 			public uint8 Percentage;
-			public PWSTR SharedSecret;
+			public char16* SharedSecret;
 		}
 		[CRepr]
 		public struct DHCP_FAILOVER_RELATIONSHIP_ARRAY
@@ -1741,15 +1741,15 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
 			public uint8 AddressState;
 			public QuarantineStatus Status;
 			public DATE_TIME ProbationEnds;
-			public BOOL QuarantineCapable;
+			public IntBool QuarantineCapable;
 			public uint32 SentPotExpTime;
 			public uint32 AckPotExpTime;
 			public uint32 RecvPotExpTime;
@@ -1757,7 +1757,7 @@ namespace Win32
 			public uint32 CltLastTransTime;
 			public uint32 LastBndUpdTime;
 			public uint32 BndMsgStatus;
-			public PWSTR PolicyName;
+			public char16* PolicyName;
 			public uint8 Flags;
 		}
 		[CRepr]
@@ -1772,15 +1772,15 @@ namespace Win32
 			public uint32 ClientIpAddress;
 			public uint32 SubnetMask;
 			public DHCP_BINARY_DATA ClientHardwareAddress;
-			public PWSTR ClientName;
-			public PWSTR ClientComment;
+			public char16* ClientName;
+			public char16* ClientComment;
 			public DATE_TIME ClientLeaseExpires;
 			public DHCP_HOST_INFO OwnerHost;
 			public uint8 bClientType;
 			public uint8 AddressState;
 			public QuarantineStatus Status;
 			public DATE_TIME ProbationEnds;
-			public BOOL QuarantineCapable;
+			public IntBool QuarantineCapable;
 			public uint32 SentPotExpTime;
 			public uint32 AckPotExpTime;
 			public uint32 RecvPotExpTime;
@@ -1788,7 +1788,7 @@ namespace Win32
 			public uint32 CltLastTransTime;
 			public uint32 LastBndUpdTime;
 			public uint32 BndMsgStatus;
-			public PWSTR PolicyName;
+			public char16* PolicyName;
 			public uint8 Flags;
 			public uint32 AddressStateEx;
 		}
@@ -1811,175 +1811,175 @@ namespace Win32
 		[Import("dhcpcsvc6.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void Dhcpv6CApiCleanup();
 		[Import("dhcpcsvc6.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 Dhcpv6RequestParams(BOOL forceNewInform, void* reserved, PWSTR adapterName, out DHCPV6CAPI_CLASSID classId, DHCPV6CAPI_PARAMS_ARRAY recdParams, out uint8 buffer, out uint32 pSize);
+		public static extern uint32 Dhcpv6RequestParams(IntBool forceNewInform, void* reserved, char16* adapterName, out DHCPV6CAPI_CLASSID classId, DHCPV6CAPI_PARAMS_ARRAY recdParams, out uint8 buffer, out uint32 pSize);
 		[Import("dhcpcsvc6.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 Dhcpv6RequestPrefix(PWSTR adapterName, out DHCPV6CAPI_CLASSID pclassId, out DHCPV6PrefixLeaseInformation prefixleaseInfo, out uint32 pdwTimeToWait);
+		public static extern uint32 Dhcpv6RequestPrefix(char16* adapterName, out DHCPV6CAPI_CLASSID pclassId, out DHCPV6PrefixLeaseInformation prefixleaseInfo, out uint32 pdwTimeToWait);
 		[Import("dhcpcsvc6.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 Dhcpv6RenewPrefix(PWSTR adapterName, out DHCPV6CAPI_CLASSID pclassId, out DHCPV6PrefixLeaseInformation prefixleaseInfo, out uint32 pdwTimeToWait, uint32 bValidatePrefix);
+		public static extern uint32 Dhcpv6RenewPrefix(char16* adapterName, out DHCPV6CAPI_CLASSID pclassId, out DHCPV6PrefixLeaseInformation prefixleaseInfo, out uint32 pdwTimeToWait, uint32 bValidatePrefix);
 		[Import("dhcpcsvc6.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 Dhcpv6ReleasePrefix(PWSTR adapterName, out DHCPV6CAPI_CLASSID classId, out DHCPV6PrefixLeaseInformation leaseInfo);
+		public static extern uint32 Dhcpv6ReleasePrefix(char16* adapterName, out DHCPV6CAPI_CLASSID classId, out DHCPV6PrefixLeaseInformation leaseInfo);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpCApiInitialize(out uint32 Version);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DhcpCApiCleanup();
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRequestParams(uint32 Flags, void* Reserved, PWSTR AdapterName, out DHCPCAPI_CLASSID ClassId, DHCPCAPI_PARAMS_ARRAY SendParams, DHCPCAPI_PARAMS_ARRAY RecdParams, out uint8 Buffer, out uint32 pSize, PWSTR RequestIdStr);
+		public static extern uint32 DhcpRequestParams(uint32 Flags, void* Reserved, char16* AdapterName, out DHCPCAPI_CLASSID ClassId, DHCPCAPI_PARAMS_ARRAY SendParams, DHCPCAPI_PARAMS_ARRAY RecdParams, out uint8 Buffer, out uint32 pSize, char16* RequestIdStr);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpUndoRequestParams(uint32 Flags, void* Reserved, PWSTR AdapterName, PWSTR RequestIdStr);
+		public static extern uint32 DhcpUndoRequestParams(uint32 Flags, void* Reserved, char16* AdapterName, char16* RequestIdStr);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRegisterParamChange(uint32 Flags, void* Reserved, PWSTR AdapterName, out DHCPCAPI_CLASSID ClassId, DHCPCAPI_PARAMS_ARRAY Params, void* Handle);
+		public static extern uint32 DhcpRegisterParamChange(uint32 Flags, void* Reserved, char16* AdapterName, out DHCPCAPI_CLASSID ClassId, DHCPCAPI_PARAMS_ARRAY Params, void* Handle);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpDeRegisterParamChange(uint32 Flags, void* Reserved, void* Event);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpRemoveDNSRegistrations();
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOriginalSubnetMask(PWSTR sAdapterName, out uint32 dwSubnetMask);
+		public static extern uint32 DhcpGetOriginalSubnetMask(char16* sAdapterName, out uint32 dwSubnetMask);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAddFilterV4(PWSTR ServerIpAddress, ref DHCP_FILTER_ADD_INFO AddFilterInfo, BOOL ForceFlag);
+		public static extern uint32 DhcpAddFilterV4(char16* ServerIpAddress, ref DHCP_FILTER_ADD_INFO AddFilterInfo, IntBool ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteFilterV4(PWSTR ServerIpAddress, ref DHCP_ADDR_PATTERN DeleteFilterInfo);
+		public static extern uint32 DhcpDeleteFilterV4(char16* ServerIpAddress, ref DHCP_ADDR_PATTERN DeleteFilterInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetFilterV4(PWSTR ServerIpAddress, ref DHCP_FILTER_GLOBAL_INFO GlobalFilterInfo);
+		public static extern uint32 DhcpSetFilterV4(char16* ServerIpAddress, ref DHCP_FILTER_GLOBAL_INFO GlobalFilterInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetFilterV4(PWSTR ServerIpAddress, out DHCP_FILTER_GLOBAL_INFO GlobalFilterInfo);
+		public static extern uint32 DhcpGetFilterV4(char16* ServerIpAddress, out DHCP_FILTER_GLOBAL_INFO GlobalFilterInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumFilterV4(PWSTR ServerIpAddress, out DHCP_ADDR_PATTERN ResumeHandle, uint32 PreferredMaximum, DHCP_FILTER_LIST_TYPE ListType, out DHCP_FILTER_ENUM_INFO* EnumFilterInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumFilterV4(char16* ServerIpAddress, out DHCP_ADDR_PATTERN ResumeHandle, uint32 PreferredMaximum, DHCP_FILTER_LIST_TYPE ListType, out DHCP_FILTER_ENUM_INFO* EnumFilterInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateSubnet(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO SubnetInfo);
+		public static extern uint32 DhcpCreateSubnet(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetSubnetInfo(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO SubnetInfo);
+		public static extern uint32 DhcpSetSubnetInfo(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetSubnetInfo(PWSTR ServerIpAddress, uint32 SubnetAddress, out DHCP_SUBNET_INFO* SubnetInfo);
+		public static extern uint32 DhcpGetSubnetInfo(char16* ServerIpAddress, uint32 SubnetAddress, out DHCP_SUBNET_INFO* SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnets(PWSTR ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_IP_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumSubnets(char16* ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_IP_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAddSubnetElement(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA AddElementInfo);
+		public static extern uint32 DhcpAddSubnetElement(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA AddElementInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetElements(PWSTR ServerIpAddress, uint32 SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumSubnetElements(char16* ServerIpAddress, uint32 SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveSubnetElement(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
+		public static extern uint32 DhcpRemoveSubnetElement(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteSubnet(PWSTR ServerIpAddress, uint32 SubnetAddress, DHCP_FORCE_FLAG ForceFlag);
+		public static extern uint32 DhcpDeleteSubnet(char16* ServerIpAddress, uint32 SubnetAddress, DHCP_FORCE_FLAG ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateOption(PWSTR ServerIpAddress, uint32 OptionID, in DHCP_OPTION OptionInfo);
+		public static extern uint32 DhcpCreateOption(char16* ServerIpAddress, uint32 OptionID, in DHCP_OPTION OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionInfo(PWSTR ServerIpAddress, uint32 OptionID, in DHCP_OPTION OptionInfo);
+		public static extern uint32 DhcpSetOptionInfo(char16* ServerIpAddress, uint32 OptionID, in DHCP_OPTION OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOptionInfo(PWSTR ServerIpAddress, uint32 OptionID, out DHCP_OPTION* OptionInfo);
+		public static extern uint32 DhcpGetOptionInfo(char16* ServerIpAddress, uint32 OptionID, out DHCP_OPTION* OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumOptions(PWSTR ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_ARRAY* Options, out uint32 OptionsRead, out uint32 OptionsTotal);
+		public static extern uint32 DhcpEnumOptions(char16* ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_ARRAY* Options, out uint32 OptionsRead, out uint32 OptionsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveOption(PWSTR ServerIpAddress, uint32 OptionID);
+		public static extern uint32 DhcpRemoveOption(char16* ServerIpAddress, uint32 OptionID);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionValue(PWSTR ServerIpAddress, uint32 OptionID, in DHCP_OPTION_SCOPE_INFO ScopeInfo, in DHCP_OPTION_DATA OptionValue);
+		public static extern uint32 DhcpSetOptionValue(char16* ServerIpAddress, uint32 OptionID, in DHCP_OPTION_SCOPE_INFO ScopeInfo, in DHCP_OPTION_DATA OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionValues(PWSTR ServerIpAddress, in DHCP_OPTION_SCOPE_INFO ScopeInfo, in DHCP_OPTION_VALUE_ARRAY OptionValues);
+		public static extern uint32 DhcpSetOptionValues(char16* ServerIpAddress, in DHCP_OPTION_SCOPE_INFO ScopeInfo, in DHCP_OPTION_VALUE_ARRAY OptionValues);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOptionValue(PWSTR ServerIpAddress, uint32 OptionID, in DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
+		public static extern uint32 DhcpGetOptionValue(char16* ServerIpAddress, uint32 OptionID, in DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumOptionValues(PWSTR ServerIpAddress, in DHCP_OPTION_SCOPE_INFO ScopeInfo, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_VALUE_ARRAY* OptionValues, out uint32 OptionsRead, out uint32 OptionsTotal);
+		public static extern uint32 DhcpEnumOptionValues(char16* ServerIpAddress, in DHCP_OPTION_SCOPE_INFO ScopeInfo, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_VALUE_ARRAY* OptionValues, out uint32 OptionsRead, out uint32 OptionsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveOptionValue(PWSTR ServerIpAddress, uint32 OptionID, in DHCP_OPTION_SCOPE_INFO ScopeInfo);
+		public static extern uint32 DhcpRemoveOptionValue(char16* ServerIpAddress, uint32 OptionID, in DHCP_OPTION_SCOPE_INFO ScopeInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateClientInfoVQ(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_VQ ClientInfo);
+		public static extern uint32 DhcpCreateClientInfoVQ(char16* ServerIpAddress, in DHCP_CLIENT_INFO_VQ ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetClientInfoVQ(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_VQ ClientInfo);
+		public static extern uint32 DhcpSetClientInfoVQ(char16* ServerIpAddress, in DHCP_CLIENT_INFO_VQ ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetClientInfoVQ(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_VQ* ClientInfo);
+		public static extern uint32 DhcpGetClientInfoVQ(char16* ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_VQ* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetClientsVQ(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_VQ* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpEnumSubnetClientsVQ(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_VQ* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetClientsFilterStatusInfo(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpEnumSubnetClientsFilterStatusInfo(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateClientInfo(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO ClientInfo);
+		public static extern uint32 DhcpCreateClientInfo(char16* ServerIpAddress, in DHCP_CLIENT_INFO ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetClientInfo(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO ClientInfo);
+		public static extern uint32 DhcpSetClientInfo(char16* ServerIpAddress, in DHCP_CLIENT_INFO ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetClientInfo(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO* ClientInfo);
+		public static extern uint32 DhcpGetClientInfo(char16* ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteClientInfo(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO ClientInfo);
+		public static extern uint32 DhcpDeleteClientInfo(char16* ServerIpAddress, in DHCP_SEARCH_INFO ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetClients(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpEnumSubnetClients(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetClientOptions(PWSTR ServerIpAddress, uint32 ClientIpAddress, uint32 ClientSubnetMask, out DHCP_OPTION_LIST* ClientOptions);
+		public static extern uint32 DhcpGetClientOptions(char16* ServerIpAddress, uint32 ClientIpAddress, uint32 ClientSubnetMask, out DHCP_OPTION_LIST* ClientOptions);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetMibInfo(PWSTR ServerIpAddress, out DHCP_MIB_INFO* MibInfo);
+		public static extern uint32 DhcpGetMibInfo(char16* ServerIpAddress, out DHCP_MIB_INFO* MibInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerSetConfig(PWSTR ServerIpAddress, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO ConfigInfo);
+		public static extern uint32 DhcpServerSetConfig(char16* ServerIpAddress, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerGetConfig(PWSTR ServerIpAddress, out DHCP_SERVER_CONFIG_INFO* ConfigInfo);
+		public static extern uint32 DhcpServerGetConfig(char16* ServerIpAddress, out DHCP_SERVER_CONFIG_INFO* ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpScanDatabase(PWSTR ServerIpAddress, uint32 SubnetAddress, uint32 FixFlag, out DHCP_SCAN_LIST* ScanList);
+		public static extern uint32 DhcpScanDatabase(char16* ServerIpAddress, uint32 SubnetAddress, uint32 FixFlag, out DHCP_SCAN_LIST* ScanList);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DhcpRpcFreeMemory(void* BufferPointer);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetVersion(PWSTR ServerIpAddress, out uint32 MajorVersion, out uint32 MinorVersion);
+		public static extern uint32 DhcpGetVersion(char16* ServerIpAddress, out uint32 MajorVersion, out uint32 MinorVersion);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAddSubnetElementV4(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V4 AddElementInfo);
+		public static extern uint32 DhcpAddSubnetElementV4(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V4 AddElementInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetElementsV4(PWSTR ServerIpAddress, uint32 SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumSubnetElementsV4(char16* ServerIpAddress, uint32 SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveSubnetElementV4(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V4 RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
+		public static extern uint32 DhcpRemoveSubnetElementV4(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V4 RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateClientInfoV4(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_V4 ClientInfo);
+		public static extern uint32 DhcpCreateClientInfoV4(char16* ServerIpAddress, in DHCP_CLIENT_INFO_V4 ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetClientInfoV4(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_V4 ClientInfo);
+		public static extern uint32 DhcpSetClientInfoV4(char16* ServerIpAddress, in DHCP_CLIENT_INFO_V4 ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetClientInfoV4(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_V4* ClientInfo);
+		public static extern uint32 DhcpGetClientInfoV4(char16* ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_V4* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetClientsV4(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_V4* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpEnumSubnetClientsV4(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_V4* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerSetConfigV4(PWSTR ServerIpAddress, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO_V4 ConfigInfo);
+		public static extern uint32 DhcpServerSetConfigV4(char16* ServerIpAddress, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO_V4 ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerGetConfigV4(PWSTR ServerIpAddress, out DHCP_SERVER_CONFIG_INFO_V4* ConfigInfo);
+		public static extern uint32 DhcpServerGetConfigV4(char16* ServerIpAddress, out DHCP_SERVER_CONFIG_INFO_V4* ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetSuperScopeV4(PWSTR ServerIpAddress, uint32 SubnetAddress, PWSTR SuperScopeName, BOOL ChangeExisting);
+		public static extern uint32 DhcpSetSuperScopeV4(char16* ServerIpAddress, uint32 SubnetAddress, char16* SuperScopeName, IntBool ChangeExisting);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteSuperScopeV4(PWSTR ServerIpAddress, PWSTR SuperScopeName);
+		public static extern uint32 DhcpDeleteSuperScopeV4(char16* ServerIpAddress, char16* SuperScopeName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetSuperScopeInfoV4(PWSTR ServerIpAddress, out DHCP_SUPER_SCOPE_TABLE* SuperScopeTable);
+		public static extern uint32 DhcpGetSuperScopeInfoV4(char16* ServerIpAddress, out DHCP_SUPER_SCOPE_TABLE* SuperScopeTable);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetClientsV5(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_V5* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpEnumSubnetClientsV5(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_V5* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateOptionV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionId, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION OptionInfo);
+		public static extern uint32 DhcpCreateOptionV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionId, char16* ClassName, char16* VendorName, out DHCP_OPTION OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionInfoV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION OptionInfo);
+		public static extern uint32 DhcpSetOptionInfoV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOptionInfoV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION* OptionInfo);
+		public static extern uint32 DhcpGetOptionInfoV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION* OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumOptionsV5(PWSTR ServerIpAddress, uint32 Flags, PWSTR ClassName, PWSTR VendorName, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_ARRAY* Options, out uint32 OptionsRead, out uint32 OptionsTotal);
+		public static extern uint32 DhcpEnumOptionsV5(char16* ServerIpAddress, uint32 Flags, char16* ClassName, char16* VendorName, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_ARRAY* Options, out uint32 OptionsRead, out uint32 OptionsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveOptionV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName);
+		public static extern uint32 DhcpRemoveOptionV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionValueV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionId, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_DATA OptionValue);
+		public static extern uint32 DhcpSetOptionValueV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionId, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_DATA OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionValuesV5(PWSTR ServerIpAddress, uint32 Flags, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE_ARRAY OptionValues);
+		public static extern uint32 DhcpSetOptionValuesV5(char16* ServerIpAddress, uint32 Flags, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE_ARRAY OptionValues);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOptionValueV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
+		public static extern uint32 DhcpGetOptionValueV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOptionValueV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
+		public static extern uint32 DhcpGetOptionValueV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumOptionValuesV5(PWSTR ServerIpAddress, uint32 Flags, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_VALUE_ARRAY* OptionValues, out uint32 OptionsRead, out uint32 OptionsTotal);
+		public static extern uint32 DhcpEnumOptionValuesV5(char16* ServerIpAddress, uint32 Flags, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_VALUE_ARRAY* OptionValues, out uint32 OptionsRead, out uint32 OptionsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveOptionValueV5(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo);
+		public static extern uint32 DhcpRemoveOptionValueV5(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateClass(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO ClassInfo);
+		public static extern uint32 DhcpCreateClass(char16* ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO ClassInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpModifyClass(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO ClassInfo);
+		public static extern uint32 DhcpModifyClass(char16* ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO ClassInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteClass(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, PWSTR ClassName);
+		public static extern uint32 DhcpDeleteClass(char16* ServerIpAddress, uint32 ReservedMustBeZero, char16* ClassName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetClassInfo(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO PartialClassInfo, out DHCP_CLASS_INFO* FilledClassInfo);
+		public static extern uint32 DhcpGetClassInfo(char16* ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO PartialClassInfo, out DHCP_CLASS_INFO* FilledClassInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumClasses(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLASS_INFO_ARRAY* ClassInfoArray, out uint32 nRead, out uint32 nTotal);
+		public static extern uint32 DhcpEnumClasses(char16* ServerIpAddress, uint32 ReservedMustBeZero, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLASS_INFO_ARRAY* ClassInfoArray, out uint32 nRead, out uint32 nTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetAllOptions(PWSTR ServerIpAddress, uint32 Flags, out DHCP_ALL_OPTIONS* OptionStruct);
+		public static extern uint32 DhcpGetAllOptions(char16* ServerIpAddress, uint32 Flags, out DHCP_ALL_OPTIONS* OptionStruct);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetAllOptionsV6(PWSTR ServerIpAddress, uint32 Flags, out DHCP_ALL_OPTIONS* OptionStruct);
+		public static extern uint32 DhcpGetAllOptionsV6(char16* ServerIpAddress, uint32 Flags, out DHCP_ALL_OPTIONS* OptionStruct);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetAllOptionValues(PWSTR ServerIpAddress, uint32 Flags, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_ALL_OPTION_VALUES* Values);
+		public static extern uint32 DhcpGetAllOptionValues(char16* ServerIpAddress, uint32 Flags, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_ALL_OPTION_VALUES* Values);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetAllOptionValuesV6(PWSTR ServerIpAddress, uint32 Flags, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_ALL_OPTION_VALUES* Values);
+		public static extern uint32 DhcpGetAllOptionValuesV6(char16* ServerIpAddress, uint32 Flags, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_ALL_OPTION_VALUES* Values);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpEnumServers(uint32 Flags, void* IdInfo, out DHCPDS_SERVERS* Servers, void* CallbackFn, void* CallbackData);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1987,39 +1987,39 @@ namespace Win32
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpDeleteServer(uint32 Flags, void* IdInfo, out DHCPDS_SERVER NewServer, void* CallbackFn, void* CallbackData);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetServerBindingInfo(PWSTR ServerIpAddress, uint32 Flags, out DHCP_BIND_ELEMENT_ARRAY* BindElementsInfo);
+		public static extern uint32 DhcpGetServerBindingInfo(char16* ServerIpAddress, uint32 Flags, out DHCP_BIND_ELEMENT_ARRAY* BindElementsInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetServerBindingInfo(PWSTR ServerIpAddress, uint32 Flags, out DHCP_BIND_ELEMENT_ARRAY BindElementInfo);
+		public static extern uint32 DhcpSetServerBindingInfo(char16* ServerIpAddress, uint32 Flags, out DHCP_BIND_ELEMENT_ARRAY BindElementInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAddSubnetElementV5(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V5 AddElementInfo);
+		public static extern uint32 DhcpAddSubnetElementV5(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V5 AddElementInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetElementsV5(PWSTR ServerIpAddress, uint32 SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumSubnetElementsV5(char16* ServerIpAddress, uint32 SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveSubnetElementV5(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V5 RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
+		public static extern uint32 DhcpRemoveSubnetElementV5(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_ELEMENT_DATA_V5 RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4EnumSubnetReservations(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_RESERVATION_INFO_ARRAY* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpV4EnumSubnetReservations(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_RESERVATION_INFO_ARRAY* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateOptionV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionId, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION OptionInfo);
+		public static extern uint32 DhcpCreateOptionV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionId, char16* ClassName, char16* VendorName, out DHCP_OPTION OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveOptionV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName);
+		public static extern uint32 DhcpRemoveOptionV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumOptionsV6(PWSTR ServerIpAddress, uint32 Flags, PWSTR ClassName, PWSTR VendorName, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_ARRAY* Options, out uint32 OptionsRead, out uint32 OptionsTotal);
+		public static extern uint32 DhcpEnumOptionsV6(char16* ServerIpAddress, uint32 Flags, char16* ClassName, char16* VendorName, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_ARRAY* Options, out uint32 OptionsRead, out uint32 OptionsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveOptionValueV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo);
+		public static extern uint32 DhcpRemoveOptionValueV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetOptionInfoV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION* OptionInfo);
+		public static extern uint32 DhcpGetOptionInfoV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION* OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionInfoV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION OptionInfo);
+		public static extern uint32 DhcpSetOptionInfoV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* ClassName, char16* VendorName, out DHCP_OPTION OptionInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetOptionValueV6(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionId, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_OPTION_DATA OptionValue);
+		public static extern uint32 DhcpSetOptionValueV6(char16* ServerIpAddress, uint32 Flags, uint32 OptionId, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_OPTION_DATA OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetSubnetInfoVQ(PWSTR ServerIpAddress, uint32 SubnetAddress, out DHCP_SUBNET_INFO_VQ* SubnetInfo);
+		public static extern uint32 DhcpGetSubnetInfoVQ(char16* ServerIpAddress, uint32 SubnetAddress, out DHCP_SUBNET_INFO_VQ* SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateSubnetVQ(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO_VQ SubnetInfo);
+		public static extern uint32 DhcpCreateSubnetVQ(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO_VQ SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetSubnetInfoVQ(PWSTR ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO_VQ SubnetInfo);
+		public static extern uint32 DhcpSetSubnetInfoVQ(char16* ServerIpAddress, uint32 SubnetAddress, in DHCP_SUBNET_INFO_VQ SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumOptionValuesV6(PWSTR ServerIpAddress, uint32 Flags, PWSTR ClassName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_VALUE_ARRAY* OptionValues, out uint32 OptionsRead, out uint32 OptionsTotal);
+		public static extern uint32 DhcpEnumOptionValuesV6(char16* ServerIpAddress, uint32 Flags, char16* ClassName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_OPTION_VALUE_ARRAY* OptionValues, out uint32 OptionsRead, out uint32 OptionsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpDsInit();
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2029,127 +2029,127 @@ namespace Win32
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpGetThreadOptions(out uint32 pFlags, void* Reserved);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerQueryAttribute(PWSTR ServerIpAddr, uint32 dwReserved, uint32 DhcpAttribId, out DHCP_ATTRIB* pDhcpAttrib);
+		public static extern uint32 DhcpServerQueryAttribute(char16* ServerIpAddr, uint32 dwReserved, uint32 DhcpAttribId, out DHCP_ATTRIB* pDhcpAttrib);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerQueryAttributes(PWSTR ServerIpAddr, uint32 dwReserved, uint32 dwAttribCount, out uint32 pDhcpAttribs, out DHCP_ATTRIB_ARRAY* pDhcpAttribArr);
+		public static extern uint32 DhcpServerQueryAttributes(char16* ServerIpAddr, uint32 dwReserved, uint32 dwAttribCount, out uint32 pDhcpAttribs, out DHCP_ATTRIB_ARRAY* pDhcpAttribArr);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerRedoAuthorization(PWSTR ServerIpAddr, uint32 dwReserved);
+		public static extern uint32 DhcpServerRedoAuthorization(char16* ServerIpAddr, uint32 dwReserved);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAuditLogSetParams(PWSTR ServerIpAddress, uint32 Flags, PWSTR AuditLogDir, uint32 DiskCheckInterval, uint32 MaxLogFilesSize, uint32 MinSpaceOnDisk);
+		public static extern uint32 DhcpAuditLogSetParams(char16* ServerIpAddress, uint32 Flags, char16* AuditLogDir, uint32 DiskCheckInterval, uint32 MaxLogFilesSize, uint32 MinSpaceOnDisk);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAuditLogGetParams(PWSTR ServerIpAddress, uint32 Flags, PWSTR* AuditLogDir, out uint32 DiskCheckInterval, out uint32 MaxLogFilesSize, out uint32 MinSpaceOnDisk);
+		public static extern uint32 DhcpAuditLogGetParams(char16* ServerIpAddress, uint32 Flags, char16** AuditLogDir, out uint32 DiskCheckInterval, out uint32 MaxLogFilesSize, out uint32 MinSpaceOnDisk);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerQueryDnsRegCredentials(PWSTR ServerIpAddress, uint32 UnameSize, char16* Uname, uint32 DomainSize, char16* Domain);
+		public static extern uint32 DhcpServerQueryDnsRegCredentials(char16* ServerIpAddress, uint32 UnameSize, char16* Uname, uint32 DomainSize, char16* Domain);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerSetDnsRegCredentials(PWSTR ServerIpAddress, PWSTR Uname, PWSTR Domain, PWSTR Passwd);
+		public static extern uint32 DhcpServerSetDnsRegCredentials(char16* ServerIpAddress, char16* Uname, char16* Domain, char16* Passwd);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerSetDnsRegCredentialsV5(PWSTR ServerIpAddress, PWSTR Uname, PWSTR Domain, PWSTR Passwd);
+		public static extern uint32 DhcpServerSetDnsRegCredentialsV5(char16* ServerIpAddress, char16* Uname, char16* Domain, char16* Passwd);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerBackupDatabase(PWSTR ServerIpAddress, PWSTR Path);
+		public static extern uint32 DhcpServerBackupDatabase(char16* ServerIpAddress, char16* Path);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerRestoreDatabase(PWSTR ServerIpAddress, PWSTR Path);
+		public static extern uint32 DhcpServerRestoreDatabase(char16* ServerIpAddress, char16* Path);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerSetConfigVQ(PWSTR ServerIpAddress, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO_VQ ConfigInfo);
+		public static extern uint32 DhcpServerSetConfigVQ(char16* ServerIpAddress, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO_VQ ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerGetConfigVQ(PWSTR ServerIpAddress, out DHCP_SERVER_CONFIG_INFO_VQ* ConfigInfo);
+		public static extern uint32 DhcpServerGetConfigVQ(char16* ServerIpAddress, out DHCP_SERVER_CONFIG_INFO_VQ* ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetServerSpecificStrings(PWSTR ServerIpAddress, out DHCP_SERVER_SPECIFIC_STRINGS* ServerSpecificStrings);
+		public static extern uint32 DhcpGetServerSpecificStrings(char16* ServerIpAddress, out DHCP_SERVER_SPECIFIC_STRINGS* ServerSpecificStrings);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DhcpServerAuditlogParamsFree(out DHCP_SERVER_CONFIG_INFO_VQ ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateSubnetV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_INFO_V6 SubnetInfo);
+		public static extern uint32 DhcpCreateSubnetV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_INFO_V6 SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteSubnetV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, DHCP_FORCE_FLAG ForceFlag);
+		public static extern uint32 DhcpDeleteSubnetV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, DHCP_FORCE_FLAG ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetsV6(PWSTR ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCPV6_IP_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumSubnetsV6(char16* ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCPV6_IP_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAddSubnetElementV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_ELEMENT_DATA_V6 AddElementInfo);
+		public static extern uint32 DhcpAddSubnetElementV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_ELEMENT_DATA_V6 AddElementInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpRemoveSubnetElementV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_ELEMENT_DATA_V6 RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
+		public static extern uint32 DhcpRemoveSubnetElementV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_ELEMENT_DATA_V6 RemoveElementInfo, DHCP_FORCE_FLAG ForceFlag);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetElementsV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE_V6 EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpEnumSubnetElementsV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, DHCP_SUBNET_ELEMENT_TYPE_V6 EnumElementType, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6* EnumElementInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetSubnetInfoV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_INFO_V6* SubnetInfo);
+		public static extern uint32 DhcpGetSubnetInfoV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_INFO_V6* SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumSubnetClientsV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_IPV6_ADDRESS ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_V6* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpEnumSubnetClientsV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_IPV6_ADDRESS ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_ARRAY_V6* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerGetConfigV6(PWSTR ServerIpAddress, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_SERVER_CONFIG_INFO_V6* ConfigInfo);
+		public static extern uint32 DhcpServerGetConfigV6(char16* ServerIpAddress, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, out DHCP_SERVER_CONFIG_INFO_V6* ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpServerSetConfigV6(PWSTR ServerIpAddress, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO_V6 ConfigInfo);
+		public static extern uint32 DhcpServerSetConfigV6(char16* ServerIpAddress, out DHCP_OPTION_SCOPE_INFO6 ScopeInfo, uint32 FieldsToSet, out DHCP_SERVER_CONFIG_INFO_V6 ConfigInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetSubnetInfoV6(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_INFO_V6 SubnetInfo);
+		public static extern uint32 DhcpSetSubnetInfoV6(char16* ServerIpAddress, DHCP_IPV6_ADDRESS SubnetAddress, out DHCP_SUBNET_INFO_V6 SubnetInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetMibInfoV6(PWSTR ServerIpAddress, out DHCP_MIB_INFO_V6* MibInfo);
+		public static extern uint32 DhcpGetMibInfoV6(char16* ServerIpAddress, out DHCP_MIB_INFO_V6* MibInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetServerBindingInfoV6(PWSTR ServerIpAddress, uint32 Flags, out DHCPV6_BIND_ELEMENT_ARRAY* BindElementsInfo);
+		public static extern uint32 DhcpGetServerBindingInfoV6(char16* ServerIpAddress, uint32 Flags, out DHCPV6_BIND_ELEMENT_ARRAY* BindElementsInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetServerBindingInfoV6(PWSTR ServerIpAddress, uint32 Flags, out DHCPV6_BIND_ELEMENT_ARRAY BindElementInfo);
+		public static extern uint32 DhcpSetServerBindingInfoV6(char16* ServerIpAddress, uint32 Flags, out DHCPV6_BIND_ELEMENT_ARRAY BindElementInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetClientInfoV6(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_V6 ClientInfo);
+		public static extern uint32 DhcpSetClientInfoV6(char16* ServerIpAddress, in DHCP_CLIENT_INFO_V6 ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetClientInfoV6(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO_V6 SearchInfo, out DHCP_CLIENT_INFO_V6* ClientInfo);
+		public static extern uint32 DhcpGetClientInfoV6(char16* ServerIpAddress, in DHCP_SEARCH_INFO_V6 SearchInfo, out DHCP_CLIENT_INFO_V6* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteClientInfoV6(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO_V6 ClientInfo);
+		public static extern uint32 DhcpDeleteClientInfoV6(char16* ServerIpAddress, in DHCP_SEARCH_INFO_V6 ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpCreateClassV6(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO_V6 ClassInfo);
+		public static extern uint32 DhcpCreateClassV6(char16* ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO_V6 ClassInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpModifyClassV6(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO_V6 ClassInfo);
+		public static extern uint32 DhcpModifyClassV6(char16* ServerIpAddress, uint32 ReservedMustBeZero, out DHCP_CLASS_INFO_V6 ClassInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpDeleteClassV6(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, PWSTR ClassName);
+		public static extern uint32 DhcpDeleteClassV6(char16* ServerIpAddress, uint32 ReservedMustBeZero, char16* ClassName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpEnumClassesV6(PWSTR ServerIpAddress, uint32 ReservedMustBeZero, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLASS_INFO_ARRAY_V6* ClassInfoArray, out uint32 nRead, out uint32 nTotal);
+		public static extern uint32 DhcpEnumClassesV6(char16* ServerIpAddress, uint32 ReservedMustBeZero, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLASS_INFO_ARRAY_V6* ClassInfoArray, out uint32 nRead, out uint32 nTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpSetSubnetDelayOffer(PWSTR ServerIpAddress, uint32 SubnetAddress, uint16 TimeDelayInMilliseconds);
+		public static extern uint32 DhcpSetSubnetDelayOffer(char16* ServerIpAddress, uint32 SubnetAddress, uint16 TimeDelayInMilliseconds);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetSubnetDelayOffer(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint16 TimeDelayInMilliseconds);
+		public static extern uint32 DhcpGetSubnetDelayOffer(char16* ServerIpAddress, uint32 SubnetAddress, out uint16 TimeDelayInMilliseconds);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpGetMibInfoV5(PWSTR ServerIpAddress, out DHCP_MIB_INFO_V5* MibInfo);
+		public static extern uint32 DhcpGetMibInfoV5(char16* ServerIpAddress, out DHCP_MIB_INFO_V5* MibInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpAddSecurityGroup(PWSTR pServer);
+		public static extern uint32 DhcpAddSecurityGroup(char16* pServer);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetOptionValue(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR PolicyName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
+		public static extern uint32 DhcpV4GetOptionValue(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* PolicyName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE* OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4SetOptionValue(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionId, PWSTR PolicyName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_DATA OptionValue);
+		public static extern uint32 DhcpV4SetOptionValue(char16* ServerIpAddress, uint32 Flags, uint32 OptionId, char16* PolicyName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_DATA OptionValue);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4SetOptionValues(PWSTR ServerIpAddress, uint32 Flags, PWSTR PolicyName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE_ARRAY OptionValues);
+		public static extern uint32 DhcpV4SetOptionValues(char16* ServerIpAddress, uint32 Flags, char16* PolicyName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_OPTION_VALUE_ARRAY OptionValues);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4RemoveOptionValue(PWSTR ServerIpAddress, uint32 Flags, uint32 OptionID, PWSTR PolicyName, PWSTR VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo);
+		public static extern uint32 DhcpV4RemoveOptionValue(char16* ServerIpAddress, uint32 Flags, uint32 OptionID, char16* PolicyName, char16* VendorName, out DHCP_OPTION_SCOPE_INFO ScopeInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetAllOptionValues(PWSTR ServerIpAddress, uint32 Flags, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_ALL_OPTION_VALUES_PB* Values);
+		public static extern uint32 DhcpV4GetAllOptionValues(char16* ServerIpAddress, uint32 Flags, out DHCP_OPTION_SCOPE_INFO ScopeInfo, out DHCP_ALL_OPTION_VALUES_PB* Values);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverCreateRelationship(PWSTR ServerIpAddress, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
+		public static extern uint32 DhcpV4FailoverCreateRelationship(char16* ServerIpAddress, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverSetRelationship(PWSTR ServerIpAddress, uint32 Flags, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
+		public static extern uint32 DhcpV4FailoverSetRelationship(char16* ServerIpAddress, uint32 Flags, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverDeleteRelationship(PWSTR ServerIpAddress, PWSTR pRelationshipName);
+		public static extern uint32 DhcpV4FailoverDeleteRelationship(char16* ServerIpAddress, char16* pRelationshipName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverGetRelationship(PWSTR ServerIpAddress, PWSTR pRelationshipName, out DHCP_FAILOVER_RELATIONSHIP* pRelationship);
+		public static extern uint32 DhcpV4FailoverGetRelationship(char16* ServerIpAddress, char16* pRelationshipName, out DHCP_FAILOVER_RELATIONSHIP* pRelationship);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverEnumRelationship(PWSTR ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_FAILOVER_RELATIONSHIP_ARRAY* pRelationship, out uint32 RelationshipRead, out uint32 RelationshipTotal);
+		public static extern uint32 DhcpV4FailoverEnumRelationship(char16* ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_FAILOVER_RELATIONSHIP_ARRAY* pRelationship, out uint32 RelationshipRead, out uint32 RelationshipTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverAddScopeToRelationship(PWSTR ServerIpAddress, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
+		public static extern uint32 DhcpV4FailoverAddScopeToRelationship(char16* ServerIpAddress, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverDeleteScopeFromRelationship(PWSTR ServerIpAddress, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
+		public static extern uint32 DhcpV4FailoverDeleteScopeFromRelationship(char16* ServerIpAddress, ref DHCP_FAILOVER_RELATIONSHIP pRelationship);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverGetScopeRelationship(PWSTR ServerIpAddress, uint32 ScopeId, out DHCP_FAILOVER_RELATIONSHIP* pRelationship);
+		public static extern uint32 DhcpV4FailoverGetScopeRelationship(char16* ServerIpAddress, uint32 ScopeId, out DHCP_FAILOVER_RELATIONSHIP* pRelationship);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverGetScopeStatistics(PWSTR ServerIpAddress, uint32 ScopeId, out DHCP_FAILOVER_STATISTICS* pStats);
+		public static extern uint32 DhcpV4FailoverGetScopeStatistics(char16* ServerIpAddress, uint32 ScopeId, out DHCP_FAILOVER_STATISTICS* pStats);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverGetClientInfo(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCPV4_FAILOVER_CLIENT_INFO* ClientInfo);
+		public static extern uint32 DhcpV4FailoverGetClientInfo(char16* ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCPV4_FAILOVER_CLIENT_INFO* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverGetSystemTime(PWSTR ServerIpAddress, out uint32 pTime, out uint32 pMaxAllowedDeltaTime);
+		public static extern uint32 DhcpV4FailoverGetSystemTime(char16* ServerIpAddress, out uint32 pTime, out uint32 pMaxAllowedDeltaTime);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverGetAddressStatus(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 pStatus);
+		public static extern uint32 DhcpV4FailoverGetAddressStatus(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 pStatus);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4FailoverTriggerAddrAllocation(PWSTR ServerIpAddress, PWSTR pFailRelName);
+		public static extern uint32 DhcpV4FailoverTriggerAddrAllocation(char16* ServerIpAddress, char16* pFailRelName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpHlprCreateV4Policy(PWSTR PolicyName, BOOL fGlobalPolicy, uint32 Subnet, uint32 ProcessingOrder, DHCP_POL_LOGIC_OPER RootOperator, PWSTR Description, BOOL Enabled, out DHCP_POLICY* Policy);
+		public static extern uint32 DhcpHlprCreateV4Policy(char16* PolicyName, IntBool fGlobalPolicy, uint32 Subnet, uint32 ProcessingOrder, DHCP_POL_LOGIC_OPER RootOperator, char16* Description, IntBool Enabled, out DHCP_POLICY* Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpHlprCreateV4PolicyEx(PWSTR PolicyName, BOOL fGlobalPolicy, uint32 Subnet, uint32 ProcessingOrder, DHCP_POL_LOGIC_OPER RootOperator, PWSTR Description, BOOL Enabled, out DHCP_POLICY_EX* Policy);
+		public static extern uint32 DhcpHlprCreateV4PolicyEx(char16* PolicyName, IntBool fGlobalPolicy, uint32 Subnet, uint32 ProcessingOrder, DHCP_POL_LOGIC_OPER RootOperator, char16* Description, IntBool Enabled, out DHCP_POLICY_EX* Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpHlprAddV4PolicyExpr(out DHCP_POLICY Policy, uint32 ParentExpr, DHCP_POL_LOGIC_OPER Operator, out uint32 ExprIndex);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpHlprAddV4PolicyCondition(out DHCP_POLICY Policy, uint32 ParentExpr, DHCP_POL_ATTR_TYPE Type, uint32 OptionID, uint32 SubOptionID, PWSTR VendorName, DHCP_POL_COMPARATOR Operator, ref uint8 Value, uint32 ValueLength, out uint32 ConditionIndex);
+		public static extern uint32 DhcpHlprAddV4PolicyCondition(out DHCP_POLICY Policy, uint32 ParentExpr, DHCP_POL_ATTR_TYPE Type, uint32 OptionID, uint32 SubOptionID, char16* VendorName, DHCP_POL_COMPARATOR Operator, ref uint8 Value, uint32 ValueLength, out uint32 ConditionIndex);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpHlprAddV4PolicyRange(out DHCP_POLICY Policy, ref DHCP_IP_RANGE Range);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2171,60 +2171,60 @@ namespace Win32
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern DHCP_PROPERTY* DhcpHlprFindV4DhcpProperty(ref DHCP_PROPERTY_ARRAY PropertyArray, DHCP_PROPERTY_ID ID, DHCP_PROPERTY_TYPE Type);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DhcpHlprIsV4PolicySingleUC(ref DHCP_POLICY Policy);
+		public static extern IntBool DhcpHlprIsV4PolicySingleUC(ref DHCP_POLICY Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4QueryPolicyEnforcement(PWSTR ServerIpAddress, BOOL fGlobalPolicy, uint32 SubnetAddress, out BOOL Enabled);
+		public static extern uint32 DhcpV4QueryPolicyEnforcement(char16* ServerIpAddress, IntBool fGlobalPolicy, uint32 SubnetAddress, out IntBool Enabled);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4SetPolicyEnforcement(PWSTR ServerIpAddress, BOOL fGlobalPolicy, uint32 SubnetAddress, BOOL Enable);
+		public static extern uint32 DhcpV4SetPolicyEnforcement(char16* ServerIpAddress, IntBool fGlobalPolicy, uint32 SubnetAddress, IntBool Enable);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DhcpHlprIsV4PolicyWellFormed(ref DHCP_POLICY pPolicy);
+		public static extern IntBool DhcpHlprIsV4PolicyWellFormed(ref DHCP_POLICY pPolicy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DhcpHlprIsV4PolicyValid(ref DHCP_POLICY pPolicy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4CreatePolicy(PWSTR ServerIpAddress, ref DHCP_POLICY pPolicy);
+		public static extern uint32 DhcpV4CreatePolicy(char16* ServerIpAddress, ref DHCP_POLICY pPolicy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetPolicy(PWSTR ServerIpAddress, BOOL fGlobalPolicy, uint32 SubnetAddress, PWSTR PolicyName, out DHCP_POLICY* Policy);
+		public static extern uint32 DhcpV4GetPolicy(char16* ServerIpAddress, IntBool fGlobalPolicy, uint32 SubnetAddress, char16* PolicyName, out DHCP_POLICY* Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4SetPolicy(PWSTR ServerIpAddress, uint32 FieldsModified, BOOL fGlobalPolicy, uint32 SubnetAddress, PWSTR PolicyName, ref DHCP_POLICY Policy);
+		public static extern uint32 DhcpV4SetPolicy(char16* ServerIpAddress, uint32 FieldsModified, IntBool fGlobalPolicy, uint32 SubnetAddress, char16* PolicyName, ref DHCP_POLICY Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4DeletePolicy(PWSTR ServerIpAddress, BOOL fGlobalPolicy, uint32 SubnetAddress, PWSTR PolicyName);
+		public static extern uint32 DhcpV4DeletePolicy(char16* ServerIpAddress, IntBool fGlobalPolicy, uint32 SubnetAddress, char16* PolicyName);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4EnumPolicies(PWSTR ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, BOOL fGlobalPolicy, uint32 SubnetAddress, out DHCP_POLICY_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpV4EnumPolicies(char16* ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, IntBool fGlobalPolicy, uint32 SubnetAddress, out DHCP_POLICY_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4AddPolicyRange(PWSTR ServerIpAddress, uint32 SubnetAddress, PWSTR PolicyName, ref DHCP_IP_RANGE Range);
+		public static extern uint32 DhcpV4AddPolicyRange(char16* ServerIpAddress, uint32 SubnetAddress, char16* PolicyName, ref DHCP_IP_RANGE Range);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4RemovePolicyRange(PWSTR ServerIpAddress, uint32 SubnetAddress, PWSTR PolicyName, ref DHCP_IP_RANGE Range);
+		public static extern uint32 DhcpV4RemovePolicyRange(char16* ServerIpAddress, uint32 SubnetAddress, char16* PolicyName, ref DHCP_IP_RANGE Range);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV6SetStatelessStoreParams(PWSTR ServerIpAddress, BOOL fServerLevel, DHCP_IPV6_ADDRESS SubnetAddress, uint32 FieldModified, ref DHCPV6_STATELESS_PARAMS Params);
+		public static extern uint32 DhcpV6SetStatelessStoreParams(char16* ServerIpAddress, IntBool fServerLevel, DHCP_IPV6_ADDRESS SubnetAddress, uint32 FieldModified, ref DHCPV6_STATELESS_PARAMS Params);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV6GetStatelessStoreParams(PWSTR ServerIpAddress, BOOL fServerLevel, DHCP_IPV6_ADDRESS SubnetAddress, out DHCPV6_STATELESS_PARAMS* Params);
+		public static extern uint32 DhcpV6GetStatelessStoreParams(char16* ServerIpAddress, IntBool fServerLevel, DHCP_IPV6_ADDRESS SubnetAddress, out DHCPV6_STATELESS_PARAMS* Params);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV6GetStatelessStatistics(PWSTR ServerIpAddress, out DHCPV6_STATELESS_STATS* StatelessStats);
+		public static extern uint32 DhcpV6GetStatelessStatistics(char16* ServerIpAddress, out DHCPV6_STATELESS_STATS* StatelessStats);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4CreateClientInfo(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_PB ClientInfo);
+		public static extern uint32 DhcpV4CreateClientInfo(char16* ServerIpAddress, in DHCP_CLIENT_INFO_PB ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4EnumSubnetClients(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_PB_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpV4EnumSubnetClients(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_PB_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetClientInfo(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_PB* ClientInfo);
+		public static extern uint32 DhcpV4GetClientInfo(char16* ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_PB* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV6CreateClientInfo(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_V6 ClientInfo);
+		public static extern uint32 DhcpV6CreateClientInfo(char16* ServerIpAddress, in DHCP_CLIENT_INFO_V6 ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetFreeIPAddress(PWSTR ServerIpAddress, uint32 ScopeId, uint32 StartIP, uint32 EndIP, uint32 NumFreeAddrReq, out DHCP_IP_ARRAY* IPAddrList);
+		public static extern uint32 DhcpV4GetFreeIPAddress(char16* ServerIpAddress, uint32 ScopeId, uint32 StartIP, uint32 EndIP, uint32 NumFreeAddrReq, out DHCP_IP_ARRAY* IPAddrList);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV6GetFreeIPAddress(PWSTR ServerIpAddress, DHCP_IPV6_ADDRESS ScopeId, DHCP_IPV6_ADDRESS StartIP, DHCP_IPV6_ADDRESS EndIP, uint32 NumFreeAddrReq, out DHCPV6_IP_ARRAY* IPAddrList);
+		public static extern uint32 DhcpV6GetFreeIPAddress(char16* ServerIpAddress, DHCP_IPV6_ADDRESS ScopeId, DHCP_IPV6_ADDRESS StartIP, DHCP_IPV6_ADDRESS EndIP, uint32 NumFreeAddrReq, out DHCPV6_IP_ARRAY* IPAddrList);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4CreateClientInfoEx(PWSTR ServerIpAddress, in DHCP_CLIENT_INFO_EX ClientInfo);
+		public static extern uint32 DhcpV4CreateClientInfoEx(char16* ServerIpAddress, in DHCP_CLIENT_INFO_EX ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4EnumSubnetClientsEx(PWSTR ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_EX_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
+		public static extern uint32 DhcpV4EnumSubnetClientsEx(char16* ServerIpAddress, uint32 SubnetAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, out DHCP_CLIENT_INFO_EX_ARRAY* ClientInfo, out uint32 ClientsRead, out uint32 ClientsTotal);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetClientInfoEx(PWSTR ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_EX* ClientInfo);
+		public static extern uint32 DhcpV4GetClientInfoEx(char16* ServerIpAddress, in DHCP_SEARCH_INFO SearchInfo, out DHCP_CLIENT_INFO_EX* ClientInfo);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4CreatePolicyEx(PWSTR ServerIpAddress, ref DHCP_POLICY_EX PolicyEx);
+		public static extern uint32 DhcpV4CreatePolicyEx(char16* ServerIpAddress, ref DHCP_POLICY_EX PolicyEx);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4GetPolicyEx(PWSTR ServerIpAddress, BOOL GlobalPolicy, uint32 SubnetAddress, PWSTR PolicyName, out DHCP_POLICY_EX* Policy);
+		public static extern uint32 DhcpV4GetPolicyEx(char16* ServerIpAddress, IntBool GlobalPolicy, uint32 SubnetAddress, char16* PolicyName, out DHCP_POLICY_EX* Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4SetPolicyEx(PWSTR ServerIpAddress, uint32 FieldsModified, BOOL GlobalPolicy, uint32 SubnetAddress, PWSTR PolicyName, ref DHCP_POLICY_EX Policy);
+		public static extern uint32 DhcpV4SetPolicyEx(char16* ServerIpAddress, uint32 FieldsModified, IntBool GlobalPolicy, uint32 SubnetAddress, char16* PolicyName, ref DHCP_POLICY_EX Policy);
 		[Import("dhcpsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DhcpV4EnumPoliciesEx(PWSTR ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, BOOL GlobalPolicy, uint32 SubnetAddress, out DHCP_POLICY_EX_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
+		public static extern uint32 DhcpV4EnumPoliciesEx(char16* ServerIpAddress, out uint32 ResumeHandle, uint32 PreferredMaximum, IntBool GlobalPolicy, uint32 SubnetAddress, out DHCP_POLICY_EX_ARRAY* EnumInfo, out uint32 ElementsRead, out uint32 ElementsTotal);
 	}
 }

@@ -238,64 +238,64 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateInteractionContext(out HINTERACTIONCONTEXT interactionContext);
+		public static extern HResult CreateInteractionContext(out HINTERACTIONCONTEXT interactionContext);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DestroyInteractionContext(HINTERACTIONCONTEXT interactionContext);
+		public static extern HResult DestroyInteractionContext(HINTERACTIONCONTEXT interactionContext);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterOutputCallbackInteractionContext(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_OUTPUT_CALLBACK outputCallback, void* clientData);
+		public static extern HResult RegisterOutputCallbackInteractionContext(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_OUTPUT_CALLBACK outputCallback, void* clientData);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterOutputCallbackInteractionContext2(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_OUTPUT_CALLBACK2 outputCallback, void* clientData);
+		public static extern HResult RegisterOutputCallbackInteractionContext2(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_OUTPUT_CALLBACK2 outputCallback, void* clientData);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetInteractionConfigurationInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 configurationCount, INTERACTION_CONTEXT_CONFIGURATION* configuration);
+		public static extern HResult SetInteractionConfigurationInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 configurationCount, INTERACTION_CONTEXT_CONFIGURATION* configuration);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetInteractionConfigurationInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 configurationCount, INTERACTION_CONTEXT_CONFIGURATION* configuration);
+		public static extern HResult GetInteractionConfigurationInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 configurationCount, INTERACTION_CONTEXT_CONFIGURATION* configuration);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetPropertyInteractionContext(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_PROPERTY contextProperty, uint32 value);
+		public static extern HResult SetPropertyInteractionContext(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_PROPERTY contextProperty, uint32 value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetPropertyInteractionContext(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_PROPERTY contextProperty, out uint32 value);
+		public static extern HResult GetPropertyInteractionContext(HINTERACTIONCONTEXT interactionContext, INTERACTION_CONTEXT_PROPERTY contextProperty, out uint32 value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetInertiaParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, INERTIA_PARAMETER inertiaParameter, float value);
+		public static extern HResult SetInertiaParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, INERTIA_PARAMETER inertiaParameter, float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetInertiaParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, INERTIA_PARAMETER inertiaParameter, out float value);
+		public static extern HResult GetInertiaParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, INERTIA_PARAMETER inertiaParameter, out float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetCrossSlideParametersInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 parameterCount, CROSS_SLIDE_PARAMETER* crossSlideParameters);
+		public static extern HResult SetCrossSlideParametersInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 parameterCount, CROSS_SLIDE_PARAMETER* crossSlideParameters);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetCrossSlideParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, CROSS_SLIDE_THRESHOLD threshold, out float distance);
+		public static extern HResult GetCrossSlideParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, CROSS_SLIDE_THRESHOLD threshold, out float distance);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetTapParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TAP_PARAMETER parameter, float value);
+		public static extern HResult SetTapParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TAP_PARAMETER parameter, float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetTapParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TAP_PARAMETER parameter, out float value);
+		public static extern HResult GetTapParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TAP_PARAMETER parameter, out float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetHoldParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, HOLD_PARAMETER parameter, float value);
+		public static extern HResult SetHoldParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, HOLD_PARAMETER parameter, float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetHoldParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, HOLD_PARAMETER parameter, out float value);
+		public static extern HResult GetHoldParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, HOLD_PARAMETER parameter, out float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetTranslationParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TRANSLATION_PARAMETER parameter, float value);
+		public static extern HResult SetTranslationParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TRANSLATION_PARAMETER parameter, float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetTranslationParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TRANSLATION_PARAMETER parameter, out float value);
+		public static extern HResult GetTranslationParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, TRANSLATION_PARAMETER parameter, out float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetMouseWheelParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, MOUSE_WHEEL_PARAMETER parameter, float value);
+		public static extern HResult SetMouseWheelParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, MOUSE_WHEEL_PARAMETER parameter, float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetMouseWheelParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, MOUSE_WHEEL_PARAMETER parameter, out float value);
+		public static extern HResult GetMouseWheelParameterInteractionContext(HINTERACTIONCONTEXT interactionContext, MOUSE_WHEEL_PARAMETER parameter, out float value);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ResetInteractionContext(HINTERACTIONCONTEXT interactionContext);
+		public static extern HResult ResetInteractionContext(HINTERACTIONCONTEXT interactionContext);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetStateInteractionContext(HINTERACTIONCONTEXT interactionContext, POINTER_INFO* pointerInfo, out INTERACTION_STATE state);
+		public static extern HResult GetStateInteractionContext(HINTERACTIONCONTEXT interactionContext, POINTER_INFO* pointerInfo, out INTERACTION_STATE state);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AddPointerInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 pointerId);
+		public static extern HResult AddPointerInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 pointerId);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RemovePointerInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 pointerId);
+		public static extern HResult RemovePointerInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 pointerId);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ProcessPointerFramesInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 entriesCount, uint32 pointerCount, in POINTER_INFO pointerInfo);
+		public static extern HResult ProcessPointerFramesInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 entriesCount, uint32 pointerCount, in POINTER_INFO pointerInfo);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT BufferPointerPacketsInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 entriesCount, POINTER_INFO* pointerInfo);
+		public static extern HResult BufferPointerPacketsInteractionContext(HINTERACTIONCONTEXT interactionContext, uint32 entriesCount, POINTER_INFO* pointerInfo);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ProcessBufferedPacketsInteractionContext(HINTERACTIONCONTEXT interactionContext);
+		public static extern HResult ProcessBufferedPacketsInteractionContext(HINTERACTIONCONTEXT interactionContext);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ProcessInertiaInteractionContext(HINTERACTIONCONTEXT interactionContext);
+		public static extern HResult ProcessInertiaInteractionContext(HINTERACTIONCONTEXT interactionContext);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT StopInteractionContext(HINTERACTIONCONTEXT interactionContext);
+		public static extern HResult StopInteractionContext(HINTERACTIONCONTEXT interactionContext);
 		[Import("ninput.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetPivotInteractionContext(HINTERACTIONCONTEXT interactionContext, float x, float y, float radius);
+		public static extern HResult SetPivotInteractionContext(HINTERACTIONCONTEXT interactionContext, float x, float y, float radius);
 	}
 }

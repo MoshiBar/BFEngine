@@ -84,7 +84,7 @@ namespace Win32
 		public struct NLM_USAGE_DATA
 		{
 			public uint32 UsageInMegabytes;
-			public FILETIME LastSyncTime;
+			public FileTime LastSyncTime;
 		}
 		[CRepr]
 		public struct NLM_DATAPLAN_STATUS
@@ -94,7 +94,7 @@ namespace Win32
 			public uint32 DataLimitInMegabytes;
 			public uint32 InboundBandwidthInKbps;
 			public uint32 OutboundBandwidthInKbps;
-			public FILETIME NextBillingCycle;
+			public FileTime NextBillingCycle;
 			public uint32 MaxTransferSizeInMegabytes;
 			public uint32 Reserved;
 		}
@@ -125,28 +125,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNetworks(NLM_ENUM_NETWORK Flags, out IEnumNetworks* ppEnumNetwork) mut => VT.GetNetworks(ref this, Flags, out ppEnumNetwork);
-			public HRESULT GetNetwork(Guid gdNetworkId, out INetwork* ppNetwork) mut => VT.GetNetwork(ref this, gdNetworkId, out ppNetwork);
-			public HRESULT GetNetworkConnections(out IEnumNetworkConnections* ppEnum) mut => VT.GetNetworkConnections(ref this, out ppEnum);
-			public HRESULT GetNetworkConnection(Guid gdNetworkConnectionId, out INetworkConnection* ppNetworkConnection) mut => VT.GetNetworkConnection(ref this, gdNetworkConnectionId, out ppNetworkConnection);
-			public HRESULT get_IsConnectedToInternet(out int16 pbIsConnected) mut => VT.get_IsConnectedToInternet(ref this, out pbIsConnected);
-			public HRESULT get_IsConnected(out int16 pbIsConnected) mut => VT.get_IsConnected(ref this, out pbIsConnected);
-			public HRESULT GetConnectivity(out NLM_CONNECTIVITY pConnectivity) mut => VT.GetConnectivity(ref this, out pConnectivity);
-			public HRESULT SetSimulatedProfileInfo(ref NLM_SIMULATED_PROFILE_INFO pSimulatedInfo) mut => VT.SetSimulatedProfileInfo(ref this, ref pSimulatedInfo);
-			public HRESULT ClearSimulatedProfileInfo() mut => VT.ClearSimulatedProfileInfo(ref this);
+			public HResult GetNetworks(NLM_ENUM_NETWORK Flags, out IEnumNetworks* ppEnumNetwork) mut => VT.GetNetworks(ref this, Flags, out ppEnumNetwork);
+			public HResult GetNetwork(Guid gdNetworkId, out INetwork* ppNetwork) mut => VT.GetNetwork(ref this, gdNetworkId, out ppNetwork);
+			public HResult GetNetworkConnections(out IEnumNetworkConnections* ppEnum) mut => VT.GetNetworkConnections(ref this, out ppEnum);
+			public HResult GetNetworkConnection(Guid gdNetworkConnectionId, out INetworkConnection* ppNetworkConnection) mut => VT.GetNetworkConnection(ref this, gdNetworkConnectionId, out ppNetworkConnection);
+			public HResult get_IsConnectedToInternet(out int16 pbIsConnected) mut => VT.get_IsConnectedToInternet(ref this, out pbIsConnected);
+			public HResult get_IsConnected(out int16 pbIsConnected) mut => VT.get_IsConnected(ref this, out pbIsConnected);
+			public HResult GetConnectivity(out NLM_CONNECTIVITY pConnectivity) mut => VT.GetConnectivity(ref this, out pConnectivity);
+			public HResult SetSimulatedProfileInfo(ref NLM_SIMULATED_PROFILE_INFO pSimulatedInfo) mut => VT.SetSimulatedProfileInfo(ref this, ref pSimulatedInfo);
+			public HResult ClearSimulatedProfileInfo() mut => VT.ClearSimulatedProfileInfo(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, NLM_ENUM_NETWORK Flags, out IEnumNetworks* ppEnumNetwork) GetNetworks;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, Guid gdNetworkId, out INetwork* ppNetwork) GetNetwork;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, out IEnumNetworkConnections* ppEnum) GetNetworkConnections;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, Guid gdNetworkConnectionId, out INetworkConnection* ppNetworkConnection) GetNetworkConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, out int16 pbIsConnected) get_IsConnectedToInternet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, out int16 pbIsConnected) get_IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, out NLM_CONNECTIVITY pConnectivity) GetConnectivity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self, ref NLM_SIMULATED_PROFILE_INFO pSimulatedInfo) SetSimulatedProfileInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManager self) ClearSimulatedProfileInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, NLM_ENUM_NETWORK Flags, out IEnumNetworks* ppEnumNetwork) GetNetworks;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, Guid gdNetworkId, out INetwork* ppNetwork) GetNetwork;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, out IEnumNetworkConnections* ppEnum) GetNetworkConnections;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, Guid gdNetworkConnectionId, out INetworkConnection* ppNetworkConnection) GetNetworkConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, out int16 pbIsConnected) get_IsConnectedToInternet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, out int16 pbIsConnected) get_IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, out NLM_CONNECTIVITY pConnectivity) GetConnectivity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self, ref NLM_SIMULATED_PROFILE_INFO pSimulatedInfo) SetSimulatedProfileInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManager self) ClearSimulatedProfileInfo;
 			}
 		}
 		[CRepr]
@@ -156,12 +156,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ConnectivityChanged(NLM_CONNECTIVITY newConnectivity) mut => VT.ConnectivityChanged(ref this, newConnectivity);
+			public HResult ConnectivityChanged(NLM_CONNECTIVITY newConnectivity) mut => VT.ConnectivityChanged(ref this, newConnectivity);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkListManagerEvents self, NLM_CONNECTIVITY newConnectivity) ConnectivityChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkListManagerEvents self, NLM_CONNECTIVITY newConnectivity) ConnectivityChanged;
 			}
 		}
 		[CRepr]
@@ -171,36 +171,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetName(out BSTR pszNetworkName) mut => VT.GetName(ref this, out pszNetworkName);
-			public HRESULT SetName(BSTR szNetworkNewName) mut => VT.SetName(ref this, szNetworkNewName);
-			public HRESULT GetDescription(out BSTR pszDescription) mut => VT.GetDescription(ref this, out pszDescription);
-			public HRESULT SetDescription(BSTR szDescription) mut => VT.SetDescription(ref this, szDescription);
-			public HRESULT GetNetworkId(out Guid pgdGuidNetworkId) mut => VT.GetNetworkId(ref this, out pgdGuidNetworkId);
-			public HRESULT GetDomainType(out NLM_DOMAIN_TYPE pNetworkType) mut => VT.GetDomainType(ref this, out pNetworkType);
-			public HRESULT GetNetworkConnections(out IEnumNetworkConnections* ppEnumNetworkConnection) mut => VT.GetNetworkConnections(ref this, out ppEnumNetworkConnection);
-			public HRESULT GetTimeCreatedAndConnected(out uint32 pdwLowDateTimeCreated, out uint32 pdwHighDateTimeCreated, out uint32 pdwLowDateTimeConnected, out uint32 pdwHighDateTimeConnected) mut => VT.GetTimeCreatedAndConnected(ref this, out pdwLowDateTimeCreated, out pdwHighDateTimeCreated, out pdwLowDateTimeConnected, out pdwHighDateTimeConnected);
-			public HRESULT get_IsConnectedToInternet(out int16 pbIsConnected) mut => VT.get_IsConnectedToInternet(ref this, out pbIsConnected);
-			public HRESULT get_IsConnected(out int16 pbIsConnected) mut => VT.get_IsConnected(ref this, out pbIsConnected);
-			public HRESULT GetConnectivity(out NLM_CONNECTIVITY pConnectivity) mut => VT.GetConnectivity(ref this, out pConnectivity);
-			public HRESULT GetCategory(out NLM_NETWORK_CATEGORY pCategory) mut => VT.GetCategory(ref this, out pCategory);
-			public HRESULT SetCategory(NLM_NETWORK_CATEGORY NewCategory) mut => VT.SetCategory(ref this, NewCategory);
+			public HResult GetName(out BSTR pszNetworkName) mut => VT.GetName(ref this, out pszNetworkName);
+			public HResult SetName(BSTR szNetworkNewName) mut => VT.SetName(ref this, szNetworkNewName);
+			public HResult GetDescription(out BSTR pszDescription) mut => VT.GetDescription(ref this, out pszDescription);
+			public HResult SetDescription(BSTR szDescription) mut => VT.SetDescription(ref this, szDescription);
+			public HResult GetNetworkId(out Guid pgdGuidNetworkId) mut => VT.GetNetworkId(ref this, out pgdGuidNetworkId);
+			public HResult GetDomainType(out NLM_DOMAIN_TYPE pNetworkType) mut => VT.GetDomainType(ref this, out pNetworkType);
+			public HResult GetNetworkConnections(out IEnumNetworkConnections* ppEnumNetworkConnection) mut => VT.GetNetworkConnections(ref this, out ppEnumNetworkConnection);
+			public HResult GetTimeCreatedAndConnected(out uint32 pdwLowDateTimeCreated, out uint32 pdwHighDateTimeCreated, out uint32 pdwLowDateTimeConnected, out uint32 pdwHighDateTimeConnected) mut => VT.GetTimeCreatedAndConnected(ref this, out pdwLowDateTimeCreated, out pdwHighDateTimeCreated, out pdwLowDateTimeConnected, out pdwHighDateTimeConnected);
+			public HResult get_IsConnectedToInternet(out int16 pbIsConnected) mut => VT.get_IsConnectedToInternet(ref this, out pbIsConnected);
+			public HResult get_IsConnected(out int16 pbIsConnected) mut => VT.get_IsConnected(ref this, out pbIsConnected);
+			public HResult GetConnectivity(out NLM_CONNECTIVITY pConnectivity) mut => VT.GetConnectivity(ref this, out pConnectivity);
+			public HResult GetCategory(out NLM_NETWORK_CATEGORY pCategory) mut => VT.GetCategory(ref this, out pCategory);
+			public HResult SetCategory(NLM_NETWORK_CATEGORY NewCategory) mut => VT.SetCategory(ref this, NewCategory);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out BSTR pszNetworkName) GetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, BSTR szNetworkNewName) SetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out BSTR pszDescription) GetDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, BSTR szDescription) SetDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out Guid pgdGuidNetworkId) GetNetworkId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out NLM_DOMAIN_TYPE pNetworkType) GetDomainType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out IEnumNetworkConnections* ppEnumNetworkConnection) GetNetworkConnections;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out uint32 pdwLowDateTimeCreated, out uint32 pdwHighDateTimeCreated, out uint32 pdwLowDateTimeConnected, out uint32 pdwHighDateTimeConnected) GetTimeCreatedAndConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out int16 pbIsConnected) get_IsConnectedToInternet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out int16 pbIsConnected) get_IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out NLM_CONNECTIVITY pConnectivity) GetConnectivity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, out NLM_NETWORK_CATEGORY pCategory) GetCategory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetwork self, NLM_NETWORK_CATEGORY NewCategory) SetCategory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out BSTR pszNetworkName) GetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, BSTR szNetworkNewName) SetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out BSTR pszDescription) GetDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, BSTR szDescription) SetDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out Guid pgdGuidNetworkId) GetNetworkId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out NLM_DOMAIN_TYPE pNetworkType) GetDomainType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out IEnumNetworkConnections* ppEnumNetworkConnection) GetNetworkConnections;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out uint32 pdwLowDateTimeCreated, out uint32 pdwHighDateTimeCreated, out uint32 pdwLowDateTimeConnected, out uint32 pdwHighDateTimeConnected) GetTimeCreatedAndConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out int16 pbIsConnected) get_IsConnectedToInternet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out int16 pbIsConnected) get_IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out NLM_CONNECTIVITY pConnectivity) GetConnectivity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, out NLM_NETWORK_CATEGORY pCategory) GetCategory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetwork self, NLM_NETWORK_CATEGORY NewCategory) SetCategory;
 			}
 		}
 		[CRepr]
@@ -210,20 +210,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get__NewEnum(out IEnumVARIANT* ppEnumVar) mut => VT.get__NewEnum(ref this, out ppEnumVar);
-			public HRESULT Next(uint32 celt, INetwork** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumNetworks* ppEnumNetwork) mut => VT.Clone(ref this, out ppEnumNetwork);
+			public HResult get__NewEnum(out IEnumVARIANT* ppEnumVar) mut => VT.get__NewEnum(ref this, out ppEnumVar);
+			public HResult Next(uint32 celt, INetwork** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumNetworks* ppEnumNetwork) mut => VT.Clone(ref this, out ppEnumNetwork);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworks self, out IEnumVARIANT* ppEnumVar) get__NewEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworks self, uint32 celt, INetwork** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworks self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworks self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworks self, out IEnumNetworks* ppEnumNetwork) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworks self, out IEnumVARIANT* ppEnumVar) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworks self, uint32 celt, INetwork** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworks self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworks self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworks self, out IEnumNetworks* ppEnumNetwork) Clone;
 			}
 		}
 		[CRepr]
@@ -233,18 +233,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NetworkAdded(Guid networkId) mut => VT.NetworkAdded(ref this, networkId);
-			public HRESULT NetworkDeleted(Guid networkId) mut => VT.NetworkDeleted(ref this, networkId);
-			public HRESULT NetworkConnectivityChanged(Guid networkId, NLM_CONNECTIVITY newConnectivity) mut => VT.NetworkConnectivityChanged(ref this, networkId, newConnectivity);
-			public HRESULT NetworkPropertyChanged(Guid networkId, NLM_NETWORK_PROPERTY_CHANGE flags) mut => VT.NetworkPropertyChanged(ref this, networkId, flags);
+			public HResult NetworkAdded(Guid networkId) mut => VT.NetworkAdded(ref this, networkId);
+			public HResult NetworkDeleted(Guid networkId) mut => VT.NetworkDeleted(ref this, networkId);
+			public HResult NetworkConnectivityChanged(Guid networkId, NLM_CONNECTIVITY newConnectivity) mut => VT.NetworkConnectivityChanged(ref this, networkId, newConnectivity);
+			public HResult NetworkPropertyChanged(Guid networkId, NLM_NETWORK_PROPERTY_CHANGE flags) mut => VT.NetworkPropertyChanged(ref this, networkId, flags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkEvents self, Guid networkId) NetworkAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkEvents self, Guid networkId) NetworkDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkEvents self, Guid networkId, NLM_CONNECTIVITY newConnectivity) NetworkConnectivityChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkEvents self, Guid networkId, NLM_NETWORK_PROPERTY_CHANGE flags) NetworkPropertyChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkEvents self, Guid networkId) NetworkAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkEvents self, Guid networkId) NetworkDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkEvents self, Guid networkId, NLM_CONNECTIVITY newConnectivity) NetworkConnectivityChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkEvents self, Guid networkId, NLM_NETWORK_PROPERTY_CHANGE flags) NetworkPropertyChanged;
 			}
 		}
 		[CRepr]
@@ -254,24 +254,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNetwork(out INetwork* ppNetwork) mut => VT.GetNetwork(ref this, out ppNetwork);
-			public HRESULT get_IsConnectedToInternet(out int16 pbIsConnected) mut => VT.get_IsConnectedToInternet(ref this, out pbIsConnected);
-			public HRESULT get_IsConnected(out int16 pbIsConnected) mut => VT.get_IsConnected(ref this, out pbIsConnected);
-			public HRESULT GetConnectivity(out NLM_CONNECTIVITY pConnectivity) mut => VT.GetConnectivity(ref this, out pConnectivity);
-			public HRESULT GetConnectionId(out Guid pgdConnectionId) mut => VT.GetConnectionId(ref this, out pgdConnectionId);
-			public HRESULT GetAdapterId(out Guid pgdAdapterId) mut => VT.GetAdapterId(ref this, out pgdAdapterId);
-			public HRESULT GetDomainType(out NLM_DOMAIN_TYPE pDomainType) mut => VT.GetDomainType(ref this, out pDomainType);
+			public HResult GetNetwork(out INetwork* ppNetwork) mut => VT.GetNetwork(ref this, out ppNetwork);
+			public HResult get_IsConnectedToInternet(out int16 pbIsConnected) mut => VT.get_IsConnectedToInternet(ref this, out pbIsConnected);
+			public HResult get_IsConnected(out int16 pbIsConnected) mut => VT.get_IsConnected(ref this, out pbIsConnected);
+			public HResult GetConnectivity(out NLM_CONNECTIVITY pConnectivity) mut => VT.GetConnectivity(ref this, out pConnectivity);
+			public HResult GetConnectionId(out Guid pgdConnectionId) mut => VT.GetConnectionId(ref this, out pgdConnectionId);
+			public HResult GetAdapterId(out Guid pgdAdapterId) mut => VT.GetAdapterId(ref this, out pgdAdapterId);
+			public HResult GetDomainType(out NLM_DOMAIN_TYPE pDomainType) mut => VT.GetDomainType(ref this, out pDomainType);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out INetwork* ppNetwork) GetNetwork;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out int16 pbIsConnected) get_IsConnectedToInternet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out int16 pbIsConnected) get_IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out NLM_CONNECTIVITY pConnectivity) GetConnectivity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out Guid pgdConnectionId) GetConnectionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out Guid pgdAdapterId) GetAdapterId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnection self, out NLM_DOMAIN_TYPE pDomainType) GetDomainType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out INetwork* ppNetwork) GetNetwork;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out int16 pbIsConnected) get_IsConnectedToInternet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out int16 pbIsConnected) get_IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out NLM_CONNECTIVITY pConnectivity) GetConnectivity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out Guid pgdConnectionId) GetConnectionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out Guid pgdAdapterId) GetAdapterId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnection self, out NLM_DOMAIN_TYPE pDomainType) GetDomainType;
 			}
 		}
 		[CRepr]
@@ -281,20 +281,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get__NewEnum(out IEnumVARIANT* ppEnumVar) mut => VT.get__NewEnum(ref this, out ppEnumVar);
-			public HRESULT Next(uint32 celt, INetworkConnection** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumNetworkConnections* ppEnumNetwork) mut => VT.Clone(ref this, out ppEnumNetwork);
+			public HResult get__NewEnum(out IEnumVARIANT* ppEnumVar) mut => VT.get__NewEnum(ref this, out ppEnumVar);
+			public HResult Next(uint32 celt, INetworkConnection** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumNetworkConnections* ppEnumNetwork) mut => VT.Clone(ref this, out ppEnumNetwork);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworkConnections self, out IEnumVARIANT* ppEnumVar) get__NewEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworkConnections self, uint32 celt, INetworkConnection** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworkConnections self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworkConnections self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetworkConnections self, out IEnumNetworkConnections* ppEnumNetwork) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworkConnections self, out IEnumVARIANT* ppEnumVar) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworkConnections self, uint32 celt, INetworkConnection** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworkConnections self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworkConnections self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetworkConnections self, out IEnumNetworkConnections* ppEnumNetwork) Clone;
 			}
 		}
 		[CRepr]
@@ -304,14 +304,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NetworkConnectionConnectivityChanged(Guid connectionId, NLM_CONNECTIVITY newConnectivity) mut => VT.NetworkConnectionConnectivityChanged(ref this, connectionId, newConnectivity);
-			public HRESULT NetworkConnectionPropertyChanged(Guid connectionId, NLM_CONNECTION_PROPERTY_CHANGE flags) mut => VT.NetworkConnectionPropertyChanged(ref this, connectionId, flags);
+			public HResult NetworkConnectionConnectivityChanged(Guid connectionId, NLM_CONNECTIVITY newConnectivity) mut => VT.NetworkConnectionConnectivityChanged(ref this, connectionId, newConnectivity);
+			public HResult NetworkConnectionPropertyChanged(Guid connectionId, NLM_CONNECTION_PROPERTY_CHANGE flags) mut => VT.NetworkConnectionPropertyChanged(ref this, connectionId, flags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnectionEvents self, Guid connectionId, NLM_CONNECTIVITY newConnectivity) NetworkConnectionConnectivityChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnectionEvents self, Guid connectionId, NLM_CONNECTION_PROPERTY_CHANGE flags) NetworkConnectionPropertyChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnectionEvents self, Guid connectionId, NLM_CONNECTIVITY newConnectivity) NetworkConnectionConnectivityChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnectionEvents self, Guid connectionId, NLM_CONNECTION_PROPERTY_CHANGE flags) NetworkConnectionPropertyChanged;
 			}
 		}
 		[CRepr]
@@ -321,16 +321,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCost(out uint32 pCost, ref NLM_SOCKADDR pDestIPAddr) mut => VT.GetCost(ref this, out pCost, ref pDestIPAddr);
-			public HRESULT GetDataPlanStatus(out NLM_DATAPLAN_STATUS pDataPlanStatus, ref NLM_SOCKADDR pDestIPAddr) mut => VT.GetDataPlanStatus(ref this, out pDataPlanStatus, ref pDestIPAddr);
-			public HRESULT SetDestinationAddresses(uint32 length, NLM_SOCKADDR* pDestIPAddrList, int16 bAppend) mut => VT.SetDestinationAddresses(ref this, length, pDestIPAddrList, bAppend);
+			public HResult GetCost(out uint32 pCost, ref NLM_SOCKADDR pDestIPAddr) mut => VT.GetCost(ref this, out pCost, ref pDestIPAddr);
+			public HResult GetDataPlanStatus(out NLM_DATAPLAN_STATUS pDataPlanStatus, ref NLM_SOCKADDR pDestIPAddr) mut => VT.GetDataPlanStatus(ref this, out pDataPlanStatus, ref pDestIPAddr);
+			public HResult SetDestinationAddresses(uint32 length, NLM_SOCKADDR* pDestIPAddrList, int16 bAppend) mut => VT.SetDestinationAddresses(ref this, length, pDestIPAddrList, bAppend);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkCostManager self, out uint32 pCost, ref NLM_SOCKADDR pDestIPAddr) GetCost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkCostManager self, out NLM_DATAPLAN_STATUS pDataPlanStatus, ref NLM_SOCKADDR pDestIPAddr) GetDataPlanStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkCostManager self, uint32 length, NLM_SOCKADDR* pDestIPAddrList, int16 bAppend) SetDestinationAddresses;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkCostManager self, out uint32 pCost, ref NLM_SOCKADDR pDestIPAddr) GetCost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkCostManager self, out NLM_DATAPLAN_STATUS pDataPlanStatus, ref NLM_SOCKADDR pDestIPAddr) GetDataPlanStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkCostManager self, uint32 length, NLM_SOCKADDR* pDestIPAddrList, int16 bAppend) SetDestinationAddresses;
 			}
 		}
 		[CRepr]
@@ -340,14 +340,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CostChanged(uint32 newCost, ref NLM_SOCKADDR pDestAddr) mut => VT.CostChanged(ref this, newCost, ref pDestAddr);
-			public HRESULT DataPlanStatusChanged(ref NLM_SOCKADDR pDestAddr) mut => VT.DataPlanStatusChanged(ref this, ref pDestAddr);
+			public HResult CostChanged(uint32 newCost, ref NLM_SOCKADDR pDestAddr) mut => VT.CostChanged(ref this, newCost, ref pDestAddr);
+			public HResult DataPlanStatusChanged(ref NLM_SOCKADDR pDestAddr) mut => VT.DataPlanStatusChanged(ref this, ref pDestAddr);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkCostManagerEvents self, uint32 newCost, ref NLM_SOCKADDR pDestAddr) CostChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkCostManagerEvents self, ref NLM_SOCKADDR pDestAddr) DataPlanStatusChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkCostManagerEvents self, uint32 newCost, ref NLM_SOCKADDR pDestAddr) CostChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkCostManagerEvents self, ref NLM_SOCKADDR pDestAddr) DataPlanStatusChanged;
 			}
 		}
 		[CRepr]
@@ -357,14 +357,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCost(out uint32 pCost) mut => VT.GetCost(ref this, out pCost);
-			public HRESULT GetDataPlanStatus(out NLM_DATAPLAN_STATUS pDataPlanStatus) mut => VT.GetDataPlanStatus(ref this, out pDataPlanStatus);
+			public HResult GetCost(out uint32 pCost) mut => VT.GetCost(ref this, out pCost);
+			public HResult GetDataPlanStatus(out NLM_DATAPLAN_STATUS pDataPlanStatus) mut => VT.GetDataPlanStatus(ref this, out pDataPlanStatus);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnectionCost self, out uint32 pCost) GetCost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnectionCost self, out NLM_DATAPLAN_STATUS pDataPlanStatus) GetDataPlanStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnectionCost self, out uint32 pCost) GetCost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnectionCost self, out NLM_DATAPLAN_STATUS pDataPlanStatus) GetDataPlanStatus;
 			}
 		}
 		[CRepr]
@@ -374,14 +374,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ConnectionCostChanged(Guid connectionId, uint32 newCost) mut => VT.ConnectionCostChanged(ref this, connectionId, newCost);
-			public HRESULT ConnectionDataPlanStatusChanged(Guid connectionId) mut => VT.ConnectionDataPlanStatusChanged(ref this, connectionId);
+			public HResult ConnectionCostChanged(Guid connectionId, uint32 newCost) mut => VT.ConnectionCostChanged(ref this, connectionId, newCost);
+			public HResult ConnectionDataPlanStatusChanged(Guid connectionId) mut => VT.ConnectionDataPlanStatusChanged(ref this, connectionId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnectionCostEvents self, Guid connectionId, uint32 newCost) ConnectionCostChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetworkConnectionCostEvents self, Guid connectionId) ConnectionDataPlanStatusChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnectionCostEvents self, Guid connectionId, uint32 newCost) ConnectionCostChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetworkConnectionCostEvents self, Guid connectionId) ConnectionDataPlanStatusChanged;
 			}
 		}
 		

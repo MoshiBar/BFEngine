@@ -322,60 +322,60 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CacheMoved(PWSTR pszOldPath, PWSTR pszNewPath) mut => VT.CacheMoved(ref this, pszOldPath, pszNewPath);
-			public HRESULT CacheIsFull() mut => VT.CacheIsFull(ref this);
-			public HRESULT CacheIsCorrupted() mut => VT.CacheIsCorrupted(ref this);
-			public HRESULT Enabled(BOOL bEnabled) mut => VT.Enabled(ref this, bEnabled);
-			public HRESULT EncryptionChanged(BOOL bWasEncrypted, BOOL bWasPartial, BOOL bIsEncrypted, BOOL bIsPartial) mut => VT.EncryptionChanged(ref this, bWasEncrypted, bWasPartial, bIsEncrypted, bIsPartial);
-			public HRESULT SyncBegin(in Guid rSyncId) mut => VT.SyncBegin(ref this, rSyncId);
-			public HRESULT SyncFileResult(in Guid rSyncId, PWSTR pszFile, HRESULT hrResult) mut => VT.SyncFileResult(ref this, rSyncId, pszFile, hrResult);
-			public HRESULT SyncConflictRecAdded(PWSTR pszConflictPath, in FILETIME pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) mut => VT.SyncConflictRecAdded(ref this, pszConflictPath, pftConflictDateTime, ConflictSyncState);
-			public HRESULT SyncConflictRecUpdated(PWSTR pszConflictPath, in FILETIME pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) mut => VT.SyncConflictRecUpdated(ref this, pszConflictPath, pftConflictDateTime, ConflictSyncState);
-			public HRESULT SyncConflictRecRemoved(PWSTR pszConflictPath, in FILETIME pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) mut => VT.SyncConflictRecRemoved(ref this, pszConflictPath, pftConflictDateTime, ConflictSyncState);
-			public HRESULT SyncEnd(in Guid rSyncId, HRESULT hrResult) mut => VT.SyncEnd(ref this, rSyncId, hrResult);
-			public HRESULT NetTransportArrived() mut => VT.NetTransportArrived(ref this);
-			public HRESULT NoNetTransports() mut => VT.NoNetTransports(ref this);
-			public HRESULT ItemDisconnected(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemDisconnected(ref this, pszPath, ItemType);
-			public HRESULT ItemReconnected(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemReconnected(ref this, pszPath, ItemType);
-			public HRESULT ItemAvailableOffline(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemAvailableOffline(ref this, pszPath, ItemType);
-			public HRESULT ItemNotAvailableOffline(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemNotAvailableOffline(ref this, pszPath, ItemType);
-			public HRESULT ItemPinned(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemPinned(ref this, pszPath, ItemType);
-			public HRESULT ItemNotPinned(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemNotPinned(ref this, pszPath, ItemType);
-			public HRESULT ItemModified(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType, BOOL bModifiedData, BOOL bModifiedAttributes) mut => VT.ItemModified(ref this, pszPath, ItemType, bModifiedData, bModifiedAttributes);
-			public HRESULT ItemAddedToCache(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemAddedToCache(ref this, pszPath, ItemType);
-			public HRESULT ItemDeletedFromCache(PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemDeletedFromCache(ref this, pszPath, ItemType);
-			public HRESULT ItemRenamed(PWSTR pszOldPath, PWSTR pszNewPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemRenamed(ref this, pszOldPath, pszNewPath, ItemType);
-			public HRESULT DataLost() mut => VT.DataLost(ref this);
-			public HRESULT Ping() mut => VT.Ping(ref this);
+			public HResult CacheMoved(char16* pszOldPath, char16* pszNewPath) mut => VT.CacheMoved(ref this, pszOldPath, pszNewPath);
+			public HResult CacheIsFull() mut => VT.CacheIsFull(ref this);
+			public HResult CacheIsCorrupted() mut => VT.CacheIsCorrupted(ref this);
+			public HResult Enabled(IntBool bEnabled) mut => VT.Enabled(ref this, bEnabled);
+			public HResult EncryptionChanged(IntBool bWasEncrypted, IntBool bWasPartial, IntBool bIsEncrypted, IntBool bIsPartial) mut => VT.EncryptionChanged(ref this, bWasEncrypted, bWasPartial, bIsEncrypted, bIsPartial);
+			public HResult SyncBegin(in Guid rSyncId) mut => VT.SyncBegin(ref this, rSyncId);
+			public HResult SyncFileResult(in Guid rSyncId, char16* pszFile, HResult hrResult) mut => VT.SyncFileResult(ref this, rSyncId, pszFile, hrResult);
+			public HResult SyncConflictRecAdded(char16* pszConflictPath, in FileTime pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) mut => VT.SyncConflictRecAdded(ref this, pszConflictPath, pftConflictDateTime, ConflictSyncState);
+			public HResult SyncConflictRecUpdated(char16* pszConflictPath, in FileTime pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) mut => VT.SyncConflictRecUpdated(ref this, pszConflictPath, pftConflictDateTime, ConflictSyncState);
+			public HResult SyncConflictRecRemoved(char16* pszConflictPath, in FileTime pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) mut => VT.SyncConflictRecRemoved(ref this, pszConflictPath, pftConflictDateTime, ConflictSyncState);
+			public HResult SyncEnd(in Guid rSyncId, HResult hrResult) mut => VT.SyncEnd(ref this, rSyncId, hrResult);
+			public HResult NetTransportArrived() mut => VT.NetTransportArrived(ref this);
+			public HResult NoNetTransports() mut => VT.NoNetTransports(ref this);
+			public HResult ItemDisconnected(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemDisconnected(ref this, pszPath, ItemType);
+			public HResult ItemReconnected(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemReconnected(ref this, pszPath, ItemType);
+			public HResult ItemAvailableOffline(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemAvailableOffline(ref this, pszPath, ItemType);
+			public HResult ItemNotAvailableOffline(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemNotAvailableOffline(ref this, pszPath, ItemType);
+			public HResult ItemPinned(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemPinned(ref this, pszPath, ItemType);
+			public HResult ItemNotPinned(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemNotPinned(ref this, pszPath, ItemType);
+			public HResult ItemModified(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType, IntBool bModifiedData, IntBool bModifiedAttributes) mut => VT.ItemModified(ref this, pszPath, ItemType, bModifiedData, bModifiedAttributes);
+			public HResult ItemAddedToCache(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemAddedToCache(ref this, pszPath, ItemType);
+			public HResult ItemDeletedFromCache(char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemDeletedFromCache(ref this, pszPath, ItemType);
+			public HResult ItemRenamed(char16* pszOldPath, char16* pszNewPath, OFFLINEFILES_ITEM_TYPE ItemType) mut => VT.ItemRenamed(ref this, pszOldPath, pszNewPath, ItemType);
+			public HResult DataLost() mut => VT.DataLost(ref this);
+			public HResult Ping() mut => VT.Ping(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszOldPath, PWSTR pszNewPath) CacheMoved;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self) CacheIsFull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self) CacheIsCorrupted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, BOOL bEnabled) Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, BOOL bWasEncrypted, BOOL bWasPartial, BOOL bIsEncrypted, BOOL bIsPartial) EncryptionChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, in Guid rSyncId) SyncBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, in Guid rSyncId, PWSTR pszFile, HRESULT hrResult) SyncFileResult;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszConflictPath, in FILETIME pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) SyncConflictRecAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszConflictPath, in FILETIME pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) SyncConflictRecUpdated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszConflictPath, in FILETIME pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) SyncConflictRecRemoved;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, in Guid rSyncId, HRESULT hrResult) SyncEnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self) NetTransportArrived;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self) NoNetTransports;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemDisconnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemReconnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemAvailableOffline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemNotAvailableOffline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemPinned;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemNotPinned;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType, BOOL bModifiedData, BOOL bModifiedAttributes) ItemModified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemAddedToCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemDeletedFromCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self, PWSTR pszOldPath, PWSTR pszNewPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self) DataLost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents self) Ping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszOldPath, char16* pszNewPath) CacheMoved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self) CacheIsFull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self) CacheIsCorrupted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, IntBool bEnabled) Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, IntBool bWasEncrypted, IntBool bWasPartial, IntBool bIsEncrypted, IntBool bIsPartial) EncryptionChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, in Guid rSyncId) SyncBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, in Guid rSyncId, char16* pszFile, HResult hrResult) SyncFileResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszConflictPath, in FileTime pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) SyncConflictRecAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszConflictPath, in FileTime pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) SyncConflictRecUpdated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszConflictPath, in FileTime pftConflictDateTime, OFFLINEFILES_SYNC_STATE ConflictSyncState) SyncConflictRecRemoved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, in Guid rSyncId, HResult hrResult) SyncEnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self) NetTransportArrived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self) NoNetTransports;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemDisconnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemReconnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemAvailableOffline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemNotAvailableOffline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemPinned;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemNotPinned;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType, IntBool bModifiedData, IntBool bModifiedAttributes) ItemModified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemAddedToCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemDeletedFromCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self, char16* pszOldPath, char16* pszNewPath, OFFLINEFILES_ITEM_TYPE ItemType) ItemRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self) DataLost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents self) Ping;
 			}
 		}
 		[CRepr]
@@ -385,28 +385,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ItemReconnectBegin() mut => VT.ItemReconnectBegin(ref this);
-			public HRESULT ItemReconnectEnd() mut => VT.ItemReconnectEnd(ref this);
-			public HRESULT CacheEvictBegin() mut => VT.CacheEvictBegin(ref this);
-			public HRESULT CacheEvictEnd() mut => VT.CacheEvictEnd(ref this);
-			public HRESULT BackgroundSyncBegin(uint32 dwSyncControlFlags) mut => VT.BackgroundSyncBegin(ref this, dwSyncControlFlags);
-			public HRESULT BackgroundSyncEnd(uint32 dwSyncControlFlags) mut => VT.BackgroundSyncEnd(ref this, dwSyncControlFlags);
-			public HRESULT PolicyChangeDetected() mut => VT.PolicyChangeDetected(ref this);
-			public HRESULT PreferenceChangeDetected() mut => VT.PreferenceChangeDetected(ref this);
-			public HRESULT SettingsChangesApplied() mut => VT.SettingsChangesApplied(ref this);
+			public HResult ItemReconnectBegin() mut => VT.ItemReconnectBegin(ref this);
+			public HResult ItemReconnectEnd() mut => VT.ItemReconnectEnd(ref this);
+			public HResult CacheEvictBegin() mut => VT.CacheEvictBegin(ref this);
+			public HResult CacheEvictEnd() mut => VT.CacheEvictEnd(ref this);
+			public HResult BackgroundSyncBegin(uint32 dwSyncControlFlags) mut => VT.BackgroundSyncBegin(ref this, dwSyncControlFlags);
+			public HResult BackgroundSyncEnd(uint32 dwSyncControlFlags) mut => VT.BackgroundSyncEnd(ref this, dwSyncControlFlags);
+			public HResult PolicyChangeDetected() mut => VT.PolicyChangeDetected(ref this);
+			public HResult PreferenceChangeDetected() mut => VT.PreferenceChangeDetected(ref this);
+			public HResult SettingsChangesApplied() mut => VT.SettingsChangesApplied(ref this);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesEvents.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) ItemReconnectBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) ItemReconnectEnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) CacheEvictBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) CacheEvictEnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self, uint32 dwSyncControlFlags) BackgroundSyncBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self, uint32 dwSyncControlFlags) BackgroundSyncEnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) PolicyChangeDetected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) PreferenceChangeDetected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents2 self) SettingsChangesApplied;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) ItemReconnectBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) ItemReconnectEnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) CacheEvictBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) CacheEvictEnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self, uint32 dwSyncControlFlags) BackgroundSyncBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self, uint32 dwSyncControlFlags) BackgroundSyncEnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) PolicyChangeDetected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) PreferenceChangeDetected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents2 self) SettingsChangesApplied;
 			}
 		}
 		[CRepr]
@@ -416,16 +416,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT TransparentCacheItemNotify(PWSTR pszPath, OFFLINEFILES_EVENTS EventType, OFFLINEFILES_ITEM_TYPE ItemType, BOOL bModifiedData, BOOL bModifiedAttributes, PWSTR pzsOldPath) mut => VT.TransparentCacheItemNotify(ref this, pszPath, EventType, ItemType, bModifiedData, bModifiedAttributes, pzsOldPath);
-			public HRESULT PrefetchFileBegin(PWSTR pszPath) mut => VT.PrefetchFileBegin(ref this, pszPath);
-			public HRESULT PrefetchFileEnd(PWSTR pszPath, HRESULT hrResult) mut => VT.PrefetchFileEnd(ref this, pszPath, hrResult);
+			public HResult TransparentCacheItemNotify(char16* pszPath, OFFLINEFILES_EVENTS EventType, OFFLINEFILES_ITEM_TYPE ItemType, IntBool bModifiedData, IntBool bModifiedAttributes, char16* pzsOldPath) mut => VT.TransparentCacheItemNotify(ref this, pszPath, EventType, ItemType, bModifiedData, bModifiedAttributes, pzsOldPath);
+			public HResult PrefetchFileBegin(char16* pszPath) mut => VT.PrefetchFileBegin(ref this, pszPath);
+			public HResult PrefetchFileEnd(char16* pszPath, HResult hrResult) mut => VT.PrefetchFileEnd(ref this, pszPath, hrResult);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesEvents2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents3 self, PWSTR pszPath, OFFLINEFILES_EVENTS EventType, OFFLINEFILES_ITEM_TYPE ItemType, BOOL bModifiedData, BOOL bModifiedAttributes, PWSTR pzsOldPath) TransparentCacheItemNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents3 self, PWSTR pszPath) PrefetchFileBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents3 self, PWSTR pszPath, HRESULT hrResult) PrefetchFileEnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents3 self, char16* pszPath, OFFLINEFILES_EVENTS EventType, OFFLINEFILES_ITEM_TYPE ItemType, IntBool bModifiedData, IntBool bModifiedAttributes, char16* pzsOldPath) TransparentCacheItemNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents3 self, char16* pszPath) PrefetchFileBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents3 self, char16* pszPath, HResult hrResult) PrefetchFileEnd;
 			}
 		}
 		[CRepr]
@@ -435,14 +435,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PrefetchCloseHandleBegin() mut => VT.PrefetchCloseHandleBegin(ref this);
-			public HRESULT PrefetchCloseHandleEnd(uint32 dwClosedHandleCount, uint32 dwOpenHandleCount, HRESULT hrResult) mut => VT.PrefetchCloseHandleEnd(ref this, dwClosedHandleCount, dwOpenHandleCount, hrResult);
+			public HResult PrefetchCloseHandleBegin() mut => VT.PrefetchCloseHandleBegin(ref this);
+			public HResult PrefetchCloseHandleEnd(uint32 dwClosedHandleCount, uint32 dwOpenHandleCount, HResult hrResult) mut => VT.PrefetchCloseHandleEnd(ref this, dwClosedHandleCount, dwOpenHandleCount, hrResult);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesEvents3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents4 self) PrefetchCloseHandleBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEvents4 self, uint32 dwClosedHandleCount, uint32 dwOpenHandleCount, HRESULT hrResult) PrefetchCloseHandleEnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents4 self) PrefetchCloseHandleBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEvents4 self, uint32 dwClosedHandleCount, uint32 dwOpenHandleCount, HResult hrResult) PrefetchCloseHandleEnd;
 			}
 		}
 		[CRepr]
@@ -452,16 +452,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPathFilter(PWSTR* ppszFilter, out OFFLINEFILES_PATHFILTER_MATCH pMatch) mut => VT.GetPathFilter(ref this, ppszFilter, out pMatch);
-			public HRESULT GetIncludedEvents(uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) mut => VT.GetIncludedEvents(ref this, cElements, prgEvents, out pcEvents);
-			public HRESULT GetExcludedEvents(uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) mut => VT.GetExcludedEvents(ref this, cElements, prgEvents, out pcEvents);
+			public HResult GetPathFilter(PWSTR* ppszFilter, out OFFLINEFILES_PATHFILTER_MATCH pMatch) mut => VT.GetPathFilter(ref this, ppszFilter, out pMatch);
+			public HResult GetIncludedEvents(uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) mut => VT.GetIncludedEvents(ref this, cElements, prgEvents, out pcEvents);
+			public HResult GetExcludedEvents(uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) mut => VT.GetExcludedEvents(ref this, cElements, prgEvents, out pcEvents);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEventsFilter self, PWSTR* ppszFilter, out OFFLINEFILES_PATHFILTER_MATCH pMatch) GetPathFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEventsFilter self, uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) GetIncludedEvents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesEventsFilter self, uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) GetExcludedEvents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEventsFilter self, char16** ppszFilter, out OFFLINEFILES_PATHFILTER_MATCH pMatch) GetPathFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEventsFilter self, uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) GetIncludedEvents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesEventsFilter self, uint32 cElements, OFFLINEFILES_EVENTS* prgEvents, out uint32 pcEvents) GetExcludedEvents;
 			}
 		}
 		[CRepr]
@@ -471,14 +471,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRawData(BYTE_BLOB** ppBlob) mut => VT.GetRawData(ref this, ppBlob);
-			public HRESULT GetDescription(PWSTR* ppszDescription) mut => VT.GetDescription(ref this, ppszDescription);
+			public HResult GetRawData(BYTE_BLOB** ppBlob) mut => VT.GetRawData(ref this, ppBlob);
+			public HResult GetDescription(PWSTR* ppszDescription) mut => VT.GetDescription(ref this, ppszDescription);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesErrorInfo self, BYTE_BLOB** ppBlob) GetRawData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesErrorInfo self, PWSTR* ppszDescription) GetDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesErrorInfo self, BYTE_BLOB** ppBlob) GetRawData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesErrorInfo self, char16** ppszDescription) GetDescription;
 			}
 		}
 		[CRepr]
@@ -488,16 +488,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFileAttributes(out uint32 pdwAttributes) mut => VT.GetFileAttributes(ref this, out pdwAttributes);
-			public HRESULT GetFileTimes(out FILETIME pftLastWrite, out FILETIME pftChange) mut => VT.GetFileTimes(ref this, out pftLastWrite, out pftChange);
-			public HRESULT GetFileSize(out LARGE_INTEGER pSize) mut => VT.GetFileSize(ref this, out pSize);
+			public HResult GetFileAttributes(out uint32 pdwAttributes) mut => VT.GetFileAttributes(ref this, out pdwAttributes);
+			public HResult GetFileTimes(out FileTime pftLastWrite, out FileTime pftChange) mut => VT.GetFileTimes(ref this, out pftLastWrite, out pftChange);
+			public HResult GetFileSize(out LARGE_INTEGER pSize) mut => VT.GetFileSize(ref this, out pSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorItemInfo self, out uint32 pdwAttributes) GetFileAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorItemInfo self, out FILETIME pftLastWrite, out FILETIME pftChange) GetFileTimes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorItemInfo self, out LARGE_INTEGER pSize) GetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorItemInfo self, out uint32 pdwAttributes) GetFileAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorItemInfo self, out FileTime pftLastWrite, out FileTime pftChange) GetFileTimes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorItemInfo self, out LARGE_INTEGER pSize) GetFileSize;
 			}
 		}
 		[CRepr]
@@ -507,24 +507,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSyncOperation(out OFFLINEFILES_SYNC_OPERATION pSyncOp) mut => VT.GetSyncOperation(ref this, out pSyncOp);
-			public HRESULT GetItemChangeFlags(out uint32 pdwItemChangeFlags) mut => VT.GetItemChangeFlags(ref this, out pdwItemChangeFlags);
-			public HRESULT InfoEnumerated(out BOOL pbLocalEnumerated, out BOOL pbRemoteEnumerated, out BOOL pbOriginalEnumerated) mut => VT.InfoEnumerated(ref this, out pbLocalEnumerated, out pbRemoteEnumerated, out pbOriginalEnumerated);
-			public HRESULT InfoAvailable(out BOOL pbLocalInfo, out BOOL pbRemoteInfo, out BOOL pbOriginalInfo) mut => VT.InfoAvailable(ref this, out pbLocalInfo, out pbRemoteInfo, out pbOriginalInfo);
-			public HRESULT GetLocalInfo(IOfflineFilesSyncErrorItemInfo** ppInfo) mut => VT.GetLocalInfo(ref this, ppInfo);
-			public HRESULT GetRemoteInfo(IOfflineFilesSyncErrorItemInfo** ppInfo) mut => VT.GetRemoteInfo(ref this, ppInfo);
-			public HRESULT GetOriginalInfo(IOfflineFilesSyncErrorItemInfo** ppInfo) mut => VT.GetOriginalInfo(ref this, ppInfo);
+			public HResult GetSyncOperation(out OFFLINEFILES_SYNC_OPERATION pSyncOp) mut => VT.GetSyncOperation(ref this, out pSyncOp);
+			public HResult GetItemChangeFlags(out uint32 pdwItemChangeFlags) mut => VT.GetItemChangeFlags(ref this, out pdwItemChangeFlags);
+			public HResult InfoEnumerated(out IntBool pbLocalEnumerated, out IntBool pbRemoteEnumerated, out IntBool pbOriginalEnumerated) mut => VT.InfoEnumerated(ref this, out pbLocalEnumerated, out pbRemoteEnumerated, out pbOriginalEnumerated);
+			public HResult InfoAvailable(out IntBool pbLocalInfo, out IntBool pbRemoteInfo, out IntBool pbOriginalInfo) mut => VT.InfoAvailable(ref this, out pbLocalInfo, out pbRemoteInfo, out pbOriginalInfo);
+			public HResult GetLocalInfo(IOfflineFilesSyncErrorItemInfo** ppInfo) mut => VT.GetLocalInfo(ref this, ppInfo);
+			public HResult GetRemoteInfo(IOfflineFilesSyncErrorItemInfo** ppInfo) mut => VT.GetRemoteInfo(ref this, ppInfo);
+			public HResult GetOriginalInfo(IOfflineFilesSyncErrorItemInfo** ppInfo) mut => VT.GetOriginalInfo(ref this, ppInfo);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesErrorInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, out OFFLINEFILES_SYNC_OPERATION pSyncOp) GetSyncOperation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, out uint32 pdwItemChangeFlags) GetItemChangeFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, out BOOL pbLocalEnumerated, out BOOL pbRemoteEnumerated, out BOOL pbOriginalEnumerated) InfoEnumerated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, out BOOL pbLocalInfo, out BOOL pbRemoteInfo, out BOOL pbOriginalInfo) InfoAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, IOfflineFilesSyncErrorItemInfo** ppInfo) GetLocalInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, IOfflineFilesSyncErrorItemInfo** ppInfo) GetRemoteInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncErrorInfo self, IOfflineFilesSyncErrorItemInfo** ppInfo) GetOriginalInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, out OFFLINEFILES_SYNC_OPERATION pSyncOp) GetSyncOperation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, out uint32 pdwItemChangeFlags) GetItemChangeFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, out IntBool pbLocalEnumerated, out IntBool pbRemoteEnumerated, out IntBool pbOriginalEnumerated) InfoEnumerated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, out IntBool pbLocalInfo, out IntBool pbRemoteInfo, out IntBool pbOriginalInfo) InfoAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, IOfflineFilesSyncErrorItemInfo** ppInfo) GetLocalInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, IOfflineFilesSyncErrorItemInfo** ppInfo) GetRemoteInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncErrorInfo self, IOfflineFilesSyncErrorItemInfo** ppInfo) GetOriginalInfo;
 			}
 		}
 		[CRepr]
@@ -534,16 +534,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin(out BOOL pbAbort) mut => VT.Begin(ref this, out pbAbort);
-			public HRESULT QueryAbort(out BOOL pbAbort) mut => VT.QueryAbort(ref this, out pbAbort);
-			public HRESULT End(HRESULT hrResult) mut => VT.End(ref this, hrResult);
+			public HResult Begin(out IntBool pbAbort) mut => VT.Begin(ref this, out pbAbort);
+			public HResult QueryAbort(out IntBool pbAbort) mut => VT.QueryAbort(ref this, out pbAbort);
+			public HResult End(HResult hrResult) mut => VT.End(ref this, hrResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesProgress self, out BOOL pbAbort) Begin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesProgress self, out BOOL pbAbort) QueryAbort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesProgress self, HRESULT hrResult) End;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesProgress self, out IntBool pbAbort) Begin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesProgress self, out IntBool pbAbort) QueryAbort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesProgress self, HResult hrResult) End;
 			}
 		}
 		[CRepr]
@@ -553,14 +553,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ItemBegin(PWSTR pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.ItemBegin(ref this, pszFile, out pResponse);
-			public HRESULT ItemResult(PWSTR pszFile, HRESULT hrResult, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.ItemResult(ref this, pszFile, hrResult, out pResponse);
+			public HResult ItemBegin(char16* pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.ItemBegin(ref this, pszFile, out pResponse);
+			public HResult ItemResult(char16* pszFile, HResult hrResult, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.ItemResult(ref this, pszFile, hrResult, out pResponse);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesProgress.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSimpleProgress self, PWSTR pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) ItemBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSimpleProgress self, PWSTR pszFile, HRESULT hrResult, out OFFLINEFILES_OP_RESPONSE pResponse) ItemResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSimpleProgress self, char16* pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) ItemBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSimpleProgress self, char16* pszFile, HResult hrResult, out OFFLINEFILES_OP_RESPONSE pResponse) ItemResult;
 			}
 		}
 		[CRepr]
@@ -570,14 +570,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SyncItemBegin(PWSTR pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.SyncItemBegin(ref this, pszFile, out pResponse);
-			public HRESULT SyncItemResult(PWSTR pszFile, HRESULT hrResult, IOfflineFilesSyncErrorInfo* pErrorInfo, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.SyncItemResult(ref this, pszFile, hrResult, pErrorInfo, out pResponse);
+			public HResult SyncItemBegin(char16* pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.SyncItemBegin(ref this, pszFile, out pResponse);
+			public HResult SyncItemResult(char16* pszFile, HResult hrResult, IOfflineFilesSyncErrorInfo* pErrorInfo, out OFFLINEFILES_OP_RESPONSE pResponse) mut => VT.SyncItemResult(ref this, pszFile, hrResult, pErrorInfo, out pResponse);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesProgress.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncProgress self, PWSTR pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) SyncItemBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncProgress self, PWSTR pszFile, HRESULT hrResult, IOfflineFilesSyncErrorInfo* pErrorInfo, out OFFLINEFILES_OP_RESPONSE pResponse) SyncItemResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncProgress self, char16* pszFile, out OFFLINEFILES_OP_RESPONSE pResponse) SyncItemBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncProgress self, char16* pszFile, HResult hrResult, IOfflineFilesSyncErrorInfo* pErrorInfo, out OFFLINEFILES_OP_RESPONSE pResponse) SyncItemResult;
 			}
 		}
 		[CRepr]
@@ -587,12 +587,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ResolveConflict(PWSTR pszPath, uint32 fStateKnown, OFFLINEFILES_SYNC_STATE state, uint32 fChangeDetails, out OFFLINEFILES_SYNC_CONFLICT_RESOLVE pConflictResolution, PWSTR* ppszNewName) mut => VT.ResolveConflict(ref this, pszPath, fStateKnown, state, fChangeDetails, out pConflictResolution, ppszNewName);
+			public HResult ResolveConflict(char16* pszPath, uint32 fStateKnown, OFFLINEFILES_SYNC_STATE state, uint32 fChangeDetails, out OFFLINEFILES_SYNC_CONFLICT_RESOLVE pConflictResolution, char16** ppszNewName) mut => VT.ResolveConflict(ref this, pszPath, fStateKnown, state, fChangeDetails, out pConflictResolution, ppszNewName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSyncConflictHandler self, PWSTR pszPath, uint32 fStateKnown, OFFLINEFILES_SYNC_STATE state, uint32 fChangeDetails, out OFFLINEFILES_SYNC_CONFLICT_RESOLVE pConflictResolution, PWSTR* ppszNewName) ResolveConflict;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSyncConflictHandler self, char16* pszPath, uint32 fStateKnown, OFFLINEFILES_SYNC_STATE state, uint32 fChangeDetails, out OFFLINEFILES_SYNC_CONFLICT_RESOLVE pConflictResolution, char16** ppszNewName) ResolveConflict;
 			}
 		}
 		[CRepr]
@@ -602,16 +602,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFilterFlags(out uint64 pullFlags, out uint64 pullMask) mut => VT.GetFilterFlags(ref this, out pullFlags, out pullMask);
-			public HRESULT GetTimeFilter(out FILETIME pftTime, out BOOL pbEvalTimeOfDay, out OFFLINEFILES_ITEM_TIME pTimeType, out OFFLINEFILES_COMPARE pCompare) mut => VT.GetTimeFilter(ref this, out pftTime, out pbEvalTimeOfDay, out pTimeType, out pCompare);
-			public HRESULT GetPatternFilter(char16* pszPattern, uint32 cchPattern) mut => VT.GetPatternFilter(ref this, pszPattern, cchPattern);
+			public HResult GetFilterFlags(out uint64 pullFlags, out uint64 pullMask) mut => VT.GetFilterFlags(ref this, out pullFlags, out pullMask);
+			public HResult GetTimeFilter(out FileTime pftTime, out IntBool pbEvalTimeOfDay, out OFFLINEFILES_ITEM_TIME pTimeType, out OFFLINEFILES_COMPARE pCompare) mut => VT.GetTimeFilter(ref this, out pftTime, out pbEvalTimeOfDay, out pTimeType, out pCompare);
+			public HResult GetPatternFilter(char16* pszPattern, uint32 cchPattern) mut => VT.GetPatternFilter(ref this, pszPattern, cchPattern);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItemFilter self, out uint64 pullFlags, out uint64 pullMask) GetFilterFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItemFilter self, out FILETIME pftTime, out BOOL pbEvalTimeOfDay, out OFFLINEFILES_ITEM_TIME pTimeType, out OFFLINEFILES_COMPARE pCompare) GetTimeFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItemFilter self, char16* pszPattern, uint32 cchPattern) GetPatternFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItemFilter self, out uint64 pullFlags, out uint64 pullMask) GetFilterFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItemFilter self, out FileTime pftTime, out IntBool pbEvalTimeOfDay, out OFFLINEFILES_ITEM_TIME pTimeType, out OFFLINEFILES_COMPARE pCompare) GetTimeFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItemFilter self, char16* pszPattern, uint32 cchPattern) GetPatternFilter;
 			}
 		}
 		[CRepr]
@@ -621,20 +621,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItemType(out OFFLINEFILES_ITEM_TYPE pItemType) mut => VT.GetItemType(ref this, out pItemType);
-			public HRESULT GetPath(PWSTR* ppszPath) mut => VT.GetPath(ref this, ppszPath);
-			public HRESULT GetParentItem(IOfflineFilesItem** ppItem) mut => VT.GetParentItem(ref this, ppItem);
-			public HRESULT Refresh(uint32 dwQueryFlags) mut => VT.Refresh(ref this, dwQueryFlags);
-			public HRESULT IsMarkedForDeletion(out BOOL pbMarkedForDeletion) mut => VT.IsMarkedForDeletion(ref this, out pbMarkedForDeletion);
+			public HResult GetItemType(out OFFLINEFILES_ITEM_TYPE pItemType) mut => VT.GetItemType(ref this, out pItemType);
+			public HResult GetPath(PWSTR* ppszPath) mut => VT.GetPath(ref this, ppszPath);
+			public HResult GetParentItem(IOfflineFilesItem** ppItem) mut => VT.GetParentItem(ref this, ppItem);
+			public HResult Refresh(uint32 dwQueryFlags) mut => VT.Refresh(ref this, dwQueryFlags);
+			public HResult IsMarkedForDeletion(out IntBool pbMarkedForDeletion) mut => VT.IsMarkedForDeletion(ref this, out pbMarkedForDeletion);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItem self, out OFFLINEFILES_ITEM_TYPE pItemType) GetItemType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItem self, PWSTR* ppszPath) GetPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItem self, IOfflineFilesItem** ppItem) GetParentItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItem self, uint32 dwQueryFlags) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItem self, out BOOL pbMarkedForDeletion) IsMarkedForDeletion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItem self, out OFFLINEFILES_ITEM_TYPE pItemType) GetItemType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItem self, char16** ppszPath) GetPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItem self, IOfflineFilesItem** ppItem) GetParentItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItem self, uint32 dwQueryFlags) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItem self, out IntBool pbMarkedForDeletion) IsMarkedForDeletion;
 			}
 		}
 		[CRepr]
@@ -674,14 +674,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsSparse(out BOOL pbIsSparse) mut => VT.IsSparse(ref this, out pbIsSparse);
-			public HRESULT IsEncrypted(out BOOL pbIsEncrypted) mut => VT.IsEncrypted(ref this, out pbIsEncrypted);
+			public HResult IsSparse(out IntBool pbIsSparse) mut => VT.IsSparse(ref this, out pbIsSparse);
+			public HResult IsEncrypted(out IntBool pbIsEncrypted) mut => VT.IsEncrypted(ref this, out pbIsEncrypted);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesFileItem self, out BOOL pbIsSparse) IsSparse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesFileItem self, out BOOL pbIsEncrypted) IsEncrypted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesFileItem self, out IntBool pbIsSparse) IsSparse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesFileItem self, out IntBool pbIsEncrypted) IsEncrypted;
 			}
 		}
 		[CRepr]
@@ -691,18 +691,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, IOfflineFilesItem** rgelt, out uint32 pceltFetched) mut => VT.Next(ref this, celt, rgelt, out pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(IEnumOfflineFilesItems** ppenum) mut => VT.Clone(ref this, ppenum);
+			public HResult Next(uint32 celt, IOfflineFilesItem** rgelt, out uint32 pceltFetched) mut => VT.Next(ref this, celt, rgelt, out pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(IEnumOfflineFilesItems** ppenum) mut => VT.Clone(ref this, ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesItems self, uint32 celt, IOfflineFilesItem** rgelt, out uint32 pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesItems self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesItems self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesItems self, IEnumOfflineFilesItems** ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesItems self, uint32 celt, IOfflineFilesItem** rgelt, out uint32 pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesItems self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesItems self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesItems self, IEnumOfflineFilesItems** ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -712,14 +712,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumItems(uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) mut => VT.EnumItems(ref this, dwQueryFlags, ppenum);
-			public HRESULT EnumItemsEx(IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwEnumFlags, uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) mut => VT.EnumItemsEx(ref this, pIncludeFileFilter, pIncludeDirFilter, pExcludeFileFilter, pExcludeDirFilter, dwEnumFlags, dwQueryFlags, ppenum);
+			public HResult EnumItems(uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) mut => VT.EnumItems(ref this, dwQueryFlags, ppenum);
+			public HResult EnumItemsEx(IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwEnumFlags, uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) mut => VT.EnumItemsEx(ref this, pIncludeFileFilter, pIncludeDirFilter, pExcludeFileFilter, pExcludeDirFilter, dwEnumFlags, dwQueryFlags, ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItemContainer self, uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) EnumItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesItemContainer self, IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwEnumFlags, uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) EnumItemsEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItemContainer self, uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) EnumItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesItemContainer self, IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwEnumFlags, uint32 dwQueryFlags, IEnumOfflineFilesItems** ppenum) EnumItemsEx;
 			}
 		}
 		[CRepr]
@@ -729,22 +729,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsDirty(out BOOL pbDirty) mut => VT.IsDirty(ref this, out pbDirty);
-			public HRESULT IsDeletedOffline(out BOOL pbDeletedOffline) mut => VT.IsDeletedOffline(ref this, out pbDeletedOffline);
-			public HRESULT IsCreatedOffline(out BOOL pbCreatedOffline) mut => VT.IsCreatedOffline(ref this, out pbCreatedOffline);
-			public HRESULT IsLocallyModifiedData(out BOOL pbLocallyModifiedData) mut => VT.IsLocallyModifiedData(ref this, out pbLocallyModifiedData);
-			public HRESULT IsLocallyModifiedAttributes(out BOOL pbLocallyModifiedAttributes) mut => VT.IsLocallyModifiedAttributes(ref this, out pbLocallyModifiedAttributes);
-			public HRESULT IsLocallyModifiedTime(out BOOL pbLocallyModifiedTime) mut => VT.IsLocallyModifiedTime(ref this, out pbLocallyModifiedTime);
+			public HResult IsDirty(out IntBool pbDirty) mut => VT.IsDirty(ref this, out pbDirty);
+			public HResult IsDeletedOffline(out IntBool pbDeletedOffline) mut => VT.IsDeletedOffline(ref this, out pbDeletedOffline);
+			public HResult IsCreatedOffline(out IntBool pbCreatedOffline) mut => VT.IsCreatedOffline(ref this, out pbCreatedOffline);
+			public HResult IsLocallyModifiedData(out IntBool pbLocallyModifiedData) mut => VT.IsLocallyModifiedData(ref this, out pbLocallyModifiedData);
+			public HResult IsLocallyModifiedAttributes(out IntBool pbLocallyModifiedAttributes) mut => VT.IsLocallyModifiedAttributes(ref this, out pbLocallyModifiedAttributes);
+			public HResult IsLocallyModifiedTime(out IntBool pbLocallyModifiedTime) mut => VT.IsLocallyModifiedTime(ref this, out pbLocallyModifiedTime);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesChangeInfo self, out BOOL pbDirty) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesChangeInfo self, out BOOL pbDeletedOffline) IsDeletedOffline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesChangeInfo self, out BOOL pbCreatedOffline) IsCreatedOffline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesChangeInfo self, out BOOL pbLocallyModifiedData) IsLocallyModifiedData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesChangeInfo self, out BOOL pbLocallyModifiedAttributes) IsLocallyModifiedAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesChangeInfo self, out BOOL pbLocallyModifiedTime) IsLocallyModifiedTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesChangeInfo self, out IntBool pbDirty) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesChangeInfo self, out IntBool pbDeletedOffline) IsDeletedOffline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesChangeInfo self, out IntBool pbCreatedOffline) IsCreatedOffline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesChangeInfo self, out IntBool pbLocallyModifiedData) IsLocallyModifiedData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesChangeInfo self, out IntBool pbLocallyModifiedAttributes) IsLocallyModifiedAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesChangeInfo self, out IntBool pbLocallyModifiedTime) IsLocallyModifiedTime;
 			}
 		}
 		[CRepr]
@@ -754,14 +754,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LocalDirtyByteCount(out LARGE_INTEGER pDirtyByteCount) mut => VT.LocalDirtyByteCount(ref this, out pDirtyByteCount);
-			public HRESULT RemoteDirtyByteCount(out LARGE_INTEGER pDirtyByteCount) mut => VT.RemoteDirtyByteCount(ref this, out pDirtyByteCount);
+			public HResult LocalDirtyByteCount(out LARGE_INTEGER pDirtyByteCount) mut => VT.LocalDirtyByteCount(ref this, out pDirtyByteCount);
+			public HResult RemoteDirtyByteCount(out LARGE_INTEGER pDirtyByteCount) mut => VT.RemoteDirtyByteCount(ref this, out pDirtyByteCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesDirtyInfo self, out LARGE_INTEGER pDirtyByteCount) LocalDirtyByteCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesDirtyInfo self, out LARGE_INTEGER pDirtyByteCount) RemoteDirtyByteCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesDirtyInfo self, out LARGE_INTEGER pDirtyByteCount) LocalDirtyByteCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesDirtyInfo self, out LARGE_INTEGER pDirtyByteCount) RemoteDirtyByteCount;
 			}
 		}
 		[CRepr]
@@ -771,16 +771,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAttributes(OFFLINEFILES_ITEM_COPY copy, out uint32 pdwAttributes) mut => VT.GetAttributes(ref this, copy, out pdwAttributes);
-			public HRESULT GetTimes(OFFLINEFILES_ITEM_COPY copy, out FILETIME pftCreationTime, out FILETIME pftLastWriteTime, out FILETIME pftChangeTime, out FILETIME pftLastAccessTime) mut => VT.GetTimes(ref this, copy, out pftCreationTime, out pftLastWriteTime, out pftChangeTime, out pftLastAccessTime);
-			public HRESULT GetFileSize(OFFLINEFILES_ITEM_COPY copy, out LARGE_INTEGER pSize) mut => VT.GetFileSize(ref this, copy, out pSize);
+			public HResult GetAttributes(OFFLINEFILES_ITEM_COPY copy, out uint32 pdwAttributes) mut => VT.GetAttributes(ref this, copy, out pdwAttributes);
+			public HResult GetTimes(OFFLINEFILES_ITEM_COPY copy, out FileTime pftCreationTime, out FileTime pftLastWriteTime, out FileTime pftChangeTime, out FileTime pftLastAccessTime) mut => VT.GetTimes(ref this, copy, out pftCreationTime, out pftLastWriteTime, out pftChangeTime, out pftLastAccessTime);
+			public HResult GetFileSize(OFFLINEFILES_ITEM_COPY copy, out LARGE_INTEGER pSize) mut => VT.GetFileSize(ref this, copy, out pSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesFileSysInfo self, OFFLINEFILES_ITEM_COPY copy, out uint32 pdwAttributes) GetAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesFileSysInfo self, OFFLINEFILES_ITEM_COPY copy, out FILETIME pftCreationTime, out FILETIME pftLastWriteTime, out FILETIME pftChangeTime, out FILETIME pftLastAccessTime) GetTimes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesFileSysInfo self, OFFLINEFILES_ITEM_COPY copy, out LARGE_INTEGER pSize) GetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesFileSysInfo self, OFFLINEFILES_ITEM_COPY copy, out uint32 pdwAttributes) GetAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesFileSysInfo self, OFFLINEFILES_ITEM_COPY copy, out FileTime pftCreationTime, out FileTime pftLastWriteTime, out FileTime pftChangeTime, out FileTime pftLastAccessTime) GetTimes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesFileSysInfo self, OFFLINEFILES_ITEM_COPY copy, out LARGE_INTEGER pSize) GetFileSize;
 			}
 		}
 		[CRepr]
@@ -790,20 +790,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsPinned(out BOOL pbPinned) mut => VT.IsPinned(ref this, out pbPinned);
-			public HRESULT IsPinnedForUser(out BOOL pbPinnedForUser, out BOOL pbInherit) mut => VT.IsPinnedForUser(ref this, out pbPinnedForUser, out pbInherit);
-			public HRESULT IsPinnedForUserByPolicy(out BOOL pbPinnedForUser, out BOOL pbInherit) mut => VT.IsPinnedForUserByPolicy(ref this, out pbPinnedForUser, out pbInherit);
-			public HRESULT IsPinnedForComputer(out BOOL pbPinnedForComputer, out BOOL pbInherit) mut => VT.IsPinnedForComputer(ref this, out pbPinnedForComputer, out pbInherit);
-			public HRESULT IsPinnedForFolderRedirection(out BOOL pbPinnedForFolderRedirection, out BOOL pbInherit) mut => VT.IsPinnedForFolderRedirection(ref this, out pbPinnedForFolderRedirection, out pbInherit);
+			public HResult IsPinned(out IntBool pbPinned) mut => VT.IsPinned(ref this, out pbPinned);
+			public HResult IsPinnedForUser(out IntBool pbPinnedForUser, out IntBool pbInherit) mut => VT.IsPinnedForUser(ref this, out pbPinnedForUser, out pbInherit);
+			public HResult IsPinnedForUserByPolicy(out IntBool pbPinnedForUser, out IntBool pbInherit) mut => VT.IsPinnedForUserByPolicy(ref this, out pbPinnedForUser, out pbInherit);
+			public HResult IsPinnedForComputer(out IntBool pbPinnedForComputer, out IntBool pbInherit) mut => VT.IsPinnedForComputer(ref this, out pbPinnedForComputer, out pbInherit);
+			public HResult IsPinnedForFolderRedirection(out IntBool pbPinnedForFolderRedirection, out IntBool pbInherit) mut => VT.IsPinnedForFolderRedirection(ref this, out pbPinnedForFolderRedirection, out pbInherit);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesPinInfo self, out BOOL pbPinned) IsPinned;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesPinInfo self, out BOOL pbPinnedForUser, out BOOL pbInherit) IsPinnedForUser;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesPinInfo self, out BOOL pbPinnedForUser, out BOOL pbInherit) IsPinnedForUserByPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesPinInfo self, out BOOL pbPinnedForComputer, out BOOL pbInherit) IsPinnedForComputer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesPinInfo self, out BOOL pbPinnedForFolderRedirection, out BOOL pbInherit) IsPinnedForFolderRedirection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesPinInfo self, out IntBool pbPinned) IsPinned;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesPinInfo self, out IntBool pbPinnedForUser, out IntBool pbInherit) IsPinnedForUser;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesPinInfo self, out IntBool pbPinnedForUser, out IntBool pbInherit) IsPinnedForUserByPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesPinInfo self, out IntBool pbPinnedForComputer, out IntBool pbInherit) IsPinnedForComputer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesPinInfo self, out IntBool pbPinnedForFolderRedirection, out IntBool pbInherit) IsPinnedForFolderRedirection;
 			}
 		}
 		[CRepr]
@@ -813,12 +813,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsPartlyPinned(out BOOL pbPartlyPinned) mut => VT.IsPartlyPinned(ref this, out pbPartlyPinned);
+			public HResult IsPartlyPinned(out IntBool pbPartlyPinned) mut => VT.IsPartlyPinned(ref this, out pbPartlyPinned);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesPinInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesPinInfo2 self, out BOOL pbPartlyPinned) IsPartlyPinned;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesPinInfo2 self, out IntBool pbPartlyPinned) IsPartlyPinned;
 			}
 		}
 		[CRepr]
@@ -828,12 +828,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsTransparentlyCached(out BOOL pbTransparentlyCached) mut => VT.IsTransparentlyCached(ref this, out pbTransparentlyCached);
+			public HResult IsTransparentlyCached(out IntBool pbTransparentlyCached) mut => VT.IsTransparentlyCached(ref this, out pbTransparentlyCached);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesTransparentCacheInfo self, out BOOL pbTransparentlyCached) IsTransparentlyCached;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesTransparentCacheInfo self, out IntBool pbTransparentlyCached) IsTransparentlyCached;
 			}
 		}
 		[CRepr]
@@ -843,12 +843,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsGhosted(out BOOL pbGhosted) mut => VT.IsGhosted(ref this, out pbGhosted);
+			public HResult IsGhosted(out IntBool pbGhosted) mut => VT.IsGhosted(ref this, out pbGhosted);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesGhostInfo self, out BOOL pbGhosted) IsGhosted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesGhostInfo self, out IntBool pbGhosted) IsGhosted;
 			}
 		}
 		[CRepr]
@@ -858,18 +858,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetConnectState(out OFFLINEFILES_CONNECT_STATE pConnectState, out OFFLINEFILES_OFFLINE_REASON pOfflineReason) mut => VT.GetConnectState(ref this, out pConnectState, out pOfflineReason);
-			public HRESULT SetConnectState(HWND hwndParent, uint32 dwFlags, OFFLINEFILES_CONNECT_STATE ConnectState) mut => VT.SetConnectState(ref this, hwndParent, dwFlags, ConnectState);
-			public HRESULT TransitionOnline(HWND hwndParent, uint32 dwFlags) mut => VT.TransitionOnline(ref this, hwndParent, dwFlags);
-			public HRESULT TransitionOffline(HWND hwndParent, uint32 dwFlags, BOOL bForceOpenFilesClosed, out BOOL pbOpenFilesPreventedTransition) mut => VT.TransitionOffline(ref this, hwndParent, dwFlags, bForceOpenFilesClosed, out pbOpenFilesPreventedTransition);
+			public HResult GetConnectState(out OFFLINEFILES_CONNECT_STATE pConnectState, out OFFLINEFILES_OFFLINE_REASON pOfflineReason) mut => VT.GetConnectState(ref this, out pConnectState, out pOfflineReason);
+			public HResult SetConnectState(HWnd hwndParent, uint32 dwFlags, OFFLINEFILES_CONNECT_STATE ConnectState) mut => VT.SetConnectState(ref this, hwndParent, dwFlags, ConnectState);
+			public HResult TransitionOnline(HWnd hwndParent, uint32 dwFlags) mut => VT.TransitionOnline(ref this, hwndParent, dwFlags);
+			public HResult TransitionOffline(HWnd hwndParent, uint32 dwFlags, IntBool bForceOpenFilesClosed, out IntBool pbOpenFilesPreventedTransition) mut => VT.TransitionOffline(ref this, hwndParent, dwFlags, bForceOpenFilesClosed, out pbOpenFilesPreventedTransition);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesConnectionInfo self, out OFFLINEFILES_CONNECT_STATE pConnectState, out OFFLINEFILES_OFFLINE_REASON pOfflineReason) GetConnectState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesConnectionInfo self, HWND hwndParent, uint32 dwFlags, OFFLINEFILES_CONNECT_STATE ConnectState) SetConnectState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesConnectionInfo self, HWND hwndParent, uint32 dwFlags) TransitionOnline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesConnectionInfo self, HWND hwndParent, uint32 dwFlags, BOOL bForceOpenFilesClosed, out BOOL pbOpenFilesPreventedTransition) TransitionOffline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesConnectionInfo self, out OFFLINEFILES_CONNECT_STATE pConnectState, out OFFLINEFILES_OFFLINE_REASON pOfflineReason) GetConnectState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesConnectionInfo self, HWnd hwndParent, uint32 dwFlags, OFFLINEFILES_CONNECT_STATE ConnectState) SetConnectState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesConnectionInfo self, HWnd hwndParent, uint32 dwFlags) TransitionOnline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesConnectionInfo self, HWnd hwndParent, uint32 dwFlags, IntBool bForceOpenFilesClosed, out IntBool pbOpenFilesPreventedTransition) TransitionOffline;
 			}
 		}
 		[CRepr]
@@ -879,16 +879,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetShareItem(IOfflineFilesShareItem** ppShareItem) mut => VT.GetShareItem(ref this, ppShareItem);
-			public HRESULT GetShareCachingMode(out OFFLINEFILES_CACHING_MODE pCachingMode) mut => VT.GetShareCachingMode(ref this, out pCachingMode);
-			public HRESULT IsShareDfsJunction(out BOOL pbIsDfsJunction) mut => VT.IsShareDfsJunction(ref this, out pbIsDfsJunction);
+			public HResult GetShareItem(IOfflineFilesShareItem** ppShareItem) mut => VT.GetShareItem(ref this, ppShareItem);
+			public HResult GetShareCachingMode(out OFFLINEFILES_CACHING_MODE pCachingMode) mut => VT.GetShareCachingMode(ref this, out pCachingMode);
+			public HResult IsShareDfsJunction(out IntBool pbIsDfsJunction) mut => VT.IsShareDfsJunction(ref this, out pbIsDfsJunction);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesShareInfo self, IOfflineFilesShareItem** ppShareItem) GetShareItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesShareInfo self, out OFFLINEFILES_CACHING_MODE pCachingMode) GetShareCachingMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesShareInfo self, out BOOL pbIsDfsJunction) IsShareDfsJunction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesShareInfo self, IOfflineFilesShareItem** ppShareItem) GetShareItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesShareInfo self, out OFFLINEFILES_CACHING_MODE pCachingMode) GetShareCachingMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesShareInfo self, out IntBool pbIsDfsJunction) IsShareDfsJunction;
 			}
 		}
 		[CRepr]
@@ -898,12 +898,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SuspendRoot(BOOL bSuspend) mut => VT.SuspendRoot(ref this, bSuspend);
+			public HResult SuspendRoot(IntBool bSuspend) mut => VT.SuspendRoot(ref this, bSuspend);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSuspend self, BOOL bSuspend) SuspendRoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSuspend self, IntBool bSuspend) SuspendRoot;
 			}
 		}
 		[CRepr]
@@ -913,12 +913,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsSuspended(out BOOL pbSuspended, out BOOL pbSuspendedRoot) mut => VT.IsSuspended(ref this, out pbSuspended, out pbSuspendedRoot);
+			public HResult IsSuspended(out IntBool pbSuspended, out IntBool pbSuspendedRoot) mut => VT.IsSuspended(ref this, out pbSuspended, out pbSuspendedRoot);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSuspendInfo self, out BOOL pbSuspended, out BOOL pbSuspendedRoot) IsSuspended;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSuspendInfo self, out IntBool pbSuspended, out IntBool pbSuspendedRoot) IsSuspended;
 			}
 		}
 		[CRepr]
@@ -928,28 +928,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetName(PWSTR* ppszName) mut => VT.GetName(ref this, ppszName);
-			public HRESULT GetValueType(out OFFLINEFILES_SETTING_VALUE_TYPE pType) mut => VT.GetValueType(ref this, out pType);
-			public HRESULT GetPreference(out VARIANT pvarValue, uint32 dwScope) mut => VT.GetPreference(ref this, out pvarValue, dwScope);
-			public HRESULT GetPreferenceScope(out uint32 pdwScope) mut => VT.GetPreferenceScope(ref this, out pdwScope);
-			public HRESULT SetPreference(in VARIANT pvarValue, uint32 dwScope) mut => VT.SetPreference(ref this, pvarValue, dwScope);
-			public HRESULT DeletePreference(uint32 dwScope) mut => VT.DeletePreference(ref this, dwScope);
-			public HRESULT GetPolicy(out VARIANT pvarValue, uint32 dwScope) mut => VT.GetPolicy(ref this, out pvarValue, dwScope);
-			public HRESULT GetPolicyScope(out uint32 pdwScope) mut => VT.GetPolicyScope(ref this, out pdwScope);
-			public HRESULT GetValue(out VARIANT pvarValue, out BOOL pbSetByPolicy) mut => VT.GetValue(ref this, out pvarValue, out pbSetByPolicy);
+			public HResult GetName(PWSTR* ppszName) mut => VT.GetName(ref this, ppszName);
+			public HResult GetValueType(out OFFLINEFILES_SETTING_VALUE_TYPE pType) mut => VT.GetValueType(ref this, out pType);
+			public HResult GetPreference(out VARIANT pvarValue, uint32 dwScope) mut => VT.GetPreference(ref this, out pvarValue, dwScope);
+			public HResult GetPreferenceScope(out uint32 pdwScope) mut => VT.GetPreferenceScope(ref this, out pdwScope);
+			public HResult SetPreference(in VARIANT pvarValue, uint32 dwScope) mut => VT.SetPreference(ref this, pvarValue, dwScope);
+			public HResult DeletePreference(uint32 dwScope) mut => VT.DeletePreference(ref this, dwScope);
+			public HResult GetPolicy(out VARIANT pvarValue, uint32 dwScope) mut => VT.GetPolicy(ref this, out pvarValue, dwScope);
+			public HResult GetPolicyScope(out uint32 pdwScope) mut => VT.GetPolicyScope(ref this, out pdwScope);
+			public HResult GetValue(out VARIANT pvarValue, out IntBool pbSetByPolicy) mut => VT.GetValue(ref this, out pvarValue, out pbSetByPolicy);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, PWSTR* ppszName) GetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, out OFFLINEFILES_SETTING_VALUE_TYPE pType) GetValueType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, out VARIANT pvarValue, uint32 dwScope) GetPreference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, out uint32 pdwScope) GetPreferenceScope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, in VARIANT pvarValue, uint32 dwScope) SetPreference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, uint32 dwScope) DeletePreference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, out VARIANT pvarValue, uint32 dwScope) GetPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, out uint32 pdwScope) GetPolicyScope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesSetting self, out VARIANT pvarValue, out BOOL pbSetByPolicy) GetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, char16** ppszName) GetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, out OFFLINEFILES_SETTING_VALUE_TYPE pType) GetValueType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, out VARIANT pvarValue, uint32 dwScope) GetPreference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, out uint32 pdwScope) GetPreferenceScope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, in VARIANT pvarValue, uint32 dwScope) SetPreference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, uint32 dwScope) DeletePreference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, out VARIANT pvarValue, uint32 dwScope) GetPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, out uint32 pdwScope) GetPolicyScope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesSetting self, out VARIANT pvarValue, out IntBool pbSetByPolicy) GetValue;
 			}
 		}
 		[CRepr]
@@ -959,18 +959,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, IOfflineFilesSetting** rgelt, out uint32 pceltFetched) mut => VT.Next(ref this, celt, rgelt, out pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(IEnumOfflineFilesSettings** ppenum) mut => VT.Clone(ref this, ppenum);
+			public HResult Next(uint32 celt, IOfflineFilesSetting** rgelt, out uint32 pceltFetched) mut => VT.Next(ref this, celt, rgelt, out pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(IEnumOfflineFilesSettings** ppenum) mut => VT.Clone(ref this, ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesSettings self, uint32 celt, IOfflineFilesSetting** rgelt, out uint32 pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesSettings self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesSettings self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumOfflineFilesSettings self, IEnumOfflineFilesSettings** ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesSettings self, uint32 celt, IOfflineFilesSetting** rgelt, out uint32 pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesSettings self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesSettings self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumOfflineFilesSettings self, IEnumOfflineFilesSettings** ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -980,44 +980,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Synchronize(HWND hwndParent, PWSTR* rgpszPaths, uint32 cPaths, BOOL bAsync, uint32 dwSyncControl, IOfflineFilesSyncConflictHandler* pISyncConflictHandler, IOfflineFilesSyncProgress* pIProgress, Guid* pSyncId) mut => VT.Synchronize(ref this, hwndParent, rgpszPaths, cPaths, bAsync, dwSyncControl, pISyncConflictHandler, pIProgress, pSyncId);
-			public HRESULT DeleteItems(PWSTR* rgpszPaths, uint32 cPaths, uint32 dwFlags, BOOL bAsync, IOfflineFilesSimpleProgress* pIProgress) mut => VT.DeleteItems(ref this, rgpszPaths, cPaths, dwFlags, bAsync, pIProgress);
-			public HRESULT DeleteItemsForUser(PWSTR pszUser, PWSTR* rgpszPaths, uint32 cPaths, uint32 dwFlags, BOOL bAsync, IOfflineFilesSimpleProgress* pIProgress) mut => VT.DeleteItemsForUser(ref this, pszUser, rgpszPaths, cPaths, dwFlags, bAsync, pIProgress);
-			public HRESULT Pin(HWND hwndParent, PWSTR* rgpszPaths, uint32 cPaths, BOOL bDeep, BOOL bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) mut => VT.Pin(ref this, hwndParent, rgpszPaths, cPaths, bDeep, bAsync, dwPinControlFlags, pIProgress);
-			public HRESULT Unpin(HWND hwndParent, PWSTR* rgpszPaths, uint32 cPaths, BOOL bDeep, BOOL bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) mut => VT.Unpin(ref this, hwndParent, rgpszPaths, cPaths, bDeep, bAsync, dwPinControlFlags, pIProgress);
-			public HRESULT GetEncryptionStatus(out BOOL pbEncrypted, out BOOL pbPartial) mut => VT.GetEncryptionStatus(ref this, out pbEncrypted, out pbPartial);
-			public HRESULT Encrypt(HWND hwndParent, BOOL bEncrypt, uint32 dwEncryptionControlFlags, BOOL bAsync, IOfflineFilesSyncProgress* pIProgress) mut => VT.Encrypt(ref this, hwndParent, bEncrypt, dwEncryptionControlFlags, bAsync, pIProgress);
-			public HRESULT FindItem(PWSTR pszPath, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) mut => VT.FindItem(ref this, pszPath, dwQueryFlags, ppItem);
-			public HRESULT FindItemEx(PWSTR pszPath, IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) mut => VT.FindItemEx(ref this, pszPath, pIncludeFileFilter, pIncludeDirFilter, pExcludeFileFilter, pExcludeDirFilter, dwQueryFlags, ppItem);
-			public HRESULT RenameItem(PWSTR pszPathOriginal, PWSTR pszPathNew, BOOL bReplaceIfExists) mut => VT.RenameItem(ref this, pszPathOriginal, pszPathNew, bReplaceIfExists);
-			public HRESULT GetLocation(PWSTR* ppszPath) mut => VT.GetLocation(ref this, ppszPath);
-			public HRESULT GetDiskSpaceInformation(out uint64 pcbVolumeTotal, out uint64 pcbLimit, out uint64 pcbUsed, out uint64 pcbUnpinnedLimit, out uint64 pcbUnpinnedUsed) mut => VT.GetDiskSpaceInformation(ref this, out pcbVolumeTotal, out pcbLimit, out pcbUsed, out pcbUnpinnedLimit, out pcbUnpinnedUsed);
-			public HRESULT SetDiskSpaceLimits(uint64 cbLimit, uint64 cbUnpinnedLimit) mut => VT.SetDiskSpaceLimits(ref this, cbLimit, cbUnpinnedLimit);
-			public HRESULT ProcessAdminPinPolicy(IOfflineFilesSyncProgress* pPinProgress, IOfflineFilesSyncProgress* pUnpinProgress) mut => VT.ProcessAdminPinPolicy(ref this, pPinProgress, pUnpinProgress);
-			public HRESULT GetSettingObject(PWSTR pszSettingName, IOfflineFilesSetting** ppSetting) mut => VT.GetSettingObject(ref this, pszSettingName, ppSetting);
-			public HRESULT EnumSettingObjects(IEnumOfflineFilesSettings** ppEnum) mut => VT.EnumSettingObjects(ref this, ppEnum);
-			public HRESULT IsPathCacheable(PWSTR pszPath, out BOOL pbCacheable, out OFFLINEFILES_CACHING_MODE pShareCachingMode) mut => VT.IsPathCacheable(ref this, pszPath, out pbCacheable, out pShareCachingMode);
+			public HResult Synchronize(HWnd hwndParent, char16** rgpszPaths, uint32 cPaths, IntBool bAsync, uint32 dwSyncControl, IOfflineFilesSyncConflictHandler* pISyncConflictHandler, IOfflineFilesSyncProgress* pIProgress, Guid* pSyncId) mut => VT.Synchronize(ref this, hwndParent, rgpszPaths, cPaths, bAsync, dwSyncControl, pISyncConflictHandler, pIProgress, pSyncId);
+			public HResult DeleteItems(PWSTR* rgpszPaths, uint32 cPaths, uint32 dwFlags, IntBool bAsync, IOfflineFilesSimpleProgress* pIProgress) mut => VT.DeleteItems(ref this, rgpszPaths, cPaths, dwFlags, bAsync, pIProgress);
+			public HResult DeleteItemsForUser(char16* pszUser, char16** rgpszPaths, uint32 cPaths, uint32 dwFlags, IntBool bAsync, IOfflineFilesSimpleProgress* pIProgress) mut => VT.DeleteItemsForUser(ref this, pszUser, rgpszPaths, cPaths, dwFlags, bAsync, pIProgress);
+			public HResult Pin(HWnd hwndParent, char16** rgpszPaths, uint32 cPaths, IntBool bDeep, IntBool bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) mut => VT.Pin(ref this, hwndParent, rgpszPaths, cPaths, bDeep, bAsync, dwPinControlFlags, pIProgress);
+			public HResult Unpin(HWnd hwndParent, char16** rgpszPaths, uint32 cPaths, IntBool bDeep, IntBool bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) mut => VT.Unpin(ref this, hwndParent, rgpszPaths, cPaths, bDeep, bAsync, dwPinControlFlags, pIProgress);
+			public HResult GetEncryptionStatus(out IntBool pbEncrypted, out IntBool pbPartial) mut => VT.GetEncryptionStatus(ref this, out pbEncrypted, out pbPartial);
+			public HResult Encrypt(HWnd hwndParent, IntBool bEncrypt, uint32 dwEncryptionControlFlags, IntBool bAsync, IOfflineFilesSyncProgress* pIProgress) mut => VT.Encrypt(ref this, hwndParent, bEncrypt, dwEncryptionControlFlags, bAsync, pIProgress);
+			public HResult FindItem(char16* pszPath, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) mut => VT.FindItem(ref this, pszPath, dwQueryFlags, ppItem);
+			public HResult FindItemEx(char16* pszPath, IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) mut => VT.FindItemEx(ref this, pszPath, pIncludeFileFilter, pIncludeDirFilter, pExcludeFileFilter, pExcludeDirFilter, dwQueryFlags, ppItem);
+			public HResult RenameItem(char16* pszPathOriginal, char16* pszPathNew, IntBool bReplaceIfExists) mut => VT.RenameItem(ref this, pszPathOriginal, pszPathNew, bReplaceIfExists);
+			public HResult GetLocation(PWSTR* ppszPath) mut => VT.GetLocation(ref this, ppszPath);
+			public HResult GetDiskSpaceInformation(out uint64 pcbVolumeTotal, out uint64 pcbLimit, out uint64 pcbUsed, out uint64 pcbUnpinnedLimit, out uint64 pcbUnpinnedUsed) mut => VT.GetDiskSpaceInformation(ref this, out pcbVolumeTotal, out pcbLimit, out pcbUsed, out pcbUnpinnedLimit, out pcbUnpinnedUsed);
+			public HResult SetDiskSpaceLimits(uint64 cbLimit, uint64 cbUnpinnedLimit) mut => VT.SetDiskSpaceLimits(ref this, cbLimit, cbUnpinnedLimit);
+			public HResult ProcessAdminPinPolicy(IOfflineFilesSyncProgress* pPinProgress, IOfflineFilesSyncProgress* pUnpinProgress) mut => VT.ProcessAdminPinPolicy(ref this, pPinProgress, pUnpinProgress);
+			public HResult GetSettingObject(char16* pszSettingName, IOfflineFilesSetting** ppSetting) mut => VT.GetSettingObject(ref this, pszSettingName, ppSetting);
+			public HResult EnumSettingObjects(IEnumOfflineFilesSettings** ppEnum) mut => VT.EnumSettingObjects(ref this, ppEnum);
+			public HResult IsPathCacheable(char16* pszPath, out IntBool pbCacheable, out OFFLINEFILES_CACHING_MODE pShareCachingMode) mut => VT.IsPathCacheable(ref this, pszPath, out pbCacheable, out pShareCachingMode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, HWND hwndParent, PWSTR* rgpszPaths, uint32 cPaths, BOOL bAsync, uint32 dwSyncControl, IOfflineFilesSyncConflictHandler* pISyncConflictHandler, IOfflineFilesSyncProgress* pIProgress, Guid* pSyncId) Synchronize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR* rgpszPaths, uint32 cPaths, uint32 dwFlags, BOOL bAsync, IOfflineFilesSimpleProgress* pIProgress) DeleteItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR pszUser, PWSTR* rgpszPaths, uint32 cPaths, uint32 dwFlags, BOOL bAsync, IOfflineFilesSimpleProgress* pIProgress) DeleteItemsForUser;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, HWND hwndParent, PWSTR* rgpszPaths, uint32 cPaths, BOOL bDeep, BOOL bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) Pin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, HWND hwndParent, PWSTR* rgpszPaths, uint32 cPaths, BOOL bDeep, BOOL bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) Unpin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, out BOOL pbEncrypted, out BOOL pbPartial) GetEncryptionStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, HWND hwndParent, BOOL bEncrypt, uint32 dwEncryptionControlFlags, BOOL bAsync, IOfflineFilesSyncProgress* pIProgress) Encrypt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR pszPath, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) FindItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR pszPath, IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) FindItemEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR pszPathOriginal, PWSTR pszPathNew, BOOL bReplaceIfExists) RenameItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR* ppszPath) GetLocation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, out uint64 pcbVolumeTotal, out uint64 pcbLimit, out uint64 pcbUsed, out uint64 pcbUnpinnedLimit, out uint64 pcbUnpinnedUsed) GetDiskSpaceInformation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, uint64 cbLimit, uint64 cbUnpinnedLimit) SetDiskSpaceLimits;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, IOfflineFilesSyncProgress* pPinProgress, IOfflineFilesSyncProgress* pUnpinProgress) ProcessAdminPinPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR pszSettingName, IOfflineFilesSetting** ppSetting) GetSettingObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, IEnumOfflineFilesSettings** ppEnum) EnumSettingObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache self, PWSTR pszPath, out BOOL pbCacheable, out OFFLINEFILES_CACHING_MODE pShareCachingMode) IsPathCacheable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, HWnd hwndParent, char16** rgpszPaths, uint32 cPaths, IntBool bAsync, uint32 dwSyncControl, IOfflineFilesSyncConflictHandler* pISyncConflictHandler, IOfflineFilesSyncProgress* pIProgress, Guid* pSyncId) Synchronize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16** rgpszPaths, uint32 cPaths, uint32 dwFlags, IntBool bAsync, IOfflineFilesSimpleProgress* pIProgress) DeleteItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16* pszUser, char16** rgpszPaths, uint32 cPaths, uint32 dwFlags, IntBool bAsync, IOfflineFilesSimpleProgress* pIProgress) DeleteItemsForUser;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, HWnd hwndParent, char16** rgpszPaths, uint32 cPaths, IntBool bDeep, IntBool bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) Pin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, HWnd hwndParent, char16** rgpszPaths, uint32 cPaths, IntBool bDeep, IntBool bAsync, uint32 dwPinControlFlags, IOfflineFilesSyncProgress* pIProgress) Unpin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, out IntBool pbEncrypted, out IntBool pbPartial) GetEncryptionStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, HWnd hwndParent, IntBool bEncrypt, uint32 dwEncryptionControlFlags, IntBool bAsync, IOfflineFilesSyncProgress* pIProgress) Encrypt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16* pszPath, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) FindItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16* pszPath, IOfflineFilesItemFilter* pIncludeFileFilter, IOfflineFilesItemFilter* pIncludeDirFilter, IOfflineFilesItemFilter* pExcludeFileFilter, IOfflineFilesItemFilter* pExcludeDirFilter, uint32 dwQueryFlags, IOfflineFilesItem** ppItem) FindItemEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16* pszPathOriginal, char16* pszPathNew, IntBool bReplaceIfExists) RenameItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16** ppszPath) GetLocation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, out uint64 pcbVolumeTotal, out uint64 pcbLimit, out uint64 pcbUsed, out uint64 pcbUnpinnedLimit, out uint64 pcbUnpinnedUsed) GetDiskSpaceInformation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, uint64 cbLimit, uint64 cbUnpinnedLimit) SetDiskSpaceLimits;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, IOfflineFilesSyncProgress* pPinProgress, IOfflineFilesSyncProgress* pUnpinProgress) ProcessAdminPinPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16* pszSettingName, IOfflineFilesSetting** ppSetting) GetSettingObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, IEnumOfflineFilesSettings** ppEnum) EnumSettingObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache self, char16* pszPath, out IntBool pbCacheable, out OFFLINEFILES_CACHING_MODE pShareCachingMode) IsPathCacheable;
 			}
 		}
 		[CRepr]
@@ -1027,24 +1027,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RenameItemEx(PWSTR pszPathOriginal, PWSTR pszPathNew, BOOL bReplaceIfExists) mut => VT.RenameItemEx(ref this, pszPathOriginal, pszPathNew, bReplaceIfExists);
+			public HResult RenameItemEx(char16* pszPathOriginal, char16* pszPathNew, IntBool bReplaceIfExists) mut => VT.RenameItemEx(ref this, pszPathOriginal, pszPathNew, bReplaceIfExists);
 
 			[CRepr]
 			public struct VTable : IOfflineFilesCache.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOfflineFilesCache2 self, PWSTR pszPathOriginal, PWSTR pszPathNew, BOOL bReplaceIfExists) RenameItemEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOfflineFilesCache2 self, char16* pszPathOriginal, char16* pszPathNew, IntBool bReplaceIfExists) RenameItemEx;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("cscapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 OfflineFilesEnable(BOOL bEnable, out BOOL pbRebootRequired);
+		public static extern uint32 OfflineFilesEnable(IntBool bEnable, out IntBool pbRebootRequired);
 		[Import("cscapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 OfflineFilesStart();
 		[Import("cscapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 OfflineFilesQueryStatus(BOOL* pbActive, BOOL* pbEnabled);
+		public static extern uint32 OfflineFilesQueryStatus(IntBool* pbActive, IntBool* pbEnabled);
 		[Import("cscapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 OfflineFilesQueryStatusEx(BOOL* pbActive, BOOL* pbEnabled, BOOL* pbAvailable);
+		public static extern uint32 OfflineFilesQueryStatusEx(IntBool* pbActive, IntBool* pbEnabled, IntBool* pbAvailable);
 	}
 }

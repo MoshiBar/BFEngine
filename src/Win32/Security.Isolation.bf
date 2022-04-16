@@ -10,7 +10,7 @@ namespace Win32
 		[CRepr]
 		public struct IsolatedAppLauncherTelemetryParameters
 		{
-			public BOOL EnableForLaunch;
+			public IntBool EnableForLaunch;
 			public Guid CorrelationGUID;
 		}
 		
@@ -27,36 +27,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Launch(PWSTR appUserModelId, PWSTR arguments, in IsolatedAppLauncherTelemetryParameters telemetryParameters) mut => VT.Launch(ref this, appUserModelId, arguments, telemetryParameters);
+			public HResult Launch(char16* appUserModelId, char16* arguments, in IsolatedAppLauncherTelemetryParameters telemetryParameters) mut => VT.Launch(ref this, appUserModelId, arguments, telemetryParameters);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIsolatedAppLauncher self, PWSTR appUserModelId, PWSTR arguments, in IsolatedAppLauncherTelemetryParameters telemetryParameters) Launch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIsolatedAppLauncher self, char16* appUserModelId, char16* arguments, in IsolatedAppLauncherTelemetryParameters telemetryParameters) Launch;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetAppContainerNamedObjectPath(HANDLE Token, PSID AppContainerSid, uint32 ObjectPathLength, char16* ObjectPath, out uint32 ReturnLength);
+		public static extern IntBool GetAppContainerNamedObjectPath(Handle Token, PSID AppContainerSid, uint32 ObjectPathLength, char16* ObjectPath, out uint32 ReturnLength);
 		[Import("api-ms-win-security-isolatedcontainer-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IsProcessInWDAGContainer(void* Reserved, out BOOL isProcessInWDAGContainer);
+		public static extern HResult IsProcessInWDAGContainer(void* Reserved, out IntBool isProcessInWDAGContainer);
 		[Import("api-ms-win-security-isolatedcontainer-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IsProcessInIsolatedContainer(out BOOL isProcessInIsolatedContainer);
+		public static extern HResult IsProcessInIsolatedContainer(out IntBool isProcessInIsolatedContainer);
 		[Import("isolatedwindowsenvironmentutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IsProcessInIsolatedWindowsEnvironment(out BOOL isProcessInIsolatedWindowsEnvironment);
+		public static extern HResult IsProcessInIsolatedWindowsEnvironment(out IntBool isProcessInIsolatedWindowsEnvironment);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateAppContainerProfile(PWSTR pszAppContainerName, PWSTR pszDisplayName, PWSTR pszDescription, SID_AND_ATTRIBUTES* pCapabilities, uint32 dwCapabilityCount, out PSID ppSidAppContainerSid);
+		public static extern HResult CreateAppContainerProfile(char16* pszAppContainerName, char16* pszDisplayName, char16* pszDescription, SID_AND_ATTRIBUTES* pCapabilities, uint32 dwCapabilityCount, out PSID ppSidAppContainerSid);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DeleteAppContainerProfile(PWSTR pszAppContainerName);
+		public static extern HResult DeleteAppContainerProfile(char16* pszAppContainerName);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetAppContainerRegistryLocation(uint32 desiredAccess, out HKEY phAppContainerKey);
+		public static extern HResult GetAppContainerRegistryLocation(uint32 desiredAccess, out HKey phAppContainerKey);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetAppContainerFolderPath(PWSTR pszAppContainerSid, out PWSTR ppszPath);
+		public static extern HResult GetAppContainerFolderPath(char16* pszAppContainerSid, out char16* ppszPath);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(PSID psidAppContainerSid, PWSTR pszRestrictedAppContainerName, out PSID ppsidRestrictedAppContainerSid);
+		public static extern HResult DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(PSID psidAppContainerSid, char16* pszRestrictedAppContainerName, out PSID ppsidRestrictedAppContainerSid);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DeriveAppContainerSidFromAppContainerName(PWSTR pszAppContainerName, out PSID ppsidAppContainerSid);
+		public static extern HResult DeriveAppContainerSidFromAppContainerName(char16* pszAppContainerName, out PSID ppsidAppContainerSid);
 	}
 }

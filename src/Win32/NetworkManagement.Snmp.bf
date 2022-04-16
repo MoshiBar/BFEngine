@@ -203,14 +203,14 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL PFNSNMPEXTENSIONINIT(uint32 dwUpTimeReference, out HANDLE phSubagentTrapEvent, out AsnObjectIdentifier pFirstSupportedRegion);
-		public function BOOL PFNSNMPEXTENSIONINITEX(out AsnObjectIdentifier pNextSupportedRegion);
-		public function BOOL PFNSNMPEXTENSIONMONITOR(void* pAgentMgmtData);
-		public function BOOL PFNSNMPEXTENSIONQUERY(uint8 bPduType, out SnmpVarBindList pVarBindList, out int32 pErrorStatus, out int32 pErrorIndex);
-		public function BOOL PFNSNMPEXTENSIONQUERYEX(uint32 nRequestType, uint32 nTransactionId, out SnmpVarBindList pVarBindList, out AsnOctetString pContextInfo, out int32 pErrorStatus, out int32 pErrorIndex);
-		public function BOOL PFNSNMPEXTENSIONTRAP(out AsnObjectIdentifier pEnterpriseOid, out int32 pGenericTrapId, out int32 pSpecificTrapId, out uint32 pTimeStamp, out SnmpVarBindList pVarBindList);
+		public function IntBool PFNSNMPEXTENSIONINIT(uint32 dwUpTimeReference, out Handle phSubagentTrapEvent, out AsnObjectIdentifier pFirstSupportedRegion);
+		public function IntBool PFNSNMPEXTENSIONINITEX(out AsnObjectIdentifier pNextSupportedRegion);
+		public function IntBool PFNSNMPEXTENSIONMONITOR(void* pAgentMgmtData);
+		public function IntBool PFNSNMPEXTENSIONQUERY(uint8 bPduType, out SnmpVarBindList pVarBindList, out int32 pErrorStatus, out int32 pErrorIndex);
+		public function IntBool PFNSNMPEXTENSIONQUERYEX(uint32 nRequestType, uint32 nTransactionId, out SnmpVarBindList pVarBindList, out AsnOctetString pContextInfo, out int32 pErrorStatus, out int32 pErrorIndex);
+		public function IntBool PFNSNMPEXTENSIONTRAP(out AsnObjectIdentifier pEnterpriseOid, out int32 pGenericTrapId, out int32 pSpecificTrapId, out uint32 pTimeStamp, out SnmpVarBindList pVarBindList);
 		public function void PFNSNMPEXTENSIONCLOSE();
-		public function uint32 SNMPAPI_CALLBACK(int hSession, HWND hWnd, uint32 wMsg, WPARAM wParam, LPARAM lParam, void* lpClientData);
+		public function uint32 SNMPAPI_CALLBACK(int hSession, HWnd hWnd, uint32 wMsg, WPARAM wParam, LPARAM lParam, void* lpClientData);
 		public function uint32 PFNSNMPSTARTUPEX(out uint32 param0, out uint32 param1, out uint32 param2, out uint32 param3, out uint32 param4);
 		public function uint32 PFNSNMPCLEANUPEX();
 		
@@ -221,7 +221,7 @@ namespace Win32
 		{
 			public uint8* stream;
 			public uint32 length;
-			public BOOL dynamic;
+			public IntBool dynamic;
 		}
 		[CRepr, Packed(4)]
 		public struct AsnObjectIdentifier
@@ -302,10 +302,10 @@ namespace Win32
 		[CRepr]
 		public struct smiVENDORINFO
 		{
-			public CHAR[64] vendorName;
-			public CHAR[64] vendorContact;
-			public CHAR[32] vendorVersionId;
-			public CHAR[32] vendorVersionDate;
+			public char8[64] vendorName;
+			public char8[64] vendorContact;
+			public char8[32] vendorVersionId;
+			public char8[32] vendorVersionDate;
 			public uint32 vendorEnterprise;
 		}
 		
@@ -348,9 +348,9 @@ namespace Win32
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* SnmpUtilMemReAlloc(void* pMem, uint32 nBytes);
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR SnmpUtilOidToA(out AsnObjectIdentifier Oid);
+		public static extern char8* SnmpUtilOidToA(out AsnObjectIdentifier Oid);
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR SnmpUtilIdsToA(out uint32 Ids, uint32 IdLength);
+		public static extern char8* SnmpUtilIdsToA(out uint32 Ids, uint32 IdLength);
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void SnmpUtilPrintOid(out AsnObjectIdentifier Oid);
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -362,25 +362,25 @@ namespace Win32
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void SnmpSvcSetLogType(SNMP_OUTPUT_LOG_TYPE nLogType);
 		[Import("snmpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void SnmpUtilDbgPrint(SNMP_LOG nLogLevel, PSTR szFormat);
+		public static extern void SnmpUtilDbgPrint(SNMP_LOG nLogLevel, char8* szFormat);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void* SnmpMgrOpen(PSTR lpAgentAddress, PSTR lpAgentCommunity, int32 nTimeOut, int32 nRetries);
+		public static extern void* SnmpMgrOpen(char8* lpAgentAddress, char8* lpAgentCommunity, int32 nTimeOut, int32 nRetries);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrCtl(void* session, uint32 dwCtlCode, void* lpvInBuffer, uint32 cbInBuffer, void* lpvOUTBuffer, uint32 cbOUTBuffer, out uint32 lpcbBytesReturned);
+		public static extern IntBool SnmpMgrCtl(void* session, uint32 dwCtlCode, void* lpvInBuffer, uint32 cbInBuffer, void* lpvOUTBuffer, uint32 cbOUTBuffer, out uint32 lpcbBytesReturned);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrClose(void* session);
+		public static extern IntBool SnmpMgrClose(void* session);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 SnmpMgrRequest(void* session, uint8 requestType, out SnmpVarBindList variableBindings, out SNMP_ERROR_STATUS errorStatus, out int32 errorIndex);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrStrToOid(PSTR string, out AsnObjectIdentifier oid);
+		public static extern IntBool SnmpMgrStrToOid(char8* string, out AsnObjectIdentifier oid);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrOidToStr(out AsnObjectIdentifier oid, PSTR* string);
+		public static extern IntBool SnmpMgrOidToStr(out AsnObjectIdentifier oid, PSTR* string);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrTrapListen(out HANDLE phTrapAvailable);
+		public static extern IntBool SnmpMgrTrapListen(out Handle phTrapAvailable);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrGetTrap(out AsnObjectIdentifier enterprise, out AsnOctetString IPAddress, out SNMP_GENERICTRAP genericTrap, out int32 specificTrap, out uint32 timeStamp, out SnmpVarBindList variableBindings);
+		public static extern IntBool SnmpMgrGetTrap(out AsnObjectIdentifier enterprise, out AsnOctetString IPAddress, out SNMP_GENERICTRAP genericTrap, out int32 specificTrap, out uint32 timeStamp, out SnmpVarBindList variableBindings);
 		[Import("mgmtapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SnmpMgrGetTrapEx(out AsnObjectIdentifier enterprise, out AsnOctetString agentAddress, out AsnOctetString sourceAddress, out SNMP_GENERICTRAP genericTrap, out int32 specificTrap, out AsnOctetString community, out uint32 timeStamp, out SnmpVarBindList variableBindings);
+		public static extern IntBool SnmpMgrGetTrapEx(out AsnObjectIdentifier enterprise, out AsnOctetString agentAddress, out AsnOctetString sourceAddress, out SNMP_GENERICTRAP genericTrap, out int32 specificTrap, out AsnOctetString community, out uint32 timeStamp, out SnmpVarBindList variableBindings);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpGetTranslateMode(out SNMP_API_TRANSLATE_MODE nTranslateMode);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -404,7 +404,7 @@ namespace Win32
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpCleanup();
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int SnmpOpen(HWND hWnd, uint32 wMsg);
+		public static extern int SnmpOpen(HWnd hWnd, uint32 wMsg);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpClose(int session);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -414,7 +414,7 @@ namespace Win32
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpRegister(int session, int srcEntity, int dstEntity, int context, out smiOID notification, SNMP_STATUS state);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int SnmpCreateSession(HWND hWnd, uint32 wMsg, SNMPAPI_CALLBACK fCallBack, void* lpClientData);
+		public static extern int SnmpCreateSession(HWnd hWnd, uint32 wMsg, SNMPAPI_CALLBACK fCallBack, void* lpClientData);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpListen(int hEntity, SNMP_STATUS lStatus);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -426,7 +426,7 @@ namespace Win32
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpCleanupEx();
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int SnmpStrToEntity(int session, PSTR string);
+		public static extern int SnmpStrToEntity(int session, char8* string);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpEntityToStr(int entity, uint32 size, uint8* string);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -466,7 +466,7 @@ namespace Win32
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpGetLastError(int session);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SnmpStrToOid(PSTR string, out smiOID dstOID);
+		public static extern uint32 SnmpStrToOid(char8* string, out smiOID dstOID);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SnmpOidToStr(ref smiOID srcOID, uint32 size, uint8* string);
 		[Import("wsnmp32.dll"), CLink, CallingConvention(.Stdcall)]

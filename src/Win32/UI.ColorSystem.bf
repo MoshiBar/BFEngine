@@ -214,11 +214,11 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function int32 ICMENUMPROCA(PSTR param0, LPARAM param1);
-		public function int32 ICMENUMPROCW(PWSTR param0, LPARAM param1);
-		public function BOOL LPBMCALLBACKFN(uint32 param0, uint32 param1, LPARAM param2);
-		public function BOOL PCMSCALLBACKW(out COLORMATCHSETUPW param0, LPARAM param1);
-		public function BOOL PCMSCALLBACKA(out COLORMATCHSETUPA param0, LPARAM param1);
+		public function int32 ICMENUMPROCA(char8* param0, LPARAM param1);
+		public function int32 ICMENUMPROCW(char16* param0, LPARAM param1);
+		public function IntBool LPBMCALLBACKFN(uint32 param0, uint32 param1, LPARAM param2);
+		public function IntBool PCMSCALLBACKW(out COLORMATCHSETUPW param0, LPARAM param1);
+		public function IntBool PCMSCALLBACKA(out COLORMATCHSETUPA param0, LPARAM param1);
 		
 		// --- Structs ---
 		
@@ -234,7 +234,7 @@ namespace Win32
 			public uint32 lcsGammaRed;
 			public uint32 lcsGammaGreen;
 			public uint32 lcsGammaBlue;
-			public CHAR[260] lcsFilename;
+			public char8[260] lcsFilename;
 		}
 		[CRepr]
 		public struct LOGCOLORSPACEW
@@ -340,7 +340,7 @@ namespace Win32
 		[CRepr]
 		public struct BlackInformation
 		{
-			public BOOL fBlackOnly;
+			public IntBool fBlackOnly;
 			public float blackWeight;
 		}
 		[CRepr]
@@ -465,7 +465,7 @@ namespace Win32
 			public uint32 dwSize;
 			public uint32 dwVersion;
 			public uint32 dwFields;
-			public PSTR pDeviceName;
+			public char8* pDeviceName;
 			public uint32 dwMediaType;
 			public uint32 dwDitheringMode;
 			public uint32[2] dwResolution;
@@ -489,7 +489,7 @@ namespace Win32
 			public uint32 dwSize;
 			public uint32 dwVersion;
 			public uint32 dwFields;
-			public PWSTR pDeviceName;
+			public char16* pDeviceName;
 			public uint32 dwMediaType;
 			public uint32 dwDitheringMode;
 			public uint32[2] dwResolution;
@@ -513,17 +513,17 @@ namespace Win32
 			public uint32 dwSize;
 			public uint32 dwVersion;
 			public uint32 dwFlags;
-			public HWND hwndOwner;
-			public PWSTR pSourceName;
-			public PWSTR pDisplayName;
-			public PWSTR pPrinterName;
+			public HWnd hwndOwner;
+			public char16* pSourceName;
+			public char16* pDisplayName;
+			public char16* pPrinterName;
 			public uint32 dwRenderIntent;
 			public uint32 dwProofingIntent;
-			public PWSTR pMonitorProfile;
+			public char16* pMonitorProfile;
 			public uint32 ccMonitorProfile;
-			public PWSTR pPrinterProfile;
+			public char16* pPrinterProfile;
 			public uint32 ccPrinterProfile;
-			public PWSTR pTargetProfile;
+			public char16* pTargetProfile;
 			public uint32 ccTargetProfile;
 			public DLGPROC lpfnHook;
 			public LPARAM lParam;
@@ -536,17 +536,17 @@ namespace Win32
 			public uint32 dwSize;
 			public uint32 dwVersion;
 			public uint32 dwFlags;
-			public HWND hwndOwner;
-			public PSTR pSourceName;
-			public PSTR pDisplayName;
-			public PSTR pPrinterName;
+			public HWnd hwndOwner;
+			public char8* pSourceName;
+			public char8* pDisplayName;
+			public char8* pPrinterName;
 			public uint32 dwRenderIntent;
 			public uint32 dwProofingIntent;
-			public PSTR pMonitorProfile;
+			public char8* pMonitorProfile;
 			public uint32 ccMonitorProfile;
-			public PSTR pPrinterProfile;
+			public char8* pPrinterProfile;
 			public uint32 ccPrinterProfile;
-			public PSTR pTargetProfile;
+			public char8* pTargetProfile;
 			public uint32 ccTargetProfile;
 			public DLGPROC lpfnHook;
 			public LPARAM lParam;
@@ -557,13 +557,13 @@ namespace Win32
 		public struct WCS_DEVICE_VCGT_CAPABILITIES
 		{
 			public uint32 Size;
-			public BOOL SupportsVcgt;
+			public IntBool SupportsVcgt;
 		}
 		[CRepr]
 		public struct WCS_DEVICE_MHC2_CAPABILITIES
 		{
 			public uint32 Size;
-			public BOOL SupportsMhc2;
+			public IntBool SupportsMhc2;
 			public uint32 RegammaLutEntryCount;
 			public uint32 CscXyzMatrixRows;
 			public uint32 CscXyzMatrixColumns;
@@ -578,32 +578,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(BSTR bstrXml, uint32 cNumModels, uint32 iModelPosition) mut => VT.Initialize(ref this, bstrXml, cNumModels, iModelPosition);
-			public HRESULT GetNumChannels(out uint32 pNumChannels) mut => VT.GetNumChannels(ref this, out pNumChannels);
-			public HRESULT DeviceToColorimetricColors(uint32 cColors, uint32 cChannels, in float pDeviceValues, XYZColorF* pXYZColors) mut => VT.DeviceToColorimetricColors(ref this, cColors, cChannels, pDeviceValues, pXYZColors);
-			public HRESULT ColorimetricToDeviceColors(uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, out float pDeviceValues) mut => VT.ColorimetricToDeviceColors(ref this, cColors, cChannels, pXYZColors, out pDeviceValues);
-			public HRESULT ColorimetricToDeviceColorsWithBlack(uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, BlackInformation* pBlackInformation, out float pDeviceValues) mut => VT.ColorimetricToDeviceColorsWithBlack(ref this, cColors, cChannels, pXYZColors, pBlackInformation, out pDeviceValues);
-			public HRESULT SetTransformDeviceModelInfo(uint32 iModelPosition, ref IDeviceModelPlugIn pIDeviceModelOther) mut => VT.SetTransformDeviceModelInfo(ref this, iModelPosition, ref pIDeviceModelOther);
-			public HRESULT GetPrimarySamples(out PrimaryXYZColors pPrimaryColor) mut => VT.GetPrimarySamples(ref this, out pPrimaryColor);
-			public HRESULT GetGamutBoundaryMeshSize(out uint32 pNumVertices, out uint32 pNumTriangles) mut => VT.GetGamutBoundaryMeshSize(ref this, out pNumVertices, out pNumTriangles);
-			public HRESULT GetGamutBoundaryMesh(uint32 cChannels, uint32 cVertices, uint32 cTriangles, out float pVertices, GamutShellTriangle* pTriangles) mut => VT.GetGamutBoundaryMesh(ref this, cChannels, cVertices, cTriangles, out pVertices, pTriangles);
-			public HRESULT GetNeutralAxisSize(out uint32 pcColors) mut => VT.GetNeutralAxisSize(ref this, out pcColors);
-			public HRESULT GetNeutralAxis(uint32 cColors, XYZColorF* pXYZColors) mut => VT.GetNeutralAxis(ref this, cColors, pXYZColors);
+			public HResult Initialize(BSTR bstrXml, uint32 cNumModels, uint32 iModelPosition) mut => VT.Initialize(ref this, bstrXml, cNumModels, iModelPosition);
+			public HResult GetNumChannels(out uint32 pNumChannels) mut => VT.GetNumChannels(ref this, out pNumChannels);
+			public HResult DeviceToColorimetricColors(uint32 cColors, uint32 cChannels, in float pDeviceValues, XYZColorF* pXYZColors) mut => VT.DeviceToColorimetricColors(ref this, cColors, cChannels, pDeviceValues, pXYZColors);
+			public HResult ColorimetricToDeviceColors(uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, out float pDeviceValues) mut => VT.ColorimetricToDeviceColors(ref this, cColors, cChannels, pXYZColors, out pDeviceValues);
+			public HResult ColorimetricToDeviceColorsWithBlack(uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, BlackInformation* pBlackInformation, out float pDeviceValues) mut => VT.ColorimetricToDeviceColorsWithBlack(ref this, cColors, cChannels, pXYZColors, pBlackInformation, out pDeviceValues);
+			public HResult SetTransformDeviceModelInfo(uint32 iModelPosition, ref IDeviceModelPlugIn pIDeviceModelOther) mut => VT.SetTransformDeviceModelInfo(ref this, iModelPosition, ref pIDeviceModelOther);
+			public HResult GetPrimarySamples(out PrimaryXYZColors pPrimaryColor) mut => VT.GetPrimarySamples(ref this, out pPrimaryColor);
+			public HResult GetGamutBoundaryMeshSize(out uint32 pNumVertices, out uint32 pNumTriangles) mut => VT.GetGamutBoundaryMeshSize(ref this, out pNumVertices, out pNumTriangles);
+			public HResult GetGamutBoundaryMesh(uint32 cChannels, uint32 cVertices, uint32 cTriangles, out float pVertices, GamutShellTriangle* pTriangles) mut => VT.GetGamutBoundaryMesh(ref this, cChannels, cVertices, cTriangles, out pVertices, pTriangles);
+			public HResult GetNeutralAxisSize(out uint32 pcColors) mut => VT.GetNeutralAxisSize(ref this, out pcColors);
+			public HResult GetNeutralAxis(uint32 cColors, XYZColorF* pXYZColors) mut => VT.GetNeutralAxis(ref this, cColors, pXYZColors);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, BSTR bstrXml, uint32 cNumModels, uint32 iModelPosition) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, out uint32 pNumChannels) GetNumChannels;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, uint32 cColors, uint32 cChannels, in float pDeviceValues, XYZColorF* pXYZColors) DeviceToColorimetricColors;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, out float pDeviceValues) ColorimetricToDeviceColors;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, BlackInformation* pBlackInformation, out float pDeviceValues) ColorimetricToDeviceColorsWithBlack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, uint32 iModelPosition, ref IDeviceModelPlugIn pIDeviceModelOther) SetTransformDeviceModelInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, out PrimaryXYZColors pPrimaryColor) GetPrimarySamples;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, out uint32 pNumVertices, out uint32 pNumTriangles) GetGamutBoundaryMeshSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, uint32 cChannels, uint32 cVertices, uint32 cTriangles, out float pVertices, GamutShellTriangle* pTriangles) GetGamutBoundaryMesh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, out uint32 pcColors) GetNeutralAxisSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceModelPlugIn self, uint32 cColors, XYZColorF* pXYZColors) GetNeutralAxis;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, BSTR bstrXml, uint32 cNumModels, uint32 iModelPosition) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, out uint32 pNumChannels) GetNumChannels;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, uint32 cColors, uint32 cChannels, in float pDeviceValues, XYZColorF* pXYZColors) DeviceToColorimetricColors;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, out float pDeviceValues) ColorimetricToDeviceColors;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, uint32 cColors, uint32 cChannels, XYZColorF* pXYZColors, BlackInformation* pBlackInformation, out float pDeviceValues) ColorimetricToDeviceColorsWithBlack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, uint32 iModelPosition, ref IDeviceModelPlugIn pIDeviceModelOther) SetTransformDeviceModelInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, out PrimaryXYZColors pPrimaryColor) GetPrimarySamples;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, out uint32 pNumVertices, out uint32 pNumTriangles) GetGamutBoundaryMeshSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, uint32 cChannels, uint32 cVertices, uint32 cTriangles, out float pVertices, GamutShellTriangle* pTriangles) GetGamutBoundaryMesh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, out uint32 pcColors) GetNeutralAxisSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceModelPlugIn self, uint32 cColors, XYZColorF* pXYZColors) GetNeutralAxis;
 			}
 		}
 		[CRepr]
@@ -613,14 +613,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(BSTR bstrXml, ref IDeviceModelPlugIn pSrcPlugIn, ref IDeviceModelPlugIn pDestPlugIn, ref GamutBoundaryDescription pSrcGBD, ref GamutBoundaryDescription pDestGBD) mut => VT.Initialize(ref this, bstrXml, ref pSrcPlugIn, ref pDestPlugIn, ref pSrcGBD, ref pDestGBD);
-			public HRESULT SourceToDestinationAppearanceColors(uint32 cColors, JChColorF* pInputColors, JChColorF* pOutputColors) mut => VT.SourceToDestinationAppearanceColors(ref this, cColors, pInputColors, pOutputColors);
+			public HResult Initialize(BSTR bstrXml, ref IDeviceModelPlugIn pSrcPlugIn, ref IDeviceModelPlugIn pDestPlugIn, ref GamutBoundaryDescription pSrcGBD, ref GamutBoundaryDescription pDestGBD) mut => VT.Initialize(ref this, bstrXml, ref pSrcPlugIn, ref pDestPlugIn, ref pSrcGBD, ref pDestGBD);
+			public HResult SourceToDestinationAppearanceColors(uint32 cColors, JChColorF* pInputColors, JChColorF* pOutputColors) mut => VT.SourceToDestinationAppearanceColors(ref this, cColors, pInputColors, pOutputColors);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGamutMapModelPlugIn self, BSTR bstrXml, ref IDeviceModelPlugIn pSrcPlugIn, ref IDeviceModelPlugIn pDestPlugIn, ref GamutBoundaryDescription pSrcGBD, ref GamutBoundaryDescription pDestGBD) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGamutMapModelPlugIn self, uint32 cColors, JChColorF* pInputColors, JChColorF* pOutputColors) SourceToDestinationAppearanceColors;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGamutMapModelPlugIn self, BSTR bstrXml, ref IDeviceModelPlugIn pSrcPlugIn, ref IDeviceModelPlugIn pDestPlugIn, ref GamutBoundaryDescription pSrcGBD, ref GamutBoundaryDescription pDestGBD) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGamutMapModelPlugIn self, uint32 cColors, JChColorF* pInputColors, JChColorF* pOutputColors) SourceToDestinationAppearanceColors;
 			}
 		}
 		
@@ -629,13 +629,13 @@ namespace Win32
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 SetICMMode(HDC hdc, int32 mode);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CheckColorsInGamut(HDC hdc, RGBTRIPLE* lpRGBTriple, void* dlpBuffer, uint32 nCount);
+		public static extern IntBool CheckColorsInGamut(HDC hdc, RGBTRIPLE* lpRGBTriple, void* dlpBuffer, uint32 nCount);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCOLORSPACE GetColorSpace(HDC hdc);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetLogColorSpaceA(HCOLORSPACE hColorSpace, out LOGCOLORSPACEA lpBuffer, uint32 nSize);
+		public static extern IntBool GetLogColorSpaceA(HCOLORSPACE hColorSpace, out LOGCOLORSPACEA lpBuffer, uint32 nSize);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetLogColorSpaceW(HCOLORSPACE hColorSpace, out LOGCOLORSPACEW lpBuffer, uint32 nSize);
+		public static extern IntBool GetLogColorSpaceW(HCOLORSPACE hColorSpace, out LOGCOLORSPACEW lpBuffer, uint32 nSize);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCOLORSPACE CreateColorSpaceA(ref LOGCOLORSPACEA lplcs);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -643,77 +643,77 @@ namespace Win32
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCOLORSPACE SetColorSpace(HDC hdc, HCOLORSPACE hcs);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteColorSpace(HCOLORSPACE hcs);
+		public static extern IntBool DeleteColorSpace(HCOLORSPACE hcs);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetICMProfileA(HDC hdc, out uint32 pBufSize, uint8* pszFilename);
+		public static extern IntBool GetICMProfileA(HDC hdc, out uint32 pBufSize, uint8* pszFilename);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetICMProfileW(HDC hdc, out uint32 pBufSize, char16* pszFilename);
+		public static extern IntBool GetICMProfileW(HDC hdc, out uint32 pBufSize, char16* pszFilename);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetICMProfileA(HDC hdc, PSTR lpFileName);
+		public static extern IntBool SetICMProfileA(HDC hdc, char8* lpFileName);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetICMProfileW(HDC hdc, PWSTR lpFileName);
+		public static extern IntBool SetICMProfileW(HDC hdc, char16* lpFileName);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeviceGammaRamp(HDC hdc, void* lpRamp);
+		public static extern IntBool GetDeviceGammaRamp(HDC hdc, void* lpRamp);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetDeviceGammaRamp(HDC hdc, void* lpRamp);
+		public static extern IntBool SetDeviceGammaRamp(HDC hdc, void* lpRamp);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ColorMatchToTarget(HDC hdc, HDC hdcTarget, COLOR_MATCH_TO_TARGET_ACTION action);
+		public static extern IntBool ColorMatchToTarget(HDC hdc, HDC hdcTarget, COLOR_MATCH_TO_TARGET_ACTION action);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 EnumICMProfilesA(HDC hdc, ICMENUMPROCA proc, LPARAM param2);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 EnumICMProfilesW(HDC hdc, ICMENUMPROCW proc, LPARAM param2);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UpdateICMRegKeyA(uint32 reserved, PSTR lpszCMID, PSTR lpszFileName, ICM_COMMAND command);
+		public static extern IntBool UpdateICMRegKeyA(uint32 reserved, char8* lpszCMID, char8* lpszFileName, ICM_COMMAND command);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UpdateICMRegKeyW(uint32 reserved, PWSTR lpszCMID, PWSTR lpszFileName, ICM_COMMAND command);
+		public static extern IntBool UpdateICMRegKeyW(uint32 reserved, char16* lpszCMID, char16* lpszFileName, ICM_COMMAND command);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ColorCorrectPalette(HDC hdc, HPALETTE hPal, uint32 deFirst, uint32 num);
+		public static extern IntBool ColorCorrectPalette(HDC hdc, HPALETTE hPal, uint32 deFirst, uint32 num);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int OpenColorProfileA(ref PROFILE pProfile, uint32 dwDesiredAccess, uint32 dwShareMode, uint32 dwCreationMode);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int OpenColorProfileW(ref PROFILE pProfile, uint32 dwDesiredAccess, uint32 dwShareMode, uint32 dwCreationMode);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CloseColorProfile(int hProfile);
+		public static extern IntBool CloseColorProfile(int hProfile);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetColorProfileFromHandle(int hProfile, uint8* pProfile, out uint32 pcbProfile);
+		public static extern IntBool GetColorProfileFromHandle(int hProfile, uint8* pProfile, out uint32 pcbProfile);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsColorProfileValid(int hProfile, out BOOL pbValid);
+		public static extern IntBool IsColorProfileValid(int hProfile, out IntBool pbValid);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProfileFromLogColorSpaceA(ref LOGCOLORSPACEA pLogColorSpace, out uint8* pProfile);
+		public static extern IntBool CreateProfileFromLogColorSpaceA(ref LOGCOLORSPACEA pLogColorSpace, out uint8* pProfile);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProfileFromLogColorSpaceW(ref LOGCOLORSPACEW pLogColorSpace, out uint8* pProfile);
+		public static extern IntBool CreateProfileFromLogColorSpaceW(ref LOGCOLORSPACEW pLogColorSpace, out uint8* pProfile);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCountColorProfileElements(int hProfile, out uint32 pnElementCount);
+		public static extern IntBool GetCountColorProfileElements(int hProfile, out uint32 pnElementCount);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetColorProfileHeader(int hProfile, out PROFILEHEADER pHeader);
+		public static extern IntBool GetColorProfileHeader(int hProfile, out PROFILEHEADER pHeader);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetColorProfileElementTag(int hProfile, uint32 dwIndex, out uint32 pTag);
+		public static extern IntBool GetColorProfileElementTag(int hProfile, uint32 dwIndex, out uint32 pTag);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsColorProfileTagPresent(int hProfile, uint32 tag, out BOOL pbPresent);
+		public static extern IntBool IsColorProfileTagPresent(int hProfile, uint32 tag, out IntBool pbPresent);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetColorProfileElement(int hProfile, uint32 tag, uint32 dwOffset, out uint32 pcbElement, void* pElement, out BOOL pbReference);
+		public static extern IntBool GetColorProfileElement(int hProfile, uint32 tag, uint32 dwOffset, out uint32 pcbElement, void* pElement, out IntBool pbReference);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetColorProfileHeader(int hProfile, ref PROFILEHEADER pHeader);
+		public static extern IntBool SetColorProfileHeader(int hProfile, ref PROFILEHEADER pHeader);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetColorProfileElementSize(int hProfile, uint32 tagType, uint32 pcbElement);
+		public static extern IntBool SetColorProfileElementSize(int hProfile, uint32 tagType, uint32 pcbElement);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetColorProfileElement(int hProfile, uint32 tag, uint32 dwOffset, ref uint32 pcbElement, void* pElement);
+		public static extern IntBool SetColorProfileElement(int hProfile, uint32 tag, uint32 dwOffset, ref uint32 pcbElement, void* pElement);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetColorProfileElementReference(int hProfile, uint32 newTag, uint32 refTag);
+		public static extern IntBool SetColorProfileElementReference(int hProfile, uint32 newTag, uint32 refTag);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPS2ColorSpaceArray(int hProfile, uint32 dwIntent, uint32 dwCSAType, uint8* pPS2ColorSpaceArray, out uint32 pcbPS2ColorSpaceArray, out BOOL pbBinary);
+		public static extern IntBool GetPS2ColorSpaceArray(int hProfile, uint32 dwIntent, uint32 dwCSAType, uint8* pPS2ColorSpaceArray, out uint32 pcbPS2ColorSpaceArray, out IntBool pbBinary);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPS2ColorRenderingIntent(int hProfile, uint32 dwIntent, uint8* pBuffer, out uint32 pcbPS2ColorRenderingIntent);
+		public static extern IntBool GetPS2ColorRenderingIntent(int hProfile, uint32 dwIntent, uint8* pBuffer, out uint32 pcbPS2ColorRenderingIntent);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPS2ColorRenderingDictionary(int hProfile, uint32 dwIntent, uint8* pPS2ColorRenderingDictionary, out uint32 pcbPS2ColorRenderingDictionary, out BOOL pbBinary);
+		public static extern IntBool GetPS2ColorRenderingDictionary(int hProfile, uint32 dwIntent, uint8* pPS2ColorRenderingDictionary, out uint32 pcbPS2ColorRenderingDictionary, out IntBool pbBinary);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNamedProfileInfo(int hProfile, out NAMED_PROFILE_INFO pNamedProfileInfo);
+		public static extern IntBool GetNamedProfileInfo(int hProfile, out NAMED_PROFILE_INFO pNamedProfileInfo);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ConvertColorNameToIndex(int hProfile, int8** paColorName, uint32* paIndex, uint32 dwCount);
+		public static extern IntBool ConvertColorNameToIndex(int hProfile, int8** paColorName, uint32* paIndex, uint32 dwCount);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ConvertIndexToColorName(int hProfile, uint32* paIndex, int8** paColorName, uint32 dwCount);
+		public static extern IntBool ConvertIndexToColorName(int hProfile, uint32* paIndex, int8** paColorName, uint32 dwCount);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateDeviceLinkProfile(int* hProfile, uint32 nProfiles, uint32* padwIntent, uint32 nIntents, uint32 dwFlags, out uint8* pProfileData, uint32 indexPreferredCMM);
+		public static extern IntBool CreateDeviceLinkProfile(int* hProfile, uint32 nProfiles, uint32* padwIntent, uint32 nIntents, uint32 dwFlags, out uint8* pProfileData, uint32 indexPreferredCMM);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CreateColorTransformA(ref LOGCOLORSPACEA pLogColorSpace, int hDestProfile, int hTargetProfile, uint32 dwFlags);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
@@ -721,103 +721,103 @@ namespace Win32
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CreateMultiProfileTransform(int* pahProfiles, uint32 nProfiles, uint32* padwIntent, uint32 nIntents, uint32 dwFlags, uint32 indexPreferredCMM);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteColorTransform(int hxform);
+		public static extern IntBool DeleteColorTransform(int hxform);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TranslateBitmapBits(int hColorTransform, void* pSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwInputStride, void* pDestBits, BMFORMAT bmOutput, uint32 dwOutputStride, LPBMCALLBACKFN pfnCallBack, LPARAM ulCallbackData);
+		public static extern IntBool TranslateBitmapBits(int hColorTransform, void* pSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwInputStride, void* pDestBits, BMFORMAT bmOutput, uint32 dwOutputStride, LPBMCALLBACKFN pfnCallBack, LPARAM ulCallbackData);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CheckBitmapBits(int hColorTransform, void* pSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwStride, out uint8 paResult, LPBMCALLBACKFN pfnCallback, LPARAM lpCallbackData);
+		public static extern IntBool CheckBitmapBits(int hColorTransform, void* pSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwStride, out uint8 paResult, LPBMCALLBACKFN pfnCallback, LPARAM lpCallbackData);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TranslateColors(int hColorTransform, COLOR* paInputColors, uint32 nColors, COLORTYPE ctInput, COLOR* paOutputColors, COLORTYPE ctOutput);
+		public static extern IntBool TranslateColors(int hColorTransform, COLOR* paInputColors, uint32 nColors, COLORTYPE ctInput, COLOR* paOutputColors, COLORTYPE ctOutput);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CheckColors(int hColorTransform, COLOR* paInputColors, uint32 nColors, COLORTYPE ctInput, uint8* paResult);
+		public static extern IntBool CheckColors(int hColorTransform, COLOR* paInputColors, uint32 nColors, COLORTYPE ctInput, uint8* paResult);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCMMInfo(int hColorTransform, uint32 param1);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RegisterCMMA(PSTR pMachineName, uint32 cmmID, PSTR pCMMdll);
+		public static extern IntBool RegisterCMMA(char8* pMachineName, uint32 cmmID, char8* pCMMdll);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RegisterCMMW(PWSTR pMachineName, uint32 cmmID, PWSTR pCMMdll);
+		public static extern IntBool RegisterCMMW(char16* pMachineName, uint32 cmmID, char16* pCMMdll);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterCMMA(PSTR pMachineName, uint32 cmmID);
+		public static extern IntBool UnregisterCMMA(char8* pMachineName, uint32 cmmID);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterCMMW(PWSTR pMachineName, uint32 cmmID);
+		public static extern IntBool UnregisterCMMW(char16* pMachineName, uint32 cmmID);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SelectCMM(uint32 dwCMMType);
+		public static extern IntBool SelectCMM(uint32 dwCMMType);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetColorDirectoryA(PSTR pMachineName, PSTR pBuffer, out uint32 pdwSize);
+		public static extern IntBool GetColorDirectoryA(char8* pMachineName, char8* pBuffer, out uint32 pdwSize);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetColorDirectoryW(PWSTR pMachineName, PWSTR pBuffer, out uint32 pdwSize);
+		public static extern IntBool GetColorDirectoryW(char16* pMachineName, char16* pBuffer, out uint32 pdwSize);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InstallColorProfileA(PSTR pMachineName, PSTR pProfileName);
+		public static extern IntBool InstallColorProfileA(char8* pMachineName, char8* pProfileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InstallColorProfileW(PWSTR pMachineName, PWSTR pProfileName);
+		public static extern IntBool InstallColorProfileW(char16* pMachineName, char16* pProfileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UninstallColorProfileA(PSTR pMachineName, PSTR pProfileName, BOOL bDelete);
+		public static extern IntBool UninstallColorProfileA(char8* pMachineName, char8* pProfileName, IntBool bDelete);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UninstallColorProfileW(PWSTR pMachineName, PWSTR pProfileName, BOOL bDelete);
+		public static extern IntBool UninstallColorProfileW(char16* pMachineName, char16* pProfileName, IntBool bDelete);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumColorProfilesA(PSTR pMachineName, ref ENUMTYPEA pEnumRecord, uint8* pEnumerationBuffer, out uint32 pdwSizeOfEnumerationBuffer, uint32* pnProfiles);
+		public static extern IntBool EnumColorProfilesA(char8* pMachineName, ref ENUMTYPEA pEnumRecord, uint8* pEnumerationBuffer, out uint32 pdwSizeOfEnumerationBuffer, uint32* pnProfiles);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumColorProfilesW(PWSTR pMachineName, ref ENUMTYPEW pEnumRecord, uint8* pEnumerationBuffer, out uint32 pdwSizeOfEnumerationBuffer, uint32* pnProfiles);
+		public static extern IntBool EnumColorProfilesW(char16* pMachineName, ref ENUMTYPEW pEnumRecord, uint8* pEnumerationBuffer, out uint32 pdwSizeOfEnumerationBuffer, uint32* pnProfiles);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetStandardColorSpaceProfileA(PSTR pMachineName, uint32 dwProfileID, PSTR pProfilename);
+		public static extern IntBool SetStandardColorSpaceProfileA(char8* pMachineName, uint32 dwProfileID, char8* pProfilename);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetStandardColorSpaceProfileW(PWSTR pMachineName, uint32 dwProfileID, PWSTR pProfileName);
+		public static extern IntBool SetStandardColorSpaceProfileW(char16* pMachineName, uint32 dwProfileID, char16* pProfileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetStandardColorSpaceProfileA(PSTR pMachineName, uint32 dwSCS, PSTR pBuffer, out uint32 pcbSize);
+		public static extern IntBool GetStandardColorSpaceProfileA(char8* pMachineName, uint32 dwSCS, char8* pBuffer, out uint32 pcbSize);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetStandardColorSpaceProfileW(PWSTR pMachineName, uint32 dwSCS, PWSTR pBuffer, out uint32 pcbSize);
+		public static extern IntBool GetStandardColorSpaceProfileW(char16* pMachineName, uint32 dwSCS, char16* pBuffer, out uint32 pcbSize);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AssociateColorProfileWithDeviceA(PSTR pMachineName, PSTR pProfileName, PSTR pDeviceName);
+		public static extern IntBool AssociateColorProfileWithDeviceA(char8* pMachineName, char8* pProfileName, char8* pDeviceName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AssociateColorProfileWithDeviceW(PWSTR pMachineName, PWSTR pProfileName, PWSTR pDeviceName);
+		public static extern IntBool AssociateColorProfileWithDeviceW(char16* pMachineName, char16* pProfileName, char16* pDeviceName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DisassociateColorProfileFromDeviceA(PSTR pMachineName, PSTR pProfileName, PSTR pDeviceName);
+		public static extern IntBool DisassociateColorProfileFromDeviceA(char8* pMachineName, char8* pProfileName, char8* pDeviceName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DisassociateColorProfileFromDeviceW(PWSTR pMachineName, PWSTR pProfileName, PWSTR pDeviceName);
+		public static extern IntBool DisassociateColorProfileFromDeviceW(char16* pMachineName, char16* pProfileName, char16* pDeviceName);
 		[Import("icmui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetupColorMatchingW(out COLORMATCHSETUPW pcms);
+		public static extern IntBool SetupColorMatchingW(out COLORMATCHSETUPW pcms);
 		[Import("icmui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetupColorMatchingA(out COLORMATCHSETUPA pcms);
+		public static extern IntBool SetupColorMatchingA(out COLORMATCHSETUPA pcms);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsAssociateColorProfileWithDevice(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR pProfileName, PWSTR pDeviceName);
+		public static extern IntBool WcsAssociateColorProfileWithDevice(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* pProfileName, char16* pDeviceName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsDisassociateColorProfileFromDevice(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR pProfileName, PWSTR pDeviceName);
+		public static extern IntBool WcsDisassociateColorProfileFromDevice(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* pProfileName, char16* pDeviceName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsEnumColorProfilesSize(WCS_PROFILE_MANAGEMENT_SCOPE @scope, ref ENUMTYPEW pEnumRecord, out uint32 pdwSize);
+		public static extern IntBool WcsEnumColorProfilesSize(WCS_PROFILE_MANAGEMENT_SCOPE @scope, ref ENUMTYPEW pEnumRecord, out uint32 pdwSize);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsEnumColorProfiles(WCS_PROFILE_MANAGEMENT_SCOPE @scope, ref ENUMTYPEW pEnumRecord, out uint8 pBuffer, uint32 dwSize, uint32* pnProfiles);
+		public static extern IntBool WcsEnumColorProfiles(WCS_PROFILE_MANAGEMENT_SCOPE @scope, ref ENUMTYPEW pEnumRecord, out uint8 pBuffer, uint32 dwSize, uint32* pnProfiles);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsGetDefaultColorProfileSize(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR pDeviceName, COLORPROFILETYPE cptColorProfileType, COLORPROFILESUBTYPE cpstColorProfileSubType, uint32 dwProfileID, out uint32 pcbProfileName);
+		public static extern IntBool WcsGetDefaultColorProfileSize(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* pDeviceName, COLORPROFILETYPE cptColorProfileType, COLORPROFILESUBTYPE cpstColorProfileSubType, uint32 dwProfileID, out uint32 pcbProfileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsGetDefaultColorProfile(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR pDeviceName, COLORPROFILETYPE cptColorProfileType, COLORPROFILESUBTYPE cpstColorProfileSubType, uint32 dwProfileID, uint32 cbProfileName, PWSTR pProfileName);
+		public static extern IntBool WcsGetDefaultColorProfile(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* pDeviceName, COLORPROFILETYPE cptColorProfileType, COLORPROFILESUBTYPE cpstColorProfileSubType, uint32 dwProfileID, uint32 cbProfileName, char16* pProfileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsSetDefaultColorProfile(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR pDeviceName, COLORPROFILETYPE cptColorProfileType, COLORPROFILESUBTYPE cpstColorProfileSubType, uint32 dwProfileID, PWSTR pProfileName);
+		public static extern IntBool WcsSetDefaultColorProfile(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* pDeviceName, COLORPROFILETYPE cptColorProfileType, COLORPROFILESUBTYPE cpstColorProfileSubType, uint32 dwProfileID, char16* pProfileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsSetDefaultRenderingIntent(WCS_PROFILE_MANAGEMENT_SCOPE @scope, uint32 dwRenderingIntent);
+		public static extern IntBool WcsSetDefaultRenderingIntent(WCS_PROFILE_MANAGEMENT_SCOPE @scope, uint32 dwRenderingIntent);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsGetDefaultRenderingIntent(WCS_PROFILE_MANAGEMENT_SCOPE @scope, out uint32 pdwRenderingIntent);
+		public static extern IntBool WcsGetDefaultRenderingIntent(WCS_PROFILE_MANAGEMENT_SCOPE @scope, out uint32 pdwRenderingIntent);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsGetUsePerUserProfiles(PWSTR pDeviceName, uint32 dwDeviceClass, out BOOL pUsePerUserProfiles);
+		public static extern IntBool WcsGetUsePerUserProfiles(char16* pDeviceName, uint32 dwDeviceClass, out IntBool pUsePerUserProfiles);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsSetUsePerUserProfiles(PWSTR pDeviceName, uint32 dwDeviceClass, BOOL usePerUserProfiles);
+		public static extern IntBool WcsSetUsePerUserProfiles(char16* pDeviceName, uint32 dwDeviceClass, IntBool usePerUserProfiles);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsTranslateColors(int hColorTransform, uint32 nColors, uint32 nInputChannels, COLORDATATYPE cdtInput, uint32 cbInput, void* pInputData, uint32 nOutputChannels, COLORDATATYPE cdtOutput, uint32 cbOutput, void* pOutputData);
+		public static extern IntBool WcsTranslateColors(int hColorTransform, uint32 nColors, uint32 nInputChannels, COLORDATATYPE cdtInput, uint32 cbInput, void* pInputData, uint32 nOutputChannels, COLORDATATYPE cdtOutput, uint32 cbOutput, void* pOutputData);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsCheckColors(int hColorTransform, uint32 nColors, uint32 nInputChannels, COLORDATATYPE cdtInput, uint32 cbInput, void* pInputData, uint8* paResult);
+		public static extern IntBool WcsCheckColors(int hColorTransform, uint32 nColors, uint32 nInputChannels, COLORDATATYPE cdtInput, uint32 cbInput, void* pInputData, uint8* paResult);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMCheckColors(int hcmTransform, COLOR* lpaInputColors, uint32 nColors, COLORTYPE ctInput, uint8* lpaResult);
+		public static extern IntBool CMCheckColors(int hcmTransform, COLOR* lpaInputColors, uint32 nColors, COLORTYPE ctInput, uint8* lpaResult);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMCheckRGBs(int hcmTransform, void* lpSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwStride, out uint8 lpaResult, LPBMCALLBACKFN pfnCallback, LPARAM ulCallbackData);
+		public static extern IntBool CMCheckRGBs(int hcmTransform, void* lpSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwStride, out uint8 lpaResult, LPBMCALLBACKFN pfnCallback, LPARAM ulCallbackData);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMConvertColorNameToIndex(int hProfile, int8** paColorName, uint32* paIndex, uint32 dwCount);
+		public static extern IntBool CMConvertColorNameToIndex(int hProfile, int8** paColorName, uint32* paIndex, uint32 dwCount);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMConvertIndexToColorName(int hProfile, uint32* paIndex, int8** paColorName, uint32 dwCount);
+		public static extern IntBool CMConvertIndexToColorName(int hProfile, uint32* paIndex, int8** paColorName, uint32 dwCount);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMCreateDeviceLinkProfile(int* pahProfiles, uint32 nProfiles, uint32* padwIntents, uint32 nIntents, uint32 dwFlags, out uint8* lpProfileData);
+		public static extern IntBool CMCreateDeviceLinkProfile(int* pahProfiles, uint32 nProfiles, uint32* padwIntents, uint32 nIntents, uint32 dwFlags, out uint8* lpProfileData);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CMCreateMultiProfileTransform(int* pahProfiles, uint32 nProfiles, uint32* padwIntents, uint32 nIntents, uint32 dwFlags);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMCreateProfileW(out LOGCOLORSPACEW lpColorSpace, void** lpProfileData);
+		public static extern IntBool CMCreateProfileW(out LOGCOLORSPACEW lpColorSpace, void** lpProfileData);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CMCreateTransform(ref LOGCOLORSPACEA lpColorSpace, void* lpDevCharacter, void* lpTargetDevCharacter);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -825,27 +825,27 @@ namespace Win32
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CMCreateTransformExt(ref LOGCOLORSPACEA lpColorSpace, void* lpDevCharacter, void* lpTargetDevCharacter, uint32 dwFlags);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMCheckColorsInGamut(int hcmTransform, RGBTRIPLE* lpaRGBTriple, out uint8 lpaResult, uint32 nCount);
+		public static extern IntBool CMCheckColorsInGamut(int hcmTransform, RGBTRIPLE* lpaRGBTriple, out uint8 lpaResult, uint32 nCount);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMCreateProfile(out LOGCOLORSPACEA lpColorSpace, void** lpProfileData);
+		public static extern IntBool CMCreateProfile(out LOGCOLORSPACEA lpColorSpace, void** lpProfileData);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMTranslateRGB(int hcmTransform, uint32 ColorRef, out uint32 lpColorRef, uint32 dwFlags);
+		public static extern IntBool CMTranslateRGB(int hcmTransform, uint32 ColorRef, out uint32 lpColorRef, uint32 dwFlags);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMTranslateRGBs(int hcmTransform, void* lpSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwStride, void* lpDestBits, BMFORMAT bmOutput, uint32 dwTranslateDirection);
+		public static extern IntBool CMTranslateRGBs(int hcmTransform, void* lpSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwStride, void* lpDestBits, BMFORMAT bmOutput, uint32 dwTranslateDirection);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CMCreateTransformExtW(ref LOGCOLORSPACEW lpColorSpace, void* lpDevCharacter, void* lpTargetDevCharacter, uint32 dwFlags);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMDeleteTransform(int hcmTransform);
+		public static extern IntBool CMDeleteTransform(int hcmTransform);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 CMGetInfo(uint32 dwInfo);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMGetNamedProfileInfo(int hProfile, out NAMED_PROFILE_INFO pNamedProfileInfo);
+		public static extern IntBool CMGetNamedProfileInfo(int hProfile, out NAMED_PROFILE_INFO pNamedProfileInfo);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMIsProfileValid(int hProfile, out int32 lpbValid);
+		public static extern IntBool CMIsProfileValid(int hProfile, out int32 lpbValid);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMTranslateColors(int hcmTransform, COLOR* lpaInputColors, uint32 nColors, COLORTYPE ctInput, COLOR* lpaOutputColors, COLORTYPE ctOutput);
+		public static extern IntBool CMTranslateColors(int hcmTransform, COLOR* lpaInputColors, uint32 nColors, COLORTYPE ctInput, COLOR* lpaOutputColors, COLORTYPE ctOutput);
 		[Import("icm32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CMTranslateRGBsExt(int hcmTransform, void* lpSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwInputStride, void* lpDestBits, BMFORMAT bmOutput, uint32 dwOutputStride, LPBMCALLBACKFN lpfnCallback, LPARAM ulCallbackData);
+		public static extern IntBool CMTranslateRGBsExt(int hcmTransform, void* lpSrcBits, BMFORMAT bmInput, uint32 dwWidth, uint32 dwHeight, uint32 dwInputStride, void* lpDestBits, BMFORMAT bmOutput, uint32 dwOutputStride, LPBMCALLBACKFN lpfnCallback, LPARAM ulCallbackData);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int WcsOpenColorProfileA(ref PROFILE pCDMPProfile, PROFILE* pCAMPProfile, PROFILE* pGMMPProfile, uint32 dwDesireAccess, uint32 dwShareMode, uint32 dwCreationMode, uint32 dwFlags);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
@@ -853,20 +853,20 @@ namespace Win32
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int WcsCreateIccProfile(int hWcsProfile, uint32 dwOptions);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsGetCalibrationManagementState(out BOOL pbIsEnabled);
+		public static extern IntBool WcsGetCalibrationManagementState(out IntBool pbIsEnabled);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WcsSetCalibrationManagementState(BOOL bIsEnabled);
+		public static extern IntBool WcsSetCalibrationManagementState(IntBool bIsEnabled);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ColorProfileAddDisplayAssociation(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR profileName, LUID targetAdapterID, uint32 sourceID, BOOL setAsDefault, BOOL associateAsAdvancedColor);
+		public static extern HResult ColorProfileAddDisplayAssociation(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* profileName, LUID targetAdapterID, uint32 sourceID, IntBool setAsDefault, IntBool associateAsAdvancedColor);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ColorProfileRemoveDisplayAssociation(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR profileName, LUID targetAdapterID, uint32 sourceID, BOOL dissociateAdvancedColor);
+		public static extern HResult ColorProfileRemoveDisplayAssociation(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* profileName, LUID targetAdapterID, uint32 sourceID, IntBool dissociateAdvancedColor);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ColorProfileSetDisplayDefaultAssociation(WCS_PROFILE_MANAGEMENT_SCOPE @scope, PWSTR profileName, COLORPROFILETYPE profileType, COLORPROFILESUBTYPE profileSubType, LUID targetAdapterID, uint32 sourceID);
+		public static extern HResult ColorProfileSetDisplayDefaultAssociation(WCS_PROFILE_MANAGEMENT_SCOPE @scope, char16* profileName, COLORPROFILETYPE profileType, COLORPROFILESUBTYPE profileSubType, LUID targetAdapterID, uint32 sourceID);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ColorProfileGetDisplayList(WCS_PROFILE_MANAGEMENT_SCOPE @scope, LUID targetAdapterID, uint32 sourceID, out PWSTR* profileList, out uint32 profileCount);
+		public static extern HResult ColorProfileGetDisplayList(WCS_PROFILE_MANAGEMENT_SCOPE @scope, LUID targetAdapterID, uint32 sourceID, out char16** profileList, out uint32 profileCount);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ColorProfileGetDisplayDefault(WCS_PROFILE_MANAGEMENT_SCOPE @scope, LUID targetAdapterID, uint32 sourceID, COLORPROFILETYPE profileType, COLORPROFILESUBTYPE profileSubType, out PWSTR profileName);
+		public static extern HResult ColorProfileGetDisplayDefault(WCS_PROFILE_MANAGEMENT_SCOPE @scope, LUID targetAdapterID, uint32 sourceID, COLORPROFILETYPE profileType, COLORPROFILESUBTYPE profileSubType, out char16* profileName);
 		[Import("mscms.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ColorProfileGetDisplayUserScope(LUID targetAdapterID, uint32 sourceID, out WCS_PROFILE_MANAGEMENT_SCOPE @scope);
+		public static extern HResult ColorProfileGetDisplayUserScope(LUID targetAdapterID, uint32 sourceID, out WCS_PROFILE_MANAGEMENT_SCOPE @scope);
 	}
 }

@@ -1,10 +1,15 @@
 using System;
 using BfEngine;
+using static Win32.Graphics.Dxgi;
+using static Win32.System.Com;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.Direct2D.Common
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	extension Direct2D
 	{
 		// --- Enums ---
 		
@@ -125,19 +130,8 @@ namespace Win32
 			public uint32 x;
 			public uint32 y;
 		}
-		[CRepr]
-		public struct D2D_VECTOR_2F
-		{
-			public float x;
-			public float y;
-		}
-		[CRepr]
-		public struct D2D_VECTOR_3F
-		{
-			public float x;
-			public float y;
-			public float z;
-		}
+
+
 		[CRepr]
 		public struct D2D_VECTOR_4F
 		{
@@ -330,7 +324,7 @@ namespace Win32
 			public void AddLines(Vector2* points, uint32 pointsCount)				mut => VT.AddLines(&this, points, pointsCount);
 			public void AddBeziers(BezierSegment* beziers, uint32 beziersCount)		mut => VT.AddBeziers(&this, beziers, beziersCount);
 			public void EndFigure(FigureEnd figureEnd)								mut => VT.EndFigure(&this, figureEnd);
-			public HRESULT Close()													mut => VT.Close(&this);
+			public HResult Close()													mut => VT.Close(&this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
@@ -341,7 +335,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, Vector2* points, uint32 pointsCount) AddLines;
 				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, BezierSegment* beziers, uint32 beziersCount) AddBeziers;
 				public new function [CallingConvention(.Stdcall)] void(ID2D1SimplifiedGeometrySink* self, FigureEnd figureEnd) EndFigure;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ID2D1SimplifiedGeometrySink* self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ID2D1SimplifiedGeometrySink* self) Close;
 			}
 		}
 		

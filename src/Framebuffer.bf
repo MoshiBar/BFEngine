@@ -45,8 +45,6 @@ namespace BfEngine
 			if(GL.CheckFramebufferStatus(.FRAMEBUFFER) != .FRAMEBUFFER_COMPLETE) Internal.FatalError("borked?");
 
 			GL.BindFramebuffer(.FRAMEBUFFER, 0);
-
-			
 		}
 
 		public void Bind(){
@@ -60,6 +58,11 @@ namespace BfEngine
 			GL.Viewport(0, 0, Screen.Resolution.x, Screen.Resolution.y);
 		}
 
-
+		public void Dispose() mut
+		{
+			GL.DeleteTextures(1, &depthhandle);
+			GL.DeleteTextures(1, &colorhandle);
+			GL.DeleteFramebuffers(1, &fbohandle);
+		}
 	}
 }

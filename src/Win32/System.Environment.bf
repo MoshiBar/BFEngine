@@ -175,78 +175,78 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetEnvironmentStringsW(PWSTR NewEnvironment);
+		public static extern IntBool SetEnvironmentStringsW(char16* NewEnvironment);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR GetCommandLineA();
+		public static extern char8* GetCommandLineA();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR GetCommandLineW();
+		public static extern char16* GetCommandLineW();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR GetEnvironmentStrings();
+		public static extern char8* GetEnvironmentStrings();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR GetEnvironmentStringsW();
+		public static extern char16* GetEnvironmentStringsW();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FreeEnvironmentStringsA(PSTR penv);
+		public static extern IntBool FreeEnvironmentStringsA(char8* penv);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FreeEnvironmentStringsW(PWSTR penv);
+		public static extern IntBool FreeEnvironmentStringsW(char16* penv);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetEnvironmentVariableA(PSTR lpName, uint8* lpBuffer, uint32 nSize);
+		public static extern uint32 GetEnvironmentVariableA(char8* lpName, uint8* lpBuffer, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetEnvironmentVariableW(PWSTR lpName, char16* lpBuffer, uint32 nSize);
+		public static extern uint32 GetEnvironmentVariableW(char16* lpName, char16* lpBuffer, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetEnvironmentVariableA(PSTR lpName, PSTR lpValue);
+		public static extern IntBool SetEnvironmentVariableA(char8* lpName, char8* lpValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetEnvironmentVariableW(PWSTR lpName, PWSTR lpValue);
+		public static extern IntBool SetEnvironmentVariableW(char16* lpName, char16* lpValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ExpandEnvironmentStringsA(PSTR lpSrc, uint8* lpDst, uint32 nSize);
+		public static extern uint32 ExpandEnvironmentStringsA(char8* lpSrc, uint8* lpDst, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ExpandEnvironmentStringsW(PWSTR lpSrc, char16* lpDst, uint32 nSize);
+		public static extern uint32 ExpandEnvironmentStringsW(char16* lpSrc, char16* lpDst, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetCurrentDirectoryA(PSTR lpPathName);
+		public static extern IntBool SetCurrentDirectoryA(char8* lpPathName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetCurrentDirectoryW(PWSTR lpPathName);
+		public static extern IntBool SetCurrentDirectoryW(char16* lpPathName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCurrentDirectoryA(uint32 nBufferLength, uint8* lpBuffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCurrentDirectoryW(uint32 nBufferLength, char16* lpBuffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL NeedCurrentDirectoryForExePathA(PSTR ExeName);
+		public static extern IntBool NeedCurrentDirectoryForExePathA(char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL NeedCurrentDirectoryForExePathW(PWSTR ExeName);
+		public static extern IntBool NeedCurrentDirectoryForExePathW(char16* ExeName);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateEnvironmentBlock(void** lpEnvironment, HANDLE hToken, BOOL bInherit);
+		public static extern IntBool CreateEnvironmentBlock(void** lpEnvironment, Handle hToken, IntBool bInherit);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DestroyEnvironmentBlock(void* lpEnvironment);
+		public static extern IntBool DestroyEnvironmentBlock(void* lpEnvironment);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ExpandEnvironmentStringsForUserA(HANDLE hToken, PSTR lpSrc, uint8* lpDest, uint32 dwSize);
+		public static extern IntBool ExpandEnvironmentStringsForUserA(Handle hToken, char8* lpSrc, uint8* lpDest, uint32 dwSize);
 		[Import("userenv.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ExpandEnvironmentStringsForUserW(HANDLE hToken, PWSTR lpSrc, char16* lpDest, uint32 dwSize);
+		public static extern IntBool ExpandEnvironmentStringsForUserW(Handle hToken, char16* lpSrc, char16* lpDest, uint32 dwSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsEnclaveTypeSupported(uint32 flEnclaveType);
+		public static extern IntBool IsEnclaveTypeSupported(uint32 flEnclaveType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void* CreateEnclave(HANDLE hProcess, void* lpAddress, uint dwSize, uint dwInitialCommitment, uint32 flEnclaveType, void* lpEnclaveInformation, uint32 dwInfoLength, uint32* lpEnclaveError);
+		public static extern void* CreateEnclave(Handle hProcess, void* lpAddress, uint dwSize, uint dwInitialCommitment, uint32 flEnclaveType, void* lpEnclaveInformation, uint32 dwInfoLength, uint32* lpEnclaveError);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL LoadEnclaveData(HANDLE hProcess, void* lpAddress, void* lpBuffer, uint nSize, uint32 flProtect, void* lpPageInformation, uint32 dwInfoLength, out uint lpNumberOfBytesWritten, uint32* lpEnclaveError);
+		public static extern IntBool LoadEnclaveData(Handle hProcess, void* lpAddress, void* lpBuffer, uint nSize, uint32 flProtect, void* lpPageInformation, uint32 dwInfoLength, out uint lpNumberOfBytesWritten, uint32* lpEnclaveError);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitializeEnclave(HANDLE hProcess, void* lpAddress, void* lpEnclaveInformation, uint32 dwInfoLength, uint32* lpEnclaveError);
+		public static extern IntBool InitializeEnclave(Handle hProcess, void* lpAddress, void* lpEnclaveInformation, uint32 dwInfoLength, uint32* lpEnclaveError);
 		[Import("api-ms-win-core-enclave-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL LoadEnclaveImageA(void* lpEnclaveAddress, PSTR lpImageName);
+		public static extern IntBool LoadEnclaveImageA(void* lpEnclaveAddress, char8* lpImageName);
 		[Import("api-ms-win-core-enclave-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL LoadEnclaveImageW(void* lpEnclaveAddress, PWSTR lpImageName);
+		public static extern IntBool LoadEnclaveImageW(void* lpEnclaveAddress, char16* lpImageName);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CallEnclave(int lpRoutine, void* lpParameter, BOOL fWaitForThread, void** lpReturnValue);
+		public static extern IntBool CallEnclave(int lpRoutine, void* lpParameter, IntBool fWaitForThread, void** lpReturnValue);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TerminateEnclave(void* lpAddress, BOOL fWait);
+		public static extern IntBool TerminateEnclave(void* lpAddress, IntBool fWait);
 		[Import("api-ms-win-core-enclave-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteEnclave(void* lpAddress);
+		public static extern IntBool DeleteEnclave(void* lpAddress);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT EnclaveGetAttestationReport(uint8* EnclaveData, void* Report, uint32 BufferSize, out uint32 OutputSize);
+		public static extern HResult EnclaveGetAttestationReport(uint8* EnclaveData, void* Report, uint32 BufferSize, out uint32 OutputSize);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT EnclaveVerifyAttestationReport(uint32 EnclaveType, void* Report, uint32 ReportSize);
+		public static extern HResult EnclaveVerifyAttestationReport(uint32 EnclaveType, void* Report, uint32 ReportSize);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT EnclaveSealData(void* DataToEncrypt, uint32 DataToEncryptSize, ENCLAVE_SEALING_IDENTITY_POLICY IdentityPolicy, uint32 RuntimePolicy, void* ProtectedBlob, uint32 BufferSize, out uint32 ProtectedBlobSize);
+		public static extern HResult EnclaveSealData(void* DataToEncrypt, uint32 DataToEncryptSize, ENCLAVE_SEALING_IDENTITY_POLICY IdentityPolicy, uint32 RuntimePolicy, void* ProtectedBlob, uint32 BufferSize, out uint32 ProtectedBlobSize);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT EnclaveUnsealData(void* ProtectedBlob, uint32 ProtectedBlobSize, void* DecryptedData, uint32 BufferSize, out uint32 DecryptedDataSize, ENCLAVE_IDENTITY* SealingIdentity, uint32* UnsealingFlags);
+		public static extern HResult EnclaveUnsealData(void* ProtectedBlob, uint32 ProtectedBlobSize, void* DecryptedData, uint32 BufferSize, out uint32 DecryptedDataSize, ENCLAVE_IDENTITY* SealingIdentity, uint32* UnsealingFlags);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT EnclaveGetEnclaveInformation(uint32 InformationSize, out ENCLAVE_INFORMATION EnclaveInformation);
+		public static extern HResult EnclaveGetEnclaveInformation(uint32 InformationSize, out ENCLAVE_INFORMATION EnclaveInformation);
 	}
 }

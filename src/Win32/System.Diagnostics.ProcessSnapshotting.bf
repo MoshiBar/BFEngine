@@ -109,10 +109,10 @@ namespace Win32
 			public uint32 ProcessId;
 			public uint32 ParentProcessId;
 			public PSS_PROCESS_FLAGS Flags;
-			public FILETIME CreateTime;
-			public FILETIME ExitTime;
-			public FILETIME KernelTime;
-			public FILETIME UserTime;
+			public FileTime CreateTime;
+			public FileTime ExitTime;
+			public FileTime KernelTime;
+			public FileTime UserTime;
 			public uint32 PriorityClass;
 			public uint PeakVirtualSize;
 			public uint VirtualSize;
@@ -132,7 +132,7 @@ namespace Win32
 		[CRepr]
 		public struct PSS_VA_CLONE_INFORMATION
 		{
-			public HANDLE VaCloneHandle;
+			public Handle VaCloneHandle;
 		}
 		[CRepr]
 		public struct PSS_AUXILIARY_PAGES_INFORMATION
@@ -158,7 +158,7 @@ namespace Win32
 		[CRepr]
 		public struct PSS_HANDLE_TRACE_INFORMATION
 		{
-			public HANDLE SectionHandle;
+			public Handle SectionHandle;
 			public uint32 Size;
 		}
 		[CRepr]
@@ -182,7 +182,7 @@ namespace Win32
 		{
 			public void* Address;
 			public MEMORY_BASIC_INFORMATION BasicInformation;
-			public FILETIME CaptureTime;
+			public FileTime CaptureTime;
 			public void* PageContents;
 			public uint32 PageSize;
 		}
@@ -201,26 +201,26 @@ namespace Win32
 			public void* ImageBase;
 			public uint32 CheckSum;
 			public uint16 MappedFileNameLength;
-			public PWSTR MappedFileName;
+			public char16* MappedFileName;
 		}
 		[CRepr]
 		public struct PSS_HANDLE_ENTRY
 		{
-			public HANDLE Handle;
+			public Handle Handle;
 			public PSS_HANDLE_FLAGS Flags;
 			public PSS_OBJECT_TYPE ObjectType;
-			public FILETIME CaptureTime;
+			public FileTime CaptureTime;
 			public uint32 Attributes;
 			public uint32 GrantedAccess;
 			public uint32 HandleCount;
 			public uint32 PointerCount;
 			public uint32 PagedPoolCharge;
 			public uint32 NonPagedPoolCharge;
-			public FILETIME CreationTime;
+			public FileTime CreationTime;
 			public uint16 TypeNameLength;
-			public PWSTR TypeName;
+			public char16* TypeName;
 			public uint16 ObjectNameLength;
-			public PWSTR ObjectName;
+			public char16* ObjectName;
 			public _TypeSpecificInformation_e__Union TypeSpecificInformation;
 			
 			[CRepr, Union]
@@ -242,8 +242,8 @@ namespace Win32
 				[CRepr]
 				public struct _Event_e__Struct
 				{
-					public BOOL ManualReset;
-					public BOOL Signaled;
+					public IntBool ManualReset;
+					public IntBool Signaled;
 				}
 				[CRepr]
 				public struct _Thread_e__Struct
@@ -279,7 +279,7 @@ namespace Win32
 				public struct _Mutant_e__Struct
 				{
 					public int32 CurrentCount;
-					public BOOL Abandoned;
+					public IntBool Abandoned;
 					public uint32 OwnerProcessId;
 					public uint32 OwnerThreadId;
 				}
@@ -297,12 +297,12 @@ namespace Win32
 			public int32 BasePriority;
 			public void* LastSyscallFirstArgument;
 			public uint16 LastSyscallNumber;
-			public FILETIME CreateTime;
-			public FILETIME ExitTime;
-			public FILETIME KernelTime;
-			public FILETIME UserTime;
+			public FileTime CreateTime;
+			public FileTime ExitTime;
+			public FileTime KernelTime;
+			public FileTime UserTime;
 			public void* Win32StartAddress;
-			public FILETIME CaptureTime;
+			public FileTime CaptureTime;
 			public PSS_THREAD_FLAGS Flags;
 			public uint16 SuspendCount;
 			public uint16 SizeOfContextRecord;
@@ -319,15 +319,15 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PssCaptureSnapshot(HANDLE ProcessHandle, PSS_CAPTURE_FLAGS CaptureFlags, uint32 ThreadContextFlags, out HPSS SnapshotHandle);
+		public static extern uint32 PssCaptureSnapshot(Handle ProcessHandle, PSS_CAPTURE_FLAGS CaptureFlags, uint32 ThreadContextFlags, out HPSS SnapshotHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PssFreeSnapshot(HANDLE ProcessHandle, HPSS SnapshotHandle);
+		public static extern uint32 PssFreeSnapshot(Handle ProcessHandle, HPSS SnapshotHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PssQuerySnapshot(HPSS SnapshotHandle, PSS_QUERY_INFORMATION_CLASS InformationClass, void* Buffer, uint32 BufferLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PssWalkSnapshot(HPSS SnapshotHandle, PSS_WALK_INFORMATION_CLASS InformationClass, HPSSWALK WalkMarkerHandle, void* Buffer, uint32 BufferLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PssDuplicateSnapshot(HANDLE SourceProcessHandle, HPSS SnapshotHandle, HANDLE TargetProcessHandle, out HPSS TargetSnapshotHandle, PSS_DUPLICATE_FLAGS Flags);
+		public static extern uint32 PssDuplicateSnapshot(Handle SourceProcessHandle, HPSS SnapshotHandle, Handle TargetProcessHandle, out HPSS TargetSnapshotHandle, PSS_DUPLICATE_FLAGS Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PssWalkMarkerCreate(PSS_ALLOCATOR* Allocator, out HPSSWALK WalkMarkerHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]

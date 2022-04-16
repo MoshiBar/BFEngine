@@ -1,9 +1,15 @@
 using System;
+using static Win32.Media.KernelStreaming;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Media.Audio.Endpoints
-namespace Win32
+namespace Win32.Media
 {
-	extension Win32
+	extension Audio{
+	public static class Endpoints
 	{
 		// --- Enums ---
 		
@@ -40,12 +46,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ResetToDefault(uint32 ResetFlags) mut => VT.ResetToDefault(ref this, ResetFlags);
+			public HResult ResetToDefault(uint32 ResetFlags) mut => VT.ResetToDefault(ref this, ResetFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointFormatControl self, uint32 ResetFlags) ResetToDefault;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointFormatControl self, uint32 ResetFlags) ResetToDefault;
 			}
 		}
 		[CRepr]
@@ -55,16 +61,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetVolumeChannelCount(out uint32 pu32ChannelCount) mut => VT.GetVolumeChannelCount(ref this, out pu32ChannelCount);
-			public HRESULT SetChannelVolumes(uint32 u32ChannelCount, ref float pf32Volumes, AUDIO_CURVE_TYPE u32CurveType, ref int64 pCurveDuration) mut => VT.SetChannelVolumes(ref this, u32ChannelCount, ref pf32Volumes, u32CurveType, ref pCurveDuration);
-			public HRESULT GetChannelVolumes(uint32 u32ChannelCount, out float pf32Volumes) mut => VT.GetChannelVolumes(ref this, u32ChannelCount, out pf32Volumes);
+			public HResult GetVolumeChannelCount(out uint32 pu32ChannelCount) mut => VT.GetVolumeChannelCount(ref this, out pu32ChannelCount);
+			public HResult SetChannelVolumes(uint32 u32ChannelCount, ref float pf32Volumes, AudioCurveType u32CurveType, ref int64 pCurveDuration) mut => VT.SetChannelVolumes(ref this, u32ChannelCount, ref pf32Volumes, u32CurveType, ref pCurveDuration);
+			public HResult GetChannelVolumes(uint32 u32ChannelCount, out float pf32Volumes) mut => VT.GetChannelVolumes(ref this, u32ChannelCount, out pf32Volumes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamVolume self, out uint32 pu32ChannelCount) GetVolumeChannelCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamVolume self, uint32 u32ChannelCount, ref float pf32Volumes, AUDIO_CURVE_TYPE u32CurveType, ref int64 pCurveDuration) SetChannelVolumes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamVolume self, uint32 u32ChannelCount, out float pf32Volumes) GetChannelVolumes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamVolume self, out uint32 pu32ChannelCount) GetVolumeChannelCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamVolume self, uint32 u32ChannelCount, ref float pf32Volumes, AudioCurveType u32CurveType, ref int64 pCurveDuration) SetChannelVolumes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamVolume self, uint32 u32ChannelCount, out float pf32Volumes) GetChannelVolumes;
 			}
 		}
 		[CRepr]
@@ -74,14 +80,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetMute(uint8 bMuted) mut => VT.SetMute(ref this, bMuted);
-			public HRESULT GetMute(out uint8 pbMuted) mut => VT.GetMute(ref this, out pbMuted);
+			public HResult SetMute(uint8 bMuted) mut => VT.SetMute(ref this, bMuted);
+			public HResult GetMute(out uint8 pbMuted) mut => VT.GetMute(ref this, out pbMuted);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamMute self, uint8 bMuted) SetMute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamMute self, out uint8 pbMuted) GetMute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamMute self, uint8 bMuted) SetMute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamMute self, out uint8 pbMuted) GetMute;
 			}
 		}
 		[CRepr]
@@ -91,14 +97,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMeterChannelCount(out uint32 pu32ChannelCount) mut => VT.GetMeterChannelCount(ref this, out pu32ChannelCount);
-			public HRESULT GetMeteringData(uint32 u32ChannelCount, out float pf32PeakValues) mut => VT.GetMeteringData(ref this, u32ChannelCount, out pf32PeakValues);
+			public HResult GetMeterChannelCount(out uint32 pu32ChannelCount) mut => VT.GetMeterChannelCount(ref this, out pu32ChannelCount);
+			public HResult GetMeteringData(uint32 u32ChannelCount, out float pf32PeakValues) mut => VT.GetMeteringData(ref this, u32ChannelCount, out pf32PeakValues);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamMeter self, out uint32 pu32ChannelCount) GetMeterChannelCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointOffloadStreamMeter self, uint32 u32ChannelCount, out float pf32PeakValues) GetMeteringData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamMeter self, out uint32 pu32ChannelCount) GetMeterChannelCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointOffloadStreamMeter self, uint32 u32ChannelCount, out float pf32PeakValues) GetMeteringData;
 			}
 		}
 		[CRepr]
@@ -108,13 +114,13 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public BOOL IsLastBufferControlSupported() mut => VT.IsLastBufferControlSupported(ref this);
+			public IntBool IsLastBufferControlSupported() mut => VT.IsLastBufferControlSupported(ref this);
 			public void ReleaseOutputDataPointerForLastBuffer(in APO_CONNECTION_PROPERTY pConnectionProperty) mut => VT.ReleaseOutputDataPointerForLastBuffer(ref this, pConnectionProperty);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IAudioEndpointLastBufferControl self) IsLastBufferControlSupported;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IAudioEndpointLastBufferControl self) IsLastBufferControlSupported;
 				public new function [CallingConvention(.Stdcall)] void(ref IAudioEndpointLastBufferControl self, in APO_CONNECTION_PROPERTY pConnectionProperty) ReleaseOutputDataPointerForLastBuffer;
 			}
 		}
@@ -125,14 +131,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetLocalEffectsState(BOOL bEnabled) mut => VT.SetLocalEffectsState(ref this, bEnabled);
-			public HRESULT GetLocalEffectsState(out BOOL pbEnabled) mut => VT.GetLocalEffectsState(ref this, out pbEnabled);
+			public HResult SetLocalEffectsState(IntBool bEnabled) mut => VT.SetLocalEffectsState(ref this, bEnabled);
+			public HResult GetLocalEffectsState(out IntBool pbEnabled) mut => VT.GetLocalEffectsState(ref this, out pbEnabled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioLfxControl self, BOOL bEnabled) SetLocalEffectsState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioLfxControl self, out BOOL pbEnabled) GetLocalEffectsState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioLfxControl self, IntBool bEnabled) SetLocalEffectsState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioLfxControl self, out IntBool pbEnabled) GetLocalEffectsState;
 			}
 		}
 		[CRepr]
@@ -142,20 +148,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAvailableOffloadConnectorCount(PWSTR _pwstrDeviceId, uint32 _uConnectorId, out uint32 _pAvailableConnectorInstanceCount) mut => VT.GetAvailableOffloadConnectorCount(ref this, _pwstrDeviceId, _uConnectorId, out _pAvailableConnectorInstanceCount);
-			public HRESULT GetEngineFormat(ref IMMDevice pDevice, BOOL _bRequestDeviceFormat, out WaveFormatEx* _ppwfxFormat) mut => VT.GetEngineFormat(ref this, ref pDevice, _bRequestDeviceFormat, out _ppwfxFormat);
-			public HRESULT SetEngineDeviceFormat(ref IMMDevice pDevice, out WaveFormatEx _pwfxFormat) mut => VT.SetEngineDeviceFormat(ref this, ref pDevice, out _pwfxFormat);
-			public HRESULT SetGfxState(ref IMMDevice pDevice, BOOL _bEnable) mut => VT.SetGfxState(ref this, ref pDevice, _bEnable);
-			public HRESULT GetGfxState(ref IMMDevice pDevice, out BOOL _pbEnable) mut => VT.GetGfxState(ref this, ref pDevice, out _pbEnable);
+			public HResult GetAvailableOffloadConnectorCount(char16* _pwstrDeviceId, uint32 _uConnectorId, out uint32 _pAvailableConnectorInstanceCount) mut => VT.GetAvailableOffloadConnectorCount(ref this, _pwstrDeviceId, _uConnectorId, out _pAvailableConnectorInstanceCount);
+			public HResult GetEngineFormat(ref IMMDevice pDevice, IntBool _bRequestDeviceFormat, out WaveFormatEx* _ppwfxFormat) mut => VT.GetEngineFormat(ref this, ref pDevice, _bRequestDeviceFormat, out _ppwfxFormat);
+			public HResult SetEngineDeviceFormat(ref IMMDevice pDevice, out WaveFormatEx _pwfxFormat) mut => VT.SetEngineDeviceFormat(ref this, ref pDevice, out _pwfxFormat);
+			public HResult SetGfxState(ref IMMDevice pDevice, IntBool _bEnable) mut => VT.SetGfxState(ref this, ref pDevice, _bEnable);
+			public HResult GetGfxState(ref IMMDevice pDevice, out IntBool _pbEnable) mut => VT.GetGfxState(ref this, ref pDevice, out _pbEnable);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHardwareAudioEngineBase self, PWSTR _pwstrDeviceId, uint32 _uConnectorId, out uint32 _pAvailableConnectorInstanceCount) GetAvailableOffloadConnectorCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, BOOL _bRequestDeviceFormat, out WaveFormatEx* _ppwfxFormat) GetEngineFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, out WaveFormatEx _pwfxFormat) SetEngineDeviceFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, BOOL _bEnable) SetGfxState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, out BOOL _pbEnable) GetGfxState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHardwareAudioEngineBase self, char16* _pwstrDeviceId, uint32 _uConnectorId, out uint32 _pAvailableConnectorInstanceCount) GetAvailableOffloadConnectorCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, IntBool _bRequestDeviceFormat, out WaveFormatEx* _ppwfxFormat) GetEngineFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, out WaveFormatEx _pwfxFormat) SetEngineDeviceFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, IntBool _bEnable) SetGfxState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHardwareAudioEngineBase self, ref IMMDevice pDevice, out IntBool _pbEnable) GetGfxState;
 			}
 		}
 		[CRepr]
@@ -165,12 +171,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnNotify(out AUDIO_VOLUME_NOTIFICATION_DATA pNotify) mut => VT.OnNotify(ref this, out pNotify);
+			public HResult OnNotify(out AUDIO_VOLUME_NOTIFICATION_DATA pNotify) mut => VT.OnNotify(ref this, out pNotify);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolumeCallback self, out AUDIO_VOLUME_NOTIFICATION_DATA pNotify) OnNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolumeCallback self, out AUDIO_VOLUME_NOTIFICATION_DATA pNotify) OnNotify;
 			}
 		}
 		[CRepr]
@@ -180,46 +186,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterControlChangeNotify(ref IAudioEndpointVolumeCallback pNotify) mut => VT.RegisterControlChangeNotify(ref this, ref pNotify);
-			public HRESULT UnregisterControlChangeNotify(ref IAudioEndpointVolumeCallback pNotify) mut => VT.UnregisterControlChangeNotify(ref this, ref pNotify);
-			public HRESULT GetChannelCount(out uint32 pnChannelCount) mut => VT.GetChannelCount(ref this, out pnChannelCount);
-			public HRESULT SetMasterVolumeLevel(float fLevelDB, in Guid pguidEventContext) mut => VT.SetMasterVolumeLevel(ref this, fLevelDB, pguidEventContext);
-			public HRESULT SetMasterVolumeLevelScalar(float fLevel, in Guid pguidEventContext) mut => VT.SetMasterVolumeLevelScalar(ref this, fLevel, pguidEventContext);
-			public HRESULT GetMasterVolumeLevel(out float pfLevelDB) mut => VT.GetMasterVolumeLevel(ref this, out pfLevelDB);
-			public HRESULT GetMasterVolumeLevelScalar(out float pfLevel) mut => VT.GetMasterVolumeLevelScalar(ref this, out pfLevel);
-			public HRESULT SetChannelVolumeLevel(uint32 nChannel, float fLevelDB, in Guid pguidEventContext) mut => VT.SetChannelVolumeLevel(ref this, nChannel, fLevelDB, pguidEventContext);
-			public HRESULT SetChannelVolumeLevelScalar(uint32 nChannel, float fLevel, in Guid pguidEventContext) mut => VT.SetChannelVolumeLevelScalar(ref this, nChannel, fLevel, pguidEventContext);
-			public HRESULT GetChannelVolumeLevel(uint32 nChannel, out float pfLevelDB) mut => VT.GetChannelVolumeLevel(ref this, nChannel, out pfLevelDB);
-			public HRESULT GetChannelVolumeLevelScalar(uint32 nChannel, out float pfLevel) mut => VT.GetChannelVolumeLevelScalar(ref this, nChannel, out pfLevel);
-			public HRESULT SetMute(BOOL bMute, in Guid pguidEventContext) mut => VT.SetMute(ref this, bMute, pguidEventContext);
-			public HRESULT GetMute(out BOOL pbMute) mut => VT.GetMute(ref this, out pbMute);
-			public HRESULT GetVolumeStepInfo(out uint32 pnStep, out uint32 pnStepCount) mut => VT.GetVolumeStepInfo(ref this, out pnStep, out pnStepCount);
-			public HRESULT VolumeStepUp(in Guid pguidEventContext) mut => VT.VolumeStepUp(ref this, pguidEventContext);
-			public HRESULT VolumeStepDown(in Guid pguidEventContext) mut => VT.VolumeStepDown(ref this, pguidEventContext);
-			public HRESULT QueryHardwareSupport(out uint32 pdwHardwareSupportMask) mut => VT.QueryHardwareSupport(ref this, out pdwHardwareSupportMask);
-			public HRESULT GetVolumeRange(out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) mut => VT.GetVolumeRange(ref this, out pflVolumeMindB, out pflVolumeMaxdB, out pflVolumeIncrementdB);
+			public HResult RegisterControlChangeNotify(ref IAudioEndpointVolumeCallback pNotify) mut => VT.RegisterControlChangeNotify(ref this, ref pNotify);
+			public HResult UnregisterControlChangeNotify(ref IAudioEndpointVolumeCallback pNotify) mut => VT.UnregisterControlChangeNotify(ref this, ref pNotify);
+			public HResult GetChannelCount(out uint32 pnChannelCount) mut => VT.GetChannelCount(ref this, out pnChannelCount);
+			public HResult SetMasterVolumeLevel(float fLevelDB, in Guid pguidEventContext) mut => VT.SetMasterVolumeLevel(ref this, fLevelDB, pguidEventContext);
+			public HResult SetMasterVolumeLevelScalar(float fLevel, in Guid pguidEventContext) mut => VT.SetMasterVolumeLevelScalar(ref this, fLevel, pguidEventContext);
+			public HResult GetMasterVolumeLevel(out float pfLevelDB) mut => VT.GetMasterVolumeLevel(ref this, out pfLevelDB);
+			public HResult GetMasterVolumeLevelScalar(out float pfLevel) mut => VT.GetMasterVolumeLevelScalar(ref this, out pfLevel);
+			public HResult SetChannelVolumeLevel(uint32 nChannel, float fLevelDB, in Guid pguidEventContext) mut => VT.SetChannelVolumeLevel(ref this, nChannel, fLevelDB, pguidEventContext);
+			public HResult SetChannelVolumeLevelScalar(uint32 nChannel, float fLevel, in Guid pguidEventContext) mut => VT.SetChannelVolumeLevelScalar(ref this, nChannel, fLevel, pguidEventContext);
+			public HResult GetChannelVolumeLevel(uint32 nChannel, out float pfLevelDB) mut => VT.GetChannelVolumeLevel(ref this, nChannel, out pfLevelDB);
+			public HResult GetChannelVolumeLevelScalar(uint32 nChannel, out float pfLevel) mut => VT.GetChannelVolumeLevelScalar(ref this, nChannel, out pfLevel);
+			public HResult SetMute(IntBool bMute, in Guid pguidEventContext) mut => VT.SetMute(ref this, bMute, pguidEventContext);
+			public HResult GetMute(out IntBool pbMute) mut => VT.GetMute(ref this, out pbMute);
+			public HResult GetVolumeStepInfo(out uint32 pnStep, out uint32 pnStepCount) mut => VT.GetVolumeStepInfo(ref this, out pnStep, out pnStepCount);
+			public HResult VolumeStepUp(in Guid pguidEventContext) mut => VT.VolumeStepUp(ref this, pguidEventContext);
+			public HResult VolumeStepDown(in Guid pguidEventContext) mut => VT.VolumeStepDown(ref this, pguidEventContext);
+			public HResult QueryHardwareSupport(out uint32 pdwHardwareSupportMask) mut => VT.QueryHardwareSupport(ref this, out pdwHardwareSupportMask);
+			public HResult GetVolumeRange(out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) mut => VT.GetVolumeRange(ref this, out pflVolumeMindB, out pflVolumeMaxdB, out pflVolumeIncrementdB);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, ref IAudioEndpointVolumeCallback pNotify) RegisterControlChangeNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, ref IAudioEndpointVolumeCallback pNotify) UnregisterControlChangeNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out uint32 pnChannelCount) GetChannelCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, float fLevelDB, in Guid pguidEventContext) SetMasterVolumeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, float fLevel, in Guid pguidEventContext) SetMasterVolumeLevelScalar;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out float pfLevelDB) GetMasterVolumeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out float pfLevel) GetMasterVolumeLevelScalar;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, uint32 nChannel, float fLevelDB, in Guid pguidEventContext) SetChannelVolumeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, uint32 nChannel, float fLevel, in Guid pguidEventContext) SetChannelVolumeLevelScalar;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, uint32 nChannel, out float pfLevelDB) GetChannelVolumeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, uint32 nChannel, out float pfLevel) GetChannelVolumeLevelScalar;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, BOOL bMute, in Guid pguidEventContext) SetMute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out BOOL pbMute) GetMute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out uint32 pnStep, out uint32 pnStepCount) GetVolumeStepInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, in Guid pguidEventContext) VolumeStepUp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, in Guid pguidEventContext) VolumeStepDown;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out uint32 pdwHardwareSupportMask) QueryHardwareSupport;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolume self, out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) GetVolumeRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, ref IAudioEndpointVolumeCallback pNotify) RegisterControlChangeNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, ref IAudioEndpointVolumeCallback pNotify) UnregisterControlChangeNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out uint32 pnChannelCount) GetChannelCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, float fLevelDB, in Guid pguidEventContext) SetMasterVolumeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, float fLevel, in Guid pguidEventContext) SetMasterVolumeLevelScalar;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out float pfLevelDB) GetMasterVolumeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out float pfLevel) GetMasterVolumeLevelScalar;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, uint32 nChannel, float fLevelDB, in Guid pguidEventContext) SetChannelVolumeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, uint32 nChannel, float fLevel, in Guid pguidEventContext) SetChannelVolumeLevelScalar;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, uint32 nChannel, out float pfLevelDB) GetChannelVolumeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, uint32 nChannel, out float pfLevel) GetChannelVolumeLevelScalar;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, IntBool bMute, in Guid pguidEventContext) SetMute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out IntBool pbMute) GetMute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out uint32 pnStep, out uint32 pnStepCount) GetVolumeStepInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, in Guid pguidEventContext) VolumeStepUp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, in Guid pguidEventContext) VolumeStepDown;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out uint32 pdwHardwareSupportMask) QueryHardwareSupport;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolume self, out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) GetVolumeRange;
 			}
 		}
 		[CRepr]
@@ -229,12 +235,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetVolumeRangeChannel(uint32 iChannel, out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) mut => VT.GetVolumeRangeChannel(ref this, iChannel, out pflVolumeMindB, out pflVolumeMaxdB, out pflVolumeIncrementdB);
+			public HResult GetVolumeRangeChannel(uint32 iChannel, out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) mut => VT.GetVolumeRangeChannel(ref this, iChannel, out pflVolumeMindB, out pflVolumeMaxdB, out pflVolumeIncrementdB);
 
 			[CRepr]
 			public struct VTable : IAudioEndpointVolume.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointVolumeEx self, uint32 iChannel, out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) GetVolumeRangeChannel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointVolumeEx self, uint32 iChannel, out float pflVolumeMindB, out float pflVolumeMaxdB, out float pflVolumeIncrementdB) GetVolumeRangeChannel;
 			}
 		}
 		[CRepr]
@@ -244,20 +250,21 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPeakValue(out float pfPeak) mut => VT.GetPeakValue(ref this, out pfPeak);
-			public HRESULT GetMeteringChannelCount(out uint32 pnChannelCount) mut => VT.GetMeteringChannelCount(ref this, out pnChannelCount);
-			public HRESULT GetChannelsPeakValues(uint32 u32ChannelCount, float* afPeakValues) mut => VT.GetChannelsPeakValues(ref this, u32ChannelCount, afPeakValues);
-			public HRESULT QueryHardwareSupport(out uint32 pdwHardwareSupportMask) mut => VT.QueryHardwareSupport(ref this, out pdwHardwareSupportMask);
+			public HResult GetPeakValue(out float pfPeak) mut => VT.GetPeakValue(ref this, out pfPeak);
+			public HResult GetMeteringChannelCount(out uint32 pnChannelCount) mut => VT.GetMeteringChannelCount(ref this, out pnChannelCount);
+			public HResult GetChannelsPeakValues(uint32 u32ChannelCount, float* afPeakValues) mut => VT.GetChannelsPeakValues(ref this, u32ChannelCount, afPeakValues);
+			public HResult QueryHardwareSupport(out uint32 pdwHardwareSupportMask) mut => VT.QueryHardwareSupport(ref this, out pdwHardwareSupportMask);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioMeterInformation self, out float pfPeak) GetPeakValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioMeterInformation self, out uint32 pnChannelCount) GetMeteringChannelCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioMeterInformation self, uint32 u32ChannelCount, float* afPeakValues) GetChannelsPeakValues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioMeterInformation self, out uint32 pdwHardwareSupportMask) QueryHardwareSupport;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioMeterInformation self, out float pfPeak) GetPeakValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioMeterInformation self, out uint32 pnChannelCount) GetMeteringChannelCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioMeterInformation self, uint32 u32ChannelCount, float* afPeakValues) GetChannelsPeakValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioMeterInformation self, out uint32 pdwHardwareSupportMask) QueryHardwareSupport;
 			}
 		}
 		
+	}
 	}
 }

@@ -61,18 +61,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetIndex(out uint32 puiIndex) mut => VT.GetIndex(ref this, out puiIndex);
-			public HRESULT GetOptimalFormat(out Guid pFormat) mut => VT.GetOptimalFormat(ref this, out pFormat);
-			public HRESULT GetNumberFormats(out uint32 pulNumberFormats) mut => VT.GetNumberFormats(ref this, out pulNumberFormats);
-			public HRESULT GetFormat(uint32 ulIndex, out Guid pFormat) mut => VT.GetFormat(ref this, ulIndex, out pFormat);
+			public HResult GetIndex(out uint32 puiIndex) mut => VT.GetIndex(ref this, out puiIndex);
+			public HResult GetOptimalFormat(out Guid pFormat) mut => VT.GetOptimalFormat(ref this, out pFormat);
+			public HResult GetNumberFormats(out uint32 pulNumberFormats) mut => VT.GetNumberFormats(ref this, out pulNumberFormats);
+			public HResult GetFormat(uint32 ulIndex, out Guid pFormat) mut => VT.GetFormat(ref this, ulIndex, out pFormat);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectorInfo self, out uint32 puiIndex) GetIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectorInfo self, out Guid pFormat) GetOptimalFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectorInfo self, out uint32 pulNumberFormats) GetNumberFormats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectorInfo self, uint32 ulIndex, out Guid pFormat) GetFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectorInfo self, out uint32 puiIndex) GetIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectorInfo self, out Guid pFormat) GetOptimalFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectorInfo self, out uint32 pulNumberFormats) GetNumberFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectorInfo self, uint32 ulIndex, out Guid pFormat) GetFormat;
 			}
 		}
 		[CRepr]
@@ -82,18 +82,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNumberInputs(out uint32 puiNumInputs) mut => VT.GetNumberInputs(ref this, out puiNumInputs);
-			public HRESULT GetNumberOutputs(out uint32 puiNumOutputs) mut => VT.GetNumberOutputs(ref this, out puiNumOutputs);
-			public HRESULT GetInputConnectorInfo(uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) mut => VT.GetInputConnectorInfo(ref this, uiIndex, out ppConnectorInfo);
-			public HRESULT GetOutputConnectorInfo(uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) mut => VT.GetOutputConnectorInfo(ref this, uiIndex, out ppConnectorInfo);
+			public HResult GetNumberInputs(out uint32 puiNumInputs) mut => VT.GetNumberInputs(ref this, out puiNumInputs);
+			public HResult GetNumberOutputs(out uint32 puiNumOutputs) mut => VT.GetNumberOutputs(ref this, out puiNumOutputs);
+			public HResult GetInputConnectorInfo(uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) mut => VT.GetInputConnectorInfo(ref this, uiIndex, out ppConnectorInfo);
+			public HResult GetOutputConnectorInfo(uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) mut => VT.GetOutputConnectorInfo(ref this, uiIndex, out ppConnectorInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectionsInfo self, out uint32 puiNumInputs) GetNumberInputs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectionsInfo self, out uint32 puiNumOutputs) GetNumberOutputs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectionsInfo self, uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) GetInputConnectorInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnectionsInfo self, uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) GetOutputConnectorInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectionsInfo self, out uint32 puiNumInputs) GetNumberInputs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectionsInfo self, out uint32 puiNumOutputs) GetNumberOutputs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectionsInfo self, uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) GetInputConnectorInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnectionsInfo self, uint32 uiIndex, out IMILBitmapEffectConnectorInfo* ppConnectorInfo) GetOutputConnectorInfo;
 			}
 		}
 		[CRepr]
@@ -103,14 +103,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInputConnector(uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) mut => VT.GetInputConnector(ref this, uiIndex, out ppConnector);
-			public HRESULT GetOutputConnector(uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) mut => VT.GetOutputConnector(ref this, uiIndex, out ppConnector);
+			public HResult GetInputConnector(uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) mut => VT.GetInputConnector(ref this, uiIndex, out ppConnector);
+			public HResult GetOutputConnector(uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) mut => VT.GetOutputConnector(ref this, uiIndex, out ppConnector);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnections self, uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) GetInputConnector;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnections self, uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) GetOutputConnector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnections self, uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) GetInputConnector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnections self, uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) GetOutputConnector;
 			}
 		}
 		[CRepr]
@@ -120,16 +120,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetOutput(uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out IWICBitmapSource* ppBitmapSource) mut => VT.GetOutput(ref this, uiIndex, ref pContext, out ppBitmapSource);
-			public HRESULT GetParentEffect(out IMILBitmapEffectGroup* ppParentEffect) mut => VT.GetParentEffect(ref this, out ppParentEffect);
-			public HRESULT SetInputSource(uint32 uiIndex, ref IWICBitmapSource pBitmapSource) mut => VT.SetInputSource(ref this, uiIndex, ref pBitmapSource);
+			public HResult GetOutput(uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out IWICBitmapSource* ppBitmapSource) mut => VT.GetOutput(ref this, uiIndex, ref pContext, out ppBitmapSource);
+			public HResult GetParentEffect(out IMILBitmapEffectGroup* ppParentEffect) mut => VT.GetParentEffect(ref this, out ppParentEffect);
+			public HResult SetInputSource(uint32 uiIndex, ref IWICBitmapSource pBitmapSource) mut => VT.SetInputSource(ref this, uiIndex, ref pBitmapSource);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffect self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out IWICBitmapSource* ppBitmapSource) GetOutput;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffect self, out IMILBitmapEffectGroup* ppParentEffect) GetParentEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffect self, uint32 uiIndex, ref IWICBitmapSource pBitmapSource) SetInputSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffect self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out IWICBitmapSource* ppBitmapSource) GetOutput;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffect self, out IMILBitmapEffectGroup* ppParentEffect) GetParentEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffect self, uint32 uiIndex, ref IWICBitmapSource pBitmapSource) SetInputSource;
 			}
 		}
 		[CRepr]
@@ -139,24 +139,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsInPlaceModificationAllowed(ref IMILBitmapEffectOutputConnector pOutputConnector, out int16 pfModifyInPlace) mut => VT.IsInPlaceModificationAllowed(ref this, ref pOutputConnector, out pfModifyInPlace);
-			public HRESULT SetParentEffect(ref IMILBitmapEffectGroup pParentEffect) mut => VT.SetParentEffect(ref this, ref pParentEffect);
-			public HRESULT GetInputSource(uint32 uiIndex, out IWICBitmapSource* ppBitmapSource) mut => VT.GetInputSource(ref this, uiIndex, out ppBitmapSource);
-			public HRESULT GetInputSourceBounds(uint32 uiIndex, out MilRectD pRect) mut => VT.GetInputSourceBounds(ref this, uiIndex, out pRect);
-			public HRESULT GetInputBitmapSource(uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) mut => VT.GetInputBitmapSource(ref this, uiIndex, ref pRenderContext, out pfModifyInPlace, out ppBitmapSource);
-			public HRESULT GetOutputBitmapSource(uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) mut => VT.GetOutputBitmapSource(ref this, uiIndex, ref pRenderContext, out pfModifyInPlace, out ppBitmapSource);
-			public HRESULT Initialize(ref IUnknown pInner) mut => VT.Initialize(ref this, ref pInner);
+			public HResult IsInPlaceModificationAllowed(ref IMILBitmapEffectOutputConnector pOutputConnector, out int16 pfModifyInPlace) mut => VT.IsInPlaceModificationAllowed(ref this, ref pOutputConnector, out pfModifyInPlace);
+			public HResult SetParentEffect(ref IMILBitmapEffectGroup pParentEffect) mut => VT.SetParentEffect(ref this, ref pParentEffect);
+			public HResult GetInputSource(uint32 uiIndex, out IWICBitmapSource* ppBitmapSource) mut => VT.GetInputSource(ref this, uiIndex, out ppBitmapSource);
+			public HResult GetInputSourceBounds(uint32 uiIndex, out MilRectD pRect) mut => VT.GetInputSourceBounds(ref this, uiIndex, out pRect);
+			public HResult GetInputBitmapSource(uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) mut => VT.GetInputBitmapSource(ref this, uiIndex, ref pRenderContext, out pfModifyInPlace, out ppBitmapSource);
+			public HResult GetOutputBitmapSource(uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) mut => VT.GetOutputBitmapSource(ref this, uiIndex, ref pRenderContext, out pfModifyInPlace, out ppBitmapSource);
+			public HResult Initialize(ref IUnknown pInner) mut => VT.Initialize(ref this, ref pInner);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, ref IMILBitmapEffectOutputConnector pOutputConnector, out int16 pfModifyInPlace) IsInPlaceModificationAllowed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, ref IMILBitmapEffectGroup pParentEffect) SetParentEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, uint32 uiIndex, out IWICBitmapSource* ppBitmapSource) GetInputSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, uint32 uiIndex, out MilRectD pRect) GetInputSourceBounds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) GetInputBitmapSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) GetOutputBitmapSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectImpl self, ref IUnknown pInner) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, ref IMILBitmapEffectOutputConnector pOutputConnector, out int16 pfModifyInPlace) IsInPlaceModificationAllowed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, ref IMILBitmapEffectGroup pParentEffect) SetParentEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, uint32 uiIndex, out IWICBitmapSource* ppBitmapSource) GetInputSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, uint32 uiIndex, out MilRectD pRect) GetInputSourceBounds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) GetInputBitmapSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pRenderContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) GetOutputBitmapSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectImpl self, ref IUnknown pInner) Initialize;
 			}
 		}
 		[CRepr]
@@ -166,16 +166,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInteriorInputConnector(uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) mut => VT.GetInteriorInputConnector(ref this, uiIndex, out ppConnector);
-			public HRESULT GetInteriorOutputConnector(uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) mut => VT.GetInteriorOutputConnector(ref this, uiIndex, out ppConnector);
-			public HRESULT Add(ref IMILBitmapEffect pEffect) mut => VT.Add(ref this, ref pEffect);
+			public HResult GetInteriorInputConnector(uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) mut => VT.GetInteriorInputConnector(ref this, uiIndex, out ppConnector);
+			public HResult GetInteriorOutputConnector(uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) mut => VT.GetInteriorOutputConnector(ref this, uiIndex, out ppConnector);
+			public HResult Add(ref IMILBitmapEffect pEffect) mut => VT.Add(ref this, ref pEffect);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectGroup self, uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) GetInteriorInputConnector;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectGroup self, uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) GetInteriorOutputConnector;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectGroup self, ref IMILBitmapEffect pEffect) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectGroup self, uint32 uiIndex, out IMILBitmapEffectOutputConnector* ppConnector) GetInteriorInputConnector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectGroup self, uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnector) GetInteriorOutputConnector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectGroup self, ref IMILBitmapEffect pEffect) Add;
 			}
 		}
 		[CRepr]
@@ -185,16 +185,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Preprocess(ref IMILBitmapEffectRenderContext pContext) mut => VT.Preprocess(ref this, ref pContext);
-			public HRESULT GetNumberChildren(out uint32 puiNumberChildren) mut => VT.GetNumberChildren(ref this, out puiNumberChildren);
-			public HRESULT GetChildren(out IMILBitmapEffects* pChildren) mut => VT.GetChildren(ref this, out pChildren);
+			public HResult Preprocess(ref IMILBitmapEffectRenderContext pContext) mut => VT.Preprocess(ref this, ref pContext);
+			public HResult GetNumberChildren(out uint32 puiNumberChildren) mut => VT.GetNumberChildren(ref this, out puiNumberChildren);
+			public HResult GetChildren(out IMILBitmapEffects* pChildren) mut => VT.GetChildren(ref this, out pChildren);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectGroupImpl self, ref IMILBitmapEffectRenderContext pContext) Preprocess;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectGroupImpl self, out uint32 puiNumberChildren) GetNumberChildren;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectGroupImpl self, out IMILBitmapEffects* pChildren) GetChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectGroupImpl self, ref IMILBitmapEffectRenderContext pContext) Preprocess;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectGroupImpl self, out uint32 puiNumberChildren) GetNumberChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectGroupImpl self, out IMILBitmapEffects* pChildren) GetChildren;
 			}
 		}
 		[CRepr]
@@ -204,26 +204,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetOutputPixelFormat(ref Guid format) mut => VT.SetOutputPixelFormat(ref this, ref format);
-			public HRESULT GetOutputPixelFormat(out Guid pFormat) mut => VT.GetOutputPixelFormat(ref this, out pFormat);
-			public HRESULT SetUseSoftwareRenderer(int16 fSoftware) mut => VT.SetUseSoftwareRenderer(ref this, fSoftware);
-			public HRESULT SetInitialTransform(ref MILMatrixF pMatrix) mut => VT.SetInitialTransform(ref this, ref pMatrix);
-			public HRESULT GetFinalTransform(out MILMatrixF pMatrix) mut => VT.GetFinalTransform(ref this, out pMatrix);
-			public HRESULT SetOutputDPI(double dblDpiX, double dblDpiY) mut => VT.SetOutputDPI(ref this, dblDpiX, dblDpiY);
-			public HRESULT GetOutputDPI(out double pdblDpiX, out double pdblDpiY) mut => VT.GetOutputDPI(ref this, out pdblDpiX, out pdblDpiY);
-			public HRESULT SetRegionOfInterest(ref MilRectD pRect) mut => VT.SetRegionOfInterest(ref this, ref pRect);
+			public HResult SetOutputPixelFormat(ref Guid format) mut => VT.SetOutputPixelFormat(ref this, ref format);
+			public HResult GetOutputPixelFormat(out Guid pFormat) mut => VT.GetOutputPixelFormat(ref this, out pFormat);
+			public HResult SetUseSoftwareRenderer(int16 fSoftware) mut => VT.SetUseSoftwareRenderer(ref this, fSoftware);
+			public HResult SetInitialTransform(ref MILMatrixF pMatrix) mut => VT.SetInitialTransform(ref this, ref pMatrix);
+			public HResult GetFinalTransform(out MILMatrixF pMatrix) mut => VT.GetFinalTransform(ref this, out pMatrix);
+			public HResult SetOutputDPI(double dblDpiX, double dblDpiY) mut => VT.SetOutputDPI(ref this, dblDpiX, dblDpiY);
+			public HResult GetOutputDPI(out double pdblDpiX, out double pdblDpiY) mut => VT.GetOutputDPI(ref this, out pdblDpiX, out pdblDpiY);
+			public HResult SetRegionOfInterest(ref MilRectD pRect) mut => VT.SetRegionOfInterest(ref this, ref pRect);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, ref Guid format) SetOutputPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, out Guid pFormat) GetOutputPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, int16 fSoftware) SetUseSoftwareRenderer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, ref MILMatrixF pMatrix) SetInitialTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, out MILMatrixF pMatrix) GetFinalTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, double dblDpiX, double dblDpiY) SetOutputDPI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, out double pdblDpiX, out double pdblDpiY) GetOutputDPI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContext self, ref MilRectD pRect) SetRegionOfInterest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, ref Guid format) SetOutputPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, out Guid pFormat) GetOutputPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, int16 fSoftware) SetUseSoftwareRenderer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, ref MILMatrixF pMatrix) SetInitialTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, out MILMatrixF pMatrix) GetFinalTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, double dblDpiX, double dblDpiY) SetOutputDPI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, out double pdblDpiX, out double pdblDpiY) GetOutputDPI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContext self, ref MilRectD pRect) SetRegionOfInterest;
 			}
 		}
 		[CRepr]
@@ -233,20 +233,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetUseSoftwareRenderer(out int16 pfSoftware) mut => VT.GetUseSoftwareRenderer(ref this, out pfSoftware);
-			public HRESULT GetTransform(out MILMatrixF pMatrix) mut => VT.GetTransform(ref this, out pMatrix);
-			public HRESULT UpdateTransform(ref MILMatrixF pMatrix) mut => VT.UpdateTransform(ref this, ref pMatrix);
-			public HRESULT GetOutputBounds(out MilRectD pRect) mut => VT.GetOutputBounds(ref this, out pRect);
-			public HRESULT UpdateOutputBounds(ref MilRectD pRect) mut => VT.UpdateOutputBounds(ref this, ref pRect);
+			public HResult GetUseSoftwareRenderer(out int16 pfSoftware) mut => VT.GetUseSoftwareRenderer(ref this, out pfSoftware);
+			public HResult GetTransform(out MILMatrixF pMatrix) mut => VT.GetTransform(ref this, out pMatrix);
+			public HResult UpdateTransform(ref MILMatrixF pMatrix) mut => VT.UpdateTransform(ref this, ref pMatrix);
+			public HResult GetOutputBounds(out MilRectD pRect) mut => VT.GetOutputBounds(ref this, out pRect);
+			public HResult UpdateOutputBounds(ref MilRectD pRect) mut => VT.UpdateOutputBounds(ref this, ref pRect);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContextImpl self, out int16 pfSoftware) GetUseSoftwareRenderer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContextImpl self, out MILMatrixF pMatrix) GetTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContextImpl self, ref MILMatrixF pMatrix) UpdateTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContextImpl self, out MilRectD pRect) GetOutputBounds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectRenderContextImpl self, ref MilRectD pRect) UpdateOutputBounds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContextImpl self, out int16 pfSoftware) GetUseSoftwareRenderer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContextImpl self, out MILMatrixF pMatrix) GetTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContextImpl self, ref MILMatrixF pMatrix) UpdateTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContextImpl self, out MilRectD pRect) GetOutputBounds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectRenderContextImpl self, ref MilRectD pRect) UpdateOutputBounds;
 			}
 		}
 		[CRepr]
@@ -256,16 +256,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateEffect(in Guid pguidEffect, out IMILBitmapEffect* ppEffect) mut => VT.CreateEffect(ref this, pguidEffect, out ppEffect);
-			public HRESULT CreateContext(out IMILBitmapEffectRenderContext* ppContext) mut => VT.CreateContext(ref this, out ppContext);
-			public HRESULT CreateEffectOuter(out IMILBitmapEffect* ppEffect) mut => VT.CreateEffectOuter(ref this, out ppEffect);
+			public HResult CreateEffect(in Guid pguidEffect, out IMILBitmapEffect* ppEffect) mut => VT.CreateEffect(ref this, pguidEffect, out ppEffect);
+			public HResult CreateContext(out IMILBitmapEffectRenderContext* ppContext) mut => VT.CreateContext(ref this, out ppContext);
+			public HResult CreateEffectOuter(out IMILBitmapEffect* ppEffect) mut => VT.CreateEffectOuter(ref this, out ppEffect);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectFactory self, in Guid pguidEffect, out IMILBitmapEffect* ppEffect) CreateEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectFactory self, out IMILBitmapEffectRenderContext* ppContext) CreateContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectFactory self, out IMILBitmapEffect* ppEffect) CreateEffectOuter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectFactory self, in Guid pguidEffect, out IMILBitmapEffect* ppEffect) CreateEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectFactory self, out IMILBitmapEffectRenderContext* ppContext) CreateContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectFactory self, out IMILBitmapEffect* ppEffect) CreateEffectOuter;
 			}
 		}
 		[CRepr]
@@ -275,22 +275,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetOutput(uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) mut => VT.GetOutput(ref this, uiIndex, ref pContext, out pfModifyInPlace, out ppBitmapSource);
-			public HRESULT TransformPoint(uint32 uiIndex, out MilPoint2D p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext, out int16 pfPointTransformed) mut => VT.TransformPoint(ref this, uiIndex, out p, fForwardTransform, ref pContext, out pfPointTransformed);
-			public HRESULT TransformRect(uint32 uiIndex, out MilRectD p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext) mut => VT.TransformRect(ref this, uiIndex, out p, fForwardTransform, ref pContext);
-			public HRESULT HasAffineTransform(uint32 uiIndex, out int16 pfAffine) mut => VT.HasAffineTransform(ref this, uiIndex, out pfAffine);
-			public HRESULT HasInverseTransform(uint32 uiIndex, out int16 pfHasInverse) mut => VT.HasInverseTransform(ref this, uiIndex, out pfHasInverse);
-			public HRESULT GetAffineMatrix(uint32 uiIndex, out MilMatrix3x2D pMatrix) mut => VT.GetAffineMatrix(ref this, uiIndex, out pMatrix);
+			public HResult GetOutput(uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) mut => VT.GetOutput(ref this, uiIndex, ref pContext, out pfModifyInPlace, out ppBitmapSource);
+			public HResult TransformPoint(uint32 uiIndex, out MilPoint2D p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext, out int16 pfPointTransformed) mut => VT.TransformPoint(ref this, uiIndex, out p, fForwardTransform, ref pContext, out pfPointTransformed);
+			public HResult TransformRect(uint32 uiIndex, out MilRectD p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext) mut => VT.TransformRect(ref this, uiIndex, out p, fForwardTransform, ref pContext);
+			public HResult HasAffineTransform(uint32 uiIndex, out int16 pfAffine) mut => VT.HasAffineTransform(ref this, uiIndex, out pfAffine);
+			public HResult HasInverseTransform(uint32 uiIndex, out int16 pfHasInverse) mut => VT.HasInverseTransform(ref this, uiIndex, out pfHasInverse);
+			public HResult GetAffineMatrix(uint32 uiIndex, out MilMatrix3x2D pMatrix) mut => VT.GetAffineMatrix(ref this, uiIndex, out pMatrix);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) GetOutput;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out MilPoint2D p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext, out int16 pfPointTransformed) TransformPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out MilRectD p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext) TransformRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out int16 pfAffine) HasAffineTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out int16 pfHasInverse) HasInverseTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out MilMatrix3x2D pMatrix) GetAffineMatrix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, ref IMILBitmapEffectRenderContext pContext, out int16 pfModifyInPlace, out IWICBitmapSource* ppBitmapSource) GetOutput;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out MilPoint2D p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext, out int16 pfPointTransformed) TransformPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out MilRectD p, int16 fForwardTransform, ref IMILBitmapEffectRenderContext pContext) TransformRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out int16 pfAffine) HasAffineTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out int16 pfHasInverse) HasInverseTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitive self, uint32 uiIndex, out MilMatrix3x2D pMatrix) GetAffineMatrix;
 			}
 		}
 		[CRepr]
@@ -300,14 +300,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsDirty(uint32 uiOutputIndex, out int16 pfDirty) mut => VT.IsDirty(ref this, uiOutputIndex, out pfDirty);
-			public HRESULT IsVolatile(uint32 uiOutputIndex, out int16 pfVolatile) mut => VT.IsVolatile(ref this, uiOutputIndex, out pfVolatile);
+			public HResult IsDirty(uint32 uiOutputIndex, out int16 pfDirty) mut => VT.IsDirty(ref this, uiOutputIndex, out pfDirty);
+			public HResult IsVolatile(uint32 uiOutputIndex, out int16 pfVolatile) mut => VT.IsVolatile(ref this, uiOutputIndex, out pfVolatile);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitiveImpl self, uint32 uiOutputIndex, out int16 pfDirty) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectPrimitiveImpl self, uint32 uiOutputIndex, out int16 pfVolatile) IsVolatile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitiveImpl self, uint32 uiOutputIndex, out int16 pfDirty) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectPrimitiveImpl self, uint32 uiOutputIndex, out int16 pfVolatile) IsVolatile;
 			}
 		}
 		[CRepr]
@@ -317,18 +317,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT _NewEnum(out IUnknown* ppiuReturn) mut => VT._NewEnum(ref this, out ppiuReturn);
-			public HRESULT get_Parent(out IMILBitmapEffectGroup* ppEffect) mut => VT.get_Parent(ref this, out ppEffect);
-			public HRESULT Item(uint32 uindex, out IMILBitmapEffect* ppEffect) mut => VT.Item(ref this, uindex, out ppEffect);
-			public HRESULT get_Count(out uint32 puiCount) mut => VT.get_Count(ref this, out puiCount);
+			public HResult _NewEnum(out IUnknown* ppiuReturn) mut => VT._NewEnum(ref this, out ppiuReturn);
+			public HResult get_Parent(out IMILBitmapEffectGroup* ppEffect) mut => VT.get_Parent(ref this, out ppEffect);
+			public HResult Item(uint32 uindex, out IMILBitmapEffect* ppEffect) mut => VT.Item(ref this, uindex, out ppEffect);
+			public HResult get_Count(out uint32 puiCount) mut => VT.get_Count(ref this, out puiCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffects self, out IUnknown* ppiuReturn) _NewEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffects self, out IMILBitmapEffectGroup* ppEffect) get_Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffects self, uint32 uindex, out IMILBitmapEffect* ppEffect) Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffects self, out uint32 puiCount) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffects self, out IUnknown* ppiuReturn) _NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffects self, out IMILBitmapEffectGroup* ppEffect) get_Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffects self, uint32 uindex, out IMILBitmapEffect* ppEffect) Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffects self, out uint32 puiCount) get_Count;
 			}
 		}
 		[CRepr]
@@ -338,14 +338,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsConnected(out int16 pfConnected) mut => VT.IsConnected(ref this, out pfConnected);
-			public HRESULT GetBitmapEffect(out IMILBitmapEffect* ppEffect) mut => VT.GetBitmapEffect(ref this, out ppEffect);
+			public HResult IsConnected(out int16 pfConnected) mut => VT.IsConnected(ref this, out pfConnected);
+			public HResult GetBitmapEffect(out IMILBitmapEffect* ppEffect) mut => VT.GetBitmapEffect(ref this, out ppEffect);
 
 			[CRepr]
 			public struct VTable : IMILBitmapEffectConnectorInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnector self, out int16 pfConnected) IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectConnector self, out IMILBitmapEffect* ppEffect) GetBitmapEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnector self, out int16 pfConnected) IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectConnector self, out IMILBitmapEffect* ppEffect) GetBitmapEffect;
 			}
 		}
 		[CRepr]
@@ -355,14 +355,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ConnectTo(ref IMILBitmapEffectOutputConnector pConnector) mut => VT.ConnectTo(ref this, ref pConnector);
-			public HRESULT GetConnection(out IMILBitmapEffectOutputConnector* ppConnector) mut => VT.GetConnection(ref this, out ppConnector);
+			public HResult ConnectTo(ref IMILBitmapEffectOutputConnector pConnector) mut => VT.ConnectTo(ref this, ref pConnector);
+			public HResult GetConnection(out IMILBitmapEffectOutputConnector* ppConnector) mut => VT.GetConnection(ref this, out ppConnector);
 
 			[CRepr]
 			public struct VTable : IMILBitmapEffectConnector.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectInputConnector self, ref IMILBitmapEffectOutputConnector pConnector) ConnectTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectInputConnector self, out IMILBitmapEffectOutputConnector* ppConnector) GetConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectInputConnector self, ref IMILBitmapEffectOutputConnector pConnector) ConnectTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectInputConnector self, out IMILBitmapEffectOutputConnector* ppConnector) GetConnection;
 			}
 		}
 		[CRepr]
@@ -372,14 +372,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNumberConnections(out uint32 puiNumberConnections) mut => VT.GetNumberConnections(ref this, out puiNumberConnections);
-			public HRESULT GetConnection(uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnection) mut => VT.GetConnection(ref this, uiIndex, out ppConnection);
+			public HResult GetNumberConnections(out uint32 puiNumberConnections) mut => VT.GetNumberConnections(ref this, out puiNumberConnections);
+			public HResult GetConnection(uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnection) mut => VT.GetConnection(ref this, uiIndex, out ppConnection);
 
 			[CRepr]
 			public struct VTable : IMILBitmapEffectConnector.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectOutputConnector self, out uint32 puiNumberConnections) GetNumberConnections;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectOutputConnector self, uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnection) GetConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectOutputConnector self, out uint32 puiNumberConnections) GetNumberConnections;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectOutputConnector self, uint32 uiIndex, out IMILBitmapEffectInputConnector* ppConnection) GetConnection;
 			}
 		}
 		[CRepr]
@@ -389,14 +389,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddBackLink(ref IMILBitmapEffectInputConnector pConnection) mut => VT.AddBackLink(ref this, ref pConnection);
-			public HRESULT RemoveBackLink(ref IMILBitmapEffectInputConnector pConnection) mut => VT.RemoveBackLink(ref this, ref pConnection);
+			public HResult AddBackLink(ref IMILBitmapEffectInputConnector pConnection) mut => VT.AddBackLink(ref this, ref pConnection);
+			public HResult RemoveBackLink(ref IMILBitmapEffectInputConnector pConnection) mut => VT.RemoveBackLink(ref this, ref pConnection);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectOutputConnectorImpl self, ref IMILBitmapEffectInputConnector pConnection) AddBackLink;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectOutputConnectorImpl self, ref IMILBitmapEffectInputConnector pConnection) RemoveBackLink;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectOutputConnectorImpl self, ref IMILBitmapEffectInputConnector pConnection) AddBackLink;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectOutputConnectorImpl self, ref IMILBitmapEffectInputConnector pConnection) RemoveBackLink;
 			}
 		}
 		[CRepr]
@@ -406,12 +406,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInputConnector(out IMILBitmapEffectInputConnector* pInputConnector) mut => VT.GetInputConnector(ref this, out pInputConnector);
+			public HResult GetInputConnector(out IMILBitmapEffectInputConnector* pInputConnector) mut => VT.GetInputConnector(ref this, out pInputConnector);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectInteriorInputConnector self, out IMILBitmapEffectInputConnector* pInputConnector) GetInputConnector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectInteriorInputConnector self, out IMILBitmapEffectInputConnector* pInputConnector) GetInputConnector;
 			}
 		}
 		[CRepr]
@@ -421,12 +421,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetOutputConnector(out IMILBitmapEffectOutputConnector* pOutputConnector) mut => VT.GetOutputConnector(ref this, out pOutputConnector);
+			public HResult GetOutputConnector(out IMILBitmapEffectOutputConnector* pOutputConnector) mut => VT.GetOutputConnector(ref this, out pOutputConnector);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectInteriorOutputConnector self, out IMILBitmapEffectOutputConnector* pOutputConnector) GetOutputConnector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectInteriorOutputConnector self, out IMILBitmapEffectOutputConnector* pOutputConnector) GetOutputConnector;
 			}
 		}
 		[CRepr]
@@ -436,14 +436,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PropertyChange(ref IMILBitmapEffect pEffect, BSTR bstrPropertyName) mut => VT.PropertyChange(ref this, ref pEffect, bstrPropertyName);
-			public HRESULT DirtyRegion(ref IMILBitmapEffect pEffect, ref MilRectD pRect) mut => VT.DirtyRegion(ref this, ref pEffect, ref pRect);
+			public HResult PropertyChange(ref IMILBitmapEffect pEffect, BSTR bstrPropertyName) mut => VT.PropertyChange(ref this, ref pEffect, bstrPropertyName);
+			public HResult DirtyRegion(ref IMILBitmapEffect pEffect, ref MilRectD pRect) mut => VT.DirtyRegion(ref this, ref pEffect, ref pRect);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectEvents self, ref IMILBitmapEffect pEffect, BSTR bstrPropertyName) PropertyChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMILBitmapEffectEvents self, ref IMILBitmapEffect pEffect, ref MilRectD pRect) DirtyRegion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectEvents self, ref IMILBitmapEffect pEffect, BSTR bstrPropertyName) PropertyChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMILBitmapEffectEvents self, ref IMILBitmapEffect pEffect, ref MilRectD pRect) DirtyRegion;
 			}
 		}
 		

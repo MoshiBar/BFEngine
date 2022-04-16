@@ -1,9 +1,16 @@
 using System;
+using static Win32.System.Com.StructuredStorage;
+using static Win32.Win32;
+using static Win32.UI.Shell;
+using static Win32.System.Com;
+using static System.Windows.COM_IUnknown;
+using static System.Windows;
 
 // namespace UI.Shell.PropertiesSystem
-namespace Win32
+namespace Win32.UI
 {
-	extension Win32
+	extension Shell{
+	public static class PropertiesSystem
 	{
 		// --- Constants ---
 		
@@ -89,7 +96,7 @@ namespace Win32
 		{
 			STRING = 0,
 			NUMBER = 1,
-			BOOLEAN = 2,
+			Boolean = 2,
 			DATETIME = 3,
 			ENUMERATED = 4,
 		}
@@ -160,7 +167,7 @@ namespace Win32
 			STRING = 1,
 			SIZE = 2,
 			DATETIME = 3,
-			BOOLEAN = 4,
+			Boolean = 4,
 			NUMBER = 5,
 		}
 		public enum PROPDESC_SEARCHINFO_FLAGS : int32
@@ -327,16 +334,16 @@ namespace Win32
 		{
 			public uint16 flPrg;
 			public uint16 flPrgInit;
-			public CHAR[30] achTitle;
-			public CHAR[128] achCmdLine;
-			public CHAR[64] achWorkDir;
+			public char8[30] achTitle;
+			public char8[128] achCmdLine;
+			public char8[64] achWorkDir;
 			public uint16 wHotKey;
-			public CHAR[80] achIconFile;
+			public char8[80] achIconFile;
 			public uint16 wIconIndex;
 			public uint32 dwEnhModeFlags;
 			public uint32 dwRealModeFlags;
-			public CHAR[80] achOtherFile;
-			public CHAR[260] achPIFFile;
+			public char8[80] achOtherFile;
+			public char8[260] achPIFFile;
 		}
 		
 		// --- COM Class IDs ---
@@ -354,12 +361,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(PWSTR pszFilePath, uint32 grfMode) mut => VT.Initialize(ref this, pszFilePath, grfMode);
+			public HResult Initialize(char16* pszFilePath, uint32 grfMode) mut => VT.Initialize(ref this, pszFilePath, grfMode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInitializeWithFile self, PWSTR pszFilePath, uint32 grfMode) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInitializeWithFile self, char16* pszFilePath, uint32 grfMode) Initialize;
 			}
 		}
 		[CRepr]
@@ -369,12 +376,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(ref IStream pstream, uint32 grfMode) mut => VT.Initialize(ref this, ref pstream, grfMode);
+			public HResult Initialize(ref IStream pstream, uint32 grfMode) mut => VT.Initialize(ref this, ref pstream, grfMode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInitializeWithStream self, ref IStream pstream, uint32 grfMode) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInitializeWithStream self, ref IStream pstream, uint32 grfMode) Initialize;
 			}
 		}
 		[CRepr]
@@ -384,20 +391,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 cProps) mut => VT.GetCount(ref this, out cProps);
-			public HRESULT GetAt(uint32 iProp, out PROPERTYKEY pkey) mut => VT.GetAt(ref this, iProp, out pkey);
-			public HRESULT GetValue(in PROPERTYKEY key, out PROPVARIANT pv) mut => VT.GetValue(ref this, key, out pv);
-			public HRESULT SetValue(in PROPERTYKEY key, in PROPVARIANT propvar) mut => VT.SetValue(ref this, key, propvar);
-			public HRESULT Commit() mut => VT.Commit(ref this);
+			public HResult GetCount(out uint32 cProps) mut => VT.GetCount(ref this, out cProps);
+			public HResult GetAt(uint32 iProp, out PROPERTYKEY pkey) mut => VT.GetAt(ref this, iProp, out pkey);
+			public HResult GetValue(in PROPERTYKEY key, out PROPVARIANT pv) mut => VT.GetValue(ref this, key, out pv);
+			public HResult SetValue(in PROPERTYKEY key, in PROPVARIANT propvar) mut => VT.SetValue(ref this, key, propvar);
+			public HResult Commit() mut => VT.Commit(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStore self, out uint32 cProps) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStore self, uint32 iProp, out PROPERTYKEY pkey) GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStore self, in PROPERTYKEY key, out PROPVARIANT pv) GetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStore self, in PROPERTYKEY key, in PROPVARIANT propvar) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStore self) Commit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStore self, out uint32 cProps) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStore self, uint32 iProp, out PROPERTYKEY pkey) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStore self, in PROPERTYKEY key, out PROPVARIANT pv) GetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStore self, in PROPERTYKEY key, in PROPVARIANT propvar) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStore self) Commit;
 			}
 		}
 		[CRepr]
@@ -407,18 +414,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNamedValue(PWSTR pszName, out PROPVARIANT ppropvar) mut => VT.GetNamedValue(ref this, pszName, out ppropvar);
-			public HRESULT SetNamedValue(PWSTR pszName, in PROPVARIANT propvar) mut => VT.SetNamedValue(ref this, pszName, propvar);
-			public HRESULT GetNameCount(out uint32 pdwCount) mut => VT.GetNameCount(ref this, out pdwCount);
-			public HRESULT GetNameAt(uint32 iProp, out BSTR pbstrName) mut => VT.GetNameAt(ref this, iProp, out pbstrName);
+			public HResult GetNamedValue(char16* pszName, out PROPVARIANT ppropvar) mut => VT.GetNamedValue(ref this, pszName, out ppropvar);
+			public HResult SetNamedValue(char16* pszName, in PROPVARIANT propvar) mut => VT.SetNamedValue(ref this, pszName, propvar);
+			public HResult GetNameCount(out uint32 pdwCount) mut => VT.GetNameCount(ref this, out pdwCount);
+			public HResult GetNameAt(uint32 iProp, out char16* pbstrName) mut => VT.GetNameAt(ref this, iProp, out pbstrName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INamedPropertyStore self, PWSTR pszName, out PROPVARIANT ppropvar) GetNamedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INamedPropertyStore self, PWSTR pszName, in PROPVARIANT propvar) SetNamedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INamedPropertyStore self, out uint32 pdwCount) GetNameCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INamedPropertyStore self, uint32 iProp, out BSTR pbstrName) GetNameAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INamedPropertyStore self, char16* pszName, out PROPVARIANT ppropvar) GetNamedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INamedPropertyStore self, char16* pszName, in PROPVARIANT propvar) SetNamedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INamedPropertyStore self, out uint32 pdwCount) GetNameCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INamedPropertyStore self, uint32 iProp, out char16* pbstrName) GetNameAt;
 			}
 		}
 		[CRepr]
@@ -428,14 +435,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetPropertyKey(in PROPERTYKEY key) mut => VT.SetPropertyKey(ref this, key);
-			public HRESULT GetPropertyKey(out PROPERTYKEY pkey) mut => VT.GetPropertyKey(ref this, out pkey);
+			public HResult SetPropertyKey(in PROPERTYKEY key) mut => VT.SetPropertyKey(ref this, key);
+			public HResult GetPropertyKey(out PROPERTYKEY pkey) mut => VT.GetPropertyKey(ref this, out pkey);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectWithPropertyKey self, in PROPERTYKEY key) SetPropertyKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectWithPropertyKey self, out PROPERTYKEY pkey) GetPropertyKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectWithPropertyKey self, in PROPERTYKEY key) SetPropertyKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectWithPropertyKey self, out PROPERTYKEY pkey) GetPropertyKey;
 			}
 		}
 		[CRepr]
@@ -445,12 +452,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ApplyToPropVariant(in PROPVARIANT propvarIn, out PROPVARIANT ppropvarOut) mut => VT.ApplyToPropVariant(ref this, propvarIn, out ppropvarOut);
+			public HResult ApplyToPropVariant(in PROPVARIANT propvarIn, out PROPVARIANT ppropvarOut) mut => VT.ApplyToPropVariant(ref this, propvarIn, out ppropvarOut);
 
 			[CRepr]
 			public struct VTable : IObjectWithPropertyKey.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChange self, in PROPVARIANT propvarIn, out PROPVARIANT ppropvarOut) ApplyToPropVariant;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChange self, in PROPVARIANT propvarIn, out PROPVARIANT ppropvarOut) ApplyToPropVariant;
 			}
 		}
 		[CRepr]
@@ -460,24 +467,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 pcOperations) mut => VT.GetCount(ref this, out pcOperations);
-			public HRESULT GetAt(uint32 iIndex, in Guid riid, void** ppv) mut => VT.GetAt(ref this, iIndex, riid, ppv);
-			public HRESULT InsertAt(uint32 iIndex, ref IPropertyChange ppropChange) mut => VT.InsertAt(ref this, iIndex, ref ppropChange);
-			public HRESULT Append(ref IPropertyChange ppropChange) mut => VT.Append(ref this, ref ppropChange);
-			public HRESULT AppendOrReplace(ref IPropertyChange ppropChange) mut => VT.AppendOrReplace(ref this, ref ppropChange);
-			public HRESULT RemoveAt(uint32 iIndex) mut => VT.RemoveAt(ref this, iIndex);
-			public HRESULT IsKeyInArray(in PROPERTYKEY key) mut => VT.IsKeyInArray(ref this, key);
+			public HResult GetCount(out uint32 pcOperations) mut => VT.GetCount(ref this, out pcOperations);
+			public HResult GetAt(uint32 iIndex, in Guid riid, void** ppv) mut => VT.GetAt(ref this, iIndex, riid, ppv);
+			public HResult InsertAt(uint32 iIndex, ref IPropertyChange ppropChange) mut => VT.InsertAt(ref this, iIndex, ref ppropChange);
+			public HResult Append(ref IPropertyChange ppropChange) mut => VT.Append(ref this, ref ppropChange);
+			public HResult AppendOrReplace(ref IPropertyChange ppropChange) mut => VT.AppendOrReplace(ref this, ref ppropChange);
+			public HResult RemoveAt(uint32 iIndex) mut => VT.RemoveAt(ref this, iIndex);
+			public HResult IsKeyInArray(in PROPERTYKEY key) mut => VT.IsKeyInArray(ref this, key);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, out uint32 pcOperations) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, uint32 iIndex, in Guid riid, void** ppv) GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, uint32 iIndex, ref IPropertyChange ppropChange) InsertAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, ref IPropertyChange ppropChange) Append;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, ref IPropertyChange ppropChange) AppendOrReplace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, uint32 iIndex) RemoveAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyChangeArray self, in PROPERTYKEY key) IsKeyInArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, out uint32 pcOperations) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, uint32 iIndex, in Guid riid, void** ppv) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, uint32 iIndex, ref IPropertyChange ppropChange) InsertAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, ref IPropertyChange ppropChange) Append;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, ref IPropertyChange ppropChange) AppendOrReplace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, uint32 iIndex) RemoveAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyChangeArray self, in PROPERTYKEY key) IsKeyInArray;
 			}
 		}
 		[CRepr]
@@ -487,12 +494,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsPropertyWritable(in PROPERTYKEY key) mut => VT.IsPropertyWritable(ref this, key);
+			public HResult IsPropertyWritable(in PROPERTYKEY key) mut => VT.IsPropertyWritable(ref this, key);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreCapabilities self, in PROPERTYKEY key) IsPropertyWritable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreCapabilities self, in PROPERTYKEY key) IsPropertyWritable;
 			}
 		}
 		[CRepr]
@@ -502,18 +509,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetState(in PROPERTYKEY key, out PSC_STATE pstate) mut => VT.GetState(ref this, key, out pstate);
-			public HRESULT GetValueAndState(in PROPERTYKEY key, out PROPVARIANT ppropvar, out PSC_STATE pstate) mut => VT.GetValueAndState(ref this, key, out ppropvar, out pstate);
-			public HRESULT SetState(in PROPERTYKEY key, PSC_STATE state) mut => VT.SetState(ref this, key, state);
-			public HRESULT SetValueAndState(in PROPERTYKEY key, in PROPVARIANT ppropvar, PSC_STATE state) mut => VT.SetValueAndState(ref this, key, ppropvar, state);
+			public HResult GetState(in PROPERTYKEY key, out PSC_STATE pstate) mut => VT.GetState(ref this, key, out pstate);
+			public HResult GetValueAndState(in PROPERTYKEY key, out PROPVARIANT ppropvar, out PSC_STATE pstate) mut => VT.GetValueAndState(ref this, key, out ppropvar, out pstate);
+			public HResult SetState(in PROPERTYKEY key, PSC_STATE state) mut => VT.SetState(ref this, key, state);
+			public HResult SetValueAndState(in PROPERTYKEY key, in PROPVARIANT ppropvar, PSC_STATE state) mut => VT.SetValueAndState(ref this, key, ppropvar, state);
 
 			[CRepr]
 			public struct VTable : IPropertyStore.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreCache self, in PROPERTYKEY key, out PSC_STATE pstate) GetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreCache self, in PROPERTYKEY key, out PROPVARIANT ppropvar, out PSC_STATE pstate) GetValueAndState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreCache self, in PROPERTYKEY key, PSC_STATE state) SetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreCache self, in PROPERTYKEY key, in PROPVARIANT ppropvar, PSC_STATE state) SetValueAndState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreCache self, in PROPERTYKEY key, out PSC_STATE pstate) GetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreCache self, in PROPERTYKEY key, out PROPVARIANT ppropvar, out PSC_STATE pstate) GetValueAndState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreCache self, in PROPERTYKEY key, PSC_STATE state) SetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreCache self, in PROPERTYKEY key, in PROPVARIANT ppropvar, PSC_STATE state) SetValueAndState;
 			}
 		}
 		[CRepr]
@@ -523,20 +530,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetEnumType(out PROPENUMTYPE penumtype) mut => VT.GetEnumType(ref this, out penumtype);
-			public HRESULT GetValue(out PROPVARIANT ppropvar) mut => VT.GetValue(ref this, out ppropvar);
-			public HRESULT GetRangeMinValue(out PROPVARIANT ppropvarMin) mut => VT.GetRangeMinValue(ref this, out ppropvarMin);
-			public HRESULT GetRangeSetValue(out PROPVARIANT ppropvarSet) mut => VT.GetRangeSetValue(ref this, out ppropvarSet);
-			public HRESULT GetDisplayText(out PWSTR ppszDisplay) mut => VT.GetDisplayText(ref this, out ppszDisplay);
+			public HResult GetEnumType(out PROPENUMTYPE penumtype) mut => VT.GetEnumType(ref this, out penumtype);
+			public HResult GetValue(out PROPVARIANT ppropvar) mut => VT.GetValue(ref this, out ppropvar);
+			public HResult GetRangeMinValue(out PROPVARIANT ppropvarMin) mut => VT.GetRangeMinValue(ref this, out ppropvarMin);
+			public HResult GetRangeSetValue(out PROPVARIANT ppropvarSet) mut => VT.GetRangeSetValue(ref this, out ppropvarSet);
+			public HResult GetDisplayText(out char16* ppszDisplay) mut => VT.GetDisplayText(ref this, out ppszDisplay);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumType self, out PROPENUMTYPE penumtype) GetEnumType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumType self, out PROPVARIANT ppropvar) GetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumType self, out PROPVARIANT ppropvarMin) GetRangeMinValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumType self, out PROPVARIANT ppropvarSet) GetRangeSetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumType self, out PWSTR ppszDisplay) GetDisplayText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumType self, out PROPENUMTYPE penumtype) GetEnumType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumType self, out PROPVARIANT ppropvar) GetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumType self, out PROPVARIANT ppropvarMin) GetRangeMinValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumType self, out PROPVARIANT ppropvarSet) GetRangeSetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumType self, out char16* ppszDisplay) GetDisplayText;
 			}
 		}
 		[CRepr]
@@ -546,12 +553,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetImageReference(out PWSTR ppszImageRes) mut => VT.GetImageReference(ref this, out ppszImageRes);
+			public HResult GetImageReference(out char16* ppszImageRes) mut => VT.GetImageReference(ref this, out ppszImageRes);
 
 			[CRepr]
 			public struct VTable : IPropertyEnumType.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumType2 self, out PWSTR ppszImageRes) GetImageReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumType2 self, out char16* ppszImageRes) GetImageReference;
 			}
 		}
 		[CRepr]
@@ -561,18 +568,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 pctypes) mut => VT.GetCount(ref this, out pctypes);
-			public HRESULT GetAt(uint32 itype, in Guid riid, void** ppv) mut => VT.GetAt(ref this, itype, riid, ppv);
-			public HRESULT GetConditionAt(uint32 nIndex, in Guid riid, void** ppv) mut => VT.GetConditionAt(ref this, nIndex, riid, ppv);
-			public HRESULT FindMatchingIndex(in PROPVARIANT propvarCmp, out uint32 pnIndex) mut => VT.FindMatchingIndex(ref this, propvarCmp, out pnIndex);
+			public HResult GetCount(out uint32 pctypes) mut => VT.GetCount(ref this, out pctypes);
+			public HResult GetAt(uint32 itype, in Guid riid, void** ppv) mut => VT.GetAt(ref this, itype, riid, ppv);
+			public HResult GetConditionAt(uint32 nIndex, in Guid riid, void** ppv) mut => VT.GetConditionAt(ref this, nIndex, riid, ppv);
+			public HResult FindMatchingIndex(in PROPVARIANT propvarCmp, out uint32 pnIndex) mut => VT.FindMatchingIndex(ref this, propvarCmp, out pnIndex);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumTypeList self, out uint32 pctypes) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumTypeList self, uint32 itype, in Guid riid, void** ppv) GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumTypeList self, uint32 nIndex, in Guid riid, void** ppv) GetConditionAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyEnumTypeList self, in PROPVARIANT propvarCmp, out uint32 pnIndex) FindMatchingIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumTypeList self, out uint32 pctypes) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumTypeList self, uint32 itype, in Guid riid, void** ppv) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumTypeList self, uint32 nIndex, in Guid riid, void** ppv) GetConditionAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyEnumTypeList self, in PROPVARIANT propvarCmp, out uint32 pnIndex) FindMatchingIndex;
 			}
 		}
 		[CRepr]
@@ -582,52 +589,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyKey(out PROPERTYKEY pkey) mut => VT.GetPropertyKey(ref this, out pkey);
-			public HRESULT GetCanonicalName(out PWSTR ppszName) mut => VT.GetCanonicalName(ref this, out ppszName);
-			public HRESULT GetPropertyType(out uint16 pvartype) mut => VT.GetPropertyType(ref this, out pvartype);
-			public HRESULT GetDisplayName(out PWSTR ppszName) mut => VT.GetDisplayName(ref this, out ppszName);
-			public HRESULT GetEditInvitation(out PWSTR ppszInvite) mut => VT.GetEditInvitation(ref this, out ppszInvite);
-			public HRESULT GetTypeFlags(PROPDESC_TYPE_FLAGS mask, out PROPDESC_TYPE_FLAGS ppdtFlags) mut => VT.GetTypeFlags(ref this, mask, out ppdtFlags);
-			public HRESULT GetViewFlags(out PROPDESC_VIEW_FLAGS ppdvFlags) mut => VT.GetViewFlags(ref this, out ppdvFlags);
-			public HRESULT GetDefaultColumnWidth(out uint32 pcxChars) mut => VT.GetDefaultColumnWidth(ref this, out pcxChars);
-			public HRESULT GetDisplayType(out PROPDESC_DISPLAYTYPE pdisplaytype) mut => VT.GetDisplayType(ref this, out pdisplaytype);
-			public HRESULT GetColumnState(out uint32 pcsFlags) mut => VT.GetColumnState(ref this, out pcsFlags);
-			public HRESULT GetGroupingRange(out PROPDESC_GROUPING_RANGE pgr) mut => VT.GetGroupingRange(ref this, out pgr);
-			public HRESULT GetRelativeDescriptionType(out PROPDESC_RELATIVEDESCRIPTION_TYPE prdt) mut => VT.GetRelativeDescriptionType(ref this, out prdt);
-			public HRESULT GetRelativeDescription(in PROPVARIANT propvar1, in PROPVARIANT propvar2, out PWSTR ppszDesc1, out PWSTR ppszDesc2) mut => VT.GetRelativeDescription(ref this, propvar1, propvar2, out ppszDesc1, out ppszDesc2);
-			public HRESULT GetSortDescription(out PROPDESC_SORTDESCRIPTION psd) mut => VT.GetSortDescription(ref this, out psd);
-			public HRESULT GetSortDescriptionLabel(BOOL fDescending, out PWSTR ppszDescription) mut => VT.GetSortDescriptionLabel(ref this, fDescending, out ppszDescription);
-			public HRESULT GetAggregationType(out PROPDESC_AGGREGATION_TYPE paggtype) mut => VT.GetAggregationType(ref this, out paggtype);
-			public HRESULT GetConditionType(out PROPDESC_CONDITION_TYPE pcontype, out CONDITION_OPERATION popDefault) mut => VT.GetConditionType(ref this, out pcontype, out popDefault);
-			public HRESULT GetEnumTypeList(in Guid riid, void** ppv) mut => VT.GetEnumTypeList(ref this, riid, ppv);
-			public HRESULT CoerceToCanonicalValue(out PROPVARIANT ppropvar) mut => VT.CoerceToCanonicalValue(ref this, out ppropvar);
-			public HRESULT FormatForDisplay(in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdfFlags, out PWSTR ppszDisplay) mut => VT.FormatForDisplay(ref this, propvar, pdfFlags, out ppszDisplay);
-			public HRESULT IsValueCanonical(in PROPVARIANT propvar) mut => VT.IsValueCanonical(ref this, propvar);
+			public HResult GetPropertyKey(out PROPERTYKEY pkey) mut => VT.GetPropertyKey(ref this, out pkey);
+			public HResult GetCanonicalName(out char16* ppszName) mut => VT.GetCanonicalName(ref this, out ppszName);
+			public HResult GetPropertyType(out uint16 pvartype) mut => VT.GetPropertyType(ref this, out pvartype);
+			public HResult GetDisplayName(out char16* ppszName) mut => VT.GetDisplayName(ref this, out ppszName);
+			public HResult GetEditInvitation(out char16* ppszInvite) mut => VT.GetEditInvitation(ref this, out ppszInvite);
+			public HResult GetTypeFlags(PROPDESC_TYPE_FLAGS mask, out PROPDESC_TYPE_FLAGS ppdtFlags) mut => VT.GetTypeFlags(ref this, mask, out ppdtFlags);
+			public HResult GetViewFlags(out PROPDESC_VIEW_FLAGS ppdvFlags) mut => VT.GetViewFlags(ref this, out ppdvFlags);
+			public HResult GetDefaultColumnWidth(out uint32 pcxChars) mut => VT.GetDefaultColumnWidth(ref this, out pcxChars);
+			public HResult GetDisplayType(out PROPDESC_DISPLAYTYPE pdisplaytype) mut => VT.GetDisplayType(ref this, out pdisplaytype);
+			public HResult GetColumnState(out uint32 pcsFlags) mut => VT.GetColumnState(ref this, out pcsFlags);
+			public HResult GetGroupingRange(out PROPDESC_GROUPING_RANGE pgr) mut => VT.GetGroupingRange(ref this, out pgr);
+			public HResult GetRelativeDescriptionType(out PROPDESC_RELATIVEDESCRIPTION_TYPE prdt) mut => VT.GetRelativeDescriptionType(ref this, out prdt);
+			public HResult GetRelativeDescription(in PROPVARIANT propvar1, in PROPVARIANT propvar2, out char16* ppszDesc1, out char16* ppszDesc2) mut => VT.GetRelativeDescription(ref this, propvar1, propvar2, out ppszDesc1, out ppszDesc2);
+			public HResult GetSortDescription(out PROPDESC_SORTDESCRIPTION psd) mut => VT.GetSortDescription(ref this, out psd);
+			public HResult GetSortDescriptionLabel(IntBool fDescending, out char16* ppszDescription) mut => VT.GetSortDescriptionLabel(ref this, fDescending, out ppszDescription);
+			public HResult GetAggregationType(out PROPDESC_AGGREGATION_TYPE paggtype) mut => VT.GetAggregationType(ref this, out paggtype);
+			public HResult GetConditionType(out PROPDESC_CONDITION_TYPE pcontype, out CONDITION_OPERATION popDefault) mut => VT.GetConditionType(ref this, out pcontype, out popDefault);
+			public HResult GetEnumTypeList(in Guid riid, void** ppv) mut => VT.GetEnumTypeList(ref this, riid, ppv);
+			public HResult CoerceToCanonicalValue(out PROPVARIANT ppropvar) mut => VT.CoerceToCanonicalValue(ref this, out ppropvar);
+			public HResult FormatForDisplay(in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdfFlags, out char16* ppszDisplay) mut => VT.FormatForDisplay(ref this, propvar, pdfFlags, out ppszDisplay);
+			public HResult IsValueCanonical(in PROPVARIANT propvar) mut => VT.IsValueCanonical(ref this, propvar);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPERTYKEY pkey) GetPropertyKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PWSTR ppszName) GetCanonicalName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out uint16 pvartype) GetPropertyType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PWSTR ppszName) GetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PWSTR ppszInvite) GetEditInvitation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, PROPDESC_TYPE_FLAGS mask, out PROPDESC_TYPE_FLAGS ppdtFlags) GetTypeFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_VIEW_FLAGS ppdvFlags) GetViewFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out uint32 pcxChars) GetDefaultColumnWidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_DISPLAYTYPE pdisplaytype) GetDisplayType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out uint32 pcsFlags) GetColumnState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_GROUPING_RANGE pgr) GetGroupingRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_RELATIVEDESCRIPTION_TYPE prdt) GetRelativeDescriptionType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, in PROPVARIANT propvar1, in PROPVARIANT propvar2, out PWSTR ppszDesc1, out PWSTR ppszDesc2) GetRelativeDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_SORTDESCRIPTION psd) GetSortDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, BOOL fDescending, out PWSTR ppszDescription) GetSortDescriptionLabel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_AGGREGATION_TYPE paggtype) GetAggregationType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPDESC_CONDITION_TYPE pcontype, out CONDITION_OPERATION popDefault) GetConditionType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, in Guid riid, void** ppv) GetEnumTypeList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, out PROPVARIANT ppropvar) CoerceToCanonicalValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdfFlags, out PWSTR ppszDisplay) FormatForDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription self, in PROPVARIANT propvar) IsValueCanonical;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPERTYKEY pkey) GetPropertyKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out char16* ppszName) GetCanonicalName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out uint16 pvartype) GetPropertyType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out char16* ppszName) GetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out char16* ppszInvite) GetEditInvitation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, PROPDESC_TYPE_FLAGS mask, out PROPDESC_TYPE_FLAGS ppdtFlags) GetTypeFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_VIEW_FLAGS ppdvFlags) GetViewFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out uint32 pcxChars) GetDefaultColumnWidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_DISPLAYTYPE pdisplaytype) GetDisplayType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out uint32 pcsFlags) GetColumnState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_GROUPING_RANGE pgr) GetGroupingRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_RELATIVEDESCRIPTION_TYPE prdt) GetRelativeDescriptionType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, in PROPVARIANT propvar1, in PROPVARIANT propvar2, out char16* ppszDesc1, out char16* ppszDesc2) GetRelativeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_SORTDESCRIPTION psd) GetSortDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, IntBool fDescending, out char16* ppszDescription) GetSortDescriptionLabel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_AGGREGATION_TYPE paggtype) GetAggregationType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPDESC_CONDITION_TYPE pcontype, out CONDITION_OPERATION popDefault) GetConditionType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, in Guid riid, void** ppv) GetEnumTypeList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, out PROPVARIANT ppropvar) CoerceToCanonicalValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdfFlags, out char16* ppszDisplay) FormatForDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription self, in PROPVARIANT propvar) IsValueCanonical;
 			}
 		}
 		[CRepr]
@@ -637,12 +644,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetImageReferenceForValue(in PROPVARIANT propvar, out PWSTR ppszImageRes) mut => VT.GetImageReferenceForValue(ref this, propvar, out ppszImageRes);
+			public HResult GetImageReferenceForValue(in PROPVARIANT propvar, out char16* ppszImageRes) mut => VT.GetImageReferenceForValue(ref this, propvar, out ppszImageRes);
 
 			[CRepr]
 			public struct VTable : IPropertyDescription.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescription2 self, in PROPVARIANT propvar, out PWSTR ppszImageRes) GetImageReferenceForValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescription2 self, in PROPVARIANT propvar, out char16* ppszImageRes) GetImageReferenceForValue;
 			}
 		}
 		[CRepr]
@@ -652,14 +659,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSortByAlias(in Guid riid, void** ppv) mut => VT.GetSortByAlias(ref this, riid, ppv);
-			public HRESULT GetAdditionalSortByAliases(in Guid riid, void** ppv) mut => VT.GetAdditionalSortByAliases(ref this, riid, ppv);
+			public HResult GetSortByAlias(in Guid riid, void** ppv) mut => VT.GetSortByAlias(ref this, riid, ppv);
+			public HResult GetAdditionalSortByAliases(in Guid riid, void** ppv) mut => VT.GetAdditionalSortByAliases(ref this, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IPropertyDescription.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionAliasInfo self, in Guid riid, void** ppv) GetSortByAlias;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionAliasInfo self, in Guid riid, void** ppv) GetAdditionalSortByAliases;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionAliasInfo self, in Guid riid, void** ppv) GetSortByAlias;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionAliasInfo self, in Guid riid, void** ppv) GetAdditionalSortByAliases;
 			}
 		}
 		[CRepr]
@@ -669,18 +676,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSearchInfoFlags(out PROPDESC_SEARCHINFO_FLAGS ppdsiFlags) mut => VT.GetSearchInfoFlags(ref this, out ppdsiFlags);
-			public HRESULT GetColumnIndexType(out PROPDESC_COLUMNINDEX_TYPE ppdciType) mut => VT.GetColumnIndexType(ref this, out ppdciType);
-			public HRESULT GetProjectionString(out PWSTR ppszProjection) mut => VT.GetProjectionString(ref this, out ppszProjection);
-			public HRESULT GetMaxSize(out uint32 pcbMaxSize) mut => VT.GetMaxSize(ref this, out pcbMaxSize);
+			public HResult GetSearchInfoFlags(out PROPDESC_SEARCHINFO_FLAGS ppdsiFlags) mut => VT.GetSearchInfoFlags(ref this, out ppdsiFlags);
+			public HResult GetColumnIndexType(out PROPDESC_COLUMNINDEX_TYPE ppdciType) mut => VT.GetColumnIndexType(ref this, out ppdciType);
+			public HResult GetProjectionString(out char16* ppszProjection) mut => VT.GetProjectionString(ref this, out ppszProjection);
+			public HResult GetMaxSize(out uint32 pcbMaxSize) mut => VT.GetMaxSize(ref this, out pcbMaxSize);
 
 			[CRepr]
 			public struct VTable : IPropertyDescription.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionSearchInfo self, out PROPDESC_SEARCHINFO_FLAGS ppdsiFlags) GetSearchInfoFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionSearchInfo self, out PROPDESC_COLUMNINDEX_TYPE ppdciType) GetColumnIndexType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionSearchInfo self, out PWSTR ppszProjection) GetProjectionString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionSearchInfo self, out uint32 pcbMaxSize) GetMaxSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionSearchInfo self, out PROPDESC_SEARCHINFO_FLAGS ppdsiFlags) GetSearchInfoFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionSearchInfo self, out PROPDESC_COLUMNINDEX_TYPE ppdciType) GetColumnIndexType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionSearchInfo self, out char16* ppszProjection) GetProjectionString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionSearchInfo self, out uint32 pcbMaxSize) GetMaxSize;
 			}
 		}
 		[CRepr]
@@ -690,12 +697,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRelatedProperty(PWSTR pszRelationshipName, in Guid riid, void** ppv) mut => VT.GetRelatedProperty(ref this, pszRelationshipName, riid, ppv);
+			public HResult GetRelatedProperty(char16* pszRelationshipName, in Guid riid, void** ppv) mut => VT.GetRelatedProperty(ref this, pszRelationshipName, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IPropertyDescription.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionRelatedPropertyInfo self, PWSTR pszRelationshipName, in Guid riid, void** ppv) GetRelatedProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionRelatedPropertyInfo self, char16* pszRelationshipName, in Guid riid, void** ppv) GetRelatedProperty;
 			}
 		}
 		[CRepr]
@@ -705,28 +712,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyDescription(in PROPERTYKEY propkey, in Guid riid, void** ppv) mut => VT.GetPropertyDescription(ref this, propkey, riid, ppv);
-			public HRESULT GetPropertyDescriptionByName(PWSTR pszCanonicalName, in Guid riid, void** ppv) mut => VT.GetPropertyDescriptionByName(ref this, pszCanonicalName, riid, ppv);
-			public HRESULT GetPropertyDescriptionListFromString(PWSTR pszPropList, in Guid riid, void** ppv) mut => VT.GetPropertyDescriptionListFromString(ref this, pszPropList, riid, ppv);
-			public HRESULT EnumeratePropertyDescriptions(PROPDESC_ENUMFILTER filterOn, in Guid riid, void** ppv) mut => VT.EnumeratePropertyDescriptions(ref this, filterOn, riid, ppv);
-			public HRESULT FormatForDisplay(in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, char16* pszText, uint32 cchText) mut => VT.FormatForDisplay(ref this, key, propvar, pdff, pszText, cchText);
-			public HRESULT FormatForDisplayAlloc(in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, out PWSTR ppszDisplay) mut => VT.FormatForDisplayAlloc(ref this, key, propvar, pdff, out ppszDisplay);
-			public HRESULT RegisterPropertySchema(PWSTR pszPath) mut => VT.RegisterPropertySchema(ref this, pszPath);
-			public HRESULT UnregisterPropertySchema(PWSTR pszPath) mut => VT.UnregisterPropertySchema(ref this, pszPath);
-			public HRESULT RefreshPropertySchema() mut => VT.RefreshPropertySchema(ref this);
+			public HResult GetPropertyDescription(in PROPERTYKEY propkey, in Guid riid, void** ppv) mut => VT.GetPropertyDescription(ref this, propkey, riid, ppv);
+			public HResult GetPropertyDescriptionByName(char16* pszCanonicalName, in Guid riid, void** ppv) mut => VT.GetPropertyDescriptionByName(ref this, pszCanonicalName, riid, ppv);
+			public HResult GetPropertyDescriptionListFromString(char16* pszPropList, in Guid riid, void** ppv) mut => VT.GetPropertyDescriptionListFromString(ref this, pszPropList, riid, ppv);
+			public HResult EnumeratePropertyDescriptions(PROPDESC_ENUMFILTER filterOn, in Guid riid, void** ppv) mut => VT.EnumeratePropertyDescriptions(ref this, filterOn, riid, ppv);
+			public HResult FormatForDisplay(in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, char16* pszText, uint32 cchText) mut => VT.FormatForDisplay(ref this, key, propvar, pdff, pszText, cchText);
+			public HResult FormatForDisplayAlloc(in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, out char16* ppszDisplay) mut => VT.FormatForDisplayAlloc(ref this, key, propvar, pdff, out ppszDisplay);
+			public HResult RegisterPropertySchema(char16* pszPath) mut => VT.RegisterPropertySchema(ref this, pszPath);
+			public HResult UnregisterPropertySchema(char16* pszPath) mut => VT.UnregisterPropertySchema(ref this, pszPath);
+			public HResult RefreshPropertySchema() mut => VT.RefreshPropertySchema(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, in PROPERTYKEY propkey, in Guid riid, void** ppv) GetPropertyDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, PWSTR pszCanonicalName, in Guid riid, void** ppv) GetPropertyDescriptionByName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, PWSTR pszPropList, in Guid riid, void** ppv) GetPropertyDescriptionListFromString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, PROPDESC_ENUMFILTER filterOn, in Guid riid, void** ppv) EnumeratePropertyDescriptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, char16* pszText, uint32 cchText) FormatForDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, out PWSTR ppszDisplay) FormatForDisplayAlloc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, PWSTR pszPath) RegisterPropertySchema;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self, PWSTR pszPath) UnregisterPropertySchema;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystem self) RefreshPropertySchema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, in PROPERTYKEY propkey, in Guid riid, void** ppv) GetPropertyDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, char16* pszCanonicalName, in Guid riid, void** ppv) GetPropertyDescriptionByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, char16* pszPropList, in Guid riid, void** ppv) GetPropertyDescriptionListFromString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, PROPDESC_ENUMFILTER filterOn, in Guid riid, void** ppv) EnumeratePropertyDescriptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, char16* pszText, uint32 cchText) FormatForDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, out char16* ppszDisplay) FormatForDisplayAlloc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, char16* pszPath) RegisterPropertySchema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self, char16* pszPath) UnregisterPropertySchema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystem self) RefreshPropertySchema;
 			}
 		}
 		[CRepr]
@@ -736,14 +743,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 pcElem) mut => VT.GetCount(ref this, out pcElem);
-			public HRESULT GetAt(uint32 iElem, in Guid riid, void** ppv) mut => VT.GetAt(ref this, iElem, riid, ppv);
+			public HResult GetCount(out uint32 pcElem) mut => VT.GetCount(ref this, out pcElem);
+			public HResult GetAt(uint32 iElem, in Guid riid, void** ppv) mut => VT.GetAt(ref this, iElem, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionList self, out uint32 pcElem) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyDescriptionList self, uint32 iElem, in Guid riid, void** ppv) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionList self, out uint32 pcElem) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyDescriptionList self, uint32 iElem, in Guid riid, void** ppv) GetAt;
 			}
 		}
 		[CRepr]
@@ -753,14 +760,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyStore(GETPROPERTYSTOREFLAGS flags, ref IUnknown pUnkFactory, in Guid riid, void** ppv) mut => VT.GetPropertyStore(ref this, flags, ref pUnkFactory, riid, ppv);
-			public HRESULT GetPropertyStoreForKeys(in PROPERTYKEY rgKeys, uint32 cKeys, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv) mut => VT.GetPropertyStoreForKeys(ref this, rgKeys, cKeys, flags, riid, ppv);
+			public HResult GetPropertyStore(GETPROPERTYSTOREFLAGS flags, ref IUnknown pUnkFactory, in Guid riid, void** ppv) mut => VT.GetPropertyStore(ref this, flags, ref pUnkFactory, riid, ppv);
+			public HResult GetPropertyStoreForKeys(in PROPERTYKEY rgKeys, uint32 cKeys, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv) mut => VT.GetPropertyStoreForKeys(ref this, rgKeys, cKeys, flags, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreFactory self, GETPROPERTYSTOREFLAGS flags, ref IUnknown pUnkFactory, in Guid riid, void** ppv) GetPropertyStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyStoreFactory self, in PROPERTYKEY rgKeys, uint32 cKeys, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv) GetPropertyStoreForKeys;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreFactory self, GETPROPERTYSTOREFLAGS flags, ref IUnknown pUnkFactory, in Guid riid, void** ppv) GetPropertyStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyStoreFactory self, in PROPERTYKEY rgKeys, uint32 cKeys, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv) GetPropertyStoreForKeys;
 			}
 		}
 		[CRepr]
@@ -770,12 +777,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDelayedPropertyStore(GETPROPERTYSTOREFLAGS flags, uint32 dwStoreId, in Guid riid, void** ppv) mut => VT.GetDelayedPropertyStore(ref this, flags, dwStoreId, riid, ppv);
+			public HResult GetDelayedPropertyStore(GETPROPERTYSTOREFLAGS flags, uint32 dwStoreId, in Guid riid, void** ppv) mut => VT.GetDelayedPropertyStore(ref this, flags, dwStoreId, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IPropertyStoreFactory.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDelayedPropertyStoreFactory self, GETPROPERTYSTOREFLAGS flags, uint32 dwStoreId, in Guid riid, void** ppv) GetDelayedPropertyStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDelayedPropertyStoreFactory self, GETPROPERTYSTOREFLAGS flags, uint32 dwStoreId, in Guid riid, void** ppv) GetDelayedPropertyStore;
 			}
 		}
 		[CRepr]
@@ -785,16 +792,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetFlags(int32 flags) mut => VT.SetFlags(ref this, flags);
-			public HRESULT SetPropertyStorage(ref SERIALIZEDPROPSTORAGE psps, uint32 cb) mut => VT.SetPropertyStorage(ref this, ref psps, cb);
-			public HRESULT GetPropertyStorage(out SERIALIZEDPROPSTORAGE* ppsps, out uint32 pcb) mut => VT.GetPropertyStorage(ref this, out ppsps, out pcb);
+			public HResult SetFlags(int32 flags) mut => VT.SetFlags(ref this, flags);
+			public HResult SetPropertyStorage(ref SERIALIZEDPROPSTORAGE psps, uint32 cb) mut => VT.SetPropertyStorage(ref this, ref psps, cb);
+			public HResult GetPropertyStorage(out SERIALIZEDPROPSTORAGE* ppsps, out uint32 pcb) mut => VT.GetPropertyStorage(ref this, out ppsps, out pcb);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistSerializedPropStorage self, int32 flags) SetFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistSerializedPropStorage self, ref SERIALIZEDPROPSTORAGE psps, uint32 cb) SetPropertyStorage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistSerializedPropStorage self, out SERIALIZEDPROPSTORAGE* ppsps, out uint32 pcb) GetPropertyStorage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistSerializedPropStorage self, int32 flags) SetFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistSerializedPropStorage self, ref SERIALIZEDPROPSTORAGE psps, uint32 cb) SetPropertyStorage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistSerializedPropStorage self, out SERIALIZEDPROPSTORAGE* ppsps, out uint32 pcb) GetPropertyStorage;
 			}
 		}
 		[CRepr]
@@ -804,14 +811,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyStorageSize(out uint32 pcb) mut => VT.GetPropertyStorageSize(ref this, out pcb);
-			public HRESULT GetPropertyStorageBuffer(out SERIALIZEDPROPSTORAGE psps, uint32 cb, out uint32 pcbWritten) mut => VT.GetPropertyStorageBuffer(ref this, out psps, cb, out pcbWritten);
+			public HResult GetPropertyStorageSize(out uint32 pcb) mut => VT.GetPropertyStorageSize(ref this, out pcb);
+			public HResult GetPropertyStorageBuffer(out SERIALIZEDPROPSTORAGE psps, uint32 cb, out uint32 pcbWritten) mut => VT.GetPropertyStorageBuffer(ref this, out psps, cb, out pcbWritten);
 
 			[CRepr]
 			public struct VTable : IPersistSerializedPropStorage.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistSerializedPropStorage2 self, out uint32 pcb) GetPropertyStorageSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistSerializedPropStorage2 self, out SERIALIZEDPROPSTORAGE psps, uint32 cb, out uint32 pcbWritten) GetPropertyStorageBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistSerializedPropStorage2 self, out uint32 pcb) GetPropertyStorageSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistSerializedPropStorage2 self, out SERIALIZEDPROPSTORAGE psps, uint32 cb, out uint32 pcbWritten) GetPropertyStorageBuffer;
 			}
 		}
 		[CRepr]
@@ -821,12 +828,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SchemaRefreshed() mut => VT.SchemaRefreshed(ref this);
+			public HResult SchemaRefreshed() mut => VT.SchemaRefreshed(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertySystemChangeNotify self) SchemaRefreshed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertySystemChangeNotify self) SchemaRefreshed;
 			}
 		}
 		[CRepr]
@@ -836,12 +843,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateObject(in Guid clsid, ref IUnknown pUnkOuter, in Guid riid, void** ppv) mut => VT.CreateObject(ref this, clsid, ref pUnkOuter, riid, ppv);
+			public HResult CreateObject(in Guid clsid, ref IUnknown pUnkOuter, in Guid riid, void** ppv) mut => VT.CreateObject(ref this, clsid, ref pUnkOuter, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICreateObject self, in Guid clsid, ref IUnknown pUnkOuter, in Guid riid, void** ppv) CreateObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICreateObject self, in Guid clsid, ref IUnknown pUnkOuter, in Guid riid, void** ppv) CreateObject;
 			}
 		}
 		[CRepr]
@@ -851,205 +858,205 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ParsePropertyName(PWSTR pszName, out Guid pfmtid, out uint32 ppid, out uint32 pchEaten) mut => VT.ParsePropertyName(ref this, pszName, out pfmtid, out ppid, out pchEaten);
-			public HRESULT GetCannonicalName(in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) mut => VT.GetCannonicalName(ref this, fmtid, pid, pwszText, cchText);
-			public HRESULT GetDisplayName(in Guid fmtid, uint32 pid, PROPERTYUI_NAME_FLAGS flags, char16* pwszText, uint32 cchText) mut => VT.GetDisplayName(ref this, fmtid, pid, flags, pwszText, cchText);
-			public HRESULT GetPropertyDescription(in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) mut => VT.GetPropertyDescription(ref this, fmtid, pid, pwszText, cchText);
-			public HRESULT GetDefaultWidth(in Guid fmtid, uint32 pid, out uint32 pcxChars) mut => VT.GetDefaultWidth(ref this, fmtid, pid, out pcxChars);
-			public HRESULT ComGetFlags(in Guid fmtid, uint32 pid, out PROPERTYUI_FLAGS pflags) mut => VT.ComGetFlags(ref this, fmtid, pid, out pflags);
-			public HRESULT FormatForDisplay(in Guid fmtid, uint32 pid, in PROPVARIANT ppropvar, PROPERTYUI_FORMAT_FLAGS puiff, char16* pwszText, uint32 cchText) mut => VT.FormatForDisplay(ref this, fmtid, pid, ppropvar, puiff, pwszText, cchText);
-			public HRESULT GetHelpInfo(in Guid fmtid, uint32 pid, char16* pwszHelpFile, uint32 cch, out uint32 puHelpID) mut => VT.GetHelpInfo(ref this, fmtid, pid, pwszHelpFile, cch, out puHelpID);
+			public HResult ParsePropertyName(char16* pszName, out Guid pfmtid, out uint32 ppid, out uint32 pchEaten) mut => VT.ParsePropertyName(ref this, pszName, out pfmtid, out ppid, out pchEaten);
+			public HResult GetCannonicalName(in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) mut => VT.GetCannonicalName(ref this, fmtid, pid, pwszText, cchText);
+			public HResult GetDisplayName(in Guid fmtid, uint32 pid, PROPERTYUI_NAME_FLAGS flags, char16* pwszText, uint32 cchText) mut => VT.GetDisplayName(ref this, fmtid, pid, flags, pwszText, cchText);
+			public HResult GetPropertyDescription(in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) mut => VT.GetPropertyDescription(ref this, fmtid, pid, pwszText, cchText);
+			public HResult GetDefaultWidth(in Guid fmtid, uint32 pid, out uint32 pcxChars) mut => VT.GetDefaultWidth(ref this, fmtid, pid, out pcxChars);
+			public HResult ComGetFlags(in Guid fmtid, uint32 pid, out PROPERTYUI_FLAGS pflags) mut => VT.ComGetFlags(ref this, fmtid, pid, out pflags);
+			public HResult FormatForDisplay(in Guid fmtid, uint32 pid, in PROPVARIANT ppropvar, PROPERTYUI_FORMAT_FLAGS puiff, char16* pwszText, uint32 cchText) mut => VT.FormatForDisplay(ref this, fmtid, pid, ppropvar, puiff, pwszText, cchText);
+			public HResult GetHelpInfo(in Guid fmtid, uint32 pid, char16* pwszHelpFile, uint32 cch, out uint32 puHelpID) mut => VT.GetHelpInfo(ref this, fmtid, pid, pwszHelpFile, cch, out puHelpID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, PWSTR pszName, out Guid pfmtid, out uint32 ppid, out uint32 pchEaten) ParsePropertyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) GetCannonicalName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, PROPERTYUI_NAME_FLAGS flags, char16* pwszText, uint32 cchText) GetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) GetPropertyDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, out uint32 pcxChars) GetDefaultWidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, out PROPERTYUI_FLAGS pflags) ComGetFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, in PROPVARIANT ppropvar, PROPERTYUI_FORMAT_FLAGS puiff, char16* pwszText, uint32 cchText) FormatForDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPropertyUI self, in Guid fmtid, uint32 pid, char16* pwszHelpFile, uint32 cch, out uint32 puHelpID) GetHelpInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, char16* pszName, out Guid pfmtid, out uint32 ppid, out uint32 pchEaten) ParsePropertyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) GetCannonicalName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, PROPERTYUI_NAME_FLAGS flags, char16* pwszText, uint32 cchText) GetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, char16* pwszText, uint32 cchText) GetPropertyDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, out uint32 pcxChars) GetDefaultWidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, out PROPERTYUI_FLAGS pflags) ComGetFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, in PROPVARIANT ppropvar, PROPERTYUI_FORMAT_FLAGS puiff, char16* pwszText, uint32 cchText) FormatForDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPropertyUI self, in Guid fmtid, uint32 pid, char16* pwszHelpFile, uint32 cch, out uint32 puHelpID) GetHelpInfo;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToWinRTPropertyValue(in PROPVARIANT propvar, in Guid riid, void** ppv);
+		public static extern HResult PropVariantToWinRTPropertyValue(in PROPVARIANT propvar, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinRTPropertyValueToPropVariant(IUnknown* punkPropertyValue, out PROPVARIANT ppropvar);
+		public static extern HResult WinRTPropertyValueToPropVariant(IUnknown* punkPropertyValue, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSFormatForDisplay(in PROPERTYKEY propkey, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdfFlags, char16* pwszText, uint32 cchText);
+		public static extern HResult PSFormatForDisplay(in PROPERTYKEY propkey, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdfFlags, char16* pwszText, uint32 cchText);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSFormatForDisplayAlloc(in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, out PWSTR ppszDisplay);
+		public static extern HResult PSFormatForDisplayAlloc(in PROPERTYKEY key, in PROPVARIANT propvar, PROPDESC_FORMAT_FLAGS pdff, out char16* ppszDisplay);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSFormatPropertyValue(ref IPropertyStore pps, ref IPropertyDescription ppd, PROPDESC_FORMAT_FLAGS pdff, out PWSTR ppszDisplay);
+		public static extern HResult PSFormatPropertyValue(ref IPropertyStore pps, ref IPropertyDescription ppd, PROPDESC_FORMAT_FLAGS pdff, out char16* ppszDisplay);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetImageReferenceForValue(in PROPERTYKEY propkey, in PROPVARIANT propvar, out PWSTR ppszImageRes);
+		public static extern HResult PSGetImageReferenceForValue(in PROPERTYKEY propkey, in PROPVARIANT propvar, out char16* ppszImageRes);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSStringFromPropertyKey(in PROPERTYKEY pkey, char16* psz, uint32 cch);
+		public static extern HResult PSStringFromPropertyKey(in PROPERTYKEY pkey, char16* psz, uint32 cch);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyKeyFromString(PWSTR pszString, out PROPERTYKEY pkey);
+		public static extern HResult PSPropertyKeyFromString(char16* pszString, out PROPERTYKEY pkey);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreateMemoryPropertyStore(in Guid riid, void** ppv);
+		public static extern HResult PSCreateMemoryPropertyStore(in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreateDelayedMultiplexPropertyStore(GETPROPERTYSTOREFLAGS flags, ref IDelayedPropertyStoreFactory pdpsf, uint32* rgStoreIds, uint32 cStores, in Guid riid, void** ppv);
+		public static extern HResult PSCreateDelayedMultiplexPropertyStore(GETPROPERTYSTOREFLAGS flags, ref IDelayedPropertyStoreFactory pdpsf, uint32* rgStoreIds, uint32 cStores, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreateMultiplexPropertyStore(IUnknown** prgpunkStores, uint32 cStores, in Guid riid, void** ppv);
+		public static extern HResult PSCreateMultiplexPropertyStore(IUnknown** prgpunkStores, uint32 cStores, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreatePropertyChangeArray(PROPERTYKEY* rgpropkey, PKA_FLAGS* rgflags, PROPVARIANT* rgpropvar, uint32 cChanges, in Guid riid, void** ppv);
+		public static extern HResult PSCreatePropertyChangeArray(PROPERTYKEY* rgpropkey, PKA_FLAGS* rgflags, PROPVARIANT* rgpropvar, uint32 cChanges, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreateSimplePropertyChange(PKA_FLAGS flags, in PROPERTYKEY key, in PROPVARIANT propvar, in Guid riid, void** ppv);
+		public static extern HResult PSCreateSimplePropertyChange(PKA_FLAGS flags, in PROPERTYKEY key, in PROPVARIANT propvar, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertyDescription(in PROPERTYKEY propkey, in Guid riid, void** ppv);
+		public static extern HResult PSGetPropertyDescription(in PROPERTYKEY propkey, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertyDescriptionByName(PWSTR pszCanonicalName, in Guid riid, void** ppv);
+		public static extern HResult PSGetPropertyDescriptionByName(char16* pszCanonicalName, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSLookupPropertyHandlerCLSID(PWSTR pszFilePath, out Guid pclsid);
+		public static extern HResult PSLookupPropertyHandlerCLSID(char16* pszFilePath, out Guid pclsid);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetItemPropertyHandler(ref IUnknown punkItem, BOOL fReadWrite, in Guid riid, void** ppv);
+		public static extern HResult PSGetItemPropertyHandler(ref IUnknown punkItem, IntBool fReadWrite, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetItemPropertyHandlerWithCreateObject(ref IUnknown punkItem, BOOL fReadWrite, ref IUnknown punkCreateObject, in Guid riid, void** ppv);
+		public static extern HResult PSGetItemPropertyHandlerWithCreateObject(ref IUnknown punkItem, IntBool fReadWrite, ref IUnknown punkCreateObject, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertyValue(ref IPropertyStore pps, ref IPropertyDescription ppd, out PROPVARIANT ppropvar);
+		public static extern HResult PSGetPropertyValue(ref IPropertyStore pps, ref IPropertyDescription ppd, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSSetPropertyValue(ref IPropertyStore pps, ref IPropertyDescription ppd, in PROPVARIANT propvar);
+		public static extern HResult PSSetPropertyValue(ref IPropertyStore pps, ref IPropertyDescription ppd, in PROPVARIANT propvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSRegisterPropertySchema(PWSTR pszPath);
+		public static extern HResult PSRegisterPropertySchema(char16* pszPath);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSUnregisterPropertySchema(PWSTR pszPath);
+		public static extern HResult PSUnregisterPropertySchema(char16* pszPath);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSRefreshPropertySchema();
+		public static extern HResult PSRefreshPropertySchema();
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSEnumeratePropertyDescriptions(PROPDESC_ENUMFILTER filterOn, in Guid riid, void** ppv);
+		public static extern HResult PSEnumeratePropertyDescriptions(PROPDESC_ENUMFILTER filterOn, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertyKeyFromName(PWSTR pszName, out PROPERTYKEY ppropkey);
+		public static extern HResult PSGetPropertyKeyFromName(char16* pszName, out PROPERTYKEY ppropkey);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetNameFromPropertyKey(in PROPERTYKEY propkey, out PWSTR ppszCanonicalName);
+		public static extern HResult PSGetNameFromPropertyKey(in PROPERTYKEY propkey, out char16* ppszCanonicalName);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCoerceToCanonicalValue(in PROPERTYKEY key, out PROPVARIANT ppropvar);
+		public static extern HResult PSCoerceToCanonicalValue(in PROPERTYKEY key, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertyDescriptionListFromString(PWSTR pszPropList, in Guid riid, void** ppv);
+		public static extern HResult PSGetPropertyDescriptionListFromString(char16* pszPropList, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreatePropertyStoreFromPropertySetStorage(ref IPropertySetStorage ppss, uint32 grfMode, in Guid riid, void** ppv);
+		public static extern HResult PSCreatePropertyStoreFromPropertySetStorage(ref IPropertySetStorage ppss, uint32 grfMode, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreatePropertyStoreFromObject(ref IUnknown punk, uint32 grfMode, in Guid riid, void** ppv);
+		public static extern HResult PSCreatePropertyStoreFromObject(ref IUnknown punk, uint32 grfMode, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSCreateAdapterFromPropertyStore(ref IPropertyStore pps, in Guid riid, void** ppv);
+		public static extern HResult PSCreateAdapterFromPropertyStore(ref IPropertyStore pps, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertySystem(in Guid riid, void** ppv);
+		public static extern HResult PSGetPropertySystem(in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetPropertyFromPropertyStorage(ref SERIALIZEDPROPSTORAGE psps, uint32 cb, in PROPERTYKEY rpkey, out PROPVARIANT ppropvar);
+		public static extern HResult PSGetPropertyFromPropertyStorage(ref SERIALIZEDPROPSTORAGE psps, uint32 cb, in PROPERTYKEY rpkey, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSGetNamedPropertyFromPropertyStorage(ref SERIALIZEDPROPSTORAGE psps, uint32 cb, PWSTR pszName, out PROPVARIANT ppropvar);
+		public static extern HResult PSGetNamedPropertyFromPropertyStorage(ref SERIALIZEDPROPSTORAGE psps, uint32 cb, char16* pszName, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadType(ref IPropertyBag propBag, PWSTR propName, out VARIANT @var, uint16 type);
+		public static extern HResult PSPropertyBag_ReadType(ref IPropertyBag propBag, char16* propName, out VARIANT @var, uint16 type);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadStr(ref IPropertyBag propBag, PWSTR propName, char16* value, int32 characterCount);
+		public static extern HResult PSPropertyBag_ReadStr(ref IPropertyBag propBag, char16* propName, char16* value, int32 characterCount);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadStrAlloc(ref IPropertyBag propBag, PWSTR propName, out PWSTR value);
+		public static extern HResult PSPropertyBag_ReadStrAlloc(ref IPropertyBag propBag, char16* propName, out char16* value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadBSTR(ref IPropertyBag propBag, PWSTR propName, out BSTR value);
+		public static extern HResult PSPropertyBag_ReadBSTR(ref IPropertyBag propBag, char16* propName, out char16* value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteStr(ref IPropertyBag propBag, PWSTR propName, PWSTR value);
+		public static extern HResult PSPropertyBag_WriteStr(ref IPropertyBag propBag, char16* propName, char16* value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteBSTR(ref IPropertyBag propBag, PWSTR propName, BSTR value);
+		public static extern HResult PSPropertyBag_WriteBSTR(ref IPropertyBag propBag, char16* propName, char16* value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadInt(ref IPropertyBag propBag, PWSTR propName, out int32 value);
+		public static extern HResult PSPropertyBag_ReadInt(ref IPropertyBag propBag, char16* propName, out int32 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteInt(ref IPropertyBag propBag, PWSTR propName, int32 value);
+		public static extern HResult PSPropertyBag_WriteInt(ref IPropertyBag propBag, char16* propName, int32 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadSHORT(ref IPropertyBag propBag, PWSTR propName, out int16 value);
+		public static extern HResult PSPropertyBag_ReadSHORT(ref IPropertyBag propBag, char16* propName, out int16 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteSHORT(ref IPropertyBag propBag, PWSTR propName, int16 value);
+		public static extern HResult PSPropertyBag_WriteSHORT(ref IPropertyBag propBag, char16* propName, int16 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadLONG(ref IPropertyBag propBag, PWSTR propName, out int32 value);
+		public static extern HResult PSPropertyBag_ReadLONG(ref IPropertyBag propBag, char16* propName, out int32 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteLONG(ref IPropertyBag propBag, PWSTR propName, int32 value);
+		public static extern HResult PSPropertyBag_WriteLONG(ref IPropertyBag propBag, char16* propName, int32 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadDWORD(ref IPropertyBag propBag, PWSTR propName, out uint32 value);
+		public static extern HResult PSPropertyBag_ReadDWORD(ref IPropertyBag propBag, char16* propName, out uint32 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteDWORD(ref IPropertyBag propBag, PWSTR propName, uint32 value);
+		public static extern HResult PSPropertyBag_WriteDWORD(ref IPropertyBag propBag, char16* propName, uint32 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadBOOL(ref IPropertyBag propBag, PWSTR propName, out BOOL value);
+		public static extern HResult PSPropertyBag_ReadIntBool(ref IPropertyBag propBag, char16* propName, out IntBool value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteBOOL(ref IPropertyBag propBag, PWSTR propName, BOOL value);
+		public static extern HResult PSPropertyBag_WriteIntBool(ref IPropertyBag propBag, char16* propName, IntBool value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadPOINTL(ref IPropertyBag propBag, PWSTR propName, out POINTL value);
+		public static extern HResult PSPropertyBag_ReadPOINTL(ref IPropertyBag propBag, char16* propName, out POINTL value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WritePOINTL(ref IPropertyBag propBag, PWSTR propName, in POINTL value);
+		public static extern HResult PSPropertyBag_WritePOINTL(ref IPropertyBag propBag, char16* propName, in POINTL value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadPOINTS(ref IPropertyBag propBag, PWSTR propName, out POINTS value);
+		public static extern HResult PSPropertyBag_ReadPOINTS(ref IPropertyBag propBag, char16* propName, out POINTS value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WritePOINTS(ref IPropertyBag propBag, PWSTR propName, in POINTS value);
+		public static extern HResult PSPropertyBag_WritePOINTS(ref IPropertyBag propBag, char16* propName, in POINTS value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadRECTL(ref IPropertyBag propBag, PWSTR propName, out RECTL value);
+		public static extern HResult PSPropertyBag_ReadRECTL(ref IPropertyBag propBag, char16* propName, out RECTL value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteRECTL(ref IPropertyBag propBag, PWSTR propName, in RECTL value);
+		public static extern HResult PSPropertyBag_WriteRECTL(ref IPropertyBag propBag, char16* propName, in RECTL value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadStream(ref IPropertyBag propBag, PWSTR propName, out IStream* value);
+		public static extern HResult PSPropertyBag_ReadStream(ref IPropertyBag propBag, char16* propName, out IStream* value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteStream(ref IPropertyBag propBag, PWSTR propName, ref IStream value);
+		public static extern HResult PSPropertyBag_WriteStream(ref IPropertyBag propBag, char16* propName, ref IStream value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_Delete(ref IPropertyBag propBag, PWSTR propName);
+		public static extern HResult PSPropertyBag_Delete(ref IPropertyBag propBag, char16* propName);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadULONGLONG(ref IPropertyBag propBag, PWSTR propName, out uint64 value);
+		public static extern HResult PSPropertyBag_ReadULONGLONG(ref IPropertyBag propBag, char16* propName, out uint64 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteULONGLONG(ref IPropertyBag propBag, PWSTR propName, uint64 value);
+		public static extern HResult PSPropertyBag_WriteULONGLONG(ref IPropertyBag propBag, char16* propName, uint64 value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadUnknown(ref IPropertyBag propBag, PWSTR propName, in Guid riid, void** ppv);
+		public static extern HResult PSPropertyBag_ReadUnknown(ref IPropertyBag propBag, char16* propName, in Guid riid, void** ppv);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteUnknown(ref IPropertyBag propBag, PWSTR propName, ref IUnknown punk);
+		public static extern HResult PSPropertyBag_WriteUnknown(ref IPropertyBag propBag, char16* propName, ref IUnknown punk);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadGUID(ref IPropertyBag propBag, PWSTR propName, out Guid value);
+		public static extern HResult PSPropertyBag_ReadGUID(ref IPropertyBag propBag, char16* propName, out Guid value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WriteGUID(ref IPropertyBag propBag, PWSTR propName, in Guid value);
+		public static extern HResult PSPropertyBag_WriteGUID(ref IPropertyBag propBag, char16* propName, in Guid value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_ReadPropertyKey(ref IPropertyBag propBag, PWSTR propName, out PROPERTYKEY value);
+		public static extern HResult PSPropertyBag_ReadPropertyKey(ref IPropertyBag propBag, char16* propName, out PROPERTYKEY value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PSPropertyBag_WritePropertyKey(ref IPropertyBag propBag, PWSTR propName, in PROPERTYKEY value);
+		public static extern HResult PSPropertyBag_WritePropertyKey(ref IPropertyBag propBag, char16* propName, in PROPERTYKEY value);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromResource(HINSTANCE hinst, uint32 id, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromResource(HInstance hinst, uint32 id, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromBuffer(void* pv, uint32 cb, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromBuffer(void* pv, uint32 cb, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromCLSID(in Guid clsid, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromCLSID(in Guid clsid, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromGUIDAsString(in Guid guid, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromGUIDAsString(in Guid guid, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromFileTime(in FILETIME pftIn, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromFileTime(in FileTime pftIn, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromPropVariantVectorElem(in PROPVARIANT propvarIn, uint32 iElem, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromPropVariantVectorElem(in PROPVARIANT propvarIn, uint32 iElem, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantVectorFromPropVariant(in PROPVARIANT propvarSingle, out PROPVARIANT ppropvarVector);
+		public static extern HResult InitPropVariantVectorFromPropVariant(in PROPVARIANT propvarSingle, out PROPVARIANT ppropvarVector);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromStrRet(out STRRET pstrret, ITEMIDLIST* pidl, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromStrRet(out STRRET pstrret, ITEMIDLIST* pidl, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromBooleanVector(BOOL* prgf, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromBooleanVector(IntBool* prgf, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromInt16Vector(int16* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromInt16Vector(int16* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromUInt16Vector(uint16* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromUInt16Vector(uint16* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromInt32Vector(int32* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromInt32Vector(int32* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromUInt32Vector(uint32* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromUInt32Vector(uint32* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromInt64Vector(int64* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromInt64Vector(int64* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromUInt64Vector(uint64* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromUInt64Vector(uint64* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromDoubleVector(double* prgn, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromDoubleVector(double* prgn, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromFileTimeVector(FILETIME* prgft, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromFileTimeVector(FileTime* prgft, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromStringVector(PWSTR* prgsz, uint32 cElems, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromStringVector(char16** prgsz, uint32 cElems, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitPropVariantFromStringAsVector(PWSTR psz, out PROPVARIANT ppropvar);
+		public static extern HResult InitPropVariantFromStringAsVector(char16* psz, out PROPVARIANT ppropvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PropVariantToBooleanWithDefault(in PROPVARIANT propvarIn, BOOL fDefault);
+		public static extern IntBool PropVariantToBooleanWithDefault(in PROPVARIANT propvarIn, IntBool fDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int16 PropVariantToInt16WithDefault(in PROPVARIANT propvarIn, int16 iDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1065,143 +1072,143 @@ namespace Win32
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern double PropVariantToDoubleWithDefault(in PROPVARIANT propvarIn, double dblDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR PropVariantToStringWithDefault(in PROPVARIANT propvarIn, PWSTR pszDefault);
+		public static extern char16* PropVariantToStringWithDefault(in PROPVARIANT propvarIn, char16* pszDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToBoolean(in PROPVARIANT propvarIn, out BOOL pfRet);
+		public static extern HResult PropVariantToBoolean(in PROPVARIANT propvarIn, out IntBool pfRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt16(in PROPVARIANT propvarIn, out int16 piRet);
+		public static extern HResult PropVariantToInt16(in PROPVARIANT propvarIn, out int16 piRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt16(in PROPVARIANT propvarIn, out uint16 puiRet);
+		public static extern HResult PropVariantToUInt16(in PROPVARIANT propvarIn, out uint16 puiRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt32(in PROPVARIANT propvarIn, out int32 plRet);
+		public static extern HResult PropVariantToInt32(in PROPVARIANT propvarIn, out int32 plRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt32(in PROPVARIANT propvarIn, out uint32 pulRet);
+		public static extern HResult PropVariantToUInt32(in PROPVARIANT propvarIn, out uint32 pulRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt64(in PROPVARIANT propvarIn, out int64 pllRet);
+		public static extern HResult PropVariantToInt64(in PROPVARIANT propvarIn, out int64 pllRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt64(in PROPVARIANT propvarIn, out uint64 pullRet);
+		public static extern HResult PropVariantToUInt64(in PROPVARIANT propvarIn, out uint64 pullRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToDouble(in PROPVARIANT propvarIn, out double pdblRet);
+		public static extern HResult PropVariantToDouble(in PROPVARIANT propvarIn, out double pdblRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToBuffer(in PROPVARIANT propvar, void* pv, uint32 cb);
+		public static extern HResult PropVariantToBuffer(in PROPVARIANT propvar, void* pv, uint32 cb);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToString(in PROPVARIANT propvar, char16* psz, uint32 cch);
+		public static extern HResult PropVariantToString(in PROPVARIANT propvar, char16* psz, uint32 cch);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToGUID(in PROPVARIANT propvar, out Guid pguid);
+		public static extern HResult PropVariantToGUID(in PROPVARIANT propvar, out Guid pguid);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToStringAlloc(in PROPVARIANT propvar, out PWSTR ppszOut);
+		public static extern HResult PropVariantToStringAlloc(in PROPVARIANT propvar, out char16* ppszOut);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToBSTR(in PROPVARIANT propvar, out BSTR pbstrOut);
+		public static extern HResult PropVariantToBSTR(in PROPVARIANT propvar, out char16* pbstrOut);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToStrRet(in PROPVARIANT propvar, out STRRET pstrret);
+		public static extern HResult PropVariantToStrRet(in PROPVARIANT propvar, out STRRET pstrret);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToFileTime(in PROPVARIANT propvar, PSTIME_FLAGS pstfOut, out FILETIME pftOut);
+		public static extern HResult PropVariantToFileTime(in PROPVARIANT propvar, PSTIME_FLAGS pstfOut, out FileTime pftOut);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PropVariantGetElementCount(in PROPVARIANT propvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToBooleanVector(in PROPVARIANT propvar, BOOL* prgf, uint32 crgf, out uint32 pcElem);
+		public static extern HResult PropVariantToBooleanVector(in PROPVARIANT propvar, IntBool* prgf, uint32 crgf, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt16Vector(in PROPVARIANT propvar, int16* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToInt16Vector(in PROPVARIANT propvar, int16* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt16Vector(in PROPVARIANT propvar, uint16* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToUInt16Vector(in PROPVARIANT propvar, uint16* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt32Vector(in PROPVARIANT propvar, int32* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToInt32Vector(in PROPVARIANT propvar, int32* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt32Vector(in PROPVARIANT propvar, uint32* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToUInt32Vector(in PROPVARIANT propvar, uint32* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt64Vector(in PROPVARIANT propvar, int64* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToInt64Vector(in PROPVARIANT propvar, int64* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt64Vector(in PROPVARIANT propvar, uint64* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToUInt64Vector(in PROPVARIANT propvar, uint64* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToDoubleVector(in PROPVARIANT propvar, double* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult PropVariantToDoubleVector(in PROPVARIANT propvar, double* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToFileTimeVector(in PROPVARIANT propvar, FILETIME* prgft, uint32 crgft, out uint32 pcElem);
+		public static extern HResult PropVariantToFileTimeVector(in PROPVARIANT propvar, FileTime* prgft, uint32 crgft, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToStringVector(in PROPVARIANT propvar, PWSTR* prgsz, uint32 crgsz, out uint32 pcElem);
+		public static extern HResult PropVariantToStringVector(in PROPVARIANT propvar, char16** prgsz, uint32 crgsz, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToBooleanVectorAlloc(in PROPVARIANT propvar, out BOOL* pprgf, out uint32 pcElem);
+		public static extern HResult PropVariantToBooleanVectorAlloc(in PROPVARIANT propvar, out IntBool* pprgf, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt16VectorAlloc(in PROPVARIANT propvar, out int16* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToInt16VectorAlloc(in PROPVARIANT propvar, out int16* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt16VectorAlloc(in PROPVARIANT propvar, out uint16* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToUInt16VectorAlloc(in PROPVARIANT propvar, out uint16* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt32VectorAlloc(in PROPVARIANT propvar, out int32* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToInt32VectorAlloc(in PROPVARIANT propvar, out int32* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt32VectorAlloc(in PROPVARIANT propvar, out uint32* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToUInt32VectorAlloc(in PROPVARIANT propvar, out uint32* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToInt64VectorAlloc(in PROPVARIANT propvar, out int64* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToInt64VectorAlloc(in PROPVARIANT propvar, out int64* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToUInt64VectorAlloc(in PROPVARIANT propvar, out uint64* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToUInt64VectorAlloc(in PROPVARIANT propvar, out uint64* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToDoubleVectorAlloc(in PROPVARIANT propvar, out double* pprgn, out uint32 pcElem);
+		public static extern HResult PropVariantToDoubleVectorAlloc(in PROPVARIANT propvar, out double* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToFileTimeVectorAlloc(in PROPVARIANT propvar, out FILETIME* pprgft, out uint32 pcElem);
+		public static extern HResult PropVariantToFileTimeVectorAlloc(in PROPVARIANT propvar, out FileTime* pprgft, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToStringVectorAlloc(in PROPVARIANT propvar, out PWSTR* pprgsz, out uint32 pcElem);
+		public static extern HResult PropVariantToStringVectorAlloc(in PROPVARIANT propvar, out char16** pprgsz, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetBooleanElem(in PROPVARIANT propvar, uint32 iElem, out BOOL pfVal);
+		public static extern HResult PropVariantGetBooleanElem(in PROPVARIANT propvar, uint32 iElem, out IntBool pfVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetInt16Elem(in PROPVARIANT propvar, uint32 iElem, out int16 pnVal);
+		public static extern HResult PropVariantGetInt16Elem(in PROPVARIANT propvar, uint32 iElem, out int16 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetUInt16Elem(in PROPVARIANT propvar, uint32 iElem, out uint16 pnVal);
+		public static extern HResult PropVariantGetUInt16Elem(in PROPVARIANT propvar, uint32 iElem, out uint16 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetInt32Elem(in PROPVARIANT propvar, uint32 iElem, out int32 pnVal);
+		public static extern HResult PropVariantGetInt32Elem(in PROPVARIANT propvar, uint32 iElem, out int32 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetUInt32Elem(in PROPVARIANT propvar, uint32 iElem, out uint32 pnVal);
+		public static extern HResult PropVariantGetUInt32Elem(in PROPVARIANT propvar, uint32 iElem, out uint32 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetInt64Elem(in PROPVARIANT propvar, uint32 iElem, out int64 pnVal);
+		public static extern HResult PropVariantGetInt64Elem(in PROPVARIANT propvar, uint32 iElem, out int64 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetUInt64Elem(in PROPVARIANT propvar, uint32 iElem, out uint64 pnVal);
+		public static extern HResult PropVariantGetUInt64Elem(in PROPVARIANT propvar, uint32 iElem, out uint64 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetDoubleElem(in PROPVARIANT propvar, uint32 iElem, out double pnVal);
+		public static extern HResult PropVariantGetDoubleElem(in PROPVARIANT propvar, uint32 iElem, out double pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetFileTimeElem(in PROPVARIANT propvar, uint32 iElem, out FILETIME pftVal);
+		public static extern HResult PropVariantGetFileTimeElem(in PROPVARIANT propvar, uint32 iElem, out FileTime pftVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantGetStringElem(in PROPVARIANT propvar, uint32 iElem, out PWSTR ppszVal);
+		public static extern HResult PropVariantGetStringElem(in PROPVARIANT propvar, uint32 iElem, out char16* ppszVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ClearPropVariantArray(PROPVARIANT* rgPropVar, uint32 cVars);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 PropVariantCompareEx(in PROPVARIANT propvar1, in PROPVARIANT propvar2, PROPVAR_COMPARE_UNIT unit, PROPVAR_COMPARE_FLAGS flags);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantChangeType(out PROPVARIANT ppropvarDest, in PROPVARIANT propvarSrc, PROPVAR_CHANGE_FLAGS flags, uint16 vt);
+		public static extern HResult PropVariantChangeType(out PROPVARIANT ppropvarDest, in PROPVARIANT propvarSrc, PROPVAR_CHANGE_FLAGS flags, uint16 vt);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PropVariantToVariant(in PROPVARIANT pPropVar, out VARIANT pVar);
+		public static extern HResult PropVariantToVariant(in PROPVARIANT pPropVar, out VARIANT pVar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToPropVariant(in VARIANT pVar, out PROPVARIANT pPropVar);
+		public static extern HResult VariantToPropVariant(in VARIANT pVar, out PROPVARIANT pPropVar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromResource(HINSTANCE hinst, uint32 id, out VARIANT pvar);
+		public static extern HResult InitVariantFromResource(HInstance hinst, uint32 id, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromBuffer(void* pv, uint32 cb, out VARIANT pvar);
+		public static extern HResult InitVariantFromBuffer(void* pv, uint32 cb, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromGUIDAsString(in Guid guid, out VARIANT pvar);
+		public static extern HResult InitVariantFromGUIDAsString(in Guid guid, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromFileTime(in FILETIME pft, out VARIANT pvar);
+		public static extern HResult InitVariantFromFileTime(in FileTime pft, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromFileTimeArray(FILETIME* prgft, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromFileTimeArray(FileTime* prgft, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromStrRet(ref STRRET pstrret, ref ITEMIDLIST pidl, out VARIANT pvar);
+		public static extern HResult InitVariantFromStrRet(ref STRRET pstrret, ref ITEMIDLIST pidl, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromVariantArrayElem(in VARIANT varIn, uint32 iElem, out VARIANT pvar);
+		public static extern HResult InitVariantFromVariantArrayElem(in VARIANT varIn, uint32 iElem, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromBooleanArray(BOOL* prgf, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromBooleanArray(IntBool* prgf, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromInt16Array(int16* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromInt16Array(int16* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromUInt16Array(uint16* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromUInt16Array(uint16* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromInt32Array(int32* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromInt32Array(int32* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromUInt32Array(uint32* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromUInt32Array(uint32* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromInt64Array(int64* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromInt64Array(int64* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromUInt64Array(uint64* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromUInt64Array(uint64* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromDoubleArray(double* prgn, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromDoubleArray(double* prgn, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitVariantFromStringArray(PWSTR* prgsz, uint32 cElems, out VARIANT pvar);
+		public static extern HResult InitVariantFromStringArray(char16** prgsz, uint32 cElems, out VARIANT pvar);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL VariantToBooleanWithDefault(in VARIANT varIn, BOOL fDefault);
+		public static extern IntBool VariantToBooleanWithDefault(in VARIANT varIn, IntBool fDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int16 VariantToInt16WithDefault(in VARIANT varIn, int16 iDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1217,118 +1224,119 @@ namespace Win32
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern double VariantToDoubleWithDefault(in VARIANT varIn, double dblDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR VariantToStringWithDefault(in VARIANT varIn, PWSTR pszDefault);
+		public static extern char16* VariantToStringWithDefault(in VARIANT varIn, char16* pszDefault);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToBoolean(in VARIANT varIn, out BOOL pfRet);
+		public static extern HResult VariantToBoolean(in VARIANT varIn, out IntBool pfRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt16(in VARIANT varIn, out int16 piRet);
+		public static extern HResult VariantToInt16(in VARIANT varIn, out int16 piRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt16(in VARIANT varIn, out uint16 puiRet);
+		public static extern HResult VariantToUInt16(in VARIANT varIn, out uint16 puiRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt32(in VARIANT varIn, out int32 plRet);
+		public static extern HResult VariantToInt32(in VARIANT varIn, out int32 plRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt32(in VARIANT varIn, out uint32 pulRet);
+		public static extern HResult VariantToUInt32(in VARIANT varIn, out uint32 pulRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt64(in VARIANT varIn, out int64 pllRet);
+		public static extern HResult VariantToInt64(in VARIANT varIn, out int64 pllRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt64(in VARIANT varIn, out uint64 pullRet);
+		public static extern HResult VariantToUInt64(in VARIANT varIn, out uint64 pullRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToDouble(in VARIANT varIn, out double pdblRet);
+		public static extern HResult VariantToDouble(in VARIANT varIn, out double pdblRet);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToBuffer(in VARIANT varIn, void* pv, uint32 cb);
+		public static extern HResult VariantToBuffer(in VARIANT varIn, void* pv, uint32 cb);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToGUID(in VARIANT varIn, out Guid pguid);
+		public static extern HResult VariantToGUID(in VARIANT varIn, out Guid pguid);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToString(in VARIANT varIn, char16* pszBuf, uint32 cchBuf);
+		public static extern HResult VariantToString(in VARIANT varIn, char16* pszBuf, uint32 cchBuf);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToStringAlloc(in VARIANT varIn, out PWSTR ppszBuf);
+		public static extern HResult VariantToStringAlloc(in VARIANT varIn, out char16* ppszBuf);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToDosDateTime(in VARIANT varIn, out uint16 pwDate, out uint16 pwTime);
+		public static extern HResult VariantToDosDateTime(in VARIANT varIn, out uint16 pwDate, out uint16 pwTime);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToStrRet(in VARIANT varIn, out STRRET pstrret);
+		public static extern HResult VariantToStrRet(in VARIANT varIn, out STRRET pstrret);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToFileTime(in VARIANT varIn, PSTIME_FLAGS stfOut, out FILETIME pftOut);
+		public static extern HResult VariantToFileTime(in VARIANT varIn, PSTIME_FLAGS stfOut, out FileTime pftOut);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 VariantGetElementCount(in VARIANT varIn);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToBooleanArray(in VARIANT @var, BOOL* prgf, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToBooleanArray(in VARIANT @var, IntBool* prgf, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt16Array(in VARIANT @var, int16* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToInt16Array(in VARIANT @var, int16* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt16Array(in VARIANT @var, uint16* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToUInt16Array(in VARIANT @var, uint16* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt32Array(in VARIANT @var, int32* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToInt32Array(in VARIANT @var, int32* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt32Array(in VARIANT @var, uint32* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToUInt32Array(in VARIANT @var, uint32* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt64Array(in VARIANT @var, int64* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToInt64Array(in VARIANT @var, int64* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt64Array(in VARIANT @var, uint64* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToUInt64Array(in VARIANT @var, uint64* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToDoubleArray(in VARIANT @var, double* prgn, uint32 crgn, out uint32 pcElem);
+		public static extern HResult VariantToDoubleArray(in VARIANT @var, double* prgn, uint32 crgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToStringArray(in VARIANT @var, PWSTR* prgsz, uint32 crgsz, out uint32 pcElem);
+		public static extern HResult VariantToStringArray(in VARIANT @var, char16** prgsz, uint32 crgsz, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToBooleanArrayAlloc(in VARIANT @var, out BOOL* pprgf, out uint32 pcElem);
+		public static extern HResult VariantToBooleanArrayAlloc(in VARIANT @var, out IntBool* pprgf, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt16ArrayAlloc(in VARIANT @var, out int16* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToInt16ArrayAlloc(in VARIANT @var, out int16* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt16ArrayAlloc(in VARIANT @var, out uint16* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToUInt16ArrayAlloc(in VARIANT @var, out uint16* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt32ArrayAlloc(in VARIANT @var, out int32* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToInt32ArrayAlloc(in VARIANT @var, out int32* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt32ArrayAlloc(in VARIANT @var, out uint32* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToUInt32ArrayAlloc(in VARIANT @var, out uint32* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToInt64ArrayAlloc(in VARIANT @var, out int64* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToInt64ArrayAlloc(in VARIANT @var, out int64* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToUInt64ArrayAlloc(in VARIANT @var, out uint64* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToUInt64ArrayAlloc(in VARIANT @var, out uint64* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToDoubleArrayAlloc(in VARIANT @var, out double* pprgn, out uint32 pcElem);
+		public static extern HResult VariantToDoubleArrayAlloc(in VARIANT @var, out double* pprgn, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantToStringArrayAlloc(in VARIANT @var, out PWSTR* pprgsz, out uint32 pcElem);
+		public static extern HResult VariantToStringArrayAlloc(in VARIANT @var, out char16** pprgsz, out uint32 pcElem);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetBooleanElem(in VARIANT @var, uint32 iElem, out BOOL pfVal);
+		public static extern HResult VariantGetBooleanElem(in VARIANT @var, uint32 iElem, out IntBool pfVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetInt16Elem(in VARIANT @var, uint32 iElem, out int16 pnVal);
+		public static extern HResult VariantGetInt16Elem(in VARIANT @var, uint32 iElem, out int16 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetUInt16Elem(in VARIANT @var, uint32 iElem, out uint16 pnVal);
+		public static extern HResult VariantGetUInt16Elem(in VARIANT @var, uint32 iElem, out uint16 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetInt32Elem(in VARIANT @var, uint32 iElem, out int32 pnVal);
+		public static extern HResult VariantGetInt32Elem(in VARIANT @var, uint32 iElem, out int32 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetUInt32Elem(in VARIANT @var, uint32 iElem, out uint32 pnVal);
+		public static extern HResult VariantGetUInt32Elem(in VARIANT @var, uint32 iElem, out uint32 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetInt64Elem(in VARIANT @var, uint32 iElem, out int64 pnVal);
+		public static extern HResult VariantGetInt64Elem(in VARIANT @var, uint32 iElem, out int64 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetUInt64Elem(in VARIANT @var, uint32 iElem, out uint64 pnVal);
+		public static extern HResult VariantGetUInt64Elem(in VARIANT @var, uint32 iElem, out uint64 pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetDoubleElem(in VARIANT @var, uint32 iElem, out double pnVal);
+		public static extern HResult VariantGetDoubleElem(in VARIANT @var, uint32 iElem, out double pnVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VariantGetStringElem(in VARIANT @var, uint32 iElem, out PWSTR ppszVal);
+		public static extern HResult VariantGetStringElem(in VARIANT @var, uint32 iElem, out char16* ppszVal);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ClearVariantArray(VARIANT* pvars, uint32 cvars);
 		[Import("propsys.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 VariantCompare(in VARIANT var1, in VARIANT var2);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHGetPropertyStoreFromIDList(ref ITEMIDLIST pidl, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv);
+		public static extern HResult SHGetPropertyStoreFromIDList(ref ITEMIDLIST pidl, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHGetPropertyStoreFromParsingName(PWSTR pszPath, IBindCtx* pbc, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv);
+		public static extern HResult SHGetPropertyStoreFromParsingName(char16* pszPath, IBindCtx* pbc, GETPROPERTYSTOREFLAGS flags, in Guid riid, void** ppv);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHAddDefaultPropertiesByExt(PWSTR pszExt, ref IPropertyStore pPropStore);
+		public static extern HResult SHAddDefaultPropertiesByExt(char16* pszExt, ref IPropertyStore pPropStore);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE PifMgr_OpenProperties(PWSTR pszApp, PWSTR pszPIF, uint32 hInf, uint32 flOpt);
+		public static extern Handle PifMgr_OpenProperties(char16* pszApp, char16* pszPIF, uint32 hInf, uint32 flOpt);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 PifMgr_GetProperties(HANDLE hProps, PSTR pszGroup, void* lpProps, int32 cbProps, uint32 flOpt);
+		public static extern int32 PifMgr_GetProperties(Handle hProps, char8* pszGroup, void* lpProps, int32 cbProps, uint32 flOpt);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 PifMgr_SetProperties(HANDLE hProps, PSTR pszGroup, void* lpProps, int32 cbProps, uint32 flOpt);
+		public static extern int32 PifMgr_SetProperties(Handle hProps, char8* pszGroup, void* lpProps, int32 cbProps, uint32 flOpt);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE PifMgr_CloseProperties(HANDLE hProps, uint32 flOpt);
+		public static extern Handle PifMgr_CloseProperties(Handle hProps, uint32 flOpt);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHPropStgCreate(ref IPropertySetStorage psstg, in Guid fmtid, Guid* pclsid, uint32 grfFlags, uint32 grfMode, uint32 dwDisposition, out IPropertyStorage* ppstg, uint32* puCodePage);
+		public static extern HResult SHPropStgCreate(ref IPropertySetStorage psstg, in Guid fmtid, Guid* pclsid, uint32 grfFlags, uint32 grfMode, uint32 dwDisposition, out IPropertyStorage* ppstg, uint32* puCodePage);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHPropStgReadMultiple(ref IPropertyStorage pps, uint32 uCodePage, uint32 cpspec, PROPSPEC* rgpspec, out PROPVARIANT rgvar);
+		public static extern HResult SHPropStgReadMultiple(ref IPropertyStorage pps, uint32 uCodePage, uint32 cpspec, PROPSPEC* rgpspec, out PROPVARIANT rgvar);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHPropStgWriteMultiple(ref IPropertyStorage pps, uint32* puCodePage, uint32 cpspec, PROPSPEC* rgpspec, PROPVARIANT* rgvar, uint32 propidNameFirst);
+		public static extern HResult SHPropStgWriteMultiple(ref IPropertyStorage pps, uint32* puCodePage, uint32 cpspec, PROPSPEC* rgpspec, PROPVARIANT* rgvar, uint32 propidNameFirst);
 		[Import("shell32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SHGetPropertyStoreForWindow(HWND hwnd, in Guid riid, void** ppv);
+		public static extern HResult SHGetPropertyStoreForWindow(HWnd hwnd, in Guid riid, void** ppv);
+	}
 	}
 }

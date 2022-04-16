@@ -27,7 +27,7 @@ namespace Win32
 		[Import("msports.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ComDBClaimNextFreePort(HCOMDB HComDB, out uint32 ComNumber);
 		[Import("msports.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ComDBClaimPort(HCOMDB HComDB, uint32 ComNumber, BOOL ForceClaim, BOOL* Forced);
+		public static extern int32 ComDBClaimPort(HCOMDB HComDB, uint32 ComNumber, IntBool ForceClaim, IntBool* Forced);
 		[Import("msports.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ComDBReleasePort(HCOMDB HComDB, uint32 ComNumber);
 		[Import("msports.dll"), CLink, CallingConvention(.Stdcall)]

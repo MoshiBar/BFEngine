@@ -13,7 +13,6 @@ namespace BfEngine
 			T sum = 0;
 			for(var time in times) sum += time;
 			sum / times.Count
-			//Math.Avg<float>((Span<float>)times);
 		}
 
 		public void PushValue(T time) mut{

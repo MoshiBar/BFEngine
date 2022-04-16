@@ -751,7 +751,7 @@ namespace Win32
 			FineRtt = 8,
 			Maximum = 9,
 		}
-		public enum TCP_BOOLEAN_OPTIONAL : int32
+		public enum TCP_Boolean_OPTIONAL : int32
 		{
 			Disabled = 0,
 			Enabled = 1,
@@ -963,8 +963,8 @@ namespace Win32
 			public NET_IF_MEDIA_CONNECT_STATE MediaConnectState;
 			public NET_IF_MEDIA_DUPLEX_STATE MediaDuplexState;
 			public uint32 ifMtu;
-			public BOOLEAN ifPromiscuousMode;
-			public BOOLEAN ifDeviceWakeUpEnable;
+			public bool ifPromiscuousMode;
+			public bool ifDeviceWakeUpEnable;
 			public uint64 XmitLinkSpeed;
 			public uint64 RcvLinkSpeed;
 			public uint64 ifLastChange;
@@ -1058,15 +1058,15 @@ namespace Win32
 			public uint64 InterfaceIdentifier;
 			public uint32 MinRouterAdvertisementInterval;
 			public uint32 MaxRouterAdvertisementInterval;
-			public BOOLEAN AdvertisingEnabled;
-			public BOOLEAN ForwardingEnabled;
-			public BOOLEAN WeakHostSend;
-			public BOOLEAN WeakHostReceive;
-			public BOOLEAN UseAutomaticMetric;
-			public BOOLEAN UseNeighborUnreachabilityDetection;
-			public BOOLEAN ManagedAddressConfigurationSupported;
-			public BOOLEAN OtherStatefulConfigurationSupported;
-			public BOOLEAN AdvertiseDefaultRoute;
+			public bool AdvertisingEnabled;
+			public bool ForwardingEnabled;
+			public bool WeakHostSend;
+			public bool WeakHostReceive;
+			public bool UseAutomaticMetric;
+			public bool UseNeighborUnreachabilityDetection;
+			public bool ManagedAddressConfigurationSupported;
+			public bool OtherStatefulConfigurationSupported;
+			public bool AdvertiseDefaultRoute;
 			public NL_ROUTER_DISCOVERY_BEHAVIOR RouterDiscoveryBehavior;
 			public uint32 DadTransmits;
 			public uint32 BaseReachableTime;
@@ -1078,14 +1078,14 @@ namespace Win32
 			public uint32 SitePrefixLength;
 			public uint32 Metric;
 			public uint32 NlMtu;
-			public BOOLEAN Connected;
-			public BOOLEAN SupportsWakeUpPatterns;
-			public BOOLEAN SupportsNeighborDiscovery;
-			public BOOLEAN SupportsRouterDiscovery;
+			public bool Connected;
+			public bool SupportsWakeUpPatterns;
+			public bool SupportsNeighborDiscovery;
+			public bool SupportsRouterDiscovery;
 			public uint32 ReachableTime;
 			public NL_INTERFACE_OFFLOAD_ROD TransmitOffload;
 			public NL_INTERFACE_OFFLOAD_ROD ReceiveOffload;
-			public BOOLEAN DisableDefaultRoutes;
+			public bool DisableDefaultRoutes;
 		}
 		[CRepr]
 		public struct MIB_IPINTERFACE_TABLE
@@ -1134,7 +1134,7 @@ namespace Win32
 			public uint32 ValidLifetime;
 			public uint32 PreferredLifetime;
 			public uint8 OnLinkPrefixLength;
-			public BOOLEAN SkipAsSource;
+			public bool SkipAsSource;
 			public NL_DAD_STATE DadState;
 			public SCOPE_ID ScopeId;
 			public LARGE_INTEGER CreationTimeStamp;
@@ -1191,10 +1191,10 @@ namespace Win32
 			public uint32 PreferredLifetime;
 			public uint32 Metric;
 			public NL_ROUTE_PROTOCOL Protocol;
-			public BOOLEAN Loopback;
-			public BOOLEAN AutoconfigureAddress;
-			public BOOLEAN Publish;
-			public BOOLEAN Immortal;
+			public bool Loopback;
+			public bool AutoconfigureAddress;
+			public bool Publish;
+			public bool Immortal;
 			public uint32 Age;
 			public NL_ROUTE_ORIGIN Origin;
 		}
@@ -1216,7 +1216,7 @@ namespace Win32
 			public uint32 RttMean;
 			public uint32 RttDeviation;
 			public _Anonymous_e__Union Anonymous;
-			public BOOLEAN IsReachable;
+			public bool IsReachable;
 			public uint64 LinkTransmitSpeed;
 			public uint64 LinkReceiveSpeed;
 			
@@ -1275,24 +1275,24 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint64 Flags;
-			public PWSTR Hostname;
-			public PWSTR Domain;
-			public PWSTR SearchList;
+			public char16* Hostname;
+			public char16* Domain;
+			public char16* SearchList;
 		}
 		[CRepr]
 		public struct DNS_SETTINGS2
 		{
 			public uint32 Version;
 			public uint64 Flags;
-			public PWSTR Hostname;
-			public PWSTR Domain;
-			public PWSTR SearchList;
+			public char16* Hostname;
+			public char16* Domain;
+			public char16* SearchList;
 			public uint64 SettingFlags;
 		}
 		[CRepr]
 		public struct DNS_DOH_SERVER_SETTINGS
 		{
-			public PWSTR Template;
+			public char16* Template;
 			public uint64 Flags;
 		}
 		[CRepr, Union]
@@ -1313,37 +1313,37 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint64 Flags;
-			public PWSTR Domain;
-			public PWSTR NameServer;
-			public PWSTR SearchList;
+			public char16* Domain;
+			public char16* NameServer;
+			public char16* SearchList;
 			public uint32 RegistrationEnabled;
 			public uint32 RegisterAdapterName;
 			public uint32 EnableLLMNR;
 			public uint32 QueryAdapterName;
-			public PWSTR ProfileNameServer;
+			public char16* ProfileNameServer;
 		}
 		[CRepr]
 		public struct DNS_INTERFACE_SETTINGS_EX
 		{
 			public DNS_INTERFACE_SETTINGS SettingsV1;
 			public uint32 DisableUnconstrainedQueries;
-			public PWSTR SupplementalSearchList;
+			public char16* SupplementalSearchList;
 		}
 		[CRepr]
 		public struct DNS_INTERFACE_SETTINGS3
 		{
 			public uint32 Version;
 			public uint64 Flags;
-			public PWSTR Domain;
-			public PWSTR NameServer;
-			public PWSTR SearchList;
+			public char16* Domain;
+			public char16* NameServer;
+			public char16* SearchList;
 			public uint32 RegistrationEnabled;
 			public uint32 RegisterAdapterName;
 			public uint32 EnableLLMNR;
 			public uint32 QueryAdapterName;
-			public PWSTR ProfileNameServer;
+			public char16* ProfileNameServer;
 			public uint32 DisableUnconstrainedQueries;
-			public PWSTR SupplementalSearchList;
+			public char16* SupplementalSearchList;
 			public uint32 cServerProperties;
 			public DNS_SERVER_PROPERTY* ServerProperties;
 			public uint32 cProfileServerProperties;
@@ -2157,8 +2157,8 @@ namespace Win32
 		[CRepr]
 		public struct TCPIP_OWNER_MODULE_BASIC_INFO
 		{
-			public PWSTR pModuleName;
-			public PWSTR pModulePath;
+			public char16* pModuleName;
+			public char16* pModulePath;
 		}
 		[CRepr]
 		public struct MIB_IPMCAST_BOUNDARY
@@ -2226,13 +2226,13 @@ namespace Win32
 			public uint32 dwIfIndex;
 			public uint32 dwAdminStatus;
 			public uint32 dwOperationalStatus;
-			public BOOL bMHbeatActive;
-			public BOOL bMHbeatAlive;
+			public IntBool bMHbeatActive;
+			public IntBool bMHbeatAlive;
 		}
 		[CRepr]
 		public struct MIB_ROUTESTATE
 		{
-			public BOOL bRoutesSetToStack;
+			public IntBool bRoutesSetToStack;
 		}
 		[CRepr]
 		public struct MIB_OPAQUE_INFO
@@ -2250,7 +2250,7 @@ namespace Win32
 		[CRepr]
 		public struct IP_ADDRESS_STRING
 		{
-			public CHAR[16] String;
+			public char8[16] String;
 		}
 		[CRepr]
 		public struct IP_ADDR_STRING
@@ -2265,8 +2265,8 @@ namespace Win32
 		{
 			public IP_ADAPTER_INFO* Next;
 			public uint32 ComboIndex;
-			public CHAR[260] AdapterName;
-			public CHAR[132] Description;
+			public char8[260] AdapterName;
+			public char8[132] Description;
 			public uint32 AddressLength;
 			public uint8[8] Address;
 			public uint32 Index;
@@ -2276,7 +2276,7 @@ namespace Win32
 			public IP_ADDR_STRING IpAddressList;
 			public IP_ADDR_STRING GatewayList;
 			public IP_ADDR_STRING DhcpServer;
-			public BOOL HaveWins;
+			public IntBool HaveWins;
 			public IP_ADDR_STRING PrimaryWinsServer;
 			public IP_ADDR_STRING SecondaryWinsServer;
 			public int64 LeaseObtained;
@@ -2475,14 +2475,14 @@ namespace Win32
 		{
 			public _Anonymous1_e__Union Anonymous1;
 			public IP_ADAPTER_ADDRESSES_LH* Next;
-			public PSTR AdapterName;
+			public char8* AdapterName;
 			public IP_ADAPTER_UNICAST_ADDRESS_LH* FirstUnicastAddress;
 			public IP_ADAPTER_ANYCAST_ADDRESS_XP* FirstAnycastAddress;
 			public IP_ADAPTER_MULTICAST_ADDRESS_XP* FirstMulticastAddress;
 			public IP_ADAPTER_DNS_SERVER_ADDRESS_XP* FirstDnsServerAddress;
-			public PWSTR DnsSuffix;
-			public PWSTR Description;
-			public PWSTR FriendlyName;
+			public char16* DnsSuffix;
+			public char16* Description;
+			public char16* FriendlyName;
 			public uint8[8] PhysicalAddress;
 			public uint32 PhysicalAddressLength;
 			public _Anonymous2_e__Union Anonymous2;
@@ -2541,14 +2541,14 @@ namespace Win32
 		{
 			public _Anonymous_e__Union Anonymous;
 			public IP_ADAPTER_ADDRESSES_XP* Next;
-			public PSTR AdapterName;
+			public char8* AdapterName;
 			public IP_ADAPTER_UNICAST_ADDRESS_XP* FirstUnicastAddress;
 			public IP_ADAPTER_ANYCAST_ADDRESS_XP* FirstAnycastAddress;
 			public IP_ADAPTER_MULTICAST_ADDRESS_XP* FirstMulticastAddress;
 			public IP_ADAPTER_DNS_SERVER_ADDRESS_XP* FirstDnsServerAddress;
-			public PWSTR DnsSuffix;
-			public PWSTR Description;
-			public PWSTR FriendlyName;
+			public char16* DnsSuffix;
+			public char16* Description;
+			public char16* FriendlyName;
 			public uint8[8] PhysicalAddress;
 			public uint32 PhysicalAddressLength;
 			public uint32 Flags;
@@ -2584,12 +2584,12 @@ namespace Win32
 		[CRepr]
 		public struct FIXED_INFO_W2KSP1
 		{
-			public CHAR[132] HostName;
-			public CHAR[132] DomainName;
+			public char8[132] HostName;
+			public char8[132] DomainName;
 			public IP_ADDR_STRING* CurrentDnsServer;
 			public IP_ADDR_STRING DnsServerList;
 			public uint32 NodeType;
-			public CHAR[260] ScopeId;
+			public char8[260] ScopeId;
 			public uint32 EnableRouting;
 			public uint32 EnableProxy;
 			public uint32 EnableDns;
@@ -2607,7 +2607,7 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_SYN_OPTS_ROS_v0
 		{
-			public BOOLEAN ActiveOpen;
+			public bool ActiveOpen;
 			public uint32 MssRcvd;
 			public uint32 MssSent;
 		}
@@ -2632,7 +2632,7 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_DATA_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_SND_CONG_ROD_v0
@@ -2664,7 +2664,7 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_SND_CONG_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_PATH_ROD_v0
@@ -2713,7 +2713,7 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_PATH_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_SEND_BUFF_ROD_v0
@@ -2726,7 +2726,7 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_SEND_BUFF_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_REC_ROD_v0
@@ -2749,7 +2749,7 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_REC_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_OBS_REC_ROD_v0
@@ -2762,13 +2762,13 @@ namespace Win32
 		[CRepr]
 		public struct TCP_ESTATS_OBS_REC_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_BANDWIDTH_RW_v0
 		{
-			public TCP_BOOLEAN_OPTIONAL EnableCollectionOutbound;
-			public TCP_BOOLEAN_OPTIONAL EnableCollectionInbound;
+			public TCP_Boolean_OPTIONAL EnableCollectionOutbound;
+			public TCP_Boolean_OPTIONAL EnableCollectionInbound;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_BANDWIDTH_ROD_v0
@@ -2777,13 +2777,13 @@ namespace Win32
 			public uint64 InboundBandwidth;
 			public uint64 OutboundInstability;
 			public uint64 InboundInstability;
-			public BOOLEAN OutboundBandwidthPeaked;
-			public BOOLEAN InboundBandwidthPeaked;
+			public bool OutboundBandwidthPeaked;
+			public bool InboundBandwidthPeaked;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_FINE_RTT_RW_v0
 		{
-			public BOOLEAN EnableCollection;
+			public bool EnableCollection;
 		}
 		[CRepr]
 		public struct TCP_ESTATS_FINE_RTT_ROD_v0
@@ -2796,30 +2796,30 @@ namespace Win32
 		[CRepr]
 		public struct INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES
 		{
-			public BOOLEAN PtpV2OverUdpIPv4EventMessageReceive;
-			public BOOLEAN PtpV2OverUdpIPv4AllMessageReceive;
-			public BOOLEAN PtpV2OverUdpIPv4EventMessageTransmit;
-			public BOOLEAN PtpV2OverUdpIPv4AllMessageTransmit;
-			public BOOLEAN PtpV2OverUdpIPv6EventMessageReceive;
-			public BOOLEAN PtpV2OverUdpIPv6AllMessageReceive;
-			public BOOLEAN PtpV2OverUdpIPv6EventMessageTransmit;
-			public BOOLEAN PtpV2OverUdpIPv6AllMessageTransmit;
-			public BOOLEAN AllReceive;
-			public BOOLEAN AllTransmit;
-			public BOOLEAN TaggedTransmit;
+			public bool PtpV2OverUdpIPv4EventMessageReceive;
+			public bool PtpV2OverUdpIPv4AllMessageReceive;
+			public bool PtpV2OverUdpIPv4EventMessageTransmit;
+			public bool PtpV2OverUdpIPv4AllMessageTransmit;
+			public bool PtpV2OverUdpIPv6EventMessageReceive;
+			public bool PtpV2OverUdpIPv6AllMessageReceive;
+			public bool PtpV2OverUdpIPv6EventMessageTransmit;
+			public bool PtpV2OverUdpIPv6AllMessageTransmit;
+			public bool AllReceive;
+			public bool AllTransmit;
+			public bool TaggedTransmit;
 		}
 		[CRepr]
 		public struct INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES
 		{
-			public BOOLEAN AllReceive;
-			public BOOLEAN AllTransmit;
-			public BOOLEAN TaggedTransmit;
+			public bool AllReceive;
+			public bool AllTransmit;
+			public bool TaggedTransmit;
 		}
 		[CRepr]
 		public struct INTERFACE_TIMESTAMP_CAPABILITIES
 		{
 			public uint64 HardwareClockFrequencyHz;
-			public BOOLEAN SupportsCrossTimestamp;
+			public bool SupportsCrossTimestamp;
 			public INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES HardwareCapabilities;
 			public INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES SoftwareCapabilities;
 		}
@@ -2915,7 +2915,7 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeIpInterfaceEntry(out MIB_IPINTERFACE_ROW Row);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NotifyIpInterfaceChange(uint16 Family, PIPINTERFACE_CHANGE_CALLBACK Callback, void* CallerContext, BOOLEAN InitialNotification, out HANDLE NotificationHandle);
+		public static extern NTSTATUS NotifyIpInterfaceChange(uint16 Family, PIPINTERFACE_CHANGE_CALLBACK Callback, void* CallerContext, bool InitialNotification, out Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS SetIpInterfaceEntry(out MIB_IPINTERFACE_ROW Row);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2931,9 +2931,9 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeUnicastIpAddressEntry(out MIB_UNICASTIPADDRESS_ROW Row);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NotifyUnicastIpAddressChange(uint16 Family, PUNICAST_IPADDRESS_CHANGE_CALLBACK Callback, void* CallerContext, BOOLEAN InitialNotification, out HANDLE NotificationHandle);
+		public static extern NTSTATUS NotifyUnicastIpAddressChange(uint16 Family, PUNICAST_IPADDRESS_CHANGE_CALLBACK Callback, void* CallerContext, bool InitialNotification, out Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NotifyStableUnicastIpAddressTable(uint16 Family, out MIB_UNICASTIPADDRESS_TABLE* Table, PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK CallerCallback, void* CallerContext, out HANDLE NotificationHandle);
+		public static extern NTSTATUS NotifyStableUnicastIpAddressTable(uint16 Family, out MIB_UNICASTIPADDRESS_TABLE* Table, PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK CallerCallback, void* CallerContext, out Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS SetUnicastIpAddressEntry(in MIB_UNICASTIPADDRESS_ROW Row);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2961,7 +2961,7 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeIpForwardEntry(out MIB_IPFORWARD_ROW2 Row);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NotifyRouteChange2(uint16 AddressFamily, PIPFORWARD_CHANGE_CALLBACK Callback, void* CallerContext, BOOLEAN InitialNotification, out HANDLE NotificationHandle);
+		public static extern NTSTATUS NotifyRouteChange2(uint16 AddressFamily, PIPFORWARD_CHANGE_CALLBACK Callback, void* CallerContext, bool InitialNotification, out Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS SetIpForwardEntry2(in MIB_IPFORWARD_ROW2 Route);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2985,11 +2985,11 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS SetIpNetEntry2(ref MIB_IPNET_ROW2 Row);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NotifyTeredoPortChange(PTEREDO_PORT_CHANGE_CALLBACK Callback, void* CallerContext, BOOLEAN InitialNotification, out HANDLE NotificationHandle);
+		public static extern NTSTATUS NotifyTeredoPortChange(PTEREDO_PORT_CHANGE_CALLBACK Callback, void* CallerContext, bool InitialNotification, out Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS GetTeredoPort(out uint16 Port);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS CancelMibChangeNotify2(HANDLE NotificationHandle);
+		public static extern NTSTATUS CancelMibChangeNotify2(Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void FreeMibTable(void* Memory);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2999,9 +2999,9 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS ConvertCompartmentIdToGuid(uint32 CompartmentId, out Guid CompartmentGuid);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS ConvertInterfaceNameToLuidA(PSTR InterfaceName, out NET_LUID_LH InterfaceLuid);
+		public static extern NTSTATUS ConvertInterfaceNameToLuidA(char8* InterfaceName, out NET_LUID_LH InterfaceLuid);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS ConvertInterfaceNameToLuidW(PWSTR InterfaceName, out NET_LUID_LH InterfaceLuid);
+		public static extern NTSTATUS ConvertInterfaceNameToLuidW(char16* InterfaceName, out NET_LUID_LH InterfaceLuid);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS ConvertInterfaceLuidToNameA(in NET_LUID_LH InterfaceLuid, uint8* InterfaceName, uint Length);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3013,15 +3013,15 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS ConvertInterfaceLuidToAlias(in NET_LUID_LH InterfaceLuid, char16* InterfaceAlias, uint Length);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS ConvertInterfaceAliasToLuid(PWSTR InterfaceAlias, out NET_LUID_LH InterfaceLuid);
+		public static extern NTSTATUS ConvertInterfaceAliasToLuid(char16* InterfaceAlias, out NET_LUID_LH InterfaceLuid);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS ConvertInterfaceLuidToGuid(in NET_LUID_LH InterfaceLuid, out Guid InterfaceGuid);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS ConvertInterfaceGuidToLuid(in Guid InterfaceGuid, out NET_LUID_LH InterfaceLuid);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 if_nametoindex(PSTR InterfaceName);
+		public static extern uint32 if_nametoindex(char8* InterfaceName);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR if_indextoname(uint32 InterfaceIndex, uint8* InterfaceName);
+		public static extern char8* if_indextoname(uint32 InterfaceIndex, uint8* InterfaceName);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCurrentThreadCompartmentId();
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3031,9 +3031,9 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS SetCurrentThreadCompartmentScope(uint32 CompartmentScope);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetJobCompartmentId(HANDLE JobHandle);
+		public static extern uint32 GetJobCompartmentId(Handle JobHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS SetJobCompartmentId(HANDLE JobHandle, uint32 CompartmentId);
+		public static extern NTSTATUS SetJobCompartmentId(Handle JobHandle, uint32 CompartmentId);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetSessionCompartmentId(uint32 SessionId);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3043,7 +3043,7 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS GetNetworkInformation(in Guid NetworkGuid, out uint32 CompartmentId, out uint32 SiteId, char16* NetworkName, uint32 Length);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS SetNetworkInformation(in Guid NetworkGuid, uint32 CompartmentId, PWSTR NetworkName);
+		public static extern NTSTATUS SetNetworkInformation(in Guid NetworkGuid, uint32 CompartmentId, char16* NetworkName);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS ConvertLengthToIpv4Mask(uint32 MaskLength, out uint32 Mask);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3065,21 +3065,21 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS GetNetworkConnectivityHintForInterface(uint32 InterfaceIndex, out NL_NETWORK_CONNECTIVITY_HINT ConnectivityHint);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NotifyNetworkConnectivityHintChange(PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK Callback, void* CallerContext, BOOLEAN InitialNotification, out HANDLE NotificationHandle);
+		public static extern NTSTATUS NotifyNetworkConnectivityHintChange(PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK Callback, void* CallerContext, bool InitialNotification, out Handle NotificationHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern IcmpHandle IcmpCreateFile();
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern IcmpHandle Icmp6CreateFile();
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IcmpCloseHandle(IcmpHandle IcmpHandle);
+		public static extern IntBool IcmpCloseHandle(IcmpHandle IcmpHandle);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 IcmpSendEcho(IcmpHandle IcmpHandle, uint32 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IcmpSendEcho2(IcmpHandle IcmpHandle, HANDLE Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, uint32 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
+		public static extern uint32 IcmpSendEcho2(IcmpHandle IcmpHandle, Handle Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, uint32 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IcmpSendEcho2Ex(IcmpHandle IcmpHandle, HANDLE Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, uint32 SourceAddress, uint32 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
+		public static extern uint32 IcmpSendEcho2Ex(IcmpHandle IcmpHandle, Handle Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, uint32 SourceAddress, uint32 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 Icmp6SendEcho2(IcmpHandle IcmpHandle, HANDLE Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, ref SOCKADDR_IN6 SourceAddress, ref SOCKADDR_IN6 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
+		public static extern uint32 Icmp6SendEcho2(IcmpHandle IcmpHandle, Handle Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, ref SOCKADDR_IN6 SourceAddress, ref SOCKADDR_IN6 DestinationAddress, void* RequestData, uint16 RequestSize, ip_option_information* RequestOptions, void* ReplyBuffer, uint32 ReplySize, uint32 Timeout);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 IcmpParseReplies(void* ReplyBuffer, uint32 ReplySize);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3089,31 +3089,31 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetIfEntry(out MIB_IFROW pIfRow);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetIfTable(MIB_IFTABLE* pIfTable, out uint32 pdwSize, BOOL bOrder);
+		public static extern uint32 GetIfTable(MIB_IFTABLE* pIfTable, out uint32 pdwSize, IntBool bOrder);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetIpAddrTable(MIB_IPADDRTABLE* pIpAddrTable, out uint32 pdwSize, BOOL bOrder);
+		public static extern uint32 GetIpAddrTable(MIB_IPADDRTABLE* pIpAddrTable, out uint32 pdwSize, IntBool bOrder);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetIpNetTable(MIB_IPNETTABLE* IpNetTable, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetIpNetTable(MIB_IPNETTABLE* IpNetTable, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetIpForwardTable(MIB_IPFORWARDTABLE* pIpForwardTable, out uint32 pdwSize, BOOL bOrder);
+		public static extern uint32 GetIpForwardTable(MIB_IPFORWARDTABLE* pIpForwardTable, out uint32 pdwSize, IntBool bOrder);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetTcpTable(MIB_TCPTABLE* TcpTable, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetTcpTable(MIB_TCPTABLE* TcpTable, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetExtendedTcpTable(void* pTcpTable, out uint32 pdwSize, BOOL bOrder, uint32 ulAf, TCP_TABLE_CLASS TableClass, uint32 Reserved);
+		public static extern uint32 GetExtendedTcpTable(void* pTcpTable, out uint32 pdwSize, IntBool bOrder, uint32 ulAf, TCP_TABLE_CLASS TableClass, uint32 Reserved);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetOwnerModuleFromTcpEntry(ref MIB_TCPROW_OWNER_MODULE pTcpEntry, TCPIP_OWNER_MODULE_INFO_CLASS Class, void* pBuffer, out uint32 pdwSize);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetUdpTable(MIB_UDPTABLE* UdpTable, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetUdpTable(MIB_UDPTABLE* UdpTable, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetExtendedUdpTable(void* pUdpTable, out uint32 pdwSize, BOOL bOrder, uint32 ulAf, UDP_TABLE_CLASS TableClass, uint32 Reserved);
+		public static extern uint32 GetExtendedUdpTable(void* pUdpTable, out uint32 pdwSize, IntBool bOrder, uint32 ulAf, UDP_TABLE_CLASS TableClass, uint32 Reserved);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetOwnerModuleFromUdpEntry(ref MIB_UDPROW_OWNER_MODULE pUdpEntry, TCPIP_OWNER_MODULE_INFO_CLASS Class, void* pBuffer, out uint32 pdwSize);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetTcpTable2(MIB_TCPTABLE2* TcpTable, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetTcpTable2(MIB_TCPTABLE2* TcpTable, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetTcp6Table(out MIB_TCP6TABLE TcpTable, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetTcp6Table(out MIB_TCP6TABLE TcpTable, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetTcp6Table2(out MIB_TCP6TABLE2 TcpTable, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetTcp6Table2(out MIB_TCP6TABLE2 TcpTable, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetPerTcpConnectionEStats(ref MIB_TCPROW_LH Row, TCP_ESTATS_TYPE EstatsType, uint8* Rw, uint32 RwVersion, uint32 RwSize, uint8* Ros, uint32 RosVersion, uint32 RosSize, uint8* Rod, uint32 RodVersion, uint32 RodSize);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3125,7 +3125,7 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetOwnerModuleFromTcp6Entry(ref MIB_TCP6ROW_OWNER_MODULE pTcpEntry, TCPIP_OWNER_MODULE_INFO_CLASS Class, void* pBuffer, out uint32 pdwSize);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetUdp6Table(MIB_UDP6TABLE* Udp6Table, out uint32 SizePointer, BOOL Order);
+		public static extern uint32 GetUdp6Table(MIB_UDP6TABLE* Udp6Table, out uint32 SizePointer, IntBool Order);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetOwnerModuleFromUdp6Entry(ref MIB_UDP6ROW_OWNER_MODULE pUdpEntry, TCPIP_OWNER_MODULE_INFO_CLASS Class, void* pBuffer, out uint32 pdwSize);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3183,7 +3183,7 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetUniDirectionalAdapterInfo(IP_UNIDIRECTIONAL_ADAPTER_ADDRESS* pIPIfInfo, out uint32 dwOutBufLen);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NhpAllocateAndGetInterfaceInfoFromStack(out ip_interface_name_info_w2ksp1* ppTable, out uint32 pdwCount, BOOL bOrder, HANDLE hHeap, uint32 dwFlags);
+		public static extern uint32 NhpAllocateAndGetInterfaceInfoFromStack(out ip_interface_name_info_w2ksp1* ppTable, out uint32 pdwCount, IntBool bOrder, Handle hHeap, uint32 dwFlags);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetBestInterface(uint32 dwDestAddr, out uint32 pdwBestIfIndex);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3191,13 +3191,13 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetBestRoute(uint32 dwDestAddr, uint32 dwSourceAddr, out MIB_IPFORWARDROW pBestRoute);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NotifyAddrChange(out HANDLE Handle, ref OVERLAPPED overlapped);
+		public static extern uint32 NotifyAddrChange(out Handle Handle, ref OVERLAPPED overlapped);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NotifyRouteChange(out HANDLE Handle, ref OVERLAPPED overlapped);
+		public static extern uint32 NotifyRouteChange(out Handle Handle, ref OVERLAPPED overlapped);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CancelIPChangeNotify(ref OVERLAPPED notifyOverlapped);
+		public static extern IntBool CancelIPChangeNotify(ref OVERLAPPED notifyOverlapped);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetAdapterIndex(PWSTR AdapterName, out uint32 IfIndex);
+		public static extern uint32 GetAdapterIndex(char16* AdapterName, out uint32 IfIndex);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 AddIPAddress(uint32 Address, uint32 IpMask, uint32 IfIndex, out uint32 NTEContext, out uint32 NTEInstance);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3229,19 +3229,19 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SendARP(uint32 DestIP, uint32 SrcIP, void* pMacAddr, out uint32 PhyAddrLen);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetRTTAndHopCount(uint32 DestIpAddress, out uint32 HopCount, uint32 MaxHops, out uint32 RTT);
+		public static extern IntBool GetRTTAndHopCount(uint32 DestIpAddress, out uint32 HopCount, uint32 MaxHops, out uint32 RTT);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetFriendlyIfIndex(uint32 IfIndex);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 EnableRouter(out HANDLE pHandle, out OVERLAPPED pOverlapped);
+		public static extern uint32 EnableRouter(out Handle pHandle, out OVERLAPPED pOverlapped);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 UnenableRouter(ref OVERLAPPED pOverlapped, uint32* lpdwEnableCount);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DisableMediaSense(out HANDLE pHandle, ref OVERLAPPED pOverLapped);
+		public static extern uint32 DisableMediaSense(out Handle pHandle, ref OVERLAPPED pOverLapped);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RestoreMediaSense(ref OVERLAPPED pOverlapped, uint32* lpdwEnableCount);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetIpErrorString(uint32 ErrorCode, PWSTR Buffer, out uint32 Size);
+		public static extern uint32 GetIpErrorString(uint32 ErrorCode, char16* Buffer, out uint32 Size);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ResolveNeighbor(ref SOCKADDR NetworkAddress, void* PhysicalAddress, out uint32 PhysicalAddressLength);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3257,7 +3257,7 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 LookupPersistentUdpPortReservation(uint16 StartPort, uint16 NumberOfPorts, out uint64 Token);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PfCreateInterface(uint32 dwName, PFFORWARD_ACTION inAction, PFFORWARD_ACTION outAction, BOOL bUseLog, BOOL bMustBeUnique, void** ppInterface);
+		public static extern uint32 PfCreateInterface(uint32 dwName, PFFORWARD_ACTION inAction, PFFORWARD_ACTION outAction, IntBool bUseLog, IntBool bMustBeUnique, void** ppInterface);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PfDeleteInterface(void* pInterface);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3279,13 +3279,13 @@ namespace Win32
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PfRemoveGlobalFilterFromInterface(void* pInterface, GLOBAL_FILTER gfFilter);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PfMakeLog(HANDLE hEvent);
+		public static extern uint32 PfMakeLog(Handle hEvent);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PfSetLogBuffer(out uint8 pbBuffer, uint32 dwSize, uint32 dwThreshold, uint32 dwEntries, out uint32 pdwLoggedEntries, out uint32 pdwLostEntries, out uint32 pdwSizeUsed);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PfDeleteLog();
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PfGetInterfaceStatistics(void* pInterface, out PF_INTERFACE_STATS ppfStats, out uint32 pdwBufferSize, BOOL fResetCounters);
+		public static extern uint32 PfGetInterfaceStatistics(void* pInterface, out PF_INTERFACE_STATS ppfStats, out uint32 pdwBufferSize, IntBool fResetCounters);
 		[Import("iphlpapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PfTestPacket(void* pInInterface, void* pOutInterface, uint32 cBytes, out uint8 pbPacket, out PFFORWARD_ACTION ppAction);
 	}

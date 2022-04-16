@@ -1,9 +1,11 @@
 using System;
+using static Win32.Win32;
+using static System.Windows;
 
 // namespace System.Time
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	public static class Time
 	{
 		// --- Constants ---
 		
@@ -36,40 +38,40 @@ namespace Win32
 			public SYSTEMTIME DaylightDate;
 			public int32 DaylightBias;
 			public char16[128] TimeZoneKeyName;
-			public BOOLEAN DynamicDaylightTimeDisabled;
+			public bool DynamicDaylightTimeDisabled;
 		}
 		
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SystemTimeToTzSpecificLocalTime(TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpUniversalTime, out SYSTEMTIME lpLocalTime);
+		public static extern IntBool SystemTimeToTzSpecificLocalTime(TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpUniversalTime, out SYSTEMTIME lpLocalTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TzSpecificLocalTimeToSystemTime(TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpLocalTime, out SYSTEMTIME lpUniversalTime);
+		public static extern IntBool TzSpecificLocalTimeToSystemTime(TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpLocalTime, out SYSTEMTIME lpUniversalTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FileTimeToSystemTime(in FILETIME lpFileTime, out SYSTEMTIME lpSystemTime);
+		public static extern IntBool FileTimeToSystemTime(in FileTime lpFileTime, out SYSTEMTIME lpSystemTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SystemTimeToFileTime(in SYSTEMTIME lpSystemTime, out FILETIME lpFileTime);
+		public static extern IntBool SystemTimeToFileTime(in SYSTEMTIME lpSystemTime, out FileTime lpFileTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetTimeZoneInformation(out TIME_ZONE_INFORMATION lpTimeZoneInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetTimeZoneInformation(in TIME_ZONE_INFORMATION lpTimeZoneInformation);
+		public static extern IntBool SetTimeZoneInformation(in TIME_ZONE_INFORMATION lpTimeZoneInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetDynamicTimeZoneInformation(in DYNAMIC_TIME_ZONE_INFORMATION lpTimeZoneInformation);
+		public static extern IntBool SetDynamicTimeZoneInformation(in DYNAMIC_TIME_ZONE_INFORMATION lpTimeZoneInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetDynamicTimeZoneInformation(out DYNAMIC_TIME_ZONE_INFORMATION pTimeZoneInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetTimeZoneInformationForYear(uint16 wYear, DYNAMIC_TIME_ZONE_INFORMATION* pdtzi, out TIME_ZONE_INFORMATION ptzi);
+		public static extern IntBool GetTimeZoneInformationForYear(uint16 wYear, DYNAMIC_TIME_ZONE_INFORMATION* pdtzi, out TIME_ZONE_INFORMATION ptzi);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 EnumDynamicTimeZoneInformation(uint32 dwIndex, out DYNAMIC_TIME_ZONE_INFORMATION lpTimeZoneInformation);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetDynamicTimeZoneInformationEffectiveYears(in DYNAMIC_TIME_ZONE_INFORMATION lpTimeZoneInformation, out uint32 FirstYear, out uint32 LastYear);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SystemTimeToTzSpecificLocalTimeEx(DYNAMIC_TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpUniversalTime, out SYSTEMTIME lpLocalTime);
+		public static extern IntBool SystemTimeToTzSpecificLocalTimeEx(DYNAMIC_TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpUniversalTime, out SYSTEMTIME lpLocalTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TzSpecificLocalTimeToSystemTimeEx(DYNAMIC_TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpLocalTime, out SYSTEMTIME lpUniversalTime);
+		public static extern IntBool TzSpecificLocalTimeToSystemTimeEx(DYNAMIC_TIME_ZONE_INFORMATION* lpTimeZoneInformation, in SYSTEMTIME lpLocalTime, out SYSTEMTIME lpUniversalTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL LocalFileTimeToLocalSystemTime(TIME_ZONE_INFORMATION* timeZoneInformation, in FILETIME localFileTime, out SYSTEMTIME localSystemTime);
+		public static extern IntBool LocalFileTimeToLocalSystemTime(TIME_ZONE_INFORMATION* timeZoneInformation, in FileTime localFileTime, out SYSTEMTIME localSystemTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL LocalSystemTimeToLocalFileTime(TIME_ZONE_INFORMATION* timeZoneInformation, in SYSTEMTIME localSystemTime, out FILETIME localFileTime);
+		public static extern IntBool LocalSystemTimeToLocalFileTime(TIME_ZONE_INFORMATION* timeZoneInformation, in SYSTEMTIME localSystemTime, out FileTime localFileTime);
 	}
 }

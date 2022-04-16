@@ -1,9 +1,15 @@
 using System;
+using System.IO;
+using static Win32.System.SystemInformation;
+using static Win32.System.SystemServices;
+using static Win32.Win32;
+using static System.Windows.COM_IUnknown;
+using static System.Windows;
 
 // namespace System.Threading
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	public static class Threading
 	{
 		// --- Constants ---
 		
@@ -361,11 +367,11 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function uint32 LPTHREAD_START_ROUTINE(void* lpThreadParameter);
-		public function BOOL PINIT_ONCE_FN(out RTL_RUN_ONCE InitOnce, void* Parameter, void** Context);
+		public function IntBool PINIT_ONCE_FN(out RTL_RUN_ONCE InitOnce, void* Parameter, void** Context);
 		public function void PTIMERAPCROUTINE(void* lpArgToCompletionRoutine, uint32 dwTimerLowValue, uint32 dwTimerHighValue);
 		public function void PTP_WIN32_IO_CALLBACK(out TP_CALLBACK_INSTANCE Instance, void* Context, void* Overlapped, uint32 IoResult, uint NumberOfBytesTransferred, out TP_IO Io);
 		public function void PRTL_UMS_SCHEDULER_ENTRY_POINT(RTL_UMS_SCHEDULER_REASON Reason, uint ActivationPayload, void* SchedulerParam);
-		public function void WAITORTIMERCALLBACK(void* param0, BOOLEAN param1);
+		public function void WAITORTIMERCALLBACK(void* param0, bool param1);
 		public function void PFLS_CALLBACK_FUNCTION(void* lpFlsData);
 		public function void PTP_SIMPLE_CALLBACK(out TP_CALLBACK_INSTANCE Instance, void* Context);
 		public function void PTP_CLEANUP_GROUP_CANCEL_CALLBACK(void* ObjectContext, void* CleanupContext);
@@ -398,23 +404,23 @@ namespace Win32
 			public struct _Reason_e__Union
 			{
 				public _Detailed_e__Struct Detailed;
-				public PWSTR SimpleReasonString;
+				public char16* SimpleReasonString;
 				
 				[CRepr]
 				public struct _Detailed_e__Struct
 				{
-					public HINSTANCE LocalizedReasonModule;
+					public HInstance LocalizedReasonModule;
 					public uint32 LocalizedReasonId;
 					public uint32 ReasonStringCount;
-					public PWSTR* ReasonStrings;
+					public char16** ReasonStrings;
 				}
 			}
 		}
 		[CRepr]
 		public struct PROCESS_INFORMATION
 		{
-			public HANDLE hProcess;
-			public HANDLE hThread;
+			public Handle hProcess;
+			public Handle hThread;
 			public uint32 dwProcessId;
 			public uint32 dwThreadId;
 		}
@@ -422,9 +428,9 @@ namespace Win32
 		public struct STARTUPINFOA
 		{
 			public uint32 cb;
-			public PSTR lpReserved;
-			public PSTR lpDesktop;
-			public PSTR lpTitle;
+			public char8* lpReserved;
+			public char8* lpDesktop;
+			public char8* lpTitle;
 			public uint32 dwX;
 			public uint32 dwY;
 			public uint32 dwXSize;
@@ -436,17 +442,17 @@ namespace Win32
 			public uint16 wShowWindow;
 			public uint16 cbReserved2;
 			public uint8* lpReserved2;
-			public HANDLE hStdInput;
-			public HANDLE hStdOutput;
-			public HANDLE hStdError;
+			public Handle hStdInput;
+			public Handle hStdOutput;
+			public Handle hStdError;
 		}
 		[CRepr]
 		public struct STARTUPINFOW
 		{
 			public uint32 cb;
-			public PWSTR lpReserved;
-			public PWSTR lpDesktop;
-			public PWSTR lpTitle;
+			public char16* lpReserved;
+			public char16* lpDesktop;
+			public char16* lpTitle;
 			public uint32 dwX;
 			public uint32 dwY;
 			public uint32 dwXSize;
@@ -458,9 +464,9 @@ namespace Win32
 			public uint16 wShowWindow;
 			public uint16 cbReserved2;
 			public uint8* lpReserved2;
-			public HANDLE hStdInput;
-			public HANDLE hStdOutput;
-			public HANDLE hStdError;
+			public Handle hStdInput;
+			public Handle hStdOutput;
+			public Handle hStdError;
 		}
 		[CRepr]
 		public struct MEMORY_PRIORITY_INFORMATION
@@ -574,7 +580,7 @@ namespace Win32
 			public uint16 Type;
 			public uint16 CreatorBackTraceIndex;
 			public RTL_CRITICAL_SECTION* CriticalSection;
-			public LIST_ENTRY ProcessLocksList;
+			public ListEntry ProcessLocksList;
 			public uint32 EntryCount;
 			public uint32 ContentionCount;
 			public uint32 Flags;
@@ -587,8 +593,8 @@ namespace Win32
 			public RTL_CRITICAL_SECTION_DEBUG* DebugInfo;
 			public int32 LockCount;
 			public int32 RecursionCount;
-			public HANDLE OwningThread;
-			public HANDLE LockSemaphore;
+			public Handle OwningThread;
+			public Handle LockSemaphore;
 			public uint SpinCount;
 		}
 		[CRepr]
@@ -680,15 +686,15 @@ namespace Win32
 		{
 			public uint8[8] Reserved1;
 			public void*[3] Reserved2;
-			public LIST_ENTRY InMemoryOrderModuleList;
+			public ListEntry InMemoryOrderModuleList;
 		}
 		[CRepr]
 		public struct RTL_USER_PROCESS_PARAMETERS
 		{
 			public uint8[16] Reserved1;
 			public void*[10] Reserved2;
-			public UNICODE_STRING ImagePathName;
-			public UNICODE_STRING CommandLine;
+			public UnicodeString ImagePathName;
+			public UnicodeString CommandLine;
 		}
 		[CRepr]
 		public struct PEB
@@ -726,19 +732,19 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessWorkingSetSize(HANDLE hProcess, out uint lpMinimumWorkingSetSize, out uint lpMaximumWorkingSetSize);
+		public static extern IntBool GetProcessWorkingSetSize(Handle hProcess, out uint lpMinimumWorkingSetSize, out uint lpMaximumWorkingSetSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessWorkingSetSize(HANDLE hProcess, uint dwMinimumWorkingSetSize, uint dwMaximumWorkingSetSize);
+		public static extern IntBool SetProcessWorkingSetSize(Handle hProcess, uint dwMinimumWorkingSetSize, uint dwMaximumWorkingSetSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 FlsAlloc(PFLS_CALLBACK_FUNCTION lpCallback);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* FlsGetValue(uint32 dwFlsIndex);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FlsSetValue(uint32 dwFlsIndex, void* lpFlsData);
+		public static extern IntBool FlsSetValue(uint32 dwFlsIndex, void* lpFlsData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FlsFree(uint32 dwFlsIndex);
+		public static extern IntBool FlsFree(uint32 dwFlsIndex);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsThreadAFiber();
+		public static extern IntBool IsThreadAFiber();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeSRWLock(out RTL_SRWLOCK SRWLock);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -750,9 +756,9 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void AcquireSRWLockShared(out RTL_SRWLOCK SRWLock);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN TryAcquireSRWLockExclusive(out RTL_SRWLOCK SRWLock);
+		public static extern bool TryAcquireSRWLockExclusive(out RTL_SRWLOCK SRWLock);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN TryAcquireSRWLockShared(out RTL_SRWLOCK SRWLock);
+		public static extern bool TryAcquireSRWLockShared(out RTL_SRWLOCK SRWLock);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeCriticalSection(out RTL_CRITICAL_SECTION lpCriticalSection);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -760,23 +766,23 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void LeaveCriticalSection(out RTL_CRITICAL_SECTION lpCriticalSection);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitializeCriticalSectionAndSpinCount(out RTL_CRITICAL_SECTION lpCriticalSection, uint32 dwSpinCount);
+		public static extern IntBool InitializeCriticalSectionAndSpinCount(out RTL_CRITICAL_SECTION lpCriticalSection, uint32 dwSpinCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitializeCriticalSectionEx(out RTL_CRITICAL_SECTION lpCriticalSection, uint32 dwSpinCount, uint32 Flags);
+		public static extern IntBool InitializeCriticalSectionEx(out RTL_CRITICAL_SECTION lpCriticalSection, uint32 dwSpinCount, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SetCriticalSectionSpinCount(out RTL_CRITICAL_SECTION lpCriticalSection, uint32 dwSpinCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TryEnterCriticalSection(out RTL_CRITICAL_SECTION lpCriticalSection);
+		public static extern IntBool TryEnterCriticalSection(out RTL_CRITICAL_SECTION lpCriticalSection);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DeleteCriticalSection(out RTL_CRITICAL_SECTION lpCriticalSection);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitOnceInitialize(out RTL_RUN_ONCE InitOnce);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitOnceExecuteOnce(out RTL_RUN_ONCE InitOnce, PINIT_ONCE_FN InitFn, void* Parameter, void** Context);
+		public static extern IntBool InitOnceExecuteOnce(out RTL_RUN_ONCE InitOnce, PINIT_ONCE_FN InitFn, void* Parameter, void** Context);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitOnceBeginInitialize(out RTL_RUN_ONCE lpInitOnce, uint32 dwFlags, out BOOL fPending, void** lpContext);
+		public static extern IntBool InitOnceBeginInitialize(out RTL_RUN_ONCE lpInitOnce, uint32 dwFlags, out IntBool fPending, void** lpContext);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitOnceComplete(out RTL_RUN_ONCE lpInitOnce, uint32 dwFlags, void* lpContext);
+		public static extern IntBool InitOnceComplete(out RTL_RUN_ONCE lpInitOnce, uint32 dwFlags, void* lpContext);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeConditionVariable(out RTL_CONDITION_VARIABLE ConditionVariable);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -784,81 +790,81 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WakeAllConditionVariable(out RTL_CONDITION_VARIABLE ConditionVariable);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SleepConditionVariableCS(out RTL_CONDITION_VARIABLE ConditionVariable, out RTL_CRITICAL_SECTION CriticalSection, uint32 dwMilliseconds);
+		public static extern IntBool SleepConditionVariableCS(out RTL_CONDITION_VARIABLE ConditionVariable, out RTL_CRITICAL_SECTION CriticalSection, uint32 dwMilliseconds);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SleepConditionVariableSRW(out RTL_CONDITION_VARIABLE ConditionVariable, out RTL_SRWLOCK SRWLock, uint32 dwMilliseconds, uint32 Flags);
+		public static extern IntBool SleepConditionVariableSRW(out RTL_CONDITION_VARIABLE ConditionVariable, out RTL_SRWLOCK SRWLock, uint32 dwMilliseconds, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetEvent(HANDLE hEvent);
+		public static extern IntBool SetEvent(Handle hEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ResetEvent(HANDLE hEvent);
+		public static extern IntBool ResetEvent(Handle hEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReleaseSemaphore(HANDLE hSemaphore, int32 lReleaseCount, int32* lpPreviousCount);
+		public static extern IntBool ReleaseSemaphore(Handle hSemaphore, int32 lReleaseCount, int32* lpPreviousCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReleaseMutex(HANDLE hMutex);
+		public static extern IntBool ReleaseMutex(Handle hMutex);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WaitForSingleObject(HANDLE hHandle, uint32 dwMilliseconds);
+		public static extern uint32 WaitForSingleObject(Handle hHandle, uint32 dwMilliseconds);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SleepEx(uint32 dwMilliseconds, BOOL bAlertable);
+		public static extern uint32 SleepEx(uint32 dwMilliseconds, IntBool bAlertable);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WaitForSingleObjectEx(HANDLE hHandle, uint32 dwMilliseconds, BOOL bAlertable);
+		public static extern uint32 WaitForSingleObjectEx(Handle hHandle, uint32 dwMilliseconds, IntBool bAlertable);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WaitForMultipleObjectsEx(uint32 nCount, HANDLE* lpHandles, BOOL bWaitAll, uint32 dwMilliseconds, BOOL bAlertable);
+		public static extern uint32 WaitForMultipleObjectsEx(uint32 nCount, Handle* lpHandles, IntBool bWaitAll, uint32 dwMilliseconds, IntBool bAlertable);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateMutexA(SECURITY_ATTRIBUTES* lpMutexAttributes, BOOL bInitialOwner, PSTR lpName);
+		public static extern Handle CreateMutexA(SecurityAttributes* lpMutexAttributes, IntBool bInitialOwner, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateMutexW(SECURITY_ATTRIBUTES* lpMutexAttributes, BOOL bInitialOwner, PWSTR lpName);
+		public static extern Handle CreateMutexW(SecurityAttributes* lpMutexAttributes, IntBool bInitialOwner, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenMutexW(uint32 dwDesiredAccess, BOOL bInheritHandle, PWSTR lpName);
+		public static extern Handle OpenMutexW(uint32 dwDesiredAccess, IntBool bInheritHandle, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateEventA(SECURITY_ATTRIBUTES* lpEventAttributes, BOOL bManualReset, BOOL bInitialState, PSTR lpName);
+		public static extern Handle CreateEventA(SecurityAttributes* lpEventAttributes, IntBool bManualReset, IntBool bInitialState, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateEventW(SECURITY_ATTRIBUTES* lpEventAttributes, BOOL bManualReset, BOOL bInitialState, PWSTR lpName);
+		public static extern Handle CreateEventW(SecurityAttributes* lpEventAttributes, IntBool bManualReset, IntBool bInitialState, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenEventA(uint32 dwDesiredAccess, BOOL bInheritHandle, PSTR lpName);
+		public static extern Handle OpenEventA(uint32 dwDesiredAccess, IntBool bInheritHandle, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenEventW(uint32 dwDesiredAccess, BOOL bInheritHandle, PWSTR lpName);
+		public static extern Handle OpenEventW(uint32 dwDesiredAccess, IntBool bInheritHandle, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenSemaphoreW(uint32 dwDesiredAccess, BOOL bInheritHandle, PWSTR lpName);
+		public static extern Handle OpenSemaphoreW(uint32 dwDesiredAccess, IntBool bInheritHandle, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenWaitableTimerW(uint32 dwDesiredAccess, BOOL bInheritHandle, PWSTR lpTimerName);
+		public static extern Handle OpenWaitableTimerW(uint32 dwDesiredAccess, IntBool bInheritHandle, char16* lpTimerName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetWaitableTimerEx(HANDLE hTimer, in LARGE_INTEGER lpDueTime, int32 lPeriod, PTIMERAPCROUTINE pfnCompletionRoutine, void* lpArgToCompletionRoutine, REASON_CONTEXT* WakeContext, uint32 TolerableDelay);
+		public static extern IntBool SetWaitableTimerEx(Handle hTimer, in LARGE_INTEGER lpDueTime, int32 lPeriod, PTIMERAPCROUTINE pfnCompletionRoutine, void* lpArgToCompletionRoutine, REASON_CONTEXT* WakeContext, uint32 TolerableDelay);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetWaitableTimer(HANDLE hTimer, in LARGE_INTEGER lpDueTime, int32 lPeriod, PTIMERAPCROUTINE pfnCompletionRoutine, void* lpArgToCompletionRoutine, BOOL fResume);
+		public static extern IntBool SetWaitableTimer(Handle hTimer, in LARGE_INTEGER lpDueTime, int32 lPeriod, PTIMERAPCROUTINE pfnCompletionRoutine, void* lpArgToCompletionRoutine, IntBool fResume);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CancelWaitableTimer(HANDLE hTimer);
+		public static extern IntBool CancelWaitableTimer(Handle hTimer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateMutexExA(SECURITY_ATTRIBUTES* lpMutexAttributes, PSTR lpName, uint32 dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateMutexExA(SecurityAttributes* lpMutexAttributes, char8* lpName, uint32 dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateMutexExW(SECURITY_ATTRIBUTES* lpMutexAttributes, PWSTR lpName, uint32 dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateMutexExW(SecurityAttributes* lpMutexAttributes, char16* lpName, uint32 dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateEventExA(SECURITY_ATTRIBUTES* lpEventAttributes, PSTR lpName, CREATE_EVENT dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateEventExA(SecurityAttributes* lpEventAttributes, char8* lpName, CREATE_EVENT dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateEventExW(SECURITY_ATTRIBUTES* lpEventAttributes, PWSTR lpName, CREATE_EVENT dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateEventExW(SecurityAttributes* lpEventAttributes, char16* lpName, CREATE_EVENT dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateSemaphoreExW(SECURITY_ATTRIBUTES* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, PWSTR lpName, uint32 dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateSemaphoreExW(SecurityAttributes* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, char16* lpName, uint32 dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateWaitableTimerExW(SECURITY_ATTRIBUTES* lpTimerAttributes, PWSTR lpTimerName, uint32 dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateWaitableTimerExW(SecurityAttributes* lpTimerAttributes, char16* lpTimerName, uint32 dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnterSynchronizationBarrier(out RTL_BARRIER lpBarrier, uint32 dwFlags);
+		public static extern IntBool EnterSynchronizationBarrier(out RTL_BARRIER lpBarrier, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitializeSynchronizationBarrier(out RTL_BARRIER lpBarrier, int32 lTotalThreads, int32 lSpinCount);
+		public static extern IntBool InitializeSynchronizationBarrier(out RTL_BARRIER lpBarrier, int32 lTotalThreads, int32 lSpinCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteSynchronizationBarrier(out RTL_BARRIER lpBarrier);
+		public static extern IntBool DeleteSynchronizationBarrier(out RTL_BARRIER lpBarrier);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void Sleep(uint32 dwMilliseconds);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WaitOnAddress(void* Address, void* CompareAddress, uint AddressSize, uint32 dwMilliseconds);
+		public static extern IntBool WaitOnAddress(void* Address, void* CompareAddress, uint AddressSize, uint32 dwMilliseconds);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WakeByAddressSingle(void* Address);
 		[Import("vertdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WakeByAddressAll(void* Address);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WaitForMultipleObjects(uint32 nCount, HANDLE* lpHandles, BOOL bWaitAll, uint32 dwMilliseconds);
+		public static extern uint32 WaitForMultipleObjects(uint32 nCount, Handle* lpHandles, IntBool bWaitAll, uint32 dwMilliseconds);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateSemaphoreW(SECURITY_ATTRIBUTES* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, PWSTR lpName);
+		public static extern Handle CreateSemaphoreW(SecurityAttributes* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateWaitableTimerW(SECURITY_ATTRIBUTES* lpTimerAttributes, BOOL bManualReset, PWSTR lpTimerName);
+		public static extern Handle CreateWaitableTimerW(SecurityAttributes* lpTimerAttributes, IntBool bManualReset, char16* lpTimerName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void InitializeSListHead(out SLIST_HEADER ListHead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -872,325 +878,325 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 QueryDepthSList(ref SLIST_HEADER ListHead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 QueueUserAPC(PAPCFUNC pfnAPC, HANDLE hThread, uint dwData);
+		public static extern uint32 QueueUserAPC(PAPCFUNC pfnAPC, Handle hThread, uint dwData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueueUserAPC2(PAPCFUNC ApcRoutine, HANDLE Thread, uint Data, QUEUE_USER_APC_FLAGS Flags);
+		public static extern IntBool QueueUserAPC2(PAPCFUNC ApcRoutine, Handle Thread, uint Data, QUEUE_USER_APC_FLAGS Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessTimes(HANDLE hProcess, out FILETIME lpCreationTime, out FILETIME lpExitTime, out FILETIME lpKernelTime, out FILETIME lpUserTime);
+		public static extern IntBool GetProcessTimes(Handle hProcess, out FileTime lpCreationTime, out FileTime lpExitTime, out FileTime lpKernelTime, out FileTime lpUserTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE GetCurrentProcess();
+		public static extern Handle GetCurrentProcess();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCurrentProcessId();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ExitProcess(uint32 uExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TerminateProcess(HANDLE hProcess, uint32 uExitCode);
+		public static extern IntBool TerminateProcess(Handle hProcess, uint32 uExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetExitCodeProcess(HANDLE hProcess, out uint32 lpExitCode);
+		public static extern IntBool GetExitCodeProcess(Handle hProcess, out uint32 lpExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SwitchToThread();
+		public static extern IntBool SwitchToThread();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateThread(SECURITY_ATTRIBUTES* lpThreadAttributes, uint dwStackSize, LPTHREAD_START_ROUTINE lpStartAddress, void* lpParameter, THREAD_CREATION_FLAGS dwCreationFlags, uint32* lpThreadId);
+		public static extern Handle CreateThread(SecurityAttributes* lpThreadAttributes, uint dwStackSize, LPTHREAD_START_ROUTINE lpStartAddress, void* lpParameter, THREAD_CREATION_FLAGS dwCreationFlags, uint32* lpThreadId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateRemoteThread(HANDLE hProcess, SECURITY_ATTRIBUTES* lpThreadAttributes, uint dwStackSize, LPTHREAD_START_ROUTINE lpStartAddress, void* lpParameter, uint32 dwCreationFlags, uint32* lpThreadId);
+		public static extern Handle CreateRemoteThread(Handle hProcess, SecurityAttributes* lpThreadAttributes, uint dwStackSize, LPTHREAD_START_ROUTINE lpStartAddress, void* lpParameter, uint32 dwCreationFlags, uint32* lpThreadId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE GetCurrentThread();
+		public static extern Handle GetCurrentThread();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCurrentThreadId();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenThread(THREAD_ACCESS_RIGHTS dwDesiredAccess, BOOL bInheritHandle, uint32 dwThreadId);
+		public static extern Handle OpenThread(THREAD_ACCESS_RIGHTS dwDesiredAccess, IntBool bInheritHandle, uint32 dwThreadId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadPriority(HANDLE hThread, THREAD_PRIORITY nPriority);
+		public static extern IntBool SetThreadPriority(Handle hThread, THREAD_PRIORITY nPriority);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadPriorityBoost(HANDLE hThread, BOOL bDisablePriorityBoost);
+		public static extern IntBool SetThreadPriorityBoost(Handle hThread, IntBool bDisablePriorityBoost);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadPriorityBoost(HANDLE hThread, out BOOL pDisablePriorityBoost);
+		public static extern IntBool GetThreadPriorityBoost(Handle hThread, out IntBool pDisablePriorityBoost);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetThreadPriority(HANDLE hThread);
+		public static extern int32 GetThreadPriority(Handle hThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ExitThread(uint32 dwExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TerminateThread(HANDLE hThread, uint32 dwExitCode);
+		public static extern IntBool TerminateThread(Handle hThread, uint32 dwExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetExitCodeThread(HANDLE hThread, out uint32 lpExitCode);
+		public static extern IntBool GetExitCodeThread(Handle hThread, out uint32 lpExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SuspendThread(HANDLE hThread);
+		public static extern uint32 SuspendThread(Handle hThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ResumeThread(HANDLE hThread);
+		public static extern uint32 ResumeThread(Handle hThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 TlsAlloc();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* TlsGetValue(uint32 dwTlsIndex);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TlsSetValue(uint32 dwTlsIndex, void* lpTlsValue);
+		public static extern IntBool TlsSetValue(uint32 dwTlsIndex, void* lpTlsValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TlsFree(uint32 dwTlsIndex);
+		public static extern IntBool TlsFree(uint32 dwTlsIndex);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProcessA(PSTR lpApplicationName, PSTR lpCommandLine, SECURITY_ATTRIBUTES* lpProcessAttributes, SECURITY_ATTRIBUTES* lpThreadAttributes, BOOL bInheritHandles, PROCESS_CREATION_FLAGS dwCreationFlags, void* lpEnvironment, PSTR lpCurrentDirectory, ref STARTUPINFOA lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+		public static extern IntBool CreateProcessA(char8* lpApplicationName, char8* lpCommandLine, SecurityAttributes* lpProcessAttributes, SecurityAttributes* lpThreadAttributes, IntBool bInheritHandles, PROCESS_CREATION_FLAGS dwCreationFlags, void* lpEnvironment, char8* lpCurrentDirectory, ref STARTUPINFOA lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProcessW(PWSTR lpApplicationName, PWSTR lpCommandLine, SECURITY_ATTRIBUTES* lpProcessAttributes, SECURITY_ATTRIBUTES* lpThreadAttributes, BOOL bInheritHandles, PROCESS_CREATION_FLAGS dwCreationFlags, void* lpEnvironment, PWSTR lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+		public static extern IntBool CreateProcessW(char16* lpApplicationName, char16* lpCommandLine, SecurityAttributes* lpProcessAttributes, SecurityAttributes* lpThreadAttributes, IntBool bInheritHandles, PROCESS_CREATION_FLAGS dwCreationFlags, void* lpEnvironment, char16* lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessShutdownParameters(uint32 dwLevel, uint32 dwFlags);
+		public static extern IntBool SetProcessShutdownParameters(uint32 dwLevel, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetProcessVersion(uint32 ProcessId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void GetStartupInfoW(out STARTUPINFOW lpStartupInfo);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProcessAsUserW(HANDLE hToken, PWSTR lpApplicationName, PWSTR lpCommandLine, SECURITY_ATTRIBUTES* lpProcessAttributes, SECURITY_ATTRIBUTES* lpThreadAttributes, BOOL bInheritHandles, uint32 dwCreationFlags, void* lpEnvironment, PWSTR lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+		public static extern IntBool CreateProcessAsUserW(Handle hToken, char16* lpApplicationName, char16* lpCommandLine, SecurityAttributes* lpProcessAttributes, SecurityAttributes* lpThreadAttributes, IntBool bInheritHandles, uint32 dwCreationFlags, void* lpEnvironment, char16* lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadToken(HANDLE* Thread, HANDLE Token);
+		public static extern IntBool SetThreadToken(Handle* Thread, Handle Token);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL OpenProcessToken(HANDLE ProcessHandle, TOKEN_ACCESS_MASK DesiredAccess, out HANDLE TokenHandle);
+		public static extern IntBool OpenProcessToken(Handle ProcessHandle, TOKEN_ACCESS_MASK DesiredAccess, out Handle TokenHandle);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL OpenThreadToken(HANDLE ThreadHandle, TOKEN_ACCESS_MASK DesiredAccess, BOOL OpenAsSelf, out HANDLE TokenHandle);
+		public static extern IntBool OpenThreadToken(Handle ThreadHandle, TOKEN_ACCESS_MASK DesiredAccess, IntBool OpenAsSelf, out Handle TokenHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetPriorityClass(HANDLE hProcess, PROCESS_CREATION_FLAGS dwPriorityClass);
+		public static extern IntBool SetPriorityClass(Handle hProcess, PROCESS_CREATION_FLAGS dwPriorityClass);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPriorityClass(HANDLE hProcess);
+		public static extern uint32 GetPriorityClass(Handle hProcess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadStackGuarantee(out uint32 StackSizeInBytes);
+		public static extern IntBool SetThreadStackGuarantee(out uint32 StackSizeInBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProcessId(HANDLE Process);
+		public static extern uint32 GetProcessId(Handle Process);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetThreadId(HANDLE Thread);
+		public static extern uint32 GetThreadId(Handle Thread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void FlushProcessWriteBuffers();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProcessIdOfThread(HANDLE Thread);
+		public static extern uint32 GetProcessIdOfThread(Handle Thread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitializeProcThreadAttributeList(LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList, uint32 dwAttributeCount, uint32 dwFlags, out uint lpSize);
+		public static extern IntBool InitializeProcThreadAttributeList(LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList, uint32 dwAttributeCount, uint32 dwFlags, out uint lpSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DeleteProcThreadAttributeList(LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UpdateProcThreadAttribute(LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList, uint32 dwFlags, uint Attribute, void* lpValue, uint cbSize, void* lpPreviousValue, uint* lpReturnSize);
+		public static extern IntBool UpdateProcThreadAttribute(LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList, uint32 dwFlags, uint Attribute, void* lpValue, uint cbSize, void* lpPreviousValue, uint* lpReturnSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessDynamicEHContinuationTargets(HANDLE Process, uint16 NumberOfTargets, PROCESS_DYNAMIC_EH_CONTINUATION_TARGET* Targets);
+		public static extern IntBool SetProcessDynamicEHContinuationTargets(Handle Process, uint16 NumberOfTargets, PROCESS_DYNAMIC_EH_CONTINUATION_TARGET* Targets);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessDynamicEnforcedCetCompatibleRanges(HANDLE Process, uint16 NumberOfRanges, PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE* Ranges);
+		public static extern IntBool SetProcessDynamicEnforcedCetCompatibleRanges(Handle Process, uint16 NumberOfRanges, PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE* Ranges);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessAffinityUpdateMode(HANDLE hProcess, PROCESS_AFFINITY_AUTO_UPDATE_FLAGS dwFlags);
+		public static extern IntBool SetProcessAffinityUpdateMode(Handle hProcess, PROCESS_AFFINITY_AUTO_UPDATE_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryProcessAffinityUpdateMode(HANDLE hProcess, PROCESS_AFFINITY_AUTO_UPDATE_FLAGS* lpdwFlags);
+		public static extern IntBool QueryProcessAffinityUpdateMode(Handle hProcess, PROCESS_AFFINITY_AUTO_UPDATE_FLAGS* lpdwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateRemoteThreadEx(HANDLE hProcess, SECURITY_ATTRIBUTES* lpThreadAttributes, uint dwStackSize, LPTHREAD_START_ROUTINE lpStartAddress, void* lpParameter, uint32 dwCreationFlags, LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList, uint32* lpThreadId);
+		public static extern Handle CreateRemoteThreadEx(Handle hProcess, SecurityAttributes* lpThreadAttributes, uint dwStackSize, LPTHREAD_START_ROUTINE lpStartAddress, void* lpParameter, uint32 dwCreationFlags, LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList, uint32* lpThreadId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void GetCurrentThreadStackLimits(out uint LowLimit, out uint HighLimit);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessMitigationPolicy(HANDLE hProcess, PROCESS_MITIGATION_POLICY MitigationPolicy, void* lpBuffer, uint dwLength);
+		public static extern IntBool GetProcessMitigationPolicy(Handle hProcess, PROCESS_MITIGATION_POLICY MitigationPolicy, void* lpBuffer, uint dwLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessMitigationPolicy(PROCESS_MITIGATION_POLICY MitigationPolicy, void* lpBuffer, uint dwLength);
+		public static extern IntBool SetProcessMitigationPolicy(PROCESS_MITIGATION_POLICY MitigationPolicy, void* lpBuffer, uint dwLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadTimes(HANDLE hThread, out FILETIME lpCreationTime, out FILETIME lpExitTime, out FILETIME lpKernelTime, out FILETIME lpUserTime);
+		public static extern IntBool GetThreadTimes(Handle hThread, out FileTime lpCreationTime, out FileTime lpExitTime, out FileTime lpKernelTime, out FileTime lpUserTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenProcess(PROCESS_ACCESS_RIGHTS dwDesiredAccess, BOOL bInheritHandle, uint32 dwProcessId);
+		public static extern Handle OpenProcess(PROCESS_ACCESS_RIGHTS dwDesiredAccess, IntBool bInheritHandle, uint32 dwProcessId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsProcessorFeaturePresent(PROCESSOR_FEATURE_ID ProcessorFeature);
+		public static extern IntBool IsProcessorFeaturePresent(PROCESSOR_FEATURE_ID ProcessorFeature);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessHandleCount(HANDLE hProcess, out uint32 pdwHandleCount);
+		public static extern IntBool GetProcessHandleCount(Handle hProcess, out uint32 pdwHandleCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetCurrentProcessorNumber();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadIdealProcessorEx(HANDLE hThread, ref PROCESSOR_NUMBER lpIdealProcessor, PROCESSOR_NUMBER* lpPreviousIdealProcessor);
+		public static extern IntBool SetThreadIdealProcessorEx(Handle hThread, ref PROCESSOR_NUMBER lpIdealProcessor, PROCESSOR_NUMBER* lpPreviousIdealProcessor);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadIdealProcessorEx(HANDLE hThread, out PROCESSOR_NUMBER lpIdealProcessor);
+		public static extern IntBool GetThreadIdealProcessorEx(Handle hThread, out PROCESSOR_NUMBER lpIdealProcessor);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void GetCurrentProcessorNumberEx(out PROCESSOR_NUMBER ProcNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessPriorityBoost(HANDLE hProcess, out BOOL pDisablePriorityBoost);
+		public static extern IntBool GetProcessPriorityBoost(Handle hProcess, out IntBool pDisablePriorityBoost);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessPriorityBoost(HANDLE hProcess, BOOL bDisablePriorityBoost);
+		public static extern IntBool SetProcessPriorityBoost(Handle hProcess, IntBool bDisablePriorityBoost);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadIOPendingFlag(HANDLE hThread, out BOOL lpIOIsPending);
+		public static extern IntBool GetThreadIOPendingFlag(Handle hThread, out IntBool lpIOIsPending);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetSystemTimes(FILETIME* lpIdleTime, FILETIME* lpKernelTime, FILETIME* lpUserTime);
+		public static extern IntBool GetSystemTimes(FileTime* lpIdleTime, FileTime* lpKernelTime, FileTime* lpUserTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadInformation(HANDLE hThread, THREAD_INFORMATION_CLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationSize);
+		public static extern IntBool GetThreadInformation(Handle hThread, THREAD_INFORMATION_CLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadInformation(HANDLE hThread, THREAD_INFORMATION_CLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationSize);
+		public static extern IntBool SetThreadInformation(Handle hThread, THREAD_INFORMATION_CLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsProcessCritical(HANDLE hProcess, out BOOL Critical);
+		public static extern IntBool IsProcessCritical(Handle hProcess, out IntBool Critical);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProtectedPolicy(in Guid PolicyGuid, uint PolicyValue, uint* OldPolicyValue);
+		public static extern IntBool SetProtectedPolicy(in Guid PolicyGuid, uint PolicyValue, uint* OldPolicyValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryProtectedPolicy(in Guid PolicyGuid, out uint PolicyValue);
+		public static extern IntBool QueryProtectedPolicy(in Guid PolicyGuid, out uint PolicyValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SetThreadIdealProcessor(HANDLE hThread, uint32 dwIdealProcessor);
+		public static extern uint32 SetThreadIdealProcessor(Handle hThread, uint32 dwIdealProcessor);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessInformation(HANDLE hProcess, PROCESS_INFORMATION_CLASS ProcessInformationClass, void* ProcessInformation, uint32 ProcessInformationSize);
+		public static extern IntBool SetProcessInformation(Handle hProcess, PROCESS_INFORMATION_CLASS ProcessInformationClass, void* ProcessInformation, uint32 ProcessInformationSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessInformation(HANDLE hProcess, PROCESS_INFORMATION_CLASS ProcessInformationClass, void* ProcessInformation, uint32 ProcessInformationSize);
+		public static extern IntBool GetProcessInformation(Handle hProcess, PROCESS_INFORMATION_CLASS ProcessInformationClass, void* ProcessInformation, uint32 ProcessInformationSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessDefaultCpuSets(HANDLE Process, uint32* CpuSetIds, uint32 CpuSetIdCount, out uint32 RequiredIdCount);
+		public static extern IntBool GetProcessDefaultCpuSets(Handle Process, uint32* CpuSetIds, uint32 CpuSetIdCount, out uint32 RequiredIdCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessDefaultCpuSets(HANDLE Process, uint32* CpuSetIds, uint32 CpuSetIdCount);
+		public static extern IntBool SetProcessDefaultCpuSets(Handle Process, uint32* CpuSetIds, uint32 CpuSetIdCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadSelectedCpuSets(HANDLE Thread, uint32* CpuSetIds, uint32 CpuSetIdCount, out uint32 RequiredIdCount);
+		public static extern IntBool GetThreadSelectedCpuSets(Handle Thread, uint32* CpuSetIds, uint32 CpuSetIdCount, out uint32 RequiredIdCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadSelectedCpuSets(HANDLE Thread, uint32* CpuSetIds, uint32 CpuSetIdCount);
+		public static extern IntBool SetThreadSelectedCpuSets(Handle Thread, uint32* CpuSetIds, uint32 CpuSetIdCount);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProcessAsUserA(HANDLE hToken, PSTR lpApplicationName, PSTR lpCommandLine, SECURITY_ATTRIBUTES* lpProcessAttributes, SECURITY_ATTRIBUTES* lpThreadAttributes, BOOL bInheritHandles, uint32 dwCreationFlags, void* lpEnvironment, PSTR lpCurrentDirectory, ref STARTUPINFOA lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+		public static extern IntBool CreateProcessAsUserA(Handle hToken, char8* lpApplicationName, char8* lpCommandLine, SecurityAttributes* lpProcessAttributes, SecurityAttributes* lpThreadAttributes, IntBool bInheritHandles, uint32 dwCreationFlags, void* lpEnvironment, char8* lpCurrentDirectory, ref STARTUPINFOA lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessShutdownParameters(out uint32 lpdwLevel, out uint32 lpdwFlags);
+		public static extern IntBool GetProcessShutdownParameters(out uint32 lpdwLevel, out uint32 lpdwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessDefaultCpuSetMasks(HANDLE Process, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount, out uint16 RequiredMaskCount);
+		public static extern IntBool GetProcessDefaultCpuSetMasks(Handle Process, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount, out uint16 RequiredMaskCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessDefaultCpuSetMasks(HANDLE Process, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount);
+		public static extern IntBool SetProcessDefaultCpuSetMasks(Handle Process, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadSelectedCpuSetMasks(HANDLE Thread, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount, out uint16 RequiredMaskCount);
+		public static extern IntBool GetThreadSelectedCpuSetMasks(Handle Thread, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount, out uint16 RequiredMaskCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadSelectedCpuSetMasks(HANDLE Thread, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount);
+		public static extern IntBool SetThreadSelectedCpuSetMasks(Handle Thread, GROUP_AFFINITY* CpuSetMasks, uint16 CpuSetMaskCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetMachineTypeAttributes(uint16 Machine, out MACHINE_ATTRIBUTES MachineTypeAttributes);
+		public static extern HResult GetMachineTypeAttributes(uint16 Machine, out MACHINE_ATTRIBUTES MachineTypeAttributes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetThreadDescription(HANDLE hThread, PWSTR lpThreadDescription);
+		public static extern HResult SetThreadDescription(Handle hThread, char16* lpThreadDescription);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetThreadDescription(HANDLE hThread, out PWSTR ppszThreadDescription);
+		public static extern HResult GetThreadDescription(Handle hThread, out char16* ppszThreadDescription);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueueUserWorkItem(LPTHREAD_START_ROUTINE Function, void* Context, WORKER_THREAD_FLAGS Flags);
+		public static extern IntBool QueueUserWorkItem(LPTHREAD_START_ROUTINE Function, void* Context, WORKER_THREAD_FLAGS Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterWaitEx(HANDLE WaitHandle, HANDLE CompletionEvent);
+		public static extern IntBool UnregisterWaitEx(Handle WaitHandle, Handle CompletionEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateTimerQueue();
+		public static extern Handle CreateTimerQueue();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateTimerQueueTimer(out HANDLE phNewTimer, HANDLE TimerQueue, WAITORTIMERCALLBACK Callback, void* Parameter, uint32 DueTime, uint32 Period, WORKER_THREAD_FLAGS Flags);
+		public static extern IntBool CreateTimerQueueTimer(out Handle phNewTimer, Handle TimerQueue, WAITORTIMERCALLBACK Callback, void* Parameter, uint32 DueTime, uint32 Period, WORKER_THREAD_FLAGS Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ChangeTimerQueueTimer(HANDLE TimerQueue, HANDLE Timer, uint32 DueTime, uint32 Period);
+		public static extern IntBool ChangeTimerQueueTimer(Handle TimerQueue, Handle Timer, uint32 DueTime, uint32 Period);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteTimerQueueTimer(HANDLE TimerQueue, HANDLE Timer, HANDLE CompletionEvent);
+		public static extern IntBool DeleteTimerQueueTimer(Handle TimerQueue, Handle Timer, Handle CompletionEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteTimerQueue(HANDLE TimerQueue);
+		public static extern IntBool DeleteTimerQueue(Handle TimerQueue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteTimerQueueEx(HANDLE TimerQueue, HANDLE CompletionEvent);
+		public static extern IntBool DeleteTimerQueueEx(Handle TimerQueue, Handle CompletionEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern PTP_POOL CreateThreadpool(void* reserved);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void SetThreadpoolThreadMaximum(PTP_POOL ptpp, uint32 cthrdMost);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadpoolThreadMinimum(PTP_POOL ptpp, uint32 cthrdMic);
+		public static extern IntBool SetThreadpoolThreadMinimum(PTP_POOL ptpp, uint32 cthrdMic);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadpoolStackInformation(PTP_POOL ptpp, ref TP_POOL_STACK_INFORMATION ptpsi);
+		public static extern IntBool SetThreadpoolStackInformation(PTP_POOL ptpp, ref TP_POOL_STACK_INFORMATION ptpsi);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryThreadpoolStackInformation(PTP_POOL ptpp, out TP_POOL_STACK_INFORMATION ptpsi);
+		public static extern IntBool QueryThreadpoolStackInformation(PTP_POOL ptpp, out TP_POOL_STACK_INFORMATION ptpsi);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CloseThreadpool(PTP_POOL ptpp);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int CreateThreadpoolCleanupGroup();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void CloseThreadpoolCleanupGroupMembers(int ptpcg, BOOL fCancelPendingCallbacks, void* pvCleanupContext);
+		public static extern void CloseThreadpoolCleanupGroupMembers(int ptpcg, IntBool fCancelPendingCallbacks, void* pvCleanupContext);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CloseThreadpoolCleanupGroup(int ptpcg);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void SetEventWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, HANDLE evt);
+		public static extern void SetEventWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, Handle evt);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ReleaseSemaphoreWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, HANDLE sem, uint32 crel);
+		public static extern void ReleaseSemaphoreWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, Handle sem, uint32 crel);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ReleaseMutexWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, HANDLE @mut);
+		public static extern void ReleaseMutexWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, Handle @mut);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void LeaveCriticalSectionWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, out RTL_CRITICAL_SECTION pcs);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void FreeLibraryWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, HINSTANCE mod);
+		public static extern void FreeLibraryWhenCallbackReturns(out TP_CALLBACK_INSTANCE pci, HInstance mod);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CallbackMayRunLong(out TP_CALLBACK_INSTANCE pci);
+		public static extern IntBool CallbackMayRunLong(out TP_CALLBACK_INSTANCE pci);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DisassociateCurrentThreadFromCallback(out TP_CALLBACK_INSTANCE pci);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TrySubmitThreadpoolCallback(PTP_SIMPLE_CALLBACK pfns, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
+		public static extern IntBool TrySubmitThreadpoolCallback(PTP_SIMPLE_CALLBACK pfns, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern TP_WORK* CreateThreadpoolWork(PTP_WORK_CALLBACK pfnwk, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void SubmitThreadpoolWork(out TP_WORK pwk);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WaitForThreadpoolWorkCallbacks(out TP_WORK pwk, BOOL fCancelPendingCallbacks);
+		public static extern void WaitForThreadpoolWorkCallbacks(out TP_WORK pwk, IntBool fCancelPendingCallbacks);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CloseThreadpoolWork(out TP_WORK pwk);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern TP_TIMER* CreateThreadpoolTimer(PTP_TIMER_CALLBACK pfnti, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void SetThreadpoolTimer(out TP_TIMER pti, FILETIME* pftDueTime, uint32 msPeriod, uint32 msWindowLength);
+		public static extern void SetThreadpoolTimer(out TP_TIMER pti, FileTime* pftDueTime, uint32 msPeriod, uint32 msWindowLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsThreadpoolTimerSet(out TP_TIMER pti);
+		public static extern IntBool IsThreadpoolTimerSet(out TP_TIMER pti);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WaitForThreadpoolTimerCallbacks(out TP_TIMER pti, BOOL fCancelPendingCallbacks);
+		public static extern void WaitForThreadpoolTimerCallbacks(out TP_TIMER pti, IntBool fCancelPendingCallbacks);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CloseThreadpoolTimer(out TP_TIMER pti);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern TP_WAIT* CreateThreadpoolWait(PTP_WAIT_CALLBACK pfnwa, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void SetThreadpoolWait(out TP_WAIT pwa, HANDLE h, FILETIME* pftTimeout);
+		public static extern void SetThreadpoolWait(out TP_WAIT pwa, Handle h, FileTime* pftTimeout);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WaitForThreadpoolWaitCallbacks(out TP_WAIT pwa, BOOL fCancelPendingCallbacks);
+		public static extern void WaitForThreadpoolWaitCallbacks(out TP_WAIT pwa, IntBool fCancelPendingCallbacks);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CloseThreadpoolWait(out TP_WAIT pwa);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern TP_IO* CreateThreadpoolIo(HANDLE fl, PTP_WIN32_IO_CALLBACK pfnio, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
+		public static extern TP_IO* CreateThreadpoolIo(Handle fl, PTP_WIN32_IO_CALLBACK pfnio, void* pv, TP_CALLBACK_ENVIRON_V3* pcbe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void StartThreadpoolIo(out TP_IO pio);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CancelThreadpoolIo(out TP_IO pio);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WaitForThreadpoolIoCallbacks(out TP_IO pio, BOOL fCancelPendingCallbacks);
+		public static extern void WaitForThreadpoolIoCallbacks(out TP_IO pio, IntBool fCancelPendingCallbacks);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CloseThreadpoolIo(out TP_IO pio);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadpoolTimerEx(out TP_TIMER pti, FILETIME* pftDueTime, uint32 msPeriod, uint32 msWindowLength);
+		public static extern IntBool SetThreadpoolTimerEx(out TP_TIMER pti, FileTime* pftDueTime, uint32 msPeriod, uint32 msWindowLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadpoolWaitEx(out TP_WAIT pwa, HANDLE h, FILETIME* pftTimeout, void* Reserved);
+		public static extern IntBool SetThreadpoolWaitEx(out TP_WAIT pwa, Handle h, FileTime* pftTimeout, void* Reserved);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsWow64Process(HANDLE hProcess, out BOOL Wow64Process);
+		public static extern IntBool IsWow64Process(Handle hProcess, out IntBool Wow64Process);
 		[Import("api-ms-win-core-wow64-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 Wow64SetThreadDefaultGuestMachine(uint16 Machine);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsWow64Process2(HANDLE hProcess, out uint16 pProcessMachine, uint16* pNativeMachine);
+		public static extern IntBool IsWow64Process2(Handle hProcess, out uint16 pProcessMachine, uint16* pNativeMachine);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 Wow64SuspendThread(HANDLE hThread);
+		public static extern uint32 Wow64SuspendThread(Handle hThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern NamespaceHandle CreatePrivateNamespaceW(SECURITY_ATTRIBUTES* lpPrivateNamespaceAttributes, void* lpBoundaryDescriptor, PWSTR lpAliasPrefix);
+		public static extern NamespaceHandle CreatePrivateNamespaceW(SecurityAttributes* lpPrivateNamespaceAttributes, void* lpBoundaryDescriptor, char16* lpAliasPrefix);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern NamespaceHandle OpenPrivateNamespaceW(void* lpBoundaryDescriptor, PWSTR lpAliasPrefix);
+		public static extern NamespaceHandle OpenPrivateNamespaceW(void* lpBoundaryDescriptor, char16* lpAliasPrefix);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN ClosePrivateNamespace(NamespaceHandle Handle, uint32 Flags);
+		public static extern bool ClosePrivateNamespace(NamespaceHandle Handle, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BoundaryDescriptorHandle CreateBoundaryDescriptorW(PWSTR Name, uint32 Flags);
+		public static extern BoundaryDescriptorHandle CreateBoundaryDescriptorW(char16* Name, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AddSIDToBoundaryDescriptor(out HANDLE BoundaryDescriptor, PSID RequiredSid);
+		public static extern IntBool AddSIDToBoundaryDescriptor(out Handle BoundaryDescriptor, PSID RequiredSid);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DeleteBoundaryDescriptor(BoundaryDescriptorHandle BoundaryDescriptor);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaHighestNodeNumber(out uint32 HighestNodeNumber);
+		public static extern IntBool GetNumaHighestNodeNumber(out uint32 HighestNodeNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaNodeProcessorMaskEx(uint16 Node, out GROUP_AFFINITY ProcessorMask);
+		public static extern IntBool GetNumaNodeProcessorMaskEx(uint16 Node, out GROUP_AFFINITY ProcessorMask);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaNodeProcessorMask2(uint16 NodeNumber, GROUP_AFFINITY* ProcessorMasks, uint16 ProcessorMaskCount, out uint16 RequiredMaskCount);
+		public static extern IntBool GetNumaNodeProcessorMask2(uint16 NodeNumber, GROUP_AFFINITY* ProcessorMasks, uint16 ProcessorMaskCount, out uint16 RequiredMaskCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaProximityNodeEx(uint32 ProximityId, out uint16 NodeNumber);
+		public static extern IntBool GetNumaProximityNodeEx(uint32 ProximityId, out uint16 NodeNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessGroupAffinity(HANDLE hProcess, out uint16 GroupCount, uint16* GroupArray);
+		public static extern IntBool GetProcessGroupAffinity(Handle hProcess, out uint16 GroupCount, uint16* GroupArray);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadGroupAffinity(HANDLE hThread, out GROUP_AFFINITY GroupAffinity);
+		public static extern IntBool GetThreadGroupAffinity(Handle hThread, out GROUP_AFFINITY GroupAffinity);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadGroupAffinity(HANDLE hThread, in GROUP_AFFINITY GroupAffinity, GROUP_AFFINITY* PreviousGroupAffinity);
+		public static extern IntBool SetThreadGroupAffinity(Handle hThread, in GROUP_AFFINITY GroupAffinity, GROUP_AFFINITY* PreviousGroupAffinity);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AttachThreadInput(uint32 idAttach, uint32 idAttachTo, BOOL fAttach);
+		public static extern IntBool AttachThreadInput(uint32 idAttach, uint32 idAttachTo, IntBool fAttach);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WaitForInputIdle(HANDLE hProcess, uint32 dwMilliseconds);
+		public static extern uint32 WaitForInputIdle(Handle hProcess, uint32 dwMilliseconds);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetGuiResources(HANDLE hProcess, GET_GUI_RESOURCES_FLAGS uiFlags);
+		public static extern uint32 GetGuiResources(Handle hProcess, GET_GUI_RESOURCES_FLAGS uiFlags);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsImmersiveProcess(HANDLE hProcess);
+		public static extern IntBool IsImmersiveProcess(Handle hProcess);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessRestrictionExemption(BOOL fEnableExemption);
+		public static extern IntBool SetProcessRestrictionExemption(IntBool fEnableExemption);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessAffinityMask(HANDLE hProcess, out uint lpProcessAffinityMask, out uint lpSystemAffinityMask);
+		public static extern IntBool GetProcessAffinityMask(Handle hProcess, out uint lpProcessAffinityMask, out uint lpSystemAffinityMask);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessAffinityMask(HANDLE hProcess, uint dwProcessAffinityMask);
+		public static extern IntBool SetProcessAffinityMask(Handle hProcess, uint dwProcessAffinityMask);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessIoCounters(HANDLE hProcess, out IO_COUNTERS lpIoCounters);
+		public static extern IntBool GetProcessIoCounters(Handle hProcess, out IO_COUNTERS lpIoCounters);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void SwitchToFiber(void* lpFiber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DeleteFiber(void* lpFiber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ConvertFiberToThread();
+		public static extern IntBool ConvertFiberToThread();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* CreateFiberEx(uint dwStackCommitSize, uint dwStackReserveSize, uint32 dwFlags, LPFIBER_START_ROUTINE lpStartAddress, void* lpParameter);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -1200,71 +1206,71 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* ConvertThreadToFiber(void* lpParameter);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateUmsCompletionList(void** UmsCompletionList);
+		public static extern IntBool CreateUmsCompletionList(void** UmsCompletionList);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DequeueUmsCompletionListItems(void* UmsCompletionList, uint32 WaitTimeOut, void** UmsThreadList);
+		public static extern IntBool DequeueUmsCompletionListItems(void* UmsCompletionList, uint32 WaitTimeOut, void** UmsThreadList);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUmsCompletionListEvent(void* UmsCompletionList, out HANDLE UmsCompletionEvent);
+		public static extern IntBool GetUmsCompletionListEvent(void* UmsCompletionList, out Handle UmsCompletionEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ExecuteUmsThread(void* UmsThread);
+		public static extern IntBool ExecuteUmsThread(void* UmsThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UmsThreadYield(void* SchedulerParam);
+		public static extern IntBool UmsThreadYield(void* SchedulerParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteUmsCompletionList(void* UmsCompletionList);
+		public static extern IntBool DeleteUmsCompletionList(void* UmsCompletionList);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* GetCurrentUmsThread();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* GetNextUmsListItem(void* UmsContext);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryUmsThreadInformation(void* UmsThread, RTL_UMS_THREAD_INFO_CLASS UmsThreadInfoClass, void* UmsThreadInformation, uint32 UmsThreadInformationLength, uint32* ReturnLength);
+		public static extern IntBool QueryUmsThreadInformation(void* UmsThread, RTL_UMS_THREAD_INFO_CLASS UmsThreadInfoClass, void* UmsThreadInformation, uint32 UmsThreadInformationLength, uint32* ReturnLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetUmsThreadInformation(void* UmsThread, RTL_UMS_THREAD_INFO_CLASS UmsThreadInfoClass, void* UmsThreadInformation, uint32 UmsThreadInformationLength);
+		public static extern IntBool SetUmsThreadInformation(void* UmsThread, RTL_UMS_THREAD_INFO_CLASS UmsThreadInfoClass, void* UmsThreadInformation, uint32 UmsThreadInformationLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeleteUmsThreadContext(void* UmsThread);
+		public static extern IntBool DeleteUmsThreadContext(void* UmsThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateUmsThreadContext(void** lpUmsThread);
+		public static extern IntBool CreateUmsThreadContext(void** lpUmsThread);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnterUmsSchedulingMode(ref UMS_SCHEDULER_STARTUP_INFO SchedulerStartupInfo);
+		public static extern IntBool EnterUmsSchedulingMode(ref UMS_SCHEDULER_STARTUP_INFO SchedulerStartupInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUmsSystemThreadInformation(HANDLE ThreadHandle, out UMS_SYSTEM_THREAD_INFORMATION SystemThreadInfo);
+		public static extern IntBool GetUmsSystemThreadInformation(Handle ThreadHandle, out UMS_SYSTEM_THREAD_INFORMATION SystemThreadInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint SetThreadAffinityMask(HANDLE hThread, uint dwThreadAffinityMask);
+		public static extern uint SetThreadAffinityMask(Handle hThread, uint dwThreadAffinityMask);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessDEPPolicy(PROCESS_DEP_FLAGS dwFlags);
+		public static extern IntBool SetProcessDEPPolicy(PROCESS_DEP_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessDEPPolicy(HANDLE hProcess, out uint32 lpFlags, out BOOL lpPermanent);
+		public static extern IntBool GetProcessDEPPolicy(Handle hProcess, out uint32 lpFlags, out IntBool lpPermanent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PulseEvent(HANDLE hEvent);
+		public static extern IntBool PulseEvent(Handle hEvent);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WinExec(PSTR lpCmdLine, uint32 uCmdShow);
+		public static extern uint32 WinExec(char8* lpCmdLine, uint32 uCmdShow);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateSemaphoreA(SECURITY_ATTRIBUTES* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, PSTR lpName);
+		public static extern Handle CreateSemaphoreA(SecurityAttributes* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateSemaphoreExA(SECURITY_ATTRIBUTES* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, PSTR lpName, uint32 dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateSemaphoreExA(SecurityAttributes* lpSemaphoreAttributes, int32 lInitialCount, int32 lMaximumCount, char8* lpName, uint32 dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryFullProcessImageNameA(HANDLE hProcess, PROCESS_NAME_FORMAT dwFlags, uint8* lpExeName, out uint32 lpdwSize);
+		public static extern IntBool QueryFullProcessImageNameA(Handle hProcess, PROCESS_NAME_FORMAT dwFlags, uint8* lpExeName, out uint32 lpdwSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryFullProcessImageNameW(HANDLE hProcess, PROCESS_NAME_FORMAT dwFlags, char16* lpExeName, out uint32 lpdwSize);
+		public static extern IntBool QueryFullProcessImageNameW(Handle hProcess, PROCESS_NAME_FORMAT dwFlags, char16* lpExeName, out uint32 lpdwSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void GetStartupInfoA(out STARTUPINFOA lpStartupInfo);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProcessWithLogonW(PWSTR lpUsername, PWSTR lpDomain, PWSTR lpPassword, CREATE_PROCESS_LOGON_FLAGS dwLogonFlags, PWSTR lpApplicationName, PWSTR lpCommandLine, uint32 dwCreationFlags, void* lpEnvironment, PWSTR lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+		public static extern IntBool CreateProcessWithLogonW(char16* lpUsername, char16* lpDomain, char16* lpPassword, CREATE_PROCESS_LOGON_FLAGS dwLogonFlags, char16* lpApplicationName, char16* lpCommandLine, uint32 dwCreationFlags, void* lpEnvironment, char16* lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateProcessWithTokenW(HANDLE hToken, CREATE_PROCESS_LOGON_FLAGS dwLogonFlags, PWSTR lpApplicationName, PWSTR lpCommandLine, uint32 dwCreationFlags, void* lpEnvironment, PWSTR lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+		public static extern IntBool CreateProcessWithTokenW(Handle hToken, CREATE_PROCESS_LOGON_FLAGS dwLogonFlags, char16* lpApplicationName, char16* lpCommandLine, uint32 dwCreationFlags, void* lpEnvironment, char16* lpCurrentDirectory, ref STARTUPINFOW lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RegisterWaitForSingleObject(out HANDLE phNewWaitObject, HANDLE hObject, WAITORTIMERCALLBACK Callback, void* Context, uint32 dwMilliseconds, WORKER_THREAD_FLAGS dwFlags);
+		public static extern IntBool RegisterWaitForSingleObject(out Handle phNewWaitObject, Handle hObject, WAITORTIMERCALLBACK Callback, void* Context, uint32 dwMilliseconds, WORKER_THREAD_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterWait(HANDLE WaitHandle);
+		public static extern IntBool UnregisterWait(Handle WaitHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE SetTimerQueueTimer(HANDLE TimerQueue, WAITORTIMERCALLBACK Callback, void* Parameter, uint32 DueTime, uint32 Period, BOOL PreferIo);
+		public static extern Handle SetTimerQueueTimer(Handle TimerQueue, WAITORTIMERCALLBACK Callback, void* Parameter, uint32 DueTime, uint32 Period, IntBool PreferIo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern NamespaceHandle CreatePrivateNamespaceA(SECURITY_ATTRIBUTES* lpPrivateNamespaceAttributes, void* lpBoundaryDescriptor, PSTR lpAliasPrefix);
+		public static extern NamespaceHandle CreatePrivateNamespaceA(SecurityAttributes* lpPrivateNamespaceAttributes, void* lpBoundaryDescriptor, char8* lpAliasPrefix);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern NamespaceHandle OpenPrivateNamespaceA(void* lpBoundaryDescriptor, PSTR lpAliasPrefix);
+		public static extern NamespaceHandle OpenPrivateNamespaceA(void* lpBoundaryDescriptor, char8* lpAliasPrefix);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BoundaryDescriptorHandle CreateBoundaryDescriptorA(PSTR Name, uint32 Flags);
+		public static extern BoundaryDescriptorHandle CreateBoundaryDescriptorA(char8* Name, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AddIntegrityLabelToBoundaryDescriptor(out HANDLE BoundaryDescriptor, PSID IntegrityLabel);
+		public static extern IntBool AddIntegrityLabelToBoundaryDescriptor(out Handle BoundaryDescriptor, PSID IntegrityLabel);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 GetActiveProcessorGroupCount();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -1274,24 +1280,24 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetMaximumProcessorCount(uint16 GroupNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaProcessorNode(uint8 Processor, out uint8 NodeNumber);
+		public static extern IntBool GetNumaProcessorNode(uint8 Processor, out uint8 NodeNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaNodeNumberFromHandle(HANDLE hFile, out uint16 NodeNumber);
+		public static extern IntBool GetNumaNodeNumberFromHandle(Handle hFile, out uint16 NodeNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaProcessorNodeEx(ref PROCESSOR_NUMBER Processor, out uint16 NodeNumber);
+		public static extern IntBool GetNumaProcessorNodeEx(ref PROCESSOR_NUMBER Processor, out uint16 NodeNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaNodeProcessorMask(uint8 Node, out uint64 ProcessorMask);
+		public static extern IntBool GetNumaNodeProcessorMask(uint8 Node, out uint64 ProcessorMask);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaAvailableMemoryNode(uint8 Node, out uint64 AvailableBytes);
+		public static extern IntBool GetNumaAvailableMemoryNode(uint8 Node, out uint64 AvailableBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaAvailableMemoryNodeEx(uint16 Node, out uint64 AvailableBytes);
+		public static extern IntBool GetNumaAvailableMemoryNodeEx(uint16 Node, out uint64 AvailableBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumaProximityNode(uint32 ProximityId, out uint8 NodeNumber);
+		public static extern IntBool GetNumaProximityNode(uint32 ProximityId, out uint8 NodeNumber);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtQueryInformationProcess(HANDLE ProcessHandle, PROCESSINFOCLASS ProcessInformationClass, void* ProcessInformation, uint32 ProcessInformationLength, out uint32 ReturnLength);
+		public static extern NTSTATUS NtQueryInformationProcess(Handle ProcessHandle, PROCESSINFOCLASS ProcessInformationClass, void* ProcessInformation, uint32 ProcessInformationLength, out uint32 ReturnLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtQueryInformationThread(HANDLE ThreadHandle, THREADINFOCLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationLength, out uint32 ReturnLength);
+		public static extern NTSTATUS NtQueryInformationThread(Handle ThreadHandle, THREADINFOCLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationLength, out uint32 ReturnLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtSetInformationThread(HANDLE ThreadHandle, THREADINFOCLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationLength);
+		public static extern NTSTATUS NtSetInformationThread(Handle ThreadHandle, THREADINFOCLASS ThreadInformationClass, void* ThreadInformation, uint32 ThreadInformationLength);
 	}
 }

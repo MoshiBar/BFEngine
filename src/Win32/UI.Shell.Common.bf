@@ -1,9 +1,12 @@
 using System;
+using static Win32.System.Com;
+using static System.Windows.COM_IUnknown;
+using static System.Windows;
 
 // namespace UI.Shell.Common
-namespace Win32
+namespace Win32.UI
 {
-	extension Win32
+	extension Shell
 	{
 		// --- Constants ---
 		
@@ -109,7 +112,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public PWSTR pOleStr;
+				public char16* pOleStr;
 				public uint32 uOffset;
 				public uint8[260] cStr;
 			}
@@ -124,8 +127,8 @@ namespace Win32
 		[CRepr]
 		public struct COMDLG_FILTERSPEC
 		{
-			public PWSTR pszName;
-			public PWSTR pszSpec;
+			public char16* pszName;
+			public char16* pszSpec;
 		}
 		
 		// --- COM Interfaces ---
@@ -137,14 +140,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 pcObjects) mut => VT.GetCount(ref this, out pcObjects);
-			public HRESULT GetAt(uint32 uiIndex, in Guid riid, void** ppv) mut => VT.GetAt(ref this, uiIndex, riid, ppv);
+			public HResult GetCount(out uint32 pcObjects) mut => VT.GetCount(ref this, out pcObjects);
+			public HResult GetAt(uint32 uiIndex, in Guid riid, void** ppv) mut => VT.GetAt(ref this, uiIndex, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectArray self, out uint32 pcObjects) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectArray self, uint32 uiIndex, in Guid riid, void** ppv) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectArray self, out uint32 pcObjects) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectArray self, uint32 uiIndex, in Guid riid, void** ppv) GetAt;
 			}
 		}
 		[CRepr]
@@ -154,18 +157,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddObject(ref IUnknown punk) mut => VT.AddObject(ref this, ref punk);
-			public HRESULT AddFromArray(ref IObjectArray poaSource) mut => VT.AddFromArray(ref this, ref poaSource);
-			public HRESULT RemoveObjectAt(uint32 uiIndex) mut => VT.RemoveObjectAt(ref this, uiIndex);
-			public HRESULT Clear() mut => VT.Clear(ref this);
+			public HResult AddObject(ref IUnknown punk) mut => VT.AddObject(ref this, ref punk);
+			public HResult AddFromArray(ref IObjectArray poaSource) mut => VT.AddFromArray(ref this, ref poaSource);
+			public HResult RemoveObjectAt(uint32 uiIndex) mut => VT.RemoveObjectAt(ref this, uiIndex);
+			public HResult Clear() mut => VT.Clear(ref this);
 
 			[CRepr]
 			public struct VTable : IObjectArray.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectCollection self, ref IUnknown punk) AddObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectCollection self, ref IObjectArray poaSource) AddFromArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectCollection self, uint32 uiIndex) RemoveObjectAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectCollection self) Clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectCollection self, ref IUnknown punk) AddObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectCollection self, ref IObjectArray poaSource) AddFromArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectCollection self, uint32 uiIndex) RemoveObjectAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectCollection self) Clear;
 			}
 		}
 		

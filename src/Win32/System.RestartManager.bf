@@ -75,7 +75,7 @@ namespace Win32
 		public struct RM_UNIQUE_PROCESS
 		{
 			public uint32 dwProcessId;
-			public FILETIME ProcessStartTime;
+			public FileTime ProcessStartTime;
 		}
 		[CRepr]
 		public struct RM_PROCESS_INFO
@@ -86,7 +86,7 @@ namespace Win32
 			public RM_APP_TYPE ApplicationType;
 			public uint32 AppStatus;
 			public uint32 TSSessionId;
-			public BOOL bRestartable;
+			public IntBool bRestartable;
 		}
 		[CRepr]
 		public struct RM_FILTER_INFO
@@ -99,22 +99,22 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public PWSTR strFilename;
+				public char16* strFilename;
 				public RM_UNIQUE_PROCESS Process;
-				public PWSTR strServiceShortName;
+				public char16* strServiceShortName;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RmStartSession(out uint32 pSessionHandle, uint32 dwSessionFlags, PWSTR strSessionKey);
+		public static extern uint32 RmStartSession(out uint32 pSessionHandle, uint32 dwSessionFlags, char16* strSessionKey);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RmJoinSession(out uint32 pSessionHandle, PWSTR strSessionKey);
+		public static extern uint32 RmJoinSession(out uint32 pSessionHandle, char16* strSessionKey);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RmEndSession(uint32 dwSessionHandle);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RmRegisterResources(uint32 dwSessionHandle, uint32 nFiles, PWSTR* rgsFileNames, uint32 nApplications, RM_UNIQUE_PROCESS* rgApplications, uint32 nServices, PWSTR* rgsServiceNames);
+		public static extern uint32 RmRegisterResources(uint32 dwSessionHandle, uint32 nFiles, char16** rgsFileNames, uint32 nApplications, RM_UNIQUE_PROCESS* rgApplications, uint32 nServices, char16** rgsServiceNames);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RmGetList(uint32 dwSessionHandle, out uint32 pnProcInfoNeeded, out uint32 pnProcInfo, RM_PROCESS_INFO* rgAffectedApps, out uint32 lpdwRebootReasons);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
@@ -124,9 +124,9 @@ namespace Win32
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RmCancelCurrentTask(uint32 dwSessionHandle);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RmAddFilter(uint32 dwSessionHandle, PWSTR strModuleName, RM_UNIQUE_PROCESS* pProcess, PWSTR strServiceShortName, RM_FILTER_ACTION FilterAction);
+		public static extern uint32 RmAddFilter(uint32 dwSessionHandle, char16* strModuleName, RM_UNIQUE_PROCESS* pProcess, char16* strServiceShortName, RM_FILTER_ACTION FilterAction);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RmRemoveFilter(uint32 dwSessionHandle, PWSTR strModuleName, RM_UNIQUE_PROCESS* pProcess, PWSTR strServiceShortName);
+		public static extern uint32 RmRemoveFilter(uint32 dwSessionHandle, char16* strModuleName, RM_UNIQUE_PROCESS* pProcess, char16* strServiceShortName);
 		[Import("rstrtmgr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RmGetFilterList(uint32 dwSessionHandle, uint8* pbFilterBuf, uint32 cbFilterBuf, out uint32 cbFilterBufNeeded);
 	}

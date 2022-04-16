@@ -1,4 +1,7 @@
-using Windows;
+using static Win32.Graphics.Gdi;
+using static Win32.Win32;
+using static System.Windows;
+
 namespace BfEngine
 {
 	class WGL
@@ -61,17 +64,17 @@ namespace BfEngine
 			Samples = 0x2042,
 		}
 
-		public static function BOOL(HDC hdc,
+		public static function IntBool(HDC hdc,
 			ARBEnum* piAttribIList,
 			float* pfAttribFList,
-			UINT nMaxFormats,
+			uint32 nMaxFormats,
 			int32* piFormats,
-			UINT* nNumFormats) ChoosePixelFormatARB;
+			uint32* nNumFormats) ChoosePixelFormatARB;
 
 
-		public static void Init(function void*(char8*/*StringView*/ procname) func)
+		public static void Init(function PROC(char8*/*StringView*/ procname) func)
 		{
-			ChoosePixelFormatARB = (.)func("wglChoosePixelFormatARB");
+			ChoosePixelFormatARB = (.)(void*)func("wglChoosePixelFormatARB");
 		}
 	}
 }

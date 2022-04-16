@@ -1259,68 +1259,68 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function HRESULT WS_READ_CALLBACK(void* callbackState, void* bytes, uint32 maxSize, out uint32 actualSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_WRITE_CALLBACK(void* callbackState, WS_BYTES* buffers, uint32 count, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_PUSH_BYTES_CALLBACK(void* callbackState, WS_WRITE_CALLBACK writeCallback, void* writeCallbackState, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_PULL_BYTES_CALLBACK(void* callbackState, void* bytes, uint32 maxSize, out uint32 actualSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_DYNAMIC_STRING_CALLBACK(void* callbackState, in WS_XML_STRING string, out BOOL found, out uint32 id, WS_ERROR* error);
-		public function void WS_ASYNC_CALLBACK(HRESULT errorCode, WS_CALLBACK_MODEL callbackModel, void* callbackState);
-		public function HRESULT WS_ASYNC_FUNCTION(HRESULT hr, WS_CALLBACK_MODEL callbackModel, void* callbackState, out WS_ASYNC_OPERATION next, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_CREATE_CHANNEL_CALLBACK(WS_CHANNEL_TYPE channelType, void* channelParameters, uint32 channelParametersSize, void** channelInstance, WS_ERROR* error);
+		public function HResult WS_READ_CALLBACK(void* callbackState, void* bytes, uint32 maxSize, out uint32 actualSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_WRITE_CALLBACK(void* callbackState, WS_BYTES* buffers, uint32 count, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_PUSH_BYTES_CALLBACK(void* callbackState, WS_WRITE_CALLBACK writeCallback, void* writeCallbackState, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_PULL_BYTES_CALLBACK(void* callbackState, void* bytes, uint32 maxSize, out uint32 actualSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_DYNAMIC_STRING_CALLBACK(void* callbackState, in WS_XML_STRING string, out IntBool found, out uint32 id, WS_ERROR* error);
+		public function void WS_ASYNC_CALLBACK(HResult errorCode, WS_CALLBACK_MODEL callbackModel, void* callbackState);
+		public function HResult WS_ASYNC_FUNCTION(HResult hr, WS_CALLBACK_MODEL callbackModel, void* callbackState, out WS_ASYNC_OPERATION next, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_CREATE_CHANNEL_CALLBACK(WS_CHANNEL_TYPE channelType, void* channelParameters, uint32 channelParametersSize, void** channelInstance, WS_ERROR* error);
 		public function void WS_FREE_CHANNEL_CALLBACK(void* channelInstance);
-		public function HRESULT WS_RESET_CHANNEL_CALLBACK(void* channelInstance, WS_ERROR* error);
-		public function HRESULT WS_ABORT_CHANNEL_CALLBACK(void* channelInstance, WS_ERROR* error);
-		public function HRESULT WS_OPEN_CHANNEL_CALLBACK(void* channelInstance, in WS_ENDPOINT_ADDRESS endpointAddress, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_CLOSE_CHANNEL_CALLBACK(void* channelInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_SET_CHANNEL_PROPERTY_CALLBACK(void* channelInstance, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
-		public function HRESULT WS_GET_CHANNEL_PROPERTY_CALLBACK(void* channelInstance, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
-		public function HRESULT WS_READ_MESSAGE_START_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_READ_MESSAGE_END_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_WRITE_MESSAGE_START_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_WRITE_MESSAGE_END_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_ABANDON_MESSAGE_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ERROR* error);
-		public function HRESULT WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK(void* channelInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_CREATE_ENCODER_CALLBACK(void* createContext, WS_WRITE_CALLBACK writeCallback, void* writeContext, void** encoderContext, WS_ERROR* error);
-		public function HRESULT WS_ENCODER_GET_CONTENT_TYPE_CALLBACK(void* encoderContext, in WS_STRING contentType, out WS_STRING newContentType, out WS_STRING contentEncoding, WS_ERROR* error);
-		public function HRESULT WS_ENCODER_START_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_ENCODER_ENCODE_CALLBACK(void* encoderContext, WS_BYTES* buffers, uint32 count, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_ENCODER_END_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_RESET_CHANNEL_CALLBACK(void* channelInstance, WS_ERROR* error);
+		public function HResult WS_ABORT_CHANNEL_CALLBACK(void* channelInstance, WS_ERROR* error);
+		public function HResult WS_OPEN_CHANNEL_CALLBACK(void* channelInstance, in WS_ENDPOINT_ADDRESS endpointAddress, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_CLOSE_CHANNEL_CALLBACK(void* channelInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_SET_CHANNEL_PROPERTY_CALLBACK(void* channelInstance, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public function HResult WS_GET_CHANNEL_PROPERTY_CALLBACK(void* channelInstance, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public function HResult WS_READ_MESSAGE_START_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_READ_MESSAGE_END_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_WRITE_MESSAGE_START_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_WRITE_MESSAGE_END_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_ABANDON_MESSAGE_CALLBACK(void* channelInstance, ref WS_MESSAGE message, WS_ERROR* error);
+		public function HResult WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK(void* channelInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_CREATE_ENCODER_CALLBACK(void* createContext, WS_WRITE_CALLBACK writeCallback, void* writeContext, void** encoderContext, WS_ERROR* error);
+		public function HResult WS_ENCODER_GET_CONTENT_TYPE_CALLBACK(void* encoderContext, in WS_STRING contentType, out WS_STRING newContentType, out WS_STRING contentEncoding, WS_ERROR* error);
+		public function HResult WS_ENCODER_START_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_ENCODER_ENCODE_CALLBACK(void* encoderContext, WS_BYTES* buffers, uint32 count, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_ENCODER_END_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		public function void WS_FREE_ENCODER_CALLBACK(void* encoderContext);
-		public function HRESULT WS_CREATE_DECODER_CALLBACK(void* createContext, WS_READ_CALLBACK readCallback, void* readContext, void** decoderContext, WS_ERROR* error);
-		public function HRESULT WS_DECODER_GET_CONTENT_TYPE_CALLBACK(void* decoderContext, in WS_STRING contentType, WS_STRING* contentEncoding, out WS_STRING newContentType, WS_ERROR* error);
-		public function HRESULT WS_DECODER_START_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_DECODER_DECODE_CALLBACK(void* encoderContext, void* buffer, uint32 maxLength, out uint32 length, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_DECODER_END_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_CREATE_DECODER_CALLBACK(void* createContext, WS_READ_CALLBACK readCallback, void* readContext, void** decoderContext, WS_ERROR* error);
+		public function HResult WS_DECODER_GET_CONTENT_TYPE_CALLBACK(void* decoderContext, in WS_STRING contentType, WS_STRING* contentEncoding, out WS_STRING newContentType, WS_ERROR* error);
+		public function HResult WS_DECODER_START_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_DECODER_DECODE_CALLBACK(void* encoderContext, void* buffer, uint32 maxLength, out uint32 length, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_DECODER_END_CALLBACK(void* encoderContext, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		public function void WS_FREE_DECODER_CALLBACK(void* decoderContext);
-		public function HRESULT WS_HTTP_REDIRECT_CALLBACK(void* state, in WS_STRING originalUrl, in WS_STRING newUrl);
-		public function HRESULT WS_CREATE_LISTENER_CALLBACK(WS_CHANNEL_TYPE channelType, void* listenerParameters, uint32 listenerParametersSize, void** listenerInstance, WS_ERROR* error);
+		public function HResult WS_HTTP_REDIRECT_CALLBACK(void* state, in WS_STRING originalUrl, in WS_STRING newUrl);
+		public function HResult WS_CREATE_LISTENER_CALLBACK(WS_CHANNEL_TYPE channelType, void* listenerParameters, uint32 listenerParametersSize, void** listenerInstance, WS_ERROR* error);
 		public function void WS_FREE_LISTENER_CALLBACK(void* listenerInstance);
-		public function HRESULT WS_RESET_LISTENER_CALLBACK(void* listenerInstance, WS_ERROR* error);
-		public function HRESULT WS_OPEN_LISTENER_CALLBACK(void* listenerInstance, in WS_STRING url, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_CLOSE_LISTENER_CALLBACK(void* listenerInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_GET_LISTENER_PROPERTY_CALLBACK(void* listenerInstance, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
-		public function HRESULT WS_SET_LISTENER_PROPERTY_CALLBACK(void* listenerInstance, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
-		public function HRESULT WS_ACCEPT_CHANNEL_CALLBACK(void* listenerInstance, void* channelInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_ABORT_LISTENER_CALLBACK(void* listenerInstance, WS_ERROR* error);
-		public function HRESULT WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK(void* listenerInstance, void* channelParameters, uint32 channelParametersSize, void** channelInstance, WS_ERROR* error);
+		public function HResult WS_RESET_LISTENER_CALLBACK(void* listenerInstance, WS_ERROR* error);
+		public function HResult WS_OPEN_LISTENER_CALLBACK(void* listenerInstance, in WS_STRING url, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_CLOSE_LISTENER_CALLBACK(void* listenerInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_GET_LISTENER_PROPERTY_CALLBACK(void* listenerInstance, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public function HResult WS_SET_LISTENER_PROPERTY_CALLBACK(void* listenerInstance, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public function HResult WS_ACCEPT_CHANNEL_CALLBACK(void* listenerInstance, void* channelInstance, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_ABORT_LISTENER_CALLBACK(void* listenerInstance, WS_ERROR* error);
+		public function HResult WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK(void* listenerInstance, void* channelParameters, uint32 channelParametersSize, void** channelInstance, WS_ERROR* error);
 		public function void WS_MESSAGE_DONE_CALLBACK(void* doneCallbackState);
-		public function HRESULT WS_CERTIFICATE_VALIDATION_CALLBACK(in CERT_CONTEXT certContext, void* state);
-		public function HRESULT WS_GET_CERT_CALLBACK(void* getCertCallbackState, WS_ENDPOINT_ADDRESS* targetAddress, WS_STRING* viaUri, out CERT_CONTEXT* cert, WS_ERROR* error);
-		public function HRESULT WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK(void* certIssuerListNotificationCallbackState, in SecPkgContext_IssuerListInfoEx issuerList, WS_ERROR* error);
-		public function HRESULT WS_VALIDATE_PASSWORD_CALLBACK(void* passwordValidatorCallbackState, in WS_STRING username, in WS_STRING password, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_VALIDATE_SAML_CALLBACK(void* samlValidatorCallbackState, ref WS_XML_BUFFER samlAssertion, WS_ERROR* error);
-		public function HRESULT WS_DURATION_COMPARISON_CALLBACK(in WS_DURATION duration1, in WS_DURATION duration2, out int32 result, WS_ERROR* error);
-		public function HRESULT WS_READ_TYPE_CALLBACK(ref WS_XML_READER reader, WS_TYPE_MAPPING typeMapping, void* descriptionData, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
-		public function HRESULT WS_WRITE_TYPE_CALLBACK(ref WS_XML_WRITER writer, WS_TYPE_MAPPING typeMapping, void* descriptionData, void* value, uint32 valueSize, WS_ERROR* error);
-		public function HRESULT WS_IS_DEFAULT_VALUE_CALLBACK(void* descriptionData, void* value, void* defaultValue, uint32 valueSize, out BOOL isDefault, WS_ERROR* error);
-		public function HRESULT WS_SERVICE_MESSAGE_RECEIVE_CALLBACK(in WS_OPERATION_CONTEXT context, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_CERTIFICATE_VALIDATION_CALLBACK(in CERT_CONTEXT certContext, void* state);
+		public function HResult WS_GET_CERT_CALLBACK(void* getCertCallbackState, WS_ENDPOINT_ADDRESS* targetAddress, WS_STRING* viaUri, out CERT_CONTEXT* cert, WS_ERROR* error);
+		public function HResult WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK(void* certIssuerListNotificationCallbackState, in SecPkgContext_IssuerListInfoEx issuerList, WS_ERROR* error);
+		public function HResult WS_VALIDATE_PASSWORD_CALLBACK(void* passwordValidatorCallbackState, in WS_STRING username, in WS_STRING password, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_VALIDATE_SAML_CALLBACK(void* samlValidatorCallbackState, ref WS_XML_BUFFER samlAssertion, WS_ERROR* error);
+		public function HResult WS_DURATION_COMPARISON_CALLBACK(in WS_DURATION duration1, in WS_DURATION duration2, out int32 result, WS_ERROR* error);
+		public function HResult WS_READ_TYPE_CALLBACK(ref WS_XML_READER reader, WS_TYPE_MAPPING typeMapping, void* descriptionData, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public function HResult WS_WRITE_TYPE_CALLBACK(ref WS_XML_WRITER writer, WS_TYPE_MAPPING typeMapping, void* descriptionData, void* value, uint32 valueSize, WS_ERROR* error);
+		public function HResult WS_IS_DEFAULT_VALUE_CALLBACK(void* descriptionData, void* value, void* defaultValue, uint32 valueSize, out IntBool isDefault, WS_ERROR* error);
+		public function HResult WS_SERVICE_MESSAGE_RECEIVE_CALLBACK(in WS_OPERATION_CONTEXT context, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		public function void WS_OPERATION_CANCEL_CALLBACK(WS_SERVICE_CANCEL_REASON reason, void* state);
 		public function void WS_OPERATION_FREE_STATE_CALLBACK(void* state);
-		public function HRESULT WS_SERVICE_STUB_CALLBACK(in WS_OPERATION_CONTEXT context, void* frame, void* callback, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_SERVICE_ACCEPT_CHANNEL_CALLBACK(in WS_OPERATION_CONTEXT context, void** channelState, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
-		public function HRESULT WS_SERVICE_CLOSE_CHANNEL_CALLBACK(in WS_OPERATION_CONTEXT context, WS_ASYNC_CONTEXT* asyncContext);
-		public function HRESULT WS_SERVICE_SECURITY_CALLBACK(in WS_OPERATION_CONTEXT context, out BOOL authorized, WS_ERROR* error);
-		public function HRESULT WS_PROXY_MESSAGE_CALLBACK(ref WS_MESSAGE message, ref WS_HEAP heap, void* state, WS_ERROR* error);
+		public function HResult WS_SERVICE_STUB_CALLBACK(in WS_OPERATION_CONTEXT context, void* frame, void* callback, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_SERVICE_ACCEPT_CHANNEL_CALLBACK(in WS_OPERATION_CONTEXT context, void** channelState, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public function HResult WS_SERVICE_CLOSE_CHANNEL_CALLBACK(in WS_OPERATION_CONTEXT context, WS_ASYNC_CONTEXT* asyncContext);
+		public function HResult WS_SERVICE_SECURITY_CALLBACK(in WS_OPERATION_CONTEXT context, out IntBool authorized, WS_ERROR* error);
+		public function HResult WS_PROXY_MESSAGE_CALLBACK(ref WS_MESSAGE message, ref WS_HEAP heap, void* state, WS_ERROR* error);
 		
 		// --- Structs ---
 		
@@ -1360,7 +1360,7 @@ namespace Win32
 			public Guid guid;
 			public WS_XML_STRING* strings;
 			public uint32 stringCount;
-			public BOOL isConst;
+			public IntBool isConst;
 		}
 		[CRepr]
 		public struct WS_XML_STRING
@@ -1445,7 +1445,7 @@ namespace Win32
 		public struct WS_XML_BOOL_TEXT
 		{
 			public WS_XML_TEXT text;
-			public BOOL value;
+			public IntBool value;
 		}
 		[CRepr]
 		public struct WS_XML_INT32_TEXT
@@ -1557,7 +1557,7 @@ namespace Win32
 			public WS_XML_STRING* ns;
 			public uint32 attributeCount;
 			public WS_XML_ATTRIBUTE** attributes;
-			public BOOL isEmpty;
+			public IntBool isEmpty;
 		}
 		[CRepr]
 		public struct WS_XML_TEXT_NODE
@@ -1612,14 +1612,14 @@ namespace Win32
 		public struct WS_STRING
 		{
 			public uint32 length;
-			public PWSTR chars;
+			public char16* chars;
 		}
 		[CRepr]
 		public struct WS_XML_READER_MTOM_ENCODING
 		{
 			public WS_XML_READER_ENCODING encoding;
 			public WS_XML_READER_ENCODING* textEncoding;
-			public BOOL readMimeHeader;
+			public IntBool readMimeHeader;
 			public WS_STRING startInfo;
 			public WS_STRING boundary;
 			public WS_STRING startUri;
@@ -1653,7 +1653,7 @@ namespace Win32
 		{
 			public WS_XML_WRITER_ENCODING encoding;
 			public WS_XML_WRITER_ENCODING* textEncoding;
-			public BOOL writeMimeHeader;
+			public IntBool writeMimeHeader;
 			public WS_STRING boundary;
 			public WS_STRING startInfo;
 			public WS_STRING startUri;
@@ -2245,7 +2245,7 @@ namespace Win32
 		[CRepr]
 		public struct WS_BOOL_DESCRIPTION
 		{
-			public BOOL value;
+			public IntBool value;
 		}
 		[CRepr]
 		public struct WS_GUID_DESCRIPTION
@@ -2261,7 +2261,7 @@ namespace Win32
 		[CRepr]
 		public struct WS_DURATION
 		{
-			public BOOL negative;
+			public IntBool negative;
 			public uint32 years;
 			public uint32 months;
 			public uint32 days;
@@ -2764,7 +2764,7 @@ namespace Win32
 			[CRepr]
 			public struct _out_e__Struct
 			{
-				public BOOL clientCertCredentialRequired;
+				public IntBool clientCertCredentialRequired;
 			}
 		}
 		[CRepr]
@@ -3199,9 +3199,9 @@ namespace Win32
 		public struct WEBAUTHN_RP_ENTITY_INFORMATION
 		{
 			public uint32 dwVersion;
-			public PWSTR pwszId;
-			public PWSTR pwszName;
-			public PWSTR pwszIcon;
+			public char16* pwszId;
+			public char16* pwszName;
+			public char16* pwszIcon;
 		}
 		[CRepr]
 		public struct WEBAUTHN_USER_ENTITY_INFORMATION
@@ -3209,9 +3209,9 @@ namespace Win32
 			public uint32 dwVersion;
 			public uint32 cbId;
 			public uint8* pbId;
-			public PWSTR pwszName;
-			public PWSTR pwszIcon;
-			public PWSTR pwszDisplayName;
+			public char16* pwszName;
+			public char16* pwszIcon;
+			public char16* pwszDisplayName;
 		}
 		[CRepr]
 		public struct WEBAUTHN_CLIENT_DATA
@@ -3219,13 +3219,13 @@ namespace Win32
 			public uint32 dwVersion;
 			public uint32 cbClientDataJSON;
 			public uint8* pbClientDataJSON;
-			public PWSTR pwszHashAlgId;
+			public char16* pwszHashAlgId;
 		}
 		[CRepr]
 		public struct WEBAUTHN_COSE_CREDENTIAL_PARAMETER
 		{
 			public uint32 dwVersion;
-			public PWSTR pwszCredentialType;
+			public char16* pwszCredentialType;
 			public int32 lAlg;
 		}
 		[CRepr]
@@ -3240,7 +3240,7 @@ namespace Win32
 			public uint32 dwVersion;
 			public uint32 cbId;
 			public uint8* pbId;
-			public PWSTR pwszCredentialType;
+			public char16* pwszCredentialType;
 		}
 		[CRepr]
 		public struct WEBAUTHN_CREDENTIALS
@@ -3254,7 +3254,7 @@ namespace Win32
 			public uint32 dwVersion;
 			public uint32 cbId;
 			public uint8* pbId;
-			public PWSTR pwszCredentialType;
+			public char16* pwszCredentialType;
 			public uint32 dwTransports;
 		}
 		[CRepr]
@@ -3267,7 +3267,7 @@ namespace Win32
 		public struct WEBAUTHN_CRED_PROTECT_EXTENSION_IN
 		{
 			public uint32 dwCredProtect;
-			public BOOL bRequireCredProtect;
+			public IntBool bRequireCredProtect;
 		}
 		[CRepr]
 		public struct WEBAUTHN_CRED_BLOB_EXTENSION
@@ -3278,7 +3278,7 @@ namespace Win32
 		[CRepr]
 		public struct WEBAUTHN_EXTENSION
 		{
-			public PWSTR pwszExtensionIdentifier;
+			public char16* pwszExtensionIdentifier;
 			public uint32 cbExtension;
 			public void* pvExtension;
 		}
@@ -3296,7 +3296,7 @@ namespace Win32
 			public WEBAUTHN_CREDENTIALS CredentialList;
 			public WEBAUTHN_EXTENSIONS Extensions;
 			public uint32 dwAuthenticatorAttachment;
-			public BOOL bRequireResidentKey;
+			public IntBool bRequireResidentKey;
 			public uint32 dwUserVerificationRequirement;
 			public uint32 dwAttestationConveyancePreference;
 			public uint32 dwFlags;
@@ -3304,7 +3304,7 @@ namespace Win32
 			public WEBAUTHN_CREDENTIAL_LIST* pExcludeCredentialList;
 			public uint32 dwEnterpriseAttestation;
 			public uint32 dwLargeBlobSupport;
-			public BOOL bPreferResidentKey;
+			public IntBool bPreferResidentKey;
 		}
 		[CRepr]
 		public struct WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS
@@ -3316,8 +3316,8 @@ namespace Win32
 			public uint32 dwAuthenticatorAttachment;
 			public uint32 dwUserVerificationRequirement;
 			public uint32 dwFlags;
-			public PWSTR pwszU2fAppId;
-			public BOOL* pbU2fAppId;
+			public char16* pwszU2fAppId;
+			public IntBool* pbU2fAppId;
 			public Guid* pCancellationId;
 			public WEBAUTHN_CREDENTIAL_LIST* pAllowCredentialList;
 			public uint32 dwCredLargeBlobOperation;
@@ -3334,13 +3334,13 @@ namespace Win32
 		public struct WEBAUTHN_COMMON_ATTESTATION
 		{
 			public uint32 dwVersion;
-			public PWSTR pwszAlg;
+			public char16* pwszAlg;
 			public int32 lAlg;
 			public uint32 cbSignature;
 			public uint8* pbSignature;
 			public uint32 cX5c;
 			public WEBAUTHN_X5C* pX5c;
-			public PWSTR pwszVer;
+			public char16* pwszVer;
 			public uint32 cbCertInfo;
 			public uint8* pbCertInfo;
 			public uint32 cbPubArea;
@@ -3350,7 +3350,7 @@ namespace Win32
 		public struct WEBAUTHN_CREDENTIAL_ATTESTATION
 		{
 			public uint32 dwVersion;
-			public PWSTR pwszFormatType;
+			public char16* pwszFormatType;
 			public uint32 cbAuthenticatorData;
 			public uint8* pbAuthenticatorData;
 			public uint32 cbAttestation;
@@ -3363,9 +3363,9 @@ namespace Win32
 			public uint8* pbCredentialId;
 			public WEBAUTHN_EXTENSIONS Extensions;
 			public uint32 dwUsedTransport;
-			public BOOL bEpAtt;
-			public BOOL bLargeBlobSupported;
-			public BOOL bResidentKey;
+			public IntBool bEpAtt;
+			public IntBool bLargeBlobSupported;
+			public IntBool bResidentKey;
 		}
 		[CRepr]
 		public struct WEBAUTHN_ASSERTION
@@ -3393,424 +3393,424 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT TriggerContentPrefetcherTask(PWSTR packageFullName) mut => VT.TriggerContentPrefetcherTask(ref this, packageFullName);
-			public HRESULT IsRegisteredForContentPrefetch(PWSTR packageFullName, out uint8 isRegistered) mut => VT.IsRegisteredForContentPrefetch(ref this, packageFullName, out isRegistered);
+			public HResult TriggerContentPrefetcherTask(char16* packageFullName) mut => VT.TriggerContentPrefetcherTask(ref this, packageFullName);
+			public HResult IsRegisteredForContentPrefetch(char16* packageFullName, out uint8 isRegistered) mut => VT.IsRegisteredForContentPrefetch(ref this, packageFullName, out isRegistered);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IContentPrefetcherTaskTrigger self, PWSTR packageFullName) TriggerContentPrefetcherTask;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IContentPrefetcherTaskTrigger self, PWSTR packageFullName, out uint8 isRegistered) IsRegisteredForContentPrefetch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IContentPrefetcherTaskTrigger self, char16* packageFullName) TriggerContentPrefetcherTask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IContentPrefetcherTaskTrigger self, char16* packageFullName, out uint8 isRegistered) IsRegisteredForContentPrefetch;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsStartReaderCanonicalization(ref WS_XML_READER reader, WS_WRITE_CALLBACK writeCallback, void* writeCallbackState, WS_XML_CANONICALIZATION_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
+		public static extern HResult WsStartReaderCanonicalization(ref WS_XML_READER reader, WS_WRITE_CALLBACK writeCallback, void* writeCallbackState, WS_XML_CANONICALIZATION_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsEndReaderCanonicalization(ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsEndReaderCanonicalization(ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsStartWriterCanonicalization(ref WS_XML_WRITER writer, WS_WRITE_CALLBACK writeCallback, void* writeCallbackState, WS_XML_CANONICALIZATION_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
+		public static extern HResult WsStartWriterCanonicalization(ref WS_XML_WRITER writer, WS_WRITE_CALLBACK writeCallback, void* writeCallbackState, WS_XML_CANONICALIZATION_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsEndWriterCanonicalization(ref WS_XML_WRITER writer, WS_ERROR* error);
+		public static extern HResult WsEndWriterCanonicalization(ref WS_XML_WRITER writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateXmlBuffer(ref WS_HEAP heap, WS_XML_BUFFER_PROPERTY* properties, uint32 propertyCount, out WS_XML_BUFFER* buffer, WS_ERROR* error);
+		public static extern HResult WsCreateXmlBuffer(ref WS_HEAP heap, WS_XML_BUFFER_PROPERTY* properties, uint32 propertyCount, out WS_XML_BUFFER* buffer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRemoveNode(in WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
+		public static extern HResult WsRemoveNode(in WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateReader(WS_XML_READER_PROPERTY* properties, uint32 propertyCount, out WS_XML_READER* reader, WS_ERROR* error);
+		public static extern HResult WsCreateReader(WS_XML_READER_PROPERTY* properties, uint32 propertyCount, out WS_XML_READER* reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetInput(ref WS_XML_READER reader, WS_XML_READER_ENCODING* encoding, WS_XML_READER_INPUT* input, WS_XML_READER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
+		public static extern HResult WsSetInput(ref WS_XML_READER reader, WS_XML_READER_ENCODING* encoding, WS_XML_READER_INPUT* input, WS_XML_READER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetInputToBuffer(ref WS_XML_READER reader, ref WS_XML_BUFFER buffer, WS_XML_READER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
+		public static extern HResult WsSetInputToBuffer(ref WS_XML_READER reader, ref WS_XML_BUFFER buffer, WS_XML_READER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeReader(ref WS_XML_READER reader);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetReaderProperty(ref WS_XML_READER reader, WS_XML_READER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetReaderProperty(ref WS_XML_READER reader, WS_XML_READER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetReaderNode(ref WS_XML_READER xmlReader, out WS_XML_NODE* node, WS_ERROR* error);
+		public static extern HResult WsGetReaderNode(ref WS_XML_READER xmlReader, out WS_XML_NODE* node, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsFillReader(ref WS_XML_READER reader, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsFillReader(ref WS_XML_READER reader, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadStartElement(ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsReadStartElement(ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadToStartElement(ref WS_XML_READER reader, WS_XML_STRING* localName, WS_XML_STRING* ns, BOOL* found, WS_ERROR* error);
+		public static extern HResult WsReadToStartElement(ref WS_XML_READER reader, WS_XML_STRING* localName, WS_XML_STRING* ns, IntBool* found, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadStartAttribute(ref WS_XML_READER reader, uint32 attributeIndex, WS_ERROR* error);
+		public static extern HResult WsReadStartAttribute(ref WS_XML_READER reader, uint32 attributeIndex, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadEndAttribute(ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsReadEndAttribute(ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadNode(ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsReadNode(ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSkipNode(ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsSkipNode(ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadEndElement(ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsReadEndElement(ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsFindAttribute(ref WS_XML_READER reader, in WS_XML_STRING localName, in WS_XML_STRING ns, BOOL required, out uint32 attributeIndex, WS_ERROR* error);
+		public static extern HResult WsFindAttribute(ref WS_XML_READER reader, in WS_XML_STRING localName, in WS_XML_STRING ns, IntBool required, out uint32 attributeIndex, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadValue(ref WS_XML_READER reader, WS_VALUE_TYPE valueType, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsReadValue(ref WS_XML_READER reader, WS_VALUE_TYPE valueType, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadChars(ref WS_XML_READER reader, char16* chars, uint32 maxCharCount, out uint32 actualCharCount, WS_ERROR* error);
+		public static extern HResult WsReadChars(ref WS_XML_READER reader, char16* chars, uint32 maxCharCount, out uint32 actualCharCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadCharsUtf8(ref WS_XML_READER reader, uint8* bytes, uint32 maxByteCount, out uint32 actualByteCount, WS_ERROR* error);
+		public static extern HResult WsReadCharsUtf8(ref WS_XML_READER reader, uint8* bytes, uint32 maxByteCount, out uint32 actualByteCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadBytes(ref WS_XML_READER reader, void* bytes, uint32 maxByteCount, out uint32 actualByteCount, WS_ERROR* error);
+		public static extern HResult WsReadBytes(ref WS_XML_READER reader, void* bytes, uint32 maxByteCount, out uint32 actualByteCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadArray(ref WS_XML_READER reader, in WS_XML_STRING localName, in WS_XML_STRING ns, WS_VALUE_TYPE valueType, void* array, uint32 arraySize, uint32 itemOffset, uint32 itemCount, out uint32 actualItemCount, WS_ERROR* error);
+		public static extern HResult WsReadArray(ref WS_XML_READER reader, in WS_XML_STRING localName, in WS_XML_STRING ns, WS_VALUE_TYPE valueType, void* array, uint32 arraySize, uint32 itemOffset, uint32 itemCount, out uint32 actualItemCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetReaderPosition(ref WS_XML_READER reader, out WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
+		public static extern HResult WsGetReaderPosition(ref WS_XML_READER reader, out WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetReaderPosition(ref WS_XML_READER reader, in WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
+		public static extern HResult WsSetReaderPosition(ref WS_XML_READER reader, in WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsMoveReader(ref WS_XML_READER reader, WS_MOVE_TO moveTo, BOOL* found, WS_ERROR* error);
+		public static extern HResult WsMoveReader(ref WS_XML_READER reader, WS_MOVE_TO moveTo, IntBool* found, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateWriter(WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, out WS_XML_WRITER* writer, WS_ERROR* error);
+		public static extern HResult WsCreateWriter(WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, out WS_XML_WRITER* writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeWriter(ref WS_XML_WRITER writer);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetOutput(ref WS_XML_WRITER writer, WS_XML_WRITER_ENCODING* encoding, WS_XML_WRITER_OUTPUT* output, WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
+		public static extern HResult WsSetOutput(ref WS_XML_WRITER writer, WS_XML_WRITER_ENCODING* encoding, WS_XML_WRITER_OUTPUT* output, WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetOutputToBuffer(ref WS_XML_WRITER writer, ref WS_XML_BUFFER buffer, WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
+		public static extern HResult WsSetOutputToBuffer(ref WS_XML_WRITER writer, ref WS_XML_BUFFER buffer, WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetWriterProperty(ref WS_XML_WRITER writer, WS_XML_WRITER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetWriterProperty(ref WS_XML_WRITER writer, WS_XML_WRITER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsFlushWriter(ref WS_XML_WRITER writer, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsFlushWriter(ref WS_XML_WRITER writer, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteStartElement(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING localName, in WS_XML_STRING ns, WS_ERROR* error);
+		public static extern HResult WsWriteStartElement(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING localName, in WS_XML_STRING ns, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteEndStartElement(ref WS_XML_WRITER writer, WS_ERROR* error);
+		public static extern HResult WsWriteEndStartElement(ref WS_XML_WRITER writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteXmlnsAttribute(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING ns, BOOL singleQuote, WS_ERROR* error);
+		public static extern HResult WsWriteXmlnsAttribute(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING ns, IntBool singleQuote, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteStartAttribute(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING localName, in WS_XML_STRING ns, BOOL singleQuote, WS_ERROR* error);
+		public static extern HResult WsWriteStartAttribute(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING localName, in WS_XML_STRING ns, IntBool singleQuote, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteEndAttribute(ref WS_XML_WRITER writer, WS_ERROR* error);
+		public static extern HResult WsWriteEndAttribute(ref WS_XML_WRITER writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteValue(ref WS_XML_WRITER writer, WS_VALUE_TYPE valueType, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsWriteValue(ref WS_XML_WRITER writer, WS_VALUE_TYPE valueType, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteXmlBuffer(ref WS_XML_WRITER writer, ref WS_XML_BUFFER xmlBuffer, WS_ERROR* error);
+		public static extern HResult WsWriteXmlBuffer(ref WS_XML_WRITER writer, ref WS_XML_BUFFER xmlBuffer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadXmlBuffer(ref WS_XML_READER reader, ref WS_HEAP heap, out WS_XML_BUFFER* xmlBuffer, WS_ERROR* error);
+		public static extern HResult WsReadXmlBuffer(ref WS_XML_READER reader, ref WS_HEAP heap, out WS_XML_BUFFER* xmlBuffer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteXmlBufferToBytes(ref WS_XML_WRITER writer, ref WS_XML_BUFFER xmlBuffer, WS_XML_WRITER_ENCODING* encoding, WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, ref WS_HEAP heap, void** bytes, out uint32 byteCount, WS_ERROR* error);
+		public static extern HResult WsWriteXmlBufferToBytes(ref WS_XML_WRITER writer, ref WS_XML_BUFFER xmlBuffer, WS_XML_WRITER_ENCODING* encoding, WS_XML_WRITER_PROPERTY* properties, uint32 propertyCount, ref WS_HEAP heap, void** bytes, out uint32 byteCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadXmlBufferFromBytes(ref WS_XML_READER reader, WS_XML_READER_ENCODING* encoding, WS_XML_READER_PROPERTY* properties, uint32 propertyCount, void* bytes, uint32 byteCount, ref WS_HEAP heap, out WS_XML_BUFFER* xmlBuffer, WS_ERROR* error);
+		public static extern HResult WsReadXmlBufferFromBytes(ref WS_XML_READER reader, WS_XML_READER_ENCODING* encoding, WS_XML_READER_PROPERTY* properties, uint32 propertyCount, void* bytes, uint32 byteCount, ref WS_HEAP heap, out WS_XML_BUFFER* xmlBuffer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteArray(ref WS_XML_WRITER writer, in WS_XML_STRING localName, in WS_XML_STRING ns, WS_VALUE_TYPE valueType, void* array, uint32 arraySize, uint32 itemOffset, uint32 itemCount, WS_ERROR* error);
+		public static extern HResult WsWriteArray(ref WS_XML_WRITER writer, in WS_XML_STRING localName, in WS_XML_STRING ns, WS_VALUE_TYPE valueType, void* array, uint32 arraySize, uint32 itemOffset, uint32 itemCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteQualifiedName(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING localName, WS_XML_STRING* ns, WS_ERROR* error);
+		public static extern HResult WsWriteQualifiedName(ref WS_XML_WRITER writer, WS_XML_STRING* prefix, in WS_XML_STRING localName, WS_XML_STRING* ns, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteChars(ref WS_XML_WRITER writer, char16* chars, uint32 charCount, WS_ERROR* error);
+		public static extern HResult WsWriteChars(ref WS_XML_WRITER writer, char16* chars, uint32 charCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteCharsUtf8(ref WS_XML_WRITER writer, uint8* bytes, uint32 byteCount, WS_ERROR* error);
+		public static extern HResult WsWriteCharsUtf8(ref WS_XML_WRITER writer, uint8* bytes, uint32 byteCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteBytes(ref WS_XML_WRITER writer, void* bytes, uint32 byteCount, WS_ERROR* error);
+		public static extern HResult WsWriteBytes(ref WS_XML_WRITER writer, void* bytes, uint32 byteCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsPushBytes(ref WS_XML_WRITER writer, WS_PUSH_BYTES_CALLBACK callback, void* callbackState, WS_ERROR* error);
+		public static extern HResult WsPushBytes(ref WS_XML_WRITER writer, WS_PUSH_BYTES_CALLBACK callback, void* callbackState, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsPullBytes(ref WS_XML_WRITER writer, WS_PULL_BYTES_CALLBACK callback, void* callbackState, WS_ERROR* error);
+		public static extern HResult WsPullBytes(ref WS_XML_WRITER writer, WS_PULL_BYTES_CALLBACK callback, void* callbackState, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteEndElement(ref WS_XML_WRITER writer, WS_ERROR* error);
+		public static extern HResult WsWriteEndElement(ref WS_XML_WRITER writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteText(ref WS_XML_WRITER writer, in WS_XML_TEXT text, WS_ERROR* error);
+		public static extern HResult WsWriteText(ref WS_XML_WRITER writer, in WS_XML_TEXT text, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteStartCData(ref WS_XML_WRITER writer, WS_ERROR* error);
+		public static extern HResult WsWriteStartCData(ref WS_XML_WRITER writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteEndCData(ref WS_XML_WRITER writer, WS_ERROR* error);
+		public static extern HResult WsWriteEndCData(ref WS_XML_WRITER writer, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteNode(ref WS_XML_WRITER writer, in WS_XML_NODE node, WS_ERROR* error);
+		public static extern HResult WsWriteNode(ref WS_XML_WRITER writer, in WS_XML_NODE node, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetPrefixFromNamespace(ref WS_XML_WRITER writer, in WS_XML_STRING ns, BOOL required, out WS_XML_STRING* prefix, WS_ERROR* error);
+		public static extern HResult WsGetPrefixFromNamespace(ref WS_XML_WRITER writer, in WS_XML_STRING ns, IntBool required, out WS_XML_STRING* prefix, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetWriterPosition(ref WS_XML_WRITER writer, out WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
+		public static extern HResult WsGetWriterPosition(ref WS_XML_WRITER writer, out WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetWriterPosition(ref WS_XML_WRITER writer, in WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
+		public static extern HResult WsSetWriterPosition(ref WS_XML_WRITER writer, in WS_XML_NODE_POSITION nodePosition, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsMoveWriter(ref WS_XML_WRITER writer, WS_MOVE_TO moveTo, BOOL* found, WS_ERROR* error);
+		public static extern HResult WsMoveWriter(ref WS_XML_WRITER writer, WS_MOVE_TO moveTo, IntBool* found, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsTrimXmlWhitespace(char16* chars, uint32 charCount, out uint16* trimmedChars, out uint32 trimmedCount, WS_ERROR* error);
+		public static extern HResult WsTrimXmlWhitespace(char16* chars, uint32 charCount, out uint16* trimmedChars, out uint32 trimmedCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsVerifyXmlNCName(char16* ncNameChars, uint32 ncNameCharCount, WS_ERROR* error);
+		public static extern HResult WsVerifyXmlNCName(char16* ncNameChars, uint32 ncNameCharCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsXmlStringEquals(in WS_XML_STRING string1, in WS_XML_STRING string2, WS_ERROR* error);
+		public static extern HResult WsXmlStringEquals(in WS_XML_STRING string1, in WS_XML_STRING string2, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetNamespaceFromPrefix(ref WS_XML_READER reader, in WS_XML_STRING prefix, BOOL required, out WS_XML_STRING* ns, WS_ERROR* error);
+		public static extern HResult WsGetNamespaceFromPrefix(ref WS_XML_READER reader, in WS_XML_STRING prefix, IntBool required, out WS_XML_STRING* ns, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadQualifiedName(ref WS_XML_READER reader, ref WS_HEAP heap, WS_XML_STRING* prefix, out WS_XML_STRING localName, WS_XML_STRING* ns, WS_ERROR* error);
+		public static extern HResult WsReadQualifiedName(ref WS_XML_READER reader, ref WS_HEAP heap, WS_XML_STRING* prefix, out WS_XML_STRING localName, WS_XML_STRING* ns, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetXmlAttribute(ref WS_XML_READER reader, in WS_XML_STRING localName, ref WS_HEAP heap, uint16** valueChars, out uint32 valueCharCount, WS_ERROR* error);
+		public static extern HResult WsGetXmlAttribute(ref WS_XML_READER reader, in WS_XML_STRING localName, ref WS_HEAP heap, uint16** valueChars, out uint32 valueCharCount, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCopyNode(ref WS_XML_WRITER writer, ref WS_XML_READER reader, WS_ERROR* error);
+		public static extern HResult WsCopyNode(ref WS_XML_WRITER writer, ref WS_XML_READER reader, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAsyncExecute(ref WS_ASYNC_STATE asyncState, WS_ASYNC_FUNCTION operation, WS_CALLBACK_MODEL callbackModel, void* callbackState, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsAsyncExecute(ref WS_ASYNC_STATE asyncState, WS_ASYNC_FUNCTION operation, WS_CALLBACK_MODEL callbackModel, void* callbackState, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateChannel(WS_CHANNEL_TYPE channelType, WS_CHANNEL_BINDING channelBinding, WS_CHANNEL_PROPERTY* properties, uint32 propertyCount, WS_SECURITY_DESCRIPTION* securityDescription, out WS_CHANNEL* channel, WS_ERROR* error);
+		public static extern HResult WsCreateChannel(WS_CHANNEL_TYPE channelType, WS_CHANNEL_BINDING channelBinding, WS_CHANNEL_PROPERTY* properties, uint32 propertyCount, WS_SECURITY_DESCRIPTION* securityDescription, out WS_CHANNEL* channel, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsOpenChannel(ref WS_CHANNEL channel, in WS_ENDPOINT_ADDRESS endpointAddress, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsOpenChannel(ref WS_CHANNEL channel, in WS_ENDPOINT_ADDRESS endpointAddress, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSendMessage(ref WS_CHANNEL channel, ref WS_MESSAGE message, in WS_MESSAGE_DESCRIPTION messageDescription, WS_WRITE_OPTION writeOption, void* bodyValue, uint32 bodyValueSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsSendMessage(ref WS_CHANNEL channel, ref WS_MESSAGE message, in WS_MESSAGE_DESCRIPTION messageDescription, WS_WRITE_OPTION writeOption, void* bodyValue, uint32 bodyValueSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReceiveMessage(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_MESSAGE_DESCRIPTION** messageDescriptions, uint32 messageDescriptionCount, WS_RECEIVE_OPTION receiveOption, WS_READ_OPTION readBodyOption, WS_HEAP* heap, void* value, uint32 valueSize, uint32* index, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsReceiveMessage(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_MESSAGE_DESCRIPTION** messageDescriptions, uint32 messageDescriptionCount, WS_RECEIVE_OPTION receiveOption, WS_READ_OPTION readBodyOption, WS_HEAP* heap, void* value, uint32 valueSize, uint32* index, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRequestReply(ref WS_CHANNEL channel, ref WS_MESSAGE requestMessage, in WS_MESSAGE_DESCRIPTION requestMessageDescription, WS_WRITE_OPTION writeOption, void* requestBodyValue, uint32 requestBodyValueSize, ref WS_MESSAGE replyMessage, in WS_MESSAGE_DESCRIPTION replyMessageDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsRequestReply(ref WS_CHANNEL channel, ref WS_MESSAGE requestMessage, in WS_MESSAGE_DESCRIPTION requestMessageDescription, WS_WRITE_OPTION writeOption, void* requestBodyValue, uint32 requestBodyValueSize, ref WS_MESSAGE replyMessage, in WS_MESSAGE_DESCRIPTION replyMessageDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSendReplyMessage(ref WS_CHANNEL channel, ref WS_MESSAGE replyMessage, in WS_MESSAGE_DESCRIPTION replyMessageDescription, WS_WRITE_OPTION writeOption, void* replyBodyValue, uint32 replyBodyValueSize, ref WS_MESSAGE requestMessage, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsSendReplyMessage(ref WS_CHANNEL channel, ref WS_MESSAGE replyMessage, in WS_MESSAGE_DESCRIPTION replyMessageDescription, WS_WRITE_OPTION writeOption, void* replyBodyValue, uint32 replyBodyValueSize, ref WS_MESSAGE requestMessage, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSendFaultMessageForError(ref WS_CHANNEL channel, ref WS_MESSAGE replyMessage, ref WS_ERROR faultError, HRESULT faultErrorCode, WS_FAULT_DISCLOSURE faultDisclosure, ref WS_MESSAGE requestMessage, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsSendFaultMessageForError(ref WS_CHANNEL channel, ref WS_MESSAGE replyMessage, ref WS_ERROR faultError, HResult faultErrorCode, WS_FAULT_DISCLOSURE faultDisclosure, ref WS_MESSAGE requestMessage, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetChannelProperty(ref WS_CHANNEL channel, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetChannelProperty(ref WS_CHANNEL channel, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetChannelProperty(ref WS_CHANNEL channel, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsSetChannelProperty(ref WS_CHANNEL channel, WS_CHANNEL_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteMessageStart(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsWriteMessageStart(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteMessageEnd(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsWriteMessageEnd(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadMessageStart(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsReadMessageStart(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadMessageEnd(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsReadMessageEnd(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCloseChannel(ref WS_CHANNEL channel, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsCloseChannel(ref WS_CHANNEL channel, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAbortChannel(ref WS_CHANNEL channel, WS_ERROR* error);
+		public static extern HResult WsAbortChannel(ref WS_CHANNEL channel, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeChannel(ref WS_CHANNEL channel);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetChannel(ref WS_CHANNEL channel, WS_ERROR* error);
+		public static extern HResult WsResetChannel(ref WS_CHANNEL channel, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAbandonMessage(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ERROR* error);
+		public static extern HResult WsAbandonMessage(ref WS_CHANNEL channel, ref WS_MESSAGE message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsShutdownSessionChannel(ref WS_CHANNEL channel, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsShutdownSessionChannel(ref WS_CHANNEL channel, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetOperationContextProperty(in WS_OPERATION_CONTEXT context, WS_OPERATION_CONTEXT_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetOperationContextProperty(in WS_OPERATION_CONTEXT context, WS_OPERATION_CONTEXT_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetDictionary(WS_ENCODING encoding, WS_XML_DICTIONARY** dictionary, WS_ERROR* error);
+		public static extern HResult WsGetDictionary(WS_ENCODING encoding, WS_XML_DICTIONARY** dictionary, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadEndpointAddressExtension(ref WS_XML_READER reader, ref WS_ENDPOINT_ADDRESS endpointAddress, WS_ENDPOINT_ADDRESS_EXTENSION_TYPE extensionType, WS_READ_OPTION readOption, ref WS_HEAP heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsReadEndpointAddressExtension(ref WS_XML_READER reader, ref WS_ENDPOINT_ADDRESS endpointAddress, WS_ENDPOINT_ADDRESS_EXTENSION_TYPE extensionType, WS_READ_OPTION readOption, ref WS_HEAP heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateError(WS_ERROR_PROPERTY* properties, uint32 propertyCount, out WS_ERROR* error);
+		public static extern HResult WsCreateError(WS_ERROR_PROPERTY* properties, uint32 propertyCount, out WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAddErrorString(ref WS_ERROR error, in WS_STRING string);
+		public static extern HResult WsAddErrorString(ref WS_ERROR error, in WS_STRING string);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetErrorString(ref WS_ERROR error, uint32 index, out WS_STRING string);
+		public static extern HResult WsGetErrorString(ref WS_ERROR error, uint32 index, out WS_STRING string);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCopyError(ref WS_ERROR source, ref WS_ERROR destination);
+		public static extern HResult WsCopyError(ref WS_ERROR source, ref WS_ERROR destination);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetErrorProperty(ref WS_ERROR error, WS_ERROR_PROPERTY_ID id, void* buffer, uint32 bufferSize);
+		public static extern HResult WsGetErrorProperty(ref WS_ERROR error, WS_ERROR_PROPERTY_ID id, void* buffer, uint32 bufferSize);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetErrorProperty(ref WS_ERROR error, WS_ERROR_PROPERTY_ID id, void* value, uint32 valueSize);
+		public static extern HResult WsSetErrorProperty(ref WS_ERROR error, WS_ERROR_PROPERTY_ID id, void* value, uint32 valueSize);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetError(ref WS_ERROR error);
+		public static extern HResult WsResetError(ref WS_ERROR error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeError(ref WS_ERROR error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetFaultErrorProperty(ref WS_ERROR error, WS_FAULT_ERROR_PROPERTY_ID id, void* buffer, uint32 bufferSize);
+		public static extern HResult WsGetFaultErrorProperty(ref WS_ERROR error, WS_FAULT_ERROR_PROPERTY_ID id, void* buffer, uint32 bufferSize);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetFaultErrorProperty(ref WS_ERROR error, WS_FAULT_ERROR_PROPERTY_ID id, void* value, uint32 valueSize);
+		public static extern HResult WsSetFaultErrorProperty(ref WS_ERROR error, WS_FAULT_ERROR_PROPERTY_ID id, void* value, uint32 valueSize);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateFaultFromError(ref WS_ERROR error, HRESULT faultErrorCode, WS_FAULT_DISCLOSURE faultDisclosure, ref WS_HEAP heap, out WS_FAULT fault);
+		public static extern HResult WsCreateFaultFromError(ref WS_ERROR error, HResult faultErrorCode, WS_FAULT_DISCLOSURE faultDisclosure, ref WS_HEAP heap, out WS_FAULT fault);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetFaultErrorDetail(ref WS_ERROR error, in WS_FAULT_DETAIL_DESCRIPTION faultDetailDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize);
+		public static extern HResult WsSetFaultErrorDetail(ref WS_ERROR error, in WS_FAULT_DETAIL_DESCRIPTION faultDetailDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetFaultErrorDetail(ref WS_ERROR error, in WS_FAULT_DETAIL_DESCRIPTION faultDetailDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize);
+		public static extern HResult WsGetFaultErrorDetail(ref WS_ERROR error, in WS_FAULT_DETAIL_DESCRIPTION faultDetailDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateHeap(uint maxSize, uint trimSize, WS_HEAP_PROPERTY* properties, uint32 propertyCount, out WS_HEAP* heap, WS_ERROR* error);
+		public static extern HResult WsCreateHeap(uint maxSize, uint trimSize, WS_HEAP_PROPERTY* properties, uint32 propertyCount, out WS_HEAP* heap, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAlloc(ref WS_HEAP heap, uint size, void** ptr, WS_ERROR* error);
+		public static extern HResult WsAlloc(ref WS_HEAP heap, uint size, void** ptr, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetHeapProperty(ref WS_HEAP heap, WS_HEAP_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetHeapProperty(ref WS_HEAP heap, WS_HEAP_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetHeap(ref WS_HEAP heap, WS_ERROR* error);
+		public static extern HResult WsResetHeap(ref WS_HEAP heap, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeHeap(ref WS_HEAP heap);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateListener(WS_CHANNEL_TYPE channelType, WS_CHANNEL_BINDING channelBinding, WS_LISTENER_PROPERTY* properties, uint32 propertyCount, WS_SECURITY_DESCRIPTION* securityDescription, out WS_LISTENER* listener, WS_ERROR* error);
+		public static extern HResult WsCreateListener(WS_CHANNEL_TYPE channelType, WS_CHANNEL_BINDING channelBinding, WS_LISTENER_PROPERTY* properties, uint32 propertyCount, WS_SECURITY_DESCRIPTION* securityDescription, out WS_LISTENER* listener, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsOpenListener(ref WS_LISTENER listener, in WS_STRING url, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsOpenListener(ref WS_LISTENER listener, in WS_STRING url, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAcceptChannel(ref WS_LISTENER listener, ref WS_CHANNEL channel, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsAcceptChannel(ref WS_LISTENER listener, ref WS_CHANNEL channel, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCloseListener(ref WS_LISTENER listener, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsCloseListener(ref WS_LISTENER listener, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAbortListener(ref WS_LISTENER listener, WS_ERROR* error);
+		public static extern HResult WsAbortListener(ref WS_LISTENER listener, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetListener(ref WS_LISTENER listener, WS_ERROR* error);
+		public static extern HResult WsResetListener(ref WS_LISTENER listener, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeListener(ref WS_LISTENER listener);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetListenerProperty(ref WS_LISTENER listener, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetListenerProperty(ref WS_LISTENER listener, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetListenerProperty(ref WS_LISTENER listener, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsSetListenerProperty(ref WS_LISTENER listener, WS_LISTENER_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateChannelForListener(ref WS_LISTENER listener, WS_CHANNEL_PROPERTY* properties, uint32 propertyCount, out WS_CHANNEL* channel, WS_ERROR* error);
+		public static extern HResult WsCreateChannelForListener(ref WS_LISTENER listener, WS_CHANNEL_PROPERTY* properties, uint32 propertyCount, out WS_CHANNEL* channel, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateMessage(WS_ENVELOPE_VERSION envelopeVersion, WS_ADDRESSING_VERSION addressingVersion, WS_MESSAGE_PROPERTY* properties, uint32 propertyCount, out WS_MESSAGE* message, WS_ERROR* error);
+		public static extern HResult WsCreateMessage(WS_ENVELOPE_VERSION envelopeVersion, WS_ADDRESSING_VERSION addressingVersion, WS_MESSAGE_PROPERTY* properties, uint32 propertyCount, out WS_MESSAGE* message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateMessageForChannel(ref WS_CHANNEL channel, WS_MESSAGE_PROPERTY* properties, uint32 propertyCount, out WS_MESSAGE* message, WS_ERROR* error);
+		public static extern HResult WsCreateMessageForChannel(ref WS_CHANNEL channel, WS_MESSAGE_PROPERTY* properties, uint32 propertyCount, out WS_MESSAGE* message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsInitializeMessage(ref WS_MESSAGE message, WS_MESSAGE_INITIALIZATION initialization, WS_MESSAGE* sourceMessage, WS_ERROR* error);
+		public static extern HResult WsInitializeMessage(ref WS_MESSAGE message, WS_MESSAGE_INITIALIZATION initialization, WS_MESSAGE* sourceMessage, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetMessage(ref WS_MESSAGE message, WS_ERROR* error);
+		public static extern HResult WsResetMessage(ref WS_MESSAGE message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeMessage(ref WS_MESSAGE message);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetHeaderAttributes(ref WS_MESSAGE message, ref WS_XML_READER reader, out uint32 headerAttributes, WS_ERROR* error);
+		public static extern HResult WsGetHeaderAttributes(ref WS_MESSAGE message, ref WS_XML_READER reader, out uint32 headerAttributes, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetHeader(ref WS_MESSAGE message, WS_HEADER_TYPE headerType, WS_TYPE valueType, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetHeader(ref WS_MESSAGE message, WS_HEADER_TYPE headerType, WS_TYPE valueType, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetCustomHeader(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION customHeaderDescription, WS_REPEATING_HEADER_OPTION repeatingOption, uint32 headerIndex, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, uint32* headerAttributes, WS_ERROR* error);
+		public static extern HResult WsGetCustomHeader(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION customHeaderDescription, WS_REPEATING_HEADER_OPTION repeatingOption, uint32 headerIndex, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, uint32* headerAttributes, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRemoveHeader(ref WS_MESSAGE message, WS_HEADER_TYPE headerType, WS_ERROR* error);
+		public static extern HResult WsRemoveHeader(ref WS_MESSAGE message, WS_HEADER_TYPE headerType, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetHeader(ref WS_MESSAGE message, WS_HEADER_TYPE headerType, WS_TYPE valueType, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsSetHeader(ref WS_MESSAGE message, WS_HEADER_TYPE headerType, WS_TYPE valueType, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRemoveCustomHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, in WS_XML_STRING headerNs, WS_ERROR* error);
+		public static extern HResult WsRemoveCustomHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, in WS_XML_STRING headerNs, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAddCustomHeader(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION headerDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, uint32 headerAttributes, WS_ERROR* error);
+		public static extern HResult WsAddCustomHeader(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION headerDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, uint32 headerAttributes, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAddMappedHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, WS_TYPE valueType, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsAddMappedHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, WS_TYPE valueType, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRemoveMappedHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, WS_ERROR* error);
+		public static extern HResult WsRemoveMappedHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetMappedHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, WS_REPEATING_HEADER_OPTION repeatingOption, uint32 headerIndex, WS_TYPE valueType, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetMappedHeader(ref WS_MESSAGE message, in WS_XML_STRING headerName, WS_REPEATING_HEADER_OPTION repeatingOption, uint32 headerIndex, WS_TYPE valueType, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteBody(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION bodyDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsWriteBody(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION bodyDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadBody(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION bodyDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsReadBody(ref WS_MESSAGE message, in WS_ELEMENT_DESCRIPTION bodyDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteEnvelopeStart(ref WS_MESSAGE message, ref WS_XML_WRITER writer, WS_MESSAGE_DONE_CALLBACK doneCallback, void* doneCallbackState, WS_ERROR* error);
+		public static extern HResult WsWriteEnvelopeStart(ref WS_MESSAGE message, ref WS_XML_WRITER writer, WS_MESSAGE_DONE_CALLBACK doneCallback, void* doneCallbackState, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteEnvelopeEnd(ref WS_MESSAGE message, WS_ERROR* error);
+		public static extern HResult WsWriteEnvelopeEnd(ref WS_MESSAGE message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadEnvelopeStart(ref WS_MESSAGE message, ref WS_XML_READER reader, WS_MESSAGE_DONE_CALLBACK doneCallback, void* doneCallbackState, WS_ERROR* error);
+		public static extern HResult WsReadEnvelopeStart(ref WS_MESSAGE message, ref WS_XML_READER reader, WS_MESSAGE_DONE_CALLBACK doneCallback, void* doneCallbackState, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadEnvelopeEnd(ref WS_MESSAGE message, WS_ERROR* error);
+		public static extern HResult WsReadEnvelopeEnd(ref WS_MESSAGE message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetMessageProperty(ref WS_MESSAGE message, WS_MESSAGE_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetMessageProperty(ref WS_MESSAGE message, WS_MESSAGE_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsSetMessageProperty(ref WS_MESSAGE message, WS_MESSAGE_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsSetMessageProperty(ref WS_MESSAGE message, WS_MESSAGE_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAddressMessage(ref WS_MESSAGE message, WS_ENDPOINT_ADDRESS* address, WS_ERROR* error);
+		public static extern HResult WsAddressMessage(ref WS_MESSAGE message, WS_ENDPOINT_ADDRESS* address, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCheckMustUnderstandHeaders(ref WS_MESSAGE message, WS_ERROR* error);
+		public static extern HResult WsCheckMustUnderstandHeaders(ref WS_MESSAGE message, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsMarkHeaderAsUnderstood(ref WS_MESSAGE message, in WS_XML_NODE_POSITION headerPosition, WS_ERROR* error);
+		public static extern HResult WsMarkHeaderAsUnderstood(ref WS_MESSAGE message, in WS_XML_NODE_POSITION headerPosition, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsFillBody(ref WS_MESSAGE message, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsFillBody(ref WS_MESSAGE message, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsFlushBody(ref WS_MESSAGE message, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsFlushBody(ref WS_MESSAGE message, uint32 minSize, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRequestSecurityToken(ref WS_CHANNEL channel, WS_REQUEST_SECURITY_TOKEN_PROPERTY* properties, uint32 propertyCount, out WS_SECURITY_TOKEN* token, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsRequestSecurityToken(ref WS_CHANNEL channel, WS_REQUEST_SECURITY_TOKEN_PROPERTY* properties, uint32 propertyCount, out WS_SECURITY_TOKEN* token, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetSecurityTokenProperty(ref WS_SECURITY_TOKEN securityToken, WS_SECURITY_TOKEN_PROPERTY_ID id, void* value, uint32 valueSize, WS_HEAP* heap, WS_ERROR* error);
+		public static extern HResult WsGetSecurityTokenProperty(ref WS_SECURITY_TOKEN securityToken, WS_SECURITY_TOKEN_PROPERTY_ID id, void* value, uint32 valueSize, WS_HEAP* heap, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateXmlSecurityToken(WS_XML_BUFFER* tokenXml, WS_SECURITY_KEY_HANDLE* tokenKey, WS_XML_SECURITY_TOKEN_PROPERTY* properties, uint32 propertyCount, out WS_SECURITY_TOKEN* token, WS_ERROR* error);
+		public static extern HResult WsCreateXmlSecurityToken(WS_XML_BUFFER* tokenXml, WS_SECURITY_KEY_HANDLE* tokenKey, WS_XML_SECURITY_TOKEN_PROPERTY* properties, uint32 propertyCount, out WS_SECURITY_TOKEN* token, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeSecurityToken(ref WS_SECURITY_TOKEN token);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRevokeSecurityContext(ref WS_SECURITY_CONTEXT securityContext, WS_ERROR* error);
+		public static extern HResult WsRevokeSecurityContext(ref WS_SECURITY_CONTEXT securityContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetSecurityContextProperty(ref WS_SECURITY_CONTEXT securityContext, WS_SECURITY_CONTEXT_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetSecurityContextProperty(ref WS_SECURITY_CONTEXT securityContext, WS_SECURITY_CONTEXT_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadElement(ref WS_XML_READER reader, in WS_ELEMENT_DESCRIPTION elementDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsReadElement(ref WS_XML_READER reader, in WS_ELEMENT_DESCRIPTION elementDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadAttribute(ref WS_XML_READER reader, in WS_ATTRIBUTE_DESCRIPTION attributeDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsReadAttribute(ref WS_XML_READER reader, in WS_ATTRIBUTE_DESCRIPTION attributeDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadType(ref WS_XML_READER reader, WS_TYPE_MAPPING typeMapping, WS_TYPE type, void* typeDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsReadType(ref WS_XML_READER reader, WS_TYPE_MAPPING typeMapping, WS_TYPE type, void* typeDescription, WS_READ_OPTION readOption, WS_HEAP* heap, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteElement(ref WS_XML_WRITER writer, in WS_ELEMENT_DESCRIPTION elementDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsWriteElement(ref WS_XML_WRITER writer, in WS_ELEMENT_DESCRIPTION elementDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteAttribute(ref WS_XML_WRITER writer, in WS_ATTRIBUTE_DESCRIPTION attributeDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsWriteAttribute(ref WS_XML_WRITER writer, in WS_ATTRIBUTE_DESCRIPTION attributeDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsWriteType(ref WS_XML_WRITER writer, WS_TYPE_MAPPING typeMapping, WS_TYPE type, void* typeDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsWriteType(ref WS_XML_WRITER writer, WS_TYPE_MAPPING typeMapping, WS_TYPE type, void* typeDescription, WS_WRITE_OPTION writeOption, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsRegisterOperationForCancel(in WS_OPERATION_CONTEXT context, WS_OPERATION_CANCEL_CALLBACK cancelCallback, WS_OPERATION_FREE_STATE_CALLBACK freestateCallback, void* userState, WS_ERROR* error);
+		public static extern HResult WsRegisterOperationForCancel(in WS_OPERATION_CONTEXT context, WS_OPERATION_CANCEL_CALLBACK cancelCallback, WS_OPERATION_FREE_STATE_CALLBACK freestateCallback, void* userState, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetServiceHostProperty(ref WS_SERVICE_HOST serviceHost, WS_SERVICE_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetServiceHostProperty(ref WS_SERVICE_HOST serviceHost, WS_SERVICE_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateServiceHost(WS_SERVICE_ENDPOINT** endpoints, uint16 endpointCount, WS_SERVICE_PROPERTY* serviceProperties, uint32 servicePropertyCount, out WS_SERVICE_HOST* serviceHost, WS_ERROR* error);
+		public static extern HResult WsCreateServiceHost(WS_SERVICE_ENDPOINT** endpoints, uint16 endpointCount, WS_SERVICE_PROPERTY* serviceProperties, uint32 servicePropertyCount, out WS_SERVICE_HOST* serviceHost, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsOpenServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsOpenServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCloseServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsCloseServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAbortServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ERROR* error);
+		public static extern HResult WsAbortServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeServiceHost(ref WS_SERVICE_HOST serviceHost);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ERROR* error);
+		public static extern HResult WsResetServiceHost(ref WS_SERVICE_HOST serviceHost, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetServiceProxyProperty(ref WS_SERVICE_PROXY serviceProxy, WS_PROXY_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetServiceProxyProperty(ref WS_SERVICE_PROXY serviceProxy, WS_PROXY_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateServiceProxy(WS_CHANNEL_TYPE channelType, WS_CHANNEL_BINDING channelBinding, WS_SECURITY_DESCRIPTION* securityDescription, WS_PROXY_PROPERTY* properties, uint32 propertyCount, WS_CHANNEL_PROPERTY* channelProperties, uint32 channelPropertyCount, out WS_SERVICE_PROXY* serviceProxy, WS_ERROR* error);
+		public static extern HResult WsCreateServiceProxy(WS_CHANNEL_TYPE channelType, WS_CHANNEL_BINDING channelBinding, WS_SECURITY_DESCRIPTION* securityDescription, WS_PROXY_PROPERTY* properties, uint32 propertyCount, WS_CHANNEL_PROPERTY* channelProperties, uint32 channelPropertyCount, out WS_SERVICE_PROXY* serviceProxy, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsOpenServiceProxy(ref WS_SERVICE_PROXY serviceProxy, in WS_ENDPOINT_ADDRESS address, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsOpenServiceProxy(ref WS_SERVICE_PROXY serviceProxy, in WS_ENDPOINT_ADDRESS address, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCloseServiceProxy(ref WS_SERVICE_PROXY serviceProxy, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsCloseServiceProxy(ref WS_SERVICE_PROXY serviceProxy, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAbortServiceProxy(ref WS_SERVICE_PROXY serviceProxy, WS_ERROR* error);
+		public static extern HResult WsAbortServiceProxy(ref WS_SERVICE_PROXY serviceProxy, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeServiceProxy(ref WS_SERVICE_PROXY serviceProxy);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetServiceProxy(ref WS_SERVICE_PROXY serviceProxy, WS_ERROR* error);
+		public static extern HResult WsResetServiceProxy(ref WS_SERVICE_PROXY serviceProxy, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsAbandonCall(ref WS_SERVICE_PROXY serviceProxy, uint32 callId, WS_ERROR* error);
+		public static extern HResult WsAbandonCall(ref WS_SERVICE_PROXY serviceProxy, uint32 callId, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCall(ref WS_SERVICE_PROXY serviceProxy, in WS_OPERATION_DESCRIPTION operation, void** arguments, ref WS_HEAP heap, WS_CALL_PROPERTY* callProperties, uint32 callPropertyCount, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
+		public static extern HResult WsCall(ref WS_SERVICE_PROXY serviceProxy, in WS_OPERATION_DESCRIPTION operation, void** arguments, ref WS_HEAP heap, WS_CALL_PROPERTY* callProperties, uint32 callPropertyCount, WS_ASYNC_CONTEXT* asyncContext, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsDecodeUrl(in WS_STRING url, uint32 flags, ref WS_HEAP heap, out WS_URL* outUrl, WS_ERROR* error);
+		public static extern HResult WsDecodeUrl(in WS_STRING url, uint32 flags, ref WS_HEAP heap, out WS_URL* outUrl, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsEncodeUrl(in WS_URL url, uint32 flags, ref WS_HEAP heap, out WS_STRING outUrl, WS_ERROR* error);
+		public static extern HResult WsEncodeUrl(in WS_URL url, uint32 flags, ref WS_HEAP heap, out WS_STRING outUrl, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCombineUrl(in WS_STRING baseUrl, in WS_STRING referenceUrl, uint32 flags, ref WS_HEAP heap, out WS_STRING resultUrl, WS_ERROR* error);
+		public static extern HResult WsCombineUrl(in WS_STRING baseUrl, in WS_STRING referenceUrl, uint32 flags, ref WS_HEAP heap, out WS_STRING resultUrl, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsDateTimeToFileTime(in WS_DATETIME dateTime, out FILETIME fileTime, WS_ERROR* error);
+		public static extern HResult WsDateTimeToFileTime(in WS_DATETIME dateTime, out FileTime fileTime, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsFileTimeToDateTime(in FILETIME fileTime, out WS_DATETIME dateTime, WS_ERROR* error);
+		public static extern HResult WsFileTimeToDateTime(in FileTime fileTime, out WS_DATETIME dateTime, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateMetadata(WS_METADATA_PROPERTY* properties, uint32 propertyCount, out WS_METADATA* metadata, WS_ERROR* error);
+		public static extern HResult WsCreateMetadata(WS_METADATA_PROPERTY* properties, uint32 propertyCount, out WS_METADATA* metadata, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsReadMetadata(ref WS_METADATA metadata, ref WS_XML_READER reader, in WS_STRING url, WS_ERROR* error);
+		public static extern HResult WsReadMetadata(ref WS_METADATA metadata, ref WS_XML_READER reader, in WS_STRING url, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WsFreeMetadata(ref WS_METADATA metadata);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsResetMetadata(ref WS_METADATA metadata, WS_ERROR* error);
+		public static extern HResult WsResetMetadata(ref WS_METADATA metadata, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetMetadataProperty(ref WS_METADATA metadata, WS_METADATA_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetMetadataProperty(ref WS_METADATA metadata, WS_METADATA_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetMissingMetadataDocumentAddress(ref WS_METADATA metadata, WS_ENDPOINT_ADDRESS** address, WS_ERROR* error);
+		public static extern HResult WsGetMissingMetadataDocumentAddress(ref WS_METADATA metadata, WS_ENDPOINT_ADDRESS** address, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetMetadataEndpoints(ref WS_METADATA metadata, out WS_METADATA_ENDPOINTS endpoints, WS_ERROR* error);
+		public static extern HResult WsGetMetadataEndpoints(ref WS_METADATA metadata, out WS_METADATA_ENDPOINTS endpoints, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsMatchPolicyAlternative(ref WS_POLICY policy, uint32 alternativeIndex, ref WS_POLICY_CONSTRAINTS policyConstraints, BOOL matchRequired, ref WS_HEAP heap, WS_ERROR* error);
+		public static extern HResult WsMatchPolicyAlternative(ref WS_POLICY policy, uint32 alternativeIndex, ref WS_POLICY_CONSTRAINTS policyConstraints, IntBool matchRequired, ref WS_HEAP heap, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetPolicyProperty(ref WS_POLICY policy, WS_POLICY_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
+		public static extern HResult WsGetPolicyProperty(ref WS_POLICY policy, WS_POLICY_PROPERTY_ID id, void* value, uint32 valueSize, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsGetPolicyAlternativeCount(ref WS_POLICY policy, out uint32 count, WS_ERROR* error);
+		public static extern HResult WsGetPolicyAlternativeCount(ref WS_POLICY policy, out uint32 count, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateServiceProxyFromTemplate(WS_CHANNEL_TYPE channelType, WS_PROXY_PROPERTY* properties, uint32 propertyCount, WS_BINDING_TEMPLATE_TYPE templateType, void* templateValue, uint32 templateSize, void* templateDescription, uint32 templateDescriptionSize, out WS_SERVICE_PROXY* serviceProxy, WS_ERROR* error);
+		public static extern HResult WsCreateServiceProxyFromTemplate(WS_CHANNEL_TYPE channelType, WS_PROXY_PROPERTY* properties, uint32 propertyCount, WS_BINDING_TEMPLATE_TYPE templateType, void* templateValue, uint32 templateSize, void* templateDescription, uint32 templateDescriptionSize, out WS_SERVICE_PROXY* serviceProxy, WS_ERROR* error);
 		[Import("webservices.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WsCreateServiceEndpointFromTemplate(WS_CHANNEL_TYPE channelType, WS_SERVICE_ENDPOINT_PROPERTY* properties, uint32 propertyCount, WS_STRING* addressUrl, in WS_SERVICE_CONTRACT contract, WS_SERVICE_SECURITY_CALLBACK authorizationCallback, ref WS_HEAP heap, WS_BINDING_TEMPLATE_TYPE templateType, void* templateValue, uint32 templateSize, void* templateDescription, uint32 templateDescriptionSize, out WS_SERVICE_ENDPOINT* serviceEndpoint, WS_ERROR* error);
+		public static extern HResult WsCreateServiceEndpointFromTemplate(WS_CHANNEL_TYPE channelType, WS_SERVICE_ENDPOINT_PROPERTY* properties, uint32 propertyCount, WS_STRING* addressUrl, in WS_SERVICE_CONTRACT contract, WS_SERVICE_SECURITY_CALLBACK authorizationCallback, ref WS_HEAP heap, WS_BINDING_TEMPLATE_TYPE templateType, void* templateValue, uint32 templateSize, void* templateDescription, uint32 templateDescriptionSize, out WS_SERVICE_ENDPOINT* serviceEndpoint, WS_ERROR* error);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WebAuthNGetApiVersionNumber();
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(out BOOL pbIsUserVerifyingPlatformAuthenticatorAvailable);
+		public static extern HResult WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(out IntBool pbIsUserVerifyingPlatformAuthenticatorAvailable);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WebAuthNAuthenticatorMakeCredential(HWND hWnd, ref WEBAUTHN_RP_ENTITY_INFORMATION pRpInformation, ref WEBAUTHN_USER_ENTITY_INFORMATION pUserInformation, ref WEBAUTHN_COSE_CREDENTIAL_PARAMETERS pPubKeyCredParams, ref WEBAUTHN_CLIENT_DATA pWebAuthNClientData, WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS* pWebAuthNMakeCredentialOptions, WEBAUTHN_CREDENTIAL_ATTESTATION** ppWebAuthNCredentialAttestation);
+		public static extern HResult WebAuthNAuthenticatorMakeCredential(HWnd hWnd, ref WEBAUTHN_RP_ENTITY_INFORMATION pRpInformation, ref WEBAUTHN_USER_ENTITY_INFORMATION pUserInformation, ref WEBAUTHN_COSE_CREDENTIAL_PARAMETERS pPubKeyCredParams, ref WEBAUTHN_CLIENT_DATA pWebAuthNClientData, WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS* pWebAuthNMakeCredentialOptions, WEBAUTHN_CREDENTIAL_ATTESTATION** ppWebAuthNCredentialAttestation);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WebAuthNAuthenticatorGetAssertion(HWND hWnd, PWSTR pwszRpId, ref WEBAUTHN_CLIENT_DATA pWebAuthNClientData, WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS* pWebAuthNGetAssertionOptions, WEBAUTHN_ASSERTION** ppWebAuthNAssertion);
+		public static extern HResult WebAuthNAuthenticatorGetAssertion(HWnd hWnd, char16* pwszRpId, ref WEBAUTHN_CLIENT_DATA pWebAuthNClientData, WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS* pWebAuthNGetAssertionOptions, WEBAUTHN_ASSERTION** ppWebAuthNAssertion);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WebAuthNFreeCredentialAttestation(WEBAUTHN_CREDENTIAL_ATTESTATION* pWebAuthNCredentialAttestation);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WebAuthNFreeAssertion(ref WEBAUTHN_ASSERTION pWebAuthNAssertion);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WebAuthNGetCancellationId(out Guid pCancellationId);
+		public static extern HResult WebAuthNGetCancellationId(out Guid pCancellationId);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WebAuthNCancelCurrentOperation(in Guid pCancellationId);
+		public static extern HResult WebAuthNCancelCurrentOperation(in Guid pCancellationId);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR WebAuthNGetErrorName(HRESULT hr);
+		public static extern char16* WebAuthNGetErrorName(HResult hr);
 		[Import("webauthn.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WebAuthNGetW3CExceptionDOMError(HRESULT hr);
+		public static extern HResult WebAuthNGetW3CExceptionDOMError(HResult hr);
 	}
 }

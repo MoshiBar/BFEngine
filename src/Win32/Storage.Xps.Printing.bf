@@ -1,9 +1,13 @@
 using System;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Storage.Xps.Printing
-namespace Win32
+namespace Win32.Storage
 {
-	extension Win32
+	extension Xps{
+	public static class Printing
 	{
 		// --- Constants ---
 		
@@ -38,7 +42,7 @@ namespace Win32
 			public int32 currentPage;
 			public int32 currentPageTotal;
 			public XPS_JOB_COMPLETION completion;
-			public HRESULT jobStatus;
+			public HResult jobStatus;
 		}
 		[CRepr]
 		public struct PrintDocumentPackageStatus
@@ -48,7 +52,7 @@ namespace Win32
 			public int32 CurrentPage;
 			public int32 CurrentPageTotal;
 			public PrintDocumentPackageCompletion Completion;
-			public HRESULT PackageStatus;
+			public HResult PackageStatus;
 		}
 		
 		// --- COM Class IDs ---
@@ -65,12 +69,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Close() mut => VT.Close(ref this);
+			public HResult Close() mut => VT.Close(ref this);
 
 			[CRepr]
 			public struct VTable : ISequentialStream.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXpsPrintJobStream self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXpsPrintJobStream self) Close;
 			}
 		}
 		[CRepr]
@@ -80,14 +84,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
-			public HRESULT GetJobStatus(out XPS_JOB_STATUS jobStatus) mut => VT.GetJobStatus(ref this, out jobStatus);
+			public HResult Cancel() mut => VT.Cancel(ref this);
+			public HResult GetJobStatus(out XPS_JOB_STATUS jobStatus) mut => VT.GetJobStatus(ref this, out jobStatus);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXpsPrintJob self) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXpsPrintJob self, out XPS_JOB_STATUS jobStatus) GetJobStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXpsPrintJob self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXpsPrintJob self, out XPS_JOB_STATUS jobStatus) GetJobStatus;
 			}
 		}
 		[CRepr]
@@ -97,16 +101,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPackageTargetTypes(out uint32 targetCount, Guid** targetTypes) mut => VT.GetPackageTargetTypes(ref this, out targetCount, targetTypes);
-			public HRESULT GetPackageTarget(in Guid guidTargetType, in Guid riid, void** ppvTarget) mut => VT.GetPackageTarget(ref this, guidTargetType, riid, ppvTarget);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
+			public HResult GetPackageTargetTypes(out uint32 targetCount, Guid** targetTypes) mut => VT.GetPackageTargetTypes(ref this, out targetCount, targetTypes);
+			public HResult GetPackageTarget(in Guid guidTargetType, in Guid riid, void** ppvTarget) mut => VT.GetPackageTarget(ref this, guidTargetType, riid, ppvTarget);
+			public HResult Cancel() mut => VT.Cancel(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDocumentPackageTarget self, out uint32 targetCount, Guid** targetTypes) GetPackageTargetTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDocumentPackageTarget self, in Guid guidTargetType, in Guid riid, void** ppvTarget) GetPackageTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDocumentPackageTarget self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDocumentPackageTarget self, out uint32 targetCount, Guid** targetTypes) GetPackageTargetTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDocumentPackageTarget self, in Guid guidTargetType, in Guid riid, void** ppvTarget) GetPackageTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDocumentPackageTarget self) Cancel;
 			}
 		}
 		[CRepr]
@@ -116,12 +120,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PackageStatusUpdated(ref PrintDocumentPackageStatus packageStatus) mut => VT.PackageStatusUpdated(ref this, ref packageStatus);
+			public HResult PackageStatusUpdated(ref PrintDocumentPackageStatus packageStatus) mut => VT.PackageStatusUpdated(ref this, ref packageStatus);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDocumentPackageStatusEvent self, ref PrintDocumentPackageStatus packageStatus) PackageStatusUpdated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDocumentPackageStatusEvent self, ref PrintDocumentPackageStatus packageStatus) PackageStatusUpdated;
 			}
 		}
 		[CRepr]
@@ -131,20 +135,21 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateDocumentPackageTargetForPrintJob(PWSTR printerName, PWSTR jobName, ref IStream jobOutputStream, ref IStream jobPrintTicketStream, out IPrintDocumentPackageTarget* docPackageTarget) mut => VT.CreateDocumentPackageTargetForPrintJob(ref this, printerName, jobName, ref jobOutputStream, ref jobPrintTicketStream, out docPackageTarget);
+			public HResult CreateDocumentPackageTargetForPrintJob(char16* printerName, char16* jobName, ref IStream jobOutputStream, ref IStream jobPrintTicketStream, out IPrintDocumentPackageTarget* docPackageTarget) mut => VT.CreateDocumentPackageTargetForPrintJob(ref this, printerName, jobName, ref jobOutputStream, ref jobPrintTicketStream, out docPackageTarget);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDocumentPackageTargetFactory self, PWSTR printerName, PWSTR jobName, ref IStream jobOutputStream, ref IStream jobPrintTicketStream, out IPrintDocumentPackageTarget* docPackageTarget) CreateDocumentPackageTargetForPrintJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDocumentPackageTargetFactory self, char16* printerName, char16* jobName, ref IStream jobOutputStream, ref IStream jobPrintTicketStream, out IPrintDocumentPackageTarget* docPackageTarget) CreateDocumentPackageTargetForPrintJob;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("xpsprint.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT StartXpsPrintJob(PWSTR printerName, PWSTR jobName, PWSTR outputFileName, HANDLE progressEvent, HANDLE completionEvent, uint8* printablePagesOn, uint32 printablePagesOnCount, IXpsPrintJob** xpsPrintJob, IXpsPrintJobStream** documentStream, IXpsPrintJobStream** printTicketStream);
+		public static extern HResult StartXpsPrintJob(char16* printerName, char16* jobName, char16* outputFileName, Handle progressEvent, Handle completionEvent, uint8* printablePagesOn, uint32 printablePagesOnCount, IXpsPrintJob** xpsPrintJob, IXpsPrintJobStream** documentStream, IXpsPrintJobStream** printTicketStream);
 		[Import("xpsprint.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT StartXpsPrintJob1(PWSTR printerName, PWSTR jobName, PWSTR outputFileName, HANDLE progressEvent, HANDLE completionEvent, IXpsPrintJob** xpsPrintJob, IXpsOMPackageTarget** printContentReceiver);
+		public static extern HResult StartXpsPrintJob1(char16* printerName, char16* jobName, char16* outputFileName, Handle progressEvent, Handle completionEvent, IXpsPrintJob** xpsPrintJob, IXpsOMPackageTarget** printContentReceiver);
+	}
 	}
 }

@@ -36,8 +36,8 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL OperationStart(ref OPERATION_START_PARAMETERS OperationStartParams);
+		public static extern IntBool OperationStart(ref OPERATION_START_PARAMETERS OperationStartParams);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL OperationEnd(ref OPERATION_END_PARAMETERS OperationEndParams);
+		public static extern IntBool OperationEnd(ref OPERATION_END_PARAMETERS OperationEndParams);
 	}
 }

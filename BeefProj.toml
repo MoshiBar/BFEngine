@@ -1,5 +1,4 @@
 FileVersion = 1
-Dependencies = {corlib = "*", Windows = "*"}
 
 [Project]
 Name = "BfEngine"
@@ -15,10 +14,6 @@ VectorizeSLP = true
 [[ProjectFolder.Items]]
 Type = "AutoFolder"
 Name = "Audio"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "Ogg.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
@@ -98,19 +93,11 @@ Name = "Devices.Geolocation.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
-Name = "Devices.HumanInterfaceDevice.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
 Name = "Devices.ImageAcquisition.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
 Name = "Devices.PortableDevices.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "Devices.Properties.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
@@ -358,15 +345,7 @@ Name = "Management.MobileDeviceManagementRegistration.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
-Name = "Media.Audio.XAudio2.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
 Name = "Media.DeviceManager.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "Media.DirectShow.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
@@ -374,15 +353,7 @@ Name = "Media.DirectShow.Xml.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
-Name = "Media.DxMediaObjects.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
 Name = "Media.LibrarySharingServices.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "Media.MediaFoundation.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
@@ -395,14 +366,6 @@ Name = "Media.PictureAcquisition.bf"
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
 Name = "Media.Speech.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "Media.Streaming.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "Media.WindowsMediaFormat.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
@@ -558,10 +521,6 @@ Name = "System.Diagnostics.Debug.WebApp.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
-Name = "System.Diagnostics.Etw.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
 Name = "System.Diagnostics.ProcessSnapshotting.bf"
 
 [[ProjectFolder.Items.Items]]
@@ -659,10 +618,6 @@ Name = "System.ParentalControls.bf"
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"
 Name = "System.PasswordManagement.bf"
-
-[[ProjectFolder.Items.Items]]
-Type = "IgnoreSource"
-Name = "System.Performance.bf"
 
 [[ProjectFolder.Items.Items]]
 Type = "IgnoreSource"

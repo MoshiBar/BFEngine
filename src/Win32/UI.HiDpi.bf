@@ -63,62 +63,62 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("uxtheme.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int OpenThemeDataForDpi(HWND hwnd, PWSTR pszClassList, uint32 dpi);
+		public static extern int OpenThemeDataForDpi(HWnd hwnd, char16* pszClassList, uint32 dpi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetDialogControlDpiChangeBehavior(HWND hWnd, DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask, DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values);
+		public static extern IntBool SetDialogControlDpiChangeBehavior(HWnd hWnd, DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask, DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS GetDialogControlDpiChangeBehavior(HWND hWnd);
+		public static extern DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS GetDialogControlDpiChangeBehavior(HWnd hWnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetDialogDpiChangeBehavior(HWND hDlg, DIALOG_DPI_CHANGE_BEHAVIORS mask, DIALOG_DPI_CHANGE_BEHAVIORS values);
+		public static extern IntBool SetDialogDpiChangeBehavior(HWnd hDlg, DIALOG_DPI_CHANGE_BEHAVIORS mask, DIALOG_DPI_CHANGE_BEHAVIORS values);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern DIALOG_DPI_CHANGE_BEHAVIORS GetDialogDpiChangeBehavior(HWND hDlg);
+		public static extern DIALOG_DPI_CHANGE_BEHAVIORS GetDialogDpiChangeBehavior(HWnd hDlg);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetSystemMetricsForDpi(int32 nIndex, uint32 dpi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AdjustWindowRectExForDpi(out RECT lpRect, uint32 dwStyle, BOOL bMenu, uint32 dwExStyle, uint32 dpi);
+		public static extern IntBool AdjustWindowRectExForDpi(out RectI lpRect, uint32 dwStyle, IntBool bMenu, uint32 dwExStyle, uint32 dpi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL LogicalToPhysicalPointForPerMonitorDPI(HWND hWnd, out POINT lpPoint);
+		public static extern IntBool LogicalToPhysicalPointForPerMonitorDPI(HWnd hWnd, out POINT lpPoint);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PhysicalToLogicalPointForPerMonitorDPI(HWND hWnd, out POINT lpPoint);
+		public static extern IntBool PhysicalToLogicalPointForPerMonitorDPI(HWnd hWnd, out POINT lpPoint);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SystemParametersInfoForDpi(uint32 uiAction, uint32 uiParam, void* pvParam, uint32 fWinIni, uint32 dpi);
+		public static extern IntBool SystemParametersInfoForDpi(uint32 uiAction, uint32 uiParam, void* pvParam, uint32 fWinIni, uint32 dpi);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern DPI_AWARENESS_CONTEXT SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT dpiContext);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern DPI_AWARENESS_CONTEXT GetThreadDpiAwarenessContext();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern DPI_AWARENESS_CONTEXT GetWindowDpiAwarenessContext(HWND hwnd);
+		public static extern DPI_AWARENESS_CONTEXT GetWindowDpiAwarenessContext(HWnd hwnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern DPI_AWARENESS GetAwarenessFromDpiAwarenessContext(DPI_AWARENESS_CONTEXT value);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetDpiFromDpiAwarenessContext(DPI_AWARENESS_CONTEXT value);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AreDpiAwarenessContextsEqual(DPI_AWARENESS_CONTEXT dpiContextA, DPI_AWARENESS_CONTEXT dpiContextB);
+		public static extern IntBool AreDpiAwarenessContextsEqual(DPI_AWARENESS_CONTEXT dpiContextA, DPI_AWARENESS_CONTEXT dpiContextB);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsValidDpiAwarenessContext(DPI_AWARENESS_CONTEXT value);
+		public static extern IntBool IsValidDpiAwarenessContext(DPI_AWARENESS_CONTEXT value);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetDpiForWindow(HWND hwnd);
+		public static extern uint32 GetDpiForWindow(HWnd hwnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetDpiForSystem();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetSystemDpiForProcess(HANDLE hProcess);
+		public static extern uint32 GetSystemDpiForProcess(Handle hProcess);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnableNonClientDpiScaling(HWND hwnd);
+		public static extern IntBool EnableNonClientDpiScaling(HWnd hwnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT value);
+		public static extern IntBool SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT value);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern DPI_AWARENESS_CONTEXT GetDpiAwarenessContextForProcess(HANDLE hProcess);
+		public static extern DPI_AWARENESS_CONTEXT GetDpiAwarenessContextForProcess(Handle hProcess);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern DPI_HOSTING_BEHAVIOR SetThreadDpiHostingBehavior(DPI_HOSTING_BEHAVIOR value);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern DPI_HOSTING_BEHAVIOR GetThreadDpiHostingBehavior();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern DPI_HOSTING_BEHAVIOR GetWindowDpiHostingBehavior(HWND hwnd);
+		public static extern DPI_HOSTING_BEHAVIOR GetWindowDpiHostingBehavior(HWnd hwnd);
 		[Import("api-ms-win-shcore-scaling-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value);
+		public static extern HResult SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value);
 		[Import("api-ms-win-shcore-scaling-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetProcessDpiAwareness(HANDLE hprocess, out PROCESS_DPI_AWARENESS value);
+		public static extern HResult GetProcessDpiAwareness(Handle hprocess, out PROCESS_DPI_AWARENESS value);
 		[Import("api-ms-win-shcore-scaling-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetDpiForMonitor(HMONITOR hmonitor, MONITOR_DPI_TYPE dpiType, out uint32 dpiX, out uint32 dpiY);
+		public static extern HResult GetDpiForMonitor(HMONITOR hmonitor, MONITOR_DPI_TYPE dpiType, out uint32 dpiX, out uint32 dpiY);
 	}
 }

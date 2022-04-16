@@ -121,17 +121,17 @@ namespace Win32
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern JsErrorCode JsIdle(uint32* nextIdleTick);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsParseScript(PWSTR script, uint sourceContext, PWSTR sourceUrl, void** result);
+		public static extern JsErrorCode JsParseScript(char16* script, uint sourceContext, char16* sourceUrl, void** result);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsRunScript(PWSTR script, uint sourceContext, PWSTR sourceUrl, void** result);
+		public static extern JsErrorCode JsRunScript(char16* script, uint sourceContext, char16* sourceUrl, void** result);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsSerializeScript(PWSTR script, uint8* buffer, out uint32 bufferSize);
+		public static extern JsErrorCode JsSerializeScript(char16* script, uint8* buffer, out uint32 bufferSize);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsParseSerializedScript(PWSTR script, ref uint8 buffer, uint sourceContext, PWSTR sourceUrl, void** result);
+		public static extern JsErrorCode JsParseSerializedScript(char16* script, ref uint8 buffer, uint sourceContext, char16* sourceUrl, void** result);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsRunSerializedScript(PWSTR script, ref uint8 buffer, uint sourceContext, PWSTR sourceUrl, void** result);
+		public static extern JsErrorCode JsRunSerializedScript(char16* script, ref uint8 buffer, uint sourceContext, char16* sourceUrl, void** result);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsGetPropertyIdFromName(PWSTR name, void** propertyId);
+		public static extern JsErrorCode JsGetPropertyIdFromName(char16* name, void** propertyId);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern JsErrorCode JsGetPropertyNameFromId(void* propertyId, out uint16* name);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
@@ -253,7 +253,7 @@ namespace Win32
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern JsErrorCode JsStartProfiling(ref IActiveScriptProfilerCallback callback, PROFILER_EVENT_MASK eventMask, uint32 context);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern JsErrorCode JsStopProfiling(HRESULT reason);
+		public static extern JsErrorCode JsStopProfiling(HResult reason);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern JsErrorCode JsEnumerateHeap(out IActiveScriptProfilerHeapEnum* enumerator);
 		[Import("chakra.dll"), CLink, CallingConvention(.Stdcall)]

@@ -1,9 +1,11 @@
+using static System.Windows;
 using System;
+using static Win32.Win32;
 
 // namespace NetworkManagement.WNet
-namespace Win32
+namespace Win32.NetworkManagement
 {
-	extension Win32
+	public static class WNet
 	{
 		// --- Constants ---
 		
@@ -181,37 +183,37 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function uint32 PF_NPAddConnection(ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserName);
-		public function uint32 PF_NPAddConnection3(HWND hwndOwner, ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserName, uint32 dwFlags);
-		public function uint32 PF_NPAddConnection4(HWND hwndOwner, ref NETRESOURCEW lpNetResource, void* lpAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions);
-		public function uint32 PF_NPCancelConnection(PWSTR lpName, BOOL fForce);
-		public function uint32 PF_NPCancelConnection2(PWSTR lpName, BOOL fForce, uint32 dwFlags);
-		public function uint32 PF_NPGetConnection(PWSTR lpLocalName, char16* lpRemoteName, out uint32 lpnBufferLen);
-		public function uint32 PF_NPGetConnection3(PWSTR lpLocalName, uint32 dwLevel, void* lpBuffer, out uint32 lpBufferSize);
-		public function uint32 PF_NPGetUniversalName(PWSTR lpLocalPath, uint32 dwInfoLevel, void* lpBuffer, out uint32 lpnBufferSize);
-		public function uint32 PF_NPGetConnectionPerformance(PWSTR lpRemoteName, out NETCONNECTINFOSTRUCT lpNetConnectInfo);
-		public function uint32 PF_NPOpenEnum(uint32 dwScope, uint32 dwType, uint32 dwUsage, NETRESOURCEW* lpNetResource, out HANDLE lphEnum);
-		public function uint32 PF_NPEnumResource(HANDLE hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
-		public function uint32 PF_NPCloseEnum(HANDLE hEnum);
+		public function uint32 PF_NPAddConnection(ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserName);
+		public function uint32 PF_NPAddConnection3(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserName, uint32 dwFlags);
+		public function uint32 PF_NPAddConnection4(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, void* lpAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions);
+		public function uint32 PF_NPCancelConnection(char16* lpName, IntBool fForce);
+		public function uint32 PF_NPCancelConnection2(char16* lpName, IntBool fForce, uint32 dwFlags);
+		public function uint32 PF_NPGetConnection(char16* lpLocalName, char16* lpRemoteName, out uint32 lpnBufferLen);
+		public function uint32 PF_NPGetConnection3(char16* lpLocalName, uint32 dwLevel, void* lpBuffer, out uint32 lpBufferSize);
+		public function uint32 PF_NPGetUniversalName(char16* lpLocalPath, uint32 dwInfoLevel, void* lpBuffer, out uint32 lpnBufferSize);
+		public function uint32 PF_NPGetConnectionPerformance(char16* lpRemoteName, out NETCONNECTINFOSTRUCT lpNetConnectInfo);
+		public function uint32 PF_NPOpenEnum(uint32 dwScope, uint32 dwType, uint32 dwUsage, NETRESOURCEW* lpNetResource, out Handle lphEnum);
+		public function uint32 PF_NPEnumResource(Handle hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
+		public function uint32 PF_NPCloseEnum(Handle hEnum);
 		public function uint32 PF_NPGetCaps(uint32 ndex);
-		public function uint32 PF_NPGetUser(PWSTR lpName, char16* lpUserName, out uint32 lpnBufferLen);
-		public function uint32 PF_NPGetPersistentUseOptionsForConnection(PWSTR lpRemotePath, ref uint8 lpReadUseOptions, uint32 cbReadUseOptions, out uint8 lpWriteUseOptions, out uint32 lpSizeWriteUseOptions);
-		public function uint32 PF_NPDeviceMode(HWND hParent);
-		public function uint32 PF_NPSearchDialog(HWND hwndParent, NETRESOURCEW* lpNetResource, void* lpBuffer, uint32 cbBuffer, out uint32 lpnFlags);
+		public function uint32 PF_NPGetUser(char16* lpName, char16* lpUserName, out uint32 lpnBufferLen);
+		public function uint32 PF_NPGetPersistentUseOptionsForConnection(char16* lpRemotePath, ref uint8 lpReadUseOptions, uint32 cbReadUseOptions, out uint8 lpWriteUseOptions, out uint32 lpSizeWriteUseOptions);
+		public function uint32 PF_NPDeviceMode(HWnd hParent);
+		public function uint32 PF_NPSearchDialog(HWnd hwndParent, NETRESOURCEW* lpNetResource, void* lpBuffer, uint32 cbBuffer, out uint32 lpnFlags);
 		public function uint32 PF_NPGetResourceParent(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpBufferSize);
-		public function uint32 PF_NPGetResourceInformation(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpBufferSize, out PWSTR lplpSystem);
-		public function uint32 PF_NPFormatNetworkName(PWSTR lpRemoteName, char16* lpFormattedName, out uint32 lpnLength, uint32 dwFlags, uint32 dwAveCharPerLine);
-		public function uint32 PF_NPGetPropertyText(uint32 iButton, uint32 nPropSel, PWSTR lpName, char16* lpButtonName, uint32 nButtonNameLen, uint32 nType);
-		public function uint32 PF_NPPropertyDialog(HWND hwndParent, uint32 iButtonDlg, uint32 nPropSel, PWSTR lpFileName, uint32 nType);
-		public function uint32 PF_NPGetDirectoryType(PWSTR lpName, ref int32 lpType, BOOL bFlushCache);
-		public function uint32 PF_NPDirectoryNotify(HWND hwnd, PWSTR lpDir, uint32 dwOper);
-		public function uint32 PF_NPLogonNotify(ref LUID lpLogonId, PWSTR lpAuthentInfoType, void* lpAuthentInfo, PWSTR lpPreviousAuthentInfoType, void* lpPreviousAuthentInfo, PWSTR lpStationName, void* StationHandle, out PWSTR lpLogonScript);
-		public function uint32 PF_NPPasswordChangeNotify(PWSTR lpAuthentInfoType, void* lpAuthentInfo, PWSTR lpPreviousAuthentInfoType, void* lpPreviousAuthentInfo, PWSTR lpStationName, void* StationHandle, uint32 dwChangeInfo);
+		public function uint32 PF_NPGetResourceInformation(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpBufferSize, out char16* lplpSystem);
+		public function uint32 PF_NPFormatNetworkName(char16* lpRemoteName, char16* lpFormattedName, out uint32 lpnLength, uint32 dwFlags, uint32 dwAveCharPerLine);
+		public function uint32 PF_NPGetPropertyText(uint32 iButton, uint32 nPropSel, char16* lpName, char16* lpButtonName, uint32 nButtonNameLen, uint32 nType);
+		public function uint32 PF_NPPropertyDialog(HWnd hwndParent, uint32 iButtonDlg, uint32 nPropSel, char16* lpFileName, uint32 nType);
+		public function uint32 PF_NPGetDirectoryType(char16* lpName, ref int32 lpType, IntBool bFlushCache);
+		public function uint32 PF_NPDirectoryNotify(HWnd hwnd, char16* lpDir, uint32 dwOper);
+		public function uint32 PF_NPLogonNotify(ref LUID lpLogonId, char16* lpAuthentInfoType, void* lpAuthentInfo, char16* lpPreviousAuthentInfoType, void* lpPreviousAuthentInfo, char16* lpStationName, void* StationHandle, out char16* lpLogonScript);
+		public function uint32 PF_NPPasswordChangeNotify(char16* lpAuthentInfoType, void* lpAuthentInfo, char16* lpPreviousAuthentInfoType, void* lpPreviousAuthentInfo, char16* lpStationName, void* StationHandle, uint32 dwChangeInfo);
 		public function uint32 PF_AddConnectNotify(out NOTIFYINFO lpNotifyInfo, ref NOTIFYADD lpAddInfo);
 		public function uint32 PF_CancelConnectNotify(out NOTIFYINFO lpNotifyInfo, ref NOTIFYCANCEL lpCancelInfo);
-		public function uint32 PF_NPFMXGetPermCaps(PWSTR lpDriveName);
-		public function uint32 PF_NPFMXEditPerm(PWSTR lpDriveName, HWND hwndFMX, uint32 nDialogType);
-		public function uint32 PF_NPFMXGetPermHelp(PWSTR lpDriveName, uint32 nDialogType, BOOL fDirectory, void* lpFileNameBuffer, out uint32 lpBufferSize, out uint32 lpnHelpContext);
+		public function uint32 PF_NPFMXGetPermCaps(char16* lpDriveName);
+		public function uint32 PF_NPFMXEditPerm(char16* lpDriveName, HWnd hwndFMX, uint32 nDialogType);
+		public function uint32 PF_NPFMXGetPermHelp(char16* lpDriveName, uint32 nDialogType, IntBool fDirectory, void* lpFileNameBuffer, out uint32 lpBufferSize, out uint32 lpnHelpContext);
 		
 		// --- Structs ---
 		
@@ -222,10 +224,10 @@ namespace Win32
 			public NET_RESOURCE_TYPE dwType;
 			public uint32 dwDisplayType;
 			public uint32 dwUsage;
-			public PSTR lpLocalName;
-			public PSTR lpRemoteName;
-			public PSTR lpComment;
-			public PSTR lpProvider;
+			public char8* lpLocalName;
+			public char8* lpRemoteName;
+			public char8* lpComment;
+			public char8* lpProvider;
 		}
 		[CRepr]
 		public struct NETRESOURCEW
@@ -234,16 +236,16 @@ namespace Win32
 			public NET_RESOURCE_TYPE dwType;
 			public uint32 dwDisplayType;
 			public uint32 dwUsage;
-			public PWSTR lpLocalName;
-			public PWSTR lpRemoteName;
-			public PWSTR lpComment;
-			public PWSTR lpProvider;
+			public char16* lpLocalName;
+			public char16* lpRemoteName;
+			public char16* lpComment;
+			public char16* lpProvider;
 		}
 		[CRepr]
 		public struct CONNECTDLGSTRUCTA
 		{
 			public uint32 cbStructure;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public NETRESOURCEA* lpConnRes;
 			public CONNECTDLGSTRUCT_FLAGS dwFlags;
 			public uint32 dwDevNum;
@@ -252,7 +254,7 @@ namespace Win32
 		public struct CONNECTDLGSTRUCTW
 		{
 			public uint32 cbStructure;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public NETRESOURCEW* lpConnRes;
 			public CONNECTDLGSTRUCT_FLAGS dwFlags;
 			public uint32 dwDevNum;
@@ -261,43 +263,43 @@ namespace Win32
 		public struct DISCDLGSTRUCTA
 		{
 			public uint32 cbStructure;
-			public HWND hwndOwner;
-			public PSTR lpLocalName;
-			public PSTR lpRemoteName;
+			public HWnd hwndOwner;
+			public char8* lpLocalName;
+			public char8* lpRemoteName;
 			public DISCDLGSTRUCT_FLAGS dwFlags;
 		}
 		[CRepr]
 		public struct DISCDLGSTRUCTW
 		{
 			public uint32 cbStructure;
-			public HWND hwndOwner;
-			public PWSTR lpLocalName;
-			public PWSTR lpRemoteName;
+			public HWnd hwndOwner;
+			public char16* lpLocalName;
+			public char16* lpRemoteName;
 			public DISCDLGSTRUCT_FLAGS dwFlags;
 		}
 		[CRepr]
 		public struct UNIVERSAL_NAME_INFOA
 		{
-			public PSTR lpUniversalName;
+			public char8* lpUniversalName;
 		}
 		[CRepr]
 		public struct UNIVERSAL_NAME_INFOW
 		{
-			public PWSTR lpUniversalName;
+			public char16* lpUniversalName;
 		}
 		[CRepr]
 		public struct REMOTE_NAME_INFOA
 		{
-			public PSTR lpUniversalName;
-			public PSTR lpConnectionName;
-			public PSTR lpRemainingPath;
+			public char8* lpUniversalName;
+			public char8* lpConnectionName;
+			public char8* lpRemainingPath;
 		}
 		[CRepr]
 		public struct REMOTE_NAME_INFOW
 		{
-			public PWSTR lpUniversalName;
-			public PWSTR lpConnectionName;
-			public PWSTR lpRemainingPath;
+			public char16* lpUniversalName;
+			public char16* lpConnectionName;
+			public char16* lpRemainingPath;
 		}
 		[CRepr]
 		public struct NETINFOSTRUCT
@@ -330,61 +332,61 @@ namespace Win32
 		[CRepr]
 		public struct NOTIFYADD
 		{
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public NETRESOURCEA NetResource;
 			public NET_USE_CONNECT_FLAGS dwAddFlags;
 		}
 		[CRepr]
 		public struct NOTIFYCANCEL
 		{
-			public PWSTR lpName;
-			public PWSTR lpProvider;
+			public char16* lpName;
+			public char16* lpProvider;
 			public uint32 dwFlags;
-			public BOOL fForce;
+			public IntBool fForce;
 		}
 		
 		// --- Functions ---
 		
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnectionA(PSTR lpRemoteName, PSTR lpPassword, PSTR lpLocalName);
+		public static extern uint32 WNetAddConnectionA(char8* lpRemoteName, char8* lpPassword, char8* lpLocalName);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnectionW(PWSTR lpRemoteName, PWSTR lpPassword, PWSTR lpLocalName);
+		public static extern uint32 WNetAddConnectionW(char16* lpRemoteName, char16* lpPassword, char16* lpLocalName);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnection2A(ref NETRESOURCEA lpNetResource, PSTR lpPassword, PSTR lpUserName, uint32 dwFlags);
+		public static extern uint32 WNetAddConnection2A(ref NETRESOURCEA lpNetResource, char8* lpPassword, char8* lpUserName, uint32 dwFlags);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnection2W(ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserName, uint32 dwFlags);
+		public static extern uint32 WNetAddConnection2W(ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserName, uint32 dwFlags);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnection3A(HWND hwndOwner, ref NETRESOURCEA lpNetResource, PSTR lpPassword, PSTR lpUserName, uint32 dwFlags);
+		public static extern uint32 WNetAddConnection3A(HWnd hwndOwner, ref NETRESOURCEA lpNetResource, char8* lpPassword, char8* lpUserName, uint32 dwFlags);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnection3W(HWND hwndOwner, ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserName, uint32 dwFlags);
+		public static extern uint32 WNetAddConnection3W(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserName, uint32 dwFlags);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnection4A(HWND hwndOwner, ref NETRESOURCEA lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, ref uint8 lpUseOptions, uint32 cbUseOptions);
+		public static extern uint32 WNetAddConnection4A(HWnd hwndOwner, ref NETRESOURCEA lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, ref uint8 lpUseOptions, uint32 cbUseOptions);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetAddConnection4W(HWND hwndOwner, ref NETRESOURCEW lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, ref uint8 lpUseOptions, uint32 cbUseOptions);
+		public static extern uint32 WNetAddConnection4W(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, ref uint8 lpUseOptions, uint32 cbUseOptions);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetCancelConnectionA(PSTR lpName, BOOL fForce);
+		public static extern uint32 WNetCancelConnectionA(char8* lpName, IntBool fForce);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetCancelConnectionW(PWSTR lpName, BOOL fForce);
+		public static extern uint32 WNetCancelConnectionW(char16* lpName, IntBool fForce);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetCancelConnection2A(PSTR lpName, uint32 dwFlags, BOOL fForce);
+		public static extern uint32 WNetCancelConnection2A(char8* lpName, uint32 dwFlags, IntBool fForce);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetCancelConnection2W(PWSTR lpName, uint32 dwFlags, BOOL fForce);
+		public static extern uint32 WNetCancelConnection2W(char16* lpName, uint32 dwFlags, IntBool fForce);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetConnectionA(PSTR lpLocalName, uint8* lpRemoteName, out uint32 lpnLength);
+		public static extern uint32 WNetGetConnectionA(char8* lpLocalName, uint8* lpRemoteName, out uint32 lpnLength);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetConnectionW(PWSTR lpLocalName, char16* lpRemoteName, out uint32 lpnLength);
+		public static extern uint32 WNetGetConnectionW(char16* lpLocalName, char16* lpRemoteName, out uint32 lpnLength);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetUseConnectionA(HWND hwndOwner, ref NETRESOURCEA lpNetResource, PSTR lpPassword, PSTR lpUserId, NET_USE_CONNECT_FLAGS dwFlags, uint8* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
+		public static extern uint32 WNetUseConnectionA(HWnd hwndOwner, ref NETRESOURCEA lpNetResource, char8* lpPassword, char8* lpUserId, NET_USE_CONNECT_FLAGS dwFlags, uint8* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetUseConnectionW(HWND hwndOwner, ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserId, NET_USE_CONNECT_FLAGS dwFlags, char16* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
+		public static extern uint32 WNetUseConnectionW(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserId, NET_USE_CONNECT_FLAGS dwFlags, char16* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetUseConnection4A(HWND hwndOwner, ref NETRESOURCEA lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions, uint8* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
+		public static extern uint32 WNetUseConnection4A(HWnd hwndOwner, ref NETRESOURCEA lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions, uint8* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetUseConnection4W(HWND hwndOwner, ref NETRESOURCEW lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions, char16* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
+		public static extern uint32 WNetUseConnection4W(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, void* pAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions, char16* lpAccessName, uint32* lpBufferSize, uint32* lpResult);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetConnectionDialog(HWND hwnd, uint32 dwType);
+		public static extern uint32 WNetConnectionDialog(HWnd hwnd, uint32 dwType);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetDisconnectDialog(HWND hwnd, uint32 dwType);
+		public static extern uint32 WNetDisconnectDialog(HWnd hwnd, uint32 dwType);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetConnectionDialog1A(out CONNECTDLGSTRUCTA lpConnDlgStruct);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
@@ -398,35 +400,35 @@ namespace Win32
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetOpenEnumW(NET_RESOURCE_SCOPE dwScope, NET_RESOURCE_TYPE dwType, WNET_OPEN_ENUM_USAGE dwUsage, NETRESOURCEW* lpNetResource, out NetEnumHandle lphEnum);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetEnumResourceA(HANDLE hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 WNetEnumResourceA(Handle hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetEnumResourceW(HANDLE hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 WNetEnumResourceW(Handle hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetCloseEnum(HANDLE hEnum);
+		public static extern uint32 WNetCloseEnum(Handle hEnum);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetGetResourceParentA(ref NETRESOURCEA lpNetResource, void* lpBuffer, out uint32 lpcbBuffer);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetGetResourceParentW(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpcbBuffer);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetResourceInformationA(ref NETRESOURCEA lpNetResource, void* lpBuffer, out uint32 lpcbBuffer, out PSTR lplpSystem);
+		public static extern uint32 WNetGetResourceInformationA(ref NETRESOURCEA lpNetResource, void* lpBuffer, out uint32 lpcbBuffer, out char8* lplpSystem);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetResourceInformationW(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpcbBuffer, out PWSTR lplpSystem);
+		public static extern uint32 WNetGetResourceInformationW(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpcbBuffer, out char16* lplpSystem);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetUniversalNameA(PSTR lpLocalPath, UNC_INFO_LEVEL dwInfoLevel, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 WNetGetUniversalNameA(char8* lpLocalPath, UNC_INFO_LEVEL dwInfoLevel, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetUniversalNameW(PWSTR lpLocalPath, UNC_INFO_LEVEL dwInfoLevel, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 WNetGetUniversalNameW(char16* lpLocalPath, UNC_INFO_LEVEL dwInfoLevel, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetUserA(PSTR lpName, uint8* lpUserName, out uint32 lpnLength);
+		public static extern uint32 WNetGetUserA(char8* lpName, uint8* lpUserName, out uint32 lpnLength);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetUserW(PWSTR lpName, char16* lpUserName, out uint32 lpnLength);
+		public static extern uint32 WNetGetUserW(char16* lpName, char16* lpUserName, out uint32 lpnLength);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetGetProviderNameA(uint32 dwNetType, uint8* lpProviderName, out uint32 lpBufferSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetGetProviderNameW(uint32 dwNetType, char16* lpProviderName, out uint32 lpBufferSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetNetworkInformationA(PSTR lpProvider, out NETINFOSTRUCT lpNetInfoStruct);
+		public static extern uint32 WNetGetNetworkInformationA(char8* lpProvider, out NETINFOSTRUCT lpNetInfoStruct);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WNetGetNetworkInformationW(PWSTR lpProvider, out NETINFOSTRUCT lpNetInfoStruct);
+		public static extern uint32 WNetGetNetworkInformationW(char16* lpProvider, out NETINFOSTRUCT lpNetInfoStruct);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WNetGetLastErrorA(out uint32 lpError, uint8* lpErrorBuf, uint32 nErrorBufSize, uint8* lpNameBuf, uint32 nNameBufSize);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
@@ -436,44 +438,44 @@ namespace Win32
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MultinetGetConnectionPerformanceW(ref NETRESOURCEW lpNetResource, out NETCONNECTINFOSTRUCT lpNetConnectInfoStruct);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPAddConnection(ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserName);
+		public static extern uint32 NPAddConnection(ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserName);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPAddConnection3(HWND hwndOwner, ref NETRESOURCEW lpNetResource, PWSTR lpPassword, PWSTR lpUserName, NET_USE_CONNECT_FLAGS dwFlags);
+		public static extern uint32 NPAddConnection3(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, char16* lpPassword, char16* lpUserName, NET_USE_CONNECT_FLAGS dwFlags);
 		[Import("ntlanman.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPAddConnection4(HWND hwndOwner, ref NETRESOURCEW lpNetResource, void* lpAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions);
+		public static extern uint32 NPAddConnection4(HWnd hwndOwner, ref NETRESOURCEW lpNetResource, void* lpAuthBuffer, uint32 cbAuthBuffer, uint32 dwFlags, uint8* lpUseOptions, uint32 cbUseOptions);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPCancelConnection(PWSTR lpName, BOOL fForce);
+		public static extern uint32 NPCancelConnection(char16* lpName, IntBool fForce);
 		[Import("ntlanman.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPCancelConnection2(PWSTR lpName, BOOL fForce, uint32 dwFlags);
+		public static extern uint32 NPCancelConnection2(char16* lpName, IntBool fForce, uint32 dwFlags);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetConnection(PWSTR lpLocalName, char16* lpRemoteName, out uint32 lpnBufferLen);
+		public static extern uint32 NPGetConnection(char16* lpLocalName, char16* lpRemoteName, out uint32 lpnBufferLen);
 		[Import("ntlanman.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetConnection3(PWSTR lpLocalName, uint32 dwLevel, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 NPGetConnection3(char16* lpLocalName, uint32 dwLevel, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetUniversalName(PWSTR lpLocalPath, UNC_INFO_LEVEL dwInfoLevel, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 NPGetUniversalName(char16* lpLocalPath, UNC_INFO_LEVEL dwInfoLevel, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("ntlanman.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetConnectionPerformance(PWSTR lpRemoteName, out NETCONNECTINFOSTRUCT lpNetConnectInfo);
+		public static extern uint32 NPGetConnectionPerformance(char16* lpRemoteName, out NETCONNECTINFOSTRUCT lpNetConnectInfo);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPOpenEnum(uint32 dwScope, uint32 dwType, uint32 dwUsage, NETRESOURCEW* lpNetResource, out HANDLE lphEnum);
+		public static extern uint32 NPOpenEnum(uint32 dwScope, uint32 dwType, uint32 dwUsage, NETRESOURCEW* lpNetResource, out Handle lphEnum);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPEnumResource(HANDLE hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
+		public static extern uint32 NPEnumResource(Handle hEnum, out uint32 lpcCount, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPCloseEnum(HANDLE hEnum);
+		public static extern uint32 NPCloseEnum(Handle hEnum);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NPGetCaps(uint32 ndex);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetUser(PWSTR lpName, char16* lpUserName, out uint32 lpnBufferLen);
+		public static extern uint32 NPGetUser(char16* lpName, char16* lpUserName, out uint32 lpnBufferLen);
 		[Import("ntlanman.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetPersistentUseOptionsForConnection(PWSTR lpRemotePath, uint8* lpReadUseOptions, uint32 cbReadUseOptions, out uint8 lpWriteUseOptions, out uint32 lpSizeWriteUseOptions);
+		public static extern uint32 NPGetPersistentUseOptionsForConnection(char16* lpRemotePath, uint8* lpReadUseOptions, uint32 cbReadUseOptions, out uint8 lpWriteUseOptions, out uint32 lpSizeWriteUseOptions);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NPGetResourceParent(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpBufferSize);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPGetResourceInformation(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpBufferSize, out PWSTR lplpSystem);
+		public static extern uint32 NPGetResourceInformation(ref NETRESOURCEW lpNetResource, void* lpBuffer, out uint32 lpBufferSize, out char16* lplpSystem);
 		[Import("davclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NPFormatNetworkName(PWSTR lpRemoteName, char16* lpFormattedName, out uint32 lpnLength, NETWORK_NAME_FORMAT_FLAGS dwFlags, uint32 dwAveCharPerLine);
+		public static extern uint32 NPFormatNetworkName(char16* lpRemoteName, char16* lpFormattedName, out uint32 lpnLength, NETWORK_NAME_FORMAT_FLAGS dwFlags, uint32 dwAveCharPerLine);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WNetSetLastErrorA(uint32 err, PSTR lpError, PSTR lpProviders);
+		public static extern void WNetSetLastErrorA(uint32 err, char8* lpError, char8* lpProviders);
 		[Import("mpr.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WNetSetLastErrorW(uint32 err, PWSTR lpError, PWSTR lpProviders);
+		public static extern void WNetSetLastErrorW(uint32 err, char16* lpError, char16* lpProviders);
 	}
 }

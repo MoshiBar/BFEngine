@@ -1278,8 +1278,8 @@ namespace Win32
 		public function void FWPM_CALLOUT_CHANGE_CALLBACK0(void* context, in FWPM_CALLOUT_CHANGE0 change);
 		public function void FWPM_FILTER_CHANGE_CALLBACK0(void* context, in FWPM_FILTER_CHANGE0 change);
 		public function void IPSEC_SA_CONTEXT_CALLBACK0(void* context, in IPSEC_SA_CONTEXT_CHANGE0 change);
-		public function void IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0(in IKEEXT_TRAFFIC0 ikeTraffic, out BOOL willDictateKey, out uint32 weight);
-		public function uint32 IPSEC_KEY_MANAGER_DICTATE_KEY0(out IPSEC_SA_DETAILS1 inboundSaDetails, out IPSEC_SA_DETAILS1 outboundSaDetails, out BOOL keyingModuleGenKey);
+		public function void IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0(in IKEEXT_TRAFFIC0 ikeTraffic, out IntBool willDictateKey, out uint32 weight);
+		public function uint32 IPSEC_KEY_MANAGER_DICTATE_KEY0(out IPSEC_SA_DETAILS1 inboundSaDetails, out IPSEC_SA_DETAILS1 outboundSaDetails, out IntBool keyingModuleGenKey);
 		public function void IPSEC_KEY_MANAGER_NOTIFY_KEY0(in IPSEC_SA_DETAILS1 inboundSa, in IPSEC_SA_DETAILS1 outboundSa);
 		public function void FWPM_NET_EVENT_CALLBACK0(void* context, in FWPM_NET_EVENT1 event);
 		public function void FWPM_NET_EVENT_CALLBACK1(void* context, in FWPM_NET_EVENT2 event);
@@ -1342,7 +1342,7 @@ namespace Win32
 				public FWP_BYTE_BLOB* sd;
 				public FWP_TOKEN_INFORMATION* tokenInformation;
 				public FWP_BYTE_BLOB* tokenAccessInformation;
-				public PWSTR unicodeString;
+				public char16* unicodeString;
 				public FWP_BYTE_ARRAY6* byteArray6;
 			}
 		}
@@ -1389,7 +1389,7 @@ namespace Win32
 				public FWP_BYTE_BLOB* sd;
 				public FWP_TOKEN_INFORMATION* tokenInformation;
 				public FWP_BYTE_BLOB* tokenAccessInformation;
-				public PWSTR unicodeString;
+				public char16* unicodeString;
 				public FWP_BYTE_ARRAY6* byteArray6;
 				public FWP_V4_ADDR_AND_MASK* v4AddrMask;
 				public FWP_V6_ADDR_AND_MASK* v6AddrMask;
@@ -1399,8 +1399,8 @@ namespace Win32
 		[CRepr]
 		public struct FWPM_DISPLAY_DATA0
 		{
-			public PWSTR name;
-			public PWSTR description;
+			public char16* name;
+			public char16* description;
 		}
 		[CRepr]
 		public struct IPSEC_VIRTUAL_IF_TUNNEL_INFO0
@@ -1512,7 +1512,7 @@ namespace Win32
 		public struct IKEEXT_CERT_NAME0
 		{
 			public IKEEXT_CERT_CRITERIA_NAME_TYPE nameType;
-			public PWSTR certName;
+			public char16* certName;
 		}
 		[CRepr]
 		public struct IKEEXT_CERTIFICATE_CRITERIA0
@@ -1589,8 +1589,8 @@ namespace Win32
 		[CRepr]
 		public struct IKEEXT_IPV6_CGA_AUTHENTICATION0
 		{
-			public PWSTR keyContainerName;
-			public PWSTR cspName;
+			public char16* keyContainerName;
+			public char16* cspName;
 			public uint32 cspType;
 			public FWP_BYTE_ARRAY16 cgaModifier;
 			public uint8 cgaCollisionCount;
@@ -1604,7 +1604,7 @@ namespace Win32
 		public struct IKEEXT_KERBEROS_AUTHENTICATION1
 		{
 			public IKEEXT_KERBEROS_AUTHENTICATION_FLAGS flags;
-			public PWSTR proxyServer;
+			public char16* proxyServer;
 		}
 		[CRepr]
 		public struct IKEEXT_RESERVED_AUTHENTICATION0
@@ -1901,7 +1901,7 @@ namespace Win32
 		[CRepr]
 		public struct IKEEXT_NAME_CREDENTIAL0
 		{
-			public PWSTR principalName;
+			public char16* principalName;
 		}
 		[CRepr]
 		public struct IKEEXT_CREDENTIAL0
@@ -2230,7 +2230,7 @@ namespace Win32
 			public _Anonymous1_e__Union Anonymous1;
 			public _Anonymous2_e__Union Anonymous2;
 			public uint64 localIfLuid;
-			public PWSTR remoteFqdn;
+			public char16* remoteFqdn;
 			public uint32 numAddresses;
 			public IPSEC_TUNNEL_ENDPOINT0* remoteAddresses;
 			
@@ -2474,8 +2474,8 @@ namespace Win32
 		[CRepr]
 		public struct IPSEC_ID0
 		{
-			public PWSTR mmTargetName;
-			public PWSTR emTargetName;
+			public char16* mmTargetName;
+			public char16* emTargetName;
 			public uint32 numTokens;
 			public IPSEC_TOKEN0* tokens;
 			public uint64 explicitCredentials;
@@ -2786,8 +2786,8 @@ namespace Win32
 			public uint32 txnWaitTimeoutInMSec;
 			public uint32 processId;
 			public SID* sid;
-			public PWSTR username;
-			public BOOL kernelMode;
+			public char16* username;
+			public IntBool kernelMode;
 		}
 		[CRepr]
 		public struct FWPM_SESSION_ENUM_TEMPLATE0
@@ -2801,7 +2801,7 @@ namespace Win32
 			public FWPM_DISPLAY_DATA0 displayData;
 			public uint32 flags;
 			public FWP_BYTE_BLOB providerData;
-			public PWSTR serviceName;
+			public char16* serviceName;
 		}
 		[CRepr]
 		public struct FWPM_PROVIDER_ENUM_TEMPLATE0
@@ -3175,7 +3175,7 @@ namespace Win32
 		[CRepr]
 		public struct FWPM_NET_EVENT_HEADER0
 		{
-			public FILETIME timeStamp;
+			public FileTime timeStamp;
 			public uint32 flags;
 			public FWP_IP_VERSION ipVersion;
 			public uint8 ipProtocol;
@@ -3203,7 +3203,7 @@ namespace Win32
 		[CRepr]
 		public struct FWPM_NET_EVENT_HEADER1
 		{
-			public FILETIME timeStamp;
+			public FileTime timeStamp;
 			public uint32 flags;
 			public FWP_IP_VERSION ipVersion;
 			public uint8 ipProtocol;
@@ -3264,7 +3264,7 @@ namespace Win32
 		[CRepr]
 		public struct FWPM_NET_EVENT_HEADER2
 		{
-			public FILETIME timeStamp;
+			public FileTime timeStamp;
 			public uint32 flags;
 			public FWP_IP_VERSION ipVersion;
 			public uint8 ipProtocol;
@@ -3294,7 +3294,7 @@ namespace Win32
 		[CRepr]
 		public struct FWPM_NET_EVENT_HEADER3
 		{
-			public FILETIME timeStamp;
+			public FileTime timeStamp;
 			public uint32 flags;
 			public FWP_IP_VERSION ipVersion;
 			public uint8 ipProtocol;
@@ -3307,7 +3307,7 @@ namespace Win32
 			public SID* userId;
 			public FWP_AF addressFamily;
 			public SID* packageSid;
-			public PWSTR enterpriseId;
+			public char16* enterpriseId;
 			public uint64 policyFlags;
 			public FWP_BYTE_BLOB effectiveName;
 			
@@ -3351,12 +3351,12 @@ namespace Win32
 			public uint8[20] endCertHash;
 			public uint64 mmId;
 			public uint64 mmFilterId;
-			public PWSTR localPrincipalNameForAuth;
-			public PWSTR remotePrincipalNameForAuth;
+			public char16* localPrincipalNameForAuth;
+			public char16* remotePrincipalNameForAuth;
 			public uint32 numLocalPrincipalGroupSids;
-			public PWSTR* localPrincipalGroupSids;
+			public char16** localPrincipalGroupSids;
 			public uint32 numRemotePrincipalGroupSids;
-			public PWSTR* remotePrincipalGroupSids;
+			public char16** remotePrincipalGroupSids;
 		}
 		[CRepr]
 		public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_
@@ -3371,12 +3371,12 @@ namespace Win32
 			public uint8[20] endCertHash;
 			public uint64 mmId;
 			public uint64 mmFilterId;
-			public PWSTR localPrincipalNameForAuth;
-			public PWSTR remotePrincipalNameForAuth;
+			public char16* localPrincipalNameForAuth;
+			public char16* remotePrincipalNameForAuth;
 			public uint32 numLocalPrincipalGroupSids;
-			public PWSTR* localPrincipalGroupSids;
+			public char16** localPrincipalGroupSids;
 			public uint32 numRemotePrincipalGroupSids;
-			public PWSTR* remotePrincipalGroupSids;
+			public char16** remotePrincipalGroupSids;
 			public Guid* providerContextKey;
 		}
 		[CRepr]
@@ -3454,12 +3454,12 @@ namespace Win32
 			public uint8[20] endCertHash;
 			public uint64 mmId;
 			public uint64 qmFilterId;
-			public PWSTR localPrincipalNameForAuth;
-			public PWSTR remotePrincipalNameForAuth;
+			public char16* localPrincipalNameForAuth;
+			public char16* remotePrincipalNameForAuth;
 			public uint32 numLocalPrincipalGroupSids;
-			public PWSTR* localPrincipalGroupSids;
+			public char16** localPrincipalGroupSids;
 			public uint32 numRemotePrincipalGroupSids;
-			public PWSTR* remotePrincipalGroupSids;
+			public char16** remotePrincipalGroupSids;
 			public IPSEC_TRAFFIC_TYPE saTrafficType;
 		}
 		[CRepr]
@@ -3477,7 +3477,7 @@ namespace Win32
 			public uint32 originalProfile;
 			public uint32 currentProfile;
 			public uint32 msFwpDirection;
-			public BOOL isLoopback;
+			public IntBool isLoopback;
 		}
 		[CRepr]
 		public struct FWPM_NET_EVENT_CLASSIFY_DROP2
@@ -3488,7 +3488,7 @@ namespace Win32
 			public uint32 originalProfile;
 			public uint32 currentProfile;
 			public uint32 msFwpDirection;
-			public BOOL isLoopback;
+			public IntBool isLoopback;
 			public FWP_BYTE_BLOB vSwitchId;
 			public uint32 vSwitchSourcePort;
 			public uint32 vSwitchDestinationPort;
@@ -3511,7 +3511,7 @@ namespace Win32
 			public uint32 originalProfile;
 			public uint32 currentProfile;
 			public uint32 msFwpDirection;
-			public BOOL isLoopback;
+			public IntBool isLoopback;
 			public FWP_BYTE_BLOB vSwitchId;
 			public uint32 vSwitchSourcePort;
 			public uint32 vSwitchDestinationPort;
@@ -3525,7 +3525,7 @@ namespace Win32
 			public uint32 originalProfile;
 			public uint32 currentProfile;
 			public uint32 msFwpDirection;
-			public BOOL isLoopback;
+			public IntBool isLoopback;
 		}
 		[CRepr]
 		public struct FWPM_NET_EVENT_IPSEC_KERNEL_DROP0
@@ -3563,14 +3563,14 @@ namespace Win32
 		{
 			public FWPM_APPC_NETWORK_CAPABILITY_TYPE networkCapabilityId;
 			public uint64 filterId;
-			public BOOL isLoopback;
+			public IntBool isLoopback;
 		}
 		[CRepr]
 		public struct FWPM_NET_EVENT_CAPABILITY_ALLOW0
 		{
 			public FWPM_APPC_NETWORK_CAPABILITY_TYPE networkCapabilityId;
 			public uint64 filterId;
-			public BOOL isLoopback;
+			public IntBool isLoopback;
 		}
 		[CRepr]
 		public struct FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_
@@ -3705,8 +3705,8 @@ namespace Win32
 		[CRepr]
 		public struct FWPM_NET_EVENT_ENUM_TEMPLATE0
 		{
-			public FILETIME startTime;
-			public FILETIME endTime;
+			public FileTime startTime;
+			public FileTime endTime;
 			public uint32 numFilterConditions;
 			public FWPM_FILTER_CONDITION0* filterCondition;
 		}
@@ -3746,7 +3746,7 @@ namespace Win32
 			public uint64 bytesTransferredIn;
 			public uint64 bytesTransferredOut;
 			public uint64 bytesTransferredTotal;
-			public FILETIME startSysTime;
+			public FileTime startSysTime;
 			
 			[CRepr, Union]
 			public struct _Anonymous1_e__Union
@@ -3778,7 +3778,7 @@ namespace Win32
 		public struct FWPM_VSWITCH_EVENT0
 		{
 			public FWPM_VSWITCH_EVENT_TYPE eventType;
-			public PWSTR vSwitchId;
+			public char16* vSwitchId;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -3790,15 +3790,15 @@ namespace Win32
 				[CRepr]
 				public struct _reorderInfo_e__Struct
 				{
-					public BOOL inRequiredPosition;
+					public IntBool inRequiredPosition;
 					public uint32 numvSwitchFilterExtensions;
-					public PWSTR* vSwitchFilterExtensions;
+					public char16** vSwitchFilterExtensions;
 				}
 				[CRepr]
 				public struct _positionInfo_e__Struct
 				{
 					public uint32 numvSwitchFilterExtensions;
-					public PWSTR* vSwitchFilterExtensions;
+					public char16** vSwitchFilterExtensions;
 				}
 			}
 		}
@@ -4598,374 +4598,374 @@ namespace Win32
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void FwpmFreeMemory0(void** p);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmEngineOpen0(PWSTR serverName, uint32 authnService, SEC_WINNT_AUTH_IDENTITY_W* authIdentity, FWPM_SESSION0* session, out HANDLE engineHandle);
+		public static extern uint32 FwpmEngineOpen0(char16* serverName, uint32 authnService, SEC_WINNT_AUTH_IDENTITY_W* authIdentity, FWPM_SESSION0* session, out Handle engineHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmEngineClose0(HANDLE engineHandle);
+		public static extern uint32 FwpmEngineClose0(Handle engineHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmEngineGetOption0(HANDLE engineHandle, FWPM_ENGINE_OPTION option, out FWP_VALUE0* value);
+		public static extern uint32 FwpmEngineGetOption0(Handle engineHandle, FWPM_ENGINE_OPTION option, out FWP_VALUE0* value);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmEngineSetOption0(HANDLE engineHandle, FWPM_ENGINE_OPTION option, in FWP_VALUE0 newValue);
+		public static extern uint32 FwpmEngineSetOption0(Handle engineHandle, FWPM_ENGINE_OPTION option, in FWP_VALUE0 newValue);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmEngineGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmEngineGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmEngineSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmEngineSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSessionCreateEnumHandle0(HANDLE engineHandle, FWPM_SESSION_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmSessionCreateEnumHandle0(Handle engineHandle, FWPM_SESSION_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSessionEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_SESSION0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmSessionEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_SESSION0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSessionDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmSessionDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmTransactionBegin0(HANDLE engineHandle, uint32 flags);
+		public static extern uint32 FwpmTransactionBegin0(Handle engineHandle, uint32 flags);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmTransactionCommit0(HANDLE engineHandle);
+		public static extern uint32 FwpmTransactionCommit0(Handle engineHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmTransactionAbort0(HANDLE engineHandle);
+		public static extern uint32 FwpmTransactionAbort0(Handle engineHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderAdd0(HANDLE engineHandle, in FWPM_PROVIDER0 provider, SECURITY_DESCRIPTOR* sd);
+		public static extern uint32 FwpmProviderAdd0(Handle engineHandle, in FWPM_PROVIDER0 provider, SECURITY_DESCRIPTOR* sd);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderDeleteByKey0(HANDLE engineHandle, in Guid key);
+		public static extern uint32 FwpmProviderDeleteByKey0(Handle engineHandle, in Guid key);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderGetByKey0(HANDLE engineHandle, in Guid key, out FWPM_PROVIDER0* provider);
+		public static extern uint32 FwpmProviderGetByKey0(Handle engineHandle, in Guid key, out FWPM_PROVIDER0* provider);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderCreateEnumHandle0(HANDLE engineHandle, FWPM_PROVIDER_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmProviderCreateEnumHandle0(Handle engineHandle, FWPM_PROVIDER_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmProviderEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmProviderDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderGetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmProviderGetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderSetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmProviderSetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderSubscribeChanges0(HANDLE engineHandle, in FWPM_PROVIDER_SUBSCRIPTION0 subscription, FWPM_PROVIDER_CHANGE_CALLBACK0 callback, void* context, out HANDLE changeHandle);
+		public static extern uint32 FwpmProviderSubscribeChanges0(Handle engineHandle, in FWPM_PROVIDER_SUBSCRIPTION0 subscription, FWPM_PROVIDER_CHANGE_CALLBACK0 callback, void* context, out Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderUnsubscribeChanges0(HANDLE engineHandle, HANDLE changeHandle);
+		public static extern uint32 FwpmProviderUnsubscribeChanges0(Handle engineHandle, Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderSubscriptionsGet0(HANDLE engineHandle, out FWPM_PROVIDER_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 FwpmProviderSubscriptionsGet0(Handle engineHandle, out FWPM_PROVIDER_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextAdd0(HANDLE engineHandle, in FWPM_PROVIDER_CONTEXT0 providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
+		public static extern uint32 FwpmProviderContextAdd0(Handle engineHandle, in FWPM_PROVIDER_CONTEXT0 providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextAdd1(HANDLE engineHandle, in FWPM_PROVIDER_CONTEXT1 providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
+		public static extern uint32 FwpmProviderContextAdd1(Handle engineHandle, in FWPM_PROVIDER_CONTEXT1 providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextAdd2(HANDLE engineHandle, in FWPM_PROVIDER_CONTEXT2 providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
+		public static extern uint32 FwpmProviderContextAdd2(Handle engineHandle, in FWPM_PROVIDER_CONTEXT2 providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextAdd3(HANDLE engineHandle, in FWPM_PROVIDER_CONTEXT3_ providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
+		public static extern uint32 FwpmProviderContextAdd3(Handle engineHandle, in FWPM_PROVIDER_CONTEXT3_ providerContext, SECURITY_DESCRIPTOR* sd, uint64* id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextDeleteById0(HANDLE engineHandle, uint64 id);
+		public static extern uint32 FwpmProviderContextDeleteById0(Handle engineHandle, uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextDeleteByKey0(HANDLE engineHandle, in Guid key);
+		public static extern uint32 FwpmProviderContextDeleteByKey0(Handle engineHandle, in Guid key);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetById0(HANDLE engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT0* providerContext);
+		public static extern uint32 FwpmProviderContextGetById0(Handle engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT0* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetById1(HANDLE engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT1* providerContext);
+		public static extern uint32 FwpmProviderContextGetById1(Handle engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT1* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetById2(HANDLE engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT2* providerContext);
+		public static extern uint32 FwpmProviderContextGetById2(Handle engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT2* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetById3(HANDLE engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT3_* providerContext);
+		public static extern uint32 FwpmProviderContextGetById3(Handle engineHandle, uint64 id, out FWPM_PROVIDER_CONTEXT3_* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetByKey0(HANDLE engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT0* providerContext);
+		public static extern uint32 FwpmProviderContextGetByKey0(Handle engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT0* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetByKey1(HANDLE engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT1* providerContext);
+		public static extern uint32 FwpmProviderContextGetByKey1(Handle engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT1* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetByKey2(HANDLE engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT2* providerContext);
+		public static extern uint32 FwpmProviderContextGetByKey2(Handle engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT2* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetByKey3(HANDLE engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT3_* providerContext);
+		public static extern uint32 FwpmProviderContextGetByKey3(Handle engineHandle, in Guid key, out FWPM_PROVIDER_CONTEXT3_* providerContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextCreateEnumHandle0(HANDLE engineHandle, FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmProviderContextCreateEnumHandle0(Handle engineHandle, FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmProviderContextEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextEnum1(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT1** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmProviderContextEnum1(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT1** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextEnum2(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT2** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmProviderContextEnum2(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT2** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextEnum3(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT3_** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmProviderContextEnum3(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_PROVIDER_CONTEXT3_** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmProviderContextDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextGetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmProviderContextGetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextSetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmProviderContextSetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextSubscribeChanges0(HANDLE engineHandle, in FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0 subscription, FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 callback, void* context, out HANDLE changeHandle);
+		public static extern uint32 FwpmProviderContextSubscribeChanges0(Handle engineHandle, in FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0 subscription, FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 callback, void* context, out Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextUnsubscribeChanges0(HANDLE engineHandle, HANDLE changeHandle);
+		public static extern uint32 FwpmProviderContextUnsubscribeChanges0(Handle engineHandle, Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmProviderContextSubscriptionsGet0(HANDLE engineHandle, out FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 FwpmProviderContextSubscriptionsGet0(Handle engineHandle, out FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerAdd0(HANDLE engineHandle, in FWPM_SUBLAYER0 subLayer, SECURITY_DESCRIPTOR* sd);
+		public static extern uint32 FwpmSubLayerAdd0(Handle engineHandle, in FWPM_SUBLAYER0 subLayer, SECURITY_DESCRIPTOR* sd);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerDeleteByKey0(HANDLE engineHandle, in Guid key);
+		public static extern uint32 FwpmSubLayerDeleteByKey0(Handle engineHandle, in Guid key);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerGetByKey0(HANDLE engineHandle, in Guid key, out FWPM_SUBLAYER0* subLayer);
+		public static extern uint32 FwpmSubLayerGetByKey0(Handle engineHandle, in Guid key, out FWPM_SUBLAYER0* subLayer);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerCreateEnumHandle0(HANDLE engineHandle, FWPM_SUBLAYER_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmSubLayerCreateEnumHandle0(Handle engineHandle, FWPM_SUBLAYER_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_SUBLAYER0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmSubLayerEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_SUBLAYER0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmSubLayerDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerGetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmSubLayerGetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerSetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmSubLayerSetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerSubscribeChanges0(HANDLE engineHandle, in FWPM_SUBLAYER_SUBSCRIPTION0 subscription, FWPM_SUBLAYER_CHANGE_CALLBACK0 callback, void* context, out HANDLE changeHandle);
+		public static extern uint32 FwpmSubLayerSubscribeChanges0(Handle engineHandle, in FWPM_SUBLAYER_SUBSCRIPTION0 subscription, FWPM_SUBLAYER_CHANGE_CALLBACK0 callback, void* context, out Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerUnsubscribeChanges0(HANDLE engineHandle, HANDLE changeHandle);
+		public static extern uint32 FwpmSubLayerUnsubscribeChanges0(Handle engineHandle, Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSubLayerSubscriptionsGet0(HANDLE engineHandle, out FWPM_SUBLAYER_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 FwpmSubLayerSubscriptionsGet0(Handle engineHandle, out FWPM_SUBLAYER_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerGetById0(HANDLE engineHandle, uint16 id, out FWPM_LAYER0* layer);
+		public static extern uint32 FwpmLayerGetById0(Handle engineHandle, uint16 id, out FWPM_LAYER0* layer);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerGetByKey0(HANDLE engineHandle, in Guid key, out FWPM_LAYER0* layer);
+		public static extern uint32 FwpmLayerGetByKey0(Handle engineHandle, in Guid key, out FWPM_LAYER0* layer);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerCreateEnumHandle0(HANDLE engineHandle, FWPM_LAYER_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmLayerCreateEnumHandle0(Handle engineHandle, FWPM_LAYER_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_LAYER0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmLayerEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_LAYER0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmLayerDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerGetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmLayerGetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmLayerSetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmLayerSetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutAdd0(HANDLE engineHandle, in FWPM_CALLOUT0 callout, SECURITY_DESCRIPTOR* sd, uint32* id);
+		public static extern uint32 FwpmCalloutAdd0(Handle engineHandle, in FWPM_CALLOUT0 callout, SECURITY_DESCRIPTOR* sd, uint32* id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutDeleteById0(HANDLE engineHandle, uint32 id);
+		public static extern uint32 FwpmCalloutDeleteById0(Handle engineHandle, uint32 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutDeleteByKey0(HANDLE engineHandle, in Guid key);
+		public static extern uint32 FwpmCalloutDeleteByKey0(Handle engineHandle, in Guid key);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutGetById0(HANDLE engineHandle, uint32 id, out FWPM_CALLOUT0* callout);
+		public static extern uint32 FwpmCalloutGetById0(Handle engineHandle, uint32 id, out FWPM_CALLOUT0* callout);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutGetByKey0(HANDLE engineHandle, in Guid key, out FWPM_CALLOUT0* callout);
+		public static extern uint32 FwpmCalloutGetByKey0(Handle engineHandle, in Guid key, out FWPM_CALLOUT0* callout);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutCreateEnumHandle0(HANDLE engineHandle, FWPM_CALLOUT_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmCalloutCreateEnumHandle0(Handle engineHandle, FWPM_CALLOUT_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_CALLOUT0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmCalloutEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_CALLOUT0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmCalloutDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutGetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmCalloutGetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutSetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmCalloutSetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutSubscribeChanges0(HANDLE engineHandle, in FWPM_CALLOUT_SUBSCRIPTION0 subscription, FWPM_CALLOUT_CHANGE_CALLBACK0 callback, void* context, out HANDLE changeHandle);
+		public static extern uint32 FwpmCalloutSubscribeChanges0(Handle engineHandle, in FWPM_CALLOUT_SUBSCRIPTION0 subscription, FWPM_CALLOUT_CHANGE_CALLBACK0 callback, void* context, out Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutUnsubscribeChanges0(HANDLE engineHandle, HANDLE changeHandle);
+		public static extern uint32 FwpmCalloutUnsubscribeChanges0(Handle engineHandle, Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmCalloutSubscriptionsGet0(HANDLE engineHandle, out FWPM_CALLOUT_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 FwpmCalloutSubscriptionsGet0(Handle engineHandle, out FWPM_CALLOUT_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterAdd0(HANDLE engineHandle, in FWPM_FILTER0 filter, SECURITY_DESCRIPTOR* sd, uint64* id);
+		public static extern uint32 FwpmFilterAdd0(Handle engineHandle, in FWPM_FILTER0 filter, SECURITY_DESCRIPTOR* sd, uint64* id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterDeleteById0(HANDLE engineHandle, uint64 id);
+		public static extern uint32 FwpmFilterDeleteById0(Handle engineHandle, uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterDeleteByKey0(HANDLE engineHandle, in Guid key);
+		public static extern uint32 FwpmFilterDeleteByKey0(Handle engineHandle, in Guid key);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterGetById0(HANDLE engineHandle, uint64 id, out FWPM_FILTER0* filter);
+		public static extern uint32 FwpmFilterGetById0(Handle engineHandle, uint64 id, out FWPM_FILTER0* filter);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterGetByKey0(HANDLE engineHandle, in Guid key, out FWPM_FILTER0* filter);
+		public static extern uint32 FwpmFilterGetByKey0(Handle engineHandle, in Guid key, out FWPM_FILTER0* filter);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterCreateEnumHandle0(HANDLE engineHandle, FWPM_FILTER_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmFilterCreateEnumHandle0(Handle engineHandle, FWPM_FILTER_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_FILTER0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmFilterEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_FILTER0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmFilterDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterGetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmFilterGetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterSetSecurityInfoByKey0(HANDLE engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmFilterSetSecurityInfoByKey0(Handle engineHandle, Guid* key, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterSubscribeChanges0(HANDLE engineHandle, in FWPM_FILTER_SUBSCRIPTION0 subscription, FWPM_FILTER_CHANGE_CALLBACK0 callback, void* context, out HANDLE changeHandle);
+		public static extern uint32 FwpmFilterSubscribeChanges0(Handle engineHandle, in FWPM_FILTER_SUBSCRIPTION0 subscription, FWPM_FILTER_CHANGE_CALLBACK0 callback, void* context, out Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterUnsubscribeChanges0(HANDLE engineHandle, HANDLE changeHandle);
+		public static extern uint32 FwpmFilterUnsubscribeChanges0(Handle engineHandle, Handle changeHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmFilterSubscriptionsGet0(HANDLE engineHandle, out FWPM_FILTER_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 FwpmFilterSubscriptionsGet0(Handle engineHandle, out FWPM_FILTER_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmGetAppIdFromFileName0(PWSTR fileName, out FWP_BYTE_BLOB* appId);
+		public static extern uint32 FwpmGetAppIdFromFileName0(char16* fileName, out FWP_BYTE_BLOB* appId);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmIPsecTunnelAdd0(HANDLE engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT0* mainModePolicy, in FWPM_PROVIDER_CONTEXT0 tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, SECURITY_DESCRIPTOR* sd);
+		public static extern uint32 FwpmIPsecTunnelAdd0(Handle engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT0* mainModePolicy, in FWPM_PROVIDER_CONTEXT0 tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, SECURITY_DESCRIPTOR* sd);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmIPsecTunnelAdd1(HANDLE engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT1* mainModePolicy, in FWPM_PROVIDER_CONTEXT1 tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, Guid* keyModKey, SECURITY_DESCRIPTOR* sd);
+		public static extern uint32 FwpmIPsecTunnelAdd1(Handle engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT1* mainModePolicy, in FWPM_PROVIDER_CONTEXT1 tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, Guid* keyModKey, SECURITY_DESCRIPTOR* sd);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmIPsecTunnelAdd2(HANDLE engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT2* mainModePolicy, in FWPM_PROVIDER_CONTEXT2 tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, Guid* keyModKey, SECURITY_DESCRIPTOR* sd);
+		public static extern uint32 FwpmIPsecTunnelAdd2(Handle engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT2* mainModePolicy, in FWPM_PROVIDER_CONTEXT2 tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, Guid* keyModKey, SECURITY_DESCRIPTOR* sd);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmIPsecTunnelAdd3(HANDLE engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT3_* mainModePolicy, in FWPM_PROVIDER_CONTEXT3_ tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, Guid* keyModKey, SECURITY_DESCRIPTOR* sd);
+		public static extern uint32 FwpmIPsecTunnelAdd3(Handle engineHandle, uint32 flags, FWPM_PROVIDER_CONTEXT3_* mainModePolicy, in FWPM_PROVIDER_CONTEXT3_ tunnelPolicy, uint32 numFilterConditions, FWPM_FILTER_CONDITION0* filterConditions, Guid* keyModKey, SECURITY_DESCRIPTOR* sd);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmIPsecTunnelDeleteByKey0(HANDLE engineHandle, in Guid key);
+		public static extern uint32 FwpmIPsecTunnelDeleteByKey0(Handle engineHandle, in Guid key);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecGetStatistics0(HANDLE engineHandle, out IPSEC_STATISTICS0 ipsecStatistics);
+		public static extern uint32 IPsecGetStatistics0(Handle engineHandle, out IPSEC_STATISTICS0 ipsecStatistics);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecGetStatistics1(HANDLE engineHandle, out IPSEC_STATISTICS1 ipsecStatistics);
+		public static extern uint32 IPsecGetStatistics1(Handle engineHandle, out IPSEC_STATISTICS1 ipsecStatistics);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextCreate0(HANDLE engineHandle, in IPSEC_TRAFFIC0 outboundTraffic, uint64* inboundFilterId, out uint64 id);
+		public static extern uint32 IPsecSaContextCreate0(Handle engineHandle, in IPSEC_TRAFFIC0 outboundTraffic, uint64* inboundFilterId, out uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextCreate1(HANDLE engineHandle, in IPSEC_TRAFFIC1 outboundTraffic, IPSEC_VIRTUAL_IF_TUNNEL_INFO0* virtualIfTunnelInfo, uint64* inboundFilterId, out uint64 id);
+		public static extern uint32 IPsecSaContextCreate1(Handle engineHandle, in IPSEC_TRAFFIC1 outboundTraffic, IPSEC_VIRTUAL_IF_TUNNEL_INFO0* virtualIfTunnelInfo, uint64* inboundFilterId, out uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextDeleteById0(HANDLE engineHandle, uint64 id);
+		public static extern uint32 IPsecSaContextDeleteById0(Handle engineHandle, uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextGetById0(HANDLE engineHandle, uint64 id, out IPSEC_SA_CONTEXT0* saContext);
+		public static extern uint32 IPsecSaContextGetById0(Handle engineHandle, uint64 id, out IPSEC_SA_CONTEXT0* saContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextGetById1(HANDLE engineHandle, uint64 id, out IPSEC_SA_CONTEXT1* saContext);
+		public static extern uint32 IPsecSaContextGetById1(Handle engineHandle, uint64 id, out IPSEC_SA_CONTEXT1* saContext);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextGetSpi0(HANDLE engineHandle, uint64 id, in IPSEC_GETSPI0 getSpi, out uint32 inboundSpi);
+		public static extern uint32 IPsecSaContextGetSpi0(Handle engineHandle, uint64 id, in IPSEC_GETSPI0 getSpi, out uint32 inboundSpi);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextGetSpi1(HANDLE engineHandle, uint64 id, in IPSEC_GETSPI1 getSpi, out uint32 inboundSpi);
+		public static extern uint32 IPsecSaContextGetSpi1(Handle engineHandle, uint64 id, in IPSEC_GETSPI1 getSpi, out uint32 inboundSpi);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextSetSpi0(HANDLE engineHandle, uint64 id, in IPSEC_GETSPI1 getSpi, uint32 inboundSpi);
+		public static extern uint32 IPsecSaContextSetSpi0(Handle engineHandle, uint64 id, in IPSEC_GETSPI1 getSpi, uint32 inboundSpi);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextAddInbound0(HANDLE engineHandle, uint64 id, in IPSEC_SA_BUNDLE0 inboundBundle);
+		public static extern uint32 IPsecSaContextAddInbound0(Handle engineHandle, uint64 id, in IPSEC_SA_BUNDLE0 inboundBundle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextAddOutbound0(HANDLE engineHandle, uint64 id, in IPSEC_SA_BUNDLE0 outboundBundle);
+		public static extern uint32 IPsecSaContextAddOutbound0(Handle engineHandle, uint64 id, in IPSEC_SA_BUNDLE0 outboundBundle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextAddInbound1(HANDLE engineHandle, uint64 id, in IPSEC_SA_BUNDLE1 inboundBundle);
+		public static extern uint32 IPsecSaContextAddInbound1(Handle engineHandle, uint64 id, in IPSEC_SA_BUNDLE1 inboundBundle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextAddOutbound1(HANDLE engineHandle, uint64 id, in IPSEC_SA_BUNDLE1 outboundBundle);
+		public static extern uint32 IPsecSaContextAddOutbound1(Handle engineHandle, uint64 id, in IPSEC_SA_BUNDLE1 outboundBundle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextExpire0(HANDLE engineHandle, uint64 id);
+		public static extern uint32 IPsecSaContextExpire0(Handle engineHandle, uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextUpdate0(HANDLE engineHandle, uint64 flags, in IPSEC_SA_CONTEXT1 newValues);
+		public static extern uint32 IPsecSaContextUpdate0(Handle engineHandle, uint64 flags, in IPSEC_SA_CONTEXT1 newValues);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextCreateEnumHandle0(HANDLE engineHandle, IPSEC_SA_CONTEXT_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 IPsecSaContextCreateEnumHandle0(Handle engineHandle, IPSEC_SA_CONTEXT_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IPSEC_SA_CONTEXT0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IPsecSaContextEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IPSEC_SA_CONTEXT0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextEnum1(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IPSEC_SA_CONTEXT1** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IPsecSaContextEnum1(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IPSEC_SA_CONTEXT1** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 IPsecSaContextDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextSubscribe0(HANDLE engineHandle, in IPSEC_SA_CONTEXT_SUBSCRIPTION0 subscription, IPSEC_SA_CONTEXT_CALLBACK0 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 IPsecSaContextSubscribe0(Handle engineHandle, in IPSEC_SA_CONTEXT_SUBSCRIPTION0 subscription, IPSEC_SA_CONTEXT_CALLBACK0 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextUnsubscribe0(HANDLE engineHandle, HANDLE eventsHandle);
+		public static extern uint32 IPsecSaContextUnsubscribe0(Handle engineHandle, Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaContextSubscriptionsGet0(HANDLE engineHandle, out IPSEC_SA_CONTEXT_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 IPsecSaContextSubscriptionsGet0(Handle engineHandle, out IPSEC_SA_CONTEXT_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaCreateEnumHandle0(HANDLE engineHandle, IPSEC_SA_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 IPsecSaCreateEnumHandle0(Handle engineHandle, IPSEC_SA_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IPSEC_SA_DETAILS0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IPsecSaEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IPSEC_SA_DETAILS0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaEnum1(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IPSEC_SA_DETAILS1** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IPsecSaEnum1(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IPSEC_SA_DETAILS1** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 IPsecSaDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaDbGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 IPsecSaDbGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecSaDbSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 IPsecSaDbSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecDospGetStatistics0(HANDLE engineHandle, out IPSEC_DOSP_STATISTICS0 idpStatistics);
+		public static extern uint32 IPsecDospGetStatistics0(Handle engineHandle, out IPSEC_DOSP_STATISTICS0 idpStatistics);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecDospStateCreateEnumHandle0(HANDLE engineHandle, IPSEC_DOSP_STATE_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 IPsecDospStateCreateEnumHandle0(Handle engineHandle, IPSEC_DOSP_STATE_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecDospStateEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IPSEC_DOSP_STATE0** entries, out uint32 numEntries);
+		public static extern uint32 IPsecDospStateEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IPSEC_DOSP_STATE0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecDospStateDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 IPsecDospStateDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecDospGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 IPsecDospGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecDospSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 IPsecDospSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecKeyManagerAddAndRegister0(HANDLE engineHandle, in IPSEC_KEY_MANAGER0 keyManager, in IPSEC_KEY_MANAGER_CALLBACKS0 keyManagerCallbacks, out HANDLE keyMgmtHandle);
+		public static extern uint32 IPsecKeyManagerAddAndRegister0(Handle engineHandle, in IPSEC_KEY_MANAGER0 keyManager, in IPSEC_KEY_MANAGER_CALLBACKS0 keyManagerCallbacks, out Handle keyMgmtHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecKeyManagerUnregisterAndDelete0(HANDLE engineHandle, HANDLE keyMgmtHandle);
+		public static extern uint32 IPsecKeyManagerUnregisterAndDelete0(Handle engineHandle, Handle keyMgmtHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecKeyManagersGet0(HANDLE engineHandle, out IPSEC_KEY_MANAGER0** entries, out uint32 numEntries);
+		public static extern uint32 IPsecKeyManagersGet0(Handle engineHandle, out IPSEC_KEY_MANAGER0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecKeyManagerGetSecurityInfoByKey0(HANDLE engineHandle, void* reserved, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 IPsecKeyManagerGetSecurityInfoByKey0(Handle engineHandle, void* reserved, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IPsecKeyManagerSetSecurityInfoByKey0(HANDLE engineHandle, void* reserved, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 IPsecKeyManagerSetSecurityInfoByKey0(Handle engineHandle, void* reserved, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextGetStatistics0(HANDLE engineHandle, out IKEEXT_STATISTICS0 ikeextStatistics);
+		public static extern uint32 IkeextGetStatistics0(Handle engineHandle, out IKEEXT_STATISTICS0 ikeextStatistics);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextGetStatistics1(HANDLE engineHandle, out IKEEXT_STATISTICS1 ikeextStatistics);
+		public static extern uint32 IkeextGetStatistics1(Handle engineHandle, out IKEEXT_STATISTICS1 ikeextStatistics);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaDeleteById0(HANDLE engineHandle, uint64 id);
+		public static extern uint32 IkeextSaDeleteById0(Handle engineHandle, uint64 id);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaGetById0(HANDLE engineHandle, uint64 id, out IKEEXT_SA_DETAILS0* sa);
+		public static extern uint32 IkeextSaGetById0(Handle engineHandle, uint64 id, out IKEEXT_SA_DETAILS0* sa);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaGetById1(HANDLE engineHandle, uint64 id, Guid* saLookupContext, out IKEEXT_SA_DETAILS1* sa);
+		public static extern uint32 IkeextSaGetById1(Handle engineHandle, uint64 id, Guid* saLookupContext, out IKEEXT_SA_DETAILS1* sa);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaGetById2(HANDLE engineHandle, uint64 id, Guid* saLookupContext, out IKEEXT_SA_DETAILS2* sa);
+		public static extern uint32 IkeextSaGetById2(Handle engineHandle, uint64 id, Guid* saLookupContext, out IKEEXT_SA_DETAILS2* sa);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaCreateEnumHandle0(HANDLE engineHandle, IKEEXT_SA_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 IkeextSaCreateEnumHandle0(Handle engineHandle, IKEEXT_SA_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IKEEXT_SA_DETAILS0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IkeextSaEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IKEEXT_SA_DETAILS0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaEnum1(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IKEEXT_SA_DETAILS1** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IkeextSaEnum1(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IKEEXT_SA_DETAILS1** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaEnum2(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out IKEEXT_SA_DETAILS2** entries, out uint32 numEntriesReturned);
+		public static extern uint32 IkeextSaEnum2(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out IKEEXT_SA_DETAILS2** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 IkeextSaDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaDbGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 IkeextSaDbGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IkeextSaDbSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 IkeextSaDbSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventCreateEnumHandle0(HANDLE engineHandle, FWPM_NET_EVENT_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmNetEventCreateEnumHandle0(Handle engineHandle, FWPM_NET_EVENT_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmNetEventEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventEnum1(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT1** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmNetEventEnum1(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT1** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventEnum2(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT2** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmNetEventEnum2(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT2** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventEnum3(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT3** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmNetEventEnum3(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT3** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventEnum4(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT4_** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmNetEventEnum4(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT4_** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventEnum5(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT5_** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmNetEventEnum5(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_NET_EVENT5_** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmNetEventDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventsGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmNetEventsGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventsSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmNetEventsSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventSubscribe0(HANDLE engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK0 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 FwpmNetEventSubscribe0(Handle engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK0 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventUnsubscribe0(HANDLE engineHandle, HANDLE eventsHandle);
+		public static extern uint32 FwpmNetEventUnsubscribe0(Handle engineHandle, Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventSubscriptionsGet0(HANDLE engineHandle, out FWPM_NET_EVENT_SUBSCRIPTION0** entries, out uint32 numEntries);
+		public static extern uint32 FwpmNetEventSubscriptionsGet0(Handle engineHandle, out FWPM_NET_EVENT_SUBSCRIPTION0** entries, out uint32 numEntries);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventSubscribe1(HANDLE engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK1 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 FwpmNetEventSubscribe1(Handle engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK1 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventSubscribe2(HANDLE engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK2 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 FwpmNetEventSubscribe2(Handle engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK2 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventSubscribe3(HANDLE engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK3 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 FwpmNetEventSubscribe3(Handle engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK3 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmNetEventSubscribe4(HANDLE engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK4 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 FwpmNetEventSubscribe4(Handle engineHandle, in FWPM_NET_EVENT_SUBSCRIPTION0 subscription, FWPM_NET_EVENT_CALLBACK4 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmDynamicKeywordSubscribe0(uint32 flags, FWPM_DYNAMIC_KEYWORD_CALLBACK0 callback, void* context, out HANDLE subscriptionHandle);
+		public static extern uint32 FwpmDynamicKeywordSubscribe0(uint32 flags, FWPM_DYNAMIC_KEYWORD_CALLBACK0 callback, void* context, out Handle subscriptionHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmDynamicKeywordUnsubscribe0(HANDLE subscriptionHandle);
+		public static extern uint32 FwpmDynamicKeywordUnsubscribe0(Handle subscriptionHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSystemPortsGet0(HANDLE engineHandle, out FWPM_SYSTEM_PORTS0* sysPorts);
+		public static extern uint32 FwpmSystemPortsGet0(Handle engineHandle, out FWPM_SYSTEM_PORTS0* sysPorts);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSystemPortsSubscribe0(HANDLE engineHandle, void* reserved, FWPM_SYSTEM_PORTS_CALLBACK0 callback, void* context, out HANDLE sysPortsHandle);
+		public static extern uint32 FwpmSystemPortsSubscribe0(Handle engineHandle, void* reserved, FWPM_SYSTEM_PORTS_CALLBACK0 callback, void* context, out Handle sysPortsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmSystemPortsUnsubscribe0(HANDLE engineHandle, HANDLE sysPortsHandle);
+		public static extern uint32 FwpmSystemPortsUnsubscribe0(Handle engineHandle, Handle sysPortsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionGetById0(HANDLE engineHandle, uint64 id, out FWPM_CONNECTION0* connection);
+		public static extern uint32 FwpmConnectionGetById0(Handle engineHandle, uint64 id, out FWPM_CONNECTION0* connection);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionEnum0(HANDLE engineHandle, HANDLE enumHandle, uint32 numEntriesRequested, out FWPM_CONNECTION0** entries, out uint32 numEntriesReturned);
+		public static extern uint32 FwpmConnectionEnum0(Handle engineHandle, Handle enumHandle, uint32 numEntriesRequested, out FWPM_CONNECTION0** entries, out uint32 numEntriesReturned);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionCreateEnumHandle0(HANDLE engineHandle, FWPM_CONNECTION_ENUM_TEMPLATE0* enumTemplate, out HANDLE enumHandle);
+		public static extern uint32 FwpmConnectionCreateEnumHandle0(Handle engineHandle, FWPM_CONNECTION_ENUM_TEMPLATE0* enumTemplate, out Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionDestroyEnumHandle0(HANDLE engineHandle, HANDLE enumHandle);
+		public static extern uint32 FwpmConnectionDestroyEnumHandle0(Handle engineHandle, Handle enumHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmConnectionGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmConnectionSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionSubscribe0(HANDLE engineHandle, in FWPM_CONNECTION_SUBSCRIPTION0 subscription, FWPM_CONNECTION_CALLBACK0 callback, void* context, out HANDLE eventsHandle);
+		public static extern uint32 FwpmConnectionSubscribe0(Handle engineHandle, in FWPM_CONNECTION_SUBSCRIPTION0 subscription, FWPM_CONNECTION_CALLBACK0 callback, void* context, out Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmConnectionUnsubscribe0(HANDLE engineHandle, HANDLE eventsHandle);
+		public static extern uint32 FwpmConnectionUnsubscribe0(Handle engineHandle, Handle eventsHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmvSwitchEventSubscribe0(HANDLE engineHandle, in FWPM_VSWITCH_EVENT_SUBSCRIPTION0 subscription, FWPM_VSWITCH_EVENT_CALLBACK0 callback, void* context, out HANDLE subscriptionHandle);
+		public static extern uint32 FwpmvSwitchEventSubscribe0(Handle engineHandle, in FWPM_VSWITCH_EVENT_SUBSCRIPTION0 subscription, FWPM_VSWITCH_EVENT_CALLBACK0 callback, void* context, out Handle subscriptionHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmvSwitchEventUnsubscribe0(HANDLE engineHandle, HANDLE subscriptionHandle);
+		public static extern uint32 FwpmvSwitchEventUnsubscribe0(Handle engineHandle, Handle subscriptionHandle);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmvSwitchEventsGetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
+		public static extern uint32 FwpmvSwitchEventsGetSecurityInfo0(Handle engineHandle, uint32 securityInfo, PSID* sidOwner, PSID* sidGroup, ACL** dacl, ACL** sacl, out SECURITY_DESCRIPTOR* securityDescriptor);
 		[Import("fwpuclnt.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 FwpmvSwitchEventsSetSecurityInfo0(HANDLE engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
+		public static extern uint32 FwpmvSwitchEventsSetSecurityInfo0(Handle engineHandle, uint32 securityInfo, SID* sidOwner, SID* sidGroup, ACL* dacl, ACL* sacl);
 	}
 }

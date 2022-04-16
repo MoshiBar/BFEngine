@@ -19,7 +19,7 @@ namespace Win32
 		public struct CORRELATION_VECTOR
 		{
 			public CHAR Version;
-			public CHAR[129] Vector;
+			public char8[129] Vector;
 		}
 		
 		// --- Functions ---

@@ -65,19 +65,19 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function uint32 LPMAPILOGON(uint ulUIParam, PSTR lpszProfileName, PSTR lpszPassword, uint32 flFlags, uint32 ulReserved, out uint lplhSession);
+		public function uint32 LPMAPILOGON(uint ulUIParam, char8* lpszProfileName, char8* lpszPassword, uint32 flFlags, uint32 ulReserved, out uint lplhSession);
 		public function uint32 LPMAPILOGOFF(uint lhSession, uint ulUIParam, uint32 flFlags, uint32 ulReserved);
 		public function uint32 LPMAPISENDMAIL(uint lhSession, uint ulUIParam, out MapiMessage lpMessage, uint32 flFlags, uint32 ulReserved);
 		public function uint32 LPMAPISENDMAILW(uint lhSession, uint ulUIParam, ref MapiMessageW lpMessage, uint32 flFlags, uint32 ulReserved);
-		public function uint32 LPMAPISENDDOCUMENTS(uint ulUIParam, PSTR lpszDelimChar, PSTR lpszFilePaths, PSTR lpszFileNames, uint32 ulReserved);
-		public function uint32 LPMAPIFINDNEXT(uint lhSession, uint ulUIParam, PSTR lpszMessageType, PSTR lpszSeedMessageID, uint32 flFlags, uint32 ulReserved, PSTR lpszMessageID);
-		public function uint32 LPMAPIREADMAIL(uint lhSession, uint ulUIParam, PSTR lpszMessageID, uint32 flFlags, uint32 ulReserved, out MapiMessage* lppMessage);
-		public function uint32 LPMAPISAVEMAIL(uint lhSession, uint ulUIParam, out MapiMessage lpMessage, uint32 flFlags, uint32 ulReserved, PSTR lpszMessageID);
-		public function uint32 LPMAPIDELETEMAIL(uint lhSession, uint ulUIParam, PSTR lpszMessageID, uint32 flFlags, uint32 ulReserved);
+		public function uint32 LPMAPISENDDOCUMENTS(uint ulUIParam, char8* lpszDelimChar, char8* lpszFilePaths, char8* lpszFileNames, uint32 ulReserved);
+		public function uint32 LPMAPIFINDNEXT(uint lhSession, uint ulUIParam, char8* lpszMessageType, char8* lpszSeedMessageID, uint32 flFlags, uint32 ulReserved, char8* lpszMessageID);
+		public function uint32 LPMAPIREADMAIL(uint lhSession, uint ulUIParam, char8* lpszMessageID, uint32 flFlags, uint32 ulReserved, out MapiMessage* lppMessage);
+		public function uint32 LPMAPISAVEMAIL(uint lhSession, uint ulUIParam, out MapiMessage lpMessage, uint32 flFlags, uint32 ulReserved, char8* lpszMessageID);
+		public function uint32 LPMAPIDELETEMAIL(uint lhSession, uint ulUIParam, char8* lpszMessageID, uint32 flFlags, uint32 ulReserved);
 		public function uint32 LPMAPIFREEBUFFER(void* pv);
-		public function uint32 LPMAPIADDRESS(uint lhSession, uint ulUIParam, PSTR lpszCaption, uint32 nEditFields, PSTR lpszLabels, uint32 nRecips, out MapiRecipDesc lpRecips, uint32 flFlags, uint32 ulReserved, out uint32 lpnNewRecips, out MapiRecipDesc* lppNewRecips);
+		public function uint32 LPMAPIADDRESS(uint lhSession, uint ulUIParam, char8* lpszCaption, uint32 nEditFields, char8* lpszLabels, uint32 nRecips, out MapiRecipDesc lpRecips, uint32 flFlags, uint32 ulReserved, out uint32 lpnNewRecips, out MapiRecipDesc* lppNewRecips);
 		public function uint32 LPMAPIDETAILS(uint lhSession, uint ulUIParam, out MapiRecipDesc lpRecip, uint32 flFlags, uint32 ulReserved);
-		public function uint32 LPMAPIRESOLVENAME(uint lhSession, uint ulUIParam, PSTR lpszName, uint32 flFlags, uint32 ulReserved, out MapiRecipDesc* lppRecip);
+		public function uint32 LPMAPIRESOLVENAME(uint lhSession, uint ulUIParam, char8* lpszName, uint32 flFlags, uint32 ulReserved, out MapiRecipDesc* lppRecip);
 		
 		// --- Structs ---
 		
@@ -87,8 +87,8 @@ namespace Win32
 			public uint32 ulReserved;
 			public uint32 flFlags;
 			public uint32 nPosition;
-			public PSTR lpszPathName;
-			public PSTR lpszFileName;
+			public char8* lpszPathName;
+			public char8* lpszFileName;
 			public void* lpFileType;
 		}
 		[CRepr]
@@ -97,8 +97,8 @@ namespace Win32
 			public uint32 ulReserved;
 			public uint32 flFlags;
 			public uint32 nPosition;
-			public PWSTR lpszPathName;
-			public PWSTR lpszFileName;
+			public char16* lpszPathName;
+			public char16* lpszFileName;
 			public void* lpFileType;
 		}
 		[CRepr]
@@ -115,8 +115,8 @@ namespace Win32
 		{
 			public uint32 ulReserved;
 			public uint32 ulRecipClass;
-			public PSTR lpszName;
-			public PSTR lpszAddress;
+			public char8* lpszName;
+			public char8* lpszAddress;
 			public uint32 ulEIDSize;
 			public void* lpEntryID;
 		}
@@ -125,8 +125,8 @@ namespace Win32
 		{
 			public uint32 ulReserved;
 			public uint32 ulRecipClass;
-			public PWSTR lpszName;
-			public PWSTR lpszAddress;
+			public char16* lpszName;
+			public char16* lpszAddress;
 			public uint32 ulEIDSize;
 			public void* lpEntryID;
 		}
@@ -134,11 +134,11 @@ namespace Win32
 		public struct MapiMessage
 		{
 			public uint32 ulReserved;
-			public PSTR lpszSubject;
-			public PSTR lpszNoteText;
-			public PSTR lpszMessageType;
-			public PSTR lpszDateReceived;
-			public PSTR lpszConversationID;
+			public char8* lpszSubject;
+			public char8* lpszNoteText;
+			public char8* lpszMessageType;
+			public char8* lpszDateReceived;
+			public char8* lpszConversationID;
 			public uint32 flFlags;
 			public MapiRecipDesc* lpOriginator;
 			public uint32 nRecipCount;
@@ -150,11 +150,11 @@ namespace Win32
 		public struct MapiMessageW
 		{
 			public uint32 ulReserved;
-			public PWSTR lpszSubject;
-			public PWSTR lpszNoteText;
-			public PWSTR lpszMessageType;
-			public PWSTR lpszDateReceived;
-			public PWSTR lpszConversationID;
+			public char16* lpszSubject;
+			public char16* lpszNoteText;
+			public char16* lpszMessageType;
+			public char16* lpszDateReceived;
+			public char16* lpszConversationID;
 			public uint32 flFlags;
 			public MapiRecipDescW* lpOriginator;
 			public uint32 nRecipCount;

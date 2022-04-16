@@ -123,14 +123,14 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public BOOL BooleanVal;
+				public IntBool BooleanVal;
 				public uint32 UInt32Val;
 				public uint64 DateTimeVal;
-				public PWSTR StringVal;
+				public char16* StringVal;
 				public uint8* BinaryVal;
-				public BOOL* BooleanArr;
+				public IntBool* BooleanArr;
 				public int32* Int32Arr;
-				public PWSTR* StringArr;
+				public char16** StringArr;
 				public int PropertyHandleVal;
 			}
 		}
@@ -140,32 +140,32 @@ namespace Win32
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int EcOpenSubscriptionEnum(uint32 Flags);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcEnumNextSubscription(int SubscriptionEnum, uint32 SubscriptionNameBufferSize, char16* SubscriptionNameBuffer, out uint32 SubscriptionNameBufferUsed);
+		public static extern IntBool EcEnumNextSubscription(int SubscriptionEnum, uint32 SubscriptionNameBufferSize, char16* SubscriptionNameBuffer, out uint32 SubscriptionNameBufferUsed);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int EcOpenSubscription(PWSTR SubscriptionName, uint32 AccessMask, uint32 Flags);
+		public static extern int EcOpenSubscription(char16* SubscriptionName, uint32 AccessMask, uint32 Flags);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcSetSubscriptionProperty(int Subscription, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 Flags, out EC_VARIANT PropertyValue);
+		public static extern IntBool EcSetSubscriptionProperty(int Subscription, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 Flags, out EC_VARIANT PropertyValue);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcGetSubscriptionProperty(int Subscription, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 Flags, uint32 PropertyValueBufferSize, out EC_VARIANT PropertyValueBuffer, out uint32 PropertyValueBufferUsed);
+		public static extern IntBool EcGetSubscriptionProperty(int Subscription, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 Flags, uint32 PropertyValueBufferSize, out EC_VARIANT PropertyValueBuffer, out uint32 PropertyValueBufferUsed);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcSaveSubscription(int Subscription, uint32 Flags);
+		public static extern IntBool EcSaveSubscription(int Subscription, uint32 Flags);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcDeleteSubscription(PWSTR SubscriptionName, uint32 Flags);
+		public static extern IntBool EcDeleteSubscription(char16* SubscriptionName, uint32 Flags);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcGetObjectArraySize(int ObjectArray, out uint32 ObjectArraySize);
+		public static extern IntBool EcGetObjectArraySize(int ObjectArray, out uint32 ObjectArraySize);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcSetObjectArrayProperty(int ObjectArray, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 ArrayIndex, uint32 Flags, out EC_VARIANT PropertyValue);
+		public static extern IntBool EcSetObjectArrayProperty(int ObjectArray, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 ArrayIndex, uint32 Flags, out EC_VARIANT PropertyValue);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcGetObjectArrayProperty(int ObjectArray, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 ArrayIndex, uint32 Flags, uint32 PropertyValueBufferSize, out EC_VARIANT PropertyValueBuffer, out uint32 PropertyValueBufferUsed);
+		public static extern IntBool EcGetObjectArrayProperty(int ObjectArray, EC_SUBSCRIPTION_PROPERTY_ID PropertyId, uint32 ArrayIndex, uint32 Flags, uint32 PropertyValueBufferSize, out EC_VARIANT PropertyValueBuffer, out uint32 PropertyValueBufferUsed);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcInsertObjectArrayElement(int ObjectArray, uint32 ArrayIndex);
+		public static extern IntBool EcInsertObjectArrayElement(int ObjectArray, uint32 ArrayIndex);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcRemoveObjectArrayElement(int ObjectArray, uint32 ArrayIndex);
+		public static extern IntBool EcRemoveObjectArrayElement(int ObjectArray, uint32 ArrayIndex);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcGetSubscriptionRunTimeStatus(PWSTR SubscriptionName, EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID StatusInfoId, PWSTR EventSourceName, uint32 Flags, uint32 StatusValueBufferSize, out EC_VARIANT StatusValueBuffer, out uint32 StatusValueBufferUsed);
+		public static extern IntBool EcGetSubscriptionRunTimeStatus(char16* SubscriptionName, EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID StatusInfoId, char16* EventSourceName, uint32 Flags, uint32 StatusValueBufferSize, out EC_VARIANT StatusValueBuffer, out uint32 StatusValueBufferUsed);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcRetrySubscription(PWSTR SubscriptionName, PWSTR EventSourceName, uint32 Flags);
+		public static extern IntBool EcRetrySubscription(char16* SubscriptionName, char16* EventSourceName, uint32 Flags);
 		[Import("wecapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EcClose(int Object);
+		public static extern IntBool EcClose(int Object);
 	}
 }

@@ -1,5 +1,11 @@
 using System;
 using BfEngine;
+using static Win32.Graphics.Gdi;
+using static Win32.Globalization;
+using static Win32.System.Com;
+using static Win32.Graphics.Direct2D;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.DirectWrite
 namespace Win32
@@ -11,10 +17,10 @@ namespace Win32
 		public const uint32 DWRITE_ALPHA_MAX = 255;
 		public const uint32 FACILITY_DWRITE = 2200;
 		public const uint32 DWRITE_ERR_BASE = 20480;
-		public const HRESULT DWRITE_E_REMOTEFONT = (.)-2003283955;
-		public const HRESULT DWRITE_E_DOWNLOADCANCELLED = (.)-2003283954;
-		public const HRESULT DWRITE_E_DOWNLOADFAILED = (.)-2003283953;
-		public const HRESULT DWRITE_E_TOOMANYDOWNLOADS = (.)-2003283952;
+		public const HResult DWRITE_E_REMOTEFONT = (.)-2003283955;
+		public const HResult DWRITE_E_DOWNLOADCANCELLED = (.)-2003283954;
+		public const HResult DWRITE_E_DOWNLOADFAILED = (.)-2003283953;
+		public const HResult DWRITE_E_TOOMANYDOWNLOADS = (.)-2003283952;
 		
 		// --- Enums ---
 		
@@ -883,12 +889,14 @@ namespace Win32
 				this.ascenderOffset = ascenderOffset;
 			}
 
+#unwarn
 			public static implicit operator Vector2(Self f) => *(Vector2*)&f;
+#unwarn
 			public static implicit operator Self(Vector2 f) => *(Self*)&f;
 
 		}
 		[CRepr]
-		public struct DWRITE_MATRIX
+		public struct DWriteMatrix
 		{
 			public float m11;
 			public float m12;
@@ -898,13 +906,13 @@ namespace Win32
 			public float dy;
 		}
 		[CRepr]
-		public struct DWRITE_TEXT_RANGE
+		public struct TextRange
 		{
 			public uint32 startPosition;
 			public uint32 length;
 		}
 		[CRepr]
-		public struct DWRITE_FONT_FEATURE
+		public struct FontFeature
 		{
 			public FontFeatureTag nameTag;
 			public uint32 parameter;
@@ -912,7 +920,7 @@ namespace Win32
 		[CRepr]
 		public struct DWRITE_TYPOGRAPHIC_FEATURES
 		{
-			public DWRITE_FONT_FEATURE* features;
+			public FontFeature* features;
 			public uint32 featureCount;
 		}
 		[CRepr]
@@ -952,14 +960,14 @@ namespace Win32
 			public uint16* glyphIndices;
 			public float* glyphAdvances;
 			public GlyphOffset* glyphOffsets;
-			public BOOL isSideways;
+			public IntBool isSideways;
 			public uint32 bidiLevel;
 		}
 		[CRepr]
 		public struct DWRITE_GLYPH_RUN_DESCRIPTION
 		{
-			public PWSTR localeName;
-			public PWSTR string;
+			public char16* localeName;
+			public char16* string;
 			public uint32 stringLength;
 			public uint16* clusterMap;
 			public uint32 textPosition;
@@ -973,7 +981,7 @@ namespace Win32
 			public float runHeight;
 			public DWRITE_READING_DIRECTION readingDirection;
 			public DWRITE_FLOW_DIRECTION flowDirection;
-			public PWSTR localeName;
+			public char16* localeName;
 			public DWRITE_MEASURING_MODE measuringMode;
 		}
 		[CRepr]
@@ -984,7 +992,7 @@ namespace Win32
 			public float offset;
 			public DWRITE_READING_DIRECTION readingDirection;
 			public DWRITE_FLOW_DIRECTION flowDirection;
-			public PWSTR localeName;
+			public char16* localeName;
 			public DWRITE_MEASURING_MODE measuringMode;
 		}
 		[CRepr]
@@ -995,7 +1003,7 @@ namespace Win32
 			public uint32 newlineLength;
 			public float height;
 			public float baseline;
-			public BOOL isTrimmed;
+			public IntBool isTrimmed;
 		}
 		[CRepr]
 		public struct DWRITE_CLUSTER_METRICS
@@ -1023,7 +1031,7 @@ namespace Win32
 			public float width;
 			public float height;
 			public float baseline;
-			public BOOL supportsSideways;
+			public IntBool supportsSideways;
 		}
 		[CRepr]
 		public struct DWRITE_OVERHANG_METRICS
@@ -1043,8 +1051,8 @@ namespace Win32
 			public float width;
 			public float height;
 			public uint32 bidiLevel;
-			public BOOL isText;
-			public BOOL isTrimmed;
+			public IntBool isText;
+			public IntBool isTrimmed;
 		}
 		[CRepr]
 		public struct FontMetrics1 : FontMetrics
@@ -1062,7 +1070,7 @@ namespace Win32
 			public int16 superscriptPositionY;
 			public int16 superscriptSizeX;
 			public int16 superscriptSizeY;
-			public BOOL hasTypographicMetrics;
+			public IntBool hasTypographicMetrics;
 		}
 		[CRepr]
 		public struct DWRITE_CARET_METRICS
@@ -1181,8 +1189,8 @@ namespace Win32
 		public struct FontProperty
 		{
 			public FontPropertyID propertyId;
-			public PWSTR propertyValue;
-			public PWSTR localeName;
+			public char16* propertyValue;
+			public char16* localeName;
 		}
 		[CRepr]
 		public struct LineMetrics1 : LineMetrics
@@ -1249,12 +1257,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateStreamFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteFontFileStream* fontFileStream) mut => VT.CreateStreamFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out fontFileStream);
+			public HResult CreateStreamFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteFontFileStream* fontFileStream) mut => VT.CreateStreamFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out fontFileStream);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteFontFileStream* fontFileStream) CreateStreamFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteFontFileStream* fontFileStream) CreateStreamFromKey;
 			}
 		}
 		[CRepr]
@@ -1264,16 +1272,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFilePathLengthFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out uint32 filePathLength) mut => VT.GetFilePathLengthFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out filePathLength);
-			public HRESULT GetFilePathFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, char16* filePath, uint32 filePathSize) mut => VT.GetFilePathFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, filePath, filePathSize);
-			public HRESULT GetLastWriteTimeFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out FILETIME lastWriteTime) mut => VT.GetLastWriteTimeFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out lastWriteTime);
+			public HResult GetFilePathLengthFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out uint32 filePathLength) mut => VT.GetFilePathLengthFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out filePathLength);
+			public HResult GetFilePathFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, char16* filePath, uint32 filePathSize) mut => VT.GetFilePathFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, filePath, filePathSize);
+			public HResult GetLastWriteTimeFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out FileTime lastWriteTime) mut => VT.GetLastWriteTimeFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out lastWriteTime);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFileLoader.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out uint32 filePathLength) GetFilePathLengthFromKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, char16* filePath, uint32 filePathSize) GetFilePathFromKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out FILETIME lastWriteTime) GetLastWriteTimeFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out uint32 filePathLength) GetFilePathLengthFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, char16* filePath, uint32 filePathSize) GetFilePathFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out FileTime lastWriteTime) GetLastWriteTimeFromKey;
 			}
 		}
 		[CRepr]
@@ -1283,18 +1291,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ReadFileFragment(void** fragmentStart, uint64 fileOffset, uint64 fragmentSize, void** fragmentContext) mut => VT.ReadFileFragment(ref this, fragmentStart, fileOffset, fragmentSize, fragmentContext);
+			public HResult ReadFileFragment(void** fragmentStart, uint64 fileOffset, uint64 fragmentSize, void** fragmentContext) mut => VT.ReadFileFragment(ref this, fragmentStart, fileOffset, fragmentSize, fragmentContext);
 			public void ReleaseFileFragment(void* fragmentContext) mut => VT.ReleaseFileFragment(ref this, fragmentContext);
-			public HRESULT GetFileSize(out uint64 fileSize) mut => VT.GetFileSize(ref this, out fileSize);
-			public HRESULT GetLastWriteTime(out uint64 lastWriteTime) mut => VT.GetLastWriteTime(ref this, out lastWriteTime);
+			public HResult GetFileSize(out uint64 fileSize) mut => VT._GetFileSize(ref this, out fileSize);
+			public HResult GetLastWriteTime(out uint64 lastWriteTime) mut => VT.GetLastWriteTime(ref this, out lastWriteTime);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFileStream self, void** fragmentStart, uint64 fileOffset, uint64 fragmentSize, void** fragmentContext) ReadFileFragment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFileStream self, void** fragmentStart, uint64 fileOffset, uint64 fragmentSize, void** fragmentContext) ReadFileFragment;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFileStream self, void* fragmentContext) ReleaseFileFragment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFileStream self, out uint64 fileSize) GetFileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFileStream self, out uint64 lastWriteTime) GetLastWriteTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFileStream self, out uint64 fileSize) _GetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFileStream self, out uint64 lastWriteTime) GetLastWriteTime;
 			}
 		}
 		[CRepr]
@@ -1304,16 +1312,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetReferenceKey(void** fontFileReferenceKey, out uint32 fontFileReferenceKeySize) mut => VT.GetReferenceKey(ref this, fontFileReferenceKey, out fontFileReferenceKeySize);
-			public HRESULT GetLoader(out IDWriteFontFileLoader* fontFileLoader) mut => VT.GetLoader(ref this, out fontFileLoader);
-			public HRESULT Analyze(out BOOL isSupportedFontType, out FontFileType fontFileType, FontFaceType* fontFaceType, out uint32 numberOfFaces) mut => VT.Analyze(ref this, out isSupportedFontType, out fontFileType, fontFaceType, out numberOfFaces);
+			public HResult GetReferenceKey(void** fontFileReferenceKey, out uint32 fontFileReferenceKeySize) mut => VT.GetReferenceKey(ref this, fontFileReferenceKey, out fontFileReferenceKeySize);
+			public HResult GetLoader(out IDWriteFontFileLoader* fontFileLoader) mut => VT.GetLoader(ref this, out fontFileLoader);
+			public HResult Analyze(out IntBool isSupportedFontType, out FontFileType fontFileType, FontFaceType* fontFaceType, out uint32 numberOfFaces) mut => VT.Analyze(ref this, out isSupportedFontType, out fontFileType, fontFaceType, out numberOfFaces);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFile self, void** fontFileReferenceKey, out uint32 fontFileReferenceKeySize) GetReferenceKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFile self, out IDWriteFontFileLoader* fontFileLoader) GetLoader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFile self, out BOOL isSupportedFontType, out FontFileType fontFileType, FontFaceType* fontFaceType, out uint32 numberOfFaces) Analyze;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFile self, void** fontFileReferenceKey, out uint32 fontFileReferenceKeySize) GetReferenceKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFile self, out IDWriteFontFileLoader* fontFileLoader) GetLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFile self, out IntBool isSupportedFontType, out FontFileType fontFileType, FontFaceType* fontFaceType, out uint32 numberOfFaces) Analyze;
 			}
 		}
 		[CRepr]
@@ -1347,39 +1355,44 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public FontFaceType ComGetType() mut => VT.ComGetType(ref this);
-			public HRESULT GetFiles(out uint32 numberOfFiles, IDWriteFontFile** fontFiles) mut => VT.GetFiles(ref this, out numberOfFiles, fontFiles);
-			public uint32 GetIndex() mut => VT.GetIndex(ref this);
-			public FontSimulations GetSimulations() mut => VT.GetSimulations(ref this);
-			public BOOL IsSymbolFont() mut => VT.IsSymbolFont(ref this);
-			public void GetMetrics(out FontMetrics fontFaceMetrics) mut => VT.GetMetrics(ref this, out fontFaceMetrics);
-			public uint16 GetGlyphCount() mut => VT.GetGlyphCount(ref this);
-			public HRESULT GetDesignGlyphMetrics(uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, BOOL isSideways) mut => VT.GetDesignGlyphMetrics(ref this, glyphIndices, glyphCount, glyphMetrics, isSideways);
-			public HRESULT GetGlyphIndices(uint32* codePoints, uint32 codePointCount, uint16* glyphIndices) mut => VT.GetGlyphIndices(ref this, codePoints, codePointCount, glyphIndices);
-			public HRESULT TryGetFontTable(uint32 openTypeTableTag, void** tableData, out uint32 tableSize, void** tableContext, out BOOL exists) mut => VT.TryGetFontTable(ref this, openTypeTableTag, tableData, out tableSize, tableContext, out exists);
+			public HResult GetFiles(out uint32 numberOfFiles, IDWriteFontFile** fontFiles) mut => VT.GetFiles(ref this, out numberOfFiles, fontFiles);
+			public uint32 Index mut => VT.GetIndex(ref this);
+			public FontSimulations Simulations mut => VT.GetSimulations(ref this);
+			public IntBool IsSymbolFont mut => VT.IsSymbolFont(ref this);
+			public FontMetrics Metrics mut => VT.GetMetrics(ref this, ..var fontFaceMetrics);
+			public uint16 GlyphCount mut => VT.GetGlyphCount(ref this);
+			public HResult GetDesignGlyphMetrics(uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, IntBool isSideways = false) mut => VT.GetDesignGlyphMetrics(ref this, glyphIndices, glyphCount, glyphMetrics, isSideways);
+			public HResult GetGlyphIndices(uint32* codePoints, uint32 codePointCount, uint16* glyphIndices) mut => VT.GetGlyphIndices(ref this, codePoints, codePointCount, glyphIndices);
+			public HResult TryGetFontTable(uint32 openTypeTableTag, void** tableData, out uint32 tableSize, void** tableContext, out IntBool exists) mut => VT.TryGetFontTable(ref this, openTypeTableTag, tableData, out tableSize, tableContext, out exists);
 			public void ReleaseFontTable(void* tableContext) mut => VT.ReleaseFontTable(ref this, tableContext);
-			public HRESULT GetGlyphRunOutline(float emSize, uint16* glyphIndices, float* glyphAdvances, GlyphOffset* glyphOffsets, uint32 glyphCount, BOOL isSideways, BOOL isRightToLeft, ID2D1SimplifiedGeometrySink* geometrySink) mut => VT.GetGlyphRunOutline(ref this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink);
-			public HRESULT GetRecommendedRenderingMode(float emSize, float pixelsPerDip, DWRITE_MEASURING_MODE measuringMode, ref IDWriteRenderingParams renderingParams, out DWRITE_RENDERING_MODE renderingMode) mut => VT.GetRecommendedRenderingMode(ref this, emSize, pixelsPerDip, measuringMode, ref renderingParams, out renderingMode);
-			public HRESULT GetGdiCompatibleMetrics(float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, out FontMetrics fontFaceMetrics) mut => VT.GetGdiCompatibleMetrics(ref this, emSize, pixelsPerDip, transform, out fontFaceMetrics);
-			public HRESULT GetGdiCompatibleGlyphMetrics(float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, BOOL isSideways) mut => VT.GetGdiCompatibleGlyphMetrics(ref this, emSize, pixelsPerDip, transform, useGdiNatural, glyphIndices, glyphCount, glyphMetrics, isSideways);
+			public HResult GetGlyphRunOutline(float emSize, uint16* glyphIndices, float* glyphAdvances, GlyphOffset* glyphOffsets, uint32 glyphCount, IntBool isSideways, IntBool isRightToLeft, ID2D1SimplifiedGeometrySink* geometrySink) mut => VT.GetGlyphRunOutline(ref this, emSize, glyphIndices, glyphAdvances, glyphOffsets, glyphCount, isSideways, isRightToLeft, geometrySink);
+			public HResult GetRecommendedRenderingMode(float emSize, float pixelsPerDip, DWRITE_MEASURING_MODE measuringMode, ref IDWriteRenderingParams renderingParams, out DWRITE_RENDERING_MODE renderingMode) mut => VT.GetRecommendedRenderingMode(ref this, emSize, pixelsPerDip, measuringMode, ref renderingParams, out renderingMode);
+			public HResult GetGdiCompatibleMetrics(float emSize, float pixelsPerDip, DWriteMatrix* transform, out FontMetrics fontFaceMetrics) mut => VT.GetGdiCompatibleMetrics(ref this, emSize, pixelsPerDip, transform, out fontFaceMetrics);
+			public HResult GetGdiCompatibleGlyphMetrics(float emSize, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, IntBool isSideways) mut => VT.GetGdiCompatibleGlyphMetrics(ref this, emSize, pixelsPerDip, transform, useGdiNatural, glyphIndices, glyphCount, glyphMetrics, isSideways);
+
+
+			public HResult GetDesignGlyphMetrics(Span<uint16> glyphIndices, Span<GlyphMetrics> glyphMetrics, IntBool isSideways = false) mut => VT.GetDesignGlyphMetrics(ref this, glyphIndices.Ptr, (.)Math.Min(glyphIndices.Length, glyphMetrics.Length), glyphMetrics.Ptr, isSideways);
+			public HResult GetGlyphIndices(Span<uint32> codePoints, Span<uint16> glyphIndices) mut => VT.GetGlyphIndices(ref this, codePoints.Ptr, (.)Math.Min(codePoints.Length, glyphIndices.Length), glyphIndices.Ptr);
+
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] FontFaceType(ref IDWriteFontFace self) ComGetType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, out uint32 numberOfFiles, IDWriteFontFile** fontFiles) GetFiles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, out uint32 numberOfFiles, IDWriteFontFile** fontFiles) GetFiles;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontFace self) GetIndex;
 				public new function [CallingConvention(.Stdcall)] FontSimulations(ref IDWriteFontFace self) GetSimulations;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace self) IsSymbolFont;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace self) IsSymbolFont;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFace self, out FontMetrics fontFaceMetrics) GetMetrics;
 				public new function [CallingConvention(.Stdcall)] uint16(ref IDWriteFontFace self) GetGlyphCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, BOOL isSideways) GetDesignGlyphMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, uint32* codePoints, uint32 codePointCount, uint16* glyphIndices) GetGlyphIndices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, uint32 openTypeTableTag, void** tableData, out uint32 tableSize, void** tableContext, out BOOL exists) TryGetFontTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, IntBool isSideways) GetDesignGlyphMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, uint32* codePoints, uint32 codePointCount, uint16* glyphIndices) GetGlyphIndices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, uint32 openTypeTableTag, void** tableData, out uint32 tableSize, void** tableContext, out IntBool exists) TryGetFontTable;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFace self, void* tableContext) ReleaseFontTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, float emSize, uint16* glyphIndices, float* glyphAdvances, GlyphOffset* glyphOffsets, uint32 glyphCount, BOOL isSideways, BOOL isRightToLeft, ID2D1SimplifiedGeometrySink* geometrySink) GetGlyphRunOutline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, float emSize, float pixelsPerDip, DWRITE_MEASURING_MODE measuringMode, ref IDWriteRenderingParams renderingParams, out DWRITE_RENDERING_MODE renderingMode) GetRecommendedRenderingMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, out FontMetrics fontFaceMetrics) GetGdiCompatibleMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace self, float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, BOOL isSideways) GetGdiCompatibleGlyphMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, float emSize, uint16* glyphIndices, float* glyphAdvances, GlyphOffset* glyphOffsets, uint32 glyphCount, IntBool isSideways, IntBool isRightToLeft, ID2D1SimplifiedGeometrySink* geometrySink) GetGlyphRunOutline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, float emSize, float pixelsPerDip, DWRITE_MEASURING_MODE measuringMode, ref IDWriteRenderingParams renderingParams, out DWRITE_RENDERING_MODE renderingMode) GetRecommendedRenderingMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, float emSize, float pixelsPerDip, DWriteMatrix* transform, out FontMetrics fontFaceMetrics) GetGdiCompatibleMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace self, float emSize, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, uint16* glyphIndices, uint32 glyphCount, GlyphMetrics* glyphMetrics, IntBool isSideways) GetGdiCompatibleGlyphMetrics;
 			}
 		}
 		[CRepr]
@@ -1389,12 +1402,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateEnumeratorFromKey(ref IDWriteFactory factory, void* collectionKey, uint32 collectionKeySize, out IDWriteFontFileEnumerator* fontFileEnumerator) mut => VT.CreateEnumeratorFromKey(ref this, ref factory, collectionKey, collectionKeySize, out fontFileEnumerator);
+			public HResult CreateEnumeratorFromKey(ref IDWriteFactory factory, void* collectionKey, uint32 collectionKeySize, out IDWriteFontFileEnumerator* fontFileEnumerator) mut => VT.CreateEnumeratorFromKey(ref this, ref factory, collectionKey, collectionKeySize, out fontFileEnumerator);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollectionLoader self, ref IDWriteFactory factory, void* collectionKey, uint32 collectionKeySize, out IDWriteFontFileEnumerator* fontFileEnumerator) CreateEnumeratorFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollectionLoader self, ref IDWriteFactory factory, void* collectionKey, uint32 collectionKeySize, out IDWriteFontFileEnumerator* fontFileEnumerator) CreateEnumeratorFromKey;
 			}
 		}
 		[CRepr]
@@ -1404,14 +1417,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT MoveNext(out BOOL hasCurrentFile) mut => VT.MoveNext(ref this, out hasCurrentFile);
-			public HRESULT GetCurrentFontFile(out IDWriteFontFile* fontFile) mut => VT.GetCurrentFontFile(ref this, out fontFile);
+			public HResult MoveNext(out IntBool hasCurrentFile) mut => VT.MoveNext(ref this, out hasCurrentFile);
+			public HResult GetCurrentFontFile(out IDWriteFontFile* fontFile) mut => VT.GetCurrentFontFile(ref this, out fontFile);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFileEnumerator self, out BOOL hasCurrentFile) MoveNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFileEnumerator self, out IDWriteFontFile* fontFile) GetCurrentFontFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFileEnumerator self, out IntBool hasCurrentFile) MoveNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFileEnumerator self, out IDWriteFontFile* fontFile) GetCurrentFontFile;
 			}
 		}
 		[CRepr]
@@ -1424,13 +1437,13 @@ namespace Win32
 			public uint32 Count mut => GetCount();
 
 			public uint32 GetCount() mut => VT.GetCount(ref this);
-			public HRESULT FindLocaleName(PWSTR localeName, out uint32 index, out BOOL exists) mut => VT.FindLocaleName(ref this, localeName, out index, out exists);
-			public HRESULT GetLocaleNameLength(uint32 index, out uint32 length) mut => VT.GetLocaleNameLength(ref this, index, out length);
-			public HRESULT GetLocaleName(uint32 index, char16* localeName, uint32 size) mut => VT.GetLocaleName(ref this, index, localeName, size);
-			public HRESULT GetStringLength(uint32 index, out uint32 length) mut => VT.GetStringLength(ref this, index, out length);
-			public HRESULT GetString(uint32 index, char16* stringBuffer, uint32 size) mut => VT.GetString(ref this, index, stringBuffer, size);
+			public HResult FindLocaleName(char16* localeName, out uint32 index, out IntBool exists) mut => VT.FindLocaleName(ref this, localeName, out index, out exists);
+			public HResult GetLocaleNameLength(uint32 index, out uint32 length) mut => VT.GetLocaleNameLength(ref this, index, out length);
+			public HResult GetLocaleName(uint32 index, char16* localeName, uint32 size) mut => VT.GetLocaleName(ref this, index, localeName, size);
+			public HResult GetStringLength(uint32 index, out uint32 length) mut => VT.GetStringLength(ref this, index, out length);
+			public HResult GetString(uint32 index, char16* stringBuffer, uint32 size) mut => VT.GetString(ref this, index, stringBuffer, size);
 
-			public HRESULT GetString(uint32 index, String buffer) mut {
+			public HResult GetString(uint32 index, String buffer) mut {
 				var hr = GetStringLength(index, var length);
 				if(hr != .OK) return hr;
 
@@ -1447,11 +1460,11 @@ namespace Win32
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteLocalizedStrings self) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalizedStrings self, PWSTR localeName, out uint32 index, out BOOL exists) FindLocaleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalizedStrings self, uint32 index, out uint32 length) GetLocaleNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalizedStrings self, uint32 index, char16* localeName, uint32 size) GetLocaleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalizedStrings self, uint32 index, out uint32 length) GetStringLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteLocalizedStrings self, uint32 index, char16* stringBuffer, uint32 size) GetString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalizedStrings self, char16* localeName, out uint32 index, out IntBool exists) FindLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalizedStrings self, uint32 index, out uint32 length) GetLocaleNameLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalizedStrings self, uint32 index, char16* localeName, uint32 size) GetLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalizedStrings self, uint32 index, out uint32 length) GetStringLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteLocalizedStrings self, uint32 index, char16* stringBuffer, uint32 size) GetString;
 			}
 		}
 		[CRepr]
@@ -1464,17 +1477,17 @@ namespace Win32
 			public uint32 FamilyCount mut => GetFontFamilyCount();
 
 			public uint32 GetFontFamilyCount() mut => VT.GetFontFamilyCount(ref this);
-			public HRESULT GetFontFamily(uint32 index, out IDWriteFontFamily* fontFamily) mut => VT.GetFontFamily(ref this, index, out fontFamily);
-			public HRESULT FindFamilyName(StringView familyName, out uint32 index, out BOOL exists) mut => VT.FindFamilyName(ref this, familyName.ToScopedNativeWChar!(), out index, out exists);
-			public HRESULT GetFontFromFontFace(ref IDWriteFontFace fontFace, out IDWriteFont* font) mut => VT.GetFontFromFontFace(ref this, ref fontFace, out font);
+			public HResult GetFontFamily(uint32 index, out IDWriteFontFamily* fontFamily) mut => VT.GetFontFamily(ref this, index, out fontFamily);
+			public HResult FindFamilyName(StringView familyName, out uint32 index, out IntBool exists) mut => VT.FindFamilyName(ref this, familyName.ToScopedNativeWChar!(), out index, out exists);
+			public HResult GetFontFromFontFace(ref IDWriteFontFace fontFace, out IDWriteFont* font) mut => VT.GetFontFromFontFace(ref this, ref fontFace, out font);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontCollection self) GetFontFamilyCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection self, uint32 index, out IDWriteFontFamily* fontFamily) GetFontFamily;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection self, PWSTR familyName, out uint32 index, out BOOL exists) FindFamilyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection self, ref IDWriteFontFace fontFace, out IDWriteFont* font) GetFontFromFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection self, uint32 index, out IDWriteFontFamily* fontFamily) GetFontFamily;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection self, char16* familyName, out uint32 index, out IntBool exists) FindFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection self, ref IDWriteFontFace fontFace, out IDWriteFont* font) GetFontFromFontFace;
 			}
 		}
 		[CRepr]
@@ -1484,16 +1497,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontCollection(out IDWriteFontCollection* fontCollection) mut => VT.GetFontCollection(ref this, out fontCollection);
+			public HResult GetFontCollection(out IDWriteFontCollection* fontCollection) mut => VT.GetFontCollection(ref this, out fontCollection);
 			public uint32 GetFontCount() mut => VT.GetFontCount(ref this);
-			public HRESULT GetFont(uint32 index, out IDWriteFont* font) mut => VT.GetFont(ref this, index, out font);
+			public HResult GetFont(uint32 index, out IDWriteFont* font) mut => VT.GetFont(ref this, index, out font);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontList self, out IDWriteFontCollection* fontCollection) GetFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontList self, out IDWriteFontCollection* fontCollection) GetFontCollection;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontList self) GetFontCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontList self, uint32 index, out IDWriteFont* font) GetFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontList self, uint32 index, out IDWriteFont* font) GetFont;
 			}
 		}
 		[CRepr]
@@ -1503,16 +1516,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFamilyNames(out IDWriteLocalizedStrings* names) mut => VT.GetFamilyNames(ref this, out names);
-			public HRESULT GetFirstMatchingFont(FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFont* matchingFont) mut => VT.GetFirstMatchingFont(ref this, weight, stretch, style, out matchingFont);
-			public HRESULT GetMatchingFonts(FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFontList* matchingFonts) mut => VT.GetMatchingFonts(ref this, weight, stretch, style, out matchingFonts);
+			public HResult GetFamilyNames(out IDWriteLocalizedStrings* names) mut => VT.GetFamilyNames(ref this, out names);
+			public HResult GetFirstMatchingFont(FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFont* matchingFont) mut => VT.GetFirstMatchingFont(ref this, weight, stretch, style, out matchingFont);
+			public HResult GetMatchingFonts(FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFontList* matchingFonts) mut => VT.GetMatchingFonts(ref this, weight, stretch, style, out matchingFonts);
 
 			[CRepr]
 			public struct VTable : IDWriteFontList.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily self, out IDWriteLocalizedStrings* names) GetFamilyNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily self, FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFont* matchingFont) GetFirstMatchingFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily self, FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFontList* matchingFonts) GetMatchingFonts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily self, out IDWriteLocalizedStrings* names) GetFamilyNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily self, FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFont* matchingFont) GetFirstMatchingFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily self, FontWeight weight, FontStretch stretch, FontStyle style, out IDWriteFontList* matchingFonts) GetMatchingFonts;
 			}
 		}
 		[CRepr]
@@ -1522,32 +1535,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontFamily(out IDWriteFontFamily* fontFamily) mut => VT.GetFontFamily(ref this, out fontFamily);
+			public HResult GetFontFamily(out IDWriteFontFamily* fontFamily) mut => VT.GetFontFamily(ref this, out fontFamily);
 			public FontWeight GetWeight() mut => VT.GetWeight(ref this);
 			public FontStretch GetStretch() mut => VT.GetStretch(ref this);
 			public FontStyle GetStyle() mut => VT.GetStyle(ref this);
-			public BOOL IsSymbolFont() mut => VT.IsSymbolFont(ref this);
-			public HRESULT GetFaceNames(out IDWriteLocalizedStrings* names) mut => VT.GetFaceNames(ref this, out names);
-			public HRESULT GetInformationalStrings(DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out BOOL exists) mut => VT.GetInformationalStrings(ref this, informationalStringID, informationalStrings, out exists);
+			public IntBool IsSymbolFont() mut => VT.IsSymbolFont(ref this);
+			public HResult GetFaceNames(out IDWriteLocalizedStrings* names) mut => VT.GetFaceNames(ref this, out names);
+			public HResult GetInformationalStrings(DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out IntBool exists) mut => VT.GetInformationalStrings(ref this, informationalStringID, informationalStrings, out exists);
 			public FontSimulations GetSimulations() mut => VT.GetSimulations(ref this);
 			public void GetMetrics(out FontMetrics fontMetrics) mut => VT.GetMetrics(ref this, out fontMetrics);
-			public HRESULT HasCharacter(uint32 unicodeValue, out BOOL exists) mut => VT.HasCharacter(ref this, unicodeValue, out exists);
-			public HRESULT CreateFontFace(out IDWriteFontFace* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
+			public HResult HasCharacter(uint32 unicodeValue, out IntBool exists) mut => VT.HasCharacter(ref this, unicodeValue, out exists);
+			public HResult CreateFontFace(out IDWriteFontFace* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont self, out IDWriteFontFamily* fontFamily) GetFontFamily;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont self, out IDWriteFontFamily* fontFamily) GetFontFamily;
 				public new function [CallingConvention(.Stdcall)] FontWeight(ref IDWriteFont self) GetWeight;
 				public new function [CallingConvention(.Stdcall)] FontStretch(ref IDWriteFont self) GetStretch;
 				public new function [CallingConvention(.Stdcall)] FontStyle(ref IDWriteFont self) GetStyle;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFont self) IsSymbolFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont self, out IDWriteLocalizedStrings* names) GetFaceNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont self, DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out BOOL exists) GetInformationalStrings;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFont self) IsSymbolFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont self, out IDWriteLocalizedStrings* names) GetFaceNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont self, DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out IntBool exists) GetInformationalStrings;
 				public new function [CallingConvention(.Stdcall)] FontSimulations(ref IDWriteFont self) GetSimulations;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFont self, out FontMetrics fontMetrics) GetMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont self, uint32 unicodeValue, out BOOL exists) HasCharacter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont self, out IDWriteFontFace* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont self, uint32 unicodeValue, out IntBool exists) HasCharacter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont self, out IDWriteFontFace* fontFace) CreateFontFace;
 			}
 		}
 		[CRepr]
@@ -1557,33 +1570,33 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetTextAlignment(TextAlignment textAlignment) mut => VT.SetTextAlignment(ref this, textAlignment);
-			public HRESULT SetParagraphAlignment(ParagraphAlignment paragraphAlignment) mut => VT.SetParagraphAlignment(ref this, paragraphAlignment);
-			public HRESULT SetWordWrapping(WordWrapping wordWrapping) mut => VT.SetWordWrapping(ref this, wordWrapping);
-			public HRESULT SetReadingDirection(DWRITE_READING_DIRECTION readingDirection) mut => VT.SetReadingDirection(ref this, readingDirection);
-			public HRESULT SetFlowDirection(DWRITE_FLOW_DIRECTION flowDirection) mut => VT.SetFlowDirection(ref this, flowDirection);
-			public HRESULT SetIncrementalTabStop(float incrementalTabStop) mut => VT.SetIncrementalTabStop(ref this, incrementalTabStop);
-			public HRESULT SetTrimming(in DWRITE_TRIMMING trimmingOptions, IDWriteInlineObject* trimmingSign) mut => VT.SetTrimming(ref this, trimmingOptions, trimmingSign);
-			public HRESULT SetLineSpacing(LineSpacingMethod lineSpacingMethod, float lineSpacing, float baseline) mut => VT.SetLineSpacing(ref this, lineSpacingMethod, lineSpacing, baseline);
+			public HResult SetTextAlignment(TextAlignment textAlignment) mut => VT.SetTextAlignment(ref this, textAlignment);
+			public HResult SetParagraphAlignment(ParagraphAlignment paragraphAlignment) mut => VT.SetParagraphAlignment(ref this, paragraphAlignment);
+			public HResult SetWordWrapping(WordWrapping wordWrapping) mut => VT.SetWordWrapping(ref this, wordWrapping);
+			public HResult SetReadingDirection(DWRITE_READING_DIRECTION readingDirection) mut => VT.SetReadingDirection(ref this, readingDirection);
+			public HResult SetFlowDirection(DWRITE_FLOW_DIRECTION flowDirection) mut => VT.SetFlowDirection(ref this, flowDirection);
+			public HResult SetIncrementalTabStop(float incrementalTabStop) mut => VT.SetIncrementalTabStop(ref this, incrementalTabStop);
+			public HResult SetTrimming(in DWRITE_TRIMMING trimmingOptions, IDWriteInlineObject* trimmingSign) mut => VT.SetTrimming(ref this, trimmingOptions, trimmingSign);
+			public HResult SetLineSpacing(LineSpacingMethod lineSpacingMethod, float lineSpacing, float baseline) mut => VT.SetLineSpacing(ref this, lineSpacingMethod, lineSpacing, baseline);
 			public TextAlignment GetTextAlignment() mut => VT.GetTextAlignment(ref this);
 			public ParagraphAlignment GetParagraphAlignment() mut => VT.GetParagraphAlignment(ref this);
 			public WordWrapping GetWordWrapping() mut => VT.GetWordWrapping(ref this);
 			public DWRITE_READING_DIRECTION GetReadingDirection() mut => VT.GetReadingDirection(ref this);
 			public DWRITE_FLOW_DIRECTION GetFlowDirection() mut => VT.GetFlowDirection(ref this);
 			public float GetIncrementalTabStop() mut => VT.GetIncrementalTabStop(ref this);
-			public HRESULT GetTrimming(out DWRITE_TRIMMING trimmingOptions, out IDWriteInlineObject* trimmingSign) mut => VT.GetTrimming(ref this, out trimmingOptions, out trimmingSign);
-			public HRESULT GetLineSpacing(out LineSpacingMethod lineSpacingMethod, out float lineSpacing, out float baseline) mut => VT.GetLineSpacing(ref this, out lineSpacingMethod, out lineSpacing, out baseline);
-			public HRESULT GetFontCollection(out IDWriteFontCollection* fontCollection) mut => VT.GetFontCollection(ref this, out fontCollection);
+			public HResult GetTrimming(out DWRITE_TRIMMING trimmingOptions, out IDWriteInlineObject* trimmingSign) mut => VT.GetTrimming(ref this, out trimmingOptions, out trimmingSign);
+			public HResult GetLineSpacing(out LineSpacingMethod lineSpacingMethod, out float lineSpacing, out float baseline) mut => VT.GetLineSpacing(ref this, out lineSpacingMethod, out lineSpacing, out baseline);
+			public HResult GetFontCollection(out IDWriteFontCollection* fontCollection) mut => VT.GetFontCollection(ref this, out fontCollection);
 			public uint32 GetFontFamilyNameLength() mut => VT.GetFontFamilyNameLength(ref this);
-			public HRESULT GetFontFamilyName(char16* fontFamilyName, uint32 nameSize) mut => VT.GetFontFamilyName(ref this, fontFamilyName, nameSize);
+			public HResult GetFontFamilyName(char16* fontFamilyName, uint32 nameSize) mut => VT.GetFontFamilyName(ref this, fontFamilyName, nameSize);
 			public FontWeight GetFontWeight() mut => VT.GetFontWeight(ref this);
 			public FontStyle GetFontStyle() mut => VT.GetFontStyle(ref this);
 			public FontStretch GetFontStretch() mut => VT.GetFontStretch(ref this);
 			public float GetFontSize() mut => VT.GetFontSize(ref this);
 			public uint32 GetLocaleNameLength() mut => VT.GetLocaleNameLength(ref this);
-			public HRESULT GetLocaleName(char16* localeName, uint32 nameSize) mut => VT.GetLocaleName(ref this, localeName, nameSize);
+			public HResult GetLocaleName(char16* localeName, uint32 nameSize) mut => VT.GetLocaleName(ref this, localeName, nameSize);
 
-			public HRESULT GetFontFamilyName(String buffer) mut {
+			public HResult GetFontFamilyName(String buffer) mut {
 				var length = GetFontFamilyNameLength();
 
 				char16[] chars = scope .[length + 1];
@@ -1598,31 +1611,31 @@ namespace Win32
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, TextAlignment textAlignment) SetTextAlignment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, ParagraphAlignment paragraphAlignment) SetParagraphAlignment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, WordWrapping wordWrapping) SetWordWrapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, DWRITE_READING_DIRECTION readingDirection) SetReadingDirection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, DWRITE_FLOW_DIRECTION flowDirection) SetFlowDirection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, float incrementalTabStop) SetIncrementalTabStop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, in DWRITE_TRIMMING trimmingOptions, IDWriteInlineObject* trimmingSign) SetTrimming;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, LineSpacingMethod lineSpacingMethod, float lineSpacing, float baseline) SetLineSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, TextAlignment textAlignment) SetTextAlignment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, ParagraphAlignment paragraphAlignment) SetParagraphAlignment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, WordWrapping wordWrapping) SetWordWrapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, DWRITE_READING_DIRECTION readingDirection) SetReadingDirection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, DWRITE_FLOW_DIRECTION flowDirection) SetFlowDirection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, float incrementalTabStop) SetIncrementalTabStop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, in DWRITE_TRIMMING trimmingOptions, IDWriteInlineObject* trimmingSign) SetTrimming;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, LineSpacingMethod lineSpacingMethod, float lineSpacing, float baseline) SetLineSpacing;
 				public new function [CallingConvention(.Stdcall)] TextAlignment(ref IDWriteTextFormat self) GetTextAlignment;
 				public new function [CallingConvention(.Stdcall)] ParagraphAlignment(ref IDWriteTextFormat self) GetParagraphAlignment;
 				public new function [CallingConvention(.Stdcall)] WordWrapping(ref IDWriteTextFormat self) GetWordWrapping;
 				public new function [CallingConvention(.Stdcall)] DWRITE_READING_DIRECTION(ref IDWriteTextFormat self) GetReadingDirection;
 				public new function [CallingConvention(.Stdcall)] DWRITE_FLOW_DIRECTION(ref IDWriteTextFormat self) GetFlowDirection;
 				public new function [CallingConvention(.Stdcall)] float(ref IDWriteTextFormat self) GetIncrementalTabStop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, out DWRITE_TRIMMING trimmingOptions, out IDWriteInlineObject* trimmingSign) GetTrimming;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, out LineSpacingMethod lineSpacingMethod, out float lineSpacing, out float baseline) GetLineSpacing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, out IDWriteFontCollection* fontCollection) GetFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, out DWRITE_TRIMMING trimmingOptions, out IDWriteInlineObject* trimmingSign) GetTrimming;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, out LineSpacingMethod lineSpacingMethod, out float lineSpacing, out float baseline) GetLineSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, out IDWriteFontCollection* fontCollection) GetFontCollection;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteTextFormat self) GetFontFamilyNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, char16* fontFamilyName, uint32 nameSize) GetFontFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, char16* fontFamilyName, uint32 nameSize) GetFontFamilyName;
 				public new function [CallingConvention(.Stdcall)] FontWeight(ref IDWriteTextFormat self) GetFontWeight;
 				public new function [CallingConvention(.Stdcall)] FontStyle(ref IDWriteTextFormat self) GetFontStyle;
 				public new function [CallingConvention(.Stdcall)] FontStretch(ref IDWriteTextFormat self) GetFontStretch;
 				public new function [CallingConvention(.Stdcall)] float(ref IDWriteTextFormat self) GetFontSize;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteTextFormat self) GetLocaleNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat self, char16* localeName, uint32 nameSize) GetLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat self, char16* localeName, uint32 nameSize) GetLocaleName;
 			}
 		}
 		[CRepr]
@@ -1632,16 +1645,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddFontFeature(DWRITE_FONT_FEATURE fontFeature) mut => VT.AddFontFeature(ref this, fontFeature);
+			public HResult AddFontFeature(FontFeature fontFeature) mut => VT.AddFontFeature(ref this, fontFeature);
 			public uint32 GetFontFeatureCount() mut => VT.GetFontFeatureCount(ref this);
-			public HRESULT GetFontFeature(uint32 fontFeatureIndex, out DWRITE_FONT_FEATURE fontFeature) mut => VT.GetFontFeature(ref this, fontFeatureIndex, out fontFeature);
+			public HResult GetFontFeature(uint32 fontFeatureIndex, out FontFeature fontFeature) mut => VT.GetFontFeature(ref this, fontFeatureIndex, out fontFeature);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTypography self, DWRITE_FONT_FEATURE fontFeature) AddFontFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTypography self, FontFeature fontFeature) AddFontFeature;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteTypography self) GetFontFeatureCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTypography self, uint32 fontFeatureIndex, out DWRITE_FONT_FEATURE fontFeature) GetFontFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTypography self, uint32 fontFeatureIndex, out FontFeature fontFeature) GetFontFeature;
 			}
 		}
 		[CRepr]
@@ -1661,20 +1674,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTextAtPosition(uint32 textPosition, out uint16* textString, out uint32 textLength) mut => VT.GetTextAtPosition(ref this, textPosition, out textString, out textLength);
-			public HRESULT GetTextBeforePosition(uint32 textPosition, out uint16* textString, out uint32 textLength) mut => VT.GetTextBeforePosition(ref this, textPosition, out textString, out textLength);
+			public HResult GetTextAtPosition(uint32 textPosition, out uint16* textString, out uint32 textLength) mut => VT.GetTextAtPosition(ref this, textPosition, out textString, out textLength);
+			public HResult GetTextBeforePosition(uint32 textPosition, out uint16* textString, out uint32 textLength) mut => VT.GetTextBeforePosition(ref this, textPosition, out textString, out textLength);
 			public DWRITE_READING_DIRECTION GetParagraphReadingDirection() mut => VT.GetParagraphReadingDirection(ref this);
-			public HRESULT GetLocaleName(uint32 textPosition, out uint32 textLength, out uint16* localeName) mut => VT.GetLocaleName(ref this, textPosition, out textLength, out localeName);
-			public HRESULT GetNumberSubstitution(uint32 textPosition, out uint32 textLength, out IDWriteNumberSubstitution* numberSubstitution) mut => VT.GetNumberSubstitution(ref this, textPosition, out textLength, out numberSubstitution);
+			public HResult GetLocaleName(uint32 textPosition, out uint32 textLength, out uint16* localeName) mut => VT.GetLocaleName(ref this, textPosition, out textLength, out localeName);
+			public HResult GetNumberSubstitution(uint32 textPosition, out uint32 textLength, out IDWriteNumberSubstitution* numberSubstitution) mut => VT.GetNumberSubstitution(ref this, textPosition, out textLength, out numberSubstitution);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint16* textString, out uint32 textLength) GetTextAtPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint16* textString, out uint32 textLength) GetTextBeforePosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint16* textString, out uint32 textLength) GetTextAtPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint16* textString, out uint32 textLength) GetTextBeforePosition;
 				public new function [CallingConvention(.Stdcall)] DWRITE_READING_DIRECTION(ref IDWriteTextAnalysisSource self) GetParagraphReadingDirection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint32 textLength, out uint16* localeName) GetLocaleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint32 textLength, out IDWriteNumberSubstitution* numberSubstitution) GetNumberSubstitution;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint32 textLength, out uint16* localeName) GetLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSource self, uint32 textPosition, out uint32 textLength, out IDWriteNumberSubstitution* numberSubstitution) GetNumberSubstitution;
 			}
 		}
 		[CRepr]
@@ -1684,18 +1697,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetScriptAnalysis(uint32 textPosition, uint32 textLength, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis) mut => VT.SetScriptAnalysis(ref this, textPosition, textLength, scriptAnalysis);
-			public HRESULT SetLineBreakpoints(uint32 textPosition, uint32 textLength, DWRITE_LINE_BREAKPOINT* lineBreakpoints) mut => VT.SetLineBreakpoints(ref this, textPosition, textLength, lineBreakpoints);
-			public HRESULT SetBidiLevel(uint32 textPosition, uint32 textLength, uint8 explicitLevel, uint8 resolvedLevel) mut => VT.SetBidiLevel(ref this, textPosition, textLength, explicitLevel, resolvedLevel);
-			public HRESULT SetNumberSubstitution(uint32 textPosition, uint32 textLength, ref IDWriteNumberSubstitution numberSubstitution) mut => VT.SetNumberSubstitution(ref this, textPosition, textLength, ref numberSubstitution);
+			public HResult SetScriptAnalysis(uint32 textPosition, uint32 textLength, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis) mut => VT.SetScriptAnalysis(ref this, textPosition, textLength, scriptAnalysis);
+			public HResult SetLineBreakpoints(uint32 textPosition, uint32 textLength, DWRITE_LINE_BREAKPOINT* lineBreakpoints) mut => VT.SetLineBreakpoints(ref this, textPosition, textLength, lineBreakpoints);
+			public HResult SetBidiLevel(uint32 textPosition, uint32 textLength, uint8 explicitLevel, uint8 resolvedLevel) mut => VT.SetBidiLevel(ref this, textPosition, textLength, explicitLevel, resolvedLevel);
+			public HResult SetNumberSubstitution(uint32 textPosition, uint32 textLength, ref IDWriteNumberSubstitution numberSubstitution) mut => VT.SetNumberSubstitution(ref this, textPosition, textLength, ref numberSubstitution);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis) SetScriptAnalysis;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, DWRITE_LINE_BREAKPOINT* lineBreakpoints) SetLineBreakpoints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, uint8 explicitLevel, uint8 resolvedLevel) SetBidiLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, ref IDWriteNumberSubstitution numberSubstitution) SetNumberSubstitution;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis) SetScriptAnalysis;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, DWRITE_LINE_BREAKPOINT* lineBreakpoints) SetLineBreakpoints;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, uint8 explicitLevel, uint8 resolvedLevel) SetBidiLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSink self, uint32 textPosition, uint32 textLength, ref IDWriteNumberSubstitution numberSubstitution) SetNumberSubstitution;
 			}
 		}
 		[CRepr]
@@ -1705,24 +1718,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AnalyzeScript(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeScript(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
-			public HRESULT AnalyzeBidi(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeBidi(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
-			public HRESULT AnalyzeNumberSubstitution(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeNumberSubstitution(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
-			public HRESULT AnalyzeLineBreakpoints(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeLineBreakpoints(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
-			public HRESULT GetGlyphs(char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, BOOL isSideways, BOOL isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, IDWriteNumberSubstitution* numberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, uint32 maxGlyphCount, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, out uint32 actualGlyphCount) mut => VT.GetGlyphs(ref this, textString, textLength, ref fontFace, isSideways, isRightToLeft, scriptAnalysis, localeName, numberSubstitution, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, out actualGlyphCount);
-			public HRESULT GetGlyphPlacements(char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, BOOL isSideways, BOOL isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) mut => VT.GetGlyphPlacements(ref this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, ref fontFace, fontEmSize, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets);
-			public HRESULT GetGdiCompatibleGlyphPlacements(char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, BOOL isSideways, BOOL isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) mut => VT.GetGdiCompatibleGlyphPlacements(ref this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, ref fontFace, fontEmSize, pixelsPerDip, transform, useGdiNatural, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets);
+			public HResult AnalyzeScript(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeScript(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
+			public HResult AnalyzeBidi(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeBidi(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
+			public HResult AnalyzeNumberSubstitution(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeNumberSubstitution(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
+			public HResult AnalyzeLineBreakpoints(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) mut => VT.AnalyzeLineBreakpoints(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
+			public HResult GetGlyphs(char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, IntBool isSideways, IntBool isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, IDWriteNumberSubstitution* numberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, uint32 maxGlyphCount, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, out uint32 actualGlyphCount) mut => VT.GetGlyphs(ref this, textString, textLength, ref fontFace, isSideways, isRightToLeft, scriptAnalysis, localeName, numberSubstitution, features, featureRangeLengths, featureRanges, maxGlyphCount, clusterMap, textProps, glyphIndices, glyphProps, out actualGlyphCount);
+			public HResult GetGlyphPlacements(char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, IntBool isSideways, IntBool isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) mut => VT.GetGlyphPlacements(ref this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, ref fontFace, fontEmSize, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets);
+			public HResult GetGdiCompatibleGlyphPlacements(char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, IntBool isSideways, IntBool isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) mut => VT.GetGdiCompatibleGlyphPlacements(ref this, textString, clusterMap, textProps, textLength, glyphIndices, glyphProps, glyphCount, ref fontFace, fontEmSize, pixelsPerDip, transform, useGdiNatural, isSideways, isRightToLeft, scriptAnalysis, localeName, features, featureRangeLengths, featureRanges, glyphAdvances, glyphOffsets);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeScript;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeBidi;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeNumberSubstitution;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeLineBreakpoints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, BOOL isSideways, BOOL isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, IDWriteNumberSubstitution* numberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, uint32 maxGlyphCount, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, out uint32 actualGlyphCount) GetGlyphs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, BOOL isSideways, BOOL isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) GetGlyphPlacements;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer self, char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, BOOL isSideways, BOOL isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) GetGdiCompatibleGlyphPlacements;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeScript;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeBidi;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeNumberSubstitution;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink analysisSink) AnalyzeLineBreakpoints;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, IntBool isSideways, IntBool isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, IDWriteNumberSubstitution* numberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, uint32 maxGlyphCount, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, out uint32 actualGlyphCount) GetGlyphs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, IntBool isSideways, IntBool isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) GetGlyphPlacements;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer self, char16* textString, uint16* clusterMap, DWRITE_SHAPING_TEXT_PROPERTIES* textProps, uint32 textLength, uint16* glyphIndices, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProps, uint32 glyphCount, ref IDWriteFontFace fontFace, float fontEmSize, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, IntBool isSideways, IntBool isRightToLeft, in DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, DWRITE_TYPOGRAPHIC_FEATURES** features, uint32* featureRangeLengths, uint32 featureRanges, float* glyphAdvances, GlyphOffset* glyphOffsets) GetGdiCompatibleGlyphPlacements;
 			}
 		}
 		[CRepr]
@@ -1732,18 +1745,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Draw(void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY, BOOL isSideways, BOOL isRightToLeft, IUnknown* clientDrawingEffect) mut => VT.Draw(ref this, clientDrawingContext, ref renderer, originX, originY, isSideways, isRightToLeft, clientDrawingEffect);
-			public HRESULT GetMetrics(out DWRITE_INLINE_OBJECT_METRICS metrics) mut => VT.GetMetrics(ref this, out metrics);
-			public HRESULT GetOverhangMetrics(out DWRITE_OVERHANG_METRICS overhangs) mut => VT.GetOverhangMetrics(ref this, out overhangs);
-			public HRESULT GetBreakConditions(out DWRITE_BREAK_CONDITION breakConditionBefore, out DWRITE_BREAK_CONDITION breakConditionAfter) mut => VT.GetBreakConditions(ref this, out breakConditionBefore, out breakConditionAfter);
+			public HResult Draw(void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY, IntBool isSideways, IntBool isRightToLeft, IUnknown* clientDrawingEffect) mut => VT.Draw(ref this, clientDrawingContext, ref renderer, originX, originY, isSideways, isRightToLeft, clientDrawingEffect);
+			public HResult GetMetrics(out DWRITE_INLINE_OBJECT_METRICS metrics) mut => VT.GetMetrics(ref this, out metrics);
+			public HResult GetOverhangMetrics(out DWRITE_OVERHANG_METRICS overhangs) mut => VT.GetOverhangMetrics(ref this, out overhangs);
+			public HResult GetBreakConditions(out DWRITE_BREAK_CONDITION breakConditionBefore, out DWRITE_BREAK_CONDITION breakConditionAfter) mut => VT.GetBreakConditions(ref this, out breakConditionBefore, out breakConditionAfter);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteInlineObject self, void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY, BOOL isSideways, BOOL isRightToLeft, IUnknown* clientDrawingEffect) Draw;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteInlineObject self, out DWRITE_INLINE_OBJECT_METRICS metrics) GetMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteInlineObject self, out DWRITE_OVERHANG_METRICS overhangs) GetOverhangMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteInlineObject self, out DWRITE_BREAK_CONDITION breakConditionBefore, out DWRITE_BREAK_CONDITION breakConditionAfter) GetBreakConditions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteInlineObject self, void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY, IntBool isSideways, IntBool isRightToLeft, IUnknown* clientDrawingEffect) Draw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteInlineObject self, out DWRITE_INLINE_OBJECT_METRICS metrics) GetMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteInlineObject self, out DWRITE_OVERHANG_METRICS overhangs) GetOverhangMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteInlineObject self, out DWRITE_BREAK_CONDITION breakConditionBefore, out DWRITE_BREAK_CONDITION breakConditionAfter) GetBreakConditions;
 			}
 		}
 		[CRepr]
@@ -1753,16 +1766,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsPixelSnappingDisabled(void* clientDrawingContext, out BOOL isDisabled) mut => VT.IsPixelSnappingDisabled(ref this, clientDrawingContext, out isDisabled);
-			public HRESULT GetCurrentTransform(void* clientDrawingContext, out DWRITE_MATRIX transform) mut => VT.GetCurrentTransform(ref this, clientDrawingContext, out transform);
-			public HRESULT GetPixelsPerDip(void* clientDrawingContext, out float pixelsPerDip) mut => VT.GetPixelsPerDip(ref this, clientDrawingContext, out pixelsPerDip);
+			public HResult IsPixelSnappingDisabled(void* clientDrawingContext, out IntBool isDisabled) mut => VT.IsPixelSnappingDisabled(ref this, clientDrawingContext, out isDisabled);
+			public HResult GetCurrentTransform(void* clientDrawingContext, out DWriteMatrix transform) mut => VT.GetCurrentTransform(ref this, clientDrawingContext, out transform);
+			public HResult GetPixelsPerDip(void* clientDrawingContext, out float pixelsPerDip) mut => VT.GetPixelsPerDip(ref this, clientDrawingContext, out pixelsPerDip);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWritePixelSnapping self, void* clientDrawingContext, out BOOL isDisabled) IsPixelSnappingDisabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWritePixelSnapping self, void* clientDrawingContext, out DWRITE_MATRIX transform) GetCurrentTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWritePixelSnapping self, void* clientDrawingContext, out float pixelsPerDip) GetPixelsPerDip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWritePixelSnapping self, void* clientDrawingContext, out IntBool isDisabled) IsPixelSnappingDisabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWritePixelSnapping self, void* clientDrawingContext, out DWriteMatrix transform) GetCurrentTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWritePixelSnapping self, void* clientDrawingContext, out float pixelsPerDip) GetPixelsPerDip;
 			}
 		}
 		[CRepr]
@@ -1772,18 +1785,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DrawGlyphRun(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) mut => VT.DrawGlyphRun(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, measuringMode, glyphRun, glyphRunDescription, clientDrawingEffect);
-			public HRESULT DrawUnderline(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) mut => VT.DrawUnderline(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, underline, clientDrawingEffect);
-			public HRESULT DrawStrikethrough(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) mut => VT.DrawStrikethrough(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, strikethrough, clientDrawingEffect);
-			public HRESULT DrawInlineObject(void* clientDrawingContext, float originX, float originY, ref IDWriteInlineObject inlineObject, BOOL isSideways, BOOL isRightToLeft, IUnknown* clientDrawingEffect) mut => VT.DrawInlineObject(ref this, clientDrawingContext, originX, originY, ref inlineObject, isSideways, isRightToLeft, clientDrawingEffect);
+			public HResult DrawGlyphRun(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) mut => VT.DrawGlyphRun(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, measuringMode, glyphRun, glyphRunDescription, clientDrawingEffect);
+			public HResult DrawUnderline(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) mut => VT.DrawUnderline(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, underline, clientDrawingEffect);
+			public HResult DrawStrikethrough(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) mut => VT.DrawStrikethrough(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, strikethrough, clientDrawingEffect);
+			public HResult DrawInlineObject(void* clientDrawingContext, float originX, float originY, ref IDWriteInlineObject inlineObject, IntBool isSideways, IntBool isRightToLeft, IUnknown* clientDrawingEffect) mut => VT.DrawInlineObject(ref this, clientDrawingContext, originX, originY, ref inlineObject, isSideways, isRightToLeft, clientDrawingEffect);
 
 			[CRepr]
 			public struct VTable : IDWritePixelSnapping.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) DrawGlyphRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) DrawUnderline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) DrawStrikethrough;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer self, void* clientDrawingContext, float originX, float originY, ref IDWriteInlineObject inlineObject, BOOL isSideways, BOOL isRightToLeft, IUnknown* clientDrawingEffect) DrawInlineObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) DrawGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) DrawUnderline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) DrawStrikethrough;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer self, void* clientDrawingContext, float originX, float originY, ref IDWriteInlineObject inlineObject, IntBool isSideways, IntBool isRightToLeft, IUnknown* clientDrawingEffect) DrawInlineObject;
 			}
 		}
 		[CRepr]
@@ -1793,88 +1806,88 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetMaxWidth(float maxWidth) mut => VT.SetMaxWidth(ref this, maxWidth);
-			public HRESULT SetMaxHeight(float maxHeight) mut => VT.SetMaxHeight(ref this, maxHeight);
-			public HRESULT SetFontCollection(ref IDWriteFontCollection fontCollection, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontCollection(ref this, ref fontCollection, textRange);
-			public HRESULT SetFontFamilyName(PWSTR fontFamilyName, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontFamilyName(ref this, fontFamilyName, textRange);
-			public HRESULT SetFontWeight(FontWeight fontWeight, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontWeight(ref this, fontWeight, textRange);
-			public HRESULT SetFontStyle(FontStyle fontStyle, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontStyle(ref this, fontStyle, textRange);
-			public HRESULT SetFontStretch(FontStretch fontStretch, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontStretch(ref this, fontStretch, textRange);
-			public HRESULT SetFontSize(float fontSize, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontSize(ref this, fontSize, textRange);
-			public HRESULT SetUnderline(BOOL hasUnderline, DWRITE_TEXT_RANGE textRange) mut => VT.SetUnderline(ref this, hasUnderline, textRange);
-			public HRESULT SetStrikethrough(BOOL hasStrikethrough, DWRITE_TEXT_RANGE textRange) mut => VT.SetStrikethrough(ref this, hasStrikethrough, textRange);
-			public HRESULT SetDrawingEffect(ref IUnknown drawingEffect, DWRITE_TEXT_RANGE textRange) mut => VT.SetDrawingEffect(ref this, ref drawingEffect, textRange);
-			public HRESULT SetInlineObject(ref IDWriteInlineObject inlineObject, DWRITE_TEXT_RANGE textRange) mut => VT.SetInlineObject(ref this, ref inlineObject, textRange);
-			public HRESULT SetTypography(ref IDWriteTypography typography, DWRITE_TEXT_RANGE textRange) mut => VT.SetTypography(ref this, ref typography, textRange);
-			public HRESULT SetLocaleName(PWSTR localeName, DWRITE_TEXT_RANGE textRange) mut => VT.SetLocaleName(ref this, localeName, textRange);
+			public HResult SetMaxWidth(float maxWidth) mut => VT.SetMaxWidth(ref this, maxWidth);
+			public HResult SetMaxHeight(float maxHeight) mut => VT.SetMaxHeight(ref this, maxHeight);
+			public HResult SetFontCollection(ref IDWriteFontCollection fontCollection, TextRange textRange) mut => VT.SetFontCollection(ref this, ref fontCollection, textRange);
+			public HResult SetFontFamilyName(char16* fontFamilyName, TextRange textRange) mut => VT.SetFontFamilyName(ref this, fontFamilyName, textRange);
+			public HResult SetFontWeight(FontWeight fontWeight, TextRange textRange) mut => VT.SetFontWeight(ref this, fontWeight, textRange);
+			public HResult SetFontStyle(FontStyle fontStyle, TextRange textRange) mut => VT.SetFontStyle(ref this, fontStyle, textRange);
+			public HResult SetFontStretch(FontStretch fontStretch, TextRange textRange) mut => VT.SetFontStretch(ref this, fontStretch, textRange);
+			public HResult SetFontSize(float fontSize, TextRange textRange) mut => VT.SetFontSize(ref this, fontSize, textRange);
+			public HResult SetUnderline(IntBool hasUnderline, TextRange textRange) mut => VT.SetUnderline(ref this, hasUnderline, textRange);
+			public HResult SetStrikethrough(IntBool hasStrikethrough, TextRange textRange) mut => VT.SetStrikethrough(ref this, hasStrikethrough, textRange);
+			public HResult SetDrawingEffect(ref IUnknown drawingEffect, TextRange textRange) mut => VT.SetDrawingEffect(ref this, ref drawingEffect, textRange);
+			public HResult SetInlineObject(ref IDWriteInlineObject inlineObject, TextRange textRange) mut => VT.SetInlineObject(ref this, ref inlineObject, textRange);
+			public HResult SetTypography(ref IDWriteTypography typography, TextRange textRange) mut => VT.SetTypography(ref this, ref typography, textRange);
+			public HResult SetLocaleName(char16* localeName, TextRange textRange) mut => VT.SetLocaleName(ref this, localeName, textRange);
 			public float GetMaxWidth() mut => VT.GetMaxWidth(ref this);
 			public float GetMaxHeight() mut => VT.GetMaxHeight(ref this);
-			public HRESULT GetFontCollection(uint32 currentPosition, out IDWriteFontCollection* fontCollection, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontCollection(ref this, currentPosition, out fontCollection, textRange);
-			public HRESULT GetFontFamilyNameLength(uint32 currentPosition, out uint32 nameLength, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontFamilyNameLength(ref this, currentPosition, out nameLength, textRange);
-			public HRESULT GetFontFamilyName(uint32 currentPosition, char16* fontFamilyName, uint32 nameSize, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontFamilyName(ref this, currentPosition, fontFamilyName, nameSize, textRange);
-			public HRESULT GetFontWeight(uint32 currentPosition, out FontWeight fontWeight, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontWeight(ref this, currentPosition, out fontWeight, textRange);
-			public HRESULT GetFontStyle(uint32 currentPosition, out FontStyle fontStyle, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontStyle(ref this, currentPosition, out fontStyle, textRange);
-			public HRESULT GetFontStretch(uint32 currentPosition, out FontStretch fontStretch, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontStretch(ref this, currentPosition, out fontStretch, textRange);
-			public HRESULT GetFontSize(uint32 currentPosition, out float fontSize, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontSize(ref this, currentPosition, out fontSize, textRange);
-			public HRESULT GetUnderline(uint32 currentPosition, out BOOL hasUnderline, DWRITE_TEXT_RANGE* textRange) mut => VT.GetUnderline(ref this, currentPosition, out hasUnderline, textRange);
-			public HRESULT GetStrikethrough(uint32 currentPosition, out BOOL hasStrikethrough, DWRITE_TEXT_RANGE* textRange) mut => VT.GetStrikethrough(ref this, currentPosition, out hasStrikethrough, textRange);
-			public HRESULT GetDrawingEffect(uint32 currentPosition, out IUnknown* drawingEffect, DWRITE_TEXT_RANGE* textRange) mut => VT.GetDrawingEffect(ref this, currentPosition, out drawingEffect, textRange);
-			public HRESULT GetInlineObject(uint32 currentPosition, out IDWriteInlineObject* inlineObject, DWRITE_TEXT_RANGE* textRange) mut => VT.GetInlineObject(ref this, currentPosition, out inlineObject, textRange);
-			public HRESULT GetTypography(uint32 currentPosition, out IDWriteTypography* typography, DWRITE_TEXT_RANGE* textRange) mut => VT.GetTypography(ref this, currentPosition, out typography, textRange);
-			public HRESULT GetLocaleNameLength(uint32 currentPosition, out uint32 nameLength, DWRITE_TEXT_RANGE* textRange) mut => VT.GetLocaleNameLength(ref this, currentPosition, out nameLength, textRange);
-			public HRESULT GetLocaleName(uint32 currentPosition, char16* localeName, uint32 nameSize, DWRITE_TEXT_RANGE* textRange) mut => VT.GetLocaleName(ref this, currentPosition, localeName, nameSize, textRange);
-			public HRESULT Draw(void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY) mut => VT.Draw(ref this, clientDrawingContext, ref renderer, originX, originY);
-			public HRESULT GetLineMetrics(LineMetrics* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) mut => VT.GetLineMetrics(ref this, lineMetrics, maxLineCount, out actualLineCount);
-			public HRESULT GetMetrics(out DWRITE_TEXT_METRICS textMetrics) mut => VT.GetMetrics(ref this, out textMetrics);
-			public HRESULT GetOverhangMetrics(out DWRITE_OVERHANG_METRICS overhangs) mut => VT.GetOverhangMetrics(ref this, out overhangs);
-			public HRESULT GetClusterMetrics(DWRITE_CLUSTER_METRICS* clusterMetrics, uint32 maxClusterCount, out uint32 actualClusterCount) mut => VT.GetClusterMetrics(ref this, clusterMetrics, maxClusterCount, out actualClusterCount);
-			public HRESULT DetermineMinWidth(out float minWidth) mut => VT.DetermineMinWidth(ref this, out minWidth);
-			public HRESULT HitTestPoint(float pointX, float pointY, out BOOL isTrailingHit, out BOOL isInside, out DWRITE_HIT_TEST_METRICS hitTestMetrics) mut => VT.HitTestPoint(ref this, pointX, pointY, out isTrailingHit, out isInside, out hitTestMetrics);
-			public HRESULT HitTestTextPosition(uint32 textPosition, BOOL isTrailingHit, out float pointX, out float pointY, out DWRITE_HIT_TEST_METRICS hitTestMetrics) mut => VT.HitTestTextPosition(ref this, textPosition, isTrailingHit, out pointX, out pointY, out hitTestMetrics);
-			public HRESULT HitTestTextRange(uint32 textPosition, uint32 textLength, float originX, float originY, DWRITE_HIT_TEST_METRICS* hitTestMetrics, uint32 maxHitTestMetricsCount, out uint32 actualHitTestMetricsCount) mut => VT.HitTestTextRange(ref this, textPosition, textLength, originX, originY, hitTestMetrics, maxHitTestMetricsCount, out actualHitTestMetricsCount);
+			public HResult GetFontCollection(uint32 currentPosition, out IDWriteFontCollection* fontCollection, TextRange* textRange) mut => VT.GetFontCollection(ref this, currentPosition, out fontCollection, textRange);
+			public HResult GetFontFamilyNameLength(uint32 currentPosition, out uint32 nameLength, TextRange* textRange) mut => VT.GetFontFamilyNameLength(ref this, currentPosition, out nameLength, textRange);
+			public HResult GetFontFamilyName(uint32 currentPosition, char16* fontFamilyName, uint32 nameSize, TextRange* textRange) mut => VT.GetFontFamilyName(ref this, currentPosition, fontFamilyName, nameSize, textRange);
+			public HResult GetFontWeight(uint32 currentPosition, out FontWeight fontWeight, TextRange* textRange) mut => VT.GetFontWeight(ref this, currentPosition, out fontWeight, textRange);
+			public HResult GetFontStyle(uint32 currentPosition, out FontStyle fontStyle, TextRange* textRange) mut => VT.GetFontStyle(ref this, currentPosition, out fontStyle, textRange);
+			public HResult GetFontStretch(uint32 currentPosition, out FontStretch fontStretch, TextRange* textRange) mut => VT.GetFontStretch(ref this, currentPosition, out fontStretch, textRange);
+			public HResult GetFontSize(uint32 currentPosition, out float fontSize, TextRange* textRange) mut => VT.GetFontSize(ref this, currentPosition, out fontSize, textRange);
+			public HResult GetUnderline(uint32 currentPosition, out IntBool hasUnderline, TextRange* textRange) mut => VT.GetUnderline(ref this, currentPosition, out hasUnderline, textRange);
+			public HResult GetStrikethrough(uint32 currentPosition, out IntBool hasStrikethrough, TextRange* textRange) mut => VT.GetStrikethrough(ref this, currentPosition, out hasStrikethrough, textRange);
+			public HResult GetDrawingEffect(uint32 currentPosition, out IUnknown* drawingEffect, TextRange* textRange) mut => VT.GetDrawingEffect(ref this, currentPosition, out drawingEffect, textRange);
+			public HResult GetInlineObject(uint32 currentPosition, out IDWriteInlineObject* inlineObject, TextRange* textRange) mut => VT.GetInlineObject(ref this, currentPosition, out inlineObject, textRange);
+			public HResult GetTypography(uint32 currentPosition, out IDWriteTypography* typography, TextRange* textRange) mut => VT.GetTypography(ref this, currentPosition, out typography, textRange);
+			public HResult GetLocaleNameLength(uint32 currentPosition, out uint32 nameLength, TextRange* textRange) mut => VT.GetLocaleNameLength(ref this, currentPosition, out nameLength, textRange);
+			public HResult GetLocaleName(uint32 currentPosition, char16* localeName, uint32 nameSize, TextRange* textRange) mut => VT.GetLocaleName(ref this, currentPosition, localeName, nameSize, textRange);
+			public HResult Draw(void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY) mut => VT.Draw(ref this, clientDrawingContext, ref renderer, originX, originY);
+			public HResult GetLineMetrics(LineMetrics* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) mut => VT.GetLineMetrics(ref this, lineMetrics, maxLineCount, out actualLineCount);
+			public HResult GetMetrics(out DWRITE_TEXT_METRICS textMetrics) mut => VT.GetMetrics(ref this, out textMetrics);
+			public HResult GetOverhangMetrics(out DWRITE_OVERHANG_METRICS overhangs) mut => VT.GetOverhangMetrics(ref this, out overhangs);
+			public HResult GetClusterMetrics(DWRITE_CLUSTER_METRICS* clusterMetrics, uint32 maxClusterCount, out uint32 actualClusterCount) mut => VT.GetClusterMetrics(ref this, clusterMetrics, maxClusterCount, out actualClusterCount);
+			public HResult DetermineMinWidth(out float minWidth) mut => VT.DetermineMinWidth(ref this, out minWidth);
+			public HResult HitTestPoint(float pointX, float pointY, out IntBool isTrailingHit, out IntBool isInside, out DWRITE_HIT_TEST_METRICS hitTestMetrics) mut => VT.HitTestPoint(ref this, pointX, pointY, out isTrailingHit, out isInside, out hitTestMetrics);
+			public HResult HitTestTextPosition(uint32 textPosition, IntBool isTrailingHit, out float pointX, out float pointY, out DWRITE_HIT_TEST_METRICS hitTestMetrics) mut => VT.HitTestTextPosition(ref this, textPosition, isTrailingHit, out pointX, out pointY, out hitTestMetrics);
+			public HResult HitTestTextRange(uint32 textPosition, uint32 textLength, float originX, float originY, DWRITE_HIT_TEST_METRICS* hitTestMetrics, uint32 maxHitTestMetricsCount, out uint32 actualHitTestMetricsCount) mut => VT.HitTestTextRange(ref this, textPosition, textLength, originX, originY, hitTestMetrics, maxHitTestMetricsCount, out actualHitTestMetricsCount);
 
 			[CRepr]
 			public struct VTable : IDWriteTextFormat.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, float maxWidth) SetMaxWidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, float maxHeight) SetMaxHeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, ref IDWriteFontCollection fontCollection, DWRITE_TEXT_RANGE textRange) SetFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, PWSTR fontFamilyName, DWRITE_TEXT_RANGE textRange) SetFontFamilyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, FontWeight fontWeight, DWRITE_TEXT_RANGE textRange) SetFontWeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, FontStyle fontStyle, DWRITE_TEXT_RANGE textRange) SetFontStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, FontStretch fontStretch, DWRITE_TEXT_RANGE textRange) SetFontStretch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, float fontSize, DWRITE_TEXT_RANGE textRange) SetFontSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, BOOL hasUnderline, DWRITE_TEXT_RANGE textRange) SetUnderline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, BOOL hasStrikethrough, DWRITE_TEXT_RANGE textRange) SetStrikethrough;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, ref IUnknown drawingEffect, DWRITE_TEXT_RANGE textRange) SetDrawingEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, ref IDWriteInlineObject inlineObject, DWRITE_TEXT_RANGE textRange) SetInlineObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, ref IDWriteTypography typography, DWRITE_TEXT_RANGE textRange) SetTypography;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, PWSTR localeName, DWRITE_TEXT_RANGE textRange) SetLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, float maxWidth) SetMaxWidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, float maxHeight) SetMaxHeight;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, ref IDWriteFontCollection fontCollection, TextRange textRange) SetFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, char16* fontFamilyName, TextRange textRange) SetFontFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, FontWeight fontWeight, TextRange textRange) SetFontWeight;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, FontStyle fontStyle, TextRange textRange) SetFontStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, FontStretch fontStretch, TextRange textRange) SetFontStretch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, float fontSize, TextRange textRange) SetFontSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, IntBool hasUnderline, TextRange textRange) SetUnderline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, IntBool hasStrikethrough, TextRange textRange) SetStrikethrough;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, ref IUnknown drawingEffect, TextRange textRange) SetDrawingEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, ref IDWriteInlineObject inlineObject, TextRange textRange) SetInlineObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, ref IDWriteTypography typography, TextRange textRange) SetTypography;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, char16* localeName, TextRange textRange) SetLocaleName;
 				public new function [CallingConvention(.Stdcall)] float(ref IDWriteTextLayout self) GetMaxWidth;
 				public new function [CallingConvention(.Stdcall)] float(ref IDWriteTextLayout self) GetMaxHeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out IDWriteFontCollection* fontCollection, DWRITE_TEXT_RANGE* textRange) GetFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out uint32 nameLength, DWRITE_TEXT_RANGE* textRange) GetFontFamilyNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, char16* fontFamilyName, uint32 nameSize, DWRITE_TEXT_RANGE* textRange) GetFontFamilyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out FontWeight fontWeight, DWRITE_TEXT_RANGE* textRange) GetFontWeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out FontStyle fontStyle, DWRITE_TEXT_RANGE* textRange) GetFontStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out FontStretch fontStretch, DWRITE_TEXT_RANGE* textRange) GetFontStretch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out float fontSize, DWRITE_TEXT_RANGE* textRange) GetFontSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out BOOL hasUnderline, DWRITE_TEXT_RANGE* textRange) GetUnderline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out BOOL hasStrikethrough, DWRITE_TEXT_RANGE* textRange) GetStrikethrough;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out IUnknown* drawingEffect, DWRITE_TEXT_RANGE* textRange) GetDrawingEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out IDWriteInlineObject* inlineObject, DWRITE_TEXT_RANGE* textRange) GetInlineObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out IDWriteTypography* typography, DWRITE_TEXT_RANGE* textRange) GetTypography;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, out uint32 nameLength, DWRITE_TEXT_RANGE* textRange) GetLocaleNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 currentPosition, char16* localeName, uint32 nameSize, DWRITE_TEXT_RANGE* textRange) GetLocaleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY) Draw;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, LineMetrics* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) GetLineMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, out DWRITE_TEXT_METRICS textMetrics) GetMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, out DWRITE_OVERHANG_METRICS overhangs) GetOverhangMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, DWRITE_CLUSTER_METRICS* clusterMetrics, uint32 maxClusterCount, out uint32 actualClusterCount) GetClusterMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, out float minWidth) DetermineMinWidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, float pointX, float pointY, out BOOL isTrailingHit, out BOOL isInside, out DWRITE_HIT_TEST_METRICS hitTestMetrics) HitTestPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 textPosition, BOOL isTrailingHit, out float pointX, out float pointY, out DWRITE_HIT_TEST_METRICS hitTestMetrics) HitTestTextPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout self, uint32 textPosition, uint32 textLength, float originX, float originY, DWRITE_HIT_TEST_METRICS* hitTestMetrics, uint32 maxHitTestMetricsCount, out uint32 actualHitTestMetricsCount) HitTestTextRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out IDWriteFontCollection* fontCollection, TextRange* textRange) GetFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out uint32 nameLength, TextRange* textRange) GetFontFamilyNameLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, char16* fontFamilyName, uint32 nameSize, TextRange* textRange) GetFontFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out FontWeight fontWeight, TextRange* textRange) GetFontWeight;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out FontStyle fontStyle, TextRange* textRange) GetFontStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out FontStretch fontStretch, TextRange* textRange) GetFontStretch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out float fontSize, TextRange* textRange) GetFontSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out IntBool hasUnderline, TextRange* textRange) GetUnderline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out IntBool hasStrikethrough, TextRange* textRange) GetStrikethrough;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out IUnknown* drawingEffect, TextRange* textRange) GetDrawingEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out IDWriteInlineObject* inlineObject, TextRange* textRange) GetInlineObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out IDWriteTypography* typography, TextRange* textRange) GetTypography;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, out uint32 nameLength, TextRange* textRange) GetLocaleNameLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 currentPosition, char16* localeName, uint32 nameSize, TextRange* textRange) GetLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, void* clientDrawingContext, ref IDWriteTextRenderer renderer, float originX, float originY) Draw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, LineMetrics* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) GetLineMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, out DWRITE_TEXT_METRICS textMetrics) GetMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, out DWRITE_OVERHANG_METRICS overhangs) GetOverhangMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, DWRITE_CLUSTER_METRICS* clusterMetrics, uint32 maxClusterCount, out uint32 actualClusterCount) GetClusterMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, out float minWidth) DetermineMinWidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, float pointX, float pointY, out IntBool isTrailingHit, out IntBool isInside, out DWRITE_HIT_TEST_METRICS hitTestMetrics) HitTestPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 textPosition, IntBool isTrailingHit, out float pointX, out float pointY, out DWRITE_HIT_TEST_METRICS hitTestMetrics) HitTestTextPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout self, uint32 textPosition, uint32 textLength, float originX, float originY, DWRITE_HIT_TEST_METRICS* hitTestMetrics, uint32 maxHitTestMetricsCount, out uint32 actualHitTestMetricsCount) HitTestTextRange;
 			}
 		}
 		[CRepr]
@@ -1884,26 +1897,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DrawGlyphRun(float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, ref IDWriteRenderingParams renderingParams, uint32 textColor, RECT* blackBoxRect) mut => VT.DrawGlyphRun(ref this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, ref renderingParams, textColor, blackBoxRect);
+			public HResult DrawGlyphRun(float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, ref IDWriteRenderingParams renderingParams, uint32 textColor, RectI* blackBoxRect) mut => VT.DrawGlyphRun(ref this, baselineOriginX, baselineOriginY, measuringMode, glyphRun, ref renderingParams, textColor, blackBoxRect);
 			public HDC GetMemoryDC() mut => VT.GetMemoryDC(ref this);
 			public float GetPixelsPerDip() mut => VT.GetPixelsPerDip(ref this);
-			public HRESULT SetPixelsPerDip(float pixelsPerDip) mut => VT.SetPixelsPerDip(ref this, pixelsPerDip);
-			public HRESULT GetCurrentTransform(out DWRITE_MATRIX transform) mut => VT.GetCurrentTransform(ref this, out transform);
-			public HRESULT SetCurrentTransform(DWRITE_MATRIX* transform) mut => VT.SetCurrentTransform(ref this, transform);
-			public HRESULT GetSize(out SIZE size) mut => VT.GetSize(ref this, out size);
-			public HRESULT Resize(uint32 width, uint32 height) mut => VT.Resize(ref this, width, height);
+			public HResult SetPixelsPerDip(float pixelsPerDip) mut => VT.SetPixelsPerDip(ref this, pixelsPerDip);
+			public HResult GetCurrentTransform(out DWriteMatrix transform) mut => VT.GetCurrentTransform(ref this, out transform);
+			public HResult SetCurrentTransform(DWriteMatrix* transform) mut => VT.SetCurrentTransform(ref this, transform);
+			public HResult GetSize(out SIZE size) mut => VT.GetSize(ref this, out size);
+			public HResult Resize(uint32 width, uint32 height) mut => VT.Resize(ref this, width, height);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget self, float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, ref IDWriteRenderingParams renderingParams, uint32 textColor, RECT* blackBoxRect) DrawGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget self, float baselineOriginX, float baselineOriginY, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, ref IDWriteRenderingParams renderingParams, uint32 textColor, RectI* blackBoxRect) DrawGlyphRun;
 				public new function [CallingConvention(.Stdcall)] HDC(ref IDWriteBitmapRenderTarget self) GetMemoryDC;
 				public new function [CallingConvention(.Stdcall)] float(ref IDWriteBitmapRenderTarget self) GetPixelsPerDip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget self, float pixelsPerDip) SetPixelsPerDip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget self, out DWRITE_MATRIX transform) GetCurrentTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget self, DWRITE_MATRIX* transform) SetCurrentTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget self, out SIZE size) GetSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget self, uint32 width, uint32 height) Resize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget self, float pixelsPerDip) SetPixelsPerDip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget self, out DWriteMatrix transform) GetCurrentTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget self, DWriteMatrix* transform) SetCurrentTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget self, out SIZE size) GetSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget self, uint32 width, uint32 height) Resize;
 			}
 		}
 		[CRepr]
@@ -1913,20 +1926,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontFromLOGFONT(in LOGFONTW logFont, out IDWriteFont* font) mut => VT.CreateFontFromLOGFONT(ref this, logFont, out font);
-			public HRESULT ConvertFontToLOGFONT(ref IDWriteFont font, out LOGFONTW logFont, out BOOL isSystemFont) mut => VT.ConvertFontToLOGFONT(ref this, ref font, out logFont, out isSystemFont);
-			public HRESULT ConvertFontFaceToLOGFONT(ref IDWriteFontFace font, out LOGFONTW logFont) mut => VT.ConvertFontFaceToLOGFONT(ref this, ref font, out logFont);
-			public HRESULT CreateFontFaceFromHdc(HDC hdc, out IDWriteFontFace* fontFace) mut => VT.CreateFontFaceFromHdc(ref this, hdc, out fontFace);
-			public HRESULT CreateBitmapRenderTarget(HDC hdc, uint32 width, uint32 height, out IDWriteBitmapRenderTarget* renderTarget) mut => VT.CreateBitmapRenderTarget(ref this, hdc, width, height, out renderTarget);
+			public HResult CreateFontFromLOGFONT(in LOGFONTW logFont, out IDWriteFont* font) mut => VT.CreateFontFromLOGFONT(ref this, logFont, out font);
+			public HResult ConvertFontToLOGFONT(ref IDWriteFont font, out LOGFONTW logFont, out IntBool isSystemFont) mut => VT.ConvertFontToLOGFONT(ref this, ref font, out logFont, out isSystemFont);
+			public HResult ConvertFontFaceToLOGFONT(ref IDWriteFontFace font, out LOGFONTW logFont) mut => VT.ConvertFontFaceToLOGFONT(ref this, ref font, out logFont);
+			public HResult CreateFontFaceFromHdc(HDC hdc, out IDWriteFontFace* fontFace) mut => VT.CreateFontFaceFromHdc(ref this, hdc, out fontFace);
+			public HResult CreateBitmapRenderTarget(HDC hdc, uint32 width, uint32 height, out IDWriteBitmapRenderTarget* renderTarget) mut => VT.CreateBitmapRenderTarget(ref this, hdc, width, height, out renderTarget);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop self, in LOGFONTW logFont, out IDWriteFont* font) CreateFontFromLOGFONT;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop self, ref IDWriteFont font, out LOGFONTW logFont, out BOOL isSystemFont) ConvertFontToLOGFONT;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop self, ref IDWriteFontFace font, out LOGFONTW logFont) ConvertFontFaceToLOGFONT;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop self, HDC hdc, out IDWriteFontFace* fontFace) CreateFontFaceFromHdc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop self, HDC hdc, uint32 width, uint32 height, out IDWriteBitmapRenderTarget* renderTarget) CreateBitmapRenderTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop self, in LOGFONTW logFont, out IDWriteFont* font) CreateFontFromLOGFONT;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop self, ref IDWriteFont font, out LOGFONTW logFont, out IntBool isSystemFont) ConvertFontToLOGFONT;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop self, ref IDWriteFontFace font, out LOGFONTW logFont) ConvertFontFaceToLOGFONT;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop self, HDC hdc, out IDWriteFontFace* fontFace) CreateFontFaceFromHdc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop self, HDC hdc, uint32 width, uint32 height, out IDWriteBitmapRenderTarget* renderTarget) CreateBitmapRenderTarget;
 			}
 		}
 		[CRepr]
@@ -1936,16 +1949,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAlphaTextureBounds(DWRITE_TEXTURE_TYPE textureType, out RECT textureBounds) mut => VT.GetAlphaTextureBounds(ref this, textureType, out textureBounds);
-			public HRESULT CreateAlphaTexture(DWRITE_TEXTURE_TYPE textureType, in RECT textureBounds, out uint8 alphaValues, uint32 bufferSize) mut => VT.CreateAlphaTexture(ref this, textureType, textureBounds, out alphaValues, bufferSize);
-			public HRESULT GetAlphaBlendParams(ref IDWriteRenderingParams renderingParams, out float blendGamma, out float blendEnhancedContrast, out float blendClearTypeLevel) mut => VT.GetAlphaBlendParams(ref this, ref renderingParams, out blendGamma, out blendEnhancedContrast, out blendClearTypeLevel);
+			public HResult GetAlphaTextureBounds(DWRITE_TEXTURE_TYPE textureType, out RectI textureBounds) mut => VT.GetAlphaTextureBounds(ref this, textureType, out textureBounds);
+			public HResult CreateAlphaTexture(DWRITE_TEXTURE_TYPE textureType, in RectI textureBounds, out uint8 alphaValues, uint32 bufferSize) mut => VT.CreateAlphaTexture(ref this, textureType, textureBounds, out alphaValues, bufferSize);
+			public HResult GetAlphaBlendParams(ref IDWriteRenderingParams renderingParams, out float blendGamma, out float blendEnhancedContrast, out float blendClearTypeLevel) mut => VT.GetAlphaBlendParams(ref this, ref renderingParams, out blendGamma, out blendEnhancedContrast, out blendClearTypeLevel);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGlyphRunAnalysis self, DWRITE_TEXTURE_TYPE textureType, out RECT textureBounds) GetAlphaTextureBounds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGlyphRunAnalysis self, DWRITE_TEXTURE_TYPE textureType, in RECT textureBounds, out uint8 alphaValues, uint32 bufferSize) CreateAlphaTexture;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGlyphRunAnalysis self, ref IDWriteRenderingParams renderingParams, out float blendGamma, out float blendEnhancedContrast, out float blendClearTypeLevel) GetAlphaBlendParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGlyphRunAnalysis self, DWRITE_TEXTURE_TYPE textureType, out RectI textureBounds) GetAlphaTextureBounds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGlyphRunAnalysis self, DWRITE_TEXTURE_TYPE textureType, in RectI textureBounds, out uint8 alphaValues, uint32 bufferSize) CreateAlphaTexture;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGlyphRunAnalysis self, ref IDWriteRenderingParams renderingParams, out float blendGamma, out float blendEnhancedContrast, out float blendClearTypeLevel) GetAlphaBlendParams;
 			}
 		}
 		[CRepr]
@@ -1955,52 +1968,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSystemFontCollection(out IDWriteFontCollection* fontCollection, BOOL checkForUpdates) mut => VT.GetSystemFontCollection(ref this, out fontCollection, checkForUpdates);
-			public HRESULT CreateCustomFontCollection(ref IDWriteFontCollectionLoader collectionLoader, void* collectionKey, uint32 collectionKeySize, out IDWriteFontCollection* fontCollection) mut => VT.CreateCustomFontCollection(ref this, ref collectionLoader, collectionKey, collectionKeySize, out fontCollection);
-			public HRESULT RegisterFontCollectionLoader(ref IDWriteFontCollectionLoader fontCollectionLoader) mut => VT.RegisterFontCollectionLoader(ref this, ref fontCollectionLoader);
-			public HRESULT UnregisterFontCollectionLoader(ref IDWriteFontCollectionLoader fontCollectionLoader) mut => VT.UnregisterFontCollectionLoader(ref this, ref fontCollectionLoader);
-			public HRESULT CreateFontFileReference(PWSTR filePath, FILETIME* lastWriteTime, out IDWriteFontFile* fontFile) mut => VT.CreateFontFileReference(ref this, filePath, lastWriteTime, out fontFile);
-			public HRESULT CreateCustomFontFileReference(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, ref IDWriteFontFileLoader fontFileLoader, out IDWriteFontFile* fontFile) mut => VT.CreateCustomFontFileReference(ref this, fontFileReferenceKey, fontFileReferenceKeySize, ref fontFileLoader, out fontFile);
-			public HRESULT CreateFontFace(FontFaceType fontFaceType, uint32 numberOfFiles, IDWriteFontFile** fontFiles, uint32 faceIndex, FontSimulations fontFaceSimulationFlags, out IDWriteFontFace* fontFace) mut => VT.CreateFontFace(ref this, fontFaceType, numberOfFiles, fontFiles, faceIndex, fontFaceSimulationFlags, out fontFace);
-			public HRESULT CreateRenderingParams(out IDWriteRenderingParams* renderingParams) mut => VT.CreateRenderingParams(ref this, out renderingParams);
-			public HRESULT CreateMonitorRenderingParams(HMONITOR monitor, out IDWriteRenderingParams* renderingParams) mut => VT.CreateMonitorRenderingParams(ref this, monitor, out renderingParams);
-			public HRESULT CreateCustomRenderingParams(float gamma, float enhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, out renderingParams);
-			public HRESULT RegisterFontFileLoader(ref IDWriteFontFileLoader fontFileLoader) mut => VT.RegisterFontFileLoader(ref this, ref fontFileLoader);
-			public HRESULT UnregisterFontFileLoader(ref IDWriteFontFileLoader fontFileLoader) mut => VT.UnregisterFontFileLoader(ref this, ref fontFileLoader);
-			public HRESULT CreateTextFormat(StringView fontFamilyName, IDWriteFontCollection* fontCollection, FontWeight fontWeight, FontStyle fontStyle, FontStretch fontStretch, float fontSize, StringView localeName, out IDWriteTextFormat* textFormat) mut => VT.CreateTextFormat(ref this, fontFamilyName.ToScopedNativeWChar!(), fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName.ToScopedNativeWChar!(), out textFormat);
-			public HRESULT CreateTypography(out IDWriteTypography* typography) mut => VT.CreateTypography(ref this, out typography);
-			public HRESULT GetGdiInterop(out IDWriteGdiInterop* gdiInterop) mut => VT.GetGdiInterop(ref this, out gdiInterop);
-			public HRESULT CreateTextLayout(char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float maxWidth, float maxHeight, out IDWriteTextLayout* textLayout) mut => VT.CreateTextLayout(ref this, string, stringLength, ref textFormat, maxWidth, maxHeight, out textLayout);
-			public HRESULT CreateGdiCompatibleTextLayout(char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float layoutWidth, float layoutHeight, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, out IDWriteTextLayout* textLayout) mut => VT.CreateGdiCompatibleTextLayout(ref this, string, stringLength, ref textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, out textLayout);
-			public HRESULT CreateEllipsisTrimmingSign(ref IDWriteTextFormat textFormat, out IDWriteInlineObject* trimmingSign) mut => VT.CreateEllipsisTrimmingSign(ref this, ref textFormat, out trimmingSign);
-			public HRESULT CreateTextAnalyzer(out IDWriteTextAnalyzer* textAnalyzer) mut => VT.CreateTextAnalyzer(ref this, out textAnalyzer);
-			public HRESULT CreateNumberSubstitution(DWRITE_NUMBER_SUBSTITUTION_METHOD substitutionMethod, PWSTR localeName, BOOL ignoreUserOverride, out IDWriteNumberSubstitution* numberSubstitution) mut => VT.CreateNumberSubstitution(ref this, substitutionMethod, localeName, ignoreUserOverride, out numberSubstitution);
-			public HRESULT CreateGlyphRunAnalysis(in GlyphRun glyphRun, float pixelsPerDip, DWRITE_MATRIX* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) mut => VT.CreateGlyphRunAnalysis(ref this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, out glyphRunAnalysis);
+			public HResult GetSystemFontCollection(out IDWriteFontCollection* fontCollection, IntBool checkForUpdates) mut => VT.GetSystemFontCollection(ref this, out fontCollection, checkForUpdates);
+			public HResult CreateCustomFontCollection(ref IDWriteFontCollectionLoader collectionLoader, void* collectionKey, uint32 collectionKeySize, out IDWriteFontCollection* fontCollection) mut => VT.CreateCustomFontCollection(ref this, ref collectionLoader, collectionKey, collectionKeySize, out fontCollection);
+			public HResult RegisterFontCollectionLoader(ref IDWriteFontCollectionLoader fontCollectionLoader) mut => VT.RegisterFontCollectionLoader(ref this, ref fontCollectionLoader);
+			public HResult UnregisterFontCollectionLoader(ref IDWriteFontCollectionLoader fontCollectionLoader) mut => VT.UnregisterFontCollectionLoader(ref this, ref fontCollectionLoader);
+			public HResult CreateFontFileReference(char16* filePath, FileTime* lastWriteTime, out IDWriteFontFile* fontFile) mut => VT.CreateFontFileReference(ref this, filePath, lastWriteTime, out fontFile);
+			public HResult CreateCustomFontFileReference(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, ref IDWriteFontFileLoader fontFileLoader, out IDWriteFontFile* fontFile) mut => VT.CreateCustomFontFileReference(ref this, fontFileReferenceKey, fontFileReferenceKeySize, ref fontFileLoader, out fontFile);
+			public HResult CreateFontFace(FontFaceType fontFaceType, uint32 numberOfFiles, IDWriteFontFile** fontFiles, uint32 faceIndex, FontSimulations fontFaceSimulationFlags, out IDWriteFontFace* fontFace) mut => VT.CreateFontFace(ref this, fontFaceType, numberOfFiles, fontFiles, faceIndex, fontFaceSimulationFlags, out fontFace);
+			public HResult CreateRenderingParams(out IDWriteRenderingParams* renderingParams) mut => VT.CreateRenderingParams(ref this, out renderingParams);
+			public HResult CreateMonitorRenderingParams(HMONITOR monitor, out IDWriteRenderingParams* renderingParams) mut => VT.CreateMonitorRenderingParams(ref this, monitor, out renderingParams);
+			public HResult CreateCustomRenderingParams(float gamma, float enhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, out renderingParams);
+			public HResult RegisterFontFileLoader(ref IDWriteFontFileLoader fontFileLoader) mut => VT.RegisterFontFileLoader(ref this, ref fontFileLoader);
+			public HResult UnregisterFontFileLoader(ref IDWriteFontFileLoader fontFileLoader) mut => VT.UnregisterFontFileLoader(ref this, ref fontFileLoader);
+			public HResult CreateTextFormat(StringView fontFamilyName, IDWriteFontCollection* fontCollection, FontWeight fontWeight, FontStyle fontStyle, FontStretch fontStretch, float fontSize, StringView localeName, out IDWriteTextFormat* textFormat) mut => VT.CreateTextFormat(ref this, fontFamilyName.ToScopedNativeWChar!(), fontCollection, fontWeight, fontStyle, fontStretch, fontSize, localeName.ToScopedNativeWChar!(), out textFormat);
+			public HResult CreateTypography(out IDWriteTypography* typography) mut => VT.CreateTypography(ref this, out typography);
+			public HResult GetGdiInterop(out IDWriteGdiInterop* gdiInterop) mut => VT.GetGdiInterop(ref this, out gdiInterop);
+			public HResult CreateTextLayout(char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float maxWidth, float maxHeight, out IDWriteTextLayout* textLayout) mut => VT.CreateTextLayout(ref this, string, stringLength, ref textFormat, maxWidth, maxHeight, out textLayout);
+			public HResult CreateGdiCompatibleTextLayout(char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float layoutWidth, float layoutHeight, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, out IDWriteTextLayout* textLayout) mut => VT.CreateGdiCompatibleTextLayout(ref this, string, stringLength, ref textFormat, layoutWidth, layoutHeight, pixelsPerDip, transform, useGdiNatural, out textLayout);
+			public HResult CreateEllipsisTrimmingSign(ref IDWriteTextFormat textFormat, out IDWriteInlineObject* trimmingSign) mut => VT.CreateEllipsisTrimmingSign(ref this, ref textFormat, out trimmingSign);
+			public HResult CreateTextAnalyzer(out IDWriteTextAnalyzer* textAnalyzer) mut => VT.CreateTextAnalyzer(ref this, out textAnalyzer);
+			public HResult CreateNumberSubstitution(DWRITE_NUMBER_SUBSTITUTION_METHOD substitutionMethod, char16* localeName, IntBool ignoreUserOverride, out IDWriteNumberSubstitution* numberSubstitution) mut => VT.CreateNumberSubstitution(ref this, substitutionMethod, localeName, ignoreUserOverride, out numberSubstitution);
+			public HResult CreateGlyphRunAnalysis(in GlyphRun glyphRun, float pixelsPerDip, DWriteMatrix* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) mut => VT.CreateGlyphRunAnalysis(ref this, glyphRun, pixelsPerDip, transform, renderingMode, measuringMode, baselineOriginX, baselineOriginY, out glyphRunAnalysis);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, out IDWriteFontCollection* fontCollection, BOOL checkForUpdates) GetSystemFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, ref IDWriteFontCollectionLoader collectionLoader, void* collectionKey, uint32 collectionKeySize, out IDWriteFontCollection* fontCollection) CreateCustomFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, ref IDWriteFontCollectionLoader fontCollectionLoader) RegisterFontCollectionLoader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, ref IDWriteFontCollectionLoader fontCollectionLoader) UnregisterFontCollectionLoader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, PWSTR filePath, FILETIME* lastWriteTime, out IDWriteFontFile* fontFile) CreateFontFileReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, ref IDWriteFontFileLoader fontFileLoader, out IDWriteFontFile* fontFile) CreateCustomFontFileReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, FontFaceType fontFaceType, uint32 numberOfFiles, IDWriteFontFile** fontFiles, uint32 faceIndex, FontSimulations fontFaceSimulationFlags, out IDWriteFontFace* fontFace) CreateFontFace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, out IDWriteRenderingParams* renderingParams) CreateRenderingParams;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, HMONITOR monitor, out IDWriteRenderingParams* renderingParams) CreateMonitorRenderingParams;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, float gamma, float enhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams* renderingParams) CreateCustomRenderingParams;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, ref IDWriteFontFileLoader fontFileLoader) RegisterFontFileLoader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, ref IDWriteFontFileLoader fontFileLoader) UnregisterFontFileLoader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, PWSTR fontFamilyName, IDWriteFontCollection* fontCollection, FontWeight fontWeight, FontStyle fontStyle, FontStretch fontStretch, float fontSize, PWSTR localeName, out IDWriteTextFormat* textFormat) CreateTextFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, out IDWriteTypography* typography) CreateTypography;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, out IDWriteGdiInterop* gdiInterop) GetGdiInterop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float maxWidth, float maxHeight, out IDWriteTextLayout* textLayout) CreateTextLayout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float layoutWidth, float layoutHeight, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, out IDWriteTextLayout* textLayout) CreateGdiCompatibleTextLayout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, ref IDWriteTextFormat textFormat, out IDWriteInlineObject* trimmingSign) CreateEllipsisTrimmingSign;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, out IDWriteTextAnalyzer* textAnalyzer) CreateTextAnalyzer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, DWRITE_NUMBER_SUBSTITUTION_METHOD substitutionMethod, PWSTR localeName, BOOL ignoreUserOverride, out IDWriteNumberSubstitution* numberSubstitution) CreateNumberSubstitution;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory self, in GlyphRun glyphRun, float pixelsPerDip, DWRITE_MATRIX* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) CreateGlyphRunAnalysis;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, out IDWriteFontCollection* fontCollection, IntBool checkForUpdates) GetSystemFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, ref IDWriteFontCollectionLoader collectionLoader, void* collectionKey, uint32 collectionKeySize, out IDWriteFontCollection* fontCollection) CreateCustomFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, ref IDWriteFontCollectionLoader fontCollectionLoader) RegisterFontCollectionLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, ref IDWriteFontCollectionLoader fontCollectionLoader) UnregisterFontCollectionLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, char16* filePath, FileTime* lastWriteTime, out IDWriteFontFile* fontFile) CreateFontFileReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, ref IDWriteFontFileLoader fontFileLoader, out IDWriteFontFile* fontFile) CreateCustomFontFileReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, FontFaceType fontFaceType, uint32 numberOfFiles, IDWriteFontFile** fontFiles, uint32 faceIndex, FontSimulations fontFaceSimulationFlags, out IDWriteFontFace* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, out IDWriteRenderingParams* renderingParams) CreateRenderingParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, HMONITOR monitor, out IDWriteRenderingParams* renderingParams) CreateMonitorRenderingParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, float gamma, float enhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams* renderingParams) CreateCustomRenderingParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, ref IDWriteFontFileLoader fontFileLoader) RegisterFontFileLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, ref IDWriteFontFileLoader fontFileLoader) UnregisterFontFileLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, char16* fontFamilyName, IDWriteFontCollection* fontCollection, FontWeight fontWeight, FontStyle fontStyle, FontStretch fontStretch, float fontSize, char16* localeName, out IDWriteTextFormat* textFormat) CreateTextFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, out IDWriteTypography* typography) CreateTypography;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, out IDWriteGdiInterop* gdiInterop) GetGdiInterop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float maxWidth, float maxHeight, out IDWriteTextLayout* textLayout) CreateTextLayout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, char16* string, uint32 stringLength, ref IDWriteTextFormat textFormat, float layoutWidth, float layoutHeight, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, out IDWriteTextLayout* textLayout) CreateGdiCompatibleTextLayout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, ref IDWriteTextFormat textFormat, out IDWriteInlineObject* trimmingSign) CreateEllipsisTrimmingSign;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, out IDWriteTextAnalyzer* textAnalyzer) CreateTextAnalyzer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, DWRITE_NUMBER_SUBSTITUTION_METHOD substitutionMethod, char16* localeName, IntBool ignoreUserOverride, out IDWriteNumberSubstitution* numberSubstitution) CreateNumberSubstitution;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory self, in GlyphRun glyphRun, float pixelsPerDip, DWriteMatrix* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) CreateGlyphRunAnalysis;
 			}
 		}
 		[CRepr]
@@ -2010,14 +2023,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetEudcFontCollection(out IDWriteFontCollection* fontCollection, BOOL checkForUpdates) mut => VT.GetEudcFontCollection(ref this, out fontCollection, checkForUpdates);
-			public HRESULT CreateCustomRenderingParams(float gamma, float enhancedContrast, float enhancedContrastGrayscale, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams1* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, out renderingParams);
+			public HResult GetEudcFontCollection(out IDWriteFontCollection* fontCollection, IntBool checkForUpdates) mut => VT.GetEudcFontCollection(ref this, out fontCollection, checkForUpdates);
+			public HResult CreateCustomRenderingParams(float gamma, float enhancedContrast, float enhancedContrastGrayscale, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams1* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, enhancedContrastGrayscale, clearTypeLevel, pixelGeometry, renderingMode, out renderingParams);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory1 self, out IDWriteFontCollection* fontCollection, BOOL checkForUpdates) GetEudcFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory1 self, float gamma, float enhancedContrast, float enhancedContrastGrayscale, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams1* renderingParams) CreateCustomRenderingParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory1 self, out IDWriteFontCollection* fontCollection, IntBool checkForUpdates) GetEudcFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory1 self, float gamma, float enhancedContrast, float enhancedContrastGrayscale, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, out IDWriteRenderingParams1* renderingParams) CreateCustomRenderingParams;
 			}
 		}
 		[CRepr]
@@ -2028,33 +2041,33 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public void GetMetrics(out FontMetrics1 fontMetrics) mut => VT.GetMetrics(ref this, out fontMetrics);
-			public HRESULT GetGdiCompatibleMetrics(float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, out FontMetrics1 fontMetrics) mut => VT.GetGdiCompatibleMetrics(ref this, emSize, pixelsPerDip, transform, out fontMetrics);
+			public HResult GetGdiCompatibleMetrics(float emSize, float pixelsPerDip, DWriteMatrix* transform, out FontMetrics1 fontMetrics) mut => VT.GetGdiCompatibleMetrics(ref this, emSize, pixelsPerDip, transform, out fontMetrics);
 			public void GetCaretMetrics(out DWRITE_CARET_METRICS caretMetrics) mut => VT.GetCaretMetrics(ref this, out caretMetrics);
-			public HRESULT GetUnicodeRanges(uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) mut => VT.GetUnicodeRanges(ref this, maxRangeCount, unicodeRanges, out actualRangeCount);
-			public BOOL IsMonospacedFont() mut => VT.IsMonospacedFont(ref this);
-			public HRESULT GetDesignGlyphAdvances(uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances, BOOL isSideways) mut => VT.GetDesignGlyphAdvances(ref this, glyphCount, glyphIndices, glyphAdvances, isSideways);
-			public HRESULT GetGdiCompatibleGlyphAdvances(float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, BOOL isSideways, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances) mut => VT.GetGdiCompatibleGlyphAdvances(ref this, emSize, pixelsPerDip, transform, useGdiNatural, isSideways, glyphCount, glyphIndices, glyphAdvances);
-			public HRESULT GetKerningPairAdjustments(uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvanceAdjustments) mut => VT.GetKerningPairAdjustments(ref this, glyphCount, glyphIndices, glyphAdvanceAdjustments);
-			public BOOL HasKerningPairs() mut => VT.HasKerningPairs(ref this);
-			public HRESULT GetRecommendedRenderingMode(float fontEmSize, float dpiX, float dpiY, DWRITE_MATRIX* transform, BOOL isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, out DWRITE_RENDERING_MODE renderingMode) mut => VT.GetRecommendedRenderingMode(ref this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, out renderingMode);
-			public HRESULT GetVerticalGlyphVariants(uint32 glyphCount, uint16* nominalGlyphIndices, uint16* verticalGlyphIndices) mut => VT.GetVerticalGlyphVariants(ref this, glyphCount, nominalGlyphIndices, verticalGlyphIndices);
-			public BOOL HasVerticalGlyphVariants() mut => VT.HasVerticalGlyphVariants(ref this);
+			public HResult GetUnicodeRanges(uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) mut => VT.GetUnicodeRanges(ref this, maxRangeCount, unicodeRanges, out actualRangeCount);
+			public IntBool IsMonospacedFont() mut => VT.IsMonospacedFont(ref this);
+			public HResult GetDesignGlyphAdvances(uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances, IntBool isSideways) mut => VT.GetDesignGlyphAdvances(ref this, glyphCount, glyphIndices, glyphAdvances, isSideways);
+			public HResult GetGdiCompatibleGlyphAdvances(float emSize, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, IntBool isSideways, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances) mut => VT.GetGdiCompatibleGlyphAdvances(ref this, emSize, pixelsPerDip, transform, useGdiNatural, isSideways, glyphCount, glyphIndices, glyphAdvances);
+			public HResult GetKerningPairAdjustments(uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvanceAdjustments) mut => VT.GetKerningPairAdjustments(ref this, glyphCount, glyphIndices, glyphAdvanceAdjustments);
+			public IntBool HasKerningPairs() mut => VT.HasKerningPairs(ref this);
+			public HResult GetRecommendedRenderingMode(float fontEmSize, float dpiX, float dpiY, DWriteMatrix* transform, IntBool isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, out DWRITE_RENDERING_MODE renderingMode) mut => VT.GetRecommendedRenderingMode(ref this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, out renderingMode);
+			public HResult GetVerticalGlyphVariants(uint32 glyphCount, uint16* nominalGlyphIndices, uint16* verticalGlyphIndices) mut => VT.GetVerticalGlyphVariants(ref this, glyphCount, nominalGlyphIndices, verticalGlyphIndices);
+			public IntBool HasVerticalGlyphVariants() mut => VT.HasVerticalGlyphVariants(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFace.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFace1 self, out FontMetrics1 fontMetrics) GetMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, out FontMetrics1 fontMetrics) GetGdiCompatibleMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, float emSize, float pixelsPerDip, DWriteMatrix* transform, out FontMetrics1 fontMetrics) GetGdiCompatibleMetrics;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFace1 self, out DWRITE_CARET_METRICS caretMetrics) GetCaretMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) GetUnicodeRanges;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace1 self) IsMonospacedFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances, BOOL isSideways) GetDesignGlyphAdvances;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, float emSize, float pixelsPerDip, DWRITE_MATRIX* transform, BOOL useGdiNatural, BOOL isSideways, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances) GetGdiCompatibleGlyphAdvances;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvanceAdjustments) GetKerningPairAdjustments;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace1 self) HasKerningPairs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, float fontEmSize, float dpiX, float dpiY, DWRITE_MATRIX* transform, BOOL isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, out DWRITE_RENDERING_MODE renderingMode) GetRecommendedRenderingMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace1 self, uint32 glyphCount, uint16* nominalGlyphIndices, uint16* verticalGlyphIndices) GetVerticalGlyphVariants;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace1 self) HasVerticalGlyphVariants;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) GetUnicodeRanges;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace1 self) IsMonospacedFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances, IntBool isSideways) GetDesignGlyphAdvances;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, float emSize, float pixelsPerDip, DWriteMatrix* transform, IntBool useGdiNatural, IntBool isSideways, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvances) GetGdiCompatibleGlyphAdvances;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, uint32 glyphCount, uint16* glyphIndices, int32* glyphAdvanceAdjustments) GetKerningPairAdjustments;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace1 self) HasKerningPairs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, float fontEmSize, float dpiX, float dpiY, DWriteMatrix* transform, IntBool isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, out DWRITE_RENDERING_MODE renderingMode) GetRecommendedRenderingMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace1 self, uint32 glyphCount, uint16* nominalGlyphIndices, uint16* verticalGlyphIndices) GetVerticalGlyphVariants;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace1 self) HasVerticalGlyphVariants;
 			}
 		}
 		[CRepr]
@@ -2066,16 +2079,16 @@ namespace Win32
 			
 			public void GetMetrics(out FontMetrics1 fontMetrics) mut => VT.GetMetrics(ref this, out fontMetrics);
 			public void GetPanose(out DWRITE_PANOSE panose) mut => VT.GetPanose(ref this, out panose);
-			public HRESULT GetUnicodeRanges(uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) mut => VT.GetUnicodeRanges(ref this, maxRangeCount, unicodeRanges, out actualRangeCount);
-			public BOOL IsMonospacedFont() mut => VT.IsMonospacedFont(ref this);
+			public HResult GetUnicodeRanges(uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) mut => VT.GetUnicodeRanges(ref this, maxRangeCount, unicodeRanges, out actualRangeCount);
+			public IntBool IsMonospacedFont() mut => VT.IsMonospacedFont(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFont.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFont1 self, out FontMetrics1 fontMetrics) GetMetrics;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFont1 self, out DWRITE_PANOSE panose) GetPanose;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont1 self, uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) GetUnicodeRanges;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFont1 self) IsMonospacedFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont1 self, uint32 maxRangeCount, DWRITE_UNICODE_RANGE* unicodeRanges, out uint32 actualRangeCount) GetUnicodeRanges;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFont1 self) IsMonospacedFont;
 			}
 		}
 		[CRepr]
@@ -2100,28 +2113,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ApplyCharacterSpacing(float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, uint32 textLength, uint32 glyphCount, uint16* clusterMap, float* glyphAdvances, GlyphOffset* glyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) mut => VT.ApplyCharacterSpacing(ref this, leadingSpacing, trailingSpacing, minimumAdvanceWidth, textLength, glyphCount, clusterMap, glyphAdvances, glyphOffsets, glyphProperties, modifiedGlyphAdvances, modifiedGlyphOffsets);
-			public HRESULT GetBaseline(ref IDWriteFontFace fontFace, DWRITE_BASELINE baseline, BOOL isVertical, BOOL isSimulationAllowed, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, out int32 baselineCoordinate, out BOOL exists) mut => VT.GetBaseline(ref this, ref fontFace, baseline, isVertical, isSimulationAllowed, scriptAnalysis, localeName, out baselineCoordinate, out exists);
-			public HRESULT AnalyzeVerticalGlyphOrientation(ref IDWriteTextAnalysisSource1 analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink1 analysisSink) mut => VT.AnalyzeVerticalGlyphOrientation(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
-			public HRESULT GetGlyphOrientationTransform(DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, BOOL isSideways, out DWRITE_MATRIX transform) mut => VT.GetGlyphOrientationTransform(ref this, glyphOrientationAngle, isSideways, out transform);
-			public HRESULT GetScriptProperties(DWRITE_SCRIPT_ANALYSIS scriptAnalysis, out DWRITE_SCRIPT_PROPERTIES scriptProperties) mut => VT.GetScriptProperties(ref this, scriptAnalysis, out scriptProperties);
-			public HRESULT GetTextComplexity(char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, out BOOL isTextSimple, out uint32 textLengthRead, uint16* glyphIndices) mut => VT.GetTextComplexity(ref this, textString, textLength, ref fontFace, out isTextSimple, out textLengthRead, glyphIndices);
-			public HRESULT GetJustificationOpportunities(IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, char16* textString, uint16* clusterMap, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities) mut => VT.GetJustificationOpportunities(ref this, fontFace, fontEmSize, scriptAnalysis, textLength, glyphCount, textString, clusterMap, glyphProperties, justificationOpportunities);
-			public HRESULT JustifyGlyphAdvances(float lineWidth, uint32 glyphCount, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities, float* glyphAdvances, GlyphOffset* glyphOffsets, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets) mut => VT.JustifyGlyphAdvances(ref this, lineWidth, glyphCount, justificationOpportunities, glyphAdvances, glyphOffsets, justifiedGlyphAdvances, justifiedGlyphOffsets);
-			public HRESULT GetJustifiedGlyphs(IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, uint32 maxGlyphCount, uint16* clusterMap, uint16* glyphIndices, float* glyphAdvances, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, out uint32 actualGlyphCount, uint16* modifiedClusterMap, uint16* modifiedGlyphIndices, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) mut => VT.GetJustifiedGlyphs(ref this, fontFace, fontEmSize, scriptAnalysis, textLength, glyphCount, maxGlyphCount, clusterMap, glyphIndices, glyphAdvances, justifiedGlyphAdvances, justifiedGlyphOffsets, glyphProperties, out actualGlyphCount, modifiedClusterMap, modifiedGlyphIndices, modifiedGlyphAdvances, modifiedGlyphOffsets);
+			public HResult ApplyCharacterSpacing(float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, uint32 textLength, uint32 glyphCount, uint16* clusterMap, float* glyphAdvances, GlyphOffset* glyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) mut => VT.ApplyCharacterSpacing(ref this, leadingSpacing, trailingSpacing, minimumAdvanceWidth, textLength, glyphCount, clusterMap, glyphAdvances, glyphOffsets, glyphProperties, modifiedGlyphAdvances, modifiedGlyphOffsets);
+			public HResult GetBaseline(ref IDWriteFontFace fontFace, DWRITE_BASELINE baseline, IntBool isVertical, IntBool isSimulationAllowed, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, out int32 baselineCoordinate, out IntBool exists) mut => VT.GetBaseline(ref this, ref fontFace, baseline, isVertical, isSimulationAllowed, scriptAnalysis, localeName, out baselineCoordinate, out exists);
+			public HResult AnalyzeVerticalGlyphOrientation(ref IDWriteTextAnalysisSource1 analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink1 analysisSink) mut => VT.AnalyzeVerticalGlyphOrientation(ref this, ref analysisSource, textPosition, textLength, ref analysisSink);
+			public HResult GetGlyphOrientationTransform(DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, IntBool isSideways, out DWriteMatrix transform) mut => VT.GetGlyphOrientationTransform(ref this, glyphOrientationAngle, isSideways, out transform);
+			public HResult GetScriptProperties(DWRITE_SCRIPT_ANALYSIS scriptAnalysis, out DWRITE_SCRIPT_PROPERTIES scriptProperties) mut => VT.GetScriptProperties(ref this, scriptAnalysis, out scriptProperties);
+			public HResult GetTextComplexity(char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, out IntBool isTextSimple, out uint32 textLengthRead, uint16* glyphIndices) mut => VT.GetTextComplexity(ref this, textString, textLength, ref fontFace, out isTextSimple, out textLengthRead, glyphIndices);
+			public HResult GetJustificationOpportunities(IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, char16* textString, uint16* clusterMap, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities) mut => VT.GetJustificationOpportunities(ref this, fontFace, fontEmSize, scriptAnalysis, textLength, glyphCount, textString, clusterMap, glyphProperties, justificationOpportunities);
+			public HResult JustifyGlyphAdvances(float lineWidth, uint32 glyphCount, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities, float* glyphAdvances, GlyphOffset* glyphOffsets, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets) mut => VT.JustifyGlyphAdvances(ref this, lineWidth, glyphCount, justificationOpportunities, glyphAdvances, glyphOffsets, justifiedGlyphAdvances, justifiedGlyphOffsets);
+			public HResult GetJustifiedGlyphs(IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, uint32 maxGlyphCount, uint16* clusterMap, uint16* glyphIndices, float* glyphAdvances, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, out uint32 actualGlyphCount, uint16* modifiedClusterMap, uint16* modifiedGlyphIndices, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) mut => VT.GetJustifiedGlyphs(ref this, fontFace, fontEmSize, scriptAnalysis, textLength, glyphCount, maxGlyphCount, clusterMap, glyphIndices, glyphAdvances, justifiedGlyphAdvances, justifiedGlyphOffsets, glyphProperties, out actualGlyphCount, modifiedClusterMap, modifiedGlyphIndices, modifiedGlyphAdvances, modifiedGlyphOffsets);
 
 			[CRepr]
 			public struct VTable : IDWriteTextAnalyzer.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, uint32 textLength, uint32 glyphCount, uint16* clusterMap, float* glyphAdvances, GlyphOffset* glyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) ApplyCharacterSpacing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, ref IDWriteFontFace fontFace, DWRITE_BASELINE baseline, BOOL isVertical, BOOL isSimulationAllowed, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, out int32 baselineCoordinate, out BOOL exists) GetBaseline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, ref IDWriteTextAnalysisSource1 analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink1 analysisSink) AnalyzeVerticalGlyphOrientation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, BOOL isSideways, out DWRITE_MATRIX transform) GetGlyphOrientationTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, out DWRITE_SCRIPT_PROPERTIES scriptProperties) GetScriptProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, out BOOL isTextSimple, out uint32 textLengthRead, uint16* glyphIndices) GetTextComplexity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, char16* textString, uint16* clusterMap, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities) GetJustificationOpportunities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, float lineWidth, uint32 glyphCount, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities, float* glyphAdvances, GlyphOffset* glyphOffsets, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets) JustifyGlyphAdvances;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer1 self, IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, uint32 maxGlyphCount, uint16* clusterMap, uint16* glyphIndices, float* glyphAdvances, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, out uint32 actualGlyphCount, uint16* modifiedClusterMap, uint16* modifiedGlyphIndices, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) GetJustifiedGlyphs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, uint32 textLength, uint32 glyphCount, uint16* clusterMap, float* glyphAdvances, GlyphOffset* glyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) ApplyCharacterSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, ref IDWriteFontFace fontFace, DWRITE_BASELINE baseline, IntBool isVertical, IntBool isSimulationAllowed, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, out int32 baselineCoordinate, out IntBool exists) GetBaseline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, ref IDWriteTextAnalysisSource1 analysisSource, uint32 textPosition, uint32 textLength, ref IDWriteTextAnalysisSink1 analysisSink) AnalyzeVerticalGlyphOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, IntBool isSideways, out DWriteMatrix transform) GetGlyphOrientationTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, out DWRITE_SCRIPT_PROPERTIES scriptProperties) GetScriptProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, char16* textString, uint32 textLength, ref IDWriteFontFace fontFace, out IntBool isTextSimple, out uint32 textLengthRead, uint16* glyphIndices) GetTextComplexity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, char16* textString, uint16* clusterMap, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities) GetJustificationOpportunities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, float lineWidth, uint32 glyphCount, DWRITE_JUSTIFICATION_OPPORTUNITY* justificationOpportunities, float* glyphAdvances, GlyphOffset* glyphOffsets, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets) JustifyGlyphAdvances;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer1 self, IDWriteFontFace* fontFace, float fontEmSize, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, uint32 textLength, uint32 glyphCount, uint32 maxGlyphCount, uint16* clusterMap, uint16* glyphIndices, float* glyphAdvances, float* justifiedGlyphAdvances, GlyphOffset* justifiedGlyphOffsets, DWRITE_SHAPING_GLYPH_PROPERTIES* glyphProperties, out uint32 actualGlyphCount, uint16* modifiedClusterMap, uint16* modifiedGlyphIndices, float* modifiedGlyphAdvances, GlyphOffset* modifiedGlyphOffsets) GetJustifiedGlyphs;
 			}
 		}
 		[CRepr]
@@ -2131,12 +2144,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetVerticalGlyphOrientation(uint32 textPosition, out uint32 textLength, out DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation, out uint8 bidiLevel) mut => VT.GetVerticalGlyphOrientation(ref this, textPosition, out textLength, out glyphOrientation, out bidiLevel);
+			public HResult GetVerticalGlyphOrientation(uint32 textPosition, out uint32 textLength, out DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation, out uint8 bidiLevel) mut => VT.GetVerticalGlyphOrientation(ref this, textPosition, out textLength, out glyphOrientation, out bidiLevel);
 
 			[CRepr]
 			public struct VTable : IDWriteTextAnalysisSource.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSource1 self, uint32 textPosition, out uint32 textLength, out DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation, out uint8 bidiLevel) GetVerticalGlyphOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSource1 self, uint32 textPosition, out uint32 textLength, out DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation, out uint8 bidiLevel) GetVerticalGlyphOrientation;
 			}
 		}
 		[CRepr]
@@ -2146,12 +2159,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetGlyphOrientation(uint32 textPosition, uint32 textLength, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, uint8 adjustedBidiLevel, BOOL isSideways, BOOL isRightToLeft) mut => VT.SetGlyphOrientation(ref this, textPosition, textLength, glyphOrientationAngle, adjustedBidiLevel, isSideways, isRightToLeft);
+			public HResult SetGlyphOrientation(uint32 textPosition, uint32 textLength, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, uint8 adjustedBidiLevel, IntBool isSideways, IntBool isRightToLeft) mut => VT.SetGlyphOrientation(ref this, textPosition, textLength, glyphOrientationAngle, adjustedBidiLevel, isSideways, isRightToLeft);
 
 			[CRepr]
 			public struct VTable : IDWriteTextAnalysisSink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalysisSink1 self, uint32 textPosition, uint32 textLength, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, uint8 adjustedBidiLevel, BOOL isSideways, BOOL isRightToLeft) SetGlyphOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalysisSink1 self, uint32 textPosition, uint32 textLength, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, uint8 adjustedBidiLevel, IntBool isSideways, IntBool isRightToLeft) SetGlyphOrientation;
 			}
 		}
 		[CRepr]
@@ -2161,18 +2174,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetPairKerning(BOOL isPairKerningEnabled, DWRITE_TEXT_RANGE textRange) mut => VT.SetPairKerning(ref this, isPairKerningEnabled, textRange);
-			public HRESULT GetPairKerning(uint32 currentPosition, out BOOL isPairKerningEnabled, DWRITE_TEXT_RANGE* textRange) mut => VT.GetPairKerning(ref this, currentPosition, out isPairKerningEnabled, textRange);
-			public HRESULT SetCharacterSpacing(float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, DWRITE_TEXT_RANGE textRange) mut => VT.SetCharacterSpacing(ref this, leadingSpacing, trailingSpacing, minimumAdvanceWidth, textRange);
-			public HRESULT GetCharacterSpacing(uint32 currentPosition, out float leadingSpacing, out float trailingSpacing, out float minimumAdvanceWidth, DWRITE_TEXT_RANGE* textRange) mut => VT.GetCharacterSpacing(ref this, currentPosition, out leadingSpacing, out trailingSpacing, out minimumAdvanceWidth, textRange);
+			public HResult SetPairKerning(IntBool isPairKerningEnabled, TextRange textRange) mut => VT.SetPairKerning(ref this, isPairKerningEnabled, textRange);
+			public HResult GetPairKerning(uint32 currentPosition, out IntBool isPairKerningEnabled, TextRange* textRange) mut => VT.GetPairKerning(ref this, currentPosition, out isPairKerningEnabled, textRange);
+			public HResult SetCharacterSpacing(float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, TextRange textRange) mut => VT.SetCharacterSpacing(ref this, leadingSpacing, trailingSpacing, minimumAdvanceWidth, textRange);
+			public HResult GetCharacterSpacing(uint32 currentPosition, out float leadingSpacing, out float trailingSpacing, out float minimumAdvanceWidth, TextRange* textRange) mut => VT.GetCharacterSpacing(ref this, currentPosition, out leadingSpacing, out trailingSpacing, out minimumAdvanceWidth, textRange);
 
 			[CRepr]
 			public struct VTable : IDWriteTextLayout.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout1 self, BOOL isPairKerningEnabled, DWRITE_TEXT_RANGE textRange) SetPairKerning;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout1 self, uint32 currentPosition, out BOOL isPairKerningEnabled, DWRITE_TEXT_RANGE* textRange) GetPairKerning;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout1 self, float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, DWRITE_TEXT_RANGE textRange) SetCharacterSpacing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout1 self, uint32 currentPosition, out float leadingSpacing, out float trailingSpacing, out float minimumAdvanceWidth, DWRITE_TEXT_RANGE* textRange) GetCharacterSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout1 self, IntBool isPairKerningEnabled, TextRange textRange) SetPairKerning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout1 self, uint32 currentPosition, out IntBool isPairKerningEnabled, TextRange* textRange) GetPairKerning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout1 self, float leadingSpacing, float trailingSpacing, float minimumAdvanceWidth, TextRange textRange) SetCharacterSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout1 self, uint32 currentPosition, out float leadingSpacing, out float trailingSpacing, out float minimumAdvanceWidth, TextRange* textRange) GetCharacterSpacing;
 			}
 		}
 		[CRepr]
@@ -2183,13 +2196,13 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public DWRITE_TEXT_ANTIALIAS_MODE GetTextAntialiasMode() mut => VT.GetTextAntialiasMode(ref this);
-			public HRESULT SetTextAntialiasMode(DWRITE_TEXT_ANTIALIAS_MODE antialiasMode) mut => VT.SetTextAntialiasMode(ref this, antialiasMode);
+			public HResult SetTextAntialiasMode(DWRITE_TEXT_ANTIALIAS_MODE antialiasMode) mut => VT.SetTextAntialiasMode(ref this, antialiasMode);
 
 			[CRepr]
 			public struct VTable : IDWriteBitmapRenderTarget.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] DWRITE_TEXT_ANTIALIAS_MODE(ref IDWriteBitmapRenderTarget1 self) GetTextAntialiasMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteBitmapRenderTarget1 self, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode) SetTextAntialiasMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteBitmapRenderTarget1 self, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode) SetTextAntialiasMode;
 			}
 		}
 		[CRepr]
@@ -2199,18 +2212,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DrawGlyphRun(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) mut => VT.DrawGlyphRun(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, orientationAngle, measuringMode, glyphRun, glyphRunDescription, clientDrawingEffect);
-			public HRESULT DrawUnderline(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) mut => VT.DrawUnderline(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, orientationAngle, underline, clientDrawingEffect);
-			public HRESULT DrawStrikethrough(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) mut => VT.DrawStrikethrough(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, orientationAngle, strikethrough, clientDrawingEffect);
-			public HRESULT DrawInlineObject(void* clientDrawingContext, float originX, float originY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, ref IDWriteInlineObject inlineObject, BOOL isSideways, BOOL isRightToLeft, IUnknown* clientDrawingEffect) mut => VT.DrawInlineObject(ref this, clientDrawingContext, originX, originY, orientationAngle, ref inlineObject, isSideways, isRightToLeft, clientDrawingEffect);
+			public HResult DrawGlyphRun(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) mut => VT.DrawGlyphRun(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, orientationAngle, measuringMode, glyphRun, glyphRunDescription, clientDrawingEffect);
+			public HResult DrawUnderline(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) mut => VT.DrawUnderline(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, orientationAngle, underline, clientDrawingEffect);
+			public HResult DrawStrikethrough(void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) mut => VT.DrawStrikethrough(ref this, clientDrawingContext, baselineOriginX, baselineOriginY, orientationAngle, strikethrough, clientDrawingEffect);
+			public HResult DrawInlineObject(void* clientDrawingContext, float originX, float originY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, ref IDWriteInlineObject inlineObject, IntBool isSideways, IntBool isRightToLeft, IUnknown* clientDrawingEffect) mut => VT.DrawInlineObject(ref this, clientDrawingContext, originX, originY, orientationAngle, ref inlineObject, isSideways, isRightToLeft, clientDrawingEffect);
 
 			[CRepr]
 			public struct VTable : IDWriteTextRenderer.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) DrawGlyphRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) DrawUnderline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) DrawStrikethrough;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float originX, float originY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, ref IDWriteInlineObject inlineObject, BOOL isSideways, BOOL isRightToLeft, IUnknown* clientDrawingEffect) DrawInlineObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, DWRITE_MEASURING_MODE measuringMode, in GlyphRun glyphRun, in DWRITE_GLYPH_RUN_DESCRIPTION glyphRunDescription, IUnknown* clientDrawingEffect) DrawGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_UNDERLINE underline, IUnknown* clientDrawingEffect) DrawUnderline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float baselineOriginX, float baselineOriginY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, in DWRITE_STRIKETHROUGH strikethrough, IUnknown* clientDrawingEffect) DrawStrikethrough;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextRenderer1 self, void* clientDrawingContext, float originX, float originY, DWRITE_GLYPH_ORIENTATION_ANGLE orientationAngle, ref IDWriteInlineObject inlineObject, IntBool isSideways, IntBool isRightToLeft, IUnknown* clientDrawingEffect) DrawInlineObject;
 			}
 		}
 		[CRepr]
@@ -2220,26 +2233,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetVerticalGlyphOrientation(DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) mut => VT.SetVerticalGlyphOrientation(ref this, glyphOrientation);
+			public HResult SetVerticalGlyphOrientation(DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) mut => VT.SetVerticalGlyphOrientation(ref this, glyphOrientation);
 			public DWRITE_VERTICAL_GLYPH_ORIENTATION GetVerticalGlyphOrientation() mut => VT.GetVerticalGlyphOrientation(ref this);
-			public HRESULT SetLastLineWrapping(BOOL isLastLineWrappingEnabled) mut => VT.SetLastLineWrapping(ref this, isLastLineWrappingEnabled);
-			public BOOL GetLastLineWrapping() mut => VT.GetLastLineWrapping(ref this);
-			public HRESULT SetOpticalAlignment(DWRITE_OPTICAL_ALIGNMENT opticalAlignment) mut => VT.SetOpticalAlignment(ref this, opticalAlignment);
+			public HResult SetLastLineWrapping(IntBool isLastLineWrappingEnabled) mut => VT.SetLastLineWrapping(ref this, isLastLineWrappingEnabled);
+			public IntBool GetLastLineWrapping() mut => VT.GetLastLineWrapping(ref this);
+			public HResult SetOpticalAlignment(DWRITE_OPTICAL_ALIGNMENT opticalAlignment) mut => VT.SetOpticalAlignment(ref this, opticalAlignment);
 			public DWRITE_OPTICAL_ALIGNMENT GetOpticalAlignment() mut => VT.GetOpticalAlignment(ref this);
-			public HRESULT SetFontFallback(ref IDWriteFontFallback fontFallback) mut => VT.SetFontFallback(ref this, ref fontFallback);
-			public HRESULT GetFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.GetFontFallback(ref this, out fontFallback);
+			public HResult SetFontFallback(ref IDWriteFontFallback fontFallback) mut => VT.SetFontFallback(ref this, ref fontFallback);
+			public HResult GetFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.GetFontFallback(ref this, out fontFallback);
 
 			[CRepr]
 			public struct VTable : IDWriteTextFormat.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat1 self, DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) SetVerticalGlyphOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat1 self, DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) SetVerticalGlyphOrientation;
 				public new function [CallingConvention(.Stdcall)] DWRITE_VERTICAL_GLYPH_ORIENTATION(ref IDWriteTextFormat1 self) GetVerticalGlyphOrientation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat1 self, BOOL isLastLineWrappingEnabled) SetLastLineWrapping;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteTextFormat1 self) GetLastLineWrapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat1 self, DWRITE_OPTICAL_ALIGNMENT opticalAlignment) SetOpticalAlignment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat1 self, IntBool isLastLineWrappingEnabled) SetLastLineWrapping;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteTextFormat1 self) GetLastLineWrapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat1 self, DWRITE_OPTICAL_ALIGNMENT opticalAlignment) SetOpticalAlignment;
 				public new function [CallingConvention(.Stdcall)] DWRITE_OPTICAL_ALIGNMENT(ref IDWriteTextFormat1 self) GetOpticalAlignment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat1 self, ref IDWriteFontFallback fontFallback) SetFontFallback;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat1 self, out IDWriteFontFallback* fontFallback) GetFontFallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat1 self, ref IDWriteFontFallback fontFallback) SetFontFallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat1 self, out IDWriteFontFallback* fontFallback) GetFontFallback;
 			}
 		}
 		[CRepr]
@@ -2249,28 +2262,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMetrics(out DWRITE_TEXT_METRICS1 textMetrics) mut => VT.GetMetrics(ref this, out textMetrics);
-			public HRESULT SetVerticalGlyphOrientation(DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) mut => VT.SetVerticalGlyphOrientation(ref this, glyphOrientation);
+			public HResult GetMetrics(out DWRITE_TEXT_METRICS1 textMetrics) mut => VT.GetMetrics(ref this, out textMetrics);
+			public HResult SetVerticalGlyphOrientation(DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) mut => VT.SetVerticalGlyphOrientation(ref this, glyphOrientation);
 			public DWRITE_VERTICAL_GLYPH_ORIENTATION GetVerticalGlyphOrientation() mut => VT.GetVerticalGlyphOrientation(ref this);
-			public HRESULT SetLastLineWrapping(BOOL isLastLineWrappingEnabled) mut => VT.SetLastLineWrapping(ref this, isLastLineWrappingEnabled);
-			public BOOL GetLastLineWrapping() mut => VT.GetLastLineWrapping(ref this);
-			public HRESULT SetOpticalAlignment(DWRITE_OPTICAL_ALIGNMENT opticalAlignment) mut => VT.SetOpticalAlignment(ref this, opticalAlignment);
+			public HResult SetLastLineWrapping(IntBool isLastLineWrappingEnabled) mut => VT.SetLastLineWrapping(ref this, isLastLineWrappingEnabled);
+			public IntBool GetLastLineWrapping() mut => VT.GetLastLineWrapping(ref this);
+			public HResult SetOpticalAlignment(DWRITE_OPTICAL_ALIGNMENT opticalAlignment) mut => VT.SetOpticalAlignment(ref this, opticalAlignment);
 			public DWRITE_OPTICAL_ALIGNMENT GetOpticalAlignment() mut => VT.GetOpticalAlignment(ref this);
-			public HRESULT SetFontFallback(ref IDWriteFontFallback fontFallback) mut => VT.SetFontFallback(ref this, ref fontFallback);
-			public HRESULT GetFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.GetFontFallback(ref this, out fontFallback);
+			public HResult SetFontFallback(ref IDWriteFontFallback fontFallback) mut => VT.SetFontFallback(ref this, ref fontFallback);
+			public HResult GetFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.GetFontFallback(ref this, out fontFallback);
 
 			[CRepr]
 			public struct VTable : IDWriteTextLayout1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout2 self, out DWRITE_TEXT_METRICS1 textMetrics) GetMetrics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout2 self, DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) SetVerticalGlyphOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout2 self, out DWRITE_TEXT_METRICS1 textMetrics) GetMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout2 self, DWRITE_VERTICAL_GLYPH_ORIENTATION glyphOrientation) SetVerticalGlyphOrientation;
 				public new function [CallingConvention(.Stdcall)] DWRITE_VERTICAL_GLYPH_ORIENTATION(ref IDWriteTextLayout2 self) GetVerticalGlyphOrientation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout2 self, BOOL isLastLineWrappingEnabled) SetLastLineWrapping;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteTextLayout2 self) GetLastLineWrapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout2 self, DWRITE_OPTICAL_ALIGNMENT opticalAlignment) SetOpticalAlignment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout2 self, IntBool isLastLineWrappingEnabled) SetLastLineWrapping;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteTextLayout2 self) GetLastLineWrapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout2 self, DWRITE_OPTICAL_ALIGNMENT opticalAlignment) SetOpticalAlignment;
 				public new function [CallingConvention(.Stdcall)] DWRITE_OPTICAL_ALIGNMENT(ref IDWriteTextLayout2 self) GetOpticalAlignment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout2 self, ref IDWriteFontFallback fontFallback) SetFontFallback;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout2 self, out IDWriteFontFallback* fontFallback) GetFontFallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout2 self, ref IDWriteFontFallback fontFallback) SetFontFallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout2 self, out IDWriteFontFallback* fontFallback) GetFontFallback;
 			}
 		}
 		[CRepr]
@@ -2280,16 +2293,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGlyphOrientationTransform(DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, BOOL isSideways, float originX, float originY, out DWRITE_MATRIX transform) mut => VT.GetGlyphOrientationTransform(ref this, glyphOrientationAngle, isSideways, originX, originY, out transform);
-			public HRESULT GetTypographicFeatures(ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, uint32 maxTagCount, out uint32 actualTagCount, FontFeatureTag* tags) mut => VT.GetTypographicFeatures(ref this, ref fontFace, scriptAnalysis, localeName, maxTagCount, out actualTagCount, tags);
-			public HRESULT CheckTypographicFeature(ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, FontFeatureTag featureTag, uint32 glyphCount, uint16* glyphIndices, uint8* featureApplies) mut => VT.CheckTypographicFeature(ref this, ref fontFace, scriptAnalysis, localeName, featureTag, glyphCount, glyphIndices, featureApplies);
+			public HResult GetGlyphOrientationTransform(DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, IntBool isSideways, float originX, float originY, out DWriteMatrix transform) mut => VT.GetGlyphOrientationTransform(ref this, glyphOrientationAngle, isSideways, originX, originY, out transform);
+			public HResult GetTypographicFeatures(ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, uint32 maxTagCount, out uint32 actualTagCount, FontFeatureTag* tags) mut => VT.GetTypographicFeatures(ref this, ref fontFace, scriptAnalysis, localeName, maxTagCount, out actualTagCount, tags);
+			public HResult CheckTypographicFeature(ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, FontFeatureTag featureTag, uint32 glyphCount, uint16* glyphIndices, uint8* featureApplies) mut => VT.CheckTypographicFeature(ref this, ref fontFace, scriptAnalysis, localeName, featureTag, glyphCount, glyphIndices, featureApplies);
 
 			[CRepr]
 			public struct VTable : IDWriteTextAnalyzer1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer2 self, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, BOOL isSideways, float originX, float originY, out DWRITE_MATRIX transform) GetGlyphOrientationTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer2 self, ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, uint32 maxTagCount, out uint32 actualTagCount, FontFeatureTag* tags) GetTypographicFeatures;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextAnalyzer2 self, ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, PWSTR localeName, FontFeatureTag featureTag, uint32 glyphCount, uint16* glyphIndices, uint8* featureApplies) CheckTypographicFeature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer2 self, DWRITE_GLYPH_ORIENTATION_ANGLE glyphOrientationAngle, IntBool isSideways, float originX, float originY, out DWriteMatrix transform) GetGlyphOrientationTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer2 self, ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, uint32 maxTagCount, out uint32 actualTagCount, FontFeatureTag* tags) GetTypographicFeatures;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextAnalyzer2 self, ref IDWriteFontFace fontFace, DWRITE_SCRIPT_ANALYSIS scriptAnalysis, char16* localeName, FontFeatureTag featureTag, uint32 glyphCount, uint16* glyphIndices, uint8* featureApplies) CheckTypographicFeature;
 			}
 		}
 		[CRepr]
@@ -2299,12 +2312,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT MapCharacters(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, PWSTR baseFamilyName, FontWeight baseWeight, FontStyle baseStyle, FontStretch baseStretch, out uint32 mappedLength, IDWriteFont** mappedFont, out float scale) mut => VT.MapCharacters(ref this, ref analysisSource, textPosition, textLength, baseFontCollection, baseFamilyName, baseWeight, baseStyle, baseStretch, out mappedLength, mappedFont, out scale);
+			public HResult MapCharacters(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, char16* baseFamilyName, FontWeight baseWeight, FontStyle baseStyle, FontStretch baseStretch, out uint32 mappedLength, IDWriteFont** mappedFont, out float scale) mut => VT.MapCharacters(ref this, ref analysisSource, textPosition, textLength, baseFontCollection, baseFamilyName, baseWeight, baseStyle, baseStretch, out mappedLength, mappedFont, out scale);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFallback self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, PWSTR baseFamilyName, FontWeight baseWeight, FontStyle baseStyle, FontStretch baseStretch, out uint32 mappedLength, IDWriteFont** mappedFont, out float scale) MapCharacters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFallback self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, char16* baseFamilyName, FontWeight baseWeight, FontStyle baseStyle, FontStretch baseStretch, out uint32 mappedLength, IDWriteFont** mappedFont, out float scale) MapCharacters;
 			}
 		}
 		[CRepr]
@@ -2314,16 +2327,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddMapping(DWRITE_UNICODE_RANGE* ranges, uint32 rangesCount, uint16** targetFamilyNames, uint32 targetFamilyNamesCount, IDWriteFontCollection* fontCollection, PWSTR localeName, PWSTR baseFamilyName, float scale) mut => VT.AddMapping(ref this, ranges, rangesCount, targetFamilyNames, targetFamilyNamesCount, fontCollection, localeName, baseFamilyName, scale);
-			public HRESULT AddMappings(ref IDWriteFontFallback fontFallback) mut => VT.AddMappings(ref this, ref fontFallback);
-			public HRESULT CreateFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.CreateFontFallback(ref this, out fontFallback);
+			public HResult AddMapping(DWRITE_UNICODE_RANGE* ranges, uint32 rangesCount, uint16** targetFamilyNames, uint32 targetFamilyNamesCount, IDWriteFontCollection* fontCollection, char16* localeName, char16* baseFamilyName, float scale) mut => VT.AddMapping(ref this, ranges, rangesCount, targetFamilyNames, targetFamilyNamesCount, fontCollection, localeName, baseFamilyName, scale);
+			public HResult AddMappings(ref IDWriteFontFallback fontFallback) mut => VT.AddMappings(ref this, ref fontFallback);
+			public HResult CreateFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.CreateFontFallback(ref this, out fontFallback);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFallbackBuilder self, DWRITE_UNICODE_RANGE* ranges, uint32 rangesCount, uint16** targetFamilyNames, uint32 targetFamilyNamesCount, IDWriteFontCollection* fontCollection, PWSTR localeName, PWSTR baseFamilyName, float scale) AddMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFallbackBuilder self, ref IDWriteFontFallback fontFallback) AddMappings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFallbackBuilder self, out IDWriteFontFallback* fontFallback) CreateFontFallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFallbackBuilder self, DWRITE_UNICODE_RANGE* ranges, uint32 rangesCount, uint16** targetFamilyNames, uint32 targetFamilyNamesCount, IDWriteFontCollection* fontCollection, char16* localeName, char16* baseFamilyName, float scale) AddMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFallbackBuilder self, ref IDWriteFontFallback fontFallback) AddMappings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFallbackBuilder self, out IDWriteFontFallback* fontFallback) CreateFontFallback;
 			}
 		}
 		[CRepr]
@@ -2333,12 +2346,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public BOOL IsColorFont() mut => VT.IsColorFont(ref this);
+			public IntBool IsColorFont() mut => VT.IsColorFont(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFont1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFont2 self) IsColorFont;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFont2 self) IsColorFont;
 			}
 		}
 		[CRepr]
@@ -2348,20 +2361,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public BOOL IsColorFont() mut => VT.IsColorFont(ref this);
+			public IntBool IsColorFont() mut => VT.IsColorFont(ref this);
 			public uint32 GetColorPaletteCount() mut => VT.GetColorPaletteCount(ref this);
 			public uint32 GetPaletteEntryCount() mut => VT.GetPaletteEntryCount(ref this);
-			public HRESULT GetPaletteEntries(uint32 colorPaletteIndex, uint32 firstEntryIndex, uint32 entryCount, ColorF* paletteEntries) mut => VT.GetPaletteEntries(ref this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries);
-			public HRESULT GetRecommendedRenderingMode(float fontEmSize, float dpiX, float dpiY, DWRITE_MATRIX* transform, BOOL isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out DWRITE_RENDERING_MODE renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) mut => VT.GetRecommendedRenderingMode(ref this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, out renderingMode, out gridFitMode);
+			public HResult GetPaletteEntries(uint32 colorPaletteIndex, uint32 firstEntryIndex, uint32 entryCount, ColorF* paletteEntries) mut => VT._GetPaletteEntries(ref this, colorPaletteIndex, firstEntryIndex, entryCount, paletteEntries);
+			public HResult GetRecommendedRenderingMode(float fontEmSize, float dpiX, float dpiY, DWriteMatrix* transform, IntBool isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out DWRITE_RENDERING_MODE renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) mut => VT.GetRecommendedRenderingMode(ref this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, out renderingMode, out gridFitMode);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFace1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace2 self) IsColorFont;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace2 self) IsColorFont;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontFace2 self) GetColorPaletteCount;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontFace2 self) GetPaletteEntryCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace2 self, uint32 colorPaletteIndex, uint32 firstEntryIndex, uint32 entryCount, ColorF* paletteEntries) GetPaletteEntries;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace2 self, float fontEmSize, float dpiX, float dpiY, DWRITE_MATRIX* transform, BOOL isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out DWRITE_RENDERING_MODE renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) GetRecommendedRenderingMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace2 self, uint32 colorPaletteIndex, uint32 firstEntryIndex, uint32 entryCount, ColorF* paletteEntries) _GetPaletteEntries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace2 self, float fontEmSize, float dpiX, float dpiY, DWriteMatrix* transform, IntBool isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out DWRITE_RENDERING_MODE renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) GetRecommendedRenderingMode;
 			}
 		}
 		[CRepr]
@@ -2371,14 +2384,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT MoveNext(out BOOL hasRun) mut => VT.MoveNext(ref this, out hasRun);
-			public HRESULT GetCurrentRun(out ColorGlyphRun* colorGlyphRun) mut => VT.GetCurrentRun(ref this, out colorGlyphRun);
+			public HResult MoveNext(out IntBool hasRun) mut => VT.MoveNext(ref this, out hasRun);
+			public HResult GetCurrentRun(out ColorGlyphRun* colorGlyphRun) mut => VT.GetCurrentRun(ref this, out colorGlyphRun);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteColorGlyphRunEnumerator self, out BOOL hasRun) MoveNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteColorGlyphRunEnumerator self, out ColorGlyphRun* colorGlyphRun) GetCurrentRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteColorGlyphRunEnumerator self, out IntBool hasRun) MoveNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteColorGlyphRunEnumerator self, out ColorGlyphRun* colorGlyphRun) GetCurrentRun;
 			}
 		}
 		[CRepr]
@@ -2403,20 +2416,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSystemFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.GetSystemFontFallback(ref this, out fontFallback);
-			public HRESULT CreateFontFallbackBuilder(out IDWriteFontFallbackBuilder* fontFallbackBuilder) mut => VT.CreateFontFallbackBuilder(ref this, out fontFallbackBuilder);
-			public HRESULT TranslateColorGlyphRun(float baselineOriginX, float baselineOriginY, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_MEASURING_MODE measuringMode, DWRITE_MATRIX* worldToDeviceTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator* colorLayers) mut => VT.TranslateColorGlyphRun(ref this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, out colorLayers);
-			public HRESULT CreateCustomRenderingParams(float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams2* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, out renderingParams);
-			public HRESULT CreateGlyphRunAnalysis(in GlyphRun glyphRun, DWRITE_MATRIX* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) mut => VT.CreateGlyphRunAnalysis(ref this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, out glyphRunAnalysis);
+			public HResult GetSystemFontFallback(out IDWriteFontFallback* fontFallback) mut => VT.GetSystemFontFallback(ref this, out fontFallback);
+			public HResult CreateFontFallbackBuilder(out IDWriteFontFallbackBuilder* fontFallbackBuilder) mut => VT.CreateFontFallbackBuilder(ref this, out fontFallbackBuilder);
+			public HResult TranslateColorGlyphRun(float baselineOriginX, float baselineOriginY, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_MEASURING_MODE measuringMode, DWriteMatrix* worldToDeviceTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator* colorLayers) mut => VT.TranslateColorGlyphRun(ref this, baselineOriginX, baselineOriginY, glyphRun, glyphRunDescription, measuringMode, worldToDeviceTransform, colorPaletteIndex, out colorLayers);
+			public HResult CreateCustomRenderingParams(float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams2* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, out renderingParams);
+			public HResult CreateGlyphRunAnalysis(in GlyphRun glyphRun, DWriteMatrix* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) mut => VT.CreateGlyphRunAnalysis(ref this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, out glyphRunAnalysis);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory2 self, out IDWriteFontFallback* fontFallback) GetSystemFontFallback;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory2 self, out IDWriteFontFallbackBuilder* fontFallbackBuilder) CreateFontFallbackBuilder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory2 self, float baselineOriginX, float baselineOriginY, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_MEASURING_MODE measuringMode, DWRITE_MATRIX* worldToDeviceTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator* colorLayers) TranslateColorGlyphRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory2 self, float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams2* renderingParams) CreateCustomRenderingParams;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory2 self, in GlyphRun glyphRun, DWRITE_MATRIX* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) CreateGlyphRunAnalysis;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory2 self, out IDWriteFontFallback* fontFallback) GetSystemFontFallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory2 self, out IDWriteFontFallbackBuilder* fontFallbackBuilder) CreateFontFallbackBuilder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory2 self, float baselineOriginX, float baselineOriginY, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_MEASURING_MODE measuringMode, DWriteMatrix* worldToDeviceTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator* colorLayers) TranslateColorGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory2 self, float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, DWRITE_RENDERING_MODE renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams2* renderingParams) CreateCustomRenderingParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory2 self, in GlyphRun glyphRun, DWriteMatrix* transform, DWRITE_RENDERING_MODE renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) CreateGlyphRunAnalysis;
 			}
 		}
 		[CRepr]
@@ -2441,28 +2454,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateGlyphRunAnalysis(in GlyphRun glyphRun, DWRITE_MATRIX* transform, RenderingMode1 renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) mut => VT.CreateGlyphRunAnalysis(ref this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, out glyphRunAnalysis);
-			public HRESULT CreateCustomRenderingParams(float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, RenderingMode1 renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams3* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, out renderingParams);
-			public HRESULT CreateFontFaceReference(ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) mut => VT.CreateFontFaceReference(ref this, ref fontFile, faceIndex, fontSimulations, out fontFaceReference);
-			public HRESULT CreateFontFaceReference(PWSTR filePath, FILETIME* lastWriteTime, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) mut => VT.CreateFontFaceReference2(ref this, filePath, lastWriteTime, faceIndex, fontSimulations, out fontFaceReference);
-			public HRESULT GetSystemFontSet(out IDWriteFontSet* fontSet) mut => VT.GetSystemFontSet(ref this, out fontSet);
-			public HRESULT CreateFontSetBuilder(out IDWriteFontSetBuilder* fontSetBuilder) mut => VT.CreateFontSetBuilder(ref this, out fontSetBuilder);
-			public HRESULT CreateFontCollectionFromFontSet(ref IDWriteFontSet fontSet, out IDWriteFontCollection1* fontCollection) mut => VT.CreateFontCollectionFromFontSet(ref this, ref fontSet, out fontCollection);
-			public HRESULT GetSystemFontCollection(BOOL includeDownloadableFonts, out IDWriteFontCollection1* fontCollection, BOOL checkForUpdates) mut => VT.GetSystemFontCollection(ref this, includeDownloadableFonts, out fontCollection, checkForUpdates);
-			public HRESULT GetFontDownloadQueue(out IDWriteFontDownloadQueue* fontDownloadQueue) mut => VT.GetFontDownloadQueue(ref this, out fontDownloadQueue);
+			public HResult CreateGlyphRunAnalysis(in GlyphRun glyphRun, DWriteMatrix* transform, RenderingMode1 renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) mut => VT.CreateGlyphRunAnalysis(ref this, glyphRun, transform, renderingMode, measuringMode, gridFitMode, antialiasMode, baselineOriginX, baselineOriginY, out glyphRunAnalysis);
+			public HResult CreateCustomRenderingParams(float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, RenderingMode1 renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams3* renderingParams) mut => VT.CreateCustomRenderingParams(ref this, gamma, enhancedContrast, grayscaleEnhancedContrast, clearTypeLevel, pixelGeometry, renderingMode, gridFitMode, out renderingParams);
+			public HResult CreateFontFaceReference(ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) mut => VT.CreateFontFaceReference(ref this, ref fontFile, faceIndex, fontSimulations, out fontFaceReference);
+			public HResult CreateFontFaceReference(char16* filePath, FileTime* lastWriteTime, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) mut => VT.CreateFontFaceReference2(ref this, filePath, lastWriteTime, faceIndex, fontSimulations, out fontFaceReference);
+			public HResult GetSystemFontSet(out IDWriteFontSet* fontSet) mut => VT.GetSystemFontSet(ref this, out fontSet);
+			public HResult CreateFontSetBuilder(out IDWriteFontSetBuilder* fontSetBuilder) mut => VT.CreateFontSetBuilder(ref this, out fontSetBuilder);
+			public HResult CreateFontCollectionFromFontSet(ref IDWriteFontSet fontSet, out IDWriteFontCollection1* fontCollection) mut => VT.CreateFontCollectionFromFontSet(ref this, ref fontSet, out fontCollection);
+			public HResult GetSystemFontCollection(IntBool includeDownloadableFonts, out IDWriteFontCollection1* fontCollection, IntBool checkForUpdates) mut => VT.GetSystemFontCollection(ref this, includeDownloadableFonts, out fontCollection, checkForUpdates);
+			public HResult GetFontDownloadQueue(out IDWriteFontDownloadQueue* fontDownloadQueue) mut => VT.GetFontDownloadQueue(ref this, out fontDownloadQueue);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, in GlyphRun glyphRun, DWRITE_MATRIX* transform, RenderingMode1 renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) CreateGlyphRunAnalysis;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, RenderingMode1 renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams3* renderingParams) CreateCustomRenderingParams;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) CreateFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, PWSTR filePath, FILETIME* lastWriteTime, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) CreateFontFaceReference2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, out IDWriteFontSet* fontSet) GetSystemFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, out IDWriteFontSetBuilder* fontSetBuilder) CreateFontSetBuilder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, ref IDWriteFontSet fontSet, out IDWriteFontCollection1* fontCollection) CreateFontCollectionFromFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, BOOL includeDownloadableFonts, out IDWriteFontCollection1* fontCollection, BOOL checkForUpdates) GetSystemFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory3 self, out IDWriteFontDownloadQueue* fontDownloadQueue) GetFontDownloadQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, in GlyphRun glyphRun, DWriteMatrix* transform, RenderingMode1 renderingMode, DWRITE_MEASURING_MODE measuringMode, DWRITE_GRID_FIT_MODE gridFitMode, DWRITE_TEXT_ANTIALIAS_MODE antialiasMode, float baselineOriginX, float baselineOriginY, out IDWriteGlyphRunAnalysis* glyphRunAnalysis) CreateGlyphRunAnalysis;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, float gamma, float enhancedContrast, float grayscaleEnhancedContrast, float clearTypeLevel, DWRITE_PIXEL_GEOMETRY pixelGeometry, RenderingMode1 renderingMode, DWRITE_GRID_FIT_MODE gridFitMode, out IDWriteRenderingParams3* renderingParams) CreateCustomRenderingParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) CreateFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, char16* filePath, FileTime* lastWriteTime, uint32 faceIndex, FontSimulations fontSimulations, out IDWriteFontFaceReference* fontFaceReference) CreateFontFaceReference2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, out IDWriteFontSet* fontSet) GetSystemFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, out IDWriteFontSetBuilder* fontSetBuilder) CreateFontSetBuilder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, ref IDWriteFontSet fontSet, out IDWriteFontCollection1* fontCollection) CreateFontCollectionFromFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, IntBool includeDownloadableFonts, out IDWriteFontCollection1* fontCollection, IntBool checkForUpdates) GetSystemFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory3 self, out IDWriteFontDownloadQueue* fontDownloadQueue) GetFontDownloadQueue;
 			}
 		}
 		[CRepr]
@@ -2473,29 +2486,29 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 GetFontCount() mut => VT.GetFontCount(ref this);
-			public HRESULT GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
-			public HRESULT FindFontFaceReference(ref IDWriteFontFaceReference fontFaceReference, out uint32 listIndex, out BOOL exists) mut => VT.FindFontFaceReference(ref this, ref fontFaceReference, out listIndex, out exists);
-			public HRESULT FindFontFace(ref IDWriteFontFace fontFace, out uint32 listIndex, out BOOL exists) mut => VT.FindFontFace(ref this, ref fontFace, out listIndex, out exists);
-			public HRESULT GetPropertyValues(FontPropertyID propertyID, out IDWriteStringList* values) mut => VT.GetPropertyValues(ref this, propertyID, out values);
-			public HRESULT GetPropertyValues(FontPropertyID propertyID, PWSTR preferredLocaleNames, out IDWriteStringList* values) mut => VT.GetPropertyValues2(ref this, propertyID, preferredLocaleNames, out values);
-			public HRESULT GetPropertyValues(uint32 listIndex, FontPropertyID propertyId, out BOOL exists, IDWriteLocalizedStrings** values) mut => VT.GetPropertyValues3(ref this, listIndex, propertyId, out exists, values);
-			public HRESULT GetPropertyOccurrenceCount(in FontProperty property, out uint32 propertyOccurrenceCount) mut => VT.GetPropertyOccurrenceCount(ref this, property, out propertyOccurrenceCount);
-			public HRESULT GetMatchingFonts(PWSTR familyName, FontWeight fontWeight, FontStretch fontStretch, FontStyle fontStyle, out IDWriteFontSet* filteredSet) mut => VT.GetMatchingFonts(ref this, familyName, fontWeight, fontStretch, fontStyle, out filteredSet);
-			public HRESULT GetMatchingFonts(FontProperty* properties, uint32 propertyCount, out IDWriteFontSet* filteredSet) mut => VT.GetMatchingFonts2(ref this, properties, propertyCount, out filteredSet);
+			public HResult GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
+			public HResult FindFontFaceReference(ref IDWriteFontFaceReference fontFaceReference, out uint32 listIndex, out IntBool exists) mut => VT.FindFontFaceReference(ref this, ref fontFaceReference, out listIndex, out exists);
+			public HResult FindFontFace(ref IDWriteFontFace fontFace, out uint32 listIndex, out IntBool exists) mut => VT.FindFontFace(ref this, ref fontFace, out listIndex, out exists);
+			public HResult GetPropertyValues(FontPropertyID propertyID, out IDWriteStringList* values) mut => VT.GetPropertyValues(ref this, propertyID, out values);
+			public HResult GetPropertyValues(FontPropertyID propertyID, char16* preferredLocaleNames, out IDWriteStringList* values) mut => VT.GetPropertyValues2(ref this, propertyID, preferredLocaleNames, out values);
+			public HResult GetPropertyValues(uint32 listIndex, FontPropertyID propertyId, out IntBool exists, IDWriteLocalizedStrings** values) mut => VT.GetPropertyValues3(ref this, listIndex, propertyId, out exists, values);
+			public HResult GetPropertyOccurrenceCount(in FontProperty property, out uint32 propertyOccurrenceCount) mut => VT.GetPropertyOccurrenceCount(ref this, property, out propertyOccurrenceCount);
+			public HResult GetMatchingFonts(char16* familyName, FontWeight fontWeight, FontStretch fontStretch, FontStyle fontStyle, out IDWriteFontSet* filteredSet) mut => VT.GetMatchingFonts(ref this, familyName, fontWeight, fontStretch, fontStyle, out filteredSet);
+			public HResult GetMatchingFonts(FontProperty* properties, uint32 propertyCount, out IDWriteFontSet* filteredSet) mut => VT.GetMatchingFonts2(ref this, properties, propertyCount, out filteredSet);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontSet self) GetFontCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, ref IDWriteFontFaceReference fontFaceReference, out uint32 listIndex, out BOOL exists) FindFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, ref IDWriteFontFace fontFace, out uint32 listIndex, out BOOL exists) FindFontFace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, FontPropertyID propertyID, out IDWriteStringList* values) GetPropertyValues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, FontPropertyID propertyID, PWSTR preferredLocaleNames, out IDWriteStringList* values) GetPropertyValues2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, uint32 listIndex, FontPropertyID propertyId, out BOOL exists, IDWriteLocalizedStrings** values) GetPropertyValues3;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, in FontProperty property, out uint32 propertyOccurrenceCount) GetPropertyOccurrenceCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, PWSTR familyName, FontWeight fontWeight, FontStretch fontStretch, FontStyle fontStyle, out IDWriteFontSet* filteredSet) GetMatchingFonts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet self, FontProperty* properties, uint32 propertyCount, out IDWriteFontSet* filteredSet) GetMatchingFonts2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, ref IDWriteFontFaceReference fontFaceReference, out uint32 listIndex, out IntBool exists) FindFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, ref IDWriteFontFace fontFace, out uint32 listIndex, out IntBool exists) FindFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, FontPropertyID propertyID, out IDWriteStringList* values) GetPropertyValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, FontPropertyID propertyID, char16* preferredLocaleNames, out IDWriteStringList* values) GetPropertyValues2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, uint32 listIndex, FontPropertyID propertyId, out IntBool exists, IDWriteLocalizedStrings** values) GetPropertyValues3;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, in FontProperty property, out uint32 propertyOccurrenceCount) GetPropertyOccurrenceCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, char16* familyName, FontWeight fontWeight, FontStretch fontStretch, FontStyle fontStyle, out IDWriteFontSet* filteredSet) GetMatchingFonts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet self, FontProperty* properties, uint32 propertyCount, out IDWriteFontSet* filteredSet) GetMatchingFonts2;
 			}
 		}
 		[CRepr]
@@ -2505,18 +2518,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddFontFaceReference(ref IDWriteFontFaceReference fontFaceReference, FontProperty* properties, uint32 propertyCount) mut => VT.AddFontFaceReference(ref this, ref fontFaceReference, properties, propertyCount);
-			public HRESULT AddFontFaceReference(ref IDWriteFontFaceReference fontFaceReference) mut => VT.AddFontFaceReference2(ref this, ref fontFaceReference);
-			public HRESULT AddFontSet(ref IDWriteFontSet fontSet) mut => VT.AddFontSet(ref this, ref fontSet);
-			public HRESULT CreateFontSet(out IDWriteFontSet* fontSet) mut => VT.CreateFontSet(ref this, out fontSet);
+			public HResult AddFontFaceReference(ref IDWriteFontFaceReference fontFaceReference, FontProperty* properties, uint32 propertyCount) mut => VT.AddFontFaceReference(ref this, ref fontFaceReference, properties, propertyCount);
+			public HResult AddFontFaceReference(ref IDWriteFontFaceReference fontFaceReference) mut => VT.AddFontFaceReference2(ref this, ref fontFaceReference);
+			public HResult AddFontSet(ref IDWriteFontSet fontSet) mut => VT.AddFontSet(ref this, ref fontSet);
+			public HResult CreateFontSet(out IDWriteFontSet* fontSet) mut => VT.CreateFontSet(ref this, out fontSet);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder self, ref IDWriteFontFaceReference fontFaceReference, FontProperty* properties, uint32 propertyCount) AddFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder self, ref IDWriteFontFaceReference fontFaceReference) AddFontFaceReference2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder self, ref IDWriteFontSet fontSet) AddFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder self, out IDWriteFontSet* fontSet) CreateFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder self, ref IDWriteFontFaceReference fontFaceReference, FontProperty* properties, uint32 propertyCount) AddFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder self, ref IDWriteFontFaceReference fontFaceReference) AddFontFaceReference2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder self, ref IDWriteFontSet fontSet) AddFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder self, out IDWriteFontSet* fontSet) CreateFontSet;
 			}
 		}
 		[CRepr]
@@ -2526,14 +2539,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontSet(out IDWriteFontSet* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
-			public HRESULT GetFontFamily(uint32 index, out IDWriteFontFamily1* fontFamily) mut => VT.GetFontFamily(ref this, index, out fontFamily);
+			public HResult GetFontSet(out IDWriteFontSet* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
+			public HResult GetFontFamily(uint32 index, out IDWriteFontFamily1* fontFamily) mut => VT.GetFontFamily(ref this, index, out fontFamily);
 
 			[CRepr]
 			public struct VTable : IDWriteFontCollection.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection1 self, out IDWriteFontSet* fontSet) GetFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection1 self, uint32 index, out IDWriteFontFamily1* fontFamily) GetFontFamily;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection1 self, out IDWriteFontSet* fontSet) GetFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection1 self, uint32 index, out IDWriteFontFamily1* fontFamily) GetFontFamily;
 			}
 		}
 		[CRepr]
@@ -2544,15 +2557,15 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public Locality GetFontLocality(uint32 listIndex) mut => VT.GetFontLocality(ref this, listIndex);
-			public HRESULT GetFont(uint32 listIndex, out IDWriteFont3* font) mut => VT.GetFont(ref this, listIndex, out font);
-			public HRESULT GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
+			public HResult GetFont(uint32 listIndex, out IDWriteFont3* font) mut => VT.GetFont(ref this, listIndex, out font);
+			public HResult GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFamily.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] Locality(ref IDWriteFontFamily1 self, uint32 listIndex) GetFontLocality;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily1 self, uint32 listIndex, out IDWriteFont3* font) GetFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily1 self, uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily1 self, uint32 listIndex, out IDWriteFont3* font) GetFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily1 self, uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
 			}
 		}
 		[CRepr]
@@ -2563,15 +2576,15 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public Locality GetFontLocality(uint32 listIndex) mut => VT.GetFontLocality(ref this, listIndex);
-			public HRESULT GetFont(uint32 listIndex, out IDWriteFont3* font) mut => VT.GetFont(ref this, listIndex, out font);
-			public HRESULT GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
+			public HResult GetFont(uint32 listIndex, out IDWriteFont3* font) mut => VT.GetFont(ref this, listIndex, out font);
+			public HResult GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
 
 			[CRepr]
 			public struct VTable : IDWriteFontList.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] Locality(ref IDWriteFontList1 self, uint32 listIndex) GetFontLocality;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontList1 self, uint32 listIndex, out IDWriteFont3* font) GetFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontList1 self, uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontList1 self, uint32 listIndex, out IDWriteFont3* font) GetFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontList1 self, uint32 listIndex, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
 			}
 		}
 		[CRepr]
@@ -2581,38 +2594,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontFace(out IDWriteFontFace3* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
-			public HRESULT CreateFontFaceWithSimulations(FontSimulations fontFaceSimulationFlags, out IDWriteFontFace3* fontFace) mut => VT.CreateFontFaceWithSimulations(ref this, fontFaceSimulationFlags, out fontFace);
-			public BOOL ComEquals(ref IDWriteFontFaceReference fontFaceReference) mut => VT.ComEquals(ref this, ref fontFaceReference);
+			public HResult CreateFontFace(out IDWriteFontFace3* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
+			public HResult CreateFontFaceWithSimulations(FontSimulations fontFaceSimulationFlags, out IDWriteFontFace3* fontFace) mut => VT.CreateFontFaceWithSimulations(ref this, fontFaceSimulationFlags, out fontFace);
+			public IntBool ComEquals(ref IDWriteFontFaceReference fontFaceReference) mut => VT.ComEquals(ref this, ref fontFaceReference);
 			public uint32 GetFontFaceIndex() mut => VT.GetFontFaceIndex(ref this);
 			public FontSimulations GetSimulations() mut => VT.GetSimulations(ref this);
-			public HRESULT GetFontFile(out IDWriteFontFile* fontFile) mut => VT.GetFontFile(ref this, out fontFile);
+			public HResult GetFontFile(out IDWriteFontFile* fontFile) mut => VT.GetFontFile(ref this, out fontFile);
 			public uint64 GetLocalFileSize() mut => VT.GetLocalFileSize(ref this);
-			public uint64 GetFileSize() mut => VT.GetFileSize(ref this);
-			public HRESULT GetFileTime(out FILETIME lastWriteTime) mut => VT.GetFileTime(ref this, out lastWriteTime);
+			public uint64 GetFileSize() mut => VT._GetFileSize(ref this);
+			public HResult GetFileTime(out FileTime lastWriteTime) mut => VT.GetFileTime(ref this, out lastWriteTime);
 			public Locality GetLocality() mut => VT.GetLocality(ref this);
-			public HRESULT EnqueueFontDownloadRequest() mut => VT.EnqueueFontDownloadRequest(ref this);
-			public HRESULT EnqueueCharacterDownloadRequest(char16* characters, uint32 characterCount) mut => VT.EnqueueCharacterDownloadRequest(ref this, characters, characterCount);
-			public HRESULT EnqueueGlyphDownloadRequest(uint16* glyphIndices, uint32 glyphCount) mut => VT.EnqueueGlyphDownloadRequest(ref this, glyphIndices, glyphCount);
-			public HRESULT EnqueueFileFragmentDownloadRequest(uint64 fileOffset, uint64 fragmentSize) mut => VT.EnqueueFileFragmentDownloadRequest(ref this, fileOffset, fragmentSize);
+			public HResult EnqueueFontDownloadRequest() mut => VT.EnqueueFontDownloadRequest(ref this);
+			public HResult EnqueueCharacterDownloadRequest(char16* characters, uint32 characterCount) mut => VT.EnqueueCharacterDownloadRequest(ref this, characters, characterCount);
+			public HResult EnqueueGlyphDownloadRequest(uint16* glyphIndices, uint32 glyphCount) mut => VT.EnqueueGlyphDownloadRequest(ref this, glyphIndices, glyphCount);
+			public HResult EnqueueFileFragmentDownloadRequest(uint64 fileOffset, uint64 fragmentSize) mut => VT.EnqueueFileFragmentDownloadRequest(ref this, fileOffset, fragmentSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, out IDWriteFontFace3* fontFace) CreateFontFace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, FontSimulations fontFaceSimulationFlags, out IDWriteFontFace3* fontFace) CreateFontFaceWithSimulations;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFaceReference self, ref IDWriteFontFaceReference fontFaceReference) ComEquals;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, out IDWriteFontFace3* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, FontSimulations fontFaceSimulationFlags, out IDWriteFontFace3* fontFace) CreateFontFaceWithSimulations;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFaceReference self, ref IDWriteFontFaceReference fontFaceReference) ComEquals;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontFaceReference self) GetFontFaceIndex;
 				public new function [CallingConvention(.Stdcall)] FontSimulations(ref IDWriteFontFaceReference self) GetSimulations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, out IDWriteFontFile* fontFile) GetFontFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, out IDWriteFontFile* fontFile) GetFontFile;
 				public new function [CallingConvention(.Stdcall)] uint64(ref IDWriteFontFaceReference self) GetLocalFileSize;
-				public new function [CallingConvention(.Stdcall)] uint64(ref IDWriteFontFaceReference self) GetFileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, out FILETIME lastWriteTime) GetFileTime;
+				public new function [CallingConvention(.Stdcall)] uint64(ref IDWriteFontFaceReference self) _GetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, out FileTime lastWriteTime) GetFileTime;
 				public new function [CallingConvention(.Stdcall)] Locality(ref IDWriteFontFaceReference self) GetLocality;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self) EnqueueFontDownloadRequest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, char16* characters, uint32 characterCount) EnqueueCharacterDownloadRequest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, uint16* glyphIndices, uint32 glyphCount) EnqueueGlyphDownloadRequest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference self, uint64 fileOffset, uint64 fragmentSize) EnqueueFileFragmentDownloadRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self) EnqueueFontDownloadRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, char16* characters, uint32 characterCount) EnqueueCharacterDownloadRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, uint16* glyphIndices, uint32 glyphCount) EnqueueGlyphDownloadRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference self, uint64 fileOffset, uint64 fragmentSize) EnqueueFileFragmentDownloadRequest;
 			}
 		}
 		[CRepr]
@@ -2622,19 +2635,19 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontFace(out IDWriteFontFace3* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
-			public BOOL ComEquals(ref IDWriteFont font) mut => VT.ComEquals(ref this, ref font);
-			public HRESULT GetFontFaceReference(out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, out fontFaceReference);
-			public BOOL HasCharacter(uint32 unicodeValue) mut => VT.HasCharacter(ref this, unicodeValue);
+			public HResult CreateFontFace(out IDWriteFontFace3* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
+			public IntBool ComEquals(ref IDWriteFont font) mut => VT.ComEquals(ref this, ref font);
+			public HResult GetFontFaceReference(out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, out fontFaceReference);
+			public IntBool HasCharacter(uint32 unicodeValue) mut => VT.HasCharacter(ref this, unicodeValue);
 			public Locality GetLocality() mut => VT.GetLocality(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFont2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont3 self, out IDWriteFontFace3* fontFace) CreateFontFace;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFont3 self, ref IDWriteFont font) ComEquals;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFont3 self, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFont3 self, uint32 unicodeValue) HasCharacter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont3 self, out IDWriteFontFace3* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFont3 self, ref IDWriteFont font) ComEquals;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFont3 self, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFont3 self, uint32 unicodeValue) HasCharacter;
 				public new function [CallingConvention(.Stdcall)] Locality(ref IDWriteFont3 self) GetLocality;
 			}
 		}
@@ -2645,38 +2658,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontFaceReference(out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, out fontFaceReference);
+			public HResult GetFontFaceReference(out IDWriteFontFaceReference* fontFaceReference) mut => VT.GetFontFaceReference(ref this, out fontFaceReference);
 			public void GetPanose(out DWRITE_PANOSE panose) mut => VT.GetPanose(ref this, out panose);
 			public FontWeight GetWeight() mut => VT.GetWeight(ref this);
 			public FontStretch GetStretch() mut => VT.GetStretch(ref this);
 			public FontStyle GetStyle() mut => VT.GetStyle(ref this);
-			public HRESULT GetFamilyNames(out IDWriteLocalizedStrings* names) mut => VT.GetFamilyNames(ref this, out names);
-			public HRESULT GetFaceNames(out IDWriteLocalizedStrings* names) mut => VT.GetFaceNames(ref this, out names);
-			public HRESULT GetInformationalStrings(DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out BOOL exists) mut => VT.GetInformationalStrings(ref this, informationalStringID, informationalStrings, out exists);
-			public BOOL HasCharacter(uint32 unicodeValue) mut => VT.HasCharacter(ref this, unicodeValue);
-			public HRESULT GetRecommendedRenderingMode(float fontEmSize, float dpiX, float dpiY, DWRITE_MATRIX* transform, BOOL isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out RenderingMode1 renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) mut => VT.GetRecommendedRenderingMode(ref this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, out renderingMode, out gridFitMode);
-			public BOOL IsCharacterLocal(uint32 unicodeValue) mut => VT.IsCharacterLocal(ref this, unicodeValue);
-			public BOOL IsGlyphLocal(uint16 glyphId) mut => VT.IsGlyphLocal(ref this, glyphId);
-			public HRESULT AreCharactersLocal(char16* characters, uint32 characterCount, BOOL enqueueIfNotLocal, out BOOL isLocal) mut => VT.AreCharactersLocal(ref this, characters, characterCount, enqueueIfNotLocal, out isLocal);
-			public HRESULT AreGlyphsLocal(uint16* glyphIndices, uint32 glyphCount, BOOL enqueueIfNotLocal, out BOOL isLocal) mut => VT.AreGlyphsLocal(ref this, glyphIndices, glyphCount, enqueueIfNotLocal, out isLocal);
+			public HResult GetFamilyNames(out IDWriteLocalizedStrings* names) mut => VT.GetFamilyNames(ref this, out names);
+			public HResult GetFaceNames(out IDWriteLocalizedStrings* names) mut => VT.GetFaceNames(ref this, out names);
+			public HResult GetInformationalStrings(DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out IntBool exists) mut => VT.GetInformationalStrings(ref this, informationalStringID, informationalStrings, out exists);
+			public IntBool HasCharacter(uint32 unicodeValue) mut => VT.HasCharacter(ref this, unicodeValue);
+			public HResult GetRecommendedRenderingMode(float fontEmSize, float dpiX, float dpiY, DWriteMatrix* transform, IntBool isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out RenderingMode1 renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) mut => VT.GetRecommendedRenderingMode(ref this, fontEmSize, dpiX, dpiY, transform, isSideways, outlineThreshold, measuringMode, renderingParams, out renderingMode, out gridFitMode);
+			public IntBool IsCharacterLocal(uint32 unicodeValue) mut => VT.IsCharacterLocal(ref this, unicodeValue);
+			public IntBool IsGlyphLocal(uint16 glyphId) mut => VT.IsGlyphLocal(ref this, glyphId);
+			public HResult AreCharactersLocal(char16* characters, uint32 characterCount, IntBool enqueueIfNotLocal, out IntBool isLocal) mut => VT.AreCharactersLocal(ref this, characters, characterCount, enqueueIfNotLocal, out isLocal);
+			public HResult AreGlyphsLocal(uint16* glyphIndices, uint32 glyphCount, IntBool enqueueIfNotLocal, out IntBool isLocal) mut => VT.AreGlyphsLocal(ref this, glyphIndices, glyphCount, enqueueIfNotLocal, out isLocal);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFace2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, out IDWriteFontFaceReference* fontFaceReference) GetFontFaceReference;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFace3 self, out DWRITE_PANOSE panose) GetPanose;
 				public new function [CallingConvention(.Stdcall)] FontWeight(ref IDWriteFontFace3 self) GetWeight;
 				public new function [CallingConvention(.Stdcall)] FontStretch(ref IDWriteFontFace3 self) GetStretch;
 				public new function [CallingConvention(.Stdcall)] FontStyle(ref IDWriteFontFace3 self) GetStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, out IDWriteLocalizedStrings* names) GetFamilyNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, out IDWriteLocalizedStrings* names) GetFaceNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out BOOL exists) GetInformationalStrings;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace3 self, uint32 unicodeValue) HasCharacter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, float fontEmSize, float dpiX, float dpiY, DWRITE_MATRIX* transform, BOOL isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out RenderingMode1 renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) GetRecommendedRenderingMode;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace3 self, uint32 unicodeValue) IsCharacterLocal;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace3 self, uint16 glyphId) IsGlyphLocal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, char16* characters, uint32 characterCount, BOOL enqueueIfNotLocal, out BOOL isLocal) AreCharactersLocal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace3 self, uint16* glyphIndices, uint32 glyphCount, BOOL enqueueIfNotLocal, out BOOL isLocal) AreGlyphsLocal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, out IDWriteLocalizedStrings* names) GetFamilyNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, out IDWriteLocalizedStrings* names) GetFaceNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, DWRITE_INFORMATIONAL_STRING_ID informationalStringID, IDWriteLocalizedStrings** informationalStrings, out IntBool exists) GetInformationalStrings;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace3 self, uint32 unicodeValue) HasCharacter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, float fontEmSize, float dpiX, float dpiY, DWriteMatrix* transform, IntBool isSideways, DWRITE_OUTLINE_THRESHOLD outlineThreshold, DWRITE_MEASURING_MODE measuringMode, IDWriteRenderingParams* renderingParams, out RenderingMode1 renderingMode, out DWRITE_GRID_FIT_MODE gridFitMode) GetRecommendedRenderingMode;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace3 self, uint32 unicodeValue) IsCharacterLocal;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace3 self, uint16 glyphId) IsGlyphLocal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, char16* characters, uint32 characterCount, IntBool enqueueIfNotLocal, out IntBool isLocal) AreCharactersLocal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace3 self, uint16* glyphIndices, uint32 glyphCount, IntBool enqueueIfNotLocal, out IntBool isLocal) AreGlyphsLocal;
 			}
 		}
 		[CRepr]
@@ -2687,19 +2700,19 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 GetCount() mut => VT.GetCount(ref this);
-			public HRESULT GetLocaleNameLength(uint32 listIndex, out uint32 length) mut => VT.GetLocaleNameLength(ref this, listIndex, out length);
-			public HRESULT GetLocaleName(uint32 listIndex, char16* localeName, uint32 size) mut => VT.GetLocaleName(ref this, listIndex, localeName, size);
-			public HRESULT GetStringLength(uint32 listIndex, out uint32 length) mut => VT.GetStringLength(ref this, listIndex, out length);
-			public HRESULT GetString(uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) mut => VT.GetString(ref this, listIndex, stringBuffer, stringBufferSize);
+			public HResult GetLocaleNameLength(uint32 listIndex, out uint32 length) mut => VT.GetLocaleNameLength(ref this, listIndex, out length);
+			public HResult GetLocaleName(uint32 listIndex, char16* localeName, uint32 size) mut => VT.GetLocaleName(ref this, listIndex, localeName, size);
+			public HResult GetStringLength(uint32 listIndex, out uint32 length) mut => VT.GetStringLength(ref this, listIndex, out length);
+			public HResult GetString(uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) mut => VT.GetString(ref this, listIndex, stringBuffer, stringBufferSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteStringList self) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteStringList self, uint32 listIndex, out uint32 length) GetLocaleNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteStringList self, uint32 listIndex, char16* localeName, uint32 size) GetLocaleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteStringList self, uint32 listIndex, out uint32 length) GetStringLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteStringList self, uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) GetString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteStringList self, uint32 listIndex, out uint32 length) GetLocaleNameLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteStringList self, uint32 listIndex, char16* localeName, uint32 size) GetLocaleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteStringList self, uint32 listIndex, out uint32 length) GetStringLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteStringList self, uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) GetString;
 			}
 		}
 		[CRepr]
@@ -2709,12 +2722,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void DownloadCompleted(ref IDWriteFontDownloadQueue downloadQueue, IUnknown* context, HRESULT downloadResult) mut => VT.DownloadCompleted(ref this, ref downloadQueue, context, downloadResult);
+			public void DownloadCompleted(ref IDWriteFontDownloadQueue downloadQueue, IUnknown* context, HResult downloadResult) mut => VT.DownloadCompleted(ref this, ref downloadQueue, context, downloadResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontDownloadListener self, ref IDWriteFontDownloadQueue downloadQueue, IUnknown* context, HRESULT downloadResult) DownloadCompleted;
+				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontDownloadListener self, ref IDWriteFontDownloadQueue downloadQueue, IUnknown* context, HResult downloadResult) DownloadCompleted;
 			}
 		}
 		[CRepr]
@@ -2724,21 +2737,21 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddListener(ref IDWriteFontDownloadListener listener, out uint32 token) mut => VT.AddListener(ref this, ref listener, out token);
-			public HRESULT RemoveListener(uint32 token) mut => VT.RemoveListener(ref this, token);
-			public BOOL IsEmpty() mut => VT.IsEmpty(ref this);
-			public HRESULT BeginDownload(IUnknown* context) mut => VT.BeginDownload(ref this, context);
-			public HRESULT CancelDownload() mut => VT.CancelDownload(ref this);
+			public HResult AddListener(ref IDWriteFontDownloadListener listener, out uint32 token) mut => VT.AddListener(ref this, ref listener, out token);
+			public HResult RemoveListener(uint32 token) mut => VT.RemoveListener(ref this, token);
+			public IntBool IsEmpty() mut => VT.IsEmpty(ref this);
+			public HResult BeginDownload(IUnknown* context) mut => VT.BeginDownload(ref this, context);
+			public HResult CancelDownload() mut => VT.CancelDownload(ref this);
 			public uint64 GetGenerationCount() mut => VT.GetGenerationCount(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontDownloadQueue self, ref IDWriteFontDownloadListener listener, out uint32 token) AddListener;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontDownloadQueue self, uint32 token) RemoveListener;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontDownloadQueue self) IsEmpty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontDownloadQueue self, IUnknown* context) BeginDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontDownloadQueue self) CancelDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontDownloadQueue self, ref IDWriteFontDownloadListener listener, out uint32 token) AddListener;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontDownloadQueue self, uint32 token) RemoveListener;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontDownloadQueue self) IsEmpty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontDownloadQueue self, IUnknown* context) BeginDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontDownloadQueue self) CancelDownload;
 				public new function [CallingConvention(.Stdcall)] uint64(ref IDWriteFontDownloadQueue self) GetGenerationCount;
 			}
 		}
@@ -2749,18 +2762,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontFromLOGFONT(in LOGFONTW logFont, IDWriteFontCollection* fontCollection, out IDWriteFont* font) mut => VT.CreateFontFromLOGFONT(ref this, logFont, fontCollection, out font);
-			public HRESULT GetFontSignature(ref IDWriteFontFace fontFace, out FONTSIGNATURE fontSignature) mut => VT.GetFontSignature(ref this, ref fontFace, out fontSignature);
-			public HRESULT GetFontSignature(ref IDWriteFont font, out FONTSIGNATURE fontSignature) mut => VT.GetFontSignature2(ref this, ref font, out fontSignature);
-			public HRESULT GetMatchingFontsByLOGFONT(in LOGFONTA logFont, ref IDWriteFontSet fontSet, out IDWriteFontSet* filteredSet) mut => VT.GetMatchingFontsByLOGFONT(ref this, logFont, ref fontSet, out filteredSet);
+			public HResult CreateFontFromLOGFONT(in LOGFONTW logFont, IDWriteFontCollection* fontCollection, out IDWriteFont* font) mut => VT.CreateFontFromLOGFONT(ref this, logFont, fontCollection, out font);
+			public HResult GetFontSignature(ref IDWriteFontFace fontFace, out FONTSIGNATURE fontSignature) mut => VT.GetFontSignature(ref this, ref fontFace, out fontSignature);
+			public HResult GetFontSignature(ref IDWriteFont font, out FONTSIGNATURE fontSignature) mut => VT.GetFontSignature2(ref this, ref font, out fontSignature);
+			public HResult GetMatchingFontsByLOGFONT(in LOGFONTA logFont, ref IDWriteFontSet fontSet, out IDWriteFontSet* filteredSet) mut => VT.GetMatchingFontsByLOGFONT(ref this, logFont, ref fontSet, out filteredSet);
 
 			[CRepr]
 			public struct VTable : IDWriteGdiInterop.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop1 self, in LOGFONTW logFont, IDWriteFontCollection* fontCollection, out IDWriteFont* font) CreateFontFromLOGFONT;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop1 self, ref IDWriteFontFace fontFace, out FONTSIGNATURE fontSignature) GetFontSignature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop1 self, ref IDWriteFont font, out FONTSIGNATURE fontSignature) GetFontSignature2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteGdiInterop1 self, in LOGFONTA logFont, ref IDWriteFontSet fontSet, out IDWriteFontSet* filteredSet) GetMatchingFontsByLOGFONT;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop1 self, in LOGFONTW logFont, IDWriteFontCollection* fontCollection, out IDWriteFont* font) CreateFontFromLOGFONT;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop1 self, ref IDWriteFontFace fontFace, out FONTSIGNATURE fontSignature) GetFontSignature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop1 self, ref IDWriteFont font, out FONTSIGNATURE fontSignature) GetFontSignature2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteGdiInterop1 self, in LOGFONTA logFont, ref IDWriteFontSet fontSet, out IDWriteFontSet* filteredSet) GetMatchingFontsByLOGFONT;
 			}
 		}
 		[CRepr]
@@ -2770,14 +2783,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetLineSpacing(in LineSpacing lineSpacingOptions) mut => VT.SetLineSpacing(ref this, lineSpacingOptions);
-			public HRESULT GetLineSpacing(out LineSpacing lineSpacingOptions) mut => VT.GetLineSpacing(ref this, out lineSpacingOptions);
+			public HResult SetLineSpacing(in LineSpacing lineSpacingOptions) mut => VT.SetLineSpacing(ref this, lineSpacingOptions);
+			public HResult GetLineSpacing(out LineSpacing lineSpacingOptions) mut => VT.GetLineSpacing(ref this, out lineSpacingOptions);
 
 			[CRepr]
 			public struct VTable : IDWriteTextFormat1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat2 self, in LineSpacing lineSpacingOptions) SetLineSpacing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat2 self, out LineSpacing lineSpacingOptions) GetLineSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat2 self, in LineSpacing lineSpacingOptions) SetLineSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat2 self, out LineSpacing lineSpacingOptions) GetLineSpacing;
 			}
 		}
 		[CRepr]
@@ -2787,18 +2800,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InvalidateLayout() mut => VT.InvalidateLayout(ref this);
-			public HRESULT SetLineSpacing(in LineSpacing lineSpacingOptions) mut => VT.SetLineSpacing(ref this, lineSpacingOptions);
-			public HRESULT GetLineSpacing(out LineSpacing lineSpacingOptions) mut => VT.GetLineSpacing(ref this, out lineSpacingOptions);
-			public HRESULT GetLineMetrics(LineMetrics1* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) mut => VT.GetLineMetrics(ref this, lineMetrics, maxLineCount, out actualLineCount);
+			public HResult InvalidateLayout() mut => VT.InvalidateLayout(ref this);
+			public HResult SetLineSpacing(in LineSpacing lineSpacingOptions) mut => VT.SetLineSpacing(ref this, lineSpacingOptions);
+			public HResult GetLineSpacing(out LineSpacing lineSpacingOptions) mut => VT.GetLineSpacing(ref this, out lineSpacingOptions);
+			public HResult GetLineMetrics(LineMetrics1* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) mut => VT.GetLineMetrics(ref this, lineMetrics, maxLineCount, out actualLineCount);
 
 			[CRepr]
 			public struct VTable : IDWriteTextLayout2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout3 self) InvalidateLayout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout3 self, in LineSpacing lineSpacingOptions) SetLineSpacing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout3 self, out LineSpacing lineSpacingOptions) GetLineSpacing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout3 self, LineMetrics1* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) GetLineMetrics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout3 self) InvalidateLayout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout3 self, in LineSpacing lineSpacingOptions) SetLineSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout3 self, out LineSpacing lineSpacingOptions) GetLineSpacing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout3 self, LineMetrics1* lineMetrics, uint32 maxLineCount, out uint32 actualLineCount) GetLineMetrics;
 			}
 		}
 		[CRepr]
@@ -2808,12 +2821,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentRun(out ColorGlyphRun1* colorGlyphRun) mut => VT.GetCurrentRun(ref this, out colorGlyphRun);
+			public HResult GetCurrentRun(out ColorGlyphRun1* colorGlyphRun) mut => VT.GetCurrentRun(ref this, out colorGlyphRun);
 
 			[CRepr]
 			public struct VTable : IDWriteColorGlyphRunEnumerator.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteColorGlyphRunEnumerator1 self, out ColorGlyphRun1* colorGlyphRun) GetCurrentRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteColorGlyphRunEnumerator1 self, out ColorGlyphRun1* colorGlyphRun) GetCurrentRun;
 			}
 		}
 		[CRepr]
@@ -2823,17 +2836,17 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGlyphImageFormats(uint16 glyphId, uint32 pixelsPerEmFirst, uint32 pixelsPerEmLast, out DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormats) mut => VT.GetGlyphImageFormats(ref this, glyphId, pixelsPerEmFirst, pixelsPerEmLast, out glyphImageFormats);
+			public HResult GetGlyphImageFormats(uint16 glyphId, uint32 pixelsPerEmFirst, uint32 pixelsPerEmLast, out DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormats) mut => VT.GetGlyphImageFormats(ref this, glyphId, pixelsPerEmFirst, pixelsPerEmLast, out glyphImageFormats);
 			public DWRITE_GLYPH_IMAGE_FORMATS GetGlyphImageFormats() mut => VT.GetGlyphImageFormats2(ref this);
-			public HRESULT GetGlyphImageData(uint16 glyphId, uint32 pixelsPerEm, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, out GlyphImageData glyphData, void** glyphDataContext) mut => VT.GetGlyphImageData(ref this, glyphId, pixelsPerEm, glyphImageFormat, out glyphData, glyphDataContext);
+			public HResult GetGlyphImageData(uint16 glyphId, uint32 pixelsPerEm, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, out GlyphImageData glyphData, void** glyphDataContext) mut => VT.GetGlyphImageData(ref this, glyphId, pixelsPerEm, glyphImageFormat, out glyphData, glyphDataContext);
 			public void ReleaseGlyphImageData(void* glyphDataContext) mut => VT.ReleaseGlyphImageData(ref this, glyphDataContext);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFace3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace4 self, uint16 glyphId, uint32 pixelsPerEmFirst, uint32 pixelsPerEmLast, out DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormats) GetGlyphImageFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace4 self, uint16 glyphId, uint32 pixelsPerEmFirst, uint32 pixelsPerEmLast, out DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormats) GetGlyphImageFormats;
 				public new function [CallingConvention(.Stdcall)] DWRITE_GLYPH_IMAGE_FORMATS(ref IDWriteFontFace4 self) GetGlyphImageFormats2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace4 self, uint16 glyphId, uint32 pixelsPerEm, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, out GlyphImageData glyphData, void** glyphDataContext) GetGlyphImageData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace4 self, uint16 glyphId, uint32 pixelsPerEm, DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat, out GlyphImageData glyphData, void** glyphDataContext) GetGlyphImageData;
 				public new function [CallingConvention(.Stdcall)] void(ref IDWriteFontFace4 self, void* glyphDataContext) ReleaseGlyphImageData;
 			}
 		}
@@ -2844,16 +2857,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT TranslateColorGlyphRun(Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_GLYPH_IMAGE_FORMATS desiredGlyphImageFormats, DWRITE_MEASURING_MODE measuringMode, DWRITE_MATRIX* worldAndDpiTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator1* colorLayers) mut => VT.TranslateColorGlyphRun(ref this, baselineOrigin, glyphRun, glyphRunDescription, desiredGlyphImageFormats, measuringMode, worldAndDpiTransform, colorPaletteIndex, out colorLayers);
-			public HRESULT ComputeGlyphOrigins(in GlyphRun glyphRun, Vector2 baselineOrigin, out Vector2 glyphOrigins) mut => VT.ComputeGlyphOrigins(ref this, glyphRun, baselineOrigin, out glyphOrigins);
-			public HRESULT ComputeGlyphOrigins(in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, Vector2 baselineOrigin, DWRITE_MATRIX* worldAndDpiTransform, out Vector2 glyphOrigins) mut => VT.ComputeGlyphOrigins2(ref this, glyphRun, measuringMode, baselineOrigin, worldAndDpiTransform, out glyphOrigins);
+			public HResult TranslateColorGlyphRun(Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_GLYPH_IMAGE_FORMATS desiredGlyphImageFormats, DWRITE_MEASURING_MODE measuringMode, DWriteMatrix* worldAndDpiTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator1* colorLayers) mut => VT.TranslateColorGlyphRun(ref this, baselineOrigin, glyphRun, glyphRunDescription, desiredGlyphImageFormats, measuringMode, worldAndDpiTransform, colorPaletteIndex, out colorLayers);
+			public HResult ComputeGlyphOrigins(in GlyphRun glyphRun, Vector2 baselineOrigin, out Vector2 glyphOrigins) mut => VT.ComputeGlyphOrigins(ref this, glyphRun, baselineOrigin, out glyphOrigins);
+			public HResult ComputeGlyphOrigins(in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, Vector2 baselineOrigin, DWriteMatrix* worldAndDpiTransform, out Vector2 glyphOrigins) mut => VT.ComputeGlyphOrigins2(ref this, glyphRun, measuringMode, baselineOrigin, worldAndDpiTransform, out glyphOrigins);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory4 self, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_GLYPH_IMAGE_FORMATS desiredGlyphImageFormats, DWRITE_MEASURING_MODE measuringMode, DWRITE_MATRIX* worldAndDpiTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator1* colorLayers) TranslateColorGlyphRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory4 self, in GlyphRun glyphRun, Vector2 baselineOrigin, out Vector2 glyphOrigins) ComputeGlyphOrigins;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory4 self, in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, Vector2 baselineOrigin, DWRITE_MATRIX* worldAndDpiTransform, out Vector2 glyphOrigins) ComputeGlyphOrigins2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory4 self, Vector2 baselineOrigin, in GlyphRun glyphRun, DWRITE_GLYPH_RUN_DESCRIPTION* glyphRunDescription, DWRITE_GLYPH_IMAGE_FORMATS desiredGlyphImageFormats, DWRITE_MEASURING_MODE measuringMode, DWriteMatrix* worldAndDpiTransform, uint32 colorPaletteIndex, out IDWriteColorGlyphRunEnumerator1* colorLayers) TranslateColorGlyphRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory4 self, in GlyphRun glyphRun, Vector2 baselineOrigin, out Vector2 glyphOrigins) ComputeGlyphOrigins;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory4 self, in GlyphRun glyphRun, DWRITE_MEASURING_MODE measuringMode, Vector2 baselineOrigin, DWriteMatrix* worldAndDpiTransform, out Vector2 glyphOrigins) ComputeGlyphOrigins2;
 			}
 		}
 		[CRepr]
@@ -2863,12 +2876,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddFontFile(ref IDWriteFontFile fontFile) mut => VT.AddFontFile(ref this, ref fontFile);
+			public HResult AddFontFile(ref IDWriteFontFile fontFile) mut => VT.AddFontFile(ref this, ref fontFile);
 
 			[CRepr]
 			public struct VTable : IDWriteFontSetBuilder.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder1 self, ref IDWriteFontFile fontFile) AddFontFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder1 self, ref IDWriteFontFile fontFile) AddFontFile;
 			}
 		}
 		[CRepr]
@@ -2878,14 +2891,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HANDLE GetWaitHandle() mut => VT.GetWaitHandle(ref this);
-			public HRESULT GetResult() mut => VT.GetResult(ref this);
+			public Handle GetWaitHandle() mut => VT.GetWaitHandle(ref this);
+			public HResult GetResult() mut => VT.GetResult(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HANDLE(ref IDWriteAsyncResult self) GetWaitHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteAsyncResult self) GetResult;
+				public new function [CallingConvention(.Stdcall)] Handle(ref IDWriteAsyncResult self) GetWaitHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteAsyncResult self) GetResult;
 			}
 		}
 		[CRepr]
@@ -2895,18 +2908,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetLocalFileSize(out uint64 localFileSize) mut => VT.GetLocalFileSize(ref this, out localFileSize);
-			public HRESULT GetFileFragmentLocality(uint64 fileOffset, uint64 fragmentSize, out BOOL isLocal, out uint64 partialSize) mut => VT.GetFileFragmentLocality(ref this, fileOffset, fragmentSize, out isLocal, out partialSize);
+			public HResult GetLocalFileSize(out uint64 localFileSize) mut => VT.GetLocalFileSize(ref this, out localFileSize);
+			public HResult GetFileFragmentLocality(uint64 fileOffset, uint64 fragmentSize, out IntBool isLocal, out uint64 partialSize) mut => VT.GetFileFragmentLocality(ref this, fileOffset, fragmentSize, out isLocal, out partialSize);
 			public Locality GetLocality() mut => VT.GetLocality(ref this);
-			public HRESULT BeginDownload(in Guid downloadOperationID, FileFragment* fileFragments, uint32 fragmentCount, IDWriteAsyncResult** asyncResult) mut => VT.BeginDownload(ref this, downloadOperationID, fileFragments, fragmentCount, asyncResult);
+			public HResult BeginDownload(in Guid downloadOperationID, FileFragment* fileFragments, uint32 fragmentCount, IDWriteAsyncResult** asyncResult) mut => VT.BeginDownload(ref this, downloadOperationID, fileFragments, fragmentCount, asyncResult);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFileStream.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteRemoteFontFileStream self, out uint64 localFileSize) GetLocalFileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteRemoteFontFileStream self, uint64 fileOffset, uint64 fragmentSize, out BOOL isLocal, out uint64 partialSize) GetFileFragmentLocality;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteRemoteFontFileStream self, out uint64 localFileSize) GetLocalFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteRemoteFontFileStream self, uint64 fileOffset, uint64 fragmentSize, out IntBool isLocal, out uint64 partialSize) GetFileFragmentLocality;
 				public new function [CallingConvention(.Stdcall)] Locality(ref IDWriteRemoteFontFileStream self) GetLocality;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteRemoteFontFileStream self, in Guid downloadOperationID, FileFragment* fileFragments, uint32 fragmentCount, IDWriteAsyncResult** asyncResult) BeginDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteRemoteFontFileStream self, in Guid downloadOperationID, FileFragment* fileFragments, uint32 fragmentCount, IDWriteAsyncResult** asyncResult) BeginDownload;
 			}
 		}
 		[CRepr]
@@ -2916,16 +2929,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateRemoteStreamFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteRemoteFontFileStream* fontFileStream) mut => VT.CreateRemoteStreamFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out fontFileStream);
-			public HRESULT GetLocalityFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out Locality locality) mut => VT.GetLocalityFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out locality);
-			public HRESULT CreateFontFileReferenceFromUrl(ref IDWriteFactory factory, PWSTR baseUrl, PWSTR fontFileUrl, out IDWriteFontFile* fontFile) mut => VT.CreateFontFileReferenceFromUrl(ref this, ref factory, baseUrl, fontFileUrl, out fontFile);
+			public HResult CreateRemoteStreamFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteRemoteFontFileStream* fontFileStream) mut => VT.CreateRemoteStreamFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out fontFileStream);
+			public HResult GetLocalityFromKey(void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out Locality locality) mut => VT.GetLocalityFromKey(ref this, fontFileReferenceKey, fontFileReferenceKeySize, out locality);
+			public HResult CreateFontFileReferenceFromUrl(ref IDWriteFactory factory, char16* baseUrl, char16* fontFileUrl, out IDWriteFontFile* fontFile) mut => VT.CreateFontFileReferenceFromUrl(ref this, ref factory, baseUrl, fontFileUrl, out fontFile);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFileLoader.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteRemoteFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteRemoteFontFileStream* fontFileStream) CreateRemoteStreamFromKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteRemoteFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out Locality locality) GetLocalityFromKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteRemoteFontFileLoader self, ref IDWriteFactory factory, PWSTR baseUrl, PWSTR fontFileUrl, out IDWriteFontFile* fontFile) CreateFontFileReferenceFromUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteRemoteFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out IDWriteRemoteFontFileStream* fontFileStream) CreateRemoteStreamFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteRemoteFontFileLoader self, void* fontFileReferenceKey, uint32 fontFileReferenceKeySize, out Locality locality) GetLocalityFromKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteRemoteFontFileLoader self, ref IDWriteFactory factory, char16* baseUrl, char16* fontFileUrl, out IDWriteFontFile* fontFile) CreateFontFileReferenceFromUrl;
 			}
 		}
 		[CRepr]
@@ -2935,13 +2948,13 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateInMemoryFontFileReference(ref IDWriteFactory factory, void* fontData, uint32 fontDataSize, IUnknown* ownerObject, out IDWriteFontFile* fontFile) mut => VT.CreateInMemoryFontFileReference(ref this, ref factory, fontData, fontDataSize, ownerObject, out fontFile);
+			public HResult CreateInMemoryFontFileReference(ref IDWriteFactory factory, void* fontData, uint32 fontDataSize, IUnknown* ownerObject, out IDWriteFontFile* fontFile) mut => VT.CreateInMemoryFontFileReference(ref this, ref factory, fontData, fontDataSize, ownerObject, out fontFile);
 			public uint32 GetFileCount() mut => VT.GetFileCount(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFileLoader.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteInMemoryFontFileLoader self, ref IDWriteFactory factory, void* fontData, uint32 fontDataSize, IUnknown* ownerObject, out IDWriteFontFile* fontFile) CreateInMemoryFontFileReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteInMemoryFontFileLoader self, ref IDWriteFactory factory, void* fontData, uint32 fontDataSize, IUnknown* ownerObject, out IDWriteFontFile* fontFile) CreateInMemoryFontFileReference;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteInMemoryFontFileLoader self) GetFileCount;
 			}
 		}
@@ -2952,20 +2965,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontSetBuilder(out IDWriteFontSetBuilder1* fontSetBuilder) mut => VT.CreateFontSetBuilder(ref this, out fontSetBuilder);
-			public HRESULT CreateInMemoryFontFileLoader(out IDWriteInMemoryFontFileLoader* newLoader) mut => VT.CreateInMemoryFontFileLoader(ref this, out newLoader);
-			public HRESULT CreateHttpFontFileLoader(PWSTR referrerUrl, PWSTR extraHeaders, out IDWriteRemoteFontFileLoader* newLoader) mut => VT.CreateHttpFontFileLoader(ref this, referrerUrl, extraHeaders, out newLoader);
+			public HResult CreateFontSetBuilder(out IDWriteFontSetBuilder1* fontSetBuilder) mut => VT.CreateFontSetBuilder(ref this, out fontSetBuilder);
+			public HResult CreateInMemoryFontFileLoader(out IDWriteInMemoryFontFileLoader* newLoader) mut => VT.CreateInMemoryFontFileLoader(ref this, out newLoader);
+			public HResult CreateHttpFontFileLoader(char16* referrerUrl, char16* extraHeaders, out IDWriteRemoteFontFileLoader* newLoader) mut => VT.CreateHttpFontFileLoader(ref this, referrerUrl, extraHeaders, out newLoader);
 			public ContainerType AnalyzeContainerType(void* fileData, uint32 fileDataSize) mut => VT.AnalyzeContainerType(ref this, fileData, fileDataSize);
-			public HRESULT UnpackFontFile(ContainerType containerType, void* fileData, uint32 fileDataSize, out IDWriteFontFileStream* unpackedFontStream) mut => VT.UnpackFontFile(ref this, containerType, fileData, fileDataSize, out unpackedFontStream);
+			public HResult UnpackFontFile(ContainerType containerType, void* fileData, uint32 fileDataSize, out IDWriteFontFileStream* unpackedFontStream) mut => VT.UnpackFontFile(ref this, containerType, fileData, fileDataSize, out unpackedFontStream);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory4.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory5 self, out IDWriteFontSetBuilder1* fontSetBuilder) CreateFontSetBuilder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory5 self, out IDWriteInMemoryFontFileLoader* newLoader) CreateInMemoryFontFileLoader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory5 self, PWSTR referrerUrl, PWSTR extraHeaders, out IDWriteRemoteFontFileLoader* newLoader) CreateHttpFontFileLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory5 self, out IDWriteFontSetBuilder1* fontSetBuilder) CreateFontSetBuilder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory5 self, out IDWriteInMemoryFontFileLoader* newLoader) CreateInMemoryFontFileLoader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory5 self, char16* referrerUrl, char16* extraHeaders, out IDWriteRemoteFontFileLoader* newLoader) CreateHttpFontFileLoader;
 				public new function [CallingConvention(.Stdcall)] ContainerType(ref IDWriteFactory5 self, void* fileData, uint32 fileDataSize) AnalyzeContainerType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory5 self, ContainerType containerType, void* fileData, uint32 fileDataSize, out IDWriteFontFileStream* unpackedFontStream) UnpackFontFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory5 self, ContainerType containerType, void* fileData, uint32 fileDataSize, out IDWriteFontFileStream* unpackedFontStream) UnpackFontFile;
 			}
 		}
 		[CRepr]
@@ -2975,24 +2988,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontFaceReference(ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) mut => VT.CreateFontFaceReference(ref this, ref fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, out fontFaceReference);
-			public HRESULT CreateFontResource(ref IDWriteFontFile fontFile, uint32 faceIndex, out IDWriteFontResource* fontResource) mut => VT.CreateFontResource(ref this, ref fontFile, faceIndex, out fontResource);
-			public HRESULT GetSystemFontSet(BOOL includeDownloadableFonts, out IDWriteFontSet1* fontSet) mut => VT.GetSystemFontSet(ref this, includeDownloadableFonts, out fontSet);
-			public HRESULT GetSystemFontCollection(BOOL includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) mut => VT.GetSystemFontCollection(ref this, includeDownloadableFonts, fontFamilyModel, out fontCollection);
-			public HRESULT CreateFontCollectionFromFontSet(ref IDWriteFontSet fontSet, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) mut => VT.CreateFontCollectionFromFontSet(ref this, ref fontSet, fontFamilyModel, out fontCollection);
-			public HRESULT CreateFontSetBuilder(out IDWriteFontSetBuilder2* fontSetBuilder) mut => VT.CreateFontSetBuilder(ref this, out fontSetBuilder);
-			public HRESULT CreateTextFormat(PWSTR fontFamilyName, IDWriteFontCollection* fontCollection, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, float fontSize, PWSTR localeName, out IDWriteTextFormat3* textFormat) mut => VT.CreateTextFormat(ref this, fontFamilyName, fontCollection, fontAxisValues, fontAxisValueCount, fontSize, localeName, out textFormat);
+			public HResult CreateFontFaceReference(ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) mut => VT.CreateFontFaceReference(ref this, ref fontFile, faceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, out fontFaceReference);
+			public HResult CreateFontResource(ref IDWriteFontFile fontFile, uint32 faceIndex, out IDWriteFontResource* fontResource) mut => VT.CreateFontResource(ref this, ref fontFile, faceIndex, out fontResource);
+			public HResult GetSystemFontSet(IntBool includeDownloadableFonts, out IDWriteFontSet1* fontSet) mut => VT.GetSystemFontSet(ref this, includeDownloadableFonts, out fontSet);
+			public HResult GetSystemFontCollection(IntBool includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) mut => VT.GetSystemFontCollection(ref this, includeDownloadableFonts, fontFamilyModel, out fontCollection);
+			public HResult CreateFontCollectionFromFontSet(ref IDWriteFontSet fontSet, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) mut => VT.CreateFontCollectionFromFontSet(ref this, ref fontSet, fontFamilyModel, out fontCollection);
+			public HResult CreateFontSetBuilder(out IDWriteFontSetBuilder2* fontSetBuilder) mut => VT.CreateFontSetBuilder(ref this, out fontSetBuilder);
+			public HResult CreateTextFormat(char16* fontFamilyName, IDWriteFontCollection* fontCollection, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, float fontSize, char16* localeName, out IDWriteTextFormat3* textFormat) mut => VT.CreateTextFormat(ref this, fontFamilyName, fontCollection, fontAxisValues, fontAxisValueCount, fontSize, localeName, out textFormat);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory5.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) CreateFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, ref IDWriteFontFile fontFile, uint32 faceIndex, out IDWriteFontResource* fontResource) CreateFontResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, BOOL includeDownloadableFonts, out IDWriteFontSet1* fontSet) GetSystemFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, BOOL includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) GetSystemFontCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, ref IDWriteFontSet fontSet, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) CreateFontCollectionFromFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, out IDWriteFontSetBuilder2* fontSetBuilder) CreateFontSetBuilder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory6 self, PWSTR fontFamilyName, IDWriteFontCollection* fontCollection, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, float fontSize, PWSTR localeName, out IDWriteTextFormat3* textFormat) CreateTextFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, ref IDWriteFontFile fontFile, uint32 faceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) CreateFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, ref IDWriteFontFile fontFile, uint32 faceIndex, out IDWriteFontResource* fontResource) CreateFontResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, IntBool includeDownloadableFonts, out IDWriteFontSet1* fontSet) GetSystemFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, IntBool includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) GetSystemFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, ref IDWriteFontSet fontSet, FontFamilyModel fontFamilyModel, out IDWriteFontCollection2* fontCollection) CreateFontCollectionFromFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, out IDWriteFontSetBuilder2* fontSetBuilder) CreateFontSetBuilder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory6 self, char16* fontFamilyName, IDWriteFontCollection* fontCollection, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, float fontSize, char16* localeName, out IDWriteTextFormat3* textFormat) CreateTextFormat;
 			}
 		}
 		[CRepr]
@@ -3003,19 +3016,19 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 GetFontAxisValueCount() mut => VT.GetFontAxisValueCount(ref this);
-			public HRESULT GetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
-			public BOOL HasVariations() mut => VT.HasVariations(ref this);
-			public HRESULT GetFontResource(out IDWriteFontResource* fontResource) mut => VT.GetFontResource(ref this, out fontResource);
-			public BOOL ComEquals(ref IDWriteFontFace fontFace) mut => VT.ComEquals(ref this, ref fontFace);
+			public HResult GetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
+			public IntBool HasVariations() mut => VT.HasVariations(ref this);
+			public HResult GetFontResource(out IDWriteFontResource* fontResource) mut => VT.GetFontResource(ref this, out fontResource);
+			public IntBool ComEquals(ref IDWriteFontFace fontFace) mut => VT.ComEquals(ref this, ref fontFace);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFace4.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontFace5 self) GetFontAxisValueCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace5 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetFontAxisValues;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace5 self) HasVariations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace5 self, out IDWriteFontResource* fontResource) GetFontResource;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontFace5 self, ref IDWriteFontFace fontFace) ComEquals;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace5 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace5 self) HasVariations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace5 self, out IDWriteFontResource* fontResource) GetFontResource;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontFace5 self, ref IDWriteFontFace fontFace) ComEquals;
 			}
 		}
 		[CRepr]
@@ -3025,34 +3038,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontFile(out IDWriteFontFile* fontFile) mut => VT.GetFontFile(ref this, out fontFile);
+			public HResult GetFontFile(out IDWriteFontFile* fontFile) mut => VT.GetFontFile(ref this, out fontFile);
 			public uint32 GetFontFaceIndex() mut => VT.GetFontFaceIndex(ref this);
 			public uint32 GetFontAxisCount() mut => VT.GetFontAxisCount(ref this);
-			public HRESULT GetDefaultFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetDefaultFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
-			public HRESULT GetFontAxisRanges(FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount) mut => VT.GetFontAxisRanges(ref this, fontAxisRanges, fontAxisRangeCount);
+			public HResult GetDefaultFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetDefaultFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
+			public HResult GetFontAxisRanges(FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount) mut => VT.GetFontAxisRanges(ref this, fontAxisRanges, fontAxisRangeCount);
 			public FontAxisAttributes GetFontAxisAttributes(uint32 axisIndex) mut => VT.GetFontAxisAttributes(ref this, axisIndex);
-			public HRESULT GetAxisNames(uint32 axisIndex, out IDWriteLocalizedStrings* names) mut => VT.GetAxisNames(ref this, axisIndex, out names);
+			public HResult GetAxisNames(uint32 axisIndex, out IDWriteLocalizedStrings* names) mut => VT.GetAxisNames(ref this, axisIndex, out names);
 			public uint32 GetAxisValueNameCount(uint32 axisIndex) mut => VT.GetAxisValueNameCount(ref this, axisIndex);
-			public HRESULT GetAxisValueNames(uint32 axisIndex, uint32 axisValueIndex, out FontAxisRange fontAxisRange, out IDWriteLocalizedStrings* names) mut => VT.GetAxisValueNames(ref this, axisIndex, axisValueIndex, out fontAxisRange, out names);
-			public BOOL HasVariations() mut => VT.HasVariations(ref this);
-			public HRESULT CreateFontFace(FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFace5* fontFace) mut => VT.CreateFontFace(ref this, fontSimulations, fontAxisValues, fontAxisValueCount, out fontFace);
-			public HRESULT CreateFontFaceReference(FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) mut => VT.CreateFontFaceReference(ref this, fontSimulations, fontAxisValues, fontAxisValueCount, out fontFaceReference);
+			public HResult GetAxisValueNames(uint32 axisIndex, uint32 axisValueIndex, out FontAxisRange fontAxisRange, out IDWriteLocalizedStrings* names) mut => VT.GetAxisValueNames(ref this, axisIndex, axisValueIndex, out fontAxisRange, out names);
+			public IntBool HasVariations() mut => VT.HasVariations(ref this);
+			public HResult CreateFontFace(FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFace5* fontFace) mut => VT.CreateFontFace(ref this, fontSimulations, fontAxisValues, fontAxisValueCount, out fontFace);
+			public HResult CreateFontFaceReference(FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) mut => VT.CreateFontFaceReference(ref this, fontSimulations, fontAxisValues, fontAxisValueCount, out fontFaceReference);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, out IDWriteFontFile* fontFile) GetFontFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, out IDWriteFontFile* fontFile) GetFontFile;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontResource self) GetFontFaceIndex;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontResource self) GetFontAxisCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetDefaultFontAxisValues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount) GetFontAxisRanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetDefaultFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount) GetFontAxisRanges;
 				public new function [CallingConvention(.Stdcall)] FontAxisAttributes(ref IDWriteFontResource self, uint32 axisIndex) GetFontAxisAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, uint32 axisIndex, out IDWriteLocalizedStrings* names) GetAxisNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, uint32 axisIndex, out IDWriteLocalizedStrings* names) GetAxisNames;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontResource self, uint32 axisIndex) GetAxisValueNameCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, uint32 axisIndex, uint32 axisValueIndex, out FontAxisRange fontAxisRange, out IDWriteLocalizedStrings* names) GetAxisValueNames;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDWriteFontResource self) HasVariations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFace5* fontFace) CreateFontFace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontResource self, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) CreateFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, uint32 axisIndex, uint32 axisValueIndex, out FontAxisRange fontAxisRange, out IDWriteLocalizedStrings* names) GetAxisValueNames;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDWriteFontResource self) HasVariations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFace5* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontResource self, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontFaceReference1* fontFaceReference) CreateFontFaceReference;
 			}
 		}
 		[CRepr]
@@ -3062,16 +3075,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFontFace(out IDWriteFontFace5* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
+			public HResult CreateFontFace(out IDWriteFontFace5* fontFace) mut => VT.CreateFontFace(ref this, out fontFace);
 			public uint32 GetFontAxisValueCount() mut => VT.GetFontAxisValueCount(ref this);
-			public HRESULT GetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
+			public HResult GetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFaceReference.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference1 self, out IDWriteFontFace5* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference1 self, out IDWriteFontFace5* fontFace) CreateFontFace;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontFaceReference1 self) GetFontAxisValueCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFaceReference1 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFaceReference1 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetFontAxisValues;
 			}
 		}
 		[CRepr]
@@ -3081,14 +3094,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddFont(ref IDWriteFontFile fontFile, uint32 fontFaceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, FontProperty* properties, uint32 propertyCount) mut => VT.AddFont(ref this, ref fontFile, fontFaceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontAxisRanges, fontAxisRangeCount, properties, propertyCount);
-			public HRESULT AddFontFile(PWSTR filePath) mut => VT.AddFontFile(ref this, filePath);
+			public HResult AddFont(ref IDWriteFontFile fontFile, uint32 fontFaceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, FontProperty* properties, uint32 propertyCount) mut => VT.AddFont(ref this, ref fontFile, fontFaceIndex, fontSimulations, fontAxisValues, fontAxisValueCount, fontAxisRanges, fontAxisRangeCount, properties, propertyCount);
+			public HResult AddFontFile(char16* filePath) mut => VT.AddFontFile(ref this, filePath);
 
 			[CRepr]
 			public struct VTable : IDWriteFontSetBuilder1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder2 self, ref IDWriteFontFile fontFile, uint32 fontFaceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, FontProperty* properties, uint32 propertyCount) AddFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSetBuilder2 self, PWSTR filePath) AddFontFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder2 self, ref IDWriteFontFile fontFile, uint32 fontFaceIndex, FontSimulations fontSimulations, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, FontProperty* properties, uint32 propertyCount) AddFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSetBuilder2 self, char16* filePath) AddFontFile;
 			}
 		}
 		[CRepr]
@@ -3098,35 +3111,35 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMatchingFonts(FontProperty* fontProperty, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontSet1* matchingFonts) mut => VT.GetMatchingFonts(ref this, fontProperty, fontAxisValues, fontAxisValueCount, out matchingFonts);
-			public HRESULT GetFirstFontResources(out IDWriteFontSet1* filteredFontSet) mut => VT.GetFirstFontResources(ref this, out filteredFontSet);
-			public HRESULT GetFilteredFonts(uint32* indices, uint32 indexCount, out IDWriteFontSet1* filteredFontSet) mut => VT.GetFilteredFonts(ref this, indices, indexCount, out filteredFontSet);
-			public HRESULT GetFilteredFonts(FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, BOOL selectAnyRange, out IDWriteFontSet1* filteredFontSet) mut => VT.GetFilteredFonts2(ref this, fontAxisRanges, fontAxisRangeCount, selectAnyRange, out filteredFontSet);
-			public HRESULT GetFilteredFonts(FontProperty* properties, uint32 propertyCount, BOOL selectAnyProperty, out IDWriteFontSet1* filteredFontSet) mut => VT.GetFilteredFonts3(ref this, properties, propertyCount, selectAnyProperty, out filteredFontSet);
-			public HRESULT GetFilteredFontIndices(FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, BOOL selectAnyRange, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) mut => VT.GetFilteredFontIndices(ref this, fontAxisRanges, fontAxisRangeCount, selectAnyRange, indices, maxIndexCount, out actualIndexCount);
-			public HRESULT GetFilteredFontIndices(FontProperty* properties, uint32 propertyCount, BOOL selectAnyProperty, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) mut => VT.GetFilteredFontIndices2(ref this, properties, propertyCount, selectAnyProperty, indices, maxIndexCount, out actualIndexCount);
-			public HRESULT GetFontAxisRanges(uint32 listIndex, FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) mut => VT.GetFontAxisRanges(ref this, listIndex, fontAxisRanges, maxFontAxisRangeCount, out actualFontAxisRangeCount);
-			public HRESULT GetFontAxisRanges(FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) mut => VT.GetFontAxisRanges2(ref this, fontAxisRanges, maxFontAxisRangeCount, out actualFontAxisRangeCount);
-			public HRESULT GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference1* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
-			public HRESULT CreateFontResource(uint32 listIndex, out IDWriteFontResource* fontResource) mut => VT.CreateFontResource(ref this, listIndex, out fontResource);
-			public HRESULT CreateFontFace(uint32 listIndex, out IDWriteFontFace5* fontFace) mut => VT.CreateFontFace(ref this, listIndex, out fontFace);
+			public HResult GetMatchingFonts(FontProperty* fontProperty, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontSet1* matchingFonts) mut => VT.GetMatchingFonts(ref this, fontProperty, fontAxisValues, fontAxisValueCount, out matchingFonts);
+			public HResult GetFirstFontResources(out IDWriteFontSet1* filteredFontSet) mut => VT.GetFirstFontResources(ref this, out filteredFontSet);
+			public HResult GetFilteredFonts(uint32* indices, uint32 indexCount, out IDWriteFontSet1* filteredFontSet) mut => VT.GetFilteredFonts(ref this, indices, indexCount, out filteredFontSet);
+			public HResult GetFilteredFonts(FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, IntBool selectAnyRange, out IDWriteFontSet1* filteredFontSet) mut => VT.GetFilteredFonts2(ref this, fontAxisRanges, fontAxisRangeCount, selectAnyRange, out filteredFontSet);
+			public HResult GetFilteredFonts(FontProperty* properties, uint32 propertyCount, IntBool selectAnyProperty, out IDWriteFontSet1* filteredFontSet) mut => VT.GetFilteredFonts3(ref this, properties, propertyCount, selectAnyProperty, out filteredFontSet);
+			public HResult GetFilteredFontIndices(FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, IntBool selectAnyRange, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) mut => VT.GetFilteredFontIndices(ref this, fontAxisRanges, fontAxisRangeCount, selectAnyRange, indices, maxIndexCount, out actualIndexCount);
+			public HResult GetFilteredFontIndices(FontProperty* properties, uint32 propertyCount, IntBool selectAnyProperty, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) mut => VT.GetFilteredFontIndices2(ref this, properties, propertyCount, selectAnyProperty, indices, maxIndexCount, out actualIndexCount);
+			public HResult GetFontAxisRanges(uint32 listIndex, FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) mut => VT.GetFontAxisRanges(ref this, listIndex, fontAxisRanges, maxFontAxisRangeCount, out actualFontAxisRangeCount);
+			public HResult GetFontAxisRanges(FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) mut => VT.GetFontAxisRanges2(ref this, fontAxisRanges, maxFontAxisRangeCount, out actualFontAxisRangeCount);
+			public HResult GetFontFaceReference(uint32 listIndex, out IDWriteFontFaceReference1* fontFaceReference) mut => VT.GetFontFaceReference(ref this, listIndex, out fontFaceReference);
+			public HResult CreateFontResource(uint32 listIndex, out IDWriteFontResource* fontResource) mut => VT.CreateFontResource(ref this, listIndex, out fontResource);
+			public HResult CreateFontFace(uint32 listIndex, out IDWriteFontFace5* fontFace) mut => VT.CreateFontFace(ref this, listIndex, out fontFace);
 			public Locality GetFontLocality(uint32 listIndex) mut => VT.GetFontLocality(ref this, listIndex);
 
 			[CRepr]
 			public struct VTable : IDWriteFontSet.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, FontProperty* fontProperty, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontSet1* matchingFonts) GetMatchingFonts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, out IDWriteFontSet1* filteredFontSet) GetFirstFontResources;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, uint32* indices, uint32 indexCount, out IDWriteFontSet1* filteredFontSet) GetFilteredFonts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, BOOL selectAnyRange, out IDWriteFontSet1* filteredFontSet) GetFilteredFonts2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, FontProperty* properties, uint32 propertyCount, BOOL selectAnyProperty, out IDWriteFontSet1* filteredFontSet) GetFilteredFonts3;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, BOOL selectAnyRange, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) GetFilteredFontIndices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, FontProperty* properties, uint32 propertyCount, BOOL selectAnyProperty, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) GetFilteredFontIndices2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, uint32 listIndex, FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) GetFontAxisRanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) GetFontAxisRanges2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, uint32 listIndex, out IDWriteFontFaceReference1* fontFaceReference) GetFontFaceReference;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, uint32 listIndex, out IDWriteFontResource* fontResource) CreateFontResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet1 self, uint32 listIndex, out IDWriteFontFace5* fontFace) CreateFontFace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, FontProperty* fontProperty, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontSet1* matchingFonts) GetMatchingFonts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, out IDWriteFontSet1* filteredFontSet) GetFirstFontResources;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, uint32* indices, uint32 indexCount, out IDWriteFontSet1* filteredFontSet) GetFilteredFonts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, IntBool selectAnyRange, out IDWriteFontSet1* filteredFontSet) GetFilteredFonts2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, FontProperty* properties, uint32 propertyCount, IntBool selectAnyProperty, out IDWriteFontSet1* filteredFontSet) GetFilteredFonts3;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, FontAxisRange* fontAxisRanges, uint32 fontAxisRangeCount, IntBool selectAnyRange, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) GetFilteredFontIndices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, FontProperty* properties, uint32 propertyCount, IntBool selectAnyProperty, uint32* indices, uint32 maxIndexCount, out uint32 actualIndexCount) GetFilteredFontIndices2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, uint32 listIndex, FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) GetFontAxisRanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, FontAxisRange* fontAxisRanges, uint32 maxFontAxisRangeCount, out uint32 actualFontAxisRangeCount) GetFontAxisRanges2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, uint32 listIndex, out IDWriteFontFaceReference1* fontFaceReference) GetFontFaceReference;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, uint32 listIndex, out IDWriteFontResource* fontResource) CreateFontResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet1 self, uint32 listIndex, out IDWriteFontFace5* fontFace) CreateFontFace;
 				public new function [CallingConvention(.Stdcall)] Locality(ref IDWriteFontSet1 self, uint32 listIndex) GetFontLocality;
 			}
 		}
@@ -3137,12 +3150,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontSet(out IDWriteFontSet1* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
+			public HResult GetFontSet(out IDWriteFontSet1* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
 
 			[CRepr]
 			public struct VTable : IDWriteFontList1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontList2 self, out IDWriteFontSet1* fontSet) GetFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontList2 self, out IDWriteFontSet1* fontSet) GetFontSet;
 			}
 		}
 		[CRepr]
@@ -3152,14 +3165,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMatchingFonts(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* matchingFonts) mut => VT.GetMatchingFonts(ref this, fontAxisValues, fontAxisValueCount, out matchingFonts);
-			public HRESULT GetFontSet(out IDWriteFontSet1* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
+			public HResult GetMatchingFonts(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* matchingFonts) mut => VT.GetMatchingFonts(ref this, fontAxisValues, fontAxisValueCount, out matchingFonts);
+			public HResult GetFontSet(out IDWriteFontSet1* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFamily1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily2 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* matchingFonts) GetMatchingFonts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFamily2 self, out IDWriteFontSet1* fontSet) GetFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily2 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* matchingFonts) GetMatchingFonts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFamily2 self, out IDWriteFontSet1* fontSet) GetFontSet;
 			}
 		}
 		[CRepr]
@@ -3169,18 +3182,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontFamily(uint32 index, out IDWriteFontFamily2* fontFamily) mut => VT.GetFontFamily(ref this, index, out fontFamily);
-			public HRESULT GetMatchingFonts(PWSTR familyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* fontList) mut => VT.GetMatchingFonts(ref this, familyName, fontAxisValues, fontAxisValueCount, out fontList);
+			public HResult GetFontFamily(uint32 index, out IDWriteFontFamily2* fontFamily) mut => VT.GetFontFamily(ref this, index, out fontFamily);
+			public HResult GetMatchingFonts(char16* familyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* fontList) mut => VT.GetMatchingFonts(ref this, familyName, fontAxisValues, fontAxisValueCount, out fontList);
 			public FontFamilyModel GetFontFamilyModel() mut => VT.GetFontFamilyModel(ref this);
-			public HRESULT GetFontSet(out IDWriteFontSet1* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
+			public HResult GetFontSet(out IDWriteFontSet1* fontSet) mut => VT.GetFontSet(ref this, out fontSet);
 
 			[CRepr]
 			public struct VTable : IDWriteFontCollection1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection2 self, uint32 index, out IDWriteFontFamily2* fontFamily) GetFontFamily;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection2 self, PWSTR familyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* fontList) GetMatchingFonts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection2 self, uint32 index, out IDWriteFontFamily2* fontFamily) GetFontFamily;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection2 self, char16* familyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out IDWriteFontList2* fontList) GetMatchingFonts;
 				public new function [CallingConvention(.Stdcall)] FontFamilyModel(ref IDWriteFontCollection2 self) GetFontFamilyModel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontCollection2 self, out IDWriteFontSet1* fontSet) GetFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontCollection2 self, out IDWriteFontSet1* fontSet) GetFontSet;
 			}
 		}
 		[CRepr]
@@ -3190,20 +3203,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, DWRITE_TEXT_RANGE textRange) mut => VT.SetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount, textRange);
+			public HResult SetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, TextRange textRange) mut => VT.SetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount, textRange);
 			public uint32 GetFontAxisValueCount(uint32 currentPosition) mut => VT.GetFontAxisValueCount(ref this, currentPosition);
-			public HRESULT GetFontAxisValues(uint32 currentPosition, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, DWRITE_TEXT_RANGE* textRange) mut => VT.GetFontAxisValues(ref this, currentPosition, fontAxisValues, fontAxisValueCount, textRange);
+			public HResult GetFontAxisValues(uint32 currentPosition, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, TextRange* textRange) mut => VT.GetFontAxisValues(ref this, currentPosition, fontAxisValues, fontAxisValueCount, textRange);
 			public AutomaticFontAxes GetAutomaticFontAxes() mut => VT.GetAutomaticFontAxes(ref this);
-			public HRESULT SetAutomaticFontAxes(AutomaticFontAxes automaticFontAxes) mut => VT.SetAutomaticFontAxes(ref this, automaticFontAxes);
+			public HResult SetAutomaticFontAxes(AutomaticFontAxes automaticFontAxes) mut => VT.SetAutomaticFontAxes(ref this, automaticFontAxes);
 
 			[CRepr]
 			public struct VTable : IDWriteTextLayout3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout4 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, DWRITE_TEXT_RANGE textRange) SetFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout4 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, TextRange textRange) SetFontAxisValues;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteTextLayout4 self, uint32 currentPosition) GetFontAxisValueCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout4 self, uint32 currentPosition, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, DWRITE_TEXT_RANGE* textRange) GetFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout4 self, uint32 currentPosition, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, TextRange* textRange) GetFontAxisValues;
 				public new function [CallingConvention(.Stdcall)] AutomaticFontAxes(ref IDWriteTextLayout4 self) GetAutomaticFontAxes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextLayout4 self, AutomaticFontAxes automaticFontAxes) SetAutomaticFontAxes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextLayout4 self, AutomaticFontAxes automaticFontAxes) SetAutomaticFontAxes;
 			}
 		}
 		[CRepr]
@@ -3213,20 +3226,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.SetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
+			public HResult SetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.SetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
 			public uint32 GetFontAxisValueCount() mut => VT.GetFontAxisValueCount(ref this);
-			public HRESULT GetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
+			public HResult GetFontAxisValues(FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) mut => VT.GetFontAxisValues(ref this, fontAxisValues, fontAxisValueCount);
 			public AutomaticFontAxes GetAutomaticFontAxes() mut => VT.GetAutomaticFontAxes(ref this);
-			public HRESULT SetAutomaticFontAxes(AutomaticFontAxes automaticFontAxes) mut => VT.SetAutomaticFontAxes(ref this, automaticFontAxes);
+			public HResult SetAutomaticFontAxes(AutomaticFontAxes automaticFontAxes) mut => VT.SetAutomaticFontAxes(ref this, automaticFontAxes);
 
 			[CRepr]
 			public struct VTable : IDWriteTextFormat2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat3 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) SetFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat3 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) SetFontAxisValues;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteTextFormat3 self) GetFontAxisValueCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat3 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetFontAxisValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat3 self, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount) GetFontAxisValues;
 				public new function [CallingConvention(.Stdcall)] AutomaticFontAxes(ref IDWriteTextFormat3 self) GetAutomaticFontAxes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteTextFormat3 self, AutomaticFontAxes automaticFontAxes) SetAutomaticFontAxes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteTextFormat3 self, AutomaticFontAxes automaticFontAxes) SetAutomaticFontAxes;
 			}
 		}
 		[CRepr]
@@ -3236,12 +3249,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT MapCharacters(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, PWSTR baseFamilyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out uint32 mappedLength, out float scale, out IDWriteFontFace5* mappedFontFace) mut => VT.MapCharacters(ref this, ref analysisSource, textPosition, textLength, baseFontCollection, baseFamilyName, fontAxisValues, fontAxisValueCount, out mappedLength, out scale, out mappedFontFace);
+			public HResult MapCharacters(ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, char16* baseFamilyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out uint32 mappedLength, out float scale, out IDWriteFontFace5* mappedFontFace) mut => VT.MapCharacters(ref this, ref analysisSource, textPosition, textLength, baseFontCollection, baseFamilyName, fontAxisValues, fontAxisValueCount, out mappedLength, out scale, out mappedFontFace);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFallback.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFallback1 self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, PWSTR baseFamilyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out uint32 mappedLength, out float scale, out IDWriteFontFace5* mappedFontFace) MapCharacters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFallback1 self, ref IDWriteTextAnalysisSource analysisSource, uint32 textPosition, uint32 textLength, IDWriteFontCollection* baseFontCollection, char16* baseFamilyName, FontAxisValue* fontAxisValues, uint32 fontAxisValueCount, out uint32 mappedLength, out float scale, out IDWriteFontFace5* mappedFontFace) MapCharacters;
 			}
 		}
 		[CRepr]
@@ -3251,12 +3264,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HANDLE GetExpirationEvent() mut => VT.GetExpirationEvent(ref this);
+			public Handle GetExpirationEvent() mut => VT.GetExpirationEvent(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFontSet1.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HANDLE(ref IDWriteFontSet2 self) GetExpirationEvent;
+				public new function [CallingConvention(.Stdcall)] Handle(ref IDWriteFontSet2 self) GetExpirationEvent;
 			}
 		}
 		[CRepr]
@@ -3266,12 +3279,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HANDLE GetExpirationEvent() mut => VT.GetExpirationEvent(ref this);
+			public Handle GetExpirationEvent() mut => VT.GetExpirationEvent(ref this);
 
 			[CRepr]
 			public struct VTable : IDWriteFontCollection2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HANDLE(ref IDWriteFontCollection3 self) GetExpirationEvent;
+				public new function [CallingConvention(.Stdcall)] Handle(ref IDWriteFontCollection3 self) GetExpirationEvent;
 			}
 		}
 		[CRepr]
@@ -3281,14 +3294,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSystemFontSet(BOOL includeDownloadableFonts, out IDWriteFontSet2* fontSet) mut => VT.GetSystemFontSet(ref this, includeDownloadableFonts, out fontSet);
-			public HRESULT GetSystemFontCollection(BOOL includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection3* fontCollection) mut => VT.GetSystemFontCollection(ref this, includeDownloadableFonts, fontFamilyModel, out fontCollection);
+			public HResult GetSystemFontSet(IntBool includeDownloadableFonts, out IDWriteFontSet2* fontSet) mut => VT.GetSystemFontSet(ref this, includeDownloadableFonts, out fontSet);
+			public HResult GetSystemFontCollection(IntBool includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection3* fontCollection) mut => VT.GetSystemFontCollection(ref this, includeDownloadableFonts, fontFamilyModel, out fontCollection);
 
 			[CRepr]
 			public struct VTable : IDWriteFactory6.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory7 self, BOOL includeDownloadableFonts, out IDWriteFontSet2* fontSet) GetSystemFontSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFactory7 self, BOOL includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection3* fontCollection) GetSystemFontCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory7 self, IntBool includeDownloadableFonts, out IDWriteFontSet2* fontSet) GetSystemFontSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFactory7 self, IntBool includeDownloadableFonts, FontFamilyModel fontFamilyModel, out IDWriteFontCollection3* fontCollection) GetSystemFontCollection;
 			}
 		}
 		[CRepr]
@@ -3300,14 +3313,14 @@ namespace Win32
 			
 			public FontSourceType GetFontSourceType(uint32 fontIndex) mut => VT.GetFontSourceType(ref this, fontIndex);
 			public uint32 GetFontSourceNameLength(uint32 listIndex) mut => VT.GetFontSourceNameLength(ref this, listIndex);
-			public HRESULT GetFontSourceName(uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) mut => VT.GetFontSourceName(ref this, listIndex, stringBuffer, stringBufferSize);
+			public HResult GetFontSourceName(uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) mut => VT.GetFontSourceName(ref this, listIndex, stringBuffer, stringBufferSize);
 
 			[CRepr]
 			public struct VTable : IDWriteFontSet2.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] FontSourceType(ref IDWriteFontSet3 self, uint32 fontIndex) GetFontSourceType;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDWriteFontSet3 self, uint32 listIndex) GetFontSourceNameLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontSet3 self, uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) GetFontSourceName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontSet3 self, uint32 listIndex, char16* stringBuffer, uint32 stringBufferSize) GetFontSourceName;
 			}
 		}
 		[CRepr]
@@ -3317,20 +3330,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFamilyNames(FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) mut => VT.GetFamilyNames(ref this, fontFamilyModel, out names);
-			public HRESULT GetFaceNames(FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) mut => VT.GetFaceNames(ref this, fontFamilyModel, out names);
+			public HResult GetFamilyNames(FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) mut => VT.GetFamilyNames(ref this, fontFamilyModel, out names);
+			public HResult GetFaceNames(FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) mut => VT.GetFaceNames(ref this, fontFamilyModel, out names);
 
 			[CRepr]
 			public struct VTable : IDWriteFontFace5.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace6 self, FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) GetFamilyNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDWriteFontFace6 self, FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) GetFaceNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace6 self, FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) GetFamilyNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDWriteFontFace6 self, FontFamilyModel fontFamilyModel, out IDWriteLocalizedStrings* names) GetFaceNames;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("dwrite.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DWriteCreateFactory<T>(DWRITE_FACTORY_TYPE factoryType, in Guid iid, out T* factory) where T : IUnknown;
+		public static extern HResult DWriteCreateFactory<T>(DWRITE_FACTORY_TYPE factoryType, in Guid iid, out T* factory) where T : IUnknown;
 	}
 }

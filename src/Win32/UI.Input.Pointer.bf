@@ -1,66 +1,69 @@
 using System;
+using static Win32.Win32;
+using static Win32.UI.WindowsAndMessaging;
+using static System.Windows;
 
 // namespace UI.Input.Pointer
-namespace Win32
+namespace Win32.UI.Input
 {
-	extension Win32
+	public static class Pointer
 	{
 		// --- Enums ---
 		
-		public enum POINTER_FLAGS : uint32
+		public enum PointerFlags : uint32
 		{
-			NONE = 0,
-			NEW = 1,
-			INRANGE = 2,
-			INCONTACT = 4,
-			FIRSTBUTTON = 16,
-			SECONDBUTTON = 32,
-			THIRDBUTTON = 64,
-			FOURTHBUTTON = 128,
-			FIFTHBUTTON = 256,
-			PRIMARY = 8192,
-			CONFIDENCE = 16384,
-			CANCELED = 32768,
-			DOWN = 65536,
-			UPDATE = 131072,
-			UP = 262144,
-			WHEEL = 524288,
-			HWHEEL = 1048576,
-			CAPTURECHANGED = 2097152,
-			HASTRANSFORM = 4194304,
+			None = 0,
+			New = 1,
+			InRange = 2,
+			InContact = 4,
+			FirstButton = 16,
+			SecondButton = 32,
+			ThirdButton = 64,
+			FourthButton = 128,
+			FifthButton = 256,
+			Primary = 8192,
+			Confidence = 16384,
+			Canceled = 32768,
+			Down = 65536,
+			Update = 131072,
+			Up = 262144,
+			Wheel = 524288,
+			HWheel = 1048576,
+			CaptureChanged = 2097152,
+			HasTransform = 4194304,
 		}
-		public enum TOUCH_FEEDBACK_MODE : uint32
+		public enum TouchFeedbackMode : uint32
 		{
-			DEFAULT = 1,
-			INDIRECT = 2,
-			NONE = 3,
+			Default = 1,
+			Indirect = 2,
+			None = 3,
 		}
-		public enum POINTER_BUTTON_CHANGE_TYPE : int32
+		public enum PointerButtonChangeType : int32
 		{
-			NONE = 0,
-			FIRSTBUTTON_DOWN = 1,
-			FIRSTBUTTON_UP = 2,
-			SECONDBUTTON_DOWN = 3,
-			SECONDBUTTON_UP = 4,
-			THIRDBUTTON_DOWN = 5,
-			THIRDBUTTON_UP = 6,
-			FOURTHBUTTON_DOWN = 7,
-			FOURTHBUTTON_UP = 8,
-			FIFTHBUTTON_DOWN = 9,
-			FIFTHBUTTON_UP = 10,
+			None				= 0,
+			FirstButtonDown		= 1,
+			FirstButtonUp		= 2,
+			SecondButtonDown	= 3,
+			SecondButtonUp		= 4,
+			ThirdButtonDown		= 5,
+			ThirdButtonUp		= 6,
+			FourthButtonDown	= 7,
+			FourthButtonUp		= 8,
+			FifthButtonDown		= 9,
+			FifthButtonUp		= 10,
 		}
 		
 		// --- Structs ---
 		
 		[CRepr]
-		public struct POINTER_INFO
+		public struct PointerInfo
 		{
-			public POINTER_INPUT_TYPE pointerType;
+			public PointerInputType pointerType;
 			public uint32 pointerId;
 			public uint32 frameId;
-			public POINTER_FLAGS pointerFlags;
-			public HANDLE sourceDevice;
-			public HWND hwndTarget;
+			public PointerFlags pointerFlags;
+			public Handle sourceDevice;
+			public HWnd hwndTarget;
 			public POINT ptPixelLocation;
 			public POINT ptHimetricLocation;
 			public POINT ptPixelLocationRaw;
@@ -70,23 +73,23 @@ namespace Win32
 			public int32 InputData;
 			public uint32 dwKeyStates;
 			public uint64 PerformanceCount;
-			public POINTER_BUTTON_CHANGE_TYPE ButtonChangeType;
+			public PointerButtonChangeType ButtonChangeType;
 		}
 		[CRepr]
-		public struct POINTER_TOUCH_INFO
+		public struct PointerTouchInfo
 		{
-			public POINTER_INFO pointerInfo;
+			public PointerInfo pointerInfo;
 			public uint32 touchFlags;
 			public uint32 touchMask;
-			public RECT rcContact;
-			public RECT rcContactRaw;
+			public RectI rcContact;
+			public RectI rcContactRaw;
 			public uint32 orientation;
 			public uint32 pressure;
 		}
 		[CRepr]
-		public struct POINTER_PEN_INFO
+		public struct PointerPenInfo
 		{
-			public POINTER_INFO pointerInfo;
+			public PointerInfo pointerInfo;
 			public uint32 penFlags;
 			public uint32 penMask;
 			public uint32 pressure;
@@ -95,7 +98,7 @@ namespace Win32
 			public int32 tiltY;
 		}
 		[CRepr]
-		public struct INPUT_INJECTION_VALUE
+		public struct InputInjectionValue
 		{
 			public uint16 page;
 			public uint16 usage;
@@ -103,7 +106,7 @@ namespace Win32
 			public uint16 index;
 		}
 		[CRepr]
-		public struct INPUT_TRANSFORM
+		public struct InputTransform
 		{
 			public _Anonymous_e__Union Anonymous;
 			
@@ -141,58 +144,58 @@ namespace Win32
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetUnpredictedMessagePos();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InitializeTouchInjection(uint32 maxCount, TOUCH_FEEDBACK_MODE dwMode);
+		public static extern IntBool InitializeTouchInjection(uint32 maxCount, TouchFeedbackMode dwMode);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InjectTouchInput(uint32 count, POINTER_TOUCH_INFO* contacts);
+		public static extern IntBool InjectTouchInput(uint32 count, PointerTouchInfo* contacts);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerType(uint32 pointerId, out POINTER_INPUT_TYPE pointerType);
+		public static extern IntBool GetPointerType(uint32 pointerId, out PointerInputType pointerType);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerCursorId(uint32 pointerId, out uint32 cursorId);
+		public static extern IntBool GetPointerCursorId(uint32 pointerId, out uint32 cursorId);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerInfo(uint32 pointerId, out POINTER_INFO pointerInfo);
+		public static extern IntBool GetPointerInfo(uint32 pointerId, out PointerInfo pointerInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerInfoHistory(uint32 pointerId, out uint32 entriesCount, POINTER_INFO* pointerInfo);
+		public static extern IntBool GetPointerInfoHistory(uint32 pointerId, out uint32 entriesCount, PointerInfo* pointerInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerFrameInfo(uint32 pointerId, out uint32 pointerCount, POINTER_INFO* pointerInfo);
+		public static extern IntBool GetPointerFrameInfo(uint32 pointerId, out uint32 pointerCount, PointerInfo* pointerInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerFrameInfoHistory(uint32 pointerId, out uint32 entriesCount, out uint32 pointerCount, POINTER_INFO* pointerInfo);
+		public static extern IntBool GetPointerFrameInfoHistory(uint32 pointerId, out uint32 entriesCount, out uint32 pointerCount, PointerInfo* pointerInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerTouchInfo(uint32 pointerId, out POINTER_TOUCH_INFO touchInfo);
+		public static extern IntBool GetPointerTouchInfo(uint32 pointerId, out PointerTouchInfo touchInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerTouchInfoHistory(uint32 pointerId, out uint32 entriesCount, POINTER_TOUCH_INFO* touchInfo);
+		public static extern IntBool GetPointerTouchInfoHistory(uint32 pointerId, out uint32 entriesCount, PointerTouchInfo* touchInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerFrameTouchInfo(uint32 pointerId, out uint32 pointerCount, POINTER_TOUCH_INFO* touchInfo);
+		public static extern IntBool GetPointerFrameTouchInfo(uint32 pointerId, out uint32 pointerCount, PointerTouchInfo* touchInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerFrameTouchInfoHistory(uint32 pointerId, out uint32 entriesCount, out uint32 pointerCount, POINTER_TOUCH_INFO* touchInfo);
+		public static extern IntBool GetPointerFrameTouchInfoHistory(uint32 pointerId, out uint32 entriesCount, out uint32 pointerCount, PointerTouchInfo* touchInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerPenInfo(uint32 pointerId, out POINTER_PEN_INFO penInfo);
+		public static extern IntBool GetPointerPenInfo(uint32 pointerId, out PointerPenInfo penInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerPenInfoHistory(uint32 pointerId, out uint32 entriesCount, POINTER_PEN_INFO* penInfo);
+		public static extern IntBool GetPointerPenInfoHistory(uint32 pointerId, out uint32 entriesCount, PointerPenInfo* penInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerFramePenInfo(uint32 pointerId, out uint32 pointerCount, POINTER_PEN_INFO* penInfo);
+		public static extern IntBool GetPointerFramePenInfo(uint32 pointerId, out uint32 pointerCount, PointerPenInfo* penInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerFramePenInfoHistory(uint32 pointerId, out uint32 entriesCount, out uint32 pointerCount, POINTER_PEN_INFO* penInfo);
+		public static extern IntBool GetPointerFramePenInfoHistory(uint32 pointerId, out uint32 entriesCount, out uint32 pointerCount, PointerPenInfo* penInfo);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SkipPointerFrameMessages(uint32 pointerId);
+		public static extern IntBool SkipPointerFrameMessages(uint32 pointerId);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL InjectSyntheticPointerInput(HSYNTHETICPOINTERDEVICE device, POINTER_TYPE_INFO* pointerInfo, uint32 count);
+		public static extern IntBool InjectSyntheticPointerInput(HSYNTHETICPOINTERDEVICE device, POINTER_TYPE_INFO* pointerInfo, uint32 count);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnableMouseInPointer(BOOL fEnable);
+		public static extern IntBool EnableMouseInPointer(IntBool fEnable);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsMouseInPointerEnabled();
+		public static extern IntBool IsMouseInPointerEnabled();
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerInputTransform(uint32 pointerId, uint32 historyCount, INPUT_TRANSFORM* inputTransform);
+		public static extern IntBool GetPointerInputTransform(uint32 pointerId, uint32 historyCount, InputTransform* inputTransform);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerDevices(out uint32 deviceCount, POINTER_DEVICE_INFO* pointerDevices);
+		public static extern IntBool GetPointerDevices(out uint32 deviceCount, POINTER_DEVICE_INFO* pointerDevices);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerDevice(HANDLE device, out POINTER_DEVICE_INFO pointerDevice);
+		public static extern IntBool GetPointerDevice(Handle device, out POINTER_DEVICE_INFO pointerDevice);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerDeviceProperties(HANDLE device, out uint32 propertyCount, POINTER_DEVICE_PROPERTY* pointerProperties);
+		public static extern IntBool GetPointerDeviceProperties(Handle device, out uint32 propertyCount, POINTER_DEVICE_PROPERTY* pointerProperties);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerDeviceRects(HANDLE device, out RECT pointerDeviceRect, out RECT displayRect);
+		public static extern IntBool GetPointerDeviceRects(Handle device, out RectI pointerDeviceRect, out RectI displayRect);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPointerDeviceCursors(HANDLE device, out uint32 cursorCount, POINTER_DEVICE_CURSOR_INFO* deviceCursors);
+		public static extern IntBool GetPointerDeviceCursors(Handle device, out uint32 cursorCount, POINTER_DEVICE_CURSOR_INFO* deviceCursors);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetRawPointerDeviceData(uint32 pointerId, uint32 historyCount, uint32 propertiesCount, POINTER_DEVICE_PROPERTY* pProperties, out int32 pValues);
+		public static extern IntBool GetRawPointerDeviceData(uint32 pointerId, uint32 historyCount, uint32 propertiesCount, POINTER_DEVICE_PROPERTY* pProperties, out int32 pValues);
 	}
 }

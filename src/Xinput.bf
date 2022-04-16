@@ -1,11 +1,10 @@
 using System;
+using static System.Windows;
 namespace BfEngine
 {
 	class Xinput
 	{
-		typealias GUID = Guid;
-		typealias BOOL = uint32;
-		typealias BYTE = uint8;
+
 		typealias WORD = uint16;
 		typealias WCHAR = char16;
 		typealias SHORT = int16;
@@ -35,7 +34,7 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		//
 		// Device types available in XINPUT_CAPABILITIES
 		//
-		public enum DevType : BYTE{
+		public enum DevType : uint8{
 			GAMEPAD = 0x01
 		}
 
@@ -43,7 +42,7 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		// Device subtypes available in XINPUT_CAPABILITIES
 		//
 #if WIN8
-		enum DevSubType : BYTE
+		enum DevSubType : uint8
 		{
 			UNKNOWN = 0x00,
 			GAMEPAD = 0x01,
@@ -121,7 +120,7 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		//
 		// Flags for battery status level
 		//
-		public enum BatteryType : BYTE{
+		public enum BatteryType : uint8{
 			DISCONNECTED      = 0x00,    // This device is not connected
 			WIRED             = 0x01,    // Wired device, no battery
 			ALKALINE          = 0x02,    // Alkaline battery source
@@ -130,7 +129,7 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		}
 		// These are only valid for wireless, connected devices, with known battery types
 		// The amount of use time remaining depends on the type of device.
-		public enum BatteryLevel : BYTE{
+		public enum BatteryLevel : uint8{
 			EMPTY  = 0x00,
 			LOW    = 0x01,
 			MEDIUM = 0x02,
@@ -202,8 +201,8 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		public struct XINPUT_GAMEPAD
 		{
 		    public Buttons	wButtons;
-		    public BYTE		bLeftTrigger;
-		    public BYTE		bRightTrigger;
+		    public uint8		bLeftTrigger;
+		    public uint8		bRightTrigger;
 		    public SHORT	sThumbLX;
 		    public SHORT	sThumbLY;
 		    public SHORT	sThumbRX;
@@ -232,8 +231,8 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		[CRepr]
 		public struct XINPUT_CAPABILITIES
 		{
-		    public BYTE				Type;
-		    public BYTE				SubType;
+		    public uint8				Type;
+		    public uint8				SubType;
 		    public WORD				Flags;
 		    public XINPUT_GAMEPAD	Gamepad;
 		    public XINPUT_VIBRATION	Vibration;
@@ -255,8 +254,8 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		    public VirtualKey		VirtualKey;
 		    public WCHAR   			Unicode;
 		    public KeyStrokeFlag	Flags;
-		    public BYTE				UserIndex;
-		    public BYTE				HidCode;
+		    public uint8				UserIndex;
+		    public uint8				HidCode;
 		}
 		typealias PXINPUT_KEYSTROKE = XINPUT_KEYSTROKE*;
 
@@ -299,7 +298,7 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		[Import(XINPUT_DLL_A), CLink]
 		public static extern void XInputEnable
 		(
-		    BOOL enable     // [in] Indicates whether xinput is enabled or disabled. 
+		    IntBool enable     // [in] Indicates whether xinput is enabled or disabled. 
 		);
 /*
 #if WIN10
@@ -338,8 +337,8 @@ const String XINPUT_DLL_A = "xinput9_1_0.dll";
 		public static extern DWORD XInputGetDSoundAudioDeviceGuids
 		(
 		    DWORD     dwUserIndex,          // Index of the gamer associated with the device
-		    GUID*     pDSoundRenderGuid,    // DSound device ID for render (speakers)
-		    GUID*     pDSoundCaptureGuid    // DSound device ID for capture (microphone)
+		    Guid*     pDSoundRenderGuid,    // DSound device ID for render (speakers)
+		    Guid*     pDSoundCaptureGuid    // DSound device ID for capture (microphone)
 		);
 
 #endif //(_WIN32_WINNT < _WIN32_WINNT_WIN8)

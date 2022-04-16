@@ -1,9 +1,10 @@
+using static System.Windows;
 using System;
 
 // namespace Graphics.Hlsl
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	public static class Hlsl
 	{
 		// --- Constants ---
 		

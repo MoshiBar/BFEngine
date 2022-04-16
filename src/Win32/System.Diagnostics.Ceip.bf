@@ -8,6 +8,6 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CeipIsOptedIn();
+		public static extern IntBool CeipIsOptedIn();
 	}
 }

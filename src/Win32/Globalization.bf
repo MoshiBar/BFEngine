@@ -1,9 +1,14 @@
 using System;
+using static Win32.Graphics.Gdi;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Globalization
 namespace Win32
 {
-	extension Win32
+	public static class Globalization
 	{
 		// --- Constants ---
 		
@@ -517,7 +522,7 @@ namespace Win32
 		public const uint32 MUI_IMMUTABLE_LOOKUP = 16;
 		public const uint32 MIN_SPELLING_NTDDI = 100794368;
 		public const uint32 SCRIPT_UNDEFINED = 0;
-		public const HRESULT USP_E_SCRIPT_NOT_IN_FONT = (.)-2147220992;
+		public const HResult USP_E_SCRIPT_NOT_IN_FONT = (.)-2147220992;
 		public const uint32 SGCM_RTL = 1;
 		public const uint32 SSA_PASSWORD = 1;
 		public const uint32 SSA_TAB = 2;
@@ -2948,7 +2953,7 @@ namespace Win32
 			PARSE_ALLOW_NUMERIC = 1,
 			PARSE_PARTIAL_LITERAL_MATCH = 2,
 			PARSE_MULTIPLE_PATTERNS_FOR_MATCH = 3,
-			BOOLEAN_ATTRIBUTE_COUNT = 4,
+			Boolean_ATTRIBUTE_COUNT = 4,
 		}
 		public enum UDateFormatSymbolType : int32
 		{
@@ -3448,36 +3453,36 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL LOCALE_ENUMPROCA(PSTR param0);
-		public function BOOL LOCALE_ENUMPROCW(PWSTR param0);
-		public function BOOL LANGUAGEGROUP_ENUMPROCA(uint32 param0, PSTR param1, PSTR param2, uint32 param3, int param4);
-		public function BOOL LANGGROUPLOCALE_ENUMPROCA(uint32 param0, uint32 param1, PSTR param2, int param3);
-		public function BOOL UILANGUAGE_ENUMPROCA(PSTR param0, int param1);
-		public function BOOL CODEPAGE_ENUMPROCA(PSTR param0);
-		public function BOOL DATEFMT_ENUMPROCA(PSTR param0);
-		public function BOOL DATEFMT_ENUMPROCEXA(PSTR param0, uint32 param1);
-		public function BOOL TIMEFMT_ENUMPROCA(PSTR param0);
-		public function BOOL CALINFO_ENUMPROCA(PSTR param0);
-		public function BOOL CALINFO_ENUMPROCEXA(PSTR param0, uint32 param1);
-		public function BOOL LANGUAGEGROUP_ENUMPROCW(uint32 param0, PWSTR param1, PWSTR param2, uint32 param3, int param4);
-		public function BOOL LANGGROUPLOCALE_ENUMPROCW(uint32 param0, uint32 param1, PWSTR param2, int param3);
-		public function BOOL UILANGUAGE_ENUMPROCW(PWSTR param0, int param1);
-		public function BOOL CODEPAGE_ENUMPROCW(PWSTR param0);
-		public function BOOL DATEFMT_ENUMPROCW(PWSTR param0);
-		public function BOOL DATEFMT_ENUMPROCEXW(PWSTR param0, uint32 param1);
-		public function BOOL TIMEFMT_ENUMPROCW(PWSTR param0);
-		public function BOOL CALINFO_ENUMPROCW(PWSTR param0);
-		public function BOOL CALINFO_ENUMPROCEXW(PWSTR param0, uint32 param1);
-		public function BOOL GEO_ENUMPROC(int32 param0);
-		public function BOOL GEO_ENUMNAMEPROC(PWSTR param0, LPARAM param1);
-		public function BOOL CALINFO_ENUMPROCEXEX(PWSTR param0, uint32 param1, PWSTR param2, LPARAM param3);
-		public function BOOL DATEFMT_ENUMPROCEXEX(PWSTR param0, uint32 param1, LPARAM param2);
-		public function BOOL TIMEFMT_ENUMPROCEX(PWSTR param0, LPARAM param1);
-		public function BOOL LOCALE_ENUMPROCEX(PWSTR param0, uint32 param1, LPARAM param2);
-		public function void PFN_MAPPINGCALLBACKPROC(out MAPPING_PROPERTY_BAG pBag, void* data, uint32 dwDataSize, HRESULT Result);
+		public function IntBool LOCALE_ENUMPROCA(char8* param0);
+		public function IntBool LOCALE_ENUMPROCW(char16* param0);
+		public function IntBool LANGUAGEGROUP_ENUMPROCA(uint32 param0, char8* param1, char8* param2, uint32 param3, int param4);
+		public function IntBool LANGGROUPLOCALE_ENUMPROCA(uint32 param0, uint32 param1, char8* param2, int param3);
+		public function IntBool UILANGUAGE_ENUMPROCA(char8* param0, int param1);
+		public function IntBool CODEPAGE_ENUMPROCA(char8* param0);
+		public function IntBool DATEFMT_ENUMPROCA(char8* param0);
+		public function IntBool DATEFMT_ENUMPROCEXA(char8* param0, uint32 param1);
+		public function IntBool TIMEFMT_ENUMPROCA(char8* param0);
+		public function IntBool CALINFO_ENUMPROCA(char8* param0);
+		public function IntBool CALINFO_ENUMPROCEXA(char8* param0, uint32 param1);
+		public function IntBool LANGUAGEGROUP_ENUMPROCW(uint32 param0, char16* param1, char16* param2, uint32 param3, int param4);
+		public function IntBool LANGGROUPLOCALE_ENUMPROCW(uint32 param0, uint32 param1, char16* param2, int param3);
+		public function IntBool UILANGUAGE_ENUMPROCW(char16* param0, int param1);
+		public function IntBool CODEPAGE_ENUMPROCW(char16* param0);
+		public function IntBool DATEFMT_ENUMPROCW(char16* param0);
+		public function IntBool DATEFMT_ENUMPROCEXW(char16* param0, uint32 param1);
+		public function IntBool TIMEFMT_ENUMPROCW(char16* param0);
+		public function IntBool CALINFO_ENUMPROCW(char16* param0);
+		public function IntBool CALINFO_ENUMPROCEXW(char16* param0, uint32 param1);
+		public function IntBool GEO_ENUMPROC(int32 param0);
+		public function IntBool GEO_ENUMNAMEPROC(char16* param0, LPARAM param1);
+		public function IntBool CALINFO_ENUMPROCEXEX(char16* param0, uint32 param1, char16* param2, LPARAM param3);
+		public function IntBool DATEFMT_ENUMPROCEXEX(char16* param0, uint32 param1, LPARAM param2);
+		public function IntBool TIMEFMT_ENUMPROCEX(char16* param0, LPARAM param1);
+		public function IntBool LOCALE_ENUMPROCEX(char16* param0, uint32 param1, LPARAM param2);
+		public function void PFN_MAPPINGCALLBACKPROC(out MAPPING_PROPERTY_BAG pBag, void* data, uint32 dwDataSize, HResult Result);
 		public function void UTraceEntry(void* context, int32 fnNumber);
-		public function void UTraceExit(void* context, int32 fnNumber, PSTR fmt, out int8 args);
-		public function void UTraceData(void* context, int32 fnNumber, int32 level, PSTR fmt, out int8 args);
+		public function void UTraceExit(void* context, int32 fnNumber, char8* fmt, out int8 args);
+		public function void UTraceData(void* context, int32 fnNumber, int32 level, char8* fmt, out int8 args);
 		public function int32 UCharIteratorGetIndex(out UCharIterator iter, UCharIteratorOrigin origin);
 		public function int32 UCharIteratorMove(out UCharIterator iter, int32 delta, UCharIteratorOrigin origin);
 		public function int8 UCharIteratorHasNext(out UCharIterator iter);
@@ -3489,13 +3494,13 @@ namespace Win32
 		public function uint32 UCharIteratorGetState(in UCharIterator iter);
 		public function void UCharIteratorSetState(out UCharIterator iter, uint32 state, out UErrorCode pErrorCode);
 		public function uint32 UCPMapValueFilter(void* context, uint32 value);
-		public function void UConverterToUCallback(void* context, out UConverterToUnicodeArgs args, PSTR codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode pErrorCode);
+		public function void UConverterToUCallback(void* context, out UConverterToUnicodeArgs args, char8* codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode pErrorCode);
 		public function void UConverterFromUCallback(void* context, out UConverterFromUnicodeArgs args, in uint16 codeUnits, int32 length, int32 codePoint, UConverterCallbackReason reason, out UErrorCode pErrorCode);
 		public function void* UMemAllocFn(void* context, uint size);
 		public function void* UMemReallocFn(void* context, void* mem, uint size);
 		public function void UMemFreeFn(void* context, void* mem);
 		public function int8 UCharEnumTypeRange(void* context, int32 start, int32 limit, UCharCategory type);
-		public function int8 UEnumCharNamesFn(void* context, int32 code, UCharNameChoice nameChoice, PSTR name, int32 length);
+		public function int8 UEnumCharNamesFn(void* context, int32 code, UCharNameChoice nameChoice, char8* name, int32 length);
 		public function UCharDirection UBiDiClassCallback(void* context, int32 c);
 		public function UText* UTextClone(out UText dest, in UText src, int8 deep, out UErrorCode status);
 		public function int64 UTextNativeLength(out UText ut);
@@ -3572,7 +3577,7 @@ namespace Win32
 			public uint8[12] LeadByte;
 			public char16 UnicodeDefaultChar;
 			public uint32 CodePage;
-			public CHAR[260] CodePageName;
+			public char8[260] CodePageName;
 		}
 		[CRepr]
 		public struct CPINFOEXW
@@ -3590,8 +3595,8 @@ namespace Win32
 			public uint32 NumDigits;
 			public uint32 LeadingZero;
 			public uint32 Grouping;
-			public PSTR lpDecimalSep;
-			public PSTR lpThousandSep;
+			public char8* lpDecimalSep;
+			public char8* lpThousandSep;
 			public uint32 NegativeOrder;
 		}
 		[CRepr]
@@ -3600,8 +3605,8 @@ namespace Win32
 			public uint32 NumDigits;
 			public uint32 LeadingZero;
 			public uint32 Grouping;
-			public PWSTR lpDecimalSep;
-			public PWSTR lpThousandSep;
+			public char16* lpDecimalSep;
+			public char16* lpThousandSep;
 			public uint32 NegativeOrder;
 		}
 		[CRepr]
@@ -3610,11 +3615,11 @@ namespace Win32
 			public uint32 NumDigits;
 			public uint32 LeadingZero;
 			public uint32 Grouping;
-			public PSTR lpDecimalSep;
-			public PSTR lpThousandSep;
+			public char8* lpDecimalSep;
+			public char8* lpThousandSep;
 			public uint32 NegativeOrder;
 			public uint32 PositiveOrder;
-			public PSTR lpCurrencySymbol;
+			public char8* lpCurrencySymbol;
 		}
 		[CRepr]
 		public struct CURRENCYFMTW
@@ -3622,11 +3627,11 @@ namespace Win32
 			public uint32 NumDigits;
 			public uint32 LeadingZero;
 			public uint32 Grouping;
-			public PWSTR lpDecimalSep;
-			public PWSTR lpThousandSep;
+			public char16* lpDecimalSep;
+			public char16* lpThousandSep;
 			public uint32 NegativeOrder;
 			public uint32 PositiveOrder;
-			public PWSTR lpCurrencySymbol;
+			public char16* lpCurrencySymbol;
 		}
 		[CRepr]
 		public struct NLSVERSIONINFO
@@ -3667,26 +3672,26 @@ namespace Win32
 		public struct MAPPING_SERVICE_INFO
 		{
 			public uint Size;
-			public PWSTR pszCopyright;
+			public char16* pszCopyright;
 			public uint16 wMajorVersion;
 			public uint16 wMinorVersion;
 			public uint16 wBuildVersion;
 			public uint16 wStepVersion;
 			public uint32 dwInputContentTypesCount;
-			public PWSTR* prgInputContentTypes;
+			public char16** prgInputContentTypes;
 			public uint32 dwOutputContentTypesCount;
-			public PWSTR* prgOutputContentTypes;
+			public char16** prgOutputContentTypes;
 			public uint32 dwInputLanguagesCount;
-			public PWSTR* prgInputLanguages;
+			public char16** prgInputLanguages;
 			public uint32 dwOutputLanguagesCount;
-			public PWSTR* prgOutputLanguages;
+			public char16** prgOutputLanguages;
 			public uint32 dwInputScriptsCount;
-			public PWSTR* prgInputScripts;
+			public char16** prgInputScripts;
 			public uint32 dwOutputScriptsCount;
-			public PWSTR* prgOutputScripts;
+			public char16** prgOutputScripts;
 			public Guid guid;
-			public PWSTR pszCategory;
-			public PWSTR pszDescription;
+			public char16* pszCategory;
+			public char16* pszDescription;
 			public uint32 dwPrivateDataSize;
 			public void* pPrivateData;
 			public void* pContext;
@@ -3696,13 +3701,13 @@ namespace Win32
 		public struct MAPPING_ENUM_OPTIONS
 		{
 			public uint Size;
-			public PWSTR pszCategory;
-			public PWSTR pszInputLanguage;
-			public PWSTR pszOutputLanguage;
-			public PWSTR pszInputScript;
-			public PWSTR pszOutputScript;
-			public PWSTR pszInputContentType;
-			public PWSTR pszOutputContentType;
+			public char16* pszCategory;
+			public char16* pszInputLanguage;
+			public char16* pszOutputLanguage;
+			public char16* pszInputScript;
+			public char16* pszOutputScript;
+			public char16* pszInputContentType;
+			public char16* pszOutputContentType;
 			public Guid* pGuid;
 			public uint32 _bitfield;
 		}
@@ -3710,13 +3715,13 @@ namespace Win32
 		public struct MAPPING_OPTIONS
 		{
 			public uint Size;
-			public PWSTR pszInputLanguage;
-			public PWSTR pszOutputLanguage;
-			public PWSTR pszInputScript;
-			public PWSTR pszOutputScript;
-			public PWSTR pszInputContentType;
-			public PWSTR pszOutputContentType;
-			public PWSTR pszUILanguage;
+			public char16* pszInputLanguage;
+			public char16* pszOutputLanguage;
+			public char16* pszInputScript;
+			public char16* pszOutputScript;
+			public char16* pszInputContentType;
+			public char16* pszOutputContentType;
+			public char16* pszUILanguage;
 			public PFN_MAPPINGCALLBACKPROC pfnRecognizeCallback;
 			public void* pRecognizeCallerData;
 			public uint32 dwRecognizeCallerDataSize;
@@ -3731,14 +3736,14 @@ namespace Win32
 		{
 			public uint32 dwStartIndex;
 			public uint32 dwEndIndex;
-			public PWSTR pszDescription;
+			public char16* pszDescription;
 			public uint32 dwDescriptionLength;
 			public void* pData;
 			public uint32 dwDataSize;
-			public PWSTR pszContentType;
-			public PWSTR* prgActionIds;
+			public char16* pszContentType;
+			public char16** prgActionIds;
 			public uint32 dwActionsCount;
-			public PWSTR* prgActionDisplayNames;
+			public char16** prgActionDisplayNames;
 		}
 		[CRepr]
 		public struct MAPPING_PROPERTY_BAG
@@ -3926,8 +3931,8 @@ namespace Win32
 			public UConverter* converter;
 			public uint16* source;
 			public uint16* sourceLimit;
-			public PSTR target;
-			public PSTR targetLimit;
+			public char8* target;
+			public char8* targetLimit;
 			public int32* offsets;
 		}
 		[CRepr]
@@ -3936,8 +3941,8 @@ namespace Win32
 			public uint16 size;
 			public int8 flush;
 			public UConverter* converter;
-			public PSTR source;
-			public PSTR sourceLimit;
+			public char8* source;
+			public char8* sourceLimit;
 			public uint16* target;
 			public uint16* targetLimit;
 			public int32* offsets;
@@ -4172,18 +4177,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_StartIndex(out uint32 value) mut => VT.get_StartIndex(ref this, out value);
-			public HRESULT get_Length(out uint32 value) mut => VT.get_Length(ref this, out value);
-			public HRESULT get_CorrectiveAction(out CORRECTIVE_ACTION value) mut => VT.get_CorrectiveAction(ref this, out value);
-			public HRESULT get_Replacement(out PWSTR value) mut => VT.get_Replacement(ref this, out value);
+			public HResult get_StartIndex(out uint32 value) mut => VT.get_StartIndex(ref this, out value);
+			public HResult get_Length(out uint32 value) mut => VT.get_Length(ref this, out value);
+			public HResult get_CorrectiveAction(out CORRECTIVE_ACTION value) mut => VT.get_CorrectiveAction(ref this, out value);
+			public HResult get_Replacement(out char16* value) mut => VT.get_Replacement(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellingError self, out uint32 value) get_StartIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellingError self, out uint32 value) get_Length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellingError self, out CORRECTIVE_ACTION value) get_CorrectiveAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellingError self, out PWSTR value) get_Replacement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellingError self, out uint32 value) get_StartIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellingError self, out uint32 value) get_Length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellingError self, out CORRECTIVE_ACTION value) get_CorrectiveAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellingError self, out char16* value) get_Replacement;
 			}
 		}
 		[CRepr]
@@ -4193,12 +4198,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(out ISpellingError* value) mut => VT.Next(ref this, out value);
+			public HResult Next(out ISpellingError* value) mut => VT.Next(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumSpellingError self, out ISpellingError* value) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumSpellingError self, out ISpellingError* value) Next;
 			}
 		}
 		[CRepr]
@@ -4208,18 +4213,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Id(out PWSTR value) mut => VT.get_Id(ref this, out value);
-			public HRESULT get_Heading(out PWSTR value) mut => VT.get_Heading(ref this, out value);
-			public HRESULT get_Description(out PWSTR value) mut => VT.get_Description(ref this, out value);
-			public HRESULT get_Labels(out IEnumString* value) mut => VT.get_Labels(ref this, out value);
+			public HResult get_Id(out char16* value) mut => VT.get_Id(ref this, out value);
+			public HResult get_Heading(out char16* value) mut => VT.get_Heading(ref this, out value);
+			public HResult get_Description(out char16* value) mut => VT.get_Description(ref this, out value);
+			public HResult get_Labels(out IEnumString* value) mut => VT.get_Labels(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOptionDescription self, out PWSTR value) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOptionDescription self, out PWSTR value) get_Heading;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOptionDescription self, out PWSTR value) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOptionDescription self, out IEnumString* value) get_Labels;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOptionDescription self, out char16* value) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOptionDescription self, out char16* value) get_Heading;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOptionDescription self, out char16* value) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOptionDescription self, out IEnumString* value) get_Labels;
 			}
 		}
 		[CRepr]
@@ -4229,12 +4234,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Invoke(ref ISpellChecker sender) mut => VT.Invoke(ref this, ref sender);
+			public HResult Invoke(ref ISpellChecker sender) mut => VT.Invoke(ref this, ref sender);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckerChangedEventHandler self, ref ISpellChecker sender) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckerChangedEventHandler self, ref ISpellChecker sender) Invoke;
 			}
 		}
 		[CRepr]
@@ -4244,38 +4249,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_LanguageTag(out PWSTR value) mut => VT.get_LanguageTag(ref this, out value);
-			public HRESULT Check(PWSTR text, out IEnumSpellingError* value) mut => VT.Check(ref this, text, out value);
-			public HRESULT Suggest(PWSTR word, out IEnumString* value) mut => VT.Suggest(ref this, word, out value);
-			public HRESULT Add(PWSTR word) mut => VT.Add(ref this, word);
-			public HRESULT Ignore(PWSTR word) mut => VT.Ignore(ref this, word);
-			public HRESULT AutoCorrect(PWSTR from, PWSTR to) mut => VT.AutoCorrect(ref this, from, to);
-			public HRESULT GetOptionValue(PWSTR optionId, out uint8 value) mut => VT.GetOptionValue(ref this, optionId, out value);
-			public HRESULT get_OptionIds(out IEnumString* value) mut => VT.get_OptionIds(ref this, out value);
-			public HRESULT get_Id(out PWSTR value) mut => VT.get_Id(ref this, out value);
-			public HRESULT get_LocalizedName(out PWSTR value) mut => VT.get_LocalizedName(ref this, out value);
-			public HRESULT add_SpellCheckerChanged(ref ISpellCheckerChangedEventHandler handler, out uint32 eventCookie) mut => VT.add_SpellCheckerChanged(ref this, ref handler, out eventCookie);
-			public HRESULT remove_SpellCheckerChanged(uint32 eventCookie) mut => VT.remove_SpellCheckerChanged(ref this, eventCookie);
-			public HRESULT GetOptionDescription(PWSTR optionId, out IOptionDescription* value) mut => VT.GetOptionDescription(ref this, optionId, out value);
-			public HRESULT ComprehensiveCheck(PWSTR text, out IEnumSpellingError* value) mut => VT.ComprehensiveCheck(ref this, text, out value);
+			public HResult get_LanguageTag(out char16* value) mut => VT.get_LanguageTag(ref this, out value);
+			public HResult Check(char16* text, out IEnumSpellingError* value) mut => VT.Check(ref this, text, out value);
+			public HResult Suggest(char16* word, out IEnumString* value) mut => VT.Suggest(ref this, word, out value);
+			public HResult Add(char16* word) mut => VT.Add(ref this, word);
+			public HResult Ignore(char16* word) mut => VT.Ignore(ref this, word);
+			public HResult AutoCorrect(char16* from, char16* to) mut => VT.AutoCorrect(ref this, from, to);
+			public HResult GetOptionValue(char16* optionId, out uint8 value) mut => VT.GetOptionValue(ref this, optionId, out value);
+			public HResult get_OptionIds(out IEnumString* value) mut => VT.get_OptionIds(ref this, out value);
+			public HResult get_Id(out char16* value) mut => VT.get_Id(ref this, out value);
+			public HResult get_LocalizedName(out char16* value) mut => VT.get_LocalizedName(ref this, out value);
+			public HResult add_SpellCheckerChanged(ref ISpellCheckerChangedEventHandler handler, out uint32 eventCookie) mut => VT.add_SpellCheckerChanged(ref this, ref handler, out eventCookie);
+			public HResult remove_SpellCheckerChanged(uint32 eventCookie) mut => VT.remove_SpellCheckerChanged(ref this, eventCookie);
+			public HResult GetOptionDescription(char16* optionId, out IOptionDescription* value) mut => VT.GetOptionDescription(ref this, optionId, out value);
+			public HResult ComprehensiveCheck(char16* text, out IEnumSpellingError* value) mut => VT.ComprehensiveCheck(ref this, text, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, out PWSTR value) get_LanguageTag;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR text, out IEnumSpellingError* value) Check;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR word, out IEnumString* value) Suggest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR word) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR word) Ignore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR from, PWSTR to) AutoCorrect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR optionId, out uint8 value) GetOptionValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, out IEnumString* value) get_OptionIds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, out PWSTR value) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, out PWSTR value) get_LocalizedName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, ref ISpellCheckerChangedEventHandler handler, out uint32 eventCookie) add_SpellCheckerChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, uint32 eventCookie) remove_SpellCheckerChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR optionId, out IOptionDescription* value) GetOptionDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker self, PWSTR text, out IEnumSpellingError* value) ComprehensiveCheck;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, out char16* value) get_LanguageTag;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* text, out IEnumSpellingError* value) Check;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* word, out IEnumString* value) Suggest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* word) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* word) Ignore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* from, char16* to) AutoCorrect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* optionId, out uint8 value) GetOptionValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, out IEnumString* value) get_OptionIds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, out char16* value) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, out char16* value) get_LocalizedName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, ref ISpellCheckerChangedEventHandler handler, out uint32 eventCookie) add_SpellCheckerChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, uint32 eventCookie) remove_SpellCheckerChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* optionId, out IOptionDescription* value) GetOptionDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker self, char16* text, out IEnumSpellingError* value) ComprehensiveCheck;
 			}
 		}
 		[CRepr]
@@ -4285,12 +4290,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Remove(PWSTR word) mut => VT.Remove(ref this, word);
+			public HResult Remove(char16* word) mut => VT.Remove(ref this, word);
 
 			[CRepr]
 			public struct VTable : ISpellChecker.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellChecker2 self, PWSTR word) Remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellChecker2 self, char16* word) Remove;
 			}
 		}
 		[CRepr]
@@ -4300,16 +4305,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SupportedLanguages(out IEnumString* value) mut => VT.get_SupportedLanguages(ref this, out value);
-			public HRESULT IsSupported(PWSTR languageTag, out BOOL value) mut => VT.IsSupported(ref this, languageTag, out value);
-			public HRESULT CreateSpellChecker(PWSTR languageTag, out ISpellChecker* value) mut => VT.CreateSpellChecker(ref this, languageTag, out value);
+			public HResult get_SupportedLanguages(out IEnumString* value) mut => VT.get_SupportedLanguages(ref this, out value);
+			public HResult IsSupported(char16* languageTag, out IntBool value) mut => VT.IsSupported(ref this, languageTag, out value);
+			public HResult CreateSpellChecker(char16* languageTag, out ISpellChecker* value) mut => VT.CreateSpellChecker(ref this, languageTag, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckerFactory self, out IEnumString* value) get_SupportedLanguages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckerFactory self, PWSTR languageTag, out BOOL value) IsSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckerFactory self, PWSTR languageTag, out ISpellChecker* value) CreateSpellChecker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckerFactory self, out IEnumString* value) get_SupportedLanguages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckerFactory self, char16* languageTag, out IntBool value) IsSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckerFactory self, char16* languageTag, out ISpellChecker* value) CreateSpellChecker;
 			}
 		}
 		[CRepr]
@@ -4319,14 +4324,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterUserDictionary(PWSTR dictionaryPath, PWSTR languageTag) mut => VT.RegisterUserDictionary(ref this, dictionaryPath, languageTag);
-			public HRESULT UnregisterUserDictionary(PWSTR dictionaryPath, PWSTR languageTag) mut => VT.UnregisterUserDictionary(ref this, dictionaryPath, languageTag);
+			public HResult RegisterUserDictionary(char16* dictionaryPath, char16* languageTag) mut => VT.RegisterUserDictionary(ref this, dictionaryPath, languageTag);
+			public HResult UnregisterUserDictionary(char16* dictionaryPath, char16* languageTag) mut => VT.UnregisterUserDictionary(ref this, dictionaryPath, languageTag);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUserDictionariesRegistrar self, PWSTR dictionaryPath, PWSTR languageTag) RegisterUserDictionary;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUserDictionariesRegistrar self, PWSTR dictionaryPath, PWSTR languageTag) UnregisterUserDictionary;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUserDictionariesRegistrar self, char16* dictionaryPath, char16* languageTag) RegisterUserDictionary;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUserDictionariesRegistrar self, char16* dictionaryPath, char16* languageTag) UnregisterUserDictionary;
 			}
 		}
 		[CRepr]
@@ -4336,30 +4341,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_LanguageTag(out PWSTR value) mut => VT.get_LanguageTag(ref this, out value);
-			public HRESULT Check(PWSTR text, out IEnumSpellingError* value) mut => VT.Check(ref this, text, out value);
-			public HRESULT Suggest(PWSTR word, out IEnumString* value) mut => VT.Suggest(ref this, word, out value);
-			public HRESULT GetOptionValue(PWSTR optionId, out uint8 value) mut => VT.GetOptionValue(ref this, optionId, out value);
-			public HRESULT SetOptionValue(PWSTR optionId, uint8 value) mut => VT.SetOptionValue(ref this, optionId, value);
-			public HRESULT get_OptionIds(out IEnumString* value) mut => VT.get_OptionIds(ref this, out value);
-			public HRESULT get_Id(out PWSTR value) mut => VT.get_Id(ref this, out value);
-			public HRESULT get_LocalizedName(out PWSTR value) mut => VT.get_LocalizedName(ref this, out value);
-			public HRESULT GetOptionDescription(PWSTR optionId, out IOptionDescription* value) mut => VT.GetOptionDescription(ref this, optionId, out value);
-			public HRESULT InitializeWordlist(WORDLIST_TYPE wordlistType, ref IEnumString words) mut => VT.InitializeWordlist(ref this, wordlistType, ref words);
+			public HResult get_LanguageTag(out char16* value) mut => VT.get_LanguageTag(ref this, out value);
+			public HResult Check(char16* text, out IEnumSpellingError* value) mut => VT.Check(ref this, text, out value);
+			public HResult Suggest(char16* word, out IEnumString* value) mut => VT.Suggest(ref this, word, out value);
+			public HResult GetOptionValue(char16* optionId, out uint8 value) mut => VT.GetOptionValue(ref this, optionId, out value);
+			public HResult SetOptionValue(char16* optionId, uint8 value) mut => VT.SetOptionValue(ref this, optionId, value);
+			public HResult get_OptionIds(out IEnumString* value) mut => VT.get_OptionIds(ref this, out value);
+			public HResult get_Id(out char16* value) mut => VT.get_Id(ref this, out value);
+			public HResult get_LocalizedName(out char16* value) mut => VT.get_LocalizedName(ref this, out value);
+			public HResult GetOptionDescription(char16* optionId, out IOptionDescription* value) mut => VT.GetOptionDescription(ref this, optionId, out value);
+			public HResult InitializeWordlist(WORDLIST_TYPE wordlistType, ref IEnumString words) mut => VT.InitializeWordlist(ref this, wordlistType, ref words);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, out PWSTR value) get_LanguageTag;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, PWSTR text, out IEnumSpellingError* value) Check;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, PWSTR word, out IEnumString* value) Suggest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, PWSTR optionId, out uint8 value) GetOptionValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, PWSTR optionId, uint8 value) SetOptionValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, out IEnumString* value) get_OptionIds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, out PWSTR value) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, out PWSTR value) get_LocalizedName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, PWSTR optionId, out IOptionDescription* value) GetOptionDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProvider self, WORDLIST_TYPE wordlistType, ref IEnumString words) InitializeWordlist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, out char16* value) get_LanguageTag;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, char16* text, out IEnumSpellingError* value) Check;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, char16* word, out IEnumString* value) Suggest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, char16* optionId, out uint8 value) GetOptionValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, char16* optionId, uint8 value) SetOptionValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, out IEnumString* value) get_OptionIds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, out char16* value) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, out char16* value) get_LocalizedName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, char16* optionId, out IOptionDescription* value) GetOptionDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProvider self, WORDLIST_TYPE wordlistType, ref IEnumString words) InitializeWordlist;
 			}
 		}
 		[CRepr]
@@ -4369,12 +4374,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ComprehensiveCheck(PWSTR text, out IEnumSpellingError* value) mut => VT.ComprehensiveCheck(ref this, text, out value);
+			public HResult ComprehensiveCheck(char16* text, out IEnumSpellingError* value) mut => VT.ComprehensiveCheck(ref this, text, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComprehensiveSpellCheckProvider self, PWSTR text, out IEnumSpellingError* value) ComprehensiveCheck;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComprehensiveSpellCheckProvider self, char16* text, out IEnumSpellingError* value) ComprehensiveCheck;
 			}
 		}
 		[CRepr]
@@ -4384,16 +4389,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SupportedLanguages(out IEnumString* value) mut => VT.get_SupportedLanguages(ref this, out value);
-			public HRESULT IsSupported(PWSTR languageTag, out BOOL value) mut => VT.IsSupported(ref this, languageTag, out value);
-			public HRESULT CreateSpellCheckProvider(PWSTR languageTag, out ISpellCheckProvider* value) mut => VT.CreateSpellCheckProvider(ref this, languageTag, out value);
+			public HResult get_SupportedLanguages(out IEnumString* value) mut => VT.get_SupportedLanguages(ref this, out value);
+			public HResult IsSupported(char16* languageTag, out IntBool value) mut => VT.IsSupported(ref this, languageTag, out value);
+			public HResult CreateSpellCheckProvider(char16* languageTag, out ISpellCheckProvider* value) mut => VT.CreateSpellCheckProvider(ref this, languageTag, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProviderFactory self, out IEnumString* value) get_SupportedLanguages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProviderFactory self, PWSTR languageTag, out BOOL value) IsSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpellCheckProviderFactory self, PWSTR languageTag, out ISpellCheckProvider* value) CreateSpellCheckProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProviderFactory self, out IEnumString* value) get_SupportedLanguages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProviderFactory self, char16* languageTag, out IntBool value) IsSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpellCheckProviderFactory self, char16* languageTag, out ISpellCheckProvider* value) CreateSpellCheckProvider;
 			}
 		}
 		[CRepr]
@@ -4403,20 +4408,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetStatus(int32* plFlags, int32* pcchBuf) mut => VT.GetStatus(ref this, plFlags, pcchBuf);
-			public HRESULT LockBuf(int32 cchOffset, int32 cchMaxLock, out uint16* ppszBuf, int32* pcchBuf) mut => VT.LockBuf(ref this, cchOffset, cchMaxLock, out ppszBuf, pcchBuf);
-			public HRESULT UnlockBuf(PWSTR pszBuf, int32 cchOffset, int32 cchWrite) mut => VT.UnlockBuf(ref this, pszBuf, cchOffset, cchWrite);
-			public HRESULT Insert(int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) mut => VT.Insert(ref this, cchOffset, cchMaxInsert, pcchActual);
-			public HRESULT Delete(int32 cchOffset, int32 cchDelete) mut => VT.Delete(ref this, cchOffset, cchDelete);
+			public HResult GetStatus(int32* plFlags, int32* pcchBuf) mut => VT.GetStatus(ref this, plFlags, pcchBuf);
+			public HResult LockBuf(int32 cchOffset, int32 cchMaxLock, out uint16* ppszBuf, int32* pcchBuf) mut => VT.LockBuf(ref this, cchOffset, cchMaxLock, out ppszBuf, pcchBuf);
+			public HResult UnlockBuf(char16* pszBuf, int32 cchOffset, int32 cchWrite) mut => VT.UnlockBuf(ref this, pszBuf, cchOffset, cchWrite);
+			public HResult Insert(int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) mut => VT.Insert(ref this, cchOffset, cchMaxInsert, pcchActual);
+			public HResult Delete(int32 cchOffset, int32 cchDelete) mut => VT.Delete(ref this, cchOffset, cchDelete);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufW self, int32* plFlags, int32* pcchBuf) GetStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufW self, int32 cchOffset, int32 cchMaxLock, out uint16* ppszBuf, int32* pcchBuf) LockBuf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufW self, PWSTR pszBuf, int32 cchOffset, int32 cchWrite) UnlockBuf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufW self, int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) Insert;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufW self, int32 cchOffset, int32 cchDelete) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufW self, int32* plFlags, int32* pcchBuf) GetStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufW self, int32 cchOffset, int32 cchMaxLock, out uint16* ppszBuf, int32* pcchBuf) LockBuf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufW self, char16* pszBuf, int32 cchOffset, int32 cchWrite) UnlockBuf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufW self, int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) Insert;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufW self, int32 cchOffset, int32 cchDelete) Delete;
 			}
 		}
 		[CRepr]
@@ -4426,20 +4431,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetStatus(int32* plFlags, int32* pcchBuf) mut => VT.GetStatus(ref this, plFlags, pcchBuf);
-			public HRESULT LockBuf(int32 cchOffset, int32 cchMaxLock, out CHAR* ppszBuf, int32* pcchBuf) mut => VT.LockBuf(ref this, cchOffset, cchMaxLock, out ppszBuf, pcchBuf);
-			public HRESULT UnlockBuf(PSTR pszBuf, int32 cchOffset, int32 cchWrite) mut => VT.UnlockBuf(ref this, pszBuf, cchOffset, cchWrite);
-			public HRESULT Insert(int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) mut => VT.Insert(ref this, cchOffset, cchMaxInsert, pcchActual);
-			public HRESULT Delete(int32 cchOffset, int32 cchDelete) mut => VT.Delete(ref this, cchOffset, cchDelete);
+			public HResult GetStatus(int32* plFlags, int32* pcchBuf) mut => VT.GetStatus(ref this, plFlags, pcchBuf);
+			public HResult LockBuf(int32 cchOffset, int32 cchMaxLock, out char8* ppszBuf, int32* pcchBuf) mut => VT.LockBuf(ref this, cchOffset, cchMaxLock, out ppszBuf, pcchBuf);
+			public HResult UnlockBuf(char8* pszBuf, int32 cchOffset, int32 cchWrite) mut => VT.UnlockBuf(ref this, pszBuf, cchOffset, cchWrite);
+			public HResult Insert(int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) mut => VT.Insert(ref this, cchOffset, cchMaxInsert, pcchActual);
+			public HResult Delete(int32 cchOffset, int32 cchDelete) mut => VT.Delete(ref this, cchOffset, cchDelete);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufA self, int32* plFlags, int32* pcchBuf) GetStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufA self, int32 cchOffset, int32 cchMaxLock, out CHAR* ppszBuf, int32* pcchBuf) LockBuf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufA self, PSTR pszBuf, int32 cchOffset, int32 cchWrite) UnlockBuf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufA self, int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) Insert;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringBufA self, int32 cchOffset, int32 cchDelete) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufA self, int32* plFlags, int32* pcchBuf) GetStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufA self, int32 cchOffset, int32 cchMaxLock, out char8* ppszBuf, int32* pcchBuf) LockBuf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufA self, char8* pszBuf, int32 cchOffset, int32 cchWrite) UnlockBuf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufA self, int32 cchOffset, int32 cchMaxInsert, int32* pcchActual) Insert;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringBufA self, int32 cchOffset, int32 cchDelete) Delete;
 			}
 		}
 		[CRepr]
@@ -4449,18 +4454,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Sync(BOOL fNoAccess) mut => VT.Sync(ref this, fNoAccess);
-			public HRESULT GetLength(int32* plLen) mut => VT.GetLength(ref this, plLen);
-			public HRESULT SetMLStr(int32 lDestPos, int32 lDestLen, ref IUnknown pSrcMLStr, int32 lSrcPos, int32 lSrcLen) mut => VT.SetMLStr(ref this, lDestPos, lDestLen, ref pSrcMLStr, lSrcPos, lSrcLen);
-			public HRESULT GetMLStr(int32 lSrcPos, int32 lSrcLen, ref IUnknown pUnkOuter, uint32 dwClsContext, in Guid piid, out IUnknown* ppDestMLStr, int32* plDestPos, int32* plDestLen) mut => VT.GetMLStr(ref this, lSrcPos, lSrcLen, ref pUnkOuter, dwClsContext, piid, out ppDestMLStr, plDestPos, plDestLen);
+			public HResult Sync(IntBool fNoAccess) mut => VT.Sync(ref this, fNoAccess);
+			public HResult GetLength(int32* plLen) mut => VT.GetLength(ref this, plLen);
+			public HResult SetMLStr(int32 lDestPos, int32 lDestLen, ref IUnknown pSrcMLStr, int32 lSrcPos, int32 lSrcLen) mut => VT.SetMLStr(ref this, lDestPos, lDestLen, ref pSrcMLStr, lSrcPos, lSrcLen);
+			public HResult GetMLStr(int32 lSrcPos, int32 lSrcLen, ref IUnknown pUnkOuter, uint32 dwClsContext, in Guid piid, out IUnknown* ppDestMLStr, int32* plDestPos, int32* plDestLen) mut => VT.GetMLStr(ref this, lSrcPos, lSrcLen, ref pUnkOuter, dwClsContext, piid, out ppDestMLStr, plDestPos, plDestLen);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangString self, BOOL fNoAccess) Sync;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangString self, int32* plLen) GetLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangString self, int32 lDestPos, int32 lDestLen, ref IUnknown pSrcMLStr, int32 lSrcPos, int32 lSrcLen) SetMLStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangString self, int32 lSrcPos, int32 lSrcLen, ref IUnknown pUnkOuter, uint32 dwClsContext, in Guid piid, out IUnknown* ppDestMLStr, int32* plDestPos, int32* plDestLen) GetMLStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangString self, IntBool fNoAccess) Sync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangString self, int32* plLen) GetLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangString self, int32 lDestPos, int32 lDestLen, ref IUnknown pSrcMLStr, int32 lSrcPos, int32 lSrcLen) SetMLStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangString self, int32 lSrcPos, int32 lSrcLen, ref IUnknown pUnkOuter, uint32 dwClsContext, in Guid piid, out IUnknown* ppDestMLStr, int32* plDestPos, int32* plDestLen) GetMLStr;
 			}
 		}
 		[CRepr]
@@ -4470,26 +4475,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetWStr(int32 lDestPos, int32 lDestLen, char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.SetWStr(ref this, lDestPos, lDestLen, pszSrc, cchSrc, pcchActual, plActualLen);
-			public HRESULT SetStrBufW(int32 lDestPos, int32 lDestLen, IMLangStringBufW* pSrcBuf, int32* pcchActual, int32* plActualLen) mut => VT.SetStrBufW(ref this, lDestPos, lDestLen, pSrcBuf, pcchActual, plActualLen);
-			public HRESULT GetWStr(int32 lSrcPos, int32 lSrcLen, char16* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) mut => VT.GetWStr(ref this, lSrcPos, lSrcLen, pszDest, cchDest, pcchActual, plActualLen);
-			public HRESULT GetStrBufW(int32 lSrcPos, int32 lSrcMaxLen, out IMLangStringBufW* ppDestBuf, int32* plDestLen) mut => VT.GetStrBufW(ref this, lSrcPos, lSrcMaxLen, out ppDestBuf, plDestLen);
-			public HRESULT LockWStr(int32 lSrcPos, int32 lSrcLen, int32 lFlags, int32 cchRequest, PWSTR* ppszDest, int32* pcchDest, int32* plDestLen) mut => VT.LockWStr(ref this, lSrcPos, lSrcLen, lFlags, cchRequest, ppszDest, pcchDest, plDestLen);
-			public HRESULT UnlockWStr(char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.UnlockWStr(ref this, pszSrc, cchSrc, pcchActual, plActualLen);
-			public HRESULT SetLocale(int32 lDestPos, int32 lDestLen, uint32 locale) mut => VT.SetLocale(ref this, lDestPos, lDestLen, locale);
-			public HRESULT GetLocale(int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) mut => VT.GetLocale(ref this, lSrcPos, lSrcMaxLen, plocale, plLocalePos, plLocaleLen);
+			public HResult SetWStr(int32 lDestPos, int32 lDestLen, char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.SetWStr(ref this, lDestPos, lDestLen, pszSrc, cchSrc, pcchActual, plActualLen);
+			public HResult SetStrBufW(int32 lDestPos, int32 lDestLen, IMLangStringBufW* pSrcBuf, int32* pcchActual, int32* plActualLen) mut => VT.SetStrBufW(ref this, lDestPos, lDestLen, pSrcBuf, pcchActual, plActualLen);
+			public HResult GetWStr(int32 lSrcPos, int32 lSrcLen, char16* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) mut => VT.GetWStr(ref this, lSrcPos, lSrcLen, pszDest, cchDest, pcchActual, plActualLen);
+			public HResult GetStrBufW(int32 lSrcPos, int32 lSrcMaxLen, out IMLangStringBufW* ppDestBuf, int32* plDestLen) mut => VT.GetStrBufW(ref this, lSrcPos, lSrcMaxLen, out ppDestBuf, plDestLen);
+			public HResult LockWStr(int32 lSrcPos, int32 lSrcLen, int32 lFlags, int32 cchRequest, char16** ppszDest, int32* pcchDest, int32* plDestLen) mut => VT.LockWStr(ref this, lSrcPos, lSrcLen, lFlags, cchRequest, ppszDest, pcchDest, plDestLen);
+			public HResult UnlockWStr(char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.UnlockWStr(ref this, pszSrc, cchSrc, pcchActual, plActualLen);
+			public HResult SetLocale(int32 lDestPos, int32 lDestLen, uint32 locale) mut => VT.SetLocale(ref this, lDestPos, lDestLen, locale);
+			public HResult GetLocale(int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) mut => VT.GetLocale(ref this, lSrcPos, lSrcMaxLen, plocale, plLocalePos, plLocaleLen);
 
 			[CRepr]
 			public struct VTable : IMLangString.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lDestPos, int32 lDestLen, char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) SetWStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lDestPos, int32 lDestLen, IMLangStringBufW* pSrcBuf, int32* pcchActual, int32* plActualLen) SetStrBufW;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcLen, char16* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) GetWStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcMaxLen, out IMLangStringBufW* ppDestBuf, int32* plDestLen) GetStrBufW;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcLen, int32 lFlags, int32 cchRequest, PWSTR* ppszDest, int32* pcchDest, int32* plDestLen) LockWStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) UnlockWStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lDestPos, int32 lDestLen, uint32 locale) SetLocale;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) GetLocale;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lDestPos, int32 lDestLen, char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) SetWStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lDestPos, int32 lDestLen, IMLangStringBufW* pSrcBuf, int32* pcchActual, int32* plActualLen) SetStrBufW;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcLen, char16* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) GetWStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcMaxLen, out IMLangStringBufW* ppDestBuf, int32* plDestLen) GetStrBufW;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcLen, int32 lFlags, int32 cchRequest, char16** ppszDest, int32* pcchDest, int32* plDestLen) LockWStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, char16* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) UnlockWStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lDestPos, int32 lDestLen, uint32 locale) SetLocale;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringWStr self, int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) GetLocale;
 			}
 		}
 		[CRepr]
@@ -4499,26 +4504,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetAStr(int32 lDestPos, int32 lDestLen, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.SetAStr(ref this, lDestPos, lDestLen, uCodePage, pszSrc, cchSrc, pcchActual, plActualLen);
-			public HRESULT SetStrBufA(int32 lDestPos, int32 lDestLen, uint32 uCodePage, IMLangStringBufA* pSrcBuf, int32* pcchActual, int32* plActualLen) mut => VT.SetStrBufA(ref this, lDestPos, lDestLen, uCodePage, pSrcBuf, pcchActual, plActualLen);
-			public HRESULT GetAStr(int32 lSrcPos, int32 lSrcLen, uint32 uCodePageIn, out uint32 puCodePageOut, uint8* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) mut => VT.GetAStr(ref this, lSrcPos, lSrcLen, uCodePageIn, out puCodePageOut, pszDest, cchDest, pcchActual, plActualLen);
-			public HRESULT GetStrBufA(int32 lSrcPos, int32 lSrcMaxLen, uint32* puDestCodePage, out IMLangStringBufA* ppDestBuf, int32* plDestLen) mut => VT.GetStrBufA(ref this, lSrcPos, lSrcMaxLen, puDestCodePage, out ppDestBuf, plDestLen);
-			public HRESULT LockAStr(int32 lSrcPos, int32 lSrcLen, int32 lFlags, uint32 uCodePageIn, int32 cchRequest, uint32* puCodePageOut, PSTR* ppszDest, int32* pcchDest, int32* plDestLen) mut => VT.LockAStr(ref this, lSrcPos, lSrcLen, lFlags, uCodePageIn, cchRequest, puCodePageOut, ppszDest, pcchDest, plDestLen);
-			public HRESULT UnlockAStr(uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.UnlockAStr(ref this, pszSrc, cchSrc, pcchActual, plActualLen);
-			public HRESULT SetLocale(int32 lDestPos, int32 lDestLen, uint32 locale) mut => VT.SetLocale(ref this, lDestPos, lDestLen, locale);
-			public HRESULT GetLocale(int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) mut => VT.GetLocale(ref this, lSrcPos, lSrcMaxLen, plocale, plLocalePos, plLocaleLen);
+			public HResult SetAStr(int32 lDestPos, int32 lDestLen, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.SetAStr(ref this, lDestPos, lDestLen, uCodePage, pszSrc, cchSrc, pcchActual, plActualLen);
+			public HResult SetStrBufA(int32 lDestPos, int32 lDestLen, uint32 uCodePage, IMLangStringBufA* pSrcBuf, int32* pcchActual, int32* plActualLen) mut => VT.SetStrBufA(ref this, lDestPos, lDestLen, uCodePage, pSrcBuf, pcchActual, plActualLen);
+			public HResult GetAStr(int32 lSrcPos, int32 lSrcLen, uint32 uCodePageIn, out uint32 puCodePageOut, uint8* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) mut => VT.GetAStr(ref this, lSrcPos, lSrcLen, uCodePageIn, out puCodePageOut, pszDest, cchDest, pcchActual, plActualLen);
+			public HResult GetStrBufA(int32 lSrcPos, int32 lSrcMaxLen, uint32* puDestCodePage, out IMLangStringBufA* ppDestBuf, int32* plDestLen) mut => VT.GetStrBufA(ref this, lSrcPos, lSrcMaxLen, puDestCodePage, out ppDestBuf, plDestLen);
+			public HResult LockAStr(int32 lSrcPos, int32 lSrcLen, int32 lFlags, uint32 uCodePageIn, int32 cchRequest, uint32* puCodePageOut, char8** ppszDest, int32* pcchDest, int32* plDestLen) mut => VT.LockAStr(ref this, lSrcPos, lSrcLen, lFlags, uCodePageIn, cchRequest, puCodePageOut, ppszDest, pcchDest, plDestLen);
+			public HResult UnlockAStr(uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) mut => VT.UnlockAStr(ref this, pszSrc, cchSrc, pcchActual, plActualLen);
+			public HResult SetLocale(int32 lDestPos, int32 lDestLen, uint32 locale) mut => VT.SetLocale(ref this, lDestPos, lDestLen, locale);
+			public HResult GetLocale(int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) mut => VT.GetLocale(ref this, lSrcPos, lSrcMaxLen, plocale, plLocalePos, plLocaleLen);
 
 			[CRepr]
 			public struct VTable : IMLangString.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lDestPos, int32 lDestLen, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) SetAStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lDestPos, int32 lDestLen, uint32 uCodePage, IMLangStringBufA* pSrcBuf, int32* pcchActual, int32* plActualLen) SetStrBufA;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcLen, uint32 uCodePageIn, out uint32 puCodePageOut, uint8* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) GetAStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcMaxLen, uint32* puDestCodePage, out IMLangStringBufA* ppDestBuf, int32* plDestLen) GetStrBufA;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcLen, int32 lFlags, uint32 uCodePageIn, int32 cchRequest, uint32* puCodePageOut, PSTR* ppszDest, int32* pcchDest, int32* plDestLen) LockAStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) UnlockAStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lDestPos, int32 lDestLen, uint32 locale) SetLocale;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) GetLocale;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lDestPos, int32 lDestLen, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) SetAStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lDestPos, int32 lDestLen, uint32 uCodePage, IMLangStringBufA* pSrcBuf, int32* pcchActual, int32* plActualLen) SetStrBufA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcLen, uint32 uCodePageIn, out uint32 puCodePageOut, uint8* pszDest, int32 cchDest, int32* pcchActual, int32* plActualLen) GetAStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcMaxLen, uint32* puDestCodePage, out IMLangStringBufA* ppDestBuf, int32* plDestLen) GetStrBufA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcLen, int32 lFlags, uint32 uCodePageIn, int32 cchRequest, uint32* puCodePageOut, char8** ppszDest, int32* pcchDest, int32* plDestLen) LockAStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, uint8* pszSrc, int32 cchSrc, int32* pcchActual, int32* plActualLen) UnlockAStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lDestPos, int32 lDestLen, uint32 locale) SetLocale;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangStringAStr self, int32 lSrcPos, int32 lSrcMaxLen, uint32* plocale, int32* plLocalePos, int32* plLocaleLen) GetLocale;
 			}
 		}
 		[CRepr]
@@ -4528,16 +4533,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BreakLineML(ref IMLangString pSrcMLStr, int32 lSrcPos, int32 lSrcLen, int32 cMinColumns, int32 cMaxColumns, int32* plLineLen, int32* plSkipLen) mut => VT.BreakLineML(ref this, ref pSrcMLStr, lSrcPos, lSrcLen, cMinColumns, cMaxColumns, plLineLen, plSkipLen);
-			public HRESULT BreakLineW(uint32 locale, char16* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) mut => VT.BreakLineW(ref this, locale, pszSrc, cchSrc, cMaxColumns, pcchLine, pcchSkip);
-			public HRESULT BreakLineA(uint32 locale, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) mut => VT.BreakLineA(ref this, locale, uCodePage, pszSrc, cchSrc, cMaxColumns, pcchLine, pcchSkip);
+			public HResult BreakLineML(ref IMLangString pSrcMLStr, int32 lSrcPos, int32 lSrcLen, int32 cMinColumns, int32 cMaxColumns, int32* plLineLen, int32* plSkipLen) mut => VT.BreakLineML(ref this, ref pSrcMLStr, lSrcPos, lSrcLen, cMinColumns, cMaxColumns, plLineLen, plSkipLen);
+			public HResult BreakLineW(uint32 locale, char16* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) mut => VT.BreakLineW(ref this, locale, pszSrc, cchSrc, cMaxColumns, pcchLine, pcchSkip);
+			public HResult BreakLineA(uint32 locale, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) mut => VT.BreakLineA(ref this, locale, uCodePage, pszSrc, cchSrc, cMaxColumns, pcchLine, pcchSkip);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangLineBreakConsole self, ref IMLangString pSrcMLStr, int32 lSrcPos, int32 lSrcLen, int32 cMinColumns, int32 cMaxColumns, int32* plLineLen, int32* plSkipLen) BreakLineML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangLineBreakConsole self, uint32 locale, char16* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) BreakLineW;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangLineBreakConsole self, uint32 locale, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) BreakLineA;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangLineBreakConsole self, ref IMLangString pSrcMLStr, int32 lSrcPos, int32 lSrcLen, int32 cMinColumns, int32 cMaxColumns, int32* plLineLen, int32* plSkipLen) BreakLineML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangLineBreakConsole self, uint32 locale, char16* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) BreakLineW;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangLineBreakConsole self, uint32 locale, uint32 uCodePage, uint8* pszSrc, int32 cchSrc, int32 cMaxColumns, int32* pcchLine, int32* pcchSkip) BreakLineA;
 			}
 		}
 		[CRepr]
@@ -4547,18 +4552,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Clone(out IEnumCodePage* ppEnum) mut => VT.Clone(ref this, out ppEnum);
-			public HRESULT Next(uint32 celt, out MIMECPINFO rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, out rgelt, pceltFetched);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Clone(out IEnumCodePage* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 celt, out MIMECPINFO rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, out rgelt, pceltFetched);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCodePage self, out IEnumCodePage* ppEnum) Clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCodePage self, uint32 celt, out MIMECPINFO rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCodePage self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCodePage self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCodePage self, out IEnumCodePage* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCodePage self, uint32 celt, out MIMECPINFO rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCodePage self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCodePage self, uint32 celt) Skip;
 			}
 		}
 		[CRepr]
@@ -4568,18 +4573,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Clone(out IEnumRfc1766* ppEnum) mut => VT.Clone(ref this, out ppEnum);
-			public HRESULT Next(uint32 celt, out RFC1766INFO rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, out rgelt, pceltFetched);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Clone(out IEnumRfc1766* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 celt, out RFC1766INFO rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, out rgelt, pceltFetched);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumRfc1766 self, out IEnumRfc1766* ppEnum) Clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumRfc1766 self, uint32 celt, out RFC1766INFO rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumRfc1766 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumRfc1766 self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumRfc1766 self, out IEnumRfc1766* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumRfc1766 self, uint32 celt, out RFC1766INFO rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumRfc1766 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumRfc1766 self, uint32 celt) Skip;
 			}
 		}
 		[CRepr]
@@ -4589,18 +4594,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Clone(out IEnumScript* ppEnum) mut => VT.Clone(ref this, out ppEnum);
-			public HRESULT Next(uint32 celt, out SCRIPTINFO rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, out rgelt, pceltFetched);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Clone(out IEnumScript* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 celt, out SCRIPTINFO rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, out rgelt, pceltFetched);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumScript self, out IEnumScript* ppEnum) Clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumScript self, uint32 celt, out SCRIPTINFO rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumScript self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumScript self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumScript self, out IEnumScript* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumScript self, uint32 celt, out SCRIPTINFO rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumScript self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumScript self, uint32 celt) Skip;
 			}
 		}
 		[CRepr]
@@ -4610,24 +4615,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty) mut => VT.Initialize(ref this, uiSrcCodePage, uiDstCodePage, dwProperty);
-			public HRESULT GetSourceCodePage(out uint32 puiSrcCodePage) mut => VT.GetSourceCodePage(ref this, out puiSrcCodePage);
-			public HRESULT GetDestinationCodePage(out uint32 puiDstCodePage) mut => VT.GetDestinationCodePage(ref this, out puiDstCodePage);
-			public HRESULT GetProperty(out uint32 pdwProperty) mut => VT.GetProperty(ref this, out pdwProperty);
-			public HRESULT DoConversion(ref uint8 pSrcStr, uint32* pcSrcSize, out uint8 pDstStr, uint32* pcDstSize) mut => VT.DoConversion(ref this, ref pSrcStr, pcSrcSize, out pDstStr, pcDstSize);
-			public HRESULT DoConversionToUnicode(PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) mut => VT.DoConversionToUnicode(ref this, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT DoConversionFromUnicode(char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize) mut => VT.DoConversionFromUnicode(ref this, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult Initialize(uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty) mut => VT.Initialize(ref this, uiSrcCodePage, uiDstCodePage, dwProperty);
+			public HResult GetSourceCodePage(out uint32 puiSrcCodePage) mut => VT.GetSourceCodePage(ref this, out puiSrcCodePage);
+			public HResult GetDestinationCodePage(out uint32 puiDstCodePage) mut => VT.GetDestinationCodePage(ref this, out puiDstCodePage);
+			public HResult GetProperty(out uint32 pdwProperty) mut => VT.GetProperty(ref this, out pdwProperty);
+			public HResult DoConversion(ref uint8 pSrcStr, uint32* pcSrcSize, out uint8 pDstStr, uint32* pcDstSize) mut => VT.DoConversion(ref this, ref pSrcStr, pcSrcSize, out pDstStr, pcDstSize);
+			public HResult DoConversionToUnicode(char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) mut => VT.DoConversionToUnicode(ref this, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult DoConversionFromUnicode(char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize) mut => VT.DoConversionFromUnicode(ref this, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, out uint32 puiSrcCodePage) GetSourceCodePage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, out uint32 puiDstCodePage) GetDestinationCodePage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, out uint32 pdwProperty) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, ref uint8 pSrcStr, uint32* pcSrcSize, out uint8 pDstStr, uint32* pcDstSize) DoConversion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) DoConversionToUnicode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangConvertCharset self, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize) DoConversionFromUnicode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, out uint32 puiSrcCodePage) GetSourceCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, out uint32 puiDstCodePage) GetDestinationCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, out uint32 pdwProperty) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, ref uint8 pSrcStr, uint32* pcSrcSize, out uint8 pDstStr, uint32* pcDstSize) DoConversion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) DoConversionToUnicode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangConvertCharset self, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize) DoConversionFromUnicode;
 			}
 		}
 		[CRepr]
@@ -4637,40 +4642,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNumberOfCodePageInfo(out uint32 pcCodePage) mut => VT.GetNumberOfCodePageInfo(ref this, out pcCodePage);
-			public HRESULT GetCodePageInfo(uint32 uiCodePage, out MIMECPINFO pCodePageInfo) mut => VT.GetCodePageInfo(ref this, uiCodePage, out pCodePageInfo);
-			public HRESULT GetFamilyCodePage(uint32 uiCodePage, out uint32 puiFamilyCodePage) mut => VT.GetFamilyCodePage(ref this, uiCodePage, out puiFamilyCodePage);
-			public HRESULT EnumCodePages(uint32 grfFlags, out IEnumCodePage* ppEnumCodePage) mut => VT.EnumCodePages(ref this, grfFlags, out ppEnumCodePage);
-			public HRESULT GetCharsetInfo(BSTR Charset, out MIMECSETINFO pCharsetInfo) mut => VT.GetCharsetInfo(ref this, Charset, out pCharsetInfo);
-			public HRESULT IsConvertible(uint32 dwSrcEncoding, uint32 dwDstEncoding) mut => VT.IsConvertible(ref this, dwSrcEncoding, dwDstEncoding);
-			public HRESULT ConvertString(uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) mut => VT.ConvertString(ref this, pdwMode, dwSrcEncoding, dwDstEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT ConvertStringToUnicode(uint32* pdwMode, uint32 dwEncoding, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) mut => VT.ConvertStringToUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT ConvertStringFromUnicode(uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize) mut => VT.ConvertStringFromUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT ConvertStringReset() mut => VT.ConvertStringReset(ref this);
-			public HRESULT GetRfc1766FromLcid(uint32 Locale, out BSTR pbstrRfc1766) mut => VT.GetRfc1766FromLcid(ref this, Locale, out pbstrRfc1766);
-			public HRESULT GetLcidFromRfc1766(out uint32 pLocale, BSTR bstrRfc1766) mut => VT.GetLcidFromRfc1766(ref this, out pLocale, bstrRfc1766);
-			public HRESULT EnumRfc1766(out IEnumRfc1766* ppEnumRfc1766) mut => VT.EnumRfc1766(ref this, out ppEnumRfc1766);
-			public HRESULT GetRfc1766Info(uint32 Locale, out RFC1766INFO pRfc1766Info) mut => VT.GetRfc1766Info(ref this, Locale, out pRfc1766Info);
-			public HRESULT CreateConvertCharset(uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) mut => VT.CreateConvertCharset(ref this, uiSrcCodePage, uiDstCodePage, dwProperty, out ppMLangConvertCharset);
+			public HResult GetNumberOfCodePageInfo(out uint32 pcCodePage) mut => VT.GetNumberOfCodePageInfo(ref this, out pcCodePage);
+			public HResult GetCodePageInfo(uint32 uiCodePage, out MIMECPINFO pCodePageInfo) mut => VT.GetCodePageInfo(ref this, uiCodePage, out pCodePageInfo);
+			public HResult GetFamilyCodePage(uint32 uiCodePage, out uint32 puiFamilyCodePage) mut => VT.GetFamilyCodePage(ref this, uiCodePage, out puiFamilyCodePage);
+			public HResult EnumCodePages(uint32 grfFlags, out IEnumCodePage* ppEnumCodePage) mut => VT.EnumCodePages(ref this, grfFlags, out ppEnumCodePage);
+			public HResult GetCharsetInfo(char16* Charset, out MIMECSETINFO pCharsetInfo) mut => VT.GetCharsetInfo(ref this, Charset, out pCharsetInfo);
+			public HResult IsConvertible(uint32 dwSrcEncoding, uint32 dwDstEncoding) mut => VT.IsConvertible(ref this, dwSrcEncoding, dwDstEncoding);
+			public HResult ConvertString(uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) mut => VT.ConvertString(ref this, pdwMode, dwSrcEncoding, dwDstEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult ConvertStringToUnicode(uint32* pdwMode, uint32 dwEncoding, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) mut => VT.ConvertStringToUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult ConvertStringFromUnicode(uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize) mut => VT.ConvertStringFromUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult ConvertStringReset() mut => VT.ConvertStringReset(ref this);
+			public HResult GetRfc1766FromLcid(uint32 Locale, out char16* pbstrRfc1766) mut => VT.GetRfc1766FromLcid(ref this, Locale, out pbstrRfc1766);
+			public HResult GetLcidFromRfc1766(out uint32 pLocale, char16* bstrRfc1766) mut => VT.GetLcidFromRfc1766(ref this, out pLocale, bstrRfc1766);
+			public HResult EnumRfc1766(out IEnumRfc1766* ppEnumRfc1766) mut => VT.EnumRfc1766(ref this, out ppEnumRfc1766);
+			public HResult GetRfc1766Info(uint32 Locale, out RFC1766INFO pRfc1766Info) mut => VT.GetRfc1766Info(ref this, Locale, out pRfc1766Info);
+			public HResult CreateConvertCharset(uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) mut => VT.CreateConvertCharset(ref this, uiSrcCodePage, uiDstCodePage, dwProperty, out ppMLangConvertCharset);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, out uint32 pcCodePage) GetNumberOfCodePageInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 uiCodePage, out MIMECPINFO pCodePageInfo) GetCodePageInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 uiCodePage, out uint32 puiFamilyCodePage) GetFamilyCodePage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 grfFlags, out IEnumCodePage* ppEnumCodePage) EnumCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, BSTR Charset, out MIMECSETINFO pCharsetInfo) GetCharsetInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 dwSrcEncoding, uint32 dwDstEncoding) IsConvertible;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) ConvertString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32* pdwMode, uint32 dwEncoding, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) ConvertStringToUnicode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize) ConvertStringFromUnicode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self) ConvertStringReset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 Locale, out BSTR pbstrRfc1766) GetRfc1766FromLcid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, out uint32 pLocale, BSTR bstrRfc1766) GetLcidFromRfc1766;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, out IEnumRfc1766* ppEnumRfc1766) EnumRfc1766;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 Locale, out RFC1766INFO pRfc1766Info) GetRfc1766Info;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage self, uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) CreateConvertCharset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, out uint32 pcCodePage) GetNumberOfCodePageInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 uiCodePage, out MIMECPINFO pCodePageInfo) GetCodePageInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 uiCodePage, out uint32 puiFamilyCodePage) GetFamilyCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 grfFlags, out IEnumCodePage* ppEnumCodePage) EnumCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, char16* Charset, out MIMECSETINFO pCharsetInfo) GetCharsetInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 dwSrcEncoding, uint32 dwDstEncoding) IsConvertible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) ConvertString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32* pdwMode, uint32 dwEncoding, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) ConvertStringToUnicode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize) ConvertStringFromUnicode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self) ConvertStringReset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 Locale, out char16* pbstrRfc1766) GetRfc1766FromLcid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, out uint32 pLocale, char16* bstrRfc1766) GetLcidFromRfc1766;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, out IEnumRfc1766* ppEnumRfc1766) EnumRfc1766;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 Locale, out RFC1766INFO pRfc1766Info) GetRfc1766Info;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage self, uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) CreateConvertCharset;
 			}
 		}
 		[CRepr]
@@ -4680,64 +4685,64 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNumberOfCodePageInfo(out uint32 pcCodePage) mut => VT.GetNumberOfCodePageInfo(ref this, out pcCodePage);
-			public HRESULT GetCodePageInfo(uint32 uiCodePage, uint16 LangId, out MIMECPINFO pCodePageInfo) mut => VT.GetCodePageInfo(ref this, uiCodePage, LangId, out pCodePageInfo);
-			public HRESULT GetFamilyCodePage(uint32 uiCodePage, out uint32 puiFamilyCodePage) mut => VT.GetFamilyCodePage(ref this, uiCodePage, out puiFamilyCodePage);
-			public HRESULT EnumCodePages(uint32 grfFlags, uint16 LangId, out IEnumCodePage* ppEnumCodePage) mut => VT.EnumCodePages(ref this, grfFlags, LangId, out ppEnumCodePage);
-			public HRESULT GetCharsetInfo(BSTR Charset, out MIMECSETINFO pCharsetInfo) mut => VT.GetCharsetInfo(ref this, Charset, out pCharsetInfo);
-			public HRESULT IsConvertible(uint32 dwSrcEncoding, uint32 dwDstEncoding) mut => VT.IsConvertible(ref this, dwSrcEncoding, dwDstEncoding);
-			public HRESULT ConvertString(uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) mut => VT.ConvertString(ref this, pdwMode, dwSrcEncoding, dwDstEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT ConvertStringToUnicode(uint32* pdwMode, uint32 dwEncoding, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) mut => VT.ConvertStringToUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT ConvertStringFromUnicode(uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize) mut => VT.ConvertStringFromUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
-			public HRESULT ConvertStringReset() mut => VT.ConvertStringReset(ref this);
-			public HRESULT GetRfc1766FromLcid(uint32 Locale, out BSTR pbstrRfc1766) mut => VT.GetRfc1766FromLcid(ref this, Locale, out pbstrRfc1766);
-			public HRESULT GetLcidFromRfc1766(out uint32 pLocale, BSTR bstrRfc1766) mut => VT.GetLcidFromRfc1766(ref this, out pLocale, bstrRfc1766);
-			public HRESULT EnumRfc1766(uint16 LangId, out IEnumRfc1766* ppEnumRfc1766) mut => VT.EnumRfc1766(ref this, LangId, out ppEnumRfc1766);
-			public HRESULT GetRfc1766Info(uint32 Locale, uint16 LangId, out RFC1766INFO pRfc1766Info) mut => VT.GetRfc1766Info(ref this, Locale, LangId, out pRfc1766Info);
-			public HRESULT CreateConvertCharset(uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) mut => VT.CreateConvertCharset(ref this, uiSrcCodePage, uiDstCodePage, dwProperty, out ppMLangConvertCharset);
-			public HRESULT ConvertStringInIStream(uint32* pdwMode, uint32 dwFlag, PWSTR lpFallBack, uint32 dwSrcEncoding, uint32 dwDstEncoding, ref IStream pstmIn, ref IStream pstmOut) mut => VT.ConvertStringInIStream(ref this, pdwMode, dwFlag, lpFallBack, dwSrcEncoding, dwDstEncoding, ref pstmIn, ref pstmOut);
-			public HRESULT ConvertStringToUnicodeEx(uint32* pdwMode, uint32 dwEncoding, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize, uint32 dwFlag, PWSTR lpFallBack) mut => VT.ConvertStringToUnicodeEx(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize, dwFlag, lpFallBack);
-			public HRESULT ConvertStringFromUnicodeEx(uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize, uint32 dwFlag, PWSTR lpFallBack) mut => VT.ConvertStringFromUnicodeEx(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize, dwFlag, lpFallBack);
-			public HRESULT DetectCodepageInIStream(uint32 dwFlag, uint32 dwPrefWinCodePage, ref IStream pstmIn, out DetectEncodingInfo lpEncoding, out int32 pnScores) mut => VT.DetectCodepageInIStream(ref this, dwFlag, dwPrefWinCodePage, ref pstmIn, out lpEncoding, out pnScores);
-			public HRESULT DetectInputCodepage(uint32 dwFlag, uint32 dwPrefWinCodePage, PSTR pSrcStr, out int32 pcSrcSize, out DetectEncodingInfo lpEncoding, out int32 pnScores) mut => VT.DetectInputCodepage(ref this, dwFlag, dwPrefWinCodePage, pSrcStr, out pcSrcSize, out lpEncoding, out pnScores);
-			public HRESULT ValidateCodePage(uint32 uiCodePage, HWND hwnd) mut => VT.ValidateCodePage(ref this, uiCodePage, hwnd);
-			public HRESULT GetCodePageDescription(uint32 uiCodePage, uint32 lcid, char16* lpWideCharStr, int32 cchWideChar) mut => VT.GetCodePageDescription(ref this, uiCodePage, lcid, lpWideCharStr, cchWideChar);
-			public HRESULT IsCodePageInstallable(uint32 uiCodePage) mut => VT.IsCodePageInstallable(ref this, uiCodePage);
-			public HRESULT SetMimeDBSource(MIMECONTF dwSource) mut => VT.SetMimeDBSource(ref this, dwSource);
-			public HRESULT GetNumberOfScripts(out uint32 pnScripts) mut => VT.GetNumberOfScripts(ref this, out pnScripts);
-			public HRESULT EnumScripts(uint32 dwFlags, uint16 LangId, out IEnumScript* ppEnumScript) mut => VT.EnumScripts(ref this, dwFlags, LangId, out ppEnumScript);
-			public HRESULT ValidateCodePageEx(uint32 uiCodePage, HWND hwnd, uint32 dwfIODControl) mut => VT.ValidateCodePageEx(ref this, uiCodePage, hwnd, dwfIODControl);
+			public HResult GetNumberOfCodePageInfo(out uint32 pcCodePage) mut => VT.GetNumberOfCodePageInfo(ref this, out pcCodePage);
+			public HResult GetCodePageInfo(uint32 uiCodePage, uint16 LangId, out MIMECPINFO pCodePageInfo) mut => VT.GetCodePageInfo(ref this, uiCodePage, LangId, out pCodePageInfo);
+			public HResult GetFamilyCodePage(uint32 uiCodePage, out uint32 puiFamilyCodePage) mut => VT.GetFamilyCodePage(ref this, uiCodePage, out puiFamilyCodePage);
+			public HResult EnumCodePages(uint32 grfFlags, uint16 LangId, out IEnumCodePage* ppEnumCodePage) mut => VT.EnumCodePages(ref this, grfFlags, LangId, out ppEnumCodePage);
+			public HResult GetCharsetInfo(char16* Charset, out MIMECSETINFO pCharsetInfo) mut => VT.GetCharsetInfo(ref this, Charset, out pCharsetInfo);
+			public HResult IsConvertible(uint32 dwSrcEncoding, uint32 dwDstEncoding) mut => VT.IsConvertible(ref this, dwSrcEncoding, dwDstEncoding);
+			public HResult ConvertString(uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) mut => VT.ConvertString(ref this, pdwMode, dwSrcEncoding, dwDstEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult ConvertStringToUnicode(uint32* pdwMode, uint32 dwEncoding, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) mut => VT.ConvertStringToUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult ConvertStringFromUnicode(uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize) mut => VT.ConvertStringFromUnicode(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize);
+			public HResult ConvertStringReset() mut => VT.ConvertStringReset(ref this);
+			public HResult GetRfc1766FromLcid(uint32 Locale, out char16* pbstrRfc1766) mut => VT.GetRfc1766FromLcid(ref this, Locale, out pbstrRfc1766);
+			public HResult GetLcidFromRfc1766(out uint32 pLocale, char16* bstrRfc1766) mut => VT.GetLcidFromRfc1766(ref this, out pLocale, bstrRfc1766);
+			public HResult EnumRfc1766(uint16 LangId, out IEnumRfc1766* ppEnumRfc1766) mut => VT.EnumRfc1766(ref this, LangId, out ppEnumRfc1766);
+			public HResult GetRfc1766Info(uint32 Locale, uint16 LangId, out RFC1766INFO pRfc1766Info) mut => VT.GetRfc1766Info(ref this, Locale, LangId, out pRfc1766Info);
+			public HResult CreateConvertCharset(uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) mut => VT.CreateConvertCharset(ref this, uiSrcCodePage, uiDstCodePage, dwProperty, out ppMLangConvertCharset);
+			public HResult ConvertStringInIStream(uint32* pdwMode, uint32 dwFlag, char16* lpFallBack, uint32 dwSrcEncoding, uint32 dwDstEncoding, ref IStream pstmIn, ref IStream pstmOut) mut => VT.ConvertStringInIStream(ref this, pdwMode, dwFlag, lpFallBack, dwSrcEncoding, dwDstEncoding, ref pstmIn, ref pstmOut);
+			public HResult ConvertStringToUnicodeEx(uint32* pdwMode, uint32 dwEncoding, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize, uint32 dwFlag, char16* lpFallBack) mut => VT.ConvertStringToUnicodeEx(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize, dwFlag, lpFallBack);
+			public HResult ConvertStringFromUnicodeEx(uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize, uint32 dwFlag, char16* lpFallBack) mut => VT.ConvertStringFromUnicodeEx(ref this, pdwMode, dwEncoding, pSrcStr, pcSrcSize, pDstStr, pcDstSize, dwFlag, lpFallBack);
+			public HResult DetectCodepageInIStream(uint32 dwFlag, uint32 dwPrefWinCodePage, ref IStream pstmIn, out DetectEncodingInfo lpEncoding, out int32 pnScores) mut => VT.DetectCodepageInIStream(ref this, dwFlag, dwPrefWinCodePage, ref pstmIn, out lpEncoding, out pnScores);
+			public HResult DetectInputCodepage(uint32 dwFlag, uint32 dwPrefWinCodePage, char8* pSrcStr, out int32 pcSrcSize, out DetectEncodingInfo lpEncoding, out int32 pnScores) mut => VT.DetectInputCodepage(ref this, dwFlag, dwPrefWinCodePage, pSrcStr, out pcSrcSize, out lpEncoding, out pnScores);
+			public HResult ValidateCodePage(uint32 uiCodePage, HWnd hwnd) mut => VT.ValidateCodePage(ref this, uiCodePage, hwnd);
+			public HResult GetCodePageDescription(uint32 uiCodePage, uint32 lcid, char16* lpWideCharStr, int32 cchWideChar) mut => VT.GetCodePageDescription(ref this, uiCodePage, lcid, lpWideCharStr, cchWideChar);
+			public HResult IsCodePageInstallable(uint32 uiCodePage) mut => VT.IsCodePageInstallable(ref this, uiCodePage);
+			public HResult SetMimeDBSource(MIMECONTF dwSource) mut => VT.SetMimeDBSource(ref this, dwSource);
+			public HResult GetNumberOfScripts(out uint32 pnScripts) mut => VT.GetNumberOfScripts(ref this, out pnScripts);
+			public HResult EnumScripts(uint32 dwFlags, uint16 LangId, out IEnumScript* ppEnumScript) mut => VT.EnumScripts(ref this, dwFlags, LangId, out ppEnumScript);
+			public HResult ValidateCodePageEx(uint32 uiCodePage, HWnd hwnd, uint32 dwfIODControl) mut => VT.ValidateCodePageEx(ref this, uiCodePage, hwnd, dwfIODControl);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, out uint32 pcCodePage) GetNumberOfCodePageInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiCodePage, uint16 LangId, out MIMECPINFO pCodePageInfo) GetCodePageInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiCodePage, out uint32 puiFamilyCodePage) GetFamilyCodePage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 grfFlags, uint16 LangId, out IEnumCodePage* ppEnumCodePage) EnumCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, BSTR Charset, out MIMECSETINFO pCharsetInfo) GetCharsetInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 dwSrcEncoding, uint32 dwDstEncoding) IsConvertible;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) ConvertString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) ConvertStringToUnicode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize) ConvertStringFromUnicode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self) ConvertStringReset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 Locale, out BSTR pbstrRfc1766) GetRfc1766FromLcid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, out uint32 pLocale, BSTR bstrRfc1766) GetLcidFromRfc1766;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint16 LangId, out IEnumRfc1766* ppEnumRfc1766) EnumRfc1766;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 Locale, uint16 LangId, out RFC1766INFO pRfc1766Info) GetRfc1766Info;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) CreateConvertCharset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwFlag, PWSTR lpFallBack, uint32 dwSrcEncoding, uint32 dwDstEncoding, ref IStream pstmIn, ref IStream pstmOut) ConvertStringInIStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, PSTR pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize, uint32 dwFlag, PWSTR lpFallBack) ConvertStringToUnicodeEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, PSTR pDstStr, uint32* pcDstSize, uint32 dwFlag, PWSTR lpFallBack) ConvertStringFromUnicodeEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 dwFlag, uint32 dwPrefWinCodePage, ref IStream pstmIn, out DetectEncodingInfo lpEncoding, out int32 pnScores) DetectCodepageInIStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 dwFlag, uint32 dwPrefWinCodePage, PSTR pSrcStr, out int32 pcSrcSize, out DetectEncodingInfo lpEncoding, out int32 pnScores) DetectInputCodepage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiCodePage, HWND hwnd) ValidateCodePage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiCodePage, uint32 lcid, char16* lpWideCharStr, int32 cchWideChar) GetCodePageDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiCodePage) IsCodePageInstallable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, MIMECONTF dwSource) SetMimeDBSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, out uint32 pnScripts) GetNumberOfScripts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 dwFlags, uint16 LangId, out IEnumScript* ppEnumScript) EnumScripts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage2 self, uint32 uiCodePage, HWND hwnd, uint32 dwfIODControl) ValidateCodePageEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, out uint32 pcCodePage) GetNumberOfCodePageInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiCodePage, uint16 LangId, out MIMECPINFO pCodePageInfo) GetCodePageInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiCodePage, out uint32 puiFamilyCodePage) GetFamilyCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 grfFlags, uint16 LangId, out IEnumCodePage* ppEnumCodePage) EnumCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, char16* Charset, out MIMECSETINFO pCharsetInfo) GetCharsetInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 dwSrcEncoding, uint32 dwDstEncoding) IsConvertible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwSrcEncoding, uint32 dwDstEncoding, uint8* pSrcStr, uint32* pcSrcSize, uint8* pDstStr, uint32* pcDstSize) ConvertString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize) ConvertStringToUnicode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize) ConvertStringFromUnicode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self) ConvertStringReset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 Locale, out char16* pbstrRfc1766) GetRfc1766FromLcid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, out uint32 pLocale, char16* bstrRfc1766) GetLcidFromRfc1766;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint16 LangId, out IEnumRfc1766* ppEnumRfc1766) EnumRfc1766;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 Locale, uint16 LangId, out RFC1766INFO pRfc1766Info) GetRfc1766Info;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiSrcCodePage, uint32 uiDstCodePage, uint32 dwProperty, out IMLangConvertCharset* ppMLangConvertCharset) CreateConvertCharset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwFlag, char16* lpFallBack, uint32 dwSrcEncoding, uint32 dwDstEncoding, ref IStream pstmIn, ref IStream pstmOut) ConvertStringInIStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, char8* pSrcStr, uint32* pcSrcSize, char16* pDstStr, uint32* pcDstSize, uint32 dwFlag, char16* lpFallBack) ConvertStringToUnicodeEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32* pdwMode, uint32 dwEncoding, char16* pSrcStr, uint32* pcSrcSize, char8* pDstStr, uint32* pcDstSize, uint32 dwFlag, char16* lpFallBack) ConvertStringFromUnicodeEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 dwFlag, uint32 dwPrefWinCodePage, ref IStream pstmIn, out DetectEncodingInfo lpEncoding, out int32 pnScores) DetectCodepageInIStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 dwFlag, uint32 dwPrefWinCodePage, char8* pSrcStr, out int32 pcSrcSize, out DetectEncodingInfo lpEncoding, out int32 pnScores) DetectInputCodepage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiCodePage, HWnd hwnd) ValidateCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiCodePage, uint32 lcid, char16* lpWideCharStr, int32 cchWideChar) GetCodePageDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiCodePage) IsCodePageInstallable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, MIMECONTF dwSource) SetMimeDBSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, out uint32 pnScripts) GetNumberOfScripts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 dwFlags, uint16 LangId, out IEnumScript* ppEnumScript) EnumScripts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage2 self, uint32 uiCodePage, HWnd hwnd, uint32 dwfIODControl) ValidateCodePageEx;
 			}
 		}
 		[CRepr]
@@ -4747,18 +4752,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCharCodePages(char16 chSrc, out uint32 pdwCodePages) mut => VT.GetCharCodePages(ref this, chSrc, out pdwCodePages);
-			public HRESULT GetStrCodePages(char16* pszSrc, int32 cchSrc, uint32 dwPriorityCodePages, uint32* pdwCodePages, int32* pcchCodePages) mut => VT.GetStrCodePages(ref this, pszSrc, cchSrc, dwPriorityCodePages, pdwCodePages, pcchCodePages);
-			public HRESULT CodePageToCodePages(uint32 uCodePage, out uint32 pdwCodePages) mut => VT.CodePageToCodePages(ref this, uCodePage, out pdwCodePages);
-			public HRESULT CodePagesToCodePage(uint32 dwCodePages, uint32 uDefaultCodePage, out uint32 puCodePage) mut => VT.CodePagesToCodePage(ref this, dwCodePages, uDefaultCodePage, out puCodePage);
+			public HResult GetCharCodePages(char16 chSrc, out uint32 pdwCodePages) mut => VT.GetCharCodePages(ref this, chSrc, out pdwCodePages);
+			public HResult GetStrCodePages(char16* pszSrc, int32 cchSrc, uint32 dwPriorityCodePages, uint32* pdwCodePages, int32* pcchCodePages) mut => VT.GetStrCodePages(ref this, pszSrc, cchSrc, dwPriorityCodePages, pdwCodePages, pcchCodePages);
+			public HResult CodePageToCodePages(uint32 uCodePage, out uint32 pdwCodePages) mut => VT.CodePageToCodePages(ref this, uCodePage, out pdwCodePages);
+			public HResult CodePagesToCodePage(uint32 dwCodePages, uint32 uDefaultCodePage, out uint32 puCodePage) mut => VT.CodePagesToCodePage(ref this, dwCodePages, uDefaultCodePage, out puCodePage);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangCodePages self, char16 chSrc, out uint32 pdwCodePages) GetCharCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangCodePages self, char16* pszSrc, int32 cchSrc, uint32 dwPriorityCodePages, uint32* pdwCodePages, int32* pcchCodePages) GetStrCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangCodePages self, uint32 uCodePage, out uint32 pdwCodePages) CodePageToCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangCodePages self, uint32 dwCodePages, uint32 uDefaultCodePage, out uint32 puCodePage) CodePagesToCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangCodePages self, char16 chSrc, out uint32 pdwCodePages) GetCharCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangCodePages self, char16* pszSrc, int32 cchSrc, uint32 dwPriorityCodePages, uint32* pdwCodePages, int32* pcchCodePages) GetStrCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangCodePages self, uint32 uCodePage, out uint32 pdwCodePages) CodePageToCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangCodePages self, uint32 dwCodePages, uint32 uDefaultCodePage, out uint32 puCodePage) CodePagesToCodePage;
 			}
 		}
 		[CRepr]
@@ -4768,18 +4773,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontCodePages(HDC hDC, HFONT hFont, uint32* pdwCodePages) mut => VT.GetFontCodePages(ref this, hDC, hFont, pdwCodePages);
-			public HRESULT MapFont(HDC hDC, uint32 dwCodePages, HFONT hSrcFont, HFONT* phDestFont) mut => VT.MapFont(ref this, hDC, dwCodePages, hSrcFont, phDestFont);
-			public HRESULT ReleaseFont(HFONT hFont) mut => VT.ReleaseFont(ref this, hFont);
-			public HRESULT ResetFontMapping() mut => VT.ResetFontMapping(ref this);
+			public HResult GetFontCodePages(HDC hDC, HFONT hFont, uint32* pdwCodePages) mut => VT.GetFontCodePages(ref this, hDC, hFont, pdwCodePages);
+			public HResult MapFont(HDC hDC, uint32 dwCodePages, HFONT hSrcFont, HFONT* phDestFont) mut => VT.MapFont(ref this, hDC, dwCodePages, hSrcFont, phDestFont);
+			public HResult ReleaseFont(HFONT hFont) mut => VT.ReleaseFont(ref this, hFont);
+			public HResult ResetFontMapping() mut => VT.ResetFontMapping(ref this);
 
 			[CRepr]
 			public struct VTable : IMLangCodePages.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink self, HDC hDC, HFONT hFont, uint32* pdwCodePages) GetFontCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink self, HDC hDC, uint32 dwCodePages, HFONT hSrcFont, HFONT* phDestFont) MapFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink self, HFONT hFont) ReleaseFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink self) ResetFontMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink self, HDC hDC, HFONT hFont, uint32* pdwCodePages) GetFontCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink self, HDC hDC, uint32 dwCodePages, HFONT hSrcFont, HFONT* phDestFont) MapFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink self, HFONT hFont) ReleaseFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink self) ResetFontMapping;
 			}
 		}
 		[CRepr]
@@ -4789,24 +4794,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFontCodePages(HDC hDC, HFONT hFont, uint32* pdwCodePages) mut => VT.GetFontCodePages(ref this, hDC, hFont, pdwCodePages);
-			public HRESULT ReleaseFont(HFONT hFont) mut => VT.ReleaseFont(ref this, hFont);
-			public HRESULT ResetFontMapping() mut => VT.ResetFontMapping(ref this);
-			public HRESULT MapFont(HDC hDC, uint32 dwCodePages, char16 chSrc, HFONT* pFont) mut => VT.MapFont(ref this, hDC, dwCodePages, chSrc, pFont);
-			public HRESULT GetFontUnicodeRanges(HDC hDC, ref uint32 puiRanges, UNICODERANGE* pUranges) mut => VT.GetFontUnicodeRanges(ref this, hDC, ref puiRanges, pUranges);
-			public HRESULT GetScriptFontInfo(uint8 sid, uint32 dwFlags, out uint32 puiFonts, tagSCRIPFONTINFO* pScriptFont) mut => VT.GetScriptFontInfo(ref this, sid, dwFlags, out puiFonts, pScriptFont);
-			public HRESULT CodePageToScriptID(uint32 uiCodePage, out uint8 pSid) mut => VT.CodePageToScriptID(ref this, uiCodePage, out pSid);
+			public HResult GetFontCodePages(HDC hDC, HFONT hFont, uint32* pdwCodePages) mut => VT.GetFontCodePages(ref this, hDC, hFont, pdwCodePages);
+			public HResult ReleaseFont(HFONT hFont) mut => VT.ReleaseFont(ref this, hFont);
+			public HResult ResetFontMapping() mut => VT.ResetFontMapping(ref this);
+			public HResult MapFont(HDC hDC, uint32 dwCodePages, char16 chSrc, HFONT* pFont) mut => VT.MapFont(ref this, hDC, dwCodePages, chSrc, pFont);
+			public HResult GetFontUnicodeRanges(HDC hDC, ref uint32 puiRanges, UNICODERANGE* pUranges) mut => VT._GetFontUnicodeRanges(ref this, hDC, ref puiRanges, pUranges);
+			public HResult GetScriptFontInfo(uint8 sid, uint32 dwFlags, out uint32 puiFonts, tagSCRIPFONTINFO* pScriptFont) mut => VT.GetScriptFontInfo(ref this, sid, dwFlags, out puiFonts, pScriptFont);
+			public HResult CodePageToScriptID(uint32 uiCodePage, out uint8 pSid) mut => VT.CodePageToScriptID(ref this, uiCodePage, out pSid);
 
 			[CRepr]
 			public struct VTable : IMLangCodePages.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self, HDC hDC, HFONT hFont, uint32* pdwCodePages) GetFontCodePages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self, HFONT hFont) ReleaseFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self) ResetFontMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self, HDC hDC, uint32 dwCodePages, char16 chSrc, HFONT* pFont) MapFont;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self, HDC hDC, ref uint32 puiRanges, UNICODERANGE* pUranges) GetFontUnicodeRanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self, uint8 sid, uint32 dwFlags, out uint32 puiFonts, tagSCRIPFONTINFO* pScriptFont) GetScriptFontInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLangFontLink2 self, uint32 uiCodePage, out uint8 pSid) CodePageToScriptID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self, HDC hDC, HFONT hFont, uint32* pdwCodePages) GetFontCodePages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self, HFONT hFont) ReleaseFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self) ResetFontMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self, HDC hDC, uint32 dwCodePages, char16 chSrc, HFONT* pFont) MapFont;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self, HDC hDC, ref uint32 puiRanges, UNICODERANGE* pUranges) _GetFontUnicodeRanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self, uint8 sid, uint32 dwFlags, out uint32 puiFonts, tagSCRIPFONTINFO* pScriptFont) GetScriptFontInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLangFontLink2 self, uint32 uiCodePage, out uint8 pSid) CodePageToScriptID;
 			}
 		}
 		[CRepr]
@@ -4816,14 +4821,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DetectOutboundCodePage(uint32 dwFlags, char16* lpWideCharStr, uint32 cchWideChar, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, PWSTR lpSpecialChar) mut => VT.DetectOutboundCodePage(ref this, dwFlags, lpWideCharStr, cchWideChar, puiPreferredCodePages, nPreferredCodePages, puiDetectedCodePages, out pnDetectedCodePages, lpSpecialChar);
-			public HRESULT DetectOutboundCodePageInIStream(uint32 dwFlags, ref IStream pStrIn, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, PWSTR lpSpecialChar) mut => VT.DetectOutboundCodePageInIStream(ref this, dwFlags, ref pStrIn, puiPreferredCodePages, nPreferredCodePages, puiDetectedCodePages, out pnDetectedCodePages, lpSpecialChar);
+			public HResult DetectOutboundCodePage(uint32 dwFlags, char16* lpWideCharStr, uint32 cchWideChar, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, char16* lpSpecialChar) mut => VT.DetectOutboundCodePage(ref this, dwFlags, lpWideCharStr, cchWideChar, puiPreferredCodePages, nPreferredCodePages, puiDetectedCodePages, out pnDetectedCodePages, lpSpecialChar);
+			public HResult DetectOutboundCodePageInIStream(uint32 dwFlags, ref IStream pStrIn, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, char16* lpSpecialChar) mut => VT.DetectOutboundCodePageInIStream(ref this, dwFlags, ref pStrIn, puiPreferredCodePages, nPreferredCodePages, puiDetectedCodePages, out pnDetectedCodePages, lpSpecialChar);
 
 			[CRepr]
 			public struct VTable : IMultiLanguage2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage3 self, uint32 dwFlags, char16* lpWideCharStr, uint32 cchWideChar, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, PWSTR lpSpecialChar) DetectOutboundCodePage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiLanguage3 self, uint32 dwFlags, ref IStream pStrIn, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, PWSTR lpSpecialChar) DetectOutboundCodePageInIStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage3 self, uint32 dwFlags, char16* lpWideCharStr, uint32 cchWideChar, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, char16* lpSpecialChar) DetectOutboundCodePage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiLanguage3 self, uint32 dwFlags, ref IStream pStrIn, uint32* puiPreferredCodePages, uint32 nPreferredCodePages, uint32* puiDetectedCodePages, out uint32 pnDetectedCodePages, char16* lpSpecialChar) DetectOutboundCodePageInIStream;
 			}
 		}
 		
@@ -4834,135 +4839,135 @@ namespace Win32
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetTextCharsetInfo(HDC hdc, FONTSIGNATURE* lpSig, uint32 dwFlags);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TranslateCharsetInfo(out uint32 lpSrc, out CHARSETINFO lpCs, TRANSLATE_CHARSET_INFO_FLAGS dwFlags);
+		public static extern IntBool TranslateCharsetInfo(out uint32 lpSrc, out CHARSETINFO lpCs, TRANSLATE_CHARSET_INFO_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetDateFormatA(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpDate, PSTR lpFormat, uint8* lpDateStr, int32 cchDate);
+		public static extern int32 GetDateFormatA(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpDate, char8* lpFormat, uint8* lpDateStr, int32 cchDate);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetDateFormatW(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpDate, PWSTR lpFormat, char16* lpDateStr, int32 cchDate);
+		public static extern int32 GetDateFormatW(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpDate, char16* lpFormat, char16* lpDateStr, int32 cchDate);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetTimeFormatA(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpTime, PSTR lpFormat, uint8* lpTimeStr, int32 cchTime);
+		public static extern int32 GetTimeFormatA(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpTime, char8* lpFormat, uint8* lpTimeStr, int32 cchTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetTimeFormatW(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpTime, PWSTR lpFormat, char16* lpTimeStr, int32 cchTime);
+		public static extern int32 GetTimeFormatW(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpTime, char16* lpFormat, char16* lpTimeStr, int32 cchTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetTimeFormatEx(PWSTR lpLocaleName, TIME_FORMAT_FLAGS dwFlags, SYSTEMTIME* lpTime, PWSTR lpFormat, char16* lpTimeStr, int32 cchTime);
+		public static extern int32 GetTimeFormatEx(char16* lpLocaleName, TIME_FORMAT_FLAGS dwFlags, SYSTEMTIME* lpTime, char16* lpFormat, char16* lpTimeStr, int32 cchTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetDateFormatEx(PWSTR lpLocaleName, ENUM_DATE_FORMATS_FLAGS dwFlags, SYSTEMTIME* lpDate, PWSTR lpFormat, char16* lpDateStr, int32 cchDate, PWSTR lpCalendar);
+		public static extern int32 GetDateFormatEx(char16* lpLocaleName, ENUM_DATE_FORMATS_FLAGS dwFlags, SYSTEMTIME* lpDate, char16* lpFormat, char16* lpDateStr, int32 cchDate, char16* lpCalendar);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetDurationFormatEx(PWSTR lpLocaleName, uint32 dwFlags, SYSTEMTIME* lpDuration, uint64 ullDuration, PWSTR lpFormat, char16* lpDurationStr, int32 cchDuration);
+		public static extern int32 GetDurationFormatEx(char16* lpLocaleName, uint32 dwFlags, SYSTEMTIME* lpDuration, uint64 ullDuration, char16* lpFormat, char16* lpDurationStr, int32 cchDuration);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 CompareStringEx(PWSTR lpLocaleName, COMPARE_STRING_FLAGS dwCmpFlags, char16* lpString1, int32 cchCount1, char16* lpString2, int32 cchCount2, out NLSVERSIONINFO lpVersionInformation, void* lpReserved, LPARAM lParam);
+		public static extern int32 CompareStringEx(char16* lpLocaleName, COMPARE_STRING_FLAGS dwCmpFlags, char16* lpString1, int32 cchCount1, char16* lpString2, int32 cchCount2, out NLSVERSIONINFO lpVersionInformation, void* lpReserved, LPARAM lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 CompareStringOrdinal(char16* lpString1, int32 cchCount1, char16* lpString2, int32 cchCount2, BOOL bIgnoreCase);
+		public static extern int32 CompareStringOrdinal(char16* lpString1, int32 cchCount1, char16* lpString2, int32 cchCount2, IntBool bIgnoreCase);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 CompareStringW(uint32 Locale, uint32 dwCmpFlags, char16* lpString1, int32 cchCount1, char16* lpString2, int32 cchCount2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 FoldStringW(FOLD_STRING_MAP_FLAGS dwMapFlags, char16* lpSrcStr, int32 cchSrc, char16* lpDestStr, int32 cchDest);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetStringTypeExW(uint32 Locale, uint32 dwInfoType, char16* lpSrcStr, int32 cchSrc, uint16* lpCharType);
+		public static extern IntBool GetStringTypeExW(uint32 Locale, uint32 dwInfoType, char16* lpSrcStr, int32 cchSrc, uint16* lpCharType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetStringTypeW(uint32 dwInfoType, char16* lpSrcStr, int32 cchSrc, out uint16 lpCharType);
+		public static extern IntBool GetStringTypeW(uint32 dwInfoType, char16* lpSrcStr, int32 cchSrc, out uint16 lpCharType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 MultiByteToWideChar(uint32 CodePage, MULTI_BYTE_TO_WIDE_CHAR_FLAGS dwFlags, uint8* lpMultiByteStr, int32 cbMultiByte, char16* lpWideCharStr, int32 cchWideChar);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 WideCharToMultiByte(uint32 CodePage, uint32 dwFlags, char16* lpWideCharStr, int32 cchWideChar, PSTR lpMultiByteStr, int32 cbMultiByte, PSTR lpDefaultChar, int32* lpUsedDefaultChar);
+		public static extern int32 WideCharToMultiByte(uint32 CodePage, uint32 dwFlags, char16* lpWideCharStr, int32 cchWideChar, char8* lpMultiByteStr, int32 cbMultiByte, char8* lpDefaultChar, int32* lpUsedDefaultChar);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsValidCodePage(uint32 CodePage);
+		public static extern IntBool IsValidCodePage(uint32 CodePage);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetACP();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetOEMCP();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCPInfo(uint32 CodePage, out CPINFO lpCPInfo);
+		public static extern IntBool GetCPInfo(uint32 CodePage, out CPINFO lpCPInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCPInfoExA(uint32 CodePage, uint32 dwFlags, out CPINFOEXA lpCPInfoEx);
+		public static extern IntBool GetCPInfoExA(uint32 CodePage, uint32 dwFlags, out CPINFOEXA lpCPInfoEx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCPInfoExW(uint32 CodePage, uint32 dwFlags, out CPINFOEXW lpCPInfoEx);
+		public static extern IntBool GetCPInfoExW(uint32 CodePage, uint32 dwFlags, out CPINFOEXW lpCPInfoEx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 CompareStringA(uint32 Locale, uint32 dwCmpFlags, int8* lpString1, int32 cchCount1, int8* lpString2, int32 cchCount2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 FindNLSString(uint32 Locale, uint32 dwFindNLSStringFlags, char16* lpStringSource, int32 cchSource, char16* lpStringValue, int32 cchValue, int32* pcchFound);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 LCMapStringW(uint32 Locale, uint32 dwMapFlags, char16* lpSrcStr, int32 cchSrc, PWSTR lpDestStr, int32 cchDest);
+		public static extern int32 LCMapStringW(uint32 Locale, uint32 dwMapFlags, char16* lpSrcStr, int32 cchSrc, char16* lpDestStr, int32 cchDest);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 LCMapStringA(uint32 Locale, uint32 dwMapFlags, uint8* lpSrcStr, int32 cchSrc, PSTR lpDestStr, int32 cchDest);
+		public static extern int32 LCMapStringA(uint32 Locale, uint32 dwMapFlags, uint8* lpSrcStr, int32 cchSrc, char8* lpDestStr, int32 cchDest);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetLocaleInfoW(uint32 Locale, uint32 LCType, char16* lpLCData, int32 cchData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetLocaleInfoA(uint32 Locale, uint32 LCType, uint8* lpLCData, int32 cchData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetLocaleInfoA(uint32 Locale, uint32 LCType, PSTR lpLCData);
+		public static extern IntBool SetLocaleInfoA(uint32 Locale, uint32 LCType, char8* lpLCData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetLocaleInfoW(uint32 Locale, uint32 LCType, PWSTR lpLCData);
+		public static extern IntBool SetLocaleInfoW(uint32 Locale, uint32 LCType, char16* lpLCData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetCalendarInfoA(uint32 Locale, uint32 Calendar, uint32 CalType, uint8* lpCalData, int32 cchData, uint32* lpValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetCalendarInfoW(uint32 Locale, uint32 Calendar, uint32 CalType, char16* lpCalData, int32 cchData, uint32* lpValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetCalendarInfoA(uint32 Locale, uint32 Calendar, uint32 CalType, PSTR lpCalData);
+		public static extern IntBool SetCalendarInfoA(uint32 Locale, uint32 Calendar, uint32 CalType, char8* lpCalData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetCalendarInfoW(uint32 Locale, uint32 Calendar, uint32 CalType, PWSTR lpCalData);
+		public static extern IntBool SetCalendarInfoW(uint32 Locale, uint32 Calendar, uint32 CalType, char16* lpCalData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsDBCSLeadByte(uint8 TestChar);
+		public static extern IntBool IsDBCSLeadByte(uint8 TestChar);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsDBCSLeadByteEx(uint32 CodePage, uint8 TestChar);
+		public static extern IntBool IsDBCSLeadByteEx(uint32 CodePage, uint8 TestChar);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 LocaleNameToLCID(PWSTR lpName, uint32 dwFlags);
+		public static extern uint32 LocaleNameToLCID(char16* lpName, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 LCIDToLocaleName(uint32 Locale, char16* lpName, int32 cchName, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetDurationFormat(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpDuration, uint64 ullDuration, PWSTR lpFormat, char16* lpDurationStr, int32 cchDuration);
+		public static extern int32 GetDurationFormat(uint32 Locale, uint32 dwFlags, SYSTEMTIME* lpDuration, uint64 ullDuration, char16* lpFormat, char16* lpDurationStr, int32 cchDuration);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetNumberFormatA(uint32 Locale, uint32 dwFlags, PSTR lpValue, NUMBERFMTA* lpFormat, uint8* lpNumberStr, int32 cchNumber);
+		public static extern int32 GetNumberFormatA(uint32 Locale, uint32 dwFlags, char8* lpValue, NUMBERFMTA* lpFormat, uint8* lpNumberStr, int32 cchNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetNumberFormatW(uint32 Locale, uint32 dwFlags, PWSTR lpValue, NUMBERFMTW* lpFormat, char16* lpNumberStr, int32 cchNumber);
+		public static extern int32 GetNumberFormatW(uint32 Locale, uint32 dwFlags, char16* lpValue, NUMBERFMTW* lpFormat, char16* lpNumberStr, int32 cchNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetCurrencyFormatA(uint32 Locale, uint32 dwFlags, PSTR lpValue, CURRENCYFMTA* lpFormat, uint8* lpCurrencyStr, int32 cchCurrency);
+		public static extern int32 GetCurrencyFormatA(uint32 Locale, uint32 dwFlags, char8* lpValue, CURRENCYFMTA* lpFormat, uint8* lpCurrencyStr, int32 cchCurrency);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetCurrencyFormatW(uint32 Locale, uint32 dwFlags, PWSTR lpValue, CURRENCYFMTW* lpFormat, char16* lpCurrencyStr, int32 cchCurrency);
+		public static extern int32 GetCurrencyFormatW(uint32 Locale, uint32 dwFlags, char16* lpValue, CURRENCYFMTW* lpFormat, char16* lpCurrencyStr, int32 cchCurrency);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumCalendarInfoA(CALINFO_ENUMPROCA lpCalInfoEnumProc, uint32 Locale, uint32 Calendar, uint32 CalType);
+		public static extern IntBool EnumCalendarInfoA(CALINFO_ENUMPROCA lpCalInfoEnumProc, uint32 Locale, uint32 Calendar, uint32 CalType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumCalendarInfoW(CALINFO_ENUMPROCW lpCalInfoEnumProc, uint32 Locale, uint32 Calendar, uint32 CalType);
+		public static extern IntBool EnumCalendarInfoW(CALINFO_ENUMPROCW lpCalInfoEnumProc, uint32 Locale, uint32 Calendar, uint32 CalType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumCalendarInfoExA(CALINFO_ENUMPROCEXA lpCalInfoEnumProcEx, uint32 Locale, uint32 Calendar, uint32 CalType);
+		public static extern IntBool EnumCalendarInfoExA(CALINFO_ENUMPROCEXA lpCalInfoEnumProcEx, uint32 Locale, uint32 Calendar, uint32 CalType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumCalendarInfoExW(CALINFO_ENUMPROCEXW lpCalInfoEnumProcEx, uint32 Locale, uint32 Calendar, uint32 CalType);
+		public static extern IntBool EnumCalendarInfoExW(CALINFO_ENUMPROCEXW lpCalInfoEnumProcEx, uint32 Locale, uint32 Calendar, uint32 CalType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumTimeFormatsA(TIMEFMT_ENUMPROCA lpTimeFmtEnumProc, uint32 Locale, TIME_FORMAT_FLAGS dwFlags);
+		public static extern IntBool EnumTimeFormatsA(TIMEFMT_ENUMPROCA lpTimeFmtEnumProc, uint32 Locale, TIME_FORMAT_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumTimeFormatsW(TIMEFMT_ENUMPROCW lpTimeFmtEnumProc, uint32 Locale, TIME_FORMAT_FLAGS dwFlags);
+		public static extern IntBool EnumTimeFormatsW(TIMEFMT_ENUMPROCW lpTimeFmtEnumProc, uint32 Locale, TIME_FORMAT_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumDateFormatsA(DATEFMT_ENUMPROCA lpDateFmtEnumProc, uint32 Locale, uint32 dwFlags);
+		public static extern IntBool EnumDateFormatsA(DATEFMT_ENUMPROCA lpDateFmtEnumProc, uint32 Locale, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumDateFormatsW(DATEFMT_ENUMPROCW lpDateFmtEnumProc, uint32 Locale, uint32 dwFlags);
+		public static extern IntBool EnumDateFormatsW(DATEFMT_ENUMPROCW lpDateFmtEnumProc, uint32 Locale, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumDateFormatsExA(DATEFMT_ENUMPROCEXA lpDateFmtEnumProcEx, uint32 Locale, uint32 dwFlags);
+		public static extern IntBool EnumDateFormatsExA(DATEFMT_ENUMPROCEXA lpDateFmtEnumProcEx, uint32 Locale, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumDateFormatsExW(DATEFMT_ENUMPROCEXW lpDateFmtEnumProcEx, uint32 Locale, uint32 dwFlags);
+		public static extern IntBool EnumDateFormatsExW(DATEFMT_ENUMPROCEXW lpDateFmtEnumProcEx, uint32 Locale, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsValidLanguageGroup(uint32 LanguageGroup, ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS dwFlags);
+		public static extern IntBool IsValidLanguageGroup(uint32 LanguageGroup, ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNLSVersion(uint32 Function, uint32 Locale, out NLSVERSIONINFO lpVersionInformation);
+		public static extern IntBool GetNLSVersion(uint32 Function, uint32 Locale, out NLSVERSIONINFO lpVersionInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsValidLocale(uint32 Locale, IS_VALID_LOCALE_FLAGS dwFlags);
+		public static extern IntBool IsValidLocale(uint32 Locale, IS_VALID_LOCALE_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetGeoInfoA(int32 Location, uint32 GeoType, uint8* lpGeoData, int32 cchData, uint16 LangId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetGeoInfoW(int32 Location, uint32 GeoType, char16* lpGeoData, int32 cchData, uint16 LangId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetGeoInfoEx(PWSTR location, uint32 geoType, char16* geoData, int32 geoDataCount);
+		public static extern int32 GetGeoInfoEx(char16* location, uint32 geoType, char16* geoData, int32 geoDataCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemGeoID(uint32 GeoClass, int32 ParentGeoId, GEO_ENUMPROC lpGeoEnumProc);
+		public static extern IntBool EnumSystemGeoID(uint32 GeoClass, int32 ParentGeoId, GEO_ENUMPROC lpGeoEnumProc);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemGeoNames(uint32 geoClass, GEO_ENUMNAMEPROC geoEnumProc, LPARAM data);
+		public static extern IntBool EnumSystemGeoNames(uint32 geoClass, GEO_ENUMNAMEPROC geoEnumProc, LPARAM data);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetUserGeoID(uint32 GeoClass);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetUserDefaultGeoName(char16* geoName, int32 geoNameCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetUserGeoID(int32 GeoId);
+		public static extern IntBool SetUserGeoID(int32 GeoId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetUserGeoName(PWSTR geoName);
+		public static extern IntBool SetUserGeoName(char16* geoName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ConvertDefaultLocale(uint32 Locale);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -4970,7 +4975,7 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetThreadLocale();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadLocale(uint32 Locale);
+		public static extern IntBool SetThreadLocale(uint32 Locale);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 GetUserDefaultUILanguage();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -4986,55 +4991,55 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 GetThreadUILanguage();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetProcessPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
+		public static extern IntBool GetProcessPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetProcessPreferredUILanguages(uint32 dwFlags, PWSTR pwszLanguagesBuffer, uint32* pulNumLanguages);
+		public static extern IntBool SetProcessPreferredUILanguages(uint32 dwFlags, char16* pwszLanguagesBuffer, uint32* pulNumLanguages);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUserPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
+		public static extern IntBool GetUserPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetSystemPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
+		public static extern IntBool GetSystemPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetThreadPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
+		public static extern IntBool GetThreadPreferredUILanguages(uint32 dwFlags, out uint32 pulNumLanguages, char16* pwszLanguagesBuffer, out uint32 pcchLanguagesBuffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadPreferredUILanguages(uint32 dwFlags, PWSTR pwszLanguagesBuffer, uint32* pulNumLanguages);
+		public static extern IntBool SetThreadPreferredUILanguages(uint32 dwFlags, char16* pwszLanguagesBuffer, uint32* pulNumLanguages);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetFileMUIInfo(uint32 dwFlags, PWSTR pcwszFilePath, FILEMUIINFO* pFileMUIInfo, out uint32 pcbFileMUIInfo);
+		public static extern IntBool GetFileMUIInfo(uint32 dwFlags, char16* pcwszFilePath, FILEMUIINFO* pFileMUIInfo, out uint32 pcbFileMUIInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetFileMUIPath(uint32 dwFlags, PWSTR pcwszFilePath, char16* pwszLanguage, out uint32 pcchLanguage, char16* pwszFileMUIPath, out uint32 pcchFileMUIPath, out uint64 pululEnumerator);
+		public static extern IntBool GetFileMUIPath(uint32 dwFlags, char16* pcwszFilePath, char16* pwszLanguage, out uint32 pcchLanguage, char16* pwszFileMUIPath, out uint32 pcchFileMUIPath, out uint64 pululEnumerator);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUILanguageInfo(uint32 dwFlags, PWSTR pwmszLanguage, char16* pwszFallbackLanguages, uint32* pcchFallbackLanguages, out uint32 pAttributes);
+		public static extern IntBool GetUILanguageInfo(uint32 dwFlags, char16* pwmszLanguage, char16* pwszFallbackLanguages, uint32* pcchFallbackLanguages, out uint32 pAttributes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetThreadPreferredUILanguages2(uint32 flags, PWSTR languages, uint32* numLanguagesSet, HSAVEDUILANGUAGES* snapshot);
+		public static extern IntBool SetThreadPreferredUILanguages2(uint32 flags, char16* languages, uint32* numLanguagesSet, HSAVEDUILANGUAGES* snapshot);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void RestoreThreadPreferredUILanguages(HSAVEDUILANGUAGES snapshot);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL NotifyUILanguageChange(uint32 dwFlags, PWSTR pcwstrNewLanguage, PWSTR pcwstrPreviousLanguage, uint32 dwReserved, uint32* pdwStatusRtrn);
+		public static extern IntBool NotifyUILanguageChange(uint32 dwFlags, char16* pcwstrNewLanguage, char16* pcwstrPreviousLanguage, uint32 dwReserved, uint32* pdwStatusRtrn);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetStringTypeExA(uint32 Locale, uint32 dwInfoType, uint8* lpSrcStr, int32 cchSrc, uint16* lpCharType);
+		public static extern IntBool GetStringTypeExA(uint32 Locale, uint32 dwInfoType, uint8* lpSrcStr, int32 cchSrc, uint16* lpCharType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetStringTypeA(uint32 Locale, uint32 dwInfoType, uint8* lpSrcStr, int32 cchSrc, out uint16 lpCharType);
+		public static extern IntBool GetStringTypeA(uint32 Locale, uint32 dwInfoType, uint8* lpSrcStr, int32 cchSrc, out uint16 lpCharType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 FoldStringA(FOLD_STRING_MAP_FLAGS dwMapFlags, uint8* lpSrcStr, int32 cchSrc, uint8* lpDestStr, int32 cchDest);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemLocalesA(LOCALE_ENUMPROCA lpLocaleEnumProc, uint32 dwFlags);
+		public static extern IntBool EnumSystemLocalesA(LOCALE_ENUMPROCA lpLocaleEnumProc, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemLocalesW(LOCALE_ENUMPROCW lpLocaleEnumProc, uint32 dwFlags);
+		public static extern IntBool EnumSystemLocalesW(LOCALE_ENUMPROCW lpLocaleEnumProc, uint32 dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemLanguageGroupsA(LANGUAGEGROUP_ENUMPROCA lpLanguageGroupEnumProc, ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS dwFlags, int lParam);
+		public static extern IntBool EnumSystemLanguageGroupsA(LANGUAGEGROUP_ENUMPROCA lpLanguageGroupEnumProc, ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS dwFlags, int lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemLanguageGroupsW(LANGUAGEGROUP_ENUMPROCW lpLanguageGroupEnumProc, ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS dwFlags, int lParam);
+		public static extern IntBool EnumSystemLanguageGroupsW(LANGUAGEGROUP_ENUMPROCW lpLanguageGroupEnumProc, ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS dwFlags, int lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumLanguageGroupLocalesA(LANGGROUPLOCALE_ENUMPROCA lpLangGroupLocaleEnumProc, uint32 LanguageGroup, uint32 dwFlags, int lParam);
+		public static extern IntBool EnumLanguageGroupLocalesA(LANGGROUPLOCALE_ENUMPROCA lpLangGroupLocaleEnumProc, uint32 LanguageGroup, uint32 dwFlags, int lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumLanguageGroupLocalesW(LANGGROUPLOCALE_ENUMPROCW lpLangGroupLocaleEnumProc, uint32 LanguageGroup, uint32 dwFlags, int lParam);
+		public static extern IntBool EnumLanguageGroupLocalesW(LANGGROUPLOCALE_ENUMPROCW lpLangGroupLocaleEnumProc, uint32 LanguageGroup, uint32 dwFlags, int lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumUILanguagesA(UILANGUAGE_ENUMPROCA lpUILanguageEnumProc, uint32 dwFlags, int lParam);
+		public static extern IntBool EnumUILanguagesA(UILANGUAGE_ENUMPROCA lpUILanguageEnumProc, uint32 dwFlags, int lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumUILanguagesW(UILANGUAGE_ENUMPROCW lpUILanguageEnumProc, uint32 dwFlags, int lParam);
+		public static extern IntBool EnumUILanguagesW(UILANGUAGE_ENUMPROCW lpUILanguageEnumProc, uint32 dwFlags, int lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemCodePagesA(CODEPAGE_ENUMPROCA lpCodePageEnumProc, ENUM_SYSTEM_CODE_PAGES_FLAGS dwFlags);
+		public static extern IntBool EnumSystemCodePagesA(CODEPAGE_ENUMPROCA lpCodePageEnumProc, ENUM_SYSTEM_CODE_PAGES_FLAGS dwFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemCodePagesW(CODEPAGE_ENUMPROCW lpCodePageEnumProc, ENUM_SYSTEM_CODE_PAGES_FLAGS dwFlags);
+		public static extern IntBool EnumSystemCodePagesW(CODEPAGE_ENUMPROCW lpCodePageEnumProc, ENUM_SYSTEM_CODE_PAGES_FLAGS dwFlags);
 		[Import("normaliz.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 IdnToAscii(uint32 dwFlags, char16* lpUnicodeCharStr, int32 cchUnicodeChar, char16* lpASCIICharStr, int32 cchASCIIChar);
 		[Import("normaliz.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5044,93 +5049,93 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 NormalizeString(NORM_FORM NormForm, char16* lpSrcString, int32 cwSrcLength, char16* lpDstString, int32 cwDstLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsNormalizedString(NORM_FORM NormForm, char16* lpString, int32 cwLength);
+		public static extern IntBool IsNormalizedString(NORM_FORM NormForm, char16* lpString, int32 cwLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL VerifyScripts(uint32 dwFlags, PWSTR lpLocaleScripts, int32 cchLocaleScripts, PWSTR lpTestScripts, int32 cchTestScripts);
+		public static extern IntBool VerifyScripts(uint32 dwFlags, char16* lpLocaleScripts, int32 cchLocaleScripts, char16* lpTestScripts, int32 cchTestScripts);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetStringScripts(uint32 dwFlags, PWSTR lpString, int32 cchString, char16* lpScripts, int32 cchScripts);
+		public static extern int32 GetStringScripts(uint32 dwFlags, char16* lpString, int32 cchString, char16* lpScripts, int32 cchScripts);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetLocaleInfoEx(PWSTR lpLocaleName, uint32 LCType, char16* lpLCData, int32 cchData);
+		public static extern int32 GetLocaleInfoEx(char16* lpLocaleName, uint32 LCType, char16* lpLCData, int32 cchData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetCalendarInfoEx(PWSTR lpLocaleName, uint32 Calendar, PWSTR lpReserved, uint32 CalType, char16* lpCalData, int32 cchData, uint32* lpValue);
+		public static extern int32 GetCalendarInfoEx(char16* lpLocaleName, uint32 Calendar, char16* lpReserved, uint32 CalType, char16* lpCalData, int32 cchData, uint32* lpValue);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetNumberFormatEx(PWSTR lpLocaleName, uint32 dwFlags, PWSTR lpValue, NUMBERFMTW* lpFormat, char16* lpNumberStr, int32 cchNumber);
+		public static extern int32 GetNumberFormatEx(char16* lpLocaleName, uint32 dwFlags, char16* lpValue, NUMBERFMTW* lpFormat, char16* lpNumberStr, int32 cchNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 GetCurrencyFormatEx(PWSTR lpLocaleName, uint32 dwFlags, PWSTR lpValue, CURRENCYFMTW* lpFormat, char16* lpCurrencyStr, int32 cchCurrency);
+		public static extern int32 GetCurrencyFormatEx(char16* lpLocaleName, uint32 dwFlags, char16* lpValue, CURRENCYFMTW* lpFormat, char16* lpCurrencyStr, int32 cchCurrency);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetUserDefaultLocaleName(char16* lpLocaleName, int32 cchLocaleName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetSystemDefaultLocaleName(char16* lpLocaleName, int32 cchLocaleName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsNLSDefinedString(uint32 Function, uint32 dwFlags, ref NLSVERSIONINFO lpVersionInformation, char16* lpString, int32 cchStr);
+		public static extern IntBool IsNLSDefinedString(uint32 Function, uint32 dwFlags, ref NLSVERSIONINFO lpVersionInformation, char16* lpString, int32 cchStr);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNLSVersionEx(uint32 @function, PWSTR lpLocaleName, out NLSVERSIONINFOEX lpVersionInformation);
+		public static extern IntBool GetNLSVersionEx(uint32 @function, char16* lpLocaleName, out NLSVERSIONINFOEX lpVersionInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 IsValidNLSVersion(uint32 @function, PWSTR lpLocaleName, ref NLSVERSIONINFOEX lpVersionInformation);
+		public static extern uint32 IsValidNLSVersion(uint32 @function, char16* lpLocaleName, ref NLSVERSIONINFOEX lpVersionInformation);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 FindNLSStringEx(PWSTR lpLocaleName, uint32 dwFindNLSStringFlags, char16* lpStringSource, int32 cchSource, char16* lpStringValue, int32 cchValue, int32* pcchFound, NLSVERSIONINFO* lpVersionInformation, void* lpReserved, LPARAM sortHandle);
+		public static extern int32 FindNLSStringEx(char16* lpLocaleName, uint32 dwFindNLSStringFlags, char16* lpStringSource, int32 cchSource, char16* lpStringValue, int32 cchValue, int32* pcchFound, NLSVERSIONINFO* lpVersionInformation, void* lpReserved, LPARAM sortHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 LCMapStringEx(PWSTR lpLocaleName, uint32 dwMapFlags, char16* lpSrcStr, int32 cchSrc, char16* lpDestStr, int32 cchDest, NLSVERSIONINFO* lpVersionInformation, void* lpReserved, LPARAM sortHandle);
+		public static extern int32 LCMapStringEx(char16* lpLocaleName, uint32 dwMapFlags, char16* lpSrcStr, int32 cchSrc, char16* lpDestStr, int32 cchDest, NLSVERSIONINFO* lpVersionInformation, void* lpReserved, LPARAM sortHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsValidLocaleName(PWSTR lpLocaleName);
+		public static extern IntBool IsValidLocaleName(char16* lpLocaleName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumCalendarInfoExEx(CALINFO_ENUMPROCEXEX pCalInfoEnumProcExEx, PWSTR lpLocaleName, uint32 Calendar, PWSTR lpReserved, uint32 CalType, LPARAM lParam);
+		public static extern IntBool EnumCalendarInfoExEx(CALINFO_ENUMPROCEXEX pCalInfoEnumProcExEx, char16* lpLocaleName, uint32 Calendar, char16* lpReserved, uint32 CalType, LPARAM lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumDateFormatsExEx(DATEFMT_ENUMPROCEXEX lpDateFmtEnumProcExEx, PWSTR lpLocaleName, ENUM_DATE_FORMATS_FLAGS dwFlags, LPARAM lParam);
+		public static extern IntBool EnumDateFormatsExEx(DATEFMT_ENUMPROCEXEX lpDateFmtEnumProcExEx, char16* lpLocaleName, ENUM_DATE_FORMATS_FLAGS dwFlags, LPARAM lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumTimeFormatsEx(TIMEFMT_ENUMPROCEX lpTimeFmtEnumProcEx, PWSTR lpLocaleName, uint32 dwFlags, LPARAM lParam);
+		public static extern IntBool EnumTimeFormatsEx(TIMEFMT_ENUMPROCEX lpTimeFmtEnumProcEx, char16* lpLocaleName, uint32 dwFlags, LPARAM lParam);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnumSystemLocalesEx(LOCALE_ENUMPROCEX lpLocaleEnumProcEx, uint32 dwFlags, LPARAM lParam, void* lpReserved);
+		public static extern IntBool EnumSystemLocalesEx(LOCALE_ENUMPROCEX lpLocaleEnumProcEx, uint32 dwFlags, LPARAM lParam, void* lpReserved);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ResolveLocaleName(PWSTR lpNameToResolve, char16* lpLocaleName, int32 cchLocaleName);
+		public static extern int32 ResolveLocaleName(char16* lpNameToResolve, char16* lpLocaleName, int32 cchLocaleName);
 		[Import("elscore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MappingGetServices(MAPPING_ENUM_OPTIONS* pOptions, out MAPPING_SERVICE_INFO* prgServices, out uint32 pdwServicesCount);
+		public static extern HResult MappingGetServices(MAPPING_ENUM_OPTIONS* pOptions, out MAPPING_SERVICE_INFO* prgServices, out uint32 pdwServicesCount);
 		[Import("elscore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MappingFreeServices(ref MAPPING_SERVICE_INFO pServiceInfo);
+		public static extern HResult MappingFreeServices(ref MAPPING_SERVICE_INFO pServiceInfo);
 		[Import("elscore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MappingRecognizeText(ref MAPPING_SERVICE_INFO pServiceInfo, char16* pszText, uint32 dwLength, uint32 dwIndex, MAPPING_OPTIONS* pOptions, out MAPPING_PROPERTY_BAG pbag);
+		public static extern HResult MappingRecognizeText(ref MAPPING_SERVICE_INFO pServiceInfo, char16* pszText, uint32 dwLength, uint32 dwIndex, MAPPING_OPTIONS* pOptions, out MAPPING_PROPERTY_BAG pbag);
 		[Import("elscore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MappingDoAction(out MAPPING_PROPERTY_BAG pBag, uint32 dwRangeIndex, PWSTR pszActionId);
+		public static extern HResult MappingDoAction(out MAPPING_PROPERTY_BAG pBag, uint32 dwRangeIndex, char16* pszActionId);
 		[Import("elscore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MappingFreePropertyBag(ref MAPPING_PROPERTY_BAG pBag);
+		public static extern HResult MappingFreePropertyBag(ref MAPPING_PROPERTY_BAG pBag);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptFreeCache(void** psc);
+		public static extern HResult ScriptFreeCache(void** psc);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptItemize(char16* pwcInChars, int32 cInChars, int32 cMaxItems, SCRIPT_CONTROL* psControl, SCRIPT_STATE* psState, SCRIPT_ITEM* pItems, out int32 pcItems);
+		public static extern HResult ScriptItemize(char16* pwcInChars, int32 cInChars, int32 cMaxItems, SCRIPT_CONTROL* psControl, SCRIPT_STATE* psState, SCRIPT_ITEM* pItems, out int32 pcItems);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptLayout(int32 cRuns, uint8* pbLevel, int32* piVisualToLogical, int32* piLogicalToVisual);
+		public static extern HResult ScriptLayout(int32 cRuns, uint8* pbLevel, int32* piVisualToLogical, int32* piLogicalToVisual);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptShape(HDC hdc, void** psc, char16* pwcChars, int32 cChars, int32 cMaxGlyphs, out SCRIPT_ANALYSIS psa, uint16* pwOutGlyphs, out uint16 pwLogClust, SCRIPT_VISATTR* psva, out int32 pcGlyphs);
+		public static extern HResult ScriptShape(HDC hdc, void** psc, char16* pwcChars, int32 cChars, int32 cMaxGlyphs, out SCRIPT_ANALYSIS psa, uint16* pwOutGlyphs, out uint16 pwLogClust, SCRIPT_VISATTR* psva, out int32 pcGlyphs);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptPlace(HDC hdc, void** psc, uint16* pwGlyphs, int32 cGlyphs, SCRIPT_VISATTR* psva, out SCRIPT_ANALYSIS psa, out int32 piAdvance, GOFFSET* pGoffset, out ABC pABC);
+		public static extern HResult ScriptPlace(HDC hdc, void** psc, uint16* pwGlyphs, int32 cGlyphs, SCRIPT_VISATTR* psva, out SCRIPT_ANALYSIS psa, out int32 piAdvance, GOFFSET* pGoffset, out ABC pABC);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptTextOut(HDC hdc, void** psc, int32 x, int32 y, uint32 fuOptions, RECT* lprc, in SCRIPT_ANALYSIS psa, PWSTR pwcReserved, int32 iReserved, uint16* pwGlyphs, int32 cGlyphs, int32* piAdvance, int32* piJustify, GOFFSET* pGoffset);
+		public static extern HResult ScriptTextOut(HDC hdc, void** psc, int32 x, int32 y, uint32 fuOptions, RectI* lprc, in SCRIPT_ANALYSIS psa, char16* pwcReserved, int32 iReserved, uint16* pwGlyphs, int32 cGlyphs, int32* piAdvance, int32* piJustify, GOFFSET* pGoffset);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptJustify(SCRIPT_VISATTR* psva, int32* piAdvance, int32 cGlyphs, int32 iDx, int32 iMinKashida, out int32 piJustify);
+		public static extern HResult ScriptJustify(SCRIPT_VISATTR* psva, int32* piAdvance, int32 cGlyphs, int32 iDx, int32 iMinKashida, out int32 piJustify);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptBreak(char16* pwcChars, int32 cChars, in SCRIPT_ANALYSIS psa, out SCRIPT_LOGATTR psla);
+		public static extern HResult ScriptBreak(char16* pwcChars, int32 cChars, in SCRIPT_ANALYSIS psa, out SCRIPT_LOGATTR psla);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptCPtoX(int32 iCP, BOOL fTrailing, int32 cChars, int32 cGlyphs, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piAdvance, in SCRIPT_ANALYSIS psa, out int32 piX);
+		public static extern HResult ScriptCPtoX(int32 iCP, IntBool fTrailing, int32 cChars, int32 cGlyphs, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piAdvance, in SCRIPT_ANALYSIS psa, out int32 piX);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptXtoCP(int32 iX, int32 cChars, int32 cGlyphs, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piAdvance, in SCRIPT_ANALYSIS psa, out int32 piCP, out int32 piTrailing);
+		public static extern HResult ScriptXtoCP(int32 iX, int32 cChars, int32 cGlyphs, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piAdvance, in SCRIPT_ANALYSIS psa, out int32 piCP, out int32 piTrailing);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetLogicalWidths(in SCRIPT_ANALYSIS psa, int32 cChars, int32 cGlyphs, int32* piGlyphWidth, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piDx);
+		public static extern HResult ScriptGetLogicalWidths(in SCRIPT_ANALYSIS psa, int32 cChars, int32 cGlyphs, int32* piGlyphWidth, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piDx);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptApplyLogicalWidth(int32* piDx, int32 cChars, int32 cGlyphs, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piAdvance, in SCRIPT_ANALYSIS psa, ABC* pABC, out int32 piJustify);
+		public static extern HResult ScriptApplyLogicalWidth(int32* piDx, int32 cChars, int32 cGlyphs, uint16* pwLogClust, SCRIPT_VISATTR* psva, int32* piAdvance, in SCRIPT_ANALYSIS psa, ABC* pABC, out int32 piJustify);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetCMap(HDC hdc, void** psc, char16* pwcInChars, int32 cChars, uint32 dwFlags, uint16* pwOutGlyphs);
+		public static extern HResult ScriptGetCMap(HDC hdc, void** psc, char16* pwcInChars, int32 cChars, uint32 dwFlags, uint16* pwOutGlyphs);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetGlyphABCWidth(HDC hdc, void** psc, uint16 wGlyph, out ABC pABC);
+		public static extern HResult ScriptGetGlyphABCWidth(HDC hdc, void** psc, uint16 wGlyph, out ABC pABC);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetProperties(out SCRIPT_PROPERTIES** ppSp, out int32 piNumScripts);
+		public static extern HResult ScriptGetProperties(out SCRIPT_PROPERTIES** ppSp, out int32 piNumScripts);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetFontProperties(HDC hdc, void** psc, out SCRIPT_FONTPROPERTIES sfp);
+		public static extern HResult ScriptGetFontProperties(HDC hdc, void** psc, out SCRIPT_FONTPROPERTIES sfp);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptCacheGetHeight(HDC hdc, void** psc, out int32 tmHeight);
+		public static extern HResult ScriptCacheGetHeight(HDC hdc, void** psc, out int32 tmHeight);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringAnalyse(HDC hdc, void* pString, int32 cString, int32 cGlyphs, int32 iCharset, uint32 dwFlags, int32 iReqWidth, SCRIPT_CONTROL* psControl, SCRIPT_STATE* psState, int32* piDx, SCRIPT_TABDEF* pTabdef, in uint8 pbInClass, void** pssa);
+		public static extern HResult ScriptStringAnalyse(HDC hdc, void* pString, int32 cString, int32 cGlyphs, int32 iCharset, uint32 dwFlags, int32 iReqWidth, SCRIPT_CONTROL* psControl, SCRIPT_STATE* psState, int32* piDx, SCRIPT_TABDEF* pTabdef, in uint8 pbInClass, void** pssa);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringFree(void** pssa);
+		public static extern HResult ScriptStringFree(void** pssa);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern SIZE* ScriptString_pSize(void* ssa);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5138,41 +5143,41 @@ namespace Win32
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern SCRIPT_LOGATTR* ScriptString_pLogAttr(void* ssa);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringGetOrder(void* ssa, out uint32 puOrder);
+		public static extern HResult ScriptStringGetOrder(void* ssa, out uint32 puOrder);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringCPtoX(void* ssa, int32 icp, BOOL fTrailing, out int32 pX);
+		public static extern HResult ScriptStringCPtoX(void* ssa, int32 icp, IntBool fTrailing, out int32 pX);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringXtoCP(void* ssa, int32 iX, out int32 piCh, out int32 piTrailing);
+		public static extern HResult ScriptStringXtoCP(void* ssa, int32 iX, out int32 piCh, out int32 piTrailing);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringGetLogicalWidths(void* ssa, out int32 piDx);
+		public static extern HResult ScriptStringGetLogicalWidths(void* ssa, out int32 piDx);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringValidate(void* ssa);
+		public static extern HResult ScriptStringValidate(void* ssa);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptStringOut(void* ssa, int32 iX, int32 iY, ETO_OPTIONS uOptions, RECT* prc, int32 iMinSel, int32 iMaxSel, BOOL fDisabled);
+		public static extern HResult ScriptStringOut(void* ssa, int32 iX, int32 iY, ETO_OPTIONS uOptions, RectI* prc, int32 iMinSel, int32 iMaxSel, IntBool fDisabled);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptIsComplex(char16* pwcInChars, int32 cInChars, SCRIPT_IS_COMPLEX_FLAGS dwFlags);
+		public static extern HResult ScriptIsComplex(char16* pwcInChars, int32 cInChars, SCRIPT_IS_COMPLEX_FLAGS dwFlags);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptRecordDigitSubstitution(uint32 Locale, out SCRIPT_DIGITSUBSTITUTE psds);
+		public static extern HResult ScriptRecordDigitSubstitution(uint32 Locale, out SCRIPT_DIGITSUBSTITUTE psds);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptApplyDigitSubstitution(in SCRIPT_DIGITSUBSTITUTE psds, out SCRIPT_CONTROL psc, out SCRIPT_STATE pss);
+		public static extern HResult ScriptApplyDigitSubstitution(in SCRIPT_DIGITSUBSTITUTE psds, out SCRIPT_CONTROL psc, out SCRIPT_STATE pss);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptShapeOpenType(HDC hdc, void** psc, out SCRIPT_ANALYSIS psa, uint32 tagScript, uint32 tagLangSys, int32* rcRangeChars, textrange_properties** rpRangeProperties, int32 cRanges, char16* pwcChars, int32 cChars, int32 cMaxGlyphs, out uint16 pwLogClust, out script_charprop pCharProps, uint16* pwOutGlyphs, script_glyphprop* pOutGlyphProps, out int32 pcGlyphs);
+		public static extern HResult ScriptShapeOpenType(HDC hdc, void** psc, out SCRIPT_ANALYSIS psa, uint32 tagScript, uint32 tagLangSys, int32* rcRangeChars, textrange_properties** rpRangeProperties, int32 cRanges, char16* pwcChars, int32 cChars, int32 cMaxGlyphs, out uint16 pwLogClust, out script_charprop pCharProps, uint16* pwOutGlyphs, script_glyphprop* pOutGlyphProps, out int32 pcGlyphs);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptPlaceOpenType(HDC hdc, void** psc, out SCRIPT_ANALYSIS psa, uint32 tagScript, uint32 tagLangSys, int32* rcRangeChars, textrange_properties** rpRangeProperties, int32 cRanges, char16* pwcChars, uint16* pwLogClust, script_charprop* pCharProps, int32 cChars, uint16* pwGlyphs, script_glyphprop* pGlyphProps, int32 cGlyphs, out int32 piAdvance, out GOFFSET pGoffset, ABC* pABC);
+		public static extern HResult ScriptPlaceOpenType(HDC hdc, void** psc, out SCRIPT_ANALYSIS psa, uint32 tagScript, uint32 tagLangSys, int32* rcRangeChars, textrange_properties** rpRangeProperties, int32 cRanges, char16* pwcChars, uint16* pwLogClust, script_charprop* pCharProps, int32 cChars, uint16* pwGlyphs, script_glyphprop* pGlyphProps, int32 cGlyphs, out int32 piAdvance, out GOFFSET pGoffset, ABC* pABC);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptItemizeOpenType(char16* pwcInChars, int32 cInChars, int32 cMaxItems, SCRIPT_CONTROL* psControl, SCRIPT_STATE* psState, SCRIPT_ITEM* pItems, uint32* pScriptTags, out int32 pcItems);
+		public static extern HResult ScriptItemizeOpenType(char16* pwcInChars, int32 cInChars, int32 cMaxItems, SCRIPT_CONTROL* psControl, SCRIPT_STATE* psState, SCRIPT_ITEM* pItems, uint32* pScriptTags, out int32 pcItems);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetFontScriptTags(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, int32 cMaxTags, uint32* pScriptTags, out int32 pcTags);
+		public static extern HResult ScriptGetFontScriptTags(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, int32 cMaxTags, uint32* pScriptTags, out int32 pcTags);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetFontLanguageTags(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, int32 cMaxTags, uint32* pLangsysTags, out int32 pcTags);
+		public static extern HResult ScriptGetFontLanguageTags(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, int32 cMaxTags, uint32* pLangsysTags, out int32 pcTags);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetFontFeatureTags(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, int32 cMaxTags, uint32* pFeatureTags, out int32 pcTags);
+		public static extern HResult ScriptGetFontFeatureTags(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, int32 cMaxTags, uint32* pFeatureTags, out int32 pcTags);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptGetFontAlternateGlyphs(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, uint32 tagFeature, uint16 wGlyphId, int32 cMaxAlternates, uint16* pAlternateGlyphs, out int32 pcAlternates);
+		public static extern HResult ScriptGetFontAlternateGlyphs(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, uint32 tagFeature, uint16 wGlyphId, int32 cMaxAlternates, uint16* pAlternateGlyphs, out int32 pcAlternates);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptSubstituteSingleGlyph(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, uint32 tagFeature, int32 lParameter, uint16 wGlyphId, out uint16 pwOutGlyphId);
+		public static extern HResult ScriptSubstituteSingleGlyph(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, uint32 tagFeature, int32 lParameter, uint16 wGlyphId, out uint16 pwOutGlyphId);
 		[Import("usp10.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScriptPositionSingleGlyph(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, uint32 tagFeature, int32 lParameter, uint16 wGlyphId, int32 iAdvance, GOFFSET GOffset, out int32 piOutAdvance, out GOFFSET pOutGoffset);
+		public static extern HResult ScriptPositionSingleGlyph(HDC hdc, void** psc, SCRIPT_ANALYSIS* psa, uint32 tagScript, uint32 tagLangSys, uint32 tagFeature, int32 lParameter, uint16 wGlyphId, int32 iAdvance, GOFFSET GOffset, out int32 piOutAdvance, out GOFFSET pOutGoffset);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 utf8_nextCharSafeBody(in uint8 s, out int32 pi, int32 length, int32 c, int8 strict);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5182,15 +5187,15 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 utf8_back1SafeBody(in uint8 s, int32 start, int32 i);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_versionFromString(out uint8 versionArray, PSTR versionString);
+		public static extern void u_versionFromString(out uint8 versionArray, char8* versionString);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void u_versionFromUString(out uint8 versionArray, in uint16 versionString);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_versionToString(in uint8 versionArray, PSTR versionString);
+		public static extern void u_versionToString(in uint8 versionArray, char8* versionString);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void u_getVersion(out uint8 versionArray);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_errorName(UErrorCode code);
+		public static extern char8* u_errorName(UErrorCode code);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void utrace_setLevel(int32 traceLevel);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5200,19 +5205,19 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void utrace_getFunctions(void** context, out UTraceEntry e, out UTraceExit x, out UTraceData d);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 utrace_vformat(PSTR outBuf, int32 capacity, int32 indent, PSTR fmt, out int8 args);
+		public static extern int32 utrace_vformat(char8* outBuf, int32 capacity, int32 indent, char8* fmt, out int8 args);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 utrace_format(PSTR outBuf, int32 capacity, int32 indent, PSTR fmt);
+		public static extern int32 utrace_format(char8* outBuf, int32 capacity, int32 indent, char8* fmt);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR utrace_functionName(int32 fnNumber);
+		public static extern char8* utrace_functionName(int32 fnNumber);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 u_shapeArabic(in uint16 source, int32 sourceLength, out uint16 dest, int32 destSize, uint32 options, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uscript_getCode(PSTR nameOrAbbrOrLocale, out UScriptCode fillIn, int32 capacity, out UErrorCode err);
+		public static extern int32 uscript_getCode(char8* nameOrAbbrOrLocale, out UScriptCode fillIn, int32 capacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uscript_getName(UScriptCode scriptCode);
+		public static extern char8* uscript_getName(UScriptCode scriptCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uscript_getShortName(UScriptCode scriptCode);
+		public static extern char8* uscript_getShortName(UScriptCode scriptCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UScriptCode uscript_getScript(int32 codepoint, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5242,9 +5247,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uiter_setString(out UCharIterator iter, in uint16 s, int32 length);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void uiter_setUTF16BE(out UCharIterator iter, PSTR s, int32 length);
+		public static extern void uiter_setUTF16BE(out UCharIterator iter, char8* s, int32 length);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void uiter_setUTF8(out UCharIterator iter, PSTR s, int32 length);
+		public static extern void uiter_setUTF8(out UCharIterator iter, char8* s, int32 length);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uenum_close(out UEnumeration en);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5252,7 +5257,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* uenum_unext(out UEnumeration en, out int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uenum_next(out UEnumeration en, out int32 resultLength, out UErrorCode status);
+		public static extern char8* uenum_next(out UEnumeration en, out int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uenum_reset(out UEnumeration en, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5260,43 +5265,43 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* uenum_openCharStringsEnumeration(in int8* strings, int32 count, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_getDefault();
+		public static extern char8* uloc_getDefault();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void uloc_setDefault(PSTR localeID, out UErrorCode status);
+		public static extern void uloc_setDefault(char8* localeID, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getLanguage(PSTR localeID, PSTR language, int32 languageCapacity, out UErrorCode err);
+		public static extern int32 uloc_getLanguage(char8* localeID, char8* language, int32 languageCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getScript(PSTR localeID, PSTR script, int32 scriptCapacity, out UErrorCode err);
+		public static extern int32 uloc_getScript(char8* localeID, char8* script, int32 scriptCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getCountry(PSTR localeID, PSTR country, int32 countryCapacity, out UErrorCode err);
+		public static extern int32 uloc_getCountry(char8* localeID, char8* country, int32 countryCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getVariant(PSTR localeID, PSTR variant, int32 variantCapacity, out UErrorCode err);
+		public static extern int32 uloc_getVariant(char8* localeID, char8* variant, int32 variantCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getName(PSTR localeID, PSTR name, int32 nameCapacity, out UErrorCode err);
+		public static extern int32 uloc_getName(char8* localeID, char8* name, int32 nameCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_canonicalize(PSTR localeID, PSTR name, int32 nameCapacity, out UErrorCode err);
+		public static extern int32 uloc_canonicalize(char8* localeID, char8* name, int32 nameCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_getISO3Language(PSTR localeID);
+		public static extern char8* uloc_getISO3Language(char8* localeID);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_getISO3Country(PSTR localeID);
+		public static extern char8* uloc_getISO3Country(char8* localeID);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 uloc_getLCID(PSTR localeID);
+		public static extern uint32 uloc_getLCID(char8* localeID);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayLanguage(PSTR locale, PSTR displayLocale, out uint16 language, int32 languageCapacity, out UErrorCode status);
+		public static extern int32 uloc_getDisplayLanguage(char8* locale, char8* displayLocale, out uint16 language, int32 languageCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayScript(PSTR locale, PSTR displayLocale, out uint16 script, int32 scriptCapacity, out UErrorCode status);
+		public static extern int32 uloc_getDisplayScript(char8* locale, char8* displayLocale, out uint16 script, int32 scriptCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayCountry(PSTR locale, PSTR displayLocale, out uint16 country, int32 countryCapacity, out UErrorCode status);
+		public static extern int32 uloc_getDisplayCountry(char8* locale, char8* displayLocale, out uint16 country, int32 countryCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayVariant(PSTR locale, PSTR displayLocale, out uint16 variant, int32 variantCapacity, out UErrorCode status);
+		public static extern int32 uloc_getDisplayVariant(char8* locale, char8* displayLocale, out uint16 variant, int32 variantCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayKeyword(PSTR keyword, PSTR displayLocale, out uint16 dest, int32 destCapacity, out UErrorCode status);
+		public static extern int32 uloc_getDisplayKeyword(char8* keyword, char8* displayLocale, out uint16 dest, int32 destCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayKeywordValue(PSTR locale, PSTR keyword, PSTR displayLocale, out uint16 dest, int32 destCapacity, out UErrorCode status);
+		public static extern int32 uloc_getDisplayKeywordValue(char8* locale, char8* keyword, char8* displayLocale, out uint16 dest, int32 destCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getDisplayName(PSTR localeID, PSTR inLocaleID, out uint16 result, int32 maxResultSize, out UErrorCode err);
+		public static extern int32 uloc_getDisplayName(char8* localeID, char8* inLocaleID, out uint16 result, int32 maxResultSize, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_getAvailable(int32 n);
+		public static extern char8* uloc_getAvailable(int32 n);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uloc_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5306,59 +5311,59 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8** uloc_getISOCountries();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getParent(PSTR localeID, PSTR parent, int32 parentCapacity, out UErrorCode err);
+		public static extern int32 uloc_getParent(char8* localeID, char8* parent, int32 parentCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getBaseName(PSTR localeID, PSTR name, int32 nameCapacity, out UErrorCode err);
+		public static extern int32 uloc_getBaseName(char8* localeID, char8* name, int32 nameCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* uloc_openKeywords(PSTR localeID, out UErrorCode status);
+		public static extern UEnumeration* uloc_openKeywords(char8* localeID, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getKeywordValue(PSTR localeID, PSTR keywordName, PSTR buffer, int32 bufferCapacity, out UErrorCode status);
+		public static extern int32 uloc_getKeywordValue(char8* localeID, char8* keywordName, char8* buffer, int32 bufferCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_setKeywordValue(PSTR keywordName, PSTR keywordValue, PSTR buffer, int32 bufferCapacity, out UErrorCode status);
+		public static extern int32 uloc_setKeywordValue(char8* keywordName, char8* keywordValue, char8* buffer, int32 bufferCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int8 uloc_isRightToLeft(PSTR locale);
+		public static extern int8 uloc_isRightToLeft(char8* locale);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ULayoutType uloc_getCharacterOrientation(PSTR localeId, out UErrorCode status);
+		public static extern ULayoutType uloc_getCharacterOrientation(char8* localeId, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ULayoutType uloc_getLineOrientation(PSTR localeId, out UErrorCode status);
+		public static extern ULayoutType uloc_getLineOrientation(char8* localeId, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_acceptLanguageFromHTTP(PSTR result, int32 resultAvailable, out UAcceptResult outResult, PSTR httpAcceptLanguage, out UEnumeration availableLocales, out UErrorCode status);
+		public static extern int32 uloc_acceptLanguageFromHTTP(char8* result, int32 resultAvailable, out UAcceptResult outResult, char8* httpAcceptLanguage, out UEnumeration availableLocales, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_acceptLanguage(PSTR result, int32 resultAvailable, out UAcceptResult outResult, in int8* acceptList, int32 acceptListCount, out UEnumeration availableLocales, out UErrorCode status);
+		public static extern int32 uloc_acceptLanguage(char8* result, int32 resultAvailable, out UAcceptResult outResult, in int8* acceptList, int32 acceptListCount, out UEnumeration availableLocales, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_getLocaleForLCID(uint32 hostID, PSTR locale, int32 localeCapacity, out UErrorCode status);
+		public static extern int32 uloc_getLocaleForLCID(uint32 hostID, char8* locale, int32 localeCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_addLikelySubtags(PSTR localeID, PSTR maximizedLocaleID, int32 maximizedLocaleIDCapacity, out UErrorCode err);
+		public static extern int32 uloc_addLikelySubtags(char8* localeID, char8* maximizedLocaleID, int32 maximizedLocaleIDCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_minimizeSubtags(PSTR localeID, PSTR minimizedLocaleID, int32 minimizedLocaleIDCapacity, out UErrorCode err);
+		public static extern int32 uloc_minimizeSubtags(char8* localeID, char8* minimizedLocaleID, int32 minimizedLocaleIDCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_forLanguageTag(PSTR langtag, PSTR localeID, int32 localeIDCapacity, out int32 parsedLength, out UErrorCode err);
+		public static extern int32 uloc_forLanguageTag(char8* langtag, char8* localeID, int32 localeIDCapacity, out int32 parsedLength, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uloc_toLanguageTag(PSTR localeID, PSTR langtag, int32 langtagCapacity, int8 strict, out UErrorCode err);
+		public static extern int32 uloc_toLanguageTag(char8* localeID, char8* langtag, int32 langtagCapacity, int8 strict, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_toUnicodeLocaleKey(PSTR keyword);
+		public static extern char8* uloc_toUnicodeLocaleKey(char8* keyword);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_toUnicodeLocaleType(PSTR keyword, PSTR value);
+		public static extern char8* uloc_toUnicodeLocaleType(char8* keyword, char8* value);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_toLegacyKey(PSTR keyword);
+		public static extern char8* uloc_toLegacyKey(char8* keyword);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uloc_toLegacyType(PSTR keyword, PSTR value);
+		public static extern char8* uloc_toLegacyType(char8* keyword, char8* value);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UResourceBundle* ures_open(PSTR packageName, PSTR locale, out UErrorCode status);
+		public static extern UResourceBundle* ures_open(char8* packageName, char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UResourceBundle* ures_openDirect(PSTR packageName, PSTR locale, out UErrorCode status);
+		public static extern UResourceBundle* ures_openDirect(char8* packageName, char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UResourceBundle* ures_openU(in uint16 packageName, PSTR locale, out UErrorCode status);
+		public static extern UResourceBundle* ures_openU(in uint16 packageName, char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ures_close(out UResourceBundle resourceBundle);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ures_getVersion(in UResourceBundle resB, out uint8 versionInfo);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ures_getLocaleByType(in UResourceBundle resourceBundle, ULocDataLocaleType type, out UErrorCode status);
+		public static extern char8* ures_getLocaleByType(in UResourceBundle resourceBundle, ULocDataLocaleType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* ures_getString(in UResourceBundle resourceBundle, out int32 len, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ures_getUTF8String(in UResourceBundle resB, PSTR dest, out int32 length, int8 forceCopy, out UErrorCode status);
+		public static extern char8* ures_getUTF8String(in UResourceBundle resB, char8* dest, out int32 length, int8 forceCopy, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint8* ures_getBinary(in UResourceBundle resourceBundle, out int32 len, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5372,7 +5377,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UResType ures_getType(in UResourceBundle resourceBundle);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ures_getKey(in UResourceBundle resourceBundle);
+		public static extern char8* ures_getKey(in UResourceBundle resourceBundle);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ures_resetIterator(out UResourceBundle resourceBundle);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5386,53 +5391,53 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* ures_getStringByIndex(in UResourceBundle resourceBundle, int32 indexS, out int32 len, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ures_getUTF8StringByIndex(in UResourceBundle resB, int32 stringIndex, PSTR dest, out int32 pLength, int8 forceCopy, out UErrorCode status);
+		public static extern char8* ures_getUTF8StringByIndex(in UResourceBundle resB, int32 stringIndex, char8* dest, out int32 pLength, int8 forceCopy, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UResourceBundle* ures_getByKey(in UResourceBundle resourceBundle, PSTR key, out UResourceBundle fillIn, out UErrorCode status);
+		public static extern UResourceBundle* ures_getByKey(in UResourceBundle resourceBundle, char8* key, out UResourceBundle fillIn, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* ures_getStringByKey(in UResourceBundle resB, PSTR key, out int32 len, out UErrorCode status);
+		public static extern uint16* ures_getStringByKey(in UResourceBundle resB, char8* key, out int32 len, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ures_getUTF8StringByKey(in UResourceBundle resB, PSTR key, PSTR dest, out int32 pLength, int8 forceCopy, out UErrorCode status);
+		public static extern char8* ures_getUTF8StringByKey(in UResourceBundle resB, char8* key, char8* dest, out int32 pLength, int8 forceCopy, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ures_openAvailableLocales(PSTR packageName, out UErrorCode status);
+		public static extern UEnumeration* ures_openAvailableLocales(char8* packageName, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ULocaleDisplayNames* uldn_open(PSTR locale, UDialectHandling dialectHandling, out UErrorCode pErrorCode);
+		public static extern ULocaleDisplayNames* uldn_open(char8* locale, UDialectHandling dialectHandling, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uldn_close(out ULocaleDisplayNames ldn);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uldn_getLocale(in ULocaleDisplayNames ldn);
+		public static extern char8* uldn_getLocale(in ULocaleDisplayNames ldn);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UDialectHandling uldn_getDialectHandling(in ULocaleDisplayNames ldn);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_localeDisplayName(in ULocaleDisplayNames ldn, PSTR locale, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_localeDisplayName(in ULocaleDisplayNames ldn, char8* locale, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_languageDisplayName(in ULocaleDisplayNames ldn, PSTR lang, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_languageDisplayName(in ULocaleDisplayNames ldn, char8* lang, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_scriptDisplayName(in ULocaleDisplayNames ldn, PSTR script, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_scriptDisplayName(in ULocaleDisplayNames ldn, char8* script, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uldn_scriptCodeDisplayName(in ULocaleDisplayNames ldn, UScriptCode scriptCode, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_regionDisplayName(in ULocaleDisplayNames ldn, PSTR region, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_regionDisplayName(in ULocaleDisplayNames ldn, char8* region, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_variantDisplayName(in ULocaleDisplayNames ldn, PSTR variant, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_variantDisplayName(in ULocaleDisplayNames ldn, char8* variant, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_keyDisplayName(in ULocaleDisplayNames ldn, PSTR key, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_keyDisplayName(in ULocaleDisplayNames ldn, char8* key, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uldn_keyValueDisplayName(in ULocaleDisplayNames ldn, PSTR key, PSTR value, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
+		public static extern int32 uldn_keyValueDisplayName(in ULocaleDisplayNames ldn, char8* key, char8* value, out uint16 result, int32 maxResultSize, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ULocaleDisplayNames* uldn_openForContext(PSTR locale, out UDisplayContext contexts, int32 length, out UErrorCode pErrorCode);
+		public static extern ULocaleDisplayNames* uldn_openForContext(char8* locale, out UDisplayContext contexts, int32 length, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UDisplayContext uldn_getContext(in ULocaleDisplayNames ldn, UDisplayContextType type, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucurr_forLocale(PSTR locale, out uint16 buff, int32 buffCapacity, out UErrorCode ec);
+		public static extern int32 ucurr_forLocale(char8* locale, out uint16 buff, int32 buffCapacity, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void* ucurr_register(in uint16 isoCode, PSTR locale, out UErrorCode status);
+		public static extern void* ucurr_register(in uint16 isoCode, char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucurr_unregister(void* key, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* ucurr_getName(in uint16 currency, PSTR locale, UCurrNameStyle nameStyle, out int8 isChoiceFormat, out int32 len, out UErrorCode ec);
+		public static extern uint16* ucurr_getName(in uint16 currency, char8* locale, UCurrNameStyle nameStyle, out int8 isChoiceFormat, out int32 len, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* ucurr_getPluralName(in uint16 currency, PSTR locale, out int8 isChoiceFormat, PSTR pluralCount, out int32 len, out UErrorCode ec);
+		public static extern uint16* ucurr_getPluralName(in uint16 currency, char8* locale, out int8 isChoiceFormat, char8* pluralCount, out int32 len, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucurr_getDefaultFractionDigits(in uint16 currency, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5446,11 +5451,11 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucurr_isAvailable(in uint16 isoCode, double from, double to, out UErrorCode errorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucurr_countCurrencies(PSTR locale, double date, out UErrorCode ec);
+		public static extern int32 ucurr_countCurrencies(char8* locale, double date, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucurr_forLocaleAndDate(PSTR locale, double date, int32 index, out uint16 buff, int32 buffCapacity, out UErrorCode ec);
+		public static extern int32 ucurr_forLocaleAndDate(char8* locale, double date, int32 index, out uint16 buff, int32 buffCapacity, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucurr_getKeywordValuesForLocale(PSTR key, PSTR locale, int8 commonlyUsed, out UErrorCode status);
+		public static extern UEnumeration* ucurr_getKeywordValuesForLocale(char8* key, char8* locale, int8 commonlyUsed, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucurr_getNumericCode(in uint16 currency);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5500,7 +5505,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void UCNV_FROM_U_CALLBACK_STOP(void* context, out UConverterFromUnicodeArgs fromUArgs, in uint16 codeUnits, int32 length, int32 codePoint, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void UCNV_TO_U_CALLBACK_STOP(void* context, out UConverterToUnicodeArgs toUArgs, PSTR codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
+		public static extern void UCNV_TO_U_CALLBACK_STOP(void* context, out UConverterToUnicodeArgs toUArgs, char8* codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void UCNV_FROM_U_CALLBACK_SKIP(void* context, out UConverterFromUnicodeArgs fromUArgs, in uint16 codeUnits, int32 length, int32 codePoint, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5508,33 +5513,33 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void UCNV_FROM_U_CALLBACK_ESCAPE(void* context, out UConverterFromUnicodeArgs fromUArgs, in uint16 codeUnits, int32 length, int32 codePoint, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void UCNV_TO_U_CALLBACK_SKIP(void* context, out UConverterToUnicodeArgs toUArgs, PSTR codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
+		public static extern void UCNV_TO_U_CALLBACK_SKIP(void* context, out UConverterToUnicodeArgs toUArgs, char8* codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void UCNV_TO_U_CALLBACK_SUBSTITUTE(void* context, out UConverterToUnicodeArgs toUArgs, PSTR codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
+		public static extern void UCNV_TO_U_CALLBACK_SUBSTITUTE(void* context, out UConverterToUnicodeArgs toUArgs, char8* codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void UCNV_TO_U_CALLBACK_ESCAPE(void* context, out UConverterToUnicodeArgs toUArgs, PSTR codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
+		public static extern void UCNV_TO_U_CALLBACK_ESCAPE(void* context, out UConverterToUnicodeArgs toUArgs, char8* codeUnits, int32 length, UConverterCallbackReason reason, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_compareNames(PSTR name1, PSTR name2);
+		public static extern int32 ucnv_compareNames(char8* name1, char8* name2);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UConverter* ucnv_open(PSTR converterName, out UErrorCode err);
+		public static extern UConverter* ucnv_open(char8* converterName, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UConverter* ucnv_openU(in uint16 name, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UConverter* ucnv_openCCSID(int32 codepage, UConverterPlatform platform, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UConverter* ucnv_openPackage(PSTR packageName, PSTR converterName, out UErrorCode err);
+		public static extern UConverter* ucnv_openPackage(char8* packageName, char8* converterName, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UConverter* ucnv_safeClone(in UConverter cnv, void* stackBuffer, out int32 pBufferSize, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucnv_close(out UConverter converter);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_getSubstChars(in UConverter converter, PSTR subChars, out int8 len, out UErrorCode err);
+		public static extern void ucnv_getSubstChars(in UConverter converter, char8* subChars, out int8 len, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_setSubstChars(out UConverter converter, PSTR subChars, int8 len, out UErrorCode err);
+		public static extern void ucnv_setSubstChars(out UConverter converter, char8* subChars, int8 len, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucnv_setSubstString(out UConverter cnv, in uint16 s, int32 length, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_getInvalidChars(in UConverter converter, PSTR errBytes, out int8 len, out UErrorCode err);
+		public static extern void ucnv_getInvalidChars(in UConverter converter, char8* errBytes, out int8 len, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucnv_getInvalidUChars(in UConverter converter, out uint16 errUChars, out int8 len, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5548,9 +5553,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucnv_getMinCharSize(in UConverter converter);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_getDisplayName(in UConverter converter, PSTR displayLocale, out uint16 displayName, int32 displayNameCapacity, out UErrorCode err);
+		public static extern int32 ucnv_getDisplayName(in UConverter converter, char8* displayLocale, out uint16 displayName, int32 displayNameCapacity, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getName(in UConverter converter, out UErrorCode err);
+		public static extern char8* ucnv_getName(in UConverter converter, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucnv_getCCSID(in UConverter converter, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5570,51 +5575,51 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucnv_setFromUCallBack(out UConverter converter, UConverterFromUCallback newAction, void* newContext, out UConverterFromUCallback oldAction, void** oldContext, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_fromUnicode(out UConverter converter, out int8* target, PSTR targetLimit, in uint16* source, in uint16 sourceLimit, out int32 offsets, int8 flush, out UErrorCode err);
+		public static extern void ucnv_fromUnicode(out UConverter converter, out int8* target, char8* targetLimit, in uint16* source, in uint16 sourceLimit, out int32 offsets, int8 flush, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_toUnicode(out UConverter converter, out uint16* target, in uint16 targetLimit, in int8* source, PSTR sourceLimit, out int32 offsets, int8 flush, out UErrorCode err);
+		public static extern void ucnv_toUnicode(out UConverter converter, out uint16* target, in uint16 targetLimit, in int8* source, char8* sourceLimit, out int32 offsets, int8 flush, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_fromUChars(out UConverter cnv, PSTR dest, int32 destCapacity, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern int32 ucnv_fromUChars(out UConverter cnv, char8* dest, int32 destCapacity, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_toUChars(out UConverter cnv, out uint16 dest, int32 destCapacity, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern int32 ucnv_toUChars(out UConverter cnv, out uint16 dest, int32 destCapacity, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_getNextUChar(out UConverter converter, in int8* source, PSTR sourceLimit, out UErrorCode err);
+		public static extern int32 ucnv_getNextUChar(out UConverter converter, in int8* source, char8* sourceLimit, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_convertEx(out UConverter targetCnv, out UConverter sourceCnv, out int8* target, PSTR targetLimit, in int8* source, PSTR sourceLimit, out uint16 pivotStart, out uint16* pivotSource, out uint16* pivotTarget, in uint16 pivotLimit, int8 reset, int8 flush, out UErrorCode pErrorCode);
+		public static extern void ucnv_convertEx(out UConverter targetCnv, out UConverter sourceCnv, out int8* target, char8* targetLimit, in int8* source, char8* sourceLimit, out uint16 pivotStart, out uint16* pivotSource, out uint16* pivotTarget, in uint16 pivotLimit, int8 reset, int8 flush, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_convert(PSTR toConverterName, PSTR fromConverterName, PSTR target, int32 targetCapacity, PSTR source, int32 sourceLength, out UErrorCode pErrorCode);
+		public static extern int32 ucnv_convert(char8* toConverterName, char8* fromConverterName, char8* target, int32 targetCapacity, char8* source, int32 sourceLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_toAlgorithmic(UConverterType algorithmicType, out UConverter cnv, PSTR target, int32 targetCapacity, PSTR source, int32 sourceLength, out UErrorCode pErrorCode);
+		public static extern int32 ucnv_toAlgorithmic(UConverterType algorithmicType, out UConverter cnv, char8* target, int32 targetCapacity, char8* source, int32 sourceLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucnv_fromAlgorithmic(out UConverter cnv, UConverterType algorithmicType, PSTR target, int32 targetCapacity, PSTR source, int32 sourceLength, out UErrorCode pErrorCode);
+		public static extern int32 ucnv_fromAlgorithmic(out UConverter cnv, UConverterType algorithmicType, char8* target, int32 targetCapacity, char8* source, int32 sourceLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucnv_flushCache();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucnv_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getAvailableName(int32 n);
+		public static extern char8* ucnv_getAvailableName(int32 n);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* ucnv_openAllNames(out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16 ucnv_countAliases(PSTR alias, out UErrorCode pErrorCode);
+		public static extern uint16 ucnv_countAliases(char8* alias, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getAlias(PSTR alias, uint16 n, out UErrorCode pErrorCode);
+		public static extern char8* ucnv_getAlias(char8* alias, uint16 n, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_getAliases(PSTR alias, in int8* aliases, out UErrorCode pErrorCode);
+		public static extern void ucnv_getAliases(char8* alias, in int8* aliases, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucnv_openStandardNames(PSTR convName, PSTR standard, out UErrorCode pErrorCode);
+		public static extern UEnumeration* ucnv_openStandardNames(char8* convName, char8* standard, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 ucnv_countStandards();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getStandard(uint16 n, out UErrorCode pErrorCode);
+		public static extern char8* ucnv_getStandard(uint16 n, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getStandardName(PSTR name, PSTR standard, out UErrorCode pErrorCode);
+		public static extern char8* ucnv_getStandardName(char8* name, char8* standard, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getCanonicalName(PSTR alias, PSTR standard, out UErrorCode pErrorCode);
+		public static extern char8* ucnv_getCanonicalName(char8* alias, char8* standard, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_getDefaultName();
+		public static extern char8* ucnv_getDefaultName();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_setDefaultName(PSTR name);
+		public static extern void ucnv_setDefaultName(char8* name);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucnv_fixFileSeparator(in UConverter cnv, out uint16 source, int32 sourceLen);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5624,7 +5629,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucnv_usesFallback(in UConverter cnv);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucnv_detectUnicodeSignature(PSTR source, int32 sourceLength, out int32 signatureLength, out UErrorCode pErrorCode);
+		public static extern char8* ucnv_detectUnicodeSignature(char8* source, int32 sourceLength, out int32 signatureLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucnv_fromUCountPending(in UConverter cnv, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5632,7 +5637,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucnv_isFixedWidth(out UConverter cnv, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucnv_cbFromUWriteBytes(out UConverterFromUnicodeArgs args, PSTR source, int32 length, int32 offsetIndex, out UErrorCode err);
+		public static extern void ucnv_cbFromUWriteBytes(out UConverterFromUnicodeArgs args, char8* source, int32 length, int32 offsetIndex, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucnv_cbFromUWriteSub(out UConverterFromUnicodeArgs args, int32 offsetIndex, out UErrorCode err);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5648,7 +5653,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void u_setMemoryFunctions(void* context, out UMemAllocFn a, out UMemReallocFn r, out UMemFreeFn f, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UResourceBundle* u_catopen(PSTR name, PSTR locale, out UErrorCode ec);
+		public static extern UResourceBundle* u_catopen(char8* name, char8* locale, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void u_catclose(out UResourceBundle catd);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5730,19 +5735,19 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UBlockCode ublock_getCode(int32 c);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_charName(int32 code, UCharNameChoice nameChoice, PSTR buffer, int32 bufferLength, out UErrorCode pErrorCode);
+		public static extern int32 u_charName(int32 code, UCharNameChoice nameChoice, char8* buffer, int32 bufferLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_charFromName(UCharNameChoice nameChoice, PSTR name, out UErrorCode pErrorCode);
+		public static extern int32 u_charFromName(UCharNameChoice nameChoice, char8* name, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void u_enumCharNames(int32 start, int32 limit, out UEnumCharNamesFn fn, void* context, UCharNameChoice nameChoice, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_getPropertyName(UProperty property, UPropertyNameChoice nameChoice);
+		public static extern char8* u_getPropertyName(UProperty property, UPropertyNameChoice nameChoice);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UProperty u_getPropertyEnum(PSTR alias);
+		public static extern UProperty u_getPropertyEnum(char8* alias);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_getPropertyValueName(UProperty property, int32 value, UPropertyNameChoice nameChoice);
+		public static extern char8* u_getPropertyValueName(UProperty property, int32 value, UPropertyNameChoice nameChoice);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_getPropertyValueEnum(UProperty property, PSTR alias);
+		public static extern int32 u_getPropertyValueEnum(UProperty property, char8* alias);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 u_isIDStart(int32 c);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5862,7 +5867,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UText* utext_close(out UText ut);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UText* utext_openUTF8(out UText ut, PSTR s, int64 length, out UErrorCode status);
+		public static extern UText* utext_openUTF8(out UText ut, char8* s, int64 length, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UText* utext_openUChars(out UText ut, in uint16 s, int64 length, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6002,9 +6007,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uset_spanBack(in USet set, in uint16 s, int32 length, USetSpanCondition spanCondition);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uset_spanUTF8(in USet set, PSTR s, int32 length, USetSpanCondition spanCondition);
+		public static extern int32 uset_spanUTF8(in USet set, char8* s, int32 length, USetSpanCondition spanCondition);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uset_spanBackUTF8(in USet set, PSTR s, int32 length, USetSpanCondition spanCondition);
+		public static extern int32 uset_spanBackUTF8(in USet set, char8* s, int32 length, USetSpanCondition spanCondition);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 uset_equals(in USet set1, in USet set2);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6030,7 +6035,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UNormalizer2* unorm2_getNFKCCasefoldInstance(out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UNormalizer2* unorm2_getInstance(PSTR packageName, PSTR name, UNormalization2Mode mode, out UErrorCode pErrorCode);
+		public static extern UNormalizer2* unorm2_getInstance(char8* packageName, char8* name, UNormalization2Mode mode, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UNormalizer2* unorm2_openFiltered(in UNormalizer2 norm2, in USet filterSet, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6074,11 +6079,11 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* ucnvsel_selectForString(in UConverterSelector sel, in uint16 s, int32 length, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucnvsel_selectForUTF8(in UConverterSelector sel, PSTR s, int32 length, out UErrorCode status);
+		public static extern UEnumeration* ucnvsel_selectForUTF8(in UConverterSelector sel, char8* s, int32 length, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_charsToUChars(PSTR cs, out uint16 us, int32 length);
+		public static extern void u_charsToUChars(char8* cs, out uint16 us, int32 length);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_UCharsToChars(in uint16 us, PSTR cs, int32 length);
+		public static extern void u_UCharsToChars(in uint16 us, char8* cs, int32 length);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 u_strlen(in uint16 s);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6138,13 +6143,13 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* u_strncpy(out uint16 dst, in uint16 src, int32 n);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_uastrcpy(out uint16 dst, PSTR src);
+		public static extern uint16* u_uastrcpy(out uint16 dst, char8* src);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_uastrncpy(out uint16 dst, PSTR src, int32 n);
+		public static extern uint16* u_uastrncpy(out uint16 dst, char8* src, int32 n);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_austrcpy(PSTR dst, in uint16 src);
+		public static extern char8* u_austrcpy(char8* dst, in uint16 src);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_austrncpy(PSTR dst, in uint16 src, int32 n);
+		public static extern char8* u_austrncpy(char8* dst, in uint16 src, int32 n);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* u_memcpy(out uint16 dest, in uint16 src, int32 count);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6164,31 +6169,31 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* u_memrchr32(in uint16 s, int32 c, int32 count);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_unescape(PSTR src, out uint16 dest, int32 destCapacity);
+		public static extern int32 u_unescape(char8* src, out uint16 dest, int32 destCapacity);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 u_unescapeAt(UNESCAPE_CHAR_AT charAt, out int32 offset, int32 length, void* context);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_strToUpper(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, PSTR locale, out UErrorCode pErrorCode);
+		public static extern int32 u_strToUpper(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, char8* locale, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_strToLower(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, PSTR locale, out UErrorCode pErrorCode);
+		public static extern int32 u_strToLower(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, char8* locale, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_strToTitle(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, out UBreakIterator titleIter, PSTR locale, out UErrorCode pErrorCode);
+		public static extern int32 u_strToTitle(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, out UBreakIterator titleIter, char8* locale, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 u_strFoldCase(out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, uint32 options, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR u_strToWCS(PWSTR dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern char16* u_strToWCS(char16* dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_strFromWCS(out uint16 dest, int32 destCapacity, out int32 pDestLength, PWSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern uint16* u_strFromWCS(out uint16 dest, int32 destCapacity, out int32 pDestLength, char16* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_strToUTF8(PSTR dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern char8* u_strToUTF8(char8* dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_strFromUTF8(out uint16 dest, int32 destCapacity, out int32 pDestLength, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern uint16* u_strFromUTF8(out uint16 dest, int32 destCapacity, out int32 pDestLength, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_strToUTF8WithSub(PSTR dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
+		public static extern char8* u_strToUTF8WithSub(char8* dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_strFromUTF8WithSub(out uint16 dest, int32 destCapacity, out int32 pDestLength, PSTR src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
+		public static extern uint16* u_strFromUTF8WithSub(out uint16 dest, int32 destCapacity, out int32 pDestLength, char8* src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_strFromUTF8Lenient(out uint16 dest, int32 destCapacity, out int32 pDestLength, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern uint16* u_strFromUTF8Lenient(out uint16 dest, int32 destCapacity, out int32 pDestLength, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32* u_strToUTF32(out int32 dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6198,19 +6203,19 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* u_strFromUTF32WithSub(out uint16 dest, int32 destCapacity, out int32 pDestLength, in int32 src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR u_strToJavaModifiedUTF8(PSTR dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern char8* u_strToJavaModifiedUTF8(char8* dest, int32 destCapacity, out int32 pDestLength, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint16* u_strFromJavaModifiedUTF8WithSub(out uint16 dest, int32 destCapacity, out int32 pDestLength, PSTR src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
+		public static extern uint16* u_strFromJavaModifiedUTF8WithSub(out uint16 dest, int32 destCapacity, out int32 pDestLength, char8* src, int32 srcLength, int32 subchar, out int32 pNumSubstitutions, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UCaseMap* ucasemap_open(PSTR locale, uint32 options, out UErrorCode pErrorCode);
+		public static extern UCaseMap* ucasemap_open(char8* locale, uint32 options, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucasemap_close(out UCaseMap csm);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucasemap_getLocale(in UCaseMap csm);
+		public static extern char8* ucasemap_getLocale(in UCaseMap csm);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ucasemap_getOptions(in UCaseMap csm);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucasemap_setLocale(out UCaseMap csm, PSTR locale, out UErrorCode pErrorCode);
+		public static extern void ucasemap_setLocale(out UCaseMap csm, char8* locale, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucasemap_setOptions(out UCaseMap csm, uint32 options, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6220,15 +6225,15 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucasemap_toTitle(out UCaseMap csm, out uint16 dest, int32 destCapacity, in uint16 src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucasemap_utf8ToLower(in UCaseMap csm, PSTR dest, int32 destCapacity, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern int32 ucasemap_utf8ToLower(in UCaseMap csm, char8* dest, int32 destCapacity, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucasemap_utf8ToUpper(in UCaseMap csm, PSTR dest, int32 destCapacity, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern int32 ucasemap_utf8ToUpper(in UCaseMap csm, char8* dest, int32 destCapacity, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucasemap_utf8ToTitle(out UCaseMap csm, PSTR dest, int32 destCapacity, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern int32 ucasemap_utf8ToTitle(out UCaseMap csm, char8* dest, int32 destCapacity, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucasemap_utf8FoldCase(in UCaseMap csm, PSTR dest, int32 destCapacity, PSTR src, int32 srcLength, out UErrorCode pErrorCode);
+		public static extern int32 ucasemap_utf8FoldCase(in UCaseMap csm, char8* dest, int32 destCapacity, char8* src, int32 srcLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UStringPrepProfile* usprep_open(PSTR path, PSTR fileName, out UErrorCode status);
+		public static extern UStringPrepProfile* usprep_open(char8* path, char8* fileName, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UStringPrepProfile* usprep_openByType(UStringPrepProfileType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6248,15 +6253,15 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uidna_nameToUnicode(in UIDNA idna, in uint16 name, int32 length, out uint16 dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uidna_labelToASCII_UTF8(in UIDNA idna, PSTR label, int32 length, PSTR dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
+		public static extern int32 uidna_labelToASCII_UTF8(in UIDNA idna, char8* label, int32 length, char8* dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uidna_labelToUnicodeUTF8(in UIDNA idna, PSTR label, int32 length, PSTR dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
+		public static extern int32 uidna_labelToUnicodeUTF8(in UIDNA idna, char8* label, int32 length, char8* dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uidna_nameToASCII_UTF8(in UIDNA idna, PSTR name, int32 length, PSTR dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
+		public static extern int32 uidna_nameToASCII_UTF8(in UIDNA idna, char8* name, int32 length, char8* dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uidna_nameToUnicodeUTF8(in UIDNA idna, PSTR name, int32 length, PSTR dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
+		public static extern int32 uidna_nameToUnicodeUTF8(in UIDNA idna, char8* name, int32 length, char8* dest, int32 capacity, out UIDNAInfo pInfo, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UBreakIterator* ubrk_open(UBreakIteratorType type, PSTR locale, in uint16 text, int32 textLength, out UErrorCode status);
+		public static extern UBreakIterator* ubrk_open(UBreakIteratorType type, char8* locale, in uint16 text, int32 textLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UBreakIterator* ubrk_openRules(in uint16 rules, int32 rulesLength, in uint16 text, int32 textLength, out UParseError parseErr, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6284,7 +6289,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ubrk_following(out UBreakIterator bi, int32 offset);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ubrk_getAvailable(int32 index);
+		public static extern char8* ubrk_getAvailable(int32 index);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ubrk_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6294,7 +6299,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ubrk_getRuleStatusVec(out UBreakIterator bi, out int32 fillInVec, int32 capacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ubrk_getLocaleByType(in UBreakIterator bi, ULocDataLocaleType type, out UErrorCode status);
+		public static extern char8* ubrk_getLocaleByType(in UBreakIterator bi, ULocDataLocaleType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ubrk_refreshUText(out UBreakIterator bi, out UText text, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6302,11 +6307,11 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void u_getDataVersion(out uint8 dataVersionFillin, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucal_openTimeZoneIDEnumeration(USystemTimeZoneType zoneType, PSTR region, in int32 rawOffset, out UErrorCode ec);
+		public static extern UEnumeration* ucal_openTimeZoneIDEnumeration(USystemTimeZoneType zoneType, char8* region, in int32 rawOffset, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* ucal_openTimeZones(out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucal_openCountryTimeZones(PSTR country, out UErrorCode ec);
+		public static extern UEnumeration* ucal_openCountryTimeZones(char8* country, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucal_getDefaultTimeZone(out uint16 result, int32 resultCapacity, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6318,7 +6323,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern double ucal_getNow();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void** ucal_open(in uint16 zoneID, int32 len, PSTR locale, UCalendarType type, out UErrorCode status);
+		public static extern void** ucal_open(in uint16 zoneID, int32 len, char8* locale, UCalendarType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucal_close(void** cal);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6328,7 +6333,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucal_getTimeZoneID(void** cal, out uint16 result, int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucal_getTimeZoneDisplayName(void** cal, UCalendarDisplayNameType type, PSTR locale, out uint16 result, int32 resultLength, out UErrorCode status);
+		public static extern int32 ucal_getTimeZoneDisplayName(void** cal, UCalendarDisplayNameType type, char8* locale, out uint16 result, int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucal_inDaylightTime(void** cal, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6340,7 +6345,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucal_setAttribute(void** cal, UCalendarAttribute attr, int32 newValue);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucal_getAvailable(int32 localeIndex);
+		public static extern char8* ucal_getAvailable(int32 localeIndex);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucal_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6370,15 +6375,15 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucal_getLimit(void** cal, UCalendarDateFields field, UCalendarLimitType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucal_getLocaleByType(void** cal, ULocDataLocaleType type, out UErrorCode status);
+		public static extern char8* ucal_getLocaleByType(void** cal, ULocDataLocaleType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucal_getTZDataVersion(out UErrorCode status);
+		public static extern char8* ucal_getTZDataVersion(out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucal_getCanonicalTimeZoneID(in uint16 id, int32 len, out uint16 result, int32 resultCapacity, out int8 isSystemID, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucal_getType(void** cal, out UErrorCode status);
+		public static extern char8* ucal_getType(void** cal, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucal_getKeywordValuesForLocale(PSTR key, PSTR locale, int8 commonlyUsed, out UErrorCode status);
+		public static extern UEnumeration* ucal_getKeywordValuesForLocale(char8* key, char8* locale, int8 commonlyUsed, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UCalendarWeekdayType ucal_getDayOfWeekType(void** cal, UCalendarDaysOfWeek dayOfWeek, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6392,9 +6397,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucal_getWindowsTimeZoneID(in uint16 id, int32 len, out uint16 winid, int32 winidCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucal_getTimeZoneIDForWindowsID(in uint16 winid, int32 len, PSTR region, out uint16 id, int32 idCapacity, out UErrorCode status);
+		public static extern int32 ucal_getTimeZoneIDForWindowsID(in uint16 winid, int32 len, char8* region, out uint16 id, int32 idCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UCollator* ucol_open(PSTR loc, out UErrorCode status);
+		public static extern UCollator* ucol_open(char8* loc, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UCollator* ucol_openRules(in uint16 rules, int32 rulesLength, UColAttributeValue normalizationMode, UColAttributeValue strength, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6404,7 +6409,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UCollationResult ucol_strcoll(in UCollator coll, in uint16 source, int32 sourceLength, in uint16 target, int32 targetLength);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UCollationResult ucol_strcollUTF8(in UCollator coll, PSTR source, int32 sourceLength, PSTR target, int32 targetLength, out UErrorCode status);
+		public static extern UCollationResult ucol_strcollUTF8(in UCollator coll, char8* source, int32 sourceLength, char8* target, int32 targetLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ucol_greater(in UCollator coll, in uint16 source, int32 sourceLength, in uint16 target, int32 targetLength);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6424,9 +6429,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucol_getEquivalentReorderCodes(int32 reorderCode, out int32 dest, int32 destCapacity, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucol_getDisplayName(PSTR objLoc, PSTR dispLoc, out uint16 result, int32 resultLength, out UErrorCode status);
+		public static extern int32 ucol_getDisplayName(char8* objLoc, char8* dispLoc, out uint16 result, int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucol_getAvailable(int32 localeIndex);
+		public static extern char8* ucol_getAvailable(int32 localeIndex);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucol_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6434,11 +6439,11 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* ucol_getKeywords(out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucol_getKeywordValues(PSTR keyword, out UErrorCode status);
+		public static extern UEnumeration* ucol_getKeywordValues(char8* keyword, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UEnumeration* ucol_getKeywordValuesForLocale(PSTR key, PSTR locale, int8 commonlyUsed, out UErrorCode status);
+		public static extern UEnumeration* ucol_getKeywordValuesForLocale(char8* key, char8* locale, int8 commonlyUsed, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ucol_getFunctionalEquivalent(PSTR result, int32 resultCapacity, PSTR keyword, PSTR locale, out int8 isAvailable, out UErrorCode status);
+		public static extern int32 ucol_getFunctionalEquivalent(char8* result, int32 resultCapacity, char8* keyword, char8* locale, out int8 isAvailable, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* ucol_getRules(in UCollator coll, out int32 length);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6468,7 +6473,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucol_getRulesEx(in UCollator coll, UColRuleOption delta, out uint16 buffer, int32 bufferLen);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucol_getLocaleByType(in UCollator coll, ULocDataLocaleType type, out UErrorCode status);
+		public static extern char8* ucol_getLocaleByType(in UCollator coll, ULocDataLocaleType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USet* ucol_getTailoredSet(in UCollator coll, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6506,19 +6511,19 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ucsdet_close(out UCharsetDetector ucsd);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucsdet_setText(out UCharsetDetector ucsd, PSTR textIn, int32 len, out UErrorCode status);
+		public static extern void ucsdet_setText(out UCharsetDetector ucsd, char8* textIn, int32 len, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ucsdet_setDeclaredEncoding(out UCharsetDetector ucsd, PSTR encoding, int32 length, out UErrorCode status);
+		public static extern void ucsdet_setDeclaredEncoding(out UCharsetDetector ucsd, char8* encoding, int32 length, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UCharsetMatch* ucsdet_detect(out UCharsetDetector ucsd, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UCharsetMatch** ucsdet_detectAll(out UCharsetDetector ucsd, out int32 matchesFound, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucsdet_getName(in UCharsetMatch ucsm, out UErrorCode status);
+		public static extern char8* ucsdet_getName(in UCharsetMatch ucsm, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucsdet_getConfidence(in UCharsetMatch ucsm, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ucsdet_getLanguage(in UCharsetMatch ucsm, out UErrorCode status);
+		public static extern char8* ucsdet_getLanguage(in UCharsetMatch ucsm, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ucsdet_getUChars(in UCharsetMatch ucsm, out uint16 buf, int32 cap, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6558,7 +6563,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void** ufmt_getArrayItemByIndex(void** fmt, int32 n, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ufmt_getDecNumChars(void** fmt, out int32 len, out UErrorCode status);
+		public static extern char8* ufmt_getDecNumChars(void** fmt, out int32 len, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UConstrainedFieldPosition* ucfpos_open(out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6588,7 +6593,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 ufmtval_nextPosition(in UFormattedValue ufmtval, out UConstrainedFieldPosition ucfpos, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UDateIntervalFormat* udtitvfmt_open(PSTR locale, in uint16 skeleton, int32 skeletonLength, in uint16 tzID, int32 tzIDLength, out UErrorCode status);
+		public static extern UDateIntervalFormat* udtitvfmt_open(char8* locale, in uint16 skeleton, int32 skeletonLength, in uint16 tzID, int32 tzIDLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void udtitvfmt_close(out UDateIntervalFormat formatter);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6600,13 +6605,13 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 udtitvfmt_format(in UDateIntervalFormat formatter, double fromDate, double toDate, out uint16 result, int32 resultCapacity, out UFieldPosition position, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UGenderInfo* ugender_getInstance(PSTR locale, out UErrorCode status);
+		public static extern UGenderInfo* ugender_getInstance(char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UGender ugender_getListGender(in UGenderInfo genderInfo, in UGender genders, int32 size, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UListFormatter* ulistfmt_open(PSTR locale, out UErrorCode status);
+		public static extern UListFormatter* ulistfmt_open(char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UListFormatter* ulistfmt_openForType(PSTR locale, UListFormatterType type, UListFormatterWidth width, out UErrorCode status);
+		public static extern UListFormatter* ulistfmt_openForType(char8* locale, UListFormatterType type, UListFormatterWidth width, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ulistfmt_close(out UListFormatter listfmt);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6620,7 +6625,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ulistfmt_formatStringsToResult(in UListFormatter listfmt, in uint16* strings, in int32 stringLengths, int32 stringCount, out UFormattedList uresult, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ULocaleData* ulocdata_open(PSTR localeID, out UErrorCode status);
+		public static extern ULocaleData* ulocdata_open(char8* localeID, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ulocdata_close(out ULocaleData uld);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6632,9 +6637,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ulocdata_getDelimiter(out ULocaleData uld, ULocaleDataDelimiterType type, out uint16 result, int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UMeasurementSystem ulocdata_getMeasurementSystem(PSTR localeID, out UErrorCode status);
+		public static extern UMeasurementSystem ulocdata_getMeasurementSystem(char8* localeID, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ulocdata_getPaperSize(PSTR localeID, out int32 height, out int32 width, out UErrorCode status);
+		public static extern void ulocdata_getPaperSize(char8* localeID, out int32 height, out int32 width, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ulocdata_getCLDRVersion(out uint8 versionArray, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6642,31 +6647,31 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ulocdata_getLocaleSeparator(out ULocaleData uld, out uint16 separator, int32 separatorCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_formatMessage(PSTR locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out UErrorCode status);
+		public static extern int32 u_formatMessage(char8* locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_vformatMessage(PSTR locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out int8 ap, out UErrorCode status);
+		public static extern int32 u_vformatMessage(char8* locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out int8 ap, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_parseMessage(PSTR locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out UErrorCode status);
+		public static extern void u_parseMessage(char8* locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_vparseMessage(PSTR locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out int8 ap, out UErrorCode status);
+		public static extern void u_vparseMessage(char8* locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out int8 ap, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_formatMessageWithError(PSTR locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out UParseError parseError, out UErrorCode status);
+		public static extern int32 u_formatMessageWithError(char8* locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 u_vformatMessageWithError(PSTR locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out UParseError parseError, out int8 ap, out UErrorCode status);
+		public static extern int32 u_vformatMessageWithError(char8* locale, in uint16 pattern, int32 patternLength, out uint16 result, int32 resultLength, out UParseError parseError, out int8 ap, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_parseMessageWithError(PSTR locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out UParseError parseError, out UErrorCode status);
+		public static extern void u_parseMessageWithError(char8* locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void u_vparseMessageWithError(PSTR locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out int8 ap, out UParseError parseError, out UErrorCode status);
+		public static extern void u_vparseMessageWithError(char8* locale, in uint16 pattern, int32 patternLength, in uint16 source, int32 sourceLength, out int8 ap, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void** umsg_open(in uint16 pattern, int32 patternLength, PSTR locale, out UParseError parseError, out UErrorCode status);
+		public static extern void** umsg_open(in uint16 pattern, int32 patternLength, char8* locale, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void umsg_close(void** format);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* umsg_clone(void** fmt, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void umsg_setLocale(void** fmt, PSTR locale);
+		public static extern void umsg_setLocale(void** fmt, char8* locale);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR umsg_getLocale(void** fmt);
+		public static extern char8* umsg_getLocale(void** fmt);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void umsg_applyPattern(void** fmt, in uint16 pattern, int32 patternLength, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6682,7 +6687,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 umsg_autoQuoteApostrophe(in uint16 pattern, int32 patternLength, out uint16 dest, int32 destCapacity, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void** unum_open(UNumberFormatStyle style, in uint16 pattern, int32 patternLength, PSTR locale, out UParseError parseErr, out UErrorCode status);
+		public static extern void** unum_open(UNumberFormatStyle style, in uint16 pattern, int32 patternLength, char8* locale, out UParseError parseErr, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unum_close(void** fmt);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6696,7 +6701,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 unum_formatDoubleForFields(void** format, double number, out uint16 result, int32 resultLength, out UFieldPositionIterator fpositer, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 unum_formatDecimal(void** fmt, PSTR number, int32 length, out uint16 result, int32 resultLength, out UFieldPosition pos, out UErrorCode status);
+		public static extern int32 unum_formatDecimal(void** fmt, char8* number, int32 length, out uint16 result, int32 resultLength, out UFieldPosition pos, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 unum_formatDoubleCurrency(void** fmt, double number, out uint16 currency, out uint16 result, int32 resultLength, out UFieldPosition pos, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6708,7 +6713,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern double unum_parseDouble(void** fmt, in uint16 text, int32 textLength, out int32 parsePos, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 unum_parseDecimal(void** fmt, in uint16 text, int32 textLength, out int32 parsePos, PSTR outBuf, int32 outBufLength, out UErrorCode status);
+		public static extern int32 unum_parseDecimal(void** fmt, in uint16 text, int32 textLength, out int32 parsePos, char8* outBuf, int32 outBufLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern double unum_parseDoubleCurrency(void** fmt, in uint16 text, int32 textLength, out int32 parsePos, out uint16 currency, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6716,7 +6721,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unum_applyPattern(void** format, int8 localized, in uint16 pattern, int32 patternLength, out UParseError parseError, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR unum_getAvailable(int32 localeIndex);
+		public static extern char8* unum_getAvailable(int32 localeIndex);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 unum_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6738,7 +6743,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unum_setSymbol(void** fmt, UNumberFormatSymbol symbol, in uint16 value, int32 length, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR unum_getLocaleByType(void** fmt, ULocDataLocaleType type, out UErrorCode status);
+		public static extern char8* unum_getLocaleByType(void** fmt, ULocDataLocaleType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unum_setContext(void** fmt, UDisplayContext value, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6746,7 +6751,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UCalendarDateFields udat_toCalendarDateField(UDateFormatField field);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void** udat_open(UDateFormatStyle timeStyle, UDateFormatStyle dateStyle, PSTR locale, in uint16 tzID, int32 tzIDLength, in uint16 pattern, int32 patternLength, out UErrorCode status);
+		public static extern void** udat_open(UDateFormatStyle timeStyle, UDateFormatStyle dateStyle, char8* locale, in uint16 tzID, int32 tzIDLength, in uint16 pattern, int32 patternLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void udat_close(void** format);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6786,7 +6791,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void udat_adoptNumberFormat(void** fmt, void** numberFormatToAdopt);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR udat_getAvailable(int32 localeIndex);
+		public static extern char8* udat_getAvailable(int32 localeIndex);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 udat_countAvailable();
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6804,13 +6809,13 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void udat_setSymbols(void** format, UDateFormatSymbolType type, int32 symbolIndex, out uint16 value, int32 valueLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR udat_getLocaleByType(void** fmt, ULocDataLocaleType type, out UErrorCode status);
+		public static extern char8* udat_getLocaleByType(void** fmt, ULocDataLocaleType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void udat_setContext(void** fmt, UDisplayContext value, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UDisplayContext udat_getContext(void** fmt, UDisplayContextType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void** udatpg_open(PSTR locale, out UErrorCode pErrorCode);
+		public static extern void** udatpg_open(char8* locale, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void** udatpg_openEmpty(out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6856,9 +6861,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* udatpg_getPatternForSkeleton(void** dtpg, in uint16 skeleton, int32 skeletonLength, out int32 pLength);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UNumberFormatter* unumf_openForSkeletonAndLocale(in uint16 skeleton, int32 skeletonLen, PSTR locale, out UErrorCode ec);
+		public static extern UNumberFormatter* unumf_openForSkeletonAndLocale(in uint16 skeleton, int32 skeletonLen, char8* locale, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UNumberFormatter* unumf_openForSkeletonAndLocaleWithError(in uint16 skeleton, int32 skeletonLen, PSTR locale, out UParseError perror, out UErrorCode ec);
+		public static extern UNumberFormatter* unumf_openForSkeletonAndLocaleWithError(in uint16 skeleton, int32 skeletonLen, char8* locale, out UParseError perror, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UFormattedNumber* unumf_openResult(out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6866,7 +6871,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unumf_formatDouble(in UNumberFormatter uformatter, double value, out UFormattedNumber uresult, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void unumf_formatDecimal(in UNumberFormatter uformatter, PSTR value, int32 valueLen, out UFormattedNumber uresult, out UErrorCode ec);
+		public static extern void unumf_formatDecimal(in UNumberFormatter uformatter, char8* value, int32 valueLen, out UFormattedNumber uresult, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UFormattedValue* unumf_resultAsValue(in UFormattedNumber uresult, out UErrorCode ec);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6880,15 +6885,15 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unumf_closeResult(out UFormattedNumber uresult);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UNumberingSystem* unumsys_open(PSTR locale, out UErrorCode status);
+		public static extern UNumberingSystem* unumsys_open(char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UNumberingSystem* unumsys_openByName(PSTR name, out UErrorCode status);
+		public static extern UNumberingSystem* unumsys_openByName(char8* name, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void unumsys_close(out UNumberingSystem unumsys);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* unumsys_openAvailableNames(out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR unumsys_getName(in UNumberingSystem unumsys);
+		public static extern char8* unumsys_getName(in UNumberingSystem unumsys);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int8 unumsys_isAlgorithmic(in UNumberingSystem unumsys);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6896,9 +6901,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 unumsys_getDescription(in UNumberingSystem unumsys, out uint16 result, int32 resultLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UPluralRules* uplrules_open(PSTR locale, out UErrorCode status);
+		public static extern UPluralRules* uplrules_open(char8* locale, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UPluralRules* uplrules_openForType(PSTR locale, UPluralType type, out UErrorCode status);
+		public static extern UPluralRules* uplrules_openForType(char8* locale, UPluralType type, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uplrules_close(out UPluralRules uplrules);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6912,7 +6917,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern URegularExpression* uregex_openUText(out UText pattern, uint32 flags, out UParseError pe, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern URegularExpression* uregex_openC(PSTR pattern, uint32 flags, out UParseError pe, out UErrorCode status);
+		public static extern URegularExpression* uregex_openC(char8* pattern, uint32 flags, out UParseError pe, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uregex_close(out URegularExpression regexp);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -6952,7 +6957,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uregex_groupNumberFromName(out URegularExpression regexp, in uint16 groupName, int32 nameLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uregex_groupNumberFromCName(out URegularExpression regexp, PSTR groupName, int32 nameLength, out UErrorCode status);
+		public static extern int32 uregex_groupNumberFromCName(out URegularExpression regexp, char8* groupName, int32 nameLength, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uregex_group(out URegularExpression regexp, int32 groupNum, out uint16 dest, int32 destCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7032,7 +7037,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uregex_getFindProgressCallback(in URegularExpression regexp, out URegexFindProgressCallback callback, void** context, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern URegion* uregion_getRegionFromCode(PSTR regionCode, out UErrorCode status);
+		public static extern URegion* uregion_getRegionFromCode(char8* regionCode, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern URegion* uregion_getRegionFromNumericCode(int32 code, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7052,13 +7057,13 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UEnumeration* uregion_getPreferredValues(in URegion uregion, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uregion_getRegionCode(in URegion uregion);
+		public static extern char8* uregion_getRegionCode(in URegion uregion);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uregion_getNumericCode(in URegion uregion);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern URegionType uregion_getType(in URegion uregion);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern URelativeDateTimeFormatter* ureldatefmt_open(PSTR locale, void** nfToAdopt, UDateRelativeDateTimeFormatterStyle width, UDisplayContext capitalizationContext, out UErrorCode status);
+		public static extern URelativeDateTimeFormatter* ureldatefmt_open(char8* locale, void** nfToAdopt, UDateRelativeDateTimeFormatterStyle width, UDisplayContext capitalizationContext, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ureldatefmt_close(out URelativeDateTimeFormatter reldatefmt);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7078,7 +7083,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ureldatefmt_combineDateAndTime(in URelativeDateTimeFormatter reldatefmt, in uint16 relativeDateString, int32 relativeDateStringLen, in uint16 timeString, int32 timeStringLen, out uint16 result, int32 resultCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern UStringSearch* usearch_open(in uint16 pattern, int32 patternlength, in uint16 text, int32 textlength, PSTR locale, out UBreakIterator breakiter, out UErrorCode status);
+		public static extern UStringSearch* usearch_open(in uint16 pattern, int32 patternlength, in uint16 text, int32 textlength, char8* locale, out UBreakIterator breakiter, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern UStringSearch* usearch_openFromCollator(in uint16 pattern, int32 patternlength, in uint16 text, int32 textlength, in UCollator collator, out UBreakIterator breakiter, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7132,7 +7137,7 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USpoofChecker* uspoof_openFromSerialized(void* data, int32 length, out int32 pActualLength, out UErrorCode pErrorCode);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern USpoofChecker* uspoof_openFromSource(PSTR confusables, int32 confusablesLen, PSTR confusablesWholeScript, int32 confusablesWholeScriptLen, out int32 errType, out UParseError pe, out UErrorCode status);
+		public static extern USpoofChecker* uspoof_openFromSource(char8* confusables, int32 confusablesLen, char8* confusablesWholeScript, int32 confusablesWholeScriptLen, out int32 errType, out UParseError pe, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uspoof_close(out USpoofChecker sc);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7146,9 +7151,9 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern URestrictionLevel uspoof_getRestrictionLevel(in USpoofChecker sc);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void uspoof_setAllowedLocales(out USpoofChecker sc, PSTR localesList, out UErrorCode status);
+		public static extern void uspoof_setAllowedLocales(out USpoofChecker sc, char8* localesList, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR uspoof_getAllowedLocales(out USpoofChecker sc, out UErrorCode status);
+		public static extern char8* uspoof_getAllowedLocales(out USpoofChecker sc, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void uspoof_setAllowedChars(out USpoofChecker sc, in USet chars, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7156,11 +7161,11 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uspoof_check(in USpoofChecker sc, in uint16 id, int32 length, out int32 position, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uspoof_checkUTF8(in USpoofChecker sc, PSTR id, int32 length, out int32 position, out UErrorCode status);
+		public static extern int32 uspoof_checkUTF8(in USpoofChecker sc, char8* id, int32 length, out int32 position, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uspoof_check2(in USpoofChecker sc, in uint16 id, int32 length, out USpoofCheckResult checkResult, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uspoof_check2UTF8(in USpoofChecker sc, PSTR id, int32 length, out USpoofCheckResult checkResult, out UErrorCode status);
+		public static extern int32 uspoof_check2UTF8(in USpoofChecker sc, char8* id, int32 length, out USpoofCheckResult checkResult, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USpoofCheckResult* uspoof_openCheckResult(out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7174,11 +7179,11 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uspoof_areConfusable(in USpoofChecker sc, in uint16 id1, int32 length1, in uint16 id2, int32 length2, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uspoof_areConfusableUTF8(in USpoofChecker sc, PSTR id1, int32 length1, PSTR id2, int32 length2, out UErrorCode status);
+		public static extern int32 uspoof_areConfusableUTF8(in USpoofChecker sc, char8* id1, int32 length1, char8* id2, int32 length2, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 uspoof_getSkeleton(in USpoofChecker sc, uint32 type, in uint16 id, int32 length, out uint16 dest, int32 destCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 uspoof_getSkeletonUTF8(in USpoofChecker sc, uint32 type, PSTR id, int32 length, PSTR dest, int32 destCapacity, out UErrorCode status);
+		public static extern int32 uspoof_getSkeletonUTF8(in USpoofChecker sc, uint32 type, char8* id, int32 length, char8* dest, int32 destCapacity, out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USet* uspoof_getInclusionSet(out UErrorCode status);
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
@@ -7224,36 +7229,36 @@ namespace Win32
 		[Import("icu.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern USet* utrans_getSourceSet(void** trans, int8 ignoreFilter, out USet fillIn, out UErrorCode status);
 		[Import("bcp47mrm.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetDistanceOfClosestLanguageInList(PWSTR pszLanguage, PWSTR pszLanguagesList, char16 wchListDelimiter, out double pClosestDistance);
+		public static extern HResult GetDistanceOfClosestLanguageInList(char16* pszLanguage, char16* pszLanguagesList, char16 wchListDelimiter, out double pClosestDistance);
 		[Import("bcp47mrm.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 IsWellFormedTag(PWSTR pszTag);
+		public static extern uint8 IsWellFormedTag(char16* pszTag);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 FindStringOrdinal(uint32 dwFindStringOrdinalFlags, char16* lpStringSource, int32 cchSource, char16* lpStringValue, int32 cchValue, BOOL bIgnoreCase);
+		public static extern int32 FindStringOrdinal(uint32 dwFindStringOrdinalFlags, char16* lpStringSource, int32 cchSource, char16* lpStringValue, int32 cchValue, IntBool bIgnoreCase);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 lstrcmpA(PSTR lpString1, PSTR lpString2);
+		public static extern int32 lstrcmpA(char8* lpString1, char8* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 lstrcmpW(PWSTR lpString1, PWSTR lpString2);
+		public static extern int32 lstrcmpW(char16* lpString1, char16* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 lstrcmpiA(PSTR lpString1, PSTR lpString2);
+		public static extern int32 lstrcmpiA(char8* lpString1, char8* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 lstrcmpiW(PWSTR lpString1, PWSTR lpString2);
+		public static extern int32 lstrcmpiW(char16* lpString1, char16* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR lstrcpynA(uint8* lpString1, PSTR lpString2, int32 iMaxLength);
+		public static extern char8* lstrcpynA(uint8* lpString1, char8* lpString2, int32 iMaxLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR lstrcpynW(char16* lpString1, PWSTR lpString2, int32 iMaxLength);
+		public static extern char16* lstrcpynW(char16* lpString1, char16* lpString2, int32 iMaxLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR lstrcpyA(PSTR lpString1, PSTR lpString2);
+		public static extern char8* lstrcpyA(char8* lpString1, char8* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR lstrcpyW(PWSTR lpString1, PWSTR lpString2);
+		public static extern char16* lstrcpyW(char16* lpString1, char16* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR lstrcatA(PSTR lpString1, PSTR lpString2);
+		public static extern char8* lstrcatA(char8* lpString1, char8* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR lstrcatW(PWSTR lpString1, PWSTR lpString2);
+		public static extern char16* lstrcatW(char16* lpString1, char16* lpString2);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 lstrlenA(PSTR lpString);
+		public static extern int32 lstrlenA(char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 lstrlenW(PWSTR lpString);
+		public static extern int32 lstrlenW(char16* lpString);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsTextUnicode(void* lpv, int32 iSize, IS_TEXT_UNICODE_RESULT* lpiResult);
+		public static extern IntBool IsTextUnicode(void* lpv, int32 iSize, IS_TEXT_UNICODE_RESULT* lpiResult);
 	}
 }

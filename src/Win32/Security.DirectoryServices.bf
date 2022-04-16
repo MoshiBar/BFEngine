@@ -17,22 +17,22 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function HRESULT PFNREADOBJECTSECURITY(PWSTR param0, uint32 param1, out SECURITY_DESCRIPTOR* param2, LPARAM param3);
-		public function HRESULT PFNWRITEOBJECTSECURITY(PWSTR param0, uint32 param1, out SECURITY_DESCRIPTOR param2, LPARAM param3);
-		public function HRESULT PFNDSCREATEISECINFO(PWSTR param0, PWSTR param1, uint32 param2, out ISecurityInformation* param3, PFNREADOBJECTSECURITY param4, PFNWRITEOBJECTSECURITY param5, LPARAM param6);
-		public function HRESULT PFNDSCREATEISECINFOEX(PWSTR param0, PWSTR param1, PWSTR param2, PWSTR param3, PWSTR param4, uint32 param5, out ISecurityInformation* param6, PFNREADOBJECTSECURITY param7, PFNWRITEOBJECTSECURITY param8, LPARAM param9);
-		public function HRESULT PFNDSCREATESECPAGE(PWSTR param0, PWSTR param1, uint32 param2, out HPROPSHEETPAGE param3, PFNREADOBJECTSECURITY param4, PFNWRITEOBJECTSECURITY param5, LPARAM param6);
-		public function HRESULT PFNDSEDITSECURITY(HWND param0, PWSTR param1, PWSTR param2, uint32 param3, PWSTR param4, PFNREADOBJECTSECURITY param5, PFNWRITEOBJECTSECURITY param6, LPARAM param7);
+		public function HResult PFNREADOBJECTSECURITY(char16* param0, uint32 param1, out SECURITY_DESCRIPTOR* param2, LPARAM param3);
+		public function HResult PFNWRITEOBJECTSECURITY(char16* param0, uint32 param1, out SECURITY_DESCRIPTOR param2, LPARAM param3);
+		public function HResult PFNDSCREATEISECINFO(char16* param0, char16* param1, uint32 param2, out ISecurityInformation* param3, PFNREADOBJECTSECURITY param4, PFNWRITEOBJECTSECURITY param5, LPARAM param6);
+		public function HResult PFNDSCREATEISECINFOEX(char16* param0, char16* param1, char16* param2, char16* param3, char16* param4, uint32 param5, out ISecurityInformation* param6, PFNREADOBJECTSECURITY param7, PFNWRITEOBJECTSECURITY param8, LPARAM param9);
+		public function HResult PFNDSCREATESECPAGE(char16* param0, char16* param1, uint32 param2, out HPROPSHEETPAGE param3, PFNREADOBJECTSECURITY param4, PFNWRITEOBJECTSECURITY param5, LPARAM param6);
+		public function HResult PFNDSEDITSECURITY(HWnd param0, char16* param1, char16* param2, uint32 param3, char16* param4, PFNREADOBJECTSECURITY param5, PFNWRITEOBJECTSECURITY param6, LPARAM param7);
 		
 		// --- Functions ---
 		
 		[Import("dssec.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DSCreateISecurityInfoObject(PWSTR pwszObjectPath, PWSTR pwszObjectClass, uint32 dwFlags, out ISecurityInformation* ppSI, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
+		public static extern HResult DSCreateISecurityInfoObject(char16* pwszObjectPath, char16* pwszObjectClass, uint32 dwFlags, out ISecurityInformation* ppSI, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
 		[Import("dssec.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DSCreateISecurityInfoObjectEx(PWSTR pwszObjectPath, PWSTR pwszObjectClass, PWSTR pwszServer, PWSTR pwszUserName, PWSTR pwszPassword, uint32 dwFlags, out ISecurityInformation* ppSI, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
+		public static extern HResult DSCreateISecurityInfoObjectEx(char16* pwszObjectPath, char16* pwszObjectClass, char16* pwszServer, char16* pwszUserName, char16* pwszPassword, uint32 dwFlags, out ISecurityInformation* ppSI, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
 		[Import("dssec.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DSCreateSecurityPage(PWSTR pwszObjectPath, PWSTR pwszObjectClass, uint32 dwFlags, out HPROPSHEETPAGE phPage, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
+		public static extern HResult DSCreateSecurityPage(char16* pwszObjectPath, char16* pwszObjectClass, uint32 dwFlags, out HPROPSHEETPAGE phPage, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
 		[Import("dssec.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DSEditSecurity(HWND hwndOwner, PWSTR pwszObjectPath, PWSTR pwszObjectClass, uint32 dwFlags, PWSTR pwszCaption, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
+		public static extern HResult DSEditSecurity(HWnd hwndOwner, char16* pwszObjectPath, char16* pwszObjectClass, uint32 dwFlags, char16* pwszCaption, PFNREADOBJECTSECURITY pfnReadSD, PFNWRITEOBJECTSECURITY pfnWriteSD, LPARAM lpContext);
 	}
 }

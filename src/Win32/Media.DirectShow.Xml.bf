@@ -18,16 +18,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BuildFromXML(ref IGraphBuilder pGraph, ref IXMLElement pxml) mut => VT.BuildFromXML(ref this, ref pGraph, ref pxml);
-			public HRESULT SaveToXML(ref IGraphBuilder pGraph, out BSTR pbstrxml) mut => VT.SaveToXML(ref this, ref pGraph, out pbstrxml);
-			public HRESULT BuildFromXMLFile(ref IGraphBuilder pGraph, PWSTR wszFileName, PWSTR wszBaseURL) mut => VT.BuildFromXMLFile(ref this, ref pGraph, wszFileName, wszBaseURL);
+			public HResult BuildFromXML(ref IGraphBuilder pGraph, ref IXMLElement pxml) mut => VT.BuildFromXML(ref this, ref pGraph, ref pxml);
+			public HResult SaveToXML(ref IGraphBuilder pGraph, out BSTR pbstrxml) mut => VT.SaveToXML(ref this, ref pGraph, out pbstrxml);
+			public HResult BuildFromXMLFile(ref IGraphBuilder pGraph, char16* wszFileName, char16* wszBaseURL) mut => VT.BuildFromXMLFile(ref this, ref pGraph, wszFileName, wszBaseURL);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLGraphBuilder self, ref IGraphBuilder pGraph, ref IXMLElement pxml) BuildFromXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLGraphBuilder self, ref IGraphBuilder pGraph, out BSTR pbstrxml) SaveToXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXMLGraphBuilder self, ref IGraphBuilder pGraph, PWSTR wszFileName, PWSTR wszBaseURL) BuildFromXMLFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLGraphBuilder self, ref IGraphBuilder pGraph, ref IXMLElement pxml) BuildFromXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLGraphBuilder self, ref IGraphBuilder pGraph, out BSTR pbstrxml) SaveToXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXMLGraphBuilder self, ref IGraphBuilder pGraph, char16* wszFileName, char16* wszBaseURL) BuildFromXMLFile;
 			}
 		}
 		

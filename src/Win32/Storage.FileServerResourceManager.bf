@@ -28,136 +28,136 @@ namespace Win32
 		public const uint32 FsrmMaxNumberPropertyDefinitions = 100;
 		public const uint32 MessageSizeLimit = 4096;
 		public const int32 FsrmDaysNotSpecified = -1;
-		public const HRESULT FSRM_S_PARTIAL_BATCH = 283396;
-		public const HRESULT FSRM_S_PARTIAL_CLASSIFICATION = 283397;
-		public const HRESULT FSRM_S_CLASSIFICATION_SCAN_FAILURES = 283398;
-		public const HRESULT FSRM_E_NOT_FOUND = -2147200255;
-		public const HRESULT FSRM_E_INVALID_SCHEDULER_ARGUMENT = -2147200254;
-		public const HRESULT FSRM_E_ALREADY_EXISTS = -2147200253;
-		public const HRESULT FSRM_E_PATH_NOT_FOUND = -2147200252;
-		public const HRESULT FSRM_E_INVALID_USER = -2147200251;
-		public const HRESULT FSRM_E_INVALID_PATH = -2147200250;
-		public const HRESULT FSRM_E_INVALID_LIMIT = -2147200249;
-		public const HRESULT FSRM_E_INVALID_NAME = -2147200248;
-		public const HRESULT FSRM_E_FAIL_BATCH = -2147200247;
-		public const HRESULT FSRM_E_INVALID_TEXT = -2147200246;
-		public const HRESULT FSRM_E_INVALID_IMPORT_VERSION = -2147200245;
-		public const HRESULT FSRM_E_OUT_OF_RANGE = -2147200243;
-		public const HRESULT FSRM_E_REQD_PARAM_MISSING = -2147200242;
-		public const HRESULT FSRM_E_INVALID_COMBINATION = -2147200241;
-		public const HRESULT FSRM_E_DUPLICATE_NAME = -2147200240;
-		public const HRESULT FSRM_E_NOT_SUPPORTED = -2147200239;
-		public const HRESULT FSRM_E_DRIVER_NOT_READY = -2147200237;
-		public const HRESULT FSRM_E_INSUFFICIENT_DISK = -2147200236;
-		public const HRESULT FSRM_E_VOLUME_UNSUPPORTED = -2147200235;
-		public const HRESULT FSRM_E_UNEXPECTED = -2147200234;
-		public const HRESULT FSRM_E_INSECURE_PATH = -2147200233;
-		public const HRESULT FSRM_E_INVALID_SMTP_SERVER = -2147200232;
-		public const HRESULT FSRM_E_AUTO_QUOTA = 283419;
-		public const HRESULT FSRM_E_EMAIL_NOT_SENT = -2147200228;
-		public const HRESULT FSRM_E_INVALID_EMAIL_ADDRESS = -2147200226;
-		public const HRESULT FSRM_E_FILE_SYSTEM_CORRUPT = -2147200225;
-		public const HRESULT FSRM_E_LONG_CMDLINE = -2147200224;
-		public const HRESULT FSRM_E_INVALID_FILEGROUP_DEFINITION = -2147200223;
-		public const HRESULT FSRM_E_INVALID_DATASCREEN_DEFINITION = -2147200220;
-		public const HRESULT FSRM_E_INVALID_REPORT_FORMAT = -2147200216;
-		public const HRESULT FSRM_E_INVALID_REPORT_DESC = -2147200215;
-		public const HRESULT FSRM_E_INVALID_FILENAME = -2147200214;
-		public const HRESULT FSRM_E_SHADOW_COPY = -2147200212;
-		public const HRESULT FSRM_E_XML_CORRUPTED = -2147200211;
-		public const HRESULT FSRM_E_CLUSTER_NOT_RUNNING = -2147200210;
-		public const HRESULT FSRM_E_STORE_NOT_INSTALLED = -2147200209;
-		public const HRESULT FSRM_E_NOT_CLUSTER_VOLUME = -2147200208;
-		public const HRESULT FSRM_E_DIFFERENT_CLUSTER_GROUP = -2147200207;
-		public const HRESULT FSRM_E_REPORT_TYPE_ALREADY_EXISTS = -2147200206;
-		public const HRESULT FSRM_E_REPORT_JOB_ALREADY_RUNNING = -2147200205;
-		public const HRESULT FSRM_E_REPORT_GENERATION_ERR = -2147200204;
-		public const HRESULT FSRM_E_REPORT_TASK_TRIGGER = -2147200203;
-		public const HRESULT FSRM_E_LOADING_DISABLED_MODULE = -2147200202;
-		public const HRESULT FSRM_E_CANNOT_AGGREGATE = -2147200201;
-		public const HRESULT FSRM_E_MESSAGE_LIMIT_EXCEEDED = -2147200200;
-		public const HRESULT FSRM_E_OBJECT_IN_USE = -2147200199;
-		public const HRESULT FSRM_E_CANNOT_RENAME_PROPERTY = -2147200198;
-		public const HRESULT FSRM_E_CANNOT_CHANGE_PROPERTY_TYPE = -2147200197;
-		public const HRESULT FSRM_E_MAX_PROPERTY_DEFINITIONS = -2147200196;
-		public const HRESULT FSRM_E_CLASSIFICATION_ALREADY_RUNNING = -2147200195;
-		public const HRESULT FSRM_E_CLASSIFICATION_NOT_RUNNING = -2147200194;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_ALREADY_RUNNING = -2147200193;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_EXPIRATION = -2147200192;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_CUSTOM = -2147200191;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_NOTIFICATION = -2147200190;
-		public const HRESULT FSRM_E_FILE_OPEN_ERROR = -2147200189;
-		public const HRESULT FSRM_E_UNSECURE_LINK_TO_HOSTED_MODULE = -2147200188;
-		public const HRESULT FSRM_E_CACHE_INVALID = -2147200187;
-		public const HRESULT FSRM_E_CACHE_MODULE_ALREADY_EXISTS = -2147200186;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_EXPIRATION_DIR_IN_SCOPE = -2147200185;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_ALREADY_EXISTS = -2147200184;
-		public const HRESULT FSRM_E_PROPERTY_DELETED = -2147200183;
-		public const HRESULT FSRM_E_LAST_ACCESS_UPDATE_DISABLED = -2147200176;
-		public const HRESULT FSRM_E_NO_PROPERTY_VALUE = -2147200175;
-		public const HRESULT FSRM_E_INPROC_MODULE_BLOCKED = -2147200174;
-		public const HRESULT FSRM_E_ENUM_PROPERTIES_FAILED = -2147200173;
-		public const HRESULT FSRM_E_SET_PROPERTY_FAILED = -2147200172;
-		public const HRESULT FSRM_E_CANNOT_STORE_PROPERTIES = -2147200171;
-		public const HRESULT FSRM_E_CANNOT_ALLOW_REPARSE_POINT_TAG = -2147200170;
-		public const HRESULT FSRM_E_PARTIAL_CLASSIFICATION_PROPERTY_NOT_FOUND = -2147200169;
-		public const HRESULT FSRM_E_TEXTREADER_NOT_INITIALIZED = -2147200168;
-		public const HRESULT FSRM_E_TEXTREADER_IFILTER_NOT_FOUND = -2147200167;
-		public const HRESULT FSRM_E_PERSIST_PROPERTIES_FAILED_ENCRYPTED = -2147200166;
-		public const HRESULT FSRM_E_TEXTREADER_IFILTER_CLSID_MALFORMED = -2147200160;
-		public const HRESULT FSRM_E_TEXTREADER_STREAM_ERROR = -2147200159;
-		public const HRESULT FSRM_E_TEXTREADER_FILENAME_TOO_LONG = -2147200158;
-		public const HRESULT FSRM_E_INCOMPATIBLE_FORMAT = -2147200157;
-		public const HRESULT FSRM_E_FILE_ENCRYPTED = -2147200156;
-		public const HRESULT FSRM_E_PERSIST_PROPERTIES_FAILED = -2147200155;
-		public const HRESULT FSRM_E_VOLUME_OFFLINE = -2147200154;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_ACTION_TIMEOUT = -2147200153;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_ACTION_GET_EXITCODE_FAILED = -2147200152;
-		public const HRESULT FSRM_E_MODULE_INVALID_PARAM = -2147200151;
-		public const HRESULT FSRM_E_MODULE_INITIALIZATION = -2147200150;
-		public const HRESULT FSRM_E_MODULE_SESSION_INITIALIZATION = -2147200149;
-		public const HRESULT FSRM_E_CLASSIFICATION_SCAN_FAIL = -2147200148;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_NOT_LEGACY_ACCESSIBLE = -2147200147;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_MAX_FILE_CONDITIONS = -2147200146;
-		public const HRESULT FSRM_E_CANNOT_USE_DEPRECATED_PROPERTY = -2147200145;
-		public const HRESULT FSRM_E_SYNC_TASK_TIMEOUT = -2147200144;
-		public const HRESULT FSRM_E_CANNOT_USE_DELETED_PROPERTY = -2147200143;
-		public const HRESULT FSRM_E_INVALID_AD_CLAIM = -2147200142;
-		public const HRESULT FSRM_E_CLASSIFICATION_CANCELED = -2147200141;
-		public const HRESULT FSRM_E_INVALID_FOLDER_PROPERTY_STORE = -2147200140;
-		public const HRESULT FSRM_E_REBUILDING_FODLER_TYPE_INDEX = -2147200139;
-		public const HRESULT FSRM_E_PROPERTY_MUST_APPLY_TO_FILES = -2147200138;
-		public const HRESULT FSRM_E_CLASSIFICATION_TIMEOUT = -2147200137;
-		public const HRESULT FSRM_E_CLASSIFICATION_PARTIAL_BATCH = -2147200136;
-		public const HRESULT FSRM_E_CANNOT_DELETE_SYSTEM_PROPERTY = -2147200135;
-		public const HRESULT FSRM_E_FILE_IN_USE = -2147200134;
-		public const HRESULT FSRM_E_ERROR_NOT_ENABLED = -2147200133;
-		public const HRESULT FSRM_E_CANNOT_CREATE_TEMP_COPY = -2147200132;
-		public const HRESULT FSRM_E_NO_EMAIL_ADDRESS = -2147200131;
-		public const HRESULT FSRM_E_ADR_MAX_EMAILS_SENT = -2147200130;
-		public const HRESULT FSRM_E_PATH_NOT_IN_NAMESPACE = -2147200129;
-		public const HRESULT FSRM_E_RMS_TEMPLATE_NOT_FOUND = -2147200128;
-		public const HRESULT FSRM_E_SECURE_PROPERTIES_NOT_SUPPORTED = -2147200127;
-		public const HRESULT FSRM_E_RMS_NO_PROTECTORS_INSTALLED = -2147200126;
-		public const HRESULT FSRM_E_RMS_NO_PROTECTOR_INSTALLED_FOR_FILE = -2147200125;
-		public const HRESULT FSRM_E_PROPERTY_MUST_APPLY_TO_FOLDERS = -2147200124;
-		public const HRESULT FSRM_E_PROPERTY_MUST_BE_SECURE = -2147200123;
-		public const HRESULT FSRM_E_PROPERTY_MUST_BE_GLOBAL = -2147200122;
-		public const HRESULT FSRM_E_WMI_FAILURE = -2147200121;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_RMS = -2147200120;
-		public const HRESULT FSRM_E_SYNC_TASK_HAD_ERRORS = -2147200119;
-		public const HRESULT FSRM_E_ADR_SRV_NOT_SUPPORTED = -2147200112;
-		public const HRESULT FSRM_E_ADR_PATH_IS_LOCAL = -2147200111;
-		public const HRESULT FSRM_E_ADR_NOT_DOMAIN_JOINED = -2147200110;
-		public const HRESULT FSRM_E_CANNOT_REMOVE_READONLY = -2147200109;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_INVALID_CONTINUOUS_CONFIG = -2147200108;
-		public const HRESULT FSRM_E_LEGACY_SCHEDULE = -2147200107;
-		public const HRESULT FSRM_E_CSC_PATH_NOT_SUPPORTED = -2147200106;
-		public const HRESULT FSRM_E_EXPIRATION_PATH_NOT_WRITEABLE = -2147200105;
-		public const HRESULT FSRM_E_EXPIRATION_PATH_TOO_LONG = -2147200104;
-		public const HRESULT FSRM_E_EXPIRATION_VOLUME_NOT_NTFS = -2147200103;
-		public const HRESULT FSRM_E_FILE_MANAGEMENT_JOB_DEPRECATED = -2147200102;
-		public const HRESULT FSRM_E_MODULE_TIMEOUT = -2147200101;
+		public const HResult FSRM_S_PARTIAL_BATCH = 283396;
+		public const HResult FSRM_S_PARTIAL_CLASSIFICATION = 283397;
+		public const HResult FSRM_S_CLASSIFICATION_SCAN_FAILURES = 283398;
+		public const HResult FSRM_E_NOT_FOUND = -2147200255;
+		public const HResult FSRM_E_INVALID_SCHEDULER_ARGUMENT = -2147200254;
+		public const HResult FSRM_E_ALREADY_EXISTS = -2147200253;
+		public const HResult FSRM_E_PATH_NOT_FOUND = -2147200252;
+		public const HResult FSRM_E_INVALID_USER = -2147200251;
+		public const HResult FSRM_E_INVALID_PATH = -2147200250;
+		public const HResult FSRM_E_INVALID_LIMIT = -2147200249;
+		public const HResult FSRM_E_INVALID_NAME = -2147200248;
+		public const HResult FSRM_E_FAIL_BATCH = -2147200247;
+		public const HResult FSRM_E_INVALID_TEXT = -2147200246;
+		public const HResult FSRM_E_INVALID_IMPORT_VERSION = -2147200245;
+		public const HResult FSRM_E_OUT_OF_RANGE = -2147200243;
+		public const HResult FSRM_E_REQD_PARAM_MISSING = -2147200242;
+		public const HResult FSRM_E_INVALID_COMBINATION = -2147200241;
+		public const HResult FSRM_E_DUPLICATE_NAME = -2147200240;
+		public const HResult FSRM_E_NOT_SUPPORTED = -2147200239;
+		public const HResult FSRM_E_DRIVER_NOT_READY = -2147200237;
+		public const HResult FSRM_E_INSUFFICIENT_DISK = -2147200236;
+		public const HResult FSRM_E_VOLUME_UNSUPPORTED = -2147200235;
+		public const HResult FSRM_E_UNEXPECTED = -2147200234;
+		public const HResult FSRM_E_INSECURE_PATH = -2147200233;
+		public const HResult FSRM_E_INVALID_SMTP_SERVER = -2147200232;
+		public const HResult FSRM_E_AUTO_QUOTA = 283419;
+		public const HResult FSRM_E_EMAIL_NOT_SENT = -2147200228;
+		public const HResult FSRM_E_INVALID_EMAIL_ADDRESS = -2147200226;
+		public const HResult FSRM_E_FILE_SYSTEM_CORRUPT = -2147200225;
+		public const HResult FSRM_E_LONG_CMDLINE = -2147200224;
+		public const HResult FSRM_E_INVALID_FILEGROUP_DEFINITION = -2147200223;
+		public const HResult FSRM_E_INVALID_DATASCREEN_DEFINITION = -2147200220;
+		public const HResult FSRM_E_INVALID_REPORT_FORMAT = -2147200216;
+		public const HResult FSRM_E_INVALID_REPORT_DESC = -2147200215;
+		public const HResult FSRM_E_INVALID_FILENAME = -2147200214;
+		public const HResult FSRM_E_SHADOW_COPY = -2147200212;
+		public const HResult FSRM_E_XML_CORRUPTED = -2147200211;
+		public const HResult FSRM_E_CLUSTER_NOT_RUNNING = -2147200210;
+		public const HResult FSRM_E_STORE_NOT_INSTALLED = -2147200209;
+		public const HResult FSRM_E_NOT_CLUSTER_VOLUME = -2147200208;
+		public const HResult FSRM_E_DIFFERENT_CLUSTER_GROUP = -2147200207;
+		public const HResult FSRM_E_REPORT_TYPE_ALREADY_EXISTS = -2147200206;
+		public const HResult FSRM_E_REPORT_JOB_ALREADY_RUNNING = -2147200205;
+		public const HResult FSRM_E_REPORT_GENERATION_ERR = -2147200204;
+		public const HResult FSRM_E_REPORT_TASK_TRIGGER = -2147200203;
+		public const HResult FSRM_E_LOADING_DISABLED_MODULE = -2147200202;
+		public const HResult FSRM_E_CANNOT_AGGREGATE = -2147200201;
+		public const HResult FSRM_E_MESSAGE_LIMIT_EXCEEDED = -2147200200;
+		public const HResult FSRM_E_OBJECT_IN_USE = -2147200199;
+		public const HResult FSRM_E_CANNOT_RENAME_PROPERTY = -2147200198;
+		public const HResult FSRM_E_CANNOT_CHANGE_PROPERTY_TYPE = -2147200197;
+		public const HResult FSRM_E_MAX_PROPERTY_DEFINITIONS = -2147200196;
+		public const HResult FSRM_E_CLASSIFICATION_ALREADY_RUNNING = -2147200195;
+		public const HResult FSRM_E_CLASSIFICATION_NOT_RUNNING = -2147200194;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_ALREADY_RUNNING = -2147200193;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_EXPIRATION = -2147200192;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_CUSTOM = -2147200191;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_NOTIFICATION = -2147200190;
+		public const HResult FSRM_E_FILE_OPEN_ERROR = -2147200189;
+		public const HResult FSRM_E_UNSECURE_LINK_TO_HOSTED_MODULE = -2147200188;
+		public const HResult FSRM_E_CACHE_INVALID = -2147200187;
+		public const HResult FSRM_E_CACHE_MODULE_ALREADY_EXISTS = -2147200186;
+		public const HResult FSRM_E_FILE_MANAGEMENT_EXPIRATION_DIR_IN_SCOPE = -2147200185;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_ALREADY_EXISTS = -2147200184;
+		public const HResult FSRM_E_PROPERTY_DELETED = -2147200183;
+		public const HResult FSRM_E_LAST_ACCESS_UPDATE_DISABLED = -2147200176;
+		public const HResult FSRM_E_NO_PROPERTY_VALUE = -2147200175;
+		public const HResult FSRM_E_INPROC_MODULE_BLOCKED = -2147200174;
+		public const HResult FSRM_E_ENUM_PROPERTIES_FAILED = -2147200173;
+		public const HResult FSRM_E_SET_PROPERTY_FAILED = -2147200172;
+		public const HResult FSRM_E_CANNOT_STORE_PROPERTIES = -2147200171;
+		public const HResult FSRM_E_CANNOT_ALLOW_REPARSE_POINT_TAG = -2147200170;
+		public const HResult FSRM_E_PARTIAL_CLASSIFICATION_PROPERTY_NOT_FOUND = -2147200169;
+		public const HResult FSRM_E_TEXTREADER_NOT_INITIALIZED = -2147200168;
+		public const HResult FSRM_E_TEXTREADER_IFILTER_NOT_FOUND = -2147200167;
+		public const HResult FSRM_E_PERSIST_PROPERTIES_FAILED_ENCRYPTED = -2147200166;
+		public const HResult FSRM_E_TEXTREADER_IFILTER_CLSID_MALFORMED = -2147200160;
+		public const HResult FSRM_E_TEXTREADER_STREAM_ERROR = -2147200159;
+		public const HResult FSRM_E_TEXTREADER_FILENAME_TOO_LONG = -2147200158;
+		public const HResult FSRM_E_INCOMPATIBLE_FORMAT = -2147200157;
+		public const HResult FSRM_E_FILE_ENCRYPTED = -2147200156;
+		public const HResult FSRM_E_PERSIST_PROPERTIES_FAILED = -2147200155;
+		public const HResult FSRM_E_VOLUME_OFFLINE = -2147200154;
+		public const HResult FSRM_E_FILE_MANAGEMENT_ACTION_TIMEOUT = -2147200153;
+		public const HResult FSRM_E_FILE_MANAGEMENT_ACTION_GET_EXITCODE_FAILED = -2147200152;
+		public const HResult FSRM_E_MODULE_INVALID_PARAM = -2147200151;
+		public const HResult FSRM_E_MODULE_INITIALIZATION = -2147200150;
+		public const HResult FSRM_E_MODULE_SESSION_INITIALIZATION = -2147200149;
+		public const HResult FSRM_E_CLASSIFICATION_SCAN_FAIL = -2147200148;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_NOT_LEGACY_ACCESSIBLE = -2147200147;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_MAX_FILE_CONDITIONS = -2147200146;
+		public const HResult FSRM_E_CANNOT_USE_DEPRECATED_PROPERTY = -2147200145;
+		public const HResult FSRM_E_SYNC_TASK_TIMEOUT = -2147200144;
+		public const HResult FSRM_E_CANNOT_USE_DELETED_PROPERTY = -2147200143;
+		public const HResult FSRM_E_INVALID_AD_CLAIM = -2147200142;
+		public const HResult FSRM_E_CLASSIFICATION_CANCELED = -2147200141;
+		public const HResult FSRM_E_INVALID_FOLDER_PROPERTY_STORE = -2147200140;
+		public const HResult FSRM_E_REBUILDING_FODLER_TYPE_INDEX = -2147200139;
+		public const HResult FSRM_E_PROPERTY_MUST_APPLY_TO_FILES = -2147200138;
+		public const HResult FSRM_E_CLASSIFICATION_TIMEOUT = -2147200137;
+		public const HResult FSRM_E_CLASSIFICATION_PARTIAL_BATCH = -2147200136;
+		public const HResult FSRM_E_CANNOT_DELETE_SYSTEM_PROPERTY = -2147200135;
+		public const HResult FSRM_E_FILE_IN_USE = -2147200134;
+		public const HResult FSRM_E_ERROR_NOT_ENABLED = -2147200133;
+		public const HResult FSRM_E_CANNOT_CREATE_TEMP_COPY = -2147200132;
+		public const HResult FSRM_E_NO_EMAIL_ADDRESS = -2147200131;
+		public const HResult FSRM_E_ADR_MAX_EMAILS_SENT = -2147200130;
+		public const HResult FSRM_E_PATH_NOT_IN_NAMESPACE = -2147200129;
+		public const HResult FSRM_E_RMS_TEMPLATE_NOT_FOUND = -2147200128;
+		public const HResult FSRM_E_SECURE_PROPERTIES_NOT_SUPPORTED = -2147200127;
+		public const HResult FSRM_E_RMS_NO_PROTECTORS_INSTALLED = -2147200126;
+		public const HResult FSRM_E_RMS_NO_PROTECTOR_INSTALLED_FOR_FILE = -2147200125;
+		public const HResult FSRM_E_PROPERTY_MUST_APPLY_TO_FOLDERS = -2147200124;
+		public const HResult FSRM_E_PROPERTY_MUST_BE_SECURE = -2147200123;
+		public const HResult FSRM_E_PROPERTY_MUST_BE_GLOBAL = -2147200122;
+		public const HResult FSRM_E_WMI_FAILURE = -2147200121;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_RMS = -2147200120;
+		public const HResult FSRM_E_SYNC_TASK_HAD_ERRORS = -2147200119;
+		public const HResult FSRM_E_ADR_SRV_NOT_SUPPORTED = -2147200112;
+		public const HResult FSRM_E_ADR_PATH_IS_LOCAL = -2147200111;
+		public const HResult FSRM_E_ADR_NOT_DOMAIN_JOINED = -2147200110;
+		public const HResult FSRM_E_CANNOT_REMOVE_READONLY = -2147200109;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_INVALID_CONTINUOUS_CONFIG = -2147200108;
+		public const HResult FSRM_E_LEGACY_SCHEDULE = -2147200107;
+		public const HResult FSRM_E_CSC_PATH_NOT_SUPPORTED = -2147200106;
+		public const HResult FSRM_E_EXPIRATION_PATH_NOT_WRITEABLE = -2147200105;
+		public const HResult FSRM_E_EXPIRATION_PATH_TOO_LONG = -2147200104;
+		public const HResult FSRM_E_EXPIRATION_VOLUME_NOT_NTFS = -2147200103;
+		public const HResult FSRM_E_FILE_MANAGEMENT_JOB_DEPRECATED = -2147200102;
+		public const HResult FSRM_E_MODULE_TIMEOUT = -2147200101;
 		
 		// --- Enums ---
 		
@@ -521,20 +521,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Id(out Guid id) mut => VT.get_Id(ref this, out id);
-			public HRESULT get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
-			public HRESULT put_Description(BSTR description) mut => VT.put_Description(ref this, description);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Commit() mut => VT.Commit(ref this);
+			public HResult get_Id(out Guid id) mut => VT.get_Id(ref this, out id);
+			public HResult get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
+			public HResult put_Description(BSTR description) mut => VT.put_Description(ref this, description);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Commit() mut => VT.Commit(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmObject self, out Guid id) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmObject self, out BSTR description) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmObject self, BSTR description) put_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmObject self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmObject self) Commit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmObject self, out Guid id) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmObject self, out BSTR description) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmObject self, BSTR description) put_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmObject self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmObject self) Commit;
 			}
 		}
 		[CRepr]
@@ -544,24 +544,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get__NewEnum(out IUnknown* unknown) mut => VT.get__NewEnum(ref this, out unknown);
-			public HRESULT get_Item(int32 index, out VARIANT item) mut => VT.get_Item(ref this, index, out item);
-			public HRESULT get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
-			public HRESULT get_State(out FsrmCollectionState state) mut => VT.get_State(ref this, out state);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
-			public HRESULT WaitForCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForCompletion(ref this, waitSeconds, out completed);
-			public HRESULT GetById(Guid id, out VARIANT entry) mut => VT.GetById(ref this, id, out entry);
+			public HResult get__NewEnum(out IUnknown* unknown) mut => VT.get__NewEnum(ref this, out unknown);
+			public HResult get_Item(int32 index, out VARIANT item) mut => VT.get_Item(ref this, index, out item);
+			public HResult get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
+			public HResult get_State(out FsrmCollectionState state) mut => VT.get_State(ref this, out state);
+			public HResult Cancel() mut => VT.Cancel(ref this);
+			public HResult WaitForCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForCompletion(ref this, waitSeconds, out completed);
+			public HResult GetById(Guid id, out VARIANT entry) mut => VT.GetById(ref this, id, out entry);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self, out IUnknown* unknown) get__NewEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self, int32 index, out VARIANT item) get_Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self, out int32 count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self, out FsrmCollectionState state) get_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self, int32 waitSeconds, out int16 completed) WaitForCompletion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCollection self, Guid id, out VARIANT entry) GetById;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self, out IUnknown* unknown) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self, int32 index, out VARIANT item) get_Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self, out int32 count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self, out FsrmCollectionState state) get_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self, int32 waitSeconds, out int16 completed) WaitForCompletion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCollection self, Guid id, out VARIANT entry) GetById;
 			}
 		}
 		[CRepr]
@@ -571,18 +571,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Add(VARIANT item) mut => VT.Add(ref this, item);
-			public HRESULT Remove(int32 index) mut => VT.Remove(ref this, index);
-			public HRESULT RemoveById(Guid id) mut => VT.RemoveById(ref this, id);
-			public HRESULT Clone(out IFsrmMutableCollection* collection) mut => VT.Clone(ref this, out collection);
+			public HResult Add(VARIANT item) mut => VT.Add(ref this, item);
+			public HResult Remove(int32 index) mut => VT.Remove(ref this, index);
+			public HResult RemoveById(Guid id) mut => VT.RemoveById(ref this, id);
+			public HResult Clone(out IFsrmMutableCollection* collection) mut => VT.Clone(ref this, out collection);
 
 			[CRepr]
 			public struct VTable : IFsrmCollection.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmMutableCollection self, VARIANT item) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmMutableCollection self, int32 index) Remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmMutableCollection self, Guid id) RemoveById;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmMutableCollection self, out IFsrmMutableCollection* collection) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmMutableCollection self, VARIANT item) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmMutableCollection self, int32 index) Remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmMutableCollection self, Guid id) RemoveById;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmMutableCollection self, out IFsrmMutableCollection* collection) Clone;
 			}
 		}
 		[CRepr]
@@ -592,12 +592,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Commit(FsrmCommitOptions options, out IFsrmCollection* results) mut => VT.Commit(ref this, options, out results);
+			public HResult Commit(FsrmCommitOptions options, out IFsrmCollection* results) mut => VT.Commit(ref this, options, out results);
 
 			[CRepr]
 			public struct VTable : IFsrmMutableCollection.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmCommittableCollection self, FsrmCommitOptions options, out IFsrmCollection* results) Commit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmCommittableCollection self, FsrmCommitOptions options, out IFsrmCollection* results) Commit;
 			}
 		}
 		[CRepr]
@@ -607,20 +607,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Id(out Guid id) mut => VT.get_Id(ref this, out id);
-			public HRESULT get_ActionType(out FsrmActionType actionType) mut => VT.get_ActionType(ref this, out actionType);
-			public HRESULT get_RunLimitInterval(out int32 minutes) mut => VT.get_RunLimitInterval(ref this, out minutes);
-			public HRESULT put_RunLimitInterval(int32 minutes) mut => VT.put_RunLimitInterval(ref this, minutes);
-			public HRESULT Delete() mut => VT.Delete(ref this);
+			public HResult get_Id(out Guid id) mut => VT.get_Id(ref this, out id);
+			public HResult get_ActionType(out FsrmActionType actionType) mut => VT.get_ActionType(ref this, out actionType);
+			public HResult get_RunLimitInterval(out int32 minutes) mut => VT.get_RunLimitInterval(ref this, out minutes);
+			public HResult put_RunLimitInterval(int32 minutes) mut => VT.put_RunLimitInterval(ref this, minutes);
+			public HResult Delete() mut => VT.Delete(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAction self, out Guid id) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAction self, out FsrmActionType actionType) get_ActionType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAction self, out int32 minutes) get_RunLimitInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAction self, int32 minutes) put_RunLimitInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAction self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAction self, out Guid id) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAction self, out FsrmActionType actionType) get_ActionType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAction self, out int32 minutes) get_RunLimitInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAction self, int32 minutes) put_RunLimitInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAction self) Delete;
 			}
 		}
 		[CRepr]
@@ -630,38 +630,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_MailFrom(out BSTR mailFrom) mut => VT.get_MailFrom(ref this, out mailFrom);
-			public HRESULT put_MailFrom(BSTR mailFrom) mut => VT.put_MailFrom(ref this, mailFrom);
-			public HRESULT get_MailReplyTo(out BSTR mailReplyTo) mut => VT.get_MailReplyTo(ref this, out mailReplyTo);
-			public HRESULT put_MailReplyTo(BSTR mailReplyTo) mut => VT.put_MailReplyTo(ref this, mailReplyTo);
-			public HRESULT get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
-			public HRESULT put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
-			public HRESULT get_MailCc(out BSTR mailCc) mut => VT.get_MailCc(ref this, out mailCc);
-			public HRESULT put_MailCc(BSTR mailCc) mut => VT.put_MailCc(ref this, mailCc);
-			public HRESULT get_MailBcc(out BSTR mailBcc) mut => VT.get_MailBcc(ref this, out mailBcc);
-			public HRESULT put_MailBcc(BSTR mailBcc) mut => VT.put_MailBcc(ref this, mailBcc);
-			public HRESULT get_MailSubject(out BSTR mailSubject) mut => VT.get_MailSubject(ref this, out mailSubject);
-			public HRESULT put_MailSubject(BSTR mailSubject) mut => VT.put_MailSubject(ref this, mailSubject);
-			public HRESULT get_MessageText(out BSTR messageText) mut => VT.get_MessageText(ref this, out messageText);
-			public HRESULT put_MessageText(BSTR messageText) mut => VT.put_MessageText(ref this, messageText);
+			public HResult get_MailFrom(out BSTR mailFrom) mut => VT.get_MailFrom(ref this, out mailFrom);
+			public HResult put_MailFrom(BSTR mailFrom) mut => VT.put_MailFrom(ref this, mailFrom);
+			public HResult get_MailReplyTo(out BSTR mailReplyTo) mut => VT.get_MailReplyTo(ref this, out mailReplyTo);
+			public HResult put_MailReplyTo(BSTR mailReplyTo) mut => VT.put_MailReplyTo(ref this, mailReplyTo);
+			public HResult get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
+			public HResult put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
+			public HResult get_MailCc(out BSTR mailCc) mut => VT.get_MailCc(ref this, out mailCc);
+			public HResult put_MailCc(BSTR mailCc) mut => VT.put_MailCc(ref this, mailCc);
+			public HResult get_MailBcc(out BSTR mailBcc) mut => VT.get_MailBcc(ref this, out mailBcc);
+			public HResult put_MailBcc(BSTR mailBcc) mut => VT.put_MailBcc(ref this, mailBcc);
+			public HResult get_MailSubject(out BSTR mailSubject) mut => VT.get_MailSubject(ref this, out mailSubject);
+			public HResult put_MailSubject(BSTR mailSubject) mut => VT.put_MailSubject(ref this, mailSubject);
+			public HResult get_MessageText(out BSTR messageText) mut => VT.get_MessageText(ref this, out messageText);
+			public HResult put_MessageText(BSTR messageText) mut => VT.put_MessageText(ref this, messageText);
 
 			[CRepr]
 			public struct VTable : IFsrmAction.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR mailFrom) get_MailFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR mailFrom) put_MailFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR mailReplyTo) get_MailReplyTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR mailReplyTo) put_MailReplyTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR mailTo) get_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR mailTo) put_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR mailCc) get_MailCc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR mailCc) put_MailCc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR mailBcc) get_MailBcc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR mailBcc) put_MailBcc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR mailSubject) get_MailSubject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR mailSubject) put_MailSubject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, out BSTR messageText) get_MessageText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail self, BSTR messageText) put_MessageText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR mailFrom) get_MailFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR mailFrom) put_MailFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR mailReplyTo) get_MailReplyTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR mailReplyTo) put_MailReplyTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR mailTo) get_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR mailTo) put_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR mailCc) get_MailCc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR mailCc) put_MailCc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR mailBcc) get_MailBcc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR mailBcc) put_MailBcc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR mailSubject) get_MailSubject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR mailSubject) put_MailSubject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, out BSTR messageText) get_MessageText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail self, BSTR messageText) put_MessageText;
 			}
 		}
 		[CRepr]
@@ -671,14 +671,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AttachmentFileListSize(out int32 attachmentFileListSize) mut => VT.get_AttachmentFileListSize(ref this, out attachmentFileListSize);
-			public HRESULT put_AttachmentFileListSize(int32 attachmentFileListSize) mut => VT.put_AttachmentFileListSize(ref this, attachmentFileListSize);
+			public HResult get_AttachmentFileListSize(out int32 attachmentFileListSize) mut => VT.get_AttachmentFileListSize(ref this, out attachmentFileListSize);
+			public HResult put_AttachmentFileListSize(int32 attachmentFileListSize) mut => VT.put_AttachmentFileListSize(ref this, attachmentFileListSize);
 
 			[CRepr]
 			public struct VTable : IFsrmActionEmail.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail2 self, out int32 attachmentFileListSize) get_AttachmentFileListSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEmail2 self, int32 attachmentFileListSize) put_AttachmentFileListSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail2 self, out int32 attachmentFileListSize) get_AttachmentFileListSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEmail2 self, int32 attachmentFileListSize) put_AttachmentFileListSize;
 			}
 		}
 		[CRepr]
@@ -688,18 +688,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ReportTypes(out SAFEARRAY* reportTypes) mut => VT.get_ReportTypes(ref this, out reportTypes);
-			public HRESULT put_ReportTypes(ref SAFEARRAY reportTypes) mut => VT.put_ReportTypes(ref this, ref reportTypes);
-			public HRESULT get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
-			public HRESULT put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
+			public HResult get_ReportTypes(out SAFEARRAY* reportTypes) mut => VT.get_ReportTypes(ref this, out reportTypes);
+			public HResult put_ReportTypes(ref SAFEARRAY reportTypes) mut => VT.put_ReportTypes(ref this, ref reportTypes);
+			public HResult get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
+			public HResult put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
 
 			[CRepr]
 			public struct VTable : IFsrmAction.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionReport self, out SAFEARRAY* reportTypes) get_ReportTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionReport self, ref SAFEARRAY reportTypes) put_ReportTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionReport self, out BSTR mailTo) get_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionReport self, BSTR mailTo) put_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionReport self, out SAFEARRAY* reportTypes) get_ReportTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionReport self, ref SAFEARRAY reportTypes) put_ReportTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionReport self, out BSTR mailTo) get_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionReport self, BSTR mailTo) put_MailTo;
 			}
 		}
 		[CRepr]
@@ -709,18 +709,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_EventType(out FsrmEventType eventType) mut => VT.get_EventType(ref this, out eventType);
-			public HRESULT put_EventType(FsrmEventType eventType) mut => VT.put_EventType(ref this, eventType);
-			public HRESULT get_MessageText(out BSTR messageText) mut => VT.get_MessageText(ref this, out messageText);
-			public HRESULT put_MessageText(BSTR messageText) mut => VT.put_MessageText(ref this, messageText);
+			public HResult get_EventType(out FsrmEventType eventType) mut => VT.get_EventType(ref this, out eventType);
+			public HResult put_EventType(FsrmEventType eventType) mut => VT.put_EventType(ref this, eventType);
+			public HResult get_MessageText(out BSTR messageText) mut => VT.get_MessageText(ref this, out messageText);
+			public HResult put_MessageText(BSTR messageText) mut => VT.put_MessageText(ref this, messageText);
 
 			[CRepr]
 			public struct VTable : IFsrmAction.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEventLog self, out FsrmEventType eventType) get_EventType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEventLog self, FsrmEventType eventType) put_EventType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEventLog self, out BSTR messageText) get_MessageText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionEventLog self, BSTR messageText) put_MessageText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEventLog self, out FsrmEventType eventType) get_EventType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEventLog self, FsrmEventType eventType) put_EventType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEventLog self, out BSTR messageText) get_MessageText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionEventLog self, BSTR messageText) put_MessageText;
 			}
 		}
 		[CRepr]
@@ -730,38 +730,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ExecutablePath(out BSTR executablePath) mut => VT.get_ExecutablePath(ref this, out executablePath);
-			public HRESULT put_ExecutablePath(BSTR executablePath) mut => VT.put_ExecutablePath(ref this, executablePath);
-			public HRESULT get_Arguments(out BSTR arguments) mut => VT.get_Arguments(ref this, out arguments);
-			public HRESULT put_Arguments(BSTR arguments) mut => VT.put_Arguments(ref this, arguments);
-			public HRESULT get_Account(out FsrmAccountType account) mut => VT.get_Account(ref this, out account);
-			public HRESULT put_Account(FsrmAccountType account) mut => VT.put_Account(ref this, account);
-			public HRESULT get_WorkingDirectory(out BSTR workingDirectory) mut => VT.get_WorkingDirectory(ref this, out workingDirectory);
-			public HRESULT put_WorkingDirectory(BSTR workingDirectory) mut => VT.put_WorkingDirectory(ref this, workingDirectory);
-			public HRESULT get_MonitorCommand(out int16 monitorCommand) mut => VT.get_MonitorCommand(ref this, out monitorCommand);
-			public HRESULT put_MonitorCommand(int16 monitorCommand) mut => VT.put_MonitorCommand(ref this, monitorCommand);
-			public HRESULT get_KillTimeOut(out int32 minutes) mut => VT.get_KillTimeOut(ref this, out minutes);
-			public HRESULT put_KillTimeOut(int32 minutes) mut => VT.put_KillTimeOut(ref this, minutes);
-			public HRESULT get_LogResult(out int16 logResults) mut => VT.get_LogResult(ref this, out logResults);
-			public HRESULT put_LogResult(int16 logResults) mut => VT.put_LogResult(ref this, logResults);
+			public HResult get_ExecutablePath(out BSTR executablePath) mut => VT.get_ExecutablePath(ref this, out executablePath);
+			public HResult put_ExecutablePath(BSTR executablePath) mut => VT.put_ExecutablePath(ref this, executablePath);
+			public HResult get_Arguments(out BSTR arguments) mut => VT.get_Arguments(ref this, out arguments);
+			public HResult put_Arguments(BSTR arguments) mut => VT.put_Arguments(ref this, arguments);
+			public HResult get_Account(out FsrmAccountType account) mut => VT.get_Account(ref this, out account);
+			public HResult put_Account(FsrmAccountType account) mut => VT.put_Account(ref this, account);
+			public HResult get_WorkingDirectory(out BSTR workingDirectory) mut => VT.get_WorkingDirectory(ref this, out workingDirectory);
+			public HResult put_WorkingDirectory(BSTR workingDirectory) mut => VT.put_WorkingDirectory(ref this, workingDirectory);
+			public HResult get_MonitorCommand(out int16 monitorCommand) mut => VT.get_MonitorCommand(ref this, out monitorCommand);
+			public HResult put_MonitorCommand(int16 monitorCommand) mut => VT.put_MonitorCommand(ref this, monitorCommand);
+			public HResult get_KillTimeOut(out int32 minutes) mut => VT.get_KillTimeOut(ref this, out minutes);
+			public HResult put_KillTimeOut(int32 minutes) mut => VT.put_KillTimeOut(ref this, minutes);
+			public HResult get_LogResult(out int16 logResults) mut => VT.get_LogResult(ref this, out logResults);
+			public HResult put_LogResult(int16 logResults) mut => VT.put_LogResult(ref this, logResults);
 
 			[CRepr]
 			public struct VTable : IFsrmAction.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out BSTR executablePath) get_ExecutablePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, BSTR executablePath) put_ExecutablePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out BSTR arguments) get_Arguments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, BSTR arguments) put_Arguments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out FsrmAccountType account) get_Account;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, FsrmAccountType account) put_Account;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out BSTR workingDirectory) get_WorkingDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, BSTR workingDirectory) put_WorkingDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out int16 monitorCommand) get_MonitorCommand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, int16 monitorCommand) put_MonitorCommand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out int32 minutes) get_KillTimeOut;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, int32 minutes) put_KillTimeOut;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, out int16 logResults) get_LogResult;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmActionCommand self, int16 logResults) put_LogResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out BSTR executablePath) get_ExecutablePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, BSTR executablePath) put_ExecutablePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out BSTR arguments) get_Arguments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, BSTR arguments) put_Arguments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out FsrmAccountType account) get_Account;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, FsrmAccountType account) put_Account;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out BSTR workingDirectory) get_WorkingDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, BSTR workingDirectory) put_WorkingDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out int16 monitorCommand) get_MonitorCommand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, int16 monitorCommand) put_MonitorCommand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out int32 minutes) get_KillTimeOut;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, int32 minutes) put_KillTimeOut;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, out int16 logResults) get_LogResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmActionCommand self, int16 logResults) put_LogResult;
 			}
 		}
 		[CRepr]
@@ -771,36 +771,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SmtpServer(out BSTR smtpServer) mut => VT.get_SmtpServer(ref this, out smtpServer);
-			public HRESULT put_SmtpServer(BSTR smtpServer) mut => VT.put_SmtpServer(ref this, smtpServer);
-			public HRESULT get_MailFrom(out BSTR mailFrom) mut => VT.get_MailFrom(ref this, out mailFrom);
-			public HRESULT put_MailFrom(BSTR mailFrom) mut => VT.put_MailFrom(ref this, mailFrom);
-			public HRESULT get_AdminEmail(out BSTR adminEmail) mut => VT.get_AdminEmail(ref this, out adminEmail);
-			public HRESULT put_AdminEmail(BSTR adminEmail) mut => VT.put_AdminEmail(ref this, adminEmail);
-			public HRESULT get_DisableCommandLine(out int16 disableCommandLine) mut => VT.get_DisableCommandLine(ref this, out disableCommandLine);
-			public HRESULT put_DisableCommandLine(int16 disableCommandLine) mut => VT.put_DisableCommandLine(ref this, disableCommandLine);
-			public HRESULT get_EnableScreeningAudit(out int16 enableScreeningAudit) mut => VT.get_EnableScreeningAudit(ref this, out enableScreeningAudit);
-			public HRESULT put_EnableScreeningAudit(int16 enableScreeningAudit) mut => VT.put_EnableScreeningAudit(ref this, enableScreeningAudit);
-			public HRESULT EmailTest(BSTR mailTo) mut => VT.EmailTest(ref this, mailTo);
-			public HRESULT SetActionRunLimitInterval(FsrmActionType actionType, int32 delayTimeMinutes) mut => VT.SetActionRunLimitInterval(ref this, actionType, delayTimeMinutes);
-			public HRESULT GetActionRunLimitInterval(FsrmActionType actionType, out int32 delayTimeMinutes) mut => VT.GetActionRunLimitInterval(ref this, actionType, out delayTimeMinutes);
+			public HResult get_SmtpServer(out BSTR smtpServer) mut => VT.get_SmtpServer(ref this, out smtpServer);
+			public HResult put_SmtpServer(BSTR smtpServer) mut => VT.put_SmtpServer(ref this, smtpServer);
+			public HResult get_MailFrom(out BSTR mailFrom) mut => VT.get_MailFrom(ref this, out mailFrom);
+			public HResult put_MailFrom(BSTR mailFrom) mut => VT.put_MailFrom(ref this, mailFrom);
+			public HResult get_AdminEmail(out BSTR adminEmail) mut => VT.get_AdminEmail(ref this, out adminEmail);
+			public HResult put_AdminEmail(BSTR adminEmail) mut => VT.put_AdminEmail(ref this, adminEmail);
+			public HResult get_DisableCommandLine(out int16 disableCommandLine) mut => VT.get_DisableCommandLine(ref this, out disableCommandLine);
+			public HResult put_DisableCommandLine(int16 disableCommandLine) mut => VT.put_DisableCommandLine(ref this, disableCommandLine);
+			public HResult get_EnableScreeningAudit(out int16 enableScreeningAudit) mut => VT.get_EnableScreeningAudit(ref this, out enableScreeningAudit);
+			public HResult put_EnableScreeningAudit(int16 enableScreeningAudit) mut => VT.put_EnableScreeningAudit(ref this, enableScreeningAudit);
+			public HResult EmailTest(BSTR mailTo) mut => VT.EmailTest(ref this, mailTo);
+			public HResult SetActionRunLimitInterval(FsrmActionType actionType, int32 delayTimeMinutes) mut => VT.SetActionRunLimitInterval(ref this, actionType, delayTimeMinutes);
+			public HResult GetActionRunLimitInterval(FsrmActionType actionType, out int32 delayTimeMinutes) mut => VT.GetActionRunLimitInterval(ref this, actionType, out delayTimeMinutes);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, out BSTR smtpServer) get_SmtpServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, BSTR smtpServer) put_SmtpServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, out BSTR mailFrom) get_MailFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, BSTR mailFrom) put_MailFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, out BSTR adminEmail) get_AdminEmail;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, BSTR adminEmail) put_AdminEmail;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, out int16 disableCommandLine) get_DisableCommandLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, int16 disableCommandLine) put_DisableCommandLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, out int16 enableScreeningAudit) get_EnableScreeningAudit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, int16 enableScreeningAudit) put_EnableScreeningAudit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, BSTR mailTo) EmailTest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, FsrmActionType actionType, int32 delayTimeMinutes) SetActionRunLimitInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmSetting self, FsrmActionType actionType, out int32 delayTimeMinutes) GetActionRunLimitInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, out BSTR smtpServer) get_SmtpServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, BSTR smtpServer) put_SmtpServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, out BSTR mailFrom) get_MailFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, BSTR mailFrom) put_MailFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, out BSTR adminEmail) get_AdminEmail;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, BSTR adminEmail) put_AdminEmail;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, out int16 disableCommandLine) get_DisableCommandLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, int16 disableCommandLine) put_DisableCommandLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, out int16 enableScreeningAudit) get_EnableScreeningAudit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, int16 enableScreeningAudit) put_EnableScreeningAudit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, BSTR mailTo) EmailTest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, FsrmActionType actionType, int32 delayTimeMinutes) SetActionRunLimitInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmSetting self, FsrmActionType actionType, out int32 delayTimeMinutes) GetActionRunLimitInterval;
 			}
 		}
 		[CRepr]
@@ -810,12 +810,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSharePathsForLocalPath(BSTR localPath, out SAFEARRAY* sharePaths) mut => VT.GetSharePathsForLocalPath(ref this, localPath, out sharePaths);
+			public HResult GetSharePathsForLocalPath(BSTR localPath, out SAFEARRAY* sharePaths) mut => VT.GetSharePathsForLocalPath(ref this, localPath, out sharePaths);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPathMapper self, BSTR localPath, out SAFEARRAY* sharePaths) GetSharePathsForLocalPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPathMapper self, BSTR localPath, out SAFEARRAY* sharePaths) GetSharePathsForLocalPath;
 			}
 		}
 		[CRepr]
@@ -825,22 +825,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ExportFileGroups(BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost) mut => VT.ExportFileGroups(ref this, filePath, ref fileGroupNamesSafeArray, remoteHost);
-			public HRESULT ImportFileGroups(BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* fileGroups) mut => VT.ImportFileGroups(ref this, filePath, ref fileGroupNamesSafeArray, remoteHost, out fileGroups);
-			public HRESULT ExportFileScreenTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) mut => VT.ExportFileScreenTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost);
-			public HRESULT ImportFileScreenTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) mut => VT.ImportFileScreenTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost, out templates);
-			public HRESULT ExportQuotaTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) mut => VT.ExportQuotaTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost);
-			public HRESULT ImportQuotaTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) mut => VT.ImportQuotaTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost, out templates);
+			public HResult ExportFileGroups(BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost) mut => VT.ExportFileGroups(ref this, filePath, ref fileGroupNamesSafeArray, remoteHost);
+			public HResult ImportFileGroups(BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* fileGroups) mut => VT.ImportFileGroups(ref this, filePath, ref fileGroupNamesSafeArray, remoteHost, out fileGroups);
+			public HResult ExportFileScreenTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) mut => VT.ExportFileScreenTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost);
+			public HResult ImportFileScreenTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) mut => VT.ImportFileScreenTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost, out templates);
+			public HResult ExportQuotaTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) mut => VT.ExportQuotaTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost);
+			public HResult ImportQuotaTemplates(BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) mut => VT.ImportQuotaTemplates(ref this, filePath, ref templateNamesSafeArray, remoteHost, out templates);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmExportImport self, BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost) ExportFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmExportImport self, BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* fileGroups) ImportFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) ExportFileScreenTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) ImportFileScreenTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) ExportQuotaTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) ImportQuotaTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmExportImport self, BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost) ExportFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmExportImport self, BSTR filePath, ref VARIANT fileGroupNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* fileGroups) ImportFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) ExportFileScreenTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) ImportFileScreenTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost) ExportQuotaTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmExportImport self, BSTR filePath, ref VARIANT templateNamesSafeArray, BSTR remoteHost, out IFsrmCommittableCollection* templates) ImportQuotaTemplates;
 			}
 		}
 		[CRepr]
@@ -850,14 +850,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_DerivedObjects(out IFsrmCollection* derivedObjects) mut => VT.get_DerivedObjects(ref this, out derivedObjects);
-			public HRESULT get_Results(out IFsrmCollection* results) mut => VT.get_Results(ref this, out results);
+			public HResult get_DerivedObjects(out IFsrmCollection* derivedObjects) mut => VT.get_DerivedObjects(ref this, out derivedObjects);
+			public HResult get_Results(out IFsrmCollection* results) mut => VT.get_Results(ref this, out results);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmDerivedObjectsResult self, out IFsrmCollection* derivedObjects) get_DerivedObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmDerivedObjectsResult self, out IFsrmCollection* results) get_Results;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmDerivedObjectsResult self, out IFsrmCollection* derivedObjects) get_DerivedObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmDerivedObjectsResult self, out IFsrmCollection* results) get_Results;
 			}
 		}
 		[CRepr]
@@ -867,12 +867,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Show(uint parentWnd, BSTR accessPath, AdrClientErrorType errorType, int32 flags, BSTR windowTitle, BSTR windowMessage, out int32 result) mut => VT.Show(ref this, parentWnd, accessPath, errorType, flags, windowTitle, windowMessage, out result);
+			public HResult Show(uint parentWnd, BSTR accessPath, AdrClientErrorType errorType, int32 flags, BSTR windowTitle, BSTR windowMessage, out int32 result) mut => VT.Show(ref this, parentWnd, accessPath, errorType, flags, windowTitle, windowMessage, out result);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAccessDeniedRemediationClient self, uint parentWnd, BSTR accessPath, AdrClientErrorType errorType, int32 flags, BSTR windowTitle, BSTR windowMessage, out int32 result) Show;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAccessDeniedRemediationClient self, uint parentWnd, BSTR accessPath, AdrClientErrorType errorType, int32 flags, BSTR windowTitle, BSTR windowMessage, out int32 result) Show;
 			}
 		}
 		[CRepr]
@@ -882,30 +882,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_QuotaLimit(out VARIANT quotaLimit) mut => VT.get_QuotaLimit(ref this, out quotaLimit);
-			public HRESULT put_QuotaLimit(VARIANT quotaLimit) mut => VT.put_QuotaLimit(ref this, quotaLimit);
-			public HRESULT get_QuotaFlags(out int32 quotaFlags) mut => VT.get_QuotaFlags(ref this, out quotaFlags);
-			public HRESULT put_QuotaFlags(int32 quotaFlags) mut => VT.put_QuotaFlags(ref this, quotaFlags);
-			public HRESULT get_Thresholds(out SAFEARRAY* thresholds) mut => VT.get_Thresholds(ref this, out thresholds);
-			public HRESULT AddThreshold(int32 threshold) mut => VT.AddThreshold(ref this, threshold);
-			public HRESULT DeleteThreshold(int32 threshold) mut => VT.DeleteThreshold(ref this, threshold);
-			public HRESULT ModifyThreshold(int32 threshold, int32 newThreshold) mut => VT.ModifyThreshold(ref this, threshold, newThreshold);
-			public HRESULT CreateThresholdAction(int32 threshold, FsrmActionType actionType, out IFsrmAction* action) mut => VT.CreateThresholdAction(ref this, threshold, actionType, out action);
-			public HRESULT EnumThresholdActions(int32 threshold, out IFsrmCollection* actions) mut => VT.EnumThresholdActions(ref this, threshold, out actions);
+			public HResult get_QuotaLimit(out VARIANT quotaLimit) mut => VT.get_QuotaLimit(ref this, out quotaLimit);
+			public HResult put_QuotaLimit(VARIANT quotaLimit) mut => VT.put_QuotaLimit(ref this, quotaLimit);
+			public HResult get_QuotaFlags(out int32 quotaFlags) mut => VT.get_QuotaFlags(ref this, out quotaFlags);
+			public HResult put_QuotaFlags(int32 quotaFlags) mut => VT.put_QuotaFlags(ref this, quotaFlags);
+			public HResult get_Thresholds(out SAFEARRAY* thresholds) mut => VT.get_Thresholds(ref this, out thresholds);
+			public HResult AddThreshold(int32 threshold) mut => VT.AddThreshold(ref this, threshold);
+			public HResult DeleteThreshold(int32 threshold) mut => VT.DeleteThreshold(ref this, threshold);
+			public HResult ModifyThreshold(int32 threshold, int32 newThreshold) mut => VT.ModifyThreshold(ref this, threshold, newThreshold);
+			public HResult CreateThresholdAction(int32 threshold, FsrmActionType actionType, out IFsrmAction* action) mut => VT.CreateThresholdAction(ref this, threshold, actionType, out action);
+			public HResult EnumThresholdActions(int32 threshold, out IFsrmCollection* actions) mut => VT.EnumThresholdActions(ref this, threshold, out actions);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, out VARIANT quotaLimit) get_QuotaLimit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, VARIANT quotaLimit) put_QuotaLimit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, out int32 quotaFlags) get_QuotaFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, int32 quotaFlags) put_QuotaFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, out SAFEARRAY* thresholds) get_Thresholds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, int32 threshold) AddThreshold;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, int32 threshold) DeleteThreshold;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, int32 threshold, int32 newThreshold) ModifyThreshold;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, int32 threshold, FsrmActionType actionType, out IFsrmAction* action) CreateThresholdAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaBase self, int32 threshold, out IFsrmCollection* actions) EnumThresholdActions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, out VARIANT quotaLimit) get_QuotaLimit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, VARIANT quotaLimit) put_QuotaLimit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, out int32 quotaFlags) get_QuotaFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, int32 quotaFlags) put_QuotaFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, out SAFEARRAY* thresholds) get_Thresholds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, int32 threshold) AddThreshold;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, int32 threshold) DeleteThreshold;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, int32 threshold, int32 newThreshold) ModifyThreshold;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, int32 threshold, FsrmActionType actionType, out IFsrmAction* action) CreateThresholdAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaBase self, int32 threshold, out IFsrmCollection* actions) EnumThresholdActions;
 			}
 		}
 		[CRepr]
@@ -915,22 +915,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
-			public HRESULT get_UserSid(out BSTR userSid) mut => VT.get_UserSid(ref this, out userSid);
-			public HRESULT get_UserAccount(out BSTR userAccount) mut => VT.get_UserAccount(ref this, out userAccount);
-			public HRESULT get_SourceTemplateName(out BSTR quotaTemplateName) mut => VT.get_SourceTemplateName(ref this, out quotaTemplateName);
-			public HRESULT get_MatchesSourceTemplate(out int16 matches) mut => VT.get_MatchesSourceTemplate(ref this, out matches);
-			public HRESULT ApplyTemplate(BSTR quotaTemplateName) mut => VT.ApplyTemplate(ref this, quotaTemplateName);
+			public HResult get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
+			public HResult get_UserSid(out BSTR userSid) mut => VT.get_UserSid(ref this, out userSid);
+			public HResult get_UserAccount(out BSTR userAccount) mut => VT.get_UserAccount(ref this, out userAccount);
+			public HResult get_SourceTemplateName(out BSTR quotaTemplateName) mut => VT.get_SourceTemplateName(ref this, out quotaTemplateName);
+			public HResult get_MatchesSourceTemplate(out int16 matches) mut => VT.get_MatchesSourceTemplate(ref this, out matches);
+			public HResult ApplyTemplate(BSTR quotaTemplateName) mut => VT.ApplyTemplate(ref this, quotaTemplateName);
 
 			[CRepr]
 			public struct VTable : IFsrmQuotaBase.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaObject self, out BSTR path) get_Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaObject self, out BSTR userSid) get_UserSid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaObject self, out BSTR userAccount) get_UserAccount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaObject self, out BSTR quotaTemplateName) get_SourceTemplateName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaObject self, out int16 matches) get_MatchesSourceTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaObject self, BSTR quotaTemplateName) ApplyTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaObject self, out BSTR path) get_Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaObject self, out BSTR userSid) get_UserSid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaObject self, out BSTR userAccount) get_UserAccount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaObject self, out BSTR quotaTemplateName) get_SourceTemplateName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaObject self, out int16 matches) get_MatchesSourceTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaObject self, BSTR quotaTemplateName) ApplyTemplate;
 			}
 		}
 		[CRepr]
@@ -940,20 +940,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_QuotaUsed(out VARIANT used) mut => VT.get_QuotaUsed(ref this, out used);
-			public HRESULT get_QuotaPeakUsage(out VARIANT peakUsage) mut => VT.get_QuotaPeakUsage(ref this, out peakUsage);
-			public HRESULT get_QuotaPeakUsageTime(out double peakUsageDateTime) mut => VT.get_QuotaPeakUsageTime(ref this, out peakUsageDateTime);
-			public HRESULT ResetPeakUsage() mut => VT.ResetPeakUsage(ref this);
-			public HRESULT RefreshUsageProperties() mut => VT.RefreshUsageProperties(ref this);
+			public HResult get_QuotaUsed(out VARIANT used) mut => VT.get_QuotaUsed(ref this, out used);
+			public HResult get_QuotaPeakUsage(out VARIANT peakUsage) mut => VT.get_QuotaPeakUsage(ref this, out peakUsage);
+			public HResult get_QuotaPeakUsageTime(out double peakUsageDateTime) mut => VT.get_QuotaPeakUsageTime(ref this, out peakUsageDateTime);
+			public HResult ResetPeakUsage() mut => VT.ResetPeakUsage(ref this);
+			public HResult RefreshUsageProperties() mut => VT.RefreshUsageProperties(ref this);
 
 			[CRepr]
 			public struct VTable : IFsrmQuotaObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuota self, out VARIANT used) get_QuotaUsed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuota self, out VARIANT peakUsage) get_QuotaPeakUsage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuota self, out double peakUsageDateTime) get_QuotaPeakUsageTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuota self) ResetPeakUsage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuota self) RefreshUsageProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuota self, out VARIANT used) get_QuotaUsed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuota self, out VARIANT peakUsage) get_QuotaPeakUsage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuota self, out double peakUsageDateTime) get_QuotaPeakUsageTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuota self) ResetPeakUsage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuota self) RefreshUsageProperties;
 			}
 		}
 		[CRepr]
@@ -963,16 +963,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ExcludeFolders(out SAFEARRAY* folders) mut => VT.get_ExcludeFolders(ref this, out folders);
-			public HRESULT put_ExcludeFolders(ref SAFEARRAY folders) mut => VT.put_ExcludeFolders(ref this, ref folders);
-			public HRESULT CommitAndUpdateDerived(FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) mut => VT.CommitAndUpdateDerived(ref this, commitOptions, applyOptions, out derivedObjectsResult);
+			public HResult get_ExcludeFolders(out SAFEARRAY* folders) mut => VT.get_ExcludeFolders(ref this, out folders);
+			public HResult put_ExcludeFolders(ref SAFEARRAY folders) mut => VT.put_ExcludeFolders(ref this, ref folders);
+			public HResult CommitAndUpdateDerived(FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) mut => VT.CommitAndUpdateDerived(ref this, commitOptions, applyOptions, out derivedObjectsResult);
 
 			[CRepr]
 			public struct VTable : IFsrmQuotaObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAutoApplyQuota self, out SAFEARRAY* folders) get_ExcludeFolders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAutoApplyQuota self, ref SAFEARRAY folders) put_ExcludeFolders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmAutoApplyQuota self, FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) CommitAndUpdateDerived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAutoApplyQuota self, out SAFEARRAY* folders) get_ExcludeFolders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAutoApplyQuota self, ref SAFEARRAY folders) put_ExcludeFolders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmAutoApplyQuota self, FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) CommitAndUpdateDerived;
 			}
 		}
 		[CRepr]
@@ -982,34 +982,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ActionVariables(out SAFEARRAY* variables) mut => VT.get_ActionVariables(ref this, out variables);
-			public HRESULT get_ActionVariableDescriptions(out SAFEARRAY* descriptions) mut => VT.get_ActionVariableDescriptions(ref this, out descriptions);
-			public HRESULT CreateQuota(BSTR path, out IFsrmQuota* quota) mut => VT.CreateQuota(ref this, path, out quota);
-			public HRESULT CreateAutoApplyQuota(BSTR quotaTemplateName, BSTR path, out IFsrmAutoApplyQuota* quota) mut => VT.CreateAutoApplyQuota(ref this, quotaTemplateName, path, out quota);
-			public HRESULT GetQuota(BSTR path, out IFsrmQuota* quota) mut => VT.GetQuota(ref this, path, out quota);
-			public HRESULT GetAutoApplyQuota(BSTR path, out IFsrmAutoApplyQuota* quota) mut => VT.GetAutoApplyQuota(ref this, path, out quota);
-			public HRESULT GetRestrictiveQuota(BSTR path, out IFsrmQuota* quota) mut => VT.GetRestrictiveQuota(ref this, path, out quota);
-			public HRESULT EnumQuotas(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) mut => VT.EnumQuotas(ref this, path, options, out quotas);
-			public HRESULT EnumAutoApplyQuotas(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) mut => VT.EnumAutoApplyQuotas(ref this, path, options, out quotas);
-			public HRESULT EnumEffectiveQuotas(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) mut => VT.EnumEffectiveQuotas(ref this, path, options, out quotas);
-			public HRESULT Scan(BSTR strPath) mut => VT.Scan(ref this, strPath);
-			public HRESULT CreateQuotaCollection(out IFsrmCommittableCollection* collection) mut => VT.CreateQuotaCollection(ref this, out collection);
+			public HResult get_ActionVariables(out SAFEARRAY* variables) mut => VT.get_ActionVariables(ref this, out variables);
+			public HResult get_ActionVariableDescriptions(out SAFEARRAY* descriptions) mut => VT.get_ActionVariableDescriptions(ref this, out descriptions);
+			public HResult CreateQuota(BSTR path, out IFsrmQuota* quota) mut => VT.CreateQuota(ref this, path, out quota);
+			public HResult CreateAutoApplyQuota(BSTR quotaTemplateName, BSTR path, out IFsrmAutoApplyQuota* quota) mut => VT.CreateAutoApplyQuota(ref this, quotaTemplateName, path, out quota);
+			public HResult GetQuota(BSTR path, out IFsrmQuota* quota) mut => VT.GetQuota(ref this, path, out quota);
+			public HResult GetAutoApplyQuota(BSTR path, out IFsrmAutoApplyQuota* quota) mut => VT.GetAutoApplyQuota(ref this, path, out quota);
+			public HResult GetRestrictiveQuota(BSTR path, out IFsrmQuota* quota) mut => VT.GetRestrictiveQuota(ref this, path, out quota);
+			public HResult EnumQuotas(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) mut => VT.EnumQuotas(ref this, path, options, out quotas);
+			public HResult EnumAutoApplyQuotas(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) mut => VT.EnumAutoApplyQuotas(ref this, path, options, out quotas);
+			public HResult EnumEffectiveQuotas(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) mut => VT.EnumEffectiveQuotas(ref this, path, options, out quotas);
+			public HResult Scan(BSTR strPath) mut => VT.Scan(ref this, strPath);
+			public HResult CreateQuotaCollection(out IFsrmCommittableCollection* collection) mut => VT.CreateQuotaCollection(ref this, out collection);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, out SAFEARRAY* variables) get_ActionVariables;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, out SAFEARRAY* descriptions) get_ActionVariableDescriptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, out IFsrmQuota* quota) CreateQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR quotaTemplateName, BSTR path, out IFsrmAutoApplyQuota* quota) CreateAutoApplyQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, out IFsrmQuota* quota) GetQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, out IFsrmAutoApplyQuota* quota) GetAutoApplyQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, out IFsrmQuota* quota) GetRestrictiveQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) EnumQuotas;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) EnumAutoApplyQuotas;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) EnumEffectiveQuotas;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, BSTR strPath) Scan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManager self, out IFsrmCommittableCollection* collection) CreateQuotaCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, out SAFEARRAY* variables) get_ActionVariables;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, out SAFEARRAY* descriptions) get_ActionVariableDescriptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, out IFsrmQuota* quota) CreateQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR quotaTemplateName, BSTR path, out IFsrmAutoApplyQuota* quota) CreateAutoApplyQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, out IFsrmQuota* quota) GetQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, out IFsrmAutoApplyQuota* quota) GetAutoApplyQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, out IFsrmQuota* quota) GetRestrictiveQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) EnumQuotas;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) EnumAutoApplyQuotas;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* quotas) EnumEffectiveQuotas;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, BSTR strPath) Scan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManager self, out IFsrmCommittableCollection* collection) CreateQuotaCollection;
 			}
 		}
 		[CRepr]
@@ -1019,12 +1019,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsAffectedByQuota(BSTR path, FsrmEnumOptions options, out int16 affected) mut => VT.IsAffectedByQuota(ref this, path, options, out affected);
+			public HResult IsAffectedByQuota(BSTR path, FsrmEnumOptions options, out int16 affected) mut => VT.IsAffectedByQuota(ref this, path, options, out affected);
 
 			[CRepr]
 			public struct VTable : IFsrmQuotaManager.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaManagerEx self, BSTR path, FsrmEnumOptions options, out int16 affected) IsAffectedByQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaManagerEx self, BSTR path, FsrmEnumOptions options, out int16 affected) IsAffectedByQuota;
 			}
 		}
 		[CRepr]
@@ -1034,18 +1034,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT CopyTemplate(BSTR quotaTemplateName) mut => VT.CopyTemplate(ref this, quotaTemplateName);
-			public HRESULT CommitAndUpdateDerived(FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) mut => VT.CommitAndUpdateDerived(ref this, commitOptions, applyOptions, out derivedObjectsResult);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult CopyTemplate(BSTR quotaTemplateName) mut => VT.CopyTemplate(ref this, quotaTemplateName);
+			public HResult CommitAndUpdateDerived(FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) mut => VT.CommitAndUpdateDerived(ref this, commitOptions, applyOptions, out derivedObjectsResult);
 
 			[CRepr]
 			public struct VTable : IFsrmQuotaBase.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplate self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplate self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplate self, BSTR quotaTemplateName) CopyTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplate self, FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) CommitAndUpdateDerived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplate self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplate self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplate self, BSTR quotaTemplateName) CopyTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplate self, FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) CommitAndUpdateDerived;
 			}
 		}
 		[CRepr]
@@ -1055,14 +1055,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_OverwriteOnCommit(out int16 overwrite) mut => VT.get_OverwriteOnCommit(ref this, out overwrite);
-			public HRESULT put_OverwriteOnCommit(int16 overwrite) mut => VT.put_OverwriteOnCommit(ref this, overwrite);
+			public HResult get_OverwriteOnCommit(out int16 overwrite) mut => VT.get_OverwriteOnCommit(ref this, out overwrite);
+			public HResult put_OverwriteOnCommit(int16 overwrite) mut => VT.put_OverwriteOnCommit(ref this, overwrite);
 
 			[CRepr]
 			public struct VTable : IFsrmQuotaTemplate.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateImported self, out int16 overwrite) get_OverwriteOnCommit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateImported self, int16 overwrite) put_OverwriteOnCommit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateImported self, out int16 overwrite) get_OverwriteOnCommit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateImported self, int16 overwrite) put_OverwriteOnCommit;
 			}
 		}
 		[CRepr]
@@ -1072,20 +1072,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateTemplate(out IFsrmQuotaTemplate* quotaTemplate) mut => VT.CreateTemplate(ref this, out quotaTemplate);
-			public HRESULT GetTemplate(BSTR name, out IFsrmQuotaTemplate* quotaTemplate) mut => VT.GetTemplate(ref this, name, out quotaTemplate);
-			public HRESULT EnumTemplates(FsrmEnumOptions options, out IFsrmCommittableCollection* quotaTemplates) mut => VT.EnumTemplates(ref this, options, out quotaTemplates);
-			public HRESULT ExportTemplates(ref VARIANT quotaTemplateNamesArray, out BSTR serializedQuotaTemplates) mut => VT.ExportTemplates(ref this, ref quotaTemplateNamesArray, out serializedQuotaTemplates);
-			public HRESULT ImportTemplates(BSTR serializedQuotaTemplates, ref VARIANT quotaTemplateNamesArray, out IFsrmCommittableCollection* quotaTemplates) mut => VT.ImportTemplates(ref this, serializedQuotaTemplates, ref quotaTemplateNamesArray, out quotaTemplates);
+			public HResult CreateTemplate(out IFsrmQuotaTemplate* quotaTemplate) mut => VT.CreateTemplate(ref this, out quotaTemplate);
+			public HResult GetTemplate(BSTR name, out IFsrmQuotaTemplate* quotaTemplate) mut => VT.GetTemplate(ref this, name, out quotaTemplate);
+			public HResult EnumTemplates(FsrmEnumOptions options, out IFsrmCommittableCollection* quotaTemplates) mut => VT.EnumTemplates(ref this, options, out quotaTemplates);
+			public HResult ExportTemplates(ref VARIANT quotaTemplateNamesArray, out BSTR serializedQuotaTemplates) mut => VT.ExportTemplates(ref this, ref quotaTemplateNamesArray, out serializedQuotaTemplates);
+			public HResult ImportTemplates(BSTR serializedQuotaTemplates, ref VARIANT quotaTemplateNamesArray, out IFsrmCommittableCollection* quotaTemplates) mut => VT.ImportTemplates(ref this, serializedQuotaTemplates, ref quotaTemplateNamesArray, out quotaTemplates);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateManager self, out IFsrmQuotaTemplate* quotaTemplate) CreateTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateManager self, BSTR name, out IFsrmQuotaTemplate* quotaTemplate) GetTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateManager self, FsrmEnumOptions options, out IFsrmCommittableCollection* quotaTemplates) EnumTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateManager self, ref VARIANT quotaTemplateNamesArray, out BSTR serializedQuotaTemplates) ExportTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmQuotaTemplateManager self, BSTR serializedQuotaTemplates, ref VARIANT quotaTemplateNamesArray, out IFsrmCommittableCollection* quotaTemplates) ImportTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateManager self, out IFsrmQuotaTemplate* quotaTemplate) CreateTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateManager self, BSTR name, out IFsrmQuotaTemplate* quotaTemplate) GetTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateManager self, FsrmEnumOptions options, out IFsrmCommittableCollection* quotaTemplates) EnumTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateManager self, ref VARIANT quotaTemplateNamesArray, out BSTR serializedQuotaTemplates) ExportTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmQuotaTemplateManager self, BSTR serializedQuotaTemplates, ref VARIANT quotaTemplateNamesArray, out IFsrmCommittableCollection* quotaTemplates) ImportTemplates;
 			}
 		}
 		[CRepr]
@@ -1095,22 +1095,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_Members(out IFsrmMutableCollection* members) mut => VT.get_Members(ref this, out members);
-			public HRESULT put_Members(ref IFsrmMutableCollection members) mut => VT.put_Members(ref this, ref members);
-			public HRESULT get_NonMembers(out IFsrmMutableCollection* nonMembers) mut => VT.get_NonMembers(ref this, out nonMembers);
-			public HRESULT put_NonMembers(ref IFsrmMutableCollection nonMembers) mut => VT.put_NonMembers(ref this, ref nonMembers);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_Members(out IFsrmMutableCollection* members) mut => VT.get_Members(ref this, out members);
+			public HResult put_Members(ref IFsrmMutableCollection members) mut => VT.put_Members(ref this, ref members);
+			public HResult get_NonMembers(out IFsrmMutableCollection* nonMembers) mut => VT.get_NonMembers(ref this, out nonMembers);
+			public HResult put_NonMembers(ref IFsrmMutableCollection nonMembers) mut => VT.put_NonMembers(ref this, ref nonMembers);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroup self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroup self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroup self, out IFsrmMutableCollection* members) get_Members;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroup self, ref IFsrmMutableCollection members) put_Members;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroup self, out IFsrmMutableCollection* nonMembers) get_NonMembers;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroup self, ref IFsrmMutableCollection nonMembers) put_NonMembers;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroup self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroup self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroup self, out IFsrmMutableCollection* members) get_Members;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroup self, ref IFsrmMutableCollection members) put_Members;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroup self, out IFsrmMutableCollection* nonMembers) get_NonMembers;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroup self, ref IFsrmMutableCollection nonMembers) put_NonMembers;
 			}
 		}
 		[CRepr]
@@ -1120,14 +1120,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_OverwriteOnCommit(out int16 overwrite) mut => VT.get_OverwriteOnCommit(ref this, out overwrite);
-			public HRESULT put_OverwriteOnCommit(int16 overwrite) mut => VT.put_OverwriteOnCommit(ref this, overwrite);
+			public HResult get_OverwriteOnCommit(out int16 overwrite) mut => VT.get_OverwriteOnCommit(ref this, out overwrite);
+			public HResult put_OverwriteOnCommit(int16 overwrite) mut => VT.put_OverwriteOnCommit(ref this, overwrite);
 
 			[CRepr]
 			public struct VTable : IFsrmFileGroup.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupImported self, out int16 overwrite) get_OverwriteOnCommit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupImported self, int16 overwrite) put_OverwriteOnCommit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupImported self, out int16 overwrite) get_OverwriteOnCommit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupImported self, int16 overwrite) put_OverwriteOnCommit;
 			}
 		}
 		[CRepr]
@@ -1137,20 +1137,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFileGroup(out IFsrmFileGroup* fileGroup) mut => VT.CreateFileGroup(ref this, out fileGroup);
-			public HRESULT GetFileGroup(BSTR name, out IFsrmFileGroup* fileGroup) mut => VT.GetFileGroup(ref this, name, out fileGroup);
-			public HRESULT EnumFileGroups(FsrmEnumOptions options, out IFsrmCommittableCollection* fileGroups) mut => VT.EnumFileGroups(ref this, options, out fileGroups);
-			public HRESULT ExportFileGroups(ref VARIANT fileGroupNamesArray, out BSTR serializedFileGroups) mut => VT.ExportFileGroups(ref this, ref fileGroupNamesArray, out serializedFileGroups);
-			public HRESULT ImportFileGroups(BSTR serializedFileGroups, ref VARIANT fileGroupNamesArray, out IFsrmCommittableCollection* fileGroups) mut => VT.ImportFileGroups(ref this, serializedFileGroups, ref fileGroupNamesArray, out fileGroups);
+			public HResult CreateFileGroup(out IFsrmFileGroup* fileGroup) mut => VT.CreateFileGroup(ref this, out fileGroup);
+			public HResult GetFileGroup(BSTR name, out IFsrmFileGroup* fileGroup) mut => VT.GetFileGroup(ref this, name, out fileGroup);
+			public HResult EnumFileGroups(FsrmEnumOptions options, out IFsrmCommittableCollection* fileGroups) mut => VT.EnumFileGroups(ref this, options, out fileGroups);
+			public HResult ExportFileGroups(ref VARIANT fileGroupNamesArray, out BSTR serializedFileGroups) mut => VT.ExportFileGroups(ref this, ref fileGroupNamesArray, out serializedFileGroups);
+			public HResult ImportFileGroups(BSTR serializedFileGroups, ref VARIANT fileGroupNamesArray, out IFsrmCommittableCollection* fileGroups) mut => VT.ImportFileGroups(ref this, serializedFileGroups, ref fileGroupNamesArray, out fileGroups);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupManager self, out IFsrmFileGroup* fileGroup) CreateFileGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupManager self, BSTR name, out IFsrmFileGroup* fileGroup) GetFileGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupManager self, FsrmEnumOptions options, out IFsrmCommittableCollection* fileGroups) EnumFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupManager self, ref VARIANT fileGroupNamesArray, out BSTR serializedFileGroups) ExportFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileGroupManager self, BSTR serializedFileGroups, ref VARIANT fileGroupNamesArray, out IFsrmCommittableCollection* fileGroups) ImportFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupManager self, out IFsrmFileGroup* fileGroup) CreateFileGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupManager self, BSTR name, out IFsrmFileGroup* fileGroup) GetFileGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupManager self, FsrmEnumOptions options, out IFsrmCommittableCollection* fileGroups) EnumFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupManager self, ref VARIANT fileGroupNamesArray, out BSTR serializedFileGroups) ExportFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileGroupManager self, BSTR serializedFileGroups, ref VARIANT fileGroupNamesArray, out IFsrmCommittableCollection* fileGroups) ImportFileGroups;
 			}
 		}
 		[CRepr]
@@ -1160,22 +1160,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_BlockedFileGroups(out IFsrmMutableCollection* blockList) mut => VT.get_BlockedFileGroups(ref this, out blockList);
-			public HRESULT put_BlockedFileGroups(ref IFsrmMutableCollection blockList) mut => VT.put_BlockedFileGroups(ref this, ref blockList);
-			public HRESULT get_FileScreenFlags(out int32 fileScreenFlags) mut => VT.get_FileScreenFlags(ref this, out fileScreenFlags);
-			public HRESULT put_FileScreenFlags(int32 fileScreenFlags) mut => VT.put_FileScreenFlags(ref this, fileScreenFlags);
-			public HRESULT CreateAction(FsrmActionType actionType, out IFsrmAction* action) mut => VT.CreateAction(ref this, actionType, out action);
-			public HRESULT EnumActions(out IFsrmCollection* actions) mut => VT.EnumActions(ref this, out actions);
+			public HResult get_BlockedFileGroups(out IFsrmMutableCollection* blockList) mut => VT.get_BlockedFileGroups(ref this, out blockList);
+			public HResult put_BlockedFileGroups(ref IFsrmMutableCollection blockList) mut => VT.put_BlockedFileGroups(ref this, ref blockList);
+			public HResult get_FileScreenFlags(out int32 fileScreenFlags) mut => VT.get_FileScreenFlags(ref this, out fileScreenFlags);
+			public HResult put_FileScreenFlags(int32 fileScreenFlags) mut => VT.put_FileScreenFlags(ref this, fileScreenFlags);
+			public HResult CreateAction(FsrmActionType actionType, out IFsrmAction* action) mut => VT.CreateAction(ref this, actionType, out action);
+			public HResult EnumActions(out IFsrmCollection* actions) mut => VT.EnumActions(ref this, out actions);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenBase self, out IFsrmMutableCollection* blockList) get_BlockedFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenBase self, ref IFsrmMutableCollection blockList) put_BlockedFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenBase self, out int32 fileScreenFlags) get_FileScreenFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenBase self, int32 fileScreenFlags) put_FileScreenFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenBase self, FsrmActionType actionType, out IFsrmAction* action) CreateAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenBase self, out IFsrmCollection* actions) EnumActions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenBase self, out IFsrmMutableCollection* blockList) get_BlockedFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenBase self, ref IFsrmMutableCollection blockList) put_BlockedFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenBase self, out int32 fileScreenFlags) get_FileScreenFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenBase self, int32 fileScreenFlags) put_FileScreenFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenBase self, FsrmActionType actionType, out IFsrmAction* action) CreateAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenBase self, out IFsrmCollection* actions) EnumActions;
 			}
 		}
 		[CRepr]
@@ -1185,22 +1185,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
-			public HRESULT get_SourceTemplateName(out BSTR fileScreenTemplateName) mut => VT.get_SourceTemplateName(ref this, out fileScreenTemplateName);
-			public HRESULT get_MatchesSourceTemplate(out int16 matches) mut => VT.get_MatchesSourceTemplate(ref this, out matches);
-			public HRESULT get_UserSid(out BSTR userSid) mut => VT.get_UserSid(ref this, out userSid);
-			public HRESULT get_UserAccount(out BSTR userAccount) mut => VT.get_UserAccount(ref this, out userAccount);
-			public HRESULT ApplyTemplate(BSTR fileScreenTemplateName) mut => VT.ApplyTemplate(ref this, fileScreenTemplateName);
+			public HResult get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
+			public HResult get_SourceTemplateName(out BSTR fileScreenTemplateName) mut => VT.get_SourceTemplateName(ref this, out fileScreenTemplateName);
+			public HResult get_MatchesSourceTemplate(out int16 matches) mut => VT.get_MatchesSourceTemplate(ref this, out matches);
+			public HResult get_UserSid(out BSTR userSid) mut => VT.get_UserSid(ref this, out userSid);
+			public HResult get_UserAccount(out BSTR userAccount) mut => VT.get_UserAccount(ref this, out userAccount);
+			public HResult ApplyTemplate(BSTR fileScreenTemplateName) mut => VT.ApplyTemplate(ref this, fileScreenTemplateName);
 
 			[CRepr]
 			public struct VTable : IFsrmFileScreenBase.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreen self, out BSTR path) get_Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreen self, out BSTR fileScreenTemplateName) get_SourceTemplateName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreen self, out int16 matches) get_MatchesSourceTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreen self, out BSTR userSid) get_UserSid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreen self, out BSTR userAccount) get_UserAccount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreen self, BSTR fileScreenTemplateName) ApplyTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreen self, out BSTR path) get_Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreen self, out BSTR fileScreenTemplateName) get_SourceTemplateName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreen self, out int16 matches) get_MatchesSourceTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreen self, out BSTR userSid) get_UserSid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreen self, out BSTR userAccount) get_UserAccount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreen self, BSTR fileScreenTemplateName) ApplyTemplate;
 			}
 		}
 		[CRepr]
@@ -1210,16 +1210,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
-			public HRESULT get_AllowedFileGroups(out IFsrmMutableCollection* allowList) mut => VT.get_AllowedFileGroups(ref this, out allowList);
-			public HRESULT put_AllowedFileGroups(ref IFsrmMutableCollection allowList) mut => VT.put_AllowedFileGroups(ref this, ref allowList);
+			public HResult get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
+			public HResult get_AllowedFileGroups(out IFsrmMutableCollection* allowList) mut => VT.get_AllowedFileGroups(ref this, out allowList);
+			public HResult put_AllowedFileGroups(ref IFsrmMutableCollection allowList) mut => VT.put_AllowedFileGroups(ref this, ref allowList);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenException self, out BSTR path) get_Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenException self, out IFsrmMutableCollection* allowList) get_AllowedFileGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenException self, ref IFsrmMutableCollection allowList) put_AllowedFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenException self, out BSTR path) get_Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenException self, out IFsrmMutableCollection* allowList) get_AllowedFileGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenException self, ref IFsrmMutableCollection allowList) put_AllowedFileGroups;
 			}
 		}
 		[CRepr]
@@ -1229,28 +1229,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ActionVariables(out SAFEARRAY* variables) mut => VT.get_ActionVariables(ref this, out variables);
-			public HRESULT get_ActionVariableDescriptions(out SAFEARRAY* descriptions) mut => VT.get_ActionVariableDescriptions(ref this, out descriptions);
-			public HRESULT CreateFileScreen(BSTR path, out IFsrmFileScreen* fileScreen) mut => VT.CreateFileScreen(ref this, path, out fileScreen);
-			public HRESULT GetFileScreen(BSTR path, out IFsrmFileScreen* fileScreen) mut => VT.GetFileScreen(ref this, path, out fileScreen);
-			public HRESULT EnumFileScreens(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreens) mut => VT.EnumFileScreens(ref this, path, options, out fileScreens);
-			public HRESULT CreateFileScreenException(BSTR path, out IFsrmFileScreenException* fileScreenException) mut => VT.CreateFileScreenException(ref this, path, out fileScreenException);
-			public HRESULT GetFileScreenException(BSTR path, out IFsrmFileScreenException* fileScreenException) mut => VT.GetFileScreenException(ref this, path, out fileScreenException);
-			public HRESULT EnumFileScreenExceptions(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenExceptions) mut => VT.EnumFileScreenExceptions(ref this, path, options, out fileScreenExceptions);
-			public HRESULT CreateFileScreenCollection(out IFsrmCommittableCollection* collection) mut => VT.CreateFileScreenCollection(ref this, out collection);
+			public HResult get_ActionVariables(out SAFEARRAY* variables) mut => VT.get_ActionVariables(ref this, out variables);
+			public HResult get_ActionVariableDescriptions(out SAFEARRAY* descriptions) mut => VT.get_ActionVariableDescriptions(ref this, out descriptions);
+			public HResult CreateFileScreen(BSTR path, out IFsrmFileScreen* fileScreen) mut => VT.CreateFileScreen(ref this, path, out fileScreen);
+			public HResult GetFileScreen(BSTR path, out IFsrmFileScreen* fileScreen) mut => VT.GetFileScreen(ref this, path, out fileScreen);
+			public HResult EnumFileScreens(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreens) mut => VT.EnumFileScreens(ref this, path, options, out fileScreens);
+			public HResult CreateFileScreenException(BSTR path, out IFsrmFileScreenException* fileScreenException) mut => VT.CreateFileScreenException(ref this, path, out fileScreenException);
+			public HResult GetFileScreenException(BSTR path, out IFsrmFileScreenException* fileScreenException) mut => VT.GetFileScreenException(ref this, path, out fileScreenException);
+			public HResult EnumFileScreenExceptions(BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenExceptions) mut => VT.EnumFileScreenExceptions(ref this, path, options, out fileScreenExceptions);
+			public HResult CreateFileScreenCollection(out IFsrmCommittableCollection* collection) mut => VT.CreateFileScreenCollection(ref this, out collection);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, out SAFEARRAY* variables) get_ActionVariables;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, out SAFEARRAY* descriptions) get_ActionVariableDescriptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreen* fileScreen) CreateFileScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreen* fileScreen) GetFileScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreens) EnumFileScreens;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreenException* fileScreenException) CreateFileScreenException;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreenException* fileScreenException) GetFileScreenException;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenExceptions) EnumFileScreenExceptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenManager self, out IFsrmCommittableCollection* collection) CreateFileScreenCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, out SAFEARRAY* variables) get_ActionVariables;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, out SAFEARRAY* descriptions) get_ActionVariableDescriptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreen* fileScreen) CreateFileScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreen* fileScreen) GetFileScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreens) EnumFileScreens;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreenException* fileScreenException) CreateFileScreenException;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, BSTR path, out IFsrmFileScreenException* fileScreenException) GetFileScreenException;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, BSTR path, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenExceptions) EnumFileScreenExceptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenManager self, out IFsrmCommittableCollection* collection) CreateFileScreenCollection;
 			}
 		}
 		[CRepr]
@@ -1260,18 +1260,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT CopyTemplate(BSTR fileScreenTemplateName) mut => VT.CopyTemplate(ref this, fileScreenTemplateName);
-			public HRESULT CommitAndUpdateDerived(FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) mut => VT.CommitAndUpdateDerived(ref this, commitOptions, applyOptions, out derivedObjectsResult);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult CopyTemplate(BSTR fileScreenTemplateName) mut => VT.CopyTemplate(ref this, fileScreenTemplateName);
+			public HResult CommitAndUpdateDerived(FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) mut => VT.CommitAndUpdateDerived(ref this, commitOptions, applyOptions, out derivedObjectsResult);
 
 			[CRepr]
 			public struct VTable : IFsrmFileScreenBase.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplate self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplate self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplate self, BSTR fileScreenTemplateName) CopyTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplate self, FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) CommitAndUpdateDerived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplate self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplate self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplate self, BSTR fileScreenTemplateName) CopyTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplate self, FsrmCommitOptions commitOptions, FsrmTemplateApplyOptions applyOptions, out IFsrmDerivedObjectsResult* derivedObjectsResult) CommitAndUpdateDerived;
 			}
 		}
 		[CRepr]
@@ -1281,14 +1281,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_OverwriteOnCommit(out int16 overwrite) mut => VT.get_OverwriteOnCommit(ref this, out overwrite);
-			public HRESULT put_OverwriteOnCommit(int16 overwrite) mut => VT.put_OverwriteOnCommit(ref this, overwrite);
+			public HResult get_OverwriteOnCommit(out int16 overwrite) mut => VT.get_OverwriteOnCommit(ref this, out overwrite);
+			public HResult put_OverwriteOnCommit(int16 overwrite) mut => VT.put_OverwriteOnCommit(ref this, overwrite);
 
 			[CRepr]
 			public struct VTable : IFsrmFileScreenTemplate.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateImported self, out int16 overwrite) get_OverwriteOnCommit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateImported self, int16 overwrite) put_OverwriteOnCommit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateImported self, out int16 overwrite) get_OverwriteOnCommit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateImported self, int16 overwrite) put_OverwriteOnCommit;
 			}
 		}
 		[CRepr]
@@ -1298,20 +1298,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateTemplate(out IFsrmFileScreenTemplate* fileScreenTemplate) mut => VT.CreateTemplate(ref this, out fileScreenTemplate);
-			public HRESULT GetTemplate(BSTR name, out IFsrmFileScreenTemplate* fileScreenTemplate) mut => VT.GetTemplate(ref this, name, out fileScreenTemplate);
-			public HRESULT EnumTemplates(FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenTemplates) mut => VT.EnumTemplates(ref this, options, out fileScreenTemplates);
-			public HRESULT ExportTemplates(ref VARIANT fileScreenTemplateNamesArray, out BSTR serializedFileScreenTemplates) mut => VT.ExportTemplates(ref this, ref fileScreenTemplateNamesArray, out serializedFileScreenTemplates);
-			public HRESULT ImportTemplates(BSTR serializedFileScreenTemplates, ref VARIANT fileScreenTemplateNamesArray, out IFsrmCommittableCollection* fileScreenTemplates) mut => VT.ImportTemplates(ref this, serializedFileScreenTemplates, ref fileScreenTemplateNamesArray, out fileScreenTemplates);
+			public HResult CreateTemplate(out IFsrmFileScreenTemplate* fileScreenTemplate) mut => VT.CreateTemplate(ref this, out fileScreenTemplate);
+			public HResult GetTemplate(BSTR name, out IFsrmFileScreenTemplate* fileScreenTemplate) mut => VT.GetTemplate(ref this, name, out fileScreenTemplate);
+			public HResult EnumTemplates(FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenTemplates) mut => VT.EnumTemplates(ref this, options, out fileScreenTemplates);
+			public HResult ExportTemplates(ref VARIANT fileScreenTemplateNamesArray, out BSTR serializedFileScreenTemplates) mut => VT.ExportTemplates(ref this, ref fileScreenTemplateNamesArray, out serializedFileScreenTemplates);
+			public HResult ImportTemplates(BSTR serializedFileScreenTemplates, ref VARIANT fileScreenTemplateNamesArray, out IFsrmCommittableCollection* fileScreenTemplates) mut => VT.ImportTemplates(ref this, serializedFileScreenTemplates, ref fileScreenTemplateNamesArray, out fileScreenTemplates);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateManager self, out IFsrmFileScreenTemplate* fileScreenTemplate) CreateTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateManager self, BSTR name, out IFsrmFileScreenTemplate* fileScreenTemplate) GetTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateManager self, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenTemplates) EnumTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateManager self, ref VARIANT fileScreenTemplateNamesArray, out BSTR serializedFileScreenTemplates) ExportTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileScreenTemplateManager self, BSTR serializedFileScreenTemplates, ref VARIANT fileScreenTemplateNamesArray, out IFsrmCommittableCollection* fileScreenTemplates) ImportTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateManager self, out IFsrmFileScreenTemplate* fileScreenTemplate) CreateTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateManager self, BSTR name, out IFsrmFileScreenTemplate* fileScreenTemplate) GetTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateManager self, FsrmEnumOptions options, out IFsrmCommittableCollection* fileScreenTemplates) EnumTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateManager self, ref VARIANT fileScreenTemplateNamesArray, out BSTR serializedFileScreenTemplates) ExportTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileScreenTemplateManager self, BSTR serializedFileScreenTemplates, ref VARIANT fileScreenTemplateNamesArray, out IFsrmCommittableCollection* fileScreenTemplates) ImportTemplates;
 			}
 		}
 		[CRepr]
@@ -1321,30 +1321,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumReportJobs(FsrmEnumOptions options, out IFsrmCollection* reportJobs) mut => VT.EnumReportJobs(ref this, options, out reportJobs);
-			public HRESULT CreateReportJob(out IFsrmReportJob* reportJob) mut => VT.CreateReportJob(ref this, out reportJob);
-			public HRESULT GetReportJob(BSTR taskName, out IFsrmReportJob* reportJob) mut => VT.GetReportJob(ref this, taskName, out reportJob);
-			public HRESULT GetOutputDirectory(FsrmReportGenerationContext context, out BSTR path) mut => VT.GetOutputDirectory(ref this, context, out path);
-			public HRESULT SetOutputDirectory(FsrmReportGenerationContext context, BSTR path) mut => VT.SetOutputDirectory(ref this, context, path);
-			public HRESULT IsFilterValidForReportType(FsrmReportType reportType, FsrmReportFilter filter, out int16 valid) mut => VT.IsFilterValidForReportType(ref this, reportType, filter, out valid);
-			public HRESULT GetDefaultFilter(FsrmReportType reportType, FsrmReportFilter filter, out VARIANT filterValue) mut => VT.GetDefaultFilter(ref this, reportType, filter, out filterValue);
-			public HRESULT SetDefaultFilter(FsrmReportType reportType, FsrmReportFilter filter, VARIANT filterValue) mut => VT.SetDefaultFilter(ref this, reportType, filter, filterValue);
-			public HRESULT GetReportSizeLimit(FsrmReportLimit limit, out VARIANT limitValue) mut => VT.GetReportSizeLimit(ref this, limit, out limitValue);
-			public HRESULT SetReportSizeLimit(FsrmReportLimit limit, VARIANT limitValue) mut => VT.SetReportSizeLimit(ref this, limit, limitValue);
+			public HResult EnumReportJobs(FsrmEnumOptions options, out IFsrmCollection* reportJobs) mut => VT.EnumReportJobs(ref this, options, out reportJobs);
+			public HResult CreateReportJob(out IFsrmReportJob* reportJob) mut => VT.CreateReportJob(ref this, out reportJob);
+			public HResult GetReportJob(BSTR taskName, out IFsrmReportJob* reportJob) mut => VT.GetReportJob(ref this, taskName, out reportJob);
+			public HResult GetOutputDirectory(FsrmReportGenerationContext context, out BSTR path) mut => VT.GetOutputDirectory(ref this, context, out path);
+			public HResult SetOutputDirectory(FsrmReportGenerationContext context, BSTR path) mut => VT.SetOutputDirectory(ref this, context, path);
+			public HResult IsFilterValidForReportType(FsrmReportType reportType, FsrmReportFilter filter, out int16 valid) mut => VT.IsFilterValidForReportType(ref this, reportType, filter, out valid);
+			public HResult GetDefaultFilter(FsrmReportType reportType, FsrmReportFilter filter, out VARIANT filterValue) mut => VT.GetDefaultFilter(ref this, reportType, filter, out filterValue);
+			public HResult SetDefaultFilter(FsrmReportType reportType, FsrmReportFilter filter, VARIANT filterValue) mut => VT.SetDefaultFilter(ref this, reportType, filter, filterValue);
+			public HResult GetReportSizeLimit(FsrmReportLimit limit, out VARIANT limitValue) mut => VT.GetReportSizeLimit(ref this, limit, out limitValue);
+			public HResult SetReportSizeLimit(FsrmReportLimit limit, VARIANT limitValue) mut => VT.SetReportSizeLimit(ref this, limit, limitValue);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmEnumOptions options, out IFsrmCollection* reportJobs) EnumReportJobs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, out IFsrmReportJob* reportJob) CreateReportJob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, BSTR taskName, out IFsrmReportJob* reportJob) GetReportJob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportGenerationContext context, out BSTR path) GetOutputDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportGenerationContext context, BSTR path) SetOutputDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportType reportType, FsrmReportFilter filter, out int16 valid) IsFilterValidForReportType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportType reportType, FsrmReportFilter filter, out VARIANT filterValue) GetDefaultFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportType reportType, FsrmReportFilter filter, VARIANT filterValue) SetDefaultFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportLimit limit, out VARIANT limitValue) GetReportSizeLimit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportManager self, FsrmReportLimit limit, VARIANT limitValue) SetReportSizeLimit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmEnumOptions options, out IFsrmCollection* reportJobs) EnumReportJobs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, out IFsrmReportJob* reportJob) CreateReportJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, BSTR taskName, out IFsrmReportJob* reportJob) GetReportJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportGenerationContext context, out BSTR path) GetOutputDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportGenerationContext context, BSTR path) SetOutputDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportType reportType, FsrmReportFilter filter, out int16 valid) IsFilterValidForReportType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportType reportType, FsrmReportFilter filter, out VARIANT filterValue) GetDefaultFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportType reportType, FsrmReportFilter filter, VARIANT filterValue) SetDefaultFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportLimit limit, out VARIANT limitValue) GetReportSizeLimit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportManager self, FsrmReportLimit limit, VARIANT limitValue) SetReportSizeLimit;
 			}
 		}
 		[CRepr]
@@ -1354,44 +1354,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Task(out BSTR taskName) mut => VT.get_Task(ref this, out taskName);
-			public HRESULT put_Task(BSTR taskName) mut => VT.put_Task(ref this, taskName);
-			public HRESULT get_NamespaceRoots(out SAFEARRAY* namespaceRoots) mut => VT.get_NamespaceRoots(ref this, out namespaceRoots);
-			public HRESULT put_NamespaceRoots(ref SAFEARRAY namespaceRoots) mut => VT.put_NamespaceRoots(ref this, ref namespaceRoots);
-			public HRESULT get_Formats(out SAFEARRAY* formats) mut => VT.get_Formats(ref this, out formats);
-			public HRESULT put_Formats(ref SAFEARRAY formats) mut => VT.put_Formats(ref this, ref formats);
-			public HRESULT get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
-			public HRESULT put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
-			public HRESULT get_RunningStatus(out FsrmReportRunningStatus runningStatus) mut => VT.get_RunningStatus(ref this, out runningStatus);
-			public HRESULT get_LastRun(out double lastRun) mut => VT.get_LastRun(ref this, out lastRun);
-			public HRESULT get_LastError(out BSTR lastError) mut => VT.get_LastError(ref this, out lastError);
-			public HRESULT get_LastGeneratedInDirectory(out BSTR path) mut => VT.get_LastGeneratedInDirectory(ref this, out path);
-			public HRESULT EnumReports(out IFsrmCollection* reports) mut => VT.EnumReports(ref this, out reports);
-			public HRESULT CreateReport(FsrmReportType reportType, out IFsrmReport* report) mut => VT.CreateReport(ref this, reportType, out report);
-			public HRESULT Run(FsrmReportGenerationContext context) mut => VT.Run(ref this, context);
-			public HRESULT WaitForCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForCompletion(ref this, waitSeconds, out completed);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
+			public HResult get_Task(out BSTR taskName) mut => VT.get_Task(ref this, out taskName);
+			public HResult put_Task(BSTR taskName) mut => VT.put_Task(ref this, taskName);
+			public HResult get_NamespaceRoots(out SAFEARRAY* namespaceRoots) mut => VT.get_NamespaceRoots(ref this, out namespaceRoots);
+			public HResult put_NamespaceRoots(ref SAFEARRAY namespaceRoots) mut => VT.put_NamespaceRoots(ref this, ref namespaceRoots);
+			public HResult get_Formats(out SAFEARRAY* formats) mut => VT.get_Formats(ref this, out formats);
+			public HResult put_Formats(ref SAFEARRAY formats) mut => VT.put_Formats(ref this, ref formats);
+			public HResult get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
+			public HResult put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
+			public HResult get_RunningStatus(out FsrmReportRunningStatus runningStatus) mut => VT.get_RunningStatus(ref this, out runningStatus);
+			public HResult get_LastRun(out double lastRun) mut => VT.get_LastRun(ref this, out lastRun);
+			public HResult get_LastError(out BSTR lastError) mut => VT.get_LastError(ref this, out lastError);
+			public HResult get_LastGeneratedInDirectory(out BSTR path) mut => VT.get_LastGeneratedInDirectory(ref this, out path);
+			public HResult EnumReports(out IFsrmCollection* reports) mut => VT.EnumReports(ref this, out reports);
+			public HResult CreateReport(FsrmReportType reportType, out IFsrmReport* report) mut => VT.CreateReport(ref this, reportType, out report);
+			public HResult Run(FsrmReportGenerationContext context) mut => VT.Run(ref this, context);
+			public HResult WaitForCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForCompletion(ref this, waitSeconds, out completed);
+			public HResult Cancel() mut => VT.Cancel(ref this);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out BSTR taskName) get_Task;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, BSTR taskName) put_Task;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out SAFEARRAY* namespaceRoots) get_NamespaceRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, ref SAFEARRAY namespaceRoots) put_NamespaceRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out SAFEARRAY* formats) get_Formats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, ref SAFEARRAY formats) put_Formats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out BSTR mailTo) get_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, BSTR mailTo) put_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out FsrmReportRunningStatus runningStatus) get_RunningStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out double lastRun) get_LastRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out BSTR lastError) get_LastError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out BSTR path) get_LastGeneratedInDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, out IFsrmCollection* reports) EnumReports;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, FsrmReportType reportType, out IFsrmReport* report) CreateReport;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, FsrmReportGenerationContext context) Run;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self, int32 waitSeconds, out int16 completed) WaitForCompletion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportJob self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out BSTR taskName) get_Task;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, BSTR taskName) put_Task;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out SAFEARRAY* namespaceRoots) get_NamespaceRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, ref SAFEARRAY namespaceRoots) put_NamespaceRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out SAFEARRAY* formats) get_Formats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, ref SAFEARRAY formats) put_Formats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out BSTR mailTo) get_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, BSTR mailTo) put_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out FsrmReportRunningStatus runningStatus) get_RunningStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out double lastRun) get_LastRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out BSTR lastError) get_LastError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out BSTR path) get_LastGeneratedInDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, out IFsrmCollection* reports) EnumReports;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, FsrmReportType reportType, out IFsrmReport* report) CreateReport;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, FsrmReportGenerationContext context) Run;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self, int32 waitSeconds, out int16 completed) WaitForCompletion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportJob self) Cancel;
 			}
 		}
 		[CRepr]
@@ -1401,28 +1401,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Type(out FsrmReportType reportType) mut => VT.get_Type(ref this, out reportType);
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
-			public HRESULT put_Description(BSTR description) mut => VT.put_Description(ref this, description);
-			public HRESULT get_LastGeneratedFileNamePrefix(out BSTR prefix) mut => VT.get_LastGeneratedFileNamePrefix(ref this, out prefix);
-			public HRESULT GetFilter(FsrmReportFilter filter, out VARIANT filterValue) mut => VT.GetFilter(ref this, filter, out filterValue);
-			public HRESULT SetFilter(FsrmReportFilter filter, VARIANT filterValue) mut => VT.SetFilter(ref this, filter, filterValue);
-			public HRESULT Delete() mut => VT.Delete(ref this);
+			public HResult get_Type(out FsrmReportType reportType) mut => VT.get_Type(ref this, out reportType);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
+			public HResult put_Description(BSTR description) mut => VT.put_Description(ref this, description);
+			public HResult get_LastGeneratedFileNamePrefix(out BSTR prefix) mut => VT.get_LastGeneratedFileNamePrefix(ref this, out prefix);
+			public HResult GetFilter(FsrmReportFilter filter, out VARIANT filterValue) mut => VT.GetFilter(ref this, filter, out filterValue);
+			public HResult SetFilter(FsrmReportFilter filter, VARIANT filterValue) mut => VT.SetFilter(ref this, filter, filterValue);
+			public HResult Delete() mut => VT.Delete(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, out FsrmReportType reportType) get_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, out BSTR description) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, BSTR description) put_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, out BSTR prefix) get_LastGeneratedFileNamePrefix;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, FsrmReportFilter filter, out VARIANT filterValue) GetFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self, FsrmReportFilter filter, VARIANT filterValue) SetFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReport self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, out FsrmReportType reportType) get_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, out BSTR description) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, BSTR description) put_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, out BSTR prefix) get_LastGeneratedFileNamePrefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, FsrmReportFilter filter, out VARIANT filterValue) GetFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self, FsrmReportFilter filter, VARIANT filterValue) SetFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReport self) Delete;
 			}
 		}
 		[CRepr]
@@ -1432,18 +1432,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT VerifyNamespaces(ref VARIANT namespacesSafeArray) mut => VT.VerifyNamespaces(ref this, ref namespacesSafeArray);
-			public HRESULT CreateScheduleTask(BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) mut => VT.CreateScheduleTask(ref this, taskName, ref namespacesSafeArray, serializedTask);
-			public HRESULT ModifyScheduleTask(BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) mut => VT.ModifyScheduleTask(ref this, taskName, ref namespacesSafeArray, serializedTask);
-			public HRESULT DeleteScheduleTask(BSTR taskName) mut => VT.DeleteScheduleTask(ref this, taskName);
+			public HResult VerifyNamespaces(ref VARIANT namespacesSafeArray) mut => VT.VerifyNamespaces(ref this, ref namespacesSafeArray);
+			public HResult CreateScheduleTask(BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) mut => VT.CreateScheduleTask(ref this, taskName, ref namespacesSafeArray, serializedTask);
+			public HResult ModifyScheduleTask(BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) mut => VT.ModifyScheduleTask(ref this, taskName, ref namespacesSafeArray, serializedTask);
+			public HResult DeleteScheduleTask(BSTR taskName) mut => VT.DeleteScheduleTask(ref this, taskName);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportScheduler self, ref VARIANT namespacesSafeArray) VerifyNamespaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportScheduler self, BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) CreateScheduleTask;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportScheduler self, BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) ModifyScheduleTask;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmReportScheduler self, BSTR taskName) DeleteScheduleTask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportScheduler self, ref VARIANT namespacesSafeArray) VerifyNamespaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportScheduler self, BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) CreateScheduleTask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportScheduler self, BSTR taskName, ref VARIANT namespacesSafeArray, BSTR serializedTask) ModifyScheduleTask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmReportScheduler self, BSTR taskName) DeleteScheduleTask;
 			}
 		}
 		[CRepr]
@@ -1453,20 +1453,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ActionVariables(out SAFEARRAY* variables) mut => VT.get_ActionVariables(ref this, out variables);
-			public HRESULT get_ActionVariableDescriptions(out SAFEARRAY* descriptions) mut => VT.get_ActionVariableDescriptions(ref this, out descriptions);
-			public HRESULT EnumFileManagementJobs(FsrmEnumOptions options, out IFsrmCollection* fileManagementJobs) mut => VT.EnumFileManagementJobs(ref this, options, out fileManagementJobs);
-			public HRESULT CreateFileManagementJob(out IFsrmFileManagementJob* fileManagementJob) mut => VT.CreateFileManagementJob(ref this, out fileManagementJob);
-			public HRESULT GetFileManagementJob(BSTR name, out IFsrmFileManagementJob* fileManagementJob) mut => VT.GetFileManagementJob(ref this, name, out fileManagementJob);
+			public HResult get_ActionVariables(out SAFEARRAY* variables) mut => VT.get_ActionVariables(ref this, out variables);
+			public HResult get_ActionVariableDescriptions(out SAFEARRAY* descriptions) mut => VT.get_ActionVariableDescriptions(ref this, out descriptions);
+			public HResult EnumFileManagementJobs(FsrmEnumOptions options, out IFsrmCollection* fileManagementJobs) mut => VT.EnumFileManagementJobs(ref this, options, out fileManagementJobs);
+			public HResult CreateFileManagementJob(out IFsrmFileManagementJob* fileManagementJob) mut => VT.CreateFileManagementJob(ref this, out fileManagementJob);
+			public HResult GetFileManagementJob(BSTR name, out IFsrmFileManagementJob* fileManagementJob) mut => VT.GetFileManagementJob(ref this, name, out fileManagementJob);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJobManager self, out SAFEARRAY* variables) get_ActionVariables;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJobManager self, out SAFEARRAY* descriptions) get_ActionVariableDescriptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJobManager self, FsrmEnumOptions options, out IFsrmCollection* fileManagementJobs) EnumFileManagementJobs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJobManager self, out IFsrmFileManagementJob* fileManagementJob) CreateFileManagementJob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJobManager self, BSTR name, out IFsrmFileManagementJob* fileManagementJob) GetFileManagementJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJobManager self, out SAFEARRAY* variables) get_ActionVariables;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJobManager self, out SAFEARRAY* descriptions) get_ActionVariableDescriptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJobManager self, FsrmEnumOptions options, out IFsrmCollection* fileManagementJobs) EnumFileManagementJobs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJobManager self, out IFsrmFileManagementJob* fileManagementJob) CreateFileManagementJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJobManager self, BSTR name, out IFsrmFileManagementJob* fileManagementJob) GetFileManagementJob;
 			}
 		}
 		[CRepr]
@@ -1476,108 +1476,108 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_NamespaceRoots(out SAFEARRAY* namespaceRoots) mut => VT.get_NamespaceRoots(ref this, out namespaceRoots);
-			public HRESULT put_NamespaceRoots(ref SAFEARRAY namespaceRoots) mut => VT.put_NamespaceRoots(ref this, ref namespaceRoots);
-			public HRESULT get_Enabled(out int16 enabled) mut => VT.get_Enabled(ref this, out enabled);
-			public HRESULT put_Enabled(int16 enabled) mut => VT.put_Enabled(ref this, enabled);
-			public HRESULT get_OperationType(out FsrmFileManagementType operationType) mut => VT.get_OperationType(ref this, out operationType);
-			public HRESULT put_OperationType(FsrmFileManagementType operationType) mut => VT.put_OperationType(ref this, operationType);
-			public HRESULT get_ExpirationDirectory(out BSTR expirationDirectory) mut => VT.get_ExpirationDirectory(ref this, out expirationDirectory);
-			public HRESULT put_ExpirationDirectory(BSTR expirationDirectory) mut => VT.put_ExpirationDirectory(ref this, expirationDirectory);
-			public HRESULT get_CustomAction(out IFsrmActionCommand* action) mut => VT.get_CustomAction(ref this, out action);
-			public HRESULT get_Notifications(out SAFEARRAY* notifications) mut => VT.get_Notifications(ref this, out notifications);
-			public HRESULT get_Logging(out int32 loggingFlags) mut => VT.get_Logging(ref this, out loggingFlags);
-			public HRESULT put_Logging(int32 loggingFlags) mut => VT.put_Logging(ref this, loggingFlags);
-			public HRESULT get_ReportEnabled(out int16 reportEnabled) mut => VT.get_ReportEnabled(ref this, out reportEnabled);
-			public HRESULT put_ReportEnabled(int16 reportEnabled) mut => VT.put_ReportEnabled(ref this, reportEnabled);
-			public HRESULT get_Formats(out SAFEARRAY* formats) mut => VT.get_Formats(ref this, out formats);
-			public HRESULT put_Formats(ref SAFEARRAY formats) mut => VT.put_Formats(ref this, ref formats);
-			public HRESULT get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
-			public HRESULT put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
-			public HRESULT get_DaysSinceFileCreated(out int32 daysSinceCreation) mut => VT.get_DaysSinceFileCreated(ref this, out daysSinceCreation);
-			public HRESULT put_DaysSinceFileCreated(int32 daysSinceCreation) mut => VT.put_DaysSinceFileCreated(ref this, daysSinceCreation);
-			public HRESULT get_DaysSinceFileLastAccessed(out int32 daysSinceAccess) mut => VT.get_DaysSinceFileLastAccessed(ref this, out daysSinceAccess);
-			public HRESULT put_DaysSinceFileLastAccessed(int32 daysSinceAccess) mut => VT.put_DaysSinceFileLastAccessed(ref this, daysSinceAccess);
-			public HRESULT get_DaysSinceFileLastModified(out int32 daysSinceModify) mut => VT.get_DaysSinceFileLastModified(ref this, out daysSinceModify);
-			public HRESULT put_DaysSinceFileLastModified(int32 daysSinceModify) mut => VT.put_DaysSinceFileLastModified(ref this, daysSinceModify);
-			public HRESULT get_PropertyConditions(out IFsrmCollection* propertyConditions) mut => VT.get_PropertyConditions(ref this, out propertyConditions);
-			public HRESULT get_FromDate(out double fromDate) mut => VT.get_FromDate(ref this, out fromDate);
-			public HRESULT put_FromDate(double fromDate) mut => VT.put_FromDate(ref this, fromDate);
-			public HRESULT get_Task(out BSTR taskName) mut => VT.get_Task(ref this, out taskName);
-			public HRESULT put_Task(BSTR taskName) mut => VT.put_Task(ref this, taskName);
-			public HRESULT get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
-			public HRESULT put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
-			public HRESULT get_RunningStatus(out FsrmReportRunningStatus runningStatus) mut => VT.get_RunningStatus(ref this, out runningStatus);
-			public HRESULT get_LastError(out BSTR lastError) mut => VT.get_LastError(ref this, out lastError);
-			public HRESULT get_LastReportPathWithoutExtension(out BSTR path) mut => VT.get_LastReportPathWithoutExtension(ref this, out path);
-			public HRESULT get_LastRun(out double lastRun) mut => VT.get_LastRun(ref this, out lastRun);
-			public HRESULT get_FileNamePattern(out BSTR fileNamePattern) mut => VT.get_FileNamePattern(ref this, out fileNamePattern);
-			public HRESULT put_FileNamePattern(BSTR fileNamePattern) mut => VT.put_FileNamePattern(ref this, fileNamePattern);
-			public HRESULT Run(FsrmReportGenerationContext context) mut => VT.Run(ref this, context);
-			public HRESULT WaitForCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForCompletion(ref this, waitSeconds, out completed);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
-			public HRESULT AddNotification(int32 days) mut => VT.AddNotification(ref this, days);
-			public HRESULT DeleteNotification(int32 days) mut => VT.DeleteNotification(ref this, days);
-			public HRESULT ModifyNotification(int32 days, int32 newDays) mut => VT.ModifyNotification(ref this, days, newDays);
-			public HRESULT CreateNotificationAction(int32 days, FsrmActionType actionType, out IFsrmAction* action) mut => VT.CreateNotificationAction(ref this, days, actionType, out action);
-			public HRESULT EnumNotificationActions(int32 days, out IFsrmCollection* actions) mut => VT.EnumNotificationActions(ref this, days, out actions);
-			public HRESULT CreatePropertyCondition(BSTR name, out IFsrmPropertyCondition* propertyCondition) mut => VT.CreatePropertyCondition(ref this, name, out propertyCondition);
-			public HRESULT CreateCustomAction(out IFsrmActionCommand* customAction) mut => VT.CreateCustomAction(ref this, out customAction);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_NamespaceRoots(out SAFEARRAY* namespaceRoots) mut => VT.get_NamespaceRoots(ref this, out namespaceRoots);
+			public HResult put_NamespaceRoots(ref SAFEARRAY namespaceRoots) mut => VT.put_NamespaceRoots(ref this, ref namespaceRoots);
+			public HResult get_Enabled(out int16 enabled) mut => VT.get_Enabled(ref this, out enabled);
+			public HResult put_Enabled(int16 enabled) mut => VT.put_Enabled(ref this, enabled);
+			public HResult get_OperationType(out FsrmFileManagementType operationType) mut => VT.get_OperationType(ref this, out operationType);
+			public HResult put_OperationType(FsrmFileManagementType operationType) mut => VT.put_OperationType(ref this, operationType);
+			public HResult get_ExpirationDirectory(out BSTR expirationDirectory) mut => VT.get_ExpirationDirectory(ref this, out expirationDirectory);
+			public HResult put_ExpirationDirectory(BSTR expirationDirectory) mut => VT.put_ExpirationDirectory(ref this, expirationDirectory);
+			public HResult get_CustomAction(out IFsrmActionCommand* action) mut => VT.get_CustomAction(ref this, out action);
+			public HResult get_Notifications(out SAFEARRAY* notifications) mut => VT.get_Notifications(ref this, out notifications);
+			public HResult get_Logging(out int32 loggingFlags) mut => VT.get_Logging(ref this, out loggingFlags);
+			public HResult put_Logging(int32 loggingFlags) mut => VT.put_Logging(ref this, loggingFlags);
+			public HResult get_ReportEnabled(out int16 reportEnabled) mut => VT.get_ReportEnabled(ref this, out reportEnabled);
+			public HResult put_ReportEnabled(int16 reportEnabled) mut => VT.put_ReportEnabled(ref this, reportEnabled);
+			public HResult get_Formats(out SAFEARRAY* formats) mut => VT.get_Formats(ref this, out formats);
+			public HResult put_Formats(ref SAFEARRAY formats) mut => VT.put_Formats(ref this, ref formats);
+			public HResult get_MailTo(out BSTR mailTo) mut => VT.get_MailTo(ref this, out mailTo);
+			public HResult put_MailTo(BSTR mailTo) mut => VT.put_MailTo(ref this, mailTo);
+			public HResult get_DaysSinceFileCreated(out int32 daysSinceCreation) mut => VT.get_DaysSinceFileCreated(ref this, out daysSinceCreation);
+			public HResult put_DaysSinceFileCreated(int32 daysSinceCreation) mut => VT.put_DaysSinceFileCreated(ref this, daysSinceCreation);
+			public HResult get_DaysSinceFileLastAccessed(out int32 daysSinceAccess) mut => VT.get_DaysSinceFileLastAccessed(ref this, out daysSinceAccess);
+			public HResult put_DaysSinceFileLastAccessed(int32 daysSinceAccess) mut => VT.put_DaysSinceFileLastAccessed(ref this, daysSinceAccess);
+			public HResult get_DaysSinceFileLastModified(out int32 daysSinceModify) mut => VT.get_DaysSinceFileLastModified(ref this, out daysSinceModify);
+			public HResult put_DaysSinceFileLastModified(int32 daysSinceModify) mut => VT.put_DaysSinceFileLastModified(ref this, daysSinceModify);
+			public HResult get_PropertyConditions(out IFsrmCollection* propertyConditions) mut => VT.get_PropertyConditions(ref this, out propertyConditions);
+			public HResult get_FromDate(out double fromDate) mut => VT.get_FromDate(ref this, out fromDate);
+			public HResult put_FromDate(double fromDate) mut => VT.put_FromDate(ref this, fromDate);
+			public HResult get_Task(out BSTR taskName) mut => VT.get_Task(ref this, out taskName);
+			public HResult put_Task(BSTR taskName) mut => VT.put_Task(ref this, taskName);
+			public HResult get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
+			public HResult put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
+			public HResult get_RunningStatus(out FsrmReportRunningStatus runningStatus) mut => VT.get_RunningStatus(ref this, out runningStatus);
+			public HResult get_LastError(out BSTR lastError) mut => VT.get_LastError(ref this, out lastError);
+			public HResult get_LastReportPathWithoutExtension(out BSTR path) mut => VT.get_LastReportPathWithoutExtension(ref this, out path);
+			public HResult get_LastRun(out double lastRun) mut => VT.get_LastRun(ref this, out lastRun);
+			public HResult get_FileNamePattern(out BSTR fileNamePattern) mut => VT.get_FileNamePattern(ref this, out fileNamePattern);
+			public HResult put_FileNamePattern(BSTR fileNamePattern) mut => VT.put_FileNamePattern(ref this, fileNamePattern);
+			public HResult Run(FsrmReportGenerationContext context) mut => VT.Run(ref this, context);
+			public HResult WaitForCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForCompletion(ref this, waitSeconds, out completed);
+			public HResult Cancel() mut => VT.Cancel(ref this);
+			public HResult AddNotification(int32 days) mut => VT.AddNotification(ref this, days);
+			public HResult DeleteNotification(int32 days) mut => VT.DeleteNotification(ref this, days);
+			public HResult ModifyNotification(int32 days, int32 newDays) mut => VT.ModifyNotification(ref this, days, newDays);
+			public HResult CreateNotificationAction(int32 days, FsrmActionType actionType, out IFsrmAction* action) mut => VT.CreateNotificationAction(ref this, days, actionType, out action);
+			public HResult EnumNotificationActions(int32 days, out IFsrmCollection* actions) mut => VT.EnumNotificationActions(ref this, days, out actions);
+			public HResult CreatePropertyCondition(BSTR name, out IFsrmPropertyCondition* propertyCondition) mut => VT.CreatePropertyCondition(ref this, name, out propertyCondition);
+			public HResult CreateCustomAction(out IFsrmActionCommand* customAction) mut => VT.CreateCustomAction(ref this, out customAction);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out SAFEARRAY* namespaceRoots) get_NamespaceRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, ref SAFEARRAY namespaceRoots) put_NamespaceRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out int16 enabled) get_Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int16 enabled) put_Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out FsrmFileManagementType operationType) get_OperationType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, FsrmFileManagementType operationType) put_OperationType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR expirationDirectory) get_ExpirationDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, BSTR expirationDirectory) put_ExpirationDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out IFsrmActionCommand* action) get_CustomAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out SAFEARRAY* notifications) get_Notifications;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out int32 loggingFlags) get_Logging;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 loggingFlags) put_Logging;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out int16 reportEnabled) get_ReportEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int16 reportEnabled) put_ReportEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out SAFEARRAY* formats) get_Formats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, ref SAFEARRAY formats) put_Formats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR mailTo) get_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, BSTR mailTo) put_MailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out int32 daysSinceCreation) get_DaysSinceFileCreated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 daysSinceCreation) put_DaysSinceFileCreated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out int32 daysSinceAccess) get_DaysSinceFileLastAccessed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 daysSinceAccess) put_DaysSinceFileLastAccessed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out int32 daysSinceModify) get_DaysSinceFileLastModified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 daysSinceModify) put_DaysSinceFileLastModified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out IFsrmCollection* propertyConditions) get_PropertyConditions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out double fromDate) get_FromDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, double fromDate) put_FromDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR taskName) get_Task;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, BSTR taskName) put_Task;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out SAFEARRAY* parameters) get_Parameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, ref SAFEARRAY parameters) put_Parameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out FsrmReportRunningStatus runningStatus) get_RunningStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR lastError) get_LastError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR path) get_LastReportPathWithoutExtension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out double lastRun) get_LastRun;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out BSTR fileNamePattern) get_FileNamePattern;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, BSTR fileNamePattern) put_FileNamePattern;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, FsrmReportGenerationContext context) Run;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 waitSeconds, out int16 completed) WaitForCompletion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 days) AddNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 days) DeleteNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 days, int32 newDays) ModifyNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 days, FsrmActionType actionType, out IFsrmAction* action) CreateNotificationAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, int32 days, out IFsrmCollection* actions) EnumNotificationActions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, BSTR name, out IFsrmPropertyCondition* propertyCondition) CreatePropertyCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileManagementJob self, out IFsrmActionCommand* customAction) CreateCustomAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out SAFEARRAY* namespaceRoots) get_NamespaceRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, ref SAFEARRAY namespaceRoots) put_NamespaceRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out int16 enabled) get_Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int16 enabled) put_Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out FsrmFileManagementType operationType) get_OperationType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, FsrmFileManagementType operationType) put_OperationType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR expirationDirectory) get_ExpirationDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, BSTR expirationDirectory) put_ExpirationDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out IFsrmActionCommand* action) get_CustomAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out SAFEARRAY* notifications) get_Notifications;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out int32 loggingFlags) get_Logging;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 loggingFlags) put_Logging;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out int16 reportEnabled) get_ReportEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int16 reportEnabled) put_ReportEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out SAFEARRAY* formats) get_Formats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, ref SAFEARRAY formats) put_Formats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR mailTo) get_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, BSTR mailTo) put_MailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out int32 daysSinceCreation) get_DaysSinceFileCreated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 daysSinceCreation) put_DaysSinceFileCreated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out int32 daysSinceAccess) get_DaysSinceFileLastAccessed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 daysSinceAccess) put_DaysSinceFileLastAccessed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out int32 daysSinceModify) get_DaysSinceFileLastModified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 daysSinceModify) put_DaysSinceFileLastModified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out IFsrmCollection* propertyConditions) get_PropertyConditions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out double fromDate) get_FromDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, double fromDate) put_FromDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR taskName) get_Task;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, BSTR taskName) put_Task;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out SAFEARRAY* parameters) get_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, ref SAFEARRAY parameters) put_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out FsrmReportRunningStatus runningStatus) get_RunningStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR lastError) get_LastError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR path) get_LastReportPathWithoutExtension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out double lastRun) get_LastRun;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out BSTR fileNamePattern) get_FileNamePattern;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, BSTR fileNamePattern) put_FileNamePattern;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, FsrmReportGenerationContext context) Run;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 waitSeconds, out int16 completed) WaitForCompletion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 days) AddNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 days) DeleteNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 days, int32 newDays) ModifyNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 days, FsrmActionType actionType, out IFsrmAction* action) CreateNotificationAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, int32 days, out IFsrmCollection* actions) EnumNotificationActions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, BSTR name, out IFsrmPropertyCondition* propertyCondition) CreatePropertyCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileManagementJob self, out IFsrmActionCommand* customAction) CreateCustomAction;
 			}
 		}
 		[CRepr]
@@ -1587,24 +1587,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_Type(out FsrmPropertyConditionType type) mut => VT.get_Type(ref this, out type);
-			public HRESULT put_Type(FsrmPropertyConditionType type) mut => VT.put_Type(ref this, type);
-			public HRESULT get_Value(out BSTR value) mut => VT.get_Value(ref this, out value);
-			public HRESULT put_Value(BSTR value) mut => VT.put_Value(ref this, value);
-			public HRESULT Delete() mut => VT.Delete(ref this);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_Type(out FsrmPropertyConditionType type) mut => VT.get_Type(ref this, out type);
+			public HResult put_Type(FsrmPropertyConditionType type) mut => VT.put_Type(ref this, type);
+			public HResult get_Value(out BSTR value) mut => VT.get_Value(ref this, out value);
+			public HResult put_Value(BSTR value) mut => VT.put_Value(ref this, value);
+			public HResult Delete() mut => VT.Delete(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self, out FsrmPropertyConditionType type) get_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self, FsrmPropertyConditionType type) put_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self, out BSTR value) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self, BSTR value) put_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyCondition self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self, out FsrmPropertyConditionType type) get_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self, FsrmPropertyConditionType type) put_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self, out BSTR value) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self, BSTR value) put_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyCondition self) Delete;
 			}
 		}
 		[CRepr]
@@ -1614,14 +1614,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Type(out FsrmFileConditionType pVal) mut => VT.get_Type(ref this, out pVal);
-			public HRESULT Delete() mut => VT.Delete(ref this);
+			public HResult get_Type(out FsrmFileConditionType pVal) mut => VT.get_Type(ref this, out pVal);
+			public HResult Delete() mut => VT.Delete(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileCondition self, out FsrmFileConditionType pVal) get_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileCondition self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileCondition self, out FsrmFileConditionType pVal) get_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileCondition self) Delete;
 			}
 		}
 		[CRepr]
@@ -1631,30 +1631,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_PropertyName(out BSTR pVal) mut => VT.get_PropertyName(ref this, out pVal);
-			public HRESULT put_PropertyName(BSTR newVal) mut => VT.put_PropertyName(ref this, newVal);
-			public HRESULT get_PropertyId(out FsrmFileSystemPropertyId pVal) mut => VT.get_PropertyId(ref this, out pVal);
-			public HRESULT put_PropertyId(FsrmFileSystemPropertyId newVal) mut => VT.put_PropertyId(ref this, newVal);
-			public HRESULT get_Operator(out FsrmPropertyConditionType pVal) mut => VT.get_Operator(ref this, out pVal);
-			public HRESULT put_Operator(FsrmPropertyConditionType newVal) mut => VT.put_Operator(ref this, newVal);
-			public HRESULT get_ValueType(out FsrmPropertyValueType pVal) mut => VT.get_ValueType(ref this, out pVal);
-			public HRESULT put_ValueType(FsrmPropertyValueType newVal) mut => VT.put_ValueType(ref this, newVal);
-			public HRESULT get_Value(out VARIANT pVal) mut => VT.get_Value(ref this, out pVal);
-			public HRESULT put_Value(VARIANT newVal) mut => VT.put_Value(ref this, newVal);
+			public HResult get_PropertyName(out BSTR pVal) mut => VT.get_PropertyName(ref this, out pVal);
+			public HResult put_PropertyName(BSTR newVal) mut => VT.put_PropertyName(ref this, newVal);
+			public HResult get_PropertyId(out FsrmFileSystemPropertyId pVal) mut => VT.get_PropertyId(ref this, out pVal);
+			public HResult put_PropertyId(FsrmFileSystemPropertyId newVal) mut => VT.put_PropertyId(ref this, newVal);
+			public HResult get_Operator(out FsrmPropertyConditionType pVal) mut => VT.get_Operator(ref this, out pVal);
+			public HResult put_Operator(FsrmPropertyConditionType newVal) mut => VT.put_Operator(ref this, newVal);
+			public HResult get_ValueType(out FsrmPropertyValueType pVal) mut => VT.get_ValueType(ref this, out pVal);
+			public HResult put_ValueType(FsrmPropertyValueType newVal) mut => VT.put_ValueType(ref this, newVal);
+			public HResult get_Value(out VARIANT pVal) mut => VT.get_Value(ref this, out pVal);
+			public HResult put_Value(VARIANT newVal) mut => VT.put_Value(ref this, newVal);
 
 			[CRepr]
 			public struct VTable : IFsrmFileCondition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, out BSTR pVal) get_PropertyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, BSTR newVal) put_PropertyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, out FsrmFileSystemPropertyId pVal) get_PropertyId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, FsrmFileSystemPropertyId newVal) put_PropertyId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, out FsrmPropertyConditionType pVal) get_Operator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, FsrmPropertyConditionType newVal) put_Operator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, out FsrmPropertyValueType pVal) get_ValueType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, FsrmPropertyValueType newVal) put_ValueType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, out VARIANT pVal) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmFileConditionProperty self, VARIANT newVal) put_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, out BSTR pVal) get_PropertyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, BSTR newVal) put_PropertyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, out FsrmFileSystemPropertyId pVal) get_PropertyId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, FsrmFileSystemPropertyId newVal) put_PropertyId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, out FsrmPropertyConditionType pVal) get_Operator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, FsrmPropertyConditionType newVal) put_Operator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, out FsrmPropertyValueType pVal) get_ValueType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, FsrmPropertyValueType newVal) put_ValueType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, out VARIANT pVal) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmFileConditionProperty self, VARIANT newVal) put_Value;
 			}
 		}
 		[CRepr]
@@ -1664,30 +1664,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_Type(out FsrmPropertyDefinitionType type) mut => VT.get_Type(ref this, out type);
-			public HRESULT put_Type(FsrmPropertyDefinitionType type) mut => VT.put_Type(ref this, type);
-			public HRESULT get_PossibleValues(out SAFEARRAY* possibleValues) mut => VT.get_PossibleValues(ref this, out possibleValues);
-			public HRESULT put_PossibleValues(ref SAFEARRAY possibleValues) mut => VT.put_PossibleValues(ref this, ref possibleValues);
-			public HRESULT get_ValueDescriptions(out SAFEARRAY* valueDescriptions) mut => VT.get_ValueDescriptions(ref this, out valueDescriptions);
-			public HRESULT put_ValueDescriptions(ref SAFEARRAY valueDescriptions) mut => VT.put_ValueDescriptions(ref this, ref valueDescriptions);
-			public HRESULT get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
-			public HRESULT put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_Type(out FsrmPropertyDefinitionType type) mut => VT.get_Type(ref this, out type);
+			public HResult put_Type(FsrmPropertyDefinitionType type) mut => VT.put_Type(ref this, type);
+			public HResult get_PossibleValues(out SAFEARRAY* possibleValues) mut => VT.get_PossibleValues(ref this, out possibleValues);
+			public HResult put_PossibleValues(ref SAFEARRAY possibleValues) mut => VT.put_PossibleValues(ref this, ref possibleValues);
+			public HResult get_ValueDescriptions(out SAFEARRAY* valueDescriptions) mut => VT.get_ValueDescriptions(ref this, out valueDescriptions);
+			public HResult put_ValueDescriptions(ref SAFEARRAY valueDescriptions) mut => VT.put_ValueDescriptions(ref this, ref valueDescriptions);
+			public HResult get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
+			public HResult put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, out FsrmPropertyDefinitionType type) get_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, FsrmPropertyDefinitionType type) put_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, out SAFEARRAY* possibleValues) get_PossibleValues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, ref SAFEARRAY possibleValues) put_PossibleValues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, out SAFEARRAY* valueDescriptions) get_ValueDescriptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, ref SAFEARRAY valueDescriptions) put_ValueDescriptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, out SAFEARRAY* parameters) get_Parameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition self, ref SAFEARRAY parameters) put_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, out FsrmPropertyDefinitionType type) get_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, FsrmPropertyDefinitionType type) put_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, out SAFEARRAY* possibleValues) get_PossibleValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, ref SAFEARRAY possibleValues) put_PossibleValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, out SAFEARRAY* valueDescriptions) get_ValueDescriptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, ref SAFEARRAY valueDescriptions) put_ValueDescriptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, out SAFEARRAY* parameters) get_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition self, ref SAFEARRAY parameters) put_Parameters;
 			}
 		}
 		[CRepr]
@@ -1697,20 +1697,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_PropertyDefinitionFlags(out int32 propertyDefinitionFlags) mut => VT.get_PropertyDefinitionFlags(ref this, out propertyDefinitionFlags);
-			public HRESULT get_DisplayName(out BSTR name) mut => VT.get_DisplayName(ref this, out name);
-			public HRESULT put_DisplayName(BSTR name) mut => VT.put_DisplayName(ref this, name);
-			public HRESULT get_AppliesTo(out int32 appliesTo) mut => VT.get_AppliesTo(ref this, out appliesTo);
-			public HRESULT get_ValueDefinitions(out IFsrmCollection* valueDefinitions) mut => VT.get_ValueDefinitions(ref this, out valueDefinitions);
+			public HResult get_PropertyDefinitionFlags(out int32 propertyDefinitionFlags) mut => VT.get_PropertyDefinitionFlags(ref this, out propertyDefinitionFlags);
+			public HResult get_DisplayName(out BSTR name) mut => VT.get_DisplayName(ref this, out name);
+			public HResult put_DisplayName(BSTR name) mut => VT.put_DisplayName(ref this, name);
+			public HResult get_AppliesTo(out int32 appliesTo) mut => VT.get_AppliesTo(ref this, out appliesTo);
+			public HResult get_ValueDefinitions(out IFsrmCollection* valueDefinitions) mut => VT.get_ValueDefinitions(ref this, out valueDefinitions);
 
 			[CRepr]
 			public struct VTable : IFsrmPropertyDefinition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition2 self, out int32 propertyDefinitionFlags) get_PropertyDefinitionFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition2 self, out BSTR name) get_DisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition2 self, BSTR name) put_DisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition2 self, out int32 appliesTo) get_AppliesTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinition2 self, out IFsrmCollection* valueDefinitions) get_ValueDefinitions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition2 self, out int32 propertyDefinitionFlags) get_PropertyDefinitionFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition2 self, out BSTR name) get_DisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition2 self, BSTR name) put_DisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition2 self, out int32 appliesTo) get_AppliesTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinition2 self, out IFsrmCollection* valueDefinitions) get_ValueDefinitions;
 			}
 		}
 		[CRepr]
@@ -1720,18 +1720,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT get_DisplayName(out BSTR displayName) mut => VT.get_DisplayName(ref this, out displayName);
-			public HRESULT get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
-			public HRESULT get_UniqueID(out BSTR uniqueID) mut => VT.get_UniqueID(ref this, out uniqueID);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult get_DisplayName(out BSTR displayName) mut => VT.get_DisplayName(ref this, out displayName);
+			public HResult get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
+			public HResult get_UniqueID(out BSTR uniqueID) mut => VT.get_UniqueID(ref this, out uniqueID);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinitionValue self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinitionValue self, out BSTR displayName) get_DisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinitionValue self, out BSTR description) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyDefinitionValue self, out BSTR uniqueID) get_UniqueID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinitionValue self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinitionValue self, out BSTR displayName) get_DisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinitionValue self, out BSTR description) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyDefinitionValue self, out BSTR uniqueID) get_UniqueID;
 			}
 		}
 		[CRepr]
@@ -1741,18 +1741,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT get_Value(out BSTR value) mut => VT.get_Value(ref this, out value);
-			public HRESULT get_Sources(out SAFEARRAY* sources) mut => VT.get_Sources(ref this, out sources);
-			public HRESULT get_PropertyFlags(out int32 flags) mut => VT.get_PropertyFlags(ref this, out flags);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult get_Value(out BSTR value) mut => VT.get_Value(ref this, out value);
+			public HResult get_Sources(out SAFEARRAY* sources) mut => VT.get_Sources(ref this, out sources);
+			public HResult get_PropertyFlags(out int32 flags) mut => VT.get_PropertyFlags(ref this, out flags);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmProperty self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmProperty self, out BSTR value) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmProperty self, out SAFEARRAY* sources) get_Sources;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmProperty self, out int32 flags) get_PropertyFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmProperty self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmProperty self, out BSTR value) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmProperty self, out SAFEARRAY* sources) get_Sources;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmProperty self, out int32 flags) get_PropertyFlags;
 			}
 		}
 		[CRepr]
@@ -1762,34 +1762,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_RuleType(out FsrmRuleType ruleType) mut => VT.get_RuleType(ref this, out ruleType);
-			public HRESULT get_ModuleDefinitionName(out BSTR moduleDefinitionName) mut => VT.get_ModuleDefinitionName(ref this, out moduleDefinitionName);
-			public HRESULT put_ModuleDefinitionName(BSTR moduleDefinitionName) mut => VT.put_ModuleDefinitionName(ref this, moduleDefinitionName);
-			public HRESULT get_NamespaceRoots(out SAFEARRAY* namespaceRoots) mut => VT.get_NamespaceRoots(ref this, out namespaceRoots);
-			public HRESULT put_NamespaceRoots(ref SAFEARRAY namespaceRoots) mut => VT.put_NamespaceRoots(ref this, ref namespaceRoots);
-			public HRESULT get_RuleFlags(out int32 ruleFlags) mut => VT.get_RuleFlags(ref this, out ruleFlags);
-			public HRESULT put_RuleFlags(int32 ruleFlags) mut => VT.put_RuleFlags(ref this, ruleFlags);
-			public HRESULT get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
-			public HRESULT put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
-			public HRESULT get_LastModified(out VARIANT lastModified) mut => VT.get_LastModified(ref this, out lastModified);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_RuleType(out FsrmRuleType ruleType) mut => VT.get_RuleType(ref this, out ruleType);
+			public HResult get_ModuleDefinitionName(out BSTR moduleDefinitionName) mut => VT.get_ModuleDefinitionName(ref this, out moduleDefinitionName);
+			public HResult put_ModuleDefinitionName(BSTR moduleDefinitionName) mut => VT.put_ModuleDefinitionName(ref this, moduleDefinitionName);
+			public HResult get_NamespaceRoots(out SAFEARRAY* namespaceRoots) mut => VT.get_NamespaceRoots(ref this, out namespaceRoots);
+			public HResult put_NamespaceRoots(ref SAFEARRAY namespaceRoots) mut => VT.put_NamespaceRoots(ref this, ref namespaceRoots);
+			public HResult get_RuleFlags(out int32 ruleFlags) mut => VT.get_RuleFlags(ref this, out ruleFlags);
+			public HResult put_RuleFlags(int32 ruleFlags) mut => VT.put_RuleFlags(ref this, ruleFlags);
+			public HResult get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
+			public HResult put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
+			public HResult get_LastModified(out VARIANT lastModified) mut => VT.get_LastModified(ref this, out lastModified);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out FsrmRuleType ruleType) get_RuleType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out BSTR moduleDefinitionName) get_ModuleDefinitionName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, BSTR moduleDefinitionName) put_ModuleDefinitionName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out SAFEARRAY* namespaceRoots) get_NamespaceRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, ref SAFEARRAY namespaceRoots) put_NamespaceRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out int32 ruleFlags) get_RuleFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, int32 ruleFlags) put_RuleFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out SAFEARRAY* parameters) get_Parameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, ref SAFEARRAY parameters) put_Parameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmRule self, out VARIANT lastModified) get_LastModified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out FsrmRuleType ruleType) get_RuleType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out BSTR moduleDefinitionName) get_ModuleDefinitionName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, BSTR moduleDefinitionName) put_ModuleDefinitionName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out SAFEARRAY* namespaceRoots) get_NamespaceRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, ref SAFEARRAY namespaceRoots) put_NamespaceRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out int32 ruleFlags) get_RuleFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, int32 ruleFlags) put_RuleFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out SAFEARRAY* parameters) get_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, ref SAFEARRAY parameters) put_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmRule self, out VARIANT lastModified) get_LastModified;
 			}
 		}
 		[CRepr]
@@ -1799,22 +1799,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ExecutionOption(out FsrmExecutionOption executionOption) mut => VT.get_ExecutionOption(ref this, out executionOption);
-			public HRESULT put_ExecutionOption(FsrmExecutionOption executionOption) mut => VT.put_ExecutionOption(ref this, executionOption);
-			public HRESULT get_PropertyAffected(out BSTR property) mut => VT.get_PropertyAffected(ref this, out property);
-			public HRESULT put_PropertyAffected(BSTR property) mut => VT.put_PropertyAffected(ref this, property);
-			public HRESULT get_Value(out BSTR value) mut => VT.get_Value(ref this, out value);
-			public HRESULT put_Value(BSTR value) mut => VT.put_Value(ref this, value);
+			public HResult get_ExecutionOption(out FsrmExecutionOption executionOption) mut => VT.get_ExecutionOption(ref this, out executionOption);
+			public HResult put_ExecutionOption(FsrmExecutionOption executionOption) mut => VT.put_ExecutionOption(ref this, executionOption);
+			public HResult get_PropertyAffected(out BSTR property) mut => VT.get_PropertyAffected(ref this, out property);
+			public HResult put_PropertyAffected(BSTR property) mut => VT.put_PropertyAffected(ref this, property);
+			public HResult get_Value(out BSTR value) mut => VT.get_Value(ref this, out value);
+			public HResult put_Value(BSTR value) mut => VT.put_Value(ref this, value);
 
 			[CRepr]
 			public struct VTable : IFsrmRule.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationRule self, out FsrmExecutionOption executionOption) get_ExecutionOption;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationRule self, FsrmExecutionOption executionOption) put_ExecutionOption;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationRule self, out BSTR property) get_PropertyAffected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationRule self, BSTR property) put_PropertyAffected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationRule self, out BSTR value) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationRule self, BSTR value) put_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationRule self, out FsrmExecutionOption executionOption) get_ExecutionOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationRule self, FsrmExecutionOption executionOption) put_ExecutionOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationRule self, out BSTR property) get_PropertyAffected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationRule self, BSTR property) put_PropertyAffected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationRule self, out BSTR value) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationRule self, BSTR value) put_Value;
 			}
 		}
 		[CRepr]
@@ -1824,48 +1824,48 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ModuleClsid(out BSTR moduleClsid) mut => VT.get_ModuleClsid(ref this, out moduleClsid);
-			public HRESULT put_ModuleClsid(BSTR moduleClsid) mut => VT.put_ModuleClsid(ref this, moduleClsid);
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT put_Name(BSTR name) mut => VT.put_Name(ref this, name);
-			public HRESULT get_Company(out BSTR company) mut => VT.get_Company(ref this, out company);
-			public HRESULT put_Company(BSTR company) mut => VT.put_Company(ref this, company);
-			public HRESULT get_Version(out BSTR version) mut => VT.get_Version(ref this, out version);
-			public HRESULT put_Version(BSTR version) mut => VT.put_Version(ref this, version);
-			public HRESULT get_ModuleType(out FsrmPipelineModuleType moduleType) mut => VT.get_ModuleType(ref this, out moduleType);
-			public HRESULT get_Enabled(out int16 enabled) mut => VT.get_Enabled(ref this, out enabled);
-			public HRESULT put_Enabled(int16 enabled) mut => VT.put_Enabled(ref this, enabled);
-			public HRESULT get_NeedsFileContent(out int16 needsFileContent) mut => VT.get_NeedsFileContent(ref this, out needsFileContent);
-			public HRESULT put_NeedsFileContent(int16 needsFileContent) mut => VT.put_NeedsFileContent(ref this, needsFileContent);
-			public HRESULT get_Account(out FsrmAccountType retrievalAccount) mut => VT.get_Account(ref this, out retrievalAccount);
-			public HRESULT put_Account(FsrmAccountType retrievalAccount) mut => VT.put_Account(ref this, retrievalAccount);
-			public HRESULT get_SupportedExtensions(out SAFEARRAY* supportedExtensions) mut => VT.get_SupportedExtensions(ref this, out supportedExtensions);
-			public HRESULT put_SupportedExtensions(ref SAFEARRAY supportedExtensions) mut => VT.put_SupportedExtensions(ref this, ref supportedExtensions);
-			public HRESULT get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
-			public HRESULT put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
+			public HResult get_ModuleClsid(out BSTR moduleClsid) mut => VT.get_ModuleClsid(ref this, out moduleClsid);
+			public HResult put_ModuleClsid(BSTR moduleClsid) mut => VT.put_ModuleClsid(ref this, moduleClsid);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult put_Name(BSTR name) mut => VT.put_Name(ref this, name);
+			public HResult get_Company(out BSTR company) mut => VT.get_Company(ref this, out company);
+			public HResult put_Company(BSTR company) mut => VT.put_Company(ref this, company);
+			public HResult get_Version(out BSTR version) mut => VT.get_Version(ref this, out version);
+			public HResult put_Version(BSTR version) mut => VT.put_Version(ref this, version);
+			public HResult get_ModuleType(out FsrmPipelineModuleType moduleType) mut => VT.get_ModuleType(ref this, out moduleType);
+			public HResult get_Enabled(out int16 enabled) mut => VT.get_Enabled(ref this, out enabled);
+			public HResult put_Enabled(int16 enabled) mut => VT.put_Enabled(ref this, enabled);
+			public HResult get_NeedsFileContent(out int16 needsFileContent) mut => VT.get_NeedsFileContent(ref this, out needsFileContent);
+			public HResult put_NeedsFileContent(int16 needsFileContent) mut => VT.put_NeedsFileContent(ref this, needsFileContent);
+			public HResult get_Account(out FsrmAccountType retrievalAccount) mut => VT.get_Account(ref this, out retrievalAccount);
+			public HResult put_Account(FsrmAccountType retrievalAccount) mut => VT.put_Account(ref this, retrievalAccount);
+			public HResult get_SupportedExtensions(out SAFEARRAY* supportedExtensions) mut => VT.get_SupportedExtensions(ref this, out supportedExtensions);
+			public HResult put_SupportedExtensions(ref SAFEARRAY supportedExtensions) mut => VT.put_SupportedExtensions(ref this, ref supportedExtensions);
+			public HResult get_Parameters(out SAFEARRAY* parameters) mut => VT.get_Parameters(ref this, out parameters);
+			public HResult put_Parameters(ref SAFEARRAY parameters) mut => VT.put_Parameters(ref this, ref parameters);
 
 			[CRepr]
 			public struct VTable : IFsrmObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out BSTR moduleClsid) get_ModuleClsid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, BSTR moduleClsid) put_ModuleClsid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, BSTR name) put_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out BSTR company) get_Company;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, BSTR company) put_Company;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out BSTR version) get_Version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, BSTR version) put_Version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out FsrmPipelineModuleType moduleType) get_ModuleType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out int16 enabled) get_Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, int16 enabled) put_Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out int16 needsFileContent) get_NeedsFileContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, int16 needsFileContent) put_NeedsFileContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out FsrmAccountType retrievalAccount) get_Account;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, FsrmAccountType retrievalAccount) put_Account;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out SAFEARRAY* supportedExtensions) get_SupportedExtensions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, ref SAFEARRAY supportedExtensions) put_SupportedExtensions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, out SAFEARRAY* parameters) get_Parameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleDefinition self, ref SAFEARRAY parameters) put_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out BSTR moduleClsid) get_ModuleClsid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, BSTR moduleClsid) put_ModuleClsid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, BSTR name) put_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out BSTR company) get_Company;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, BSTR company) put_Company;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out BSTR version) get_Version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, BSTR version) put_Version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out FsrmPipelineModuleType moduleType) get_ModuleType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out int16 enabled) get_Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, int16 enabled) put_Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out int16 needsFileContent) get_NeedsFileContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, int16 needsFileContent) put_NeedsFileContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out FsrmAccountType retrievalAccount) get_Account;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, FsrmAccountType retrievalAccount) put_Account;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out SAFEARRAY* supportedExtensions) get_SupportedExtensions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, ref SAFEARRAY supportedExtensions) put_SupportedExtensions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, out SAFEARRAY* parameters) get_Parameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleDefinition self, ref SAFEARRAY parameters) put_Parameters;
 			}
 		}
 		[CRepr]
@@ -1875,22 +1875,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_PropertiesAffected(out SAFEARRAY* propertiesAffected) mut => VT.get_PropertiesAffected(ref this, out propertiesAffected);
-			public HRESULT put_PropertiesAffected(ref SAFEARRAY propertiesAffected) mut => VT.put_PropertiesAffected(ref this, ref propertiesAffected);
-			public HRESULT get_PropertiesUsed(out SAFEARRAY* propertiesUsed) mut => VT.get_PropertiesUsed(ref this, out propertiesUsed);
-			public HRESULT put_PropertiesUsed(ref SAFEARRAY propertiesUsed) mut => VT.put_PropertiesUsed(ref this, ref propertiesUsed);
-			public HRESULT get_NeedsExplicitValue(out int16 needsExplicitValue) mut => VT.get_NeedsExplicitValue(ref this, out needsExplicitValue);
-			public HRESULT put_NeedsExplicitValue(int16 needsExplicitValue) mut => VT.put_NeedsExplicitValue(ref this, needsExplicitValue);
+			public HResult get_PropertiesAffected(out SAFEARRAY* propertiesAffected) mut => VT.get_PropertiesAffected(ref this, out propertiesAffected);
+			public HResult put_PropertiesAffected(ref SAFEARRAY propertiesAffected) mut => VT.put_PropertiesAffected(ref this, ref propertiesAffected);
+			public HResult get_PropertiesUsed(out SAFEARRAY* propertiesUsed) mut => VT.get_PropertiesUsed(ref this, out propertiesUsed);
+			public HResult put_PropertiesUsed(ref SAFEARRAY propertiesUsed) mut => VT.put_PropertiesUsed(ref this, ref propertiesUsed);
+			public HResult get_NeedsExplicitValue(out int16 needsExplicitValue) mut => VT.get_NeedsExplicitValue(ref this, out needsExplicitValue);
+			public HResult put_NeedsExplicitValue(int16 needsExplicitValue) mut => VT.put_NeedsExplicitValue(ref this, needsExplicitValue);
 
 			[CRepr]
 			public struct VTable : IFsrmPipelineModuleDefinition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleDefinition self, out SAFEARRAY* propertiesAffected) get_PropertiesAffected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleDefinition self, ref SAFEARRAY propertiesAffected) put_PropertiesAffected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleDefinition self, out SAFEARRAY* propertiesUsed) get_PropertiesUsed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleDefinition self, ref SAFEARRAY propertiesUsed) put_PropertiesUsed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleDefinition self, out int16 needsExplicitValue) get_NeedsExplicitValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleDefinition self, int16 needsExplicitValue) put_NeedsExplicitValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleDefinition self, out SAFEARRAY* propertiesAffected) get_PropertiesAffected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleDefinition self, ref SAFEARRAY propertiesAffected) put_PropertiesAffected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleDefinition self, out SAFEARRAY* propertiesUsed) get_PropertiesUsed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleDefinition self, ref SAFEARRAY propertiesUsed) put_PropertiesUsed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleDefinition self, out int16 needsExplicitValue) get_NeedsExplicitValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleDefinition self, int16 needsExplicitValue) put_NeedsExplicitValue;
 			}
 		}
 		[CRepr]
@@ -1900,22 +1900,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Capabilities(out FsrmStorageModuleCaps capabilities) mut => VT.get_Capabilities(ref this, out capabilities);
-			public HRESULT put_Capabilities(FsrmStorageModuleCaps capabilities) mut => VT.put_Capabilities(ref this, capabilities);
-			public HRESULT get_StorageType(out FsrmStorageModuleType storageType) mut => VT.get_StorageType(ref this, out storageType);
-			public HRESULT put_StorageType(FsrmStorageModuleType storageType) mut => VT.put_StorageType(ref this, storageType);
-			public HRESULT get_UpdatesFileContent(out int16 updatesFileContent) mut => VT.get_UpdatesFileContent(ref this, out updatesFileContent);
-			public HRESULT put_UpdatesFileContent(int16 updatesFileContent) mut => VT.put_UpdatesFileContent(ref this, updatesFileContent);
+			public HResult get_Capabilities(out FsrmStorageModuleCaps capabilities) mut => VT.get_Capabilities(ref this, out capabilities);
+			public HResult put_Capabilities(FsrmStorageModuleCaps capabilities) mut => VT.put_Capabilities(ref this, capabilities);
+			public HResult get_StorageType(out FsrmStorageModuleType storageType) mut => VT.get_StorageType(ref this, out storageType);
+			public HResult put_StorageType(FsrmStorageModuleType storageType) mut => VT.put_StorageType(ref this, storageType);
+			public HResult get_UpdatesFileContent(out int16 updatesFileContent) mut => VT.get_UpdatesFileContent(ref this, out updatesFileContent);
+			public HResult put_UpdatesFileContent(int16 updatesFileContent) mut => VT.put_UpdatesFileContent(ref this, updatesFileContent);
 
 			[CRepr]
 			public struct VTable : IFsrmPipelineModuleDefinition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleDefinition self, out FsrmStorageModuleCaps capabilities) get_Capabilities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleDefinition self, FsrmStorageModuleCaps capabilities) put_Capabilities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleDefinition self, out FsrmStorageModuleType storageType) get_StorageType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleDefinition self, FsrmStorageModuleType storageType) put_StorageType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleDefinition self, out int16 updatesFileContent) get_UpdatesFileContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleDefinition self, int16 updatesFileContent) put_UpdatesFileContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleDefinition self, out FsrmStorageModuleCaps capabilities) get_Capabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleDefinition self, FsrmStorageModuleCaps capabilities) put_Capabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleDefinition self, out FsrmStorageModuleType storageType) get_StorageType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleDefinition self, FsrmStorageModuleType storageType) put_StorageType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleDefinition self, out int16 updatesFileContent) get_UpdatesFileContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleDefinition self, int16 updatesFileContent) put_UpdatesFileContent;
 			}
 		}
 		[CRepr]
@@ -1925,64 +1925,64 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ClassificationReportFormats(out SAFEARRAY* formats) mut => VT.get_ClassificationReportFormats(ref this, out formats);
-			public HRESULT put_ClassificationReportFormats(ref SAFEARRAY formats) mut => VT.put_ClassificationReportFormats(ref this, ref formats);
-			public HRESULT get_Logging(out int32 logging) mut => VT.get_Logging(ref this, out logging);
-			public HRESULT put_Logging(int32 logging) mut => VT.put_Logging(ref this, logging);
-			public HRESULT get_ClassificationReportMailTo(out BSTR mailTo) mut => VT.get_ClassificationReportMailTo(ref this, out mailTo);
-			public HRESULT put_ClassificationReportMailTo(BSTR mailTo) mut => VT.put_ClassificationReportMailTo(ref this, mailTo);
-			public HRESULT get_ClassificationReportEnabled(out int16 reportEnabled) mut => VT.get_ClassificationReportEnabled(ref this, out reportEnabled);
-			public HRESULT put_ClassificationReportEnabled(int16 reportEnabled) mut => VT.put_ClassificationReportEnabled(ref this, reportEnabled);
-			public HRESULT get_ClassificationLastReportPathWithoutExtension(out BSTR lastReportPath) mut => VT.get_ClassificationLastReportPathWithoutExtension(ref this, out lastReportPath);
-			public HRESULT get_ClassificationLastError(out BSTR lastError) mut => VT.get_ClassificationLastError(ref this, out lastError);
-			public HRESULT get_ClassificationRunningStatus(out FsrmReportRunningStatus runningStatus) mut => VT.get_ClassificationRunningStatus(ref this, out runningStatus);
-			public HRESULT EnumPropertyDefinitions(FsrmEnumOptions options, out IFsrmCollection* propertyDefinitions) mut => VT.EnumPropertyDefinitions(ref this, options, out propertyDefinitions);
-			public HRESULT CreatePropertyDefinition(out IFsrmPropertyDefinition* propertyDefinition) mut => VT.CreatePropertyDefinition(ref this, out propertyDefinition);
-			public HRESULT GetPropertyDefinition(BSTR propertyName, out IFsrmPropertyDefinition* propertyDefinition) mut => VT.GetPropertyDefinition(ref this, propertyName, out propertyDefinition);
-			public HRESULT EnumRules(FsrmRuleType ruleType, FsrmEnumOptions options, out IFsrmCollection* Rules) mut => VT.EnumRules(ref this, ruleType, options, out Rules);
-			public HRESULT CreateRule(FsrmRuleType ruleType, out IFsrmRule* Rule) mut => VT.CreateRule(ref this, ruleType, out Rule);
-			public HRESULT GetRule(BSTR ruleName, FsrmRuleType ruleType, out IFsrmRule* Rule) mut => VT.GetRule(ref this, ruleName, ruleType, out Rule);
-			public HRESULT EnumModuleDefinitions(FsrmPipelineModuleType moduleType, FsrmEnumOptions options, out IFsrmCollection* moduleDefinitions) mut => VT.EnumModuleDefinitions(ref this, moduleType, options, out moduleDefinitions);
-			public HRESULT CreateModuleDefinition(FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) mut => VT.CreateModuleDefinition(ref this, moduleType, out moduleDefinition);
-			public HRESULT GetModuleDefinition(BSTR moduleName, FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) mut => VT.GetModuleDefinition(ref this, moduleName, moduleType, out moduleDefinition);
-			public HRESULT RunClassification(FsrmReportGenerationContext context, BSTR reserved) mut => VT.RunClassification(ref this, context, reserved);
-			public HRESULT WaitForClassificationCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForClassificationCompletion(ref this, waitSeconds, out completed);
-			public HRESULT CancelClassification() mut => VT.CancelClassification(ref this);
-			public HRESULT EnumFileProperties(BSTR filePath, FsrmGetFilePropertyOptions options, out IFsrmCollection* fileProperties) mut => VT.EnumFileProperties(ref this, filePath, options, out fileProperties);
-			public HRESULT GetFileProperty(BSTR filePath, BSTR propertyName, FsrmGetFilePropertyOptions options, out IFsrmProperty* property) mut => VT.GetFileProperty(ref this, filePath, propertyName, options, out property);
-			public HRESULT SetFileProperty(BSTR filePath, BSTR propertyName, BSTR propertyValue) mut => VT.SetFileProperty(ref this, filePath, propertyName, propertyValue);
-			public HRESULT ClearFileProperty(BSTR filePath, BSTR property) mut => VT.ClearFileProperty(ref this, filePath, property);
+			public HResult get_ClassificationReportFormats(out SAFEARRAY* formats) mut => VT.get_ClassificationReportFormats(ref this, out formats);
+			public HResult put_ClassificationReportFormats(ref SAFEARRAY formats) mut => VT.put_ClassificationReportFormats(ref this, ref formats);
+			public HResult get_Logging(out int32 logging) mut => VT.get_Logging(ref this, out logging);
+			public HResult put_Logging(int32 logging) mut => VT.put_Logging(ref this, logging);
+			public HResult get_ClassificationReportMailTo(out BSTR mailTo) mut => VT.get_ClassificationReportMailTo(ref this, out mailTo);
+			public HResult put_ClassificationReportMailTo(BSTR mailTo) mut => VT.put_ClassificationReportMailTo(ref this, mailTo);
+			public HResult get_ClassificationReportEnabled(out int16 reportEnabled) mut => VT.get_ClassificationReportEnabled(ref this, out reportEnabled);
+			public HResult put_ClassificationReportEnabled(int16 reportEnabled) mut => VT.put_ClassificationReportEnabled(ref this, reportEnabled);
+			public HResult get_ClassificationLastReportPathWithoutExtension(out BSTR lastReportPath) mut => VT.get_ClassificationLastReportPathWithoutExtension(ref this, out lastReportPath);
+			public HResult get_ClassificationLastError(out BSTR lastError) mut => VT.get_ClassificationLastError(ref this, out lastError);
+			public HResult get_ClassificationRunningStatus(out FsrmReportRunningStatus runningStatus) mut => VT.get_ClassificationRunningStatus(ref this, out runningStatus);
+			public HResult EnumPropertyDefinitions(FsrmEnumOptions options, out IFsrmCollection* propertyDefinitions) mut => VT.EnumPropertyDefinitions(ref this, options, out propertyDefinitions);
+			public HResult CreatePropertyDefinition(out IFsrmPropertyDefinition* propertyDefinition) mut => VT.CreatePropertyDefinition(ref this, out propertyDefinition);
+			public HResult GetPropertyDefinition(BSTR propertyName, out IFsrmPropertyDefinition* propertyDefinition) mut => VT.GetPropertyDefinition(ref this, propertyName, out propertyDefinition);
+			public HResult EnumRules(FsrmRuleType ruleType, FsrmEnumOptions options, out IFsrmCollection* Rules) mut => VT.EnumRules(ref this, ruleType, options, out Rules);
+			public HResult CreateRule(FsrmRuleType ruleType, out IFsrmRule* Rule) mut => VT.CreateRule(ref this, ruleType, out Rule);
+			public HResult GetRule(BSTR ruleName, FsrmRuleType ruleType, out IFsrmRule* Rule) mut => VT.GetRule(ref this, ruleName, ruleType, out Rule);
+			public HResult EnumModuleDefinitions(FsrmPipelineModuleType moduleType, FsrmEnumOptions options, out IFsrmCollection* moduleDefinitions) mut => VT.EnumModuleDefinitions(ref this, moduleType, options, out moduleDefinitions);
+			public HResult CreateModuleDefinition(FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) mut => VT.CreateModuleDefinition(ref this, moduleType, out moduleDefinition);
+			public HResult GetModuleDefinition(BSTR moduleName, FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) mut => VT.GetModuleDefinition(ref this, moduleName, moduleType, out moduleDefinition);
+			public HResult RunClassification(FsrmReportGenerationContext context, BSTR reserved) mut => VT.RunClassification(ref this, context, reserved);
+			public HResult WaitForClassificationCompletion(int32 waitSeconds, out int16 completed) mut => VT.WaitForClassificationCompletion(ref this, waitSeconds, out completed);
+			public HResult CancelClassification() mut => VT.CancelClassification(ref this);
+			public HResult EnumFileProperties(BSTR filePath, FsrmGetFilePropertyOptions options, out IFsrmCollection* fileProperties) mut => VT.EnumFileProperties(ref this, filePath, options, out fileProperties);
+			public HResult GetFileProperty(BSTR filePath, BSTR propertyName, FsrmGetFilePropertyOptions options, out IFsrmProperty* property) mut => VT.GetFileProperty(ref this, filePath, propertyName, options, out property);
+			public HResult SetFileProperty(BSTR filePath, BSTR propertyName, BSTR propertyValue) mut => VT.SetFileProperty(ref this, filePath, propertyName, propertyValue);
+			public HResult ClearFileProperty(BSTR filePath, BSTR property) mut => VT.ClearFileProperty(ref this, filePath, property);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out SAFEARRAY* formats) get_ClassificationReportFormats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, ref SAFEARRAY formats) put_ClassificationReportFormats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out int32 logging) get_Logging;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, int32 logging) put_Logging;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out BSTR mailTo) get_ClassificationReportMailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR mailTo) put_ClassificationReportMailTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out int16 reportEnabled) get_ClassificationReportEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, int16 reportEnabled) put_ClassificationReportEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out BSTR lastReportPath) get_ClassificationLastReportPathWithoutExtension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out BSTR lastError) get_ClassificationLastError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out FsrmReportRunningStatus runningStatus) get_ClassificationRunningStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, FsrmEnumOptions options, out IFsrmCollection* propertyDefinitions) EnumPropertyDefinitions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, out IFsrmPropertyDefinition* propertyDefinition) CreatePropertyDefinition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR propertyName, out IFsrmPropertyDefinition* propertyDefinition) GetPropertyDefinition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, FsrmRuleType ruleType, FsrmEnumOptions options, out IFsrmCollection* Rules) EnumRules;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, FsrmRuleType ruleType, out IFsrmRule* Rule) CreateRule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR ruleName, FsrmRuleType ruleType, out IFsrmRule* Rule) GetRule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, FsrmPipelineModuleType moduleType, FsrmEnumOptions options, out IFsrmCollection* moduleDefinitions) EnumModuleDefinitions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) CreateModuleDefinition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR moduleName, FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) GetModuleDefinition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, FsrmReportGenerationContext context, BSTR reserved) RunClassification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, int32 waitSeconds, out int16 completed) WaitForClassificationCompletion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self) CancelClassification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR filePath, FsrmGetFilePropertyOptions options, out IFsrmCollection* fileProperties) EnumFileProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR filePath, BSTR propertyName, FsrmGetFilePropertyOptions options, out IFsrmProperty* property) GetFileProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR filePath, BSTR propertyName, BSTR propertyValue) SetFileProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager self, BSTR filePath, BSTR property) ClearFileProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out SAFEARRAY* formats) get_ClassificationReportFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, ref SAFEARRAY formats) put_ClassificationReportFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out int32 logging) get_Logging;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, int32 logging) put_Logging;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out BSTR mailTo) get_ClassificationReportMailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR mailTo) put_ClassificationReportMailTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out int16 reportEnabled) get_ClassificationReportEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, int16 reportEnabled) put_ClassificationReportEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out BSTR lastReportPath) get_ClassificationLastReportPathWithoutExtension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out BSTR lastError) get_ClassificationLastError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out FsrmReportRunningStatus runningStatus) get_ClassificationRunningStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, FsrmEnumOptions options, out IFsrmCollection* propertyDefinitions) EnumPropertyDefinitions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, out IFsrmPropertyDefinition* propertyDefinition) CreatePropertyDefinition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR propertyName, out IFsrmPropertyDefinition* propertyDefinition) GetPropertyDefinition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, FsrmRuleType ruleType, FsrmEnumOptions options, out IFsrmCollection* Rules) EnumRules;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, FsrmRuleType ruleType, out IFsrmRule* Rule) CreateRule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR ruleName, FsrmRuleType ruleType, out IFsrmRule* Rule) GetRule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, FsrmPipelineModuleType moduleType, FsrmEnumOptions options, out IFsrmCollection* moduleDefinitions) EnumModuleDefinitions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) CreateModuleDefinition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR moduleName, FsrmPipelineModuleType moduleType, out IFsrmPipelineModuleDefinition* moduleDefinition) GetModuleDefinition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, FsrmReportGenerationContext context, BSTR reserved) RunClassification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, int32 waitSeconds, out int16 completed) WaitForClassificationCompletion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self) CancelClassification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR filePath, FsrmGetFilePropertyOptions options, out IFsrmCollection* fileProperties) EnumFileProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR filePath, BSTR propertyName, FsrmGetFilePropertyOptions options, out IFsrmProperty* property) GetFileProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR filePath, BSTR propertyName, BSTR propertyValue) SetFileProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager self, BSTR filePath, BSTR property) ClearFileProperty;
 			}
 		}
 		[CRepr]
@@ -1992,12 +1992,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ClassifyFiles(ref SAFEARRAY filePaths, ref SAFEARRAY propertyNames, ref SAFEARRAY propertyValues, FsrmGetFilePropertyOptions options) mut => VT.ClassifyFiles(ref this, ref filePaths, ref propertyNames, ref propertyValues, options);
+			public HResult ClassifyFiles(ref SAFEARRAY filePaths, ref SAFEARRAY propertyNames, ref SAFEARRAY propertyValues, FsrmGetFilePropertyOptions options) mut => VT.ClassifyFiles(ref this, ref filePaths, ref propertyNames, ref propertyValues, options);
 
 			[CRepr]
 			public struct VTable : IFsrmClassificationManager.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassificationManager2 self, ref SAFEARRAY filePaths, ref SAFEARRAY propertyNames, ref SAFEARRAY propertyValues, FsrmGetFilePropertyOptions options) ClassifyFiles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassificationManager2 self, ref SAFEARRAY filePaths, ref SAFEARRAY propertyNames, ref SAFEARRAY propertyValues, FsrmGetFilePropertyOptions options) ClassifyFiles;
 			}
 		}
 		[CRepr]
@@ -2007,52 +2007,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT get_RelativePath(out BSTR path) mut => VT.get_RelativePath(ref this, out path);
-			public HRESULT get_VolumeName(out BSTR volumeName) mut => VT.get_VolumeName(ref this, out volumeName);
-			public HRESULT get_RelativeNamespaceRoot(out BSTR relativeNamespaceRoot) mut => VT.get_RelativeNamespaceRoot(ref this, out relativeNamespaceRoot);
-			public HRESULT get_VolumeIndex(out uint32 volumeId) mut => VT.get_VolumeIndex(ref this, out volumeId);
-			public HRESULT get_FileId(out VARIANT fileId) mut => VT.get_FileId(ref this, out fileId);
-			public HRESULT get_ParentDirectoryId(out VARIANT parentDirectoryId) mut => VT.get_ParentDirectoryId(ref this, out parentDirectoryId);
-			public HRESULT get_Size(out VARIANT size) mut => VT.get_Size(ref this, out size);
-			public HRESULT get_SizeAllocated(out VARIANT sizeAllocated) mut => VT.get_SizeAllocated(ref this, out sizeAllocated);
-			public HRESULT get_CreationTime(out VARIANT creationTime) mut => VT.get_CreationTime(ref this, out creationTime);
-			public HRESULT get_LastAccessTime(out VARIANT lastAccessTime) mut => VT.get_LastAccessTime(ref this, out lastAccessTime);
-			public HRESULT get_LastModificationTime(out VARIANT lastModificationTime) mut => VT.get_LastModificationTime(ref this, out lastModificationTime);
-			public HRESULT get_Attributes(out uint32 attributes) mut => VT.get_Attributes(ref this, out attributes);
-			public HRESULT get_OwnerSid(out BSTR ownerSid) mut => VT.get_OwnerSid(ref this, out ownerSid);
-			public HRESULT get_FilePropertyNames(out SAFEARRAY* filePropertyNames) mut => VT.get_FilePropertyNames(ref this, out filePropertyNames);
-			public HRESULT get_Messages(out SAFEARRAY* messages) mut => VT.get_Messages(ref this, out messages);
-			public HRESULT get_PropertyBagFlags(out uint32 flags) mut => VT.get_PropertyBagFlags(ref this, out flags);
-			public HRESULT GetFileProperty(BSTR name, out IFsrmProperty* fileProperty) mut => VT.GetFileProperty(ref this, name, out fileProperty);
-			public HRESULT SetFileProperty(BSTR name, BSTR value) mut => VT.SetFileProperty(ref this, name, value);
-			public HRESULT AddMessage(BSTR message) mut => VT.AddMessage(ref this, message);
-			public HRESULT GetFileStreamInterface(FsrmFileStreamingMode accessMode, FsrmFileStreamingInterfaceType interfaceType, out VARIANT pStreamInterface) mut => VT.GetFileStreamInterface(ref this, accessMode, interfaceType, out pStreamInterface);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult get_RelativePath(out BSTR path) mut => VT.get_RelativePath(ref this, out path);
+			public HResult get_VolumeName(out BSTR volumeName) mut => VT.get_VolumeName(ref this, out volumeName);
+			public HResult get_RelativeNamespaceRoot(out BSTR relativeNamespaceRoot) mut => VT.get_RelativeNamespaceRoot(ref this, out relativeNamespaceRoot);
+			public HResult get_VolumeIndex(out uint32 volumeId) mut => VT.get_VolumeIndex(ref this, out volumeId);
+			public HResult get_FileId(out VARIANT fileId) mut => VT.get_FileId(ref this, out fileId);
+			public HResult get_ParentDirectoryId(out VARIANT parentDirectoryId) mut => VT.get_ParentDirectoryId(ref this, out parentDirectoryId);
+			public HResult get_Size(out VARIANT size) mut => VT.get_Size(ref this, out size);
+			public HResult get_SizeAllocated(out VARIANT sizeAllocated) mut => VT.get_SizeAllocated(ref this, out sizeAllocated);
+			public HResult get_CreationTime(out VARIANT creationTime) mut => VT.get_CreationTime(ref this, out creationTime);
+			public HResult get_LastAccessTime(out VARIANT lastAccessTime) mut => VT.get_LastAccessTime(ref this, out lastAccessTime);
+			public HResult get_LastModificationTime(out VARIANT lastModificationTime) mut => VT.get_LastModificationTime(ref this, out lastModificationTime);
+			public HResult get_Attributes(out uint32 attributes) mut => VT.get_Attributes(ref this, out attributes);
+			public HResult get_OwnerSid(out BSTR ownerSid) mut => VT.get_OwnerSid(ref this, out ownerSid);
+			public HResult get_FilePropertyNames(out SAFEARRAY* filePropertyNames) mut => VT.get_FilePropertyNames(ref this, out filePropertyNames);
+			public HResult get_Messages(out SAFEARRAY* messages) mut => VT.get_Messages(ref this, out messages);
+			public HResult get_PropertyBagFlags(out uint32 flags) mut => VT.get_PropertyBagFlags(ref this, out flags);
+			public HResult GetFileProperty(BSTR name, out IFsrmProperty* fileProperty) mut => VT.GetFileProperty(ref this, name, out fileProperty);
+			public HResult SetFileProperty(BSTR name, BSTR value) mut => VT.SetFileProperty(ref this, name, value);
+			public HResult AddMessage(BSTR message) mut => VT.AddMessage(ref this, message);
+			public HResult GetFileStreamInterface(FsrmFileStreamingMode accessMode, FsrmFileStreamingInterfaceType interfaceType, out VARIANT pStreamInterface) mut => VT.GetFileStreamInterface(ref this, accessMode, interfaceType, out pStreamInterface);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out BSTR path) get_RelativePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out BSTR volumeName) get_VolumeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out BSTR relativeNamespaceRoot) get_RelativeNamespaceRoot;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out uint32 volumeId) get_VolumeIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT fileId) get_FileId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT parentDirectoryId) get_ParentDirectoryId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT size) get_Size;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT sizeAllocated) get_SizeAllocated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT creationTime) get_CreationTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT lastAccessTime) get_LastAccessTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out VARIANT lastModificationTime) get_LastModificationTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out uint32 attributes) get_Attributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out BSTR ownerSid) get_OwnerSid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out SAFEARRAY* filePropertyNames) get_FilePropertyNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out SAFEARRAY* messages) get_Messages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, out uint32 flags) get_PropertyBagFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, BSTR name, out IFsrmProperty* fileProperty) GetFileProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, BSTR name, BSTR value) SetFileProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, BSTR message) AddMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag self, FsrmFileStreamingMode accessMode, FsrmFileStreamingInterfaceType interfaceType, out VARIANT pStreamInterface) GetFileStreamInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out BSTR path) get_RelativePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out BSTR volumeName) get_VolumeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out BSTR relativeNamespaceRoot) get_RelativeNamespaceRoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out uint32 volumeId) get_VolumeIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT fileId) get_FileId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT parentDirectoryId) get_ParentDirectoryId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT size) get_Size;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT sizeAllocated) get_SizeAllocated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT creationTime) get_CreationTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT lastAccessTime) get_LastAccessTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out VARIANT lastModificationTime) get_LastModificationTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out uint32 attributes) get_Attributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out BSTR ownerSid) get_OwnerSid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out SAFEARRAY* filePropertyNames) get_FilePropertyNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out SAFEARRAY* messages) get_Messages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, out uint32 flags) get_PropertyBagFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, BSTR name, out IFsrmProperty* fileProperty) GetFileProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, BSTR name, BSTR value) SetFileProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, BSTR message) AddMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag self, FsrmFileStreamingMode accessMode, FsrmFileStreamingInterfaceType interfaceType, out VARIANT pStreamInterface) GetFileStreamInterface;
 			}
 		}
 		[CRepr]
@@ -2062,14 +2062,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFieldValue(FsrmPropertyBagField field, out VARIANT value) mut => VT.GetFieldValue(ref this, field, out value);
-			public HRESULT GetUntrustedInFileProperties(out IFsrmCollection* props) mut => VT.GetUntrustedInFileProperties(ref this, out props);
+			public HResult GetFieldValue(FsrmPropertyBagField field, out VARIANT value) mut => VT.GetFieldValue(ref this, field, out value);
+			public HResult GetUntrustedInFileProperties(out IFsrmCollection* props) mut => VT.GetUntrustedInFileProperties(ref this, out props);
 
 			[CRepr]
 			public struct VTable : IFsrmPropertyBag.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag2 self, FsrmPropertyBagField field, out VARIANT value) GetFieldValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPropertyBag2 self, out IFsrmCollection* props) GetUntrustedInFileProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag2 self, FsrmPropertyBagField field, out VARIANT value) GetFieldValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPropertyBag2 self, out IFsrmCollection* props) GetUntrustedInFileProperties;
 			}
 		}
 		[CRepr]
@@ -2079,14 +2079,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnLoad(ref IFsrmPipelineModuleDefinition moduleDefinition, out IFsrmPipelineModuleConnector* moduleConnector) mut => VT.OnLoad(ref this, ref moduleDefinition, out moduleConnector);
-			public HRESULT OnUnload() mut => VT.OnUnload(ref this);
+			public HResult OnLoad(ref IFsrmPipelineModuleDefinition moduleDefinition, out IFsrmPipelineModuleConnector* moduleConnector) mut => VT.OnLoad(ref this, ref moduleDefinition, out moduleConnector);
+			public HResult OnUnload() mut => VT.OnUnload(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleImplementation self, ref IFsrmPipelineModuleDefinition moduleDefinition, out IFsrmPipelineModuleConnector* moduleConnector) OnLoad;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleImplementation self) OnUnload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleImplementation self, ref IFsrmPipelineModuleDefinition moduleDefinition, out IFsrmPipelineModuleConnector* moduleConnector) OnLoad;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleImplementation self) OnUnload;
 			}
 		}
 		[CRepr]
@@ -2096,22 +2096,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_LastModified(out VARIANT lastModified) mut => VT.get_LastModified(ref this, out lastModified);
-			public HRESULT UseRulesAndDefinitions(ref IFsrmCollection rules, ref IFsrmCollection propertyDefinitions) mut => VT.UseRulesAndDefinitions(ref this, ref rules, ref propertyDefinitions);
-			public HRESULT OnBeginFile(ref IFsrmPropertyBag propertyBag, ref SAFEARRAY arrayRuleIds) mut => VT.OnBeginFile(ref this, ref propertyBag, ref arrayRuleIds);
-			public HRESULT DoesPropertyValueApply(BSTR property, BSTR value, out int16 applyValue, Guid idRule, Guid idPropDef) mut => VT.DoesPropertyValueApply(ref this, property, value, out applyValue, idRule, idPropDef);
-			public HRESULT GetPropertyValueToApply(BSTR property, out BSTR value, Guid idRule, Guid idPropDef) mut => VT.GetPropertyValueToApply(ref this, property, out value, idRule, idPropDef);
-			public HRESULT OnEndFile() mut => VT.OnEndFile(ref this);
+			public HResult get_LastModified(out VARIANT lastModified) mut => VT.get_LastModified(ref this, out lastModified);
+			public HResult UseRulesAndDefinitions(ref IFsrmCollection rules, ref IFsrmCollection propertyDefinitions) mut => VT.UseRulesAndDefinitions(ref this, ref rules, ref propertyDefinitions);
+			public HResult OnBeginFile(ref IFsrmPropertyBag propertyBag, ref SAFEARRAY arrayRuleIds) mut => VT.OnBeginFile(ref this, ref propertyBag, ref arrayRuleIds);
+			public HResult DoesPropertyValueApply(BSTR property, BSTR value, out int16 applyValue, Guid idRule, Guid idPropDef) mut => VT.DoesPropertyValueApply(ref this, property, value, out applyValue, idRule, idPropDef);
+			public HResult GetPropertyValueToApply(BSTR property, out BSTR value, Guid idRule, Guid idPropDef) mut => VT.GetPropertyValueToApply(ref this, property, out value, idRule, idPropDef);
+			public HResult OnEndFile() mut => VT.OnEndFile(ref this);
 
 			[CRepr]
 			public struct VTable : IFsrmPipelineModuleImplementation.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleImplementation self, out VARIANT lastModified) get_LastModified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleImplementation self, ref IFsrmCollection rules, ref IFsrmCollection propertyDefinitions) UseRulesAndDefinitions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleImplementation self, ref IFsrmPropertyBag propertyBag, ref SAFEARRAY arrayRuleIds) OnBeginFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleImplementation self, BSTR property, BSTR value, out int16 applyValue, Guid idRule, Guid idPropDef) DoesPropertyValueApply;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleImplementation self, BSTR property, out BSTR value, Guid idRule, Guid idPropDef) GetPropertyValueToApply;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmClassifierModuleImplementation self) OnEndFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleImplementation self, out VARIANT lastModified) get_LastModified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleImplementation self, ref IFsrmCollection rules, ref IFsrmCollection propertyDefinitions) UseRulesAndDefinitions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleImplementation self, ref IFsrmPropertyBag propertyBag, ref SAFEARRAY arrayRuleIds) OnBeginFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleImplementation self, BSTR property, BSTR value, out int16 applyValue, Guid idRule, Guid idPropDef) DoesPropertyValueApply;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleImplementation self, BSTR property, out BSTR value, Guid idRule, Guid idPropDef) GetPropertyValueToApply;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmClassifierModuleImplementation self) OnEndFile;
 			}
 		}
 		[CRepr]
@@ -2121,16 +2121,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT UseDefinitions(ref IFsrmCollection propertyDefinitions) mut => VT.UseDefinitions(ref this, ref propertyDefinitions);
-			public HRESULT LoadProperties(ref IFsrmPropertyBag propertyBag) mut => VT.LoadProperties(ref this, ref propertyBag);
-			public HRESULT SaveProperties(ref IFsrmPropertyBag propertyBag) mut => VT.SaveProperties(ref this, ref propertyBag);
+			public HResult UseDefinitions(ref IFsrmCollection propertyDefinitions) mut => VT.UseDefinitions(ref this, ref propertyDefinitions);
+			public HResult LoadProperties(ref IFsrmPropertyBag propertyBag) mut => VT.LoadProperties(ref this, ref propertyBag);
+			public HResult SaveProperties(ref IFsrmPropertyBag propertyBag) mut => VT.SaveProperties(ref this, ref propertyBag);
 
 			[CRepr]
 			public struct VTable : IFsrmPipelineModuleImplementation.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleImplementation self, ref IFsrmCollection propertyDefinitions) UseDefinitions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleImplementation self, ref IFsrmPropertyBag propertyBag) LoadProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmStorageModuleImplementation self, ref IFsrmPropertyBag propertyBag) SaveProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleImplementation self, ref IFsrmCollection propertyDefinitions) UseDefinitions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleImplementation self, ref IFsrmPropertyBag propertyBag) LoadProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmStorageModuleImplementation self, ref IFsrmPropertyBag propertyBag) SaveProperties;
 			}
 		}
 		[CRepr]
@@ -2140,20 +2140,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ModuleImplementation(out IFsrmPipelineModuleImplementation* pipelineModuleImplementation) mut => VT.get_ModuleImplementation(ref this, out pipelineModuleImplementation);
-			public HRESULT get_ModuleName(out BSTR userName) mut => VT.get_ModuleName(ref this, out userName);
-			public HRESULT get_HostingUserAccount(out BSTR userAccount) mut => VT.get_HostingUserAccount(ref this, out userAccount);
-			public HRESULT get_HostingProcessPid(out int32 pid) mut => VT.get_HostingProcessPid(ref this, out pid);
-			public HRESULT Bind(ref IFsrmPipelineModuleDefinition moduleDefinition, ref IFsrmPipelineModuleImplementation moduleImplementation) mut => VT.Bind(ref this, ref moduleDefinition, ref moduleImplementation);
+			public HResult get_ModuleImplementation(out IFsrmPipelineModuleImplementation* pipelineModuleImplementation) mut => VT.get_ModuleImplementation(ref this, out pipelineModuleImplementation);
+			public HResult get_ModuleName(out BSTR userName) mut => VT.get_ModuleName(ref this, out userName);
+			public HResult get_HostingUserAccount(out BSTR userAccount) mut => VT.get_HostingUserAccount(ref this, out userAccount);
+			public HResult get_HostingProcessPid(out int32 pid) mut => VT.get_HostingProcessPid(ref this, out pid);
+			public HResult Bind(ref IFsrmPipelineModuleDefinition moduleDefinition, ref IFsrmPipelineModuleImplementation moduleImplementation) mut => VT.Bind(ref this, ref moduleDefinition, ref moduleImplementation);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleConnector self, out IFsrmPipelineModuleImplementation* pipelineModuleImplementation) get_ModuleImplementation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleConnector self, out BSTR userName) get_ModuleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleConnector self, out BSTR userAccount) get_HostingUserAccount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleConnector self, out int32 pid) get_HostingProcessPid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFsrmPipelineModuleConnector self, ref IFsrmPipelineModuleDefinition moduleDefinition, ref IFsrmPipelineModuleImplementation moduleImplementation) Bind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleConnector self, out IFsrmPipelineModuleImplementation* pipelineModuleImplementation) get_ModuleImplementation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleConnector self, out BSTR userName) get_ModuleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleConnector self, out BSTR userAccount) get_HostingUserAccount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleConnector self, out int32 pid) get_HostingProcessPid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFsrmPipelineModuleConnector self, ref IFsrmPipelineModuleDefinition moduleDefinition, ref IFsrmPipelineModuleImplementation moduleImplementation) Bind;
 			}
 		}
 		[CRepr]

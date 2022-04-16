@@ -90,7 +90,7 @@ namespace Win32
 		
 		public function void HCS_OPERATION_COMPLETION(HCS_OPERATION operation, void* context);
 		public function void HCS_EVENT_CALLBACK(ref HCS_EVENT event, void* context);
-		public function void HCS_NOTIFICATION_CALLBACK(uint32 notificationType, void* context, HRESULT notificationStatus, PWSTR notificationData);
+		public function void HCS_NOTIFICATION_CALLBACK(uint32 notificationType, void* context, HResult notificationStatus, char16* notificationData);
 		
 		// --- Structs ---
 		
@@ -98,7 +98,7 @@ namespace Win32
 		public struct HCS_EVENT
 		{
 			public HCS_EVENT_TYPE Type;
-			public PWSTR EventData;
+			public char16* EventData;
 			public HCS_OPERATION Operation;
 		}
 		[CRepr]
@@ -106,15 +106,15 @@ namespace Win32
 		{
 			public uint32 ProcessId;
 			public uint32 Reserved;
-			public HANDLE StdInput;
-			public HANDLE StdOutput;
-			public HANDLE StdError;
+			public Handle StdInput;
+			public Handle StdOutput;
+			public Handle StdError;
 		}
 		[CRepr]
 		public struct HCS_CREATE_OPTIONS_1
 		{
 			public HCS_CREATE_OPTIONS Version;
-			public HANDLE UserToken;
+			public Handle UserToken;
 			public SECURITY_DESCRIPTOR* SecurityDescriptor;
 			public HCS_EVENT_OPTIONS CallbackOptions;
 			public void* CallbackContext;
@@ -124,9 +124,9 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsEnumerateComputeSystems(PWSTR query, HCS_OPERATION operation);
+		public static extern HResult HcsEnumerateComputeSystems(char16* query, HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsEnumerateComputeSystemsInNamespace(PWSTR idNamespace, PWSTR query, HCS_OPERATION operation);
+		public static extern HResult HcsEnumerateComputeSystemsInNamespace(char16* idNamespace, char16* query, HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCS_OPERATION HcsCreateOperation(void* context, HCS_OPERATION_COMPLETION callback);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
@@ -134,7 +134,7 @@ namespace Win32
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* HcsGetOperationContext(HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSetOperationContext(HCS_OPERATION operation, void* context);
+		public static extern HResult HcsSetOperationContext(HCS_OPERATION operation, void* context);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HCS_SYSTEM HcsGetComputeSystemFromOperation(HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
@@ -144,112 +144,112 @@ namespace Win32
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint64 HcsGetOperationId(HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetOperationResult(HCS_OPERATION operation, PWSTR* resultDocument);
+		public static extern HResult HcsGetOperationResult(HCS_OPERATION operation, char16** resultDocument);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetOperationResultAndProcessInfo(HCS_OPERATION operation, HCS_PROCESS_INFORMATION* processInformation, PWSTR* resultDocument);
+		public static extern HResult HcsGetOperationResultAndProcessInfo(HCS_OPERATION operation, HCS_PROCESS_INFORMATION* processInformation, char16** resultDocument);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetProcessorCompatibilityFromSavedState(PWSTR RuntimeFileName, PWSTR* ProcessorFeaturesString);
+		public static extern HResult HcsGetProcessorCompatibilityFromSavedState(char16* RuntimeFileName, char16** ProcessorFeaturesString);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsWaitForOperationResult(HCS_OPERATION operation, uint32 timeoutMs, PWSTR* resultDocument);
+		public static extern HResult HcsWaitForOperationResult(HCS_OPERATION operation, uint32 timeoutMs, char16** resultDocument);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsWaitForOperationResultAndProcessInfo(HCS_OPERATION operation, uint32 timeoutMs, HCS_PROCESS_INFORMATION* processInformation, PWSTR* resultDocument);
+		public static extern HResult HcsWaitForOperationResultAndProcessInfo(HCS_OPERATION operation, uint32 timeoutMs, HCS_PROCESS_INFORMATION* processInformation, char16** resultDocument);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSetOperationCallback(HCS_OPERATION operation, void* context, HCS_OPERATION_COMPLETION callback);
+		public static extern HResult HcsSetOperationCallback(HCS_OPERATION operation, void* context, HCS_OPERATION_COMPLETION callback);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCancelOperation(HCS_OPERATION operation);
+		public static extern HResult HcsCancelOperation(HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCreateComputeSystem(PWSTR id, PWSTR configuration, HCS_OPERATION operation, SECURITY_DESCRIPTOR* securityDescriptor, out HCS_SYSTEM computeSystem);
+		public static extern HResult HcsCreateComputeSystem(char16* id, char16* configuration, HCS_OPERATION operation, SECURITY_DESCRIPTOR* securityDescriptor, out HCS_SYSTEM computeSystem);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCreateComputeSystemInNamespace(PWSTR idNamespace, PWSTR id, PWSTR configuration, HCS_OPERATION operation, HCS_CREATE_OPTIONS* options, out HCS_SYSTEM computeSystem);
+		public static extern HResult HcsCreateComputeSystemInNamespace(char16* idNamespace, char16* id, char16* configuration, HCS_OPERATION operation, HCS_CREATE_OPTIONS* options, out HCS_SYSTEM computeSystem);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsOpenComputeSystem(PWSTR id, uint32 requestedAccess, out HCS_SYSTEM computeSystem);
+		public static extern HResult HcsOpenComputeSystem(char16* id, uint32 requestedAccess, out HCS_SYSTEM computeSystem);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsOpenComputeSystemInNamespace(PWSTR idNamespace, PWSTR id, uint32 requestedAccess, out HCS_SYSTEM computeSystem);
+		public static extern HResult HcsOpenComputeSystemInNamespace(char16* idNamespace, char16* id, uint32 requestedAccess, out HCS_SYSTEM computeSystem);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void HcsCloseComputeSystem(HCS_SYSTEM computeSystem);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsStartComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsStartComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsShutDownComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsShutDownComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsTerminateComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsTerminateComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCrashComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsCrashComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsPauseComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsPauseComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsResumeComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsResumeComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSaveComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsSaveComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetComputeSystemProperties(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR propertyQuery);
+		public static extern HResult HcsGetComputeSystemProperties(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* propertyQuery);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsModifyComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, PWSTR configuration, HANDLE identity);
+		public static extern HResult HcsModifyComputeSystem(HCS_SYSTEM computeSystem, HCS_OPERATION operation, char16* configuration, Handle identity);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsWaitForComputeSystemExit(HCS_SYSTEM computeSystem, uint32 timeoutMs, PWSTR* result);
+		public static extern HResult HcsWaitForComputeSystemExit(HCS_SYSTEM computeSystem, uint32 timeoutMs, char16** result);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSetComputeSystemCallback(HCS_SYSTEM computeSystem, HCS_EVENT_OPTIONS callbackOptions, void* context, HCS_EVENT_CALLBACK callback);
+		public static extern HResult HcsSetComputeSystemCallback(HCS_SYSTEM computeSystem, HCS_EVENT_OPTIONS callbackOptions, void* context, HCS_EVENT_CALLBACK callback);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCreateProcess(HCS_SYSTEM computeSystem, PWSTR processParameters, HCS_OPERATION operation, SECURITY_DESCRIPTOR* securityDescriptor, out HCS_PROCESS process);
+		public static extern HResult HcsCreateProcess(HCS_SYSTEM computeSystem, char16* processParameters, HCS_OPERATION operation, SECURITY_DESCRIPTOR* securityDescriptor, out HCS_PROCESS process);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsOpenProcess(HCS_SYSTEM computeSystem, uint32 processId, uint32 requestedAccess, out HCS_PROCESS process);
+		public static extern HResult HcsOpenProcess(HCS_SYSTEM computeSystem, uint32 processId, uint32 requestedAccess, out HCS_PROCESS process);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void HcsCloseProcess(HCS_PROCESS process);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsTerminateProcess(HCS_PROCESS process, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsTerminateProcess(HCS_PROCESS process, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSignalProcess(HCS_PROCESS process, HCS_OPERATION operation, PWSTR options);
+		public static extern HResult HcsSignalProcess(HCS_PROCESS process, HCS_OPERATION operation, char16* options);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetProcessInfo(HCS_PROCESS process, HCS_OPERATION operation);
+		public static extern HResult HcsGetProcessInfo(HCS_PROCESS process, HCS_OPERATION operation);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetProcessProperties(HCS_PROCESS process, HCS_OPERATION operation, PWSTR propertyQuery);
+		public static extern HResult HcsGetProcessProperties(HCS_PROCESS process, HCS_OPERATION operation, char16* propertyQuery);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsModifyProcess(HCS_PROCESS process, HCS_OPERATION operation, PWSTR settings);
+		public static extern HResult HcsModifyProcess(HCS_PROCESS process, HCS_OPERATION operation, char16* settings);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSetProcessCallback(HCS_PROCESS process, HCS_EVENT_OPTIONS callbackOptions, void* context, HCS_EVENT_CALLBACK callback);
+		public static extern HResult HcsSetProcessCallback(HCS_PROCESS process, HCS_EVENT_OPTIONS callbackOptions, void* context, HCS_EVENT_CALLBACK callback);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsWaitForProcessExit(HCS_PROCESS computeSystem, uint32 timeoutMs, PWSTR* result);
+		public static extern HResult HcsWaitForProcessExit(HCS_PROCESS computeSystem, uint32 timeoutMs, char16** result);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetServiceProperties(PWSTR propertyQuery, out PWSTR result);
+		public static extern HResult HcsGetServiceProperties(char16* propertyQuery, out char16* result);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsModifyServiceSettings(PWSTR settings, PWSTR* result);
+		public static extern HResult HcsModifyServiceSettings(char16* settings, char16** result);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSubmitWerReport(PWSTR settings);
+		public static extern HResult HcsSubmitWerReport(char16* settings);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCreateEmptyGuestStateFile(PWSTR guestStateFilePath);
+		public static extern HResult HcsCreateEmptyGuestStateFile(char16* guestStateFilePath);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsCreateEmptyRuntimeStateFile(PWSTR runtimeStateFilePath);
+		public static extern HResult HcsCreateEmptyRuntimeStateFile(char16* runtimeStateFilePath);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGrantVmAccess(PWSTR vmId, PWSTR filePath);
+		public static extern HResult HcsGrantVmAccess(char16* vmId, char16* filePath);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsRevokeVmAccess(PWSTR vmId, PWSTR filePath);
+		public static extern HResult HcsRevokeVmAccess(char16* vmId, char16* filePath);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGrantVmGroupAccess(PWSTR filePath);
+		public static extern HResult HcsGrantVmGroupAccess(char16* filePath);
 		[Import("computecore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsRevokeVmGroupAccess(PWSTR filePath);
+		public static extern HResult HcsRevokeVmGroupAccess(char16* filePath);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsImportLayer(PWSTR layerPath, PWSTR sourceFolderPath, PWSTR layerData);
+		public static extern HResult HcsImportLayer(char16* layerPath, char16* sourceFolderPath, char16* layerData);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsExportLayer(PWSTR layerPath, PWSTR exportFolderPath, PWSTR layerData, PWSTR options);
+		public static extern HResult HcsExportLayer(char16* layerPath, char16* exportFolderPath, char16* layerData, char16* options);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsExportLegacyWritableLayer(PWSTR writableLayerMountPath, PWSTR writableLayerFolderPath, PWSTR exportFolderPath, PWSTR layerData);
+		public static extern HResult HcsExportLegacyWritableLayer(char16* writableLayerMountPath, char16* writableLayerFolderPath, char16* exportFolderPath, char16* layerData);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsDestroyLayer(PWSTR layerPath);
+		public static extern HResult HcsDestroyLayer(char16* layerPath);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSetupBaseOSLayer(PWSTR layerPath, HANDLE vhdHandle, PWSTR options);
+		public static extern HResult HcsSetupBaseOSLayer(char16* layerPath, Handle vhdHandle, char16* options);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsInitializeWritableLayer(PWSTR writableLayerPath, PWSTR layerData, PWSTR options);
+		public static extern HResult HcsInitializeWritableLayer(char16* writableLayerPath, char16* layerData, char16* options);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsInitializeLegacyWritableLayer(PWSTR writableLayerMountPath, PWSTR writableLayerFolderPath, PWSTR layerData, PWSTR options);
+		public static extern HResult HcsInitializeLegacyWritableLayer(char16* writableLayerMountPath, char16* writableLayerFolderPath, char16* layerData, char16* options);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsAttachLayerStorageFilter(PWSTR layerPath, PWSTR layerData);
+		public static extern HResult HcsAttachLayerStorageFilter(char16* layerPath, char16* layerData);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsDetachLayerStorageFilter(PWSTR layerPath);
+		public static extern HResult HcsDetachLayerStorageFilter(char16* layerPath);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsFormatWritableLayerVhd(HANDLE vhdHandle);
+		public static extern HResult HcsFormatWritableLayerVhd(Handle vhdHandle);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsGetLayerVhdMountPath(HANDLE vhdHandle, out PWSTR mountPath);
+		public static extern HResult HcsGetLayerVhdMountPath(Handle vhdHandle, out char16* mountPath);
 		[Import("computestorage.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcsSetupBaseOSVolume(PWSTR layerPath, PWSTR volumePath, PWSTR options);
+		public static extern HResult HcsSetupBaseOSVolume(char16* layerPath, char16* volumePath, char16* options);
 	}
 }

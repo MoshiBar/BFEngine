@@ -30,22 +30,14 @@ namespace BfEngine.Audio
 		OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		*/
 
-		//using namespace nqr;
-
-		typealias char = char8;
-
-		typealias uint8_t = uint8;
-		typealias uint16_t = uint16;
-		typealias int16_t = int16;
-		typealias uint32_t = uint32;
-
+		
 		struct ADPCMState
 		{
 		    public int32 frame_size;
 		    public int32 firstDataBlockByte;
 		    public int32 dataSize;
 		    public int32 currentByte;
-		    public uint8_t * inBuffer;
+		    public uint8 * inBuffer;
 		};
 
 		const int32[16] ima_index_table =
@@ -63,8 +55,9 @@ namespace BfEngine.Audio
 		    return index;
 		}
 		[Inline]
-		static /*inline*/ int16_t ima_clamp_predict(int16_t predict)
+		static /*inline*/ int16 ima_clamp_predict(int16 predict)
 		{
+#unwarn			
 		    if (predict < -32768) return -32768;
 		    else if (predict > 32767) return 32767;
 		    return predict;
@@ -84,7 +77,7 @@ namespace BfEngine.Audio
 
 		// Decodes an IMA ADPCM nibble to a 16 bit pcm sample
 		[Inline]
-		static /*inline*/ int16_t decode_nibble(uint8_t nibble, ref int16_t /*&*/ p, ref int32 /*&*/ s)
+		static /*inline*/ int16 decode_nibble(uint8 nibble, ref int16 /*&*/ p, ref int32 /*&*/ s)
 		{
 		    // Compute a delta to add to the predictor value
 		    int32 diff = ima_step_table[s] >> 3;
@@ -104,12 +97,12 @@ namespace BfEngine.Audio
 		    return ima_clamp_predict(p);
 		}
 
-		static void decode_ima_adpcm(ref ADPCMState /*&*/ state, int16_t * outBuffer, uint32_t num_channels)
+		static void decode_ima_adpcm(ref ADPCMState /*&*/ state, int16 * outBuffer, uint32 num_channels)
 		{
-		    /*const*/ uint8_t * data = state.inBuffer;
+		    /*const*/ uint8 * data = state.inBuffer;
 
 		    // Loop over the interleaved channels
-		    for (uint32_t ch = 0; ch < num_channels; ch++)
+		    for (uint32 ch = 0; ch < num_channels; ch++)
 		    {
 		        /*const*/ int32 byteOffset = (.)ch * 4;
 
@@ -118,10 +111,10 @@ namespace BfEngine.Audio
 		        // Byte1: packed high byte of the initial predictor
 		        // Byte2: initial step index
 		        // Byte3: Reserved empty value
-		        int16_t predictor = ((int16_t)data[byteOffset + 1] << 8) | data[byteOffset];
+		        int16 predictor = ((int16)data[byteOffset + 1] << 8) | data[byteOffset];
 		        int32 stepIndex = data[byteOffset + 2];
 
-		        uint8_t reserved = data[byteOffset + 3];
+		        uint8 reserved = data[byteOffset + 3];
 		        if (reserved != 0) Internal.FatalError("adpcm decode error");//throw std::runtime_error("adpcm decode error");
 
 		        int byteIdx = num_channels * 4 + byteOffset; //the byte index of the first data word for this channel
@@ -154,7 +147,7 @@ namespace BfEngine.Audio
 			List<uint8> fileBuffer = scope .();
 			File.ReadAll(path, fileBuffer);
 		    //auto fileBuffer = nqr::ReadFile(path);
-		    return LoadFromBuffer(data, fileBuffer);
+		    LoadFromBuffer(data, fileBuffer);
 		}
 
 		public static void LoadFromBuffer(AudioData * data, /*const std::vector<uint8_t> &*/Span<uint8> memory)
@@ -192,7 +185,7 @@ namespace BfEngine.Audio
 		    if (riffHeader.id_wave != GenerateChunkCode((.)'W', (.)'A', (.)'V', (.)'E')) Internal.FatalError("bad WAVE header"); //throw std::runtime_error("bad WAVE header");
 		    
 		    var expectedSize = (memory.Length) - riffHeader.file_size;
-		    if (expectedSize != sizeof(uint32_t) * 2)
+		    if (expectedSize != sizeof(uint32) * 2)
 		    {
 				Internal.FatalError("declared size of file less than file size");//might not need to crash the program lol
 		        //throw std::runtime_error("declared size of file less than file size"); //@todo warning instead of runtime_error
@@ -298,7 +291,7 @@ namespace BfEngine.Audio
 		    
 		    if (DataChunkInfo.offset == 0) Internal.FatalError("couldn't find data chunk"); //throw std::runtime_error("couldn't find data chunk");
 		    
-		    DataChunkInfo.offset += 2 * sizeof(uint32_t); // ignore the header and size fields
+		    DataChunkInfo.offset += 2 * sizeof(uint32); // ignore the header and size fields
 
 		    if (adpcmEncoded)
 		    {
@@ -307,15 +300,15 @@ namespace BfEngine.Audio
 		        s.firstDataBlockByte = 0;
 		        s.dataSize = (.)DataChunkInfo.size;
 		        s.currentByte = 0;
-		        s.inBuffer = /*const_cast<uint8_t*>*/(uint8_t*)(memory.Ptr + DataChunkInfo.offset);
+		        s.inBuffer = /*const_cast<uint8_t*>*/(uint8*)(memory.Ptr + DataChunkInfo.offset);
 		        
 		        size_t totalSamples = (factChunk.sample_length * wavHeader.channel_count); // Samples per channel times channel count
-		        List<int16_t> adpcm_pcm16 = new List<int16_t>((int)totalSamples * 2/*, 0*/); // Each frame decodes into twice as many pcm samples
+		        List<int16> adpcm_pcm16 = new List<int16>((int)totalSamples * 2/*, 0*/); // Each frame decodes into twice as many pcm samples
 		        
-		        uint32_t frameOffset = 0;
-		        uint32_t frameCount = DataChunkInfo.size / (.)s.frame_size;
+		        uint32 frameOffset = 0;
+		        uint32 frameCount = DataChunkInfo.size / (.)s.frame_size;
 
-		        for (uint32_t i = 0; i < frameCount; ++i)
+		        for (uint32 i = 0; i < frameCount; ++i)
 		        {
 		            decode_ima_adpcm(ref s, adpcm_pcm16.Ptr + frameOffset, wavHeader.channel_count);
 		            s.inBuffer += s.frame_size;

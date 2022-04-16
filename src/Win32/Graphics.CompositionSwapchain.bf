@@ -1,4 +1,8 @@
 using System;
+using static Win32.Graphics.Dxgi;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.CompositionSwapchain
 namespace Win32
@@ -65,14 +69,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAvailableEvent(out HANDLE availableEventHandle) mut => VT.GetAvailableEvent(ref this, out availableEventHandle);
-			public HRESULT IsAvailable(out uint8 isAvailable) mut => VT.IsAvailable(ref this, out isAvailable);
+			public HResult GetAvailableEvent(out Handle availableEventHandle) mut => VT.GetAvailableEvent(ref this, out availableEventHandle);
+			public HResult IsAvailable(out uint8 isAvailable) mut => VT.IsAvailable(ref this, out isAvailable);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationBuffer self, out HANDLE availableEventHandle) GetAvailableEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationBuffer self, out uint8 isAvailable) IsAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationBuffer self, out Handle availableEventHandle) GetAvailableEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationBuffer self, out uint8 isAvailable) IsAvailable;
 			}
 		}
 		[CRepr]
@@ -97,26 +101,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetBuffer(ref IPresentationBuffer presentationBuffer) mut => VT.SetBuffer(ref this, ref presentationBuffer);
-			public HRESULT SetColorSpace(DXGI_COLOR_SPACE_TYPE colorSpace) mut => VT.SetColorSpace(ref this, colorSpace);
-			public HRESULT SetAlphaMode(DXGI_ALPHA_MODE alphaMode) mut => VT.SetAlphaMode(ref this, alphaMode);
-			public HRESULT SetSourceRect(in RECT sourceRect) mut => VT.SetSourceRect(ref this, sourceRect);
-			public HRESULT SetTransform(ref PresentationTransform transform) mut => VT.SetTransform(ref this, ref transform);
-			public HRESULT RestrictToOutput(ref IUnknown output) mut => VT.RestrictToOutput(ref this, ref output);
-			public HRESULT SetDisableReadback(uint8 value) mut => VT.SetDisableReadback(ref this, value);
-			public HRESULT SetLetterboxingMargins(float leftLetterboxSize, float topLetterboxSize, float rightLetterboxSize, float bottomLetterboxSize) mut => VT.SetLetterboxingMargins(ref this, leftLetterboxSize, topLetterboxSize, rightLetterboxSize, bottomLetterboxSize);
+			public HResult SetBuffer(ref IPresentationBuffer presentationBuffer) mut => VT.SetBuffer(ref this, ref presentationBuffer);
+			public HResult SetColorSpace(DXGI_COLOR_SPACE_TYPE colorSpace) mut => VT.SetColorSpace(ref this, colorSpace);
+			public HResult SetAlphaMode(DXGI_ALPHA_MODE alphaMode) mut => VT.SetAlphaMode(ref this, alphaMode);
+			public HResult SetSourceRect(in RectI sourceRect) mut => VT.SetSourceRect(ref this, sourceRect);
+			public HResult SetTransform(ref PresentationTransform transform) mut => VT.SetTransform(ref this, ref transform);
+			public HResult RestrictToOutput(ref IUnknown output) mut => VT.RestrictToOutput(ref this, ref output);
+			public HResult SetDisableReadback(uint8 value) mut => VT.SetDisableReadback(ref this, value);
+			public HResult SetLetterboxingMargins(float leftLetterboxSize, float topLetterboxSize, float rightLetterboxSize, float bottomLetterboxSize) mut => VT.SetLetterboxingMargins(ref this, leftLetterboxSize, topLetterboxSize, rightLetterboxSize, bottomLetterboxSize);
 
 			[CRepr]
 			public struct VTable : IPresentationContent.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, ref IPresentationBuffer presentationBuffer) SetBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, DXGI_COLOR_SPACE_TYPE colorSpace) SetColorSpace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, DXGI_ALPHA_MODE alphaMode) SetAlphaMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, in RECT sourceRect) SetSourceRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, ref PresentationTransform transform) SetTransform;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, ref IUnknown output) RestrictToOutput;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, uint8 value) SetDisableReadback;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationSurface self, float leftLetterboxSize, float topLetterboxSize, float rightLetterboxSize, float bottomLetterboxSize) SetLetterboxingMargins;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, ref IPresentationBuffer presentationBuffer) SetBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, DXGI_COLOR_SPACE_TYPE colorSpace) SetColorSpace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, DXGI_ALPHA_MODE alphaMode) SetAlphaMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, in RectI sourceRect) SetSourceRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, ref PresentationTransform transform) SetTransform;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, ref IUnknown output) RestrictToOutput;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, uint8 value) SetDisableReadback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationSurface self, float leftLetterboxSize, float topLetterboxSize, float rightLetterboxSize, float bottomLetterboxSize) SetLetterboxingMargins;
 			}
 		}
 		[CRepr]
@@ -143,36 +147,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddBufferFromResource(ref IUnknown resource, out IPresentationBuffer* presentationBuffer) mut => VT.AddBufferFromResource(ref this, ref resource, out presentationBuffer);
-			public HRESULT CreatePresentationSurface(HANDLE compositionSurfaceHandle, out IPresentationSurface* presentationSurface) mut => VT.CreatePresentationSurface(ref this, compositionSurfaceHandle, out presentationSurface);
+			public HResult AddBufferFromResource(ref IUnknown resource, out IPresentationBuffer* presentationBuffer) mut => VT.AddBufferFromResource(ref this, ref resource, out presentationBuffer);
+			public HResult CreatePresentationSurface(Handle compositionSurfaceHandle, out IPresentationSurface* presentationSurface) mut => VT.CreatePresentationSurface(ref this, compositionSurfaceHandle, out presentationSurface);
 			public uint64 GetNextPresentId() mut => VT.GetNextPresentId(ref this);
-			public HRESULT SetTargetTime(SystemInterruptTime targetTime) mut => VT.SetTargetTime(ref this, targetTime);
-			public HRESULT SetPreferredPresentDuration(SystemInterruptTime preferredDuration, SystemInterruptTime deviationTolerance) mut => VT.SetPreferredPresentDuration(ref this, preferredDuration, deviationTolerance);
-			public HRESULT ForceVSyncInterrupt(uint8 forceVsyncInterrupt) mut => VT.ForceVSyncInterrupt(ref this, forceVsyncInterrupt);
-			public HRESULT Present() mut => VT.Present(ref this);
-			public HRESULT GetPresentRetiringFence(in Guid riid, void** fence) mut => VT.GetPresentRetiringFence(ref this, riid, fence);
-			public HRESULT CancelPresentsFrom(uint64 presentIdToCancelFrom) mut => VT.CancelPresentsFrom(ref this, presentIdToCancelFrom);
-			public HRESULT GetLostEvent(out HANDLE lostEventHandle) mut => VT.GetLostEvent(ref this, out lostEventHandle);
-			public HRESULT GetPresentStatisticsAvailableEvent(out HANDLE presentStatisticsAvailableEventHandle) mut => VT.GetPresentStatisticsAvailableEvent(ref this, out presentStatisticsAvailableEventHandle);
-			public HRESULT EnablePresentStatisticsKind(PresentStatisticsKind presentStatisticsKind, uint8 enabled) mut => VT.EnablePresentStatisticsKind(ref this, presentStatisticsKind, enabled);
-			public HRESULT GetNextPresentStatistics(out IPresentStatistics* nextPresentStatistics) mut => VT.GetNextPresentStatistics(ref this, out nextPresentStatistics);
+			public HResult SetTargetTime(SystemInterruptTime targetTime) mut => VT.SetTargetTime(ref this, targetTime);
+			public HResult SetPreferredPresentDuration(SystemInterruptTime preferredDuration, SystemInterruptTime deviationTolerance) mut => VT.SetPreferredPresentDuration(ref this, preferredDuration, deviationTolerance);
+			public HResult ForceVSyncInterrupt(uint8 forceVsyncInterrupt) mut => VT.ForceVSyncInterrupt(ref this, forceVsyncInterrupt);
+			public HResult Present() mut => VT.Present(ref this);
+			public HResult GetPresentRetiringFence(in Guid riid, void** fence) mut => VT.GetPresentRetiringFence(ref this, riid, fence);
+			public HResult CancelPresentsFrom(uint64 presentIdToCancelFrom) mut => VT.CancelPresentsFrom(ref this, presentIdToCancelFrom);
+			public HResult GetLostEvent(out Handle lostEventHandle) mut => VT.GetLostEvent(ref this, out lostEventHandle);
+			public HResult GetPresentStatisticsAvailableEvent(out Handle presentStatisticsAvailableEventHandle) mut => VT.GetPresentStatisticsAvailableEvent(ref this, out presentStatisticsAvailableEventHandle);
+			public HResult EnablePresentStatisticsKind(PresentStatisticsKind presentStatisticsKind, uint8 enabled) mut => VT.EnablePresentStatisticsKind(ref this, presentStatisticsKind, enabled);
+			public HResult GetNextPresentStatistics(out IPresentStatistics* nextPresentStatistics) mut => VT.GetNextPresentStatistics(ref this, out nextPresentStatistics);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, ref IUnknown resource, out IPresentationBuffer* presentationBuffer) AddBufferFromResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, HANDLE compositionSurfaceHandle, out IPresentationSurface* presentationSurface) CreatePresentationSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, ref IUnknown resource, out IPresentationBuffer* presentationBuffer) AddBufferFromResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, Handle compositionSurfaceHandle, out IPresentationSurface* presentationSurface) CreatePresentationSurface;
 				public new function [CallingConvention(.Stdcall)] uint64(ref IPresentationManager self) GetNextPresentId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, SystemInterruptTime targetTime) SetTargetTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, SystemInterruptTime preferredDuration, SystemInterruptTime deviationTolerance) SetPreferredPresentDuration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, uint8 forceVsyncInterrupt) ForceVSyncInterrupt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self) Present;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, in Guid riid, void** fence) GetPresentRetiringFence;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, uint64 presentIdToCancelFrom) CancelPresentsFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, out HANDLE lostEventHandle) GetLostEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, out HANDLE presentStatisticsAvailableEventHandle) GetPresentStatisticsAvailableEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, PresentStatisticsKind presentStatisticsKind, uint8 enabled) EnablePresentStatisticsKind;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationManager self, out IPresentStatistics* nextPresentStatistics) GetNextPresentStatistics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, SystemInterruptTime targetTime) SetTargetTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, SystemInterruptTime preferredDuration, SystemInterruptTime deviationTolerance) SetPreferredPresentDuration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, uint8 forceVsyncInterrupt) ForceVSyncInterrupt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self) Present;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, in Guid riid, void** fence) GetPresentRetiringFence;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, uint64 presentIdToCancelFrom) CancelPresentsFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, out Handle lostEventHandle) GetLostEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, out Handle presentStatisticsAvailableEventHandle) GetPresentStatisticsAvailableEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, PresentStatisticsKind presentStatisticsKind, uint8 enabled) EnablePresentStatisticsKind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationManager self, out IPresentStatistics* nextPresentStatistics) GetNextPresentStatistics;
 			}
 		}
 		[CRepr]
@@ -184,14 +188,14 @@ namespace Win32
 			
 			public uint8 IsPresentationSupported() mut => VT.IsPresentationSupported(ref this);
 			public uint8 IsPresentationSupportedWithIndependentFlip() mut => VT.IsPresentationSupportedWithIndependentFlip(ref this);
-			public HRESULT CreatePresentationManager(out IPresentationManager* ppPresentationManager) mut => VT.CreatePresentationManager(ref this, out ppPresentationManager);
+			public HResult CreatePresentationManager(out IPresentationManager* ppPresentationManager) mut => VT.CreatePresentationManager(ref this, out ppPresentationManager);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint8(ref IPresentationFactory self) IsPresentationSupported;
 				public new function [CallingConvention(.Stdcall)] uint8(ref IPresentationFactory self) IsPresentationSupportedWithIndependentFlip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPresentationFactory self, out IPresentationManager* ppPresentationManager) CreatePresentationManager;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPresentationFactory self, out IPresentationManager* ppPresentationManager) CreatePresentationManager;
 			}
 		}
 		[CRepr]
@@ -257,6 +261,6 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("dcomp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreatePresentationFactory(ref IUnknown d3dDevice, in Guid riid, void** presentationFactory);
+		public static extern HResult CreatePresentationFactory(ref IUnknown d3dDevice, in Guid riid, void** presentationFactory);
 	}
 }

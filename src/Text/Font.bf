@@ -1,6 +1,11 @@
-using System.IO;
 using System;
-
+using System.Diagnostics;
+using System.Collections;
+using static Win32.Graphics.Imaging;
+using static Win32.Graphics.Imaging.D2D;
+using static Win32.Graphics.Direct2D;
+using static System.Windows.COM_IUnknown;
+using static Win32.Win32;
 namespace BfEngine.Text
 {
 	class Font
@@ -9,53 +14,66 @@ namespace BfEngine.Text
 		private const int PAGE_SIZE = 1 << LOG2_PAGE_SIZE;
 		private const int PAGES = 0x10000 / PAGE_SIZE;
 
+		const Vector2Int atlasSize = .(2048, 2048);
+		const String defaultChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!`?'.,;:()[]{}<>|/@\\^$-%+=#_&~*";
 
-		public bool flipped;
 
 		public String name = new String() ~ delete _;
 
 		public Texture[] textures ~ delete _;
 
-		public float padTop, padRight, padBottom, padLeft;
+		//public float padTop, padRight, padBottom, padLeft;
 		/** The distance from one line of text to the next. To set this value, use {@link #setLineHeight(float)}. */
-		public float lineHeight;
+		/*public float lineHeight;
 		/** The distance from the top of most uppercase characters to the baseline. Since the drawing position is the cap height of
 		 * the first line, the cap height can be used to get the location of the baseline. */
 		public float capHeight = 1;
 		/** The distance from the cap height to the top of the tallest glyph. */
 		public float ascent;
 		/** The distance from the bottom of the glyph that extends the lowest to the baseline. This number is negative. */
-		public float descent;
- 		/** The distance to move down when \n is encountered. */
+		public float descent;*/
+		/** The distance to move down when \n is encountered. */
 		public float down;
 		/** Multiplier for the line height of blank lines. down * blankLineHeight is used as the distance to move down for a blank
 		 * line. */
-		public float size;
+		//public float size;
 
 		public float scaleW, scaleH;
+
+		//size in pixels
+		public float size;
+		//amount to scale design units by
+		public float scale;
+
+		public float SDFSpread;
+
+		IDWriteFontFace1* fontFace ~ _.Release();
+		Framebuffer framebuffer ~ _.Dispose();//keep the framebuffer active so we can render new glyphs
+		List<RectF> glyphlocations = new .() ~ delete _;
+		ID2D1RenderTarget* renderTarget ~ _.Release();
+		ID2D1SolidColorBrush* solidColorBrush ~ _.Release();
+		Texture texture ~ _.Dispose();
+		IWICBitmap* bitmap ~ _.Release();
 
 		public readonly Glyph[][] glyphs = new Glyph[PAGES][] ~ {
 			for(var arr in _){
 				if(arr != null){
-					for(var glyph in arr) if( glyph != null) delete glyph;
+					for(var glyph in arr) delete glyph;
 					delete arr;
 				}
 			}
 			delete _;
 		};
-		public Glyph missingGlyph ~ delete _;
+		public Glyph missingGlyph => getGlyph(0);
 
 		public float spaceXadvance;
 
-		public float xHeight = 1;
 
-		//public char16[] breakChars;
-		const char16[?] xChars = .('x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z');
-		const char16[?] capChars = .('M', 'N', 'B', 'D', 'C', 'E', 'F', 'K', 'A', 'G', 'H', 'I', 'J', 'L', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
-
-		public this (StringView fontFile, bool flip = false) {
-			this.flipped = flip;
-			this.load(fontFile, flip);
+		static Shader beziershader ~ delete _;
+		static Shader invertshader ~ delete _;
+		
+		public this (StringView fontName) {
+			this.load(fontName);
 		}
 
 		static StringView getVal(StringView buffer, StringView valName){
@@ -71,246 +89,421 @@ namespace BfEngine.Text
 			return buffer.Substring(0, buffer.IndexOf(' '));
 		}
 
-		public void load(StringView path, bool flip)
+		public void load(StringView fontName)
 		{
-			//TODO: this parser is a nightmare, pls fix
+			scaleW = atlasSize.x;
+			scaleH = atlasSize.y;
 
-			String buffer = scope String(256);
+			HResult hr = default;
 
-			StreamReader reader = scope StreamReader(scope FileStream()..Open(path));
+			
 
-			//Info
-			reader.ReadLine(buffer);
+			hr = DWriteCreateFactory<IDWriteFactory7>(.Shared, IDWriteFactory7.IID, var dwriteFactory);
+			Debug.Assert(hr == .OK);
 
-			name.Append(getVal(buffer, "face"));
+			//actually get the font face
+			hr = dwriteFactory.CreateTextFormat(
+				"",
+				default,
+				.Regular,
+				.Normal,
+				.Normal,
+				72.0f,//doesnt matter
+				"en-us",
+				var textFormat);
+			Debug.Assert(hr == .OK);
+
+			dwriteFactory.Release();
+
+			Console.WriteLine(textFormat.GetFontFamilyName(..scope .()));
+
+			hr = textFormat.GetFontCollection(var fontcollection);
+			Debug.Assert(hr == .OK);
+			textFormat.Release();
+
+			hr = fontcollection.FindFamilyName(fontName, var index, var found);
+			Debug.Assert(hr == .OK);
+			Debug.Assert(found);
+
+			hr = fontcollection.GetFontFamily(index, var fontfamily);
+			Debug.Assert(hr == .OK);
+			fontcollection.Release();
+
+			hr = fontfamily.GetFont(0, var font);
+			Debug.Assert(hr == .OK);
+			fontfamily.Release();
+
+			hr = font.CreateFontFace(var ff);
+			Debug.Assert(hr == .OK);
+			font.Release();
+
+			//risky cast to derived type lol
+			fontFace = (IDWriteFontFace1*)ff;
+
+			fontFace.GetMetrics(var fontmetrics);
+
+			
+
+			//bunch of boring code to create a context to render character masks
+			hr = CoCreateInstance<IWICImagingFactory2>(CLSID_WICImagingFactory2, null, .INPROC_SERVER, IWICImagingFactory2.IID, var imagingFactory);
+			Debug.Assert(hr == .OK);
+
+			var pformat = GUID_WICPixelFormat8bppAlpha;//*/GUID_WICPixelFormat32bppPBGRA;
+			hr = imagingFactory.CreateBitmap((.)atlasSize.x, (.)atlasSize.y, ref pformat, .WICBitmapCacheOnDemand, out bitmap);
+			Debug.Assert(hr == .OK);
+
+			imagingFactory.Release();
 
 
-			size = Int32.Parse(getVal(buffer, "size"));
+			hr = D2D1CreateFactory<ID2D1Factory>(.MultiThreaded, ID2D1Factory.IID, null, var d2dFactory);
+			Debug.Assert(hr == .OK);
 
-			{
-				var paddingStrings = getVal(buffer, "padding").Split(',');
-				padTop = Int32.Parse(paddingStrings.GetNext());
-				padRight = Int32.Parse(paddingStrings.GetNext());
-				padBottom = Int32.Parse(paddingStrings.GetNext());
-				padLeft = Int32.Parse(paddingStrings.GetNext());
-			}
-			float padY = padTop + padBottom;
+			RenderTargetProperties rtProperties = .(.Default, .(.Unknown, .Unknown), 96, 96, .None, .Default);
+			hr = d2dFactory.CreateWicBitmapRenderTarget(bitmap, rtProperties, out renderTarget);
+			Debug.Assert(hr == .OK);
 
-			//Common
-			reader.ReadLine(buffer..Clear());
-			var common = buffer.Split!(' ');// At most we want the 6th element; i.e. "page=N"
-			lineHeight = Int32.Parse(StringView(common[1], "lineHeight=".Length));
-			int32 baseLine = Int32.Parse(StringView(common[2], "base=".Length));
-			scaleW = float.Parse(StringView(common[3], "scaleW=".Length));
-			scaleH = float.Parse(StringView(common[4], "scaleH=".Length));
+			d2dFactory.Release();
 
-			int pageCount = 1;
-			if (common.Count >= 6 && common[5].StartsWith("pages="))
-			{
-				pageCount = Math.Max(1, Int.Parse(common[5].Substring("pages=".Length)).Get(1));
-			}
 
-			//Pages
-			textures = new Texture[pageCount];
-			//var imagePaths = scope String[pageCount];
+			//make a brush, honestly not exactly sure what this does
+			ColorF brushColor = .(1, 1, 1, 1);//render a white color
+			BrushProperties brushProps = .(){opacity = 1, transform = D2D1MakeRotateMatrix(0, default, ..var _)};//create a rotation matrix with no rotation, cause i didn't know how to make an identity matrix lmao
+			hr = renderTarget.CreateSolidColorBrush(brushColor, &brushProps, out solidColorBrush);
+			Debug.Assert(hr == .OK);
 
-				// Read each page definition.
-			for (int p = 0; p < pageCount; p++)
-			{
-					// Read each "page" info line.
-				reader.ReadLine(buffer..Clear());
-				var idIndex = buffer.IndexOf("id=") + "id=".Length;
-				int32 pageID = int32.Parse(StringView(buffer, idIndex, buffer.IndexOf(' ', idIndex) - idIndex));
 
-				String fileName = scope String();
-				StringView(buffer, buffer.IndexOf("file=") + "file=".Length).UnQuoteString(fileName);
+			SDFSpread = 8;
 
-				var texturePath = scope String(path.Length + 4);
-				Path.GetDirectoryPath(path, texturePath);
-				texturePath..Append("/").Append(fileName);
-				
-				textures[pageID] = Texture.Load(texturePath);
-			}
-			descent = 0;
+			size = 128f;
+			
+			scale = size / fontmetrics.designUnitsPerEm;
 
-			while (true)
-			{
-				reader.ReadLine(buffer..Clear());
-				if (buffer.Length == 0) break;// EOF
-				if (buffer.StartsWith("kernings ")) break;// Starting kernings block.
-				if (buffer.StartsWith("metrics ")) break;// Starting metrics block.
-				if (!buffer.StartsWith("char ")) continue;
 
-				Glyph glyph = new Glyph();
+			//create framebuffer to render the atlas
+			framebuffer = Framebuffer(atlasSize);
 
-				var tokens = buffer.Split(scope char8[](' ', '='), int32.MaxValue, .RemoveEmptyEntries);
 
-				tokens.MoveNext();
-				tokens.MoveNext();
-				int32 ch = int32.Parse(tokens.GetNext());
-				if (ch <= 0)
-					missingGlyph = glyph;
-				else if (ch <= uint16.MaxValue)
-					setGlyph(ch, glyph);
-				else
-					continue;
-				glyph.id = ch;
-				tokens.MoveNext();
-				glyph.srcX = int32.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				glyph.srcY = int32.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				glyph.width = int32.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				glyph.height = int32.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				glyph.xoffset = int32.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				if (flip)
-					glyph.yoffset = int32.Parse(tokens.GetNext());
-				else
-					glyph.yoffset = -(glyph.height + int32.Parse(tokens.GetNext()).Get());
-				tokens.MoveNext();
-				glyph.xadvance = int32.Parse(tokens.GetNext());
+			//load shaders if not done already
+			if(beziershader == null) beziershader = new Shader()..LoadShader("Assets/shaders/cubicdistance.vert", "Assets/shaders/cubicdistance.frag");
+			if(invertshader == null) invertshader = new Shader()..LoadShader("Assets/shaders/invert.vert", "Assets/shaders/invert.frag");
 
-				// Check for page safely, it could be omitted or invalid.
-				if (tokens.HasMore) tokens.MoveNext();
-				if (tokens.HasMore)
-				{
-					glyph.page = int32.Parse(tokens.GetNext());
-				}
+			down = -(fontmetrics.ascent + fontmetrics.descent + fontmetrics.lineGap) * scale;
 
-				if (glyph.width > 0 && glyph.height > 0) descent = Math.Min(baseLine + glyph.yoffset, descent);
-			}
-			descent += padBottom;
 
-			loop: while (true)
-			{
+			//TODO: multiple atlas textures?
+			textures = new Texture[](framebuffer.colorhandle);
 
-				switch(reader.ReadLine(buffer..Clear())){
-				case .Err: break loop;
-				case .Ok:
-				}
+			//GenerateGlyphs('\0');
+			//missingGlyph = getGlyph('\0');
+			return;
+		}
 
-				if (buffer.Length == 0) break;
-				if (!buffer.StartsWith("kerning ")) break;
+		public void GenerateGlyphs(char32 char){
+			GenerateGlyphs(scope $"{char}");
+		}
 
-				var tokens = buffer.Split(scope char8[](' ', '='), int32.MaxValue, .RemoveEmptyEntries);
+		public void GenerateGlyphs(StringView str){
 
-				tokens.MoveNext();
-				tokens.MoveNext();
-				int first = int.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				int second = int.Parse(tokens.GetNext());
-				if (first < 0 || first > uint16.MaxValue || second < 0 || second > uint16.MaxValue) continue;
-				Glyph glyph = getGlyph((char16)first);
-				tokens.MoveNext();
-				int amount = int.Parse(tokens.GetNext());
-				if (glyph != null)
-				{// Kernings may exist for glyph pairs not contained in the font.
-					glyph.setKerning(second, amount);
-				}
+			List<uint32> codepoints = scope .();
+			for(var codepoint in str.DecodedChars){
+				if(codepoint == ' ' || codepoints.Contains((.)codepoint)) continue;
+				if(this.getGlyph(codepoint) != null) continue;
+
+				codepoints.Add((.)codepoint);
 			}
 
-			bool hasMetricsOverride = false;
-			float overrideAscent = 0;
-			float overrideDescent = 0;
-			float overrideDown = 0;
-			float overrideCapHeight = 0;
-			float overrideLineHeight = 0;
-			float overrideSpaceXAdvance = 0;
-			float overrideXHeight = 0;
+			if(codepoints.Count == 0)return; //theres nothing to render!
 
-				// Metrics override
-			if (buffer.StartsWith("metrics "))
-			{
-				hasMetricsOverride = true;
 
-				var tokens = buffer.Split(scope char8[](' ', '='), int32.MaxValue, .RemoveEmptyEntries);
+			List<uint16> indices = scope List<uint16>(codepoints.Count);
+			indices.Count = codepoints.Count;
 
-				tokens.MoveNext();
-				tokens.MoveNext();
-				overrideAscent = float.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				overrideDescent = float.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				overrideDown = float.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				overrideCapHeight = float.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				overrideLineHeight = float.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				overrideSpaceXAdvance = float.Parse(tokens.GetNext());
-				tokens.MoveNext();
-				overrideXHeight = float.Parse(tokens.GetNext());
+			//convert unicode codepoints into glyph indices
+			fontFace.GetGlyphIndices(codepoints, indices);
+
+			//remove any chars that result in a missing glyph
+			bool generatemissingglyph = false;
+			for(int i = codepoints.Count - 1; i >= 0; i--){//classic reverse array iteration
+				if(indices[i] != 0) continue;
+				if(codepoints[i] == 0) continue;//we dont want to remove an intentionally generated missing glyph
+				generatemissingglyph = getGlyph(0) == null;
+				codepoints.RemoveAt(i);
+				indices.RemoveAt(i);
+			}
+			if(generatemissingglyph){
+				codepoints.Add(0);
+				indices.Add(0);
 			}
 
-			Glyph spaceGlyph = getGlyph(' ');
-			if (spaceGlyph == null)
-			{
-				spaceGlyph = new Glyph();
-				spaceGlyph.id = (int32)' ';
-				Glyph xadvanceGlyph = getGlyph('l');
-				if (xadvanceGlyph == null) xadvanceGlyph = getFirstGlyph();
-				spaceGlyph.xadvance = xadvanceGlyph.xadvance;
-				setGlyph(' ', spaceGlyph);
-			}
-			if (spaceGlyph.width == 0)
-			{
-				spaceGlyph.width = (int32)(padLeft + spaceGlyph.xadvance + padRight);
-				spaceGlyph.xoffset = (int32) - padLeft;
-			}
-			spaceXadvance = spaceGlyph.xadvance;
+			if(codepoints.Count == 0)return; //second easy out since there might just be invalid chars
 
-			Glyph xGlyph = null;
-			for (char16 xChar in xChars)
-			{
-				xGlyph = getGlyph(xChar);
-				if (xGlyph != null) break;
-			}
-			if (xGlyph == null) xGlyph = getFirstGlyph();
-			xHeight = xGlyph.height - padY;
 
-			Glyph capGlyph = null;
-			for (char16 capChar in capChars)
-			{
-				capGlyph = getGlyph(capChar);
-				if (capGlyph != null) break;
+			GlyphMetrics[] glyphMetrics = scope .[codepoints.Count];
+			fontFace.GetDesignGlyphMetrics(indices, glyphMetrics);
+
+			//create an array we can sort by height to more optimally pack into a texture(maybe?)
+			(uint32 codepoint, uint16 index, GlyphMetrics metrics)[] glyphinfo = scope .[codepoints.Count];
+			for(int i < codepoints.Count)
+				glyphinfo[i] = (codepoints[i], indices[i], glyphMetrics[i]);
+
+			Array.Sort(glyphinfo, scope (a, b) => { return a.metrics.blackboxheight - b.metrics.blackboxheight;});
+			for(int i < codepoints.Count){
+				indices[i] = glyphinfo[i].index;
+				codepoints[i] = glyphinfo[i].codepoint;
+				glyphMetrics[i] = glyphinfo[i].metrics;
 			}
-			if (capGlyph == null)
-			{
-				for (Glyph[] page in this.glyphs)
-				{
-					if (page == null) continue;
-					for (Glyph glyph in page)
+
+
+			//List<Rect> glyphlocations = scope List<Rect>(codepoints.Count);
+			var glyphlocationsindex = glyphlocations.Count;
+			//my super special glyph packing algorithm that'll probably break instantly
+			for(int i < glyphinfo.Count){
+				var info = glyphinfo[i];
+				RectF rect = .(0,0, info.metrics.blackboxwidth * scale + SDFSpread * 2, info.metrics.blackboxheight * scale + SDFSpread * 2);
+				bool added = false;
+				for(int y < atlasSize.y - (.)rect.mHeight){
+					//reset when starting to test new line
+					rect.mY = y;
+					rect.mX = 0;
+					bool intersected = true;
+					A: while (intersected){
+						intersected = false;
+						for(int g < glyphlocations.Count)
+						{
+							if(rect.Right > atlasSize.x)break A;//doesnt fit on this line, don't continue
+							if(glyphlocations[g].Intersects(rect)){
+								rect.mX = glyphlocations[g].Right;//move right till we find a non-intersecting point
+								intersected = true;
+							}
+						}
+					}
+
+					if(rect.Right <= atlasSize.x)
 					{
-						if (glyph == null || glyph.height == 0 || glyph.width == 0) continue;
-						capHeight = Math.Max(capHeight, glyph.height);
+						added = true;
+						glyphlocations.Add(rect);
+						break;//glyph added, 
 					}
 				}
-			} else
-				capHeight = capGlyph.height;
-			capHeight -= padY;
-
-			ascent = baseLine - capHeight;
-			down = -lineHeight;
-			if (flip)
-			{
-				ascent = -ascent;
-				down = -down;
+				if(!added) Internal.FatalError("glyph don't fit (sad face)");
 			}
 
-			if (hasMetricsOverride)
-			{
-				this.ascent = overrideAscent;
-				this.descent = overrideDescent;
-				this.down = overrideDown;
-				this.capHeight = overrideCapHeight;
-				this.lineHeight = overrideLineHeight;
-				this.spaceXadvance = overrideSpaceXAdvance;
-				this.xHeight = overrideXHeight;
+			//GlyphOffset offset = .(-spread, spread);
+			Vector2 origin = .zero;//.(-glyphMetric.leftSideBearing, /*glyphMetric.verticalOriginY*/ /*- glyphMetric.topSideBearing*/0);
+			//GlyphOffset offset = .(-glyphMetric.leftSideBearing * scale + spread, (-glyphMetric.verticalOriginY + glyphMetric.topSideBearing) * scale - spread);
+
+			GlyphOffset[] offsets = scope .[codepoints.Count];
+			for(int i < codepoints.Count){
+				offsets[i] = .(
+					(-glyphMetrics[i].leftSideBearing) * scale + SDFSpread + glyphlocations[i + glyphlocationsindex].mX,
+					(-glyphMetrics[i].verticalOriginY + glyphMetrics[i].topSideBearing) * scale - SDFSpread - glyphlocations[i + glyphlocationsindex].mY);
 			}
+			float[] advances = scope .[codepoints.Count];//not used lol
+
+			GlyphRun grun = .(){
+				fontFace = fontFace,
+				fontEmSize = size,
+				glyphCount = (.)codepoints.Count,
+				glyphIndices = indices.Ptr,
+				glyphAdvances = advances.Ptr,
+				glyphOffsets = offsets.Ptr
+			};
+
+			{
+				var rect = WICRect(0, 0, atlasSize.x, atlasSize.y);
+				var hr = bitmap.Lock(rect, .LockWrite, var lock);
+				Debug.Assert(hr == .OK);
+				hr = lock.GetDataPointer(var buffersize, var data);
+				Debug.Assert(hr == .OK);
+				Internal.MemSet(data, 0, atlasSize.x * atlasSize.y);
+				lock.Release();
+			}
+
+
+			//render the glyph mask
+			renderTarget.BeginDraw();
+
+			renderTarget.DrawGlyphRun(origin, grun, solidColorBrush, .Natural);
+
+			var hr = renderTarget.EndDraw();
+			Debug.Assert(hr == .OK);
+
+
+			//convert wic texture to opengl texture
+			var rect = WICRect(0, 0, atlasSize.x, atlasSize.y);
+			hr = bitmap.Lock(rect, .LockRead, var lock);
+			Debug.Assert(hr == .OK);
+			hr = lock.GetDataPointer(var buffersize, var data);
+			Debug.Assert(hr == .OK);
+
+
+			
+			var texture = Texture.LoadRaw(data, atlasSize, .LUMINANCE, false, false);//texture for mask
+			lock.Release();
+
+
+
+			GlyphGeometrySink geometrysink = .();
+			defer geometrysink.Dispose();
+
+			fontFace.GetGlyphRunOutline(size, indices.Ptr, advances.Ptr, offsets.Ptr, (.)codepoints.Count, false, false, &geometrysink);
+
+
+
+
+
+
+			framebuffer.Bind();
+			//GL.Clear(.COLOR_BUFFER_BIT);
+			GL.Clear(.DEPTH_BUFFER_BIT);
+			//GL.Clear(.STENCIL_BUFFER_BIT);
+
+			//do actual rendering to the texture
+
+			beziershader.UseProgram();
+			Shader.SetMatrix(0, Matrix4.CreateOrtho(0, atlasSize.x, 0, atlasSize.y, -1, 1));
+			Shader.SetFloat(8, SDFSpread);
+
+
+			var rectModel = Engine.defaultRect;
+
+			for(int f < geometrysink.figures.Count){
+				var figure = geometrysink.figures[f];
+				var points = figure.points;
+				
+				for(int r < figure.regions.Count)
+				{
+					var region = figure.regions[r];
+
+					for(int i < region.bezier ? region.length / 3 : region.length)
+					{
+						if(region.bezier)
+						{
+							var bezier = points.GetRange(region.start + i * 3 - 1, 4);
+
+							var bounds = Utils.GetCurveBounds(bezier);
+
+							bounds.Inflate(SDFSpread, SDFSpread);//give space for the distance field
+
+							Shader.SetMatrix(1, .CreateTransform(bounds.Center, bounds.Size.x_y / 2, default));
+
+							
+							GL.Uniform2fv(2, 2, (float*)&bounds);
+							GL.Uniform2fv(4, 4, (float*)bezier.Ptr);
+
+							rectModel.Draw();
+						}
+						else
+						{
+							//line region
+							var lineStart = points[region.start + i - 1];
+							var lineEnd = points[region.start + i];
+
+							Vector2[4] bezier = .(lineStart, lineStart, lineEnd, lineEnd);//bezier thats just a straight line
+
+							var min = Vector2(Math.Min(lineStart.x, lineEnd.x), Math.Min(lineStart.y, lineEnd.y));
+							var max = Vector2(Math.Max(lineStart.x, lineEnd.x), Math.Max(lineStart.y, lineEnd.y));
+
+							var bounds = RectF(min, max - min);
+
+							bounds.Inflate(SDFSpread, SDFSpread);//give space for the distance field
+
+							Shader.SetMatrix(1, .CreateTransform(bounds.Center, bounds.Size.x_y / 2, default));
+
+
+							GL.Uniform2fv(2, 2, (float*)&bounds);
+							GL.Uniform2fv(4, 4, (float*)&bezier);
+
+							rectModel.Draw();
+						}
+					}
+				}
+
+				var lineStart = points.Back;
+				var lineEnd = points.Front;
+
+
+
+				Vector2[4] bezier = .(lineStart, lineStart, lineEnd, lineEnd);
+
+				var min = Vector2(Math.Min(lineStart.x, lineEnd.x), Math.Min(lineStart.y, lineEnd.y));
+				var max = Vector2(Math.Max(lineStart.x, lineEnd.x), Math.Max(lineStart.y, lineEnd.y));
+
+				var bounds = RectF(min, max - min);
+
+				bounds.Inflate(SDFSpread, SDFSpread);
+
+				Shader.SetMatrix(1, .CreateTransform(bounds.Center, bounds.Size.x_y / 2, default));
+
+
+				GL.Uniform2fv(2, 2, (float*)&bounds);
+				GL.Uniform2fv(4, 4, (float*)&bezier);
+
+				rectModel.Draw();
+			}
+
+			//render invert mask on top
+			GL.BlendFunc(.ONE_MINUS_DST_COLOR, .ZERO);
+
+			invertshader.UseProgram();
+			Shader.SetMatrix(0, Matrix4.CreateOrtho(-1, 1, 1, -1, -1, 1));
+			Shader.BindTexture(texture, 0);
+
+			Shader.SetMatrix(1, .CreateTransform(.(0, 0), .one, default));
+
+			rectModel.Draw();
+
+			Engine.SetDefaultBlendFunc();
+
+			Framebuffer.BindDefault();
+
+
+
+			
+			uint32 spacecodepoint = (.)' ';
+			uint16 spaceindex = default;
+			fontFace.GetGlyphIndices(&spacecodepoint, 1, &spaceindex);
+			GlyphMetrics spaceMetrics = default;
+			fontFace.GetDesignGlyphMetrics(&spaceindex, 1, &spaceMetrics, false);
+			spaceXadvance = spaceMetrics.advanceWidth * scale;
+
+
+
+			for(int i < glyphinfo.Count){
+				var info = glyphinfo[i];
+				var metrics = info.metrics;
+
+				Glyph glyph = new Glyph();
+				glyph.id = (.)info.codepoint;
+				glyph.xadvance = (.)(((.)metrics.advanceWidth) * scale);
+
+				glyph.height = (.)metrics.blackboxheight;
+
+				glyph.xoffset = (.)(metrics.leftSideBearing * scale) - (.)SDFSpread;
+				glyph.yoffset = (.)((-metrics.verticalOriginY + metrics.bottomSideBearing) * scale) - (.)SDFSpread;
+
+
+				var glyphrect = glyphlocations[i + glyphlocationsindex];
+				glyph.srcX = (.)glyphrect.mX;
+				glyph.srcY = (.)glyphrect.mY;
+				glyph.width = (.)glyphrect.mWidth;
+				glyph.height = (.)glyphrect.mHeight;
+
+				setGlyph((.)info.codepoint, glyph);
+			}
+
 		}
+
+
+		public float getKerningAdjustment(char32 a, char32 b){
+			char32[2] pair = .(a, b);
+			uint16[2] glyphpair = ?;
+			fontFace.GetGlyphIndices((.)&pair, 2, &glyphpair);
+			int32[2] kerning = ?;
+			fontFace.GetKerningPairAdjustments(2, &glyphpair, &kerning);
+			return kerning[0];
+		}
+
 
 		public Glyph getFirstGlyph () {
 			for (Glyph[] page in this.glyphs) {
@@ -344,30 +537,9 @@ namespace BfEngine.Text
 			//public float u, v, u2, v2;
 			public int32 xoffset, yoffset;
 			public int32 xadvance;
-			public int8[][] kerning ~ if(_ != null){
-				for(var arr in _) if(arr != null) delete arr;
-				delete _;
-			};
-			public bool fixedWidth;
 
 			/** The index to the texture page that holds this glyph. */
 			public int32 page = 0;
-
-			public int32 getKerning (char32 ch) {
-				if (kerning != null) {
-					var page = kerning[(int)ch >> LOG2_PAGE_SIZE];
-					if (page != null) return page[(int)ch & (PAGE_SIZE - 1)];
-				}
-				return 0;
-			}
-
-			public void setKerning (int ch, int value)
-			{
-				if (kerning == null) kerning = new int8[PAGES][];
-				var page = kerning[(int)ch >> LOG2_PAGE_SIZE];
-				if (page == null) kerning[(int)ch >> LOG2_PAGE_SIZE] = page = new .[PAGE_SIZE];
-				page[(int)ch & (PAGE_SIZE - 1)] = (int8)value;
-			}
 
 			public override void ToString(String strBuffer) => ((char16)id).ToString(strBuffer);
 		}

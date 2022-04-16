@@ -1,9 +1,13 @@
 using System;
+using static System.Windows;
+using static Win32.System.Com;
+using static System.Windows.COM_IUnknown;
 
 // namespace Media.Audio.XAudio2
-namespace Win32
+namespace Win32.Media
 {
-	extension Win32
+	extension Audio{
+	public static class Xaudio2
 	{
 		// --- Constants ---
 		
@@ -59,20 +63,37 @@ namespace Win32
 		public const uint32 XAUDIO2_MAX_INSTANCES = 8;
 		public const uint32 XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MONO = 600000;
 		public const uint32 XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MULTICHANNEL = 300000;
-		public const uint32 XAUDIO2_COMMIT_NOW = 0;
+		public const uint32 CommitNow = 0;
 		public const uint32 XAUDIO2_COMMIT_ALL = 0;
 		public const uint32 XAUDIO2_NO_LOOP_REGION = 0;
 		public const uint32 XAUDIO2_LOOP_INFINITE = 255;
-		public const uint32 XAUDIO2_DEFAULT_CHANNELS = 0;
-		public const uint32 XAUDIO2_DEFAULT_SAMPLERATE = 0;
+		public const uint32 DefaultChannels = 0;
+		public const uint32 DefaultSampleRate = 0;
 		public const uint32 XAUDIO2_DEBUG_ENGINE = 1;
-		public const uint32 XAUDIO2_VOICE_NOPITCH = 2;
-		public const uint32 XAUDIO2_VOICE_NOSRC = 4;
-		public const uint32 XAUDIO2_VOICE_USEFILTER = 8;
-		public const uint32 XAUDIO2_PLAY_TAILS = 32;
-		public const uint32 XAUDIO2_END_OF_STREAM = 64;
+
+		public enum VoiceFlags : uint32{
+			Default				= 0,
+			NoPitchControl		= 2,
+			NoSourceConversion	= 4,
+			UseFilter			= 8,
+		}
+
+		public enum StopFlags : uint32
+		{
+			Default = 0,
+			PlayTails = 32
+		}
+
+		public enum BufferFlags : uint32{
+			Default = 0,
+			EndOfStream = 64
+		}
+
 		public const uint32 XAUDIO2_SEND_USEFILTER = 128;
-		public const uint32 XAUDIO2_VOICE_NOSAMPLESPLAYED = 256;
+		public enum GetVoiceFlags : uint32{
+			Default = 0,
+			NoSamplesPlayed = 256//return only buffer state, no sampler state
+		}
 		public const uint32 XAUDIO2_STOP_ENGINE_WHEN_IDLE = 8192;
 		public const uint32 XAUDIO2_1024_QUANTUM = 32768;
 		public const uint32 XAUDIO2_NO_VIRTUAL_AUDIO_CLIENT = 65536;
@@ -81,45 +102,49 @@ namespace Win32
 		public const uint32 XAUDIO2_QUANTUM_NUMERATOR = 1;
 		public const uint32 XAUDIO2_QUANTUM_DENOMINATOR = 100;
 		public const uint32 FACILITY_XAUDIO2 = 2198;
-		public const HRESULT XAUDIO2_E_INVALID_CALL = -2003435519;
-		public const HRESULT XAUDIO2_E_XMA_DECODER_ERROR = -2003435518;
-		public const HRESULT XAUDIO2_E_XAPO_CREATION_FAILED = -2003435517;
-		public const HRESULT XAUDIO2_E_DEVICE_INVALIDATED = -2003435516;
-		public const uint32 Processor1 = 1;
-		public const uint32 Processor2 = 2;
-		public const uint32 Processor3 = 4;
-		public const uint32 Processor4 = 8;
-		public const uint32 Processor5 = 16;
-		public const uint32 Processor6 = 32;
-		public const uint32 Processor7 = 64;
-		public const uint32 Processor8 = 128;
-		public const uint32 Processor9 = 256;
-		public const uint32 Processor10 = 512;
-		public const uint32 Processor11 = 1024;
-		public const uint32 Processor12 = 2048;
-		public const uint32 Processor13 = 4096;
-		public const uint32 Processor14 = 8192;
-		public const uint32 Processor15 = 16384;
-		public const uint32 Processor16 = 32768;
-		public const uint32 Processor17 = 65536;
-		public const uint32 Processor18 = 131072;
-		public const uint32 Processor19 = 262144;
-		public const uint32 Processor20 = 524288;
-		public const uint32 Processor21 = 1048576;
-		public const uint32 Processor22 = 2097152;
-		public const uint32 Processor23 = 4194304;
-		public const uint32 Processor24 = 8388608;
-		public const uint32 Processor25 = 16777216;
-		public const uint32 Processor26 = 33554432;
-		public const uint32 Processor27 = 67108864;
-		public const uint32 Processor28 = 134217728;
-		public const uint32 Processor29 = 268435456;
-		public const uint32 Processor30 = 536870912;
-		public const uint32 Processor31 = 1073741824;
-		public const uint32 Processor32 = 2147483648;
-		public const uint32 XAUDIO2_ANY_PROCESSOR = 4294967295;
-		public const uint32 XAUDIO2_USE_DEFAULT_PROCESSOR = 0;
-		public const uint32 XAUDIO2_DEFAULT_PROCESSOR = 1;
+		public const HResult XAUDIO2_E_INVALID_CALL = (.)-2003435519;
+		public const HResult XAUDIO2_E_XMA_DECODER_ERROR = (.)-2003435518;
+		public const HResult XAUDIO2_E_XAPO_CREATION_FAILED = (.)-2003435517;
+		public const HResult XAUDIO2_E_DEVICE_INVALIDATED = (.)-2003435516;
+
+		[AllowDuplicates]
+		public enum XAudio2Processor : uint32{
+			Processor1	= 0x00000001,
+			Processor2	= 0x00000002,
+			Processor3	= 0x00000004,
+			Processor4	= 0x00000008,
+			Processor5	= 0x00000010,
+			Processor6	= 0x00000020,
+			Processor7	= 0x00000040,
+			Processor8	= 0x00000080,
+			Processor9	= 0x00000100,
+			Processor10 = 0x00000200,
+			Processor11 = 0x00000400,
+			Processor12 = 0x00000800,
+			Processor13 = 0x00001000,
+			Processor14 = 0x00002000,
+			Processor15 = 0x00004000,
+			Processor16 = 0x00008000,
+			Processor17 = 0x00010000,
+			Processor18 = 0x00020000,
+			Processor19 = 0x00040000,
+			Processor20 = 0x00080000,
+			Processor21 = 0x00100000,
+			Processor22 = 0x00200000,
+			Processor23 = 0x00400000,
+			Processor24 = 0x00800000,
+			Processor25 = 0x01000000,
+			Processor26 = 0x02000000,
+			Processor27 = 0x04000000,
+			Processor28 = 0x08000000,
+			Processor29 = 0x10000000,
+			Processor30 = 0x20000000,
+			Processor31 = 0x40000000,
+			Processor32 = 0x80000000,
+			AnyProcessor = 0xFFFFFFFF,
+			UseDefaultProcessor = 0,
+			DefaultProcessor = 1,
+		}
 		public const uint32 XAUDIO2_LOG_ERRORS = 1;
 		public const uint32 XAUDIO2_LOG_WARNINGS = 2;
 		public const uint32 XAUDIO2_LOG_INFO = 4;
@@ -199,7 +224,7 @@ namespace Win32
 		public const float HRTF_MIN_UNITY_GAIN_DISTANCE = 0.05f;
 		public const float HRTF_DEFAULT_UNITY_GAIN_DISTANCE = 1f;
 		public const uint32 FACILITY_XAPO = 2199;
-		public const HRESULT XAPO_E_FORMAT_UNSUPPORTED = -2003369983;
+		public const HResult XAPO_E_FORMAT_UNSUPPORTED = (.)-2003369983;
 		public const uint32 XAPO_MIN_CHANNELS = 1;
 		public const uint32 XAPO_MAX_CHANNELS = 64;
 		public const uint32 XAPO_MIN_FRAMERATE = 1000;
@@ -280,7 +305,7 @@ namespace Win32
 		[CRepr, Packed(1)]
 		public struct XAPO_LOCKFORPROCESS_PARAMETERS
 		{
-			public WAVEFORMATEX* pFormat;
+			public WaveFormatEx* pFormat;
 			public uint32 MaxFrameCount;
 		}
 		[CRepr, Packed(1)]
@@ -331,7 +356,7 @@ namespace Win32
 			public float Delay;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_VOICE_DETAILS
+		public struct VoiceDetails
 		{
 			public uint32 CreationFlags;
 			public uint32 ActiveFlags;
@@ -345,7 +370,7 @@ namespace Win32
 			public IXAudio2Voice* pOutputVoice;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_VOICE_SENDS
+		public struct VoiceSends
 		{
 			public uint32 SendCount;
 			public XAUDIO2_SEND_DESCRIPTOR* pSends;
@@ -354,26 +379,26 @@ namespace Win32
 		public struct XAUDIO2_EFFECT_DESCRIPTOR
 		{
 			public IUnknown* pEffect;
-			public BOOL InitialState;
+			public IntBool InitialState;
 			public uint32 OutputChannels;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_EFFECT_CHAIN
+		public struct EffectChain
 		{
 			public uint32 EffectCount;
 			public XAUDIO2_EFFECT_DESCRIPTOR* pEffectDescriptors;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_FILTER_PARAMETERS
+		public struct FilterParameters
 		{
 			public XAUDIO2_FILTER_TYPE Type;
 			public float Frequency;
 			public float OneOverQ;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_BUFFER
+		public struct XAudio2Buffer : IDisposable
 		{
-			public uint32 Flags;
+			public BufferFlags Flags = .Default;
 			public uint32 AudioBytes;
 			public uint8* pAudioData;
 			public uint32 PlayBegin;
@@ -382,6 +407,11 @@ namespace Win32
 			public uint32 LoopLength;
 			public uint32 LoopCount;
 			public void* pContext;
+
+			public void Dispose()
+			{
+				delete pAudioData;
+			}
 		}
 		[CRepr, Packed(1)]
 		public struct XAUDIO2_BUFFER_WMA
@@ -390,7 +420,7 @@ namespace Win32
 			public uint32 PacketCount;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_VOICE_STATE
+		public struct VoiceState
 		{
 			public void* pCurrentBufferContext;
 			public uint32 BuffersQueued;
@@ -415,14 +445,14 @@ namespace Win32
 			public uint32 ActiveXmaStreams;
 		}
 		[CRepr, Packed(1)]
-		public struct XAUDIO2_DEBUG_CONFIGURATION
+		public struct Xaudio2DebugConfiguration
 		{
 			public uint32 TraceMask;
 			public uint32 BreakMask;
-			public BOOL LogThreadID;
-			public BOOL LogFileline;
-			public BOOL LogFunctionName;
-			public BOOL LogTiming;
+			public IntBool LogThreadID;
+			public IntBool LogFileline;
+			public IntBool LogFunctionName;
+			public IntBool LogTiming;
 		}
 		[CRepr, Packed(1)]
 		public struct XAUDIO2FX_VOLUMEMETER_LEVELS
@@ -457,7 +487,7 @@ namespace Win32
 			public float DecayTime;
 			public float Density;
 			public float RoomSize;
-			public BOOL DisableLateField;
+			public IntBool DisableLateField;
 		}
 		[CRepr, Packed(1)]
 		public struct XAUDIO2FX_REVERB_I3DL2_PARAMETERS
@@ -541,28 +571,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRegistrationProperties(out XAPO_REGISTRATION_PROPERTIES* ppRegistrationProperties) mut => VT.GetRegistrationProperties(ref this, out ppRegistrationProperties);
-			public HRESULT IsInputFormatSupported(in WAVEFORMATEX pOutputFormat, in WAVEFORMATEX pRequestedInputFormat, WAVEFORMATEX** ppSupportedInputFormat) mut => VT.IsInputFormatSupported(ref this, pOutputFormat, pRequestedInputFormat, ppSupportedInputFormat);
-			public HRESULT IsOutputFormatSupported(in WAVEFORMATEX pInputFormat, in WAVEFORMATEX pRequestedOutputFormat, WAVEFORMATEX** ppSupportedOutputFormat) mut => VT.IsOutputFormatSupported(ref this, pInputFormat, pRequestedOutputFormat, ppSupportedOutputFormat);
-			public HRESULT Initialize(void* pData, uint32 DataByteSize) mut => VT.Initialize(ref this, pData, DataByteSize);
+			public HResult GetRegistrationProperties(out XAPO_REGISTRATION_PROPERTIES* ppRegistrationProperties) mut => VT.GetRegistrationProperties(ref this, out ppRegistrationProperties);
+			public HResult IsInputFormatSupported(in WaveFormatEx pOutputFormat, in WaveFormatEx pRequestedInputFormat, WaveFormatEx** ppSupportedInputFormat) mut => VT.IsInputFormatSupported(ref this, pOutputFormat, pRequestedInputFormat, ppSupportedInputFormat);
+			public HResult IsOutputFormatSupported(in WaveFormatEx pInputFormat, in WaveFormatEx pRequestedOutputFormat, WaveFormatEx** ppSupportedOutputFormat) mut => VT.IsOutputFormatSupported(ref this, pInputFormat, pRequestedOutputFormat, ppSupportedOutputFormat);
+			public HResult Initialize(void* pData, uint32 DataByteSize) mut => VT.Initialize(ref this, pData, DataByteSize);
 			public void Reset() mut => VT.Reset(ref this);
-			public HRESULT LockForProcess(uint32 InputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pInputLockedParameters, uint32 OutputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pOutputLockedParameters) mut => VT.LockForProcess(ref this, InputLockedParameterCount, pInputLockedParameters, OutputLockedParameterCount, pOutputLockedParameters);
+			public HResult LockForProcess(uint32 InputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pInputLockedParameters, uint32 OutputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pOutputLockedParameters) mut => VT.LockForProcess(ref this, InputLockedParameterCount, pInputLockedParameters, OutputLockedParameterCount, pOutputLockedParameters);
 			public void UnlockForProcess() mut => VT.UnlockForProcess(ref this);
-			public void Process(uint32 InputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pInputProcessParameters, uint32 OutputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pOutputProcessParameters, BOOL IsEnabled) mut => VT.Process(ref this, InputProcessParameterCount, pInputProcessParameters, OutputProcessParameterCount, pOutputProcessParameters, IsEnabled);
+			public void Process(uint32 InputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pInputProcessParameters, uint32 OutputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pOutputProcessParameters, IntBool IsEnabled) mut => VT.Process(ref this, InputProcessParameterCount, pInputProcessParameters, OutputProcessParameterCount, pOutputProcessParameters, IsEnabled);
 			public uint32 CalcInputFrames(uint32 OutputFrameCount) mut => VT.CalcInputFrames(ref this, OutputFrameCount);
 			public uint32 CalcOutputFrames(uint32 InputFrameCount) mut => VT.CalcOutputFrames(ref this, InputFrameCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPO self, out XAPO_REGISTRATION_PROPERTIES* ppRegistrationProperties) GetRegistrationProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPO self, in WAVEFORMATEX pOutputFormat, in WAVEFORMATEX pRequestedInputFormat, WAVEFORMATEX** ppSupportedInputFormat) IsInputFormatSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPO self, in WAVEFORMATEX pInputFormat, in WAVEFORMATEX pRequestedOutputFormat, WAVEFORMATEX** ppSupportedOutputFormat) IsOutputFormatSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPO self, void* pData, uint32 DataByteSize) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPO self, out XAPO_REGISTRATION_PROPERTIES* ppRegistrationProperties) GetRegistrationProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPO self, in WaveFormatEx pOutputFormat, in WaveFormatEx pRequestedInputFormat, WaveFormatEx** ppSupportedInputFormat) IsInputFormatSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPO self, in WaveFormatEx pInputFormat, in WaveFormatEx pRequestedOutputFormat, WaveFormatEx** ppSupportedOutputFormat) IsOutputFormatSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPO self, void* pData, uint32 DataByteSize) Initialize;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAPO self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPO self, uint32 InputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pInputLockedParameters, uint32 OutputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pOutputLockedParameters) LockForProcess;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPO self, uint32 InputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pInputLockedParameters, uint32 OutputLockedParameterCount, XAPO_LOCKFORPROCESS_PARAMETERS* pOutputLockedParameters) LockForProcess;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAPO self) UnlockForProcess;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAPO self, uint32 InputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pInputProcessParameters, uint32 OutputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pOutputProcessParameters, BOOL IsEnabled) Process;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAPO self, uint32 InputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pInputProcessParameters, uint32 OutputProcessParameterCount, XAPO_PROCESS_BUFFER_PARAMETERS* pOutputProcessParameters, IntBool IsEnabled) Process;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IXAPO self, uint32 OutputFrameCount) CalcInputFrames;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IXAPO self, uint32 InputFrameCount) CalcOutputFrames;
 			}
@@ -591,30 +621,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterForCallbacks(ref IXAudio2EngineCallback pCallback) mut => VT.RegisterForCallbacks(ref this, ref pCallback);
+			public HResult RegisterForCallbacks(ref IXAudio2EngineCallback pCallback) mut => VT.RegisterForCallbacks(ref this, ref pCallback);
 			public void UnregisterForCallbacks(ref IXAudio2EngineCallback pCallback) mut => VT.UnregisterForCallbacks(ref this, ref pCallback);
-			public HRESULT CreateSourceVoice(out IXAudio2SourceVoice* ppSourceVoice, in WAVEFORMATEX pSourceFormat, uint32 Flags, float MaxFrequencyRatio, IXAudio2VoiceCallback* pCallback, XAUDIO2_VOICE_SENDS* pSendList, XAUDIO2_EFFECT_CHAIN* pEffectChain) mut => VT.CreateSourceVoice(ref this, out ppSourceVoice, pSourceFormat, Flags, MaxFrequencyRatio, pCallback, pSendList, pEffectChain);
-			public HRESULT CreateSubmixVoice(out IXAudio2SubmixVoice* ppSubmixVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, uint32 ProcessingStage, XAUDIO2_VOICE_SENDS* pSendList, XAUDIO2_EFFECT_CHAIN* pEffectChain) mut => VT.CreateSubmixVoice(ref this, out ppSubmixVoice, InputChannels, InputSampleRate, Flags, ProcessingStage, pSendList, pEffectChain);
-			public HRESULT CreateMasteringVoice(out IXAudio2MasteringVoice* ppMasteringVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, PWSTR szDeviceId, XAUDIO2_EFFECT_CHAIN* pEffectChain, AUDIO_STREAM_CATEGORY StreamCategory) mut => VT.CreateMasteringVoice(ref this, out ppMasteringVoice, InputChannels, InputSampleRate, Flags, szDeviceId, pEffectChain, StreamCategory);
-			public HRESULT StartEngine() mut => VT.StartEngine(ref this);
+			public HResult CreateSourceVoice(out IXAudio2SourceVoice* ppSourceVoice, in WaveFormatEx pSourceFormat, VoiceFlags Flags = .Default, float MaxFrequencyRatio = 1, IXAudio2VoiceCallback* pCallback = null, VoiceSends* pSendList = null, EffectChain* pEffectChain = null) mut => VT.CreateSourceVoice(ref this, out ppSourceVoice, pSourceFormat, Flags, MaxFrequencyRatio, pCallback, pSendList, pEffectChain);
+			public HResult CreateSubmixVoice(out IXAudio2SubmixVoice* ppSubmixVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, uint32 ProcessingStage, VoiceSends* pSendList, EffectChain* pEffectChain) mut => VT.CreateSubmixVoice(ref this, out ppSubmixVoice, InputChannels, InputSampleRate, Flags, ProcessingStage, pSendList, pEffectChain);
+			public HResult CreateMasteringVoice(out IXAudio2MasteringVoice* ppMasteringVoice, uint32 InputChannels = DefaultChannels, uint32 InputSampleRate = DefaultSampleRate, uint32 Flags = 0, char16* szDeviceId = null, EffectChain* pEffectChain = null, AUDIO_STREAM_CATEGORY StreamCategory = default) mut => VT.CreateMasteringVoice(ref this, out ppMasteringVoice, InputChannels, InputSampleRate, Flags, szDeviceId, pEffectChain, StreamCategory);
+			public HResult StartEngine() mut => VT.StartEngine(ref this);
 			public void StopEngine() mut => VT.StopEngine(ref this);
-			public HRESULT CommitChanges(uint32 OperationSet) mut => VT.CommitChanges(ref this, OperationSet);
+			public HResult CommitChanges(uint32 OperationSet) mut => VT.CommitChanges(ref this, OperationSet);
 			public void GetPerformanceData(out XAUDIO2_PERFORMANCE_DATA pPerfData) mut => VT.GetPerformanceData(ref this, out pPerfData);
-			public void SetDebugConfiguration(XAUDIO2_DEBUG_CONFIGURATION* pDebugConfiguration, void* pReserved) mut => VT.SetDebugConfiguration(ref this, pDebugConfiguration, pReserved);
+			public void SetDebugConfiguration(Xaudio2DebugConfiguration* pDebugConfiguration, void* pReserved) mut => VT.SetDebugConfiguration(ref this, pDebugConfiguration, pReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2 self, ref IXAudio2EngineCallback pCallback) RegisterForCallbacks;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2 self, ref IXAudio2EngineCallback pCallback) RegisterForCallbacks;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2 self, ref IXAudio2EngineCallback pCallback) UnregisterForCallbacks;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2 self, out IXAudio2SourceVoice* ppSourceVoice, in WAVEFORMATEX pSourceFormat, uint32 Flags, float MaxFrequencyRatio, IXAudio2VoiceCallback* pCallback, XAUDIO2_VOICE_SENDS* pSendList, XAUDIO2_EFFECT_CHAIN* pEffectChain) CreateSourceVoice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2 self, out IXAudio2SubmixVoice* ppSubmixVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, uint32 ProcessingStage, XAUDIO2_VOICE_SENDS* pSendList, XAUDIO2_EFFECT_CHAIN* pEffectChain) CreateSubmixVoice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2 self, out IXAudio2MasteringVoice* ppMasteringVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, PWSTR szDeviceId, XAUDIO2_EFFECT_CHAIN* pEffectChain, AUDIO_STREAM_CATEGORY StreamCategory) CreateMasteringVoice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2 self) StartEngine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2 self, out IXAudio2SourceVoice* ppSourceVoice, in WaveFormatEx pSourceFormat, VoiceFlags Flags, float MaxFrequencyRatio, IXAudio2VoiceCallback* pCallback, VoiceSends* pSendList, EffectChain* pEffectChain) CreateSourceVoice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2 self, out IXAudio2SubmixVoice* ppSubmixVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, uint32 ProcessingStage, VoiceSends* pSendList, EffectChain* pEffectChain) CreateSubmixVoice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2 self, out IXAudio2MasteringVoice* ppMasteringVoice, uint32 InputChannels, uint32 InputSampleRate, uint32 Flags, char16* szDeviceId, EffectChain* pEffectChain, AUDIO_STREAM_CATEGORY StreamCategory) CreateMasteringVoice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2 self) StartEngine;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2 self) StopEngine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2 self, uint32 OperationSet) CommitChanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2 self, uint32 OperationSet) CommitChanges;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2 self, out XAUDIO2_PERFORMANCE_DATA pPerfData) GetPerformanceData;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2 self, XAUDIO2_DEBUG_CONFIGURATION* pDebugConfiguration, void* pReserved) SetDebugConfiguration;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2 self, Xaudio2DebugConfiguration* pDebugConfiguration, void* pReserved) SetDebugConfiguration;
 			}
 		}
 		[CRepr]
@@ -635,53 +665,76 @@ namespace Win32
 			}
 		}
 		[CRepr]
-		public struct IXAudio2Voice
+		public struct IXAudio2Voice : IDisposable
 		{
 			protected VTable* vt;
 			public new VTable* VT { get => (.)vt; }
 			
-			public void GetVoiceDetails(out XAUDIO2_VOICE_DETAILS pVoiceDetails) mut => VT.GetVoiceDetails(ref this, out pVoiceDetails);
-			public HRESULT SetOutputVoices(XAUDIO2_VOICE_SENDS* pSendList) mut => VT.SetOutputVoices(ref this, pSendList);
-			public HRESULT SetEffectChain(XAUDIO2_EFFECT_CHAIN* pEffectChain) mut => VT.SetEffectChain(ref this, pEffectChain);
-			public HRESULT EnableEffect(uint32 EffectIndex, uint32 OperationSet) mut => VT.EnableEffect(ref this, EffectIndex, OperationSet);
-			public HRESULT DisableEffect(uint32 EffectIndex, uint32 OperationSet) mut => VT.DisableEffect(ref this, EffectIndex, OperationSet);
-			public void GetEffectState(uint32 EffectIndex, out BOOL pEnabled) mut => VT.GetEffectState(ref this, EffectIndex, out pEnabled);
-			public HRESULT SetEffectParameters(uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize, uint32 OperationSet) mut => VT.SetEffectParameters(ref this, EffectIndex, pParameters, ParametersByteSize, OperationSet);
-			public HRESULT GetEffectParameters(uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize) mut => VT.GetEffectParameters(ref this, EffectIndex, pParameters, ParametersByteSize);
-			public HRESULT SetFilterParameters(in XAUDIO2_FILTER_PARAMETERS pParameters, uint32 OperationSet) mut => VT.SetFilterParameters(ref this, pParameters, OperationSet);
-			public void GetFilterParameters(out XAUDIO2_FILTER_PARAMETERS pParameters) mut => VT.GetFilterParameters(ref this, out pParameters);
-			public HRESULT SetOutputFilterParameters(IXAudio2Voice* pDestinationVoice, in XAUDIO2_FILTER_PARAMETERS pParameters, uint32 OperationSet) mut => VT.SetOutputFilterParameters(ref this, pDestinationVoice, pParameters, OperationSet);
-			public void GetOutputFilterParameters(IXAudio2Voice* pDestinationVoice, out XAUDIO2_FILTER_PARAMETERS pParameters) mut => VT.GetOutputFilterParameters(ref this, pDestinationVoice, out pParameters);
-			public HRESULT SetVolume(float Volume, uint32 OperationSet) mut => VT.SetVolume(ref this, Volume, OperationSet);
+			public void GetVoiceDetails(out VoiceDetails pVoiceDetails) mut => VT.GetVoiceDetails(ref this, out pVoiceDetails);
+			public HResult SetOutputVoices(VoiceSends* pSendList) mut => VT.SetOutputVoices(ref this, pSendList);
+			public HResult SetEffectChain(EffectChain* pEffectChain) mut => VT.SetEffectChain(ref this, pEffectChain);
+
+			public HResult EnableEffect(uint32 EffectIndex, uint32 OperationSet) mut => VT.EnableEffect(ref this, EffectIndex, OperationSet);
+			public HResult DisableEffect(uint32 EffectIndex, uint32 OperationSet) mut => VT.DisableEffect(ref this, EffectIndex, OperationSet);
+
+			public void GetEffectState(uint32 EffectIndex, out IntBool pEnabled) mut => VT.GetEffectState(ref this, EffectIndex, out pEnabled);
+
+			public HResult SetEffectParameters(uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize, uint32 OperationSet) mut => VT.SetEffectParameters(ref this, EffectIndex, pParameters, ParametersByteSize, OperationSet);
+			public HResult GetEffectParameters(uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize) mut => VT.GetEffectParameters(ref this, EffectIndex, pParameters, ParametersByteSize);
+
+			public HResult SetFilterParameters(in FilterParameters pParameters, uint32 OperationSet) mut => VT.SetFilterParameters(ref this, pParameters, OperationSet);
+			public void GetFilterParameters(out FilterParameters pParameters) mut => VT.GetFilterParameters(ref this, out pParameters);
+
+			public HResult SetOutputFilterParameters(IXAudio2Voice* pDestinationVoice, in FilterParameters pParameters, uint32 OperationSet) mut => VT.SetOutputFilterParameters(ref this, pDestinationVoice, pParameters, OperationSet);
+			public void GetOutputFilterParameters(IXAudio2Voice* pDestinationVoice, out FilterParameters pParameters) mut => VT.GetOutputFilterParameters(ref this, pDestinationVoice, out pParameters);
+
+			public HResult SetVolume(float Volume, uint32 OperationSet) mut => VT.SetVolume(ref this, Volume, OperationSet);
 			public void GetVolume(out float pVolume) mut => VT.GetVolume(ref this, out pVolume);
-			public HRESULT SetChannelVolumes(uint32 Channels, float* pVolumes, uint32 OperationSet) mut => VT.SetChannelVolumes(ref this, Channels, pVolumes, OperationSet);
+
+			public HResult SetChannelVolumes(uint32 Channels, float* pVolumes, uint32 OperationSet) mut => VT.SetChannelVolumes(ref this, Channels, pVolumes, OperationSet);
 			public void GetChannelVolumes(uint32 Channels, float* pVolumes) mut => VT.GetChannelVolumes(ref this, Channels, pVolumes);
-			public HRESULT SetOutputMatrix(IXAudio2Voice* pDestinationVoice, uint32 SourceChannels, uint32 DestinationChannels, in float pLevelMatrix, uint32 OperationSet) mut => VT.SetOutputMatrix(ref this, pDestinationVoice, SourceChannels, DestinationChannels, pLevelMatrix, OperationSet);
+
+			public HResult SetOutputMatrix(IXAudio2Voice* pDestinationVoice, uint32 SourceChannels, uint32 DestinationChannels, in float pLevelMatrix, uint32 OperationSet) mut => VT.SetOutputMatrix(ref this, pDestinationVoice, SourceChannels, DestinationChannels, pLevelMatrix, OperationSet);
 			public void GetOutputMatrix(IXAudio2Voice* pDestinationVoice, uint32 SourceChannels, uint32 DestinationChannels, out float pLevelMatrix) mut => VT.GetOutputMatrix(ref this, pDestinationVoice, SourceChannels, DestinationChannels, out pLevelMatrix);
+
 			public void DestroyVoice() mut => VT.DestroyVoice(ref this);
+
+			public FilterParameters filterParameters{
+				get mut => GetFilterParameters(..var _);
+				set mut => SetFilterParameters(value, CommitNow);
+			}
+
+			public float Volume {
+				get mut => GetVolume(..var _);
+				set mut => SetVolume(value, CommitNow);
+			}
 
 			[CRepr]
 			public struct VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, out XAUDIO2_VOICE_DETAILS pVoiceDetails) GetVoiceDetails;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, XAUDIO2_VOICE_SENDS* pSendList) SetOutputVoices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, XAUDIO2_EFFECT_CHAIN* pEffectChain) SetEffectChain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, uint32 EffectIndex, uint32 OperationSet) EnableEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, uint32 EffectIndex, uint32 OperationSet) DisableEffect;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, uint32 EffectIndex, out BOOL pEnabled) GetEffectState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize, uint32 OperationSet) SetEffectParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize) GetEffectParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, in XAUDIO2_FILTER_PARAMETERS pParameters, uint32 OperationSet) SetFilterParameters;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, out XAUDIO2_FILTER_PARAMETERS pParameters) GetFilterParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, in XAUDIO2_FILTER_PARAMETERS pParameters, uint32 OperationSet) SetOutputFilterParameters;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, out XAUDIO2_FILTER_PARAMETERS pParameters) GetOutputFilterParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, float Volume, uint32 OperationSet) SetVolume;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, out VoiceDetails pVoiceDetails) GetVoiceDetails;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, VoiceSends* pSendList) SetOutputVoices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, EffectChain* pEffectChain) SetEffectChain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, uint32 EffectIndex, uint32 OperationSet) EnableEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, uint32 EffectIndex, uint32 OperationSet) DisableEffect;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, uint32 EffectIndex, out IntBool pEnabled) GetEffectState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize, uint32 OperationSet) SetEffectParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, uint32 EffectIndex, void* pParameters, uint32 ParametersByteSize) GetEffectParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, in FilterParameters pParameters, uint32 OperationSet) SetFilterParameters;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, out FilterParameters pParameters) GetFilterParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, in FilterParameters pParameters, uint32 OperationSet) SetOutputFilterParameters;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, out FilterParameters pParameters) GetOutputFilterParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, float Volume, uint32 OperationSet) SetVolume;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, out float pVolume) GetVolume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, uint32 Channels, float* pVolumes, uint32 OperationSet) SetChannelVolumes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, uint32 Channels, float* pVolumes, uint32 OperationSet) SetChannelVolumes;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, uint32 Channels, float* pVolumes) GetChannelVolumes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, uint32 SourceChannels, uint32 DestinationChannels, in float pLevelMatrix, uint32 OperationSet) SetOutputMatrix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, uint32 SourceChannels, uint32 DestinationChannels, in float pLevelMatrix, uint32 OperationSet) SetOutputMatrix;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self, IXAudio2Voice* pDestinationVoice, uint32 SourceChannels, uint32 DestinationChannels, out float pLevelMatrix) GetOutputMatrix;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2Voice self) DestroyVoice;
+			}
+			public void Dispose() mut
+			{
+				DestroyVoice();
 			}
 		}
 		[CRepr]
@@ -689,30 +742,35 @@ namespace Win32
 		{
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Start(uint32 Flags, uint32 OperationSet) mut => VT.Start(ref this, Flags, OperationSet);
-			public HRESULT Stop(uint32 Flags, uint32 OperationSet) mut => VT.Stop(ref this, Flags, OperationSet);
-			public HRESULT SubmitSourceBuffer(in XAUDIO2_BUFFER pBuffer, XAUDIO2_BUFFER_WMA* pBufferWMA) mut => VT.SubmitSourceBuffer(ref this, pBuffer, pBufferWMA);
-			public HRESULT FlushSourceBuffers() mut => VT.FlushSourceBuffers(ref this);
-			public HRESULT Discontinuity() mut => VT.Discontinuity(ref this);
-			public HRESULT ExitLoop(uint32 OperationSet) mut => VT.ExitLoop(ref this, OperationSet);
-			public void GetState(out XAUDIO2_VOICE_STATE pVoiceState, uint32 Flags) mut => VT.GetState(ref this, out pVoiceState, Flags);
-			public HRESULT SetFrequencyRatio(float Ratio, uint32 OperationSet) mut => VT.SetFrequencyRatio(ref this, Ratio, OperationSet);
+			public HResult Start(/*uint32 Flags,*/ uint32 OperationSet = CommitNow) mut => VT.Start(ref this, /*Flags*/0, OperationSet);
+			public HResult Stop(StopFlags Flags = .Default, uint32 OperationSet = CommitNow) mut => VT.Stop(ref this, Flags, OperationSet);
+			public HResult SubmitSourceBuffer(in XAudio2Buffer pBuffer, XAUDIO2_BUFFER_WMA* pBufferWMA = null) mut => VT.SubmitSourceBuffer(ref this, pBuffer, pBufferWMA);
+			public HResult FlushSourceBuffers() mut => VT.FlushSourceBuffers(ref this);
+			public HResult Discontinuity() mut => VT.Discontinuity(ref this);
+			public HResult ExitLoop(uint32 OperationSet) mut => VT.ExitLoop(ref this, OperationSet);
+			public void GetState(out VoiceState pVoiceState, GetVoiceFlags Flags) mut => VT.GetState(ref this, out pVoiceState, Flags);
+			public HResult SetFrequencyRatio(float Ratio, uint32 OperationSet) mut => VT.SetFrequencyRatio(ref this, Ratio, OperationSet);
 			public void GetFrequencyRatio(out float pRatio) mut => VT.GetFrequencyRatio(ref this, out pRatio);
-			public HRESULT SetSourceSampleRate(uint32 NewSourceSampleRate) mut => VT.SetSourceSampleRate(ref this, NewSourceSampleRate);
+			public HResult SetSourceSampleRate(uint32 NewSourceSampleRate) mut => VT.SetSourceSampleRate(ref this, NewSourceSampleRate);
+
+			public float FrequencyRatio{
+				get mut => GetFrequencyRatio(..var _);
+				set mut => SetFrequencyRatio(value, CommitNow);
+			}
 
 			[CRepr]
 			public struct VTable : IXAudio2Voice.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self, uint32 Flags, uint32 OperationSet) Start;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self, uint32 Flags, uint32 OperationSet) Stop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self, in XAUDIO2_BUFFER pBuffer, XAUDIO2_BUFFER_WMA* pBufferWMA) SubmitSourceBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self) FlushSourceBuffers;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self) Discontinuity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self, uint32 OperationSet) ExitLoop;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2SourceVoice self, out XAUDIO2_VOICE_STATE pVoiceState, uint32 Flags) GetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self, float Ratio, uint32 OperationSet) SetFrequencyRatio;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self, uint32 Flags, uint32 OperationSet) Start;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self, StopFlags Flags, uint32 OperationSet) Stop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self, in XAudio2Buffer pBuffer, XAUDIO2_BUFFER_WMA* pBufferWMA) SubmitSourceBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self) FlushSourceBuffers;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self) Discontinuity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self, uint32 OperationSet) ExitLoop;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2SourceVoice self, out VoiceState pVoiceState, GetVoiceFlags Flags) GetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self, float Ratio, uint32 OperationSet) SetFrequencyRatio;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2SourceVoice self, out float pRatio) GetFrequencyRatio;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2SourceVoice self, uint32 NewSourceSampleRate) SetSourceSampleRate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2SourceVoice self, uint32 NewSourceSampleRate) SetSourceSampleRate;
 			}
 		}
 		[CRepr]
@@ -728,12 +786,12 @@ namespace Win32
 		{
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetChannelMask(out uint32 pChannelmask) mut => VT.GetChannelMask(ref this, out pChannelmask);
+			public HResult GetChannelMask(out uint32 pChannelmask) mut => VT.GetChannelMask(ref this, out pChannelmask);
 
 			[CRepr]
 			public struct VTable : IXAudio2Voice.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAudio2MasteringVoice self, out uint32 pChannelmask) GetChannelMask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAudio2MasteringVoice self, out uint32 pChannelmask) GetChannelMask;
 			}
 		}
 		[CRepr]
@@ -744,14 +802,14 @@ namespace Win32
 			
 			public void OnProcessingPassStart() mut => VT.OnProcessingPassStart(ref this);
 			public void OnProcessingPassEnd() mut => VT.OnProcessingPassEnd(ref this);
-			public void OnCriticalError(HRESULT Error) mut => VT.OnCriticalError(ref this, Error);
+			public void OnCriticalError(HResult Error) mut => VT.OnCriticalError(ref this, Error);
 
 			[CRepr]
 			public struct VTable
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2EngineCallback self) OnProcessingPassStart;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2EngineCallback self) OnProcessingPassEnd;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2EngineCallback self, HRESULT Error) OnCriticalError;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2EngineCallback self, HResult Error) OnCriticalError;
 			}
 		}
 		[CRepr]
@@ -766,7 +824,7 @@ namespace Win32
 			public void OnBufferStart(void* pBufferContext) mut => VT.OnBufferStart(ref this, pBufferContext);
 			public void OnBufferEnd(void* pBufferContext) mut => VT.OnBufferEnd(ref this, pBufferContext);
 			public void OnLoopEnd(void* pBufferContext) mut => VT.OnLoopEnd(ref this, pBufferContext);
-			public void OnVoiceError(void* pBufferContext, HRESULT Error) mut => VT.OnVoiceError(ref this, pBufferContext, Error);
+			public void OnVoiceError(void* pBufferContext, HResult Error) mut => VT.OnVoiceError(ref this, pBufferContext, Error);
 
 			[CRepr]
 			public struct VTable
@@ -777,7 +835,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2VoiceCallback self, void* pBufferContext) OnBufferStart;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2VoiceCallback self, void* pBufferContext) OnBufferEnd;
 				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2VoiceCallback self, void* pBufferContext) OnLoopEnd;
-				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2VoiceCallback self, void* pBufferContext, HRESULT Error) OnVoiceError;
+				public new function [CallingConvention(.Stdcall)] void(ref IXAudio2VoiceCallback self, void* pBufferContext, HResult Error) OnVoiceError;
 			}
 		}
 		[CRepr]
@@ -787,32 +845,39 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetSourcePosition(in HrtfPosition position) mut => VT.SetSourcePosition(ref this, position);
-			public HRESULT SetSourceOrientation(in HrtfOrientation orientation) mut => VT.SetSourceOrientation(ref this, orientation);
-			public HRESULT SetSourceGain(float gain) mut => VT.SetSourceGain(ref this, gain);
-			public HRESULT SetEnvironment(HrtfEnvironment environment) mut => VT.SetEnvironment(ref this, environment);
+			public HResult SetSourcePosition(in HrtfPosition position) mut => VT.SetSourcePosition(ref this, position);
+			public HResult SetSourceOrientation(in HrtfOrientation orientation) mut => VT.SetSourceOrientation(ref this, orientation);
+			public HResult SetSourceGain(float gain) mut => VT.SetSourceGain(ref this, gain);
+			public HResult SetEnvironment(HrtfEnvironment environment) mut => VT.SetEnvironment(ref this, environment);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPOHrtfParameters self, in HrtfPosition position) SetSourcePosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPOHrtfParameters self, in HrtfOrientation orientation) SetSourceOrientation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPOHrtfParameters self, float gain) SetSourceGain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXAPOHrtfParameters self, HrtfEnvironment environment) SetEnvironment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPOHrtfParameters self, in HrtfPosition position) SetSourcePosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPOHrtfParameters self, in HrtfOrientation orientation) SetSourceOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPOHrtfParameters self, float gain) SetSourceGain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXAPOHrtfParameters self, HrtfEnvironment environment) SetEnvironment;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("xaudio2_8.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateFX(in Guid clsid, out IUnknown* pEffect, void* pInitDat, uint32 InitDataByteSize);
+		public static extern HResult CreateFX(in Guid clsid, out IUnknown* pEffect, void* pInitDat, uint32 InitDataByteSize);
 		[Import("xaudio2_8.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT XAudio2CreateWithVersionInfo(out IXAudio2* ppXAudio2, uint32 Flags, uint32 XAudio2Processor, uint32 ntddiVersion);
+		public static extern HResult XAudio2CreateWithVersionInfo(out IXAudio2* ppXAudio2, uint32 Flags, XAudio2Processor XAudio2Processor, uint32 ntddiVersion);
+
 		[Import("xaudio2_8.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateAudioVolumeMeter(out IUnknown* ppApo);
+		public static extern HResult XAudio2Create(out IXAudio2* ppXAudio2, uint32 Flags, XAudio2Processor XAudio2Processor);
+
+		public static HResult XAudio2Create(out IXAudio2* ppXAudio2, XAudio2Processor XAudio2Processor) => XAudio2Create(out ppXAudio2, 0, XAudio2Processor);
+
 		[Import("xaudio2_8.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateAudioReverb(out IUnknown* ppApo);
+		public static extern HResult CreateAudioVolumeMeter(out IUnknown* ppApo);
+		[Import("xaudio2_8.dll"), CLink, CallingConvention(.Stdcall)]
+		public static extern HResult CreateAudioReverb(out IUnknown* ppApo);
 		[Import("hrtfapo.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateHrtfApo(in HrtfApoInit init, out IXAPO* xApo);
+		public static extern HResult CreateHrtfApo(in HrtfApoInit init, out IXAPO* xApo);
+	}
 	}
 }

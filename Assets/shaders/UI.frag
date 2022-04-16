@@ -17,8 +17,17 @@ void main(void){
 
     vec2 clampedposition = clamp(position, vec2(bevel), size - bevel);
 
-    float mask = float(distance(position, clampedposition) < bevel);
+    float dist = distance(position, clampedposition) - bevel;
 
-    fragColor = texColor * color * mask;
+    // sdf distance per pixel (gradient vector)
+    vec2 ddist = vec2(dFdx(dist), dFdy(dist));
+
+    // distance to edge in pixels (scalar)
+    float pixelDist = dist / length(ddist);
+
+    //color.a = clamp(0.5 - pixelDist, 0, 1); 
+    float mask = clamp(0.5 - pixelDist, 0, 1);
+
+    fragColor = texColor * vec4(texColor.aaa, 1) * color * mask;
     //fragColor = texColor * color;
 }

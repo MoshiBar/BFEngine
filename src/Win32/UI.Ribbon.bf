@@ -107,7 +107,7 @@ namespace Win32
 			COLLECTION = 5,
 			COMMANDCOLLECTION = 6,
 			DECIMAL = 7,
-			BOOLEAN = 8,
+			Boolean = 8,
 			FONT = 9,
 			RECENTITEMS = 10,
 			COLORANCHOR = 11,
@@ -136,9 +136,9 @@ namespace Win32
 		public struct UI_EVENTPARAMS_COMMAND
 		{
 			public uint32 CommandID;
-			public PWSTR CommandName;
+			public char16* CommandName;
 			public uint32 ParentCommandID;
-			public PWSTR ParentCommandName;
+			public char16* ParentCommandName;
 			public uint32 SelectionIndex;
 			public UI_EVENTLOCATION Location;
 		}
@@ -170,12 +170,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetValue(in PROPERTYKEY key, out PROPVARIANT value) mut => VT.GetValue(ref this, key, out value);
+			public HResult GetValue(in PROPERTYKEY key, out PROPVARIANT value) mut => VT.GetValue(ref this, key, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUISimplePropertySet self, in PROPERTYKEY key, out PROPVARIANT value) GetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUISimplePropertySet self, in PROPERTYKEY key, out PROPVARIANT value) GetValue;
 			}
 		}
 		[CRepr]
@@ -185,16 +185,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetHeight(out uint32 cy) mut => VT.GetHeight(ref this, out cy);
-			public HRESULT LoadSettingsFromStream(ref IStream pStream) mut => VT.LoadSettingsFromStream(ref this, ref pStream);
-			public HRESULT SaveSettingsToStream(ref IStream pStream) mut => VT.SaveSettingsToStream(ref this, ref pStream);
+			public HResult GetHeight(out uint32 cy) mut => VT.GetHeight(ref this, out cy);
+			public HResult LoadSettingsFromStream(ref IStream pStream) mut => VT.LoadSettingsFromStream(ref this, ref pStream);
+			public HResult SaveSettingsToStream(ref IStream pStream) mut => VT.SaveSettingsToStream(ref this, ref pStream);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIRibbon self, out uint32 cy) GetHeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIRibbon self, ref IStream pStream) LoadSettingsFromStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIRibbon self, ref IStream pStream) SaveSettingsToStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIRibbon self, out uint32 cy) GetHeight;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIRibbon self, ref IStream pStream) LoadSettingsFromStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIRibbon self, ref IStream pStream) SaveSettingsToStream;
 			}
 		}
 		[CRepr]
@@ -204,28 +204,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(HWND frameWnd, ref IUIApplication application) mut => VT.Initialize(ref this, frameWnd, ref application);
-			public HRESULT Destroy() mut => VT.Destroy(ref this);
-			public HRESULT LoadUI(HINSTANCE instance, PWSTR resourceName) mut => VT.LoadUI(ref this, instance, resourceName);
-			public HRESULT GetView(uint32 viewId, in Guid riid, void** ppv) mut => VT.GetView(ref this, viewId, riid, ppv);
-			public HRESULT GetUICommandProperty(uint32 commandId, in PROPERTYKEY key, out PROPVARIANT value) mut => VT.GetUICommandProperty(ref this, commandId, key, out value);
-			public HRESULT SetUICommandProperty(uint32 commandId, in PROPERTYKEY key, in PROPVARIANT value) mut => VT.SetUICommandProperty(ref this, commandId, key, value);
-			public HRESULT InvalidateUICommand(uint32 commandId, UI_INVALIDATIONS flags, PROPERTYKEY* key) mut => VT.InvalidateUICommand(ref this, commandId, flags, key);
-			public HRESULT FlushPendingInvalidations() mut => VT.FlushPendingInvalidations(ref this);
-			public HRESULT SetModes(int32 iModes) mut => VT.SetModes(ref this, iModes);
+			public HResult Initialize(HWnd frameWnd, ref IUIApplication application) mut => VT.Initialize(ref this, frameWnd, ref application);
+			public HResult Destroy() mut => VT.Destroy(ref this);
+			public HResult LoadUI(HINSTANCE instance, char16* resourceName) mut => VT.LoadUI(ref this, instance, resourceName);
+			public HResult GetView(uint32 viewId, in Guid riid, void** ppv) mut => VT.GetView(ref this, viewId, riid, ppv);
+			public HResult GetUICommandProperty(uint32 commandId, in PROPERTYKEY key, out PROPVARIANT value) mut => VT.GetUICommandProperty(ref this, commandId, key, out value);
+			public HResult SetUICommandProperty(uint32 commandId, in PROPERTYKEY key, in PROPVARIANT value) mut => VT.SetUICommandProperty(ref this, commandId, key, value);
+			public HResult InvalidateUICommand(uint32 commandId, UI_INVALIDATIONS flags, PROPERTYKEY* key) mut => VT.InvalidateUICommand(ref this, commandId, flags, key);
+			public HResult FlushPendingInvalidations() mut => VT.FlushPendingInvalidations(ref this);
+			public HResult SetModes(int32 iModes) mut => VT.SetModes(ref this, iModes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, HWND frameWnd, ref IUIApplication application) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self) Destroy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, HINSTANCE instance, PWSTR resourceName) LoadUI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, uint32 viewId, in Guid riid, void** ppv) GetView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, uint32 commandId, in PROPERTYKEY key, out PROPVARIANT value) GetUICommandProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, uint32 commandId, in PROPERTYKEY key, in PROPVARIANT value) SetUICommandProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, uint32 commandId, UI_INVALIDATIONS flags, PROPERTYKEY* key) InvalidateUICommand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self) FlushPendingInvalidations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIFramework self, int32 iModes) SetModes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, HWnd frameWnd, ref IUIApplication application) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self) Destroy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, HINSTANCE instance, char16* resourceName) LoadUI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, uint32 viewId, in Guid riid, void** ppv) GetView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, uint32 commandId, in PROPERTYKEY key, out PROPVARIANT value) GetUICommandProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, uint32 commandId, in PROPERTYKEY key, in PROPVARIANT value) SetUICommandProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, uint32 commandId, UI_INVALIDATIONS flags, PROPERTYKEY* key) InvalidateUICommand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self) FlushPendingInvalidations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIFramework self, int32 iModes) SetModes;
 			}
 		}
 		[CRepr]
@@ -250,12 +250,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetEventLogger(ref IUIEventLogger eventLogger) mut => VT.SetEventLogger(ref this, ref eventLogger);
+			public HResult SetEventLogger(ref IUIEventLogger eventLogger) mut => VT.SetEventLogger(ref this, ref eventLogger);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIEventingManager self, ref IUIEventLogger eventLogger) SetEventLogger;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIEventingManager self, ref IUIEventLogger eventLogger) SetEventLogger;
 			}
 		}
 		[CRepr]
@@ -265,12 +265,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ShowAtLocation(int32 x, int32 y) mut => VT.ShowAtLocation(ref this, x, y);
+			public HResult ShowAtLocation(int32 x, int32 y) mut => VT.ShowAtLocation(ref this, x, y);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIContextualUI self, int32 x, int32 y) ShowAtLocation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIContextualUI self, int32 x, int32 y) ShowAtLocation;
 			}
 		}
 		[CRepr]
@@ -280,24 +280,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 count) mut => VT.GetCount(ref this, out count);
-			public HRESULT GetItem(uint32 index, out IUnknown* item) mut => VT.GetItem(ref this, index, out item);
-			public HRESULT Add(ref IUnknown item) mut => VT.Add(ref this, ref item);
-			public HRESULT Insert(uint32 index, ref IUnknown item) mut => VT.Insert(ref this, index, ref item);
-			public HRESULT RemoveAt(uint32 index) mut => VT.RemoveAt(ref this, index);
-			public HRESULT Replace(uint32 indexReplaced, ref IUnknown itemReplaceWith) mut => VT.Replace(ref this, indexReplaced, ref itemReplaceWith);
-			public HRESULT Clear() mut => VT.Clear(ref this);
+			public HResult GetCount(out uint32 count) mut => VT.GetCount(ref this, out count);
+			public HResult GetItem(uint32 index, out IUnknown* item) mut => VT.GetItem(ref this, index, out item);
+			public HResult Add(ref IUnknown item) mut => VT.Add(ref this, ref item);
+			public HResult Insert(uint32 index, ref IUnknown item) mut => VT.Insert(ref this, index, ref item);
+			public HResult RemoveAt(uint32 index) mut => VT.RemoveAt(ref this, index);
+			public HResult Replace(uint32 indexReplaced, ref IUnknown itemReplaceWith) mut => VT.Replace(ref this, indexReplaced, ref itemReplaceWith);
+			public HResult Clear() mut => VT.Clear(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self, out uint32 count) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self, uint32 index, out IUnknown* item) GetItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self, ref IUnknown item) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self, uint32 index, ref IUnknown item) Insert;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self, uint32 index) RemoveAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self, uint32 indexReplaced, ref IUnknown itemReplaceWith) Replace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollection self) Clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self, out uint32 count) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self, uint32 index, out IUnknown* item) GetItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self, ref IUnknown item) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self, uint32 index, ref IUnknown item) Insert;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self, uint32 index) RemoveAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self, uint32 indexReplaced, ref IUnknown itemReplaceWith) Replace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollection self) Clear;
 			}
 		}
 		[CRepr]
@@ -307,12 +307,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnChanged(UI_COLLECTIONCHANGE action, uint32 oldIndex, IUnknown* oldItem, uint32 newIndex, IUnknown* newItem) mut => VT.OnChanged(ref this, action, oldIndex, oldItem, newIndex, newItem);
+			public HResult OnChanged(UI_COLLECTIONCHANGE action, uint32 oldIndex, IUnknown* oldItem, uint32 newIndex, IUnknown* newItem) mut => VT.OnChanged(ref this, action, oldIndex, oldItem, newIndex, newItem);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICollectionChangedEvent self, UI_COLLECTIONCHANGE action, uint32 oldIndex, IUnknown* oldItem, uint32 newIndex, IUnknown* newItem) OnChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICollectionChangedEvent self, UI_COLLECTIONCHANGE action, uint32 oldIndex, IUnknown* oldItem, uint32 newIndex, IUnknown* newItem) OnChanged;
 			}
 		}
 		[CRepr]
@@ -322,14 +322,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Execute(uint32 commandId, UI_EXECUTIONVERB verb, PROPERTYKEY* key, PROPVARIANT* currentValue, IUISimplePropertySet* commandExecutionProperties) mut => VT.Execute(ref this, commandId, verb, key, currentValue, commandExecutionProperties);
-			public HRESULT UpdateProperty(uint32 commandId, in PROPERTYKEY key, PROPVARIANT* currentValue, out PROPVARIANT newValue) mut => VT.UpdateProperty(ref this, commandId, key, currentValue, out newValue);
+			public HResult Execute(uint32 commandId, UI_EXECUTIONVERB verb, PROPERTYKEY* key, PROPVARIANT* currentValue, IUISimplePropertySet* commandExecutionProperties) mut => VT.Execute(ref this, commandId, verb, key, currentValue, commandExecutionProperties);
+			public HResult UpdateProperty(uint32 commandId, in PROPERTYKEY key, PROPVARIANT* currentValue, out PROPVARIANT newValue) mut => VT.UpdateProperty(ref this, commandId, key, currentValue, out newValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICommandHandler self, uint32 commandId, UI_EXECUTIONVERB verb, PROPERTYKEY* key, PROPVARIANT* currentValue, IUISimplePropertySet* commandExecutionProperties) Execute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUICommandHandler self, uint32 commandId, in PROPERTYKEY key, PROPVARIANT* currentValue, out PROPVARIANT newValue) UpdateProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICommandHandler self, uint32 commandId, UI_EXECUTIONVERB verb, PROPERTYKEY* key, PROPVARIANT* currentValue, IUISimplePropertySet* commandExecutionProperties) Execute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUICommandHandler self, uint32 commandId, in PROPERTYKEY key, PROPVARIANT* currentValue, out PROPVARIANT newValue) UpdateProperty;
 			}
 		}
 		[CRepr]
@@ -339,16 +339,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnViewChanged(uint32 viewId, UI_VIEWTYPE typeID, ref IUnknown view, UI_VIEWVERB verb, int32 uReasonCode) mut => VT.OnViewChanged(ref this, viewId, typeID, ref view, verb, uReasonCode);
-			public HRESULT OnCreateUICommand(uint32 commandId, UI_COMMANDTYPE typeID, out IUICommandHandler* commandHandler) mut => VT.OnCreateUICommand(ref this, commandId, typeID, out commandHandler);
-			public HRESULT OnDestroyUICommand(uint32 commandId, UI_COMMANDTYPE typeID, IUICommandHandler* commandHandler) mut => VT.OnDestroyUICommand(ref this, commandId, typeID, commandHandler);
+			public HResult OnViewChanged(uint32 viewId, UI_VIEWTYPE typeID, ref IUnknown view, UI_VIEWVERB verb, int32 uReasonCode) mut => VT.OnViewChanged(ref this, viewId, typeID, ref view, verb, uReasonCode);
+			public HResult OnCreateUICommand(uint32 commandId, UI_COMMANDTYPE typeID, out IUICommandHandler* commandHandler) mut => VT.OnCreateUICommand(ref this, commandId, typeID, out commandHandler);
+			public HResult OnDestroyUICommand(uint32 commandId, UI_COMMANDTYPE typeID, IUICommandHandler* commandHandler) mut => VT.OnDestroyUICommand(ref this, commandId, typeID, commandHandler);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIApplication self, uint32 viewId, UI_VIEWTYPE typeID, ref IUnknown view, UI_VIEWVERB verb, int32 uReasonCode) OnViewChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIApplication self, uint32 commandId, UI_COMMANDTYPE typeID, out IUICommandHandler* commandHandler) OnCreateUICommand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIApplication self, uint32 commandId, UI_COMMANDTYPE typeID, IUICommandHandler* commandHandler) OnDestroyUICommand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIApplication self, uint32 viewId, UI_VIEWTYPE typeID, ref IUnknown view, UI_VIEWVERB verb, int32 uReasonCode) OnViewChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIApplication self, uint32 commandId, UI_COMMANDTYPE typeID, out IUICommandHandler* commandHandler) OnCreateUICommand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIApplication self, uint32 commandId, UI_COMMANDTYPE typeID, IUICommandHandler* commandHandler) OnDestroyUICommand;
 			}
 		}
 		[CRepr]
@@ -358,12 +358,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBitmap(out HBITMAP bitmap) mut => VT.GetBitmap(ref this, out bitmap);
+			public HResult GetBitmap(out HBITMAP bitmap) mut => VT.GetBitmap(ref this, out bitmap);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIImage self, out HBITMAP bitmap) GetBitmap;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIImage self, out HBITMAP bitmap) GetBitmap;
 			}
 		}
 		[CRepr]
@@ -373,12 +373,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateImage(HBITMAP bitmap, UI_OWNERSHIP options, out IUIImage* image) mut => VT.CreateImage(ref this, bitmap, options, out image);
+			public HResult CreateImage(HBITMAP bitmap, UI_OWNERSHIP options, out IUIImage* image) mut => VT.CreateImage(ref this, bitmap, options, out image);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIImageFromBitmap self, HBITMAP bitmap, UI_OWNERSHIP options, out IUIImage* image) CreateImage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIImageFromBitmap self, HBITMAP bitmap, UI_OWNERSHIP options, out IUIImage* image) CreateImage;
 			}
 		}
 		

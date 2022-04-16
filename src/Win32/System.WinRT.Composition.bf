@@ -14,22 +14,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginDraw(RECT* updateRect, in Guid iid, void** updateObject, out POINT updateOffset) mut => VT.BeginDraw(ref this, updateRect, iid, updateObject, out updateOffset);
-			public HRESULT EndDraw() mut => VT.EndDraw(ref this);
-			public HRESULT Resize(SIZE sizePixels) mut => VT.Resize(ref this, sizePixels);
-			public HRESULT Scroll(RECT* scrollRect, RECT* clipRect, int32 offsetX, int32 offsetY) mut => VT.Scroll(ref this, scrollRect, clipRect, offsetX, offsetY);
-			public HRESULT ResumeDraw() mut => VT.ResumeDraw(ref this);
-			public HRESULT SuspendDraw() mut => VT.SuspendDraw(ref this);
+			public HResult BeginDraw(RECT* updateRect, in Guid iid, void** updateObject, out POINT updateOffset) mut => VT.BeginDraw(ref this, updateRect, iid, updateObject, out updateOffset);
+			public HResult EndDraw() mut => VT.EndDraw(ref this);
+			public HResult Resize(SIZE sizePixels) mut => VT.Resize(ref this, sizePixels);
+			public HResult Scroll(RECT* scrollRect, RECT* clipRect, int32 offsetX, int32 offsetY) mut => VT.Scroll(ref this, scrollRect, clipRect, offsetX, offsetY);
+			public HResult ResumeDraw() mut => VT.ResumeDraw(ref this);
+			public HResult SuspendDraw() mut => VT.SuspendDraw(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop self, RECT* updateRect, in Guid iid, void** updateObject, out POINT updateOffset) BeginDraw;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop self) EndDraw;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop self, SIZE sizePixels) Resize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop self, RECT* scrollRect, RECT* clipRect, int32 offsetX, int32 offsetY) Scroll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop self) ResumeDraw;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop self) SuspendDraw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop self, RECT* updateRect, in Guid iid, void** updateObject, out POINT updateOffset) BeginDraw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop self) EndDraw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop self, SIZE sizePixels) Resize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop self, RECT* scrollRect, RECT* clipRect, int32 offsetX, int32 offsetY) Scroll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop self) ResumeDraw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop self) SuspendDraw;
 			}
 		}
 		[CRepr]
@@ -39,12 +39,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CopySurface(ref IUnknown destinationResource, int32 destinationOffsetX, int32 destinationOffsetY, RECT* sourceRectangle) mut => VT.CopySurface(ref this, ref destinationResource, destinationOffsetX, destinationOffsetY, sourceRectangle);
+			public HResult CopySurface(ref IUnknown destinationResource, int32 destinationOffsetX, int32 destinationOffsetY, RECT* sourceRectangle) mut => VT.CopySurface(ref this, ref destinationResource, destinationOffsetX, destinationOffsetY, sourceRectangle);
 
 			[CRepr]
 			public struct VTable : ICompositionDrawingSurfaceInterop.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionDrawingSurfaceInterop2 self, ref IUnknown destinationResource, int32 destinationOffsetX, int32 destinationOffsetY, RECT* sourceRectangle) CopySurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionDrawingSurfaceInterop2 self, ref IUnknown destinationResource, int32 destinationOffsetX, int32 destinationOffsetY, RECT* sourceRectangle) CopySurface;
 			}
 		}
 		[CRepr]
@@ -54,14 +54,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRenderingDevice(out IUnknown* value) mut => VT.GetRenderingDevice(ref this, out value);
-			public HRESULT SetRenderingDevice(ref IUnknown value) mut => VT.SetRenderingDevice(ref this, ref value);
+			public HResult GetRenderingDevice(out IUnknown* value) mut => VT.GetRenderingDevice(ref this, out value);
+			public HResult SetRenderingDevice(ref IUnknown value) mut => VT.SetRenderingDevice(ref this, ref value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionGraphicsDeviceInterop self, out IUnknown* value) GetRenderingDevice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionGraphicsDeviceInterop self, ref IUnknown value) SetRenderingDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionGraphicsDeviceInterop self, out IUnknown* value) GetRenderingDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionGraphicsDeviceInterop self, ref IUnknown value) SetRenderingDevice;
 			}
 		}
 		[CRepr]
@@ -71,16 +71,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateCompositionSurfaceForHandle(HANDLE swapChain, void* result) mut => VT.CreateCompositionSurfaceForHandle(ref this, swapChain, result);
-			public HRESULT CreateCompositionSurfaceForSwapChain(ref IUnknown swapChain, void* result) mut => VT.CreateCompositionSurfaceForSwapChain(ref this, ref swapChain, result);
-			public HRESULT CreateGraphicsDevice(ref IUnknown renderingDevice, void* result) mut => VT.CreateGraphicsDevice(ref this, ref renderingDevice, result);
+			public HResult CreateCompositionSurfaceForHandle(Handle swapChain, void* result) mut => VT.CreateCompositionSurfaceForHandle(ref this, swapChain, result);
+			public HResult CreateCompositionSurfaceForSwapChain(ref IUnknown swapChain, void* result) mut => VT.CreateCompositionSurfaceForSwapChain(ref this, ref swapChain, result);
+			public HResult CreateGraphicsDevice(ref IUnknown renderingDevice, void* result) mut => VT.CreateGraphicsDevice(ref this, ref renderingDevice, result);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositorInterop self, HANDLE swapChain, void* result) CreateCompositionSurfaceForHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositorInterop self, ref IUnknown swapChain, void* result) CreateCompositionSurfaceForSwapChain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositorInterop self, ref IUnknown renderingDevice, void* result) CreateGraphicsDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositorInterop self, Handle swapChain, void* result) CreateCompositionSurfaceForHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositorInterop self, ref IUnknown swapChain, void* result) CreateCompositionSurfaceForSwapChain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositorInterop self, ref IUnknown renderingDevice, void* result) CreateGraphicsDevice;
 			}
 		}
 		[CRepr]
@@ -90,12 +90,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetSwapChain(ref IUnknown swapChain) mut => VT.SetSwapChain(ref this, ref swapChain);
+			public HResult SetSwapChain(ref IUnknown swapChain) mut => VT.SetSwapChain(ref this, ref swapChain);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISwapChainInterop self, ref IUnknown swapChain) SetSwapChain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISwapChainInterop self, ref IUnknown swapChain) SetSwapChain;
 			}
 		}
 		[CRepr]
@@ -105,12 +105,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT TryRedirectForManipulation(in POINTER_INFO pointerInfo) mut => VT.TryRedirectForManipulation(ref this, pointerInfo);
+			public HResult TryRedirectForManipulation(in POINTER_INFO pointerInfo) mut => VT.TryRedirectForManipulation(ref this, pointerInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualInteractionSourceInterop self, in POINTER_INFO pointerInfo) TryRedirectForManipulation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualInteractionSourceInterop self, in POINTER_INFO pointerInfo) TryRedirectForManipulation;
 			}
 		}
 		[CRepr]
@@ -120,12 +120,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetForWindow(HWND hwnd, void* result) mut => VT.GetForWindow(ref this, hwnd, result);
+			public HResult GetForWindow(HWnd hwnd, void* result) mut => VT.GetForWindow(ref this, hwnd, result);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositionCapabilitiesInteropFactory self, HWND hwnd, void* result) GetForWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositionCapabilitiesInteropFactory self, HWnd hwnd, void* result) GetForWindow;
 			}
 		}
 		[CRepr]
@@ -135,14 +135,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateDesktopWindowTarget(HWND hwndTarget, BOOL isTopmost, void* result) mut => VT.CreateDesktopWindowTarget(ref this, hwndTarget, isTopmost, result);
-			public HRESULT EnsureOnThread(uint32 threadId) mut => VT.EnsureOnThread(ref this, threadId);
+			public HResult CreateDesktopWindowTarget(HWnd hwndTarget, IntBool isTopmost, void* result) mut => VT.CreateDesktopWindowTarget(ref this, hwndTarget, isTopmost, result);
+			public HResult EnsureOnThread(uint32 threadId) mut => VT.EnsureOnThread(ref this, threadId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositorDesktopInterop self, HWND hwndTarget, BOOL isTopmost, void* result) CreateDesktopWindowTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICompositorDesktopInterop self, uint32 threadId) EnsureOnThread;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositorDesktopInterop self, HWnd hwndTarget, IntBool isTopmost, void* result) CreateDesktopWindowTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICompositorDesktopInterop self, uint32 threadId) EnsureOnThread;
 			}
 		}
 		[CRepr]
@@ -152,12 +152,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Hwnd(out HWND value) mut => VT.get_Hwnd(ref this, out value);
+			public HResult get_Hwnd(out HWnd value) mut => VT.get_Hwnd(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDesktopWindowTargetInterop self, out HWND value) get_Hwnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDesktopWindowTargetInterop self, out HWnd value) get_Hwnd;
 			}
 		}
 		

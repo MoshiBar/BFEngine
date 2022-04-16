@@ -1,5 +1,6 @@
 using System.Collections;
 using System;
+using static Win32.Graphics.Direct2D;
 using static Win32.Win32;
 
 namespace BfEngine.Text

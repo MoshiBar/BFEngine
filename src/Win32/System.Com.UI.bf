@@ -14,14 +14,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ExtractThumbnail(ref IStorage pStg, uint32 ulLength, uint32 ulHeight, out uint32 pulOutputLength, out uint32 pulOutputHeight, out HBITMAP phOutputBitmap) mut => VT.ExtractThumbnail(ref this, ref pStg, ulLength, ulHeight, out pulOutputLength, out pulOutputHeight, out phOutputBitmap);
-			public HRESULT OnFileUpdated(ref IStorage pStg) mut => VT.OnFileUpdated(ref this, ref pStg);
+			public HResult ExtractThumbnail(ref IStorage pStg, uint32 ulLength, uint32 ulHeight, out uint32 pulOutputLength, out uint32 pulOutputHeight, out HBITMAP phOutputBitmap) mut => VT.ExtractThumbnail(ref this, ref pStg, ulLength, ulHeight, out pulOutputLength, out pulOutputHeight, out phOutputBitmap);
+			public HResult OnFileUpdated(ref IStorage pStg) mut => VT.OnFileUpdated(ref this, ref pStg);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IThumbnailExtractor self, ref IStorage pStg, uint32 ulLength, uint32 ulHeight, out uint32 pulOutputLength, out uint32 pulOutputHeight, out HBITMAP phOutputBitmap) ExtractThumbnail;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IThumbnailExtractor self, ref IStorage pStg) OnFileUpdated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IThumbnailExtractor self, ref IStorage pStg, uint32 ulLength, uint32 ulHeight, out uint32 pulOutputLength, out uint32 pulOutputHeight, out HBITMAP phOutputBitmap) ExtractThumbnail;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IThumbnailExtractor self, ref IStorage pStg) OnFileUpdated;
 			}
 		}
 		[CRepr]
@@ -31,12 +31,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Dummy(HICON h1, HDC h2) mut => VT.Dummy(ref this, h1, h2);
+			public HResult Dummy(HICON h1, HDC h2) mut => VT.Dummy(ref this, h1, h2);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDummyHICONIncluder self, HICON h1, HDC h2) Dummy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDummyHICONIncluder self, HICON h1, HDC h2) Dummy;
 			}
 		}
 		

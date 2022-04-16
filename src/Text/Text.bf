@@ -8,29 +8,15 @@ namespace BfEngine.Text
 {
 	class RenderableText
 	{
-#define DWRITE
-
-#if DWRITE
-		public static DWFont defaultFont ~ delete _;
-
-		public DWFont font = defaultFont;
-
-		public static void Init()
-		{
-			//defaultFont = new .("Segoe UI");
-			defaultFont = new .("BIZ UDGothic");
-		}
-#else
 		public static Font defaultFont ~ delete _;
 
 		public Font font = defaultFont;
 
 		public static void Init()
 		{
-			defaultFont = new .("Assets/fonts/Segoe UI.fnt");
+			defaultFont = new .("Segoe UI");
+			//defaultFont = new .("BIZ UDGothic");
 		}
-#endif
-
 
 		private uint32 VAO, VBO, texture, count, maxCount;
 
@@ -49,9 +35,10 @@ namespace BfEngine.Text
 			GL.EnableVertexAttribArray(0);
 			GL.EnableVertexAttribArray(1);
 			GL.EnableVertexAttribArray(2);
-			GL.VertexAttribPointer(0, 4, .FLOAT, .FALSE, strideof(GGlyph), (void*)0);//color
-			GL.VertexAttribPointer(1, 4, .FLOAT, .FALSE, strideof(GGlyph), (void*)16);//rect
-			GL.VertexAttribPointer(2, 4, .FLOAT, .FALSE, strideof(GGlyph), (void*)32);//uvrect
+			GL.VertexAttribPointer(0, 4, .FLOAT, .FALSE, strideof(GGlyph), (void*)(int)offsetof(GGlyph, glyphColor));//color
+			GL.VertexAttribPointer(1, 4, .FLOAT, .FALSE, strideof(GGlyph), (void*)(int)offsetof(GGlyph, position));//rect
+			GL.VertexAttribPointer(2, 4, .FLOAT, .FALSE, strideof(GGlyph), (void*)(int)offsetof(GGlyph, UVpos));//uvrect
+			GL.VertexAttribPointer(3, 1, .FLOAT, .FALSE, strideof(GGlyph), (void*)(int)offsetof(GGlyph, rotation));//uvrect
 
 
 			GL.BindVertexArray(0);
@@ -66,16 +53,14 @@ namespace BfEngine.Text
 			public Vector2 size;
 			public Vector2 UVpos;
 			public Vector2 UVsize;
+			public float rotation;
 		}
 
-		public void GenerateTextBuffer(StringView Text, float width, TextOptions options = .Default, function void (int index, ref GGlyph glyph) postProcess = null)
+		public void GenerateTextBuffer(StringView Text, float width = float.MaxValue, TextOptions options = .Default, function void (int index, ref GGlyph glyph) postProcess = null)
 		{
 			font.GenerateGlyphs(Text);
 
 			float scale = this.scale;
-			/*List<Vector3> positions = scope .(Text.Length * 4);
-			List<Vector2> UVs = scope .(Text.Length * 4);
-			List<uint32> indices = scope .(Text.Length * 6);*/
 
 			List<GGlyph> glyphs = new .(Text.Length);
 			defer delete glyphs;
@@ -84,8 +69,6 @@ namespace BfEngine.Text
 
 			Vector2 cursor = .(0, 0);
 
-			//uint32 index = 0;
-			
 
 			bool escapeNextChar = false;
 			char32 previouschar = default;
@@ -164,6 +147,7 @@ namespace BfEngine.Text
 						if(name == default) break;
 
 						//ifelseifelse bad... maybe i should fix it...
+
 						if (name.Equals("alpha", true))
 						{
 							switch (float.Parse(value)) {
@@ -201,14 +185,7 @@ namespace BfEngine.Text
 							continue;
 						}
 					}
-					var glyph = font.getGlyph(character);// ?? font.missingGlyph;
-#if DWRITE
-					if(glyph == null){
-						font.GenerateGlyphs(character);
-						glyph = font.getGlyph(character) ?? font.missingGlyph;
-					}
-#endif
-
+					var glyph = font.getGlyph(character) ?? font.missingGlyph;
 
 
 					glyphs.Add(GGlyph()
@@ -224,11 +201,7 @@ namespace BfEngine.Text
 					var newEnumerator = textEnumerator;
 					if (newEnumerator.MoveNext())
 					{
-#if DWRITE
 						cursor.x += font.getKerningAdjustment(character, newEnumerator.Current) * font.scale * scale;
-#else
-						cursor.x += glyph.getKerning(newEnumerator.Current) * scale;
-#endif
 					}
 				}
 

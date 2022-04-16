@@ -164,14 +164,14 @@ namespace Win32
 			public int64 MaxIops;
 			public int64 MaxBandwidth;
 			public int64 ReservationIops;
-			public PWSTR VolumeName;
+			public char16* VolumeName;
 			public uint32 BaseIoSize;
 			public JOB_OBJECT_IO_RATE_CONTROL_FLAGS ControlFlags;
 		}
 		[CRepr]
 		public struct JOB_SET_ARRAY
 		{
-			public HANDLE JobHandle;
+			public Handle JobHandle;
 			public uint32 MemberLevel;
 			public uint32 Flags;
 		}
@@ -226,7 +226,7 @@ namespace Win32
 		public struct JOBOBJECT_SECURITY_LIMIT_INFORMATION
 		{
 			public JOB_OBJECT_SECURITY SecurityLimitFlags;
-			public HANDLE JobToken;
+			public Handle JobToken;
 			public TOKEN_GROUPS* SidsToDisable;
 			public TOKEN_PRIVILEGES* PrivilegesToDelete;
 			public TOKEN_GROUPS* RestrictedSids;
@@ -240,7 +240,7 @@ namespace Win32
 		public struct JOBOBJECT_ASSOCIATE_COMPLETION_PORT
 		{
 			public void* CompletionKey;
-			public HANDLE CompletionPort;
+			public Handle CompletionPort;
 		}
 		[CRepr]
 		public struct JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION
@@ -389,7 +389,7 @@ namespace Win32
 			public int64 MaxIops;
 			public int64 MaxBandwidth;
 			public int64 ReservationIops;
-			public PWSTR VolumeName;
+			public char16* VolumeName;
 			public uint32 BaseIoSize;
 			public JOB_OBJECT_IO_RATE_CONTROL_FLAGS ControlFlags;
 			public uint16 VolumeNameLength;
@@ -400,7 +400,7 @@ namespace Win32
 			public int64 MaxIops;
 			public int64 MaxBandwidth;
 			public int64 ReservationIops;
-			public PWSTR VolumeName;
+			public char16* VolumeName;
 			public uint32 BaseIoSize;
 			public JOB_OBJECT_IO_RATE_CONTROL_FLAGS ControlFlags;
 			public uint16 VolumeNameLength;
@@ -417,7 +417,7 @@ namespace Win32
 			public int64 MaxIops;
 			public int64 MaxBandwidth;
 			public int64 ReservationIops;
-			public PWSTR VolumeName;
+			public char16* VolumeName;
 			public uint32 BaseIoSize;
 			public JOB_OBJECT_IO_RATE_CONTROL_FLAGS ControlFlags;
 			public uint16 VolumeNameLength;
@@ -453,32 +453,32 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsProcessInJob(HANDLE ProcessHandle, HANDLE JobHandle, out BOOL Result);
+		public static extern IntBool IsProcessInJob(Handle ProcessHandle, Handle JobHandle, out IntBool Result);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateJobObjectW(SECURITY_ATTRIBUTES* lpJobAttributes, PWSTR lpName);
+		public static extern Handle CreateJobObjectW(SECURITY_ATTRIBUTES* lpJobAttributes, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void FreeMemoryJobObject(void* Buffer);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenJobObjectW(uint32 dwDesiredAccess, BOOL bInheritHandle, PWSTR lpName);
+		public static extern Handle OpenJobObjectW(uint32 dwDesiredAccess, IntBool bInheritHandle, char16* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AssignProcessToJobObject(HANDLE hJob, HANDLE hProcess);
+		public static extern IntBool AssignProcessToJobObject(Handle hJob, Handle hProcess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TerminateJobObject(HANDLE hJob, uint32 uExitCode);
+		public static extern IntBool TerminateJobObject(Handle hJob, uint32 uExitCode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetInformationJobObject(HANDLE hJob, JOBOBJECTINFOCLASS JobObjectInformationClass, void* lpJobObjectInformation, uint32 cbJobObjectInformationLength);
+		public static extern IntBool SetInformationJobObject(Handle hJob, JOBOBJECTINFOCLASS JobObjectInformationClass, void* lpJobObjectInformation, uint32 cbJobObjectInformationLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SetIoRateControlInformationJobObject(HANDLE hJob, ref JOBOBJECT_IO_RATE_CONTROL_INFORMATION IoRateControlInfo);
+		public static extern uint32 SetIoRateControlInformationJobObject(Handle hJob, ref JOBOBJECT_IO_RATE_CONTROL_INFORMATION IoRateControlInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryInformationJobObject(HANDLE hJob, JOBOBJECTINFOCLASS JobObjectInformationClass, void* lpJobObjectInformation, uint32 cbJobObjectInformationLength, uint32* lpReturnLength);
+		public static extern IntBool QueryInformationJobObject(Handle hJob, JOBOBJECTINFOCLASS JobObjectInformationClass, void* lpJobObjectInformation, uint32 cbJobObjectInformationLength, uint32* lpReturnLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 QueryIoRateControlInformationJobObject(HANDLE hJob, PWSTR VolumeName, out JOBOBJECT_IO_RATE_CONTROL_INFORMATION* InfoBlocks, out uint32 InfoBlockCount);
+		public static extern uint32 QueryIoRateControlInformationJobObject(Handle hJob, char16* VolumeName, out JOBOBJECT_IO_RATE_CONTROL_INFORMATION* InfoBlocks, out uint32 InfoBlockCount);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UserHandleGrantAccess(HANDLE hUserHandle, HANDLE hJob, BOOL bGrant);
+		public static extern IntBool UserHandleGrantAccess(Handle hUserHandle, Handle hJob, IntBool bGrant);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateJobObjectA(SECURITY_ATTRIBUTES* lpJobAttributes, PSTR lpName);
+		public static extern Handle CreateJobObjectA(SECURITY_ATTRIBUTES* lpJobAttributes, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenJobObjectA(uint32 dwDesiredAccess, BOOL bInheritHandle, PSTR lpName);
+		public static extern Handle OpenJobObjectA(uint32 dwDesiredAccess, IntBool bInheritHandle, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateJobSet(uint32 NumJob, JOB_SET_ARRAY* UserJobSet, uint32 Flags);
+		public static extern IntBool CreateJobSet(uint32 NumJob, JOB_SET_ARRAY* UserJobSet, uint32 Flags);
 	}
 }

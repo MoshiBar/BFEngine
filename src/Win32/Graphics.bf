@@ -1,4 +1,5 @@
 using System;
+using static System.Windows;
 
 // namespace Graphics
 namespace Win32

@@ -1,9 +1,16 @@
 using System;
+using System.IO;
+using static Win32.System.Com.StructuredStorage;
+using static Win32.Graphics.Gdi;
+using static Win32.System.SystemServices;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace System.Com
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	static class Com
 	{
 		// --- Constants ---
 		
@@ -419,12 +426,12 @@ namespace Win32
 			IdleShutdown = 0,
 			ForcedShutdown = 1,
 		}
-		public enum COINIT : uint32
+		public enum CoInit : uint32
 		{
-			APARTMENTTHREADED = 2,
-			MULTITHREADED = 0,
-			DISABLE_OLE1DDE = 4,
-			SPEED_OVER_MEMORY = 8,
+			ApartmentThreaded = 2,
+			MultiThreaded = 0,
+			DisableOLE1DDE = 4,
+			SpeedOverMemory = 8,
 		}
 		public enum COMSD : int32
 		{
@@ -548,10 +555,10 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function HRESULT LPEXCEPFINO_DEFERRED_FILLIN(out EXCEPINFO pExcepInfo);
-		public function HRESULT LPFNGETCLASSOBJECT(in Guid param0, in Guid param1, void** param2);
-		public function HRESULT LPFNCANUNLOADNOW();
-		public function HRESULT PFNCONTEXTCALL(out ComCallData pParam);
+		public function HResult LPEXCEPFINO_DEFERRED_FILLIN(out EXCEPINFO pExcepInfo);
+		public function HResult LPFNGETCLASSOBJECT(in Guid param0, in Guid param1, void** param2);
+		public function HResult LPFNCANUNLOADNOW();
+		public function HResult PFNCONTEXTCALL(out ComCallData pParam);
 		
 		// --- Structs ---
 		
@@ -595,17 +602,17 @@ namespace Win32
 			public struct _tagged_union_e__Struct
 			{
 				public Guid clsid;
-				public PWSTR pFileExt;
-				public PWSTR pMimeType;
-				public PWSTR pProgId;
-				public PWSTR pFileName;
+				public char16* pFileExt;
+				public char16* pMimeType;
+				public char16* pProgId;
+				public char16* pFileName;
 				public _ByName_e__Struct ByName;
 				public _ByObjectId_e__Struct ByObjectId;
 				
 				[CRepr]
 				public struct _ByName_e__Struct
 				{
-					public PWSTR pPackageName;
+					public char16* pPackageName;
 					public Guid PolicyId;
 				}
 				[CRepr]
@@ -632,7 +639,7 @@ namespace Win32
 		{
 			public uint32 dwAuthnSvc;
 			public uint32 dwAuthzSvc;
-			public PWSTR pwszServerPrincName;
+			public char16* pwszServerPrincName;
 			public uint32 dwAuthnLevel;
 			public uint32 dwImpersonationLevel;
 			public COAUTHIDENTITY* pAuthIdentityData;
@@ -708,7 +715,7 @@ namespace Win32
 		public struct COSERVERINFO
 		{
 			public uint32 dwReserved1;
-			public PWSTR pwszName;
+			public char16* pwszName;
 			public COAUTHINFO* pAuthInfo;
 			public uint32 dwReserved2;
 		}
@@ -717,17 +724,17 @@ namespace Win32
 		{
 			public Guid* pIID;
 			public IUnknown* pItf;
-			public HRESULT hr;
+			public HResult hr;
 		}
 		[CRepr]
 		public struct STATSTG
 		{
-			public PWSTR pwcsName;
+			public char16* pwcsName;
 			public uint32 type;
 			public ULARGE_INTEGER cbSize;
-			public FILETIME mtime;
-			public FILETIME ctime;
-			public FILETIME atime;
+			public FileTime mtime;
+			public FileTime ctime;
+			public FileTime atime;
 			public uint32 grfMode;
 			public uint32 grfLocksSupported;
 			public Guid clsid;
@@ -760,8 +767,8 @@ namespace Win32
 		{
 			public uint32 dwAuthnSvc;
 			public uint32 dwAuthzSvc;
-			public PWSTR pPrincipalName;
-			public HRESULT hr;
+			public char16* pPrincipalName;
+			public HResult hr;
 		}
 		[CRepr]
 		public struct SOLE_AUTHENTICATION_INFO
@@ -802,7 +809,7 @@ namespace Win32
 		public struct BIND_OPTS3
 		{
 			public BIND_OPTS2 __AnonymousBase_objidl_L9041_C36;
-			public HWND hwnd;
+			public HWnd hwnd;
 		}
 		[CRepr]
 		public struct DVTARGETDEVICE
@@ -851,11 +858,11 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public HBITMAP hBitmap;
+				public HBitmap hBitmap;
 				public void* hMetaFilePict;
 				public HENHMETAFILE hEnhMetaFile;
 				public int hGlobal;
-				public PWSTR lpszFileName;
+				public char16* lpszFileName;
 				public IStream* pstm;
 				public IStorage* pstg;
 			}
@@ -892,7 +899,7 @@ namespace Win32
 					public userHENHMETAFILE* hHEnhMetaFile;
 					public GDI_OBJECT* hGdiHandle;
 					public userHGLOBAL* hGlobal;
-					public PWSTR lpszFileName;
+					public char16* lpszFileName;
 					public BYTE_BLOB* pstm;
 					public BYTE_BLOB* pstg;
 				}
@@ -923,7 +930,7 @@ namespace Win32
 		public struct StorageLayout
 		{
 			public uint32 LayoutType;
-			public PWSTR pwcsElementName;
+			public char16* pwcsElementName;
 			public LARGE_INTEGER cOffset;
 			public LARGE_INTEGER cBytes;
 		}
@@ -945,16 +952,16 @@ namespace Win32
 		public struct BINDINFO
 		{
 			public uint32 cbSize;
-			public PWSTR szExtraInfo;
+			public char16* szExtraInfo;
 			public STGMEDIUM stgmedData;
 			public uint32 grfBindInfoF;
 			public uint32 dwBindVerb;
-			public PWSTR szCustomVerb;
+			public char16* szCustomVerb;
 			public uint32 cbstgmedData;
 			public uint32 dwOptions;
 			public uint32 dwOptionsFlags;
 			public uint32 dwCodePage;
-			public SECURITY_ATTRIBUTES securityAttributes;
+			public SecurityAttributes securityAttributes;
 			public Guid iid;
 			public IUnknown* pUnk;
 			public uint32 dwReserved;
@@ -1011,11 +1018,11 @@ namespace Win32
 						public float fltVal;
 						public double dblVal;
 						public int16 boolVal;
-						public int16 __OBSOLETE__VARIANT_BOOL;
+						public int16 __OBSOLETE__VARIANT_IntBool;
 						public int32 scode;
 						public CY cyVal;
 						public double date;
-						public BSTR bstrVal;
+						public char16* bstrVal;
 						public IUnknown* punkVal;
 						public IDispatch* pdispVal;
 						public SAFEARRAY* parray;
@@ -1026,24 +1033,24 @@ namespace Win32
 						public float* pfltVal;
 						public double* pdblVal;
 						public int16* pboolVal;
-						public int16* __OBSOLETE__VARIANT_PBOOL;
+						public int16* __OBSOLETE__VARIANT_PIntBool;
 						public int32* pscode;
 						public CY* pcyVal;
 						public double* pdate;
-						public BSTR* pbstrVal;
+						public char16** pbstrVal;
 						public IUnknown** ppunkVal;
 						public IDispatch** ppdispVal;
 						public SAFEARRAY** pparray;
 						public VARIANT* pvarVal;
 						public void* byref;
-						public CHAR cVal;
+						public char8 cVal;
 						public uint16 uiVal;
 						public uint32 ulVal;
 						public uint64 ullVal;
 						public int32 intVal;
 						public uint32 uintVal;
 						public DECIMAL* pdecVal;
-						public PSTR pcVal;
+						public char8* pcVal;
 						public uint16* puiVal;
 						public uint32* pulVal;
 						public uint64* pullVal;
@@ -1102,7 +1109,7 @@ namespace Win32
 			public uint32 dwReserved;
 			public int32 memidConstructor;
 			public int32 memidDestructor;
-			public PWSTR lpstrSchema;
+			public char16* lpstrSchema;
 			public uint32 cbSizeInstance;
 			public TYPEKIND typekind;
 			public uint16 cFuncs;
@@ -1129,9 +1136,9 @@ namespace Win32
 		{
 			public uint16 wCode;
 			public uint16 wReserved;
-			public BSTR bstrSource;
-			public BSTR bstrDescription;
-			public BSTR bstrHelpFile;
+			public char16* bstrSource;
+			public char16* bstrDescription;
+			public char16* bstrHelpFile;
 			public uint32 dwHelpContext;
 			public void* pvReserved;
 			public LPEXCEPFINO_DEFERRED_FILLIN pfnDeferredFillIn;
@@ -1157,7 +1164,7 @@ namespace Win32
 		public struct VARDESC
 		{
 			public int32 memid;
-			public PWSTR lpstrSchema;
+			public char16* lpstrSchema;
 			public _Anonymous_e__Union Anonymous;
 			public ELEMDESC elemdescVar;
 			public uint16 wVarFlags;
@@ -1216,14 +1223,14 @@ namespace Win32
 			protected VTable* vt;
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryInterface(in Guid riid, void** ppvObject) mut => VT.QueryInterface(ref this, riid, ppvObject);
+			public HResult QueryInterface(in Guid riid, void** ppvObject) mut => VT.QueryInterface(ref this, riid, ppvObject);
 			public uint32 AddRef() mut => VT.AddRef(ref this);
 			public uint32 Release() mut => VT.Release(ref this);
 
 			[CRepr]
 			public struct VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUnknown self, in Guid riid, void** ppvObject) QueryInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUnknown self, in Guid riid, void** ppvObject) QueryInterface;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IUnknown self) AddRef;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IUnknown self) Release;
 			}
@@ -1235,21 +1242,21 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_QueryInterface(in Guid riid) mut => VT.Begin_QueryInterface(ref this, riid);
-			public HRESULT Finish_QueryInterface(void** ppvObject) mut => VT.Finish_QueryInterface(ref this, ppvObject);
-			public HRESULT Begin_AddRef() mut => VT.Begin_AddRef(ref this);
+			public HResult Begin_QueryInterface(in Guid riid) mut => VT.Begin_QueryInterface(ref this, riid);
+			public HResult Finish_QueryInterface(void** ppvObject) mut => VT.Finish_QueryInterface(ref this, ppvObject);
+			public HResult Begin_AddRef() mut => VT.Begin_AddRef(ref this);
 			public uint32 Finish_AddRef() mut => VT.Finish_AddRef(ref this);
-			public HRESULT Begin_Release() mut => VT.Begin_Release(ref this);
+			public HResult Begin_Release() mut => VT.Begin_Release(ref this);
 			public uint32 Finish_Release() mut => VT.Finish_Release(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIUnknown self, in Guid riid) Begin_QueryInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIUnknown self, void** ppvObject) Finish_QueryInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIUnknown self) Begin_AddRef;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIUnknown self, in Guid riid) Begin_QueryInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIUnknown self, void** ppvObject) Finish_QueryInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIUnknown self) Begin_AddRef;
 				public new function [CallingConvention(.Stdcall)] uint32(ref AsyncIUnknown self) Finish_AddRef;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIUnknown self) Begin_Release;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIUnknown self) Begin_Release;
 				public new function [CallingConvention(.Stdcall)] uint32(ref AsyncIUnknown self) Finish_Release;
 			}
 		}
@@ -1260,14 +1267,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateInstance(IUnknown* pUnkOuter, in Guid riid, void** ppvObject) mut => VT.CreateInstance(ref this, pUnkOuter, riid, ppvObject);
-			public HRESULT LockServer(BOOL fLock) mut => VT.LockServer(ref this, fLock);
+			public HResult CreateInstance(IUnknown* pUnkOuter, in Guid riid, void** ppvObject) mut => VT.CreateInstance(ref this, pUnkOuter, riid, ppvObject);
+			public HResult LockServer(IntBool fLock) mut => VT.LockServer(ref this, fLock);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClassFactory self, IUnknown* pUnkOuter, in Guid riid, void** ppvObject) CreateInstance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClassFactory self, BOOL fLock) LockServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClassFactory self, IUnknown* pUnkOuter, in Guid riid, void** ppvObject) CreateInstance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClassFactory self, IntBool fLock) LockServer;
 			}
 		}
 		[CRepr]
@@ -1297,12 +1304,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleActivation(uint32 dwActivationType, in Guid rclsid, out Guid pReplacementClsId) mut => VT.HandleActivation(ref this, dwActivationType, rclsid, out pReplacementClsId);
+			public HResult HandleActivation(uint32 dwActivationType, in Guid rclsid, out Guid pReplacementClsId) mut => VT.HandleActivation(ref this, dwActivationType, rclsid, out pReplacementClsId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IActivationFilter self, uint32 dwActivationType, in Guid rclsid, out Guid pReplacementClsId) HandleActivation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IActivationFilter self, uint32 dwActivationType, in Guid rclsid, out Guid pReplacementClsId) HandleActivation;
 			}
 		}
 		[CRepr]
@@ -1337,12 +1344,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetClassForHandler(uint32 dwDestContext, void* pvDestContext, out Guid pClsid) mut => VT.GetClassForHandler(ref this, dwDestContext, pvDestContext, out pClsid);
+			public HResult GetClassForHandler(uint32 dwDestContext, void* pvDestContext, out Guid pClsid) mut => VT.GetClassForHandler(ref this, dwDestContext, pvDestContext, out pClsid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStdMarshalInfo self, uint32 dwDestContext, void* pvDestContext, out Guid pClsid) GetClassForHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStdMarshalInfo self, uint32 dwDestContext, void* pvDestContext, out Guid pClsid) GetClassForHandler;
 			}
 		}
 		[CRepr]
@@ -1353,13 +1360,13 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 AddConnection(uint32 extconn, uint32 reserved) mut => VT.AddConnection(ref this, extconn, reserved);
-			public uint32 ReleaseConnection(uint32 extconn, uint32 reserved, BOOL fLastReleaseCloses) mut => VT.ReleaseConnection(ref this, extconn, reserved, fLastReleaseCloses);
+			public uint32 ReleaseConnection(uint32 extconn, uint32 reserved, IntBool fLastReleaseCloses) mut => VT.ReleaseConnection(ref this, extconn, reserved, fLastReleaseCloses);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IExternalConnection self, uint32 extconn, uint32 reserved) AddConnection;
-				public new function [CallingConvention(.Stdcall)] uint32(ref IExternalConnection self, uint32 extconn, uint32 reserved, BOOL fLastReleaseCloses) ReleaseConnection;
+				public new function [CallingConvention(.Stdcall)] uint32(ref IExternalConnection self, uint32 extconn, uint32 reserved, IntBool fLastReleaseCloses) ReleaseConnection;
 			}
 		}
 		[CRepr]
@@ -1369,12 +1376,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryMultipleInterfaces(uint32 cMQIs, MULTI_QI* pMQIs) mut => VT.QueryMultipleInterfaces(ref this, cMQIs, pMQIs);
+			public HResult QueryMultipleInterfaces(uint32 cMQIs, MULTI_QI* pMQIs) mut => VT.QueryMultipleInterfaces(ref this, cMQIs, pMQIs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultiQI self, uint32 cMQIs, MULTI_QI* pMQIs) QueryMultipleInterfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultiQI self, uint32 cMQIs, MULTI_QI* pMQIs) QueryMultipleInterfaces;
 			}
 		}
 		[CRepr]
@@ -1384,14 +1391,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_QueryMultipleInterfaces(uint32 cMQIs, MULTI_QI* pMQIs) mut => VT.Begin_QueryMultipleInterfaces(ref this, cMQIs, pMQIs);
-			public HRESULT Finish_QueryMultipleInterfaces(out MULTI_QI pMQIs) mut => VT.Finish_QueryMultipleInterfaces(ref this, out pMQIs);
+			public HResult Begin_QueryMultipleInterfaces(uint32 cMQIs, MULTI_QI* pMQIs) mut => VT.Begin_QueryMultipleInterfaces(ref this, cMQIs, pMQIs);
+			public HResult Finish_QueryMultipleInterfaces(out MULTI_QI pMQIs) mut => VT.Finish_QueryMultipleInterfaces(ref this, out pMQIs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIMultiQI self, uint32 cMQIs, MULTI_QI* pMQIs) Begin_QueryMultipleInterfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIMultiQI self, out MULTI_QI pMQIs) Finish_QueryMultipleInterfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIMultiQI self, uint32 cMQIs, MULTI_QI* pMQIs) Begin_QueryMultipleInterfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIMultiQI self, out MULTI_QI pMQIs) Finish_QueryMultipleInterfaces;
 			}
 		}
 		[CRepr]
@@ -1401,12 +1408,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryInternalInterface(in Guid riid, void** ppv) mut => VT.QueryInternalInterface(ref this, riid, ppv);
+			public HResult QueryInternalInterface(in Guid riid, void** ppv) mut => VT.QueryInternalInterface(ref this, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternalUnknown self, in Guid riid, void** ppv) QueryInternalInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternalUnknown self, in Guid riid, void** ppv) QueryInternalInterface;
 			}
 		}
 		[CRepr]
@@ -1416,18 +1423,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, IUnknown** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumUnknown* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, IUnknown** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumUnknown* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumUnknown self, uint32 celt, IUnknown** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumUnknown self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumUnknown self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumUnknown self, out IEnumUnknown* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumUnknown self, uint32 celt, IUnknown** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumUnknown self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumUnknown self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumUnknown self, out IEnumUnknown* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -1437,18 +1444,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, PWSTR* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumString* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, char16** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumString* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumString self, uint32 celt, PWSTR* rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumString self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumString self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumString self, out IEnumString* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumString self, uint32 celt, char16** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumString self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumString self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumString self, out IEnumString* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -1458,14 +1465,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Read(void* pv, uint32 cb, uint32* pcbRead) mut => VT.Read(ref this, pv, cb, pcbRead);
-			public HRESULT Write(void* pv, uint32 cb, uint32* pcbWritten) mut => VT.Write(ref this, pv, cb, pcbWritten);
+			public HResult Read(void* pv, uint32 cb, uint32* pcbRead) mut => VT.Read(ref this, pv, cb, pcbRead);
+			public HResult Write(void* pv, uint32 cb, uint32* pcbWritten) mut => VT.Write(ref this, pv, cb, pcbWritten);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISequentialStream self, void* pv, uint32 cb, uint32* pcbRead) Read;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISequentialStream self, void* pv, uint32 cb, uint32* pcbWritten) Write;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISequentialStream self, void* pv, uint32 cb, uint32* pcbRead) Read;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISequentialStream self, void* pv, uint32 cb, uint32* pcbWritten) Write;
 			}
 		}
 		[CRepr]
@@ -1475,28 +1482,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Seek(LARGE_INTEGER dlibMove, STREAM_SEEK dwOrigin, ULARGE_INTEGER* plibNewPosition) mut => VT.Seek(ref this, dlibMove, dwOrigin, plibNewPosition);
-			public HRESULT SetSize(ULARGE_INTEGER libNewSize) mut => VT.SetSize(ref this, libNewSize);
-			public HRESULT CopyTo(ref IStream pstm, ULARGE_INTEGER cb, ULARGE_INTEGER* pcbRead, ULARGE_INTEGER* pcbWritten) mut => VT.CopyTo(ref this, ref pstm, cb, pcbRead, pcbWritten);
-			public HRESULT Commit(uint32 grfCommitFlags) mut => VT.Commit(ref this, grfCommitFlags);
-			public HRESULT Revert() mut => VT.Revert(ref this);
-			public HRESULT LockRegion(ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) mut => VT.LockRegion(ref this, libOffset, cb, dwLockType);
-			public HRESULT UnlockRegion(ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) mut => VT.UnlockRegion(ref this, libOffset, cb, dwLockType);
-			public HRESULT Stat(out STATSTG pstatstg, uint32 grfStatFlag) mut => VT.Stat(ref this, out pstatstg, grfStatFlag);
-			public HRESULT Clone(out IStream* ppstm) mut => VT.Clone(ref this, out ppstm);
+			public HResult Seek(LARGE_INTEGER dlibMove, STREAM_SEEK dwOrigin, ULARGE_INTEGER* plibNewPosition) mut => VT.Seek(ref this, dlibMove, dwOrigin, plibNewPosition);
+			public HResult SetSize(ULARGE_INTEGER libNewSize) mut => VT.SetSize(ref this, libNewSize);
+			public HResult CopyTo(ref IStream pstm, ULARGE_INTEGER cb, ULARGE_INTEGER* pcbRead, ULARGE_INTEGER* pcbWritten) mut => VT.CopyTo(ref this, ref pstm, cb, pcbRead, pcbWritten);
+			public HResult Commit(uint32 grfCommitFlags) mut => VT.Commit(ref this, grfCommitFlags);
+			public HResult Revert() mut => VT.Revert(ref this);
+			public HResult LockRegion(ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) mut => VT.LockRegion(ref this, libOffset, cb, dwLockType);
+			public HResult UnlockRegion(ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) mut => VT.UnlockRegion(ref this, libOffset, cb, dwLockType);
+			public HResult Stat(out STATSTG pstatstg, uint32 grfStatFlag) mut => VT.Stat(ref this, out pstatstg, grfStatFlag);
+			public HResult Clone(out IStream* ppstm) mut => VT.Clone(ref this, out ppstm);
 
 			[CRepr]
 			public struct VTable : ISequentialStream.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, LARGE_INTEGER dlibMove, STREAM_SEEK dwOrigin, ULARGE_INTEGER* plibNewPosition) Seek;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, ULARGE_INTEGER libNewSize) SetSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, ref IStream pstm, ULARGE_INTEGER cb, ULARGE_INTEGER* pcbRead, ULARGE_INTEGER* pcbWritten) CopyTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, uint32 grfCommitFlags) Commit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self) Revert;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) LockRegion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) UnlockRegion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, out STATSTG pstatstg, uint32 grfStatFlag) Stat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStream self, out IStream* ppstm) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, LARGE_INTEGER dlibMove, STREAM_SEEK dwOrigin, ULARGE_INTEGER* plibNewPosition) Seek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, ULARGE_INTEGER libNewSize) SetSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, ref IStream pstm, ULARGE_INTEGER cb, ULARGE_INTEGER* pcbRead, ULARGE_INTEGER* pcbWritten) CopyTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, uint32 grfCommitFlags) Commit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self) Revert;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) LockRegion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, uint32 dwLockType) UnlockRegion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, out STATSTG pstatstg, uint32 grfStatFlag) Stat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStream self, out IStream* ppstm) Clone;
 			}
 		}
 		[CRepr]
@@ -1506,20 +1513,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBuffer(out RPCOLEMESSAGE pMessage, in Guid riid) mut => VT.GetBuffer(ref this, out pMessage, riid);
-			public HRESULT SendReceive(out RPCOLEMESSAGE pMessage, uint32* pStatus) mut => VT.SendReceive(ref this, out pMessage, pStatus);
-			public HRESULT FreeBuffer(out RPCOLEMESSAGE pMessage) mut => VT.FreeBuffer(ref this, out pMessage);
-			public HRESULT GetDestCtx(out uint32 pdwDestContext, void** ppvDestContext) mut => VT.GetDestCtx(ref this, out pdwDestContext, ppvDestContext);
-			public HRESULT IsConnected() mut => VT.IsConnected(ref this);
+			public HResult GetBuffer(out RPCOLEMESSAGE pMessage, in Guid riid) mut => VT.GetBuffer(ref this, out pMessage, riid);
+			public HResult SendReceive(out RPCOLEMESSAGE pMessage, uint32* pStatus) mut => VT.SendReceive(ref this, out pMessage, pStatus);
+			public HResult FreeBuffer(out RPCOLEMESSAGE pMessage) mut => VT.FreeBuffer(ref this, out pMessage);
+			public HResult GetDestCtx(out uint32 pdwDestContext, void** ppvDestContext) mut => VT.GetDestCtx(ref this, out pdwDestContext, ppvDestContext);
+			public HResult IsConnected() mut => VT.IsConnected(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer self, out RPCOLEMESSAGE pMessage, in Guid riid) GetBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer self, out RPCOLEMESSAGE pMessage, uint32* pStatus) SendReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer self, out RPCOLEMESSAGE pMessage) FreeBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer self, out uint32 pdwDestContext, void** ppvDestContext) GetDestCtx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer self) IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer self, out RPCOLEMESSAGE pMessage, in Guid riid) GetBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer self, out RPCOLEMESSAGE pMessage, uint32* pStatus) SendReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer self, out RPCOLEMESSAGE pMessage) FreeBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer self, out uint32 pdwDestContext, void** ppvDestContext) GetDestCtx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer self) IsConnected;
 			}
 		}
 		[CRepr]
@@ -1529,12 +1536,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetProtocolVersion(out uint32 pdwVersion) mut => VT.GetProtocolVersion(ref this, out pdwVersion);
+			public HResult GetProtocolVersion(out uint32 pdwVersion) mut => VT.GetProtocolVersion(ref this, out pdwVersion);
 
 			[CRepr]
 			public struct VTable : IRpcChannelBuffer.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer2 self, out uint32 pdwVersion) GetProtocolVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer2 self, out uint32 pdwVersion) GetProtocolVersion;
 			}
 		}
 		[CRepr]
@@ -1544,16 +1551,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Send(out RPCOLEMESSAGE pMsg, ref ISynchronize pSync, out uint32 pulStatus) mut => VT.Send(ref this, out pMsg, ref pSync, out pulStatus);
-			public HRESULT Receive(out RPCOLEMESSAGE pMsg, out uint32 pulStatus) mut => VT.Receive(ref this, out pMsg, out pulStatus);
-			public HRESULT GetDestCtxEx(ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) mut => VT.GetDestCtxEx(ref this, ref pMsg, out pdwDestContext, ppvDestContext);
+			public HResult Send(out RPCOLEMESSAGE pMsg, ref ISynchronize pSync, out uint32 pulStatus) mut => VT.Send(ref this, out pMsg, ref pSync, out pulStatus);
+			public HResult Receive(out RPCOLEMESSAGE pMsg, out uint32 pulStatus) mut => VT.Receive(ref this, out pMsg, out pulStatus);
+			public HResult GetDestCtxEx(ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) mut => VT.GetDestCtxEx(ref this, ref pMsg, out pdwDestContext, ppvDestContext);
 
 			[CRepr]
 			public struct VTable : IRpcChannelBuffer2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAsyncRpcChannelBuffer self, out RPCOLEMESSAGE pMsg, ref ISynchronize pSync, out uint32 pulStatus) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAsyncRpcChannelBuffer self, out RPCOLEMESSAGE pMsg, out uint32 pulStatus) Receive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAsyncRpcChannelBuffer self, ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) GetDestCtxEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAsyncRpcChannelBuffer self, out RPCOLEMESSAGE pMsg, ref ISynchronize pSync, out uint32 pulStatus) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAsyncRpcChannelBuffer self, out RPCOLEMESSAGE pMsg, out uint32 pulStatus) Receive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAsyncRpcChannelBuffer self, ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) GetDestCtxEx;
 			}
 		}
 		[CRepr]
@@ -1563,24 +1570,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Send(out RPCOLEMESSAGE pMsg, out uint32 pulStatus) mut => VT.Send(ref this, out pMsg, out pulStatus);
-			public HRESULT Receive(out RPCOLEMESSAGE pMsg, uint32 ulSize, out uint32 pulStatus) mut => VT.Receive(ref this, out pMsg, ulSize, out pulStatus);
-			public HRESULT Cancel(out RPCOLEMESSAGE pMsg) mut => VT.Cancel(ref this, out pMsg);
-			public HRESULT GetCallContext(ref RPCOLEMESSAGE pMsg, in Guid riid, void** pInterface) mut => VT.GetCallContext(ref this, ref pMsg, riid, pInterface);
-			public HRESULT GetDestCtxEx(ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) mut => VT.GetDestCtxEx(ref this, ref pMsg, out pdwDestContext, ppvDestContext);
-			public HRESULT GetState(ref RPCOLEMESSAGE pMsg, out uint32 pState) mut => VT.GetState(ref this, ref pMsg, out pState);
-			public HRESULT RegisterAsync(out RPCOLEMESSAGE pMsg, ref IAsyncManager pAsyncMgr) mut => VT.RegisterAsync(ref this, out pMsg, ref pAsyncMgr);
+			public HResult Send(out RPCOLEMESSAGE pMsg, out uint32 pulStatus) mut => VT.Send(ref this, out pMsg, out pulStatus);
+			public HResult Receive(out RPCOLEMESSAGE pMsg, uint32 ulSize, out uint32 pulStatus) mut => VT.Receive(ref this, out pMsg, ulSize, out pulStatus);
+			public HResult Cancel(out RPCOLEMESSAGE pMsg) mut => VT.Cancel(ref this, out pMsg);
+			public HResult GetCallContext(ref RPCOLEMESSAGE pMsg, in Guid riid, void** pInterface) mut => VT.GetCallContext(ref this, ref pMsg, riid, pInterface);
+			public HResult GetDestCtxEx(ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) mut => VT.GetDestCtxEx(ref this, ref pMsg, out pdwDestContext, ppvDestContext);
+			public HResult GetState(ref RPCOLEMESSAGE pMsg, out uint32 pState) mut => VT.GetState(ref this, ref pMsg, out pState);
+			public HResult RegisterAsync(out RPCOLEMESSAGE pMsg, ref IAsyncManager pAsyncMgr) mut => VT.RegisterAsync(ref this, out pMsg, ref pAsyncMgr);
 
 			[CRepr]
 			public struct VTable : IRpcChannelBuffer2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg, out uint32 pulStatus) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg, uint32 ulSize, out uint32 pulStatus) Receive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, ref RPCOLEMESSAGE pMsg, in Guid riid, void** pInterface) GetCallContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) GetDestCtxEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, ref RPCOLEMESSAGE pMsg, out uint32 pState) GetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg, ref IAsyncManager pAsyncMgr) RegisterAsync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg, out uint32 pulStatus) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg, uint32 ulSize, out uint32 pulStatus) Receive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, ref RPCOLEMESSAGE pMsg, in Guid riid, void** pInterface) GetCallContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, ref RPCOLEMESSAGE pMsg, out uint32 pdwDestContext, void** ppvDestContext) GetDestCtxEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, ref RPCOLEMESSAGE pMsg, out uint32 pState) GetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcChannelBuffer3 self, out RPCOLEMESSAGE pMsg, ref IAsyncManager pAsyncMgr) RegisterAsync;
 			}
 		}
 		[CRepr]
@@ -1590,12 +1597,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NegotiateSyntax(out RPCOLEMESSAGE pMsg) mut => VT.NegotiateSyntax(ref this, out pMsg);
+			public HResult NegotiateSyntax(out RPCOLEMESSAGE pMsg) mut => VT.NegotiateSyntax(ref this, out pMsg);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcSyntaxNegotiate self, out RPCOLEMESSAGE pMsg) NegotiateSyntax;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcSyntaxNegotiate self, out RPCOLEMESSAGE pMsg) NegotiateSyntax;
 			}
 		}
 		[CRepr]
@@ -1605,13 +1612,13 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Connect(ref IRpcChannelBuffer pRpcChannelBuffer) mut => VT.Connect(ref this, ref pRpcChannelBuffer);
+			public HResult Connect(ref IRpcChannelBuffer pRpcChannelBuffer) mut => VT.Connect(ref this, ref pRpcChannelBuffer);
 			public void Disconnect() mut => VT.Disconnect(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcProxyBuffer self, ref IRpcChannelBuffer pRpcChannelBuffer) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcProxyBuffer self, ref IRpcChannelBuffer pRpcChannelBuffer) Connect;
 				public new function [CallingConvention(.Stdcall)] void(ref IRpcProxyBuffer self) Disconnect;
 			}
 		}
@@ -1622,23 +1629,23 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Connect(ref IUnknown pUnkServer) mut => VT.Connect(ref this, ref pUnkServer);
+			public HResult Connect(ref IUnknown pUnkServer) mut => VT.Connect(ref this, ref pUnkServer);
 			public void Disconnect() mut => VT.Disconnect(ref this);
-			public HRESULT Invoke(out RPCOLEMESSAGE _prpcmsg, ref IRpcChannelBuffer _pRpcChannelBuffer) mut => VT.Invoke(ref this, out _prpcmsg, ref _pRpcChannelBuffer);
+			public HResult Invoke(out RPCOLEMESSAGE _prpcmsg, ref IRpcChannelBuffer _pRpcChannelBuffer) mut => VT.Invoke(ref this, out _prpcmsg, ref _pRpcChannelBuffer);
 			public IRpcStubBuffer* IsIIDSupported(in Guid riid) mut => VT.IsIIDSupported(ref this, riid);
 			public uint32 CountRefs() mut => VT.CountRefs(ref this);
-			public HRESULT DebugServerQueryInterface(void** ppv) mut => VT.DebugServerQueryInterface(ref this, ppv);
+			public HResult DebugServerQueryInterface(void** ppv) mut => VT.DebugServerQueryInterface(ref this, ppv);
 			public void DebugServerRelease(void* pv) mut => VT.DebugServerRelease(ref this, pv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcStubBuffer self, ref IUnknown pUnkServer) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcStubBuffer self, ref IUnknown pUnkServer) Connect;
 				public new function [CallingConvention(.Stdcall)] void(ref IRpcStubBuffer self) Disconnect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcStubBuffer self, out RPCOLEMESSAGE _prpcmsg, ref IRpcChannelBuffer _pRpcChannelBuffer) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcStubBuffer self, out RPCOLEMESSAGE _prpcmsg, ref IRpcChannelBuffer _pRpcChannelBuffer) Invoke;
 				public new function [CallingConvention(.Stdcall)] IRpcStubBuffer*(ref IRpcStubBuffer self, in Guid riid) IsIIDSupported;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IRpcStubBuffer self) CountRefs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcStubBuffer self, void** ppv) DebugServerQueryInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcStubBuffer self, void** ppv) DebugServerQueryInterface;
 				public new function [CallingConvention(.Stdcall)] void(ref IRpcStubBuffer self, void* pv) DebugServerRelease;
 			}
 		}
@@ -1649,14 +1656,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateProxy(ref IUnknown pUnkOuter, in Guid riid, out IRpcProxyBuffer* ppProxy, void** ppv) mut => VT.CreateProxy(ref this, ref pUnkOuter, riid, out ppProxy, ppv);
-			public HRESULT CreateStub(in Guid riid, IUnknown* pUnkServer, out IRpcStubBuffer* ppStub) mut => VT.CreateStub(ref this, riid, pUnkServer, out ppStub);
+			public HResult CreateProxy(ref IUnknown pUnkOuter, in Guid riid, out IRpcProxyBuffer* ppProxy, void** ppv) mut => VT.CreateProxy(ref this, ref pUnkOuter, riid, out ppProxy, ppv);
+			public HResult CreateStub(in Guid riid, IUnknown* pUnkServer, out IRpcStubBuffer* ppStub) mut => VT.CreateStub(ref this, riid, pUnkServer, out ppStub);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPSFactoryBuffer self, ref IUnknown pUnkOuter, in Guid riid, out IRpcProxyBuffer* ppProxy, void** ppv) CreateProxy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPSFactoryBuffer self, in Guid riid, IUnknown* pUnkServer, out IRpcStubBuffer* ppStub) CreateStub;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPSFactoryBuffer self, ref IUnknown pUnkOuter, in Guid riid, out IRpcProxyBuffer* ppProxy, void** ppv) CreateProxy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPSFactoryBuffer self, in Guid riid, IUnknown* pUnkServer, out IRpcStubBuffer* ppStub) CreateStub;
 			}
 		}
 		[CRepr]
@@ -1668,20 +1675,20 @@ namespace Win32
 			
 			public void ClientGetSize(in Guid uExtent, in Guid riid, out uint32 pDataSize) mut => VT.ClientGetSize(ref this, uExtent, riid, out pDataSize);
 			public void ClientFillBuffer(in Guid uExtent, in Guid riid, out uint32 pDataSize, void* pDataBuffer) mut => VT.ClientFillBuffer(ref this, uExtent, riid, out pDataSize, pDataBuffer);
-			public void ClientNotify(in Guid uExtent, in Guid riid, uint32 cbDataSize, void* pDataBuffer, uint32 lDataRep, HRESULT hrFault) mut => VT.ClientNotify(ref this, uExtent, riid, cbDataSize, pDataBuffer, lDataRep, hrFault);
+			public void ClientNotify(in Guid uExtent, in Guid riid, uint32 cbDataSize, void* pDataBuffer, uint32 lDataRep, HResult hrFault) mut => VT.ClientNotify(ref this, uExtent, riid, cbDataSize, pDataBuffer, lDataRep, hrFault);
 			public void ServerNotify(in Guid uExtent, in Guid riid, uint32 cbDataSize, void* pDataBuffer, uint32 lDataRep) mut => VT.ServerNotify(ref this, uExtent, riid, cbDataSize, pDataBuffer, lDataRep);
-			public void ServerGetSize(in Guid uExtent, in Guid riid, HRESULT hrFault, out uint32 pDataSize) mut => VT.ServerGetSize(ref this, uExtent, riid, hrFault, out pDataSize);
-			public void ServerFillBuffer(in Guid uExtent, in Guid riid, out uint32 pDataSize, void* pDataBuffer, HRESULT hrFault) mut => VT.ServerFillBuffer(ref this, uExtent, riid, out pDataSize, pDataBuffer, hrFault);
+			public void ServerGetSize(in Guid uExtent, in Guid riid, HResult hrFault, out uint32 pDataSize) mut => VT.ServerGetSize(ref this, uExtent, riid, hrFault, out pDataSize);
+			public void ServerFillBuffer(in Guid uExtent, in Guid riid, out uint32 pDataSize, void* pDataBuffer, HResult hrFault) mut => VT.ServerFillBuffer(ref this, uExtent, riid, out pDataSize, pDataBuffer, hrFault);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, out uint32 pDataSize) ClientGetSize;
 				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, out uint32 pDataSize, void* pDataBuffer) ClientFillBuffer;
-				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, uint32 cbDataSize, void* pDataBuffer, uint32 lDataRep, HRESULT hrFault) ClientNotify;
+				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, uint32 cbDataSize, void* pDataBuffer, uint32 lDataRep, HResult hrFault) ClientNotify;
 				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, uint32 cbDataSize, void* pDataBuffer, uint32 lDataRep) ServerNotify;
-				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, HRESULT hrFault, out uint32 pDataSize) ServerGetSize;
-				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, out uint32 pDataSize, void* pDataBuffer, HRESULT hrFault) ServerFillBuffer;
+				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, HResult hrFault, out uint32 pDataSize) ServerGetSize;
+				public new function [CallingConvention(.Stdcall)] void(ref IChannelHook self, in Guid uExtent, in Guid riid, out uint32 pDataSize, void* pDataBuffer, HResult hrFault) ServerFillBuffer;
 			}
 		}
 		[CRepr]
@@ -1691,16 +1698,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryBlanket(ref IUnknown pProxy, out uint32 pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, RPC_C_AUTHN_LEVEL* pAuthnLevel, RPC_C_IMP_LEVEL* pImpLevel, void** pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES* pCapabilites) mut => VT.QueryBlanket(ref this, ref pProxy, out pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites);
-			public HRESULT SetBlanket(ref IUnknown pProxy, uint32 dwAuthnSvc, uint32 dwAuthzSvc, PWSTR pServerPrincName, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities) mut => VT.SetBlanket(ref this, ref pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName, dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities);
-			public HRESULT CopyProxy(ref IUnknown pProxy, out IUnknown* ppCopy) mut => VT.CopyProxy(ref this, ref pProxy, out ppCopy);
+			public HResult QueryBlanket(ref IUnknown pProxy, out uint32 pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, RPC_C_AUTHN_LEVEL* pAuthnLevel, RPC_C_IMP_LEVEL* pImpLevel, void** pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES* pCapabilites) mut => VT.QueryBlanket(ref this, ref pProxy, out pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites);
+			public HResult SetBlanket(ref IUnknown pProxy, uint32 dwAuthnSvc, uint32 dwAuthzSvc, char16* pServerPrincName, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities) mut => VT.SetBlanket(ref this, ref pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName, dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities);
+			public HResult CopyProxy(ref IUnknown pProxy, out IUnknown* ppCopy) mut => VT.CopyProxy(ref this, ref pProxy, out ppCopy);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClientSecurity self, ref IUnknown pProxy, out uint32 pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, RPC_C_AUTHN_LEVEL* pAuthnLevel, RPC_C_IMP_LEVEL* pImpLevel, void** pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES* pCapabilites) QueryBlanket;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClientSecurity self, ref IUnknown pProxy, uint32 dwAuthnSvc, uint32 dwAuthzSvc, PWSTR pServerPrincName, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities) SetBlanket;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClientSecurity self, ref IUnknown pProxy, out IUnknown* ppCopy) CopyProxy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClientSecurity self, ref IUnknown pProxy, out uint32 pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, RPC_C_AUTHN_LEVEL* pAuthnLevel, RPC_C_IMP_LEVEL* pImpLevel, void** pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES* pCapabilites) QueryBlanket;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClientSecurity self, ref IUnknown pProxy, uint32 dwAuthnSvc, uint32 dwAuthzSvc, char16* pServerPrincName, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities) SetBlanket;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClientSecurity self, ref IUnknown pProxy, out IUnknown* ppCopy) CopyProxy;
 			}
 		}
 		[CRepr]
@@ -1710,18 +1717,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryBlanket(uint32* pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pPrivs, uint32* pCapabilities) mut => VT.QueryBlanket(ref this, pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pPrivs, pCapabilities);
-			public HRESULT ImpersonateClient() mut => VT.ImpersonateClient(ref this);
-			public HRESULT RevertToSelf() mut => VT.RevertToSelf(ref this);
-			public BOOL IsImpersonating() mut => VT.IsImpersonating(ref this);
+			public HResult QueryBlanket(uint32* pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pPrivs, uint32* pCapabilities) mut => VT.QueryBlanket(ref this, pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pPrivs, pCapabilities);
+			public HResult ImpersonateClient() mut => VT.ImpersonateClient(ref this);
+			public HResult RevertToSelf() mut => VT._RevertToSelf(ref this);
+			public IntBool IsImpersonating() mut => VT.IsImpersonating(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerSecurity self, uint32* pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pPrivs, uint32* pCapabilities) QueryBlanket;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerSecurity self) ImpersonateClient;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServerSecurity self) RevertToSelf;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IServerSecurity self) IsImpersonating;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerSecurity self, uint32* pAuthnSvc, uint32* pAuthzSvc, uint16** pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pPrivs, uint32* pCapabilities) QueryBlanket;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerSecurity self) ImpersonateClient;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServerSecurity self) _RevertToSelf;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IServerSecurity self) IsImpersonating;
 			}
 		}
 		[CRepr]
@@ -1731,14 +1738,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Set(ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, uint dwValue) mut => VT.Set(ref this, ref pPrx, dwProperty, dwValue);
-			public HRESULT Query(ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, out uint pdwValue) mut => VT.Query(ref this, ref pPrx, dwProperty, out pdwValue);
+			public HResult Set(ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, uint dwValue) mut => VT.Set(ref this, ref pPrx, dwProperty, dwValue);
+			public HResult Query(ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, out uint pdwValue) mut => VT.Query(ref this, ref pPrx, dwProperty, out pdwValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcOptions self, ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, uint dwValue) Set;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcOptions self, ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, out uint pdwValue) Query;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcOptions self, ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, uint dwValue) Set;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcOptions self, ref IUnknown pPrx, RPCOPT_PROPERTIES dwProperty, out uint pdwValue) Query;
 			}
 		}
 		[CRepr]
@@ -1748,14 +1755,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Set(GLOBALOPT_PROPERTIES dwProperty, uint dwValue) mut => VT.Set(ref this, dwProperty, dwValue);
-			public HRESULT Query(GLOBALOPT_PROPERTIES dwProperty, out uint pdwValue) mut => VT.Query(ref this, dwProperty, out pdwValue);
+			public HResult Set(GLOBALOPT_PROPERTIES dwProperty, uint dwValue) mut => VT.Set(ref this, dwProperty, dwValue);
+			public HResult Query(GLOBALOPT_PROPERTIES dwProperty, out uint pdwValue) mut => VT.Query(ref this, dwProperty, out pdwValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGlobalOptions self, GLOBALOPT_PROPERTIES dwProperty, uint dwValue) Set;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGlobalOptions self, GLOBALOPT_PROPERTIES dwProperty, out uint pdwValue) Query;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGlobalOptions self, GLOBALOPT_PROPERTIES dwProperty, uint dwValue) Set;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGlobalOptions self, GLOBALOPT_PROPERTIES dwProperty, out uint pdwValue) Query;
 			}
 		}
 		[CRepr]
@@ -1765,14 +1772,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LoadDllServer(in Guid Clsid) mut => VT.LoadDllServer(ref this, Clsid);
-			public HRESULT FreeSurrogate() mut => VT.FreeSurrogate(ref this);
+			public HResult LoadDllServer(in Guid Clsid) mut => VT.LoadDllServer(ref this, Clsid);
+			public HResult FreeSurrogate() mut => VT.FreeSurrogate(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogate self, in Guid Clsid) LoadDllServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogate self) FreeSurrogate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogate self, in Guid Clsid) LoadDllServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogate self) FreeSurrogate;
 			}
 		}
 		[CRepr]
@@ -1782,16 +1789,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterInterfaceInGlobal(ref IUnknown pUnk, in Guid riid, out uint32 pdwCookie) mut => VT.RegisterInterfaceInGlobal(ref this, ref pUnk, riid, out pdwCookie);
-			public HRESULT RevokeInterfaceFromGlobal(uint32 dwCookie) mut => VT.RevokeInterfaceFromGlobal(ref this, dwCookie);
-			public HRESULT GetInterfaceFromGlobal(uint32 dwCookie, in Guid riid, void** ppv) mut => VT.GetInterfaceFromGlobal(ref this, dwCookie, riid, ppv);
+			public HResult RegisterInterfaceInGlobal(ref IUnknown pUnk, in Guid riid, out uint32 pdwCookie) mut => VT.RegisterInterfaceInGlobal(ref this, ref pUnk, riid, out pdwCookie);
+			public HResult RevokeInterfaceFromGlobal(uint32 dwCookie) mut => VT.RevokeInterfaceFromGlobal(ref this, dwCookie);
+			public HResult GetInterfaceFromGlobal(uint32 dwCookie, in Guid riid, void** ppv) mut => VT.GetInterfaceFromGlobal(ref this, dwCookie, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGlobalInterfaceTable self, ref IUnknown pUnk, in Guid riid, out uint32 pdwCookie) RegisterInterfaceInGlobal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGlobalInterfaceTable self, uint32 dwCookie) RevokeInterfaceFromGlobal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGlobalInterfaceTable self, uint32 dwCookie, in Guid riid, void** ppv) GetInterfaceFromGlobal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGlobalInterfaceTable self, ref IUnknown pUnk, in Guid riid, out uint32 pdwCookie) RegisterInterfaceInGlobal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGlobalInterfaceTable self, uint32 dwCookie) RevokeInterfaceFromGlobal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGlobalInterfaceTable self, uint32 dwCookie, in Guid riid, void** ppv) GetInterfaceFromGlobal;
 			}
 		}
 		[CRepr]
@@ -1801,16 +1808,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Wait(uint32 dwFlags, uint32 dwMilliseconds) mut => VT.Wait(ref this, dwFlags, dwMilliseconds);
-			public HRESULT Signal() mut => VT.Signal(ref this);
-			public HRESULT Reset() mut => VT.Reset(ref this);
+			public HResult Wait(uint32 dwFlags, uint32 dwMilliseconds) mut => VT.Wait(ref this, dwFlags, dwMilliseconds);
+			public HResult Signal() mut => VT.Signal(ref this);
+			public HResult Reset() mut => VT.Reset(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronize self, uint32 dwFlags, uint32 dwMilliseconds) Wait;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronize self) Signal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronize self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronize self, uint32 dwFlags, uint32 dwMilliseconds) Wait;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronize self) Signal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronize self) Reset;
 			}
 		}
 		[CRepr]
@@ -1820,12 +1827,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetHandle(out HANDLE ph) mut => VT.GetHandle(ref this, out ph);
+			public HResult GetHandle(out Handle ph) mut => VT.GetHandle(ref this, out ph);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizeHandle self, out HANDLE ph) GetHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizeHandle self, out Handle ph) GetHandle;
 			}
 		}
 		[CRepr]
@@ -1835,12 +1842,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetEventHandle(ref HANDLE ph) mut => VT.SetEventHandle(ref this, ref ph);
+			public HResult SetEventHandle(ref Handle ph) mut => VT.SetEventHandle(ref this, ref ph);
 
 			[CRepr]
 			public struct VTable : ISynchronizeHandle.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizeEvent self, ref HANDLE ph) SetEventHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizeEvent self, ref Handle ph) SetEventHandle;
 			}
 		}
 		[CRepr]
@@ -1850,14 +1857,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddSynchronize(ref ISynchronize pSync) mut => VT.AddSynchronize(ref this, ref pSync);
-			public HRESULT WaitMultiple(uint32 dwFlags, uint32 dwTimeOut, out ISynchronize* ppSync) mut => VT.WaitMultiple(ref this, dwFlags, dwTimeOut, out ppSync);
+			public HResult AddSynchronize(ref ISynchronize pSync) mut => VT.AddSynchronize(ref this, ref pSync);
+			public HResult WaitMultiple(uint32 dwFlags, uint32 dwTimeOut, out ISynchronize* ppSync) mut => VT.WaitMultiple(ref this, dwFlags, dwTimeOut, out ppSync);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizeContainer self, ref ISynchronize pSync) AddSynchronize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizeContainer self, uint32 dwFlags, uint32 dwTimeOut, out ISynchronize* ppSync) WaitMultiple;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizeContainer self, ref ISynchronize pSync) AddSynchronize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizeContainer self, uint32 dwFlags, uint32 dwTimeOut, out ISynchronize* ppSync) WaitMultiple;
 			}
 		}
 		[CRepr]
@@ -1867,12 +1874,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ReleaseMutex() mut => VT.ReleaseMutex(ref this);
+			public HResult ReleaseMutex() mut => VT._ReleaseMutex(ref this);
 
 			[CRepr]
 			public struct VTable : ISynchronize.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizeMutex self) ReleaseMutex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizeMutex self) _ReleaseMutex;
 			}
 		}
 		[CRepr]
@@ -1882,14 +1889,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Cancel(uint32 ulSeconds) mut => VT.Cancel(ref this, ulSeconds);
-			public HRESULT TestCancel() mut => VT.TestCancel(ref this);
+			public HResult Cancel(uint32 ulSeconds) mut => VT.Cancel(ref this, ulSeconds);
+			public HResult TestCancel() mut => VT.TestCancel(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICancelMethodCalls self, uint32 ulSeconds) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICancelMethodCalls self) TestCancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICancelMethodCalls self, uint32 ulSeconds) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICancelMethodCalls self) TestCancel;
 			}
 		}
 		[CRepr]
@@ -1899,16 +1906,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CompleteCall(HRESULT Result) mut => VT.CompleteCall(ref this, Result);
-			public HRESULT GetCallContext(in Guid riid, void** pInterface) mut => VT.GetCallContext(ref this, riid, pInterface);
-			public HRESULT GetState(out uint32 pulStateFlags) mut => VT.GetState(ref this, out pulStateFlags);
+			public HResult CompleteCall(HResult Result) mut => VT.CompleteCall(ref this, Result);
+			public HResult GetCallContext(in Guid riid, void** pInterface) mut => VT.GetCallContext(ref this, riid, pInterface);
+			public HResult GetState(out uint32 pulStateFlags) mut => VT.GetState(ref this, out pulStateFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAsyncManager self, HRESULT Result) CompleteCall;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAsyncManager self, in Guid riid, void** pInterface) GetCallContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAsyncManager self, out uint32 pulStateFlags) GetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAsyncManager self, HResult Result) CompleteCall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAsyncManager self, in Guid riid, void** pInterface) GetCallContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAsyncManager self, out uint32 pulStateFlags) GetState;
 			}
 		}
 		[CRepr]
@@ -1918,12 +1925,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateCall(in Guid riid, IUnknown* pCtrlUnk, in Guid riid2, out IUnknown* ppv) mut => VT.CreateCall(ref this, riid, pCtrlUnk, riid2, out ppv);
+			public HResult CreateCall(in Guid riid, IUnknown* pCtrlUnk, in Guid riid2, out IUnknown* ppv) mut => VT.CreateCall(ref this, riid, pCtrlUnk, riid2, out ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICallFactory self, in Guid riid, IUnknown* pCtrlUnk, in Guid riid2, out IUnknown* ppv) CreateCall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICallFactory self, in Guid riid, IUnknown* pCtrlUnk, in Guid riid2, out IUnknown* ppv) CreateCall;
 			}
 		}
 		[CRepr]
@@ -1933,14 +1940,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDCOMProtocolVersion(out uint32 pComVersion) mut => VT.GetDCOMProtocolVersion(ref this, out pComVersion);
-			public HRESULT GetIIDFromOBJREF(void* pObjRef, out Guid* piid) mut => VT.GetIIDFromOBJREF(ref this, pObjRef, out piid);
+			public HResult GetDCOMProtocolVersion(out uint32 pComVersion) mut => VT.GetDCOMProtocolVersion(ref this, out pComVersion);
+			public HResult GetIIDFromOBJREF(void* pObjRef, out Guid* piid) mut => VT.GetIIDFromOBJREF(ref this, pObjRef, out piid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcHelper self, out uint32 pComVersion) GetDCOMProtocolVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRpcHelper self, void* pObjRef, out Guid* piid) GetIIDFromOBJREF;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcHelper self, out uint32 pComVersion) GetDCOMProtocolVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRpcHelper self, void* pObjRef, out Guid* piid) GetIIDFromOBJREF;
 			}
 		}
 		[CRepr]
@@ -1950,12 +1957,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ReleaseMarshalBuffer(out RPCOLEMESSAGE pMsg, uint32 dwFlags, IUnknown* pChnl) mut => VT.ReleaseMarshalBuffer(ref this, out pMsg, dwFlags, pChnl);
+			public HResult ReleaseMarshalBuffer(out RPCOLEMESSAGE pMsg, uint32 dwFlags, IUnknown* pChnl) mut => VT.ReleaseMarshalBuffer(ref this, out pMsg, dwFlags, pChnl);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReleaseMarshalBuffers self, out RPCOLEMESSAGE pMsg, uint32 dwFlags, IUnknown* pChnl) ReleaseMarshalBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReleaseMarshalBuffers self, out RPCOLEMESSAGE pMsg, uint32 dwFlags, IUnknown* pChnl) ReleaseMarshalBuffer;
 			}
 		}
 		[CRepr]
@@ -1965,14 +1972,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT WaitMultiple(uint32 timeout, out ISynchronize* pSync) mut => VT.WaitMultiple(ref this, timeout, out pSync);
-			public HRESULT AddSynchronize(ref ISynchronize pSync) mut => VT.AddSynchronize(ref this, ref pSync);
+			public HResult WaitMultiple(uint32 timeout, out ISynchronize* pSync) mut => VT.WaitMultiple(ref this, timeout, out pSync);
+			public HResult AddSynchronize(ref ISynchronize pSync) mut => VT.AddSynchronize(ref this, ref pSync);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWaitMultiple self, uint32 timeout, out ISynchronize* pSync) WaitMultiple;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWaitMultiple self, ref ISynchronize pSync) AddSynchronize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWaitMultiple self, uint32 timeout, out ISynchronize* pSync) WaitMultiple;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWaitMultiple self, ref ISynchronize pSync) AddSynchronize;
 			}
 		}
 		[CRepr]
@@ -1982,14 +1989,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnableCOMDynamicAddrTracking() mut => VT.EnableCOMDynamicAddrTracking(ref this);
-			public HRESULT DisableCOMDynamicAddrTracking() mut => VT.DisableCOMDynamicAddrTracking(ref this);
+			public HResult EnableCOMDynamicAddrTracking() mut => VT.EnableCOMDynamicAddrTracking(ref this);
+			public HResult DisableCOMDynamicAddrTracking() mut => VT.DisableCOMDynamicAddrTracking(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAddrTrackingControl self) EnableCOMDynamicAddrTracking;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAddrTrackingControl self) DisableCOMDynamicAddrTracking;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAddrTrackingControl self) EnableCOMDynamicAddrTracking;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAddrTrackingControl self) DisableCOMDynamicAddrTracking;
 			}
 		}
 		[CRepr]
@@ -1999,14 +2006,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentAddrExclusionList(in Guid riid, void** ppEnumerator) mut => VT.GetCurrentAddrExclusionList(ref this, riid, ppEnumerator);
-			public HRESULT UpdateAddrExclusionList(ref IUnknown pEnumerator) mut => VT.UpdateAddrExclusionList(ref this, ref pEnumerator);
+			public HResult GetCurrentAddrExclusionList(in Guid riid, void** ppEnumerator) mut => VT.GetCurrentAddrExclusionList(ref this, riid, ppEnumerator);
+			public HResult UpdateAddrExclusionList(ref IUnknown pEnumerator) mut => VT.UpdateAddrExclusionList(ref this, ref pEnumerator);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAddrExclusionControl self, in Guid riid, void** ppEnumerator) GetCurrentAddrExclusionList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAddrExclusionControl self, ref IUnknown pEnumerator) UpdateAddrExclusionList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAddrExclusionControl self, in Guid riid, void** ppEnumerator) GetCurrentAddrExclusionList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAddrExclusionControl self, ref IUnknown pEnumerator) UpdateAddrExclusionList;
 			}
 		}
 		[CRepr]
@@ -2016,14 +2023,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Pull(uint8* buf, uint32 cRequest, out uint32 pcReturned) mut => VT.Pull(ref this, buf, cRequest, out pcReturned);
-			public HRESULT Push(uint8* buf, uint32 cSent) mut => VT.Push(ref this, buf, cSent);
+			public HResult Pull(uint8* buf, uint32 cRequest, out uint32 pcReturned) mut => VT.Pull(ref this, buf, cRequest, out pcReturned);
+			public HResult Push(uint8* buf, uint32 cSent) mut => VT.Push(ref this, buf, cSent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPipeByte self, uint8* buf, uint32 cRequest, out uint32 pcReturned) Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPipeByte self, uint8* buf, uint32 cSent) Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPipeByte self, uint8* buf, uint32 cRequest, out uint32 pcReturned) Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPipeByte self, uint8* buf, uint32 cSent) Push;
 			}
 		}
 		[CRepr]
@@ -2033,18 +2040,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_Pull(uint32 cRequest) mut => VT.Begin_Pull(ref this, cRequest);
-			public HRESULT Finish_Pull(uint8* buf, out uint32 pcReturned) mut => VT.Finish_Pull(ref this, buf, out pcReturned);
-			public HRESULT Begin_Push(uint8* buf, uint32 cSent) mut => VT.Begin_Push(ref this, buf, cSent);
-			public HRESULT Finish_Push() mut => VT.Finish_Push(ref this);
+			public HResult Begin_Pull(uint32 cRequest) mut => VT.Begin_Pull(ref this, cRequest);
+			public HResult Finish_Pull(uint8* buf, out uint32 pcReturned) mut => VT.Finish_Pull(ref this, buf, out pcReturned);
+			public HResult Begin_Push(uint8* buf, uint32 cSent) mut => VT.Begin_Push(ref this, buf, cSent);
+			public HResult Finish_Push() mut => VT.Finish_Push(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeByte self, uint32 cRequest) Begin_Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeByte self, uint8* buf, out uint32 pcReturned) Finish_Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeByte self, uint8* buf, uint32 cSent) Begin_Push;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeByte self) Finish_Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeByte self, uint32 cRequest) Begin_Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeByte self, uint8* buf, out uint32 pcReturned) Finish_Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeByte self, uint8* buf, uint32 cSent) Begin_Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeByte self) Finish_Push;
 			}
 		}
 		[CRepr]
@@ -2054,14 +2061,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Pull(int32* buf, uint32 cRequest, out uint32 pcReturned) mut => VT.Pull(ref this, buf, cRequest, out pcReturned);
-			public HRESULT Push(int32* buf, uint32 cSent) mut => VT.Push(ref this, buf, cSent);
+			public HResult Pull(int32* buf, uint32 cRequest, out uint32 pcReturned) mut => VT.Pull(ref this, buf, cRequest, out pcReturned);
+			public HResult Push(int32* buf, uint32 cSent) mut => VT.Push(ref this, buf, cSent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPipeLong self, int32* buf, uint32 cRequest, out uint32 pcReturned) Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPipeLong self, int32* buf, uint32 cSent) Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPipeLong self, int32* buf, uint32 cRequest, out uint32 pcReturned) Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPipeLong self, int32* buf, uint32 cSent) Push;
 			}
 		}
 		[CRepr]
@@ -2071,18 +2078,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_Pull(uint32 cRequest) mut => VT.Begin_Pull(ref this, cRequest);
-			public HRESULT Finish_Pull(int32* buf, out uint32 pcReturned) mut => VT.Finish_Pull(ref this, buf, out pcReturned);
-			public HRESULT Begin_Push(int32* buf, uint32 cSent) mut => VT.Begin_Push(ref this, buf, cSent);
-			public HRESULT Finish_Push() mut => VT.Finish_Push(ref this);
+			public HResult Begin_Pull(uint32 cRequest) mut => VT.Begin_Pull(ref this, cRequest);
+			public HResult Finish_Pull(int32* buf, out uint32 pcReturned) mut => VT.Finish_Pull(ref this, buf, out pcReturned);
+			public HResult Begin_Push(int32* buf, uint32 cSent) mut => VT.Begin_Push(ref this, buf, cSent);
+			public HResult Finish_Push() mut => VT.Finish_Push(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeLong self, uint32 cRequest) Begin_Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeLong self, int32* buf, out uint32 pcReturned) Finish_Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeLong self, int32* buf, uint32 cSent) Begin_Push;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeLong self) Finish_Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeLong self, uint32 cRequest) Begin_Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeLong self, int32* buf, out uint32 pcReturned) Finish_Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeLong self, int32* buf, uint32 cSent) Begin_Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeLong self) Finish_Push;
 			}
 		}
 		[CRepr]
@@ -2092,14 +2099,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Pull(double* buf, uint32 cRequest, out uint32 pcReturned) mut => VT.Pull(ref this, buf, cRequest, out pcReturned);
-			public HRESULT Push(double* buf, uint32 cSent) mut => VT.Push(ref this, buf, cSent);
+			public HResult Pull(double* buf, uint32 cRequest, out uint32 pcReturned) mut => VT.Pull(ref this, buf, cRequest, out pcReturned);
+			public HResult Push(double* buf, uint32 cSent) mut => VT.Push(ref this, buf, cSent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPipeDouble self, double* buf, uint32 cRequest, out uint32 pcReturned) Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPipeDouble self, double* buf, uint32 cSent) Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPipeDouble self, double* buf, uint32 cRequest, out uint32 pcReturned) Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPipeDouble self, double* buf, uint32 cSent) Push;
 			}
 		}
 		[CRepr]
@@ -2109,18 +2116,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_Pull(uint32 cRequest) mut => VT.Begin_Pull(ref this, cRequest);
-			public HRESULT Finish_Pull(double* buf, out uint32 pcReturned) mut => VT.Finish_Pull(ref this, buf, out pcReturned);
-			public HRESULT Begin_Push(double* buf, uint32 cSent) mut => VT.Begin_Push(ref this, buf, cSent);
-			public HRESULT Finish_Push() mut => VT.Finish_Push(ref this);
+			public HResult Begin_Pull(uint32 cRequest) mut => VT.Begin_Pull(ref this, cRequest);
+			public HResult Finish_Pull(double* buf, out uint32 pcReturned) mut => VT.Finish_Pull(ref this, buf, out pcReturned);
+			public HResult Begin_Push(double* buf, uint32 cSent) mut => VT.Begin_Push(ref this, buf, cSent);
+			public HResult Finish_Push() mut => VT.Finish_Push(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeDouble self, uint32 cRequest) Begin_Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeDouble self, double* buf, out uint32 pcReturned) Finish_Pull;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeDouble self, double* buf, uint32 cSent) Begin_Push;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIPipeDouble self) Finish_Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeDouble self, uint32 cRequest) Begin_Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeDouble self, double* buf, out uint32 pcReturned) Finish_Pull;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeDouble self, double* buf, uint32 cSent) Begin_Push;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIPipeDouble self) Finish_Push;
 			}
 		}
 		[CRepr]
@@ -2130,18 +2137,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentApartmentType(out APTTYPE pAptType) mut => VT.GetCurrentApartmentType(ref this, out pAptType);
-			public HRESULT GetCurrentThreadType(out THDTYPE pThreadType) mut => VT.GetCurrentThreadType(ref this, out pThreadType);
-			public HRESULT GetCurrentLogicalThreadId(out Guid pguidLogicalThreadId) mut => VT.GetCurrentLogicalThreadId(ref this, out pguidLogicalThreadId);
-			public HRESULT SetCurrentLogicalThreadId(in Guid rguid) mut => VT.SetCurrentLogicalThreadId(ref this, rguid);
+			public HResult GetCurrentApartmentType(out APTTYPE pAptType) mut => VT.GetCurrentApartmentType(ref this, out pAptType);
+			public HResult GetCurrentThreadType(out THDTYPE pThreadType) mut => VT.GetCurrentThreadType(ref this, out pThreadType);
+			public HResult GetCurrentLogicalThreadId(out Guid pguidLogicalThreadId) mut => VT.GetCurrentLogicalThreadId(ref this, out pguidLogicalThreadId);
+			public HResult SetCurrentLogicalThreadId(in Guid rguid) mut => VT.SetCurrentLogicalThreadId(ref this, rguid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComThreadingInfo self, out APTTYPE pAptType) GetCurrentApartmentType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComThreadingInfo self, out THDTYPE pThreadType) GetCurrentThreadType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComThreadingInfo self, out Guid pguidLogicalThreadId) GetCurrentLogicalThreadId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComThreadingInfo self, in Guid rguid) SetCurrentLogicalThreadId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComThreadingInfo self, out APTTYPE pAptType) GetCurrentApartmentType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComThreadingInfo self, out THDTYPE pThreadType) GetCurrentThreadType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComThreadingInfo self, out Guid pguidLogicalThreadId) GetCurrentLogicalThreadId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComThreadingInfo self, in Guid rguid) SetCurrentLogicalThreadId;
 			}
 		}
 		[CRepr]
@@ -2151,12 +2158,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ResetInitializerTimeout(uint32 dwSecondsRemaining) mut => VT.ResetInitializerTimeout(ref this, dwSecondsRemaining);
+			public HResult ResetInitializerTimeout(uint32 dwSecondsRemaining) mut => VT.ResetInitializerTimeout(ref this, dwSecondsRemaining);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProcessInitControl self, uint32 dwSecondsRemaining) ResetInitializerTimeout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProcessInitControl self, uint32 dwSecondsRemaining) ResetInitializerTimeout;
 			}
 		}
 		[CRepr]
@@ -2176,16 +2183,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterObject(in Guid clsid, PWSTR identifier, ref IUnknown object, out MachineGlobalObjectTableRegistrationToken__* token) mut => VT.RegisterObject(ref this, clsid, identifier, ref object, out token);
-			public HRESULT GetObject(in Guid clsid, PWSTR identifier, in Guid riid, void** ppv) mut => VT.GetObject(ref this, clsid, identifier, riid, ppv);
-			public HRESULT RevokeObject(ref MachineGlobalObjectTableRegistrationToken__ token) mut => VT.RevokeObject(ref this, ref token);
+			public HResult RegisterObject(in Guid clsid, char16* identifier, ref IUnknown object, out MachineGlobalObjectTableRegistrationToken__* token) mut => VT.RegisterObject(ref this, clsid, identifier, ref object, out token);
+			public HResult GetObject(in Guid clsid, char16* identifier, in Guid riid, void** ppv) mut => VT.GetObject(ref this, clsid, identifier, riid, ppv);
+			public HResult RevokeObject(ref MachineGlobalObjectTableRegistrationToken__ token) mut => VT.RevokeObject(ref this, ref token);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMachineGlobalObjectTable self, in Guid clsid, PWSTR identifier, ref IUnknown object, out MachineGlobalObjectTableRegistrationToken__* token) RegisterObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMachineGlobalObjectTable self, in Guid clsid, PWSTR identifier, in Guid riid, void** ppv) GetObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMachineGlobalObjectTable self, ref MachineGlobalObjectTableRegistrationToken__ token) RevokeObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMachineGlobalObjectTable self, in Guid clsid, char16* identifier, ref IUnknown object, out MachineGlobalObjectTableRegistrationToken__* token) RegisterObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMachineGlobalObjectTable self, in Guid clsid, char16* identifier, in Guid riid, void** ppv) GetObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMachineGlobalObjectTable self, ref MachineGlobalObjectTableRegistrationToken__ token) RevokeObject;
 			}
 		}
 		[CRepr]
@@ -2197,14 +2204,14 @@ namespace Win32
 			
 			public uint PreAlloc(uint cbRequest) mut => VT.PreAlloc(ref this, cbRequest);
 			public void* PostAlloc(void* pActual) mut => VT.PostAlloc(ref this, pActual);
-			public void* PreFree(void* pRequest, BOOL fSpyed) mut => VT.PreFree(ref this, pRequest, fSpyed);
-			public void PostFree(BOOL fSpyed) mut => VT.PostFree(ref this, fSpyed);
-			public uint PreRealloc(void* pRequest, uint cbRequest, void** ppNewRequest, BOOL fSpyed) mut => VT.PreRealloc(ref this, pRequest, cbRequest, ppNewRequest, fSpyed);
-			public void* PostRealloc(void* pActual, BOOL fSpyed) mut => VT.PostRealloc(ref this, pActual, fSpyed);
-			public void* PreGetSize(void* pRequest, BOOL fSpyed) mut => VT.PreGetSize(ref this, pRequest, fSpyed);
-			public uint PostGetSize(uint cbActual, BOOL fSpyed) mut => VT.PostGetSize(ref this, cbActual, fSpyed);
-			public void* PreDidAlloc(void* pRequest, BOOL fSpyed) mut => VT.PreDidAlloc(ref this, pRequest, fSpyed);
-			public int32 PostDidAlloc(void* pRequest, BOOL fSpyed, int32 fActual) mut => VT.PostDidAlloc(ref this, pRequest, fSpyed, fActual);
+			public void* PreFree(void* pRequest, IntBool fSpyed) mut => VT.PreFree(ref this, pRequest, fSpyed);
+			public void PostFree(IntBool fSpyed) mut => VT.PostFree(ref this, fSpyed);
+			public uint PreRealloc(void* pRequest, uint cbRequest, void** ppNewRequest, IntBool fSpyed) mut => VT.PreRealloc(ref this, pRequest, cbRequest, ppNewRequest, fSpyed);
+			public void* PostRealloc(void* pActual, IntBool fSpyed) mut => VT.PostRealloc(ref this, pActual, fSpyed);
+			public void* PreGetSize(void* pRequest, IntBool fSpyed) mut => VT.PreGetSize(ref this, pRequest, fSpyed);
+			public uint PostGetSize(uint cbActual, IntBool fSpyed) mut => VT.PostGetSize(ref this, cbActual, fSpyed);
+			public void* PreDidAlloc(void* pRequest, IntBool fSpyed) mut => VT.PreDidAlloc(ref this, pRequest, fSpyed);
+			public int32 PostDidAlloc(void* pRequest, IntBool fSpyed, int32 fActual) mut => VT.PostDidAlloc(ref this, pRequest, fSpyed, fActual);
 			public void PreHeapMinimize() mut => VT.PreHeapMinimize(ref this);
 			public void PostHeapMinimize() mut => VT.PostHeapMinimize(ref this);
 
@@ -2213,14 +2220,14 @@ namespace Win32
 			{
 				public new function [CallingConvention(.Stdcall)] uint(ref IMallocSpy self, uint cbRequest) PreAlloc;
 				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pActual) PostAlloc;
-				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pRequest, BOOL fSpyed) PreFree;
-				public new function [CallingConvention(.Stdcall)] void(ref IMallocSpy self, BOOL fSpyed) PostFree;
-				public new function [CallingConvention(.Stdcall)] uint(ref IMallocSpy self, void* pRequest, uint cbRequest, void** ppNewRequest, BOOL fSpyed) PreRealloc;
-				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pActual, BOOL fSpyed) PostRealloc;
-				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pRequest, BOOL fSpyed) PreGetSize;
-				public new function [CallingConvention(.Stdcall)] uint(ref IMallocSpy self, uint cbActual, BOOL fSpyed) PostGetSize;
-				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pRequest, BOOL fSpyed) PreDidAlloc;
-				public new function [CallingConvention(.Stdcall)] int32(ref IMallocSpy self, void* pRequest, BOOL fSpyed, int32 fActual) PostDidAlloc;
+				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pRequest, IntBool fSpyed) PreFree;
+				public new function [CallingConvention(.Stdcall)] void(ref IMallocSpy self, IntBool fSpyed) PostFree;
+				public new function [CallingConvention(.Stdcall)] uint(ref IMallocSpy self, void* pRequest, uint cbRequest, void** ppNewRequest, IntBool fSpyed) PreRealloc;
+				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pActual, IntBool fSpyed) PostRealloc;
+				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pRequest, IntBool fSpyed) PreGetSize;
+				public new function [CallingConvention(.Stdcall)] uint(ref IMallocSpy self, uint cbActual, IntBool fSpyed) PostGetSize;
+				public new function [CallingConvention(.Stdcall)] void*(ref IMallocSpy self, void* pRequest, IntBool fSpyed) PreDidAlloc;
+				public new function [CallingConvention(.Stdcall)] int32(ref IMallocSpy self, void* pRequest, IntBool fSpyed, int32 fActual) PostDidAlloc;
 				public new function [CallingConvention(.Stdcall)] void(ref IMallocSpy self) PreHeapMinimize;
 				public new function [CallingConvention(.Stdcall)] void(ref IMallocSpy self) PostHeapMinimize;
 			}
@@ -2232,30 +2239,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterObjectBound(ref IUnknown punk) mut => VT.RegisterObjectBound(ref this, ref punk);
-			public HRESULT RevokeObjectBound(ref IUnknown punk) mut => VT.RevokeObjectBound(ref this, ref punk);
-			public HRESULT ReleaseBoundObjects() mut => VT.ReleaseBoundObjects(ref this);
-			public HRESULT SetBindOptions(ref BIND_OPTS pbindopts) mut => VT.SetBindOptions(ref this, ref pbindopts);
-			public HRESULT GetBindOptions(out BIND_OPTS pbindopts) mut => VT.GetBindOptions(ref this, out pbindopts);
-			public HRESULT GetRunningObjectTable(out IRunningObjectTable* pprot) mut => VT.GetRunningObjectTable(ref this, out pprot);
-			public HRESULT RegisterObjectParam(PWSTR pszKey, ref IUnknown punk) mut => VT.RegisterObjectParam(ref this, pszKey, ref punk);
-			public HRESULT GetObjectParam(PWSTR pszKey, out IUnknown* ppunk) mut => VT.GetObjectParam(ref this, pszKey, out ppunk);
-			public HRESULT EnumObjectParam(out IEnumString* ppenum) mut => VT.EnumObjectParam(ref this, out ppenum);
-			public HRESULT RevokeObjectParam(PWSTR pszKey) mut => VT.RevokeObjectParam(ref this, pszKey);
+			public HResult RegisterObjectBound(ref IUnknown punk) mut => VT.RegisterObjectBound(ref this, ref punk);
+			public HResult RevokeObjectBound(ref IUnknown punk) mut => VT.RevokeObjectBound(ref this, ref punk);
+			public HResult ReleaseBoundObjects() mut => VT.ReleaseBoundObjects(ref this);
+			public HResult SetBindOptions(ref BIND_OPTS pbindopts) mut => VT.SetBindOptions(ref this, ref pbindopts);
+			public HResult GetBindOptions(out BIND_OPTS pbindopts) mut => VT.GetBindOptions(ref this, out pbindopts);
+			public HResult GetRunningObjectTable(out IRunningObjectTable* pprot) mut => VT.GetRunningObjectTable(ref this, out pprot);
+			public HResult RegisterObjectParam(char16* pszKey, ref IUnknown punk) mut => VT.RegisterObjectParam(ref this, pszKey, ref punk);
+			public HResult GetObjectParam(char16* pszKey, out IUnknown* ppunk) mut => VT.GetObjectParam(ref this, pszKey, out ppunk);
+			public HResult EnumObjectParam(out IEnumString* ppenum) mut => VT.EnumObjectParam(ref this, out ppenum);
+			public HResult RevokeObjectParam(char16* pszKey) mut => VT.RevokeObjectParam(ref this, pszKey);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, ref IUnknown punk) RegisterObjectBound;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, ref IUnknown punk) RevokeObjectBound;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self) ReleaseBoundObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, ref BIND_OPTS pbindopts) SetBindOptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, out BIND_OPTS pbindopts) GetBindOptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, out IRunningObjectTable* pprot) GetRunningObjectTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, PWSTR pszKey, ref IUnknown punk) RegisterObjectParam;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, PWSTR pszKey, out IUnknown* ppunk) GetObjectParam;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, out IEnumString* ppenum) EnumObjectParam;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCtx self, PWSTR pszKey) RevokeObjectParam;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, ref IUnknown punk) RegisterObjectBound;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, ref IUnknown punk) RevokeObjectBound;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self) ReleaseBoundObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, ref BIND_OPTS pbindopts) SetBindOptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, out BIND_OPTS pbindopts) GetBindOptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, out IRunningObjectTable* pprot) GetRunningObjectTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, char16* pszKey, ref IUnknown punk) RegisterObjectParam;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, char16* pszKey, out IUnknown* ppunk) GetObjectParam;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, out IEnumString* ppenum) EnumObjectParam;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCtx self, char16* pszKey) RevokeObjectParam;
 			}
 		}
 		[CRepr]
@@ -2265,18 +2272,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, IMoniker** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumMoniker* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, IMoniker** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumMoniker* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMoniker self, uint32 celt, IMoniker** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMoniker self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMoniker self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMoniker self, out IEnumMoniker* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMoniker self, uint32 celt, IMoniker** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMoniker self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMoniker self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMoniker self, out IEnumMoniker* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -2286,20 +2293,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRunningClass(out Guid lpClsid) mut => VT.GetRunningClass(ref this, out lpClsid);
-			public HRESULT Run(ref IBindCtx pbc) mut => VT.Run(ref this, ref pbc);
-			public BOOL IsRunning() mut => VT.IsRunning(ref this);
-			public HRESULT LockRunning(BOOL fLock, BOOL fLastUnlockCloses) mut => VT.LockRunning(ref this, fLock, fLastUnlockCloses);
-			public HRESULT SetContainedObject(BOOL fContained) mut => VT.SetContainedObject(ref this, fContained);
+			public HResult GetRunningClass(out Guid lpClsid) mut => VT.GetRunningClass(ref this, out lpClsid);
+			public HResult Run(ref IBindCtx pbc) mut => VT.Run(ref this, ref pbc);
+			public IntBool IsRunning() mut => VT.IsRunning(ref this);
+			public HResult LockRunning(IntBool fLock, IntBool fLastUnlockCloses) mut => VT.LockRunning(ref this, fLock, fLastUnlockCloses);
+			public HResult SetContainedObject(IntBool fContained) mut => VT.SetContainedObject(ref this, fContained);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunnableObject self, out Guid lpClsid) GetRunningClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunnableObject self, ref IBindCtx pbc) Run;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IRunnableObject self) IsRunning;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunnableObject self, BOOL fLock, BOOL fLastUnlockCloses) LockRunning;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunnableObject self, BOOL fContained) SetContainedObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunnableObject self, out Guid lpClsid) GetRunningClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunnableObject self, ref IBindCtx pbc) Run;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IRunnableObject self) IsRunning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunnableObject self, IntBool fLock, IntBool fLastUnlockCloses) LockRunning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunnableObject self, IntBool fContained) SetContainedObject;
 			}
 		}
 		[CRepr]
@@ -2309,24 +2316,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Register(uint32 grfFlags, ref IUnknown punkObject, ref IMoniker pmkObjectName, out uint32 pdwRegister) mut => VT.Register(ref this, grfFlags, ref punkObject, ref pmkObjectName, out pdwRegister);
-			public HRESULT Revoke(uint32 dwRegister) mut => VT.Revoke(ref this, dwRegister);
-			public HRESULT IsRunning(ref IMoniker pmkObjectName) mut => VT.IsRunning(ref this, ref pmkObjectName);
-			public HRESULT GetObject(ref IMoniker pmkObjectName, out IUnknown* ppunkObject) mut => VT.GetObject(ref this, ref pmkObjectName, out ppunkObject);
-			public HRESULT NoteChangeTime(uint32 dwRegister, ref FILETIME pfiletime) mut => VT.NoteChangeTime(ref this, dwRegister, ref pfiletime);
-			public HRESULT GetTimeOfLastChange(ref IMoniker pmkObjectName, out FILETIME pfiletime) mut => VT.GetTimeOfLastChange(ref this, ref pmkObjectName, out pfiletime);
-			public HRESULT EnumRunning(out IEnumMoniker* ppenumMoniker) mut => VT.EnumRunning(ref this, out ppenumMoniker);
+			public HResult Register(uint32 grfFlags, ref IUnknown punkObject, ref IMoniker pmkObjectName, out uint32 pdwRegister) mut => VT.Register(ref this, grfFlags, ref punkObject, ref pmkObjectName, out pdwRegister);
+			public HResult Revoke(uint32 dwRegister) mut => VT.Revoke(ref this, dwRegister);
+			public HResult IsRunning(ref IMoniker pmkObjectName) mut => VT.IsRunning(ref this, ref pmkObjectName);
+			public HResult GetObject(ref IMoniker pmkObjectName, out IUnknown* ppunkObject) mut => VT.GetObject(ref this, ref pmkObjectName, out ppunkObject);
+			public HResult NoteChangeTime(uint32 dwRegister, ref FileTime pfiletime) mut => VT.NoteChangeTime(ref this, dwRegister, ref pfiletime);
+			public HResult GetTimeOfLastChange(ref IMoniker pmkObjectName, out FileTime pfiletime) mut => VT.GetTimeOfLastChange(ref this, ref pmkObjectName, out pfiletime);
+			public HResult EnumRunning(out IEnumMoniker* ppenumMoniker) mut => VT.EnumRunning(ref this, out ppenumMoniker);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, uint32 grfFlags, ref IUnknown punkObject, ref IMoniker pmkObjectName, out uint32 pdwRegister) Register;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, uint32 dwRegister) Revoke;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, ref IMoniker pmkObjectName) IsRunning;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, ref IMoniker pmkObjectName, out IUnknown* ppunkObject) GetObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, uint32 dwRegister, ref FILETIME pfiletime) NoteChangeTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, ref IMoniker pmkObjectName, out FILETIME pfiletime) GetTimeOfLastChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRunningObjectTable self, out IEnumMoniker* ppenumMoniker) EnumRunning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, uint32 grfFlags, ref IUnknown punkObject, ref IMoniker pmkObjectName, out uint32 pdwRegister) Register;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, uint32 dwRegister) Revoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, ref IMoniker pmkObjectName) IsRunning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, ref IMoniker pmkObjectName, out IUnknown* ppunkObject) GetObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, uint32 dwRegister, ref FileTime pfiletime) NoteChangeTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, ref IMoniker pmkObjectName, out FileTime pfiletime) GetTimeOfLastChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRunningObjectTable self, out IEnumMoniker* ppenumMoniker) EnumRunning;
 			}
 		}
 		[CRepr]
@@ -2336,12 +2343,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetClassID(out Guid pClassID) mut => VT.GetClassID(ref this, out pClassID);
+			public HResult GetClassID(out Guid pClassID) mut => VT.GetClassID(ref this, out pClassID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersist self, out Guid pClassID) GetClassID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersist self, out Guid pClassID) GetClassID;
 			}
 		}
 		[CRepr]
@@ -2351,18 +2358,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsDirty() mut => VT.IsDirty(ref this);
-			public HRESULT Load(ref IStream pStm) mut => VT.Load(ref this, ref pStm);
-			public HRESULT Save(ref IStream pStm, BOOL fClearDirty) mut => VT.Save(ref this, ref pStm, fClearDirty);
-			public HRESULT GetSizeMax(out ULARGE_INTEGER pcbSize) mut => VT.GetSizeMax(ref this, out pcbSize);
+			public HResult IsDirty() mut => VT.IsDirty(ref this);
+			public HResult Load(ref IStream pStm) mut => VT.Load(ref this, ref pStm);
+			public HResult Save(ref IStream pStm, IntBool fClearDirty) mut => VT.Save(ref this, ref pStm, fClearDirty);
+			public HResult GetSizeMax(out ULARGE_INTEGER pcbSize) mut => VT.GetSizeMax(ref this, out pcbSize);
 
 			[CRepr]
 			public struct VTable : IPersist.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStream self) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStream self, ref IStream pStm) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStream self, ref IStream pStm, BOOL fClearDirty) Save;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStream self, out ULARGE_INTEGER pcbSize) GetSizeMax;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStream self) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStream self, ref IStream pStm) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStream self, ref IStream pStm, IntBool fClearDirty) Save;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStream self, out ULARGE_INTEGER pcbSize) GetSizeMax;
 			}
 		}
 		[CRepr]
@@ -2372,40 +2379,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BindToObject(ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riidResult, void** ppvResult) mut => VT.BindToObject(ref this, ref pbc, pmkToLeft, riidResult, ppvResult);
-			public HRESULT BindToStorage(ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riid, void** ppvObj) mut => VT.BindToStorage(ref this, ref pbc, pmkToLeft, riid, ppvObj);
-			public HRESULT Reduce(ref IBindCtx pbc, uint32 dwReduceHowFar, out IMoniker* ppmkToLeft, out IMoniker* ppmkReduced) mut => VT.Reduce(ref this, ref pbc, dwReduceHowFar, out ppmkToLeft, out ppmkReduced);
-			public HRESULT ComposeWith(ref IMoniker pmkRight, BOOL fOnlyIfNotGeneric, out IMoniker* ppmkComposite) mut => VT.ComposeWith(ref this, ref pmkRight, fOnlyIfNotGeneric, out ppmkComposite);
-			public HRESULT Enum(BOOL fForward, out IEnumMoniker* ppenumMoniker) mut => VT.Enum(ref this, fForward, out ppenumMoniker);
-			public HRESULT IsEqual(ref IMoniker pmkOtherMoniker) mut => VT.IsEqual(ref this, ref pmkOtherMoniker);
-			public HRESULT Hash(out uint32 pdwHash) mut => VT.Hash(ref this, out pdwHash);
-			public HRESULT IsRunning(ref IBindCtx pbc, ref IMoniker pmkToLeft, ref IMoniker pmkNewlyRunning) mut => VT.IsRunning(ref this, ref pbc, ref pmkToLeft, ref pmkNewlyRunning);
-			public HRESULT GetTimeOfLastChange(ref IBindCtx pbc, ref IMoniker pmkToLeft, out FILETIME pFileTime) mut => VT.GetTimeOfLastChange(ref this, ref pbc, ref pmkToLeft, out pFileTime);
-			public HRESULT Inverse(out IMoniker* ppmk) mut => VT.Inverse(ref this, out ppmk);
-			public HRESULT CommonPrefixWith(ref IMoniker pmkOther, out IMoniker* ppmkPrefix) mut => VT.CommonPrefixWith(ref this, ref pmkOther, out ppmkPrefix);
-			public HRESULT RelativePathTo(ref IMoniker pmkOther, out IMoniker* ppmkRelPath) mut => VT.RelativePathTo(ref this, ref pmkOther, out ppmkRelPath);
-			public HRESULT GetDisplayName(ref IBindCtx pbc, ref IMoniker pmkToLeft, out PWSTR ppszDisplayName) mut => VT.GetDisplayName(ref this, ref pbc, ref pmkToLeft, out ppszDisplayName);
-			public HRESULT ParseDisplayName(ref IBindCtx pbc, ref IMoniker pmkToLeft, PWSTR pszDisplayName, out uint32 pchEaten, out IMoniker* ppmkOut) mut => VT.ParseDisplayName(ref this, ref pbc, ref pmkToLeft, pszDisplayName, out pchEaten, out ppmkOut);
-			public HRESULT IsSystemMoniker(out uint32 pdwMksys) mut => VT.IsSystemMoniker(ref this, out pdwMksys);
+			public HResult BindToObject(ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riidResult, void** ppvResult) mut => VT.BindToObject(ref this, ref pbc, pmkToLeft, riidResult, ppvResult);
+			public HResult BindToStorage(ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riid, void** ppvObj) mut => VT.BindToStorage(ref this, ref pbc, pmkToLeft, riid, ppvObj);
+			public HResult Reduce(ref IBindCtx pbc, uint32 dwReduceHowFar, out IMoniker* ppmkToLeft, out IMoniker* ppmkReduced) mut => VT.Reduce(ref this, ref pbc, dwReduceHowFar, out ppmkToLeft, out ppmkReduced);
+			public HResult ComposeWith(ref IMoniker pmkRight, IntBool fOnlyIfNotGeneric, out IMoniker* ppmkComposite) mut => VT.ComposeWith(ref this, ref pmkRight, fOnlyIfNotGeneric, out ppmkComposite);
+			public HResult Enum(IntBool fForward, out IEnumMoniker* ppenumMoniker) mut => VT.Enum(ref this, fForward, out ppenumMoniker);
+			public HResult IsEqual(ref IMoniker pmkOtherMoniker) mut => VT.IsEqual(ref this, ref pmkOtherMoniker);
+			public HResult Hash(out uint32 pdwHash) mut => VT.Hash(ref this, out pdwHash);
+			public HResult IsRunning(ref IBindCtx pbc, ref IMoniker pmkToLeft, ref IMoniker pmkNewlyRunning) mut => VT.IsRunning(ref this, ref pbc, ref pmkToLeft, ref pmkNewlyRunning);
+			public HResult GetTimeOfLastChange(ref IBindCtx pbc, ref IMoniker pmkToLeft, out FileTime pFileTime) mut => VT.GetTimeOfLastChange(ref this, ref pbc, ref pmkToLeft, out pFileTime);
+			public HResult Inverse(out IMoniker* ppmk) mut => VT.Inverse(ref this, out ppmk);
+			public HResult CommonPrefixWith(ref IMoniker pmkOther, out IMoniker* ppmkPrefix) mut => VT.CommonPrefixWith(ref this, ref pmkOther, out ppmkPrefix);
+			public HResult RelativePathTo(ref IMoniker pmkOther, out IMoniker* ppmkRelPath) mut => VT.RelativePathTo(ref this, ref pmkOther, out ppmkRelPath);
+			public HResult GetDisplayName(ref IBindCtx pbc, ref IMoniker pmkToLeft, out char16* ppszDisplayName) mut => VT.GetDisplayName(ref this, ref pbc, ref pmkToLeft, out ppszDisplayName);
+			public HResult ParseDisplayName(ref IBindCtx pbc, ref IMoniker pmkToLeft, char16* pszDisplayName, out uint32 pchEaten, out IMoniker* ppmkOut) mut => VT.ParseDisplayName(ref this, ref pbc, ref pmkToLeft, pszDisplayName, out pchEaten, out ppmkOut);
+			public HResult IsSystemMoniker(out uint32 pdwMksys) mut => VT.IsSystemMoniker(ref this, out pdwMksys);
 
 			[CRepr]
 			public struct VTable : IPersistStream.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riidResult, void** ppvResult) BindToObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riid, void** ppvObj) BindToStorage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, uint32 dwReduceHowFar, out IMoniker* ppmkToLeft, out IMoniker* ppmkReduced) Reduce;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IMoniker pmkRight, BOOL fOnlyIfNotGeneric, out IMoniker* ppmkComposite) ComposeWith;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, BOOL fForward, out IEnumMoniker* ppenumMoniker) Enum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IMoniker pmkOtherMoniker) IsEqual;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, out uint32 pdwHash) Hash;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, ref IMoniker pmkNewlyRunning) IsRunning;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, out FILETIME pFileTime) GetTimeOfLastChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, out IMoniker* ppmk) Inverse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IMoniker pmkOther, out IMoniker* ppmkPrefix) CommonPrefixWith;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IMoniker pmkOther, out IMoniker* ppmkRelPath) RelativePathTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, out PWSTR ppszDisplayName) GetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, PWSTR pszDisplayName, out uint32 pchEaten, out IMoniker* ppmkOut) ParseDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMoniker self, out uint32 pdwMksys) IsSystemMoniker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riidResult, void** ppvResult) BindToObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, IMoniker* pmkToLeft, in Guid riid, void** ppvObj) BindToStorage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, uint32 dwReduceHowFar, out IMoniker* ppmkToLeft, out IMoniker* ppmkReduced) Reduce;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IMoniker pmkRight, IntBool fOnlyIfNotGeneric, out IMoniker* ppmkComposite) ComposeWith;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, IntBool fForward, out IEnumMoniker* ppenumMoniker) Enum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IMoniker pmkOtherMoniker) IsEqual;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, out uint32 pdwHash) Hash;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, ref IMoniker pmkNewlyRunning) IsRunning;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, out FileTime pFileTime) GetTimeOfLastChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, out IMoniker* ppmk) Inverse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IMoniker pmkOther, out IMoniker* ppmkPrefix) CommonPrefixWith;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IMoniker pmkOther, out IMoniker* ppmkRelPath) RelativePathTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, out char16* ppszDisplayName) GetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, ref IBindCtx pbc, ref IMoniker pmkToLeft, char16* pszDisplayName, out uint32 pchEaten, out IMoniker* ppmkOut) ParseDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMoniker self, out uint32 pdwMksys) IsSystemMoniker;
 			}
 		}
 		[CRepr]
@@ -2415,12 +2422,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetComparisonData(uint8* pbData, uint32 cbMax, out uint32 pcbData) mut => VT.GetComparisonData(ref this, pbData, cbMax, out pcbData);
+			public HResult GetComparisonData(uint8* pbData, uint32 cbMax, out uint32 pcbData) mut => VT.GetComparisonData(ref this, pbData, cbMax, out pcbData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IROTData self, uint8* pbData, uint32 cbMax, out uint32 pcbData) GetComparisonData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IROTData self, uint8* pbData, uint32 cbMax, out uint32 pcbData) GetComparisonData;
 			}
 		}
 		[CRepr]
@@ -2430,20 +2437,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsDirty() mut => VT.IsDirty(ref this);
-			public HRESULT Load(PWSTR pszFileName, uint32 dwMode) mut => VT.Load(ref this, pszFileName, dwMode);
-			public HRESULT Save(PWSTR pszFileName, BOOL fRemember) mut => VT.Save(ref this, pszFileName, fRemember);
-			public HRESULT SaveCompleted(PWSTR pszFileName) mut => VT.SaveCompleted(ref this, pszFileName);
-			public HRESULT GetCurFile(out PWSTR ppszFileName) mut => VT.GetCurFile(ref this, out ppszFileName);
+			public HResult IsDirty() mut => VT.IsDirty(ref this);
+			public HResult Load(char16* pszFileName, uint32 dwMode) mut => VT.Load(ref this, pszFileName, dwMode);
+			public HResult Save(char16* pszFileName, IntBool fRemember) mut => VT.Save(ref this, pszFileName, fRemember);
+			public HResult SaveCompleted(char16* pszFileName) mut => VT.SaveCompleted(ref this, pszFileName);
+			public HResult GetCurFile(out char16* ppszFileName) mut => VT.GetCurFile(ref this, out ppszFileName);
 
 			[CRepr]
 			public struct VTable : IPersist.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistFile self) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistFile self, PWSTR pszFileName, uint32 dwMode) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistFile self, PWSTR pszFileName, BOOL fRemember) Save;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistFile self, PWSTR pszFileName) SaveCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistFile self, out PWSTR ppszFileName) GetCurFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistFile self) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistFile self, char16* pszFileName, uint32 dwMode) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistFile self, char16* pszFileName, IntBool fRemember) Save;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistFile self, char16* pszFileName) SaveCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistFile self, out char16* ppszFileName) GetCurFile;
 			}
 		}
 		[CRepr]
@@ -2453,18 +2460,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, FORMATETC* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumFORMATETC* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, FORMATETC* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumFORMATETC* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumFORMATETC self, uint32 celt, FORMATETC* rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumFORMATETC self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumFORMATETC self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumFORMATETC self, out IEnumFORMATETC* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumFORMATETC self, uint32 celt, FORMATETC* rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumFORMATETC self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumFORMATETC self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumFORMATETC self, out IEnumFORMATETC* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -2474,18 +2481,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, STATDATA* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumSTATDATA* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, STATDATA* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumSTATDATA* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumSTATDATA self, uint32 celt, STATDATA* rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumSTATDATA self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumSTATDATA self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumSTATDATA self, out IEnumSTATDATA* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumSTATDATA self, uint32 celt, STATDATA* rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumSTATDATA self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumSTATDATA self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumSTATDATA self, out IEnumSTATDATA* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -2583,28 +2590,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetData(ref FORMATETC pformatetcIn, out STGMEDIUM pmedium) mut => VT.GetData(ref this, ref pformatetcIn, out pmedium);
-			public HRESULT GetDataHere(ref FORMATETC pformatetc, out STGMEDIUM pmedium) mut => VT.GetDataHere(ref this, ref pformatetc, out pmedium);
-			public HRESULT QueryGetData(ref FORMATETC pformatetc) mut => VT.QueryGetData(ref this, ref pformatetc);
-			public HRESULT GetCanonicalFormatEtc(ref FORMATETC pformatectIn, out FORMATETC pformatetcOut) mut => VT.GetCanonicalFormatEtc(ref this, ref pformatectIn, out pformatetcOut);
-			public HRESULT SetData(ref FORMATETC pformatetc, ref STGMEDIUM pmedium, BOOL fRelease) mut => VT.SetData(ref this, ref pformatetc, ref pmedium, fRelease);
-			public HRESULT EnumFormatEtc(uint32 dwDirection, out IEnumFORMATETC* ppenumFormatEtc) mut => VT.EnumFormatEtc(ref this, dwDirection, out ppenumFormatEtc);
-			public HRESULT DAdvise(ref FORMATETC pformatetc, uint32 advf, ref IAdviseSink pAdvSink, out uint32 pdwConnection) mut => VT.DAdvise(ref this, ref pformatetc, advf, ref pAdvSink, out pdwConnection);
-			public HRESULT DUnadvise(uint32 dwConnection) mut => VT.DUnadvise(ref this, dwConnection);
-			public HRESULT EnumDAdvise(out IEnumSTATDATA* ppenumAdvise) mut => VT.EnumDAdvise(ref this, out ppenumAdvise);
+			public HResult GetData(ref FORMATETC pformatetcIn, out STGMEDIUM pmedium) mut => VT.GetData(ref this, ref pformatetcIn, out pmedium);
+			public HResult GetDataHere(ref FORMATETC pformatetc, out STGMEDIUM pmedium) mut => VT.GetDataHere(ref this, ref pformatetc, out pmedium);
+			public HResult QueryGetData(ref FORMATETC pformatetc) mut => VT.QueryGetData(ref this, ref pformatetc);
+			public HResult GetCanonicalFormatEtc(ref FORMATETC pformatectIn, out FORMATETC pformatetcOut) mut => VT.GetCanonicalFormatEtc(ref this, ref pformatectIn, out pformatetcOut);
+			public HResult SetData(ref FORMATETC pformatetc, ref STGMEDIUM pmedium, IntBool fRelease) mut => VT.SetData(ref this, ref pformatetc, ref pmedium, fRelease);
+			public HResult EnumFormatEtc(uint32 dwDirection, out IEnumFORMATETC* ppenumFormatEtc) mut => VT.EnumFormatEtc(ref this, dwDirection, out ppenumFormatEtc);
+			public HResult DAdvise(ref FORMATETC pformatetc, uint32 advf, ref IAdviseSink pAdvSink, out uint32 pdwConnection) mut => VT.DAdvise(ref this, ref pformatetc, advf, ref pAdvSink, out pdwConnection);
+			public HResult DUnadvise(uint32 dwConnection) mut => VT.DUnadvise(ref this, dwConnection);
+			public HResult EnumDAdvise(out IEnumSTATDATA* ppenumAdvise) mut => VT.EnumDAdvise(ref this, out ppenumAdvise);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, ref FORMATETC pformatetcIn, out STGMEDIUM pmedium) GetData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, ref FORMATETC pformatetc, out STGMEDIUM pmedium) GetDataHere;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, ref FORMATETC pformatetc) QueryGetData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, ref FORMATETC pformatectIn, out FORMATETC pformatetcOut) GetCanonicalFormatEtc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, ref FORMATETC pformatetc, ref STGMEDIUM pmedium, BOOL fRelease) SetData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, uint32 dwDirection, out IEnumFORMATETC* ppenumFormatEtc) EnumFormatEtc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, ref FORMATETC pformatetc, uint32 advf, ref IAdviseSink pAdvSink, out uint32 pdwConnection) DAdvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, uint32 dwConnection) DUnadvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataObject self, out IEnumSTATDATA* ppenumAdvise) EnumDAdvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, ref FORMATETC pformatetcIn, out STGMEDIUM pmedium) GetData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, ref FORMATETC pformatetc, out STGMEDIUM pmedium) GetDataHere;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, ref FORMATETC pformatetc) QueryGetData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, ref FORMATETC pformatectIn, out FORMATETC pformatetcOut) GetCanonicalFormatEtc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, ref FORMATETC pformatetc, ref STGMEDIUM pmedium, IntBool fRelease) SetData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, uint32 dwDirection, out IEnumFORMATETC* ppenumFormatEtc) EnumFormatEtc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, ref FORMATETC pformatetc, uint32 advf, ref IAdviseSink pAdvSink, out uint32 pdwConnection) DAdvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, uint32 dwConnection) DUnadvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataObject self, out IEnumSTATDATA* ppenumAdvise) EnumDAdvise;
 			}
 		}
 		[CRepr]
@@ -2614,18 +2621,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Advise(IDataObject* pDataObject, ref FORMATETC pFetc, uint32 advf, ref IAdviseSink pAdvise, out uint32 pdwConnection) mut => VT.Advise(ref this, pDataObject, ref pFetc, advf, ref pAdvise, out pdwConnection);
-			public HRESULT Unadvise(uint32 dwConnection) mut => VT.Unadvise(ref this, dwConnection);
-			public HRESULT EnumAdvise(out IEnumSTATDATA* ppenumAdvise) mut => VT.EnumAdvise(ref this, out ppenumAdvise);
-			public HRESULT SendOnDataChange(ref IDataObject pDataObject, uint32 dwReserved, uint32 advf) mut => VT.SendOnDataChange(ref this, ref pDataObject, dwReserved, advf);
+			public HResult Advise(IDataObject* pDataObject, ref FORMATETC pFetc, uint32 advf, ref IAdviseSink pAdvise, out uint32 pdwConnection) mut => VT.Advise(ref this, pDataObject, ref pFetc, advf, ref pAdvise, out pdwConnection);
+			public HResult Unadvise(uint32 dwConnection) mut => VT.Unadvise(ref this, dwConnection);
+			public HResult EnumAdvise(out IEnumSTATDATA* ppenumAdvise) mut => VT.EnumAdvise(ref this, out ppenumAdvise);
+			public HResult SendOnDataChange(ref IDataObject pDataObject, uint32 dwReserved, uint32 advf) mut => VT.SendOnDataChange(ref this, ref pDataObject, dwReserved, advf);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataAdviseHolder self, IDataObject* pDataObject, ref FORMATETC pFetc, uint32 advf, ref IAdviseSink pAdvise, out uint32 pdwConnection) Advise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataAdviseHolder self, uint32 dwConnection) Unadvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataAdviseHolder self, out IEnumSTATDATA* ppenumAdvise) EnumAdvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataAdviseHolder self, ref IDataObject pDataObject, uint32 dwReserved, uint32 advf) SendOnDataChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataAdviseHolder self, IDataObject* pDataObject, ref FORMATETC pFetc, uint32 advf, ref IAdviseSink pAdvise, out uint32 pdwConnection) Advise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataAdviseHolder self, uint32 dwConnection) Unadvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataAdviseHolder self, out IEnumSTATDATA* ppenumAdvise) EnumAdvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataAdviseHolder self, ref IDataObject pDataObject, uint32 dwReserved, uint32 advf) SendOnDataChange;
 			}
 		}
 		[CRepr]
@@ -2635,12 +2642,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetClassObject(in Guid rclsid, uint32 dwClassContext, uint32 locale, in Guid riid, void** ppv) mut => VT.GetClassObject(ref this, rclsid, dwClassContext, locale, riid, ppv);
+			public HResult GetClassObject(in Guid rclsid, uint32 dwClassContext, uint32 locale, in Guid riid, void** ppv) mut => VT.GetClassObject(ref this, rclsid, dwClassContext, locale, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClassActivator self, in Guid rclsid, uint32 dwClassContext, uint32 locale, in Guid riid, void** ppv) GetClassObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClassActivator self, in Guid rclsid, uint32 dwClassContext, uint32 locale, in Guid riid, void** ppv) GetClassObject;
 			}
 		}
 		[CRepr]
@@ -2650,12 +2657,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnProgress(uint32 dwProgressCurrent, uint32 dwProgressMaximum, BOOL fAccurate, BOOL fOwner) mut => VT.OnProgress(ref this, dwProgressCurrent, dwProgressMaximum, fAccurate, fOwner);
+			public HResult OnProgress(uint32 dwProgressCurrent, uint32 dwProgressMaximum, IntBool fAccurate, IntBool fOwner) mut => VT.OnProgress(ref this, dwProgressCurrent, dwProgressMaximum, fAccurate, fOwner);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProgressNotify self, uint32 dwProgressCurrent, uint32 dwProgressMaximum, BOOL fAccurate, BOOL fOwner) OnProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProgressNotify self, uint32 dwProgressCurrent, uint32 dwProgressMaximum, IntBool fAccurate, IntBool fOwner) OnProgress;
 			}
 		}
 		[CRepr]
@@ -2665,14 +2672,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Lock(uint32 dwTimeout) mut => VT.Lock(ref this, dwTimeout);
-			public HRESULT Unlock() mut => VT.Unlock(ref this);
+			public HResult Lock(uint32 dwTimeout) mut => VT.Lock(ref this, dwTimeout);
+			public HResult Unlock() mut => VT.Unlock(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBlockingLock self, uint32 dwTimeout) Lock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBlockingLock self) Unlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBlockingLock self, uint32 dwTimeout) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBlockingLock self) Unlock;
 			}
 		}
 		[CRepr]
@@ -2682,12 +2689,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SuppressChanges(uint32 res1, uint32 res2) mut => VT.SuppressChanges(ref this, res1, res2);
+			public HResult SuppressChanges(uint32 res1, uint32 res2) mut => VT.SuppressChanges(ref this, res1, res2);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITimeAndNoticeControl self, uint32 res1, uint32 res2) SuppressChanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITimeAndNoticeControl self, uint32 res1, uint32 res2) SuppressChanges;
 			}
 		}
 		[CRepr]
@@ -2697,14 +2704,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateStorageEx(PWSTR pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) mut => VT.CreateStorageEx(ref this, pwcsName, grfMode, stgfmt, grfAttrs, riid, ppstgOpen);
-			public HRESULT OpenStorageEx(PWSTR pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) mut => VT.OpenStorageEx(ref this, pwcsName, grfMode, stgfmt, grfAttrs, riid, ppstgOpen);
+			public HResult CreateStorageEx(char16* pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) mut => VT.CreateStorageEx(ref this, pwcsName, grfMode, stgfmt, grfAttrs, riid, ppstgOpen);
+			public HResult OpenStorageEx(char16* pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) mut => VT.OpenStorageEx(ref this, pwcsName, grfMode, stgfmt, grfAttrs, riid, ppstgOpen);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOplockStorage self, PWSTR pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) CreateStorageEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOplockStorage self, PWSTR pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) OpenStorageEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOplockStorage self, char16* pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) CreateStorageEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOplockStorage self, char16* pwcsName, uint32 grfMode, uint32 stgfmt, uint32 grfAttrs, in Guid riid, void** ppstgOpen) OpenStorageEx;
 			}
 		}
 		[CRepr]
@@ -2714,12 +2721,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AsyncGetClassBits(in Guid rclsid, PWSTR pszTYPE, PWSTR pszExt, uint32 dwFileVersionMS, uint32 dwFileVersionLS, PWSTR pszCodeBase, ref IBindCtx pbc, uint32 dwClassContext, in Guid riid, uint32 flags) mut => VT.AsyncGetClassBits(ref this, rclsid, pszTYPE, pszExt, dwFileVersionMS, dwFileVersionLS, pszCodeBase, ref pbc, dwClassContext, riid, flags);
+			public HResult AsyncGetClassBits(in Guid rclsid, char16* pszTYPE, char16* pszExt, uint32 dwFileVersionMS, uint32 dwFileVersionLS, char16* pszCodeBase, ref IBindCtx pbc, uint32 dwClassContext, in Guid riid, uint32 flags) mut => VT.AsyncGetClassBits(ref this, rclsid, pszTYPE, pszExt, dwFileVersionMS, dwFileVersionLS, pszCodeBase, ref pbc, dwClassContext, riid, flags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUrlMon self, in Guid rclsid, PWSTR pszTYPE, PWSTR pszExt, uint32 dwFileVersionMS, uint32 dwFileVersionLS, PWSTR pszCodeBase, ref IBindCtx pbc, uint32 dwClassContext, in Guid riid, uint32 flags) AsyncGetClassBits;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUrlMon self, in Guid rclsid, char16* pszTYPE, char16* pszExt, uint32 dwFileVersionMS, uint32 dwFileVersionLS, char16* pszCodeBase, ref IBindCtx pbc, uint32 dwClassContext, in Guid riid, uint32 flags) AsyncGetClassBits;
 			}
 		}
 		[CRepr]
@@ -2729,12 +2736,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AllowForegroundTransfer(void* lpvReserved) mut => VT.AllowForegroundTransfer(ref this, lpvReserved);
+			public HResult AllowForegroundTransfer(void* lpvReserved) mut => VT.AllowForegroundTransfer(ref this, lpvReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IForegroundTransfer self, void* lpvReserved) AllowForegroundTransfer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IForegroundTransfer self, void* lpvReserved) AllowForegroundTransfer;
 			}
 		}
 		[CRepr]
@@ -2761,20 +2768,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Init(in Guid rguidProcessID, ref IProcessLock pProcessLock, out BOOL pfApplicationAware) mut => VT.Init(ref this, rguidProcessID, ref pProcessLock, out pfApplicationAware);
-			public HRESULT ApplicationLaunch(in Guid rguidApplID, ApplicationType appType) mut => VT.ApplicationLaunch(ref this, rguidApplID, appType);
-			public HRESULT ApplicationFree(in Guid rguidApplID) mut => VT.ApplicationFree(ref this, rguidApplID);
-			public HRESULT CatalogRefresh(uint32 ulReserved) mut => VT.CatalogRefresh(ref this, ulReserved);
-			public HRESULT ProcessShutdown(ShutdownType shutdownType) mut => VT.ProcessShutdown(ref this, shutdownType);
+			public HResult Init(in Guid rguidProcessID, ref IProcessLock pProcessLock, out IntBool pfApplicationAware) mut => VT.Init(ref this, rguidProcessID, ref pProcessLock, out pfApplicationAware);
+			public HResult ApplicationLaunch(in Guid rguidApplID, ApplicationType appType) mut => VT.ApplicationLaunch(ref this, rguidApplID, appType);
+			public HResult ApplicationFree(in Guid rguidApplID) mut => VT.ApplicationFree(ref this, rguidApplID);
+			public HResult CatalogRefresh(uint32 ulReserved) mut => VT.CatalogRefresh(ref this, ulReserved);
+			public HResult ProcessShutdown(ShutdownType shutdownType) mut => VT.ProcessShutdown(ref this, shutdownType);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogateService self, in Guid rguidProcessID, ref IProcessLock pProcessLock, out BOOL pfApplicationAware) Init;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogateService self, in Guid rguidApplID, ApplicationType appType) ApplicationLaunch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogateService self, in Guid rguidApplID) ApplicationFree;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogateService self, uint32 ulReserved) CatalogRefresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISurrogateService self, ShutdownType shutdownType) ProcessShutdown;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogateService self, in Guid rguidProcessID, ref IProcessLock pProcessLock, out IntBool pfApplicationAware) Init;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogateService self, in Guid rguidApplID, ApplicationType appType) ApplicationLaunch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogateService self, in Guid rguidApplID) ApplicationFree;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogateService self, uint32 ulReserved) CatalogRefresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISurrogateService self, ShutdownType shutdownType) ProcessShutdown;
 			}
 		}
 		[CRepr]
@@ -2784,18 +2791,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PreInitialize(uint32 dwCoInit, uint32 dwCurThreadAptRefs) mut => VT.PreInitialize(ref this, dwCoInit, dwCurThreadAptRefs);
-			public HRESULT PostInitialize(HRESULT hrCoInit, uint32 dwCoInit, uint32 dwNewThreadAptRefs) mut => VT.PostInitialize(ref this, hrCoInit, dwCoInit, dwNewThreadAptRefs);
-			public HRESULT PreUninitialize(uint32 dwCurThreadAptRefs) mut => VT.PreUninitialize(ref this, dwCurThreadAptRefs);
-			public HRESULT PostUninitialize(uint32 dwNewThreadAptRefs) mut => VT.PostUninitialize(ref this, dwNewThreadAptRefs);
+			public HResult PreInitialize(uint32 dwCoInit, uint32 dwCurThreadAptRefs) mut => VT.PreInitialize(ref this, dwCoInit, dwCurThreadAptRefs);
+			public HResult PostInitialize(HResult hrCoInit, uint32 dwCoInit, uint32 dwNewThreadAptRefs) mut => VT.PostInitialize(ref this, hrCoInit, dwCoInit, dwNewThreadAptRefs);
+			public HResult PreUninitialize(uint32 dwCurThreadAptRefs) mut => VT.PreUninitialize(ref this, dwCurThreadAptRefs);
+			public HResult PostUninitialize(uint32 dwNewThreadAptRefs) mut => VT.PostUninitialize(ref this, dwNewThreadAptRefs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInitializeSpy self, uint32 dwCoInit, uint32 dwCurThreadAptRefs) PreInitialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInitializeSpy self, HRESULT hrCoInit, uint32 dwCoInit, uint32 dwNewThreadAptRefs) PostInitialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInitializeSpy self, uint32 dwCurThreadAptRefs) PreUninitialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInitializeSpy self, uint32 dwNewThreadAptRefs) PostUninitialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInitializeSpy self, uint32 dwCoInit, uint32 dwCurThreadAptRefs) PreInitialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInitializeSpy self, HResult hrCoInit, uint32 dwCoInit, uint32 dwNewThreadAptRefs) PostInitialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInitializeSpy self, uint32 dwCurThreadAptRefs) PreUninitialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInitializeSpy self, uint32 dwNewThreadAptRefs) PostUninitialize;
 			}
 		}
 		[CRepr]
@@ -2805,12 +2812,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryService(in Guid guidService, in Guid riid, void** ppvObject) mut => VT.QueryService(ref this, guidService, riid, ppvObject);
+			public HResult QueryService(in Guid guidService, in Guid riid, void** ppvObject) mut => VT.QueryService(ref this, guidService, riid, ppvObject);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IServiceProvider self, in Guid guidService, in Guid riid, void** ppvObject) QueryService;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IServiceProvider self, in Guid guidService, in Guid riid, void** ppvObject) QueryService;
 			}
 		}
 		[CRepr]
@@ -2820,18 +2827,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, Guid* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumGUID* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, Guid* rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumGUID* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumGUID self, uint32 celt, Guid* rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumGUID self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumGUID self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumGUID self, out IEnumGUID* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumGUID self, uint32 celt, Guid* rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumGUID self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumGUID self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumGUID self, out IEnumGUID* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -2841,18 +2848,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, CATEGORYINFO* rgelt, out uint32 pceltFetched) mut => VT.Next(ref this, celt, rgelt, out pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumCATEGORYINFO* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, CATEGORYINFO* rgelt, out uint32 pceltFetched) mut => VT.Next(ref this, celt, rgelt, out pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumCATEGORYINFO* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCATEGORYINFO self, uint32 celt, CATEGORYINFO* rgelt, out uint32 pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCATEGORYINFO self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCATEGORYINFO self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumCATEGORYINFO self, out IEnumCATEGORYINFO* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCATEGORYINFO self, uint32 celt, CATEGORYINFO* rgelt, out uint32 pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCATEGORYINFO self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCATEGORYINFO self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumCATEGORYINFO self, out IEnumCATEGORYINFO* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -2862,22 +2869,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterCategories(uint32 cCategories, CATEGORYINFO* rgCategoryInfo) mut => VT.RegisterCategories(ref this, cCategories, rgCategoryInfo);
-			public HRESULT UnRegisterCategories(uint32 cCategories, Guid* rgcatid) mut => VT.UnRegisterCategories(ref this, cCategories, rgcatid);
-			public HRESULT RegisterClassImplCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.RegisterClassImplCategories(ref this, rclsid, cCategories, rgcatid);
-			public HRESULT UnRegisterClassImplCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.UnRegisterClassImplCategories(ref this, rclsid, cCategories, rgcatid);
-			public HRESULT RegisterClassReqCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.RegisterClassReqCategories(ref this, rclsid, cCategories, rgcatid);
-			public HRESULT UnRegisterClassReqCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.UnRegisterClassReqCategories(ref this, rclsid, cCategories, rgcatid);
+			public HResult RegisterCategories(uint32 cCategories, CATEGORYINFO* rgCategoryInfo) mut => VT.RegisterCategories(ref this, cCategories, rgCategoryInfo);
+			public HResult UnRegisterCategories(uint32 cCategories, Guid* rgcatid) mut => VT.UnRegisterCategories(ref this, cCategories, rgcatid);
+			public HResult RegisterClassImplCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.RegisterClassImplCategories(ref this, rclsid, cCategories, rgcatid);
+			public HResult UnRegisterClassImplCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.UnRegisterClassImplCategories(ref this, rclsid, cCategories, rgcatid);
+			public HResult RegisterClassReqCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.RegisterClassReqCategories(ref this, rclsid, cCategories, rgcatid);
+			public HResult UnRegisterClassReqCategories(in Guid rclsid, uint32 cCategories, Guid* rgcatid) mut => VT.UnRegisterClassReqCategories(ref this, rclsid, cCategories, rgcatid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatRegister self, uint32 cCategories, CATEGORYINFO* rgCategoryInfo) RegisterCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatRegister self, uint32 cCategories, Guid* rgcatid) UnRegisterCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) RegisterClassImplCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) UnRegisterClassImplCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) RegisterClassReqCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) UnRegisterClassReqCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatRegister self, uint32 cCategories, CATEGORYINFO* rgCategoryInfo) RegisterCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatRegister self, uint32 cCategories, Guid* rgcatid) UnRegisterCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) RegisterClassImplCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) UnRegisterClassImplCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) RegisterClassReqCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatRegister self, in Guid rclsid, uint32 cCategories, Guid* rgcatid) UnRegisterClassReqCategories;
 			}
 		}
 		[CRepr]
@@ -2887,22 +2894,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumCategories(uint32 lcid, out IEnumCATEGORYINFO* ppenumCategoryInfo) mut => VT.EnumCategories(ref this, lcid, out ppenumCategoryInfo);
-			public HRESULT GetCategoryDesc(ref Guid rcatid, uint32 lcid, out PWSTR pszDesc) mut => VT.GetCategoryDesc(ref this, ref rcatid, lcid, out pszDesc);
-			public HRESULT EnumClassesOfCategories(uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq, out IEnumGUID* ppenumClsid) mut => VT.EnumClassesOfCategories(ref this, cImplemented, rgcatidImpl, cRequired, rgcatidReq, out ppenumClsid);
-			public HRESULT IsClassOfCategories(in Guid rclsid, uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq) mut => VT.IsClassOfCategories(ref this, rclsid, cImplemented, rgcatidImpl, cRequired, rgcatidReq);
-			public HRESULT EnumImplCategoriesOfClass(in Guid rclsid, out IEnumGUID* ppenumCatid) mut => VT.EnumImplCategoriesOfClass(ref this, rclsid, out ppenumCatid);
-			public HRESULT EnumReqCategoriesOfClass(in Guid rclsid, out IEnumGUID* ppenumCatid) mut => VT.EnumReqCategoriesOfClass(ref this, rclsid, out ppenumCatid);
+			public HResult EnumCategories(uint32 lcid, out IEnumCATEGORYINFO* ppenumCategoryInfo) mut => VT.EnumCategories(ref this, lcid, out ppenumCategoryInfo);
+			public HResult GetCategoryDesc(ref Guid rcatid, uint32 lcid, out char16* pszDesc) mut => VT.GetCategoryDesc(ref this, ref rcatid, lcid, out pszDesc);
+			public HResult EnumClassesOfCategories(uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq, out IEnumGUID* ppenumClsid) mut => VT.EnumClassesOfCategories(ref this, cImplemented, rgcatidImpl, cRequired, rgcatidReq, out ppenumClsid);
+			public HResult IsClassOfCategories(in Guid rclsid, uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq) mut => VT.IsClassOfCategories(ref this, rclsid, cImplemented, rgcatidImpl, cRequired, rgcatidReq);
+			public HResult EnumImplCategoriesOfClass(in Guid rclsid, out IEnumGUID* ppenumCatid) mut => VT.EnumImplCategoriesOfClass(ref this, rclsid, out ppenumCatid);
+			public HResult EnumReqCategoriesOfClass(in Guid rclsid, out IEnumGUID* ppenumCatid) mut => VT.EnumReqCategoriesOfClass(ref this, rclsid, out ppenumCatid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatInformation self, uint32 lcid, out IEnumCATEGORYINFO* ppenumCategoryInfo) EnumCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatInformation self, ref Guid rcatid, uint32 lcid, out PWSTR pszDesc) GetCategoryDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatInformation self, uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq, out IEnumGUID* ppenumClsid) EnumClassesOfCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatInformation self, in Guid rclsid, uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq) IsClassOfCategories;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatInformation self, in Guid rclsid, out IEnumGUID* ppenumCatid) EnumImplCategoriesOfClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatInformation self, in Guid rclsid, out IEnumGUID* ppenumCatid) EnumReqCategoriesOfClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatInformation self, uint32 lcid, out IEnumCATEGORYINFO* ppenumCategoryInfo) EnumCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatInformation self, ref Guid rcatid, uint32 lcid, out char16* pszDesc) GetCategoryDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatInformation self, uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq, out IEnumGUID* ppenumClsid) EnumClassesOfCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatInformation self, in Guid rclsid, uint32 cImplemented, Guid* rgcatidImpl, uint32 cRequired, Guid* rgcatidReq) IsClassOfCategories;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatInformation self, in Guid rclsid, out IEnumGUID* ppenumCatid) EnumImplCategoriesOfClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatInformation self, in Guid rclsid, out IEnumGUID* ppenumCatid) EnumReqCategoriesOfClass;
 			}
 		}
 		[CRepr]
@@ -2912,12 +2919,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ContextCallback(PFNCONTEXTCALL pfnCallback, ref ComCallData pParam, in Guid riid, int32 iMethod, ref IUnknown pUnk) mut => VT.ContextCallback(ref this, pfnCallback, ref pParam, riid, iMethod, ref pUnk);
+			public HResult ContextCallback(PFNCONTEXTCALL pfnCallback, ref ComCallData pParam, in Guid riid, int32 iMethod, ref IUnknown pUnk) mut => VT.ContextCallback(ref this, pfnCallback, ref pParam, riid, iMethod, ref pUnk);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IContextCallback self, PFNCONTEXTCALL pfnCallback, ref ComCallData pParam, in Guid riid, int32 iMethod, ref IUnknown pUnk) ContextCallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IContextCallback self, PFNCONTEXTCALL pfnCallback, ref ComCallData pParam, in Guid riid, int32 iMethod, ref IUnknown pUnk) ContextCallback;
 			}
 		}
 		[CRepr]
@@ -2927,22 +2934,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Abort() mut => VT.Abort(ref this);
-			public HRESULT Suspend() mut => VT.Suspend(ref this);
-			public HRESULT Resume() mut => VT.Resume(ref this);
-			public HRESULT SetPriority(int32 nPriority) mut => VT.SetPriority(ref this, nPriority);
-			public HRESULT GetPriority(out int32 pnPriority) mut => VT.GetPriority(ref this, out pnPriority);
-			public HRESULT GetBindResult(out Guid pclsidProtocol, out uint32 pdwResult, out PWSTR pszResult, out uint32 pdwReserved) mut => VT.GetBindResult(ref this, out pclsidProtocol, out pdwResult, out pszResult, out pdwReserved);
+			public HResult Abort() mut => VT.Abort(ref this);
+			public HResult Suspend() mut => VT.Suspend(ref this);
+			public HResult Resume() mut => VT.Resume(ref this);
+			public HResult SetPriority(int32 nPriority) mut => VT.SetPriority(ref this, nPriority);
+			public HResult GetPriority(out int32 pnPriority) mut => VT.GetPriority(ref this, out pnPriority);
+			public HResult GetBindResult(out Guid pclsidProtocol, out uint32 pdwResult, out char16* pszResult, out uint32 pdwReserved) mut => VT.GetBindResult(ref this, out pclsidProtocol, out pdwResult, out pszResult, out pdwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBinding self) Abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBinding self) Suspend;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBinding self) Resume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBinding self, int32 nPriority) SetPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBinding self, out int32 pnPriority) GetPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBinding self, out Guid pclsidProtocol, out uint32 pdwResult, out PWSTR pszResult, out uint32 pdwReserved) GetBindResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBinding self) Abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBinding self) Suspend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBinding self) Resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBinding self, int32 nPriority) SetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBinding self, out int32 pnPriority) GetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBinding self, out Guid pclsidProtocol, out uint32 pdwResult, out char16* pszResult, out uint32 pdwReserved) GetBindResult;
 			}
 		}
 		[CRepr]
@@ -2952,26 +2959,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnStartBinding(uint32 dwReserved, ref IBinding pib) mut => VT.OnStartBinding(ref this, dwReserved, ref pib);
-			public HRESULT GetPriority(out int32 pnPriority) mut => VT.GetPriority(ref this, out pnPriority);
-			public HRESULT OnLowResource(uint32 reserved) mut => VT.OnLowResource(ref this, reserved);
-			public HRESULT OnProgress(uint32 ulProgress, uint32 ulProgressMax, uint32 ulStatusCode, PWSTR szStatusText) mut => VT.OnProgress(ref this, ulProgress, ulProgressMax, ulStatusCode, szStatusText);
-			public HRESULT OnStopBinding(HRESULT hresult, PWSTR szError) mut => VT.OnStopBinding(ref this, hresult, szError);
-			public HRESULT GetBindInfo(out uint32 grfBINDF, out BINDINFO pbindinfo) mut => VT.GetBindInfo(ref this, out grfBINDF, out pbindinfo);
-			public HRESULT OnDataAvailable(uint32 grfBSCF, uint32 dwSize, ref FORMATETC pformatetc, ref STGMEDIUM pstgmed) mut => VT.OnDataAvailable(ref this, grfBSCF, dwSize, ref pformatetc, ref pstgmed);
-			public HRESULT OnObjectAvailable(in Guid riid, ref IUnknown punk) mut => VT.OnObjectAvailable(ref this, riid, ref punk);
+			public HResult OnStartBinding(uint32 dwReserved, ref IBinding pib) mut => VT.OnStartBinding(ref this, dwReserved, ref pib);
+			public HResult GetPriority(out int32 pnPriority) mut => VT.GetPriority(ref this, out pnPriority);
+			public HResult OnLowResource(uint32 reserved) mut => VT.OnLowResource(ref this, reserved);
+			public HResult OnProgress(uint32 ulProgress, uint32 ulProgressMax, uint32 ulStatusCode, char16* szStatusText) mut => VT.OnProgress(ref this, ulProgress, ulProgressMax, ulStatusCode, szStatusText);
+			public HResult OnStopBinding(HResult hresult, char16* szError) mut => VT.OnStopBinding(ref this, hresult, szError);
+			public HResult GetBindInfo(out uint32 grfBINDF, out BINDINFO pbindinfo) mut => VT.GetBindInfo(ref this, out grfBINDF, out pbindinfo);
+			public HResult OnDataAvailable(uint32 grfBSCF, uint32 dwSize, ref FORMATETC pformatetc, ref STGMEDIUM pstgmed) mut => VT.OnDataAvailable(ref this, grfBSCF, dwSize, ref pformatetc, ref pstgmed);
+			public HResult OnObjectAvailable(in Guid riid, ref IUnknown punk) mut => VT.OnObjectAvailable(ref this, riid, ref punk);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, uint32 dwReserved, ref IBinding pib) OnStartBinding;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, out int32 pnPriority) GetPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, uint32 reserved) OnLowResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, uint32 ulProgress, uint32 ulProgressMax, uint32 ulStatusCode, PWSTR szStatusText) OnProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, HRESULT hresult, PWSTR szError) OnStopBinding;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, out uint32 grfBINDF, out BINDINFO pbindinfo) GetBindInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, uint32 grfBSCF, uint32 dwSize, ref FORMATETC pformatetc, ref STGMEDIUM pstgmed) OnDataAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallback self, in Guid riid, ref IUnknown punk) OnObjectAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, uint32 dwReserved, ref IBinding pib) OnStartBinding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, out int32 pnPriority) GetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, uint32 reserved) OnLowResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, uint32 ulProgress, uint32 ulProgressMax, uint32 ulStatusCode, char16* szStatusText) OnProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, HResult hresult, char16* szError) OnStopBinding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, out uint32 grfBINDF, out BINDINFO pbindinfo) GetBindInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, uint32 grfBSCF, uint32 dwSize, ref FORMATETC pformatetc, ref STGMEDIUM pstgmed) OnDataAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallback self, in Guid riid, ref IUnknown punk) OnObjectAvailable;
 			}
 		}
 		[CRepr]
@@ -2981,12 +2988,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBindInfoEx(out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) mut => VT.GetBindInfoEx(ref this, out grfBINDF, out pbindinfo, out grfBINDF2, out pdwReserved);
+			public HResult GetBindInfoEx(out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) mut => VT.GetBindInfoEx(ref this, out grfBINDF, out pbindinfo, out grfBINDF2, out pdwReserved);
 
 			[CRepr]
 			public struct VTable : IBindStatusCallback.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindStatusCallbackEx self, out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) GetBindInfoEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindStatusCallbackEx self, out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) GetBindInfoEx;
 			}
 		}
 		[CRepr]
@@ -2996,12 +3003,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Authenticate(out HWND phwnd, out PWSTR pszUsername, out PWSTR pszPassword) mut => VT.Authenticate(ref this, out phwnd, out pszUsername, out pszPassword);
+			public HResult Authenticate(out HWnd phwnd, out char16* pszUsername, out char16* pszPassword) mut => VT.Authenticate(ref this, out phwnd, out pszUsername, out pszPassword);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAuthenticate self, out HWND phwnd, out PWSTR pszUsername, out PWSTR pszPassword) Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAuthenticate self, out HWnd phwnd, out char16* pszUsername, out char16* pszPassword) Authenticate;
 			}
 		}
 		[CRepr]
@@ -3011,12 +3018,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AuthenticateEx(out HWND phwnd, out PWSTR pszUsername, out PWSTR pszPassword, ref AUTHENTICATEINFO pauthinfo) mut => VT.AuthenticateEx(ref this, out phwnd, out pszUsername, out pszPassword, ref pauthinfo);
+			public HResult AuthenticateEx(out HWnd phwnd, out char16* pszUsername, out char16* pszPassword, ref AUTHENTICATEINFO pauthinfo) mut => VT.AuthenticateEx(ref this, out phwnd, out pszUsername, out pszPassword, ref pauthinfo);
 
 			[CRepr]
 			public struct VTable : IAuthenticate.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAuthenticateEx self, out HWND phwnd, out PWSTR pszUsername, out PWSTR pszPassword, ref AUTHENTICATEINFO pauthinfo) AuthenticateEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAuthenticateEx self, out HWnd phwnd, out char16* pszUsername, out char16* pszPassword, ref AUTHENTICATEINFO pauthinfo) AuthenticateEx;
 			}
 		}
 		[CRepr]
@@ -3026,60 +3033,60 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyBSTR(Uri_PROPERTY uriProp, out BSTR pbstrProperty, uint32 dwFlags) mut => VT.GetPropertyBSTR(ref this, uriProp, out pbstrProperty, dwFlags);
-			public HRESULT GetPropertyLength(Uri_PROPERTY uriProp, out uint32 pcchProperty, uint32 dwFlags) mut => VT.GetPropertyLength(ref this, uriProp, out pcchProperty, dwFlags);
-			public HRESULT GetPropertyDWORD(Uri_PROPERTY uriProp, out uint32 pdwProperty, uint32 dwFlags) mut => VT.GetPropertyDWORD(ref this, uriProp, out pdwProperty, dwFlags);
-			public HRESULT HasProperty(Uri_PROPERTY uriProp, out BOOL pfHasProperty) mut => VT.HasProperty(ref this, uriProp, out pfHasProperty);
-			public HRESULT GetAbsoluteUri(out BSTR pbstrAbsoluteUri) mut => VT.GetAbsoluteUri(ref this, out pbstrAbsoluteUri);
-			public HRESULT GetAuthority(out BSTR pbstrAuthority) mut => VT.GetAuthority(ref this, out pbstrAuthority);
-			public HRESULT GetDisplayUri(out BSTR pbstrDisplayString) mut => VT.GetDisplayUri(ref this, out pbstrDisplayString);
-			public HRESULT GetDomain(out BSTR pbstrDomain) mut => VT.GetDomain(ref this, out pbstrDomain);
-			public HRESULT GetExtension(out BSTR pbstrExtension) mut => VT.GetExtension(ref this, out pbstrExtension);
-			public HRESULT GetFragment(out BSTR pbstrFragment) mut => VT.GetFragment(ref this, out pbstrFragment);
-			public HRESULT GetHost(out BSTR pbstrHost) mut => VT.GetHost(ref this, out pbstrHost);
-			public HRESULT GetPassword(out BSTR pbstrPassword) mut => VT.GetPassword(ref this, out pbstrPassword);
-			public HRESULT GetPath(out BSTR pbstrPath) mut => VT.GetPath(ref this, out pbstrPath);
-			public HRESULT GetPathAndQuery(out BSTR pbstrPathAndQuery) mut => VT.GetPathAndQuery(ref this, out pbstrPathAndQuery);
-			public HRESULT GetQuery(out BSTR pbstrQuery) mut => VT.GetQuery(ref this, out pbstrQuery);
-			public HRESULT GetRawUri(out BSTR pbstrRawUri) mut => VT.GetRawUri(ref this, out pbstrRawUri);
-			public HRESULT GetSchemeName(out BSTR pbstrSchemeName) mut => VT.GetSchemeName(ref this, out pbstrSchemeName);
-			public HRESULT GetUserInfo(out BSTR pbstrUserInfo) mut => VT.GetUserInfo(ref this, out pbstrUserInfo);
-			public HRESULT GetUserName(out BSTR pbstrUserName) mut => VT.GetUserName(ref this, out pbstrUserName);
-			public HRESULT GetHostType(out uint32 pdwHostType) mut => VT.GetHostType(ref this, out pdwHostType);
-			public HRESULT GetPort(out uint32 pdwPort) mut => VT.GetPort(ref this, out pdwPort);
-			public HRESULT GetScheme(out uint32 pdwScheme) mut => VT.GetScheme(ref this, out pdwScheme);
-			public HRESULT GetZone(out uint32 pdwZone) mut => VT.GetZone(ref this, out pdwZone);
-			public HRESULT GetProperties(out uint32 pdwFlags) mut => VT.GetProperties(ref this, out pdwFlags);
-			public HRESULT IsEqual(ref IUri pUri, out BOOL pfEqual) mut => VT.IsEqual(ref this, ref pUri, out pfEqual);
+			public HResult GetPropertyBSTR(Uri_PROPERTY uriProp, out char16* pbstrProperty, uint32 dwFlags) mut => VT.GetPropertyBSTR(ref this, uriProp, out pbstrProperty, dwFlags);
+			public HResult GetPropertyLength(Uri_PROPERTY uriProp, out uint32 pcchProperty, uint32 dwFlags) mut => VT.GetPropertyLength(ref this, uriProp, out pcchProperty, dwFlags);
+			public HResult GetPropertyDWORD(Uri_PROPERTY uriProp, out uint32 pdwProperty, uint32 dwFlags) mut => VT.GetPropertyDWORD(ref this, uriProp, out pdwProperty, dwFlags);
+			public HResult HasProperty(Uri_PROPERTY uriProp, out IntBool pfHasProperty) mut => VT.HasProperty(ref this, uriProp, out pfHasProperty);
+			public HResult GetAbsoluteUri(out char16* pbstrAbsoluteUri) mut => VT.GetAbsoluteUri(ref this, out pbstrAbsoluteUri);
+			public HResult GetAuthority(out char16* pbstrAuthority) mut => VT.GetAuthority(ref this, out pbstrAuthority);
+			public HResult GetDisplayUri(out char16* pbstrDisplayString) mut => VT.GetDisplayUri(ref this, out pbstrDisplayString);
+			public HResult GetDomain(out char16* pbstrDomain) mut => VT.GetDomain(ref this, out pbstrDomain);
+			public HResult GetExtension(out char16* pbstrExtension) mut => VT.GetExtension(ref this, out pbstrExtension);
+			public HResult GetFragment(out char16* pbstrFragment) mut => VT.GetFragment(ref this, out pbstrFragment);
+			public HResult GetHost(out char16* pbstrHost) mut => VT.GetHost(ref this, out pbstrHost);
+			public HResult GetPassword(out char16* pbstrPassword) mut => VT.GetPassword(ref this, out pbstrPassword);
+			public HResult GetPath(out char16* pbstrPath) mut => VT._GetPath(ref this, out pbstrPath);
+			public HResult GetPathAndQuery(out char16* pbstrPathAndQuery) mut => VT.GetPathAndQuery(ref this, out pbstrPathAndQuery);
+			public HResult GetQuery(out char16* pbstrQuery) mut => VT.GetQuery(ref this, out pbstrQuery);
+			public HResult GetRawUri(out char16* pbstrRawUri) mut => VT.GetRawUri(ref this, out pbstrRawUri);
+			public HResult GetSchemeName(out char16* pbstrSchemeName) mut => VT.GetSchemeName(ref this, out pbstrSchemeName);
+			public HResult GetUserInfo(out char16* pbstrUserInfo) mut => VT.GetUserInfo(ref this, out pbstrUserInfo);
+			public HResult GetUserName(out char16* pbstrUserName) mut => VT.GetUserName(ref this, out pbstrUserName);
+			public HResult GetHostType(out uint32 pdwHostType) mut => VT.GetHostType(ref this, out pdwHostType);
+			public HResult GetPort(out uint32 pdwPort) mut => VT.GetPort(ref this, out pdwPort);
+			public HResult GetScheme(out uint32 pdwScheme) mut => VT.GetScheme(ref this, out pdwScheme);
+			public HResult GetZone(out uint32 pdwZone) mut => VT.GetZone(ref this, out pdwZone);
+			public HResult GetProperties(out uint32 pdwFlags) mut => VT.GetProperties(ref this, out pdwFlags);
+			public HResult IsEqual(ref IUri pUri, out IntBool pfEqual) mut => VT.IsEqual(ref this, ref pUri, out pfEqual);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, Uri_PROPERTY uriProp, out BSTR pbstrProperty, uint32 dwFlags) GetPropertyBSTR;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, Uri_PROPERTY uriProp, out uint32 pcchProperty, uint32 dwFlags) GetPropertyLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, Uri_PROPERTY uriProp, out uint32 pdwProperty, uint32 dwFlags) GetPropertyDWORD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, Uri_PROPERTY uriProp, out BOOL pfHasProperty) HasProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrAbsoluteUri) GetAbsoluteUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrAuthority) GetAuthority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrDisplayString) GetDisplayUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrDomain) GetDomain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrExtension) GetExtension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrFragment) GetFragment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrHost) GetHost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrPassword) GetPassword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrPath) GetPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrPathAndQuery) GetPathAndQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrQuery) GetQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrRawUri) GetRawUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrSchemeName) GetSchemeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrUserInfo) GetUserInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out BSTR pbstrUserName) GetUserName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out uint32 pdwHostType) GetHostType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out uint32 pdwPort) GetPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out uint32 pdwScheme) GetScheme;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out uint32 pdwZone) GetZone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, out uint32 pdwFlags) GetProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUri self, ref IUri pUri, out BOOL pfEqual) IsEqual;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, Uri_PROPERTY uriProp, out char16* pbstrProperty, uint32 dwFlags) GetPropertyBSTR;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, Uri_PROPERTY uriProp, out uint32 pcchProperty, uint32 dwFlags) GetPropertyLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, Uri_PROPERTY uriProp, out uint32 pdwProperty, uint32 dwFlags) GetPropertyDWORD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, Uri_PROPERTY uriProp, out IntBool pfHasProperty) HasProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrAbsoluteUri) GetAbsoluteUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrAuthority) GetAuthority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrDisplayString) GetDisplayUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrDomain) GetDomain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrExtension) GetExtension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrFragment) GetFragment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrHost) GetHost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrPassword) GetPassword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrPath) _GetPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrPathAndQuery) GetPathAndQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrQuery) GetQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrRawUri) GetRawUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrSchemeName) GetSchemeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrUserInfo) GetUserInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out char16* pbstrUserName) GetUserName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out uint32 pdwHostType) GetHostType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out uint32 pdwPort) GetPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out uint32 pdwScheme) GetScheme;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out uint32 pdwZone) GetZone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, out uint32 pdwFlags) GetProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUri self, ref IUri pUri, out IntBool pfEqual) IsEqual;
 			}
 		}
 		[CRepr]
@@ -3089,56 +3096,56 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateUriSimple(uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) mut => VT.CreateUriSimple(ref this, dwAllowEncodingPropertyMask, dwReserved, out ppIUri);
-			public HRESULT CreateUri(uint32 dwCreateFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) mut => VT.CreateUri(ref this, dwCreateFlags, dwAllowEncodingPropertyMask, dwReserved, out ppIUri);
-			public HRESULT CreateUriWithFlags(uint32 dwCreateFlags, uint32 dwUriBuilderFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) mut => VT.CreateUriWithFlags(ref this, dwCreateFlags, dwUriBuilderFlags, dwAllowEncodingPropertyMask, dwReserved, out ppIUri);
-			public HRESULT GetIUri(IUri** ppIUri) mut => VT.GetIUri(ref this, ppIUri);
-			public HRESULT SetIUri(IUri* pIUri) mut => VT.SetIUri(ref this, pIUri);
-			public HRESULT GetFragment(out uint32 pcchFragment, PWSTR* ppwzFragment) mut => VT.GetFragment(ref this, out pcchFragment, ppwzFragment);
-			public HRESULT GetHost(out uint32 pcchHost, PWSTR* ppwzHost) mut => VT.GetHost(ref this, out pcchHost, ppwzHost);
-			public HRESULT GetPassword(out uint32 pcchPassword, PWSTR* ppwzPassword) mut => VT.GetPassword(ref this, out pcchPassword, ppwzPassword);
-			public HRESULT GetPath(out uint32 pcchPath, PWSTR* ppwzPath) mut => VT.GetPath(ref this, out pcchPath, ppwzPath);
-			public HRESULT GetPort(out BOOL pfHasPort, out uint32 pdwPort) mut => VT.GetPort(ref this, out pfHasPort, out pdwPort);
-			public HRESULT GetQuery(out uint32 pcchQuery, PWSTR* ppwzQuery) mut => VT.GetQuery(ref this, out pcchQuery, ppwzQuery);
-			public HRESULT GetSchemeName(out uint32 pcchSchemeName, PWSTR* ppwzSchemeName) mut => VT.GetSchemeName(ref this, out pcchSchemeName, ppwzSchemeName);
-			public HRESULT GetUserName(out uint32 pcchUserName, PWSTR* ppwzUserName) mut => VT.GetUserName(ref this, out pcchUserName, ppwzUserName);
-			public HRESULT SetFragment(PWSTR pwzNewValue) mut => VT.SetFragment(ref this, pwzNewValue);
-			public HRESULT SetHost(PWSTR pwzNewValue) mut => VT.SetHost(ref this, pwzNewValue);
-			public HRESULT SetPassword(PWSTR pwzNewValue) mut => VT.SetPassword(ref this, pwzNewValue);
-			public HRESULT SetPath(PWSTR pwzNewValue) mut => VT.SetPath(ref this, pwzNewValue);
-			public HRESULT SetPort(BOOL fHasPort, uint32 dwNewValue) mut => VT.SetPort(ref this, fHasPort, dwNewValue);
-			public HRESULT SetQuery(PWSTR pwzNewValue) mut => VT.SetQuery(ref this, pwzNewValue);
-			public HRESULT SetSchemeName(PWSTR pwzNewValue) mut => VT.SetSchemeName(ref this, pwzNewValue);
-			public HRESULT SetUserName(PWSTR pwzNewValue) mut => VT.SetUserName(ref this, pwzNewValue);
-			public HRESULT RemoveProperties(uint32 dwPropertyMask) mut => VT.RemoveProperties(ref this, dwPropertyMask);
-			public HRESULT HasBeenModified(out BOOL pfModified) mut => VT.HasBeenModified(ref this, out pfModified);
+			public HResult CreateUriSimple(uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) mut => VT.CreateUriSimple(ref this, dwAllowEncodingPropertyMask, dwReserved, out ppIUri);
+			public HResult CreateUri(uint32 dwCreateFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) mut => VT.CreateUri(ref this, dwCreateFlags, dwAllowEncodingPropertyMask, dwReserved, out ppIUri);
+			public HResult CreateUriWithFlags(uint32 dwCreateFlags, uint32 dwUriBuilderFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) mut => VT.CreateUriWithFlags(ref this, dwCreateFlags, dwUriBuilderFlags, dwAllowEncodingPropertyMask, dwReserved, out ppIUri);
+			public HResult GetIUri(IUri** ppIUri) mut => VT.GetIUri(ref this, ppIUri);
+			public HResult SetIUri(IUri* pIUri) mut => VT.SetIUri(ref this, pIUri);
+			public HResult GetFragment(out uint32 pcchFragment, char16** ppwzFragment) mut => VT.GetFragment(ref this, out pcchFragment, ppwzFragment);
+			public HResult GetHost(out uint32 pcchHost, char16** ppwzHost) mut => VT.GetHost(ref this, out pcchHost, ppwzHost);
+			public HResult GetPassword(out uint32 pcchPassword, char16** ppwzPassword) mut => VT.GetPassword(ref this, out pcchPassword, ppwzPassword);
+			public HResult GetPath(out uint32 pcchPath, char16** ppwzPath) mut => VT._GetPath(ref this, out pcchPath, ppwzPath);
+			public HResult GetPort(out IntBool pfHasPort, out uint32 pdwPort) mut => VT.GetPort(ref this, out pfHasPort, out pdwPort);
+			public HResult GetQuery(out uint32 pcchQuery, char16** ppwzQuery) mut => VT.GetQuery(ref this, out pcchQuery, ppwzQuery);
+			public HResult GetSchemeName(out uint32 pcchSchemeName, char16** ppwzSchemeName) mut => VT.GetSchemeName(ref this, out pcchSchemeName, ppwzSchemeName);
+			public HResult GetUserName(out uint32 pcchUserName, char16** ppwzUserName) mut => VT.GetUserName(ref this, out pcchUserName, ppwzUserName);
+			public HResult SetFragment(char16* pwzNewValue) mut => VT.SetFragment(ref this, pwzNewValue);
+			public HResult SetHost(char16* pwzNewValue) mut => VT.SetHost(ref this, pwzNewValue);
+			public HResult SetPassword(char16* pwzNewValue) mut => VT.SetPassword(ref this, pwzNewValue);
+			public HResult SetPath(char16* pwzNewValue) mut => VT.SetPath(ref this, pwzNewValue);
+			public HResult SetPort(IntBool fHasPort, uint32 dwNewValue) mut => VT.SetPort(ref this, fHasPort, dwNewValue);
+			public HResult SetQuery(char16* pwzNewValue) mut => VT.SetQuery(ref this, pwzNewValue);
+			public HResult SetSchemeName(char16* pwzNewValue) mut => VT.SetSchemeName(ref this, pwzNewValue);
+			public HResult SetUserName(char16* pwzNewValue) mut => VT.SetUserName(ref this, pwzNewValue);
+			public HResult RemoveProperties(uint32 dwPropertyMask) mut => VT.RemoveProperties(ref this, dwPropertyMask);
+			public HResult HasBeenModified(out IntBool pfModified) mut => VT.HasBeenModified(ref this, out pfModified);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) CreateUriSimple;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, uint32 dwCreateFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) CreateUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, uint32 dwCreateFlags, uint32 dwUriBuilderFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) CreateUriWithFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, IUri** ppIUri) GetIUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, IUri* pIUri) SetIUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchFragment, PWSTR* ppwzFragment) GetFragment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchHost, PWSTR* ppwzHost) GetHost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchPassword, PWSTR* ppwzPassword) GetPassword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchPath, PWSTR* ppwzPath) GetPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out BOOL pfHasPort, out uint32 pdwPort) GetPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchQuery, PWSTR* ppwzQuery) GetQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchSchemeName, PWSTR* ppwzSchemeName) GetSchemeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out uint32 pcchUserName, PWSTR* ppwzUserName) GetUserName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetFragment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetHost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetPassword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, BOOL fHasPort, uint32 dwNewValue) SetPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetSchemeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, PWSTR pwzNewValue) SetUserName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, uint32 dwPropertyMask) RemoveProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilder self, out BOOL pfModified) HasBeenModified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) CreateUriSimple;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, uint32 dwCreateFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) CreateUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, uint32 dwCreateFlags, uint32 dwUriBuilderFlags, uint32 dwAllowEncodingPropertyMask, uint dwReserved, out IUri* ppIUri) CreateUriWithFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, IUri** ppIUri) GetIUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, IUri* pIUri) SetIUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchFragment, char16** ppwzFragment) GetFragment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchHost, char16** ppwzHost) GetHost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchPassword, char16** ppwzPassword) GetPassword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchPath, char16** ppwzPath) _GetPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out IntBool pfHasPort, out uint32 pdwPort) GetPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchQuery, char16** ppwzQuery) GetQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchSchemeName, char16** ppwzSchemeName) GetSchemeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out uint32 pcchUserName, char16** ppwzUserName) GetUserName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetFragment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetHost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetPassword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, IntBool fHasPort, uint32 dwNewValue) SetPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetSchemeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, char16* pwzNewValue) SetUserName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, uint32 dwPropertyMask) RemoveProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilder self, out IntBool pfModified) HasBeenModified;
 			}
 		}
 		[CRepr]
@@ -3148,16 +3155,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateMoniker(PWSTR szName, ref IBindCtx pBC, out IMoniker* ppmk, uint32 dwReserved) mut => VT.CreateMoniker(ref this, szName, ref pBC, out ppmk, dwReserved);
-			public HRESULT MonikerBindToStorage(ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) mut => VT.MonikerBindToStorage(ref this, ref pMk, ref pBC, ref pBSC, riid, ppvObj);
-			public HRESULT MonikerBindToObject(ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) mut => VT.MonikerBindToObject(ref this, ref pMk, ref pBC, ref pBSC, riid, ppvObj);
+			public HResult CreateMoniker(char16* szName, ref IBindCtx pBC, out IMoniker* ppmk, uint32 dwReserved) mut => VT.CreateMoniker(ref this, szName, ref pBC, out ppmk, dwReserved);
+			public HResult MonikerBindToStorage(ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) mut => VT.MonikerBindToStorage(ref this, ref pMk, ref pBC, ref pBSC, riid, ppvObj);
+			public HResult MonikerBindToObject(ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) mut => VT.MonikerBindToObject(ref this, ref pMk, ref pBC, ref pBSC, riid, ppvObj);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindHost self, PWSTR szName, ref IBindCtx pBC, out IMoniker* ppmk, uint32 dwReserved) CreateMoniker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindHost self, ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) MonikerBindToStorage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindHost self, ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) MonikerBindToObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindHost self, char16* szName, ref IBindCtx pBC, out IMoniker* ppmk, uint32 dwReserved) CreateMoniker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindHost self, ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) MonikerBindToStorage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindHost self, ref IMoniker pMk, ref IBindCtx pBC, ref IBindStatusCallback pBSC, in Guid riid, void** ppvObj) MonikerBindToObject;
 			}
 		}
 		[CRepr]
@@ -3167,18 +3174,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTypeInfoCount(out uint32 pctinfo) mut => VT.GetTypeInfoCount(ref this, out pctinfo);
-			public HRESULT GetTypeInfo(uint32 iTInfo, uint32 lcid, out ITypeInfo* ppTInfo) mut => VT.GetTypeInfo(ref this, iTInfo, lcid, out ppTInfo);
-			public HRESULT GetIDsOfNames(in Guid riid, PWSTR* rgszNames, uint32 cNames, uint32 lcid, int32* rgDispId) mut => VT.GetIDsOfNames(ref this, riid, rgszNames, cNames, lcid, rgDispId);
-			public HRESULT Invoke(int32 dispIdMember, in Guid riid, uint32 lcid, uint16 wFlags, ref DISPPARAMS pDispParams, VARIANT* pVarResult, EXCEPINFO* pExcepInfo, uint32* puArgErr) mut => VT.Invoke(ref this, dispIdMember, riid, lcid, wFlags, ref pDispParams, pVarResult, pExcepInfo, puArgErr);
+			public HResult GetTypeInfoCount(out uint32 pctinfo) mut => VT.GetTypeInfoCount(ref this, out pctinfo);
+			public HResult GetTypeInfo(uint32 iTInfo, uint32 lcid, out ITypeInfo* ppTInfo) mut => VT.GetTypeInfo(ref this, iTInfo, lcid, out ppTInfo);
+			public HResult GetIDsOfNames(in Guid riid, char16** rgszNames, uint32 cNames, uint32 lcid, int32* rgDispId) mut => VT.GetIDsOfNames(ref this, riid, rgszNames, cNames, lcid, rgDispId);
+			public HResult Invoke(int32 dispIdMember, in Guid riid, uint32 lcid, uint16 wFlags, ref DISPPARAMS pDispParams, VARIANT* pVarResult, EXCEPINFO* pExcepInfo, uint32* puArgErr) mut => VT.Invoke(ref this, dispIdMember, riid, lcid, wFlags, ref pDispParams, pVarResult, pExcepInfo, puArgErr);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDispatch self, out uint32 pctinfo) GetTypeInfoCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDispatch self, uint32 iTInfo, uint32 lcid, out ITypeInfo* ppTInfo) GetTypeInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDispatch self, in Guid riid, PWSTR* rgszNames, uint32 cNames, uint32 lcid, int32* rgDispId) GetIDsOfNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDispatch self, int32 dispIdMember, in Guid riid, uint32 lcid, uint16 wFlags, ref DISPPARAMS pDispParams, VARIANT* pVarResult, EXCEPINFO* pExcepInfo, uint32* puArgErr) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDispatch self, out uint32 pctinfo) GetTypeInfoCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDispatch self, uint32 iTInfo, uint32 lcid, out ITypeInfo* ppTInfo) GetTypeInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDispatch self, in Guid riid, char16** rgszNames, uint32 cNames, uint32 lcid, int32* rgDispId) GetIDsOfNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDispatch self, int32 dispIdMember, in Guid riid, uint32 lcid, uint16 wFlags, ref DISPPARAMS pDispParams, VARIANT* pVarResult, EXCEPINFO* pExcepInfo, uint32* puArgErr) Invoke;
 			}
 		}
 		[CRepr]
@@ -3188,14 +3195,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Bind(PWSTR szName, uint32 lHashVal, uint16 wFlags, out ITypeInfo* ppTInfo, out DESCKIND pDescKind, out BINDPTR pBindPtr) mut => VT.Bind(ref this, szName, lHashVal, wFlags, out ppTInfo, out pDescKind, out pBindPtr);
-			public HRESULT BindType(PWSTR szName, uint32 lHashVal, out ITypeInfo* ppTInfo, out ITypeComp* ppTComp) mut => VT.BindType(ref this, szName, lHashVal, out ppTInfo, out ppTComp);
+			public HResult Bind(char16* szName, uint32 lHashVal, uint16 wFlags, out ITypeInfo* ppTInfo, out DESCKIND pDescKind, out BINDPTR pBindPtr) mut => VT.Bind(ref this, szName, lHashVal, wFlags, out ppTInfo, out pDescKind, out pBindPtr);
+			public HResult BindType(char16* szName, uint32 lHashVal, out ITypeInfo* ppTInfo, out ITypeComp* ppTComp) mut => VT.BindType(ref this, szName, lHashVal, out ppTInfo, out ppTComp);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeComp self, PWSTR szName, uint32 lHashVal, uint16 wFlags, out ITypeInfo* ppTInfo, out DESCKIND pDescKind, out BINDPTR pBindPtr) Bind;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeComp self, PWSTR szName, uint32 lHashVal, out ITypeInfo* ppTInfo, out ITypeComp* ppTComp) BindType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeComp self, char16* szName, uint32 lHashVal, uint16 wFlags, out ITypeInfo* ppTInfo, out DESCKIND pDescKind, out BINDPTR pBindPtr) Bind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeComp self, char16* szName, uint32 lHashVal, out ITypeInfo* ppTInfo, out ITypeComp* ppTComp) BindType;
 			}
 		}
 		[CRepr]
@@ -3205,22 +3212,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTypeAttr(out TYPEATTR* ppTypeAttr) mut => VT.GetTypeAttr(ref this, out ppTypeAttr);
-			public HRESULT GetTypeComp(out ITypeComp* ppTComp) mut => VT.GetTypeComp(ref this, out ppTComp);
-			public HRESULT GetFuncDesc(uint32 index, out FUNCDESC* ppFuncDesc) mut => VT.GetFuncDesc(ref this, index, out ppFuncDesc);
-			public HRESULT GetVarDesc(uint32 index, out VARDESC* ppVarDesc) mut => VT.GetVarDesc(ref this, index, out ppVarDesc);
-			public HRESULT GetNames(int32 memid, BSTR* rgBstrNames, uint32 cMaxNames, out uint32 pcNames) mut => VT.GetNames(ref this, memid, rgBstrNames, cMaxNames, out pcNames);
-			public HRESULT GetRefTypeOfImplType(uint32 index, out uint32 pRefType) mut => VT.GetRefTypeOfImplType(ref this, index, out pRefType);
-			public HRESULT GetImplTypeFlags(uint32 index, out int32 pImplTypeFlags) mut => VT.GetImplTypeFlags(ref this, index, out pImplTypeFlags);
-			public HRESULT GetIDsOfNames(PWSTR* rgszNames, uint32 cNames, int32* pMemId) mut => VT.GetIDsOfNames(ref this, rgszNames, cNames, pMemId);
-			public HRESULT Invoke(void* pvInstance, int32 memid, uint16 wFlags, out DISPPARAMS pDispParams, out VARIANT pVarResult, out EXCEPINFO pExcepInfo, out uint32 puArgErr) mut => VT.Invoke(ref this, pvInstance, memid, wFlags, out pDispParams, out pVarResult, out pExcepInfo, out puArgErr);
-			public HRESULT GetDocumentation(int32 memid, BSTR* pBstrName, BSTR* pBstrDocString, out uint32 pdwHelpContext, BSTR* pBstrHelpFile) mut => VT.GetDocumentation(ref this, memid, pBstrName, pBstrDocString, out pdwHelpContext, pBstrHelpFile);
-			public HRESULT GetDllEntry(int32 memid, INVOKEKIND invKind, BSTR* pBstrDllName, BSTR* pBstrName, out uint16 pwOrdinal) mut => VT.GetDllEntry(ref this, memid, invKind, pBstrDllName, pBstrName, out pwOrdinal);
-			public HRESULT GetRefTypeInfo(uint32 hRefType, out ITypeInfo* ppTInfo) mut => VT.GetRefTypeInfo(ref this, hRefType, out ppTInfo);
-			public HRESULT AddressOfMember(int32 memid, INVOKEKIND invKind, void** ppv) mut => VT.AddressOfMember(ref this, memid, invKind, ppv);
-			public HRESULT CreateInstance(ref IUnknown pUnkOuter, in Guid riid, void** ppvObj) mut => VT.CreateInstance(ref this, ref pUnkOuter, riid, ppvObj);
-			public HRESULT GetMops(int32 memid, out BSTR pBstrMops) mut => VT.GetMops(ref this, memid, out pBstrMops);
-			public HRESULT GetContainingTypeLib(out ITypeLib* ppTLib, out uint32 pIndex) mut => VT.GetContainingTypeLib(ref this, out ppTLib, out pIndex);
+			public HResult GetTypeAttr(out TYPEATTR* ppTypeAttr) mut => VT.GetTypeAttr(ref this, out ppTypeAttr);
+			public HResult GetTypeComp(out ITypeComp* ppTComp) mut => VT.GetTypeComp(ref this, out ppTComp);
+			public HResult GetFuncDesc(uint32 index, out FUNCDESC* ppFuncDesc) mut => VT.GetFuncDesc(ref this, index, out ppFuncDesc);
+			public HResult GetVarDesc(uint32 index, out VARDESC* ppVarDesc) mut => VT.GetVarDesc(ref this, index, out ppVarDesc);
+			public HResult GetNames(int32 memid, char16** rgBstrNames, uint32 cMaxNames, out uint32 pcNames) mut => VT.GetNames(ref this, memid, rgBstrNames, cMaxNames, out pcNames);
+			public HResult GetRefTypeOfImplType(uint32 index, out uint32 pRefType) mut => VT.GetRefTypeOfImplType(ref this, index, out pRefType);
+			public HResult GetImplTypeFlags(uint32 index, out int32 pImplTypeFlags) mut => VT.GetImplTypeFlags(ref this, index, out pImplTypeFlags);
+			public HResult GetIDsOfNames(char16** rgszNames, uint32 cNames, int32* pMemId) mut => VT.GetIDsOfNames(ref this, rgszNames, cNames, pMemId);
+			public HResult Invoke(void* pvInstance, int32 memid, uint16 wFlags, out DISPPARAMS pDispParams, out VARIANT pVarResult, out EXCEPINFO pExcepInfo, out uint32 puArgErr) mut => VT.Invoke(ref this, pvInstance, memid, wFlags, out pDispParams, out pVarResult, out pExcepInfo, out puArgErr);
+			public HResult GetDocumentation(int32 memid, char16** pBstrName, char16** pBstrDocString, out uint32 pdwHelpContext, char16** pBstrHelpFile) mut => VT.GetDocumentation(ref this, memid, pBstrName, pBstrDocString, out pdwHelpContext, pBstrHelpFile);
+			public HResult GetDllEntry(int32 memid, INVOKEKIND invKind, char16** pBstrDllName, char16** pBstrName, out uint16 pwOrdinal) mut => VT.GetDllEntry(ref this, memid, invKind, pBstrDllName, pBstrName, out pwOrdinal);
+			public HResult GetRefTypeInfo(uint32 hRefType, out ITypeInfo* ppTInfo) mut => VT.GetRefTypeInfo(ref this, hRefType, out ppTInfo);
+			public HResult AddressOfMember(int32 memid, INVOKEKIND invKind, void** ppv) mut => VT.AddressOfMember(ref this, memid, invKind, ppv);
+			public HResult CreateInstance(ref IUnknown pUnkOuter, in Guid riid, void** ppvObj) mut => VT.CreateInstance(ref this, ref pUnkOuter, riid, ppvObj);
+			public HResult GetMops(int32 memid, out char16* pBstrMops) mut => VT.GetMops(ref this, memid, out pBstrMops);
+			public HResult GetContainingTypeLib(out ITypeLib* ppTLib, out uint32 pIndex) mut => VT.GetContainingTypeLib(ref this, out ppTLib, out pIndex);
 			public void ReleaseTypeAttr(ref TYPEATTR pTypeAttr) mut => VT.ReleaseTypeAttr(ref this, ref pTypeAttr);
 			public void ReleaseFuncDesc(ref FUNCDESC pFuncDesc) mut => VT.ReleaseFuncDesc(ref this, ref pFuncDesc);
 			public void ReleaseVarDesc(ref VARDESC pVarDesc) mut => VT.ReleaseVarDesc(ref this, ref pVarDesc);
@@ -3228,22 +3235,22 @@ namespace Win32
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, out TYPEATTR* ppTypeAttr) GetTypeAttr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, out ITypeComp* ppTComp) GetTypeComp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, uint32 index, out FUNCDESC* ppFuncDesc) GetFuncDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, uint32 index, out VARDESC* ppVarDesc) GetVarDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, int32 memid, BSTR* rgBstrNames, uint32 cMaxNames, out uint32 pcNames) GetNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, uint32 index, out uint32 pRefType) GetRefTypeOfImplType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, uint32 index, out int32 pImplTypeFlags) GetImplTypeFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, PWSTR* rgszNames, uint32 cNames, int32* pMemId) GetIDsOfNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, void* pvInstance, int32 memid, uint16 wFlags, out DISPPARAMS pDispParams, out VARIANT pVarResult, out EXCEPINFO pExcepInfo, out uint32 puArgErr) Invoke;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, int32 memid, BSTR* pBstrName, BSTR* pBstrDocString, out uint32 pdwHelpContext, BSTR* pBstrHelpFile) GetDocumentation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, int32 memid, INVOKEKIND invKind, BSTR* pBstrDllName, BSTR* pBstrName, out uint16 pwOrdinal) GetDllEntry;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, uint32 hRefType, out ITypeInfo* ppTInfo) GetRefTypeInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, int32 memid, INVOKEKIND invKind, void** ppv) AddressOfMember;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, ref IUnknown pUnkOuter, in Guid riid, void** ppvObj) CreateInstance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, int32 memid, out BSTR pBstrMops) GetMops;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo self, out ITypeLib* ppTLib, out uint32 pIndex) GetContainingTypeLib;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, out TYPEATTR* ppTypeAttr) GetTypeAttr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, out ITypeComp* ppTComp) GetTypeComp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, uint32 index, out FUNCDESC* ppFuncDesc) GetFuncDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, uint32 index, out VARDESC* ppVarDesc) GetVarDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, int32 memid, char16** rgBstrNames, uint32 cMaxNames, out uint32 pcNames) GetNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, uint32 index, out uint32 pRefType) GetRefTypeOfImplType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, uint32 index, out int32 pImplTypeFlags) GetImplTypeFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, char16** rgszNames, uint32 cNames, int32* pMemId) GetIDsOfNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, void* pvInstance, int32 memid, uint16 wFlags, out DISPPARAMS pDispParams, out VARIANT pVarResult, out EXCEPINFO pExcepInfo, out uint32 puArgErr) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, int32 memid, char16** pBstrName, char16** pBstrDocString, out uint32 pdwHelpContext, char16** pBstrHelpFile) GetDocumentation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, int32 memid, INVOKEKIND invKind, char16** pBstrDllName, char16** pBstrName, out uint16 pwOrdinal) GetDllEntry;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, uint32 hRefType, out ITypeInfo* ppTInfo) GetRefTypeInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, int32 memid, INVOKEKIND invKind, void** ppv) AddressOfMember;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, ref IUnknown pUnkOuter, in Guid riid, void** ppvObj) CreateInstance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, int32 memid, out char16* pBstrMops) GetMops;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo self, out ITypeLib* ppTLib, out uint32 pIndex) GetContainingTypeLib;
 				public new function [CallingConvention(.Stdcall)] void(ref ITypeInfo self, ref TYPEATTR pTypeAttr) ReleaseTypeAttr;
 				public new function [CallingConvention(.Stdcall)] void(ref ITypeInfo self, ref FUNCDESC pFuncDesc) ReleaseFuncDesc;
 				public new function [CallingConvention(.Stdcall)] void(ref ITypeInfo self, ref VARDESC pVarDesc) ReleaseVarDesc;
@@ -3256,40 +3263,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTypeKind(out TYPEKIND pTypeKind) mut => VT.GetTypeKind(ref this, out pTypeKind);
-			public HRESULT GetTypeFlags(out uint32 pTypeFlags) mut => VT.GetTypeFlags(ref this, out pTypeFlags);
-			public HRESULT GetFuncIndexOfMemId(int32 memid, INVOKEKIND invKind, out uint32 pFuncIndex) mut => VT.GetFuncIndexOfMemId(ref this, memid, invKind, out pFuncIndex);
-			public HRESULT GetVarIndexOfMemId(int32 memid, out uint32 pVarIndex) mut => VT.GetVarIndexOfMemId(ref this, memid, out pVarIndex);
-			public HRESULT GetCustData(in Guid guid, out VARIANT pVarVal) mut => VT.GetCustData(ref this, guid, out pVarVal);
-			public HRESULT GetFuncCustData(uint32 index, in Guid guid, out VARIANT pVarVal) mut => VT.GetFuncCustData(ref this, index, guid, out pVarVal);
-			public HRESULT GetParamCustData(uint32 indexFunc, uint32 indexParam, in Guid guid, out VARIANT pVarVal) mut => VT.GetParamCustData(ref this, indexFunc, indexParam, guid, out pVarVal);
-			public HRESULT GetVarCustData(uint32 index, in Guid guid, out VARIANT pVarVal) mut => VT.GetVarCustData(ref this, index, guid, out pVarVal);
-			public HRESULT GetImplTypeCustData(uint32 index, in Guid guid, out VARIANT pVarVal) mut => VT.GetImplTypeCustData(ref this, index, guid, out pVarVal);
-			public HRESULT GetDocumentation2(int32 memid, uint32 lcid, BSTR* pbstrHelpString, out uint32 pdwHelpStringContext, BSTR* pbstrHelpStringDll) mut => VT.GetDocumentation2(ref this, memid, lcid, pbstrHelpString, out pdwHelpStringContext, pbstrHelpStringDll);
-			public HRESULT GetAllCustData(out CUSTDATA pCustData) mut => VT.GetAllCustData(ref this, out pCustData);
-			public HRESULT GetAllFuncCustData(uint32 index, out CUSTDATA pCustData) mut => VT.GetAllFuncCustData(ref this, index, out pCustData);
-			public HRESULT GetAllParamCustData(uint32 indexFunc, uint32 indexParam, out CUSTDATA pCustData) mut => VT.GetAllParamCustData(ref this, indexFunc, indexParam, out pCustData);
-			public HRESULT GetAllVarCustData(uint32 index, out CUSTDATA pCustData) mut => VT.GetAllVarCustData(ref this, index, out pCustData);
-			public HRESULT GetAllImplTypeCustData(uint32 index, out CUSTDATA pCustData) mut => VT.GetAllImplTypeCustData(ref this, index, out pCustData);
+			public HResult GetTypeKind(out TYPEKIND pTypeKind) mut => VT.GetTypeKind(ref this, out pTypeKind);
+			public HResult GetTypeFlags(out uint32 pTypeFlags) mut => VT.GetTypeFlags(ref this, out pTypeFlags);
+			public HResult GetFuncIndexOfMemId(int32 memid, INVOKEKIND invKind, out uint32 pFuncIndex) mut => VT.GetFuncIndexOfMemId(ref this, memid, invKind, out pFuncIndex);
+			public HResult GetVarIndexOfMemId(int32 memid, out uint32 pVarIndex) mut => VT.GetVarIndexOfMemId(ref this, memid, out pVarIndex);
+			public HResult GetCustData(in Guid guid, out VARIANT pVarVal) mut => VT.GetCustData(ref this, guid, out pVarVal);
+			public HResult GetFuncCustData(uint32 index, in Guid guid, out VARIANT pVarVal) mut => VT.GetFuncCustData(ref this, index, guid, out pVarVal);
+			public HResult GetParamCustData(uint32 indexFunc, uint32 indexParam, in Guid guid, out VARIANT pVarVal) mut => VT.GetParamCustData(ref this, indexFunc, indexParam, guid, out pVarVal);
+			public HResult GetVarCustData(uint32 index, in Guid guid, out VARIANT pVarVal) mut => VT.GetVarCustData(ref this, index, guid, out pVarVal);
+			public HResult GetImplTypeCustData(uint32 index, in Guid guid, out VARIANT pVarVal) mut => VT.GetImplTypeCustData(ref this, index, guid, out pVarVal);
+			public HResult GetDocumentation2(int32 memid, uint32 lcid, char16** pbstrHelpString, out uint32 pdwHelpStringContext, char16** pbstrHelpStringDll) mut => VT.GetDocumentation2(ref this, memid, lcid, pbstrHelpString, out pdwHelpStringContext, pbstrHelpStringDll);
+			public HResult GetAllCustData(out CUSTDATA pCustData) mut => VT.GetAllCustData(ref this, out pCustData);
+			public HResult GetAllFuncCustData(uint32 index, out CUSTDATA pCustData) mut => VT.GetAllFuncCustData(ref this, index, out pCustData);
+			public HResult GetAllParamCustData(uint32 indexFunc, uint32 indexParam, out CUSTDATA pCustData) mut => VT.GetAllParamCustData(ref this, indexFunc, indexParam, out pCustData);
+			public HResult GetAllVarCustData(uint32 index, out CUSTDATA pCustData) mut => VT.GetAllVarCustData(ref this, index, out pCustData);
+			public HResult GetAllImplTypeCustData(uint32 index, out CUSTDATA pCustData) mut => VT.GetAllImplTypeCustData(ref this, index, out pCustData);
 
 			[CRepr]
 			public struct VTable : ITypeInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, out TYPEKIND pTypeKind) GetTypeKind;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, out uint32 pTypeFlags) GetTypeFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, int32 memid, INVOKEKIND invKind, out uint32 pFuncIndex) GetFuncIndexOfMemId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, int32 memid, out uint32 pVarIndex) GetVarIndexOfMemId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, in Guid guid, out VARIANT pVarVal) GetCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 index, in Guid guid, out VARIANT pVarVal) GetFuncCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 indexFunc, uint32 indexParam, in Guid guid, out VARIANT pVarVal) GetParamCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 index, in Guid guid, out VARIANT pVarVal) GetVarCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 index, in Guid guid, out VARIANT pVarVal) GetImplTypeCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, int32 memid, uint32 lcid, BSTR* pbstrHelpString, out uint32 pdwHelpStringContext, BSTR* pbstrHelpStringDll) GetDocumentation2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, out CUSTDATA pCustData) GetAllCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 index, out CUSTDATA pCustData) GetAllFuncCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 indexFunc, uint32 indexParam, out CUSTDATA pCustData) GetAllParamCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 index, out CUSTDATA pCustData) GetAllVarCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeInfo2 self, uint32 index, out CUSTDATA pCustData) GetAllImplTypeCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, out TYPEKIND pTypeKind) GetTypeKind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, out uint32 pTypeFlags) GetTypeFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, int32 memid, INVOKEKIND invKind, out uint32 pFuncIndex) GetFuncIndexOfMemId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, int32 memid, out uint32 pVarIndex) GetVarIndexOfMemId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, in Guid guid, out VARIANT pVarVal) GetCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 index, in Guid guid, out VARIANT pVarVal) GetFuncCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 indexFunc, uint32 indexParam, in Guid guid, out VARIANT pVarVal) GetParamCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 index, in Guid guid, out VARIANT pVarVal) GetVarCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 index, in Guid guid, out VARIANT pVarVal) GetImplTypeCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, int32 memid, uint32 lcid, char16** pbstrHelpString, out uint32 pdwHelpStringContext, char16** pbstrHelpStringDll) GetDocumentation2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, out CUSTDATA pCustData) GetAllCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 index, out CUSTDATA pCustData) GetAllFuncCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 indexFunc, uint32 indexParam, out CUSTDATA pCustData) GetAllParamCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 index, out CUSTDATA pCustData) GetAllVarCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeInfo2 self, uint32 index, out CUSTDATA pCustData) GetAllImplTypeCustData;
 			}
 		}
 		[CRepr]
@@ -3300,28 +3307,28 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 GetTypeInfoCount() mut => VT.GetTypeInfoCount(ref this);
-			public HRESULT GetTypeInfo(uint32 index, out ITypeInfo* ppTInfo) mut => VT.GetTypeInfo(ref this, index, out ppTInfo);
-			public HRESULT GetTypeInfoType(uint32 index, out TYPEKIND pTKind) mut => VT.GetTypeInfoType(ref this, index, out pTKind);
-			public HRESULT GetTypeInfoOfGuid(in Guid guid, out ITypeInfo* ppTinfo) mut => VT.GetTypeInfoOfGuid(ref this, guid, out ppTinfo);
-			public HRESULT GetLibAttr(out TLIBATTR* ppTLibAttr) mut => VT.GetLibAttr(ref this, out ppTLibAttr);
-			public HRESULT GetTypeComp(out ITypeComp* ppTComp) mut => VT.GetTypeComp(ref this, out ppTComp);
-			public HRESULT GetDocumentation(int32 index, BSTR* pBstrName, BSTR* pBstrDocString, out uint32 pdwHelpContext, BSTR* pBstrHelpFile) mut => VT.GetDocumentation(ref this, index, pBstrName, pBstrDocString, out pdwHelpContext, pBstrHelpFile);
-			public HRESULT IsName(PWSTR szNameBuf, uint32 lHashVal, out BOOL pfName) mut => VT.IsName(ref this, szNameBuf, lHashVal, out pfName);
-			public HRESULT FindName(PWSTR szNameBuf, uint32 lHashVal, ITypeInfo** ppTInfo, int32* rgMemId, out uint16 pcFound) mut => VT.FindName(ref this, szNameBuf, lHashVal, ppTInfo, rgMemId, out pcFound);
+			public HResult GetTypeInfo(uint32 index, out ITypeInfo* ppTInfo) mut => VT.GetTypeInfo(ref this, index, out ppTInfo);
+			public HResult GetTypeInfoType(uint32 index, out TYPEKIND pTKind) mut => VT.GetTypeInfoType(ref this, index, out pTKind);
+			public HResult GetTypeInfoOfGuid(in Guid guid, out ITypeInfo* ppTinfo) mut => VT.GetTypeInfoOfGuid(ref this, guid, out ppTinfo);
+			public HResult GetLibAttr(out TLIBATTR* ppTLibAttr) mut => VT.GetLibAttr(ref this, out ppTLibAttr);
+			public HResult GetTypeComp(out ITypeComp* ppTComp) mut => VT.GetTypeComp(ref this, out ppTComp);
+			public HResult GetDocumentation(int32 index, char16** pBstrName, char16** pBstrDocString, out uint32 pdwHelpContext, char16** pBstrHelpFile) mut => VT.GetDocumentation(ref this, index, pBstrName, pBstrDocString, out pdwHelpContext, pBstrHelpFile);
+			public HResult IsName(char16* szNameBuf, uint32 lHashVal, out IntBool pfName) mut => VT.IsName(ref this, szNameBuf, lHashVal, out pfName);
+			public HResult FindName(char16* szNameBuf, uint32 lHashVal, ITypeInfo** ppTInfo, int32* rgMemId, out uint16 pcFound) mut => VT.FindName(ref this, szNameBuf, lHashVal, ppTInfo, rgMemId, out pcFound);
 			public void ReleaseTLibAttr(ref TLIBATTR pTLibAttr) mut => VT.ReleaseTLibAttr(ref this, ref pTLibAttr);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref ITypeLib self) GetTypeInfoCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, uint32 index, out ITypeInfo* ppTInfo) GetTypeInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, uint32 index, out TYPEKIND pTKind) GetTypeInfoType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, in Guid guid, out ITypeInfo* ppTinfo) GetTypeInfoOfGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, out TLIBATTR* ppTLibAttr) GetLibAttr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, out ITypeComp* ppTComp) GetTypeComp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, int32 index, BSTR* pBstrName, BSTR* pBstrDocString, out uint32 pdwHelpContext, BSTR* pBstrHelpFile) GetDocumentation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, PWSTR szNameBuf, uint32 lHashVal, out BOOL pfName) IsName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib self, PWSTR szNameBuf, uint32 lHashVal, ITypeInfo** ppTInfo, int32* rgMemId, out uint16 pcFound) FindName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, uint32 index, out ITypeInfo* ppTInfo) GetTypeInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, uint32 index, out TYPEKIND pTKind) GetTypeInfoType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, in Guid guid, out ITypeInfo* ppTinfo) GetTypeInfoOfGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, out TLIBATTR* ppTLibAttr) GetLibAttr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, out ITypeComp* ppTComp) GetTypeComp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, int32 index, char16** pBstrName, char16** pBstrDocString, out uint32 pdwHelpContext, char16** pBstrHelpFile) GetDocumentation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, char16* szNameBuf, uint32 lHashVal, out IntBool pfName) IsName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib self, char16* szNameBuf, uint32 lHashVal, ITypeInfo** ppTInfo, int32* rgMemId, out uint16 pcFound) FindName;
 				public new function [CallingConvention(.Stdcall)] void(ref ITypeLib self, ref TLIBATTR pTLibAttr) ReleaseTLibAttr;
 			}
 		}
@@ -3332,18 +3339,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCustData(in Guid guid, out VARIANT pVarVal) mut => VT.GetCustData(ref this, guid, out pVarVal);
-			public HRESULT GetLibStatistics(out uint32 pcUniqueNames, out uint32 pcchUniqueNames) mut => VT.GetLibStatistics(ref this, out pcUniqueNames, out pcchUniqueNames);
-			public HRESULT GetDocumentation2(int32 index, uint32 lcid, BSTR* pbstrHelpString, out uint32 pdwHelpStringContext, BSTR* pbstrHelpStringDll) mut => VT.GetDocumentation2(ref this, index, lcid, pbstrHelpString, out pdwHelpStringContext, pbstrHelpStringDll);
-			public HRESULT GetAllCustData(out CUSTDATA pCustData) mut => VT.GetAllCustData(ref this, out pCustData);
+			public HResult GetCustData(in Guid guid, out VARIANT pVarVal) mut => VT.GetCustData(ref this, guid, out pVarVal);
+			public HResult GetLibStatistics(out uint32 pcUniqueNames, out uint32 pcchUniqueNames) mut => VT.GetLibStatistics(ref this, out pcUniqueNames, out pcchUniqueNames);
+			public HResult GetDocumentation2(int32 index, uint32 lcid, char16** pbstrHelpString, out uint32 pdwHelpStringContext, char16** pbstrHelpStringDll) mut => VT.GetDocumentation2(ref this, index, lcid, pbstrHelpString, out pdwHelpStringContext, pbstrHelpStringDll);
+			public HResult GetAllCustData(out CUSTDATA pCustData) mut => VT.GetAllCustData(ref this, out pCustData);
 
 			[CRepr]
 			public struct VTable : ITypeLib.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib2 self, in Guid guid, out VARIANT pVarVal) GetCustData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib2 self, out uint32 pcUniqueNames, out uint32 pcchUniqueNames) GetLibStatistics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib2 self, int32 index, uint32 lcid, BSTR* pbstrHelpString, out uint32 pdwHelpStringContext, BSTR* pbstrHelpStringDll) GetDocumentation2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLib2 self, out CUSTDATA pCustData) GetAllCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib2 self, in Guid guid, out VARIANT pVarVal) GetCustData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib2 self, out uint32 pcUniqueNames, out uint32 pcchUniqueNames) GetLibStatistics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib2 self, int32 index, uint32 lcid, char16** pbstrHelpString, out uint32 pdwHelpStringContext, char16** pbstrHelpStringDll) GetDocumentation2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLib2 self, out CUSTDATA pCustData) GetAllCustData;
 			}
 		}
 		[CRepr]
@@ -3353,20 +3360,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGUID(out Guid pGUID) mut => VT.GetGUID(ref this, out pGUID);
-			public HRESULT GetSource(out BSTR pBstrSource) mut => VT.GetSource(ref this, out pBstrSource);
-			public HRESULT GetDescription(out BSTR pBstrDescription) mut => VT.GetDescription(ref this, out pBstrDescription);
-			public HRESULT GetHelpFile(out BSTR pBstrHelpFile) mut => VT.GetHelpFile(ref this, out pBstrHelpFile);
-			public HRESULT GetHelpContext(out uint32 pdwHelpContext) mut => VT.GetHelpContext(ref this, out pdwHelpContext);
+			public HResult GetGUID(out Guid pGUID) mut => VT.GetGUID(ref this, out pGUID);
+			public HResult GetSource(out char16* pBstrSource) mut => VT.GetSource(ref this, out pBstrSource);
+			public HResult GetDescription(out char16* pBstrDescription) mut => VT.GetDescription(ref this, out pBstrDescription);
+			public HResult GetHelpFile(out char16* pBstrHelpFile) mut => VT.GetHelpFile(ref this, out pBstrHelpFile);
+			public HResult GetHelpContext(out uint32 pdwHelpContext) mut => VT.GetHelpContext(ref this, out pdwHelpContext);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IErrorInfo self, out Guid pGUID) GetGUID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IErrorInfo self, out BSTR pBstrSource) GetSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IErrorInfo self, out BSTR pBstrDescription) GetDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IErrorInfo self, out BSTR pBstrHelpFile) GetHelpFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IErrorInfo self, out uint32 pdwHelpContext) GetHelpContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IErrorInfo self, out Guid pGUID) GetGUID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IErrorInfo self, out char16* pBstrSource) GetSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IErrorInfo self, out char16* pBstrDescription) GetDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IErrorInfo self, out char16* pBstrHelpFile) GetHelpFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IErrorInfo self, out uint32 pdwHelpContext) GetHelpContext;
 			}
 		}
 		[CRepr]
@@ -3376,12 +3383,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InterfaceSupportsErrorInfo(in Guid riid) mut => VT.InterfaceSupportsErrorInfo(ref this, riid);
+			public HResult InterfaceSupportsErrorInfo(in Guid riid) mut => VT.InterfaceSupportsErrorInfo(ref this, riid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISupportErrorInfo self, in Guid riid) InterfaceSupportsErrorInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISupportErrorInfo self, in Guid riid) InterfaceSupportsErrorInfo;
 			}
 		}
 		[CRepr]
@@ -3391,12 +3398,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddError(PWSTR pszPropName, ref EXCEPINFO pExcepInfo) mut => VT.AddError(ref this, pszPropName, ref pExcepInfo);
+			public HResult AddError(char16* pszPropName, ref EXCEPINFO pExcepInfo) mut => VT.AddError(ref this, pszPropName, ref pExcepInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IErrorLog self, PWSTR pszPropName, ref EXCEPINFO pExcepInfo) AddError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IErrorLog self, char16* pszPropName, ref EXCEPINFO pExcepInfo) AddError;
 			}
 		}
 		[CRepr]
@@ -3406,12 +3413,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumTypeLibRegistrations(out IEnumUnknown* ppEnumUnknown) mut => VT.EnumTypeLibRegistrations(ref this, out ppEnumUnknown);
+			public HResult EnumTypeLibRegistrations(out IEnumUnknown* ppEnumUnknown) mut => VT.EnumTypeLibRegistrations(ref this, out ppEnumUnknown);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistrationReader self, out IEnumUnknown* ppEnumUnknown) EnumTypeLibRegistrations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistrationReader self, out IEnumUnknown* ppEnumUnknown) EnumTypeLibRegistrations;
 			}
 		}
 		[CRepr]
@@ -3421,26 +3428,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGuid(out Guid pGuid) mut => VT.GetGuid(ref this, out pGuid);
-			public HRESULT GetVersion(out BSTR pVersion) mut => VT.GetVersion(ref this, out pVersion);
-			public HRESULT GetLcid(out uint32 pLcid) mut => VT.GetLcid(ref this, out pLcid);
-			public HRESULT GetWin32Path(out BSTR pWin32Path) mut => VT.GetWin32Path(ref this, out pWin32Path);
-			public HRESULT GetWin64Path(out BSTR pWin64Path) mut => VT.GetWin64Path(ref this, out pWin64Path);
-			public HRESULT GetDisplayName(out BSTR pDisplayName) mut => VT.GetDisplayName(ref this, out pDisplayName);
-			public HRESULT ComGetFlags(out uint32 pFlags) mut => VT.ComGetFlags(ref this, out pFlags);
-			public HRESULT GetHelpDir(out BSTR pHelpDir) mut => VT.GetHelpDir(ref this, out pHelpDir);
+			public HResult GetGuid(out Guid pGuid) mut => VT.GetGuid(ref this, out pGuid);
+			public HResult GetVersion(out char16* pVersion) mut => VT._GetVersion(ref this, out pVersion);
+			public HResult GetLcid(out uint32 pLcid) mut => VT.GetLcid(ref this, out pLcid);
+			public HResult GetWin32Path(out char16* pWin32Path) mut => VT.GetWin32Path(ref this, out pWin32Path);
+			public HResult GetWin64Path(out char16* pWin64Path) mut => VT.GetWin64Path(ref this, out pWin64Path);
+			public HResult GetDisplayName(out char16* pDisplayName) mut => VT.GetDisplayName(ref this, out pDisplayName);
+			public HResult ComGetFlags(out uint32 pFlags) mut => VT.ComGetFlags(ref this, out pFlags);
+			public HResult GetHelpDir(out char16* pHelpDir) mut => VT.GetHelpDir(ref this, out pHelpDir);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out Guid pGuid) GetGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out BSTR pVersion) GetVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out uint32 pLcid) GetLcid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out BSTR pWin32Path) GetWin32Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out BSTR pWin64Path) GetWin64Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out BSTR pDisplayName) GetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out uint32 pFlags) ComGetFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITypeLibRegistration self, out BSTR pHelpDir) GetHelpDir;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out Guid pGuid) GetGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out char16* pVersion) _GetVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out uint32 pLcid) GetLcid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out char16* pWin32Path) GetWin32Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out char16* pWin64Path) GetWin64Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out char16* pDisplayName) GetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out uint32 pFlags) ComGetFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITypeLibRegistration self, out char16* pHelpDir) GetHelpDir;
 			}
 		}
 		[CRepr]
@@ -3450,18 +3457,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cConnections, CONNECTDATA* rgcd, out uint32 pcFetched) mut => VT.Next(ref this, cConnections, rgcd, out pcFetched);
-			public HRESULT Skip(uint32 cConnections) mut => VT.Skip(ref this, cConnections);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumConnections* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 cConnections, CONNECTDATA* rgcd, out uint32 pcFetched) mut => VT.Next(ref this, cConnections, rgcd, out pcFetched);
+			public HResult Skip(uint32 cConnections) mut => VT.Skip(ref this, cConnections);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumConnections* ppEnum) mut => VT.Clone(ref this, out ppEnum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnections self, uint32 cConnections, CONNECTDATA* rgcd, out uint32 pcFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnections self, uint32 cConnections) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnections self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnections self, out IEnumConnections* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnections self, uint32 cConnections, CONNECTDATA* rgcd, out uint32 pcFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnections self, uint32 cConnections) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnections self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnections self, out IEnumConnections* ppEnum) Clone;
 			}
 		}
 		[CRepr]
@@ -3471,20 +3478,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetConnectionInterface(out Guid pIID) mut => VT.GetConnectionInterface(ref this, out pIID);
-			public HRESULT GetConnectionPointContainer(out IConnectionPointContainer* ppCPC) mut => VT.GetConnectionPointContainer(ref this, out ppCPC);
-			public HRESULT Advise(ref IUnknown pUnkSink, out uint32 pdwCookie) mut => VT.Advise(ref this, ref pUnkSink, out pdwCookie);
-			public HRESULT Unadvise(uint32 dwCookie) mut => VT.Unadvise(ref this, dwCookie);
-			public HRESULT EnumConnections(out IEnumConnections* ppEnum) mut => VT.EnumConnections(ref this, out ppEnum);
+			public HResult GetConnectionInterface(out Guid pIID) mut => VT.GetConnectionInterface(ref this, out pIID);
+			public HResult GetConnectionPointContainer(out IConnectionPointContainer* ppCPC) mut => VT.GetConnectionPointContainer(ref this, out ppCPC);
+			public HResult Advise(ref IUnknown pUnkSink, out uint32 pdwCookie) mut => VT.Advise(ref this, ref pUnkSink, out pdwCookie);
+			public HResult Unadvise(uint32 dwCookie) mut => VT.Unadvise(ref this, dwCookie);
+			public HResult EnumConnections(out IEnumConnections* ppEnum) mut => VT.EnumConnections(ref this, out ppEnum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPoint self, out Guid pIID) GetConnectionInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPoint self, out IConnectionPointContainer* ppCPC) GetConnectionPointContainer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPoint self, ref IUnknown pUnkSink, out uint32 pdwCookie) Advise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPoint self, uint32 dwCookie) Unadvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPoint self, out IEnumConnections* ppEnum) EnumConnections;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPoint self, out Guid pIID) GetConnectionInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPoint self, out IConnectionPointContainer* ppCPC) GetConnectionPointContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPoint self, ref IUnknown pUnkSink, out uint32 pdwCookie) Advise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPoint self, uint32 dwCookie) Unadvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPoint self, out IEnumConnections* ppEnum) EnumConnections;
 			}
 		}
 		[CRepr]
@@ -3494,18 +3501,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cConnections, IConnectionPoint** ppCP, out uint32 pcFetched) mut => VT.Next(ref this, cConnections, ppCP, out pcFetched);
-			public HRESULT Skip(uint32 cConnections) mut => VT.Skip(ref this, cConnections);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumConnectionPoints* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 cConnections, IConnectionPoint** ppCP, out uint32 pcFetched) mut => VT.Next(ref this, cConnections, ppCP, out pcFetched);
+			public HResult Skip(uint32 cConnections) mut => VT.Skip(ref this, cConnections);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumConnectionPoints* ppEnum) mut => VT.Clone(ref this, out ppEnum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnectionPoints self, uint32 cConnections, IConnectionPoint** ppCP, out uint32 pcFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnectionPoints self, uint32 cConnections) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnectionPoints self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumConnectionPoints self, out IEnumConnectionPoints* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnectionPoints self, uint32 cConnections, IConnectionPoint** ppCP, out uint32 pcFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnectionPoints self, uint32 cConnections) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnectionPoints self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumConnectionPoints self, out IEnumConnectionPoints* ppEnum) Clone;
 			}
 		}
 		[CRepr]
@@ -3515,14 +3522,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumConnectionPoints(out IEnumConnectionPoints* ppEnum) mut => VT.EnumConnectionPoints(ref this, out ppEnum);
-			public HRESULT FindConnectionPoint(in Guid riid, out IConnectionPoint* ppCP) mut => VT.FindConnectionPoint(ref this, riid, out ppCP);
+			public HResult EnumConnectionPoints(out IEnumConnectionPoints* ppEnum) mut => VT.EnumConnectionPoints(ref this, out ppEnum);
+			public HResult FindConnectionPoint(in Guid riid, out IConnectionPoint* ppCP) mut => VT.FindConnectionPoint(ref this, riid, out ppCP);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPointContainer self, out IEnumConnectionPoints* ppEnum) EnumConnectionPoints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectionPointContainer self, in Guid riid, out IConnectionPoint* ppCP) FindConnectionPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPointContainer self, out IEnumConnectionPoints* ppEnum) EnumConnectionPoints;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectionPointContainer self, in Guid riid, out IConnectionPoint* ppCP) FindConnectionPoint;
 			}
 		}
 		[CRepr]
@@ -3532,20 +3539,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsDirty() mut => VT.IsDirty(ref this);
-			public HRESULT Load(void* pMem, uint32 cbSize) mut => VT.Load(ref this, pMem, cbSize);
-			public HRESULT Save(void* pMem, BOOL fClearDirty, uint32 cbSize) mut => VT.Save(ref this, pMem, fClearDirty, cbSize);
-			public HRESULT GetSizeMax(out uint32 pCbSize) mut => VT.GetSizeMax(ref this, out pCbSize);
-			public HRESULT InitNew() mut => VT.InitNew(ref this);
+			public HResult IsDirty() mut => VT.IsDirty(ref this);
+			public HResult Load(void* pMem, uint32 cbSize) mut => VT.Load(ref this, pMem, cbSize);
+			public HResult Save(void* pMem, IntBool fClearDirty, uint32 cbSize) mut => VT.Save(ref this, pMem, fClearDirty, cbSize);
+			public HResult GetSizeMax(out uint32 pCbSize) mut => VT.GetSizeMax(ref this, out pCbSize);
+			public HResult InitNew() mut => VT.InitNew(ref this);
 
 			[CRepr]
 			public struct VTable : IPersist.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMemory self) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMemory self, void* pMem, uint32 cbSize) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMemory self, void* pMem, BOOL fClearDirty, uint32 cbSize) Save;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMemory self, out uint32 pCbSize) GetSizeMax;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMemory self) InitNew;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMemory self) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMemory self, void* pMem, uint32 cbSize) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMemory self, void* pMem, IntBool fClearDirty, uint32 cbSize) Save;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMemory self, out uint32 pCbSize) GetSizeMax;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMemory self) InitNew;
 			}
 		}
 		[CRepr]
@@ -3555,20 +3562,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsDirty() mut => VT.IsDirty(ref this);
-			public HRESULT Load(ref IStream pStm) mut => VT.Load(ref this, ref pStm);
-			public HRESULT Save(ref IStream pStm, BOOL fClearDirty) mut => VT.Save(ref this, ref pStm, fClearDirty);
-			public HRESULT GetSizeMax(out ULARGE_INTEGER pCbSize) mut => VT.GetSizeMax(ref this, out pCbSize);
-			public HRESULT InitNew() mut => VT.InitNew(ref this);
+			public HResult IsDirty() mut => VT.IsDirty(ref this);
+			public HResult Load(ref IStream pStm) mut => VT.Load(ref this, ref pStm);
+			public HResult Save(ref IStream pStm, IntBool fClearDirty) mut => VT.Save(ref this, ref pStm, fClearDirty);
+			public HResult GetSizeMax(out ULARGE_INTEGER pCbSize) mut => VT.GetSizeMax(ref this, out pCbSize);
+			public HResult InitNew() mut => VT.InitNew(ref this);
 
 			[CRepr]
 			public struct VTable : IPersist.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStreamInit self) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStreamInit self, ref IStream pStm) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStreamInit self, ref IStream pStm, BOOL fClearDirty) Save;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStreamInit self, out ULARGE_INTEGER pCbSize) GetSizeMax;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistStreamInit self) InitNew;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStreamInit self) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStreamInit self, ref IStream pStm) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStreamInit self, ref IStream pStm, IntBool fClearDirty) Save;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStreamInit self, out ULARGE_INTEGER pCbSize) GetSizeMax;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistStreamInit self) InitNew;
 			}
 		}
 		
@@ -3577,201 +3584,201 @@ namespace Win32
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 CoBuildVersion();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInitialize(void* pvReserved);
+		public static extern HResult CoInitialize(void* pvReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterMallocSpy(ref IMallocSpy pMallocSpy);
+		public static extern HResult CoRegisterMallocSpy(ref IMallocSpy pMallocSpy);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRevokeMallocSpy();
+		public static extern HResult CoRevokeMallocSpy();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterInitializeSpy(ref IInitializeSpy pSpy, out ULARGE_INTEGER puliCookie);
+		public static extern HResult CoRegisterInitializeSpy(ref IInitializeSpy pSpy, out ULARGE_INTEGER puliCookie);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRevokeInitializeSpy(ULARGE_INTEGER uliCookie);
+		public static extern HResult CoRevokeInitializeSpy(ULARGE_INTEGER uliCookie);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetSystemSecurityPermissions(COMSD comSDType, out SECURITY_DESCRIPTOR* ppSD);
+		public static extern HResult CoGetSystemSecurityPermissions(COMSD comSDType, out SECURITY_DESCRIPTOR* ppSD);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HINSTANCE CoLoadLibrary(PWSTR lpszLibName, BOOL bAutoFree);
+		public static extern HInstance CoLoadLibrary(char16* lpszLibName, IntBool bAutoFree);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void CoFreeLibrary(HINSTANCE hInst);
+		public static extern void CoFreeLibrary(HInstance hInst);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CoFreeAllLibraries();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoAllowSetForegroundWindow(ref IUnknown pUnk, void* lpvReserved);
+		public static extern HResult CoAllowSetForegroundWindow(ref IUnknown pUnk, void* lpvReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DcomChannelSetHResult(void* pvReserved, uint32* pulReserved, HRESULT appsHR);
+		public static extern HResult DcomChannelSetHResult(void* pvReserved, uint32* pulReserved, HResult appsHR);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CoIsOle1Class(in Guid rclsid);
+		public static extern IntBool CoIsOle1Class(in Guid rclsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CLSIDFromProgIDEx(PWSTR lpszProgID, out Guid lpclsid);
+		public static extern HResult CLSIDFromProgIDEx(char16* lpszProgID, out Guid lpclsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CoFileTimeToDosDateTime(ref FILETIME lpFileTime, out uint16 lpDosDate, out uint16 lpDosTime);
+		public static extern IntBool CoFileTimeToDosDateTime(ref FileTime lpFileTime, out uint16 lpDosDate, out uint16 lpDosTime);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CoDosDateTimeToFileTime(uint16 nDosDate, uint16 nDosTime, out FILETIME lpFileTime);
+		public static extern IntBool CoDosDateTimeToFileTime(uint16 nDosDate, uint16 nDosTime, out FileTime lpFileTime);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoFileTimeNow(out FILETIME lpFileTime);
+		public static extern HResult CoFileTimeNow(out FileTime lpFileTime);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterChannelHook(in Guid ExtensionUuid, ref IChannelHook pChannelHook);
+		public static extern HResult CoRegisterChannelHook(in Guid ExtensionUuid, ref IChannelHook pChannelHook);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoTreatAsClass(in Guid clsidOld, in Guid clsidNew);
+		public static extern HResult CoTreatAsClass(in Guid clsidOld, in Guid clsidNew);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateDataAdviseHolder(out IDataAdviseHolder* ppDAHolder);
+		public static extern HResult CreateDataAdviseHolder(out IDataAdviseHolder* ppDAHolder);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateDataCache(IUnknown* pUnkOuter, in Guid rclsid, in Guid iid, void** ppv);
+		public static extern HResult CreateDataCache(IUnknown* pUnkOuter, in Guid rclsid, in Guid iid, void** ppv);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInstall(ref IBindCtx pbc, uint32 dwFlags, ref uCLSSPEC pClassSpec, ref QUERYCONTEXT pQuery, PWSTR pszCodeBase);
+		public static extern HResult CoInstall(ref IBindCtx pbc, uint32 dwFlags, ref uCLSSPEC pClassSpec, ref QUERYCONTEXT pQuery, char16* pszCodeBase);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT BindMoniker(ref IMoniker pmk, uint32 grfOpt, in Guid iidResult, void** ppvResult);
+		public static extern HResult BindMoniker(ref IMoniker pmk, uint32 grfOpt, in Guid iidResult, void** ppvResult);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetObject(PWSTR pszName, BIND_OPTS* pBindOptions, in Guid riid, void** ppv);
+		public static extern HResult CoGetObject(char16* pszName, BIND_OPTS* pBindOptions, in Guid riid, void** ppv);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MkParseDisplayName(ref IBindCtx pbc, PWSTR szUserName, out uint32 pchEaten, out IMoniker* ppmk);
+		public static extern HResult MkParseDisplayName(ref IBindCtx pbc, char16* szUserName, out uint32 pchEaten, out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MonikerRelativePathTo(ref IMoniker pmkSrc, ref IMoniker pmkDest, out IMoniker* ppmkRelPath, BOOL dwReserved);
+		public static extern HResult MonikerRelativePathTo(ref IMoniker pmkSrc, ref IMoniker pmkDest, out IMoniker* ppmkRelPath, IntBool dwReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MonikerCommonPrefixWith(ref IMoniker pmkThis, ref IMoniker pmkOther, out IMoniker* ppmkCommon);
+		public static extern HResult MonikerCommonPrefixWith(ref IMoniker pmkThis, ref IMoniker pmkOther, out IMoniker* ppmkCommon);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateBindCtx(uint32 reserved, out IBindCtx* ppbc);
+		public static extern HResult CreateBindCtx(uint32 reserved, out IBindCtx* ppbc);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateGenericComposite(IMoniker* pmkFirst, IMoniker* pmkRest, out IMoniker* ppmkComposite);
+		public static extern HResult CreateGenericComposite(IMoniker* pmkFirst, IMoniker* pmkRest, out IMoniker* ppmkComposite);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetClassFile(PWSTR szFilename, out Guid pclsid);
+		public static extern HResult GetClassFile(char16* szFilename, out Guid pclsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateClassMoniker(in Guid rclsid, out IMoniker* ppmk);
+		public static extern HResult CreateClassMoniker(in Guid rclsid, out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateFileMoniker(PWSTR lpszPathName, out IMoniker* ppmk);
+		public static extern HResult CreateFileMoniker(char16* lpszPathName, out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateItemMoniker(PWSTR lpszDelim, PWSTR lpszItem, out IMoniker* ppmk);
+		public static extern HResult CreateItemMoniker(char16* lpszDelim, char16* lpszItem, out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateAntiMoniker(out IMoniker* ppmk);
+		public static extern HResult CreateAntiMoniker(out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreatePointerMoniker(IUnknown* punk, out IMoniker* ppmk);
+		public static extern HResult CreatePointerMoniker(IUnknown* punk, out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateObjrefMoniker(IUnknown* punk, out IMoniker* ppmk);
+		public static extern HResult CreateObjrefMoniker(IUnknown* punk, out IMoniker* ppmk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetRunningObjectTable(uint32 reserved, out IRunningObjectTable* pprot);
+		public static extern HResult GetRunningObjectTable(uint32 reserved, out IRunningObjectTable* pprot);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateStdProgressIndicator(HWND hwndParent, PWSTR pszTitle, ref IBindStatusCallback pIbscCaller, out IBindStatusCallback* ppIbsc);
+		public static extern HResult CreateStdProgressIndicator(HWnd hwndParent, char16* pszTitle, ref IBindStatusCallback pIbscCaller, out IBindStatusCallback* ppIbsc);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetMalloc(uint32 dwMemContext, out IMalloc* ppMalloc);
+		public static extern HResult CoGetMalloc(uint32 dwMemContext, out IMalloc* ppMalloc);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CoUninitialize();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 CoGetCurrentProcess();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInitializeEx(void* pvReserved, COINIT dwCoInit);
+		public static extern HResult CoInitializeEx(void* pvReserved, CoInit dwCoInit);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetCallerTID(out uint32 lpdwTID);
+		public static extern HResult CoGetCallerTID(out uint32 lpdwTID);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetCurrentLogicalThreadId(out Guid pguid);
+		public static extern HResult CoGetCurrentLogicalThreadId(out Guid pguid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetContextToken(out uint pToken);
+		public static extern HResult CoGetContextToken(out uint pToken);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetApartmentType(out APTTYPE pAptType, out APTTYPEQUALIFIER pAptQualifier);
+		public static extern HResult CoGetApartmentType(out APTTYPE pAptType, out APTTYPEQUALIFIER pAptQualifier);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoIncrementMTAUsage(out CO_MTA_USAGE_COOKIE pCookie);
+		public static extern HResult CoIncrementMTAUsage(out CO_MTA_USAGE_COOKIE pCookie);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoDecrementMTAUsage(CO_MTA_USAGE_COOKIE Cookie);
+		public static extern HResult CoDecrementMTAUsage(CO_MTA_USAGE_COOKIE Cookie);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoAllowUnmarshalerCLSID(in Guid clsid);
+		public static extern HResult CoAllowUnmarshalerCLSID(in Guid clsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetObjectContext(in Guid riid, void** ppv);
+		public static extern HResult CoGetObjectContext(in Guid riid, void** ppv);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetClassObject(in Guid rclsid, CLSCTX dwClsContext, void* pvReserved, in Guid riid, void** ppv);
+		public static extern HResult CoGetClassObject(in Guid rclsid, CLSCTX dwClsContext, void* pvReserved, in Guid riid, void** ppv);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterClassObject(in Guid rclsid, ref IUnknown pUnk, CLSCTX dwClsContext, uint32 flags, out uint32 lpdwRegister);
+		public static extern HResult CoRegisterClassObject(in Guid rclsid, ref IUnknown pUnk, CLSCTX dwClsContext, uint32 flags, out uint32 lpdwRegister);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRevokeClassObject(uint32 dwRegister);
+		public static extern HResult CoRevokeClassObject(uint32 dwRegister);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoResumeClassObjects();
+		public static extern HResult CoResumeClassObjects();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoSuspendClassObjects();
+		public static extern HResult CoSuspendClassObjects();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 CoAddRefServerProcess();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 CoReleaseServerProcess();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetPSClsid(in Guid riid, out Guid pClsid);
+		public static extern HResult CoGetPSClsid(in Guid riid, out Guid pClsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterPSClsid(in Guid riid, in Guid rclsid);
+		public static extern HResult CoRegisterPSClsid(in Guid riid, in Guid rclsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterSurrogate(ref ISurrogate pSurrogate);
+		public static extern HResult CoRegisterSurrogate(ref ISurrogate pSurrogate);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoDisconnectObject(ref IUnknown pUnk, uint32 dwReserved);
+		public static extern HResult CoDisconnectObject(ref IUnknown pUnk, uint32 dwReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoLockObjectExternal(ref IUnknown pUnk, BOOL fLock, BOOL fLastUnlockReleases);
+		public static extern HResult CoLockObjectExternal(ref IUnknown pUnk, IntBool fLock, IntBool fLastUnlockReleases);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CoIsHandlerConnected(ref IUnknown pUnk);
+		public static extern IntBool CoIsHandlerConnected(ref IUnknown pUnk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCreateFreeThreadedMarshaler(IUnknown* punkOuter, out IUnknown* ppunkMarshal);
+		public static extern HResult CoCreateFreeThreadedMarshaler(IUnknown* punkOuter, out IUnknown* ppunkMarshal);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CoFreeUnusedLibraries();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CoFreeUnusedLibrariesEx(uint32 dwUnloadDelay, uint32 dwReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoDisconnectContext(uint32 dwTimeout);
+		public static extern HResult CoDisconnectContext(uint32 dwTimeout);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInitializeSecurity(SECURITY_DESCRIPTOR* pSecDesc, int32 cAuthSvc, SOLE_AUTHENTICATION_SERVICE* asAuthSvc, void* pReserved1, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthList, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities, void* pReserved3);
+		public static extern HResult CoInitializeSecurity(SECURITY_DESCRIPTOR* pSecDesc, int32 cAuthSvc, SOLE_AUTHENTICATION_SERVICE* asAuthSvc, void* pReserved1, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthList, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities, void* pReserved3);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetCallContext(in Guid riid, void** ppInterface);
+		public static extern HResult CoGetCallContext(in Guid riid, void** ppInterface);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoQueryProxyBlanket(ref IUnknown pProxy, uint32* pwAuthnSvc, uint32* pAuthzSvc, PWSTR* pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pAuthInfo, uint32* pCapabilites);
+		public static extern HResult CoQueryProxyBlanket(ref IUnknown pProxy, uint32* pwAuthnSvc, uint32* pAuthzSvc, char16** pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pAuthInfo, uint32* pCapabilites);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoSetProxyBlanket(ref IUnknown pProxy, uint32 dwAuthnSvc, uint32 dwAuthzSvc, PWSTR pServerPrincName, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities);
+		public static extern HResult CoSetProxyBlanket(ref IUnknown pProxy, uint32 dwAuthnSvc, uint32 dwAuthzSvc, char16* pServerPrincName, RPC_C_AUTHN_LEVEL dwAuthnLevel, RPC_C_IMP_LEVEL dwImpLevel, void* pAuthInfo, EOLE_AUTHENTICATION_CAPABILITIES dwCapabilities);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCopyProxy(ref IUnknown pProxy, out IUnknown* ppCopy);
+		public static extern HResult CoCopyProxy(ref IUnknown pProxy, out IUnknown* ppCopy);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoQueryClientBlanket(uint32* pAuthnSvc, uint32* pAuthzSvc, PWSTR* pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pPrivs, uint32* pCapabilities);
+		public static extern HResult CoQueryClientBlanket(uint32* pAuthnSvc, uint32* pAuthzSvc, char16** pServerPrincName, uint32* pAuthnLevel, uint32* pImpLevel, void** pPrivs, uint32* pCapabilities);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoImpersonateClient();
+		public static extern HResult CoImpersonateClient();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRevertToSelf();
+		public static extern HResult CoRevertToSelf();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoQueryAuthenticationServices(out uint32 pcAuthSvc, out SOLE_AUTHENTICATION_SERVICE* asAuthSvc);
+		public static extern HResult CoQueryAuthenticationServices(out uint32 pcAuthSvc, out SOLE_AUTHENTICATION_SERVICE* asAuthSvc);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoSwitchCallContext(IUnknown* pNewObject, out IUnknown* ppOldObject);
+		public static extern HResult CoSwitchCallContext(IUnknown* pNewObject, out IUnknown* ppOldObject);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCreateInstance<T>(in Guid rclsid, IUnknown* pUnkOuter, CLSCTX dwClsContext, in Guid riid, out T* ppv) where T : IUnknown;
+		public static extern HResult CoCreateInstance<T>(in Guid rclsid, IUnknown* pUnkOuter, CLSCTX dwClsContext, in Guid riid, out T* ppv) where T : IUnknown;
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCreateInstanceEx(in Guid Clsid, IUnknown* punkOuter, CLSCTX dwClsCtx, COSERVERINFO* pServerInfo, uint32 dwCount, MULTI_QI* pResults);
+		public static extern HResult CoCreateInstanceEx(in Guid Clsid, IUnknown* punkOuter, CLSCTX dwClsCtx, COSERVERINFO* pServerInfo, uint32 dwCount, MULTI_QI* pResults);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCreateInstanceFromApp(in Guid Clsid, IUnknown* punkOuter, CLSCTX dwClsCtx, void* reserved, uint32 dwCount, MULTI_QI* pResults);
+		public static extern HResult CoCreateInstanceFromApp(in Guid Clsid, IUnknown* punkOuter, CLSCTX dwClsCtx, void* reserved, uint32 dwCount, MULTI_QI* pResults);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterActivationFilter(ref IActivationFilter pActivationFilter);
+		public static extern HResult CoRegisterActivationFilter(ref IActivationFilter pActivationFilter);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetCancelObject(uint32 dwThreadId, in Guid iid, void** ppUnk);
+		public static extern HResult CoGetCancelObject(uint32 dwThreadId, in Guid iid, void** ppUnk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoSetCancelObject(IUnknown* pUnk);
+		public static extern HResult CoSetCancelObject(IUnknown* pUnk);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCancelCall(uint32 dwThreadId, uint32 ulTimeout);
+		public static extern HResult CoCancelCall(uint32 dwThreadId, uint32 ulTimeout);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoTestCancel();
+		public static extern HResult CoTestCancel();
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoEnableCallCancellation(void* pReserved);
+		public static extern HResult CoEnableCallCancellation(void* pReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoDisableCallCancellation(void* pReserved);
+		public static extern HResult CoDisableCallCancellation(void* pReserved);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT StringFromCLSID(in Guid rclsid, out PWSTR lplpsz);
+		public static extern HResult StringFromCLSID(in Guid rclsid, out char16* lplpsz);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CLSIDFromString(PWSTR lpsz, out Guid pclsid);
+		public static extern HResult CLSIDFromString(char16* lpsz, out Guid pclsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT StringFromIID(in Guid rclsid, out PWSTR lplpsz);
+		public static extern HResult StringFromIID(in Guid rclsid, out char16* lplpsz);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IIDFromString(PWSTR lpsz, out Guid lpiid);
+		public static extern HResult IIDFromString(char16* lpsz, out Guid lpiid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ProgIDFromCLSID(in Guid clsid, out PWSTR lplpszProgID);
+		public static extern HResult ProgIDFromCLSID(in Guid clsid, out char16* lplpszProgID);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CLSIDFromProgID(PWSTR lpszProgID, out Guid lpclsid);
+		public static extern HResult CLSIDFromProgID(char16* lpszProgID, out Guid lpclsid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 StringFromGUID2(in Guid rguid, char16* lpsz, int32 cchMax);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoCreateGuid(out Guid pguid);
+		public static extern HResult CoCreateGuid(out Guid pguid);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoWaitForMultipleHandles(uint32 dwFlags, uint32 dwTimeout, uint32 cHandles, HANDLE* pHandles, out uint32 lpdwindex);
+		public static extern HResult CoWaitForMultipleHandles(uint32 dwFlags, uint32 dwTimeout, uint32 cHandles, Handle* pHandles, out uint32 lpdwindex);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoWaitForMultipleObjects(uint32 dwFlags, uint32 dwTimeout, uint32 cHandles, HANDLE* pHandles, out uint32 lpdwindex);
+		public static extern HResult CoWaitForMultipleObjects(uint32 dwFlags, uint32 dwTimeout, uint32 cHandles, Handle* pHandles, out uint32 lpdwindex);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetTreatAsClass(in Guid clsidOld, out Guid pClsidNew);
+		public static extern HResult CoGetTreatAsClass(in Guid clsidOld, out Guid pClsidNew);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInvalidateRemoteMachineBindings(PWSTR pszMachineName);
+		public static extern HResult CoInvalidateRemoteMachineBindings(char16* pszMachineName);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* CoTaskMemAlloc(uint cb);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -3779,20 +3786,20 @@ namespace Win32
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CoTaskMemFree(void* pv);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRegisterDeviceCatalog(PWSTR deviceInstanceId, out CO_DEVICE_CATALOG_COOKIE cookie);
+		public static extern HResult CoRegisterDeviceCatalog(char16* deviceInstanceId, out CO_DEVICE_CATALOG_COOKIE cookie);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoRevokeDeviceCatalog(CO_DEVICE_CATALOG_COOKIE cookie);
+		public static extern HResult CoRevokeDeviceCatalog(CO_DEVICE_CATALOG_COOKIE cookie);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateUri(PWSTR pwzURI, URI_CREATE_FLAGS dwFlags, uint dwReserved, out IUri* ppURI);
+		public static extern HResult CreateUri(char16* pwzURI, URI_CREATE_FLAGS dwFlags, uint dwReserved, out IUri* ppURI);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateUriWithFragment(PWSTR pwzURI, PWSTR pwzFragment, uint32 dwFlags, uint dwReserved, out IUri* ppURI);
+		public static extern HResult CreateUriWithFragment(char16* pwzURI, char16* pwzFragment, uint32 dwFlags, uint dwReserved, out IUri* ppURI);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateUriFromMultiByteString(PSTR pszANSIInputUri, uint32 dwEncodingFlags, uint32 dwCodePage, uint32 dwCreateFlags, uint dwReserved, out IUri* ppUri);
+		public static extern HResult CreateUriFromMultiByteString(char8* pszANSIInputUri, uint32 dwEncodingFlags, uint32 dwCodePage, uint32 dwCreateFlags, uint dwReserved, out IUri* ppUri);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateIUriBuilder(IUri* pIUri, uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder);
+		public static extern HResult CreateIUriBuilder(IUri* pIUri, uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetErrorInfo(uint32 dwReserved, IErrorInfo* perrinfo);
+		public static extern HResult SetErrorInfo(uint32 dwReserved, IErrorInfo* perrinfo);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetErrorInfo(uint32 dwReserved, out IErrorInfo* pperrinfo);
+		public static extern HResult GetErrorInfo(uint32 dwReserved, out IErrorInfo* pperrinfo);
 	}
 }

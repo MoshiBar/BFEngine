@@ -89,6 +89,6 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("verifier.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 VerifierEnumerateResource(HANDLE Process, VERIFIER_ENUM_RESOURCE_FLAGS Flags, eAvrfResourceTypes ResourceType, AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback, void* EnumerationContext);
+		public static extern uint32 VerifierEnumerateResource(Handle Process, VERIFIER_ENUM_RESOURCE_FLAGS Flags, eAvrfResourceTypes ResourceType, AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback, void* EnumerationContext);
 	}
 }

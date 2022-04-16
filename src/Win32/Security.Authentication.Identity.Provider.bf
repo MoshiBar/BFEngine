@@ -58,12 +58,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IdentityUpdated(IdentityUpdateEvent dwIdentityUpdateEvents, PWSTR lpszUniqueID) mut => VT.IdentityUpdated(ref this, dwIdentityUpdateEvents, lpszUniqueID);
+			public HResult IdentityUpdated(IdentityUpdateEvent dwIdentityUpdateEvents, char16* lpszUniqueID) mut => VT.IdentityUpdated(ref this, dwIdentityUpdateEvents, lpszUniqueID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityAdvise self, IdentityUpdateEvent dwIdentityUpdateEvents, PWSTR lpszUniqueID) IdentityUpdated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityAdvise self, IdentityUpdateEvent dwIdentityUpdateEvents, char16* lpszUniqueID) IdentityUpdated;
 			}
 		}
 		[CRepr]
@@ -73,14 +73,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_IdentityUpdated(uint32 dwIdentityUpdateEvents, PWSTR lpszUniqueID) mut => VT.Begin_IdentityUpdated(ref this, dwIdentityUpdateEvents, lpszUniqueID);
-			public HRESULT Finish_IdentityUpdated() mut => VT.Finish_IdentityUpdated(ref this);
+			public HResult Begin_IdentityUpdated(uint32 dwIdentityUpdateEvents, char16* lpszUniqueID) mut => VT.Begin_IdentityUpdated(ref this, dwIdentityUpdateEvents, lpszUniqueID);
+			public HResult Finish_IdentityUpdated() mut => VT.Finish_IdentityUpdated(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityAdvise self, uint32 dwIdentityUpdateEvents, PWSTR lpszUniqueID) Begin_IdentityUpdated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityAdvise self) Finish_IdentityUpdated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityAdvise self, uint32 dwIdentityUpdateEvents, char16* lpszUniqueID) Begin_IdentityUpdated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityAdvise self) Finish_IdentityUpdated;
 			}
 		}
 		[CRepr]
@@ -90,26 +90,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetIdentityEnum(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) mut => VT.GetIdentityEnum(ref this, eIdentityType, pFilterkey, pFilterPropVarValue, ppIdentityEnum);
-			public HRESULT Create(PWSTR lpszUserName, IPropertyStore** ppPropertyStore, in PROPVARIANT pKeywordsToAdd) mut => VT.Create(ref this, lpszUserName, ppPropertyStore, pKeywordsToAdd);
-			public HRESULT Import(IPropertyStore* pPropertyStore) mut => VT.Import(ref this, pPropertyStore);
-			public HRESULT Delete(PWSTR lpszUniqueID, in PROPVARIANT pKeywordsToDelete) mut => VT.Delete(ref this, lpszUniqueID, pKeywordsToDelete);
-			public HRESULT FindByUniqueID(PWSTR lpszUniqueID, IPropertyStore** ppPropertyStore) mut => VT.FindByUniqueID(ref this, lpszUniqueID, ppPropertyStore);
-			public HRESULT GetProviderPropertyStore(IPropertyStore** ppPropertyStore) mut => VT.GetProviderPropertyStore(ref this, ppPropertyStore);
-			public HRESULT Advise(IIdentityAdvise* pIdentityAdvise, IdentityUpdateEvent dwIdentityUpdateEvents, out uint32 pdwCookie) mut => VT.Advise(ref this, pIdentityAdvise, dwIdentityUpdateEvents, out pdwCookie);
-			public HRESULT UnAdvise(uint32 dwCookie) mut => VT.UnAdvise(ref this, dwCookie);
+			public HResult GetIdentityEnum(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) mut => VT.GetIdentityEnum(ref this, eIdentityType, pFilterkey, pFilterPropVarValue, ppIdentityEnum);
+			public HResult Create(char16* lpszUserName, IPropertyStore** ppPropertyStore, in PROPVARIANT pKeywordsToAdd) mut => VT.Create(ref this, lpszUserName, ppPropertyStore, pKeywordsToAdd);
+			public HResult Import(IPropertyStore* pPropertyStore) mut => VT.Import(ref this, pPropertyStore);
+			public HResult Delete(char16* lpszUniqueID, in PROPVARIANT pKeywordsToDelete) mut => VT.Delete(ref this, lpszUniqueID, pKeywordsToDelete);
+			public HResult FindByUniqueID(char16* lpszUniqueID, IPropertyStore** ppPropertyStore) mut => VT.FindByUniqueID(ref this, lpszUniqueID, ppPropertyStore);
+			public HResult GetProviderPropertyStore(IPropertyStore** ppPropertyStore) mut => VT.GetProviderPropertyStore(ref this, ppPropertyStore);
+			public HResult Advise(IIdentityAdvise* pIdentityAdvise, IdentityUpdateEvent dwIdentityUpdateEvents, out uint32 pdwCookie) mut => VT.Advise(ref this, pIdentityAdvise, dwIdentityUpdateEvents, out pdwCookie);
+			public HResult UnAdvise(uint32 dwCookie) mut => VT.UnAdvise(ref this, dwCookie);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) GetIdentityEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, PWSTR lpszUserName, IPropertyStore** ppPropertyStore, in PROPVARIANT pKeywordsToAdd) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, IPropertyStore* pPropertyStore) Import;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, PWSTR lpszUniqueID, in PROPVARIANT pKeywordsToDelete) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, PWSTR lpszUniqueID, IPropertyStore** ppPropertyStore) FindByUniqueID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, IPropertyStore** ppPropertyStore) GetProviderPropertyStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, IIdentityAdvise* pIdentityAdvise, IdentityUpdateEvent dwIdentityUpdateEvents, out uint32 pdwCookie) Advise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityProvider self, uint32 dwCookie) UnAdvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) GetIdentityEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, char16* lpszUserName, IPropertyStore** ppPropertyStore, in PROPVARIANT pKeywordsToAdd) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, IPropertyStore* pPropertyStore) Import;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, char16* lpszUniqueID, in PROPVARIANT pKeywordsToDelete) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, char16* lpszUniqueID, IPropertyStore** ppPropertyStore) FindByUniqueID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, IPropertyStore** ppPropertyStore) GetProviderPropertyStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, IIdentityAdvise* pIdentityAdvise, IdentityUpdateEvent dwIdentityUpdateEvents, out uint32 pdwCookie) Advise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityProvider self, uint32 dwCookie) UnAdvise;
 			}
 		}
 		[CRepr]
@@ -119,42 +119,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_GetIdentityEnum(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) mut => VT.Begin_GetIdentityEnum(ref this, eIdentityType, pFilterkey, pFilterPropVarValue);
-			public HRESULT Finish_GetIdentityEnum(IEnumUnknown** ppIdentityEnum) mut => VT.Finish_GetIdentityEnum(ref this, ppIdentityEnum);
-			public HRESULT Begin_Create(PWSTR lpszUserName, in PROPVARIANT pKeywordsToAdd) mut => VT.Begin_Create(ref this, lpszUserName, pKeywordsToAdd);
-			public HRESULT Finish_Create(IPropertyStore** ppPropertyStore) mut => VT.Finish_Create(ref this, ppPropertyStore);
-			public HRESULT Begin_Import(IPropertyStore* pPropertyStore) mut => VT.Begin_Import(ref this, pPropertyStore);
-			public HRESULT Finish_Import() mut => VT.Finish_Import(ref this);
-			public HRESULT Begin_Delete(PWSTR lpszUniqueID, in PROPVARIANT pKeywordsToDelete) mut => VT.Begin_Delete(ref this, lpszUniqueID, pKeywordsToDelete);
-			public HRESULT Finish_Delete() mut => VT.Finish_Delete(ref this);
-			public HRESULT Begin_FindByUniqueID(PWSTR lpszUniqueID) mut => VT.Begin_FindByUniqueID(ref this, lpszUniqueID);
-			public HRESULT Finish_FindByUniqueID(IPropertyStore** ppPropertyStore) mut => VT.Finish_FindByUniqueID(ref this, ppPropertyStore);
-			public HRESULT Begin_GetProviderPropertyStore() mut => VT.Begin_GetProviderPropertyStore(ref this);
-			public HRESULT Finish_GetProviderPropertyStore(IPropertyStore** ppPropertyStore) mut => VT.Finish_GetProviderPropertyStore(ref this, ppPropertyStore);
-			public HRESULT Begin_Advise(IIdentityAdvise* pIdentityAdvise, uint32 dwIdentityUpdateEvents) mut => VT.Begin_Advise(ref this, pIdentityAdvise, dwIdentityUpdateEvents);
-			public HRESULT Finish_Advise(out uint32 pdwCookie) mut => VT.Finish_Advise(ref this, out pdwCookie);
-			public HRESULT Begin_UnAdvise(uint32 dwCookie) mut => VT.Begin_UnAdvise(ref this, dwCookie);
-			public HRESULT Finish_UnAdvise() mut => VT.Finish_UnAdvise(ref this);
+			public HResult Begin_GetIdentityEnum(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) mut => VT.Begin_GetIdentityEnum(ref this, eIdentityType, pFilterkey, pFilterPropVarValue);
+			public HResult Finish_GetIdentityEnum(IEnumUnknown** ppIdentityEnum) mut => VT.Finish_GetIdentityEnum(ref this, ppIdentityEnum);
+			public HResult Begin_Create(char16* lpszUserName, in PROPVARIANT pKeywordsToAdd) mut => VT.Begin_Create(ref this, lpszUserName, pKeywordsToAdd);
+			public HResult Finish_Create(IPropertyStore** ppPropertyStore) mut => VT.Finish_Create(ref this, ppPropertyStore);
+			public HResult Begin_Import(IPropertyStore* pPropertyStore) mut => VT.Begin_Import(ref this, pPropertyStore);
+			public HResult Finish_Import() mut => VT.Finish_Import(ref this);
+			public HResult Begin_Delete(char16* lpszUniqueID, in PROPVARIANT pKeywordsToDelete) mut => VT.Begin_Delete(ref this, lpszUniqueID, pKeywordsToDelete);
+			public HResult Finish_Delete() mut => VT.Finish_Delete(ref this);
+			public HResult Begin_FindByUniqueID(char16* lpszUniqueID) mut => VT.Begin_FindByUniqueID(ref this, lpszUniqueID);
+			public HResult Finish_FindByUniqueID(IPropertyStore** ppPropertyStore) mut => VT.Finish_FindByUniqueID(ref this, ppPropertyStore);
+			public HResult Begin_GetProviderPropertyStore() mut => VT.Begin_GetProviderPropertyStore(ref this);
+			public HResult Finish_GetProviderPropertyStore(IPropertyStore** ppPropertyStore) mut => VT.Finish_GetProviderPropertyStore(ref this, ppPropertyStore);
+			public HResult Begin_Advise(IIdentityAdvise* pIdentityAdvise, uint32 dwIdentityUpdateEvents) mut => VT.Begin_Advise(ref this, pIdentityAdvise, dwIdentityUpdateEvents);
+			public HResult Finish_Advise(out uint32 pdwCookie) mut => VT.Finish_Advise(ref this, out pdwCookie);
+			public HResult Begin_UnAdvise(uint32 dwCookie) mut => VT.Begin_UnAdvise(ref this, dwCookie);
+			public HResult Finish_UnAdvise() mut => VT.Finish_UnAdvise(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) Begin_GetIdentityEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IEnumUnknown** ppIdentityEnum) Finish_GetIdentityEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, PWSTR lpszUserName, in PROPVARIANT pKeywordsToAdd) Begin_Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IPropertyStore* pPropertyStore) Begin_Import;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self) Finish_Import;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, PWSTR lpszUniqueID, in PROPVARIANT pKeywordsToDelete) Begin_Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self) Finish_Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, PWSTR lpszUniqueID) Begin_FindByUniqueID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_FindByUniqueID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self) Begin_GetProviderPropertyStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_GetProviderPropertyStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, IIdentityAdvise* pIdentityAdvise, uint32 dwIdentityUpdateEvents) Begin_Advise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, out uint32 pdwCookie) Finish_Advise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self, uint32 dwCookie) Begin_UnAdvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityProvider self) Finish_UnAdvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) Begin_GetIdentityEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IEnumUnknown** ppIdentityEnum) Finish_GetIdentityEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, char16* lpszUserName, in PROPVARIANT pKeywordsToAdd) Begin_Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IPropertyStore* pPropertyStore) Begin_Import;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self) Finish_Import;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, char16* lpszUniqueID, in PROPVARIANT pKeywordsToDelete) Begin_Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self) Finish_Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, char16* lpszUniqueID) Begin_FindByUniqueID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_FindByUniqueID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self) Begin_GetProviderPropertyStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_GetProviderPropertyStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, IIdentityAdvise* pIdentityAdvise, uint32 dwIdentityUpdateEvents) Begin_Advise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, out uint32 pdwCookie) Finish_Advise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self, uint32 dwCookie) Begin_UnAdvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityProvider self) Finish_UnAdvise;
 			}
 		}
 		[CRepr]
@@ -164,16 +164,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AssociateIdentity(HWND hwndParent, IPropertyStore** ppPropertyStore) mut => VT.AssociateIdentity(ref this, hwndParent, ppPropertyStore);
-			public HRESULT DisassociateIdentity(HWND hwndParent, PWSTR lpszUniqueID) mut => VT.DisassociateIdentity(ref this, hwndParent, lpszUniqueID);
-			public HRESULT ChangeCredential(HWND hwndParent, PWSTR lpszUniqueID) mut => VT.ChangeCredential(ref this, hwndParent, lpszUniqueID);
+			public HResult AssociateIdentity(HWnd hwndParent, IPropertyStore** ppPropertyStore) mut => VT.AssociateIdentity(ref this, hwndParent, ppPropertyStore);
+			public HResult DisassociateIdentity(HWnd hwndParent, char16* lpszUniqueID) mut => VT.DisassociateIdentity(ref this, hwndParent, lpszUniqueID);
+			public HResult ChangeCredential(HWnd hwndParent, char16* lpszUniqueID) mut => VT.ChangeCredential(ref this, hwndParent, lpszUniqueID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssociatedIdentityProvider self, HWND hwndParent, IPropertyStore** ppPropertyStore) AssociateIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssociatedIdentityProvider self, HWND hwndParent, PWSTR lpszUniqueID) DisassociateIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssociatedIdentityProvider self, HWND hwndParent, PWSTR lpszUniqueID) ChangeCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssociatedIdentityProvider self, HWnd hwndParent, IPropertyStore** ppPropertyStore) AssociateIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssociatedIdentityProvider self, HWnd hwndParent, char16* lpszUniqueID) DisassociateIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssociatedIdentityProvider self, HWnd hwndParent, char16* lpszUniqueID) ChangeCredential;
 			}
 		}
 		[CRepr]
@@ -183,22 +183,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_AssociateIdentity(HWND hwndParent) mut => VT.Begin_AssociateIdentity(ref this, hwndParent);
-			public HRESULT Finish_AssociateIdentity(IPropertyStore** ppPropertyStore) mut => VT.Finish_AssociateIdentity(ref this, ppPropertyStore);
-			public HRESULT Begin_DisassociateIdentity(HWND hwndParent, PWSTR lpszUniqueID) mut => VT.Begin_DisassociateIdentity(ref this, hwndParent, lpszUniqueID);
-			public HRESULT Finish_DisassociateIdentity() mut => VT.Finish_DisassociateIdentity(ref this);
-			public HRESULT Begin_ChangeCredential(HWND hwndParent, PWSTR lpszUniqueID) mut => VT.Begin_ChangeCredential(ref this, hwndParent, lpszUniqueID);
-			public HRESULT Finish_ChangeCredential() mut => VT.Finish_ChangeCredential(ref this);
+			public HResult Begin_AssociateIdentity(HWnd hwndParent) mut => VT.Begin_AssociateIdentity(ref this, hwndParent);
+			public HResult Finish_AssociateIdentity(IPropertyStore** ppPropertyStore) mut => VT.Finish_AssociateIdentity(ref this, ppPropertyStore);
+			public HResult Begin_DisassociateIdentity(HWnd hwndParent, char16* lpszUniqueID) mut => VT.Begin_DisassociateIdentity(ref this, hwndParent, lpszUniqueID);
+			public HResult Finish_DisassociateIdentity() mut => VT.Finish_DisassociateIdentity(ref this);
+			public HResult Begin_ChangeCredential(HWnd hwndParent, char16* lpszUniqueID) mut => VT.Begin_ChangeCredential(ref this, hwndParent, lpszUniqueID);
+			public HResult Finish_ChangeCredential() mut => VT.Finish_ChangeCredential(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIAssociatedIdentityProvider self, HWND hwndParent) Begin_AssociateIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIAssociatedIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_AssociateIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIAssociatedIdentityProvider self, HWND hwndParent, PWSTR lpszUniqueID) Begin_DisassociateIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIAssociatedIdentityProvider self) Finish_DisassociateIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIAssociatedIdentityProvider self, HWND hwndParent, PWSTR lpszUniqueID) Begin_ChangeCredential;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIAssociatedIdentityProvider self) Finish_ChangeCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIAssociatedIdentityProvider self, HWnd hwndParent) Begin_AssociateIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIAssociatedIdentityProvider self, IPropertyStore** ppPropertyStore) Finish_AssociateIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIAssociatedIdentityProvider self, HWnd hwndParent, char16* lpszUniqueID) Begin_DisassociateIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIAssociatedIdentityProvider self) Finish_DisassociateIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIAssociatedIdentityProvider self, HWnd hwndParent, char16* lpszUniqueID) Begin_ChangeCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIAssociatedIdentityProvider self) Finish_ChangeCredential;
 			}
 		}
 		[CRepr]
@@ -208,20 +208,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ConnectIdentity(uint8* AuthBuffer, uint32 AuthBufferSize) mut => VT.ConnectIdentity(ref this, AuthBuffer, AuthBufferSize);
-			public HRESULT DisconnectIdentity() mut => VT.DisconnectIdentity(ref this);
-			public HRESULT IsConnected(out BOOL Connected) mut => VT.IsConnected(ref this, out Connected);
-			public HRESULT GetUrl(IDENTITY_URL Identifier, IBindCtx* Context, out VARIANT PostData, PWSTR* Url) mut => VT.GetUrl(ref this, Identifier, Context, out PostData, Url);
-			public HRESULT GetAccountState(out ACCOUNT_STATE pState) mut => VT.GetAccountState(ref this, out pState);
+			public HResult ConnectIdentity(uint8* AuthBuffer, uint32 AuthBufferSize) mut => VT.ConnectIdentity(ref this, AuthBuffer, AuthBufferSize);
+			public HResult DisconnectIdentity() mut => VT.DisconnectIdentity(ref this);
+			public HResult IsConnected(out IntBool Connected) mut => VT.IsConnected(ref this, out Connected);
+			public HResult GetUrl(IDENTITY_URL Identifier, IBindCtx* Context, out VARIANT PostData, char16** Url) mut => VT.GetUrl(ref this, Identifier, Context, out PostData, Url);
+			public HResult GetAccountState(out ACCOUNT_STATE pState) mut => VT.GetAccountState(ref this, out pState);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectedIdentityProvider self, uint8* AuthBuffer, uint32 AuthBufferSize) ConnectIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectedIdentityProvider self) DisconnectIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectedIdentityProvider self, out BOOL Connected) IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectedIdentityProvider self, IDENTITY_URL Identifier, IBindCtx* Context, out VARIANT PostData, PWSTR* Url) GetUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IConnectedIdentityProvider self, out ACCOUNT_STATE pState) GetAccountState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectedIdentityProvider self, uint8* AuthBuffer, uint32 AuthBufferSize) ConnectIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectedIdentityProvider self) DisconnectIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectedIdentityProvider self, out IntBool Connected) IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectedIdentityProvider self, IDENTITY_URL Identifier, IBindCtx* Context, out VARIANT PostData, char16** Url) GetUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IConnectedIdentityProvider self, out ACCOUNT_STATE pState) GetAccountState;
 			}
 		}
 		[CRepr]
@@ -231,30 +231,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_ConnectIdentity(uint8* AuthBuffer, uint32 AuthBufferSize) mut => VT.Begin_ConnectIdentity(ref this, AuthBuffer, AuthBufferSize);
-			public HRESULT Finish_ConnectIdentity() mut => VT.Finish_ConnectIdentity(ref this);
-			public HRESULT Begin_DisconnectIdentity() mut => VT.Begin_DisconnectIdentity(ref this);
-			public HRESULT Finish_DisconnectIdentity() mut => VT.Finish_DisconnectIdentity(ref this);
-			public HRESULT Begin_IsConnected() mut => VT.Begin_IsConnected(ref this);
-			public HRESULT Finish_IsConnected(out BOOL Connected) mut => VT.Finish_IsConnected(ref this, out Connected);
-			public HRESULT Begin_GetUrl(IDENTITY_URL Identifier, IBindCtx* Context) mut => VT.Begin_GetUrl(ref this, Identifier, Context);
-			public HRESULT Finish_GetUrl(out VARIANT PostData, PWSTR* Url) mut => VT.Finish_GetUrl(ref this, out PostData, Url);
-			public HRESULT Begin_GetAccountState() mut => VT.Begin_GetAccountState(ref this);
-			public HRESULT Finish_GetAccountState(out ACCOUNT_STATE pState) mut => VT.Finish_GetAccountState(ref this, out pState);
+			public HResult Begin_ConnectIdentity(uint8* AuthBuffer, uint32 AuthBufferSize) mut => VT.Begin_ConnectIdentity(ref this, AuthBuffer, AuthBufferSize);
+			public HResult Finish_ConnectIdentity() mut => VT.Finish_ConnectIdentity(ref this);
+			public HResult Begin_DisconnectIdentity() mut => VT.Begin_DisconnectIdentity(ref this);
+			public HResult Finish_DisconnectIdentity() mut => VT.Finish_DisconnectIdentity(ref this);
+			public HResult Begin_IsConnected() mut => VT.Begin_IsConnected(ref this);
+			public HResult Finish_IsConnected(out IntBool Connected) mut => VT.Finish_IsConnected(ref this, out Connected);
+			public HResult Begin_GetUrl(IDENTITY_URL Identifier, IBindCtx* Context) mut => VT.Begin_GetUrl(ref this, Identifier, Context);
+			public HResult Finish_GetUrl(out VARIANT PostData, char16** Url) mut => VT.Finish_GetUrl(ref this, out PostData, Url);
+			public HResult Begin_GetAccountState() mut => VT.Begin_GetAccountState(ref this);
+			public HResult Finish_GetAccountState(out ACCOUNT_STATE pState) mut => VT.Finish_GetAccountState(ref this, out pState);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self, uint8* AuthBuffer, uint32 AuthBufferSize) Begin_ConnectIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self) Finish_ConnectIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self) Begin_DisconnectIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self) Finish_DisconnectIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self) Begin_IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self, out BOOL Connected) Finish_IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self, IDENTITY_URL Identifier, IBindCtx* Context) Begin_GetUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self, out VARIANT PostData, PWSTR* Url) Finish_GetUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self) Begin_GetAccountState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIConnectedIdentityProvider self, out ACCOUNT_STATE pState) Finish_GetAccountState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self, uint8* AuthBuffer, uint32 AuthBufferSize) Begin_ConnectIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self) Finish_ConnectIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self) Begin_DisconnectIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self) Finish_DisconnectIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self) Begin_IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self, out IntBool Connected) Finish_IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self, IDENTITY_URL Identifier, IBindCtx* Context) Begin_GetUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self, out VARIANT PostData, char16** Url) Finish_GetUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self) Begin_GetAccountState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIConnectedIdentityProvider self, out ACCOUNT_STATE pState) Finish_GetAccountState;
 			}
 		}
 		[CRepr]
@@ -264,14 +264,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength) mut => VT.SetIdentityCredential(ref this, CredBuffer, CredBufferLength);
-			public HRESULT ValidateIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) mut => VT.ValidateIdentityCredential(ref this, CredBuffer, CredBufferLength, ppIdentityProperties);
+			public HResult SetIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength) mut => VT.SetIdentityCredential(ref this, CredBuffer, CredBufferLength);
+			public HResult ValidateIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) mut => VT.ValidateIdentityCredential(ref this, CredBuffer, CredBufferLength, ppIdentityProperties);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength) SetIdentityCredential;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) ValidateIdentityCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength) SetIdentityCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) ValidateIdentityCredential;
 			}
 		}
 		[CRepr]
@@ -281,18 +281,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_SetIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength) mut => VT.Begin_SetIdentityCredential(ref this, CredBuffer, CredBufferLength);
-			public HRESULT Finish_SetIdentityCredential() mut => VT.Finish_SetIdentityCredential(ref this);
-			public HRESULT Begin_ValidateIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) mut => VT.Begin_ValidateIdentityCredential(ref this, CredBuffer, CredBufferLength, ppIdentityProperties);
-			public HRESULT Finish_ValidateIdentityCredential(IPropertyStore** ppIdentityProperties) mut => VT.Finish_ValidateIdentityCredential(ref this, ppIdentityProperties);
+			public HResult Begin_SetIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength) mut => VT.Begin_SetIdentityCredential(ref this, CredBuffer, CredBufferLength);
+			public HResult Finish_SetIdentityCredential() mut => VT.Finish_SetIdentityCredential(ref this);
+			public HResult Begin_ValidateIdentityCredential(uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) mut => VT.Begin_ValidateIdentityCredential(ref this, CredBuffer, CredBufferLength, ppIdentityProperties);
+			public HResult Finish_ValidateIdentityCredential(IPropertyStore** ppIdentityProperties) mut => VT.Finish_ValidateIdentityCredential(ref this, ppIdentityProperties);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength) Begin_SetIdentityCredential;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityAuthentication self) Finish_SetIdentityCredential;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) Begin_ValidateIdentityCredential;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityAuthentication self, IPropertyStore** ppIdentityProperties) Finish_ValidateIdentityCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength) Begin_SetIdentityCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityAuthentication self) Finish_SetIdentityCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityAuthentication self, uint8* CredBuffer, uint32 CredBufferLength, IPropertyStore** ppIdentityProperties) Begin_ValidateIdentityCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityAuthentication self, IPropertyStore** ppIdentityProperties) Finish_ValidateIdentityCredential;
 			}
 		}
 		[CRepr]
@@ -302,22 +302,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 pdwProviders) mut => VT.GetCount(ref this, out pdwProviders);
-			public HRESULT GetAt(uint32 dwProvider, Guid* pProvGuid, IUnknown** ppIdentityProvider) mut => VT.GetAt(ref this, dwProvider, pProvGuid, ppIdentityProvider);
-			public HRESULT AddToCache(PWSTR lpszUniqueID, in Guid ProviderGUID) mut => VT.AddToCache(ref this, lpszUniqueID, ProviderGUID);
-			public HRESULT ConvertToSid(PWSTR lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid, out uint16 pcbRequiredSid) mut => VT.ConvertToSid(ref this, lpszUniqueID, ProviderGUID, cbSid, pSid, out pcbRequiredSid);
-			public HRESULT EnumerateIdentities(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) mut => VT.EnumerateIdentities(ref this, eIdentityType, pFilterkey, pFilterPropVarValue, ppIdentityEnum);
-			public HRESULT Reset() mut => VT.Reset(ref this);
+			public HResult GetCount(out uint32 pdwProviders) mut => VT.GetCount(ref this, out pdwProviders);
+			public HResult GetAt(uint32 dwProvider, Guid* pProvGuid, IUnknown** ppIdentityProvider) mut => VT.GetAt(ref this, dwProvider, pProvGuid, ppIdentityProvider);
+			public HResult AddToCache(char16* lpszUniqueID, in Guid ProviderGUID) mut => VT.AddToCache(ref this, lpszUniqueID, ProviderGUID);
+			public HResult ConvertToSid(char16* lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid, out uint16 pcbRequiredSid) mut => VT.ConvertToSid(ref this, lpszUniqueID, ProviderGUID, cbSid, pSid, out pcbRequiredSid);
+			public HResult EnumerateIdentities(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) mut => VT.EnumerateIdentities(ref this, eIdentityType, pFilterkey, pFilterPropVarValue, ppIdentityEnum);
+			public HResult Reset() mut => VT.Reset(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStore self, out uint32 pdwProviders) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStore self, uint32 dwProvider, Guid* pProvGuid, IUnknown** ppIdentityProvider) GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStore self, PWSTR lpszUniqueID, in Guid ProviderGUID) AddToCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStore self, PWSTR lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid, out uint16 pcbRequiredSid) ConvertToSid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStore self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) EnumerateIdentities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStore self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStore self, out uint32 pdwProviders) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStore self, uint32 dwProvider, Guid* pProvGuid, IUnknown** ppIdentityProvider) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStore self, char16* lpszUniqueID, in Guid ProviderGUID) AddToCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStore self, char16* lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid, out uint16 pcbRequiredSid) ConvertToSid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStore self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue, IEnumUnknown** ppIdentityEnum) EnumerateIdentities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStore self) Reset;
 			}
 		}
 		[CRepr]
@@ -327,34 +327,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_GetCount() mut => VT.Begin_GetCount(ref this);
-			public HRESULT Finish_GetCount(out uint32 pdwProviders) mut => VT.Finish_GetCount(ref this, out pdwProviders);
-			public HRESULT Begin_GetAt(uint32 dwProvider, Guid* pProvGuid) mut => VT.Begin_GetAt(ref this, dwProvider, pProvGuid);
-			public HRESULT Finish_GetAt(Guid* pProvGuid, IUnknown** ppIdentityProvider) mut => VT.Finish_GetAt(ref this, pProvGuid, ppIdentityProvider);
-			public HRESULT Begin_AddToCache(PWSTR lpszUniqueID, in Guid ProviderGUID) mut => VT.Begin_AddToCache(ref this, lpszUniqueID, ProviderGUID);
-			public HRESULT Finish_AddToCache() mut => VT.Finish_AddToCache(ref this);
-			public HRESULT Begin_ConvertToSid(PWSTR lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid) mut => VT.Begin_ConvertToSid(ref this, lpszUniqueID, ProviderGUID, cbSid, pSid);
-			public HRESULT Finish_ConvertToSid(uint8* pSid, out uint16 pcbRequiredSid) mut => VT.Finish_ConvertToSid(ref this, pSid, out pcbRequiredSid);
-			public HRESULT Begin_EnumerateIdentities(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) mut => VT.Begin_EnumerateIdentities(ref this, eIdentityType, pFilterkey, pFilterPropVarValue);
-			public HRESULT Finish_EnumerateIdentities(IEnumUnknown** ppIdentityEnum) mut => VT.Finish_EnumerateIdentities(ref this, ppIdentityEnum);
-			public HRESULT Begin_Reset() mut => VT.Begin_Reset(ref this);
-			public HRESULT Finish_Reset() mut => VT.Finish_Reset(ref this);
+			public HResult Begin_GetCount() mut => VT.Begin_GetCount(ref this);
+			public HResult Finish_GetCount(out uint32 pdwProviders) mut => VT.Finish_GetCount(ref this, out pdwProviders);
+			public HResult Begin_GetAt(uint32 dwProvider, Guid* pProvGuid) mut => VT.Begin_GetAt(ref this, dwProvider, pProvGuid);
+			public HResult Finish_GetAt(Guid* pProvGuid, IUnknown** ppIdentityProvider) mut => VT.Finish_GetAt(ref this, pProvGuid, ppIdentityProvider);
+			public HResult Begin_AddToCache(char16* lpszUniqueID, in Guid ProviderGUID) mut => VT.Begin_AddToCache(ref this, lpszUniqueID, ProviderGUID);
+			public HResult Finish_AddToCache() mut => VT.Finish_AddToCache(ref this);
+			public HResult Begin_ConvertToSid(char16* lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid) mut => VT.Begin_ConvertToSid(ref this, lpszUniqueID, ProviderGUID, cbSid, pSid);
+			public HResult Finish_ConvertToSid(uint8* pSid, out uint16 pcbRequiredSid) mut => VT.Finish_ConvertToSid(ref this, pSid, out pcbRequiredSid);
+			public HResult Begin_EnumerateIdentities(IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) mut => VT.Begin_EnumerateIdentities(ref this, eIdentityType, pFilterkey, pFilterPropVarValue);
+			public HResult Finish_EnumerateIdentities(IEnumUnknown** ppIdentityEnum) mut => VT.Finish_EnumerateIdentities(ref this, ppIdentityEnum);
+			public HResult Begin_Reset() mut => VT.Begin_Reset(ref this);
+			public HResult Finish_Reset() mut => VT.Finish_Reset(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self) Begin_GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, out uint32 pdwProviders) Finish_GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, uint32 dwProvider, Guid* pProvGuid) Begin_GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, Guid* pProvGuid, IUnknown** ppIdentityProvider) Finish_GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, PWSTR lpszUniqueID, in Guid ProviderGUID) Begin_AddToCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self) Finish_AddToCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, PWSTR lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid) Begin_ConvertToSid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, uint8* pSid, out uint16 pcbRequiredSid) Finish_ConvertToSid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) Begin_EnumerateIdentities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self, IEnumUnknown** ppIdentityEnum) Finish_EnumerateIdentities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self) Begin_Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStore self) Finish_Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self) Begin_GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, out uint32 pdwProviders) Finish_GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, uint32 dwProvider, Guid* pProvGuid) Begin_GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, Guid* pProvGuid, IUnknown** ppIdentityProvider) Finish_GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, char16* lpszUniqueID, in Guid ProviderGUID) Begin_AddToCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self) Finish_AddToCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, char16* lpszUniqueID, in Guid ProviderGUID, uint16 cbSid, uint8* pSid) Begin_ConvertToSid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, uint8* pSid, out uint16 pcbRequiredSid) Finish_ConvertToSid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, IDENTITY_TYPE eIdentityType, PROPERTYKEY* pFilterkey, PROPVARIANT* pFilterPropVarValue) Begin_EnumerateIdentities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self, IEnumUnknown** ppIdentityEnum) Finish_EnumerateIdentities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self) Begin_Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStore self) Finish_Reset;
 			}
 		}
 		[CRepr]
@@ -364,14 +364,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateConnectedIdentity(PWSTR LocalName, PWSTR ConnectedName, in Guid ProviderGUID) mut => VT.CreateConnectedIdentity(ref this, LocalName, ConnectedName, ProviderGUID);
-			public HRESULT DeleteConnectedIdentity(PWSTR ConnectedName, in Guid ProviderGUID) mut => VT.DeleteConnectedIdentity(ref this, ConnectedName, ProviderGUID);
+			public HResult CreateConnectedIdentity(char16* LocalName, char16* ConnectedName, in Guid ProviderGUID) mut => VT.CreateConnectedIdentity(ref this, LocalName, ConnectedName, ProviderGUID);
+			public HResult DeleteConnectedIdentity(char16* ConnectedName, in Guid ProviderGUID) mut => VT.DeleteConnectedIdentity(ref this, ConnectedName, ProviderGUID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStoreEx self, PWSTR LocalName, PWSTR ConnectedName, in Guid ProviderGUID) CreateConnectedIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IIdentityStoreEx self, PWSTR ConnectedName, in Guid ProviderGUID) DeleteConnectedIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStoreEx self, char16* LocalName, char16* ConnectedName, in Guid ProviderGUID) CreateConnectedIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IIdentityStoreEx self, char16* ConnectedName, in Guid ProviderGUID) DeleteConnectedIdentity;
 			}
 		}
 		[CRepr]
@@ -381,18 +381,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Begin_CreateConnectedIdentity(PWSTR LocalName, PWSTR ConnectedName, in Guid ProviderGUID) mut => VT.Begin_CreateConnectedIdentity(ref this, LocalName, ConnectedName, ProviderGUID);
-			public HRESULT Finish_CreateConnectedIdentity() mut => VT.Finish_CreateConnectedIdentity(ref this);
-			public HRESULT Begin_DeleteConnectedIdentity(PWSTR ConnectedName, in Guid ProviderGUID) mut => VT.Begin_DeleteConnectedIdentity(ref this, ConnectedName, ProviderGUID);
-			public HRESULT Finish_DeleteConnectedIdentity() mut => VT.Finish_DeleteConnectedIdentity(ref this);
+			public HResult Begin_CreateConnectedIdentity(char16* LocalName, char16* ConnectedName, in Guid ProviderGUID) mut => VT.Begin_CreateConnectedIdentity(ref this, LocalName, ConnectedName, ProviderGUID);
+			public HResult Finish_CreateConnectedIdentity() mut => VT.Finish_CreateConnectedIdentity(ref this);
+			public HResult Begin_DeleteConnectedIdentity(char16* ConnectedName, in Guid ProviderGUID) mut => VT.Begin_DeleteConnectedIdentity(ref this, ConnectedName, ProviderGUID);
+			public HResult Finish_DeleteConnectedIdentity() mut => VT.Finish_DeleteConnectedIdentity(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStoreEx self, PWSTR LocalName, PWSTR ConnectedName, in Guid ProviderGUID) Begin_CreateConnectedIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStoreEx self) Finish_CreateConnectedIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStoreEx self, PWSTR ConnectedName, in Guid ProviderGUID) Begin_DeleteConnectedIdentity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref AsyncIIdentityStoreEx self) Finish_DeleteConnectedIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStoreEx self, char16* LocalName, char16* ConnectedName, in Guid ProviderGUID) Begin_CreateConnectedIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStoreEx self) Finish_CreateConnectedIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStoreEx self, char16* ConnectedName, in Guid ProviderGUID) Begin_DeleteConnectedIdentity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref AsyncIIdentityStoreEx self) Finish_DeleteConnectedIdentity;
 			}
 		}
 		

@@ -1,4 +1,5 @@
 using System;
+using static Win32.System.IO;
 
 // namespace System.Rpc
 namespace Win32
@@ -518,7 +519,7 @@ namespace Win32
 			UNMARSHAL = 0,
 			CALL_SERVER = 1,
 			MARSHAL = 2,
-			CALL_SERVER_NO_HRESULT = 3,
+			CALL_SERVER_NO_HResult = 3,
 		}
 		public enum PROXY_PHASE : int32
 		{
@@ -571,7 +572,7 @@ namespace Win32
 		public function void RPC_SETFILTER_FUNC(RPCLT_PDU_FILTER_FUNC pfnFilter);
 		public function RPC_STATUS RPC_BLOCKING_FN(void* hWnd, void* Context, void* hSyncEvent);
 		public function RPC_STATUS I_RpcProxyIsValidMachineFn(ref uint16 Machine, ref uint16 DotMachine, uint32 PortNumber);
-		public function RPC_STATUS I_RpcProxyGetClientAddressFn(void* Context, PSTR Buffer, out uint32 BufferLength);
+		public function RPC_STATUS I_RpcProxyGetClientAddressFn(void* Context, char8* Buffer, out uint32 BufferLength);
 		public function RPC_STATUS I_RpcProxyGetConnectionTimeoutFn(out uint32 ConnectionTimeout);
 		public function RPC_STATUS I_RpcPerformCalloutFn(void* Context, out RDR_CALLOUT_STATE CallOutState, RPC_HTTP_REDIRECTOR_STAGE Stage);
 		public function void I_RpcFreeCalloutStateFn(out RDR_CALLOUT_STATE CallOutState);
@@ -601,7 +602,7 @@ namespace Win32
 		public function void* RPC_CLIENT_ALLOC(uint Size);
 		public function void RPC_CLIENT_FREE(void* Ptr);
 		public function void MIDL_ES_ALLOC(void* state, out int8* pbuffer, out uint32 psize);
-		public function void MIDL_ES_WRITE(void* state, PSTR buffer, uint32 size);
+		public function void MIDL_ES_WRITE(void* state, char8* buffer, uint32 size);
 		public function void MIDL_ES_READ(void* state, out int8* pbuffer, out uint32 psize);
 		
 		// --- Structs ---
@@ -1106,7 +1107,7 @@ namespace Win32
 		public struct RPC_C_OPT_COOKIE_AUTH_DESCRIPTOR
 		{
 			public uint32 BufferSize;
-			public PSTR Buffer;
+			public char8* Buffer;
 		}
 		[CRepr]
 		public struct RDR_CALLOUT_STATE
@@ -1145,13 +1146,13 @@ namespace Win32
 			public _APC_e__Struct APC;
 			public _IOC_e__Struct IOC;
 			public _IntPtr_e__Struct IntPtr;
-			public HANDLE hEvent;
+			public Handle hEvent;
 			public PFN_RPCNOTIFICATION_ROUTINE NotificationRoutine;
 			
 			[CRepr]
 			public struct _IOC_e__Struct
 			{
-				public HANDLE hIOPort;
+				public Handle hIOPort;
 				public uint32 dwNumberOfBytesTransferred;
 				public uint dwCompletionKey;
 				public OVERLAPPED* lpOverlapped;
@@ -1160,12 +1161,12 @@ namespace Win32
 			public struct _APC_e__Struct
 			{
 				public PFN_RPCNOTIFICATION_ROUTINE NotificationRoutine;
-				public HANDLE hThread;
+				public Handle hThread;
 			}
 			[CRepr]
 			public struct _IntPtr_e__Struct
 			{
-				public HWND hWnd;
+				public HWnd hWnd;
 				public uint32 Msg;
 			}
 		}
@@ -1199,8 +1200,8 @@ namespace Win32
 			[CRepr, Union]
 			public struct _u_e__Union
 			{
-				public PSTR AnsiString;
-				public PWSTR UnicodeString;
+				public char8* AnsiString;
+				public char16* UnicodeString;
 				public int32 LVal;
 				public int16 SVal;
 				public uint64 PVal;
@@ -1211,7 +1212,7 @@ namespace Win32
 		public struct RPC_EXTENDED_ERROR_INFO
 		{
 			public uint32 Version;
-			public PWSTR ComputerName;
+			public char16* ComputerName;
 			public uint32 ProcessID;
 			public _u_e__Union u;
 			public uint32 GeneratingComponent;
@@ -1225,7 +1226,7 @@ namespace Win32
 			public struct _u_e__Union
 			{
 				public SYSTEMTIME SystemTime;
-				public FILETIME FileTime;
+				public FileTime FileTime;
 			}
 		}
 		[CRepr]
@@ -1254,7 +1255,7 @@ namespace Win32
 			public uint16* ClientPrincipalName;
 			public uint32 AuthenticationLevel;
 			public uint32 AuthenticationService;
-			public BOOL NullSession;
+			public IntBool NullSession;
 		}
 		[CRepr]
 		public struct RPC_CALL_ATTRIBUTES_V1_A
@@ -1267,7 +1268,7 @@ namespace Win32
 			public uint8* ClientPrincipalName;
 			public uint32 AuthenticationLevel;
 			public uint32 AuthenticationService;
-			public BOOL NullSession;
+			public IntBool NullSession;
 		}
 		[CRepr]
 		public struct RPC_CALL_ATTRIBUTES_V2_W
@@ -1280,11 +1281,11 @@ namespace Win32
 			public uint16* ClientPrincipalName;
 			public uint32 AuthenticationLevel;
 			public uint32 AuthenticationService;
-			public BOOL NullSession;
-			public BOOL KernelModeCaller;
+			public IntBool NullSession;
+			public IntBool KernelModeCaller;
 			public uint32 ProtocolSequence;
 			public RpcCallClientLocality IsClientLocal;
-			public HANDLE ClientPID;
+			public Handle ClientPID;
 			public uint32 CallStatus;
 			public RpcCallType CallType;
 			public RPC_CALL_LOCAL_ADDRESS_V1* CallLocalAddress;
@@ -1302,11 +1303,11 @@ namespace Win32
 			public uint8* ClientPrincipalName;
 			public uint32 AuthenticationLevel;
 			public uint32 AuthenticationService;
-			public BOOL NullSession;
-			public BOOL KernelModeCaller;
+			public IntBool NullSession;
+			public IntBool KernelModeCaller;
 			public uint32 ProtocolSequence;
 			public uint32 IsClientLocal;
-			public HANDLE ClientPID;
+			public Handle ClientPID;
 			public uint32 CallStatus;
 			public RpcCallType CallType;
 			public RPC_CALL_LOCAL_ADDRESS_V1* CallLocalAddress;
@@ -1324,11 +1325,11 @@ namespace Win32
 			public uint16* ClientPrincipalName;
 			public uint32 AuthenticationLevel;
 			public uint32 AuthenticationService;
-			public BOOL NullSession;
-			public BOOL KernelModeCaller;
+			public IntBool NullSession;
+			public IntBool KernelModeCaller;
 			public uint32 ProtocolSequence;
 			public RpcCallClientLocality IsClientLocal;
-			public HANDLE ClientPID;
+			public Handle ClientPID;
 			public uint32 CallStatus;
 			public RpcCallType CallType;
 			public RPC_CALL_LOCAL_ADDRESS_V1* CallLocalAddress;
@@ -1348,11 +1349,11 @@ namespace Win32
 			public uint8* ClientPrincipalName;
 			public uint32 AuthenticationLevel;
 			public uint32 AuthenticationService;
-			public BOOL NullSession;
-			public BOOL KernelModeCaller;
+			public IntBool NullSession;
+			public IntBool KernelModeCaller;
 			public uint32 ProtocolSequence;
 			public uint32 IsClientLocal;
-			public HANDLE ClientPID;
+			public Handle ClientPID;
 			public uint32 CallStatus;
 			public RpcCallType CallType;
 			public RPC_CALL_LOCAL_ADDRESS_V1* CallLocalAddress;
@@ -2204,7 +2205,7 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IUnknown_QueryInterface_Proxy(ref IUnknown This, in Guid riid, void** ppvObject);
+		public static extern HResult IUnknown_QueryInterface_Proxy(ref IUnknown This, in Guid riid, void** ppvObject);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 IUnknown_AddRef_Proxy(ref IUnknown This);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2738,11 +2739,11 @@ namespace Win32
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS RpcAsyncAbortCall(out RPC_ASYNC_STATE pAsync, uint32 ExceptionCode);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern RPC_STATUS RpcAsyncCancelCall(out RPC_ASYNC_STATE pAsync, BOOL fAbort);
+		public static extern RPC_STATUS RpcAsyncCancelCall(out RPC_ASYNC_STATE pAsync, IntBool fAbort);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS RpcErrorStartEnumeration(out RPC_ERROR_ENUM_HANDLE EnumHandle);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern RPC_STATUS RpcErrorGetNextRecord(ref RPC_ERROR_ENUM_HANDLE EnumHandle, BOOL CopyStrings, out RPC_EXTENDED_ERROR_INFO ErrorInfo);
+		public static extern RPC_STATUS RpcErrorGetNextRecord(ref RPC_ERROR_ENUM_HANDLE EnumHandle, IntBool CopyStrings, out RPC_EXTENDED_ERROR_INFO ErrorInfo);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS RpcErrorEndEnumeration(out RPC_ERROR_ENUM_HANDLE EnumHandle);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2758,7 +2759,7 @@ namespace Win32
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void RpcErrorClearInformation();
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern RPC_STATUS RpcGetAuthorizationContextForClient(void* ClientBinding, BOOL ImpersonateOnReturn, void* Reserved1, LARGE_INTEGER* pExpirationTime, LUID Reserved2, uint32 Reserved3, void* Reserved4, void** pAuthzClientContext);
+		public static extern RPC_STATUS RpcGetAuthorizationContextForClient(void* ClientBinding, IntBool ImpersonateOnReturn, void* Reserved1, LARGE_INTEGER* pExpirationTime, LUID Reserved2, uint32 Reserved3, void* Reserved4, void** pAuthzClientContext);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS RpcFreeAuthorizationContext(void** pAuthzClientContext);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3046,7 +3047,7 @@ namespace Win32
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void NdrFreeBuffer(out MIDL_STUB_MESSAGE pStubMsg);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT NdrGetDcomProtocolVersion(out MIDL_STUB_MESSAGE pStubMsg, out RPC_VERSION pVersion);
+		public static extern HResult NdrGetDcomProtocolVersion(out MIDL_STUB_MESSAGE pStubMsg, out RPC_VERSION pVersion);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern CLIENT_CALL_RETURN NdrClientCall2(out MIDL_STUB_DESC pStubDescriptor, out uint8 pFormat);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3164,11 +3165,11 @@ namespace Win32
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS MesIncrementalHandleReset(void* Handle, void* UserState, MIDL_ES_ALLOC AllocFn, MIDL_ES_WRITE WriteFn, MIDL_ES_READ ReadFn, MIDL_ES_CODE Operation);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern RPC_STATUS MesEncodeFixedBufferHandleCreate(PSTR pBuffer, uint32 BufferSize, out uint32 pEncodedSize, void** pHandle);
+		public static extern RPC_STATUS MesEncodeFixedBufferHandleCreate(char8* pBuffer, uint32 BufferSize, out uint32 pEncodedSize, void** pHandle);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS MesEncodeDynBufferHandleCreate(out int8* pBuffer, out uint32 pEncodedSize, void** pHandle);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern RPC_STATUS MesDecodeBufferHandleCreate(PSTR Buffer, uint32 BufferSize, void** pHandle);
+		public static extern RPC_STATUS MesDecodeBufferHandleCreate(char8* Buffer, uint32 BufferSize, void** pHandle);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern RPC_STATUS MesBufferHandleReset(void* Handle, uint32 HandleStyle, MIDL_ES_CODE Operation, int8** pBuffer, uint32 BufferSize, uint32* pEncodedSize);
 		[Import("rpcrt4.dll"), CLink, CallingConvention(.Stdcall)]

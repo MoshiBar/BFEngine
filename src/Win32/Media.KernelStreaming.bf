@@ -1,9 +1,14 @@
 using System;
+using static Win32.Win32;
+using static Win32.UI.Shell.PropertiesSystem;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Media.KernelStreaming
-namespace Win32
+namespace Win32.Media
 {
-	extension Win32
+	public static class KernelStreaming
 	{
 		// --- Constants ---
 		
@@ -1016,7 +1021,7 @@ namespace Win32
 			SUPPORTEDPATTERNS = 1,
 			PATTERNS = 2,
 			ARMED = 3,
-			MATCHRESULT = 4,
+			MATCHResult = 4,
 			RESET = 5,
 			STREAMINGSUPPORT = 6,
 		}
@@ -1895,7 +1900,7 @@ namespace Win32
 			LOOPBACK_PROTECTION = 8,
 			VOLUMELEVEL = 9,
 		}
-		public enum AUDIO_CURVE_TYPE : int32
+		public enum AudioCurveType : int32
 		{
 			NONE = 0,
 			WINDOWS_FADE = 1,
@@ -2104,7 +2109,7 @@ namespace Win32
 				[CRepr]
 				public struct _SemaphoreHandle_e__Struct
 				{
-					public HANDLE Semaphore;
+					public Handle Semaphore;
 					public uint32 Reserved;
 					public int32 Adjustment;
 				}
@@ -2117,7 +2122,7 @@ namespace Win32
 				[CRepr]
 				public struct _EventHandle_e__Struct
 				{
-					public HANDLE Event;
+					public Handle Event;
 					public uint[2] Reserved;
 				}
 			}
@@ -2142,7 +2147,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public HANDLE ObjectHandle;
+				public Handle ObjectHandle;
 				public void* ObjectPointer;
 			}
 		}
@@ -2281,7 +2286,7 @@ namespace Win32
 			public KSIDENTIFIER Interface;
 			public KSIDENTIFIER Medium;
 			public uint32 PinId;
-			public HANDLE PinToHandle;
+			public Handle PinToHandle;
 			public KSPRIORITY Priority;
 		}
 		[CRepr]
@@ -2452,7 +2457,7 @@ namespace Win32
 		[CRepr]
 		public struct KSQUALITY_MANAGER
 		{
-			public HANDLE QualityManager;
+			public Handle QualityManager;
 			public void* Context;
 		}
 		[CRepr]
@@ -2668,9 +2673,9 @@ namespace Win32
 		{
 			public uint32 Size;
 			public uint32 Enabled;
-			public BOOL SwapChannels;
-			public BOOL ZeroAzimuth;
-			public BOOL CrossFadeOutput;
+			public IntBool SwapChannels;
+			public IntBool ZeroAzimuth;
+			public IntBool CrossFadeOutput;
 			public uint32 FilterSize;
 		}
 		[CRepr]
@@ -2756,14 +2761,14 @@ namespace Win32
 		{
 			public void* BufferAddress;
 			public uint32 ActualBufferSize;
-			public BOOL CallMemoryBarrier;
+			public IntBool CallMemoryBarrier;
 		}
 		[CRepr]
 		public struct KSRTAUDIO_BUFFER32
 		{
 			public uint32 BufferAddress;
 			public uint32 ActualBufferSize;
-			public BOOL CallMemoryBarrier;
+			public IntBool CallMemoryBarrier;
 		}
 		[CRepr]
 		public struct KSRTAUDIO_HWLATENCY
@@ -2806,7 +2811,7 @@ namespace Win32
 		public struct KSRTAUDIO_NOTIFICATION_EVENT_PROPERTY
 		{
 			public KSIDENTIFIER Property;
-			public HANDLE NotificationEvent;
+			public Handle NotificationEvent;
 		}
 		[CRepr]
 		public struct KSRTAUDIO_NOTIFICATION_EVENT_PROPERTY32
@@ -2820,7 +2825,7 @@ namespace Win32
 			public uint32 PacketNumber;
 			public uint32 Flags;
 			public uint64 PerformanceCounterValue;
-			public BOOL MoreData;
+			public IntBool MoreData;
 		}
 		[CRepr]
 		public struct KSRTAUDIO_SETWRITEPACKET_INFO
@@ -2868,8 +2873,8 @@ namespace Win32
 		[CRepr]
 		public struct KSAUDIO_COPY_PROTECTION
 		{
-			public BOOL fCopyrighted;
-			public BOOL fOriginal;
+			public IntBool fCopyrighted;
+			public IntBool fOriginal;
 		}
 		[CRepr]
 		public struct KSAUDIO_CHANNEL_CONFIG
@@ -2885,13 +2890,13 @@ namespace Win32
 		[CRepr]
 		public struct KSAUDIO_MIXLEVEL
 		{
-			public BOOL Mute;
+			public IntBool Mute;
 			public int32 Level;
 		}
 		[CRepr]
 		public struct KSAUDIO_MIX_CAPS
 		{
-			public BOOL Mute;
+			public IntBool Mute;
 			public int32 Minimum;
 			public int32 Maximum;
 			public _Anonymous_e__Union Anonymous;
@@ -2953,9 +2958,9 @@ namespace Win32
 		{
 			public KSIDENTIFIER Identifier;
 			public uint32 Size;
-			public BOOL Looped;
+			public IntBool Looped;
 			public uint32 LoopPoint;
-			public BOOL InROM;
+			public IntBool InROM;
 			public KSDATAFORMAT Format;
 		}
 		[CRepr]
@@ -3078,20 +3083,20 @@ namespace Win32
 		[CRepr]
 		public struct KSAC3_ERROR_CONCEALMENT
 		{
-			public BOOL fRepeatPreviousBlock;
-			public BOOL fErrorInCurrentBlock;
+			public IntBool fRepeatPreviousBlock;
+			public IntBool fErrorInCurrentBlock;
 		}
 		[CRepr]
 		public struct KSAC3_ALTERNATE_AUDIO
 		{
-			public BOOL fStereo;
+			public IntBool fStereo;
 			public uint32 DualMode;
 		}
 		[CRepr]
 		public struct KSAC3_DOWNMIX
 		{
-			public BOOL fDownMix;
-			public BOOL fDolbySurround;
+			public IntBool fDownMix;
+			public IntBool fDolbySurround;
 		}
 		[CRepr]
 		public struct KSAC3_BIT_STREAM_MODE
@@ -3106,7 +3111,7 @@ namespace Win32
 		[CRepr]
 		public struct KSAC3_ROOM_TYPE
 		{
-			public BOOL fLargeRoom;
+			public IntBool fLargeRoom;
 		}
 		[CRepr]
 		public struct KS_DVD_YCrCb
@@ -3224,8 +3229,8 @@ namespace Win32
 		[CRepr]
 		public struct KS_VIDEOINFOHEADER
 		{
-			public RECT rcSource;
-			public RECT rcTarget;
+			public RectI rcSource;
+			public RectI rcTarget;
 			public uint32 dwBitRate;
 			public uint32 dwBitErrorRate;
 			public int64 AvgTimePerFrame;
@@ -3234,8 +3239,8 @@ namespace Win32
 		[CRepr]
 		public struct KS_VIDEOINFO
 		{
-			public RECT rcSource;
-			public RECT rcTarget;
+			public RectI rcSource;
+			public RectI rcTarget;
 			public uint32 dwBitRate;
 			public uint32 dwBitErrorRate;
 			public int64 AvgTimePerFrame;
@@ -3268,8 +3273,8 @@ namespace Win32
 		[CRepr]
 		public struct KS_AnalogVideoInfo
 		{
-			public RECT rcSource;
-			public RECT rcTarget;
+			public RectI rcSource;
+			public RectI rcTarget;
 			public uint32 dwActiveWidth;
 			public uint32 dwActiveHeight;
 			public int64 AvgTimePerFrame;
@@ -3285,8 +3290,8 @@ namespace Win32
 		[CRepr]
 		public struct KS_VIDEOINFOHEADER2
 		{
-			public RECT rcSource;
-			public RECT rcTarget;
+			public RectI rcSource;
+			public RectI rcTarget;
 			public uint32 dwBitRate;
 			public uint32 dwBitErrorRate;
 			public int64 AvgTimePerFrame;
@@ -3445,8 +3450,8 @@ namespace Win32
 		public struct KS_DATARANGE_VIDEO
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3456,8 +3461,8 @@ namespace Win32
 		public struct KS_DATARANGE_VIDEO2
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3467,8 +3472,8 @@ namespace Win32
 		public struct KS_DATARANGE_MPEG1_VIDEO
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3478,8 +3483,8 @@ namespace Win32
 		public struct KS_DATARANGE_MPEG2_VIDEO
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3489,8 +3494,8 @@ namespace Win32
 		public struct KS_DATARANGE_H264_VIDEO
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3507,8 +3512,8 @@ namespace Win32
 		public struct KS_DATARANGE_VIDEO_PALETTE
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3518,8 +3523,8 @@ namespace Win32
 		public struct KS_DATARANGE_VIDEO_VBI
 		{
 			public KSDATAFORMAT DataRange;
-			public BOOL bFixedSizeSamples;
-			public BOOL bTemporalCompression;
+			public IntBool bFixedSizeSamples;
+			public IntBool bTemporalCompression;
 			public uint32 StreamDescriptionFlags;
 			public uint32 MemoryAllocationFlags;
 			public KS_VIDEO_STREAM_CONFIG_CAPS ConfigCaps;
@@ -3754,9 +3759,9 @@ namespace Win32
 			public uint32 dwFrameFlags;
 			public int64 PictureNumber;
 			public int64 DropCount;
-			public HANDLE hDirectDraw;
-			public HANDLE hSurfaceHandle;
-			public RECT DirectDrawRect;
+			public Handle hDirectDraw;
+			public Handle hSurfaceHandle;
+			public RectI DirectDrawRect;
 			public _Anonymous1_e__Union Anonymous1;
 			public uint32 Reserved2;
 			public _Anonymous2_e__Union Anonymous2;
@@ -3914,7 +3919,7 @@ namespace Win32
 		public struct KSPROPERTY_TUNER_STANDARD_MODE_S
 		{
 			public KSIDENTIFIER Property;
-			public BOOL AutoDetect;
+			public IntBool AutoDetect;
 		}
 		[CRepr]
 		public struct KSPROPERTY_TUNER_INPUT_S
@@ -3947,7 +3952,7 @@ namespace Win32
 		public struct KSPROPERTY_TUNER_SCAN_CAPS_S
 		{
 			public KSIDENTIFIER Property;
-			public BOOL fSupportsHardwareAssistedScanning;
+			public IntBool fSupportsHardwareAssistedScanning;
 			public uint32 SupportedBroadcastStandards;
 			public void* GUIDBucket;
 			public uint32 lengthofBucket;
@@ -4019,7 +4024,7 @@ namespace Win32
 			public int32 Value;
 			public uint32 Flags;
 			public uint32 Capabilities;
-			public RECT FocusRect;
+			public RectI FocusRect;
 		}
 		[CRepr]
 		public struct KSPROPERTY_CAMERACONTROL_S
@@ -4086,10 +4091,10 @@ namespace Win32
 		[CRepr]
 		public struct KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S
 		{
-			public RECT FocusRect;
-			public BOOL AutoFocusLock;
-			public BOOL AutoExposureLock;
-			public BOOL AutoWhitebalanceLock;
+			public RectI FocusRect;
+			public IntBool AutoFocusLock;
+			public IntBool AutoExposureLock;
+			public IntBool AutoWhitebalanceLock;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -4261,7 +4266,7 @@ namespace Win32
 		[CRepr]
 		public struct KSCAMERA_EXTENDEDPROP_ROI_INFO
 		{
-			public RECT Region;
+			public RectI Region;
 			public uint64 Flags;
 			public int32 Weight;
 			public int32 RegionOfInterestType;
@@ -4383,9 +4388,9 @@ namespace Win32
 		public struct KSCAMERA_METADATA_BACKGROUNDSEGMENTATIONMASK
 		{
 			public KSCAMERA_METADATA_ITEMHEADER Header;
-			public RECT MaskCoverageBoundingBox;
+			public RectI MaskCoverageBoundingBox;
 			public SIZE MaskResolution;
-			public RECT ForegroundBoundingBox;
+			public RectI ForegroundBoundingBox;
 			public uint8[0] MaskData;
 		}
 		[CRepr]
@@ -4498,10 +4503,10 @@ namespace Win32
 		{
 			public uint32 MetadataItems;
 			public uint32 Size;
-			public BOOL PTZStatus;
-			public BOOL Events;
-			public BOOL Analytics;
-			public BOOL Reserved;
+			public IntBool PTZStatus;
+			public IntBool Events;
+			public IntBool Analytics;
+			public IntBool Reserved;
 		}
 		[CRepr]
 		public struct KSPROPERTY_NETWORKCAMERACONTROL_EVENT_INFO
@@ -4621,9 +4626,9 @@ namespace Win32
 		[CRepr]
 		public struct MEDIUM_INFO
 		{
-			public BOOL MediaPresent;
+			public IntBool MediaPresent;
 			public uint32 MediaType;
-			public BOOL RecordInhibit;
+			public IntBool RecordInhibit;
 		}
 		[CRepr]
 		public struct TRANSPORT_STATE
@@ -4840,7 +4845,7 @@ namespace Win32
 			public uint32 dwFieldHeight;
 			public uint32 dwVBIWidth;
 			public uint32 dwVBIHeight;
-			public RECT rcValidRegion;
+			public RectI rcValidRegion;
 		}
 		[CRepr]
 		public struct KS_AMVPDATAINFO
@@ -4850,11 +4855,11 @@ namespace Win32
 			public KS_AMVPDIMINFO amvpDimInfo;
 			public uint32 dwPictAspectRatioX;
 			public uint32 dwPictAspectRatioY;
-			public BOOL bEnableDoubleClock;
-			public BOOL bEnableVACT;
-			public BOOL bDataIsInterlaced;
+			public IntBool bEnableDoubleClock;
+			public IntBool bEnableVACT;
+			public IntBool bDataIsInterlaced;
 			public int32 lHalfLinesOdd;
-			public BOOL bFieldPolarityInverted;
+			public IntBool bFieldPolarityInverted;
 			public uint32 dwNumLinesInVREF;
 			public int32 lHalfLinesEven;
 			public uint32 dwReserved1;
@@ -4891,7 +4896,7 @@ namespace Win32
 			public uint32 sc;
 			public uint32 reserved1;
 			public uint8 cFields;
-			public CHAR[3] l21Data;
+			public char8[3] l21Data;
 		}
 		[CRepr]
 		public struct KS_AM_SimpleRateChange
@@ -4914,7 +4919,7 @@ namespace Win32
 			public EPcxGeoLocation GeoLocation;
 			public EPcxGenLocation GenLocation;
 			public EPxcPortConnection PortConnection;
-			public BOOL IsConnected;
+			public IntBool IsConnected;
 		}
 		[CRepr]
 		public struct KSJACK_SINK_INFORMATION
@@ -4923,8 +4928,8 @@ namespace Win32
 			public uint16 ManufacturerId;
 			public uint16 ProductId;
 			public uint16 AudioLatency;
-			public BOOL HDCPCapable;
-			public BOOL AICapable;
+			public IntBool HDCPCapable;
+			public IntBool AICapable;
 			public uint8 SinkDescriptionLength;
 			public char16[32] SinkDescription;
 			public LUID PortId;
@@ -4952,7 +4957,7 @@ namespace Win32
 		public struct KSAUDIOENGINE_VOLUMELEVEL
 		{
 			public int32 TargetVolume;
-			public AUDIO_CURVE_TYPE CurveType;
+			public AudioCurveType CurveType;
 			public uint64 CurveDuration;
 		}
 		[CRepr]
@@ -4964,7 +4969,7 @@ namespace Win32
 		[CRepr]
 		public struct AUDIORESOURCEMANAGEMENT_RESOURCEGROUP
 		{
-			public BOOL ResourceGroupAcquired;
+			public IntBool ResourceGroupAcquired;
 			public char16[256] ResourceGroupName;
 		}
 		[CRepr]
@@ -5588,16 +5593,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT KsProperty(ref KSIDENTIFIER Property, uint32 PropertyLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) mut => VT.KsProperty(ref this, ref Property, PropertyLength, PropertyData, DataLength, out BytesReturned);
-			public HRESULT KsMethod(ref KSIDENTIFIER Method, uint32 MethodLength, void* MethodData, uint32 DataLength, out uint32 BytesReturned) mut => VT.KsMethod(ref this, ref Method, MethodLength, MethodData, DataLength, out BytesReturned);
-			public HRESULT KsEvent(ref KSIDENTIFIER Event, uint32 EventLength, void* EventData, uint32 DataLength, out uint32 BytesReturned) mut => VT.KsEvent(ref this, ref Event, EventLength, EventData, DataLength, out BytesReturned);
+			public HResult KsProperty(ref KSIDENTIFIER Property, uint32 PropertyLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) mut => VT.KsProperty(ref this, ref Property, PropertyLength, PropertyData, DataLength, out BytesReturned);
+			public HResult KsMethod(ref KSIDENTIFIER Method, uint32 MethodLength, void* MethodData, uint32 DataLength, out uint32 BytesReturned) mut => VT.KsMethod(ref this, ref Method, MethodLength, MethodData, DataLength, out BytesReturned);
+			public HResult KsEvent(ref KSIDENTIFIER Event, uint32 EventLength, void* EventData, uint32 DataLength, out uint32 BytesReturned) mut => VT.KsEvent(ref this, ref Event, EventLength, EventData, DataLength, out BytesReturned);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsControl self, ref KSIDENTIFIER Property, uint32 PropertyLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) KsProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsControl self, ref KSIDENTIFIER Method, uint32 MethodLength, void* MethodData, uint32 DataLength, out uint32 BytesReturned) KsMethod;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsControl self, ref KSIDENTIFIER Event, uint32 EventLength, void* EventData, uint32 DataLength, out uint32 BytesReturned) KsEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsControl self, ref KSIDENTIFIER Property, uint32 PropertyLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) KsProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsControl self, ref KSIDENTIFIER Method, uint32 MethodLength, void* MethodData, uint32 DataLength, out uint32 BytesReturned) KsMethod;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsControl self, ref KSIDENTIFIER Event, uint32 EventLength, void* EventData, uint32 DataLength, out uint32 BytesReturned) KsEvent;
 			}
 		}
 		[CRepr]
@@ -5607,14 +5612,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsFormatSupported(out KSDATAFORMAT pKsFormat, uint32 cbFormat, out BOOL pbSupported) mut => VT.IsFormatSupported(ref this, out pKsFormat, cbFormat, out pbSupported);
-			public HRESULT GetDevicePreferredFormat(out KSDATAFORMAT* ppKsFormat) mut => VT.GetDevicePreferredFormat(ref this, out ppKsFormat);
+			public HResult IsFormatSupported(out KSDATAFORMAT pKsFormat, uint32 cbFormat, out IntBool pbSupported) mut => VT.IsFormatSupported(ref this, out pKsFormat, cbFormat, out pbSupported);
+			public HResult GetDevicePreferredFormat(out KSDATAFORMAT* ppKsFormat) mut => VT.GetDevicePreferredFormat(ref this, out ppKsFormat);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsFormatSupport self, out KSDATAFORMAT pKsFormat, uint32 cbFormat, out BOOL pbSupported) IsFormatSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsFormatSupport self, out KSDATAFORMAT* ppKsFormat) GetDevicePreferredFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsFormatSupport self, out KSDATAFORMAT pKsFormat, uint32 cbFormat, out IntBool pbSupported) IsFormatSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsFormatSupport self, out KSDATAFORMAT* ppKsFormat) GetDevicePreferredFormat;
 			}
 		}
 		[CRepr]
@@ -5624,14 +5629,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetJackCount(out uint32 pcJacks) mut => VT.GetJackCount(ref this, out pcJacks);
-			public HRESULT GetJackDescription(uint32 nJack, out KSJACK_DESCRIPTION pDescription) mut => VT.GetJackDescription(ref this, nJack, out pDescription);
+			public HResult GetJackCount(out uint32 pcJacks) mut => VT.GetJackCount(ref this, out pcJacks);
+			public HResult GetJackDescription(uint32 nJack, out KSJACK_DESCRIPTION pDescription) mut => VT.GetJackDescription(ref this, nJack, out pDescription);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsJackDescription self, out uint32 pcJacks) GetJackCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsJackDescription self, uint32 nJack, out KSJACK_DESCRIPTION pDescription) GetJackDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsJackDescription self, out uint32 pcJacks) GetJackCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsJackDescription self, uint32 nJack, out KSJACK_DESCRIPTION pDescription) GetJackDescription;
 			}
 		}
 		[CRepr]
@@ -5641,14 +5646,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetJackCount(out uint32 pcJacks) mut => VT.GetJackCount(ref this, out pcJacks);
-			public HRESULT GetJackDescription2(uint32 nJack, out KSJACK_DESCRIPTION2 pDescription2) mut => VT.GetJackDescription2(ref this, nJack, out pDescription2);
+			public HResult GetJackCount(out uint32 pcJacks) mut => VT.GetJackCount(ref this, out pcJacks);
+			public HResult GetJackDescription2(uint32 nJack, out KSJACK_DESCRIPTION2 pDescription2) mut => VT.GetJackDescription2(ref this, nJack, out pDescription2);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsJackDescription2 self, out uint32 pcJacks) GetJackCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsJackDescription2 self, uint32 nJack, out KSJACK_DESCRIPTION2 pDescription2) GetJackDescription2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsJackDescription2 self, out uint32 pcJacks) GetJackCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsJackDescription2 self, uint32 nJack, out KSJACK_DESCRIPTION2 pDescription2) GetJackDescription2;
 			}
 		}
 		[CRepr]
@@ -5658,12 +5663,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetJackSinkInformation(out KSJACK_SINK_INFORMATION pJackSinkInformation) mut => VT.GetJackSinkInformation(ref this, out pJackSinkInformation);
+			public HResult GetJackSinkInformation(out KSJACK_SINK_INFORMATION pJackSinkInformation) mut => VT.GetJackSinkInformation(ref this, out pJackSinkInformation);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsJackSinkInformation self, out KSJACK_SINK_INFORMATION pJackSinkInformation) GetJackSinkInformation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsJackSinkInformation self, out KSJACK_SINK_INFORMATION pJackSinkInformation) GetJackSinkInformation;
 			}
 		}
 		[CRepr]
@@ -5673,12 +5678,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetJackContainerId(out Guid pJackContainerId) mut => VT.GetJackContainerId(ref this, out pJackContainerId);
+			public HResult GetJackContainerId(out Guid pJackContainerId) mut => VT.GetJackContainerId(ref this, out pJackContainerId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsJackContainerId self, out Guid pJackContainerId) GetJackContainerId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsJackContainerId self, out Guid pJackContainerId) GetJackContainerId;
 			}
 		}
 		[CRepr]
@@ -5688,16 +5693,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Set(in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength) mut => VT.Set(ref this, PropSet, Id, InstanceData, InstanceLength, PropertyData, DataLength);
-			public HRESULT Get(in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) mut => VT.Get(ref this, PropSet, Id, InstanceData, InstanceLength, PropertyData, DataLength, out BytesReturned);
-			public HRESULT QuerySupported(in Guid PropSet, uint32 Id, out uint32 TypeSupport) mut => VT.QuerySupported(ref this, PropSet, Id, out TypeSupport);
+			public HResult Set(in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength) mut => VT.Set(ref this, PropSet, Id, InstanceData, InstanceLength, PropertyData, DataLength);
+			public HResult Get(in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) mut => VT.Get(ref this, PropSet, Id, InstanceData, InstanceLength, PropertyData, DataLength, out BytesReturned);
+			public HResult QuerySupported(in Guid PropSet, uint32 Id, out uint32 TypeSupport) mut => VT.QuerySupported(ref this, PropSet, Id, out TypeSupport);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsPropertySet self, in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength) Set;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsPropertySet self, in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) Get;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsPropertySet self, in Guid PropSet, uint32 Id, out uint32 TypeSupport) QuerySupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsPropertySet self, in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength) Set;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsPropertySet self, in Guid PropSet, uint32 Id, void* InstanceData, uint32 InstanceLength, void* PropertyData, uint32 DataLength, out uint32 BytesReturned) Get;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsPropertySet self, in Guid PropSet, uint32 Id, out uint32 TypeSupport) QuerySupported;
 			}
 		}
 		[CRepr]
@@ -5707,14 +5712,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT KsAddAggregate(in Guid AggregateClass) mut => VT.KsAddAggregate(ref this, AggregateClass);
-			public HRESULT KsRemoveAggregate(in Guid AggregateClass) mut => VT.KsRemoveAggregate(ref this, AggregateClass);
+			public HResult KsAddAggregate(in Guid AggregateClass) mut => VT.KsAddAggregate(ref this, AggregateClass);
+			public HResult KsRemoveAggregate(in Guid AggregateClass) mut => VT.KsRemoveAggregate(ref this, AggregateClass);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsAggregateControl self, in Guid AggregateClass) KsAddAggregate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsAggregateControl self, in Guid AggregateClass) KsRemoveAggregate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsAggregateControl self, in Guid AggregateClass) KsAddAggregate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsAggregateControl self, in Guid AggregateClass) KsRemoveAggregate;
 			}
 		}
 		[CRepr]
@@ -5724,32 +5729,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateNodeInstance(uint32 NodeId, uint32 Flags, uint32 DesiredAccess, IUnknown* UnkOuter, in Guid InterfaceId, void** Interface) mut => VT.CreateNodeInstance(ref this, NodeId, Flags, DesiredAccess, UnkOuter, InterfaceId, Interface);
+			public HResult CreateNodeInstance(uint32 NodeId, uint32 Flags, uint32 DesiredAccess, IUnknown* UnkOuter, in Guid InterfaceId, void** Interface) mut => VT.CreateNodeInstance(ref this, NodeId, Flags, DesiredAccess, UnkOuter, InterfaceId, Interface);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IKsTopology self, uint32 NodeId, uint32 Flags, uint32 DesiredAccess, IUnknown* UnkOuter, in Guid InterfaceId, void** Interface) CreateNodeInstance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IKsTopology self, uint32 NodeId, uint32 Flags, uint32 DesiredAccess, IUnknown* UnkOuter, in Guid InterfaceId, void** Interface) CreateNodeInstance;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 KsCreateAllocator(HANDLE ConnectionHandle, ref KSALLOCATOR_FRAMING AllocatorFraming, out HANDLE AllocatorHandle);
+		public static extern uint32 KsCreateAllocator(Handle ConnectionHandle, ref KSALLOCATOR_FRAMING AllocatorFraming, out Handle AllocatorHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 KsCreateClock(HANDLE ConnectionHandle, ref KSCLOCK_CREATE ClockCreate, out HANDLE ClockHandle);
+		public static extern uint32 KsCreateClock(Handle ConnectionHandle, ref KSCLOCK_CREATE ClockCreate, out Handle ClockHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 KsCreatePin(HANDLE FilterHandle, ref KSPIN_CONNECT Connect, uint32 DesiredAccess, out HANDLE ConnectionHandle);
+		public static extern uint32 KsCreatePin(Handle FilterHandle, ref KSPIN_CONNECT Connect, uint32 DesiredAccess, out Handle ConnectionHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 KsCreateTopologyNode(HANDLE ParentHandle, ref KSNODE_CREATE NodeCreate, uint32 DesiredAccess, out HANDLE NodeHandle);
+		public static extern uint32 KsCreateTopologyNode(Handle ParentHandle, ref KSNODE_CREATE NodeCreate, uint32 DesiredAccess, out Handle NodeHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT KsCreateAllocator2(HANDLE ConnectionHandle, ref KSALLOCATOR_FRAMING AllocatorFraming, out HANDLE AllocatorHandle);
+		public static extern HResult KsCreateAllocator2(Handle ConnectionHandle, ref KSALLOCATOR_FRAMING AllocatorFraming, out Handle AllocatorHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT KsCreateClock2(HANDLE ConnectionHandle, ref KSCLOCK_CREATE ClockCreate, out HANDLE ClockHandle);
+		public static extern HResult KsCreateClock2(Handle ConnectionHandle, ref KSCLOCK_CREATE ClockCreate, out Handle ClockHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT KsCreatePin2(HANDLE FilterHandle, ref KSPIN_CONNECT Connect, uint32 DesiredAccess, out HANDLE ConnectionHandle);
+		public static extern HResult KsCreatePin2(Handle FilterHandle, ref KSPIN_CONNECT Connect, uint32 DesiredAccess, out Handle ConnectionHandle);
 		[Import("ksuser.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT KsCreateTopologyNode2(HANDLE ParentHandle, ref KSNODE_CREATE NodeCreate, uint32 DesiredAccess, out HANDLE NodeHandle);
+		public static extern HResult KsCreateTopologyNode2(Handle ParentHandle, ref KSNODE_CREATE NodeCreate, uint32 DesiredAccess, out Handle NodeHandle);
 	}
 }

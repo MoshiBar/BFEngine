@@ -1,4 +1,5 @@
 using System;
+using static System.Windows;
 
 // namespace System.Search.Common
 namespace Win32

@@ -5,7 +5,7 @@ using System.Text;
 namespace BfEngine
 {
 	[CRepr]
-	public struct Rect
+	public struct RectF
 	{
 		public float mX;
 		public float mY;
@@ -116,7 +116,7 @@ namespace BfEngine
 			mHeight = height;
 		}
 
-		public bool Intersects(Rect rect)
+		public bool Intersects(RectF rect)
 		{
 			return !((rect.mX + rect.mWidth <= mX) ||
 				(rect.mY + rect.mHeight <= mY) ||
@@ -124,7 +124,7 @@ namespace BfEngine
 				(rect.mY >= mY + mHeight));
 		}
 
-		public void SetIntersectionOf(Rect rect1, Rect rect2) mut
+		public void SetIntersectionOf(RectF rect1, RectF rect2) mut
 		{
 			float x1 = Math.Max(rect1.mX, rect2.mX);
 			float x2 = Math.Min(rect1.mX + rect1.mWidth, rect2.mX + rect2.mWidth);
@@ -146,7 +146,7 @@ namespace BfEngine
 			}
 		}
 
-		public void SetIntersectionOf(Rect rect1, float x, float y, float width, float height) mut
+		public void SetIntersectionOf(RectF rect1, float x, float y, float width, float height) mut
 		{
 			float x1 = Math.Max(rect1.mX, x);
 			float x2 = Math.Min(rect1.mX + rect1.mWidth, x + width);
@@ -168,25 +168,25 @@ namespace BfEngine
 			}
 		}
 
-		public Rect Intersection(Rect rect)
+		public RectF Intersection(RectF rect)
 		{
 			float x1 = Math.Max(mX, rect.mX);
 			float x2 = Math.Min(mX + mWidth, rect.mX + rect.mWidth);
 			float y1 = Math.Max(mY, rect.mY);
 			float y2 = Math.Min(mY + mHeight, rect.mY + rect.mHeight);
 			if (((x2 - x1) < 0) || ((y2 - y1) < 0))
-				return Rect(0, 0, 0, 0);
+				return RectF(0, 0, 0, 0);
 			else
-				return Rect(x1, y1, x2 - x1, y2 - y1);
+				return RectF(x1, y1, x2 - x1, y2 - y1);
 		}
 
-		public Rect Union(Rect rect)
+		public RectF Union(RectF rect)
 		{
 			float x1 = Math.Min(mX, rect.mX);
 			float x2 = Math.Max(mX + mWidth, rect.mX + rect.mWidth);
 			float y1 = Math.Min(mY, rect.mY);
 			float y2 = Math.Max(mY + mHeight, rect.mY + rect.mHeight);
-			return Rect(x1, y1, x2 - x1, y2 - y1);
+			return RectF(x1, y1, x2 - x1, y2 - y1);
 		}
 
 		public bool Contains(float x, float y)
@@ -200,7 +200,7 @@ namespace BfEngine
 			return Contains(pt.x, pt.y);
 		}
 
-		public bool Contains(Rect rect)
+		public bool Contains(RectF rect)
 		{
 			return Contains(rect.mX, rect.mY) && Contains(rect.mX + rect.mWidth, rect.mY + rect.mHeight);
 		}

@@ -22,7 +22,7 @@ namespace Win32
 			INT32 = 6,
 			INT64 = 7,
 			STRING = 8,
-			BOOLEAN = 9,
+			Boolean = 9,
 			FLOAT16 = 10,
 			DOUBLE = 11,
 			UINT32 = 12,
@@ -129,7 +129,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public PWSTR* pStrings;
+				public char16** pStrings;
 				public int64* pInts;
 				public float* pFloats;
 				public double* pDoubles;
@@ -147,7 +147,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous2_e__Union
 			{
-				public PWSTR* pStringFields;
+				public char16** pStringFields;
 				public int64* pIntFields;
 				public float* pFloatFields;
 				public double* pDoubleFields;
@@ -155,7 +155,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous1_e__Union
 			{
-				public PWSTR* pStringKeys;
+				public char16** pStringKeys;
 				public int64* pIntKeys;
 			}
 		}
@@ -179,7 +179,7 @@ namespace Win32
 		[CRepr]
 		public struct WINML_BINDING_DESC
 		{
-			public PWSTR Name;
+			public char16* Name;
 			public WINML_BINDING_TYPE BindType;
 			public _Anonymous_e__Union Anonymous;
 			
@@ -221,10 +221,10 @@ namespace Win32
 		[CRepr]
 		public struct WINML_VARIABLE_DESC
 		{
-			public PWSTR Name;
-			public PWSTR Description;
+			public char16* Name;
+			public char16* Description;
 			public WINML_FEATURE_TYPE FeatureType;
-			public BOOL Required;
+			public IntBool Required;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -239,10 +239,10 @@ namespace Win32
 		[CRepr]
 		public struct WINML_MODEL_DESC
 		{
-			public PWSTR Author;
-			public PWSTR Name;
-			public PWSTR Domain;
-			public PWSTR Description;
+			public char16* Author;
+			public char16* Name;
+			public char16* Domain;
+			public char16* Description;
 			public uint Version;
 		}
 		[CRepr]
@@ -269,28 +269,28 @@ namespace Win32
 			public struct _Anonymous_e__Union
 			{
 				public void* reserved;
-				public PSTR typeLabel;
+				public char8* typeLabel;
 				public MLOperatorEdgeDescription edgeDescription;
 			}
 		}
 		[CRepr]
 		public struct MLOperatorEdgeTypeConstraint
 		{
-			public PSTR typeLabel;
+			public char8* typeLabel;
 			public MLOperatorEdgeDescription* allowedTypes;
 			public uint32 allowedTypeCount;
 		}
 		[CRepr]
 		public struct MLOperatorAttribute
 		{
-			public PSTR name;
+			public char8* name;
 			public MLOperatorAttributeType type;
 			public Boolean required;
 		}
 		[CRepr]
 		public struct MLOperatorAttributeNameValue
 		{
-			public PSTR name;
+			public char8* name;
 			public MLOperatorAttributeType type;
 			public uint32 valueCount;
 			public _Anonymous_e__Union Anonymous;
@@ -307,7 +307,7 @@ namespace Win32
 		[CRepr]
 		public struct MLOperatorSchemaDescription
 		{
-			public PSTR name;
+			public char8* name;
 			public int32 operatorSetVersionAtLastChange;
 			public MLOperatorSchemaEdgeDescription* inputs;
 			public uint32 inputCount;
@@ -323,14 +323,14 @@ namespace Win32
 		[CRepr]
 		public struct MLOperatorSetId
 		{
-			public PSTR domain;
+			public char8* domain;
 			public int32 version;
 		}
 		[CRepr]
 		public struct MLOperatorKernelDescription
 		{
-			public PSTR domain;
-			public PSTR name;
+			public char8* domain;
+			public char8* name;
 			public int32 minimumOperatorSetVersion;
 			public MLOperatorExecutionType executionType;
 			public MLOperatorEdgeTypeConstraint* typeConstraints;
@@ -350,18 +350,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDescription(out WINML_MODEL_DESC* ppDescription) mut => VT.GetDescription(ref this, out ppDescription);
-			public HRESULT EnumerateMetadata(uint32 Index, out PWSTR pKey, out PWSTR pValue) mut => VT.EnumerateMetadata(ref this, Index, out pKey, out pValue);
-			public HRESULT EnumerateModelInputs(uint32 Index, out WINML_VARIABLE_DESC* ppInputDescriptor) mut => VT.EnumerateModelInputs(ref this, Index, out ppInputDescriptor);
-			public HRESULT EnumerateModelOutputs(uint32 Index, out WINML_VARIABLE_DESC* ppOutputDescriptor) mut => VT.EnumerateModelOutputs(ref this, Index, out ppOutputDescriptor);
+			public HResult GetDescription(out WINML_MODEL_DESC* ppDescription) mut => VT.GetDescription(ref this, out ppDescription);
+			public HResult EnumerateMetadata(uint32 Index, out char16* pKey, out char16* pValue) mut => VT.EnumerateMetadata(ref this, Index, out pKey, out pValue);
+			public HResult EnumerateModelInputs(uint32 Index, out WINML_VARIABLE_DESC* ppInputDescriptor) mut => VT.EnumerateModelInputs(ref this, Index, out ppInputDescriptor);
+			public HResult EnumerateModelOutputs(uint32 Index, out WINML_VARIABLE_DESC* ppOutputDescriptor) mut => VT.EnumerateModelOutputs(ref this, Index, out ppOutputDescriptor);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLModel self, out WINML_MODEL_DESC* ppDescription) GetDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLModel self, uint32 Index, out PWSTR pKey, out PWSTR pValue) EnumerateMetadata;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLModel self, uint32 Index, out WINML_VARIABLE_DESC* ppInputDescriptor) EnumerateModelInputs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLModel self, uint32 Index, out WINML_VARIABLE_DESC* ppOutputDescriptor) EnumerateModelOutputs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLModel self, out WINML_MODEL_DESC* ppDescription) GetDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLModel self, uint32 Index, out char16* pKey, out char16* pValue) EnumerateMetadata;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLModel self, uint32 Index, out WINML_VARIABLE_DESC* ppInputDescriptor) EnumerateModelInputs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLModel self, uint32 Index, out WINML_VARIABLE_DESC* ppOutputDescriptor) EnumerateModelOutputs;
 			}
 		}
 		[CRepr]
@@ -371,16 +371,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BindValue(ref WINML_BINDING_DESC pDescriptor) mut => VT.BindValue(ref this, ref pDescriptor);
-			public HRESULT GetValueByName(PWSTR Name, out WINML_BINDING_DESC* pDescriptor) mut => VT.GetValueByName(ref this, Name, out pDescriptor);
-			public HRESULT Clear() mut => VT.Clear(ref this);
+			public HResult BindValue(ref WINML_BINDING_DESC pDescriptor) mut => VT.BindValue(ref this, ref pDescriptor);
+			public HResult GetValueByName(char16* Name, out WINML_BINDING_DESC* pDescriptor) mut => VT.GetValueByName(ref this, Name, out pDescriptor);
+			public HResult Clear() mut => VT.Clear(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLEvaluationContext self, ref WINML_BINDING_DESC pDescriptor) BindValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLEvaluationContext self, PWSTR Name, out WINML_BINDING_DESC* pDescriptor) GetValueByName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLEvaluationContext self) Clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLEvaluationContext self, ref WINML_BINDING_DESC pDescriptor) BindValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLEvaluationContext self, char16* Name, out WINML_BINDING_DESC* pDescriptor) GetValueByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLEvaluationContext self) Clear;
 			}
 		}
 		[CRepr]
@@ -390,16 +390,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LoadModel(PWSTR Path, out IWinMLModel* ppModel) mut => VT.LoadModel(ref this, Path, out ppModel);
-			public HRESULT CreateEvaluationContext(ID3D12Device* device, out IWinMLEvaluationContext* ppContext) mut => VT.CreateEvaluationContext(ref this, device, out ppContext);
-			public HRESULT EvaluateModel(ref IWinMLEvaluationContext pContext) mut => VT.EvaluateModel(ref this, ref pContext);
+			public HResult LoadModel(char16* Path, out IWinMLModel* ppModel) mut => VT.LoadModel(ref this, Path, out ppModel);
+			public HResult CreateEvaluationContext(ID3D12Device* device, out IWinMLEvaluationContext* ppContext) mut => VT.CreateEvaluationContext(ref this, device, out ppContext);
+			public HResult EvaluateModel(ref IWinMLEvaluationContext pContext) mut => VT.EvaluateModel(ref this, ref pContext);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLRuntime self, PWSTR Path, out IWinMLModel* ppModel) LoadModel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLRuntime self, ID3D12Device* device, out IWinMLEvaluationContext* ppContext) CreateEvaluationContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLRuntime self, ref IWinMLEvaluationContext pContext) EvaluateModel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLRuntime self, char16* Path, out IWinMLModel* ppModel) LoadModel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLRuntime self, ID3D12Device* device, out IWinMLEvaluationContext* ppContext) CreateEvaluationContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLRuntime self, ref IWinMLEvaluationContext pContext) EvaluateModel;
 			}
 		}
 		[CRepr]
@@ -409,12 +409,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateRuntime(WINML_RUNTIME_TYPE RuntimeType, out IWinMLRuntime* ppRuntime) mut => VT.CreateRuntime(ref this, RuntimeType, out ppRuntime);
+			public HResult CreateRuntime(WINML_RUNTIME_TYPE RuntimeType, out IWinMLRuntime* ppRuntime) mut => VT.CreateRuntime(ref this, RuntimeType, out ppRuntime);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinMLRuntimeFactory self, WINML_RUNTIME_TYPE RuntimeType, out IWinMLRuntime* ppRuntime) CreateRuntime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinMLRuntimeFactory self, WINML_RUNTIME_TYPE RuntimeType, out IWinMLRuntime* ppRuntime) CreateRuntime;
 			}
 		}
 		[CRepr]
@@ -424,18 +424,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAttributeElementCount(PSTR name, MLOperatorAttributeType type, out uint32 elementCount) mut => VT.GetAttributeElementCount(ref this, name, type, out elementCount);
-			public HRESULT GetAttribute(PSTR name, MLOperatorAttributeType type, uint32 elementCount, uint elementByteSize, void* value) mut => VT.GetAttribute(ref this, name, type, elementCount, elementByteSize, value);
-			public HRESULT GetStringAttributeElementLength(PSTR name, uint32 elementIndex, out uint32 attributeElementByteSize) mut => VT.GetStringAttributeElementLength(ref this, name, elementIndex, out attributeElementByteSize);
-			public HRESULT GetStringAttributeElement(PSTR name, uint32 elementIndex, uint32 attributeElementByteSize, uint8* attributeElement) mut => VT.GetStringAttributeElement(ref this, name, elementIndex, attributeElementByteSize, attributeElement);
+			public HResult GetAttributeElementCount(char8* name, MLOperatorAttributeType type, out uint32 elementCount) mut => VT.GetAttributeElementCount(ref this, name, type, out elementCount);
+			public HResult GetAttribute(char8* name, MLOperatorAttributeType type, uint32 elementCount, uint elementByteSize, void* value) mut => VT.GetAttribute(ref this, name, type, elementCount, elementByteSize, value);
+			public HResult GetStringAttributeElementLength(char8* name, uint32 elementIndex, out uint32 attributeElementByteSize) mut => VT.GetStringAttributeElementLength(ref this, name, elementIndex, out attributeElementByteSize);
+			public HResult GetStringAttributeElement(char8* name, uint32 elementIndex, uint32 attributeElementByteSize, uint8* attributeElement) mut => VT.GetStringAttributeElement(ref this, name, elementIndex, attributeElementByteSize, attributeElement);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorAttributes self, PSTR name, MLOperatorAttributeType type, out uint32 elementCount) GetAttributeElementCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorAttributes self, PSTR name, MLOperatorAttributeType type, uint32 elementCount, uint elementByteSize, void* value) GetAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorAttributes self, PSTR name, uint32 elementIndex, out uint32 attributeElementByteSize) GetStringAttributeElementLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorAttributes self, PSTR name, uint32 elementIndex, uint32 attributeElementByteSize, uint8* attributeElement) GetStringAttributeElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorAttributes self, char8* name, MLOperatorAttributeType type, out uint32 elementCount) GetAttributeElementCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorAttributes self, char8* name, MLOperatorAttributeType type, uint32 elementCount, uint elementByteSize, void* value) GetAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorAttributes self, char8* name, uint32 elementIndex, out uint32 attributeElementByteSize) GetStringAttributeElementLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorAttributes self, char8* name, uint32 elementIndex, uint32 attributeElementByteSize, uint8* attributeElement) GetStringAttributeElement;
 			}
 		}
 		[CRepr]
@@ -445,20 +445,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInputTensorDimensionCount(uint32 inputIndex, out uint32 dimensionCount) mut => VT.GetInputTensorDimensionCount(ref this, inputIndex, out dimensionCount);
-			public HRESULT GetInputTensorShape(uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) mut => VT.GetInputTensorShape(ref this, inputIndex, dimensionCount, dimensions);
+			public HResult GetInputTensorDimensionCount(uint32 inputIndex, out uint32 dimensionCount) mut => VT.GetInputTensorDimensionCount(ref this, inputIndex, out dimensionCount);
+			public HResult GetInputTensorShape(uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) mut => VT.GetInputTensorShape(ref this, inputIndex, dimensionCount, dimensions);
 			public Boolean HasOutputShapeDescription() mut => VT.HasOutputShapeDescription(ref this);
-			public HRESULT GetOutputTensorDimensionCount(uint32 outputIndex, out uint32 dimensionCount) mut => VT.GetOutputTensorDimensionCount(ref this, outputIndex, out dimensionCount);
-			public HRESULT GetOutputTensorShape(uint32 outputIndex, uint32 dimensionCount, uint32* dimensions) mut => VT.GetOutputTensorShape(ref this, outputIndex, dimensionCount, dimensions);
+			public HResult GetOutputTensorDimensionCount(uint32 outputIndex, out uint32 dimensionCount) mut => VT.GetOutputTensorDimensionCount(ref this, outputIndex, out dimensionCount);
+			public HResult GetOutputTensorShape(uint32 outputIndex, uint32 dimensionCount, uint32* dimensions) mut => VT.GetOutputTensorShape(ref this, outputIndex, dimensionCount, dimensions);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTensorShapeDescription self, uint32 inputIndex, out uint32 dimensionCount) GetInputTensorDimensionCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTensorShapeDescription self, uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) GetInputTensorShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTensorShapeDescription self, uint32 inputIndex, out uint32 dimensionCount) GetInputTensorDimensionCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTensorShapeDescription self, uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) GetInputTensorShape;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorTensorShapeDescription self) HasOutputShapeDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTensorShapeDescription self, uint32 outputIndex, out uint32 dimensionCount) GetOutputTensorDimensionCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTensorShapeDescription self, uint32 outputIndex, uint32 dimensionCount, uint32* dimensions) GetOutputTensorShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTensorShapeDescription self, uint32 outputIndex, out uint32 dimensionCount) GetOutputTensorDimensionCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTensorShapeDescription self, uint32 outputIndex, uint32 dimensionCount, uint32* dimensions) GetOutputTensorShape;
 			}
 		}
 		[CRepr]
@@ -472,10 +472,10 @@ namespace Win32
 			public uint32 GetOutputCount() mut => VT.GetOutputCount(ref this);
 			public Boolean IsInputValid(uint32 inputIndex) mut => VT.IsInputValid(ref this, inputIndex);
 			public Boolean IsOutputValid(uint32 outputIndex) mut => VT.IsOutputValid(ref this, outputIndex);
-			public HRESULT GetInputEdgeDescription(uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetInputEdgeDescription(ref this, inputIndex, out edgeDescription);
-			public HRESULT GetOutputEdgeDescription(uint32 outputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetOutputEdgeDescription(ref this, outputIndex, out edgeDescription);
+			public HResult GetInputEdgeDescription(uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetInputEdgeDescription(ref this, inputIndex, out edgeDescription);
+			public HResult GetOutputEdgeDescription(uint32 outputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetOutputEdgeDescription(ref this, outputIndex, out edgeDescription);
 			public Boolean HasTensorShapeDescription() mut => VT.HasTensorShapeDescription(ref this);
-			public HRESULT GetTensorShapeDescription(out IMLOperatorTensorShapeDescription* shapeDescription) mut => VT.GetTensorShapeDescription(ref this, out shapeDescription);
+			public HResult GetTensorShapeDescription(out IMLOperatorTensorShapeDescription* shapeDescription) mut => VT.GetTensorShapeDescription(ref this, out shapeDescription);
 			public void GetExecutionInterface(IUnknown** executionObject) mut => VT.GetExecutionInterface(ref this, executionObject);
 
 			[CRepr]
@@ -485,10 +485,10 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] uint32(ref IMLOperatorKernelCreationContext self) GetOutputCount;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorKernelCreationContext self, uint32 inputIndex) IsInputValid;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorKernelCreationContext self, uint32 outputIndex) IsOutputValid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelCreationContext self, uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) GetInputEdgeDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelCreationContext self, uint32 outputIndex, out MLOperatorEdgeDescription edgeDescription) GetOutputEdgeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelCreationContext self, uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) GetInputEdgeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelCreationContext self, uint32 outputIndex, out MLOperatorEdgeDescription edgeDescription) GetOutputEdgeDescription;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorKernelCreationContext self) HasTensorShapeDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelCreationContext self, out IMLOperatorTensorShapeDescription* shapeDescription) GetTensorShapeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelCreationContext self, out IMLOperatorTensorShapeDescription* shapeDescription) GetTensorShapeDescription;
 				public new function [CallingConvention(.Stdcall)] void(ref IMLOperatorKernelCreationContext self, IUnknown** executionObject) GetExecutionInterface;
 			}
 		}
@@ -500,7 +500,7 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 GetDimensionCount() mut => VT.GetDimensionCount(ref this);
-			public HRESULT GetShape(uint32 dimensionCount, uint32* dimensions) mut => VT.GetShape(ref this, dimensionCount, dimensions);
+			public HResult GetShape(uint32 dimensionCount, uint32* dimensions) mut => VT.GetShape(ref this, dimensionCount, dimensions);
 			public MLOperatorTensorDataType GetTensorDataType() mut => VT.GetTensorDataType(ref this);
 			public Boolean IsCpuData() mut => VT.IsCpuData(ref this);
 			public Boolean IsDataInterface() mut => VT.IsDataInterface(ref this);
@@ -511,7 +511,7 @@ namespace Win32
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IMLOperatorTensor self) GetDimensionCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTensor self, uint32 dimensionCount, uint32* dimensions) GetShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTensor self, uint32 dimensionCount, uint32* dimensions) GetShape;
 				public new function [CallingConvention(.Stdcall)] MLOperatorTensorDataType(ref IMLOperatorTensor self) GetTensorDataType;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorTensor self) IsCpuData;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorTensor self) IsDataInterface;
@@ -526,19 +526,19 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInputTensor(uint32 inputIndex, IMLOperatorTensor** tensor) mut => VT.GetInputTensor(ref this, inputIndex, tensor);
-			public HRESULT GetOutputTensor(uint32 outputIndex, uint32 dimensionCount, uint32* dimensionSizes, IMLOperatorTensor** tensor) mut => VT.GetOutputTensor(ref this, outputIndex, dimensionCount, dimensionSizes, tensor);
-			public HRESULT GetOutputTensor(uint32 outputIndex, IMLOperatorTensor** tensor) mut => VT.GetOutputTensor2(ref this, outputIndex, tensor);
-			public HRESULT AllocateTemporaryData(uint size, out IUnknown* data) mut => VT.AllocateTemporaryData(ref this, size, out data);
+			public HResult GetInputTensor(uint32 inputIndex, IMLOperatorTensor** tensor) mut => VT.GetInputTensor(ref this, inputIndex, tensor);
+			public HResult GetOutputTensor(uint32 outputIndex, uint32 dimensionCount, uint32* dimensionSizes, IMLOperatorTensor** tensor) mut => VT.GetOutputTensor(ref this, outputIndex, dimensionCount, dimensionSizes, tensor);
+			public HResult GetOutputTensor(uint32 outputIndex, IMLOperatorTensor** tensor) mut => VT.GetOutputTensor2(ref this, outputIndex, tensor);
+			public HResult AllocateTemporaryData(uint size, out IUnknown* data) mut => VT.AllocateTemporaryData(ref this, size, out data);
 			public void GetExecutionInterface(IUnknown** executionObject) mut => VT.GetExecutionInterface(ref this, executionObject);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelContext self, uint32 inputIndex, IMLOperatorTensor** tensor) GetInputTensor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelContext self, uint32 outputIndex, uint32 dimensionCount, uint32* dimensionSizes, IMLOperatorTensor** tensor) GetOutputTensor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelContext self, uint32 outputIndex, IMLOperatorTensor** tensor) GetOutputTensor2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelContext self, uint size, out IUnknown* data) AllocateTemporaryData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelContext self, uint32 inputIndex, IMLOperatorTensor** tensor) GetInputTensor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelContext self, uint32 outputIndex, uint32 dimensionCount, uint32* dimensionSizes, IMLOperatorTensor** tensor) GetOutputTensor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelContext self, uint32 outputIndex, IMLOperatorTensor** tensor) GetOutputTensor2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelContext self, uint size, out IUnknown* data) AllocateTemporaryData;
 				public new function [CallingConvention(.Stdcall)] void(ref IMLOperatorKernelContext self, IUnknown** executionObject) GetExecutionInterface;
 			}
 		}
@@ -549,12 +549,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compute(ref IMLOperatorKernelContext context) mut => VT.Compute(ref this, ref context);
+			public HResult Compute(ref IMLOperatorKernelContext context) mut => VT.Compute(ref this, ref context);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernel self, ref IMLOperatorKernelContext context) Compute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernel self, ref IMLOperatorKernelContext context) Compute;
 			}
 		}
 		[CRepr]
@@ -568,10 +568,10 @@ namespace Win32
 			public uint32 GetOutputCount() mut => VT.GetOutputCount(ref this);
 			public Boolean IsInputValid(uint32 inputIndex) mut => VT.IsInputValid(ref this, inputIndex);
 			public Boolean IsOutputValid(uint32 outputIndex) mut => VT.IsOutputValid(ref this, outputIndex);
-			public HRESULT GetInputEdgeDescription(uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetInputEdgeDescription(ref this, inputIndex, out edgeDescription);
-			public HRESULT GetInputTensorDimensionCount(uint32 inputIndex, out uint32 dimensionCount) mut => VT.GetInputTensorDimensionCount(ref this, inputIndex, out dimensionCount);
-			public HRESULT GetInputTensorShape(uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) mut => VT.GetInputTensorShape(ref this, inputIndex, dimensionCount, dimensions);
-			public HRESULT SetOutputTensorShape(uint32 outputIndex, uint32 dimensionCount, in uint32 dimensions) mut => VT.SetOutputTensorShape(ref this, outputIndex, dimensionCount, dimensions);
+			public HResult GetInputEdgeDescription(uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetInputEdgeDescription(ref this, inputIndex, out edgeDescription);
+			public HResult GetInputTensorDimensionCount(uint32 inputIndex, out uint32 dimensionCount) mut => VT.GetInputTensorDimensionCount(ref this, inputIndex, out dimensionCount);
+			public HResult GetInputTensorShape(uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) mut => VT.GetInputTensorShape(ref this, inputIndex, dimensionCount, dimensions);
+			public HResult SetOutputTensorShape(uint32 outputIndex, uint32 dimensionCount, in uint32 dimensions) mut => VT.SetOutputTensorShape(ref this, outputIndex, dimensionCount, dimensions);
 
 			[CRepr]
 			public struct VTable : IMLOperatorAttributes.VTable
@@ -580,10 +580,10 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] uint32(ref IMLOperatorShapeInferenceContext self) GetOutputCount;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex) IsInputValid;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorShapeInferenceContext self, uint32 outputIndex) IsOutputValid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) GetInputEdgeDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex, out uint32 dimensionCount) GetInputTensorDimensionCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) GetInputTensorShape;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorShapeInferenceContext self, uint32 outputIndex, uint32 dimensionCount, in uint32 dimensions) SetOutputTensorShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) GetInputEdgeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex, out uint32 dimensionCount) GetInputTensorDimensionCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorShapeInferenceContext self, uint32 inputIndex, uint32 dimensionCount, uint32* dimensions) GetInputTensorShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorShapeInferenceContext self, uint32 outputIndex, uint32 dimensionCount, in uint32 dimensions) SetOutputTensorShape;
 			}
 		}
 		[CRepr]
@@ -597,8 +597,8 @@ namespace Win32
 			public uint32 GetOutputCount() mut => VT.GetOutputCount(ref this);
 			public Boolean IsInputValid(uint32 inputIndex) mut => VT.IsInputValid(ref this, inputIndex);
 			public Boolean IsOutputValid(uint32 outputIndex) mut => VT.IsOutputValid(ref this, outputIndex);
-			public HRESULT GetInputEdgeDescription(uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetInputEdgeDescription(ref this, inputIndex, out edgeDescription);
-			public HRESULT SetOutputEdgeDescription(uint32 outputIndex, in MLOperatorEdgeDescription edgeDescription) mut => VT.SetOutputEdgeDescription(ref this, outputIndex, edgeDescription);
+			public HResult GetInputEdgeDescription(uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) mut => VT.GetInputEdgeDescription(ref this, inputIndex, out edgeDescription);
+			public HResult SetOutputEdgeDescription(uint32 outputIndex, in MLOperatorEdgeDescription edgeDescription) mut => VT.SetOutputEdgeDescription(ref this, outputIndex, edgeDescription);
 
 			[CRepr]
 			public struct VTable : IMLOperatorAttributes.VTable
@@ -607,8 +607,8 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] uint32(ref IMLOperatorTypeInferenceContext self) GetOutputCount;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorTypeInferenceContext self, uint32 inputIndex) IsInputValid;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IMLOperatorTypeInferenceContext self, uint32 outputIndex) IsOutputValid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTypeInferenceContext self, uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) GetInputEdgeDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTypeInferenceContext self, uint32 outputIndex, in MLOperatorEdgeDescription edgeDescription) SetOutputEdgeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTypeInferenceContext self, uint32 inputIndex, out MLOperatorEdgeDescription edgeDescription) GetInputEdgeDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTypeInferenceContext self, uint32 outputIndex, in MLOperatorEdgeDescription edgeDescription) SetOutputEdgeDescription;
 			}
 		}
 		[CRepr]
@@ -618,12 +618,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InferOutputTypes(ref IMLOperatorTypeInferenceContext context) mut => VT.InferOutputTypes(ref this, ref context);
+			public HResult InferOutputTypes(ref IMLOperatorTypeInferenceContext context) mut => VT.InferOutputTypes(ref this, ref context);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorTypeInferrer self, ref IMLOperatorTypeInferenceContext context) InferOutputTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorTypeInferrer self, ref IMLOperatorTypeInferenceContext context) InferOutputTypes;
 			}
 		}
 		[CRepr]
@@ -633,12 +633,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InferOutputShapes(ref IMLOperatorShapeInferenceContext context) mut => VT.InferOutputShapes(ref this, ref context);
+			public HResult InferOutputShapes(ref IMLOperatorShapeInferenceContext context) mut => VT.InferOutputShapes(ref this, ref context);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorShapeInferrer self, ref IMLOperatorShapeInferenceContext context) InferOutputShapes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorShapeInferrer self, ref IMLOperatorShapeInferenceContext context) InferOutputShapes;
 			}
 		}
 		[CRepr]
@@ -648,12 +648,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateKernel(ref IMLOperatorKernelCreationContext context, out IMLOperatorKernel* kernel) mut => VT.CreateKernel(ref this, ref context, out kernel);
+			public HResult CreateKernel(ref IMLOperatorKernelCreationContext context, out IMLOperatorKernel* kernel) mut => VT.CreateKernel(ref this, ref context, out kernel);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorKernelFactory self, ref IMLOperatorKernelCreationContext context, out IMLOperatorKernel* kernel) CreateKernel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorKernelFactory self, ref IMLOperatorKernelCreationContext context, out IMLOperatorKernel* kernel) CreateKernel;
 			}
 		}
 		[CRepr]
@@ -663,22 +663,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterOperatorSetSchema(in MLOperatorSetId operatorSetId, int32 baselineVersion, MLOperatorSchemaDescription** schema, uint32 schemaCount, IMLOperatorTypeInferrer* typeInferrer, IMLOperatorShapeInferrer* shapeInferrer) mut => VT.RegisterOperatorSetSchema(ref this, operatorSetId, baselineVersion, schema, schemaCount, typeInferrer, shapeInferrer);
-			public HRESULT RegisterOperatorKernel(in MLOperatorKernelDescription operatorKernel, ref IMLOperatorKernelFactory operatorKernelFactory, IMLOperatorShapeInferrer* shapeInferrer) mut => VT.RegisterOperatorKernel(ref this, operatorKernel, ref operatorKernelFactory, shapeInferrer);
+			public HResult RegisterOperatorSetSchema(in MLOperatorSetId operatorSetId, int32 baselineVersion, MLOperatorSchemaDescription** schema, uint32 schemaCount, IMLOperatorTypeInferrer* typeInferrer, IMLOperatorShapeInferrer* shapeInferrer) mut => VT.RegisterOperatorSetSchema(ref this, operatorSetId, baselineVersion, schema, schemaCount, typeInferrer, shapeInferrer);
+			public HResult RegisterOperatorKernel(in MLOperatorKernelDescription operatorKernel, ref IMLOperatorKernelFactory operatorKernelFactory, IMLOperatorShapeInferrer* shapeInferrer) mut => VT.RegisterOperatorKernel(ref this, operatorKernel, ref operatorKernelFactory, shapeInferrer);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorRegistry self, in MLOperatorSetId operatorSetId, int32 baselineVersion, MLOperatorSchemaDescription** schema, uint32 schemaCount, IMLOperatorTypeInferrer* typeInferrer, IMLOperatorShapeInferrer* shapeInferrer) RegisterOperatorSetSchema;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMLOperatorRegistry self, in MLOperatorKernelDescription operatorKernel, ref IMLOperatorKernelFactory operatorKernelFactory, IMLOperatorShapeInferrer* shapeInferrer) RegisterOperatorKernel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorRegistry self, in MLOperatorSetId operatorSetId, int32 baselineVersion, MLOperatorSchemaDescription** schema, uint32 schemaCount, IMLOperatorTypeInferrer* typeInferrer, IMLOperatorShapeInferrer* shapeInferrer) RegisterOperatorSetSchema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMLOperatorRegistry self, in MLOperatorKernelDescription operatorKernel, ref IMLOperatorKernelFactory operatorKernelFactory, IMLOperatorShapeInferrer* shapeInferrer) RegisterOperatorKernel;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("winml.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinMLCreateRuntime(out IWinMLRuntime* runtime);
+		public static extern HResult WinMLCreateRuntime(out IWinMLRuntime* runtime);
 		[Import("windows.ai.machinelearning.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MLCreateOperatorRegistry(out IMLOperatorRegistry* registry);
+		public static extern HResult MLCreateOperatorRegistry(out IMLOperatorRegistry* registry);
 	}
 }

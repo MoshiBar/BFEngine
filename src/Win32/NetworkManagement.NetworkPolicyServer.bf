@@ -287,7 +287,7 @@ namespace Win32
 		}
 		public enum ATTRIBUTESYNTAX : int32
 		{
-			BOOLEAN = 1,
+			Boolean = 1,
 			INTEGER = 2,
 			ENUMERATOR = 3,
 			INETADDR = 4,
@@ -800,28 +800,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Attach(BSTR bstrComputerName) mut => VT.Attach(ref this, bstrComputerName);
-			public HRESULT GetDictionarySDO(out IUnknown* ppDictionarySDO) mut => VT.GetDictionarySDO(ref this, out ppDictionarySDO);
-			public HRESULT GetServiceSDO(IASDATASTORE eDataStore, BSTR bstrServiceName, out IUnknown* ppServiceSDO) mut => VT.GetServiceSDO(ref this, eDataStore, bstrServiceName, out ppServiceSDO);
-			public HRESULT GetUserSDO(IASDATASTORE eDataStore, BSTR bstrUserName, out IUnknown* ppUserSDO) mut => VT.GetUserSDO(ref this, eDataStore, bstrUserName, out ppUserSDO);
-			public HRESULT GetOSType(out IASOSTYPE eOSType) mut => VT.GetOSType(ref this, out eOSType);
-			public HRESULT GetDomainType(out IASDOMAINTYPE eDomainType) mut => VT.GetDomainType(ref this, out eDomainType);
-			public HRESULT IsDirectoryAvailable(out int16 boolDirectoryAvailable) mut => VT.IsDirectoryAvailable(ref this, out boolDirectoryAvailable);
-			public HRESULT GetAttachedComputer(out BSTR bstrComputerName) mut => VT.GetAttachedComputer(ref this, out bstrComputerName);
-			public HRESULT GetSDOSchema(out IUnknown* ppSDOSchema) mut => VT.GetSDOSchema(ref this, out ppSDOSchema);
+			public HResult Attach(BSTR bstrComputerName) mut => VT.Attach(ref this, bstrComputerName);
+			public HResult GetDictionarySDO(out IUnknown* ppDictionarySDO) mut => VT.GetDictionarySDO(ref this, out ppDictionarySDO);
+			public HResult GetServiceSDO(IASDATASTORE eDataStore, BSTR bstrServiceName, out IUnknown* ppServiceSDO) mut => VT.GetServiceSDO(ref this, eDataStore, bstrServiceName, out ppServiceSDO);
+			public HResult GetUserSDO(IASDATASTORE eDataStore, BSTR bstrUserName, out IUnknown* ppUserSDO) mut => VT.GetUserSDO(ref this, eDataStore, bstrUserName, out ppUserSDO);
+			public HResult GetOSType(out IASOSTYPE eOSType) mut => VT.GetOSType(ref this, out eOSType);
+			public HResult GetDomainType(out IASDOMAINTYPE eDomainType) mut => VT.GetDomainType(ref this, out eDomainType);
+			public HResult IsDirectoryAvailable(out int16 boolDirectoryAvailable) mut => VT.IsDirectoryAvailable(ref this, out boolDirectoryAvailable);
+			public HResult GetAttachedComputer(out BSTR bstrComputerName) mut => VT.GetAttachedComputer(ref this, out bstrComputerName);
+			public HResult GetSDOSchema(out IUnknown* ppSDOSchema) mut => VT.GetSDOSchema(ref this, out ppSDOSchema);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, BSTR bstrComputerName) Attach;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, out IUnknown* ppDictionarySDO) GetDictionarySDO;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, IASDATASTORE eDataStore, BSTR bstrServiceName, out IUnknown* ppServiceSDO) GetServiceSDO;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, IASDATASTORE eDataStore, BSTR bstrUserName, out IUnknown* ppUserSDO) GetUserSDO;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, out IASOSTYPE eOSType) GetOSType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, out IASDOMAINTYPE eDomainType) GetDomainType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, out int16 boolDirectoryAvailable) IsDirectoryAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, out BSTR bstrComputerName) GetAttachedComputer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine self, out IUnknown* ppSDOSchema) GetSDOSchema;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, BSTR bstrComputerName) Attach;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, out IUnknown* ppDictionarySDO) GetDictionarySDO;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, IASDATASTORE eDataStore, BSTR bstrServiceName, out IUnknown* ppServiceSDO) GetServiceSDO;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, IASDATASTORE eDataStore, BSTR bstrUserName, out IUnknown* ppUserSDO) GetUserSDO;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, out IASOSTYPE eOSType) GetOSType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, out IASDOMAINTYPE eDomainType) GetDomainType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, out int16 boolDirectoryAvailable) IsDirectoryAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, out BSTR bstrComputerName) GetAttachedComputer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine self, out IUnknown* ppSDOSchema) GetSDOSchema;
 			}
 		}
 		[CRepr]
@@ -831,20 +831,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTemplatesSDO(BSTR bstrServiceName, out IUnknown* ppTemplatesSDO) mut => VT.GetTemplatesSDO(ref this, bstrServiceName, out ppTemplatesSDO);
-			public HRESULT EnableTemplates() mut => VT.EnableTemplates(ref this);
-			public HRESULT SyncConfigAgainstTemplates(BSTR bstrServiceName, out IUnknown* ppConfigRoot, out IUnknown* ppTemplatesRoot, int16 bForcedSync) mut => VT.SyncConfigAgainstTemplates(ref this, bstrServiceName, out ppConfigRoot, out ppTemplatesRoot, bForcedSync);
-			public HRESULT ImportRemoteTemplates(IUnknown* pLocalTemplatesRoot, BSTR bstrRemoteMachineName) mut => VT.ImportRemoteTemplates(ref this, pLocalTemplatesRoot, bstrRemoteMachineName);
-			public HRESULT Reload() mut => VT.Reload(ref this);
+			public HResult GetTemplatesSDO(BSTR bstrServiceName, out IUnknown* ppTemplatesSDO) mut => VT.GetTemplatesSDO(ref this, bstrServiceName, out ppTemplatesSDO);
+			public HResult EnableTemplates() mut => VT.EnableTemplates(ref this);
+			public HResult SyncConfigAgainstTemplates(BSTR bstrServiceName, out IUnknown* ppConfigRoot, out IUnknown* ppTemplatesRoot, int16 bForcedSync) mut => VT.SyncConfigAgainstTemplates(ref this, bstrServiceName, out ppConfigRoot, out ppTemplatesRoot, bForcedSync);
+			public HResult ImportRemoteTemplates(IUnknown* pLocalTemplatesRoot, BSTR bstrRemoteMachineName) mut => VT.ImportRemoteTemplates(ref this, pLocalTemplatesRoot, bstrRemoteMachineName);
+			public HResult Reload() mut => VT.Reload(ref this);
 
 			[CRepr]
 			public struct VTable : ISdoMachine.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine2 self, BSTR bstrServiceName, out IUnknown* ppTemplatesSDO) GetTemplatesSDO;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine2 self) EnableTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine2 self, BSTR bstrServiceName, out IUnknown* ppConfigRoot, out IUnknown* ppTemplatesRoot, int16 bForcedSync) SyncConfigAgainstTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine2 self, IUnknown* pLocalTemplatesRoot, BSTR bstrRemoteMachineName) ImportRemoteTemplates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoMachine2 self) Reload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine2 self, BSTR bstrServiceName, out IUnknown* ppTemplatesSDO) GetTemplatesSDO;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine2 self) EnableTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine2 self, BSTR bstrServiceName, out IUnknown* ppConfigRoot, out IUnknown* ppTemplatesRoot, int16 bForcedSync) SyncConfigAgainstTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine2 self, IUnknown* pLocalTemplatesRoot, BSTR bstrRemoteMachineName) ImportRemoteTemplates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoMachine2 self) Reload;
 			}
 		}
 		[CRepr]
@@ -854,18 +854,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartService() mut => VT.StartService(ref this);
-			public HRESULT StopService() mut => VT.StopService(ref this);
-			public HRESULT GetServiceStatus(out int32 status) mut => VT.GetServiceStatus(ref this, out status);
-			public HRESULT ResetService() mut => VT.ResetService(ref this);
+			public HResult StartService() mut => VT.StartService(ref this);
+			public HResult StopService() mut => VT.StopService(ref this);
+			public HResult GetServiceStatus(out int32 status) mut => VT.GetServiceStatus(ref this, out status);
+			public HResult ResetService() mut => VT.ResetService(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoServiceControl self) StartService;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoServiceControl self) StopService;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoServiceControl self, out int32 status) GetServiceStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoServiceControl self) ResetService;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoServiceControl self) StartService;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoServiceControl self) StopService;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoServiceControl self, out int32 status) GetServiceStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoServiceControl self) ResetService;
 			}
 		}
 		[CRepr]
@@ -875,24 +875,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyInfo(int32 Id, out IUnknown* ppPropertyInfo) mut => VT.GetPropertyInfo(ref this, Id, out ppPropertyInfo);
-			public HRESULT GetProperty(int32 Id, out VARIANT pValue) mut => VT.GetProperty(ref this, Id, out pValue);
-			public HRESULT PutProperty(int32 Id, ref VARIANT pValue) mut => VT.PutProperty(ref this, Id, ref pValue);
-			public HRESULT ResetProperty(int32 Id) mut => VT.ResetProperty(ref this, Id);
-			public HRESULT Apply() mut => VT.Apply(ref this);
-			public HRESULT Restore() mut => VT.Restore(ref this);
-			public HRESULT get__NewEnum(out IUnknown* ppEnumVARIANT) mut => VT.get__NewEnum(ref this, out ppEnumVARIANT);
+			public HResult GetPropertyInfo(int32 Id, out IUnknown* ppPropertyInfo) mut => VT.GetPropertyInfo(ref this, Id, out ppPropertyInfo);
+			public HResult GetProperty(int32 Id, out VARIANT pValue) mut => VT.GetProperty(ref this, Id, out pValue);
+			public HResult PutProperty(int32 Id, ref VARIANT pValue) mut => VT.PutProperty(ref this, Id, ref pValue);
+			public HResult ResetProperty(int32 Id) mut => VT.ResetProperty(ref this, Id);
+			public HResult Apply() mut => VT.Apply(ref this);
+			public HResult Restore() mut => VT.Restore(ref this);
+			public HResult get__NewEnum(out IUnknown* ppEnumVARIANT) mut => VT.get__NewEnum(ref this, out ppEnumVARIANT);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self, int32 Id, out IUnknown* ppPropertyInfo) GetPropertyInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self, int32 Id, out VARIANT pValue) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self, int32 Id, ref VARIANT pValue) PutProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self, int32 Id) ResetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self) Apply;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self) Restore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdo self, out IUnknown* ppEnumVARIANT) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self, int32 Id, out IUnknown* ppPropertyInfo) GetPropertyInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self, int32 Id, out VARIANT pValue) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self, int32 Id, ref VARIANT pValue) PutProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self, int32 Id) ResetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self) Apply;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self) Restore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdo self, out IUnknown* ppEnumVARIANT) get__NewEnum;
 			}
 		}
 		[CRepr]
@@ -902,26 +902,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Count(out int32 pCount) mut => VT.get_Count(ref this, out pCount);
-			public HRESULT Add(BSTR bstrName, out IDispatch* ppItem) mut => VT.Add(ref this, bstrName, out ppItem);
-			public HRESULT Remove(ref IDispatch pItem) mut => VT.Remove(ref this, ref pItem);
-			public HRESULT RemoveAll() mut => VT.RemoveAll(ref this);
-			public HRESULT Reload() mut => VT.Reload(ref this);
-			public HRESULT IsNameUnique(BSTR bstrName, out int16 pBool) mut => VT.IsNameUnique(ref this, bstrName, out pBool);
-			public HRESULT Item(ref VARIANT Name, out IDispatch* pItem) mut => VT.Item(ref this, ref Name, out pItem);
-			public HRESULT get__NewEnum(out IUnknown* ppEnumVARIANT) mut => VT.get__NewEnum(ref this, out ppEnumVARIANT);
+			public HResult get_Count(out int32 pCount) mut => VT.get_Count(ref this, out pCount);
+			public HResult Add(BSTR bstrName, out IDispatch* ppItem) mut => VT.Add(ref this, bstrName, out ppItem);
+			public HResult Remove(ref IDispatch pItem) mut => VT.Remove(ref this, ref pItem);
+			public HResult RemoveAll() mut => VT.RemoveAll(ref this);
+			public HResult Reload() mut => VT.Reload(ref this);
+			public HResult IsNameUnique(BSTR bstrName, out int16 pBool) mut => VT.IsNameUnique(ref this, bstrName, out pBool);
+			public HResult Item(ref VARIANT Name, out IDispatch* pItem) mut => VT.Item(ref this, ref Name, out pItem);
+			public HResult get__NewEnum(out IUnknown* ppEnumVARIANT) mut => VT.get__NewEnum(ref this, out ppEnumVARIANT);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self, out int32 pCount) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self, BSTR bstrName, out IDispatch* ppItem) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self, ref IDispatch pItem) Remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self) RemoveAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self) Reload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self, BSTR bstrName, out int16 pBool) IsNameUnique;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self, ref VARIANT Name, out IDispatch* pItem) Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoCollection self, out IUnknown* ppEnumVARIANT) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self, out int32 pCount) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self, BSTR bstrName, out IDispatch* ppItem) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self, ref IDispatch pItem) Remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self) RemoveAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self) Reload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self, BSTR bstrName, out int16 pBool) IsNameUnique;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self, ref VARIANT Name, out IDispatch* pItem) Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoCollection self, out IUnknown* ppEnumVARIANT) get__NewEnum;
 			}
 		}
 		[CRepr]
@@ -931,16 +931,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddToCollection(BSTR bstrName, ref IDispatch pCollection, out IDispatch* ppItem) mut => VT.AddToCollection(ref this, bstrName, ref pCollection, out ppItem);
-			public HRESULT AddToSdo(BSTR bstrName, ref IDispatch pSdoTarget, out IDispatch* ppItem) mut => VT.AddToSdo(ref this, bstrName, ref pSdoTarget, out ppItem);
-			public HRESULT AddToSdoAsProperty(ref IDispatch pSdoTarget, int32 id) mut => VT.AddToSdoAsProperty(ref this, ref pSdoTarget, id);
+			public HResult AddToCollection(BSTR bstrName, ref IDispatch pCollection, out IDispatch* ppItem) mut => VT.AddToCollection(ref this, bstrName, ref pCollection, out ppItem);
+			public HResult AddToSdo(BSTR bstrName, ref IDispatch pSdoTarget, out IDispatch* ppItem) mut => VT.AddToSdo(ref this, bstrName, ref pSdoTarget, out ppItem);
+			public HResult AddToSdoAsProperty(ref IDispatch pSdoTarget, int32 id) mut => VT.AddToSdoAsProperty(ref this, ref pSdoTarget, id);
 
 			[CRepr]
 			public struct VTable : ISdo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITemplateSdo self, BSTR bstrName, ref IDispatch pCollection, out IDispatch* ppItem) AddToCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITemplateSdo self, BSTR bstrName, ref IDispatch pSdoTarget, out IDispatch* ppItem) AddToSdo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITemplateSdo self, ref IDispatch pSdoTarget, int32 id) AddToSdoAsProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITemplateSdo self, BSTR bstrName, ref IDispatch pCollection, out IDispatch* ppItem) AddToCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITemplateSdo self, BSTR bstrName, ref IDispatch pSdoTarget, out IDispatch* ppItem) AddToSdo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITemplateSdo self, ref IDispatch pSdoTarget, int32 id) AddToSdoAsProperty;
 			}
 		}
 		[CRepr]
@@ -950,20 +950,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumAttributes(out VARIANT Id, out VARIANT pValues) mut => VT.EnumAttributes(ref this, out Id, out pValues);
-			public HRESULT GetAttributeInfo(ATTRIBUTEID Id, ref VARIANT pInfoIDs, out VARIANT pInfoValues) mut => VT.GetAttributeInfo(ref this, Id, ref pInfoIDs, out pInfoValues);
-			public HRESULT EnumAttributeValues(ATTRIBUTEID Id, out VARIANT pValueIds, out VARIANT pValuesDesc) mut => VT.EnumAttributeValues(ref this, Id, out pValueIds, out pValuesDesc);
-			public HRESULT CreateAttribute(ATTRIBUTEID Id, out IDispatch* ppAttributeObject) mut => VT.CreateAttribute(ref this, Id, out ppAttributeObject);
-			public HRESULT GetAttributeID(BSTR bstrAttributeName, out ATTRIBUTEID pId) mut => VT.GetAttributeID(ref this, bstrAttributeName, out pId);
+			public HResult EnumAttributes(out VARIANT Id, out VARIANT pValues) mut => VT.EnumAttributes(ref this, out Id, out pValues);
+			public HResult GetAttributeInfo(ATTRIBUTEID Id, ref VARIANT pInfoIDs, out VARIANT pInfoValues) mut => VT.GetAttributeInfo(ref this, Id, ref pInfoIDs, out pInfoValues);
+			public HResult EnumAttributeValues(ATTRIBUTEID Id, out VARIANT pValueIds, out VARIANT pValuesDesc) mut => VT.EnumAttributeValues(ref this, Id, out pValueIds, out pValuesDesc);
+			public HResult CreateAttribute(ATTRIBUTEID Id, out IDispatch* ppAttributeObject) mut => VT.CreateAttribute(ref this, Id, out ppAttributeObject);
+			public HResult GetAttributeID(BSTR bstrAttributeName, out ATTRIBUTEID pId) mut => VT.GetAttributeID(ref this, bstrAttributeName, out pId);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoDictionaryOld self, out VARIANT Id, out VARIANT pValues) EnumAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoDictionaryOld self, ATTRIBUTEID Id, ref VARIANT pInfoIDs, out VARIANT pInfoValues) GetAttributeInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoDictionaryOld self, ATTRIBUTEID Id, out VARIANT pValueIds, out VARIANT pValuesDesc) EnumAttributeValues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoDictionaryOld self, ATTRIBUTEID Id, out IDispatch* ppAttributeObject) CreateAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISdoDictionaryOld self, BSTR bstrAttributeName, out ATTRIBUTEID pId) GetAttributeID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoDictionaryOld self, out VARIANT Id, out VARIANT pValues) EnumAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoDictionaryOld self, ATTRIBUTEID Id, ref VARIANT pInfoIDs, out VARIANT pInfoValues) GetAttributeInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoDictionaryOld self, ATTRIBUTEID Id, out VARIANT pValueIds, out VARIANT pValuesDesc) EnumAttributeValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoDictionaryOld self, ATTRIBUTEID Id, out IDispatch* ppAttributeObject) CreateAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISdoDictionaryOld self, BSTR bstrAttributeName, out ATTRIBUTEID pId) GetAttributeID;
 			}
 		}
 		

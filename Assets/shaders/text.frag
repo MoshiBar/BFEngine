@@ -11,7 +11,9 @@ const float Cutoff = 0.475;
 const float Cutoff2 = 0.15;
 
 void main(void){
-    float textureColor = texture(textureSampler, texCoord).a;
+    //fragColor = vec4(1, 1, 1, 1);
+    //return;
+    float textureColor = texture(textureSampler, texCoord).r * texture(textureSampler, texCoord).a;
 
     //if(textureColor < Cutoff) discard;
 
@@ -30,7 +32,7 @@ void main(void){
 
 
     // sdf distance from edge (scalar)
-    /*dist = (Cutoff2 - textureColor);
+    dist = (Cutoff2 - textureColor);
 
     // sdf distance per pixel (gradient vector)
     ddist = vec2(dFdx(dist), dFdy(dist));
@@ -39,11 +41,11 @@ void main(void){
     pixelDist = dist / length(ddist);
 
     //color.a = clamp(0.5 - pixelDist, 0, 1); 
-    float alpha2 = clamp(0.5 - pixelDist, 0, 1);*/
+    float alpha2 = clamp(0.5 - pixelDist, 0, 1);
 
 
 
 
-    fragColor = color * alpha /*+ color * (1 - alpha) * alpha2*/;
+    fragColor = color * alpha + vec4(1 - color.rgb, 1) * (1 - alpha) * alpha2;
     //fragColor = color;
 }

@@ -310,8 +310,8 @@ namespace Win32
 				[CRepr]
 				public struct _Version3_e__Struct
 				{
-					public BOOL GetInfoOnly;
-					public BOOL ReadOnly;
+					public IntBool GetInfoOnly;
+					public IntBool ReadOnly;
 					public Guid ResiliencyGuid;
 					public Guid SnapshotId;
 				}
@@ -323,8 +323,8 @@ namespace Win32
 				[CRepr]
 				public struct _Version2_e__Struct
 				{
-					public BOOL GetInfoOnly;
-					public BOOL ReadOnly;
+					public IntBool GetInfoOnly;
+					public IntBool ReadOnly;
 					public Guid ResiliencyGuid;
 				}
 			}
@@ -351,13 +351,13 @@ namespace Win32
 					public uint32 BlockSizeInBytes;
 					public uint32 SectorSizeInBytes;
 					public uint32 PhysicalSectorSizeInBytes;
-					public PWSTR ParentPath;
-					public PWSTR SourcePath;
+					public char16* ParentPath;
+					public char16* SourcePath;
 					public OPEN_VIRTUAL_DISK_FLAG OpenFlags;
 					public VIRTUAL_STORAGE_TYPE ParentVirtualStorageType;
 					public VIRTUAL_STORAGE_TYPE SourceVirtualStorageType;
 					public Guid ResiliencyGuid;
-					public PWSTR SourceLimitPath;
+					public char16* SourceLimitPath;
 					public VIRTUAL_STORAGE_TYPE BackingStorageType;
 					public Guid PmemAddressAbstractionType;
 					public uint64 DataAlignment;
@@ -370,8 +370,8 @@ namespace Win32
 					public uint32 BlockSizeInBytes;
 					public uint32 SectorSizeInBytes;
 					public uint32 PhysicalSectorSizeInBytes;
-					public PWSTR ParentPath;
-					public PWSTR SourcePath;
+					public char16* ParentPath;
+					public char16* SourcePath;
 					public OPEN_VIRTUAL_DISK_FLAG OpenFlags;
 					public VIRTUAL_STORAGE_TYPE ParentVirtualStorageType;
 					public VIRTUAL_STORAGE_TYPE SourceVirtualStorageType;
@@ -385,13 +385,13 @@ namespace Win32
 					public uint32 BlockSizeInBytes;
 					public uint32 SectorSizeInBytes;
 					public uint32 PhysicalSectorSizeInBytes;
-					public PWSTR ParentPath;
-					public PWSTR SourcePath;
+					public char16* ParentPath;
+					public char16* SourcePath;
 					public OPEN_VIRTUAL_DISK_FLAG OpenFlags;
 					public VIRTUAL_STORAGE_TYPE ParentVirtualStorageType;
 					public VIRTUAL_STORAGE_TYPE SourceVirtualStorageType;
 					public Guid ResiliencyGuid;
-					public PWSTR SourceLimitPath;
+					public char16* SourceLimitPath;
 					public VIRTUAL_STORAGE_TYPE BackingStorageType;
 				}
 				[CRepr]
@@ -401,8 +401,8 @@ namespace Win32
 					public uint64 MaximumSize;
 					public uint32 BlockSizeInBytes;
 					public uint32 SectorSizeInBytes;
-					public PWSTR ParentPath;
-					public PWSTR SourcePath;
+					public char16* ParentPath;
+					public char16* SourcePath;
 				}
 			}
 		}
@@ -445,10 +445,10 @@ namespace Win32
 			public uint32 ProviderSpecificFlags;
 			public VIRTUAL_STORAGE_TYPE VirtualStorageType;
 			public uint32 AncestorLevel;
-			public PWSTR DependencyDeviceName;
-			public PWSTR HostVolumeName;
-			public PWSTR DependentVolumeName;
-			public PWSTR DependentVolumeRelativePath;
+			public char16* DependencyDeviceName;
+			public char16* HostVolumeName;
+			public char16* DependentVolumeName;
+			public char16* DependentVolumeRelativePath;
 		}
 		[CRepr]
 		public struct STORAGE_DEPENDENCY_INFO
@@ -480,8 +480,8 @@ namespace Win32
 				public uint32 ParentTimestamp;
 				public VIRTUAL_STORAGE_TYPE VirtualStorageType;
 				public uint32 ProviderSubtype;
-				public BOOL Is4kAligned;
-				public BOOL IsLoaded;
+				public IntBool Is4kAligned;
+				public IntBool IsLoaded;
 				public _PhysicalDisk_e__Struct PhysicalDisk;
 				public uint32 VhdPhysicalSectorSize;
 				public uint64 SmallestSafeVirtualSize;
@@ -494,7 +494,7 @@ namespace Win32
 				{
 					public uint32 LogicalSectorSize;
 					public uint32 PhysicalSectorSize;
-					public BOOL IsRemote;
+					public IntBool IsRemote;
 				}
 				[CRepr]
 				public struct _Size_e__Struct
@@ -507,14 +507,14 @@ namespace Win32
 				[CRepr]
 				public struct _ChangeTrackingState_e__Struct
 				{
-					public BOOL Enabled;
-					public BOOL NewerChanges;
+					public IntBool Enabled;
+					public IntBool NewerChanges;
 					public char16[0] MostRecentId;
 				}
 				[CRepr]
 				public struct _ParentLocation_e__Struct
 				{
-					public BOOL ParentResolved;
+					public IntBool ParentResolved;
 					public char16[0] ParentLocationBuffer;
 				}
 			}
@@ -528,25 +528,25 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public PWSTR ParentFilePath;
+				public char16* ParentFilePath;
 				public Guid UniqueIdentifier;
 				public _ParentPathWithDepthInfo_e__Struct ParentPathWithDepthInfo;
 				public uint32 VhdPhysicalSectorSize;
 				public Guid VirtualDiskId;
-				public BOOL ChangeTrackingEnabled;
+				public IntBool ChangeTrackingEnabled;
 				public _ParentLocator_e__Struct ParentLocator;
 				
 				[CRepr]
 				public struct _ParentPathWithDepthInfo_e__Struct
 				{
 					public uint32 ChildDepth;
-					public PWSTR ParentFilePath;
+					public char16* ParentFilePath;
 				}
 				[CRepr]
 				public struct _ParentLocator_e__Struct
 				{
 					public Guid LinkageId;
-					public PWSTR ParentFilePath;
+					public char16* ParentFilePath;
 				}
 			}
 		}
@@ -650,7 +650,7 @@ namespace Win32
 				[CRepr]
 				public struct _Version1_e__Struct
 				{
-					public PWSTR MirrorVirtualDiskPath;
+					public char16* MirrorVirtualDiskPath;
 				}
 			}
 		}
@@ -708,13 +708,13 @@ namespace Win32
 			{
 				public _SnapshotPath_e__Struct SnapshotPath;
 				public Guid SnapshotId;
-				public PWSTR DefaultFilePath;
+				public char16* DefaultFilePath;
 				
 				[CRepr]
 				public struct _SnapshotPath_e__Struct
 				{
 					public Guid SnapshotId;
-					public PWSTR SnapshotFilePath;
+					public char16* SnapshotFilePath;
 				}
 			}
 		}
@@ -751,7 +751,7 @@ namespace Win32
 				[CRepr]
 				public struct _Version1_e__Struct
 				{
-					public BOOL RSVDHandle;
+					public IntBool RSVDHandle;
 					public uint8 DataIn;
 					public uint8 CdbLength;
 					public uint8 SenseInfoLength;
@@ -797,7 +797,7 @@ namespace Win32
 				[CRepr]
 				public struct _Version1_e__Struct
 				{
-					public PWSTR ForkedVirtualDiskPath;
+					public char16* ForkedVirtualDiskPath;
 				}
 			}
 		}
@@ -805,62 +805,62 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 OpenVirtualDisk(ref VIRTUAL_STORAGE_TYPE VirtualStorageType, PWSTR Path, VIRTUAL_DISK_ACCESS_MASK VirtualDiskAccessMask, OPEN_VIRTUAL_DISK_FLAG Flags, OPEN_VIRTUAL_DISK_PARAMETERS* Parameters, out HANDLE Handle);
+		public static extern uint32 OpenVirtualDisk(ref VIRTUAL_STORAGE_TYPE VirtualStorageType, char16* Path, VIRTUAL_DISK_ACCESS_MASK VirtualDiskAccessMask, OPEN_VIRTUAL_DISK_FLAG Flags, OPEN_VIRTUAL_DISK_PARAMETERS* Parameters, out Handle Handle);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 CreateVirtualDisk(ref VIRTUAL_STORAGE_TYPE VirtualStorageType, PWSTR Path, VIRTUAL_DISK_ACCESS_MASK VirtualDiskAccessMask, SECURITY_DESCRIPTOR* SecurityDescriptor, CREATE_VIRTUAL_DISK_FLAG Flags, uint32 ProviderSpecificFlags, ref CREATE_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped, out HANDLE Handle);
+		public static extern uint32 CreateVirtualDisk(ref VIRTUAL_STORAGE_TYPE VirtualStorageType, char16* Path, VIRTUAL_DISK_ACCESS_MASK VirtualDiskAccessMask, SECURITY_DESCRIPTOR* SecurityDescriptor, CREATE_VIRTUAL_DISK_FLAG Flags, uint32 ProviderSpecificFlags, ref CREATE_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped, out Handle Handle);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 AttachVirtualDisk(HANDLE VirtualDiskHandle, SECURITY_DESCRIPTOR* SecurityDescriptor, ATTACH_VIRTUAL_DISK_FLAG Flags, uint32 ProviderSpecificFlags, ATTACH_VIRTUAL_DISK_PARAMETERS* Parameters, OVERLAPPED* Overlapped);
+		public static extern uint32 AttachVirtualDisk(Handle VirtualDiskHandle, SECURITY_DESCRIPTOR* SecurityDescriptor, ATTACH_VIRTUAL_DISK_FLAG Flags, uint32 ProviderSpecificFlags, ATTACH_VIRTUAL_DISK_PARAMETERS* Parameters, OVERLAPPED* Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DetachVirtualDisk(HANDLE VirtualDiskHandle, DETACH_VIRTUAL_DISK_FLAG Flags, uint32 ProviderSpecificFlags);
+		public static extern uint32 DetachVirtualDisk(Handle VirtualDiskHandle, DETACH_VIRTUAL_DISK_FLAG Flags, uint32 ProviderSpecificFlags);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetVirtualDiskPhysicalPath(HANDLE VirtualDiskHandle, out uint32 DiskPathSizeInBytes, PWSTR DiskPath);
+		public static extern uint32 GetVirtualDiskPhysicalPath(Handle VirtualDiskHandle, out uint32 DiskPathSizeInBytes, char16* DiskPath);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetAllAttachedVirtualDiskPhysicalPaths(out uint32 PathsBufferSizeInBytes, PWSTR PathsBuffer);
+		public static extern uint32 GetAllAttachedVirtualDiskPhysicalPaths(out uint32 PathsBufferSizeInBytes, char16* PathsBuffer);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetStorageDependencyInformation(HANDLE ObjectHandle, GET_STORAGE_DEPENDENCY_FLAG Flags, uint32 StorageDependencyInfoSize, out STORAGE_DEPENDENCY_INFO StorageDependencyInfo, uint32* SizeUsed);
+		public static extern uint32 GetStorageDependencyInformation(Handle ObjectHandle, GET_STORAGE_DEPENDENCY_FLAG Flags, uint32 StorageDependencyInfoSize, out STORAGE_DEPENDENCY_INFO StorageDependencyInfo, uint32* SizeUsed);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetVirtualDiskInformation(HANDLE VirtualDiskHandle, out uint32 VirtualDiskInfoSize, out GET_VIRTUAL_DISK_INFO VirtualDiskInfo, uint32* SizeUsed);
+		public static extern uint32 GetVirtualDiskInformation(Handle VirtualDiskHandle, out uint32 VirtualDiskInfoSize, out GET_VIRTUAL_DISK_INFO VirtualDiskInfo, uint32* SizeUsed);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SetVirtualDiskInformation(HANDLE VirtualDiskHandle, ref SET_VIRTUAL_DISK_INFO VirtualDiskInfo);
+		public static extern uint32 SetVirtualDiskInformation(Handle VirtualDiskHandle, ref SET_VIRTUAL_DISK_INFO VirtualDiskInfo);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 EnumerateVirtualDiskMetadata(HANDLE VirtualDiskHandle, out uint32 NumberOfItems, Guid* Items);
+		public static extern uint32 EnumerateVirtualDiskMetadata(Handle VirtualDiskHandle, out uint32 NumberOfItems, Guid* Items);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetVirtualDiskMetadata(HANDLE VirtualDiskHandle, in Guid Item, out uint32 MetaDataSize, void* MetaData);
+		public static extern uint32 GetVirtualDiskMetadata(Handle VirtualDiskHandle, in Guid Item, out uint32 MetaDataSize, void* MetaData);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SetVirtualDiskMetadata(HANDLE VirtualDiskHandle, in Guid Item, uint32 MetaDataSize, void* MetaData);
+		public static extern uint32 SetVirtualDiskMetadata(Handle VirtualDiskHandle, in Guid Item, uint32 MetaDataSize, void* MetaData);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DeleteVirtualDiskMetadata(HANDLE VirtualDiskHandle, in Guid Item);
+		public static extern uint32 DeleteVirtualDiskMetadata(Handle VirtualDiskHandle, in Guid Item);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetVirtualDiskOperationProgress(HANDLE VirtualDiskHandle, ref OVERLAPPED Overlapped, out VIRTUAL_DISK_PROGRESS Progress);
+		public static extern uint32 GetVirtualDiskOperationProgress(Handle VirtualDiskHandle, ref OVERLAPPED Overlapped, out VIRTUAL_DISK_PROGRESS Progress);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 CompactVirtualDisk(HANDLE VirtualDiskHandle, COMPACT_VIRTUAL_DISK_FLAG Flags, COMPACT_VIRTUAL_DISK_PARAMETERS* Parameters, OVERLAPPED* Overlapped);
+		public static extern uint32 CompactVirtualDisk(Handle VirtualDiskHandle, COMPACT_VIRTUAL_DISK_FLAG Flags, COMPACT_VIRTUAL_DISK_PARAMETERS* Parameters, OVERLAPPED* Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MergeVirtualDisk(HANDLE VirtualDiskHandle, MERGE_VIRTUAL_DISK_FLAG Flags, ref MERGE_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped);
+		public static extern uint32 MergeVirtualDisk(Handle VirtualDiskHandle, MERGE_VIRTUAL_DISK_FLAG Flags, ref MERGE_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ExpandVirtualDisk(HANDLE VirtualDiskHandle, EXPAND_VIRTUAL_DISK_FLAG Flags, ref EXPAND_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped);
+		public static extern uint32 ExpandVirtualDisk(Handle VirtualDiskHandle, EXPAND_VIRTUAL_DISK_FLAG Flags, ref EXPAND_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ResizeVirtualDisk(HANDLE VirtualDiskHandle, RESIZE_VIRTUAL_DISK_FLAG Flags, ref RESIZE_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped);
+		public static extern uint32 ResizeVirtualDisk(Handle VirtualDiskHandle, RESIZE_VIRTUAL_DISK_FLAG Flags, ref RESIZE_VIRTUAL_DISK_PARAMETERS Parameters, OVERLAPPED* Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MirrorVirtualDisk(HANDLE VirtualDiskHandle, MIRROR_VIRTUAL_DISK_FLAG Flags, ref MIRROR_VIRTUAL_DISK_PARAMETERS Parameters, ref OVERLAPPED Overlapped);
+		public static extern uint32 MirrorVirtualDisk(Handle VirtualDiskHandle, MIRROR_VIRTUAL_DISK_FLAG Flags, ref MIRROR_VIRTUAL_DISK_PARAMETERS Parameters, ref OVERLAPPED Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 BreakMirrorVirtualDisk(HANDLE VirtualDiskHandle);
+		public static extern uint32 BreakMirrorVirtualDisk(Handle VirtualDiskHandle);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 AddVirtualDiskParent(HANDLE VirtualDiskHandle, PWSTR ParentPath);
+		public static extern uint32 AddVirtualDiskParent(Handle VirtualDiskHandle, char16* ParentPath);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 QueryChangesVirtualDisk(HANDLE VirtualDiskHandle, PWSTR ChangeTrackingId, uint64 ByteOffset, uint64 ByteLength, QUERY_CHANGES_VIRTUAL_DISK_FLAG Flags, QUERY_CHANGES_VIRTUAL_DISK_RANGE* Ranges, out uint32 RangeCount, out uint64 ProcessedLength);
+		public static extern uint32 QueryChangesVirtualDisk(Handle VirtualDiskHandle, char16* ChangeTrackingId, uint64 ByteOffset, uint64 ByteLength, QUERY_CHANGES_VIRTUAL_DISK_FLAG Flags, QUERY_CHANGES_VIRTUAL_DISK_RANGE* Ranges, out uint32 RangeCount, out uint64 ProcessedLength);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TakeSnapshotVhdSet(HANDLE VirtualDiskHandle, in TAKE_SNAPSHOT_VHDSET_PARAMETERS Parameters, TAKE_SNAPSHOT_VHDSET_FLAG Flags);
+		public static extern uint32 TakeSnapshotVhdSet(Handle VirtualDiskHandle, in TAKE_SNAPSHOT_VHDSET_PARAMETERS Parameters, TAKE_SNAPSHOT_VHDSET_FLAG Flags);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DeleteSnapshotVhdSet(HANDLE VirtualDiskHandle, in DELETE_SNAPSHOT_VHDSET_PARAMETERS Parameters, DELETE_SNAPSHOT_VHDSET_FLAG Flags);
+		public static extern uint32 DeleteSnapshotVhdSet(Handle VirtualDiskHandle, in DELETE_SNAPSHOT_VHDSET_PARAMETERS Parameters, DELETE_SNAPSHOT_VHDSET_FLAG Flags);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ModifyVhdSet(HANDLE VirtualDiskHandle, in MODIFY_VHDSET_PARAMETERS Parameters, MODIFY_VHDSET_FLAG Flags);
+		public static extern uint32 ModifyVhdSet(Handle VirtualDiskHandle, in MODIFY_VHDSET_PARAMETERS Parameters, MODIFY_VHDSET_FLAG Flags);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ApplySnapshotVhdSet(HANDLE VirtualDiskHandle, in APPLY_SNAPSHOT_VHDSET_PARAMETERS Parameters, APPLY_SNAPSHOT_VHDSET_FLAG Flags);
+		public static extern uint32 ApplySnapshotVhdSet(Handle VirtualDiskHandle, in APPLY_SNAPSHOT_VHDSET_PARAMETERS Parameters, APPLY_SNAPSHOT_VHDSET_FLAG Flags);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RawSCSIVirtualDisk(HANDLE VirtualDiskHandle, in RAW_SCSI_VIRTUAL_DISK_PARAMETERS Parameters, RAW_SCSI_VIRTUAL_DISK_FLAG Flags, out RAW_SCSI_VIRTUAL_DISK_RESPONSE Response);
+		public static extern uint32 RawSCSIVirtualDisk(Handle VirtualDiskHandle, in RAW_SCSI_VIRTUAL_DISK_PARAMETERS Parameters, RAW_SCSI_VIRTUAL_DISK_FLAG Flags, out RAW_SCSI_VIRTUAL_DISK_RESPONSE Response);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ForkVirtualDisk(HANDLE VirtualDiskHandle, FORK_VIRTUAL_DISK_FLAG Flags, in FORK_VIRTUAL_DISK_PARAMETERS Parameters, out OVERLAPPED Overlapped);
+		public static extern uint32 ForkVirtualDisk(Handle VirtualDiskHandle, FORK_VIRTUAL_DISK_FLAG Flags, in FORK_VIRTUAL_DISK_PARAMETERS Parameters, out OVERLAPPED Overlapped);
 		[Import("virtdisk.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 CompleteForkVirtualDisk(HANDLE VirtualDiskHandle);
+		public static extern uint32 CompleteForkVirtualDisk(Handle VirtualDiskHandle);
 	}
 }

@@ -44,7 +44,7 @@ namespace Win32
 		public struct HEAPENTRY32
 		{
 			public uint dwSize;
-			public HANDLE hHandle;
+			public Handle hHandle;
 			public uint dwAddress;
 			public uint dwBlockSize;
 			public HEAPENTRY32_FLAGS dwFlags;
@@ -79,7 +79,7 @@ namespace Win32
 			public uint32 th32ParentProcessID;
 			public int32 pcPriClassBase;
 			public uint32 dwFlags;
-			public CHAR[260] szExeFile;
+			public char8[260] szExeFile;
 		}
 		[CRepr]
 		public struct THREADENTRY32
@@ -117,43 +117,43 @@ namespace Win32
 			public uint8* modBaseAddr;
 			public uint32 modBaseSize;
 			public HINSTANCE hModule;
-			public CHAR[256] szModule;
-			public CHAR[260] szExePath;
+			public char8[256] szModule;
+			public char8[260] szExePath;
 		}
 		
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateToolhelp32Snapshot(CREATE_TOOLHELP_SNAPSHOT_FLAGS dwFlags, uint32 th32ProcessID);
+		public static extern Handle CreateToolhelp32Snapshot(CREATE_TOOLHELP_SNAPSHOT_FLAGS dwFlags, uint32 th32ProcessID);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Heap32ListFirst(HANDLE hSnapshot, out HEAPLIST32 lphl);
+		public static extern IntBool Heap32ListFirst(Handle hSnapshot, out HEAPLIST32 lphl);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Heap32ListNext(HANDLE hSnapshot, out HEAPLIST32 lphl);
+		public static extern IntBool Heap32ListNext(Handle hSnapshot, out HEAPLIST32 lphl);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Heap32First(out HEAPENTRY32 lphe, uint32 th32ProcessID, uint th32HeapID);
+		public static extern IntBool Heap32First(out HEAPENTRY32 lphe, uint32 th32ProcessID, uint th32HeapID);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Heap32Next(out HEAPENTRY32 lphe);
+		public static extern IntBool Heap32Next(out HEAPENTRY32 lphe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Toolhelp32ReadProcessMemory(uint32 th32ProcessID, void* lpBaseAddress, void* lpBuffer, uint cbRead, out uint lpNumberOfBytesRead);
+		public static extern IntBool Toolhelp32ReadProcessMemory(uint32 th32ProcessID, void* lpBaseAddress, void* lpBuffer, uint cbRead, out uint lpNumberOfBytesRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Process32FirstW(HANDLE hSnapshot, out PROCESSENTRY32W lppe);
+		public static extern IntBool Process32FirstW(Handle hSnapshot, out PROCESSENTRY32W lppe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Process32NextW(HANDLE hSnapshot, out PROCESSENTRY32W lppe);
+		public static extern IntBool Process32NextW(Handle hSnapshot, out PROCESSENTRY32W lppe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Process32First(HANDLE hSnapshot, out PROCESSENTRY32 lppe);
+		public static extern IntBool Process32First(Handle hSnapshot, out PROCESSENTRY32 lppe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Process32Next(HANDLE hSnapshot, out PROCESSENTRY32 lppe);
+		public static extern IntBool Process32Next(Handle hSnapshot, out PROCESSENTRY32 lppe);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Thread32First(HANDLE hSnapshot, out THREADENTRY32 lpte);
+		public static extern IntBool Thread32First(Handle hSnapshot, out THREADENTRY32 lpte);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Thread32Next(HANDLE hSnapshot, out THREADENTRY32 lpte);
+		public static extern IntBool Thread32Next(Handle hSnapshot, out THREADENTRY32 lpte);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Module32FirstW(HANDLE hSnapshot, out MODULEENTRY32W lpme);
+		public static extern IntBool Module32FirstW(Handle hSnapshot, out MODULEENTRY32W lpme);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Module32NextW(HANDLE hSnapshot, out MODULEENTRY32W lpme);
+		public static extern IntBool Module32NextW(Handle hSnapshot, out MODULEENTRY32W lpme);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Module32First(HANDLE hSnapshot, out MODULEENTRY32 lpme);
+		public static extern IntBool Module32First(Handle hSnapshot, out MODULEENTRY32 lpme);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL Module32Next(HANDLE hSnapshot, out MODULEENTRY32 lpme);
+		public static extern IntBool Module32Next(Handle hSnapshot, out MODULEENTRY32 lpme);
 	}
 }

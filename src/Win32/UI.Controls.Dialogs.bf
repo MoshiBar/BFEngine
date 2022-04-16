@@ -1,4 +1,8 @@
 using System;
+using static Win32.Graphics.Gdi;
+using static Win32.System.Com;
+using static System.Windows.COM_IUnknown;
+using static System.Windows;
 
 // namespace UI.Controls.Dialogs
 namespace Win32
@@ -279,14 +283,14 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function uint LPOFNHOOKPROC(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPCCHOOKPROC(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPFRHOOKPROC(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPCFHOOKPROC(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPPRINTHOOKPROC(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPSETUPHOOKPROC(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPPAGEPAINTHOOK(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
-		public function uint LPPAGESETUPHOOK(HWND param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPOFNHOOKPROC(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPCCHOOKPROC(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPFRHOOKPROC(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPCFHOOKPROC(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPPRINTHOOKPROC(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPSETUPHOOKPROC(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPPAGEPAINTHOOK(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
+		public function uint LPPAGESETUPHOOK(HWnd param0, uint32 param1, WPARAM param2, LPARAM param3);
 		
 		// --- Structs ---
 		
@@ -294,73 +298,73 @@ namespace Win32
 		public struct OPENFILENAME_NT4A
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HINSTANCE hInstance;
-			public PSTR lpstrFilter;
-			public PSTR lpstrCustomFilter;
+			public HWnd hwndOwner;
+			public HInstance hInstance;
+			public char8* lpstrFilter;
+			public char8* lpstrCustomFilter;
 			public uint32 nMaxCustFilter;
 			public uint32 nFilterIndex;
-			public PSTR lpstrFile;
+			public char8* lpstrFile;
 			public uint32 nMaxFile;
-			public PSTR lpstrFileTitle;
+			public char8* lpstrFileTitle;
 			public uint32 nMaxFileTitle;
-			public PSTR lpstrInitialDir;
-			public PSTR lpstrTitle;
+			public char8* lpstrInitialDir;
+			public char8* lpstrTitle;
 			public uint32 Flags;
 			public uint16 nFileOffset;
 			public uint16 nFileExtension;
-			public PSTR lpstrDefExt;
+			public char8* lpstrDefExt;
 			public LPARAM lCustData;
 			public LPOFNHOOKPROC lpfnHook;
-			public PSTR lpTemplateName;
+			public char8* lpTemplateName;
 		}
 		[CRepr]
 		public struct OPENFILENAME_NT4W
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HINSTANCE hInstance;
-			public PWSTR lpstrFilter;
-			public PWSTR lpstrCustomFilter;
+			public HWnd hwndOwner;
+			public HInstance hInstance;
+			public char16* lpstrFilter;
+			public char16* lpstrCustomFilter;
 			public uint32 nMaxCustFilter;
 			public uint32 nFilterIndex;
-			public PWSTR lpstrFile;
+			public char16* lpstrFile;
 			public uint32 nMaxFile;
-			public PWSTR lpstrFileTitle;
+			public char16* lpstrFileTitle;
 			public uint32 nMaxFileTitle;
-			public PWSTR lpstrInitialDir;
-			public PWSTR lpstrTitle;
+			public char16* lpstrInitialDir;
+			public char16* lpstrTitle;
 			public uint32 Flags;
 			public uint16 nFileOffset;
 			public uint16 nFileExtension;
-			public PWSTR lpstrDefExt;
+			public char16* lpstrDefExt;
 			public LPARAM lCustData;
 			public LPOFNHOOKPROC lpfnHook;
-			public PWSTR lpTemplateName;
+			public char16* lpTemplateName;
 		}
 		[CRepr]
 		public struct OPENFILENAMEA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HINSTANCE hInstance;
-			public PSTR lpstrFilter;
-			public PSTR lpstrCustomFilter;
+			public HWnd hwndOwner;
+			public HInstance hInstance;
+			public char8* lpstrFilter;
+			public char8* lpstrCustomFilter;
 			public uint32 nMaxCustFilter;
 			public uint32 nFilterIndex;
-			public PSTR lpstrFile;
+			public char8* lpstrFile;
 			public uint32 nMaxFile;
-			public PSTR lpstrFileTitle;
+			public char8* lpstrFileTitle;
 			public uint32 nMaxFileTitle;
-			public PSTR lpstrInitialDir;
-			public PSTR lpstrTitle;
+			public char8* lpstrInitialDir;
+			public char8* lpstrTitle;
 			public OPEN_FILENAME_FLAGS Flags;
 			public uint16 nFileOffset;
 			public uint16 nFileExtension;
-			public PSTR lpstrDefExt;
+			public char8* lpstrDefExt;
 			public LPARAM lCustData;
 			public LPOFNHOOKPROC lpfnHook;
-			public PSTR lpTemplateName;
+			public char8* lpTemplateName;
 			public void* pvReserved;
 			public uint32 dwReserved;
 			public OPEN_FILENAME_FLAGS_EX FlagsEx;
@@ -369,25 +373,25 @@ namespace Win32
 		public struct OPENFILENAMEW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HINSTANCE hInstance;
-			public PWSTR lpstrFilter;
-			public PWSTR lpstrCustomFilter;
+			public HWnd hwndOwner;
+			public HInstance hInstance;
+			public char16* lpstrFilter;
+			public char16* lpstrCustomFilter;
 			public uint32 nMaxCustFilter;
 			public uint32 nFilterIndex;
-			public PWSTR lpstrFile;
+			public char16* lpstrFile;
 			public uint32 nMaxFile;
-			public PWSTR lpstrFileTitle;
+			public char16* lpstrFileTitle;
 			public uint32 nMaxFileTitle;
-			public PWSTR lpstrInitialDir;
-			public PWSTR lpstrTitle;
+			public char16* lpstrInitialDir;
+			public char16* lpstrTitle;
 			public OPEN_FILENAME_FLAGS Flags;
 			public uint16 nFileOffset;
 			public uint16 nFileExtension;
-			public PWSTR lpstrDefExt;
+			public char16* lpstrDefExt;
 			public LPARAM lCustData;
 			public LPOFNHOOKPROC lpfnHook;
-			public PWSTR lpTemplateName;
+			public char16* lpTemplateName;
 			public void* pvReserved;
 			public uint32 dwReserved;
 			public OPEN_FILENAME_FLAGS_EX FlagsEx;
@@ -397,14 +401,14 @@ namespace Win32
 		{
 			public NMHDR hdr;
 			public OPENFILENAMEA* lpOFN;
-			public PSTR pszFile;
+			public char8* pszFile;
 		}
 		[CRepr]
 		public struct OFNOTIFYW
 		{
 			public NMHDR hdr;
 			public OPENFILENAMEW* lpOFN;
-			public PWSTR pszFile;
+			public char16* pszFile;
 		}
 		[CRepr]
 		public struct OFNOTIFYEXA
@@ -426,63 +430,63 @@ namespace Win32
 		public struct CHOOSECOLORA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HWND hInstance;
+			public HWnd hwndOwner;
+			public HWnd hInstance;
 			public uint32 rgbResult;
 			public uint32* lpCustColors;
 			public uint32 Flags;
 			public LPARAM lCustData;
 			public LPCCHOOKPROC lpfnHook;
-			public PSTR lpTemplateName;
+			public char8* lpTemplateName;
 		}
 		[CRepr]
 		public struct CHOOSECOLORW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HWND hInstance;
+			public HWnd hwndOwner;
+			public HWnd hInstance;
 			public uint32 rgbResult;
 			public uint32* lpCustColors;
 			public uint32 Flags;
 			public LPARAM lCustData;
 			public LPCCHOOKPROC lpfnHook;
-			public PWSTR lpTemplateName;
+			public char16* lpTemplateName;
 		}
 		[CRepr]
 		public struct FINDREPLACEA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HINSTANCE hInstance;
+			public HWnd hwndOwner;
+			public HInstance hInstance;
 			public FINDREPLACE_FLAGS Flags;
-			public PSTR lpstrFindWhat;
-			public PSTR lpstrReplaceWith;
+			public char8* lpstrFindWhat;
+			public char8* lpstrReplaceWith;
 			public uint16 wFindWhatLen;
 			public uint16 wReplaceWithLen;
 			public LPARAM lCustData;
 			public LPFRHOOKPROC lpfnHook;
-			public PSTR lpTemplateName;
+			public char8* lpTemplateName;
 		}
 		[CRepr]
 		public struct FINDREPLACEW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
-			public HINSTANCE hInstance;
+			public HWnd hwndOwner;
+			public HInstance hInstance;
 			public FINDREPLACE_FLAGS Flags;
-			public PWSTR lpstrFindWhat;
-			public PWSTR lpstrReplaceWith;
+			public char16* lpstrFindWhat;
+			public char16* lpstrReplaceWith;
 			public uint16 wFindWhatLen;
 			public uint16 wReplaceWithLen;
 			public LPARAM lCustData;
 			public LPFRHOOKPROC lpfnHook;
-			public PWSTR lpTemplateName;
+			public char16* lpTemplateName;
 		}
 		[CRepr]
 		public struct CHOOSEFONTA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public HDC hDC;
 			public LOGFONTA* lpLogFont;
 			public int32 iPointSize;
@@ -490,9 +494,9 @@ namespace Win32
 			public uint32 rgbColors;
 			public LPARAM lCustData;
 			public LPCFHOOKPROC lpfnHook;
-			public PSTR lpTemplateName;
-			public HINSTANCE hInstance;
-			public PSTR lpszStyle;
+			public char8* lpTemplateName;
+			public HInstance hInstance;
+			public char8* lpszStyle;
 			public CHOOSEFONT_FONT_TYPE nFontType;
 			public uint16 ___MISSING_ALIGNMENT__;
 			public int32 nSizeMin;
@@ -502,7 +506,7 @@ namespace Win32
 		public struct CHOOSEFONTW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public HDC hDC;
 			public LOGFONTW* lpLogFont;
 			public int32 iPointSize;
@@ -510,9 +514,9 @@ namespace Win32
 			public uint32 rgbColors;
 			public LPARAM lCustData;
 			public LPCFHOOKPROC lpfnHook;
-			public PWSTR lpTemplateName;
-			public HINSTANCE hInstance;
-			public PWSTR lpszStyle;
+			public char16* lpTemplateName;
+			public HInstance hInstance;
+			public char16* lpszStyle;
 			public CHOOSEFONT_FONT_TYPE nFontType;
 			public uint16 ___MISSING_ALIGNMENT__;
 			public int32 nSizeMin;
@@ -522,7 +526,7 @@ namespace Win32
 		public struct PRINTDLGA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public int hDevMode;
 			public int hDevNames;
 			public HDC hDC;
@@ -532,12 +536,12 @@ namespace Win32
 			public uint16 nMinPage;
 			public uint16 nMaxPage;
 			public uint16 nCopies;
-			public HINSTANCE hInstance;
+			public HInstance hInstance;
 			public LPARAM lCustData;
 			public LPPRINTHOOKPROC lpfnPrintHook;
 			public LPSETUPHOOKPROC lpfnSetupHook;
-			public PSTR lpPrintTemplateName;
-			public PSTR lpSetupTemplateName;
+			public char8* lpPrintTemplateName;
+			public char8* lpSetupTemplateName;
 			public int hPrintTemplate;
 			public int hSetupTemplate;
 		}
@@ -545,7 +549,7 @@ namespace Win32
 		public struct PRINTDLGW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public int hDevMode;
 			public int hDevNames;
 			public HDC hDC;
@@ -555,12 +559,12 @@ namespace Win32
 			public uint16 nMinPage;
 			public uint16 nMaxPage;
 			public uint16 nCopies;
-			public HINSTANCE hInstance;
+			public HInstance hInstance;
 			public LPARAM lCustData;
 			public LPPRINTHOOKPROC lpfnPrintHook;
 			public LPSETUPHOOKPROC lpfnSetupHook;
-			public PWSTR lpPrintTemplateName;
-			public PWSTR lpSetupTemplateName;
+			public char16* lpPrintTemplateName;
+			public char16* lpSetupTemplateName;
 			public int hPrintTemplate;
 			public int hSetupTemplate;
 		}
@@ -574,7 +578,7 @@ namespace Win32
 		public struct PRINTDLGEXA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public int hDevMode;
 			public int hDevNames;
 			public HDC hDC;
@@ -587,8 +591,8 @@ namespace Win32
 			public uint32 nMinPage;
 			public uint32 nMaxPage;
 			public uint32 nCopies;
-			public HINSTANCE hInstance;
-			public PSTR lpPrintTemplateName;
+			public HInstance hInstance;
+			public char8* lpPrintTemplateName;
 			public IUnknown* lpCallback;
 			public uint32 nPropertyPages;
 			public HPROPSHEETPAGE* lphPropertyPages;
@@ -599,7 +603,7 @@ namespace Win32
 		public struct PRINTDLGEXW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public int hDevMode;
 			public int hDevNames;
 			public HDC hDC;
@@ -612,8 +616,8 @@ namespace Win32
 			public uint32 nMinPage;
 			public uint32 nMaxPage;
 			public uint32 nCopies;
-			public HINSTANCE hInstance;
-			public PWSTR lpPrintTemplateName;
+			public HInstance hInstance;
+			public char16* lpPrintTemplateName;
 			public IUnknown* lpCallback;
 			public uint32 nPropertyPages;
 			public HPROPSHEETPAGE* lphPropertyPages;
@@ -632,36 +636,36 @@ namespace Win32
 		public struct PAGESETUPDLGA
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public int hDevMode;
 			public int hDevNames;
 			public PAGESETUPDLG_FLAGS Flags;
 			public POINT ptPaperSize;
-			public RECT rtMinMargin;
-			public RECT rtMargin;
-			public HINSTANCE hInstance;
+			public RectI rtMinMargin;
+			public RectI rtMargin;
+			public HInstance hInstance;
 			public LPARAM lCustData;
 			public LPPAGESETUPHOOK lpfnPageSetupHook;
 			public LPPAGEPAINTHOOK lpfnPagePaintHook;
-			public PSTR lpPageSetupTemplateName;
+			public char8* lpPageSetupTemplateName;
 			public int hPageSetupTemplate;
 		}
 		[CRepr]
 		public struct PAGESETUPDLGW
 		{
 			public uint32 lStructSize;
-			public HWND hwndOwner;
+			public HWnd hwndOwner;
 			public int hDevMode;
 			public int hDevNames;
 			public PAGESETUPDLG_FLAGS Flags;
 			public POINT ptPaperSize;
-			public RECT rtMinMargin;
-			public RECT rtMargin;
-			public HINSTANCE hInstance;
+			public RectI rtMinMargin;
+			public RectI rtMargin;
+			public HInstance hInstance;
 			public LPARAM lCustData;
 			public LPPAGESETUPHOOK lpfnPageSetupHook;
 			public LPPAGEPAINTHOOK lpfnPagePaintHook;
-			public PWSTR lpPageSetupTemplateName;
+			public char16* lpPageSetupTemplateName;
 			public int hPageSetupTemplate;
 		}
 		
@@ -674,16 +678,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InitDone() mut => VT.InitDone(ref this);
-			public HRESULT SelectionChange() mut => VT.SelectionChange(ref this);
-			public HRESULT HandleMessage(HWND hDlg, uint32 uMsg, WPARAM wParam, LPARAM lParam, out LRESULT pResult) mut => VT.HandleMessage(ref this, hDlg, uMsg, wParam, lParam, out pResult);
+			public HResult InitDone() mut => VT.InitDone(ref this);
+			public HResult SelectionChange() mut => VT.SelectionChange(ref this);
+			public HResult HandleMessage(HWnd hDlg, uint32 uMsg, WPARAM wParam, LPARAM lParam, out LRESULT pResult) mut => VT.HandleMessage(ref this, hDlg, uMsg, wParam, lParam, out pResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDialogCallback self) InitDone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDialogCallback self) SelectionChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDialogCallback self, HWND hDlg, uint32 uMsg, WPARAM wParam, LPARAM lParam, out LRESULT pResult) HandleMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDialogCallback self) InitDone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDialogCallback self) SelectionChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDialogCallback self, HWnd hDlg, uint32 uMsg, WPARAM wParam, LPARAM lParam, out LRESULT pResult) HandleMessage;
 			}
 		}
 		[CRepr]
@@ -693,62 +697,62 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentDevMode(out DEVMODEA pDevMode, out uint32 pcbSize) mut => VT.GetCurrentDevMode(ref this, out pDevMode, out pcbSize);
-			public HRESULT GetCurrentPrinterName(char16* pPrinterName, out uint32 pcchSize) mut => VT.GetCurrentPrinterName(ref this, pPrinterName, out pcchSize);
-			public HRESULT GetCurrentPortName(char16* pPortName, out uint32 pcchSize) mut => VT.GetCurrentPortName(ref this, pPortName, out pcchSize);
+			public HResult GetCurrentDevMode(out DEVMODEA pDevMode, out uint32 pcbSize) mut => VT.GetCurrentDevMode(ref this, out pDevMode, out pcbSize);
+			public HResult GetCurrentPrinterName(char16* pPrinterName, out uint32 pcchSize) mut => VT.GetCurrentPrinterName(ref this, pPrinterName, out pcchSize);
+			public HResult GetCurrentPortName(char16* pPortName, out uint32 pcchSize) mut => VT.GetCurrentPortName(ref this, pPortName, out pcchSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDialogServices self, out DEVMODEA pDevMode, out uint32 pcbSize) GetCurrentDevMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDialogServices self, char16* pPrinterName, out uint32 pcchSize) GetCurrentPrinterName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintDialogServices self, char16* pPortName, out uint32 pcchSize) GetCurrentPortName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDialogServices self, out DEVMODEA pDevMode, out uint32 pcbSize) GetCurrentDevMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDialogServices self, char16* pPrinterName, out uint32 pcchSize) GetCurrentPrinterName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintDialogServices self, char16* pPortName, out uint32 pcchSize) GetCurrentPortName;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetOpenFileNameA(out OPENFILENAMEA param0);
+		public static extern IntBool GetOpenFileNameA(out OPENFILENAMEA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetOpenFileNameW(out OPENFILENAMEW param0);
+		public static extern IntBool GetOpenFileNameW(out OPENFILENAMEW param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetSaveFileNameA(out OPENFILENAMEA param0);
+		public static extern IntBool GetSaveFileNameA(out OPENFILENAMEA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetSaveFileNameW(out OPENFILENAMEW param0);
+		public static extern IntBool GetSaveFileNameW(out OPENFILENAMEW param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int16 GetFileTitleA(PSTR param0, uint8* Buf, uint16 cchSize);
+		public static extern int16 GetFileTitleA(char8* param0, uint8* Buf, uint16 cchSize);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int16 GetFileTitleW(PWSTR param0, char16* Buf, uint16 cchSize);
+		public static extern int16 GetFileTitleW(char16* param0, char16* Buf, uint16 cchSize);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ChooseColorA(out CHOOSECOLORA param0);
+		public static extern IntBool ChooseColorA(out CHOOSECOLORA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ChooseColorW(out CHOOSECOLORW param0);
+		public static extern IntBool ChooseColorW(out CHOOSECOLORW param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND FindTextA(out FINDREPLACEA param0);
+		public static extern HWnd FindTextA(out FINDREPLACEA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND FindTextW(out FINDREPLACEW param0);
+		public static extern HWnd FindTextW(out FINDREPLACEW param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND ReplaceTextA(out FINDREPLACEA param0);
+		public static extern HWnd ReplaceTextA(out FINDREPLACEA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND ReplaceTextW(out FINDREPLACEW param0);
+		public static extern HWnd ReplaceTextW(out FINDREPLACEW param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ChooseFontA(out CHOOSEFONTA param0);
+		public static extern IntBool ChooseFontA(out CHOOSEFONTA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ChooseFontW(out CHOOSEFONTW param0);
+		public static extern IntBool ChooseFontW(out CHOOSEFONTW param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PrintDlgA(out PRINTDLGA pPD);
+		public static extern IntBool PrintDlgA(out PRINTDLGA pPD);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PrintDlgW(out PRINTDLGW pPD);
+		public static extern IntBool PrintDlgW(out PRINTDLGW pPD);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PrintDlgExA(out PRINTDLGEXA pPD);
+		public static extern HResult PrintDlgExA(out PRINTDLGEXA pPD);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PrintDlgExW(out PRINTDLGEXW pPD);
+		public static extern HResult PrintDlgExW(out PRINTDLGEXW pPD);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern COMMON_DLG_ERRORS CommDlgExtendedError();
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PageSetupDlgA(out PAGESETUPDLGA param0);
+		public static extern IntBool PageSetupDlgA(out PAGESETUPDLGA param0);
 		[Import("comdlg32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PageSetupDlgW(out PAGESETUPDLGW param0);
+		public static extern IntBool PageSetupDlgW(out PAGESETUPDLGW param0);
 	}
 }

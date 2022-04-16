@@ -8,10 +8,10 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("wsclient.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CheckDeveloperLicense(out FILETIME pExpiration);
+		public static extern HResult CheckDeveloperLicense(out FileTime pExpiration);
 		[Import("wsclient.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AcquireDeveloperLicense(HWND hwndParent, out FILETIME pExpiration);
+		public static extern HResult AcquireDeveloperLicense(HWnd hwndParent, out FileTime pExpiration);
 		[Import("wsclient.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RemoveDeveloperLicense(HWND hwndParent);
+		public static extern HResult RemoveDeveloperLicense(HWnd hwndParent);
 	}
 }

@@ -92,15 +92,15 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public uint32 dwCheckFlags;
-			public PWSTR ImagePath;
-			public HANDLE hImageFileHandle;
+			public char16* ImagePath;
+			public Handle hImageFileHandle;
 			public uint32 UrlZoneId;
 			public uint8[64] ImageHash;
 			public uint32 dwImageHashSize;
 			public LARGE_INTEGER ImageSize;
 			public uint32 HashAlgorithm;
 			public uint8* pByteBlock;
-			public HWND hWndParent;
+			public HWnd hWndParent;
 			public uint32 dwWVTUIChoice;
 		}
 		[CRepr]
@@ -108,21 +108,21 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public uint32 dwCheckFlags;
-			public PWSTR ImagePath;
-			public HANDLE hImageFileHandle;
+			public char16* ImagePath;
+			public Handle hImageFileHandle;
 			public uint32 UrlZoneId;
 			public uint8[64] ImageHash;
 			public uint32 dwImageHashSize;
 			public LARGE_INTEGER ImageSize;
 			public uint32 HashAlgorithm;
 			public uint8* pByteBlock;
-			public HWND hWndParent;
+			public HWnd hWndParent;
 			public uint32 dwWVTUIChoice;
-			public PWSTR PackageMoniker;
-			public PWSTR PackagePublisher;
-			public PWSTR PackageName;
+			public char16* PackageMoniker;
+			public char16* PackagePublisher;
+			public char16* PackageName;
 			public uint64 PackageVersion;
-			public BOOL PackageIsFramework;
+			public IntBool PackageIsFramework;
 		}
 		[CRepr]
 		public struct SAFER_IDENTIFICATION_HEADER
@@ -130,14 +130,14 @@ namespace Win32
 			public SAFER_IDENTIFICATION_TYPES dwIdentificationType;
 			public uint32 cbStructSize;
 			public Guid IdentificationGuid;
-			public FILETIME lastModified;
+			public FileTime lastModified;
 		}
 		[CRepr]
 		public struct SAFER_PATHNAME_IDENTIFICATION
 		{
 			public SAFER_IDENTIFICATION_HEADER header;
 			public char16[256] Description;
-			public PWSTR ImageName;
+			public char16* ImageName;
 			public uint32 dwSaferFlags;
 		}
 		[CRepr]
@@ -171,24 +171,24 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferGetPolicyInformation(uint32 dwScopeId, SAFER_POLICY_INFO_CLASS SaferPolicyInfoClass, uint32 InfoBufferSize, void* InfoBuffer, out uint32 InfoBufferRetSize, void* lpReserved);
+		public static extern IntBool SaferGetPolicyInformation(uint32 dwScopeId, SAFER_POLICY_INFO_CLASS SaferPolicyInfoClass, uint32 InfoBufferSize, void* InfoBuffer, out uint32 InfoBufferRetSize, void* lpReserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferSetPolicyInformation(uint32 dwScopeId, SAFER_POLICY_INFO_CLASS SaferPolicyInfoClass, uint32 InfoBufferSize, void* InfoBuffer, void* lpReserved);
+		public static extern IntBool SaferSetPolicyInformation(uint32 dwScopeId, SAFER_POLICY_INFO_CLASS SaferPolicyInfoClass, uint32 InfoBufferSize, void* InfoBuffer, void* lpReserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferCreateLevel(uint32 dwScopeId, uint32 dwLevelId, uint32 OpenFlags, out SAFER_LEVEL_HANDLE pLevelHandle, void* lpReserved);
+		public static extern IntBool SaferCreateLevel(uint32 dwScopeId, uint32 dwLevelId, uint32 OpenFlags, out SAFER_LEVEL_HANDLE pLevelHandle, void* lpReserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferCloseLevel(SAFER_LEVEL_HANDLE hLevelHandle);
+		public static extern IntBool SaferCloseLevel(SAFER_LEVEL_HANDLE hLevelHandle);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferIdentifyLevel(uint32 dwNumProperties, SAFER_CODE_PROPERTIES_V2* pCodeProperties, out SAFER_LEVEL_HANDLE pLevelHandle, void* lpReserved);
+		public static extern IntBool SaferIdentifyLevel(uint32 dwNumProperties, SAFER_CODE_PROPERTIES_V2* pCodeProperties, out SAFER_LEVEL_HANDLE pLevelHandle, void* lpReserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferComputeTokenFromLevel(SAFER_LEVEL_HANDLE LevelHandle, HANDLE InAccessToken, out HANDLE OutAccessToken, SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS dwFlags, void* lpReserved);
+		public static extern IntBool SaferComputeTokenFromLevel(SAFER_LEVEL_HANDLE LevelHandle, Handle InAccessToken, out Handle OutAccessToken, SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS dwFlags, void* lpReserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferGetLevelInformation(SAFER_LEVEL_HANDLE LevelHandle, SAFER_OBJECT_INFO_CLASS dwInfoType, void* lpQueryBuffer, uint32 dwInBufferSize, out uint32 lpdwOutBufferSize);
+		public static extern IntBool SaferGetLevelInformation(SAFER_LEVEL_HANDLE LevelHandle, SAFER_OBJECT_INFO_CLASS dwInfoType, void* lpQueryBuffer, uint32 dwInBufferSize, out uint32 lpdwOutBufferSize);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferSetLevelInformation(SAFER_LEVEL_HANDLE LevelHandle, SAFER_OBJECT_INFO_CLASS dwInfoType, void* lpQueryBuffer, uint32 dwInBufferSize);
+		public static extern IntBool SaferSetLevelInformation(SAFER_LEVEL_HANDLE LevelHandle, SAFER_OBJECT_INFO_CLASS dwInfoType, void* lpQueryBuffer, uint32 dwInBufferSize);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferRecordEventLogEntry(SAFER_LEVEL_HANDLE hLevel, PWSTR szTargetPath, void* lpReserved);
+		public static extern IntBool SaferRecordEventLogEntry(SAFER_LEVEL_HANDLE hLevel, char16* szTargetPath, void* lpReserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SaferiIsExecutableFileType(PWSTR szFullPathname, BOOLEAN bFromShellExecute);
+		public static extern IntBool SaferiIsExecutableFileType(char16* szFullPathname, bool bFromShellExecute);
 	}
 }

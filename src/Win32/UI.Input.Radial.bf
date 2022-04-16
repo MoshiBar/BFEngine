@@ -14,12 +14,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateForWindow(HWND hwnd, in Guid riid, void** ppv) mut => VT.CreateForWindow(ref this, hwnd, riid, ppv);
+			public HResult CreateForWindow(HWnd hwnd, in Guid riid, void** ppv) mut => VT.CreateForWindow(ref this, hwnd, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRadialControllerInterop self, HWND hwnd, in Guid riid, void** ppv) CreateForWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRadialControllerInterop self, HWnd hwnd, in Guid riid, void** ppv) CreateForWindow;
 			}
 		}
 		[CRepr]
@@ -29,12 +29,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetForWindow(HWND hwnd, in Guid riid, void** ppv) mut => VT.GetForWindow(ref this, hwnd, riid, ppv);
+			public HResult GetForWindow(HWnd hwnd, in Guid riid, void** ppv) mut => VT.GetForWindow(ref this, hwnd, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRadialControllerConfigurationInterop self, HWND hwnd, in Guid riid, void** ppv) GetForWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRadialControllerConfigurationInterop self, HWnd hwnd, in Guid riid, void** ppv) GetForWindow;
 			}
 		}
 		[CRepr]
@@ -44,12 +44,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateForWindow(HWND hwnd, in Guid riid, void** ppv) mut => VT.CreateForWindow(ref this, hwnd, riid, ppv);
+			public HResult CreateForWindow(HWnd hwnd, in Guid riid, void** ppv) mut => VT.CreateForWindow(ref this, hwnd, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRadialControllerIndependentInputSourceInterop self, HWND hwnd, in Guid riid, void** ppv) CreateForWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRadialControllerIndependentInputSourceInterop self, HWnd hwnd, in Guid riid, void** ppv) CreateForWindow;
 			}
 		}
 		

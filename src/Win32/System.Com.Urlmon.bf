@@ -1,9 +1,14 @@
 using System;
+using static Win32.Data.MsXml.MsXml;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace System.Com.Urlmon
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	extension Com{
+	public static class UrlMon
 	{
 		// --- Constants ---
 		
@@ -31,53 +36,53 @@ namespace Win32
 		public const uint32 URLMON_OPTION_USE_BINDSTRINGCREDS = 268435464;
 		public const uint32 URLMON_OPTION_USE_BROWSERAPPSDOCUMENTS = 268435472;
 		public const uint32 CF_NULL = 0;
-		public const HRESULT MK_S_ASYNCHRONOUS = (.)262632;
+		public const HResult MK_S_ASYNCHRONOUS = (.)262632;
 		public const int32 S_ASYNCHRONOUS = 262632;
-		public const HRESULT E_PENDING = (.)-2147483638;
-		public const HRESULT INET_E_INVALID_URL = (.)-2146697214;
-		public const HRESULT INET_E_NO_SESSION = (.)-2146697213;
-		public const HRESULT INET_E_CANNOT_CONNECT = (.)-2146697212;
-		public const HRESULT INET_E_RESOURCE_NOT_FOUND = (.)-2146697211;
-		public const HRESULT INET_E_OBJECT_NOT_FOUND = (.)-2146697210;
-		public const HRESULT INET_E_DATA_NOT_AVAILABLE = (.)-2146697209;
-		public const HRESULT INET_E_DOWNLOAD_FAILURE = (.)-2146697208;
-		public const HRESULT INET_E_AUTHENTICATION_REQUIRED = (.)-2146697207;
-		public const HRESULT INET_E_NO_VALID_MEDIA = (.)-2146697206;
-		public const HRESULT INET_E_CONNECTION_TIMEOUT = (.)-2146697205;
-		public const HRESULT INET_E_INVALID_REQUEST = (.)-2146697204;
-		public const HRESULT INET_E_UNKNOWN_PROTOCOL = (.)-2146697203;
-		public const HRESULT INET_E_SECURITY_PROBLEM = (.)-2146697202;
-		public const HRESULT INET_E_CANNOT_LOAD_DATA = (.)-2146697201;
-		public const HRESULT INET_E_CANNOT_INSTANTIATE_OBJECT = (.)-2146697200;
-		public const HRESULT INET_E_INVALID_CERTIFICATE = (.)-2146697191;
-		public const HRESULT INET_E_REDIRECT_FAILED = (.)-2146697196;
-		public const HRESULT INET_E_REDIRECT_TO_DIR = (.)-2146697195;
-		public const HRESULT INET_E_CANNOT_LOCK_REQUEST = (.)-2146697194;
-		public const HRESULT INET_E_USE_EXTEND_BINDING = (.)-2146697193;
-		public const HRESULT INET_E_TERMINATED_BIND = (.)-2146697192;
-		public const HRESULT INET_E_RESERVED_1 = (.)-2146697190;
-		public const HRESULT INET_E_BLOCKED_REDIRECT_XSECURITYID = (.)-2146697189;
-		public const HRESULT INET_E_DOMINJECTIONVALIDATION = (.)-2146697188;
-		public const HRESULT INET_E_VTAB_SWITCH_FORCE_ENGINE = (.)-2146697187;
-		public const HRESULT INET_E_HSTS_CERTIFICATE_ERROR = (.)-2146697186;
-		public const HRESULT INET_E_RESERVED_2 = (.)-2146697185;
-		public const HRESULT INET_E_RESERVED_3 = (.)-2146697184;
-		public const HRESULT INET_E_RESERVED_4 = (.)-2146697183;
-		public const HRESULT INET_E_RESERVED_5 = (.)-2146697182;
-		public const HRESULT INET_E_ERROR_FIRST = (.)-2146697214;
-		public const HRESULT INET_E_CODE_DOWNLOAD_DECLINED = (.)-2146696960;
-		public const HRESULT INET_E_RESULT_DISPATCHED = (.)-2146696704;
-		public const HRESULT INET_E_CANNOT_REPLACE_SFP_FILE = (.)-2146696448;
-		public const HRESULT INET_E_CODE_INSTALL_SUPPRESSED = (.)-2146696192;
-		public const HRESULT INET_E_CODE_INSTALL_BLOCKED_BY_HASH_POLICY = (.)-2146695936;
-		public const HRESULT INET_E_DOWNLOAD_BLOCKED_BY_INPRIVATE = (.)-2146695935;
-		public const HRESULT INET_E_CODE_INSTALL_BLOCKED_IMMERSIVE = (.)-2146695934;
-		public const HRESULT INET_E_FORBIDFRAMING = (.)-2146695933;
-		public const HRESULT INET_E_CODE_INSTALL_BLOCKED_ARM = (.)-2146695932;
-		public const HRESULT INET_E_BLOCKED_PLUGGABLE_PROTOCOL = (.)-2146695931;
-		public const HRESULT INET_E_BLOCKED_ENHANCEDPROTECTEDMODE = (.)-2146695930;
-		public const HRESULT INET_E_CODE_INSTALL_BLOCKED_BITNESS = (.)-2146695929;
-		public const HRESULT INET_E_DOWNLOAD_BLOCKED_BY_CSP = (.)-2146695928;
+		public const HResult E_PENDING = (.)-2147483638;
+		public const HResult INET_E_INVALID_URL = (.)-2146697214;
+		public const HResult INET_E_NO_SESSION = (.)-2146697213;
+		public const HResult INET_E_CANNOT_CONNECT = (.)-2146697212;
+		public const HResult INET_E_RESOURCE_NOT_FOUND = (.)-2146697211;
+		public const HResult INET_E_OBJECT_NOT_FOUND = (.)-2146697210;
+		public const HResult INET_E_DATA_NOT_AVAILABLE = (.)-2146697209;
+		public const HResult INET_E_DOWNLOAD_FAILURE = (.)-2146697208;
+		public const HResult INET_E_AUTHENTICATION_REQUIRED = (.)-2146697207;
+		public const HResult INET_E_NO_VALID_MEDIA = (.)-2146697206;
+		public const HResult INET_E_CONNECTION_TIMEOUT = (.)-2146697205;
+		public const HResult INET_E_INVALID_REQUEST = (.)-2146697204;
+		public const HResult INET_E_UNKNOWN_PROTOCOL = (.)-2146697203;
+		public const HResult INET_E_SECURITY_PROBLEM = (.)-2146697202;
+		public const HResult INET_E_CANNOT_LOAD_DATA = (.)-2146697201;
+		public const HResult INET_E_CANNOT_INSTANTIATE_OBJECT = (.)-2146697200;
+		public const HResult INET_E_INVALID_CERTIFICATE = (.)-2146697191;
+		public const HResult INET_E_REDIRECT_FAILED = (.)-2146697196;
+		public const HResult INET_E_REDIRECT_TO_DIR = (.)-2146697195;
+		public const HResult INET_E_CANNOT_LOCK_REQUEST = (.)-2146697194;
+		public const HResult INET_E_USE_EXTEND_BINDING = (.)-2146697193;
+		public const HResult INET_E_TERMINATED_BIND = (.)-2146697192;
+		public const HResult INET_E_RESERVED_1 = (.)-2146697190;
+		public const HResult INET_E_BLOCKED_REDIRECT_XSECURITYID = (.)-2146697189;
+		public const HResult INET_E_DOMINJECTIONVALIDATION = (.)-2146697188;
+		public const HResult INET_E_VTAB_SWITCH_FORCE_ENGINE = (.)-2146697187;
+		public const HResult INET_E_HSTS_CERTIFICATE_ERROR = (.)-2146697186;
+		public const HResult INET_E_RESERVED_2 = (.)-2146697185;
+		public const HResult INET_E_RESERVED_3 = (.)-2146697184;
+		public const HResult INET_E_RESERVED_4 = (.)-2146697183;
+		public const HResult INET_E_RESERVED_5 = (.)-2146697182;
+		public const HResult INET_E_ERROR_FIRST = (.)-2146697214;
+		public const HResult INET_E_CODE_DOWNLOAD_DECLINED = (.)-2146696960;
+		public const HResult INET_E_RESULT_DISPATCHED = (.)-2146696704;
+		public const HResult INET_E_CANNOT_REPLACE_SFP_FILE = (.)-2146696448;
+		public const HResult INET_E_CODE_INSTALL_SUPPRESSED = (.)-2146696192;
+		public const HResult INET_E_CODE_INSTALL_BLOCKED_BY_HASH_POLICY = (.)-2146695936;
+		public const HResult INET_E_DOWNLOAD_BLOCKED_BY_INPRIVATE = (.)-2146695935;
+		public const HResult INET_E_CODE_INSTALL_BLOCKED_IMMERSIVE = (.)-2146695934;
+		public const HResult INET_E_FORBIDFRAMING = (.)-2146695933;
+		public const HResult INET_E_CODE_INSTALL_BLOCKED_ARM = (.)-2146695932;
+		public const HResult INET_E_BLOCKED_PLUGGABLE_PROTOCOL = (.)-2146695931;
+		public const HResult INET_E_BLOCKED_ENHANCEDPROTECTEDMODE = (.)-2146695930;
+		public const HResult INET_E_CODE_INSTALL_BLOCKED_BITNESS = (.)-2146695929;
+		public const HResult INET_E_DOWNLOAD_BLOCKED_BY_CSP = (.)-2146695928;
 		public const int32 INET_E_ERROR_LAST = -2146695928;
 		public const uint32 Uri_DISPLAY_NO_FRAGMENT = 1;
 		public const uint32 Uri_PUNYCODE_IDN_HOST = 2;
@@ -111,11 +116,11 @@ namespace Win32
 		public const uint32 GET_FEATURE_FROM_THREAD_TRUSTED = 32;
 		public const uint32 GET_FEATURE_FROM_THREAD_INTERNET = 64;
 		public const uint32 GET_FEATURE_FROM_THREAD_RESTRICTED = 128;
-		public const HRESULT INET_E_USE_DEFAULT_PROTOCOLHANDLER = (.)-2146697199;
-		public const HRESULT INET_E_USE_DEFAULT_SETTING = (.)-2146697198;
+		public const HResult INET_E_USE_DEFAULT_PROTOCOLHANDLER = (.)-2146697199;
+		public const HResult INET_E_USE_DEFAULT_SETTING = (.)-2146697198;
 		public const int32 INET_E_DEFAULT_ACTION = -2146697199;
-		public const HRESULT INET_E_QUERYOPTION_UNKNOWN = (.)-2146697197;
-		public const HRESULT INET_E_REDIRECTING = (.)-2146697196;
+		public const HResult INET_E_QUERYOPTION_UNKNOWN = (.)-2146697197;
+		public const HResult INET_E_REDIRECTING = (.)-2146697196;
 		public const uint32 PROTOCOLFLAG_NO_PICS_CHECK = 1;
 		public const uint32 MUTZ_NOSAVEDFILECHECK = 1;
 		public const uint32 MUTZ_ISFILE = 2;
@@ -313,14 +318,14 @@ namespace Win32
 		
 		public enum IEObjectType : int32
 		{
-			EVENT = 0,
-			MUTEX = 1,
-			SEMAPHORE = 2,
-			SHARED_MEMORY = 3,
-			WAITABLE_TIMER = 4,
-			FILE = 5,
-			NAMED_PIPE = 6,
-			REGISTRY = 7,
+			Event = 0,
+			Mutex = 1,
+			Semaphore = 2,
+			SharedMemory = 3,
+			WaitableTimer = 4,
+			File = 5,
+			NamedPipe = 6,
+			Registry = 7,
 		}
 		public enum MONIKERPROPERTY : int32
 		{
@@ -372,11 +377,11 @@ namespace Win32
 			RESERVED_7 = 1073741824,
 			RESERVED_8 = 536870912,
 		}
-		public enum URL_ENCODING : int32
+		public enum UrlEncoding : int32
 		{
-			NONE = 0,
-			ENABLE_UTF8 = 268435456,
-			DISABLE_UTF8 = 536870912,
+			None = 0,
+			EnableUTF8 = 268435456,
+			DisableUTF8 = 536870912,
 		}
 		public enum BINDINFO_OPTIONS : int32
 		{
@@ -525,8 +530,8 @@ namespace Win32
 		}
 		public enum AUTHENTICATEF : int32
 		{
-			PROXY = 1,
-			BASIC = 2,
+			Proxy = 1,
+			Basic = 2,
 			HTTP = 4,
 		}
 		public enum CIP_STATUS : int32
@@ -780,16 +785,16 @@ namespace Win32
 		{
 			public uint32 nLength;
 			public uint32 lpSecurityDescriptor;
-			public BOOL bInheritHandle;
+			public IntBool bInheritHandle;
 		}
 		[CRepr]
 		public struct RemBINDINFO
 		{
 			public uint32 cbSize;
-			public PWSTR szExtraInfo;
+			public char16* szExtraInfo;
 			public uint32 grfBindInfoF;
 			public uint32 dwBindVerb;
-			public PWSTR szCustomVerb;
+			public char16* szCustomVerb;
 			public uint32 cbstgmedData;
 			public uint32 dwOptions;
 			public uint32 dwOptionsFlags;
@@ -839,8 +844,8 @@ namespace Win32
 		public struct CODEBASEHOLD
 		{
 			public uint32 cbSize;
-			public PWSTR szDistUnit;
-			public PWSTR szCodeBase;
+			public char16* szDistUnit;
+			public char16* szCodeBase;
 			public uint32 dwVersionMS;
 			public uint32 dwVersionLS;
 			public uint32 dwStyle;
@@ -851,9 +856,9 @@ namespace Win32
 			public uint32 cbSize;
 			public uint32 dwFlags;
 			public uint32 dwAdState;
-			public PWSTR szTitle;
-			public PWSTR szAbstract;
-			public PWSTR szHREF;
+			public char16* szTitle;
+			public char16* szAbstract;
+			public char16* szHREF;
 			public uint32 dwInstalledVersionMS;
 			public uint32 dwInstalledVersionLS;
 			public uint32 dwUpdateVersionMS;
@@ -883,10 +888,10 @@ namespace Win32
 		public struct HIT_LOGGING_INFO
 		{
 			public uint32 dwStructSize;
-			public PSTR lpszLoggedUrlName;
+			public char8* lpszLoggedUrlName;
 			public SYSTEMTIME StartTime;
 			public SYSTEMTIME EndTime;
-			public PSTR lpszExtendedInfo;
+			public char8* lpszExtendedInfo;
 		}
 		[CRepr]
 		public struct CONFIRMSAFETY
@@ -898,8 +903,8 @@ namespace Win32
 		[CRepr]
 		public struct PROTOCOL_ARGUMENT
 		{
-			public PWSTR szMethod;
-			public PWSTR szTargetUrl;
+			public char16* szMethod;
+			public char16* szTargetUrl;
 		}
 		
 		// --- COM Interfaces ---
@@ -911,22 +916,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetClassID(out Guid pClassID) mut => VT.GetClassID(ref this, out pClassID);
-			public HRESULT IsDirty() mut => VT.IsDirty(ref this);
-			public HRESULT Load(BOOL fFullyAvailable, ref IMoniker pimkName, ref IBindCtx pibc, uint32 grfMode) mut => VT.Load(ref this, fFullyAvailable, ref pimkName, ref pibc, grfMode);
-			public HRESULT Save(ref IMoniker pimkName, ref IBindCtx pbc, BOOL fRemember) mut => VT.Save(ref this, ref pimkName, ref pbc, fRemember);
-			public HRESULT SaveCompleted(ref IMoniker pimkName, ref IBindCtx pibc) mut => VT.SaveCompleted(ref this, ref pimkName, ref pibc);
-			public HRESULT GetCurMoniker(out IMoniker* ppimkName) mut => VT.GetCurMoniker(ref this, out ppimkName);
+			public HResult GetClassID(out Guid pClassID) mut => VT.GetClassID(ref this, out pClassID);
+			public HResult IsDirty() mut => VT.IsDirty(ref this);
+			public HResult Load(IntBool fFullyAvailable, ref IMoniker pimkName, ref IBindCtx pibc, uint32 grfMode) mut => VT.Load(ref this, fFullyAvailable, ref pimkName, ref pibc, grfMode);
+			public HResult Save(ref IMoniker pimkName, ref IBindCtx pbc, IntBool fRemember) mut => VT.Save(ref this, ref pimkName, ref pbc, fRemember);
+			public HResult SaveCompleted(ref IMoniker pimkName, ref IBindCtx pibc) mut => VT.SaveCompleted(ref this, ref pimkName, ref pibc);
+			public HResult GetCurMoniker(out IMoniker* ppimkName) mut => VT.GetCurMoniker(ref this, out ppimkName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMoniker self, out Guid pClassID) GetClassID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMoniker self) IsDirty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMoniker self, BOOL fFullyAvailable, ref IMoniker pimkName, ref IBindCtx pibc, uint32 grfMode) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMoniker self, ref IMoniker pimkName, ref IBindCtx pbc, BOOL fRemember) Save;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMoniker self, ref IMoniker pimkName, ref IBindCtx pibc) SaveCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPersistMoniker self, out IMoniker* ppimkName) GetCurMoniker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMoniker self, out Guid pClassID) GetClassID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMoniker self) IsDirty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMoniker self, IntBool fFullyAvailable, ref IMoniker pimkName, ref IBindCtx pibc, uint32 grfMode) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMoniker self, ref IMoniker pimkName, ref IBindCtx pbc, IntBool fRemember) Save;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMoniker self, ref IMoniker pimkName, ref IBindCtx pibc) SaveCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPersistMoniker self, out IMoniker* ppimkName) GetCurMoniker;
 			}
 		}
 		[CRepr]
@@ -936,12 +941,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PutProperty(MONIKERPROPERTY mkp, PWSTR val) mut => VT.PutProperty(ref this, mkp, val);
+			public HResult PutProperty(MONIKERPROPERTY mkp, char16* val) mut => VT.PutProperty(ref this, mkp, val);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMonikerProp self, MONIKERPROPERTY mkp, PWSTR val) PutProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMonikerProp self, MONIKERPROPERTY mkp, char16* val) PutProperty;
 			}
 		}
 		[CRepr]
@@ -951,12 +956,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateBinding(PWSTR szUrl, ref IBindCtx pbc, out IBinding* ppb) mut => VT.CreateBinding(ref this, szUrl, ref pbc, out ppb);
+			public HResult CreateBinding(char16* szUrl, ref IBindCtx pbc, out IBinding* ppb) mut => VT.CreateBinding(ref this, szUrl, ref pbc, out ppb);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindProtocol self, PWSTR szUrl, ref IBindCtx pbc, out IBinding* ppb) CreateBinding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindProtocol self, char16* szUrl, ref IBindCtx pbc, out IBinding* ppb) CreateBinding;
 			}
 		}
 		[CRepr]
@@ -966,14 +971,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginningTransaction(PWSTR szURL, PWSTR szHeaders, uint32 dwReserved, out PWSTR pszAdditionalHeaders) mut => VT.BeginningTransaction(ref this, szURL, szHeaders, dwReserved, out pszAdditionalHeaders);
-			public HRESULT OnResponse(uint32 dwResponseCode, PWSTR szResponseHeaders, PWSTR szRequestHeaders, out PWSTR pszAdditionalRequestHeaders) mut => VT.OnResponse(ref this, dwResponseCode, szResponseHeaders, szRequestHeaders, out pszAdditionalRequestHeaders);
+			public HResult BeginningTransaction(char16* szURL, char16* szHeaders, uint32 dwReserved, out char16* pszAdditionalHeaders) mut => VT.BeginningTransaction(ref this, szURL, szHeaders, dwReserved, out pszAdditionalHeaders);
+			public HResult OnResponse(uint32 dwResponseCode, char16* szResponseHeaders, char16* szRequestHeaders, out char16* pszAdditionalRequestHeaders) mut => VT.OnResponse(ref this, dwResponseCode, szResponseHeaders, szRequestHeaders, out pszAdditionalRequestHeaders);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHttpNegotiate self, PWSTR szURL, PWSTR szHeaders, uint32 dwReserved, out PWSTR pszAdditionalHeaders) BeginningTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHttpNegotiate self, uint32 dwResponseCode, PWSTR szResponseHeaders, PWSTR szRequestHeaders, out PWSTR pszAdditionalRequestHeaders) OnResponse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHttpNegotiate self, char16* szURL, char16* szHeaders, uint32 dwReserved, out char16* pszAdditionalHeaders) BeginningTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHttpNegotiate self, uint32 dwResponseCode, char16* szResponseHeaders, char16* szRequestHeaders, out char16* pszAdditionalRequestHeaders) OnResponse;
 			}
 		}
 		[CRepr]
@@ -983,12 +988,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRootSecurityId(uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetRootSecurityId(ref this, pbSecurityId, out pcbSecurityId, dwReserved);
+			public HResult GetRootSecurityId(uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetRootSecurityId(ref this, pbSecurityId, out pcbSecurityId, dwReserved);
 
 			[CRepr]
 			public struct VTable : IHttpNegotiate.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHttpNegotiate2 self, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetRootSecurityId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHttpNegotiate2 self, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetRootSecurityId;
 			}
 		}
 		[CRepr]
@@ -998,12 +1003,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSerializedClientCertContext(uint8** ppbCert, out uint32 pcbCert) mut => VT.GetSerializedClientCertContext(ref this, ppbCert, out pcbCert);
+			public HResult GetSerializedClientCertContext(uint8** ppbCert, out uint32 pcbCert) mut => VT.GetSerializedClientCertContext(ref this, ppbCert, out pcbCert);
 
 			[CRepr]
 			public struct VTable : IHttpNegotiate2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHttpNegotiate3 self, uint8** ppbCert, out uint32 pcbCert) GetSerializedClientCertContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHttpNegotiate3 self, uint8** ppbCert, out uint32 pcbCert) GetSerializedClientCertContext;
 			}
 		}
 		[CRepr]
@@ -1013,14 +1018,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetHandleForUnlock(uint hWinInetLockHandle, uint dwReserved) mut => VT.SetHandleForUnlock(ref this, hWinInetLockHandle, dwReserved);
-			public HRESULT SetDeleteFile(uint dwReserved) mut => VT.SetDeleteFile(ref this, dwReserved);
+			public HResult SetHandleForUnlock(uint hWinInetLockHandle, uint dwReserved) mut => VT.SetHandleForUnlock(ref this, hWinInetLockHandle, dwReserved);
+			public HResult SetDeleteFile(uint dwReserved) mut => VT.SetDeleteFile(ref this, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetFileStream self, uint hWinInetLockHandle, uint dwReserved) SetHandleForUnlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetFileStream self, uint dwReserved) SetDeleteFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetFileStream self, uint hWinInetLockHandle, uint dwReserved) SetHandleForUnlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetFileStream self, uint dwReserved) SetDeleteFile;
 			}
 		}
 		[CRepr]
@@ -1030,12 +1035,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetWindow(in Guid rguidReason, out HWND phwnd) mut => VT.GetWindow(ref this, rguidReason, out phwnd);
+			public HResult GetWindow(in Guid rguidReason, out HWnd phwnd) mut => VT._GetWindow(ref this, rguidReason, out phwnd);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowForBindingUI self, in Guid rguidReason, out HWND phwnd) GetWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowForBindingUI self, in Guid rguidReason, out HWnd phwnd) _GetWindow;
 			}
 		}
 		[CRepr]
@@ -1045,12 +1050,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnCodeInstallProblem(uint32 ulStatusCode, PWSTR szDestination, PWSTR szSource, uint32 dwReserved) mut => VT.OnCodeInstallProblem(ref this, ulStatusCode, szDestination, szSource, dwReserved);
+			public HResult OnCodeInstallProblem(uint32 ulStatusCode, char16* szDestination, char16* szSource, uint32 dwReserved) mut => VT.OnCodeInstallProblem(ref this, ulStatusCode, szDestination, szSource, dwReserved);
 
 			[CRepr]
 			public struct VTable : IWindowForBindingUI.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICodeInstall self, uint32 ulStatusCode, PWSTR szDestination, PWSTR szSource, uint32 dwReserved) OnCodeInstallProblem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICodeInstall self, uint32 ulStatusCode, char16* szDestination, char16* szSource, uint32 dwReserved) OnCodeInstallProblem;
 			}
 		}
 		[CRepr]
@@ -1060,12 +1065,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetIUri(out IUri* ppIUri) mut => VT.GetIUri(ref this, out ppIUri);
+			public HResult GetIUri(out IUri* ppIUri) mut => VT.GetIUri(ref this, out ppIUri);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriContainer self, out IUri* ppIUri) GetIUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriContainer self, out IUri* ppIUri) GetIUri;
 			}
 		}
 		[CRepr]
@@ -1075,14 +1080,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateIUriBuilder(uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) mut => VT.CreateIUriBuilder(ref this, dwFlags, dwReserved, out ppIUriBuilder);
-			public HRESULT CreateInitializedIUriBuilder(uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) mut => VT.CreateInitializedIUriBuilder(ref this, dwFlags, dwReserved, out ppIUriBuilder);
+			public HResult CreateIUriBuilder(uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) mut => VT.CreateIUriBuilder(ref this, dwFlags, dwReserved, out ppIUriBuilder);
+			public HResult CreateInitializedIUriBuilder(uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) mut => VT.CreateInitializedIUriBuilder(ref this, dwFlags, dwReserved, out ppIUriBuilder);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilderFactory self, uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) CreateIUriBuilder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUriBuilderFactory self, uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) CreateInitializedIUriBuilder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilderFactory self, uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) CreateIUriBuilder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUriBuilderFactory self, uint32 dwFlags, uint dwReserved, out IUriBuilder* ppIUriBuilder) CreateInitializedIUriBuilder;
 			}
 		}
 		[CRepr]
@@ -1092,12 +1097,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryOption(uint32 dwOption, void* pBuffer, out uint32 pcbBuf) mut => VT.QueryOption(ref this, dwOption, pBuffer, out pcbBuf);
+			public HResult QueryOption(uint32 dwOption, void* pBuffer, out uint32 pcbBuf) mut => VT.QueryOption(ref this, dwOption, pBuffer, out pcbBuf);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetInfo self, uint32 dwOption, void* pBuffer, out uint32 pcbBuf) QueryOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetInfo self, uint32 dwOption, void* pBuffer, out uint32 pcbBuf) QueryOption;
 			}
 		}
 		[CRepr]
@@ -1107,12 +1112,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnSecurityProblem(uint32 dwProblem) mut => VT.OnSecurityProblem(ref this, dwProblem);
+			public HResult OnSecurityProblem(uint32 dwProblem) mut => VT.OnSecurityProblem(ref this, dwProblem);
 
 			[CRepr]
 			public struct VTable : IWindowForBindingUI.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IHttpSecurity self, uint32 dwProblem) OnSecurityProblem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IHttpSecurity self, uint32 dwProblem) OnSecurityProblem;
 			}
 		}
 		[CRepr]
@@ -1122,12 +1127,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryInfo(uint32 dwOption, void* pBuffer, out uint32 pcbBuf, out uint32 pdwFlags, out uint32 pdwReserved) mut => VT.QueryInfo(ref this, dwOption, pBuffer, out pcbBuf, out pdwFlags, out pdwReserved);
+			public HResult QueryInfo(uint32 dwOption, void* pBuffer, out uint32 pcbBuf, out uint32 pdwFlags, out uint32 pdwReserved) mut => VT.QueryInfo(ref this, dwOption, pBuffer, out pcbBuf, out pdwFlags, out pdwReserved);
 
 			[CRepr]
 			public struct VTable : IWinInetInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetHttpInfo self, uint32 dwOption, void* pBuffer, out uint32 pcbBuf, out uint32 pdwFlags, out uint32 pdwReserved) QueryInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetHttpInfo self, uint32 dwOption, void* pBuffer, out uint32 pcbBuf, out uint32 pdwFlags, out uint32 pdwReserved) QueryInfo;
 			}
 		}
 		[CRepr]
@@ -1137,12 +1142,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRequestTimeouts(out uint32 pdwConnectTimeout, out uint32 pdwSendTimeout, out uint32 pdwReceiveTimeout) mut => VT.GetRequestTimeouts(ref this, out pdwConnectTimeout, out pdwSendTimeout, out pdwReceiveTimeout);
+			public HResult GetRequestTimeouts(out uint32 pdwConnectTimeout, out uint32 pdwSendTimeout, out uint32 pdwReceiveTimeout) mut => VT.GetRequestTimeouts(ref this, out pdwConnectTimeout, out pdwSendTimeout, out pdwReceiveTimeout);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetHttpTimeouts self, out uint32 pdwConnectTimeout, out uint32 pdwSendTimeout, out uint32 pdwReceiveTimeout) GetRequestTimeouts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetHttpTimeouts self, out uint32 pdwConnectTimeout, out uint32 pdwSendTimeout, out uint32 pdwReceiveTimeout) GetRequestTimeouts;
 			}
 		}
 		[CRepr]
@@ -1152,12 +1157,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetCacheExtension(PWSTR pwzExt, void* pszCacheFile, out uint32 pcbCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) mut => VT.SetCacheExtension(ref this, pwzExt, pszCacheFile, out pcbCacheFile, out pdwWinInetError, out pdwReserved);
+			public HResult SetCacheExtension(char16* pwzExt, void* pszCacheFile, out uint32 pcbCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) mut => VT.SetCacheExtension(ref this, pwzExt, pszCacheFile, out pcbCacheFile, out pdwWinInetError, out pdwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetCacheHints self, PWSTR pwzExt, void* pszCacheFile, out uint32 pcbCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) SetCacheExtension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetCacheHints self, char16* pwzExt, void* pszCacheFile, out uint32 pcbCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) SetCacheExtension;
 			}
 		}
 		[CRepr]
@@ -1167,12 +1172,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetCacheExtension2(PWSTR pwzExt, PWSTR pwzCacheFile, out uint32 pcchCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) mut => VT.SetCacheExtension2(ref this, pwzExt, pwzCacheFile, out pcchCacheFile, out pdwWinInetError, out pdwReserved);
+			public HResult SetCacheExtension2(char16* pwzExt, char16* pwzCacheFile, out uint32 pcchCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) mut => VT.SetCacheExtension2(ref this, pwzExt, pwzCacheFile, out pcchCacheFile, out pdwWinInetError, out pdwReserved);
 
 			[CRepr]
 			public struct VTable : IWinInetCacheHints.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWinInetCacheHints2 self, PWSTR pwzExt, PWSTR pwzCacheFile, out uint32 pcchCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) SetCacheExtension2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWinInetCacheHints2 self, char16* pwzExt, char16* pwzCacheFile, out uint32 pcchCacheFile, out uint32 pdwWinInetError, out uint32 pdwReserved) SetCacheExtension2;
 			}
 		}
 		[CRepr]
@@ -1192,14 +1197,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBindInfo(out uint32 grfBINDF, out BINDINFO pbindinfo) mut => VT.GetBindInfo(ref this, out grfBINDF, out pbindinfo);
-			public HRESULT GetBindString(uint32 ulStringType, out PWSTR ppwzStr, uint32 cEl, out uint32 pcElFetched) mut => VT.GetBindString(ref this, ulStringType, out ppwzStr, cEl, out pcElFetched);
+			public HResult GetBindInfo(out uint32 grfBINDF, out BINDINFO pbindinfo) mut => VT.GetBindInfo(ref this, out grfBINDF, out pbindinfo);
+			public HResult GetBindString(uint32 ulStringType, out char16* ppwzStr, uint32 cEl, out uint32 pcElFetched) mut => VT.GetBindString(ref this, ulStringType, out ppwzStr, cEl, out pcElFetched);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetBindInfo self, out uint32 grfBINDF, out BINDINFO pbindinfo) GetBindInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetBindInfo self, uint32 ulStringType, out PWSTR ppwzStr, uint32 cEl, out uint32 pcElFetched) GetBindString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetBindInfo self, out uint32 grfBINDF, out BINDINFO pbindinfo) GetBindInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetBindInfo self, uint32 ulStringType, out char16* ppwzStr, uint32 cEl, out uint32 pcElFetched) GetBindString;
 			}
 		}
 		[CRepr]
@@ -1209,12 +1214,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBindInfoEx(out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) mut => VT.GetBindInfoEx(ref this, out grfBINDF, out pbindinfo, out grfBINDF2, out pdwReserved);
+			public HResult GetBindInfoEx(out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) mut => VT.GetBindInfoEx(ref this, out grfBINDF, out pbindinfo, out grfBINDF2, out pdwReserved);
 
 			[CRepr]
 			public struct VTable : IInternetBindInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetBindInfoEx self, out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) GetBindInfoEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetBindInfoEx self, out uint32 grfBINDF, out BINDINFO pbindinfo, out uint32 grfBINDF2, out uint32 pdwReserved) GetBindInfoEx;
 			}
 		}
 		[CRepr]
@@ -1224,22 +1229,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Start(PWSTR szUrl, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) mut => VT.Start(ref this, szUrl, ref pOIProtSink, ref pOIBindInfo, grfPI, dwReserved);
-			public HRESULT Continue(ref PROTOCOLDATA pProtocolData) mut => VT.Continue(ref this, ref pProtocolData);
-			public HRESULT Abort(HRESULT hrReason, uint32 dwOptions) mut => VT.Abort(ref this, hrReason, dwOptions);
-			public HRESULT Terminate(uint32 dwOptions) mut => VT.Terminate(ref this, dwOptions);
-			public HRESULT Suspend() mut => VT.Suspend(ref this);
-			public HRESULT Resume() mut => VT.Resume(ref this);
+			public HResult Start(char16* szUrl, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) mut => VT.Start(ref this, szUrl, ref pOIProtSink, ref pOIBindInfo, grfPI, dwReserved);
+			public HResult Continue(ref PROTOCOLDATA pProtocolData) mut => VT.Continue(ref this, ref pProtocolData);
+			public HResult Abort(HResult hrReason, uint32 dwOptions) mut => VT.Abort(ref this, hrReason, dwOptions);
+			public HResult Terminate(uint32 dwOptions) mut => VT.Terminate(ref this, dwOptions);
+			public HResult Suspend() mut => VT.Suspend(ref this);
+			public HResult Resume() mut => VT.Resume(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolRoot self, PWSTR szUrl, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) Start;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolRoot self, ref PROTOCOLDATA pProtocolData) Continue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolRoot self, HRESULT hrReason, uint32 dwOptions) Abort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolRoot self, uint32 dwOptions) Terminate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolRoot self) Suspend;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolRoot self) Resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolRoot self, char16* szUrl, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) Start;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolRoot self, ref PROTOCOLDATA pProtocolData) Continue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolRoot self, HResult hrReason, uint32 dwOptions) Abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolRoot self, uint32 dwOptions) Terminate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolRoot self) Suspend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolRoot self) Resume;
 			}
 		}
 		[CRepr]
@@ -1249,18 +1254,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Read(void* pv, uint32 cb, out uint32 pcbRead) mut => VT.Read(ref this, pv, cb, out pcbRead);
-			public HRESULT Seek(LARGE_INTEGER dlibMove, uint32 dwOrigin, out ULARGE_INTEGER plibNewPosition) mut => VT.Seek(ref this, dlibMove, dwOrigin, out plibNewPosition);
-			public HRESULT LockRequest(uint32 dwOptions) mut => VT.LockRequest(ref this, dwOptions);
-			public HRESULT UnlockRequest() mut => VT.UnlockRequest(ref this);
+			public HResult Read(void* pv, uint32 cb, out uint32 pcbRead) mut => VT.Read(ref this, pv, cb, out pcbRead);
+			public HResult Seek(LARGE_INTEGER dlibMove, uint32 dwOrigin, out ULARGE_INTEGER plibNewPosition) mut => VT.Seek(ref this, dlibMove, dwOrigin, out plibNewPosition);
+			public HResult LockRequest(uint32 dwOptions) mut => VT.LockRequest(ref this, dwOptions);
+			public HResult UnlockRequest() mut => VT.UnlockRequest(ref this);
 
 			[CRepr]
 			public struct VTable : IInternetProtocolRoot.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocol self, void* pv, uint32 cb, out uint32 pcbRead) Read;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocol self, LARGE_INTEGER dlibMove, uint32 dwOrigin, out ULARGE_INTEGER plibNewPosition) Seek;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocol self, uint32 dwOptions) LockRequest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocol self) UnlockRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocol self, void* pv, uint32 cb, out uint32 pcbRead) Read;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocol self, LARGE_INTEGER dlibMove, uint32 dwOrigin, out ULARGE_INTEGER plibNewPosition) Seek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocol self, uint32 dwOptions) LockRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocol self) UnlockRequest;
 			}
 		}
 		[CRepr]
@@ -1270,12 +1275,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartEx(ref IUri pUri, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) mut => VT.StartEx(ref this, ref pUri, ref pOIProtSink, ref pOIBindInfo, grfPI, dwReserved);
+			public HResult StartEx(ref IUri pUri, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) mut => VT.StartEx(ref this, ref pUri, ref pOIProtSink, ref pOIBindInfo, grfPI, dwReserved);
 
 			[CRepr]
 			public struct VTable : IInternetProtocol.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolEx self, ref IUri pUri, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) StartEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolEx self, ref IUri pUri, ref IInternetProtocolSink pOIProtSink, ref IInternetBindInfo pOIBindInfo, uint32 grfPI, HANDLE_PTR dwReserved) StartEx;
 			}
 		}
 		[CRepr]
@@ -1285,18 +1290,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Switch(ref PROTOCOLDATA pProtocolData) mut => VT.Switch(ref this, ref pProtocolData);
-			public HRESULT ReportProgress(uint32 ulStatusCode, PWSTR szStatusText) mut => VT.ReportProgress(ref this, ulStatusCode, szStatusText);
-			public HRESULT ReportData(uint32 grfBSCF, uint32 ulProgress, uint32 ulProgressMax) mut => VT.ReportData(ref this, grfBSCF, ulProgress, ulProgressMax);
-			public HRESULT ReportResult(HRESULT hrResult, uint32 dwError, PWSTR szResult) mut => VT.ReportResult(ref this, hrResult, dwError, szResult);
+			public HResult Switch(ref PROTOCOLDATA pProtocolData) mut => VT.Switch(ref this, ref pProtocolData);
+			public HResult ReportProgress(uint32 ulStatusCode, char16* szStatusText) mut => VT.ReportProgress(ref this, ulStatusCode, szStatusText);
+			public HResult ReportData(uint32 grfBSCF, uint32 ulProgress, uint32 ulProgressMax) mut => VT.ReportData(ref this, grfBSCF, ulProgress, ulProgressMax);
+			public HResult ReportResult(HResult hrResult, uint32 dwError, char16* szResult) mut => VT.ReportResult(ref this, hrResult, dwError, szResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSink self, ref PROTOCOLDATA pProtocolData) Switch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSink self, uint32 ulStatusCode, PWSTR szStatusText) ReportProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSink self, uint32 grfBSCF, uint32 ulProgress, uint32 ulProgressMax) ReportData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSink self, HRESULT hrResult, uint32 dwError, PWSTR szResult) ReportResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSink self, ref PROTOCOLDATA pProtocolData) Switch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSink self, uint32 ulStatusCode, char16* szStatusText) ReportProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSink self, uint32 grfBSCF, uint32 ulProgress, uint32 ulProgressMax) ReportData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSink self, HResult hrResult, uint32 dwError, char16* szResult) ReportResult;
 			}
 		}
 		[CRepr]
@@ -1306,16 +1311,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SwitchSink(ref IInternetProtocolSink pOIProtSink) mut => VT.SwitchSink(ref this, ref pOIProtSink);
-			public HRESULT CommitSwitch() mut => VT.CommitSwitch(ref this);
-			public HRESULT RollbackSwitch() mut => VT.RollbackSwitch(ref this);
+			public HResult SwitchSink(ref IInternetProtocolSink pOIProtSink) mut => VT.SwitchSink(ref this, ref pOIProtSink);
+			public HResult CommitSwitch() mut => VT.CommitSwitch(ref this);
+			public HResult RollbackSwitch() mut => VT.RollbackSwitch(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSinkStackable self, ref IInternetProtocolSink pOIProtSink) SwitchSink;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSinkStackable self) CommitSwitch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolSinkStackable self) RollbackSwitch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSinkStackable self, ref IInternetProtocolSink pOIProtSink) SwitchSink;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSinkStackable self) CommitSwitch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolSinkStackable self) RollbackSwitch;
 			}
 		}
 		[CRepr]
@@ -1325,24 +1330,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterNameSpace(ref IClassFactory pCF, in Guid rclsid, PWSTR pwzProtocol, uint32 cPatterns, in PWSTR ppwzPatterns, uint32 dwReserved) mut => VT.RegisterNameSpace(ref this, ref pCF, rclsid, pwzProtocol, cPatterns, ppwzPatterns, dwReserved);
-			public HRESULT UnregisterNameSpace(ref IClassFactory pCF, PWSTR pszProtocol) mut => VT.UnregisterNameSpace(ref this, ref pCF, pszProtocol);
-			public HRESULT RegisterMimeFilter(ref IClassFactory pCF, in Guid rclsid, PWSTR pwzType) mut => VT.RegisterMimeFilter(ref this, ref pCF, rclsid, pwzType);
-			public HRESULT UnregisterMimeFilter(ref IClassFactory pCF, PWSTR pwzType) mut => VT.UnregisterMimeFilter(ref this, ref pCF, pwzType);
-			public HRESULT CreateBinding(ref IBindCtx pBC, PWSTR szUrl, ref IUnknown pUnkOuter, out IUnknown* ppUnk, out IInternetProtocol* ppOInetProt, uint32 dwOption) mut => VT.CreateBinding(ref this, ref pBC, szUrl, ref pUnkOuter, out ppUnk, out ppOInetProt, dwOption);
-			public HRESULT SetSessionOption(uint32 dwOption, void* pBuffer, uint32 dwBufferLength, uint32 dwReserved) mut => VT.SetSessionOption(ref this, dwOption, pBuffer, dwBufferLength, dwReserved);
-			public HRESULT GetSessionOption(uint32 dwOption, void* pBuffer, out uint32 pdwBufferLength, uint32 dwReserved) mut => VT.GetSessionOption(ref this, dwOption, pBuffer, out pdwBufferLength, dwReserved);
+			public HResult RegisterNameSpace(ref IClassFactory pCF, in Guid rclsid, char16* pwzProtocol, uint32 cPatterns, in char16* ppwzPatterns, uint32 dwReserved) mut => VT.RegisterNameSpace(ref this, ref pCF, rclsid, pwzProtocol, cPatterns, ppwzPatterns, dwReserved);
+			public HResult UnregisterNameSpace(ref IClassFactory pCF, char16* pszProtocol) mut => VT.UnregisterNameSpace(ref this, ref pCF, pszProtocol);
+			public HResult RegisterMimeFilter(ref IClassFactory pCF, in Guid rclsid, char16* pwzType) mut => VT.RegisterMimeFilter(ref this, ref pCF, rclsid, pwzType);
+			public HResult UnregisterMimeFilter(ref IClassFactory pCF, char16* pwzType) mut => VT.UnregisterMimeFilter(ref this, ref pCF, pwzType);
+			public HResult CreateBinding(ref IBindCtx pBC, char16* szUrl, ref IUnknown pUnkOuter, out IUnknown* ppUnk, out IInternetProtocol* ppOInetProt, uint32 dwOption) mut => VT.CreateBinding(ref this, ref pBC, szUrl, ref pUnkOuter, out ppUnk, out ppOInetProt, dwOption);
+			public HResult SetSessionOption(uint32 dwOption, void* pBuffer, uint32 dwBufferLength, uint32 dwReserved) mut => VT.SetSessionOption(ref this, dwOption, pBuffer, dwBufferLength, dwReserved);
+			public HResult GetSessionOption(uint32 dwOption, void* pBuffer, out uint32 pdwBufferLength, uint32 dwReserved) mut => VT.GetSessionOption(ref this, dwOption, pBuffer, out pdwBufferLength, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, ref IClassFactory pCF, in Guid rclsid, PWSTR pwzProtocol, uint32 cPatterns, in PWSTR ppwzPatterns, uint32 dwReserved) RegisterNameSpace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, ref IClassFactory pCF, PWSTR pszProtocol) UnregisterNameSpace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, ref IClassFactory pCF, in Guid rclsid, PWSTR pwzType) RegisterMimeFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, ref IClassFactory pCF, PWSTR pwzType) UnregisterMimeFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, ref IBindCtx pBC, PWSTR szUrl, ref IUnknown pUnkOuter, out IUnknown* ppUnk, out IInternetProtocol* ppOInetProt, uint32 dwOption) CreateBinding;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, uint32 dwOption, void* pBuffer, uint32 dwBufferLength, uint32 dwReserved) SetSessionOption;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSession self, uint32 dwOption, void* pBuffer, out uint32 pdwBufferLength, uint32 dwReserved) GetSessionOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, ref IClassFactory pCF, in Guid rclsid, char16* pwzProtocol, uint32 cPatterns, in char16* ppwzPatterns, uint32 dwReserved) RegisterNameSpace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, ref IClassFactory pCF, char16* pszProtocol) UnregisterNameSpace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, ref IClassFactory pCF, in Guid rclsid, char16* pwzType) RegisterMimeFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, ref IClassFactory pCF, char16* pwzType) UnregisterMimeFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, ref IBindCtx pBC, char16* szUrl, ref IUnknown pUnkOuter, out IUnknown* ppUnk, out IInternetProtocol* ppOInetProt, uint32 dwOption) CreateBinding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, uint32 dwOption, void* pBuffer, uint32 dwBufferLength, uint32 dwReserved) SetSessionOption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSession self, uint32 dwOption, void* pBuffer, out uint32 pdwBufferLength, uint32 dwReserved) GetSessionOption;
 			}
 		}
 		[CRepr]
@@ -1352,14 +1357,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Prepare() mut => VT.Prepare(ref this);
-			public HRESULT Continue() mut => VT.Continue(ref this);
+			public HResult Prepare() mut => VT.Prepare(ref this);
+			public HResult Continue() mut => VT.Continue(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetThreadSwitch self) Prepare;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetThreadSwitch self) Continue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetThreadSwitch self) Prepare;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetThreadSwitch self) Continue;
 			}
 		}
 		[CRepr]
@@ -1369,14 +1374,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetPriority(int32 nPriority) mut => VT.SetPriority(ref this, nPriority);
-			public HRESULT GetPriority(out int32 pnPriority) mut => VT.GetPriority(ref this, out pnPriority);
+			public HResult SetPriority(int32 nPriority) mut => VT.SetPriority(ref this, nPriority);
+			public HResult GetPriority(out int32 pnPriority) mut => VT.GetPriority(ref this, out pnPriority);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetPriority self, int32 nPriority) SetPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetPriority self, out int32 pnPriority) GetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetPriority self, int32 nPriority) SetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetPriority self, out int32 pnPriority) GetPriority;
 			}
 		}
 		[CRepr]
@@ -1386,18 +1391,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ParseUrl(PWSTR pwzUrl, PARSEACTION ParseAction, uint32 dwParseFlags, PWSTR pwzResult, uint32 cchResult, out uint32 pcchResult, uint32 dwReserved) mut => VT.ParseUrl(ref this, pwzUrl, ParseAction, dwParseFlags, pwzResult, cchResult, out pcchResult, dwReserved);
-			public HRESULT CombineUrl(PWSTR pwzBaseUrl, PWSTR pwzRelativeUrl, uint32 dwCombineFlags, PWSTR pwzResult, uint32 cchResult, out uint32 pcchResult, uint32 dwReserved) mut => VT.CombineUrl(ref this, pwzBaseUrl, pwzRelativeUrl, dwCombineFlags, pwzResult, cchResult, out pcchResult, dwReserved);
-			public HRESULT CompareUrl(PWSTR pwzUrl1, PWSTR pwzUrl2, uint32 dwCompareFlags) mut => VT.CompareUrl(ref this, pwzUrl1, pwzUrl2, dwCompareFlags);
-			public HRESULT QueryInfo(PWSTR pwzUrl, QUERYOPTION OueryOption, uint32 dwQueryFlags, void* pBuffer, uint32 cbBuffer, out uint32 pcbBuf, uint32 dwReserved) mut => VT.QueryInfo(ref this, pwzUrl, OueryOption, dwQueryFlags, pBuffer, cbBuffer, out pcbBuf, dwReserved);
+			public HResult ParseUrl(char16* pwzUrl, PARSEACTION ParseAction, uint32 dwParseFlags, char16* pwzResult, uint32 ccHResult, out uint32 pccHResult, uint32 dwReserved) mut => VT.ParseUrl(ref this, pwzUrl, ParseAction, dwParseFlags, pwzResult, ccHResult, out pccHResult, dwReserved);
+			public HResult CombineUrl(char16* pwzBaseUrl, char16* pwzRelativeUrl, uint32 dwCombineFlags, char16* pwzResult, uint32 ccHResult, out uint32 pccHResult, uint32 dwReserved) mut => VT.CombineUrl(ref this, pwzBaseUrl, pwzRelativeUrl, dwCombineFlags, pwzResult, ccHResult, out pccHResult, dwReserved);
+			public HResult CompareUrl(char16* pwzUrl1, char16* pwzUrl2, uint32 dwCompareFlags) mut => VT.CompareUrl(ref this, pwzUrl1, pwzUrl2, dwCompareFlags);
+			public HResult QueryInfo(char16* pwzUrl, QUERYOPTION OueryOption, uint32 dwQueryFlags, void* pBuffer, uint32 cbBuffer, out uint32 pcbBuf, uint32 dwReserved) mut => VT.QueryInfo(ref this, pwzUrl, OueryOption, dwQueryFlags, pBuffer, cbBuffer, out pcbBuf, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolInfo self, PWSTR pwzUrl, PARSEACTION ParseAction, uint32 dwParseFlags, PWSTR pwzResult, uint32 cchResult, out uint32 pcchResult, uint32 dwReserved) ParseUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolInfo self, PWSTR pwzBaseUrl, PWSTR pwzRelativeUrl, uint32 dwCombineFlags, PWSTR pwzResult, uint32 cchResult, out uint32 pcchResult, uint32 dwReserved) CombineUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolInfo self, PWSTR pwzUrl1, PWSTR pwzUrl2, uint32 dwCompareFlags) CompareUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetProtocolInfo self, PWSTR pwzUrl, QUERYOPTION OueryOption, uint32 dwQueryFlags, void* pBuffer, uint32 cbBuffer, out uint32 pcbBuf, uint32 dwReserved) QueryInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolInfo self, char16* pwzUrl, PARSEACTION ParseAction, uint32 dwParseFlags, char16* pwzResult, uint32 ccHResult, out uint32 pccHResult, uint32 dwReserved) ParseUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolInfo self, char16* pwzBaseUrl, char16* pwzRelativeUrl, uint32 dwCombineFlags, char16* pwzResult, uint32 ccHResult, out uint32 pccHResult, uint32 dwReserved) CombineUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolInfo self, char16* pwzUrl1, char16* pwzUrl2, uint32 dwCompareFlags) CompareUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetProtocolInfo self, char16* pwzUrl, QUERYOPTION OueryOption, uint32 dwQueryFlags, void* pBuffer, uint32 cbBuffer, out uint32 pcbBuf, uint32 dwReserved) QueryInfo;
 			}
 		}
 		[CRepr]
@@ -1407,14 +1412,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetWindow(out HWND phwnd) mut => VT.GetWindow(ref this, out phwnd);
-			public HRESULT EnableModeless(BOOL fEnable) mut => VT.EnableModeless(ref this, fEnable);
+			public HResult GetWindow(out HWnd phwnd) mut => VT._GetWindow(ref this, out phwnd);
+			public HResult EnableModeless(IntBool fEnable) mut => VT.EnableModeless(ref this, fEnable);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityMgrSite self, out HWND phwnd) GetWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityMgrSite self, BOOL fEnable) EnableModeless;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityMgrSite self, out HWnd phwnd) _GetWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityMgrSite self, IntBool fEnable) EnableModeless;
 			}
 		}
 		[CRepr]
@@ -1424,26 +1429,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetSecuritySite(ref IInternetSecurityMgrSite pSite) mut => VT.SetSecuritySite(ref this, ref pSite);
-			public HRESULT GetSecuritySite(out IInternetSecurityMgrSite* ppSite) mut => VT.GetSecuritySite(ref this, out ppSite);
-			public HRESULT MapUrlToZone(PWSTR pwszUrl, out uint32 pdwZone, uint32 dwFlags) mut => VT.MapUrlToZone(ref this, pwszUrl, out pdwZone, dwFlags);
-			public HRESULT GetSecurityId(PWSTR pwszUrl, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetSecurityId(ref this, pwszUrl, pbSecurityId, out pcbSecurityId, dwReserved);
-			public HRESULT ProcessUrlAction(PWSTR pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) mut => VT.ProcessUrlAction(ref this, pwszUrl, dwAction, pPolicy, cbPolicy, ref pContext, cbContext, dwFlags, dwReserved);
-			public HRESULT QueryCustomPolicy(PWSTR pwszUrl, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwReserved) mut => VT.QueryCustomPolicy(ref this, pwszUrl, guidKey, ppPolicy, out pcbPolicy, ref pContext, cbContext, dwReserved);
-			public HRESULT SetZoneMapping(uint32 dwZone, PWSTR lpszPattern, uint32 dwFlags) mut => VT.SetZoneMapping(ref this, dwZone, lpszPattern, dwFlags);
-			public HRESULT GetZoneMappings(uint32 dwZone, out IEnumString* ppenumString, uint32 dwFlags) mut => VT.GetZoneMappings(ref this, dwZone, out ppenumString, dwFlags);
+			public HResult SetSecuritySite(ref IInternetSecurityMgrSite pSite) mut => VT.SetSecuritySite(ref this, ref pSite);
+			public HResult GetSecuritySite(out IInternetSecurityMgrSite* ppSite) mut => VT.GetSecuritySite(ref this, out ppSite);
+			public HResult MapUrlToZone(char16* pwszUrl, out uint32 pdwZone, uint32 dwFlags) mut => VT.MapUrlToZone(ref this, pwszUrl, out pdwZone, dwFlags);
+			public HResult GetSecurityId(char16* pwszUrl, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetSecurityId(ref this, pwszUrl, pbSecurityId, out pcbSecurityId, dwReserved);
+			public HResult ProcessUrlAction(char16* pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) mut => VT.ProcessUrlAction(ref this, pwszUrl, dwAction, pPolicy, cbPolicy, ref pContext, cbContext, dwFlags, dwReserved);
+			public HResult QueryCustomPolicy(char16* pwszUrl, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwReserved) mut => VT.QueryCustomPolicy(ref this, pwszUrl, guidKey, ppPolicy, out pcbPolicy, ref pContext, cbContext, dwReserved);
+			public HResult SetZoneMapping(uint32 dwZone, char16* lpszPattern, uint32 dwFlags) mut => VT.SetZoneMapping(ref this, dwZone, lpszPattern, dwFlags);
+			public HResult GetZoneMappings(uint32 dwZone, out IEnumString* ppenumString, uint32 dwFlags) mut => VT.GetZoneMappings(ref this, dwZone, out ppenumString, dwFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, ref IInternetSecurityMgrSite pSite) SetSecuritySite;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, out IInternetSecurityMgrSite* ppSite) GetSecuritySite;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, PWSTR pwszUrl, out uint32 pdwZone, uint32 dwFlags) MapUrlToZone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, PWSTR pwszUrl, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetSecurityId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, PWSTR pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) ProcessUrlAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, PWSTR pwszUrl, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwReserved) QueryCustomPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, uint32 dwZone, PWSTR lpszPattern, uint32 dwFlags) SetZoneMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManager self, uint32 dwZone, out IEnumString* ppenumString, uint32 dwFlags) GetZoneMappings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, ref IInternetSecurityMgrSite pSite) SetSecuritySite;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, out IInternetSecurityMgrSite* ppSite) GetSecuritySite;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, char16* pwszUrl, out uint32 pdwZone, uint32 dwFlags) MapUrlToZone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, char16* pwszUrl, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetSecurityId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, char16* pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) ProcessUrlAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, char16* pwszUrl, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwReserved) QueryCustomPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, uint32 dwZone, char16* lpszPattern, uint32 dwFlags) SetZoneMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManager self, uint32 dwZone, out IEnumString* ppenumString, uint32 dwFlags) GetZoneMappings;
 			}
 		}
 		[CRepr]
@@ -1453,12 +1458,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ProcessUrlActionEx(PWSTR pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved, out uint32 pdwOutFlags) mut => VT.ProcessUrlActionEx(ref this, pwszUrl, dwAction, pPolicy, cbPolicy, ref pContext, cbContext, dwFlags, dwReserved, out pdwOutFlags);
+			public HResult ProcessUrlActionEx(char16* pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved, out uint32 pdwOutFlags) mut => VT.ProcessUrlActionEx(ref this, pwszUrl, dwAction, pPolicy, cbPolicy, ref pContext, cbContext, dwFlags, dwReserved, out pdwOutFlags);
 
 			[CRepr]
 			public struct VTable : IInternetSecurityManager.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManagerEx self, PWSTR pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved, out uint32 pdwOutFlags) ProcessUrlActionEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManagerEx self, char16* pwszUrl, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved, out uint32 pdwOutFlags) ProcessUrlActionEx;
 			}
 		}
 		[CRepr]
@@ -1468,18 +1473,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT MapUrlToZoneEx2(ref IUri pUri, out uint32 pdwZone, uint32 dwFlags, PWSTR* ppwszMappedUrl, uint32* pdwOutFlags) mut => VT.MapUrlToZoneEx2(ref this, ref pUri, out pdwZone, dwFlags, ppwszMappedUrl, pdwOutFlags);
-			public HRESULT ProcessUrlActionEx2(ref IUri pUri, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint dwReserved, out uint32 pdwOutFlags) mut => VT.ProcessUrlActionEx2(ref this, ref pUri, dwAction, pPolicy, cbPolicy, ref pContext, cbContext, dwFlags, dwReserved, out pdwOutFlags);
-			public HRESULT GetSecurityIdEx2(ref IUri pUri, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetSecurityIdEx2(ref this, ref pUri, pbSecurityId, out pcbSecurityId, dwReserved);
-			public HRESULT QueryCustomPolicyEx2(ref IUri pUri, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint dwReserved) mut => VT.QueryCustomPolicyEx2(ref this, ref pUri, guidKey, ppPolicy, out pcbPolicy, ref pContext, cbContext, dwReserved);
+			public HResult MapUrlToZoneEx2(ref IUri pUri, out uint32 pdwZone, uint32 dwFlags, char16** ppwszMappedUrl, uint32* pdwOutFlags) mut => VT.MapUrlToZoneEx2(ref this, ref pUri, out pdwZone, dwFlags, ppwszMappedUrl, pdwOutFlags);
+			public HResult ProcessUrlActionEx2(ref IUri pUri, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint dwReserved, out uint32 pdwOutFlags) mut => VT.ProcessUrlActionEx2(ref this, ref pUri, dwAction, pPolicy, cbPolicy, ref pContext, cbContext, dwFlags, dwReserved, out pdwOutFlags);
+			public HResult GetSecurityIdEx2(ref IUri pUri, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetSecurityIdEx2(ref this, ref pUri, pbSecurityId, out pcbSecurityId, dwReserved);
+			public HResult QueryCustomPolicyEx2(ref IUri pUri, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint dwReserved) mut => VT.QueryCustomPolicyEx2(ref this, ref pUri, guidKey, ppPolicy, out pcbPolicy, ref pContext, cbContext, dwReserved);
 
 			[CRepr]
 			public struct VTable : IInternetSecurityManagerEx.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManagerEx2 self, ref IUri pUri, out uint32 pdwZone, uint32 dwFlags, PWSTR* ppwszMappedUrl, uint32* pdwOutFlags) MapUrlToZoneEx2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManagerEx2 self, ref IUri pUri, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint dwReserved, out uint32 pdwOutFlags) ProcessUrlActionEx2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManagerEx2 self, ref IUri pUri, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetSecurityIdEx2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetSecurityManagerEx2 self, ref IUri pUri, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint dwReserved) QueryCustomPolicyEx2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManagerEx2 self, ref IUri pUri, out uint32 pdwZone, uint32 dwFlags, char16** ppwszMappedUrl, uint32* pdwOutFlags) MapUrlToZoneEx2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManagerEx2 self, ref IUri pUri, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, ref uint8 pContext, uint32 cbContext, uint32 dwFlags, uint dwReserved, out uint32 pdwOutFlags) ProcessUrlActionEx2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManagerEx2 self, ref IUri pUri, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetSecurityIdEx2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetSecurityManagerEx2 self, ref IUri pUri, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, ref uint8 pContext, uint32 cbContext, uint dwReserved) QueryCustomPolicyEx2;
 			}
 		}
 		[CRepr]
@@ -1489,16 +1494,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetId(out uint32 pdwZone) mut => VT.GetId(ref this, out pdwZone);
-			public HRESULT SetId(uint32 dwZone) mut => VT.SetId(ref this, dwZone);
-			public HRESULT Remove() mut => VT.Remove(ref this);
+			public HResult GetId(out uint32 pdwZone) mut => VT.GetId(ref this, out pdwZone);
+			public HResult SetId(uint32 dwZone) mut => VT.SetId(ref this, dwZone);
+			public HResult Remove() mut => VT.Remove(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier self, out uint32 pdwZone) GetId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier self, uint32 dwZone) SetId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier self) Remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier self, out uint32 pdwZone) GetId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier self, uint32 dwZone) SetId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier self) Remove;
 			}
 		}
 		[CRepr]
@@ -1508,22 +1513,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetLastWriterPackageFamilyName(out PWSTR packageFamilyName) mut => VT.GetLastWriterPackageFamilyName(ref this, out packageFamilyName);
-			public HRESULT SetLastWriterPackageFamilyName(PWSTR packageFamilyName) mut => VT.SetLastWriterPackageFamilyName(ref this, packageFamilyName);
-			public HRESULT RemoveLastWriterPackageFamilyName() mut => VT.RemoveLastWriterPackageFamilyName(ref this);
-			public HRESULT GetAppZoneId(out uint32 zone) mut => VT.GetAppZoneId(ref this, out zone);
-			public HRESULT SetAppZoneId(uint32 zone) mut => VT.SetAppZoneId(ref this, zone);
-			public HRESULT RemoveAppZoneId() mut => VT.RemoveAppZoneId(ref this);
+			public HResult GetLastWriterPackageFamilyName(out char16* packageFamilyName) mut => VT.GetLastWriterPackageFamilyName(ref this, out packageFamilyName);
+			public HResult SetLastWriterPackageFamilyName(char16* packageFamilyName) mut => VT.SetLastWriterPackageFamilyName(ref this, packageFamilyName);
+			public HResult RemoveLastWriterPackageFamilyName() mut => VT.RemoveLastWriterPackageFamilyName(ref this);
+			public HResult GetAppZoneId(out uint32 zone) mut => VT.GetAppZoneId(ref this, out zone);
+			public HResult SetAppZoneId(uint32 zone) mut => VT.SetAppZoneId(ref this, zone);
+			public HResult RemoveAppZoneId() mut => VT.RemoveAppZoneId(ref this);
 
 			[CRepr]
 			public struct VTable : IZoneIdentifier.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier2 self, out PWSTR packageFamilyName) GetLastWriterPackageFamilyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier2 self, PWSTR packageFamilyName) SetLastWriterPackageFamilyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier2 self) RemoveLastWriterPackageFamilyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier2 self, out uint32 zone) GetAppZoneId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier2 self, uint32 zone) SetAppZoneId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IZoneIdentifier2 self) RemoveAppZoneId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier2 self, out char16* packageFamilyName) GetLastWriterPackageFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier2 self, char16* packageFamilyName) SetLastWriterPackageFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier2 self) RemoveLastWriterPackageFamilyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier2 self, out uint32 zone) GetAppZoneId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier2 self, uint32 zone) SetAppZoneId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IZoneIdentifier2 self) RemoveAppZoneId;
 			}
 		}
 		[CRepr]
@@ -1533,16 +1538,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSecurityId(uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetSecurityId(ref this, pbSecurityId, out pcbSecurityId, dwReserved);
-			public HRESULT ProcessUrlAction(uint32 dwAction, out uint8 pPolicy, uint32 cbPolicy, uint8* pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) mut => VT.ProcessUrlAction(ref this, dwAction, out pPolicy, cbPolicy, pContext, cbContext, dwFlags, dwReserved);
-			public HRESULT QueryCustomPolicy(in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, uint8* pContext, uint32 cbContext, uint32 dwReserved) mut => VT.QueryCustomPolicy(ref this, guidKey, ppPolicy, out pcbPolicy, pContext, cbContext, dwReserved);
+			public HResult GetSecurityId(uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) mut => VT.GetSecurityId(ref this, pbSecurityId, out pcbSecurityId, dwReserved);
+			public HResult ProcessUrlAction(uint32 dwAction, out uint8 pPolicy, uint32 cbPolicy, uint8* pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) mut => VT.ProcessUrlAction(ref this, dwAction, out pPolicy, cbPolicy, pContext, cbContext, dwFlags, dwReserved);
+			public HResult QueryCustomPolicy(in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, uint8* pContext, uint32 cbContext, uint32 dwReserved) mut => VT.QueryCustomPolicy(ref this, guidKey, ppPolicy, out pcbPolicy, pContext, cbContext, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetHostSecurityManager self, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetSecurityId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetHostSecurityManager self, uint32 dwAction, out uint8 pPolicy, uint32 cbPolicy, uint8* pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) ProcessUrlAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetHostSecurityManager self, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, uint8* pContext, uint32 cbContext, uint32 dwReserved) QueryCustomPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetHostSecurityManager self, uint8* pbSecurityId, out uint32 pcbSecurityId, uint dwReserved) GetSecurityId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetHostSecurityManager self, uint32 dwAction, out uint8 pPolicy, uint32 cbPolicy, uint8* pContext, uint32 cbContext, uint32 dwFlags, uint32 dwReserved) ProcessUrlAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetHostSecurityManager self, in Guid guidKey, uint8** ppPolicy, out uint32 pcbPolicy, uint8* pContext, uint32 cbContext, uint32 dwReserved) QueryCustomPolicy;
 			}
 		}
 		[CRepr]
@@ -1552,34 +1557,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetZoneAttributes(uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes) mut => VT.GetZoneAttributes(ref this, dwZone, out pZoneAttributes);
-			public HRESULT SetZoneAttributes(uint32 dwZone, ref ZONEATTRIBUTES pZoneAttributes) mut => VT.SetZoneAttributes(ref this, dwZone, ref pZoneAttributes);
-			public HRESULT GetZoneCustomPolicy(uint32 dwZone, in Guid guidKey, out uint8* ppPolicy, out uint32 pcbPolicy, URLZONEREG urlZoneReg) mut => VT.GetZoneCustomPolicy(ref this, dwZone, guidKey, out ppPolicy, out pcbPolicy, urlZoneReg);
-			public HRESULT SetZoneCustomPolicy(uint32 dwZone, in Guid guidKey, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) mut => VT.SetZoneCustomPolicy(ref this, dwZone, guidKey, pPolicy, cbPolicy, urlZoneReg);
-			public HRESULT GetZoneActionPolicy(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) mut => VT.GetZoneActionPolicy(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg);
-			public HRESULT SetZoneActionPolicy(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) mut => VT.SetZoneActionPolicy(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg);
-			public HRESULT PromptAction(uint32 dwAction, HWND hwndParent, PWSTR pwszUrl, PWSTR pwszText, uint32 dwPromptFlags) mut => VT.PromptAction(ref this, dwAction, hwndParent, pwszUrl, pwszText, dwPromptFlags);
-			public HRESULT LogAction(uint32 dwAction, PWSTR pwszUrl, PWSTR pwszText, uint32 dwLogFlags) mut => VT.LogAction(ref this, dwAction, pwszUrl, pwszText, dwLogFlags);
-			public HRESULT CreateZoneEnumerator(out uint32 pdwEnum, out uint32 pdwCount, uint32 dwFlags) mut => VT.CreateZoneEnumerator(ref this, out pdwEnum, out pdwCount, dwFlags);
-			public HRESULT GetZoneAt(uint32 dwEnum, uint32 dwIndex, out uint32 pdwZone) mut => VT.GetZoneAt(ref this, dwEnum, dwIndex, out pdwZone);
-			public HRESULT DestroyZoneEnumerator(uint32 dwEnum) mut => VT.DestroyZoneEnumerator(ref this, dwEnum);
-			public HRESULT CopyTemplatePoliciesToZone(uint32 dwTemplate, uint32 dwZone, uint32 dwReserved) mut => VT.CopyTemplatePoliciesToZone(ref this, dwTemplate, dwZone, dwReserved);
+			public HResult GetZoneAttributes(uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes) mut => VT.GetZoneAttributes(ref this, dwZone, out pZoneAttributes);
+			public HResult SetZoneAttributes(uint32 dwZone, ref ZONEATTRIBUTES pZoneAttributes) mut => VT.SetZoneAttributes(ref this, dwZone, ref pZoneAttributes);
+			public HResult GetZoneCustomPolicy(uint32 dwZone, in Guid guidKey, out uint8* ppPolicy, out uint32 pcbPolicy, URLZONEREG urlZoneReg) mut => VT.GetZoneCustomPolicy(ref this, dwZone, guidKey, out ppPolicy, out pcbPolicy, urlZoneReg);
+			public HResult SetZoneCustomPolicy(uint32 dwZone, in Guid guidKey, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) mut => VT.SetZoneCustomPolicy(ref this, dwZone, guidKey, pPolicy, cbPolicy, urlZoneReg);
+			public HResult GetZoneActionPolicy(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) mut => VT.GetZoneActionPolicy(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg);
+			public HResult SetZoneActionPolicy(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) mut => VT.SetZoneActionPolicy(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg);
+			public HResult PromptAction(uint32 dwAction, HWnd hwndParent, char16* pwszUrl, char16* pwszText, uint32 dwPromptFlags) mut => VT.PromptAction(ref this, dwAction, hwndParent, pwszUrl, pwszText, dwPromptFlags);
+			public HResult LogAction(uint32 dwAction, char16* pwszUrl, char16* pwszText, uint32 dwLogFlags) mut => VT.LogAction(ref this, dwAction, pwszUrl, pwszText, dwLogFlags);
+			public HResult CreateZoneEnumerator(out uint32 pdwEnum, out uint32 pdwCount, uint32 dwFlags) mut => VT.CreateZoneEnumerator(ref this, out pdwEnum, out pdwCount, dwFlags);
+			public HResult GetZoneAt(uint32 dwEnum, uint32 dwIndex, out uint32 pdwZone) mut => VT.GetZoneAt(ref this, dwEnum, dwIndex, out pdwZone);
+			public HResult DestroyZoneEnumerator(uint32 dwEnum) mut => VT.DestroyZoneEnumerator(ref this, dwEnum);
+			public HResult CopyTemplatePoliciesToZone(uint32 dwTemplate, uint32 dwZone, uint32 dwReserved) mut => VT.CopyTemplatePoliciesToZone(ref this, dwTemplate, dwZone, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes) GetZoneAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwZone, ref ZONEATTRIBUTES pZoneAttributes) SetZoneAttributes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwZone, in Guid guidKey, out uint8* ppPolicy, out uint32 pcbPolicy, URLZONEREG urlZoneReg) GetZoneCustomPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwZone, in Guid guidKey, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) SetZoneCustomPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) GetZoneActionPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) SetZoneActionPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwAction, HWND hwndParent, PWSTR pwszUrl, PWSTR pwszText, uint32 dwPromptFlags) PromptAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwAction, PWSTR pwszUrl, PWSTR pwszText, uint32 dwLogFlags) LogAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, out uint32 pdwEnum, out uint32 pdwCount, uint32 dwFlags) CreateZoneEnumerator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwEnum, uint32 dwIndex, out uint32 pdwZone) GetZoneAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwEnum) DestroyZoneEnumerator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManager self, uint32 dwTemplate, uint32 dwZone, uint32 dwReserved) CopyTemplatePoliciesToZone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes) GetZoneAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwZone, ref ZONEATTRIBUTES pZoneAttributes) SetZoneAttributes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwZone, in Guid guidKey, out uint8* ppPolicy, out uint32 pcbPolicy, URLZONEREG urlZoneReg) GetZoneCustomPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwZone, in Guid guidKey, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) SetZoneCustomPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) GetZoneActionPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg) SetZoneActionPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwAction, HWnd hwndParent, char16* pwszUrl, char16* pwszText, uint32 dwPromptFlags) PromptAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwAction, char16* pwszUrl, char16* pwszText, uint32 dwLogFlags) LogAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, out uint32 pdwEnum, out uint32 pdwCount, uint32 dwFlags) CreateZoneEnumerator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwEnum, uint32 dwIndex, out uint32 pdwZone) GetZoneAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwEnum) DestroyZoneEnumerator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManager self, uint32 dwTemplate, uint32 dwZone, uint32 dwReserved) CopyTemplatePoliciesToZone;
 			}
 		}
 		[CRepr]
@@ -1589,14 +1594,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetZoneActionPolicyEx(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) mut => VT.GetZoneActionPolicyEx(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg, dwFlags);
-			public HRESULT SetZoneActionPolicyEx(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) mut => VT.SetZoneActionPolicyEx(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg, dwFlags);
+			public HResult GetZoneActionPolicyEx(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) mut => VT.GetZoneActionPolicyEx(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg, dwFlags);
+			public HResult SetZoneActionPolicyEx(uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) mut => VT.SetZoneActionPolicyEx(ref this, dwZone, dwAction, pPolicy, cbPolicy, urlZoneReg, dwFlags);
 
 			[CRepr]
 			public struct VTable : IInternetZoneManager.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManagerEx self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) GetZoneActionPolicyEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManagerEx self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) SetZoneActionPolicyEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManagerEx self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) GetZoneActionPolicyEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManagerEx self, uint32 dwZone, uint32 dwAction, uint8* pPolicy, uint32 cbPolicy, URLZONEREG urlZoneReg, uint32 dwFlags) SetZoneActionPolicyEx;
 			}
 		}
 		[CRepr]
@@ -1606,18 +1611,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetZoneAttributesEx(uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes, uint32 dwFlags) mut => VT.GetZoneAttributesEx(ref this, dwZone, out pZoneAttributes, dwFlags);
-			public HRESULT GetZoneSecurityState(uint32 dwZoneIndex, BOOL fRespectPolicy, out uint32 pdwState, out BOOL pfPolicyEncountered) mut => VT.GetZoneSecurityState(ref this, dwZoneIndex, fRespectPolicy, out pdwState, out pfPolicyEncountered);
-			public HRESULT GetIESecurityState(BOOL fRespectPolicy, out uint32 pdwState, out BOOL pfPolicyEncountered, BOOL fNoCache) mut => VT.GetIESecurityState(ref this, fRespectPolicy, out pdwState, out pfPolicyEncountered, fNoCache);
-			public HRESULT FixUnsecureSettings() mut => VT.FixUnsecureSettings(ref this);
+			public HResult GetZoneAttributesEx(uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes, uint32 dwFlags) mut => VT.GetZoneAttributesEx(ref this, dwZone, out pZoneAttributes, dwFlags);
+			public HResult GetZoneSecurityState(uint32 dwZoneIndex, IntBool fRespectPolicy, out uint32 pdwState, out IntBool pfPolicyEncountered) mut => VT.GetZoneSecurityState(ref this, dwZoneIndex, fRespectPolicy, out pdwState, out pfPolicyEncountered);
+			public HResult GetIESecurityState(IntBool fRespectPolicy, out uint32 pdwState, out IntBool pfPolicyEncountered, IntBool fNoCache) mut => VT.GetIESecurityState(ref this, fRespectPolicy, out pdwState, out pfPolicyEncountered, fNoCache);
+			public HResult FixUnsecureSettings() mut => VT.FixUnsecureSettings(ref this);
 
 			[CRepr]
 			public struct VTable : IInternetZoneManagerEx.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManagerEx2 self, uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes, uint32 dwFlags) GetZoneAttributesEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManagerEx2 self, uint32 dwZoneIndex, BOOL fRespectPolicy, out uint32 pdwState, out BOOL pfPolicyEncountered) GetZoneSecurityState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManagerEx2 self, BOOL fRespectPolicy, out uint32 pdwState, out BOOL pfPolicyEncountered, BOOL fNoCache) GetIESecurityState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInternetZoneManagerEx2 self) FixUnsecureSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManagerEx2 self, uint32 dwZone, out ZONEATTRIBUTES pZoneAttributes, uint32 dwFlags) GetZoneAttributesEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManagerEx2 self, uint32 dwZoneIndex, IntBool fRespectPolicy, out uint32 pdwState, out IntBool pfPolicyEncountered) GetZoneSecurityState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManagerEx2 self, IntBool fRespectPolicy, out uint32 pdwState, out IntBool pfPolicyEncountered, IntBool fNoCache) GetIESecurityState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInternetZoneManagerEx2 self) FixUnsecureSettings;
 			}
 		}
 		[CRepr]
@@ -1627,18 +1632,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ProcessSoftDist(PWSTR szCDFURL, ref IXMLElement pSoftDistElement, out SOFTDISTINFO lpsdi) mut => VT.ProcessSoftDist(ref this, szCDFURL, ref pSoftDistElement, out lpsdi);
-			public HRESULT GetFirstCodeBase(ref PWSTR szCodeBase, ref uint32 dwMaxSize) mut => VT.GetFirstCodeBase(ref this, ref szCodeBase, ref dwMaxSize);
-			public HRESULT GetNextCodeBase(ref PWSTR szCodeBase, ref uint32 dwMaxSize) mut => VT.GetNextCodeBase(ref this, ref szCodeBase, ref dwMaxSize);
-			public HRESULT AsyncInstallDistributionUnit(ref IBindCtx pbc, void* pvReserved, uint32 flags, ref CODEBASEHOLD lpcbh) mut => VT.AsyncInstallDistributionUnit(ref this, ref pbc, pvReserved, flags, ref lpcbh);
+			public HResult ProcessSoftDist(char16* szCDFURL, ref IXMLElement pSoftDistElement, out SOFTDISTINFO lpsdi) mut => VT.ProcessSoftDist(ref this, szCDFURL, ref pSoftDistElement, out lpsdi);
+			public HResult GetFirstCodeBase(ref char16* szCodeBase, ref uint32 dwMaxSize) mut => VT.GetFirstCodeBase(ref this, ref szCodeBase, ref dwMaxSize);
+			public HResult GetNextCodeBase(ref char16* szCodeBase, ref uint32 dwMaxSize) mut => VT.GetNextCodeBase(ref this, ref szCodeBase, ref dwMaxSize);
+			public HResult AsyncInstallDistributionUnit(ref IBindCtx pbc, void* pvReserved, uint32 flags, ref CODEBASEHOLD lpcbh) mut => VT.AsyncInstallDistributionUnit(ref this, ref pbc, pvReserved, flags, ref lpcbh);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftDistExt self, PWSTR szCDFURL, ref IXMLElement pSoftDistElement, out SOFTDISTINFO lpsdi) ProcessSoftDist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftDistExt self, ref PWSTR szCodeBase, ref uint32 dwMaxSize) GetFirstCodeBase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftDistExt self, ref PWSTR szCodeBase, ref uint32 dwMaxSize) GetNextCodeBase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftDistExt self, ref IBindCtx pbc, void* pvReserved, uint32 flags, ref CODEBASEHOLD lpcbh) AsyncInstallDistributionUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftDistExt self, char16* szCDFURL, ref IXMLElement pSoftDistElement, out SOFTDISTINFO lpsdi) ProcessSoftDist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftDistExt self, ref char16* szCodeBase, ref uint32 dwMaxSize) GetFirstCodeBase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftDistExt self, ref char16* szCodeBase, ref uint32 dwMaxSize) GetNextCodeBase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftDistExt self, ref IBindCtx pbc, void* pvReserved, uint32 flags, ref CODEBASEHOLD lpcbh) AsyncInstallDistributionUnit;
 			}
 		}
 		[CRepr]
@@ -1648,14 +1653,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCatalogFile(out PSTR ppszCatalogFile) mut => VT.GetCatalogFile(ref this, out ppszCatalogFile);
-			public HRESULT GetJavaTrust(void** ppJavaTrust) mut => VT.GetJavaTrust(ref this, ppJavaTrust);
+			public HResult GetCatalogFile(out char8* ppszCatalogFile) mut => VT.GetCatalogFile(ref this, out ppszCatalogFile);
+			public HResult GetJavaTrust(void** ppJavaTrust) mut => VT.GetJavaTrust(ref this, ppJavaTrust);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatalogFileInfo self, out PSTR ppszCatalogFile) GetCatalogFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatalogFileInfo self, void** ppJavaTrust) GetJavaTrust;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatalogFileInfo self, out char8* ppszCatalogFile) GetCatalogFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatalogFileInfo self, void** ppJavaTrust) GetJavaTrust;
 			}
 		}
 		[CRepr]
@@ -1665,16 +1670,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DoEncode(uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) mut => VT.DoEncode(ref this, dwFlags, lInBufferSize, pbInBuffer, lOutBufferSize, pbOutBuffer, lInBytesAvailable, out plInBytesRead, out plOutBytesWritten, dwReserved);
-			public HRESULT DoDecode(uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) mut => VT.DoDecode(ref this, dwFlags, lInBufferSize, pbInBuffer, lOutBufferSize, pbOutBuffer, lInBytesAvailable, out plInBytesRead, out plOutBytesWritten, dwReserved);
-			public HRESULT SetEncodingLevel(uint32 dwEncLevel) mut => VT.SetEncodingLevel(ref this, dwEncLevel);
+			public HResult DoEncode(uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) mut => VT.DoEncode(ref this, dwFlags, lInBufferSize, pbInBuffer, lOutBufferSize, pbOutBuffer, lInBytesAvailable, out plInBytesRead, out plOutBytesWritten, dwReserved);
+			public HResult DoDecode(uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) mut => VT.DoDecode(ref this, dwFlags, lInBufferSize, pbInBuffer, lOutBufferSize, pbOutBuffer, lInBytesAvailable, out plInBytesRead, out plOutBytesWritten, dwReserved);
+			public HResult SetEncodingLevel(uint32 dwEncLevel) mut => VT.SetEncodingLevel(ref this, dwEncLevel);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataFilter self, uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) DoEncode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataFilter self, uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) DoDecode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDataFilter self, uint32 dwEncLevel) SetEncodingLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataFilter self, uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) DoEncode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataFilter self, uint32 dwFlags, int32 lInBufferSize, uint8* pbInBuffer, int32 lOutBufferSize, uint8* pbOutBuffer, int32 lInBytesAvailable, out int32 plInBytesRead, out int32 plOutBytesWritten, uint32 dwReserved) DoDecode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDataFilter self, uint32 dwEncLevel) SetEncodingLevel;
 			}
 		}
 		[CRepr]
@@ -1684,14 +1689,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT FindBestFilter(PWSTR pwzCodeIn, PWSTR pwzCodeOut, DATAINFO info, out IDataFilter* ppDF) mut => VT.FindBestFilter(ref this, pwzCodeIn, pwzCodeOut, info, out ppDF);
-			public HRESULT GetDefaultFilter(PWSTR pwzCodeIn, PWSTR pwzCodeOut, out IDataFilter* ppDF) mut => VT.GetDefaultFilter(ref this, pwzCodeIn, pwzCodeOut, out ppDF);
+			public HResult FindBestFilter(char16* pwzCodeIn, char16* pwzCodeOut, DATAINFO info, out IDataFilter* ppDF) mut => VT.FindBestFilter(ref this, pwzCodeIn, pwzCodeOut, info, out ppDF);
+			public HResult GetDefaultFilter(char16* pwzCodeIn, char16* pwzCodeOut, out IDataFilter* ppDF) mut => VT.GetDefaultFilter(ref this, pwzCodeIn, pwzCodeOut, out ppDF);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEncodingFilterFactory self, PWSTR pwzCodeIn, PWSTR pwzCodeOut, DATAINFO info, out IDataFilter* ppDF) FindBestFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEncodingFilterFactory self, PWSTR pwzCodeIn, PWSTR pwzCodeOut, out IDataFilter* ppDF) GetDefaultFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEncodingFilterFactory self, char16* pwzCodeIn, char16* pwzCodeOut, DATAINFO info, out IDataFilter* ppDF) FindBestFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEncodingFilterFactory self, char16* pwzCodeIn, char16* pwzCodeOut, out IDataFilter* ppDF) GetDefaultFilter;
 			}
 		}
 		[CRepr]
@@ -1701,12 +1706,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetWrapperCode(out int32 pnCode, uint dwReserved) mut => VT.GetWrapperCode(ref this, out pnCode, dwReserved);
+			public HResult GetWrapperCode(out int32 pnCode, uint dwReserved) mut => VT.GetWrapperCode(ref this, out pnCode, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWrappedProtocol self, out int32 pnCode, uint dwReserved) GetWrapperCode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWrappedProtocol self, out int32 pnCode, uint dwReserved) GetWrapperCode;
 			}
 		}
 		[CRepr]
@@ -1716,12 +1721,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBindHandle(BINDHANDLETYPES enumRequestedHandle, out HANDLE pRetHandle) mut => VT.GetBindHandle(ref this, enumRequestedHandle, out pRetHandle);
+			public HResult GetBindHandle(BINDHANDLETYPES enumRequestedHandle, out Handle pRetHandle) mut => VT.GetBindHandle(ref this, enumRequestedHandle, out pRetHandle);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGetBindHandle self, BINDHANDLETYPES enumRequestedHandle, out HANDLE pRetHandle) GetBindHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGetBindHandle self, BINDHANDLETYPES enumRequestedHandle, out Handle pRetHandle) GetBindHandle;
 			}
 		}
 		[CRepr]
@@ -1731,12 +1736,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Redirect(PWSTR lpcUrl, out int16 vbCancel) mut => VT.Redirect(ref this, lpcUrl, out vbCancel);
+			public HResult Redirect(char16* lpcUrl, out int16 vbCancel) mut => VT.Redirect(ref this, lpcUrl, out vbCancel);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindCallbackRedirect self, PWSTR lpcUrl, out int16 vbCancel) Redirect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindCallbackRedirect self, char16* lpcUrl, out int16 vbCancel) Redirect;
 			}
 		}
 		[CRepr]
@@ -1746,162 +1751,163 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetIgnoreCertMask(out uint32 pdwIgnoreCertMask) mut => VT.GetIgnoreCertMask(ref this, out pdwIgnoreCertMask);
+			public HResult GetIgnoreCertMask(out uint32 pdwIgnoreCertMask) mut => VT.GetIgnoreCertMask(ref this, out pdwIgnoreCertMask);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBindHttpSecurity self, out uint32 pdwIgnoreCertMask) GetIgnoreCertMask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBindHttpSecurity self, out uint32 pdwIgnoreCertMask) GetIgnoreCertMask;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateURLMoniker(IMoniker* pMkCtx, PWSTR szURL, out IMoniker* ppmk);
+		public static extern HResult CreateURLMoniker(IMoniker* pMkCtx, char16* szURL, out IMoniker* ppmk);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateURLMonikerEx(IMoniker* pMkCtx, PWSTR szURL, out IMoniker* ppmk, uint32 dwFlags);
+		public static extern HResult CreateURLMonikerEx(IMoniker* pMkCtx, char16* szURL, out IMoniker* ppmk, uint32 dwFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetClassURL(PWSTR szURL, out Guid pClsID);
+		public static extern HResult GetClassURL(char16* szURL, out Guid pClsID);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateAsyncBindCtx(uint32 reserved, ref IBindStatusCallback pBSCb, IEnumFORMATETC* pEFetc, out IBindCtx* ppBC);
+		public static extern HResult CreateAsyncBindCtx(uint32 reserved, ref IBindStatusCallback pBSCb, IEnumFORMATETC* pEFetc, out IBindCtx* ppBC);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateURLMonikerEx2(IMoniker* pMkCtx, ref IUri pUri, out IMoniker* ppmk, uint32 dwFlags);
+		public static extern HResult CreateURLMonikerEx2(IMoniker* pMkCtx, ref IUri pUri, out IMoniker* ppmk, uint32 dwFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateAsyncBindCtxEx(ref IBindCtx pbc, uint32 dwOptions, ref IBindStatusCallback pBSCb, IEnumFORMATETC* pEnum, out IBindCtx* ppBC, uint32 reserved);
+		public static extern HResult CreateAsyncBindCtxEx(ref IBindCtx pbc, uint32 dwOptions, ref IBindStatusCallback pBSCb, IEnumFORMATETC* pEnum, out IBindCtx* ppBC, uint32 reserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MkParseDisplayNameEx(ref IBindCtx pbc, PWSTR szDisplayName, out uint32 pchEaten, out IMoniker* ppmk);
+		public static extern HResult MkParseDisplayNameEx(ref IBindCtx pbc, char16* szDisplayName, out uint32 pchEaten, out IMoniker* ppmk);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterBindStatusCallback(ref IBindCtx pBC, ref IBindStatusCallback pBSCb, out IBindStatusCallback* ppBSCBPrev, uint32 dwReserved);
+		public static extern HResult RegisterBindStatusCallback(ref IBindCtx pBC, ref IBindStatusCallback pBSCb, out IBindStatusCallback* ppBSCBPrev, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RevokeBindStatusCallback(ref IBindCtx pBC, ref IBindStatusCallback pBSCb);
+		public static extern HResult RevokeBindStatusCallback(ref IBindCtx pBC, ref IBindStatusCallback pBSCb);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetClassFileOrMime(IBindCtx* pBC, PWSTR szFilename, void* pBuffer, uint32 cbSize, PWSTR szMime, uint32 dwReserved, out Guid pclsid);
+		public static extern HResult GetClassFileOrMime(IBindCtx* pBC, char16* szFilename, void* pBuffer, uint32 cbSize, char16* szMime, uint32 dwReserved, out Guid pclsid);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IsValidURL(IBindCtx* pBC, PWSTR szURL, uint32 dwReserved);
+		public static extern HResult IsValidURL(IBindCtx* pBC, char16* szURL, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetClassObjectFromURL(in Guid rCLASSID, PWSTR szCODE, uint32 dwFileVersionMS, uint32 dwFileVersionLS, PWSTR szTYPE, ref IBindCtx pBindCtx, CLSCTX dwClsContext, void* pvReserved, in Guid riid, void** ppv);
+		public static extern HResult CoGetClassObjectFromURL(in Guid rCLASSID, char16* szCODE, uint32 dwFileVersionMS, uint32 dwFileVersionLS, char16* szTYPE, ref IBindCtx pBindCtx, CLSCTX dwClsContext, void* pvReserved, in Guid riid, void** ppv);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IEInstallScope(out uint32 pdwScope);
+		public static extern HResult IEInstallScope(out uint32 pdwScope);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FaultInIEFeature(HWND hWnd, ref uCLSSPEC pClassSpec, QUERYCONTEXT* pQuery, uint32 dwFlags);
+		public static extern HResult FaultInIEFeature(HWnd hWnd, ref uCLSSPEC pClassSpec, QUERYCONTEXT* pQuery, uint32 dwFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetComponentIDFromCLSSPEC(ref uCLSSPEC pClassspec, out PSTR ppszComponentID);
+		public static extern HResult GetComponentIDFromCLSSPEC(ref uCLSSPEC pClassspec, out char8* ppszComponentID);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT IsAsyncMoniker(ref IMoniker pmk);
+		public static extern HResult IsAsyncMoniker(ref IMoniker pmk);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterMediaTypes(uint32 ctypes, PSTR* rgszTypes, uint16* rgcfTypes);
+		public static extern HResult RegisterMediaTypes(uint32 ctypes, char8** rgszTypes, uint16* rgcfTypes);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FindMediaType(PSTR rgszTypes, out uint16 rgcfTypes);
+		public static extern HResult FindMediaType(char8* rgszTypes, out uint16 rgcfTypes);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateFormatEnumerator(uint32 cfmtetc, FORMATETC* rgfmtetc, out IEnumFORMATETC* ppenumfmtetc);
+		public static extern HResult CreateFormatEnumerator(uint32 cfmtetc, FORMATETC* rgfmtetc, out IEnumFORMATETC* ppenumfmtetc);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterFormatEnumerator(ref IBindCtx pBC, ref IEnumFORMATETC pEFetc, uint32 reserved);
+		public static extern HResult RegisterFormatEnumerator(ref IBindCtx pBC, ref IEnumFORMATETC pEFetc, uint32 reserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RevokeFormatEnumerator(ref IBindCtx pBC, ref IEnumFORMATETC pEFetc);
+		public static extern HResult RevokeFormatEnumerator(ref IBindCtx pBC, ref IEnumFORMATETC pEFetc);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegisterMediaTypeClass(ref IBindCtx pBC, uint32 ctypes, PSTR* rgszTypes, Guid* rgclsID, uint32 reserved);
+		public static extern HResult RegisterMediaTypeClass(ref IBindCtx pBC, uint32 ctypes, char8** rgszTypes, Guid* rgclsID, uint32 reserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FindMediaTypeClass(ref IBindCtx pBC, PSTR szType, out Guid pclsID, uint32 reserved);
+		public static extern HResult FindMediaTypeClass(ref IBindCtx pBC, char8* szType, out Guid pclsID, uint32 reserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UrlMkSetSessionOption(uint32 dwOption, void* pBuffer, uint32 dwBufferLength, uint32 dwReserved);
+		public static extern HResult UrlMkSetSessionOption(uint32 dwOption, void* pBuffer, uint32 dwBufferLength, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UrlMkGetSessionOption(uint32 dwOption, void* pBuffer, uint32 dwBufferLength, out uint32 pdwBufferLengthOut, uint32 dwReserved);
+		public static extern HResult UrlMkGetSessionOption(uint32 dwOption, void* pBuffer, uint32 dwBufferLength, out uint32 pdwBufferLengthOut, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FindMimeFromData(IBindCtx* pBC, PWSTR pwzUrl, void* pBuffer, uint32 cbSize, PWSTR pwzMimeProposed, uint32 dwMimeFlags, out PWSTR ppwzMimeOut, uint32 dwReserved);
+		public static extern HResult FindMimeFromData(IBindCtx* pBC, char16* pwzUrl, void* pBuffer, uint32 cbSize, char16* pwzMimeProposed, uint32 dwMimeFlags, out char16* ppwzMimeOut, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ObtainUserAgentString(uint32 dwOption, uint8* pszUAOut, out uint32 cbSize);
+		public static extern HResult ObtainUserAgentString(uint32 dwOption, uint8* pszUAOut, out uint32 cbSize);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CompareSecurityIds(uint8* pbSecurityId1, uint32 dwLen1, uint8* pbSecurityId2, uint32 dwLen2, uint32 dwReserved);
+		public static extern HResult CompareSecurityIds(uint8* pbSecurityId1, uint32 dwLen1, uint8* pbSecurityId2, uint32 dwLen2, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CompatFlagsFromClsid(ref Guid pclsid, out uint32 pdwCompatFlags, out uint32 pdwMiscStatusFlags);
+		public static extern HResult CompatFlagsFromClsid(ref Guid pclsid, out uint32 pdwCompatFlags, out uint32 pdwMiscStatusFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetAccessForIEAppContainer(HANDLE hObject, IEObjectType ieObjectType, uint32 dwAccessMask);
+		public static extern HResult SetAccessForIEAppContainer(Handle hObject, IEObjectType ieObjectType, uint32 dwAccessMask);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HlinkSimpleNavigateToString(PWSTR szTarget, PWSTR szLocation, PWSTR szTargetFrameName, ref IUnknown pUnk, IBindCtx* pbc, IBindStatusCallback* param5, uint32 grfHLNF, uint32 dwReserved);
+		public static extern HResult HlinkSimpleNavigateToString(char16* szTarget, char16* szLocation, char16* szTargetFrameName, ref IUnknown pUnk, IBindCtx* pbc, IBindStatusCallback* param5, uint32 grfHLNF, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HlinkSimpleNavigateToMoniker(IMoniker* pmkTarget, PWSTR szLocation, PWSTR szTargetFrameName, IUnknown* pUnk, IBindCtx* pbc, IBindStatusCallback* param5, uint32 grfHLNF, uint32 dwReserved);
+		public static extern HResult HlinkSimpleNavigateToMoniker(IMoniker* pmkTarget, char16* szLocation, char16* szTargetFrameName, IUnknown* pUnk, IBindCtx* pbc, IBindStatusCallback* param5, uint32 grfHLNF, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLOpenStreamA(IUnknown* param0, PSTR param1, uint32 param2, IBindStatusCallback* param3);
+		public static extern HResult URLOpenStreamA(IUnknown* param0, char8* param1, uint32 param2, IBindStatusCallback* param3);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLOpenStreamW(IUnknown* param0, PWSTR param1, uint32 param2, IBindStatusCallback* param3);
+		public static extern HResult URLOpenStreamW(IUnknown* param0, char16* param1, uint32 param2, IBindStatusCallback* param3);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLOpenPullStreamA(IUnknown* param0, PSTR param1, uint32 param2, IBindStatusCallback* param3);
+		public static extern HResult URLOpenPullStreamA(IUnknown* param0, char8* param1, uint32 param2, IBindStatusCallback* param3);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLOpenPullStreamW(IUnknown* param0, PWSTR param1, uint32 param2, IBindStatusCallback* param3);
+		public static extern HResult URLOpenPullStreamW(IUnknown* param0, char16* param1, uint32 param2, IBindStatusCallback* param3);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLDownloadToFileA(IUnknown* param0, PSTR param1, PSTR param2, uint32 param3, IBindStatusCallback* param4);
+		public static extern HResult URLDownloadToFileA(IUnknown* param0, char8* param1, char8* param2, uint32 param3, IBindStatusCallback* param4);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLDownloadToFileW(IUnknown* param0, PWSTR param1, PWSTR param2, uint32 param3, IBindStatusCallback* param4);
+		public static extern HResult URLDownloadToFileW(IUnknown* param0, char16* param1, char16* param2, uint32 param3, IBindStatusCallback* param4);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLDownloadToCacheFileA(IUnknown* param0, PSTR param1, uint8* param2, uint32 cchFileName, uint32 param4, IBindStatusCallback* param5);
+		public static extern HResult URLDownloadToCacheFileA(IUnknown* param0, char8* param1, uint8* param2, uint32 cchFileName, uint32 param4, IBindStatusCallback* param5);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLDownloadToCacheFileW(IUnknown* param0, PWSTR param1, char16* param2, uint32 cchFileName, uint32 param4, IBindStatusCallback* param5);
+		public static extern HResult URLDownloadToCacheFileW(IUnknown* param0, char16* param1, char16* param2, uint32 cchFileName, uint32 param4, IBindStatusCallback* param5);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLOpenBlockingStreamA(IUnknown* param0, PSTR param1, out IStream* param2, uint32 param3, IBindStatusCallback* param4);
+		public static extern HResult URLOpenBlockingStreamA(IUnknown* param0, char8* param1, out IStream* param2, uint32 param3, IBindStatusCallback* param4);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT URLOpenBlockingStreamW(IUnknown* param0, PWSTR param1, out IStream* param2, uint32 param3, IBindStatusCallback* param4);
+		public static extern HResult URLOpenBlockingStreamW(IUnknown* param0, char16* param1, out IStream* param2, uint32 param3, IBindStatusCallback* param4);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HlinkGoBack(ref IUnknown pUnk);
+		public static extern HResult HlinkGoBack(ref IUnknown pUnk);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HlinkGoForward(ref IUnknown pUnk);
+		public static extern HResult HlinkGoForward(ref IUnknown pUnk);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HlinkNavigateString(IUnknown* pUnk, PWSTR szTarget);
+		public static extern HResult HlinkNavigateString(IUnknown* pUnk, char16* szTarget);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HlinkNavigateMoniker(IUnknown* pUnk, IMoniker* pmkTarget);
+		public static extern HResult HlinkNavigateMoniker(IUnknown* pUnk, IMoniker* pmkTarget);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetParseUrl(PWSTR pwzUrl, PARSEACTION ParseAction, uint32 dwFlags, char16* pszResult, uint32 cchResult, out uint32 pcchResult, uint32 dwReserved);
+		public static extern HResult CoInternetParseUrl(char16* pwzUrl, PARSEACTION ParseAction, uint32 dwFlags, char16* pszResult, uint32 ccHResult, out uint32 pccHResult, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetParseIUri(ref IUri pIUri, PARSEACTION ParseAction, uint32 dwFlags, char16* pwzResult, uint32 cchResult, out uint32 pcchResult, uint dwReserved);
+		public static extern HResult CoInternetParseIUri(ref IUri pIUri, PARSEACTION ParseAction, uint32 dwFlags, char16* pwzResult, uint32 ccHResult, out uint32 pccHResult, uint dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetCombineUrl(PWSTR pwzBaseUrl, PWSTR pwzRelativeUrl, uint32 dwCombineFlags, char16* pszResult, uint32 cchResult, uint32* pcchResult, uint32 dwReserved);
+		public static extern HResult CoInternetCombineUrl(char16* pwzBaseUrl, char16* pwzRelativeUrl, uint32 dwCombineFlags, char16* pszResult, uint32 ccHResult, uint32* pccHResult, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetCombineUrlEx(IUri* pBaseUri, PWSTR pwzRelativeUrl, uint32 dwCombineFlags, out IUri* ppCombinedUri, uint dwReserved);
+		public static extern HResult CoInternetCombineUrlEx(IUri* pBaseUri, char16* pwzRelativeUrl, uint32 dwCombineFlags, out IUri* ppCombinedUri, uint dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetCombineIUri(ref IUri pBaseUri, ref IUri pRelativeUri, uint32 dwCombineFlags, out IUri* ppCombinedUri, uint dwReserved);
+		public static extern HResult CoInternetCombineIUri(ref IUri pBaseUri, ref IUri pRelativeUri, uint32 dwCombineFlags, out IUri* ppCombinedUri, uint dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetCompareUrl(PWSTR pwzUrl1, PWSTR pwzUrl2, uint32 dwFlags);
+		public static extern HResult CoInternetCompareUrl(char16* pwzUrl1, char16* pwzUrl2, uint32 dwFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetGetProtocolFlags(PWSTR pwzUrl, out uint32 pdwFlags, uint32 dwReserved);
+		public static extern HResult CoInternetGetProtocolFlags(char16* pwzUrl, out uint32 pdwFlags, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetQueryInfo(PWSTR pwzUrl, QUERYOPTION QueryOptions, uint32 dwQueryFlags, void* pvBuffer, uint32 cbBuffer, uint32* pcbBuffer, uint32 dwReserved);
+		public static extern HResult CoInternetQueryInfo(char16* pwzUrl, QUERYOPTION QueryOptions, uint32 dwQueryFlags, void* pvBuffer, uint32 cbBuffer, uint32* pcbBuffer, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetGetSession(uint32 dwSessionMode, out IInternetSession* ppIInternetSession, uint32 dwReserved);
+		public static extern HResult CoInternetGetSession(uint32 dwSessionMode, out IInternetSession* ppIInternetSession, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetGetSecurityUrl(PWSTR pwszUrl, out PWSTR ppwszSecUrl, PSUACTION psuAction, uint32 dwReserved);
+		public static extern HResult CoInternetGetSecurityUrl(char16* pwszUrl, out char16* ppwszSecUrl, PSUACTION psuAction, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetGetSecurityUrlEx(ref IUri pUri, out IUri* ppSecUri, PSUACTION psuAction, uint dwReserved);
+		public static extern HResult CoInternetGetSecurityUrlEx(ref IUri pUri, out IUri* ppSecUri, PSUACTION psuAction, uint dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetSetFeatureEnabled(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags, BOOL fEnable);
+		public static extern HResult CoInternetSetFeatureEnabled(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags, IntBool fEnable);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetIsFeatureEnabled(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags);
+		public static extern HResult CoInternetIsFeatureEnabled(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetIsFeatureEnabledForUrl(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags, PWSTR szURL, IInternetSecurityManager* pSecMgr);
+		public static extern HResult CoInternetIsFeatureEnabledForUrl(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags, char16* szURL, IInternetSecurityManager* pSecMgr);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetIsFeatureEnabledForIUri(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags, IUri* pIUri, IInternetSecurityManagerEx2* pSecMgr);
+		public static extern HResult CoInternetIsFeatureEnabledForIUri(INTERNETFEATURELIST FeatureEntry, uint32 dwFlags, IUri* pIUri, IInternetSecurityManagerEx2* pSecMgr);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetIsFeatureZoneElevationEnabled(PWSTR szFromURL, PWSTR szToURL, IInternetSecurityManager* pSecMgr, uint32 dwFlags);
+		public static extern HResult CoInternetIsFeatureZoneElevationEnabled(char16* szFromURL, char16* szToURL, IInternetSecurityManager* pSecMgr, uint32 dwFlags);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CopyStgMedium(in STGMEDIUM pcstgmedSrc, out STGMEDIUM pstgmedDest);
+		public static extern HResult CopyStgMedium(in STGMEDIUM pcstgmedSrc, out STGMEDIUM pstgmedDest);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CopyBindInfo(in BINDINFO pcbiSrc, out BINDINFO pbiDest);
+		public static extern HResult CopyBindInfo(in BINDINFO pcbiSrc, out BINDINFO pbiDest);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ReleaseBindInfo(out BINDINFO pbindinfo);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR IEGetUserPrivateNamespaceName();
+		public static extern char16* IEGetUserPrivateNamespaceName();
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetCreateSecurityManager(IServiceProvider* pSP, out IInternetSecurityManager* ppSM, uint32 dwReserved);
+		public static extern HResult CoInternetCreateSecurityManager(IServiceProvider* pSP, out IInternetSecurityManager* ppSM, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoInternetCreateZoneManager(IServiceProvider* pSP, out IInternetZoneManager* ppZM, uint32 dwReserved);
+		public static extern HResult CoInternetCreateZoneManager(IServiceProvider* pSP, out IInternetZoneManager* ppZM, uint32 dwReserved);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetSoftwareUpdateInfo(PWSTR szDistUnit, out SOFTDISTINFO psdi);
+		public static extern HResult GetSoftwareUpdateInfo(char16* szDistUnit, out SOFTDISTINFO psdi);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetSoftwareUpdateAdvertisementState(PWSTR szDistUnit, uint32 dwAdState, uint32 dwAdvertisedVersionMS, uint32 dwAdvertisedVersionLS);
+		public static extern HResult SetSoftwareUpdateAdvertisementState(char16* szDistUnit, uint32 dwAdState, uint32 dwAdvertisedVersionMS, uint32 dwAdvertisedVersionLS);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsLoggingEnabledA(PSTR pszUrl);
+		public static extern IntBool IsLoggingEnabledA(char8* pszUrl);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsLoggingEnabledW(PWSTR pwszUrl);
+		public static extern IntBool IsLoggingEnabledW(char16* pwszUrl);
 		[Import("urlmon.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteHitLogging(ref HIT_LOGGING_INFO lpLogginginfo);
+		public static extern IntBool WriteHitLogging(ref HIT_LOGGING_INFO lpLogginginfo);
+	}
 	}
 }

@@ -1442,14 +1442,14 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function LRESULT LPFNLRESULTFROMOBJECT(in Guid riid, WPARAM wParam, ref IUnknown punk);
-		public function HRESULT LPFNOBJECTFROMLRESULT(LRESULT lResult, in Guid riid, WPARAM wParam, void** ppvObject);
-		public function HRESULT LPFNACCESSIBLEOBJECTFROMWINDOW(HWND hwnd, uint32 dwId, in Guid riid, void** ppvObject);
-		public function HRESULT LPFNACCESSIBLEOBJECTFROMPOINT(POINT ptScreen, out IAccessible* ppacc, out VARIANT pvarChild);
-		public function HRESULT LPFNCREATESTDACCESSIBLEOBJECT(HWND hwnd, int32 idObject, in Guid riid, void** ppvObject);
-		public function HRESULT LPFNACCESSIBLECHILDREN(ref IAccessible paccContainer, int32 iChildStart, int32 cChildren, out VARIANT rgvarChildren, out int32 pcObtained);
-		public function SAFEARRAY* UiaProviderCallback(HWND hwnd, ProviderType providerType);
+		public function HResult LPFNOBJECTFROMLRESULT(LRESULT lResult, in Guid riid, WPARAM wParam, void** ppvObject);
+		public function HResult LPFNACCESSIBLEOBJECTFROMWINDOW(HWnd hwnd, uint32 dwId, in Guid riid, void** ppvObject);
+		public function HResult LPFNACCESSIBLEOBJECTFROMPOINT(POINT ptScreen, out IAccessible* ppacc, out VARIANT pvarChild);
+		public function HResult LPFNCREATESTDACCESSIBLEOBJECT(HWnd hwnd, int32 idObject, in Guid riid, void** ppvObject);
+		public function HResult LPFNACCESSIBLECHILDREN(ref IAccessible paccContainer, int32 iChildStart, int32 cChildren, out VARIANT rgvarChildren, out int32 pcObtained);
+		public function SAFEARRAY* UiaProviderCallback(HWnd hwnd, ProviderType providerType);
 		public function void UiaEventCallback(out UiaEventArgs pArgs, out SAFEARRAY pRequestedData, BSTR pTreeStructure);
-		public function void WINEVENTPROC(HWINEVENTHOOK hWinEventHook, uint32 event, HWND hwnd, int32 idObject, int32 idChild, uint32 idEventThread, uint32 dwmsEventTime);
+		public function void WINEVENTPROC(HWINEVENTHOOK hWinEventHook, uint32 event, HWnd hwnd, int32 idObject, int32 idChild, uint32 idEventThread, uint32 dwmsEventTime);
 		
 		// --- Structs ---
 		
@@ -1458,7 +1458,7 @@ namespace Win32
 		{
 			public uint32 dwMSAASignature;
 			public uint32 cchWText;
-			public PWSTR pszWText;
+			public char16* pszWText;
 		}
 		[CRepr]
 		public struct UiaRect
@@ -1491,30 +1491,30 @@ namespace Win32
 		public struct UIAutomationPropertyInfo
 		{
 			public Guid guid;
-			public PWSTR pProgrammaticName;
+			public char16* pProgrammaticName;
 			public UIAutomationType type;
 		}
 		[CRepr]
 		public struct UIAutomationEventInfo
 		{
 			public Guid guid;
-			public PWSTR pProgrammaticName;
+			public char16* pProgrammaticName;
 		}
 		[CRepr]
 		public struct UIAutomationMethodInfo
 		{
-			public PWSTR pProgrammaticName;
-			public BOOL doSetFocus;
+			public char16* pProgrammaticName;
+			public IntBool doSetFocus;
 			public uint32 cInParameters;
 			public uint32 cOutParameters;
 			public UIAutomationType* pParameterTypes;
-			public PWSTR* pParameterNames;
+			public char16** pParameterNames;
 		}
 		[CRepr]
 		public struct UIAutomationPatternInfo
 		{
 			public Guid guid;
-			public PWSTR pProgrammaticName;
+			public char16* pProgrammaticName;
 			public Guid providerInterfaceId;
 			public Guid clientInterfaceId;
 			public uint32 cProperties;
@@ -1572,8 +1572,8 @@ namespace Win32
 		public struct UiaFindParams
 		{
 			public int32 MaxDepth;
-			public BOOL FindFirst;
-			public BOOL ExcludeRoot;
+			public IntBool FindFirst;
+			public IntBool ExcludeRoot;
 			public UiaCondition* pFindCondition;
 		}
 		[CRepr]
@@ -1637,8 +1637,8 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public SERIALKEYS_FLAGS dwFlags;
-			public PSTR lpszActivePort;
-			public PSTR lpszPort;
+			public char8* lpszActivePort;
+			public char8* lpszPort;
 			public uint32 iBaudRate;
 			public uint32 iPortState;
 			public uint32 iActive;
@@ -1648,8 +1648,8 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public SERIALKEYS_FLAGS dwFlags;
-			public PWSTR lpszActivePort;
-			public PWSTR lpszPort;
+			public char16* lpszActivePort;
+			public char16* lpszPort;
 			public uint32 iBaudRate;
 			public uint32 iPortState;
 			public uint32 iActive;
@@ -1659,14 +1659,14 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public HIGHCONTRASTW_FLAGS dwFlags;
-			public PSTR lpszDefaultScheme;
+			public char8* lpszDefaultScheme;
 		}
 		[CRepr]
 		public struct HIGHCONTRASTW
 		{
 			public uint32 cbSize;
 			public HIGHCONTRASTW_FLAGS dwFlags;
-			public PWSTR lpszDefaultScheme;
+			public char16* lpszDefaultScheme;
 		}
 		[CRepr]
 		public struct FILTERKEYS
@@ -1715,7 +1715,7 @@ namespace Win32
 			public uint32 iFSGrafEffectColor;
 			public SOUNDSENTRY_WINDOWS_EFFECT iWindowsEffect;
 			public uint32 iWindowsEffectMSec;
-			public PSTR lpszWindowsEffectDLL;
+			public char8* lpszWindowsEffectDLL;
 			public uint32 iWindowsEffectOrdinal;
 		}
 		[CRepr]
@@ -1731,7 +1731,7 @@ namespace Win32
 			public uint32 iFSGrafEffectColor;
 			public SOUNDSENTRY_WINDOWS_EFFECT iWindowsEffect;
 			public uint32 iWindowsEffectMSec;
-			public PWSTR lpszWindowsEffectDLL;
+			public char16* lpszWindowsEffectDLL;
 			public uint32 iWindowsEffectOrdinal;
 		}
 		[CRepr]
@@ -1755,12 +1755,12 @@ namespace Win32
 		{
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateProvider(ref IRawElementProviderWindowlessSite pSite, out IRawElementProviderSimple* ppProvider) mut => VT.CreateProvider(ref this, ref pSite, out ppProvider);
+			public HResult CreateProvider(ref IRawElementProviderWindowlessSite pSite, out IRawElementProviderSimple* ppProvider) mut => VT.CreateProvider(ref this, ref pSite, out ppProvider);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRicheditWindowlessAccessibility self, ref IRawElementProviderWindowlessSite pSite, out IRawElementProviderSimple* ppProvider) CreateProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRicheditWindowlessAccessibility self, ref IRawElementProviderWindowlessSite pSite, out IRawElementProviderSimple* ppProvider) CreateProvider;
 			}
 		}
 		[CRepr]
@@ -1768,14 +1768,14 @@ namespace Win32
 		{
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBoundaryRectangle(out UiaRect pUiaRect) mut => VT.GetBoundaryRectangle(ref this, out pUiaRect);
-			public HRESULT IsVisible() mut => VT.IsVisible(ref this);
+			public HResult GetBoundaryRectangle(out UiaRect pUiaRect) mut => VT.GetBoundaryRectangle(ref this, out pUiaRect);
+			public HResult IsVisible() mut => VT.IsVisible(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRichEditUiaInformation self, out UiaRect pUiaRect) GetBoundaryRectangle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRichEditUiaInformation self) IsVisible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRichEditUiaInformation self, out UiaRect pUiaRect) GetBoundaryRectangle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRichEditUiaInformation self) IsVisible;
 			}
 		}
 		[CRepr]
@@ -1785,52 +1785,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_accParent(out IDispatch* ppdispParent) mut => VT.get_accParent(ref this, out ppdispParent);
-			public HRESULT get_accChildCount(out int32 pcountChildren) mut => VT.get_accChildCount(ref this, out pcountChildren);
-			public HRESULT get_accChild(VARIANT varChild, out IDispatch* ppdispChild) mut => VT.get_accChild(ref this, varChild, out ppdispChild);
-			public HRESULT get_accName(VARIANT varChild, out BSTR pszName) mut => VT.get_accName(ref this, varChild, out pszName);
-			public HRESULT get_accValue(VARIANT varChild, out BSTR pszValue) mut => VT.get_accValue(ref this, varChild, out pszValue);
-			public HRESULT get_accDescription(VARIANT varChild, out BSTR pszDescription) mut => VT.get_accDescription(ref this, varChild, out pszDescription);
-			public HRESULT get_accRole(VARIANT varChild, out VARIANT pvarRole) mut => VT.get_accRole(ref this, varChild, out pvarRole);
-			public HRESULT get_accState(VARIANT varChild, out VARIANT pvarState) mut => VT.get_accState(ref this, varChild, out pvarState);
-			public HRESULT get_accHelp(VARIANT varChild, out BSTR pszHelp) mut => VT.get_accHelp(ref this, varChild, out pszHelp);
-			public HRESULT get_accHelpTopic(out BSTR pszHelpFile, VARIANT varChild, out int32 pidTopic) mut => VT.get_accHelpTopic(ref this, out pszHelpFile, varChild, out pidTopic);
-			public HRESULT get_accKeyboardShortcut(VARIANT varChild, out BSTR pszKeyboardShortcut) mut => VT.get_accKeyboardShortcut(ref this, varChild, out pszKeyboardShortcut);
-			public HRESULT get_accFocus(out VARIANT pvarChild) mut => VT.get_accFocus(ref this, out pvarChild);
-			public HRESULT get_accSelection(out VARIANT pvarChildren) mut => VT.get_accSelection(ref this, out pvarChildren);
-			public HRESULT get_accDefaultAction(VARIANT varChild, out BSTR pszDefaultAction) mut => VT.get_accDefaultAction(ref this, varChild, out pszDefaultAction);
-			public HRESULT accSelect(int32 flagsSelect, VARIANT varChild) mut => VT.accSelect(ref this, flagsSelect, varChild);
-			public HRESULT accLocation(out int32 pxLeft, out int32 pyTop, out int32 pcxWidth, out int32 pcyHeight, VARIANT varChild) mut => VT.accLocation(ref this, out pxLeft, out pyTop, out pcxWidth, out pcyHeight, varChild);
-			public HRESULT accNavigate(int32 navDir, VARIANT varStart, out VARIANT pvarEndUpAt) mut => VT.accNavigate(ref this, navDir, varStart, out pvarEndUpAt);
-			public HRESULT accHitTest(int32 xLeft, int32 yTop, out VARIANT pvarChild) mut => VT.accHitTest(ref this, xLeft, yTop, out pvarChild);
-			public HRESULT accDoDefaultAction(VARIANT varChild) mut => VT.accDoDefaultAction(ref this, varChild);
-			public HRESULT put_accName(VARIANT varChild, BSTR szName) mut => VT.put_accName(ref this, varChild, szName);
-			public HRESULT put_accValue(VARIANT varChild, BSTR szValue) mut => VT.put_accValue(ref this, varChild, szValue);
+			public HResult get_accParent(out IDispatch* ppdispParent) mut => VT.get_accParent(ref this, out ppdispParent);
+			public HResult get_accChildCount(out int32 pcountChildren) mut => VT.get_accChildCount(ref this, out pcountChildren);
+			public HResult get_accChild(VARIANT varChild, out IDispatch* ppdispChild) mut => VT.get_accChild(ref this, varChild, out ppdispChild);
+			public HResult get_accName(VARIANT varChild, out BSTR pszName) mut => VT.get_accName(ref this, varChild, out pszName);
+			public HResult get_accValue(VARIANT varChild, out BSTR pszValue) mut => VT.get_accValue(ref this, varChild, out pszValue);
+			public HResult get_accDescription(VARIANT varChild, out BSTR pszDescription) mut => VT.get_accDescription(ref this, varChild, out pszDescription);
+			public HResult get_accRole(VARIANT varChild, out VARIANT pvarRole) mut => VT.get_accRole(ref this, varChild, out pvarRole);
+			public HResult get_accState(VARIANT varChild, out VARIANT pvarState) mut => VT.get_accState(ref this, varChild, out pvarState);
+			public HResult get_accHelp(VARIANT varChild, out BSTR pszHelp) mut => VT.get_accHelp(ref this, varChild, out pszHelp);
+			public HResult get_accHelpTopic(out BSTR pszHelpFile, VARIANT varChild, out int32 pidTopic) mut => VT.get_accHelpTopic(ref this, out pszHelpFile, varChild, out pidTopic);
+			public HResult get_accKeyboardShortcut(VARIANT varChild, out BSTR pszKeyboardShortcut) mut => VT.get_accKeyboardShortcut(ref this, varChild, out pszKeyboardShortcut);
+			public HResult get_accFocus(out VARIANT pvarChild) mut => VT.get_accFocus(ref this, out pvarChild);
+			public HResult get_accSelection(out VARIANT pvarChildren) mut => VT.get_accSelection(ref this, out pvarChildren);
+			public HResult get_accDefaultAction(VARIANT varChild, out BSTR pszDefaultAction) mut => VT.get_accDefaultAction(ref this, varChild, out pszDefaultAction);
+			public HResult accSelect(int32 flagsSelect, VARIANT varChild) mut => VT.accSelect(ref this, flagsSelect, varChild);
+			public HResult accLocation(out int32 pxLeft, out int32 pyTop, out int32 pcxWidth, out int32 pcyHeight, VARIANT varChild) mut => VT.accLocation(ref this, out pxLeft, out pyTop, out pcxWidth, out pcyHeight, varChild);
+			public HResult accNavigate(int32 navDir, VARIANT varStart, out VARIANT pvarEndUpAt) mut => VT.accNavigate(ref this, navDir, varStart, out pvarEndUpAt);
+			public HResult accHitTest(int32 xLeft, int32 yTop, out VARIANT pvarChild) mut => VT.accHitTest(ref this, xLeft, yTop, out pvarChild);
+			public HResult accDoDefaultAction(VARIANT varChild) mut => VT.accDoDefaultAction(ref this, varChild);
+			public HResult put_accName(VARIANT varChild, BSTR szName) mut => VT.put_accName(ref this, varChild, szName);
+			public HResult put_accValue(VARIANT varChild, BSTR szValue) mut => VT.put_accValue(ref this, varChild, szValue);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, out IDispatch* ppdispParent) get_accParent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, out int32 pcountChildren) get_accChildCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out IDispatch* ppdispChild) get_accChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out BSTR pszName) get_accName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out BSTR pszValue) get_accValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out BSTR pszDescription) get_accDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out VARIANT pvarRole) get_accRole;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out VARIANT pvarState) get_accState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out BSTR pszHelp) get_accHelp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, out BSTR pszHelpFile, VARIANT varChild, out int32 pidTopic) get_accHelpTopic;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out BSTR pszKeyboardShortcut) get_accKeyboardShortcut;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, out VARIANT pvarChild) get_accFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, out VARIANT pvarChildren) get_accSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, out BSTR pszDefaultAction) get_accDefaultAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, int32 flagsSelect, VARIANT varChild) accSelect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, out int32 pxLeft, out int32 pyTop, out int32 pcxWidth, out int32 pcyHeight, VARIANT varChild) accLocation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, int32 navDir, VARIANT varStart, out VARIANT pvarEndUpAt) accNavigate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, int32 xLeft, int32 yTop, out VARIANT pvarChild) accHitTest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild) accDoDefaultAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, BSTR szName) put_accName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessible self, VARIANT varChild, BSTR szValue) put_accValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, out IDispatch* ppdispParent) get_accParent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, out int32 pcountChildren) get_accChildCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out IDispatch* ppdispChild) get_accChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out BSTR pszName) get_accName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out BSTR pszValue) get_accValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out BSTR pszDescription) get_accDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out VARIANT pvarRole) get_accRole;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out VARIANT pvarState) get_accState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out BSTR pszHelp) get_accHelp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, out BSTR pszHelpFile, VARIANT varChild, out int32 pidTopic) get_accHelpTopic;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out BSTR pszKeyboardShortcut) get_accKeyboardShortcut;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, out VARIANT pvarChild) get_accFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, out VARIANT pvarChildren) get_accSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, out BSTR pszDefaultAction) get_accDefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, int32 flagsSelect, VARIANT varChild) accSelect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, out int32 pxLeft, out int32 pyTop, out int32 pcxWidth, out int32 pcyHeight, VARIANT varChild) accLocation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, int32 navDir, VARIANT varStart, out VARIANT pvarEndUpAt) accNavigate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, int32 xLeft, int32 yTop, out VARIANT pvarChild) accHitTest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild) accDoDefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, BSTR szName) put_accName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessible self, VARIANT varChild, BSTR szValue) put_accValue;
 			}
 		}
 		[CRepr]
@@ -1840,12 +1840,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AccessibleObjectFromID(int32 hwnd, int32 lObjectID, out IAccessible* pIAccessible) mut => VT.AccessibleObjectFromID(ref this, hwnd, lObjectID, out pIAccessible);
+			public HResult AccessibleObjectFromID(int32 hwnd, int32 lObjectID, out IAccessible* pIAccessible) mut => VT.AccessibleObjectFromID(ref this, hwnd, lObjectID, out pIAccessible);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleHandler self, int32 hwnd, int32 lObjectID, out IAccessible* pIAccessible) AccessibleObjectFromID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleHandler self, int32 hwnd, int32 lObjectID, out IAccessible* pIAccessible) AccessibleObjectFromID;
 			}
 		}
 		[CRepr]
@@ -1855,18 +1855,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AcquireObjectIdRange(int32 rangeSize, ref IAccessibleHandler pRangeOwner, out int32 pRangeBase) mut => VT.AcquireObjectIdRange(ref this, rangeSize, ref pRangeOwner, out pRangeBase);
-			public HRESULT ReleaseObjectIdRange(int32 rangeBase, ref IAccessibleHandler pRangeOwner) mut => VT.ReleaseObjectIdRange(ref this, rangeBase, ref pRangeOwner);
-			public HRESULT QueryObjectIdRanges(ref IAccessibleHandler pRangesOwner, out SAFEARRAY* psaRanges) mut => VT.QueryObjectIdRanges(ref this, ref pRangesOwner, out psaRanges);
-			public HRESULT GetParentAccessible(out IAccessible* ppParent) mut => VT.GetParentAccessible(ref this, out ppParent);
+			public HResult AcquireObjectIdRange(int32 rangeSize, ref IAccessibleHandler pRangeOwner, out int32 pRangeBase) mut => VT.AcquireObjectIdRange(ref this, rangeSize, ref pRangeOwner, out pRangeBase);
+			public HResult ReleaseObjectIdRange(int32 rangeBase, ref IAccessibleHandler pRangeOwner) mut => VT.ReleaseObjectIdRange(ref this, rangeBase, ref pRangeOwner);
+			public HResult QueryObjectIdRanges(ref IAccessibleHandler pRangesOwner, out SAFEARRAY* psaRanges) mut => VT.QueryObjectIdRanges(ref this, ref pRangesOwner, out psaRanges);
+			public HResult GetParentAccessible(out IAccessible* ppParent) mut => VT.GetParentAccessible(ref this, out ppParent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleWindowlessSite self, int32 rangeSize, ref IAccessibleHandler pRangeOwner, out int32 pRangeBase) AcquireObjectIdRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleWindowlessSite self, int32 rangeBase, ref IAccessibleHandler pRangeOwner) ReleaseObjectIdRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleWindowlessSite self, ref IAccessibleHandler pRangesOwner, out SAFEARRAY* psaRanges) QueryObjectIdRanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleWindowlessSite self, out IAccessible* ppParent) GetParentAccessible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleWindowlessSite self, int32 rangeSize, ref IAccessibleHandler pRangeOwner, out int32 pRangeBase) AcquireObjectIdRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleWindowlessSite self, int32 rangeBase, ref IAccessibleHandler pRangeOwner) ReleaseObjectIdRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleWindowlessSite self, ref IAccessibleHandler pRangesOwner, out SAFEARRAY* psaRanges) QueryObjectIdRanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleWindowlessSite self, out IAccessible* ppParent) GetParentAccessible;
 			}
 		}
 		[CRepr]
@@ -1876,12 +1876,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetIdentityString(uint32 dwIDChild, uint8** ppIDString, out uint32 pdwIDStringLen) mut => VT.GetIdentityString(ref this, dwIDChild, ppIDString, out pdwIDStringLen);
+			public HResult GetIdentityString(uint32 dwIDChild, uint8** ppIDString, out uint32 pdwIDStringLen) mut => VT.GetIdentityString(ref this, dwIDChild, ppIDString, out pdwIDStringLen);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccIdentity self, uint32 dwIDChild, uint8** ppIDString, out uint32 pdwIDStringLen) GetIdentityString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccIdentity self, uint32 dwIDChild, uint8** ppIDString, out uint32 pdwIDStringLen) GetIdentityString;
 			}
 		}
 		[CRepr]
@@ -1891,12 +1891,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropValue(uint8* pIDString, uint32 dwIDStringLen, Guid idProp, out VARIANT pvarValue, out BOOL pfHasProp) mut => VT.GetPropValue(ref this, pIDString, dwIDStringLen, idProp, out pvarValue, out pfHasProp);
+			public HResult GetPropValue(uint8* pIDString, uint32 dwIDStringLen, Guid idProp, out VARIANT pvarValue, out IntBool pfHasProp) mut => VT.GetPropValue(ref this, pIDString, dwIDStringLen, idProp, out pvarValue, out pfHasProp);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServer self, uint8* pIDString, uint32 dwIDStringLen, Guid idProp, out VARIANT pvarValue, out BOOL pfHasProp) GetPropValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServer self, uint8* pIDString, uint32 dwIDStringLen, Guid idProp, out VARIANT pvarValue, out IntBool pfHasProp) GetPropValue;
 			}
 		}
 		[CRepr]
@@ -1906,40 +1906,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetPropValue(uint8* pIDString, uint32 dwIDStringLen, Guid idProp, VARIANT @var) mut => VT.SetPropValue(ref this, pIDString, dwIDStringLen, idProp, @var);
-			public HRESULT SetPropServer(uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) mut => VT.SetPropServer(ref this, pIDString, dwIDStringLen, paProps, cProps, ref pServer, annoScope);
-			public HRESULT ClearProps(uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps) mut => VT.ClearProps(ref this, pIDString, dwIDStringLen, paProps, cProps);
-			public HRESULT SetHwndProp(HWND hwnd, uint32 idObject, uint32 idChild, Guid idProp, VARIANT @var) mut => VT.SetHwndProp(ref this, hwnd, idObject, idChild, idProp, @var);
-			public HRESULT SetHwndPropStr(HWND hwnd, uint32 idObject, uint32 idChild, Guid idProp, PWSTR str) mut => VT.SetHwndPropStr(ref this, hwnd, idObject, idChild, idProp, str);
-			public HRESULT SetHwndPropServer(HWND hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) mut => VT.SetHwndPropServer(ref this, hwnd, idObject, idChild, paProps, cProps, ref pServer, annoScope);
-			public HRESULT ClearHwndProps(HWND hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps) mut => VT.ClearHwndProps(ref this, hwnd, idObject, idChild, paProps, cProps);
-			public HRESULT ComposeHwndIdentityString(HWND hwnd, uint32 idObject, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) mut => VT.ComposeHwndIdentityString(ref this, hwnd, idObject, idChild, ppIDString, out pdwIDStringLen);
-			public HRESULT DecomposeHwndIdentityString(uint8* pIDString, uint32 dwIDStringLen, out HWND phwnd, out uint32 pidObject, out uint32 pidChild) mut => VT.DecomposeHwndIdentityString(ref this, pIDString, dwIDStringLen, out phwnd, out pidObject, out pidChild);
-			public HRESULT SetHmenuProp(HMENU hmenu, uint32 idChild, Guid idProp, VARIANT @var) mut => VT.SetHmenuProp(ref this, hmenu, idChild, idProp, @var);
-			public HRESULT SetHmenuPropStr(HMENU hmenu, uint32 idChild, Guid idProp, PWSTR str) mut => VT.SetHmenuPropStr(ref this, hmenu, idChild, idProp, str);
-			public HRESULT SetHmenuPropServer(HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) mut => VT.SetHmenuPropServer(ref this, hmenu, idChild, paProps, cProps, ref pServer, annoScope);
-			public HRESULT ClearHmenuProps(HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps) mut => VT.ClearHmenuProps(ref this, hmenu, idChild, paProps, cProps);
-			public HRESULT ComposeHmenuIdentityString(HMENU hmenu, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) mut => VT.ComposeHmenuIdentityString(ref this, hmenu, idChild, ppIDString, out pdwIDStringLen);
-			public HRESULT DecomposeHmenuIdentityString(uint8* pIDString, uint32 dwIDStringLen, out HMENU phmenu, out uint32 pidChild) mut => VT.DecomposeHmenuIdentityString(ref this, pIDString, dwIDStringLen, out phmenu, out pidChild);
+			public HResult SetPropValue(uint8* pIDString, uint32 dwIDStringLen, Guid idProp, VARIANT @var) mut => VT.SetPropValue(ref this, pIDString, dwIDStringLen, idProp, @var);
+			public HResult SetPropServer(uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) mut => VT.SetPropServer(ref this, pIDString, dwIDStringLen, paProps, cProps, ref pServer, annoScope);
+			public HResult ClearProps(uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps) mut => VT.ClearProps(ref this, pIDString, dwIDStringLen, paProps, cProps);
+			public HResult SetHwndProp(HWnd hwnd, uint32 idObject, uint32 idChild, Guid idProp, VARIANT @var) mut => VT.SetHwndProp(ref this, hwnd, idObject, idChild, idProp, @var);
+			public HResult SetHwndPropStr(HWnd hwnd, uint32 idObject, uint32 idChild, Guid idProp, char16* str) mut => VT.SetHwndPropStr(ref this, hwnd, idObject, idChild, idProp, str);
+			public HResult SetHwndPropServer(HWnd hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) mut => VT.SetHwndPropServer(ref this, hwnd, idObject, idChild, paProps, cProps, ref pServer, annoScope);
+			public HResult ClearHwndProps(HWnd hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps) mut => VT.ClearHwndProps(ref this, hwnd, idObject, idChild, paProps, cProps);
+			public HResult ComposeHwndIdentityString(HWnd hwnd, uint32 idObject, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) mut => VT.ComposeHwndIdentityString(ref this, hwnd, idObject, idChild, ppIDString, out pdwIDStringLen);
+			public HResult DecomposeHwndIdentityString(uint8* pIDString, uint32 dwIDStringLen, out HWnd phwnd, out uint32 pidObject, out uint32 pidChild) mut => VT.DecomposeHwndIdentityString(ref this, pIDString, dwIDStringLen, out phwnd, out pidObject, out pidChild);
+			public HResult SetHmenuProp(HMENU hmenu, uint32 idChild, Guid idProp, VARIANT @var) mut => VT.SetHmenuProp(ref this, hmenu, idChild, idProp, @var);
+			public HResult SetHmenuPropStr(HMENU hmenu, uint32 idChild, Guid idProp, char16* str) mut => VT.SetHmenuPropStr(ref this, hmenu, idChild, idProp, str);
+			public HResult SetHmenuPropServer(HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) mut => VT.SetHmenuPropServer(ref this, hmenu, idChild, paProps, cProps, ref pServer, annoScope);
+			public HResult ClearHmenuProps(HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps) mut => VT.ClearHmenuProps(ref this, hmenu, idChild, paProps, cProps);
+			public HResult ComposeHmenuIdentityString(HMENU hmenu, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) mut => VT.ComposeHmenuIdentityString(ref this, hmenu, idChild, ppIDString, out pdwIDStringLen);
+			public HResult DecomposeHmenuIdentityString(uint8* pIDString, uint32 dwIDStringLen, out HMENU phmenu, out uint32 pidChild) mut => VT.DecomposeHmenuIdentityString(ref this, pIDString, dwIDStringLen, out phmenu, out pidChild);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, Guid idProp, VARIANT @var) SetPropValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) SetPropServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps) ClearProps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HWND hwnd, uint32 idObject, uint32 idChild, Guid idProp, VARIANT @var) SetHwndProp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HWND hwnd, uint32 idObject, uint32 idChild, Guid idProp, PWSTR str) SetHwndPropStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HWND hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) SetHwndPropServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HWND hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps) ClearHwndProps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HWND hwnd, uint32 idObject, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) ComposeHwndIdentityString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, out HWND phwnd, out uint32 pidObject, out uint32 pidChild) DecomposeHwndIdentityString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid idProp, VARIANT @var) SetHmenuProp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid idProp, PWSTR str) SetHmenuPropStr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) SetHmenuPropServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps) ClearHmenuProps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, HMENU hmenu, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) ComposeHmenuIdentityString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, out HMENU phmenu, out uint32 pidChild) DecomposeHmenuIdentityString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, Guid idProp, VARIANT @var) SetPropValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) SetPropServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, Guid* paProps, int32 cProps) ClearProps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HWnd hwnd, uint32 idObject, uint32 idChild, Guid idProp, VARIANT @var) SetHwndProp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HWnd hwnd, uint32 idObject, uint32 idChild, Guid idProp, char16* str) SetHwndPropStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HWnd hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) SetHwndPropServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HWnd hwnd, uint32 idObject, uint32 idChild, Guid* paProps, int32 cProps) ClearHwndProps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HWnd hwnd, uint32 idObject, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) ComposeHwndIdentityString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, out HWnd phwnd, out uint32 pidObject, out uint32 pidChild) DecomposeHwndIdentityString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid idProp, VARIANT @var) SetHmenuProp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid idProp, char16* str) SetHmenuPropStr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps, ref IAccPropServer pServer, AnnoScope annoScope) SetHmenuPropServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HMENU hmenu, uint32 idChild, Guid* paProps, int32 cProps) ClearHmenuProps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, HMENU hmenu, uint32 idChild, uint8** ppIDString, out uint32 pdwIDStringLen) ComposeHmenuIdentityString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccPropServices self, uint8* pIDString, uint32 dwIDStringLen, out HMENU phmenu, out uint32 pidChild) DecomposeHmenuIdentityString;
 			}
 		}
 		[CRepr]
@@ -1949,18 +1949,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProviderOptions(out ProviderOptions pRetVal) mut => VT.get_ProviderOptions(ref this, out pRetVal);
-			public HRESULT GetPatternProvider(int32 patternId, out IUnknown* pRetVal) mut => VT.GetPatternProvider(ref this, patternId, out pRetVal);
-			public HRESULT GetPropertyValue(int32 propertyId, out VARIANT pRetVal) mut => VT.GetPropertyValue(ref this, propertyId, out pRetVal);
-			public HRESULT get_HostRawElementProvider(out IRawElementProviderSimple* pRetVal) mut => VT.get_HostRawElementProvider(ref this, out pRetVal);
+			public HResult get_ProviderOptions(out ProviderOptions pRetVal) mut => VT.get_ProviderOptions(ref this, out pRetVal);
+			public HResult GetPatternProvider(int32 patternId, out IUnknown* pRetVal) mut => VT.GetPatternProvider(ref this, patternId, out pRetVal);
+			public HResult GetPropertyValue(int32 propertyId, out VARIANT pRetVal) mut => VT.GetPropertyValue(ref this, propertyId, out pRetVal);
+			public HResult get_HostRawElementProvider(out IRawElementProviderSimple* pRetVal) mut => VT.get_HostRawElementProvider(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderSimple self, out ProviderOptions pRetVal) get_ProviderOptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderSimple self, int32 patternId, out IUnknown* pRetVal) GetPatternProvider;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderSimple self, int32 propertyId, out VARIANT pRetVal) GetPropertyValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderSimple self, out IRawElementProviderSimple* pRetVal) get_HostRawElementProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderSimple self, out ProviderOptions pRetVal) get_ProviderOptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderSimple self, int32 patternId, out IUnknown* pRetVal) GetPatternProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderSimple self, int32 propertyId, out VARIANT pRetVal) GetPropertyValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderSimple self, out IRawElementProviderSimple* pRetVal) get_HostRawElementProvider;
 			}
 		}
 		[CRepr]
@@ -1970,18 +1970,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetObjectForChild(int32 idChild, out IAccessibleEx* pRetVal) mut => VT.GetObjectForChild(ref this, idChild, out pRetVal);
-			public HRESULT GetIAccessiblePair(out IAccessible* ppAcc, out int32 pidChild) mut => VT.GetIAccessiblePair(ref this, out ppAcc, out pidChild);
-			public HRESULT GetRuntimeId(out SAFEARRAY* pRetVal) mut => VT.GetRuntimeId(ref this, out pRetVal);
-			public HRESULT ConvertReturnedElement(ref IRawElementProviderSimple pIn, out IAccessibleEx* ppRetValOut) mut => VT.ConvertReturnedElement(ref this, ref pIn, out ppRetValOut);
+			public HResult GetObjectForChild(int32 idChild, out IAccessibleEx* pRetVal) mut => VT.GetObjectForChild(ref this, idChild, out pRetVal);
+			public HResult GetIAccessiblePair(out IAccessible* ppAcc, out int32 pidChild) mut => VT.GetIAccessiblePair(ref this, out ppAcc, out pidChild);
+			public HResult GetRuntimeId(out SAFEARRAY* pRetVal) mut => VT.GetRuntimeId(ref this, out pRetVal);
+			public HResult ConvertReturnedElement(ref IRawElementProviderSimple pIn, out IAccessibleEx* ppRetValOut) mut => VT.ConvertReturnedElement(ref this, ref pIn, out ppRetValOut);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleEx self, int32 idChild, out IAccessibleEx* pRetVal) GetObjectForChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleEx self, out IAccessible* ppAcc, out int32 pidChild) GetIAccessiblePair;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleEx self, out SAFEARRAY* pRetVal) GetRuntimeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleEx self, ref IRawElementProviderSimple pIn, out IAccessibleEx* ppRetValOut) ConvertReturnedElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleEx self, int32 idChild, out IAccessibleEx* pRetVal) GetObjectForChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleEx self, out IAccessible* ppAcc, out int32 pidChild) GetIAccessiblePair;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleEx self, out SAFEARRAY* pRetVal) GetRuntimeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleEx self, ref IRawElementProviderSimple pIn, out IAccessibleEx* ppRetValOut) ConvertReturnedElement;
 			}
 		}
 		[CRepr]
@@ -1991,12 +1991,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ShowContextMenu() mut => VT.ShowContextMenu(ref this);
+			public HResult ShowContextMenu() mut => VT.ShowContextMenu(ref this);
 
 			[CRepr]
 			public struct VTable : IRawElementProviderSimple.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderSimple2 self) ShowContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderSimple2 self) ShowContextMenu;
 			}
 		}
 		[CRepr]
@@ -2006,12 +2006,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMetadataValue(int32 targetId, int32 metadataId, out VARIANT returnVal) mut => VT.GetMetadataValue(ref this, targetId, metadataId, out returnVal);
+			public HResult GetMetadataValue(int32 targetId, int32 metadataId, out VARIANT returnVal) mut => VT.GetMetadataValue(ref this, targetId, metadataId, out returnVal);
 
 			[CRepr]
 			public struct VTable : IRawElementProviderSimple2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderSimple3 self, int32 targetId, int32 metadataId, out VARIANT returnVal) GetMetadataValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderSimple3 self, int32 targetId, int32 metadataId, out VARIANT returnVal) GetMetadataValue;
 			}
 		}
 		[CRepr]
@@ -2021,14 +2021,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ElementProviderFromPoint(double x, double y, out IRawElementProviderFragment* pRetVal) mut => VT.ElementProviderFromPoint(ref this, x, y, out pRetVal);
-			public HRESULT GetFocus(out IRawElementProviderFragment* pRetVal) mut => VT.GetFocus(ref this, out pRetVal);
+			public HResult ElementProviderFromPoint(double x, double y, out IRawElementProviderFragment* pRetVal) mut => VT.ElementProviderFromPoint(ref this, x, y, out pRetVal);
+			public HResult GetFocus(out IRawElementProviderFragment* pRetVal) mut => VT.GetFocus(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragmentRoot self, double x, double y, out IRawElementProviderFragment* pRetVal) ElementProviderFromPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragmentRoot self, out IRawElementProviderFragment* pRetVal) GetFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragmentRoot self, double x, double y, out IRawElementProviderFragment* pRetVal) ElementProviderFromPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragmentRoot self, out IRawElementProviderFragment* pRetVal) GetFocus;
 			}
 		}
 		[CRepr]
@@ -2038,22 +2038,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Navigate(NavigateDirection direction, out IRawElementProviderFragment* pRetVal) mut => VT.Navigate(ref this, direction, out pRetVal);
-			public HRESULT GetRuntimeId(out SAFEARRAY* pRetVal) mut => VT.GetRuntimeId(ref this, out pRetVal);
-			public HRESULT get_BoundingRectangle(out UiaRect pRetVal) mut => VT.get_BoundingRectangle(ref this, out pRetVal);
-			public HRESULT GetEmbeddedFragmentRoots(out SAFEARRAY* pRetVal) mut => VT.GetEmbeddedFragmentRoots(ref this, out pRetVal);
-			public HRESULT SetFocus() mut => VT.SetFocus(ref this);
-			public HRESULT get_FragmentRoot(out IRawElementProviderFragmentRoot* pRetVal) mut => VT.get_FragmentRoot(ref this, out pRetVal);
+			public HResult Navigate(NavigateDirection direction, out IRawElementProviderFragment* pRetVal) mut => VT.Navigate(ref this, direction, out pRetVal);
+			public HResult GetRuntimeId(out SAFEARRAY* pRetVal) mut => VT.GetRuntimeId(ref this, out pRetVal);
+			public HResult get_BoundingRectangle(out UiaRect pRetVal) mut => VT.get_BoundingRectangle(ref this, out pRetVal);
+			public HResult GetEmbeddedFragmentRoots(out SAFEARRAY* pRetVal) mut => VT.GetEmbeddedFragmentRoots(ref this, out pRetVal);
+			public HResult SetFocus() mut => VT.SetFocus(ref this);
+			public HResult get_FragmentRoot(out IRawElementProviderFragmentRoot* pRetVal) mut => VT.get_FragmentRoot(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragment self, NavigateDirection direction, out IRawElementProviderFragment* pRetVal) Navigate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragment self, out SAFEARRAY* pRetVal) GetRuntimeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragment self, out UiaRect pRetVal) get_BoundingRectangle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragment self, out SAFEARRAY* pRetVal) GetEmbeddedFragmentRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragment self) SetFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderFragment self, out IRawElementProviderFragmentRoot* pRetVal) get_FragmentRoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragment self, NavigateDirection direction, out IRawElementProviderFragment* pRetVal) Navigate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragment self, out SAFEARRAY* pRetVal) GetRuntimeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragment self, out UiaRect pRetVal) get_BoundingRectangle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragment self, out SAFEARRAY* pRetVal) GetEmbeddedFragmentRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragment self) SetFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderFragment self, out IRawElementProviderFragmentRoot* pRetVal) get_FragmentRoot;
 			}
 		}
 		[CRepr]
@@ -2063,14 +2063,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AdviseEventAdded(int32 eventId, ref SAFEARRAY propertyIDs) mut => VT.AdviseEventAdded(ref this, eventId, ref propertyIDs);
-			public HRESULT AdviseEventRemoved(int32 eventId, ref SAFEARRAY propertyIDs) mut => VT.AdviseEventRemoved(ref this, eventId, ref propertyIDs);
+			public HResult AdviseEventAdded(int32 eventId, ref SAFEARRAY propertyIDs) mut => VT.AdviseEventAdded(ref this, eventId, ref propertyIDs);
+			public HResult AdviseEventRemoved(int32 eventId, ref SAFEARRAY propertyIDs) mut => VT.AdviseEventRemoved(ref this, eventId, ref propertyIDs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderAdviseEvents self, int32 eventId, ref SAFEARRAY propertyIDs) AdviseEventAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderAdviseEvents self, int32 eventId, ref SAFEARRAY propertyIDs) AdviseEventRemoved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderAdviseEvents self, int32 eventId, ref SAFEARRAY propertyIDs) AdviseEventAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderAdviseEvents self, int32 eventId, ref SAFEARRAY propertyIDs) AdviseEventRemoved;
 			}
 		}
 		[CRepr]
@@ -2080,12 +2080,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetOverrideProviderForHwnd(HWND hwnd, out IRawElementProviderSimple* pRetVal) mut => VT.GetOverrideProviderForHwnd(ref this, hwnd, out pRetVal);
+			public HResult GetOverrideProviderForHwnd(HWnd hwnd, out IRawElementProviderSimple* pRetVal) mut => VT.GetOverrideProviderForHwnd(ref this, hwnd, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderHwndOverride self, HWND hwnd, out IRawElementProviderSimple* pRetVal) GetOverrideProviderForHwnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderHwndOverride self, HWnd hwnd, out IRawElementProviderSimple* pRetVal) GetOverrideProviderForHwnd;
 			}
 		}
 		[CRepr]
@@ -2095,16 +2095,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddAutomationPropertyChangedEvent(ref IRawElementProviderSimple pProvider, int32 id, VARIANT newValue) mut => VT.AddAutomationPropertyChangedEvent(ref this, ref pProvider, id, newValue);
-			public HRESULT AddAutomationEvent(ref IRawElementProviderSimple pProvider, int32 id) mut => VT.AddAutomationEvent(ref this, ref pProvider, id);
-			public HRESULT AddStructureChangedEvent(ref IRawElementProviderSimple pProvider, StructureChangeType structureChangeType, ref SAFEARRAY runtimeId) mut => VT.AddStructureChangedEvent(ref this, ref pProvider, structureChangeType, ref runtimeId);
+			public HResult AddAutomationPropertyChangedEvent(ref IRawElementProviderSimple pProvider, int32 id, VARIANT newValue) mut => VT.AddAutomationPropertyChangedEvent(ref this, ref pProvider, id, newValue);
+			public HResult AddAutomationEvent(ref IRawElementProviderSimple pProvider, int32 id) mut => VT.AddAutomationEvent(ref this, ref pProvider, id);
+			public HResult AddStructureChangedEvent(ref IRawElementProviderSimple pProvider, StructureChangeType structureChangeType, ref SAFEARRAY runtimeId) mut => VT.AddStructureChangedEvent(ref this, ref pProvider, structureChangeType, ref runtimeId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProxyProviderWinEventSink self, ref IRawElementProviderSimple pProvider, int32 id, VARIANT newValue) AddAutomationPropertyChangedEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProxyProviderWinEventSink self, ref IRawElementProviderSimple pProvider, int32 id) AddAutomationEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProxyProviderWinEventSink self, ref IRawElementProviderSimple pProvider, StructureChangeType structureChangeType, ref SAFEARRAY runtimeId) AddStructureChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProxyProviderWinEventSink self, ref IRawElementProviderSimple pProvider, int32 id, VARIANT newValue) AddAutomationPropertyChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProxyProviderWinEventSink self, ref IRawElementProviderSimple pProvider, int32 id) AddAutomationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProxyProviderWinEventSink self, ref IRawElementProviderSimple pProvider, StructureChangeType structureChangeType, ref SAFEARRAY runtimeId) AddStructureChangedEvent;
 			}
 		}
 		[CRepr]
@@ -2114,12 +2114,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RespondToWinEvent(uint32 idWinEvent, HWND hwnd, int32 idObject, int32 idChild, ref IProxyProviderWinEventSink pSink) mut => VT.RespondToWinEvent(ref this, idWinEvent, hwnd, idObject, idChild, ref pSink);
+			public HResult RespondToWinEvent(uint32 idWinEvent, HWnd hwnd, int32 idObject, int32 idChild, ref IProxyProviderWinEventSink pSink) mut => VT.RespondToWinEvent(ref this, idWinEvent, hwnd, idObject, idChild, ref pSink);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProxyProviderWinEventHandler self, uint32 idWinEvent, HWND hwnd, int32 idObject, int32 idChild, ref IProxyProviderWinEventSink pSink) RespondToWinEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProxyProviderWinEventHandler self, uint32 idWinEvent, HWnd hwnd, int32 idObject, int32 idChild, ref IProxyProviderWinEventSink pSink) RespondToWinEvent;
 			}
 		}
 		[CRepr]
@@ -2129,14 +2129,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAdjacentFragment(NavigateDirection direction, out IRawElementProviderFragment* ppParent) mut => VT.GetAdjacentFragment(ref this, direction, out ppParent);
-			public HRESULT GetRuntimeIdPrefix(out SAFEARRAY* pRetVal) mut => VT.GetRuntimeIdPrefix(ref this, out pRetVal);
+			public HResult GetAdjacentFragment(NavigateDirection direction, out IRawElementProviderFragment* ppParent) mut => VT.GetAdjacentFragment(ref this, direction, out ppParent);
+			public HResult GetRuntimeIdPrefix(out SAFEARRAY* pRetVal) mut => VT.GetRuntimeIdPrefix(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderWindowlessSite self, NavigateDirection direction, out IRawElementProviderFragment* ppParent) GetAdjacentFragment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderWindowlessSite self, out SAFEARRAY* pRetVal) GetRuntimeIdPrefix;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderWindowlessSite self, NavigateDirection direction, out IRawElementProviderFragment* ppParent) GetAdjacentFragment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderWindowlessSite self, out SAFEARRAY* pRetVal) GetRuntimeIdPrefix;
 			}
 		}
 		[CRepr]
@@ -2146,14 +2146,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetEmbeddedFragmentRoots(out SAFEARRAY* pRetVal) mut => VT.GetEmbeddedFragmentRoots(ref this, out pRetVal);
-			public HRESULT GetObjectIdForProvider(ref IRawElementProviderSimple pProvider, out int32 pidObject) mut => VT.GetObjectIdForProvider(ref this, ref pProvider, out pidObject);
+			public HResult GetEmbeddedFragmentRoots(out SAFEARRAY* pRetVal) mut => VT.GetEmbeddedFragmentRoots(ref this, out pRetVal);
+			public HResult GetObjectIdForProvider(ref IRawElementProviderSimple pProvider, out int32 pidObject) mut => VT.GetObjectIdForProvider(ref this, ref pProvider, out pidObject);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleHostingElementProviders self, out SAFEARRAY* pRetVal) GetEmbeddedFragmentRoots;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAccessibleHostingElementProviders self, ref IRawElementProviderSimple pProvider, out int32 pidObject) GetObjectIdForProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleHostingElementProviders self, out SAFEARRAY* pRetVal) GetEmbeddedFragmentRoots;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAccessibleHostingElementProviders self, ref IRawElementProviderSimple pProvider, out int32 pidObject) GetObjectIdForProvider;
 			}
 		}
 		[CRepr]
@@ -2163,12 +2163,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetEmbeddedAccessibles(out SAFEARRAY* pRetVal) mut => VT.GetEmbeddedAccessibles(ref this, out pRetVal);
+			public HResult GetEmbeddedAccessibles(out SAFEARRAY* pRetVal) mut => VT.GetEmbeddedAccessibles(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRawElementProviderHostingAccessibles self, out SAFEARRAY* pRetVal) GetEmbeddedAccessibles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRawElementProviderHostingAccessibles self, out SAFEARRAY* pRetVal) GetEmbeddedAccessibles;
 			}
 		}
 		[CRepr]
@@ -2178,14 +2178,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetDockPosition(DockPosition dockPosition) mut => VT.SetDockPosition(ref this, dockPosition);
-			public HRESULT get_DockPosition(out DockPosition pRetVal) mut => VT.get_DockPosition(ref this, out pRetVal);
+			public HResult SetDockPosition(DockPosition dockPosition) mut => VT.SetDockPosition(ref this, dockPosition);
+			public HResult get_DockPosition(out DockPosition pRetVal) mut => VT.get_DockPosition(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDockProvider self, DockPosition dockPosition) SetDockPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDockProvider self, out DockPosition pRetVal) get_DockPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDockProvider self, DockPosition dockPosition) SetDockPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDockProvider self, out DockPosition pRetVal) get_DockPosition;
 			}
 		}
 		[CRepr]
@@ -2195,16 +2195,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Expand() mut => VT.Expand(ref this);
-			public HRESULT Collapse() mut => VT.Collapse(ref this);
-			public HRESULT get_ExpandCollapseState(out ExpandCollapseState pRetVal) mut => VT.get_ExpandCollapseState(ref this, out pRetVal);
+			public HResult Expand() mut => VT.Expand(ref this);
+			public HResult Collapse() mut => VT.Collapse(ref this);
+			public HResult get_ExpandCollapseState(out ExpandCollapseState pRetVal) mut => VT.get_ExpandCollapseState(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IExpandCollapseProvider self) Expand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IExpandCollapseProvider self) Collapse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IExpandCollapseProvider self, out ExpandCollapseState pRetVal) get_ExpandCollapseState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IExpandCollapseProvider self) Expand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IExpandCollapseProvider self) Collapse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IExpandCollapseProvider self, out ExpandCollapseState pRetVal) get_ExpandCollapseState;
 			}
 		}
 		[CRepr]
@@ -2214,16 +2214,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItem(int32 row, int32 column, out IRawElementProviderSimple* pRetVal) mut => VT.GetItem(ref this, row, column, out pRetVal);
-			public HRESULT get_RowCount(out int32 pRetVal) mut => VT.get_RowCount(ref this, out pRetVal);
-			public HRESULT get_ColumnCount(out int32 pRetVal) mut => VT.get_ColumnCount(ref this, out pRetVal);
+			public HResult GetItem(int32 row, int32 column, out IRawElementProviderSimple* pRetVal) mut => VT.GetItem(ref this, row, column, out pRetVal);
+			public HResult get_RowCount(out int32 pRetVal) mut => VT.get_RowCount(ref this, out pRetVal);
+			public HResult get_ColumnCount(out int32 pRetVal) mut => VT.get_ColumnCount(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridProvider self, int32 row, int32 column, out IRawElementProviderSimple* pRetVal) GetItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridProvider self, out int32 pRetVal) get_RowCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridProvider self, out int32 pRetVal) get_ColumnCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridProvider self, int32 row, int32 column, out IRawElementProviderSimple* pRetVal) GetItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridProvider self, out int32 pRetVal) get_RowCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridProvider self, out int32 pRetVal) get_ColumnCount;
 			}
 		}
 		[CRepr]
@@ -2233,20 +2233,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Row(out int32 pRetVal) mut => VT.get_Row(ref this, out pRetVal);
-			public HRESULT get_Column(out int32 pRetVal) mut => VT.get_Column(ref this, out pRetVal);
-			public HRESULT get_RowSpan(out int32 pRetVal) mut => VT.get_RowSpan(ref this, out pRetVal);
-			public HRESULT get_ColumnSpan(out int32 pRetVal) mut => VT.get_ColumnSpan(ref this, out pRetVal);
-			public HRESULT get_ContainingGrid(out IRawElementProviderSimple* pRetVal) mut => VT.get_ContainingGrid(ref this, out pRetVal);
+			public HResult get_Row(out int32 pRetVal) mut => VT.get_Row(ref this, out pRetVal);
+			public HResult get_Column(out int32 pRetVal) mut => VT.get_Column(ref this, out pRetVal);
+			public HResult get_RowSpan(out int32 pRetVal) mut => VT.get_RowSpan(ref this, out pRetVal);
+			public HResult get_ColumnSpan(out int32 pRetVal) mut => VT.get_ColumnSpan(ref this, out pRetVal);
+			public HResult get_ContainingGrid(out IRawElementProviderSimple* pRetVal) mut => VT.get_ContainingGrid(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridItemProvider self, out int32 pRetVal) get_Row;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridItemProvider self, out int32 pRetVal) get_Column;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridItemProvider self, out int32 pRetVal) get_RowSpan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridItemProvider self, out int32 pRetVal) get_ColumnSpan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IGridItemProvider self, out IRawElementProviderSimple* pRetVal) get_ContainingGrid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridItemProvider self, out int32 pRetVal) get_Row;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridItemProvider self, out int32 pRetVal) get_Column;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridItemProvider self, out int32 pRetVal) get_RowSpan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridItemProvider self, out int32 pRetVal) get_ColumnSpan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IGridItemProvider self, out IRawElementProviderSimple* pRetVal) get_ContainingGrid;
 			}
 		}
 		[CRepr]
@@ -2256,12 +2256,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Invoke() mut => VT.Invoke(ref this);
+			public HResult Invoke() mut => VT.Invoke(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInvokeProvider self) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInvokeProvider self) Invoke;
 			}
 		}
 		[CRepr]
@@ -2271,18 +2271,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetViewName(int32 viewId, out BSTR pRetVal) mut => VT.GetViewName(ref this, viewId, out pRetVal);
-			public HRESULT SetCurrentView(int32 viewId) mut => VT.SetCurrentView(ref this, viewId);
-			public HRESULT get_CurrentView(out int32 pRetVal) mut => VT.get_CurrentView(ref this, out pRetVal);
-			public HRESULT GetSupportedViews(out SAFEARRAY* pRetVal) mut => VT.GetSupportedViews(ref this, out pRetVal);
+			public HResult GetViewName(int32 viewId, out BSTR pRetVal) mut => VT.GetViewName(ref this, viewId, out pRetVal);
+			public HResult SetCurrentView(int32 viewId) mut => VT.SetCurrentView(ref this, viewId);
+			public HResult get_CurrentView(out int32 pRetVal) mut => VT.get_CurrentView(ref this, out pRetVal);
+			public HResult GetSupportedViews(out SAFEARRAY* pRetVal) mut => VT.GetSupportedViews(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultipleViewProvider self, int32 viewId, out BSTR pRetVal) GetViewName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultipleViewProvider self, int32 viewId) SetCurrentView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultipleViewProvider self, out int32 pRetVal) get_CurrentView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMultipleViewProvider self, out SAFEARRAY* pRetVal) GetSupportedViews;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultipleViewProvider self, int32 viewId, out BSTR pRetVal) GetViewName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultipleViewProvider self, int32 viewId) SetCurrentView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultipleViewProvider self, out int32 pRetVal) get_CurrentView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMultipleViewProvider self, out SAFEARRAY* pRetVal) GetSupportedViews;
 			}
 		}
 		[CRepr]
@@ -2292,24 +2292,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetValue(double val) mut => VT.SetValue(ref this, val);
-			public HRESULT get_Value(out double pRetVal) mut => VT.get_Value(ref this, out pRetVal);
-			public HRESULT get_IsReadOnly(out BOOL pRetVal) mut => VT.get_IsReadOnly(ref this, out pRetVal);
-			public HRESULT get_Maximum(out double pRetVal) mut => VT.get_Maximum(ref this, out pRetVal);
-			public HRESULT get_Minimum(out double pRetVal) mut => VT.get_Minimum(ref this, out pRetVal);
-			public HRESULT get_LargeChange(out double pRetVal) mut => VT.get_LargeChange(ref this, out pRetVal);
-			public HRESULT get_SmallChange(out double pRetVal) mut => VT.get_SmallChange(ref this, out pRetVal);
+			public HResult SetValue(double val) mut => VT.SetValue(ref this, val);
+			public HResult get_Value(out double pRetVal) mut => VT.get_Value(ref this, out pRetVal);
+			public HResult get_IsReadOnly(out IntBool pRetVal) mut => VT.get_IsReadOnly(ref this, out pRetVal);
+			public HResult get_Maximum(out double pRetVal) mut => VT.get_Maximum(ref this, out pRetVal);
+			public HResult get_Minimum(out double pRetVal) mut => VT.get_Minimum(ref this, out pRetVal);
+			public HResult get_LargeChange(out double pRetVal) mut => VT.get_LargeChange(ref this, out pRetVal);
+			public HResult get_SmallChange(out double pRetVal) mut => VT.get_SmallChange(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, double val) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, out double pRetVal) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, out BOOL pRetVal) get_IsReadOnly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, out double pRetVal) get_Maximum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, out double pRetVal) get_Minimum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, out double pRetVal) get_LargeChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRangeValueProvider self, out double pRetVal) get_SmallChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, double val) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, out double pRetVal) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, out IntBool pRetVal) get_IsReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, out double pRetVal) get_Maximum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, out double pRetVal) get_Minimum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, out double pRetVal) get_LargeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRangeValueProvider self, out double pRetVal) get_SmallChange;
 			}
 		}
 		[CRepr]
@@ -2319,12 +2319,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ScrollIntoView() mut => VT.ScrollIntoView(ref this);
+			public HResult ScrollIntoView() mut => VT.ScrollIntoView(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollItemProvider self) ScrollIntoView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollItemProvider self) ScrollIntoView;
 			}
 		}
 		[CRepr]
@@ -2334,16 +2334,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSelection(out SAFEARRAY* pRetVal) mut => VT.GetSelection(ref this, out pRetVal);
-			public HRESULT get_CanSelectMultiple(out BOOL pRetVal) mut => VT.get_CanSelectMultiple(ref this, out pRetVal);
-			public HRESULT get_IsSelectionRequired(out BOOL pRetVal) mut => VT.get_IsSelectionRequired(ref this, out pRetVal);
+			public HResult GetSelection(out SAFEARRAY* pRetVal) mut => VT.GetSelection(ref this, out pRetVal);
+			public HResult get_CanSelectMultiple(out IntBool pRetVal) mut => VT.get_CanSelectMultiple(ref this, out pRetVal);
+			public HResult get_IsSelectionRequired(out IntBool pRetVal) mut => VT.get_IsSelectionRequired(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider self, out SAFEARRAY* pRetVal) GetSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider self, out BOOL pRetVal) get_CanSelectMultiple;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider self, out BOOL pRetVal) get_IsSelectionRequired;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider self, out SAFEARRAY* pRetVal) GetSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider self, out IntBool pRetVal) get_CanSelectMultiple;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider self, out IntBool pRetVal) get_IsSelectionRequired;
 			}
 		}
 		[CRepr]
@@ -2353,18 +2353,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_FirstSelectedItem(out IRawElementProviderSimple* retVal) mut => VT.get_FirstSelectedItem(ref this, out retVal);
-			public HRESULT get_LastSelectedItem(out IRawElementProviderSimple* retVal) mut => VT.get_LastSelectedItem(ref this, out retVal);
-			public HRESULT get_CurrentSelectedItem(out IRawElementProviderSimple* retVal) mut => VT.get_CurrentSelectedItem(ref this, out retVal);
-			public HRESULT get_ItemCount(out int32 retVal) mut => VT.get_ItemCount(ref this, out retVal);
+			public HResult get_FirstSelectedItem(out IRawElementProviderSimple* retVal) mut => VT.get_FirstSelectedItem(ref this, out retVal);
+			public HResult get_LastSelectedItem(out IRawElementProviderSimple* retVal) mut => VT.get_LastSelectedItem(ref this, out retVal);
+			public HResult get_CurrentSelectedItem(out IRawElementProviderSimple* retVal) mut => VT.get_CurrentSelectedItem(ref this, out retVal);
+			public HResult get_ItemCount(out int32 retVal) mut => VT.get_ItemCount(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : ISelectionProvider.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider2 self, out IRawElementProviderSimple* retVal) get_FirstSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider2 self, out IRawElementProviderSimple* retVal) get_LastSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider2 self, out IRawElementProviderSimple* retVal) get_CurrentSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionProvider2 self, out int32 retVal) get_ItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider2 self, out IRawElementProviderSimple* retVal) get_FirstSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider2 self, out IRawElementProviderSimple* retVal) get_LastSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider2 self, out IRawElementProviderSimple* retVal) get_CurrentSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionProvider2 self, out int32 retVal) get_ItemCount;
 			}
 		}
 		[CRepr]
@@ -2374,26 +2374,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount) mut => VT.Scroll(ref this, horizontalAmount, verticalAmount);
-			public HRESULT SetScrollPercent(double horizontalPercent, double verticalPercent) mut => VT.SetScrollPercent(ref this, horizontalPercent, verticalPercent);
-			public HRESULT get_HorizontalScrollPercent(out double pRetVal) mut => VT.get_HorizontalScrollPercent(ref this, out pRetVal);
-			public HRESULT get_VerticalScrollPercent(out double pRetVal) mut => VT.get_VerticalScrollPercent(ref this, out pRetVal);
-			public HRESULT get_HorizontalViewSize(out double pRetVal) mut => VT.get_HorizontalViewSize(ref this, out pRetVal);
-			public HRESULT get_VerticalViewSize(out double pRetVal) mut => VT.get_VerticalViewSize(ref this, out pRetVal);
-			public HRESULT get_HorizontallyScrollable(out BOOL pRetVal) mut => VT.get_HorizontallyScrollable(ref this, out pRetVal);
-			public HRESULT get_VerticallyScrollable(out BOOL pRetVal) mut => VT.get_VerticallyScrollable(ref this, out pRetVal);
+			public HResult Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount) mut => VT.Scroll(ref this, horizontalAmount, verticalAmount);
+			public HResult SetScrollPercent(double horizontalPercent, double verticalPercent) mut => VT.SetScrollPercent(ref this, horizontalPercent, verticalPercent);
+			public HResult get_HorizontalScrollPercent(out double pRetVal) mut => VT.get_HorizontalScrollPercent(ref this, out pRetVal);
+			public HResult get_VerticalScrollPercent(out double pRetVal) mut => VT.get_VerticalScrollPercent(ref this, out pRetVal);
+			public HResult get_HorizontalViewSize(out double pRetVal) mut => VT.get_HorizontalViewSize(ref this, out pRetVal);
+			public HResult get_VerticalViewSize(out double pRetVal) mut => VT.get_VerticalViewSize(ref this, out pRetVal);
+			public HResult get_HorizontallyScrollable(out IntBool pRetVal) mut => VT.get_HorizontallyScrollable(ref this, out pRetVal);
+			public HResult get_VerticallyScrollable(out IntBool pRetVal) mut => VT.get_VerticallyScrollable(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, ScrollAmount horizontalAmount, ScrollAmount verticalAmount) Scroll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, double horizontalPercent, double verticalPercent) SetScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, out double pRetVal) get_HorizontalScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, out double pRetVal) get_VerticalScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, out double pRetVal) get_HorizontalViewSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, out double pRetVal) get_VerticalViewSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, out BOOL pRetVal) get_HorizontallyScrollable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IScrollProvider self, out BOOL pRetVal) get_VerticallyScrollable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, ScrollAmount horizontalAmount, ScrollAmount verticalAmount) Scroll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, double horizontalPercent, double verticalPercent) SetScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, out double pRetVal) get_HorizontalScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, out double pRetVal) get_VerticalScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, out double pRetVal) get_HorizontalViewSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, out double pRetVal) get_VerticalViewSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, out IntBool pRetVal) get_HorizontallyScrollable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IScrollProvider self, out IntBool pRetVal) get_VerticallyScrollable;
 			}
 		}
 		[CRepr]
@@ -2403,20 +2403,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Select() mut => VT.Select(ref this);
-			public HRESULT AddToSelection() mut => VT.AddToSelection(ref this);
-			public HRESULT RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
-			public HRESULT get_IsSelected(out BOOL pRetVal) mut => VT.get_IsSelected(ref this, out pRetVal);
-			public HRESULT get_SelectionContainer(out IRawElementProviderSimple* pRetVal) mut => VT.get_SelectionContainer(ref this, out pRetVal);
+			public HResult Select() mut => VT.Select(ref this);
+			public HResult AddToSelection() mut => VT.AddToSelection(ref this);
+			public HResult RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
+			public HResult get_IsSelected(out IntBool pRetVal) mut => VT.get_IsSelected(ref this, out pRetVal);
+			public HResult get_SelectionContainer(out IRawElementProviderSimple* pRetVal) mut => VT.get_SelectionContainer(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionItemProvider self) Select;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionItemProvider self) AddToSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionItemProvider self) RemoveFromSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionItemProvider self, out BOOL pRetVal) get_IsSelected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISelectionItemProvider self, out IRawElementProviderSimple* pRetVal) get_SelectionContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionItemProvider self) Select;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionItemProvider self) AddToSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionItemProvider self) RemoveFromSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionItemProvider self, out IntBool pRetVal) get_IsSelected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISelectionItemProvider self, out IRawElementProviderSimple* pRetVal) get_SelectionContainer;
 			}
 		}
 		[CRepr]
@@ -2426,14 +2426,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartListening(SynchronizedInputType inputType) mut => VT.StartListening(ref this, inputType);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
+			public HResult StartListening(SynchronizedInputType inputType) mut => VT.StartListening(ref this, inputType);
+			public HResult Cancel() mut => VT.Cancel(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizedInputProvider self, SynchronizedInputType inputType) StartListening;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISynchronizedInputProvider self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizedInputProvider self, SynchronizedInputType inputType) StartListening;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISynchronizedInputProvider self) Cancel;
 			}
 		}
 		[CRepr]
@@ -2443,16 +2443,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRowHeaders(out SAFEARRAY* pRetVal) mut => VT.GetRowHeaders(ref this, out pRetVal);
-			public HRESULT GetColumnHeaders(out SAFEARRAY* pRetVal) mut => VT.GetColumnHeaders(ref this, out pRetVal);
-			public HRESULT get_RowOrColumnMajor(out RowOrColumnMajor pRetVal) mut => VT.get_RowOrColumnMajor(ref this, out pRetVal);
+			public HResult GetRowHeaders(out SAFEARRAY* pRetVal) mut => VT.GetRowHeaders(ref this, out pRetVal);
+			public HResult GetColumnHeaders(out SAFEARRAY* pRetVal) mut => VT.GetColumnHeaders(ref this, out pRetVal);
+			public HResult get_RowOrColumnMajor(out RowOrColumnMajor pRetVal) mut => VT.get_RowOrColumnMajor(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITableProvider self, out SAFEARRAY* pRetVal) GetRowHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITableProvider self, out SAFEARRAY* pRetVal) GetColumnHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITableProvider self, out RowOrColumnMajor pRetVal) get_RowOrColumnMajor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITableProvider self, out SAFEARRAY* pRetVal) GetRowHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITableProvider self, out SAFEARRAY* pRetVal) GetColumnHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITableProvider self, out RowOrColumnMajor pRetVal) get_RowOrColumnMajor;
 			}
 		}
 		[CRepr]
@@ -2462,14 +2462,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetRowHeaderItems(out SAFEARRAY* pRetVal) mut => VT.GetRowHeaderItems(ref this, out pRetVal);
-			public HRESULT GetColumnHeaderItems(out SAFEARRAY* pRetVal) mut => VT.GetColumnHeaderItems(ref this, out pRetVal);
+			public HResult GetRowHeaderItems(out SAFEARRAY* pRetVal) mut => VT.GetRowHeaderItems(ref this, out pRetVal);
+			public HResult GetColumnHeaderItems(out SAFEARRAY* pRetVal) mut => VT.GetColumnHeaderItems(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITableItemProvider self, out SAFEARRAY* pRetVal) GetRowHeaderItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITableItemProvider self, out SAFEARRAY* pRetVal) GetColumnHeaderItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITableItemProvider self, out SAFEARRAY* pRetVal) GetRowHeaderItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITableItemProvider self, out SAFEARRAY* pRetVal) GetColumnHeaderItems;
 			}
 		}
 		[CRepr]
@@ -2479,14 +2479,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Toggle() mut => VT.Toggle(ref this);
-			public HRESULT get_ToggleState(out ToggleState pRetVal) mut => VT.get_ToggleState(ref this, out pRetVal);
+			public HResult Toggle() mut => VT.Toggle(ref this);
+			public HResult get_ToggleState(out ToggleState pRetVal) mut => VT.get_ToggleState(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IToggleProvider self) Toggle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IToggleProvider self, out ToggleState pRetVal) get_ToggleState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IToggleProvider self) Toggle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IToggleProvider self, out ToggleState pRetVal) get_ToggleState;
 			}
 		}
 		[CRepr]
@@ -2496,22 +2496,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Move(double x, double y) mut => VT.Move(ref this, x, y);
-			public HRESULT Resize(double width, double height) mut => VT.Resize(ref this, width, height);
-			public HRESULT Rotate(double degrees) mut => VT.Rotate(ref this, degrees);
-			public HRESULT get_CanMove(out BOOL pRetVal) mut => VT.get_CanMove(ref this, out pRetVal);
-			public HRESULT get_CanResize(out BOOL pRetVal) mut => VT.get_CanResize(ref this, out pRetVal);
-			public HRESULT get_CanRotate(out BOOL pRetVal) mut => VT.get_CanRotate(ref this, out pRetVal);
+			public HResult Move(double x, double y) mut => VT.Move(ref this, x, y);
+			public HResult Resize(double width, double height) mut => VT.Resize(ref this, width, height);
+			public HResult Rotate(double degrees) mut => VT.Rotate(ref this, degrees);
+			public HResult get_CanMove(out IntBool pRetVal) mut => VT.get_CanMove(ref this, out pRetVal);
+			public HResult get_CanResize(out IntBool pRetVal) mut => VT.get_CanResize(ref this, out pRetVal);
+			public HResult get_CanRotate(out IntBool pRetVal) mut => VT.get_CanRotate(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider self, double x, double y) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider self, double width, double height) Resize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider self, double degrees) Rotate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider self, out BOOL pRetVal) get_CanMove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider self, out BOOL pRetVal) get_CanResize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider self, out BOOL pRetVal) get_CanRotate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider self, double x, double y) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider self, double width, double height) Resize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider self, double degrees) Rotate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider self, out IntBool pRetVal) get_CanMove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider self, out IntBool pRetVal) get_CanResize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider self, out IntBool pRetVal) get_CanRotate;
 			}
 		}
 		[CRepr]
@@ -2521,16 +2521,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetValue(PWSTR val) mut => VT.SetValue(ref this, val);
-			public HRESULT get_Value(out BSTR pRetVal) mut => VT.get_Value(ref this, out pRetVal);
-			public HRESULT get_IsReadOnly(out BOOL pRetVal) mut => VT.get_IsReadOnly(ref this, out pRetVal);
+			public HResult SetValue(char16* val) mut => VT.SetValue(ref this, val);
+			public HResult get_Value(out BSTR pRetVal) mut => VT.get_Value(ref this, out pRetVal);
+			public HResult get_IsReadOnly(out IntBool pRetVal) mut => VT.get_IsReadOnly(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValueProvider self, PWSTR val) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValueProvider self, out BSTR pRetVal) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValueProvider self, out BOOL pRetVal) get_IsReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValueProvider self, char16* val) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValueProvider self, out BSTR pRetVal) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValueProvider self, out IntBool pRetVal) get_IsReadOnly;
 			}
 		}
 		[CRepr]
@@ -2540,28 +2540,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetVisualState(WindowVisualState state) mut => VT.SetVisualState(ref this, state);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT WaitForInputIdle(int32 milliseconds, out BOOL pRetVal) mut => VT.WaitForInputIdle(ref this, milliseconds, out pRetVal);
-			public HRESULT get_CanMaximize(out BOOL pRetVal) mut => VT.get_CanMaximize(ref this, out pRetVal);
-			public HRESULT get_CanMinimize(out BOOL pRetVal) mut => VT.get_CanMinimize(ref this, out pRetVal);
-			public HRESULT get_IsModal(out BOOL pRetVal) mut => VT.get_IsModal(ref this, out pRetVal);
-			public HRESULT get_WindowVisualState(out WindowVisualState pRetVal) mut => VT.get_WindowVisualState(ref this, out pRetVal);
-			public HRESULT get_WindowInteractionState(out WindowInteractionState pRetVal) mut => VT.get_WindowInteractionState(ref this, out pRetVal);
-			public HRESULT get_IsTopmost(out BOOL pRetVal) mut => VT.get_IsTopmost(ref this, out pRetVal);
+			public HResult SetVisualState(WindowVisualState state) mut => VT.SetVisualState(ref this, state);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult WaitForInputIdle(int32 milliseconds, out IntBool pRetVal) mut => VT.WaitForInputIdle(ref this, milliseconds, out pRetVal);
+			public HResult get_CanMaximize(out IntBool pRetVal) mut => VT.get_CanMaximize(ref this, out pRetVal);
+			public HResult get_CanMinimize(out IntBool pRetVal) mut => VT.get_CanMinimize(ref this, out pRetVal);
+			public HResult get_IsModal(out IntBool pRetVal) mut => VT.get_IsModal(ref this, out pRetVal);
+			public HResult get_WindowVisualState(out WindowVisualState pRetVal) mut => VT.get_WindowVisualState(ref this, out pRetVal);
+			public HResult get_WindowInteractionState(out WindowInteractionState pRetVal) mut => VT.get_WindowInteractionState(ref this, out pRetVal);
+			public HResult get_IsTopmost(out IntBool pRetVal) mut => VT.get_IsTopmost(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, WindowVisualState state) SetVisualState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, int32 milliseconds, out BOOL pRetVal) WaitForInputIdle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, out BOOL pRetVal) get_CanMaximize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, out BOOL pRetVal) get_CanMinimize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, out BOOL pRetVal) get_IsModal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, out WindowVisualState pRetVal) get_WindowVisualState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, out WindowInteractionState pRetVal) get_WindowInteractionState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowProvider self, out BOOL pRetVal) get_IsTopmost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, WindowVisualState state) SetVisualState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, int32 milliseconds, out IntBool pRetVal) WaitForInputIdle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, out IntBool pRetVal) get_CanMaximize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, out IntBool pRetVal) get_CanMinimize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, out IntBool pRetVal) get_IsModal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, out WindowVisualState pRetVal) get_WindowVisualState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, out WindowInteractionState pRetVal) get_WindowInteractionState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowProvider self, out IntBool pRetVal) get_IsTopmost;
 			}
 		}
 		[CRepr]
@@ -2571,38 +2571,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Select(int32 flagsSelect) mut => VT.Select(ref this, flagsSelect);
-			public HRESULT DoDefaultAction() mut => VT.DoDefaultAction(ref this);
-			public HRESULT SetValue(PWSTR szValue) mut => VT.SetValue(ref this, szValue);
-			public HRESULT GetIAccessible(out IAccessible* ppAccessible) mut => VT.GetIAccessible(ref this, out ppAccessible);
-			public HRESULT get_ChildId(out int32 pRetVal) mut => VT.get_ChildId(ref this, out pRetVal);
-			public HRESULT get_Name(out BSTR pszName) mut => VT.get_Name(ref this, out pszName);
-			public HRESULT get_Value(out BSTR pszValue) mut => VT.get_Value(ref this, out pszValue);
-			public HRESULT get_Description(out BSTR pszDescription) mut => VT.get_Description(ref this, out pszDescription);
-			public HRESULT get_Role(out uint32 pdwRole) mut => VT.get_Role(ref this, out pdwRole);
-			public HRESULT get_State(out uint32 pdwState) mut => VT.get_State(ref this, out pdwState);
-			public HRESULT get_Help(out BSTR pszHelp) mut => VT.get_Help(ref this, out pszHelp);
-			public HRESULT get_KeyboardShortcut(out BSTR pszKeyboardShortcut) mut => VT.get_KeyboardShortcut(ref this, out pszKeyboardShortcut);
-			public HRESULT GetSelection(out SAFEARRAY* pvarSelectedChildren) mut => VT.GetSelection(ref this, out pvarSelectedChildren);
-			public HRESULT get_DefaultAction(out BSTR pszDefaultAction) mut => VT.get_DefaultAction(ref this, out pszDefaultAction);
+			public HResult Select(int32 flagsSelect) mut => VT.Select(ref this, flagsSelect);
+			public HResult DoDefaultAction() mut => VT.DoDefaultAction(ref this);
+			public HResult SetValue(char16* szValue) mut => VT.SetValue(ref this, szValue);
+			public HResult GetIAccessible(out IAccessible* ppAccessible) mut => VT.GetIAccessible(ref this, out ppAccessible);
+			public HResult get_ChildId(out int32 pRetVal) mut => VT.get_ChildId(ref this, out pRetVal);
+			public HResult get_Name(out BSTR pszName) mut => VT.get_Name(ref this, out pszName);
+			public HResult get_Value(out BSTR pszValue) mut => VT.get_Value(ref this, out pszValue);
+			public HResult get_Description(out BSTR pszDescription) mut => VT.get_Description(ref this, out pszDescription);
+			public HResult get_Role(out uint32 pdwRole) mut => VT.get_Role(ref this, out pdwRole);
+			public HResult get_State(out uint32 pdwState) mut => VT.get_State(ref this, out pdwState);
+			public HResult get_Help(out BSTR pszHelp) mut => VT.get_Help(ref this, out pszHelp);
+			public HResult get_KeyboardShortcut(out BSTR pszKeyboardShortcut) mut => VT.get_KeyboardShortcut(ref this, out pszKeyboardShortcut);
+			public HResult GetSelection(out SAFEARRAY* pvarSelectedChildren) mut => VT.GetSelection(ref this, out pvarSelectedChildren);
+			public HResult get_DefaultAction(out BSTR pszDefaultAction) mut => VT.get_DefaultAction(ref this, out pszDefaultAction);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, int32 flagsSelect) Select;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self) DoDefaultAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, PWSTR szValue) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out IAccessible* ppAccessible) GetIAccessible;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out int32 pRetVal) get_ChildId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out BSTR pszName) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out BSTR pszValue) get_Value;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out BSTR pszDescription) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out uint32 pdwRole) get_Role;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out uint32 pdwState) get_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out BSTR pszHelp) get_Help;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out BSTR pszKeyboardShortcut) get_KeyboardShortcut;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out SAFEARRAY* pvarSelectedChildren) GetSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ILegacyIAccessibleProvider self, out BSTR pszDefaultAction) get_DefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, int32 flagsSelect) Select;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self) DoDefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, char16* szValue) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out IAccessible* ppAccessible) GetIAccessible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out int32 pRetVal) get_ChildId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out BSTR pszName) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out BSTR pszValue) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out BSTR pszDescription) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out uint32 pdwRole) get_Role;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out uint32 pdwState) get_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out BSTR pszHelp) get_Help;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out BSTR pszKeyboardShortcut) get_KeyboardShortcut;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out SAFEARRAY* pvarSelectedChildren) GetSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ILegacyIAccessibleProvider self, out BSTR pszDefaultAction) get_DefaultAction;
 			}
 		}
 		[CRepr]
@@ -2612,12 +2612,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT FindItemByProperty(ref IRawElementProviderSimple pStartAfter, int32 propertyId, VARIANT value, out IRawElementProviderSimple* pFound) mut => VT.FindItemByProperty(ref this, ref pStartAfter, propertyId, value, out pFound);
+			public HResult FindItemByProperty(ref IRawElementProviderSimple pStartAfter, int32 propertyId, VARIANT value, out IRawElementProviderSimple* pFound) mut => VT.FindItemByProperty(ref this, ref pStartAfter, propertyId, value, out pFound);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IItemContainerProvider self, ref IRawElementProviderSimple pStartAfter, int32 propertyId, VARIANT value, out IRawElementProviderSimple* pFound) FindItemByProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IItemContainerProvider self, ref IRawElementProviderSimple pStartAfter, int32 propertyId, VARIANT value, out IRawElementProviderSimple* pFound) FindItemByProperty;
 			}
 		}
 		[CRepr]
@@ -2627,12 +2627,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Realize() mut => VT.Realize(ref this);
+			public HResult Realize() mut => VT.Realize(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVirtualizedItemProvider self) Realize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVirtualizedItemProvider self) Realize;
 			}
 		}
 		[CRepr]
@@ -2642,12 +2642,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetUnderlyingObjectModel(out IUnknown* ppUnknown) mut => VT.GetUnderlyingObjectModel(ref this, out ppUnknown);
+			public HResult GetUnderlyingObjectModel(out IUnknown* ppUnknown) mut => VT.GetUnderlyingObjectModel(ref this, out ppUnknown);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IObjectModelProvider self, out IUnknown* ppUnknown) GetUnderlyingObjectModel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IObjectModelProvider self, out IUnknown* ppUnknown) GetUnderlyingObjectModel;
 			}
 		}
 		[CRepr]
@@ -2657,20 +2657,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AnnotationTypeId(out int32 retVal) mut => VT.get_AnnotationTypeId(ref this, out retVal);
-			public HRESULT get_AnnotationTypeName(out BSTR retVal) mut => VT.get_AnnotationTypeName(ref this, out retVal);
-			public HRESULT get_Author(out BSTR retVal) mut => VT.get_Author(ref this, out retVal);
-			public HRESULT get_DateTime(out BSTR retVal) mut => VT.get_DateTime(ref this, out retVal);
-			public HRESULT get_Target(out IRawElementProviderSimple* retVal) mut => VT.get_Target(ref this, out retVal);
+			public HResult get_AnnotationTypeId(out int32 retVal) mut => VT.get_AnnotationTypeId(ref this, out retVal);
+			public HResult get_AnnotationTypeName(out BSTR retVal) mut => VT.get_AnnotationTypeName(ref this, out retVal);
+			public HResult get_Author(out BSTR retVal) mut => VT.get_Author(ref this, out retVal);
+			public HResult get_DateTime(out BSTR retVal) mut => VT.get_DateTime(ref this, out retVal);
+			public HResult get_Target(out IRawElementProviderSimple* retVal) mut => VT.get_Target(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAnnotationProvider self, out int32 retVal) get_AnnotationTypeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAnnotationProvider self, out BSTR retVal) get_AnnotationTypeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAnnotationProvider self, out BSTR retVal) get_Author;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAnnotationProvider self, out BSTR retVal) get_DateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAnnotationProvider self, out IRawElementProviderSimple* retVal) get_Target;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAnnotationProvider self, out int32 retVal) get_AnnotationTypeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAnnotationProvider self, out BSTR retVal) get_AnnotationTypeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAnnotationProvider self, out BSTR retVal) get_Author;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAnnotationProvider self, out BSTR retVal) get_DateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAnnotationProvider self, out IRawElementProviderSimple* retVal) get_Target;
 			}
 		}
 		[CRepr]
@@ -2680,24 +2680,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_StyleId(out int32 retVal) mut => VT.get_StyleId(ref this, out retVal);
-			public HRESULT get_StyleName(out BSTR retVal) mut => VT.get_StyleName(ref this, out retVal);
-			public HRESULT get_FillColor(out int32 retVal) mut => VT.get_FillColor(ref this, out retVal);
-			public HRESULT get_FillPatternStyle(out BSTR retVal) mut => VT.get_FillPatternStyle(ref this, out retVal);
-			public HRESULT get_Shape(out BSTR retVal) mut => VT.get_Shape(ref this, out retVal);
-			public HRESULT get_FillPatternColor(out int32 retVal) mut => VT.get_FillPatternColor(ref this, out retVal);
-			public HRESULT get_ExtendedProperties(out BSTR retVal) mut => VT.get_ExtendedProperties(ref this, out retVal);
+			public HResult get_StyleId(out int32 retVal) mut => VT.get_StyleId(ref this, out retVal);
+			public HResult get_StyleName(out BSTR retVal) mut => VT.get_StyleName(ref this, out retVal);
+			public HResult get_FillColor(out int32 retVal) mut => VT.get_FillColor(ref this, out retVal);
+			public HResult get_FillPatternStyle(out BSTR retVal) mut => VT.get_FillPatternStyle(ref this, out retVal);
+			public HResult get_Shape(out BSTR retVal) mut => VT.get_Shape(ref this, out retVal);
+			public HResult get_FillPatternColor(out int32 retVal) mut => VT.get_FillPatternColor(ref this, out retVal);
+			public HResult get_ExtendedProperties(out BSTR retVal) mut => VT.get_ExtendedProperties(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out int32 retVal) get_StyleId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out BSTR retVal) get_StyleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out int32 retVal) get_FillColor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out BSTR retVal) get_FillPatternStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out BSTR retVal) get_Shape;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out int32 retVal) get_FillPatternColor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStylesProvider self, out BSTR retVal) get_ExtendedProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out int32 retVal) get_StyleId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out BSTR retVal) get_StyleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out int32 retVal) get_FillColor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out BSTR retVal) get_FillPatternStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out BSTR retVal) get_Shape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out int32 retVal) get_FillPatternColor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStylesProvider self, out BSTR retVal) get_ExtendedProperties;
 			}
 		}
 		[CRepr]
@@ -2707,12 +2707,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItemByName(PWSTR name, out IRawElementProviderSimple* pRetVal) mut => VT.GetItemByName(ref this, name, out pRetVal);
+			public HResult GetItemByName(char16* name, out IRawElementProviderSimple* pRetVal) mut => VT.GetItemByName(ref this, name, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpreadsheetProvider self, PWSTR name, out IRawElementProviderSimple* pRetVal) GetItemByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpreadsheetProvider self, char16* name, out IRawElementProviderSimple* pRetVal) GetItemByName;
 			}
 		}
 		[CRepr]
@@ -2722,16 +2722,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Formula(out BSTR pRetVal) mut => VT.get_Formula(ref this, out pRetVal);
-			public HRESULT GetAnnotationObjects(out SAFEARRAY* pRetVal) mut => VT.GetAnnotationObjects(ref this, out pRetVal);
-			public HRESULT GetAnnotationTypes(out SAFEARRAY* pRetVal) mut => VT.GetAnnotationTypes(ref this, out pRetVal);
+			public HResult get_Formula(out BSTR pRetVal) mut => VT.get_Formula(ref this, out pRetVal);
+			public HResult GetAnnotationObjects(out SAFEARRAY* pRetVal) mut => VT.GetAnnotationObjects(ref this, out pRetVal);
+			public HResult GetAnnotationTypes(out SAFEARRAY* pRetVal) mut => VT.GetAnnotationTypes(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpreadsheetItemProvider self, out BSTR pRetVal) get_Formula;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpreadsheetItemProvider self, out SAFEARRAY* pRetVal) GetAnnotationObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISpreadsheetItemProvider self, out SAFEARRAY* pRetVal) GetAnnotationTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpreadsheetItemProvider self, out BSTR pRetVal) get_Formula;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpreadsheetItemProvider self, out SAFEARRAY* pRetVal) GetAnnotationObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISpreadsheetItemProvider self, out SAFEARRAY* pRetVal) GetAnnotationTypes;
 			}
 		}
 		[CRepr]
@@ -2741,22 +2741,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Zoom(double zoom) mut => VT.Zoom(ref this, zoom);
-			public HRESULT get_CanZoom(out BOOL pRetVal) mut => VT.get_CanZoom(ref this, out pRetVal);
-			public HRESULT get_ZoomLevel(out double pRetVal) mut => VT.get_ZoomLevel(ref this, out pRetVal);
-			public HRESULT get_ZoomMinimum(out double pRetVal) mut => VT.get_ZoomMinimum(ref this, out pRetVal);
-			public HRESULT get_ZoomMaximum(out double pRetVal) mut => VT.get_ZoomMaximum(ref this, out pRetVal);
-			public HRESULT ZoomByUnit(ZoomUnit zoomUnit) mut => VT.ZoomByUnit(ref this, zoomUnit);
+			public HResult Zoom(double zoom) mut => VT.Zoom(ref this, zoom);
+			public HResult get_CanZoom(out IntBool pRetVal) mut => VT.get_CanZoom(ref this, out pRetVal);
+			public HResult get_ZoomLevel(out double pRetVal) mut => VT.get_ZoomLevel(ref this, out pRetVal);
+			public HResult get_ZoomMinimum(out double pRetVal) mut => VT.get_ZoomMinimum(ref this, out pRetVal);
+			public HResult get_ZoomMaximum(out double pRetVal) mut => VT.get_ZoomMaximum(ref this, out pRetVal);
+			public HResult ZoomByUnit(ZoomUnit zoomUnit) mut => VT.ZoomByUnit(ref this, zoomUnit);
 
 			[CRepr]
 			public struct VTable : ITransformProvider.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider2 self, double zoom) Zoom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider2 self, out BOOL pRetVal) get_CanZoom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider2 self, out double pRetVal) get_ZoomLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider2 self, out double pRetVal) get_ZoomMinimum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider2 self, out double pRetVal) get_ZoomMaximum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITransformProvider2 self, ZoomUnit zoomUnit) ZoomByUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider2 self, double zoom) Zoom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider2 self, out IntBool pRetVal) get_CanZoom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider2 self, out double pRetVal) get_ZoomLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider2 self, out double pRetVal) get_ZoomMinimum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider2 self, out double pRetVal) get_ZoomMaximum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITransformProvider2 self, ZoomUnit zoomUnit) ZoomByUnit;
 			}
 		}
 		[CRepr]
@@ -2766,18 +2766,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_IsGrabbed(out BOOL pRetVal) mut => VT.get_IsGrabbed(ref this, out pRetVal);
-			public HRESULT get_DropEffect(out BSTR pRetVal) mut => VT.get_DropEffect(ref this, out pRetVal);
-			public HRESULT get_DropEffects(out SAFEARRAY* pRetVal) mut => VT.get_DropEffects(ref this, out pRetVal);
-			public HRESULT GetGrabbedItems(out SAFEARRAY* pRetVal) mut => VT.GetGrabbedItems(ref this, out pRetVal);
+			public HResult get_IsGrabbed(out IntBool pRetVal) mut => VT.get_IsGrabbed(ref this, out pRetVal);
+			public HResult get_DropEffect(out BSTR pRetVal) mut => VT.get_DropEffect(ref this, out pRetVal);
+			public HResult get_DropEffects(out SAFEARRAY* pRetVal) mut => VT.get_DropEffects(ref this, out pRetVal);
+			public HResult GetGrabbedItems(out SAFEARRAY* pRetVal) mut => VT.GetGrabbedItems(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDragProvider self, out BOOL pRetVal) get_IsGrabbed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDragProvider self, out BSTR pRetVal) get_DropEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDragProvider self, out SAFEARRAY* pRetVal) get_DropEffects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDragProvider self, out SAFEARRAY* pRetVal) GetGrabbedItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDragProvider self, out IntBool pRetVal) get_IsGrabbed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDragProvider self, out BSTR pRetVal) get_DropEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDragProvider self, out SAFEARRAY* pRetVal) get_DropEffects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDragProvider self, out SAFEARRAY* pRetVal) GetGrabbedItems;
 			}
 		}
 		[CRepr]
@@ -2787,14 +2787,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_DropTargetEffect(out BSTR pRetVal) mut => VT.get_DropTargetEffect(ref this, out pRetVal);
-			public HRESULT get_DropTargetEffects(out SAFEARRAY* pRetVal) mut => VT.get_DropTargetEffects(ref this, out pRetVal);
+			public HResult get_DropTargetEffect(out BSTR pRetVal) mut => VT.get_DropTargetEffect(ref this, out pRetVal);
+			public HResult get_DropTargetEffects(out SAFEARRAY* pRetVal) mut => VT.get_DropTargetEffects(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDropTargetProvider self, out BSTR pRetVal) get_DropTargetEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDropTargetProvider self, out SAFEARRAY* pRetVal) get_DropTargetEffects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDropTargetProvider self, out BSTR pRetVal) get_DropTargetEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDropTargetProvider self, out SAFEARRAY* pRetVal) get_DropTargetEffects;
 			}
 		}
 		[CRepr]
@@ -2804,46 +2804,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Clone(out ITextRangeProvider* pRetVal) mut => VT.Clone(ref this, out pRetVal);
-			public HRESULT Compare(ref ITextRangeProvider range, out BOOL pRetVal) mut => VT.Compare(ref this, ref range, out pRetVal);
-			public HRESULT CompareEndpoints(TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint, out int32 pRetVal) mut => VT.CompareEndpoints(ref this, endpoint, ref targetRange, targetEndpoint, out pRetVal);
-			public HRESULT ExpandToEnclosingUnit(TextUnit unit) mut => VT.ExpandToEnclosingUnit(ref this, unit);
-			public HRESULT FindAttribute(int32 attributeId, VARIANT val, BOOL backward, out ITextRangeProvider* pRetVal) mut => VT.FindAttribute(ref this, attributeId, val, backward, out pRetVal);
-			public HRESULT FindText(BSTR text, BOOL backward, BOOL ignoreCase, out ITextRangeProvider* pRetVal) mut => VT.FindText(ref this, text, backward, ignoreCase, out pRetVal);
-			public HRESULT GetAttributeValue(int32 attributeId, out VARIANT pRetVal) mut => VT.GetAttributeValue(ref this, attributeId, out pRetVal);
-			public HRESULT GetBoundingRectangles(out SAFEARRAY* pRetVal) mut => VT.GetBoundingRectangles(ref this, out pRetVal);
-			public HRESULT GetEnclosingElement(out IRawElementProviderSimple* pRetVal) mut => VT.GetEnclosingElement(ref this, out pRetVal);
-			public HRESULT GetText(int32 maxLength, out BSTR pRetVal) mut => VT.GetText(ref this, maxLength, out pRetVal);
-			public HRESULT Move(TextUnit unit, int32 count, out int32 pRetVal) mut => VT.Move(ref this, unit, count, out pRetVal);
-			public HRESULT MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 pRetVal) mut => VT.MoveEndpointByUnit(ref this, endpoint, unit, count, out pRetVal);
-			public HRESULT MoveEndpointByRange(TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint) mut => VT.MoveEndpointByRange(ref this, endpoint, ref targetRange, targetEndpoint);
-			public HRESULT Select() mut => VT.Select(ref this);
-			public HRESULT AddToSelection() mut => VT.AddToSelection(ref this);
-			public HRESULT RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
-			public HRESULT ScrollIntoView(BOOL alignToTop) mut => VT.ScrollIntoView(ref this, alignToTop);
-			public HRESULT GetChildren(out SAFEARRAY* pRetVal) mut => VT.GetChildren(ref this, out pRetVal);
+			public HResult Clone(out ITextRangeProvider* pRetVal) mut => VT.Clone(ref this, out pRetVal);
+			public HResult Compare(ref ITextRangeProvider range, out IntBool pRetVal) mut => VT.Compare(ref this, ref range, out pRetVal);
+			public HResult CompareEndpoints(TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint, out int32 pRetVal) mut => VT.CompareEndpoints(ref this, endpoint, ref targetRange, targetEndpoint, out pRetVal);
+			public HResult ExpandToEnclosingUnit(TextUnit unit) mut => VT.ExpandToEnclosingUnit(ref this, unit);
+			public HResult FindAttribute(int32 attributeId, VARIANT val, IntBool backward, out ITextRangeProvider* pRetVal) mut => VT.FindAttribute(ref this, attributeId, val, backward, out pRetVal);
+			public HResult FindText(BSTR text, IntBool backward, IntBool ignoreCase, out ITextRangeProvider* pRetVal) mut => VT.FindText(ref this, text, backward, ignoreCase, out pRetVal);
+			public HResult GetAttributeValue(int32 attributeId, out VARIANT pRetVal) mut => VT.GetAttributeValue(ref this, attributeId, out pRetVal);
+			public HResult GetBoundingRectangles(out SAFEARRAY* pRetVal) mut => VT.GetBoundingRectangles(ref this, out pRetVal);
+			public HResult GetEnclosingElement(out IRawElementProviderSimple* pRetVal) mut => VT.GetEnclosingElement(ref this, out pRetVal);
+			public HResult GetText(int32 maxLength, out BSTR pRetVal) mut => VT.GetText(ref this, maxLength, out pRetVal);
+			public HResult Move(TextUnit unit, int32 count, out int32 pRetVal) mut => VT.Move(ref this, unit, count, out pRetVal);
+			public HResult MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 pRetVal) mut => VT.MoveEndpointByUnit(ref this, endpoint, unit, count, out pRetVal);
+			public HResult MoveEndpointByRange(TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint) mut => VT.MoveEndpointByRange(ref this, endpoint, ref targetRange, targetEndpoint);
+			public HResult Select() mut => VT.Select(ref this);
+			public HResult AddToSelection() mut => VT.AddToSelection(ref this);
+			public HResult RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
+			public HResult ScrollIntoView(IntBool alignToTop) mut => VT.ScrollIntoView(ref this, alignToTop);
+			public HResult GetChildren(out SAFEARRAY* pRetVal) mut => VT.GetChildren(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, out ITextRangeProvider* pRetVal) Clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, ref ITextRangeProvider range, out BOOL pRetVal) Compare;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint, out int32 pRetVal) CompareEndpoints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, TextUnit unit) ExpandToEnclosingUnit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, int32 attributeId, VARIANT val, BOOL backward, out ITextRangeProvider* pRetVal) FindAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, BSTR text, BOOL backward, BOOL ignoreCase, out ITextRangeProvider* pRetVal) FindText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, int32 attributeId, out VARIANT pRetVal) GetAttributeValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, out SAFEARRAY* pRetVal) GetBoundingRectangles;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, out IRawElementProviderSimple* pRetVal) GetEnclosingElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, int32 maxLength, out BSTR pRetVal) GetText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, TextUnit unit, int32 count, out int32 pRetVal) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 pRetVal) MoveEndpointByUnit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint) MoveEndpointByRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self) Select;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self) AddToSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self) RemoveFromSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, BOOL alignToTop) ScrollIntoView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider self, out SAFEARRAY* pRetVal) GetChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, out ITextRangeProvider* pRetVal) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, ref ITextRangeProvider range, out IntBool pRetVal) Compare;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint, out int32 pRetVal) CompareEndpoints;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, TextUnit unit) ExpandToEnclosingUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, int32 attributeId, VARIANT val, IntBool backward, out ITextRangeProvider* pRetVal) FindAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, BSTR text, IntBool backward, IntBool ignoreCase, out ITextRangeProvider* pRetVal) FindText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, int32 attributeId, out VARIANT pRetVal) GetAttributeValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, out SAFEARRAY* pRetVal) GetBoundingRectangles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, out IRawElementProviderSimple* pRetVal) GetEnclosingElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, int32 maxLength, out BSTR pRetVal) GetText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, TextUnit unit, int32 count, out int32 pRetVal) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 pRetVal) MoveEndpointByUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, TextPatternRangeEndpoint endpoint, ref ITextRangeProvider targetRange, TextPatternRangeEndpoint targetEndpoint) MoveEndpointByRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self) Select;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self) AddToSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self) RemoveFromSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, IntBool alignToTop) ScrollIntoView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider self, out SAFEARRAY* pRetVal) GetChildren;
 			}
 		}
 		[CRepr]
@@ -2853,22 +2853,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSelection(out SAFEARRAY* pRetVal) mut => VT.GetSelection(ref this, out pRetVal);
-			public HRESULT GetVisibleRanges(out SAFEARRAY* pRetVal) mut => VT.GetVisibleRanges(ref this, out pRetVal);
-			public HRESULT RangeFromChild(ref IRawElementProviderSimple childElement, out ITextRangeProvider* pRetVal) mut => VT.RangeFromChild(ref this, ref childElement, out pRetVal);
-			public HRESULT RangeFromPoint(UiaPoint point, out ITextRangeProvider* pRetVal) mut => VT.RangeFromPoint(ref this, point, out pRetVal);
-			public HRESULT get_DocumentRange(out ITextRangeProvider* pRetVal) mut => VT.get_DocumentRange(ref this, out pRetVal);
-			public HRESULT get_SupportedTextSelection(out SupportedTextSelection pRetVal) mut => VT.get_SupportedTextSelection(ref this, out pRetVal);
+			public HResult GetSelection(out SAFEARRAY* pRetVal) mut => VT.GetSelection(ref this, out pRetVal);
+			public HResult GetVisibleRanges(out SAFEARRAY* pRetVal) mut => VT.GetVisibleRanges(ref this, out pRetVal);
+			public HResult RangeFromChild(ref IRawElementProviderSimple childElement, out ITextRangeProvider* pRetVal) mut => VT.RangeFromChild(ref this, ref childElement, out pRetVal);
+			public HResult RangeFromPoint(UiaPoint point, out ITextRangeProvider* pRetVal) mut => VT.RangeFromPoint(ref this, point, out pRetVal);
+			public HResult get_DocumentRange(out ITextRangeProvider* pRetVal) mut => VT.get_DocumentRange(ref this, out pRetVal);
+			public HResult get_SupportedTextSelection(out SupportedTextSelection pRetVal) mut => VT.get_SupportedTextSelection(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider self, out SAFEARRAY* pRetVal) GetSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider self, out SAFEARRAY* pRetVal) GetVisibleRanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider self, ref IRawElementProviderSimple childElement, out ITextRangeProvider* pRetVal) RangeFromChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider self, UiaPoint point, out ITextRangeProvider* pRetVal) RangeFromPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider self, out ITextRangeProvider* pRetVal) get_DocumentRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider self, out SupportedTextSelection pRetVal) get_SupportedTextSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider self, out SAFEARRAY* pRetVal) GetSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider self, out SAFEARRAY* pRetVal) GetVisibleRanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider self, ref IRawElementProviderSimple childElement, out ITextRangeProvider* pRetVal) RangeFromChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider self, UiaPoint point, out ITextRangeProvider* pRetVal) RangeFromPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider self, out ITextRangeProvider* pRetVal) get_DocumentRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider self, out SupportedTextSelection pRetVal) get_SupportedTextSelection;
 			}
 		}
 		[CRepr]
@@ -2878,14 +2878,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RangeFromAnnotation(ref IRawElementProviderSimple annotationElement, out ITextRangeProvider* pRetVal) mut => VT.RangeFromAnnotation(ref this, ref annotationElement, out pRetVal);
-			public HRESULT GetCaretRange(out BOOL isActive, out ITextRangeProvider* pRetVal) mut => VT.GetCaretRange(ref this, out isActive, out pRetVal);
+			public HResult RangeFromAnnotation(ref IRawElementProviderSimple annotationElement, out ITextRangeProvider* pRetVal) mut => VT.RangeFromAnnotation(ref this, ref annotationElement, out pRetVal);
+			public HResult GetCaretRange(out IntBool isActive, out ITextRangeProvider* pRetVal) mut => VT.GetCaretRange(ref this, out isActive, out pRetVal);
 
 			[CRepr]
 			public struct VTable : ITextProvider.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider2 self, ref IRawElementProviderSimple annotationElement, out ITextRangeProvider* pRetVal) RangeFromAnnotation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextProvider2 self, out BOOL isActive, out ITextRangeProvider* pRetVal) GetCaretRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider2 self, ref IRawElementProviderSimple annotationElement, out ITextRangeProvider* pRetVal) RangeFromAnnotation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextProvider2 self, out IntBool isActive, out ITextRangeProvider* pRetVal) GetCaretRange;
 			}
 		}
 		[CRepr]
@@ -2895,14 +2895,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetActiveComposition(out ITextRangeProvider* pRetVal) mut => VT.GetActiveComposition(ref this, out pRetVal);
-			public HRESULT GetConversionTarget(out ITextRangeProvider* pRetVal) mut => VT.GetConversionTarget(ref this, out pRetVal);
+			public HResult GetActiveComposition(out ITextRangeProvider* pRetVal) mut => VT.GetActiveComposition(ref this, out pRetVal);
+			public HResult GetConversionTarget(out ITextRangeProvider* pRetVal) mut => VT.GetConversionTarget(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : ITextProvider.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextEditProvider self, out ITextRangeProvider* pRetVal) GetActiveComposition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextEditProvider self, out ITextRangeProvider* pRetVal) GetConversionTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextEditProvider self, out ITextRangeProvider* pRetVal) GetActiveComposition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextEditProvider self, out ITextRangeProvider* pRetVal) GetConversionTarget;
 			}
 		}
 		[CRepr]
@@ -2912,12 +2912,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ShowContextMenu() mut => VT.ShowContextMenu(ref this);
+			public HResult ShowContextMenu() mut => VT.ShowContextMenu(ref this);
 
 			[CRepr]
 			public struct VTable : ITextRangeProvider.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextRangeProvider2 self) ShowContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextRangeProvider2 self) ShowContextMenu;
 			}
 		}
 		[CRepr]
@@ -2927,14 +2927,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_TextContainer(out IRawElementProviderSimple* pRetVal) mut => VT.get_TextContainer(ref this, out pRetVal);
-			public HRESULT get_TextRange(out ITextRangeProvider* pRetVal) mut => VT.get_TextRange(ref this, out pRetVal);
+			public HResult get_TextContainer(out IRawElementProviderSimple* pRetVal) mut => VT.get_TextContainer(ref this, out pRetVal);
+			public HResult get_TextRange(out ITextRangeProvider* pRetVal) mut => VT.get_TextRange(ref this, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextChildProvider self, out IRawElementProviderSimple* pRetVal) get_TextContainer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITextChildProvider self, out ITextRangeProvider* pRetVal) get_TextRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextChildProvider self, out IRawElementProviderSimple* pRetVal) get_TextContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITextChildProvider self, out ITextRangeProvider* pRetVal) get_TextRange;
 			}
 		}
 		[CRepr]
@@ -2944,12 +2944,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Navigate(NavigateDirection direction, out IRawElementProviderSimple* pRetVal) mut => VT.Navigate(ref this, direction, out pRetVal);
+			public HResult Navigate(NavigateDirection direction, out IRawElementProviderSimple* pRetVal) mut => VT.Navigate(ref this, direction, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICustomNavigationProvider self, NavigateDirection direction, out IRawElementProviderSimple* pRetVal) Navigate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICustomNavigationProvider self, NavigateDirection direction, out IRawElementProviderSimple* pRetVal) Navigate;
 			}
 		}
 		[CRepr]
@@ -2959,14 +2959,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetProperty(uint32 index, BOOL cached, UIAutomationType type, void* pPtr) mut => VT.GetProperty(ref this, index, cached, type, pPtr);
-			public HRESULT CallMethod(uint32 index, in UIAutomationParameter pParams, uint32 cParams) mut => VT.CallMethod(ref this, index, pParams, cParams);
+			public HResult GetProperty(uint32 index, IntBool cached, UIAutomationType type, void* pPtr) mut => VT.GetProperty(ref this, index, cached, type, pPtr);
+			public HResult CallMethod(uint32 index, in UIAutomationParameter pParams, uint32 cParams) mut => VT.CallMethod(ref this, index, pParams, cParams);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPatternInstance self, uint32 index, BOOL cached, UIAutomationType type, void* pPtr) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPatternInstance self, uint32 index, in UIAutomationParameter pParams, uint32 cParams) CallMethod;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPatternInstance self, uint32 index, IntBool cached, UIAutomationType type, void* pPtr) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPatternInstance self, uint32 index, in UIAutomationParameter pParams, uint32 cParams) CallMethod;
 			}
 		}
 		[CRepr]
@@ -2976,14 +2976,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateClientWrapper(ref IUIAutomationPatternInstance pPatternInstance, out IUnknown* pClientWrapper) mut => VT.CreateClientWrapper(ref this, ref pPatternInstance, out pClientWrapper);
-			public HRESULT Dispatch(ref IUnknown pTarget, uint32 index, in UIAutomationParameter pParams, uint32 cParams) mut => VT.Dispatch(ref this, ref pTarget, index, pParams, cParams);
+			public HResult CreateClientWrapper(ref IUIAutomationPatternInstance pPatternInstance, out IUnknown* pClientWrapper) mut => VT.CreateClientWrapper(ref this, ref pPatternInstance, out pClientWrapper);
+			public HResult Dispatch(ref IUnknown pTarget, uint32 index, in UIAutomationParameter pParams, uint32 cParams) mut => VT.Dispatch(ref this, ref pTarget, index, pParams, cParams);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPatternHandler self, ref IUIAutomationPatternInstance pPatternInstance, out IUnknown* pClientWrapper) CreateClientWrapper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPatternHandler self, ref IUnknown pTarget, uint32 index, in UIAutomationParameter pParams, uint32 cParams) Dispatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPatternHandler self, ref IUIAutomationPatternInstance pPatternInstance, out IUnknown* pClientWrapper) CreateClientWrapper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPatternHandler self, ref IUnknown pTarget, uint32 index, in UIAutomationParameter pParams, uint32 cParams) Dispatch;
 			}
 		}
 		[CRepr]
@@ -2993,16 +2993,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterProperty(in UIAutomationPropertyInfo property, out int32 propertyId) mut => VT.RegisterProperty(ref this, property, out propertyId);
-			public HRESULT RegisterEvent(in UIAutomationEventInfo event, out int32 eventId) mut => VT.RegisterEvent(ref this, event, out eventId);
-			public HRESULT RegisterPattern(in UIAutomationPatternInfo pattern, out int32 pPatternId, out int32 pPatternAvailablePropertyId, uint32 propertyIdCount, int32* pPropertyIds, uint32 eventIdCount, int32* pEventIds) mut => VT.RegisterPattern(ref this, pattern, out pPatternId, out pPatternAvailablePropertyId, propertyIdCount, pPropertyIds, eventIdCount, pEventIds);
+			public HResult RegisterProperty(in UIAutomationPropertyInfo property, out int32 propertyId) mut => VT.RegisterProperty(ref this, property, out propertyId);
+			public HResult RegisterEvent(in UIAutomationEventInfo event, out int32 eventId) mut => VT.RegisterEvent(ref this, event, out eventId);
+			public HResult RegisterPattern(in UIAutomationPatternInfo pattern, out int32 pPatternId, out int32 pPatternAvailablePropertyId, uint32 propertyIdCount, int32* pPropertyIds, uint32 eventIdCount, int32* pEventIds) mut => VT.RegisterPattern(ref this, pattern, out pPatternId, out pPatternAvailablePropertyId, propertyIdCount, pPropertyIds, eventIdCount, pEventIds);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRegistrar self, in UIAutomationPropertyInfo property, out int32 propertyId) RegisterProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRegistrar self, in UIAutomationEventInfo event, out int32 eventId) RegisterEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRegistrar self, in UIAutomationPatternInfo pattern, out int32 pPatternId, out int32 pPatternAvailablePropertyId, uint32 propertyIdCount, int32* pPropertyIds, uint32 eventIdCount, int32* pEventIds) RegisterPattern;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRegistrar self, in UIAutomationPropertyInfo property, out int32 propertyId) RegisterProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRegistrar self, in UIAutomationEventInfo event, out int32 eventId) RegisterEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRegistrar self, in UIAutomationPatternInfo pattern, out int32 pPatternId, out int32 pPatternAvailablePropertyId, uint32 propertyIdCount, int32* pPropertyIds, uint32 eventIdCount, int32* pEventIds) RegisterPattern;
 			}
 		}
 		[CRepr]
@@ -3012,174 +3012,174 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetFocus() mut => VT.SetFocus(ref this);
-			public HRESULT GetRuntimeId(out SAFEARRAY* runtimeId) mut => VT.GetRuntimeId(ref this, out runtimeId);
-			public HRESULT FindFirst(TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElement* found) mut => VT.FindFirst(ref this, @scope, ref condition, out found);
-			public HRESULT FindAll(TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElementArray* found) mut => VT.FindAll(ref this, @scope, ref condition, out found);
-			public HRESULT FindFirstBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* found) mut => VT.FindFirstBuildCache(ref this, @scope, ref condition, ref cacheRequest, out found);
-			public HRESULT FindAllBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* found) mut => VT.FindAllBuildCache(ref this, @scope, ref condition, ref cacheRequest, out found);
-			public HRESULT BuildUpdatedCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* updatedElement) mut => VT.BuildUpdatedCache(ref this, ref cacheRequest, out updatedElement);
-			public HRESULT GetCurrentPropertyValue(int32 propertyId, out VARIANT retVal) mut => VT.GetCurrentPropertyValue(ref this, propertyId, out retVal);
-			public HRESULT GetCurrentPropertyValueEx(int32 propertyId, BOOL ignoreDefaultValue, out VARIANT retVal) mut => VT.GetCurrentPropertyValueEx(ref this, propertyId, ignoreDefaultValue, out retVal);
-			public HRESULT GetCachedPropertyValue(int32 propertyId, out VARIANT retVal) mut => VT.GetCachedPropertyValue(ref this, propertyId, out retVal);
-			public HRESULT GetCachedPropertyValueEx(int32 propertyId, BOOL ignoreDefaultValue, out VARIANT retVal) mut => VT.GetCachedPropertyValueEx(ref this, propertyId, ignoreDefaultValue, out retVal);
-			public HRESULT GetCurrentPatternAs(int32 patternId, in Guid riid, void** patternObject) mut => VT.GetCurrentPatternAs(ref this, patternId, riid, patternObject);
-			public HRESULT GetCachedPatternAs(int32 patternId, in Guid riid, void** patternObject) mut => VT.GetCachedPatternAs(ref this, patternId, riid, patternObject);
-			public HRESULT GetCurrentPattern(int32 patternId, out IUnknown* patternObject) mut => VT.GetCurrentPattern(ref this, patternId, out patternObject);
-			public HRESULT GetCachedPattern(int32 patternId, out IUnknown* patternObject) mut => VT.GetCachedPattern(ref this, patternId, out patternObject);
-			public HRESULT GetCachedParent(out IUIAutomationElement* parent) mut => VT.GetCachedParent(ref this, out parent);
-			public HRESULT GetCachedChildren(out IUIAutomationElementArray* children) mut => VT.GetCachedChildren(ref this, out children);
-			public HRESULT get_CurrentProcessId(out int32 retVal) mut => VT.get_CurrentProcessId(ref this, out retVal);
-			public HRESULT get_CurrentControlType(out int32 retVal) mut => VT.get_CurrentControlType(ref this, out retVal);
-			public HRESULT get_CurrentLocalizedControlType(out BSTR retVal) mut => VT.get_CurrentLocalizedControlType(ref this, out retVal);
-			public HRESULT get_CurrentName(out BSTR retVal) mut => VT.get_CurrentName(ref this, out retVal);
-			public HRESULT get_CurrentAcceleratorKey(out BSTR retVal) mut => VT.get_CurrentAcceleratorKey(ref this, out retVal);
-			public HRESULT get_CurrentAccessKey(out BSTR retVal) mut => VT.get_CurrentAccessKey(ref this, out retVal);
-			public HRESULT get_CurrentHasKeyboardFocus(out BOOL retVal) mut => VT.get_CurrentHasKeyboardFocus(ref this, out retVal);
-			public HRESULT get_CurrentIsKeyboardFocusable(out BOOL retVal) mut => VT.get_CurrentIsKeyboardFocusable(ref this, out retVal);
-			public HRESULT get_CurrentIsEnabled(out BOOL retVal) mut => VT.get_CurrentIsEnabled(ref this, out retVal);
-			public HRESULT get_CurrentAutomationId(out BSTR retVal) mut => VT.get_CurrentAutomationId(ref this, out retVal);
-			public HRESULT get_CurrentClassName(out BSTR retVal) mut => VT.get_CurrentClassName(ref this, out retVal);
-			public HRESULT get_CurrentHelpText(out BSTR retVal) mut => VT.get_CurrentHelpText(ref this, out retVal);
-			public HRESULT get_CurrentCulture(out int32 retVal) mut => VT.get_CurrentCulture(ref this, out retVal);
-			public HRESULT get_CurrentIsControlElement(out BOOL retVal) mut => VT.get_CurrentIsControlElement(ref this, out retVal);
-			public HRESULT get_CurrentIsContentElement(out BOOL retVal) mut => VT.get_CurrentIsContentElement(ref this, out retVal);
-			public HRESULT get_CurrentIsPassword(out BOOL retVal) mut => VT.get_CurrentIsPassword(ref this, out retVal);
-			public HRESULT get_CurrentNativeWindowHandle(HWND retVal) mut => VT.get_CurrentNativeWindowHandle(ref this, retVal);
-			public HRESULT get_CurrentItemType(out BSTR retVal) mut => VT.get_CurrentItemType(ref this, out retVal);
-			public HRESULT get_CurrentIsOffscreen(out BOOL retVal) mut => VT.get_CurrentIsOffscreen(ref this, out retVal);
-			public HRESULT get_CurrentOrientation(out OrientationType retVal) mut => VT.get_CurrentOrientation(ref this, out retVal);
-			public HRESULT get_CurrentFrameworkId(out BSTR retVal) mut => VT.get_CurrentFrameworkId(ref this, out retVal);
-			public HRESULT get_CurrentIsRequiredForForm(out BOOL retVal) mut => VT.get_CurrentIsRequiredForForm(ref this, out retVal);
-			public HRESULT get_CurrentItemStatus(out BSTR retVal) mut => VT.get_CurrentItemStatus(ref this, out retVal);
-			public HRESULT get_CurrentBoundingRectangle(out RECT retVal) mut => VT.get_CurrentBoundingRectangle(ref this, out retVal);
-			public HRESULT get_CurrentLabeledBy(out IUIAutomationElement* retVal) mut => VT.get_CurrentLabeledBy(ref this, out retVal);
-			public HRESULT get_CurrentAriaRole(out BSTR retVal) mut => VT.get_CurrentAriaRole(ref this, out retVal);
-			public HRESULT get_CurrentAriaProperties(out BSTR retVal) mut => VT.get_CurrentAriaProperties(ref this, out retVal);
-			public HRESULT get_CurrentIsDataValidForForm(out BOOL retVal) mut => VT.get_CurrentIsDataValidForForm(ref this, out retVal);
-			public HRESULT get_CurrentControllerFor(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentControllerFor(ref this, out retVal);
-			public HRESULT get_CurrentDescribedBy(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentDescribedBy(ref this, out retVal);
-			public HRESULT get_CurrentFlowsTo(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentFlowsTo(ref this, out retVal);
-			public HRESULT get_CurrentProviderDescription(out BSTR retVal) mut => VT.get_CurrentProviderDescription(ref this, out retVal);
-			public HRESULT get_CachedProcessId(out int32 retVal) mut => VT.get_CachedProcessId(ref this, out retVal);
-			public HRESULT get_CachedControlType(out int32 retVal) mut => VT.get_CachedControlType(ref this, out retVal);
-			public HRESULT get_CachedLocalizedControlType(out BSTR retVal) mut => VT.get_CachedLocalizedControlType(ref this, out retVal);
-			public HRESULT get_CachedName(out BSTR retVal) mut => VT.get_CachedName(ref this, out retVal);
-			public HRESULT get_CachedAcceleratorKey(out BSTR retVal) mut => VT.get_CachedAcceleratorKey(ref this, out retVal);
-			public HRESULT get_CachedAccessKey(out BSTR retVal) mut => VT.get_CachedAccessKey(ref this, out retVal);
-			public HRESULT get_CachedHasKeyboardFocus(out BOOL retVal) mut => VT.get_CachedHasKeyboardFocus(ref this, out retVal);
-			public HRESULT get_CachedIsKeyboardFocusable(out BOOL retVal) mut => VT.get_CachedIsKeyboardFocusable(ref this, out retVal);
-			public HRESULT get_CachedIsEnabled(out BOOL retVal) mut => VT.get_CachedIsEnabled(ref this, out retVal);
-			public HRESULT get_CachedAutomationId(out BSTR retVal) mut => VT.get_CachedAutomationId(ref this, out retVal);
-			public HRESULT get_CachedClassName(out BSTR retVal) mut => VT.get_CachedClassName(ref this, out retVal);
-			public HRESULT get_CachedHelpText(out BSTR retVal) mut => VT.get_CachedHelpText(ref this, out retVal);
-			public HRESULT get_CachedCulture(out int32 retVal) mut => VT.get_CachedCulture(ref this, out retVal);
-			public HRESULT get_CachedIsControlElement(out BOOL retVal) mut => VT.get_CachedIsControlElement(ref this, out retVal);
-			public HRESULT get_CachedIsContentElement(out BOOL retVal) mut => VT.get_CachedIsContentElement(ref this, out retVal);
-			public HRESULT get_CachedIsPassword(out BOOL retVal) mut => VT.get_CachedIsPassword(ref this, out retVal);
-			public HRESULT get_CachedNativeWindowHandle(HWND retVal) mut => VT.get_CachedNativeWindowHandle(ref this, retVal);
-			public HRESULT get_CachedItemType(out BSTR retVal) mut => VT.get_CachedItemType(ref this, out retVal);
-			public HRESULT get_CachedIsOffscreen(out BOOL retVal) mut => VT.get_CachedIsOffscreen(ref this, out retVal);
-			public HRESULT get_CachedOrientation(out OrientationType retVal) mut => VT.get_CachedOrientation(ref this, out retVal);
-			public HRESULT get_CachedFrameworkId(out BSTR retVal) mut => VT.get_CachedFrameworkId(ref this, out retVal);
-			public HRESULT get_CachedIsRequiredForForm(out BOOL retVal) mut => VT.get_CachedIsRequiredForForm(ref this, out retVal);
-			public HRESULT get_CachedItemStatus(out BSTR retVal) mut => VT.get_CachedItemStatus(ref this, out retVal);
-			public HRESULT get_CachedBoundingRectangle(out RECT retVal) mut => VT.get_CachedBoundingRectangle(ref this, out retVal);
-			public HRESULT get_CachedLabeledBy(out IUIAutomationElement* retVal) mut => VT.get_CachedLabeledBy(ref this, out retVal);
-			public HRESULT get_CachedAriaRole(out BSTR retVal) mut => VT.get_CachedAriaRole(ref this, out retVal);
-			public HRESULT get_CachedAriaProperties(out BSTR retVal) mut => VT.get_CachedAriaProperties(ref this, out retVal);
-			public HRESULT get_CachedIsDataValidForForm(out BOOL retVal) mut => VT.get_CachedIsDataValidForForm(ref this, out retVal);
-			public HRESULT get_CachedControllerFor(out IUIAutomationElementArray* retVal) mut => VT.get_CachedControllerFor(ref this, out retVal);
-			public HRESULT get_CachedDescribedBy(out IUIAutomationElementArray* retVal) mut => VT.get_CachedDescribedBy(ref this, out retVal);
-			public HRESULT get_CachedFlowsTo(out IUIAutomationElementArray* retVal) mut => VT.get_CachedFlowsTo(ref this, out retVal);
-			public HRESULT get_CachedProviderDescription(out BSTR retVal) mut => VT.get_CachedProviderDescription(ref this, out retVal);
-			public HRESULT GetClickablePoint(out POINT clickable, out BOOL gotClickable) mut => VT.GetClickablePoint(ref this, out clickable, out gotClickable);
+			public HResult SetFocus() mut => VT.SetFocus(ref this);
+			public HResult GetRuntimeId(out SAFEARRAY* runtimeId) mut => VT.GetRuntimeId(ref this, out runtimeId);
+			public HResult FindFirst(TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElement* found) mut => VT.FindFirst(ref this, @scope, ref condition, out found);
+			public HResult FindAll(TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElementArray* found) mut => VT.FindAll(ref this, @scope, ref condition, out found);
+			public HResult FindFirstBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* found) mut => VT.FindFirstBuildCache(ref this, @scope, ref condition, ref cacheRequest, out found);
+			public HResult FindAllBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* found) mut => VT.FindAllBuildCache(ref this, @scope, ref condition, ref cacheRequest, out found);
+			public HResult BuildUpdatedCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* updatedElement) mut => VT.BuildUpdatedCache(ref this, ref cacheRequest, out updatedElement);
+			public HResult GetCurrentPropertyValue(int32 propertyId, out VARIANT retVal) mut => VT.GetCurrentPropertyValue(ref this, propertyId, out retVal);
+			public HResult GetCurrentPropertyValueEx(int32 propertyId, IntBool ignoreDefaultValue, out VARIANT retVal) mut => VT.GetCurrentPropertyValueEx(ref this, propertyId, ignoreDefaultValue, out retVal);
+			public HResult GetCachedPropertyValue(int32 propertyId, out VARIANT retVal) mut => VT.GetCachedPropertyValue(ref this, propertyId, out retVal);
+			public HResult GetCachedPropertyValueEx(int32 propertyId, IntBool ignoreDefaultValue, out VARIANT retVal) mut => VT.GetCachedPropertyValueEx(ref this, propertyId, ignoreDefaultValue, out retVal);
+			public HResult GetCurrentPatternAs(int32 patternId, in Guid riid, void** patternObject) mut => VT.GetCurrentPatternAs(ref this, patternId, riid, patternObject);
+			public HResult GetCachedPatternAs(int32 patternId, in Guid riid, void** patternObject) mut => VT.GetCachedPatternAs(ref this, patternId, riid, patternObject);
+			public HResult GetCurrentPattern(int32 patternId, out IUnknown* patternObject) mut => VT.GetCurrentPattern(ref this, patternId, out patternObject);
+			public HResult GetCachedPattern(int32 patternId, out IUnknown* patternObject) mut => VT.GetCachedPattern(ref this, patternId, out patternObject);
+			public HResult GetCachedParent(out IUIAutomationElement* parent) mut => VT.GetCachedParent(ref this, out parent);
+			public HResult GetCachedChildren(out IUIAutomationElementArray* children) mut => VT.GetCachedChildren(ref this, out children);
+			public HResult get_CurrentProcessId(out int32 retVal) mut => VT.get_CurrentProcessId(ref this, out retVal);
+			public HResult get_CurrentControlType(out int32 retVal) mut => VT.get_CurrentControlType(ref this, out retVal);
+			public HResult get_CurrentLocalizedControlType(out BSTR retVal) mut => VT.get_CurrentLocalizedControlType(ref this, out retVal);
+			public HResult get_CurrentName(out BSTR retVal) mut => VT.get_CurrentName(ref this, out retVal);
+			public HResult get_CurrentAcceleratorKey(out BSTR retVal) mut => VT.get_CurrentAcceleratorKey(ref this, out retVal);
+			public HResult get_CurrentAccessKey(out BSTR retVal) mut => VT.get_CurrentAccessKey(ref this, out retVal);
+			public HResult get_CurrentHasKeyboardFocus(out IntBool retVal) mut => VT.get_CurrentHasKeyboardFocus(ref this, out retVal);
+			public HResult get_CurrentIsKeyboardFocusable(out IntBool retVal) mut => VT.get_CurrentIsKeyboardFocusable(ref this, out retVal);
+			public HResult get_CurrentIsEnabled(out IntBool retVal) mut => VT.get_CurrentIsEnabled(ref this, out retVal);
+			public HResult get_CurrentAutomationId(out BSTR retVal) mut => VT.get_CurrentAutomationId(ref this, out retVal);
+			public HResult get_CurrentClassName(out BSTR retVal) mut => VT.get_CurrentClassName(ref this, out retVal);
+			public HResult get_CurrentHelpText(out BSTR retVal) mut => VT.get_CurrentHelpText(ref this, out retVal);
+			public HResult get_CurrentCulture(out int32 retVal) mut => VT.get_CurrentCulture(ref this, out retVal);
+			public HResult get_CurrentIsControlElement(out IntBool retVal) mut => VT.get_CurrentIsControlElement(ref this, out retVal);
+			public HResult get_CurrentIsContentElement(out IntBool retVal) mut => VT.get_CurrentIsContentElement(ref this, out retVal);
+			public HResult get_CurrentIsPassword(out IntBool retVal) mut => VT.get_CurrentIsPassword(ref this, out retVal);
+			public HResult get_CurrentNativeWindowHandle(HWnd retVal) mut => VT.get_CurrentNativeWindowHandle(ref this, retVal);
+			public HResult get_CurrentItemType(out BSTR retVal) mut => VT.get_CurrentItemType(ref this, out retVal);
+			public HResult get_CurrentIsOffscreen(out IntBool retVal) mut => VT.get_CurrentIsOffscreen(ref this, out retVal);
+			public HResult get_CurrentOrientation(out OrientationType retVal) mut => VT.get_CurrentOrientation(ref this, out retVal);
+			public HResult get_CurrentFrameworkId(out BSTR retVal) mut => VT.get_CurrentFrameworkId(ref this, out retVal);
+			public HResult get_CurrentIsRequiredForForm(out IntBool retVal) mut => VT.get_CurrentIsRequiredForForm(ref this, out retVal);
+			public HResult get_CurrentItemStatus(out BSTR retVal) mut => VT.get_CurrentItemStatus(ref this, out retVal);
+			public HResult get_CurrentBoundingRectangle(out RectI retVal) mut => VT.get_CurrentBoundingRectangle(ref this, out retVal);
+			public HResult get_CurrentLabeledBy(out IUIAutomationElement* retVal) mut => VT.get_CurrentLabeledBy(ref this, out retVal);
+			public HResult get_CurrentAriaRole(out BSTR retVal) mut => VT.get_CurrentAriaRole(ref this, out retVal);
+			public HResult get_CurrentAriaProperties(out BSTR retVal) mut => VT.get_CurrentAriaProperties(ref this, out retVal);
+			public HResult get_CurrentIsDataValidForForm(out IntBool retVal) mut => VT.get_CurrentIsDataValidForForm(ref this, out retVal);
+			public HResult get_CurrentControllerFor(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentControllerFor(ref this, out retVal);
+			public HResult get_CurrentDescribedBy(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentDescribedBy(ref this, out retVal);
+			public HResult get_CurrentFlowsTo(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentFlowsTo(ref this, out retVal);
+			public HResult get_CurrentProviderDescription(out BSTR retVal) mut => VT.get_CurrentProviderDescription(ref this, out retVal);
+			public HResult get_CachedProcessId(out int32 retVal) mut => VT.get_CachedProcessId(ref this, out retVal);
+			public HResult get_CachedControlType(out int32 retVal) mut => VT.get_CachedControlType(ref this, out retVal);
+			public HResult get_CachedLocalizedControlType(out BSTR retVal) mut => VT.get_CachedLocalizedControlType(ref this, out retVal);
+			public HResult get_CachedName(out BSTR retVal) mut => VT.get_CachedName(ref this, out retVal);
+			public HResult get_CachedAcceleratorKey(out BSTR retVal) mut => VT.get_CachedAcceleratorKey(ref this, out retVal);
+			public HResult get_CachedAccessKey(out BSTR retVal) mut => VT.get_CachedAccessKey(ref this, out retVal);
+			public HResult get_CachedHasKeyboardFocus(out IntBool retVal) mut => VT.get_CachedHasKeyboardFocus(ref this, out retVal);
+			public HResult get_CachedIsKeyboardFocusable(out IntBool retVal) mut => VT.get_CachedIsKeyboardFocusable(ref this, out retVal);
+			public HResult get_CachedIsEnabled(out IntBool retVal) mut => VT.get_CachedIsEnabled(ref this, out retVal);
+			public HResult get_CachedAutomationId(out BSTR retVal) mut => VT.get_CachedAutomationId(ref this, out retVal);
+			public HResult get_CachedClassName(out BSTR retVal) mut => VT.get_CachedClassName(ref this, out retVal);
+			public HResult get_CachedHelpText(out BSTR retVal) mut => VT.get_CachedHelpText(ref this, out retVal);
+			public HResult get_CachedCulture(out int32 retVal) mut => VT.get_CachedCulture(ref this, out retVal);
+			public HResult get_CachedIsControlElement(out IntBool retVal) mut => VT.get_CachedIsControlElement(ref this, out retVal);
+			public HResult get_CachedIsContentElement(out IntBool retVal) mut => VT.get_CachedIsContentElement(ref this, out retVal);
+			public HResult get_CachedIsPassword(out IntBool retVal) mut => VT.get_CachedIsPassword(ref this, out retVal);
+			public HResult get_CachedNativeWindowHandle(HWnd retVal) mut => VT.get_CachedNativeWindowHandle(ref this, retVal);
+			public HResult get_CachedItemType(out BSTR retVal) mut => VT.get_CachedItemType(ref this, out retVal);
+			public HResult get_CachedIsOffscreen(out IntBool retVal) mut => VT.get_CachedIsOffscreen(ref this, out retVal);
+			public HResult get_CachedOrientation(out OrientationType retVal) mut => VT.get_CachedOrientation(ref this, out retVal);
+			public HResult get_CachedFrameworkId(out BSTR retVal) mut => VT.get_CachedFrameworkId(ref this, out retVal);
+			public HResult get_CachedIsRequiredForForm(out IntBool retVal) mut => VT.get_CachedIsRequiredForForm(ref this, out retVal);
+			public HResult get_CachedItemStatus(out BSTR retVal) mut => VT.get_CachedItemStatus(ref this, out retVal);
+			public HResult get_CachedBoundingRectangle(out RectI retVal) mut => VT.get_CachedBoundingRectangle(ref this, out retVal);
+			public HResult get_CachedLabeledBy(out IUIAutomationElement* retVal) mut => VT.get_CachedLabeledBy(ref this, out retVal);
+			public HResult get_CachedAriaRole(out BSTR retVal) mut => VT.get_CachedAriaRole(ref this, out retVal);
+			public HResult get_CachedAriaProperties(out BSTR retVal) mut => VT.get_CachedAriaProperties(ref this, out retVal);
+			public HResult get_CachedIsDataValidForForm(out IntBool retVal) mut => VT.get_CachedIsDataValidForForm(ref this, out retVal);
+			public HResult get_CachedControllerFor(out IUIAutomationElementArray* retVal) mut => VT.get_CachedControllerFor(ref this, out retVal);
+			public HResult get_CachedDescribedBy(out IUIAutomationElementArray* retVal) mut => VT.get_CachedDescribedBy(ref this, out retVal);
+			public HResult get_CachedFlowsTo(out IUIAutomationElementArray* retVal) mut => VT.get_CachedFlowsTo(ref this, out retVal);
+			public HResult get_CachedProviderDescription(out BSTR retVal) mut => VT.get_CachedProviderDescription(ref this, out retVal);
+			public HResult GetClickablePoint(out POINT clickable, out IntBool gotClickable) mut => VT.GetClickablePoint(ref this, out clickable, out gotClickable);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self) SetFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out SAFEARRAY* runtimeId) GetRuntimeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElement* found) FindFirst;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElementArray* found) FindAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* found) FindFirstBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* found) FindAllBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* updatedElement) BuildUpdatedCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 propertyId, out VARIANT retVal) GetCurrentPropertyValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 propertyId, BOOL ignoreDefaultValue, out VARIANT retVal) GetCurrentPropertyValueEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 propertyId, out VARIANT retVal) GetCachedPropertyValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 propertyId, BOOL ignoreDefaultValue, out VARIANT retVal) GetCachedPropertyValueEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 patternId, in Guid riid, void** patternObject) GetCurrentPatternAs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 patternId, in Guid riid, void** patternObject) GetCachedPatternAs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 patternId, out IUnknown* patternObject) GetCurrentPattern;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, int32 patternId, out IUnknown* patternObject) GetCachedPattern;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElement* parent) GetCachedParent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* children) GetCachedChildren;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out int32 retVal) get_CurrentProcessId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out int32 retVal) get_CurrentControlType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentLocalizedControlType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAcceleratorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAccessKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentHasKeyboardFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsKeyboardFocusable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAutomationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentClassName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentHelpText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out int32 retVal) get_CurrentCulture;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsControlElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsContentElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsPassword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, HWND retVal) get_CurrentNativeWindowHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentItemType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsOffscreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out OrientationType retVal) get_CurrentOrientation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentFrameworkId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsRequiredForForm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentItemStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out RECT retVal) get_CurrentBoundingRectangle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElement* retVal) get_CurrentLabeledBy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAriaRole;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAriaProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CurrentIsDataValidForForm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CurrentControllerFor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CurrentDescribedBy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CurrentFlowsTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CurrentProviderDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out int32 retVal) get_CachedProcessId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out int32 retVal) get_CachedControlType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedLocalizedControlType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedAcceleratorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedAccessKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedHasKeyboardFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsKeyboardFocusable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedAutomationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedClassName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedHelpText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out int32 retVal) get_CachedCulture;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsControlElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsContentElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsPassword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, HWND retVal) get_CachedNativeWindowHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedItemType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsOffscreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out OrientationType retVal) get_CachedOrientation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedFrameworkId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsRequiredForForm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedItemStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out RECT retVal) get_CachedBoundingRectangle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElement* retVal) get_CachedLabeledBy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedAriaRole;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedAriaProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BOOL retVal) get_CachedIsDataValidForForm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CachedControllerFor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CachedDescribedBy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CachedFlowsTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out BSTR retVal) get_CachedProviderDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement self, out POINT clickable, out BOOL gotClickable) GetClickablePoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self) SetFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out SAFEARRAY* runtimeId) GetRuntimeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElement* found) FindFirst;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, out IUIAutomationElementArray* found) FindAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* found) FindFirstBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* found) FindAllBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* updatedElement) BuildUpdatedCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 propertyId, out VARIANT retVal) GetCurrentPropertyValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 propertyId, IntBool ignoreDefaultValue, out VARIANT retVal) GetCurrentPropertyValueEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 propertyId, out VARIANT retVal) GetCachedPropertyValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 propertyId, IntBool ignoreDefaultValue, out VARIANT retVal) GetCachedPropertyValueEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 patternId, in Guid riid, void** patternObject) GetCurrentPatternAs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 patternId, in Guid riid, void** patternObject) GetCachedPatternAs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 patternId, out IUnknown* patternObject) GetCurrentPattern;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, int32 patternId, out IUnknown* patternObject) GetCachedPattern;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElement* parent) GetCachedParent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* children) GetCachedChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out int32 retVal) get_CurrentProcessId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out int32 retVal) get_CurrentControlType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentLocalizedControlType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAcceleratorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAccessKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentHasKeyboardFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsKeyboardFocusable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAutomationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentClassName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentHelpText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out int32 retVal) get_CurrentCulture;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsControlElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsContentElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsPassword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, HWnd retVal) get_CurrentNativeWindowHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentItemType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsOffscreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out OrientationType retVal) get_CurrentOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentFrameworkId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsRequiredForForm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentItemStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out RectI retVal) get_CurrentBoundingRectangle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElement* retVal) get_CurrentLabeledBy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAriaRole;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentAriaProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CurrentIsDataValidForForm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CurrentControllerFor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CurrentDescribedBy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CurrentFlowsTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CurrentProviderDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out int32 retVal) get_CachedProcessId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out int32 retVal) get_CachedControlType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedLocalizedControlType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedAcceleratorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedAccessKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedHasKeyboardFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsKeyboardFocusable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedAutomationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedClassName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedHelpText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out int32 retVal) get_CachedCulture;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsControlElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsContentElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsPassword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, HWnd retVal) get_CachedNativeWindowHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedItemType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsOffscreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out OrientationType retVal) get_CachedOrientation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedFrameworkId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsRequiredForForm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedItemStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out RectI retVal) get_CachedBoundingRectangle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElement* retVal) get_CachedLabeledBy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedAriaRole;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedAriaProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IntBool retVal) get_CachedIsDataValidForForm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CachedControllerFor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CachedDescribedBy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out IUIAutomationElementArray* retVal) get_CachedFlowsTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out BSTR retVal) get_CachedProviderDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement self, out POINT clickable, out IntBool gotClickable) GetClickablePoint;
 			}
 		}
 		[CRepr]
@@ -3189,14 +3189,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Length(out int32 length) mut => VT.get_Length(ref this, out length);
-			public HRESULT GetElement(int32 index, out IUIAutomationElement* element) mut => VT.GetElement(ref this, index, out element);
+			public HResult get_Length(out int32 length) mut => VT.get_Length(ref this, out length);
+			public HResult GetElement(int32 index, out IUIAutomationElement* element) mut => VT.GetElement(ref this, index, out element);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElementArray self, out int32 length) get_Length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElementArray self, int32 index, out IUIAutomationElement* element) GetElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElementArray self, out int32 length) get_Length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElementArray self, int32 index, out IUIAutomationElement* element) GetElement;
 			}
 		}
 		[CRepr]
@@ -3216,12 +3216,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_BooleanValue(out BOOL boolVal) mut => VT.get_BooleanValue(ref this, out boolVal);
+			public HResult get_BooleanValue(out IntBool boolVal) mut => VT.get_BooleanValue(ref this, out boolVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationCondition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationBoolCondition self, out BOOL boolVal) get_BooleanValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationBoolCondition self, out IntBool boolVal) get_BooleanValue;
 			}
 		}
 		[CRepr]
@@ -3231,16 +3231,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_PropertyId(out int32 propertyId) mut => VT.get_PropertyId(ref this, out propertyId);
-			public HRESULT get_PropertyValue(out VARIANT propertyValue) mut => VT.get_PropertyValue(ref this, out propertyValue);
-			public HRESULT get_PropertyConditionFlags(out PropertyConditionFlags flags) mut => VT.get_PropertyConditionFlags(ref this, out flags);
+			public HResult get_PropertyId(out int32 propertyId) mut => VT.get_PropertyId(ref this, out propertyId);
+			public HResult get_PropertyValue(out VARIANT propertyValue) mut => VT.get_PropertyValue(ref this, out propertyValue);
+			public HResult get_PropertyConditionFlags(out PropertyConditionFlags flags) mut => VT.get_PropertyConditionFlags(ref this, out flags);
 
 			[CRepr]
 			public struct VTable : IUIAutomationCondition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPropertyCondition self, out int32 propertyId) get_PropertyId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPropertyCondition self, out VARIANT propertyValue) get_PropertyValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPropertyCondition self, out PropertyConditionFlags flags) get_PropertyConditionFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPropertyCondition self, out int32 propertyId) get_PropertyId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPropertyCondition self, out VARIANT propertyValue) get_PropertyValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPropertyCondition self, out PropertyConditionFlags flags) get_PropertyConditionFlags;
 			}
 		}
 		[CRepr]
@@ -3250,16 +3250,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ChildCount(out int32 childCount) mut => VT.get_ChildCount(ref this, out childCount);
-			public HRESULT GetChildrenAsNativeArray(IUIAutomationCondition*** childArray, out int32 childArrayCount) mut => VT.GetChildrenAsNativeArray(ref this, childArray, out childArrayCount);
-			public HRESULT GetChildren(out SAFEARRAY* childArray) mut => VT.GetChildren(ref this, out childArray);
+			public HResult get_ChildCount(out int32 childCount) mut => VT.get_ChildCount(ref this, out childCount);
+			public HResult GetChildrenAsNativeArray(IUIAutomationCondition*** childArray, out int32 childArrayCount) mut => VT.GetChildrenAsNativeArray(ref this, childArray, out childArrayCount);
+			public HResult GetChildren(out SAFEARRAY* childArray) mut => VT.GetChildren(ref this, out childArray);
 
 			[CRepr]
 			public struct VTable : IUIAutomationCondition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAndCondition self, out int32 childCount) get_ChildCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAndCondition self, IUIAutomationCondition*** childArray, out int32 childArrayCount) GetChildrenAsNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAndCondition self, out SAFEARRAY* childArray) GetChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAndCondition self, out int32 childCount) get_ChildCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAndCondition self, IUIAutomationCondition*** childArray, out int32 childArrayCount) GetChildrenAsNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAndCondition self, out SAFEARRAY* childArray) GetChildren;
 			}
 		}
 		[CRepr]
@@ -3269,16 +3269,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ChildCount(out int32 childCount) mut => VT.get_ChildCount(ref this, out childCount);
-			public HRESULT GetChildrenAsNativeArray(IUIAutomationCondition*** childArray, out int32 childArrayCount) mut => VT.GetChildrenAsNativeArray(ref this, childArray, out childArrayCount);
-			public HRESULT GetChildren(out SAFEARRAY* childArray) mut => VT.GetChildren(ref this, out childArray);
+			public HResult get_ChildCount(out int32 childCount) mut => VT.get_ChildCount(ref this, out childCount);
+			public HResult GetChildrenAsNativeArray(IUIAutomationCondition*** childArray, out int32 childArrayCount) mut => VT.GetChildrenAsNativeArray(ref this, childArray, out childArrayCount);
+			public HResult GetChildren(out SAFEARRAY* childArray) mut => VT.GetChildren(ref this, out childArray);
 
 			[CRepr]
 			public struct VTable : IUIAutomationCondition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationOrCondition self, out int32 childCount) get_ChildCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationOrCondition self, IUIAutomationCondition*** childArray, out int32 childArrayCount) GetChildrenAsNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationOrCondition self, out SAFEARRAY* childArray) GetChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationOrCondition self, out int32 childCount) get_ChildCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationOrCondition self, IUIAutomationCondition*** childArray, out int32 childArrayCount) GetChildrenAsNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationOrCondition self, out SAFEARRAY* childArray) GetChildren;
 			}
 		}
 		[CRepr]
@@ -3288,12 +3288,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetChild(out IUIAutomationCondition* condition) mut => VT.GetChild(ref this, out condition);
+			public HResult GetChild(out IUIAutomationCondition* condition) mut => VT.GetChild(ref this, out condition);
 
 			[CRepr]
 			public struct VTable : IUIAutomationCondition.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationNotCondition self, out IUIAutomationCondition* condition) GetChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationNotCondition self, out IUIAutomationCondition* condition) GetChild;
 			}
 		}
 		[CRepr]
@@ -3303,28 +3303,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddProperty(int32 propertyId) mut => VT.AddProperty(ref this, propertyId);
-			public HRESULT AddPattern(int32 patternId) mut => VT.AddPattern(ref this, patternId);
-			public HRESULT Clone(out IUIAutomationCacheRequest* clonedRequest) mut => VT.Clone(ref this, out clonedRequest);
-			public HRESULT get_TreeScope(out TreeScope @scope) mut => VT.get_TreeScope(ref this, out @scope);
-			public HRESULT put_TreeScope(TreeScope @scope) mut => VT.put_TreeScope(ref this, @scope);
-			public HRESULT get_TreeFilter(out IUIAutomationCondition* filter) mut => VT.get_TreeFilter(ref this, out filter);
-			public HRESULT put_TreeFilter(ref IUIAutomationCondition filter) mut => VT.put_TreeFilter(ref this, ref filter);
-			public HRESULT get_AutomationElementMode(out AutomationElementMode mode) mut => VT.get_AutomationElementMode(ref this, out mode);
-			public HRESULT put_AutomationElementMode(AutomationElementMode mode) mut => VT.put_AutomationElementMode(ref this, mode);
+			public HResult AddProperty(int32 propertyId) mut => VT.AddProperty(ref this, propertyId);
+			public HResult AddPattern(int32 patternId) mut => VT.AddPattern(ref this, patternId);
+			public HResult Clone(out IUIAutomationCacheRequest* clonedRequest) mut => VT.Clone(ref this, out clonedRequest);
+			public HResult get_TreeScope(out TreeScope @scope) mut => VT.get_TreeScope(ref this, out @scope);
+			public HResult put_TreeScope(TreeScope @scope) mut => VT.put_TreeScope(ref this, @scope);
+			public HResult get_TreeFilter(out IUIAutomationCondition* filter) mut => VT.get_TreeFilter(ref this, out filter);
+			public HResult put_TreeFilter(ref IUIAutomationCondition filter) mut => VT.put_TreeFilter(ref this, ref filter);
+			public HResult get_AutomationElementMode(out AutomationElementMode mode) mut => VT.get_AutomationElementMode(ref this, out mode);
+			public HResult put_AutomationElementMode(AutomationElementMode mode) mut => VT.put_AutomationElementMode(ref this, mode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, int32 propertyId) AddProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, int32 patternId) AddPattern;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, out IUIAutomationCacheRequest* clonedRequest) Clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, out TreeScope @scope) get_TreeScope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, TreeScope @scope) put_TreeScope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, out IUIAutomationCondition* filter) get_TreeFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, ref IUIAutomationCondition filter) put_TreeFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, out AutomationElementMode mode) get_AutomationElementMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCacheRequest self, AutomationElementMode mode) put_AutomationElementMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, int32 propertyId) AddProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, int32 patternId) AddPattern;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, out IUIAutomationCacheRequest* clonedRequest) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, out TreeScope @scope) get_TreeScope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, TreeScope @scope) put_TreeScope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, out IUIAutomationCondition* filter) get_TreeFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, ref IUIAutomationCondition filter) put_TreeFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, out AutomationElementMode mode) get_AutomationElementMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCacheRequest self, AutomationElementMode mode) put_AutomationElementMode;
 			}
 		}
 		[CRepr]
@@ -3334,36 +3334,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetParentElement(ref IUIAutomationElement element, out IUIAutomationElement* parent) mut => VT.GetParentElement(ref this, ref element, out parent);
-			public HRESULT GetFirstChildElement(ref IUIAutomationElement element, out IUIAutomationElement* first) mut => VT.GetFirstChildElement(ref this, ref element, out first);
-			public HRESULT GetLastChildElement(ref IUIAutomationElement element, out IUIAutomationElement* last) mut => VT.GetLastChildElement(ref this, ref element, out last);
-			public HRESULT GetNextSiblingElement(ref IUIAutomationElement element, out IUIAutomationElement* next) mut => VT.GetNextSiblingElement(ref this, ref element, out next);
-			public HRESULT GetPreviousSiblingElement(ref IUIAutomationElement element, out IUIAutomationElement* previous) mut => VT.GetPreviousSiblingElement(ref this, ref element, out previous);
-			public HRESULT NormalizeElement(ref IUIAutomationElement element, out IUIAutomationElement* normalized) mut => VT.NormalizeElement(ref this, ref element, out normalized);
-			public HRESULT GetParentElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* parent) mut => VT.GetParentElementBuildCache(ref this, ref element, ref cacheRequest, out parent);
-			public HRESULT GetFirstChildElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* first) mut => VT.GetFirstChildElementBuildCache(ref this, ref element, ref cacheRequest, out first);
-			public HRESULT GetLastChildElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* last) mut => VT.GetLastChildElementBuildCache(ref this, ref element, ref cacheRequest, out last);
-			public HRESULT GetNextSiblingElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* next) mut => VT.GetNextSiblingElementBuildCache(ref this, ref element, ref cacheRequest, out next);
-			public HRESULT GetPreviousSiblingElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* previous) mut => VT.GetPreviousSiblingElementBuildCache(ref this, ref element, ref cacheRequest, out previous);
-			public HRESULT NormalizeElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* normalized) mut => VT.NormalizeElementBuildCache(ref this, ref element, ref cacheRequest, out normalized);
-			public HRESULT get_Condition(out IUIAutomationCondition* condition) mut => VT.get_Condition(ref this, out condition);
+			public HResult GetParentElement(ref IUIAutomationElement element, out IUIAutomationElement* parent) mut => VT.GetParentElement(ref this, ref element, out parent);
+			public HResult GetFirstChildElement(ref IUIAutomationElement element, out IUIAutomationElement* first) mut => VT.GetFirstChildElement(ref this, ref element, out first);
+			public HResult GetLastChildElement(ref IUIAutomationElement element, out IUIAutomationElement* last) mut => VT.GetLastChildElement(ref this, ref element, out last);
+			public HResult GetNextSiblingElement(ref IUIAutomationElement element, out IUIAutomationElement* next) mut => VT.GetNextSiblingElement(ref this, ref element, out next);
+			public HResult GetPreviousSiblingElement(ref IUIAutomationElement element, out IUIAutomationElement* previous) mut => VT.GetPreviousSiblingElement(ref this, ref element, out previous);
+			public HResult NormalizeElement(ref IUIAutomationElement element, out IUIAutomationElement* normalized) mut => VT.NormalizeElement(ref this, ref element, out normalized);
+			public HResult GetParentElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* parent) mut => VT.GetParentElementBuildCache(ref this, ref element, ref cacheRequest, out parent);
+			public HResult GetFirstChildElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* first) mut => VT.GetFirstChildElementBuildCache(ref this, ref element, ref cacheRequest, out first);
+			public HResult GetLastChildElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* last) mut => VT.GetLastChildElementBuildCache(ref this, ref element, ref cacheRequest, out last);
+			public HResult GetNextSiblingElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* next) mut => VT.GetNextSiblingElementBuildCache(ref this, ref element, ref cacheRequest, out next);
+			public HResult GetPreviousSiblingElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* previous) mut => VT.GetPreviousSiblingElementBuildCache(ref this, ref element, ref cacheRequest, out previous);
+			public HResult NormalizeElementBuildCache(ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* normalized) mut => VT.NormalizeElementBuildCache(ref this, ref element, ref cacheRequest, out normalized);
+			public HResult get_Condition(out IUIAutomationCondition* condition) mut => VT.get_Condition(ref this, out condition);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* parent) GetParentElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* first) GetFirstChildElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* last) GetLastChildElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* next) GetNextSiblingElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* previous) GetPreviousSiblingElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* normalized) NormalizeElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* parent) GetParentElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* first) GetFirstChildElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* last) GetLastChildElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* next) GetNextSiblingElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* previous) GetPreviousSiblingElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* normalized) NormalizeElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTreeWalker self, out IUIAutomationCondition* condition) get_Condition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* parent) GetParentElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* first) GetFirstChildElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* last) GetLastChildElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* next) GetNextSiblingElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* previous) GetPreviousSiblingElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, out IUIAutomationElement* normalized) NormalizeElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* parent) GetParentElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* first) GetFirstChildElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* last) GetLastChildElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* next) GetNextSiblingElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* previous) GetPreviousSiblingElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, ref IUIAutomationElement element, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* normalized) NormalizeElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTreeWalker self, out IUIAutomationCondition* condition) get_Condition;
 			}
 		}
 		[CRepr]
@@ -3373,12 +3373,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleAutomationEvent(ref IUIAutomationElement sender, int32 eventId) mut => VT.HandleAutomationEvent(ref this, ref sender, eventId);
+			public HResult HandleAutomationEvent(ref IUIAutomationElement sender, int32 eventId) mut => VT.HandleAutomationEvent(ref this, ref sender, eventId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandler self, ref IUIAutomationElement sender, int32 eventId) HandleAutomationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandler self, ref IUIAutomationElement sender, int32 eventId) HandleAutomationEvent;
 			}
 		}
 		[CRepr]
@@ -3388,12 +3388,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandlePropertyChangedEvent(ref IUIAutomationElement sender, int32 propertyId, VARIANT newValue) mut => VT.HandlePropertyChangedEvent(ref this, ref sender, propertyId, newValue);
+			public HResult HandlePropertyChangedEvent(ref IUIAutomationElement sender, int32 propertyId, VARIANT newValue) mut => VT.HandlePropertyChangedEvent(ref this, ref sender, propertyId, newValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationPropertyChangedEventHandler self, ref IUIAutomationElement sender, int32 propertyId, VARIANT newValue) HandlePropertyChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationPropertyChangedEventHandler self, ref IUIAutomationElement sender, int32 propertyId, VARIANT newValue) HandlePropertyChangedEvent;
 			}
 		}
 		[CRepr]
@@ -3403,12 +3403,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleStructureChangedEvent(ref IUIAutomationElement sender, StructureChangeType changeType, ref SAFEARRAY runtimeId) mut => VT.HandleStructureChangedEvent(ref this, ref sender, changeType, ref runtimeId);
+			public HResult HandleStructureChangedEvent(ref IUIAutomationElement sender, StructureChangeType changeType, ref SAFEARRAY runtimeId) mut => VT.HandleStructureChangedEvent(ref this, ref sender, changeType, ref runtimeId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStructureChangedEventHandler self, ref IUIAutomationElement sender, StructureChangeType changeType, ref SAFEARRAY runtimeId) HandleStructureChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStructureChangedEventHandler self, ref IUIAutomationElement sender, StructureChangeType changeType, ref SAFEARRAY runtimeId) HandleStructureChangedEvent;
 			}
 		}
 		[CRepr]
@@ -3418,12 +3418,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleFocusChangedEvent(ref IUIAutomationElement sender) mut => VT.HandleFocusChangedEvent(ref this, ref sender);
+			public HResult HandleFocusChangedEvent(ref IUIAutomationElement sender) mut => VT.HandleFocusChangedEvent(ref this, ref sender);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationFocusChangedEventHandler self, ref IUIAutomationElement sender) HandleFocusChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationFocusChangedEventHandler self, ref IUIAutomationElement sender) HandleFocusChangedEvent;
 			}
 		}
 		[CRepr]
@@ -3433,12 +3433,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleTextEditTextChangedEvent(ref IUIAutomationElement sender, TextEditChangeType textEditChangeType, ref SAFEARRAY eventStrings) mut => VT.HandleTextEditTextChangedEvent(ref this, ref sender, textEditChangeType, ref eventStrings);
+			public HResult HandleTextEditTextChangedEvent(ref IUIAutomationElement sender, TextEditChangeType textEditChangeType, ref SAFEARRAY eventStrings) mut => VT.HandleTextEditTextChangedEvent(ref this, ref sender, textEditChangeType, ref eventStrings);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextEditTextChangedEventHandler self, ref IUIAutomationElement sender, TextEditChangeType textEditChangeType, ref SAFEARRAY eventStrings) HandleTextEditTextChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextEditTextChangedEventHandler self, ref IUIAutomationElement sender, TextEditChangeType textEditChangeType, ref SAFEARRAY eventStrings) HandleTextEditTextChangedEvent;
 			}
 		}
 		[CRepr]
@@ -3448,12 +3448,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleChangesEvent(ref IUIAutomationElement sender, UiaChangeInfo* uiaChanges, int32 changesCount) mut => VT.HandleChangesEvent(ref this, ref sender, uiaChanges, changesCount);
+			public HResult HandleChangesEvent(ref IUIAutomationElement sender, UiaChangeInfo* uiaChanges, int32 changesCount) mut => VT.HandleChangesEvent(ref this, ref sender, uiaChanges, changesCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationChangesEventHandler self, ref IUIAutomationElement sender, UiaChangeInfo* uiaChanges, int32 changesCount) HandleChangesEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationChangesEventHandler self, ref IUIAutomationElement sender, UiaChangeInfo* uiaChanges, int32 changesCount) HandleChangesEvent;
 			}
 		}
 		[CRepr]
@@ -3463,12 +3463,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleNotificationEvent(ref IUIAutomationElement sender, NotificationKind notificationKind, NotificationProcessing notificationProcessing, BSTR displayString, BSTR activityId) mut => VT.HandleNotificationEvent(ref this, ref sender, notificationKind, notificationProcessing, displayString, activityId);
+			public HResult HandleNotificationEvent(ref IUIAutomationElement sender, NotificationKind notificationKind, NotificationProcessing notificationProcessing, BSTR displayString, BSTR activityId) mut => VT.HandleNotificationEvent(ref this, ref sender, notificationKind, notificationProcessing, displayString, activityId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationNotificationEventHandler self, ref IUIAutomationElement sender, NotificationKind notificationKind, NotificationProcessing notificationProcessing, BSTR displayString, BSTR activityId) HandleNotificationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationNotificationEventHandler self, ref IUIAutomationElement sender, NotificationKind notificationKind, NotificationProcessing notificationProcessing, BSTR displayString, BSTR activityId) HandleNotificationEvent;
 			}
 		}
 		[CRepr]
@@ -3478,12 +3478,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Invoke() mut => VT.Invoke(ref this);
+			public HResult Invoke() mut => VT.Invoke(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationInvokePattern self) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationInvokePattern self) Invoke;
 			}
 		}
 		[CRepr]
@@ -3493,16 +3493,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetDockPosition(DockPosition dockPos) mut => VT.SetDockPosition(ref this, dockPos);
-			public HRESULT get_CurrentDockPosition(out DockPosition retVal) mut => VT.get_CurrentDockPosition(ref this, out retVal);
-			public HRESULT get_CachedDockPosition(out DockPosition retVal) mut => VT.get_CachedDockPosition(ref this, out retVal);
+			public HResult SetDockPosition(DockPosition dockPos) mut => VT.SetDockPosition(ref this, dockPos);
+			public HResult get_CurrentDockPosition(out DockPosition retVal) mut => VT.get_CurrentDockPosition(ref this, out retVal);
+			public HResult get_CachedDockPosition(out DockPosition retVal) mut => VT.get_CachedDockPosition(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDockPattern self, DockPosition dockPos) SetDockPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDockPattern self, out DockPosition retVal) get_CurrentDockPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDockPattern self, out DockPosition retVal) get_CachedDockPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDockPattern self, DockPosition dockPos) SetDockPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDockPattern self, out DockPosition retVal) get_CurrentDockPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDockPattern self, out DockPosition retVal) get_CachedDockPosition;
 			}
 		}
 		[CRepr]
@@ -3512,18 +3512,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Expand() mut => VT.Expand(ref this);
-			public HRESULT Collapse() mut => VT.Collapse(ref this);
-			public HRESULT get_CurrentExpandCollapseState(out ExpandCollapseState retVal) mut => VT.get_CurrentExpandCollapseState(ref this, out retVal);
-			public HRESULT get_CachedExpandCollapseState(out ExpandCollapseState retVal) mut => VT.get_CachedExpandCollapseState(ref this, out retVal);
+			public HResult Expand() mut => VT.Expand(ref this);
+			public HResult Collapse() mut => VT.Collapse(ref this);
+			public HResult get_CurrentExpandCollapseState(out ExpandCollapseState retVal) mut => VT.get_CurrentExpandCollapseState(ref this, out retVal);
+			public HResult get_CachedExpandCollapseState(out ExpandCollapseState retVal) mut => VT.get_CachedExpandCollapseState(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationExpandCollapsePattern self) Expand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationExpandCollapsePattern self) Collapse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationExpandCollapsePattern self, out ExpandCollapseState retVal) get_CurrentExpandCollapseState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationExpandCollapsePattern self, out ExpandCollapseState retVal) get_CachedExpandCollapseState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationExpandCollapsePattern self) Expand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationExpandCollapsePattern self) Collapse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationExpandCollapsePattern self, out ExpandCollapseState retVal) get_CurrentExpandCollapseState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationExpandCollapsePattern self, out ExpandCollapseState retVal) get_CachedExpandCollapseState;
 			}
 		}
 		[CRepr]
@@ -3533,20 +3533,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItem(int32 row, int32 column, out IUIAutomationElement* element) mut => VT.GetItem(ref this, row, column, out element);
-			public HRESULT get_CurrentRowCount(out int32 retVal) mut => VT.get_CurrentRowCount(ref this, out retVal);
-			public HRESULT get_CurrentColumnCount(out int32 retVal) mut => VT.get_CurrentColumnCount(ref this, out retVal);
-			public HRESULT get_CachedRowCount(out int32 retVal) mut => VT.get_CachedRowCount(ref this, out retVal);
-			public HRESULT get_CachedColumnCount(out int32 retVal) mut => VT.get_CachedColumnCount(ref this, out retVal);
+			public HResult GetItem(int32 row, int32 column, out IUIAutomationElement* element) mut => VT.GetItem(ref this, row, column, out element);
+			public HResult get_CurrentRowCount(out int32 retVal) mut => VT.get_CurrentRowCount(ref this, out retVal);
+			public HResult get_CurrentColumnCount(out int32 retVal) mut => VT.get_CurrentColumnCount(ref this, out retVal);
+			public HResult get_CachedRowCount(out int32 retVal) mut => VT.get_CachedRowCount(ref this, out retVal);
+			public HResult get_CachedColumnCount(out int32 retVal) mut => VT.get_CachedColumnCount(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridPattern self, int32 row, int32 column, out IUIAutomationElement* element) GetItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridPattern self, out int32 retVal) get_CurrentRowCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridPattern self, out int32 retVal) get_CurrentColumnCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridPattern self, out int32 retVal) get_CachedRowCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridPattern self, out int32 retVal) get_CachedColumnCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridPattern self, int32 row, int32 column, out IUIAutomationElement* element) GetItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridPattern self, out int32 retVal) get_CurrentRowCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridPattern self, out int32 retVal) get_CurrentColumnCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridPattern self, out int32 retVal) get_CachedRowCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridPattern self, out int32 retVal) get_CachedColumnCount;
 			}
 		}
 		[CRepr]
@@ -3556,30 +3556,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentContainingGrid(out IUIAutomationElement* retVal) mut => VT.get_CurrentContainingGrid(ref this, out retVal);
-			public HRESULT get_CurrentRow(out int32 retVal) mut => VT.get_CurrentRow(ref this, out retVal);
-			public HRESULT get_CurrentColumn(out int32 retVal) mut => VT.get_CurrentColumn(ref this, out retVal);
-			public HRESULT get_CurrentRowSpan(out int32 retVal) mut => VT.get_CurrentRowSpan(ref this, out retVal);
-			public HRESULT get_CurrentColumnSpan(out int32 retVal) mut => VT.get_CurrentColumnSpan(ref this, out retVal);
-			public HRESULT get_CachedContainingGrid(out IUIAutomationElement* retVal) mut => VT.get_CachedContainingGrid(ref this, out retVal);
-			public HRESULT get_CachedRow(out int32 retVal) mut => VT.get_CachedRow(ref this, out retVal);
-			public HRESULT get_CachedColumn(out int32 retVal) mut => VT.get_CachedColumn(ref this, out retVal);
-			public HRESULT get_CachedRowSpan(out int32 retVal) mut => VT.get_CachedRowSpan(ref this, out retVal);
-			public HRESULT get_CachedColumnSpan(out int32 retVal) mut => VT.get_CachedColumnSpan(ref this, out retVal);
+			public HResult get_CurrentContainingGrid(out IUIAutomationElement* retVal) mut => VT.get_CurrentContainingGrid(ref this, out retVal);
+			public HResult get_CurrentRow(out int32 retVal) mut => VT.get_CurrentRow(ref this, out retVal);
+			public HResult get_CurrentColumn(out int32 retVal) mut => VT.get_CurrentColumn(ref this, out retVal);
+			public HResult get_CurrentRowSpan(out int32 retVal) mut => VT.get_CurrentRowSpan(ref this, out retVal);
+			public HResult get_CurrentColumnSpan(out int32 retVal) mut => VT.get_CurrentColumnSpan(ref this, out retVal);
+			public HResult get_CachedContainingGrid(out IUIAutomationElement* retVal) mut => VT.get_CachedContainingGrid(ref this, out retVal);
+			public HResult get_CachedRow(out int32 retVal) mut => VT.get_CachedRow(ref this, out retVal);
+			public HResult get_CachedColumn(out int32 retVal) mut => VT.get_CachedColumn(ref this, out retVal);
+			public HResult get_CachedRowSpan(out int32 retVal) mut => VT.get_CachedRowSpan(ref this, out retVal);
+			public HResult get_CachedColumnSpan(out int32 retVal) mut => VT.get_CachedColumnSpan(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out IUIAutomationElement* retVal) get_CurrentContainingGrid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentRow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentColumn;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentRowSpan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentColumnSpan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out IUIAutomationElement* retVal) get_CachedContainingGrid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedRow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedColumn;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedRowSpan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedColumnSpan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out IUIAutomationElement* retVal) get_CurrentContainingGrid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentRow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentColumn;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentRowSpan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CurrentColumnSpan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out IUIAutomationElement* retVal) get_CachedContainingGrid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedRow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedColumn;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedRowSpan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationGridItemPattern self, out int32 retVal) get_CachedColumnSpan;
 			}
 		}
 		[CRepr]
@@ -3589,22 +3589,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetViewName(int32 view, out BSTR name) mut => VT.GetViewName(ref this, view, out name);
-			public HRESULT SetCurrentView(int32 view) mut => VT.SetCurrentView(ref this, view);
-			public HRESULT get_CurrentCurrentView(out int32 retVal) mut => VT.get_CurrentCurrentView(ref this, out retVal);
-			public HRESULT GetCurrentSupportedViews(out SAFEARRAY* retVal) mut => VT.GetCurrentSupportedViews(ref this, out retVal);
-			public HRESULT get_CachedCurrentView(out int32 retVal) mut => VT.get_CachedCurrentView(ref this, out retVal);
-			public HRESULT GetCachedSupportedViews(out SAFEARRAY* retVal) mut => VT.GetCachedSupportedViews(ref this, out retVal);
+			public HResult GetViewName(int32 view, out BSTR name) mut => VT.GetViewName(ref this, view, out name);
+			public HResult SetCurrentView(int32 view) mut => VT.SetCurrentView(ref this, view);
+			public HResult get_CurrentCurrentView(out int32 retVal) mut => VT.get_CurrentCurrentView(ref this, out retVal);
+			public HResult GetCurrentSupportedViews(out SAFEARRAY* retVal) mut => VT.GetCurrentSupportedViews(ref this, out retVal);
+			public HResult get_CachedCurrentView(out int32 retVal) mut => VT.get_CachedCurrentView(ref this, out retVal);
+			public HResult GetCachedSupportedViews(out SAFEARRAY* retVal) mut => VT.GetCachedSupportedViews(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationMultipleViewPattern self, int32 view, out BSTR name) GetViewName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationMultipleViewPattern self, int32 view) SetCurrentView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationMultipleViewPattern self, out int32 retVal) get_CurrentCurrentView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationMultipleViewPattern self, out SAFEARRAY* retVal) GetCurrentSupportedViews;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationMultipleViewPattern self, out int32 retVal) get_CachedCurrentView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationMultipleViewPattern self, out SAFEARRAY* retVal) GetCachedSupportedViews;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationMultipleViewPattern self, int32 view, out BSTR name) GetViewName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationMultipleViewPattern self, int32 view) SetCurrentView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationMultipleViewPattern self, out int32 retVal) get_CurrentCurrentView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationMultipleViewPattern self, out SAFEARRAY* retVal) GetCurrentSupportedViews;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationMultipleViewPattern self, out int32 retVal) get_CachedCurrentView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationMultipleViewPattern self, out SAFEARRAY* retVal) GetCachedSupportedViews;
 			}
 		}
 		[CRepr]
@@ -3614,12 +3614,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetUnderlyingObjectModel(out IUnknown* retVal) mut => VT.GetUnderlyingObjectModel(ref this, out retVal);
+			public HResult GetUnderlyingObjectModel(out IUnknown* retVal) mut => VT.GetUnderlyingObjectModel(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationObjectModelPattern self, out IUnknown* retVal) GetUnderlyingObjectModel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationObjectModelPattern self, out IUnknown* retVal) GetUnderlyingObjectModel;
 			}
 		}
 		[CRepr]
@@ -3629,36 +3629,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetValue(double val) mut => VT.SetValue(ref this, val);
-			public HRESULT get_CurrentValue(out double retVal) mut => VT.get_CurrentValue(ref this, out retVal);
-			public HRESULT get_CurrentIsReadOnly(out BOOL retVal) mut => VT.get_CurrentIsReadOnly(ref this, out retVal);
-			public HRESULT get_CurrentMaximum(out double retVal) mut => VT.get_CurrentMaximum(ref this, out retVal);
-			public HRESULT get_CurrentMinimum(out double retVal) mut => VT.get_CurrentMinimum(ref this, out retVal);
-			public HRESULT get_CurrentLargeChange(out double retVal) mut => VT.get_CurrentLargeChange(ref this, out retVal);
-			public HRESULT get_CurrentSmallChange(out double retVal) mut => VT.get_CurrentSmallChange(ref this, out retVal);
-			public HRESULT get_CachedValue(out double retVal) mut => VT.get_CachedValue(ref this, out retVal);
-			public HRESULT get_CachedIsReadOnly(out BOOL retVal) mut => VT.get_CachedIsReadOnly(ref this, out retVal);
-			public HRESULT get_CachedMaximum(out double retVal) mut => VT.get_CachedMaximum(ref this, out retVal);
-			public HRESULT get_CachedMinimum(out double retVal) mut => VT.get_CachedMinimum(ref this, out retVal);
-			public HRESULT get_CachedLargeChange(out double retVal) mut => VT.get_CachedLargeChange(ref this, out retVal);
-			public HRESULT get_CachedSmallChange(out double retVal) mut => VT.get_CachedSmallChange(ref this, out retVal);
+			public HResult SetValue(double val) mut => VT.SetValue(ref this, val);
+			public HResult get_CurrentValue(out double retVal) mut => VT.get_CurrentValue(ref this, out retVal);
+			public HResult get_CurrentIsReadOnly(out IntBool retVal) mut => VT.get_CurrentIsReadOnly(ref this, out retVal);
+			public HResult get_CurrentMaximum(out double retVal) mut => VT.get_CurrentMaximum(ref this, out retVal);
+			public HResult get_CurrentMinimum(out double retVal) mut => VT.get_CurrentMinimum(ref this, out retVal);
+			public HResult get_CurrentLargeChange(out double retVal) mut => VT.get_CurrentLargeChange(ref this, out retVal);
+			public HResult get_CurrentSmallChange(out double retVal) mut => VT.get_CurrentSmallChange(ref this, out retVal);
+			public HResult get_CachedValue(out double retVal) mut => VT.get_CachedValue(ref this, out retVal);
+			public HResult get_CachedIsReadOnly(out IntBool retVal) mut => VT.get_CachedIsReadOnly(ref this, out retVal);
+			public HResult get_CachedMaximum(out double retVal) mut => VT.get_CachedMaximum(ref this, out retVal);
+			public HResult get_CachedMinimum(out double retVal) mut => VT.get_CachedMinimum(ref this, out retVal);
+			public HResult get_CachedLargeChange(out double retVal) mut => VT.get_CachedLargeChange(ref this, out retVal);
+			public HResult get_CachedSmallChange(out double retVal) mut => VT.get_CachedSmallChange(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, double val) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out BOOL retVal) get_CurrentIsReadOnly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentMaximum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentMinimum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentLargeChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentSmallChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out BOOL retVal) get_CachedIsReadOnly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedMaximum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedMinimum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedLargeChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedSmallChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, double val) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out IntBool retVal) get_CurrentIsReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentMaximum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentMinimum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentLargeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CurrentSmallChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out IntBool retVal) get_CachedIsReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedMaximum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedMinimum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedLargeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationRangeValuePattern self, out double retVal) get_CachedSmallChange;
 			}
 		}
 		[CRepr]
@@ -3668,38 +3668,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount) mut => VT.Scroll(ref this, horizontalAmount, verticalAmount);
-			public HRESULT SetScrollPercent(double horizontalPercent, double verticalPercent) mut => VT.SetScrollPercent(ref this, horizontalPercent, verticalPercent);
-			public HRESULT get_CurrentHorizontalScrollPercent(out double retVal) mut => VT.get_CurrentHorizontalScrollPercent(ref this, out retVal);
-			public HRESULT get_CurrentVerticalScrollPercent(out double retVal) mut => VT.get_CurrentVerticalScrollPercent(ref this, out retVal);
-			public HRESULT get_CurrentHorizontalViewSize(out double retVal) mut => VT.get_CurrentHorizontalViewSize(ref this, out retVal);
-			public HRESULT get_CurrentVerticalViewSize(out double retVal) mut => VT.get_CurrentVerticalViewSize(ref this, out retVal);
-			public HRESULT get_CurrentHorizontallyScrollable(out BOOL retVal) mut => VT.get_CurrentHorizontallyScrollable(ref this, out retVal);
-			public HRESULT get_CurrentVerticallyScrollable(out BOOL retVal) mut => VT.get_CurrentVerticallyScrollable(ref this, out retVal);
-			public HRESULT get_CachedHorizontalScrollPercent(out double retVal) mut => VT.get_CachedHorizontalScrollPercent(ref this, out retVal);
-			public HRESULT get_CachedVerticalScrollPercent(out double retVal) mut => VT.get_CachedVerticalScrollPercent(ref this, out retVal);
-			public HRESULT get_CachedHorizontalViewSize(out double retVal) mut => VT.get_CachedHorizontalViewSize(ref this, out retVal);
-			public HRESULT get_CachedVerticalViewSize(out double retVal) mut => VT.get_CachedVerticalViewSize(ref this, out retVal);
-			public HRESULT get_CachedHorizontallyScrollable(out BOOL retVal) mut => VT.get_CachedHorizontallyScrollable(ref this, out retVal);
-			public HRESULT get_CachedVerticallyScrollable(out BOOL retVal) mut => VT.get_CachedVerticallyScrollable(ref this, out retVal);
+			public HResult Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount) mut => VT.Scroll(ref this, horizontalAmount, verticalAmount);
+			public HResult SetScrollPercent(double horizontalPercent, double verticalPercent) mut => VT.SetScrollPercent(ref this, horizontalPercent, verticalPercent);
+			public HResult get_CurrentHorizontalScrollPercent(out double retVal) mut => VT.get_CurrentHorizontalScrollPercent(ref this, out retVal);
+			public HResult get_CurrentVerticalScrollPercent(out double retVal) mut => VT.get_CurrentVerticalScrollPercent(ref this, out retVal);
+			public HResult get_CurrentHorizontalViewSize(out double retVal) mut => VT.get_CurrentHorizontalViewSize(ref this, out retVal);
+			public HResult get_CurrentVerticalViewSize(out double retVal) mut => VT.get_CurrentVerticalViewSize(ref this, out retVal);
+			public HResult get_CurrentHorizontallyScrollable(out IntBool retVal) mut => VT.get_CurrentHorizontallyScrollable(ref this, out retVal);
+			public HResult get_CurrentVerticallyScrollable(out IntBool retVal) mut => VT.get_CurrentVerticallyScrollable(ref this, out retVal);
+			public HResult get_CachedHorizontalScrollPercent(out double retVal) mut => VT.get_CachedHorizontalScrollPercent(ref this, out retVal);
+			public HResult get_CachedVerticalScrollPercent(out double retVal) mut => VT.get_CachedVerticalScrollPercent(ref this, out retVal);
+			public HResult get_CachedHorizontalViewSize(out double retVal) mut => VT.get_CachedHorizontalViewSize(ref this, out retVal);
+			public HResult get_CachedVerticalViewSize(out double retVal) mut => VT.get_CachedVerticalViewSize(ref this, out retVal);
+			public HResult get_CachedHorizontallyScrollable(out IntBool retVal) mut => VT.get_CachedHorizontallyScrollable(ref this, out retVal);
+			public HResult get_CachedVerticallyScrollable(out IntBool retVal) mut => VT.get_CachedVerticallyScrollable(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, ScrollAmount horizontalAmount, ScrollAmount verticalAmount) Scroll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, double horizontalPercent, double verticalPercent) SetScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentHorizontalScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentVerticalScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentHorizontalViewSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentVerticalViewSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out BOOL retVal) get_CurrentHorizontallyScrollable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out BOOL retVal) get_CurrentVerticallyScrollable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CachedHorizontalScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CachedVerticalScrollPercent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CachedHorizontalViewSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out double retVal) get_CachedVerticalViewSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out BOOL retVal) get_CachedHorizontallyScrollable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollPattern self, out BOOL retVal) get_CachedVerticallyScrollable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, ScrollAmount horizontalAmount, ScrollAmount verticalAmount) Scroll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, double horizontalPercent, double verticalPercent) SetScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentHorizontalScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentVerticalScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentHorizontalViewSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CurrentVerticalViewSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out IntBool retVal) get_CurrentHorizontallyScrollable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out IntBool retVal) get_CurrentVerticallyScrollable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CachedHorizontalScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CachedVerticalScrollPercent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CachedHorizontalViewSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out double retVal) get_CachedVerticalViewSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out IntBool retVal) get_CachedHorizontallyScrollable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollPattern self, out IntBool retVal) get_CachedVerticallyScrollable;
 			}
 		}
 		[CRepr]
@@ -3709,12 +3709,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ScrollIntoView() mut => VT.ScrollIntoView(ref this);
+			public HResult ScrollIntoView() mut => VT.ScrollIntoView(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationScrollItemPattern self) ScrollIntoView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationScrollItemPattern self) ScrollIntoView;
 			}
 		}
 		[CRepr]
@@ -3724,22 +3724,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentSelection(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentSelection(ref this, out retVal);
-			public HRESULT get_CurrentCanSelectMultiple(out BOOL retVal) mut => VT.get_CurrentCanSelectMultiple(ref this, out retVal);
-			public HRESULT get_CurrentIsSelectionRequired(out BOOL retVal) mut => VT.get_CurrentIsSelectionRequired(ref this, out retVal);
-			public HRESULT GetCachedSelection(out IUIAutomationElementArray* retVal) mut => VT.GetCachedSelection(ref this, out retVal);
-			public HRESULT get_CachedCanSelectMultiple(out BOOL retVal) mut => VT.get_CachedCanSelectMultiple(ref this, out retVal);
-			public HRESULT get_CachedIsSelectionRequired(out BOOL retVal) mut => VT.get_CachedIsSelectionRequired(ref this, out retVal);
+			public HResult GetCurrentSelection(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentSelection(ref this, out retVal);
+			public HResult get_CurrentCanSelectMultiple(out IntBool retVal) mut => VT.get_CurrentCanSelectMultiple(ref this, out retVal);
+			public HResult get_CurrentIsSelectionRequired(out IntBool retVal) mut => VT.get_CurrentIsSelectionRequired(ref this, out retVal);
+			public HResult GetCachedSelection(out IUIAutomationElementArray* retVal) mut => VT.GetCachedSelection(ref this, out retVal);
+			public HResult get_CachedCanSelectMultiple(out IntBool retVal) mut => VT.get_CachedCanSelectMultiple(ref this, out retVal);
+			public HResult get_CachedIsSelectionRequired(out IntBool retVal) mut => VT.get_CachedIsSelectionRequired(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern self, out IUIAutomationElementArray* retVal) GetCurrentSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern self, out BOOL retVal) get_CurrentCanSelectMultiple;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern self, out BOOL retVal) get_CurrentIsSelectionRequired;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern self, out IUIAutomationElementArray* retVal) GetCachedSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern self, out BOOL retVal) get_CachedCanSelectMultiple;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern self, out BOOL retVal) get_CachedIsSelectionRequired;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern self, out IUIAutomationElementArray* retVal) GetCurrentSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern self, out IntBool retVal) get_CurrentCanSelectMultiple;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern self, out IntBool retVal) get_CurrentIsSelectionRequired;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern self, out IUIAutomationElementArray* retVal) GetCachedSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern self, out IntBool retVal) get_CachedCanSelectMultiple;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern self, out IntBool retVal) get_CachedIsSelectionRequired;
 			}
 		}
 		[CRepr]
@@ -3749,26 +3749,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentFirstSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CurrentFirstSelectedItem(ref this, out retVal);
-			public HRESULT get_CurrentLastSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CurrentLastSelectedItem(ref this, out retVal);
-			public HRESULT get_CurrentCurrentSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CurrentCurrentSelectedItem(ref this, out retVal);
-			public HRESULT get_CurrentItemCount(out int32 retVal) mut => VT.get_CurrentItemCount(ref this, out retVal);
-			public HRESULT get_CachedFirstSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CachedFirstSelectedItem(ref this, out retVal);
-			public HRESULT get_CachedLastSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CachedLastSelectedItem(ref this, out retVal);
-			public HRESULT get_CachedCurrentSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CachedCurrentSelectedItem(ref this, out retVal);
-			public HRESULT get_CachedItemCount(out int32 retVal) mut => VT.get_CachedItemCount(ref this, out retVal);
+			public HResult get_CurrentFirstSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CurrentFirstSelectedItem(ref this, out retVal);
+			public HResult get_CurrentLastSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CurrentLastSelectedItem(ref this, out retVal);
+			public HResult get_CurrentCurrentSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CurrentCurrentSelectedItem(ref this, out retVal);
+			public HResult get_CurrentItemCount(out int32 retVal) mut => VT.get_CurrentItemCount(ref this, out retVal);
+			public HResult get_CachedFirstSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CachedFirstSelectedItem(ref this, out retVal);
+			public HResult get_CachedLastSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CachedLastSelectedItem(ref this, out retVal);
+			public HResult get_CachedCurrentSelectedItem(out IUIAutomationElement* retVal) mut => VT.get_CachedCurrentSelectedItem(ref this, out retVal);
+			public HResult get_CachedItemCount(out int32 retVal) mut => VT.get_CachedItemCount(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationSelectionPattern.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CurrentFirstSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CurrentLastSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CurrentCurrentSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out int32 retVal) get_CurrentItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CachedFirstSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CachedLastSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CachedCurrentSelectedItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionPattern2 self, out int32 retVal) get_CachedItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CurrentFirstSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CurrentLastSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CurrentCurrentSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out int32 retVal) get_CurrentItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CachedFirstSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CachedLastSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out IUIAutomationElement* retVal) get_CachedCurrentSelectedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionPattern2 self, out int32 retVal) get_CachedItemCount;
 			}
 		}
 		[CRepr]
@@ -3778,24 +3778,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Select() mut => VT.Select(ref this);
-			public HRESULT AddToSelection() mut => VT.AddToSelection(ref this);
-			public HRESULT RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
-			public HRESULT get_CurrentIsSelected(out BOOL retVal) mut => VT.get_CurrentIsSelected(ref this, out retVal);
-			public HRESULT get_CurrentSelectionContainer(out IUIAutomationElement* retVal) mut => VT.get_CurrentSelectionContainer(ref this, out retVal);
-			public HRESULT get_CachedIsSelected(out BOOL retVal) mut => VT.get_CachedIsSelected(ref this, out retVal);
-			public HRESULT get_CachedSelectionContainer(out IUIAutomationElement* retVal) mut => VT.get_CachedSelectionContainer(ref this, out retVal);
+			public HResult Select() mut => VT.Select(ref this);
+			public HResult AddToSelection() mut => VT.AddToSelection(ref this);
+			public HResult RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
+			public HResult get_CurrentIsSelected(out IntBool retVal) mut => VT.get_CurrentIsSelected(ref this, out retVal);
+			public HResult get_CurrentSelectionContainer(out IUIAutomationElement* retVal) mut => VT.get_CurrentSelectionContainer(ref this, out retVal);
+			public HResult get_CachedIsSelected(out IntBool retVal) mut => VT.get_CachedIsSelected(ref this, out retVal);
+			public HResult get_CachedSelectionContainer(out IUIAutomationElement* retVal) mut => VT.get_CachedSelectionContainer(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self) Select;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self) AddToSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self) RemoveFromSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self, out BOOL retVal) get_CurrentIsSelected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self, out IUIAutomationElement* retVal) get_CurrentSelectionContainer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self, out BOOL retVal) get_CachedIsSelected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSelectionItemPattern self, out IUIAutomationElement* retVal) get_CachedSelectionContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self) Select;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self) AddToSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self) RemoveFromSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self, out IntBool retVal) get_CurrentIsSelected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self, out IUIAutomationElement* retVal) get_CurrentSelectionContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self, out IntBool retVal) get_CachedIsSelected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSelectionItemPattern self, out IUIAutomationElement* retVal) get_CachedSelectionContainer;
 			}
 		}
 		[CRepr]
@@ -3805,14 +3805,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartListening(SynchronizedInputType inputType) mut => VT.StartListening(ref this, inputType);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
+			public HResult StartListening(SynchronizedInputType inputType) mut => VT.StartListening(ref this, inputType);
+			public HResult Cancel() mut => VT.Cancel(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSynchronizedInputPattern self, SynchronizedInputType inputType) StartListening;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSynchronizedInputPattern self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSynchronizedInputPattern self, SynchronizedInputType inputType) StartListening;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSynchronizedInputPattern self) Cancel;
 			}
 		}
 		[CRepr]
@@ -3822,22 +3822,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentRowHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentRowHeaders(ref this, out retVal);
-			public HRESULT GetCurrentColumnHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentColumnHeaders(ref this, out retVal);
-			public HRESULT get_CurrentRowOrColumnMajor(out RowOrColumnMajor retVal) mut => VT.get_CurrentRowOrColumnMajor(ref this, out retVal);
-			public HRESULT GetCachedRowHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCachedRowHeaders(ref this, out retVal);
-			public HRESULT GetCachedColumnHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCachedColumnHeaders(ref this, out retVal);
-			public HRESULT get_CachedRowOrColumnMajor(out RowOrColumnMajor retVal) mut => VT.get_CachedRowOrColumnMajor(ref this, out retVal);
+			public HResult GetCurrentRowHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentRowHeaders(ref this, out retVal);
+			public HResult GetCurrentColumnHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentColumnHeaders(ref this, out retVal);
+			public HResult get_CurrentRowOrColumnMajor(out RowOrColumnMajor retVal) mut => VT.get_CurrentRowOrColumnMajor(ref this, out retVal);
+			public HResult GetCachedRowHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCachedRowHeaders(ref this, out retVal);
+			public HResult GetCachedColumnHeaders(out IUIAutomationElementArray* retVal) mut => VT.GetCachedColumnHeaders(ref this, out retVal);
+			public HResult get_CachedRowOrColumnMajor(out RowOrColumnMajor retVal) mut => VT.get_CachedRowOrColumnMajor(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCurrentRowHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCurrentColumnHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTablePattern self, out RowOrColumnMajor retVal) get_CurrentRowOrColumnMajor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCachedRowHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCachedColumnHeaders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTablePattern self, out RowOrColumnMajor retVal) get_CachedRowOrColumnMajor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCurrentRowHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCurrentColumnHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTablePattern self, out RowOrColumnMajor retVal) get_CurrentRowOrColumnMajor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCachedRowHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTablePattern self, out IUIAutomationElementArray* retVal) GetCachedColumnHeaders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTablePattern self, out RowOrColumnMajor retVal) get_CachedRowOrColumnMajor;
 			}
 		}
 		[CRepr]
@@ -3847,18 +3847,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrentRowHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentRowHeaderItems(ref this, out retVal);
-			public HRESULT GetCurrentColumnHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentColumnHeaderItems(ref this, out retVal);
-			public HRESULT GetCachedRowHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCachedRowHeaderItems(ref this, out retVal);
-			public HRESULT GetCachedColumnHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCachedColumnHeaderItems(ref this, out retVal);
+			public HResult GetCurrentRowHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentRowHeaderItems(ref this, out retVal);
+			public HResult GetCurrentColumnHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentColumnHeaderItems(ref this, out retVal);
+			public HResult GetCachedRowHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCachedRowHeaderItems(ref this, out retVal);
+			public HResult GetCachedColumnHeaderItems(out IUIAutomationElementArray* retVal) mut => VT.GetCachedColumnHeaderItems(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCurrentRowHeaderItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCurrentColumnHeaderItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCachedRowHeaderItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCachedColumnHeaderItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCurrentRowHeaderItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCurrentColumnHeaderItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCachedRowHeaderItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTableItemPattern self, out IUIAutomationElementArray* retVal) GetCachedColumnHeaderItems;
 			}
 		}
 		[CRepr]
@@ -3868,16 +3868,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Toggle() mut => VT.Toggle(ref this);
-			public HRESULT get_CurrentToggleState(out ToggleState retVal) mut => VT.get_CurrentToggleState(ref this, out retVal);
-			public HRESULT get_CachedToggleState(out ToggleState retVal) mut => VT.get_CachedToggleState(ref this, out retVal);
+			public HResult Toggle() mut => VT.Toggle(ref this);
+			public HResult get_CurrentToggleState(out ToggleState retVal) mut => VT.get_CurrentToggleState(ref this, out retVal);
+			public HResult get_CachedToggleState(out ToggleState retVal) mut => VT.get_CachedToggleState(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTogglePattern self) Toggle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTogglePattern self, out ToggleState retVal) get_CurrentToggleState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTogglePattern self, out ToggleState retVal) get_CachedToggleState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTogglePattern self) Toggle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTogglePattern self, out ToggleState retVal) get_CurrentToggleState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTogglePattern self, out ToggleState retVal) get_CachedToggleState;
 			}
 		}
 		[CRepr]
@@ -3887,28 +3887,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Move(double x, double y) mut => VT.Move(ref this, x, y);
-			public HRESULT Resize(double width, double height) mut => VT.Resize(ref this, width, height);
-			public HRESULT Rotate(double degrees) mut => VT.Rotate(ref this, degrees);
-			public HRESULT get_CurrentCanMove(out BOOL retVal) mut => VT.get_CurrentCanMove(ref this, out retVal);
-			public HRESULT get_CurrentCanResize(out BOOL retVal) mut => VT.get_CurrentCanResize(ref this, out retVal);
-			public HRESULT get_CurrentCanRotate(out BOOL retVal) mut => VT.get_CurrentCanRotate(ref this, out retVal);
-			public HRESULT get_CachedCanMove(out BOOL retVal) mut => VT.get_CachedCanMove(ref this, out retVal);
-			public HRESULT get_CachedCanResize(out BOOL retVal) mut => VT.get_CachedCanResize(ref this, out retVal);
-			public HRESULT get_CachedCanRotate(out BOOL retVal) mut => VT.get_CachedCanRotate(ref this, out retVal);
+			public HResult Move(double x, double y) mut => VT.Move(ref this, x, y);
+			public HResult Resize(double width, double height) mut => VT.Resize(ref this, width, height);
+			public HResult Rotate(double degrees) mut => VT.Rotate(ref this, degrees);
+			public HResult get_CurrentCanMove(out IntBool retVal) mut => VT.get_CurrentCanMove(ref this, out retVal);
+			public HResult get_CurrentCanResize(out IntBool retVal) mut => VT.get_CurrentCanResize(ref this, out retVal);
+			public HResult get_CurrentCanRotate(out IntBool retVal) mut => VT.get_CurrentCanRotate(ref this, out retVal);
+			public HResult get_CachedCanMove(out IntBool retVal) mut => VT.get_CachedCanMove(ref this, out retVal);
+			public HResult get_CachedCanResize(out IntBool retVal) mut => VT.get_CachedCanResize(ref this, out retVal);
+			public HResult get_CachedCanRotate(out IntBool retVal) mut => VT.get_CachedCanRotate(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, double x, double y) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, double width, double height) Resize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, double degrees) Rotate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, out BOOL retVal) get_CurrentCanMove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, out BOOL retVal) get_CurrentCanResize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, out BOOL retVal) get_CurrentCanRotate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, out BOOL retVal) get_CachedCanMove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, out BOOL retVal) get_CachedCanResize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern self, out BOOL retVal) get_CachedCanRotate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, double x, double y) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, double width, double height) Resize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, double degrees) Rotate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, out IntBool retVal) get_CurrentCanMove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, out IntBool retVal) get_CurrentCanResize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, out IntBool retVal) get_CurrentCanRotate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, out IntBool retVal) get_CachedCanMove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, out IntBool retVal) get_CachedCanResize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern self, out IntBool retVal) get_CachedCanRotate;
 			}
 		}
 		[CRepr]
@@ -3918,20 +3918,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetValue(BSTR val) mut => VT.SetValue(ref this, val);
-			public HRESULT get_CurrentValue(out BSTR retVal) mut => VT.get_CurrentValue(ref this, out retVal);
-			public HRESULT get_CurrentIsReadOnly(out BOOL retVal) mut => VT.get_CurrentIsReadOnly(ref this, out retVal);
-			public HRESULT get_CachedValue(out BSTR retVal) mut => VT.get_CachedValue(ref this, out retVal);
-			public HRESULT get_CachedIsReadOnly(out BOOL retVal) mut => VT.get_CachedIsReadOnly(ref this, out retVal);
+			public HResult SetValue(BSTR val) mut => VT.SetValue(ref this, val);
+			public HResult get_CurrentValue(out BSTR retVal) mut => VT.get_CurrentValue(ref this, out retVal);
+			public HResult get_CurrentIsReadOnly(out IntBool retVal) mut => VT.get_CurrentIsReadOnly(ref this, out retVal);
+			public HResult get_CachedValue(out BSTR retVal) mut => VT.get_CachedValue(ref this, out retVal);
+			public HResult get_CachedIsReadOnly(out IntBool retVal) mut => VT.get_CachedIsReadOnly(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationValuePattern self, BSTR val) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationValuePattern self, out BSTR retVal) get_CurrentValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationValuePattern self, out BOOL retVal) get_CurrentIsReadOnly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationValuePattern self, out BSTR retVal) get_CachedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationValuePattern self, out BOOL retVal) get_CachedIsReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationValuePattern self, BSTR val) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationValuePattern self, out BSTR retVal) get_CurrentValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationValuePattern self, out IntBool retVal) get_CurrentIsReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationValuePattern self, out BSTR retVal) get_CachedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationValuePattern self, out IntBool retVal) get_CachedIsReadOnly;
 			}
 		}
 		[CRepr]
@@ -3941,40 +3941,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT WaitForInputIdle(int32 milliseconds, out BOOL success) mut => VT.WaitForInputIdle(ref this, milliseconds, out success);
-			public HRESULT SetWindowVisualState(WindowVisualState state) mut => VT.SetWindowVisualState(ref this, state);
-			public HRESULT get_CurrentCanMaximize(out BOOL retVal) mut => VT.get_CurrentCanMaximize(ref this, out retVal);
-			public HRESULT get_CurrentCanMinimize(out BOOL retVal) mut => VT.get_CurrentCanMinimize(ref this, out retVal);
-			public HRESULT get_CurrentIsModal(out BOOL retVal) mut => VT.get_CurrentIsModal(ref this, out retVal);
-			public HRESULT get_CurrentIsTopmost(out BOOL retVal) mut => VT.get_CurrentIsTopmost(ref this, out retVal);
-			public HRESULT get_CurrentWindowVisualState(out WindowVisualState retVal) mut => VT.get_CurrentWindowVisualState(ref this, out retVal);
-			public HRESULT get_CurrentWindowInteractionState(out WindowInteractionState retVal) mut => VT.get_CurrentWindowInteractionState(ref this, out retVal);
-			public HRESULT get_CachedCanMaximize(out BOOL retVal) mut => VT.get_CachedCanMaximize(ref this, out retVal);
-			public HRESULT get_CachedCanMinimize(out BOOL retVal) mut => VT.get_CachedCanMinimize(ref this, out retVal);
-			public HRESULT get_CachedIsModal(out BOOL retVal) mut => VT.get_CachedIsModal(ref this, out retVal);
-			public HRESULT get_CachedIsTopmost(out BOOL retVal) mut => VT.get_CachedIsTopmost(ref this, out retVal);
-			public HRESULT get_CachedWindowVisualState(out WindowVisualState retVal) mut => VT.get_CachedWindowVisualState(ref this, out retVal);
-			public HRESULT get_CachedWindowInteractionState(out WindowInteractionState retVal) mut => VT.get_CachedWindowInteractionState(ref this, out retVal);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult WaitForInputIdle(int32 milliseconds, out IntBool success) mut => VT.WaitForInputIdle(ref this, milliseconds, out success);
+			public HResult SetWindowVisualState(WindowVisualState state) mut => VT.SetWindowVisualState(ref this, state);
+			public HResult get_CurrentCanMaximize(out IntBool retVal) mut => VT.get_CurrentCanMaximize(ref this, out retVal);
+			public HResult get_CurrentCanMinimize(out IntBool retVal) mut => VT.get_CurrentCanMinimize(ref this, out retVal);
+			public HResult get_CurrentIsModal(out IntBool retVal) mut => VT.get_CurrentIsModal(ref this, out retVal);
+			public HResult get_CurrentIsTopmost(out IntBool retVal) mut => VT.get_CurrentIsTopmost(ref this, out retVal);
+			public HResult get_CurrentWindowVisualState(out WindowVisualState retVal) mut => VT.get_CurrentWindowVisualState(ref this, out retVal);
+			public HResult get_CurrentWindowInteractionState(out WindowInteractionState retVal) mut => VT.get_CurrentWindowInteractionState(ref this, out retVal);
+			public HResult get_CachedCanMaximize(out IntBool retVal) mut => VT.get_CachedCanMaximize(ref this, out retVal);
+			public HResult get_CachedCanMinimize(out IntBool retVal) mut => VT.get_CachedCanMinimize(ref this, out retVal);
+			public HResult get_CachedIsModal(out IntBool retVal) mut => VT.get_CachedIsModal(ref this, out retVal);
+			public HResult get_CachedIsTopmost(out IntBool retVal) mut => VT.get_CachedIsTopmost(ref this, out retVal);
+			public HResult get_CachedWindowVisualState(out WindowVisualState retVal) mut => VT.get_CachedWindowVisualState(ref this, out retVal);
+			public HResult get_CachedWindowInteractionState(out WindowInteractionState retVal) mut => VT.get_CachedWindowInteractionState(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, int32 milliseconds, out BOOL success) WaitForInputIdle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, WindowVisualState state) SetWindowVisualState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CurrentCanMaximize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CurrentCanMinimize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CurrentIsModal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CurrentIsTopmost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out WindowVisualState retVal) get_CurrentWindowVisualState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out WindowInteractionState retVal) get_CurrentWindowInteractionState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CachedCanMaximize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CachedCanMinimize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CachedIsModal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out BOOL retVal) get_CachedIsTopmost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out WindowVisualState retVal) get_CachedWindowVisualState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationWindowPattern self, out WindowInteractionState retVal) get_CachedWindowInteractionState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, int32 milliseconds, out IntBool success) WaitForInputIdle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, WindowVisualState state) SetWindowVisualState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CurrentCanMaximize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CurrentCanMinimize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CurrentIsModal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CurrentIsTopmost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out WindowVisualState retVal) get_CurrentWindowVisualState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out WindowInteractionState retVal) get_CurrentWindowInteractionState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CachedCanMaximize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CachedCanMinimize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CachedIsModal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out IntBool retVal) get_CachedIsTopmost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out WindowVisualState retVal) get_CachedWindowVisualState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationWindowPattern self, out WindowInteractionState retVal) get_CachedWindowInteractionState;
 			}
 		}
 		[CRepr]
@@ -3984,46 +3984,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Clone(out IUIAutomationTextRange* clonedRange) mut => VT.Clone(ref this, out clonedRange);
-			public HRESULT Compare(ref IUIAutomationTextRange range, out BOOL areSame) mut => VT.Compare(ref this, ref range, out areSame);
-			public HRESULT CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint, out int32 compValue) mut => VT.CompareEndpoints(ref this, srcEndPoint, ref range, targetEndPoint, out compValue);
-			public HRESULT ExpandToEnclosingUnit(TextUnit textUnit) mut => VT.ExpandToEnclosingUnit(ref this, textUnit);
-			public HRESULT FindAttribute(int32 attr, VARIANT val, BOOL backward, out IUIAutomationTextRange* found) mut => VT.FindAttribute(ref this, attr, val, backward, out found);
-			public HRESULT FindText(BSTR text, BOOL backward, BOOL ignoreCase, out IUIAutomationTextRange* found) mut => VT.FindText(ref this, text, backward, ignoreCase, out found);
-			public HRESULT GetAttributeValue(int32 attr, out VARIANT value) mut => VT.GetAttributeValue(ref this, attr, out value);
-			public HRESULT GetBoundingRectangles(out SAFEARRAY* boundingRects) mut => VT.GetBoundingRectangles(ref this, out boundingRects);
-			public HRESULT GetEnclosingElement(out IUIAutomationElement* enclosingElement) mut => VT.GetEnclosingElement(ref this, out enclosingElement);
-			public HRESULT GetText(int32 maxLength, out BSTR text) mut => VT.GetText(ref this, maxLength, out text);
-			public HRESULT Move(TextUnit unit, int32 count, out int32 moved) mut => VT.Move(ref this, unit, count, out moved);
-			public HRESULT MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 moved) mut => VT.MoveEndpointByUnit(ref this, endpoint, unit, count, out moved);
-			public HRESULT MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint) mut => VT.MoveEndpointByRange(ref this, srcEndPoint, ref range, targetEndPoint);
-			public HRESULT Select() mut => VT.Select(ref this);
-			public HRESULT AddToSelection() mut => VT.AddToSelection(ref this);
-			public HRESULT RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
-			public HRESULT ScrollIntoView(BOOL alignToTop) mut => VT.ScrollIntoView(ref this, alignToTop);
-			public HRESULT GetChildren(out IUIAutomationElementArray* children) mut => VT.GetChildren(ref this, out children);
+			public HResult Clone(out IUIAutomationTextRange* clonedRange) mut => VT.Clone(ref this, out clonedRange);
+			public HResult Compare(ref IUIAutomationTextRange range, out IntBool areSame) mut => VT.Compare(ref this, ref range, out areSame);
+			public HResult CompareEndpoints(TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint, out int32 compValue) mut => VT.CompareEndpoints(ref this, srcEndPoint, ref range, targetEndPoint, out compValue);
+			public HResult ExpandToEnclosingUnit(TextUnit textUnit) mut => VT.ExpandToEnclosingUnit(ref this, textUnit);
+			public HResult FindAttribute(int32 attr, VARIANT val, IntBool backward, out IUIAutomationTextRange* found) mut => VT.FindAttribute(ref this, attr, val, backward, out found);
+			public HResult FindText(BSTR text, IntBool backward, IntBool ignoreCase, out IUIAutomationTextRange* found) mut => VT.FindText(ref this, text, backward, ignoreCase, out found);
+			public HResult GetAttributeValue(int32 attr, out VARIANT value) mut => VT.GetAttributeValue(ref this, attr, out value);
+			public HResult GetBoundingRectangles(out SAFEARRAY* boundingRects) mut => VT.GetBoundingRectangles(ref this, out boundingRects);
+			public HResult GetEnclosingElement(out IUIAutomationElement* enclosingElement) mut => VT.GetEnclosingElement(ref this, out enclosingElement);
+			public HResult GetText(int32 maxLength, out BSTR text) mut => VT.GetText(ref this, maxLength, out text);
+			public HResult Move(TextUnit unit, int32 count, out int32 moved) mut => VT.Move(ref this, unit, count, out moved);
+			public HResult MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 moved) mut => VT.MoveEndpointByUnit(ref this, endpoint, unit, count, out moved);
+			public HResult MoveEndpointByRange(TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint) mut => VT.MoveEndpointByRange(ref this, srcEndPoint, ref range, targetEndPoint);
+			public HResult Select() mut => VT.Select(ref this);
+			public HResult AddToSelection() mut => VT.AddToSelection(ref this);
+			public HResult RemoveFromSelection() mut => VT.RemoveFromSelection(ref this);
+			public HResult ScrollIntoView(IntBool alignToTop) mut => VT.ScrollIntoView(ref this, alignToTop);
+			public HResult GetChildren(out IUIAutomationElementArray* children) mut => VT.GetChildren(ref this, out children);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, out IUIAutomationTextRange* clonedRange) Clone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, ref IUIAutomationTextRange range, out BOOL areSame) Compare;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint, out int32 compValue) CompareEndpoints;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, TextUnit textUnit) ExpandToEnclosingUnit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, int32 attr, VARIANT val, BOOL backward, out IUIAutomationTextRange* found) FindAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, BSTR text, BOOL backward, BOOL ignoreCase, out IUIAutomationTextRange* found) FindText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, int32 attr, out VARIANT value) GetAttributeValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, out SAFEARRAY* boundingRects) GetBoundingRectangles;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, out IUIAutomationElement* enclosingElement) GetEnclosingElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, int32 maxLength, out BSTR text) GetText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, TextUnit unit, int32 count, out int32 moved) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 moved) MoveEndpointByUnit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint) MoveEndpointByRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self) Select;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self) AddToSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self) RemoveFromSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, BOOL alignToTop) ScrollIntoView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange self, out IUIAutomationElementArray* children) GetChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, out IUIAutomationTextRange* clonedRange) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, ref IUIAutomationTextRange range, out IntBool areSame) Compare;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint, out int32 compValue) CompareEndpoints;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, TextUnit textUnit) ExpandToEnclosingUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, int32 attr, VARIANT val, IntBool backward, out IUIAutomationTextRange* found) FindAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, BSTR text, IntBool backward, IntBool ignoreCase, out IUIAutomationTextRange* found) FindText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, int32 attr, out VARIANT value) GetAttributeValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, out SAFEARRAY* boundingRects) GetBoundingRectangles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, out IUIAutomationElement* enclosingElement) GetEnclosingElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, int32 maxLength, out BSTR text) GetText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, TextUnit unit, int32 count, out int32 moved) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 moved) MoveEndpointByUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, TextPatternRangeEndpoint srcEndPoint, ref IUIAutomationTextRange range, TextPatternRangeEndpoint targetEndPoint) MoveEndpointByRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self) Select;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self) AddToSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self) RemoveFromSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, IntBool alignToTop) ScrollIntoView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange self, out IUIAutomationElementArray* children) GetChildren;
 			}
 		}
 		[CRepr]
@@ -4033,12 +4033,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ShowContextMenu() mut => VT.ShowContextMenu(ref this);
+			public HResult ShowContextMenu() mut => VT.ShowContextMenu(ref this);
 
 			[CRepr]
 			public struct VTable : IUIAutomationTextRange.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange2 self) ShowContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange2 self) ShowContextMenu;
 			}
 		}
 		[CRepr]
@@ -4048,16 +4048,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetEnclosingElementBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* enclosingElement) mut => VT.GetEnclosingElementBuildCache(ref this, ref cacheRequest, out enclosingElement);
-			public HRESULT GetChildrenBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* children) mut => VT.GetChildrenBuildCache(ref this, ref cacheRequest, out children);
-			public HRESULT GetAttributeValues(int32* attributeIds, int32 attributeIdCount, out SAFEARRAY* attributeValues) mut => VT.GetAttributeValues(ref this, attributeIds, attributeIdCount, out attributeValues);
+			public HResult GetEnclosingElementBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* enclosingElement) mut => VT.GetEnclosingElementBuildCache(ref this, ref cacheRequest, out enclosingElement);
+			public HResult GetChildrenBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* children) mut => VT.GetChildrenBuildCache(ref this, ref cacheRequest, out children);
+			public HResult GetAttributeValues(int32* attributeIds, int32 attributeIdCount, out SAFEARRAY* attributeValues) mut => VT.GetAttributeValues(ref this, attributeIds, attributeIdCount, out attributeValues);
 
 			[CRepr]
 			public struct VTable : IUIAutomationTextRange2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange3 self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* enclosingElement) GetEnclosingElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange3 self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* children) GetChildrenBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRange3 self, int32* attributeIds, int32 attributeIdCount, out SAFEARRAY* attributeValues) GetAttributeValues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange3 self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* enclosingElement) GetEnclosingElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange3 self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElementArray* children) GetChildrenBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRange3 self, int32* attributeIds, int32 attributeIdCount, out SAFEARRAY* attributeValues) GetAttributeValues;
 			}
 		}
 		[CRepr]
@@ -4067,14 +4067,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Length(out int32 length) mut => VT.get_Length(ref this, out length);
-			public HRESULT GetElement(int32 index, out IUIAutomationTextRange* element) mut => VT.GetElement(ref this, index, out element);
+			public HResult get_Length(out int32 length) mut => VT.get_Length(ref this, out length);
+			public HResult GetElement(int32 index, out IUIAutomationTextRange* element) mut => VT.GetElement(ref this, index, out element);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRangeArray self, out int32 length) get_Length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextRangeArray self, int32 index, out IUIAutomationTextRange* element) GetElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRangeArray self, out int32 length) get_Length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextRangeArray self, int32 index, out IUIAutomationTextRange* element) GetElement;
 			}
 		}
 		[CRepr]
@@ -4084,22 +4084,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RangeFromPoint(POINT pt, out IUIAutomationTextRange* range) mut => VT.RangeFromPoint(ref this, pt, out range);
-			public HRESULT RangeFromChild(ref IUIAutomationElement child, out IUIAutomationTextRange* range) mut => VT.RangeFromChild(ref this, ref child, out range);
-			public HRESULT GetSelection(out IUIAutomationTextRangeArray* ranges) mut => VT.GetSelection(ref this, out ranges);
-			public HRESULT GetVisibleRanges(out IUIAutomationTextRangeArray* ranges) mut => VT.GetVisibleRanges(ref this, out ranges);
-			public HRESULT get_DocumentRange(out IUIAutomationTextRange* range) mut => VT.get_DocumentRange(ref this, out range);
-			public HRESULT get_SupportedTextSelection(out SupportedTextSelection supportedTextSelection) mut => VT.get_SupportedTextSelection(ref this, out supportedTextSelection);
+			public HResult RangeFromPoint(POINT pt, out IUIAutomationTextRange* range) mut => VT.RangeFromPoint(ref this, pt, out range);
+			public HResult RangeFromChild(ref IUIAutomationElement child, out IUIAutomationTextRange* range) mut => VT.RangeFromChild(ref this, ref child, out range);
+			public HResult GetSelection(out IUIAutomationTextRangeArray* ranges) mut => VT.GetSelection(ref this, out ranges);
+			public HResult GetVisibleRanges(out IUIAutomationTextRangeArray* ranges) mut => VT.GetVisibleRanges(ref this, out ranges);
+			public HResult get_DocumentRange(out IUIAutomationTextRange* range) mut => VT.get_DocumentRange(ref this, out range);
+			public HResult get_SupportedTextSelection(out SupportedTextSelection supportedTextSelection) mut => VT.get_SupportedTextSelection(ref this, out supportedTextSelection);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern self, POINT pt, out IUIAutomationTextRange* range) RangeFromPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern self, ref IUIAutomationElement child, out IUIAutomationTextRange* range) RangeFromChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern self, out IUIAutomationTextRangeArray* ranges) GetSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern self, out IUIAutomationTextRangeArray* ranges) GetVisibleRanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern self, out IUIAutomationTextRange* range) get_DocumentRange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern self, out SupportedTextSelection supportedTextSelection) get_SupportedTextSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern self, POINT pt, out IUIAutomationTextRange* range) RangeFromPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern self, ref IUIAutomationElement child, out IUIAutomationTextRange* range) RangeFromChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern self, out IUIAutomationTextRangeArray* ranges) GetSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern self, out IUIAutomationTextRangeArray* ranges) GetVisibleRanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern self, out IUIAutomationTextRange* range) get_DocumentRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern self, out SupportedTextSelection supportedTextSelection) get_SupportedTextSelection;
 			}
 		}
 		[CRepr]
@@ -4109,14 +4109,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RangeFromAnnotation(ref IUIAutomationElement annotation, out IUIAutomationTextRange* range) mut => VT.RangeFromAnnotation(ref this, ref annotation, out range);
-			public HRESULT GetCaretRange(out BOOL isActive, out IUIAutomationTextRange* range) mut => VT.GetCaretRange(ref this, out isActive, out range);
+			public HResult RangeFromAnnotation(ref IUIAutomationElement annotation, out IUIAutomationTextRange* range) mut => VT.RangeFromAnnotation(ref this, ref annotation, out range);
+			public HResult GetCaretRange(out IntBool isActive, out IUIAutomationTextRange* range) mut => VT.GetCaretRange(ref this, out isActive, out range);
 
 			[CRepr]
 			public struct VTable : IUIAutomationTextPattern.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern2 self, ref IUIAutomationElement annotation, out IUIAutomationTextRange* range) RangeFromAnnotation;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextPattern2 self, out BOOL isActive, out IUIAutomationTextRange* range) GetCaretRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern2 self, ref IUIAutomationElement annotation, out IUIAutomationTextRange* range) RangeFromAnnotation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextPattern2 self, out IntBool isActive, out IUIAutomationTextRange* range) GetCaretRange;
 			}
 		}
 		[CRepr]
@@ -4126,14 +4126,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetActiveComposition(out IUIAutomationTextRange* range) mut => VT.GetActiveComposition(ref this, out range);
-			public HRESULT GetConversionTarget(out IUIAutomationTextRange* range) mut => VT.GetConversionTarget(ref this, out range);
+			public HResult GetActiveComposition(out IUIAutomationTextRange* range) mut => VT.GetActiveComposition(ref this, out range);
+			public HResult GetConversionTarget(out IUIAutomationTextRange* range) mut => VT.GetConversionTarget(ref this, out range);
 
 			[CRepr]
 			public struct VTable : IUIAutomationTextPattern.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextEditPattern self, out IUIAutomationTextRange* range) GetActiveComposition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextEditPattern self, out IUIAutomationTextRange* range) GetConversionTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextEditPattern self, out IUIAutomationTextRange* range) GetActiveComposition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextEditPattern self, out IUIAutomationTextRange* range) GetConversionTarget;
 			}
 		}
 		[CRepr]
@@ -4143,12 +4143,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Navigate(NavigateDirection direction, out IUIAutomationElement* pRetVal) mut => VT.Navigate(ref this, direction, out pRetVal);
+			public HResult Navigate(NavigateDirection direction, out IUIAutomationElement* pRetVal) mut => VT.Navigate(ref this, direction, out pRetVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationCustomNavigationPattern self, NavigateDirection direction, out IUIAutomationElement* pRetVal) Navigate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationCustomNavigationPattern self, NavigateDirection direction, out IUIAutomationElement* pRetVal) Navigate;
 			}
 		}
 		[CRepr]
@@ -4158,12 +4158,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HandleActiveTextPositionChangedEvent(ref IUIAutomationElement sender, ref IUIAutomationTextRange range) mut => VT.HandleActiveTextPositionChangedEvent(ref this, ref sender, ref range);
+			public HResult HandleActiveTextPositionChangedEvent(ref IUIAutomationElement sender, ref IUIAutomationTextRange range) mut => VT.HandleActiveTextPositionChangedEvent(ref this, ref sender, ref range);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationActiveTextPositionChangedEventHandler self, ref IUIAutomationElement sender, ref IUIAutomationTextRange range) HandleActiveTextPositionChangedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationActiveTextPositionChangedEventHandler self, ref IUIAutomationElement sender, ref IUIAutomationTextRange range) HandleActiveTextPositionChangedEvent;
 			}
 		}
 		[CRepr]
@@ -4173,58 +4173,58 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Select(int32 flagsSelect) mut => VT.Select(ref this, flagsSelect);
-			public HRESULT DoDefaultAction() mut => VT.DoDefaultAction(ref this);
-			public HRESULT SetValue(PWSTR szValue) mut => VT.SetValue(ref this, szValue);
-			public HRESULT get_CurrentChildId(out int32 pRetVal) mut => VT.get_CurrentChildId(ref this, out pRetVal);
-			public HRESULT get_CurrentName(out BSTR pszName) mut => VT.get_CurrentName(ref this, out pszName);
-			public HRESULT get_CurrentValue(out BSTR pszValue) mut => VT.get_CurrentValue(ref this, out pszValue);
-			public HRESULT get_CurrentDescription(out BSTR pszDescription) mut => VT.get_CurrentDescription(ref this, out pszDescription);
-			public HRESULT get_CurrentRole(out uint32 pdwRole) mut => VT.get_CurrentRole(ref this, out pdwRole);
-			public HRESULT get_CurrentState(out uint32 pdwState) mut => VT.get_CurrentState(ref this, out pdwState);
-			public HRESULT get_CurrentHelp(out BSTR pszHelp) mut => VT.get_CurrentHelp(ref this, out pszHelp);
-			public HRESULT get_CurrentKeyboardShortcut(out BSTR pszKeyboardShortcut) mut => VT.get_CurrentKeyboardShortcut(ref this, out pszKeyboardShortcut);
-			public HRESULT GetCurrentSelection(out IUIAutomationElementArray* pvarSelectedChildren) mut => VT.GetCurrentSelection(ref this, out pvarSelectedChildren);
-			public HRESULT get_CurrentDefaultAction(out BSTR pszDefaultAction) mut => VT.get_CurrentDefaultAction(ref this, out pszDefaultAction);
-			public HRESULT get_CachedChildId(out int32 pRetVal) mut => VT.get_CachedChildId(ref this, out pRetVal);
-			public HRESULT get_CachedName(out BSTR pszName) mut => VT.get_CachedName(ref this, out pszName);
-			public HRESULT get_CachedValue(out BSTR pszValue) mut => VT.get_CachedValue(ref this, out pszValue);
-			public HRESULT get_CachedDescription(out BSTR pszDescription) mut => VT.get_CachedDescription(ref this, out pszDescription);
-			public HRESULT get_CachedRole(out uint32 pdwRole) mut => VT.get_CachedRole(ref this, out pdwRole);
-			public HRESULT get_CachedState(out uint32 pdwState) mut => VT.get_CachedState(ref this, out pdwState);
-			public HRESULT get_CachedHelp(out BSTR pszHelp) mut => VT.get_CachedHelp(ref this, out pszHelp);
-			public HRESULT get_CachedKeyboardShortcut(out BSTR pszKeyboardShortcut) mut => VT.get_CachedKeyboardShortcut(ref this, out pszKeyboardShortcut);
-			public HRESULT GetCachedSelection(out IUIAutomationElementArray* pvarSelectedChildren) mut => VT.GetCachedSelection(ref this, out pvarSelectedChildren);
-			public HRESULT get_CachedDefaultAction(out BSTR pszDefaultAction) mut => VT.get_CachedDefaultAction(ref this, out pszDefaultAction);
-			public HRESULT GetIAccessible(out IAccessible* ppAccessible) mut => VT.GetIAccessible(ref this, out ppAccessible);
+			public HResult Select(int32 flagsSelect) mut => VT.Select(ref this, flagsSelect);
+			public HResult DoDefaultAction() mut => VT.DoDefaultAction(ref this);
+			public HResult SetValue(char16* szValue) mut => VT.SetValue(ref this, szValue);
+			public HResult get_CurrentChildId(out int32 pRetVal) mut => VT.get_CurrentChildId(ref this, out pRetVal);
+			public HResult get_CurrentName(out BSTR pszName) mut => VT.get_CurrentName(ref this, out pszName);
+			public HResult get_CurrentValue(out BSTR pszValue) mut => VT.get_CurrentValue(ref this, out pszValue);
+			public HResult get_CurrentDescription(out BSTR pszDescription) mut => VT.get_CurrentDescription(ref this, out pszDescription);
+			public HResult get_CurrentRole(out uint32 pdwRole) mut => VT.get_CurrentRole(ref this, out pdwRole);
+			public HResult get_CurrentState(out uint32 pdwState) mut => VT.get_CurrentState(ref this, out pdwState);
+			public HResult get_CurrentHelp(out BSTR pszHelp) mut => VT.get_CurrentHelp(ref this, out pszHelp);
+			public HResult get_CurrentKeyboardShortcut(out BSTR pszKeyboardShortcut) mut => VT.get_CurrentKeyboardShortcut(ref this, out pszKeyboardShortcut);
+			public HResult GetCurrentSelection(out IUIAutomationElementArray* pvarSelectedChildren) mut => VT.GetCurrentSelection(ref this, out pvarSelectedChildren);
+			public HResult get_CurrentDefaultAction(out BSTR pszDefaultAction) mut => VT.get_CurrentDefaultAction(ref this, out pszDefaultAction);
+			public HResult get_CachedChildId(out int32 pRetVal) mut => VT.get_CachedChildId(ref this, out pRetVal);
+			public HResult get_CachedName(out BSTR pszName) mut => VT.get_CachedName(ref this, out pszName);
+			public HResult get_CachedValue(out BSTR pszValue) mut => VT.get_CachedValue(ref this, out pszValue);
+			public HResult get_CachedDescription(out BSTR pszDescription) mut => VT.get_CachedDescription(ref this, out pszDescription);
+			public HResult get_CachedRole(out uint32 pdwRole) mut => VT.get_CachedRole(ref this, out pdwRole);
+			public HResult get_CachedState(out uint32 pdwState) mut => VT.get_CachedState(ref this, out pdwState);
+			public HResult get_CachedHelp(out BSTR pszHelp) mut => VT.get_CachedHelp(ref this, out pszHelp);
+			public HResult get_CachedKeyboardShortcut(out BSTR pszKeyboardShortcut) mut => VT.get_CachedKeyboardShortcut(ref this, out pszKeyboardShortcut);
+			public HResult GetCachedSelection(out IUIAutomationElementArray* pvarSelectedChildren) mut => VT.GetCachedSelection(ref this, out pvarSelectedChildren);
+			public HResult get_CachedDefaultAction(out BSTR pszDefaultAction) mut => VT.get_CachedDefaultAction(ref this, out pszDefaultAction);
+			public HResult GetIAccessible(out IAccessible* ppAccessible) mut => VT.GetIAccessible(ref this, out ppAccessible);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, int32 flagsSelect) Select;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self) DoDefaultAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, PWSTR szValue) SetValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out int32 pRetVal) get_CurrentChildId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszName) get_CurrentName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszValue) get_CurrentValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDescription) get_CurrentDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwRole) get_CurrentRole;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwState) get_CurrentState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszHelp) get_CurrentHelp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszKeyboardShortcut) get_CurrentKeyboardShortcut;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out IUIAutomationElementArray* pvarSelectedChildren) GetCurrentSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDefaultAction) get_CurrentDefaultAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out int32 pRetVal) get_CachedChildId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszName) get_CachedName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszValue) get_CachedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDescription) get_CachedDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwRole) get_CachedRole;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwState) get_CachedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszHelp) get_CachedHelp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszKeyboardShortcut) get_CachedKeyboardShortcut;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out IUIAutomationElementArray* pvarSelectedChildren) GetCachedSelection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDefaultAction) get_CachedDefaultAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationLegacyIAccessiblePattern self, out IAccessible* ppAccessible) GetIAccessible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, int32 flagsSelect) Select;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self) DoDefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, char16* szValue) SetValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out int32 pRetVal) get_CurrentChildId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszName) get_CurrentName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszValue) get_CurrentValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDescription) get_CurrentDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwRole) get_CurrentRole;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwState) get_CurrentState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszHelp) get_CurrentHelp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszKeyboardShortcut) get_CurrentKeyboardShortcut;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out IUIAutomationElementArray* pvarSelectedChildren) GetCurrentSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDefaultAction) get_CurrentDefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out int32 pRetVal) get_CachedChildId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszName) get_CachedName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszValue) get_CachedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDescription) get_CachedDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwRole) get_CachedRole;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out uint32 pdwState) get_CachedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszHelp) get_CachedHelp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszKeyboardShortcut) get_CachedKeyboardShortcut;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out IUIAutomationElementArray* pvarSelectedChildren) GetCachedSelection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out BSTR pszDefaultAction) get_CachedDefaultAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationLegacyIAccessiblePattern self, out IAccessible* ppAccessible) GetIAccessible;
 			}
 		}
 		[CRepr]
@@ -4234,12 +4234,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT FindItemByProperty(ref IUIAutomationElement pStartAfter, int32 propertyId, VARIANT value, out IUIAutomationElement* pFound) mut => VT.FindItemByProperty(ref this, ref pStartAfter, propertyId, value, out pFound);
+			public HResult FindItemByProperty(ref IUIAutomationElement pStartAfter, int32 propertyId, VARIANT value, out IUIAutomationElement* pFound) mut => VT.FindItemByProperty(ref this, ref pStartAfter, propertyId, value, out pFound);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationItemContainerPattern self, ref IUIAutomationElement pStartAfter, int32 propertyId, VARIANT value, out IUIAutomationElement* pFound) FindItemByProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationItemContainerPattern self, ref IUIAutomationElement pStartAfter, int32 propertyId, VARIANT value, out IUIAutomationElement* pFound) FindItemByProperty;
 			}
 		}
 		[CRepr]
@@ -4249,12 +4249,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Realize() mut => VT.Realize(ref this);
+			public HResult Realize() mut => VT.Realize(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationVirtualizedItemPattern self) Realize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationVirtualizedItemPattern self) Realize;
 			}
 		}
 		[CRepr]
@@ -4264,30 +4264,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentAnnotationTypeId(out int32 retVal) mut => VT.get_CurrentAnnotationTypeId(ref this, out retVal);
-			public HRESULT get_CurrentAnnotationTypeName(out BSTR retVal) mut => VT.get_CurrentAnnotationTypeName(ref this, out retVal);
-			public HRESULT get_CurrentAuthor(out BSTR retVal) mut => VT.get_CurrentAuthor(ref this, out retVal);
-			public HRESULT get_CurrentDateTime(out BSTR retVal) mut => VT.get_CurrentDateTime(ref this, out retVal);
-			public HRESULT get_CurrentTarget(out IUIAutomationElement* retVal) mut => VT.get_CurrentTarget(ref this, out retVal);
-			public HRESULT get_CachedAnnotationTypeId(out int32 retVal) mut => VT.get_CachedAnnotationTypeId(ref this, out retVal);
-			public HRESULT get_CachedAnnotationTypeName(out BSTR retVal) mut => VT.get_CachedAnnotationTypeName(ref this, out retVal);
-			public HRESULT get_CachedAuthor(out BSTR retVal) mut => VT.get_CachedAuthor(ref this, out retVal);
-			public HRESULT get_CachedDateTime(out BSTR retVal) mut => VT.get_CachedDateTime(ref this, out retVal);
-			public HRESULT get_CachedTarget(out IUIAutomationElement* retVal) mut => VT.get_CachedTarget(ref this, out retVal);
+			public HResult get_CurrentAnnotationTypeId(out int32 retVal) mut => VT.get_CurrentAnnotationTypeId(ref this, out retVal);
+			public HResult get_CurrentAnnotationTypeName(out BSTR retVal) mut => VT.get_CurrentAnnotationTypeName(ref this, out retVal);
+			public HResult get_CurrentAuthor(out BSTR retVal) mut => VT.get_CurrentAuthor(ref this, out retVal);
+			public HResult get_CurrentDateTime(out BSTR retVal) mut => VT.get_CurrentDateTime(ref this, out retVal);
+			public HResult get_CurrentTarget(out IUIAutomationElement* retVal) mut => VT.get_CurrentTarget(ref this, out retVal);
+			public HResult get_CachedAnnotationTypeId(out int32 retVal) mut => VT.get_CachedAnnotationTypeId(ref this, out retVal);
+			public HResult get_CachedAnnotationTypeName(out BSTR retVal) mut => VT.get_CachedAnnotationTypeName(ref this, out retVal);
+			public HResult get_CachedAuthor(out BSTR retVal) mut => VT.get_CachedAuthor(ref this, out retVal);
+			public HResult get_CachedDateTime(out BSTR retVal) mut => VT.get_CachedDateTime(ref this, out retVal);
+			public HResult get_CachedTarget(out IUIAutomationElement* retVal) mut => VT.get_CachedTarget(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out int32 retVal) get_CurrentAnnotationTypeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CurrentAnnotationTypeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CurrentAuthor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CurrentDateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out IUIAutomationElement* retVal) get_CurrentTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out int32 retVal) get_CachedAnnotationTypeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CachedAnnotationTypeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CachedAuthor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CachedDateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationAnnotationPattern self, out IUIAutomationElement* retVal) get_CachedTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out int32 retVal) get_CurrentAnnotationTypeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CurrentAnnotationTypeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CurrentAuthor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CurrentDateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out IUIAutomationElement* retVal) get_CurrentTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out int32 retVal) get_CachedAnnotationTypeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CachedAnnotationTypeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CachedAuthor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out BSTR retVal) get_CachedDateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationAnnotationPattern self, out IUIAutomationElement* retVal) get_CachedTarget;
 			}
 		}
 		[CRepr]
@@ -4297,42 +4297,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentStyleId(out int32 retVal) mut => VT.get_CurrentStyleId(ref this, out retVal);
-			public HRESULT get_CurrentStyleName(out BSTR retVal) mut => VT.get_CurrentStyleName(ref this, out retVal);
-			public HRESULT get_CurrentFillColor(out int32 retVal) mut => VT.get_CurrentFillColor(ref this, out retVal);
-			public HRESULT get_CurrentFillPatternStyle(out BSTR retVal) mut => VT.get_CurrentFillPatternStyle(ref this, out retVal);
-			public HRESULT get_CurrentShape(out BSTR retVal) mut => VT.get_CurrentShape(ref this, out retVal);
-			public HRESULT get_CurrentFillPatternColor(out int32 retVal) mut => VT.get_CurrentFillPatternColor(ref this, out retVal);
-			public HRESULT get_CurrentExtendedProperties(out BSTR retVal) mut => VT.get_CurrentExtendedProperties(ref this, out retVal);
-			public HRESULT GetCurrentExtendedPropertiesAsArray(out ExtendedProperty* propertyArray, out int32 propertyCount) mut => VT.GetCurrentExtendedPropertiesAsArray(ref this, out propertyArray, out propertyCount);
-			public HRESULT get_CachedStyleId(out int32 retVal) mut => VT.get_CachedStyleId(ref this, out retVal);
-			public HRESULT get_CachedStyleName(out BSTR retVal) mut => VT.get_CachedStyleName(ref this, out retVal);
-			public HRESULT get_CachedFillColor(out int32 retVal) mut => VT.get_CachedFillColor(ref this, out retVal);
-			public HRESULT get_CachedFillPatternStyle(out BSTR retVal) mut => VT.get_CachedFillPatternStyle(ref this, out retVal);
-			public HRESULT get_CachedShape(out BSTR retVal) mut => VT.get_CachedShape(ref this, out retVal);
-			public HRESULT get_CachedFillPatternColor(out int32 retVal) mut => VT.get_CachedFillPatternColor(ref this, out retVal);
-			public HRESULT get_CachedExtendedProperties(out BSTR retVal) mut => VT.get_CachedExtendedProperties(ref this, out retVal);
-			public HRESULT GetCachedExtendedPropertiesAsArray(out ExtendedProperty* propertyArray, out int32 propertyCount) mut => VT.GetCachedExtendedPropertiesAsArray(ref this, out propertyArray, out propertyCount);
+			public HResult get_CurrentStyleId(out int32 retVal) mut => VT.get_CurrentStyleId(ref this, out retVal);
+			public HResult get_CurrentStyleName(out BSTR retVal) mut => VT.get_CurrentStyleName(ref this, out retVal);
+			public HResult get_CurrentFillColor(out int32 retVal) mut => VT.get_CurrentFillColor(ref this, out retVal);
+			public HResult get_CurrentFillPatternStyle(out BSTR retVal) mut => VT.get_CurrentFillPatternStyle(ref this, out retVal);
+			public HResult get_CurrentShape(out BSTR retVal) mut => VT.get_CurrentShape(ref this, out retVal);
+			public HResult get_CurrentFillPatternColor(out int32 retVal) mut => VT.get_CurrentFillPatternColor(ref this, out retVal);
+			public HResult get_CurrentExtendedProperties(out BSTR retVal) mut => VT.get_CurrentExtendedProperties(ref this, out retVal);
+			public HResult GetCurrentExtendedPropertiesAsArray(out ExtendedProperty* propertyArray, out int32 propertyCount) mut => VT.GetCurrentExtendedPropertiesAsArray(ref this, out propertyArray, out propertyCount);
+			public HResult get_CachedStyleId(out int32 retVal) mut => VT.get_CachedStyleId(ref this, out retVal);
+			public HResult get_CachedStyleName(out BSTR retVal) mut => VT.get_CachedStyleName(ref this, out retVal);
+			public HResult get_CachedFillColor(out int32 retVal) mut => VT.get_CachedFillColor(ref this, out retVal);
+			public HResult get_CachedFillPatternStyle(out BSTR retVal) mut => VT.get_CachedFillPatternStyle(ref this, out retVal);
+			public HResult get_CachedShape(out BSTR retVal) mut => VT.get_CachedShape(ref this, out retVal);
+			public HResult get_CachedFillPatternColor(out int32 retVal) mut => VT.get_CachedFillPatternColor(ref this, out retVal);
+			public HResult get_CachedExtendedProperties(out BSTR retVal) mut => VT.get_CachedExtendedProperties(ref this, out retVal);
+			public HResult GetCachedExtendedPropertiesAsArray(out ExtendedProperty* propertyArray, out int32 propertyCount) mut => VT.GetCachedExtendedPropertiesAsArray(ref this, out propertyArray, out propertyCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out int32 retVal) get_CurrentStyleId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentStyleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out int32 retVal) get_CurrentFillColor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentFillPatternStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentShape;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out int32 retVal) get_CurrentFillPatternColor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentExtendedProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out ExtendedProperty* propertyArray, out int32 propertyCount) GetCurrentExtendedPropertiesAsArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out int32 retVal) get_CachedStyleId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedStyleName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out int32 retVal) get_CachedFillColor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedFillPatternStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedShape;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out int32 retVal) get_CachedFillPatternColor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedExtendedProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationStylesPattern self, out ExtendedProperty* propertyArray, out int32 propertyCount) GetCachedExtendedPropertiesAsArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out int32 retVal) get_CurrentStyleId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentStyleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out int32 retVal) get_CurrentFillColor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentFillPatternStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out int32 retVal) get_CurrentFillPatternColor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CurrentExtendedProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out ExtendedProperty* propertyArray, out int32 propertyCount) GetCurrentExtendedPropertiesAsArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out int32 retVal) get_CachedStyleId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedStyleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out int32 retVal) get_CachedFillColor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedFillPatternStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedShape;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out int32 retVal) get_CachedFillPatternColor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out BSTR retVal) get_CachedExtendedProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationStylesPattern self, out ExtendedProperty* propertyArray, out int32 propertyCount) GetCachedExtendedPropertiesAsArray;
 			}
 		}
 		[CRepr]
@@ -4342,12 +4342,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItemByName(BSTR name, out IUIAutomationElement* element) mut => VT.GetItemByName(ref this, name, out element);
+			public HResult GetItemByName(BSTR name, out IUIAutomationElement* element) mut => VT.GetItemByName(ref this, name, out element);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetPattern self, BSTR name, out IUIAutomationElement* element) GetItemByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetPattern self, BSTR name, out IUIAutomationElement* element) GetItemByName;
 			}
 		}
 		[CRepr]
@@ -4357,22 +4357,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentFormula(out BSTR retVal) mut => VT.get_CurrentFormula(ref this, out retVal);
-			public HRESULT GetCurrentAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentAnnotationObjects(ref this, out retVal);
-			public HRESULT GetCurrentAnnotationTypes(out SAFEARRAY* retVal) mut => VT.GetCurrentAnnotationTypes(ref this, out retVal);
-			public HRESULT get_CachedFormula(out BSTR retVal) mut => VT.get_CachedFormula(ref this, out retVal);
-			public HRESULT GetCachedAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.GetCachedAnnotationObjects(ref this, out retVal);
-			public HRESULT GetCachedAnnotationTypes(out SAFEARRAY* retVal) mut => VT.GetCachedAnnotationTypes(ref this, out retVal);
+			public HResult get_CurrentFormula(out BSTR retVal) mut => VT.get_CurrentFormula(ref this, out retVal);
+			public HResult GetCurrentAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentAnnotationObjects(ref this, out retVal);
+			public HResult GetCurrentAnnotationTypes(out SAFEARRAY* retVal) mut => VT.GetCurrentAnnotationTypes(ref this, out retVal);
+			public HResult get_CachedFormula(out BSTR retVal) mut => VT.get_CachedFormula(ref this, out retVal);
+			public HResult GetCachedAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.GetCachedAnnotationObjects(ref this, out retVal);
+			public HResult GetCachedAnnotationTypes(out SAFEARRAY* retVal) mut => VT.GetCachedAnnotationTypes(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetItemPattern self, out BSTR retVal) get_CurrentFormula;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetItemPattern self, out IUIAutomationElementArray* retVal) GetCurrentAnnotationObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetItemPattern self, out SAFEARRAY* retVal) GetCurrentAnnotationTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetItemPattern self, out BSTR retVal) get_CachedFormula;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetItemPattern self, out IUIAutomationElementArray* retVal) GetCachedAnnotationObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationSpreadsheetItemPattern self, out SAFEARRAY* retVal) GetCachedAnnotationTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetItemPattern self, out BSTR retVal) get_CurrentFormula;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetItemPattern self, out IUIAutomationElementArray* retVal) GetCurrentAnnotationObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetItemPattern self, out SAFEARRAY* retVal) GetCurrentAnnotationTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetItemPattern self, out BSTR retVal) get_CachedFormula;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetItemPattern self, out IUIAutomationElementArray* retVal) GetCachedAnnotationObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationSpreadsheetItemPattern self, out SAFEARRAY* retVal) GetCachedAnnotationTypes;
 			}
 		}
 		[CRepr]
@@ -4382,30 +4382,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Zoom(double zoomValue) mut => VT.Zoom(ref this, zoomValue);
-			public HRESULT ZoomByUnit(ZoomUnit zoomUnit) mut => VT.ZoomByUnit(ref this, zoomUnit);
-			public HRESULT get_CurrentCanZoom(out BOOL retVal) mut => VT.get_CurrentCanZoom(ref this, out retVal);
-			public HRESULT get_CachedCanZoom(out BOOL retVal) mut => VT.get_CachedCanZoom(ref this, out retVal);
-			public HRESULT get_CurrentZoomLevel(out double retVal) mut => VT.get_CurrentZoomLevel(ref this, out retVal);
-			public HRESULT get_CachedZoomLevel(out double retVal) mut => VT.get_CachedZoomLevel(ref this, out retVal);
-			public HRESULT get_CurrentZoomMinimum(out double retVal) mut => VT.get_CurrentZoomMinimum(ref this, out retVal);
-			public HRESULT get_CachedZoomMinimum(out double retVal) mut => VT.get_CachedZoomMinimum(ref this, out retVal);
-			public HRESULT get_CurrentZoomMaximum(out double retVal) mut => VT.get_CurrentZoomMaximum(ref this, out retVal);
-			public HRESULT get_CachedZoomMaximum(out double retVal) mut => VT.get_CachedZoomMaximum(ref this, out retVal);
+			public HResult Zoom(double zoomValue) mut => VT.Zoom(ref this, zoomValue);
+			public HResult ZoomByUnit(ZoomUnit zoomUnit) mut => VT.ZoomByUnit(ref this, zoomUnit);
+			public HResult get_CurrentCanZoom(out IntBool retVal) mut => VT.get_CurrentCanZoom(ref this, out retVal);
+			public HResult get_CachedCanZoom(out IntBool retVal) mut => VT.get_CachedCanZoom(ref this, out retVal);
+			public HResult get_CurrentZoomLevel(out double retVal) mut => VT.get_CurrentZoomLevel(ref this, out retVal);
+			public HResult get_CachedZoomLevel(out double retVal) mut => VT.get_CachedZoomLevel(ref this, out retVal);
+			public HResult get_CurrentZoomMinimum(out double retVal) mut => VT.get_CurrentZoomMinimum(ref this, out retVal);
+			public HResult get_CachedZoomMinimum(out double retVal) mut => VT.get_CachedZoomMinimum(ref this, out retVal);
+			public HResult get_CurrentZoomMaximum(out double retVal) mut => VT.get_CurrentZoomMaximum(ref this, out retVal);
+			public HResult get_CachedZoomMaximum(out double retVal) mut => VT.get_CachedZoomMaximum(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationTransformPattern.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, double zoomValue) Zoom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, ZoomUnit zoomUnit) ZoomByUnit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out BOOL retVal) get_CurrentCanZoom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out BOOL retVal) get_CachedCanZoom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out double retVal) get_CurrentZoomLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out double retVal) get_CachedZoomLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out double retVal) get_CurrentZoomMinimum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out double retVal) get_CachedZoomMinimum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out double retVal) get_CurrentZoomMaximum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTransformPattern2 self, out double retVal) get_CachedZoomMaximum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, double zoomValue) Zoom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, ZoomUnit zoomUnit) ZoomByUnit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out IntBool retVal) get_CurrentCanZoom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out IntBool retVal) get_CachedCanZoom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out double retVal) get_CurrentZoomLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out double retVal) get_CachedZoomLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out double retVal) get_CurrentZoomMinimum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out double retVal) get_CachedZoomMinimum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out double retVal) get_CurrentZoomMaximum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTransformPattern2 self, out double retVal) get_CachedZoomMaximum;
 			}
 		}
 		[CRepr]
@@ -4415,14 +4415,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_TextContainer(out IUIAutomationElement* container) mut => VT.get_TextContainer(ref this, out container);
-			public HRESULT get_TextRange(out IUIAutomationTextRange* range) mut => VT.get_TextRange(ref this, out range);
+			public HResult get_TextContainer(out IUIAutomationElement* container) mut => VT.get_TextContainer(ref this, out container);
+			public HResult get_TextRange(out IUIAutomationTextRange* range) mut => VT.get_TextRange(ref this, out range);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextChildPattern self, out IUIAutomationElement* container) get_TextContainer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationTextChildPattern self, out IUIAutomationTextRange* range) get_TextRange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextChildPattern self, out IUIAutomationElement* container) get_TextContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationTextChildPattern self, out IUIAutomationTextRange* range) get_TextRange;
 			}
 		}
 		[CRepr]
@@ -4432,26 +4432,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentIsGrabbed(out BOOL retVal) mut => VT.get_CurrentIsGrabbed(ref this, out retVal);
-			public HRESULT get_CachedIsGrabbed(out BOOL retVal) mut => VT.get_CachedIsGrabbed(ref this, out retVal);
-			public HRESULT get_CurrentDropEffect(out BSTR retVal) mut => VT.get_CurrentDropEffect(ref this, out retVal);
-			public HRESULT get_CachedDropEffect(out BSTR retVal) mut => VT.get_CachedDropEffect(ref this, out retVal);
-			public HRESULT get_CurrentDropEffects(out SAFEARRAY* retVal) mut => VT.get_CurrentDropEffects(ref this, out retVal);
-			public HRESULT get_CachedDropEffects(out SAFEARRAY* retVal) mut => VT.get_CachedDropEffects(ref this, out retVal);
-			public HRESULT GetCurrentGrabbedItems(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentGrabbedItems(ref this, out retVal);
-			public HRESULT GetCachedGrabbedItems(out IUIAutomationElementArray* retVal) mut => VT.GetCachedGrabbedItems(ref this, out retVal);
+			public HResult get_CurrentIsGrabbed(out IntBool retVal) mut => VT.get_CurrentIsGrabbed(ref this, out retVal);
+			public HResult get_CachedIsGrabbed(out IntBool retVal) mut => VT.get_CachedIsGrabbed(ref this, out retVal);
+			public HResult get_CurrentDropEffect(out BSTR retVal) mut => VT.get_CurrentDropEffect(ref this, out retVal);
+			public HResult get_CachedDropEffect(out BSTR retVal) mut => VT.get_CachedDropEffect(ref this, out retVal);
+			public HResult get_CurrentDropEffects(out SAFEARRAY* retVal) mut => VT.get_CurrentDropEffects(ref this, out retVal);
+			public HResult get_CachedDropEffects(out SAFEARRAY* retVal) mut => VT.get_CachedDropEffects(ref this, out retVal);
+			public HResult GetCurrentGrabbedItems(out IUIAutomationElementArray* retVal) mut => VT.GetCurrentGrabbedItems(ref this, out retVal);
+			public HResult GetCachedGrabbedItems(out IUIAutomationElementArray* retVal) mut => VT.GetCachedGrabbedItems(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out BOOL retVal) get_CurrentIsGrabbed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out BOOL retVal) get_CachedIsGrabbed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out BSTR retVal) get_CurrentDropEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out BSTR retVal) get_CachedDropEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out SAFEARRAY* retVal) get_CurrentDropEffects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out SAFEARRAY* retVal) get_CachedDropEffects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out IUIAutomationElementArray* retVal) GetCurrentGrabbedItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDragPattern self, out IUIAutomationElementArray* retVal) GetCachedGrabbedItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out IntBool retVal) get_CurrentIsGrabbed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out IntBool retVal) get_CachedIsGrabbed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out BSTR retVal) get_CurrentDropEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out BSTR retVal) get_CachedDropEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out SAFEARRAY* retVal) get_CurrentDropEffects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out SAFEARRAY* retVal) get_CachedDropEffects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out IUIAutomationElementArray* retVal) GetCurrentGrabbedItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDragPattern self, out IUIAutomationElementArray* retVal) GetCachedGrabbedItems;
 			}
 		}
 		[CRepr]
@@ -4461,18 +4461,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentDropTargetEffect(out BSTR retVal) mut => VT.get_CurrentDropTargetEffect(ref this, out retVal);
-			public HRESULT get_CachedDropTargetEffect(out BSTR retVal) mut => VT.get_CachedDropTargetEffect(ref this, out retVal);
-			public HRESULT get_CurrentDropTargetEffects(out SAFEARRAY* retVal) mut => VT.get_CurrentDropTargetEffects(ref this, out retVal);
-			public HRESULT get_CachedDropTargetEffects(out SAFEARRAY* retVal) mut => VT.get_CachedDropTargetEffects(ref this, out retVal);
+			public HResult get_CurrentDropTargetEffect(out BSTR retVal) mut => VT.get_CurrentDropTargetEffect(ref this, out retVal);
+			public HResult get_CachedDropTargetEffect(out BSTR retVal) mut => VT.get_CachedDropTargetEffect(ref this, out retVal);
+			public HResult get_CurrentDropTargetEffects(out SAFEARRAY* retVal) mut => VT.get_CurrentDropTargetEffects(ref this, out retVal);
+			public HResult get_CachedDropTargetEffects(out SAFEARRAY* retVal) mut => VT.get_CachedDropTargetEffects(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDropTargetPattern self, out BSTR retVal) get_CurrentDropTargetEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDropTargetPattern self, out BSTR retVal) get_CachedDropTargetEffect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDropTargetPattern self, out SAFEARRAY* retVal) get_CurrentDropTargetEffects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationDropTargetPattern self, out SAFEARRAY* retVal) get_CachedDropTargetEffects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDropTargetPattern self, out BSTR retVal) get_CurrentDropTargetEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDropTargetPattern self, out BSTR retVal) get_CachedDropTargetEffect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDropTargetPattern self, out SAFEARRAY* retVal) get_CurrentDropTargetEffects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationDropTargetPattern self, out SAFEARRAY* retVal) get_CachedDropTargetEffects;
 			}
 		}
 		[CRepr]
@@ -4482,22 +4482,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentOptimizeForVisualContent(out BOOL retVal) mut => VT.get_CurrentOptimizeForVisualContent(ref this, out retVal);
-			public HRESULT get_CachedOptimizeForVisualContent(out BOOL retVal) mut => VT.get_CachedOptimizeForVisualContent(ref this, out retVal);
-			public HRESULT get_CurrentLiveSetting(out LiveSetting retVal) mut => VT.get_CurrentLiveSetting(ref this, out retVal);
-			public HRESULT get_CachedLiveSetting(out LiveSetting retVal) mut => VT.get_CachedLiveSetting(ref this, out retVal);
-			public HRESULT get_CurrentFlowsFrom(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentFlowsFrom(ref this, out retVal);
-			public HRESULT get_CachedFlowsFrom(out IUIAutomationElementArray* retVal) mut => VT.get_CachedFlowsFrom(ref this, out retVal);
+			public HResult get_CurrentOptimizeForVisualContent(out IntBool retVal) mut => VT.get_CurrentOptimizeForVisualContent(ref this, out retVal);
+			public HResult get_CachedOptimizeForVisualContent(out IntBool retVal) mut => VT.get_CachedOptimizeForVisualContent(ref this, out retVal);
+			public HResult get_CurrentLiveSetting(out LiveSetting retVal) mut => VT.get_CurrentLiveSetting(ref this, out retVal);
+			public HResult get_CachedLiveSetting(out LiveSetting retVal) mut => VT.get_CachedLiveSetting(ref this, out retVal);
+			public HResult get_CurrentFlowsFrom(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentFlowsFrom(ref this, out retVal);
+			public HResult get_CachedFlowsFrom(out IUIAutomationElementArray* retVal) mut => VT.get_CachedFlowsFrom(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement2 self, out BOOL retVal) get_CurrentOptimizeForVisualContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement2 self, out BOOL retVal) get_CachedOptimizeForVisualContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement2 self, out LiveSetting retVal) get_CurrentLiveSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement2 self, out LiveSetting retVal) get_CachedLiveSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement2 self, out IUIAutomationElementArray* retVal) get_CurrentFlowsFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement2 self, out IUIAutomationElementArray* retVal) get_CachedFlowsFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement2 self, out IntBool retVal) get_CurrentOptimizeForVisualContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement2 self, out IntBool retVal) get_CachedOptimizeForVisualContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement2 self, out LiveSetting retVal) get_CurrentLiveSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement2 self, out LiveSetting retVal) get_CachedLiveSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement2 self, out IUIAutomationElementArray* retVal) get_CurrentFlowsFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement2 self, out IUIAutomationElementArray* retVal) get_CachedFlowsFrom;
 			}
 		}
 		[CRepr]
@@ -4507,16 +4507,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ShowContextMenu() mut => VT.ShowContextMenu(ref this);
-			public HRESULT get_CurrentIsPeripheral(out BOOL retVal) mut => VT.get_CurrentIsPeripheral(ref this, out retVal);
-			public HRESULT get_CachedIsPeripheral(out BOOL retVal) mut => VT.get_CachedIsPeripheral(ref this, out retVal);
+			public HResult ShowContextMenu() mut => VT.ShowContextMenu(ref this);
+			public HResult get_CurrentIsPeripheral(out IntBool retVal) mut => VT.get_CurrentIsPeripheral(ref this, out retVal);
+			public HResult get_CachedIsPeripheral(out IntBool retVal) mut => VT.get_CachedIsPeripheral(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement3 self) ShowContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement3 self, out BOOL retVal) get_CurrentIsPeripheral;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement3 self, out BOOL retVal) get_CachedIsPeripheral;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement3 self) ShowContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement3 self, out IntBool retVal) get_CurrentIsPeripheral;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement3 self, out IntBool retVal) get_CachedIsPeripheral;
 			}
 		}
 		[CRepr]
@@ -4526,30 +4526,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentPositionInSet(out int32 retVal) mut => VT.get_CurrentPositionInSet(ref this, out retVal);
-			public HRESULT get_CurrentSizeOfSet(out int32 retVal) mut => VT.get_CurrentSizeOfSet(ref this, out retVal);
-			public HRESULT get_CurrentLevel(out int32 retVal) mut => VT.get_CurrentLevel(ref this, out retVal);
-			public HRESULT get_CurrentAnnotationTypes(out SAFEARRAY* retVal) mut => VT.get_CurrentAnnotationTypes(ref this, out retVal);
-			public HRESULT get_CurrentAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentAnnotationObjects(ref this, out retVal);
-			public HRESULT get_CachedPositionInSet(out int32 retVal) mut => VT.get_CachedPositionInSet(ref this, out retVal);
-			public HRESULT get_CachedSizeOfSet(out int32 retVal) mut => VT.get_CachedSizeOfSet(ref this, out retVal);
-			public HRESULT get_CachedLevel(out int32 retVal) mut => VT.get_CachedLevel(ref this, out retVal);
-			public HRESULT get_CachedAnnotationTypes(out SAFEARRAY* retVal) mut => VT.get_CachedAnnotationTypes(ref this, out retVal);
-			public HRESULT get_CachedAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.get_CachedAnnotationObjects(ref this, out retVal);
+			public HResult get_CurrentPositionInSet(out int32 retVal) mut => VT.get_CurrentPositionInSet(ref this, out retVal);
+			public HResult get_CurrentSizeOfSet(out int32 retVal) mut => VT.get_CurrentSizeOfSet(ref this, out retVal);
+			public HResult get_CurrentLevel(out int32 retVal) mut => VT.get_CurrentLevel(ref this, out retVal);
+			public HResult get_CurrentAnnotationTypes(out SAFEARRAY* retVal) mut => VT.get_CurrentAnnotationTypes(ref this, out retVal);
+			public HResult get_CurrentAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.get_CurrentAnnotationObjects(ref this, out retVal);
+			public HResult get_CachedPositionInSet(out int32 retVal) mut => VT.get_CachedPositionInSet(ref this, out retVal);
+			public HResult get_CachedSizeOfSet(out int32 retVal) mut => VT.get_CachedSizeOfSet(ref this, out retVal);
+			public HResult get_CachedLevel(out int32 retVal) mut => VT.get_CachedLevel(ref this, out retVal);
+			public HResult get_CachedAnnotationTypes(out SAFEARRAY* retVal) mut => VT.get_CachedAnnotationTypes(ref this, out retVal);
+			public HResult get_CachedAnnotationObjects(out IUIAutomationElementArray* retVal) mut => VT.get_CachedAnnotationObjects(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out int32 retVal) get_CurrentPositionInSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out int32 retVal) get_CurrentSizeOfSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out int32 retVal) get_CurrentLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out SAFEARRAY* retVal) get_CurrentAnnotationTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out IUIAutomationElementArray* retVal) get_CurrentAnnotationObjects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out int32 retVal) get_CachedPositionInSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out int32 retVal) get_CachedSizeOfSet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out int32 retVal) get_CachedLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out SAFEARRAY* retVal) get_CachedAnnotationTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement4 self, out IUIAutomationElementArray* retVal) get_CachedAnnotationObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out int32 retVal) get_CurrentPositionInSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out int32 retVal) get_CurrentSizeOfSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out int32 retVal) get_CurrentLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out SAFEARRAY* retVal) get_CurrentAnnotationTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out IUIAutomationElementArray* retVal) get_CurrentAnnotationObjects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out int32 retVal) get_CachedPositionInSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out int32 retVal) get_CachedSizeOfSet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out int32 retVal) get_CachedLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out SAFEARRAY* retVal) get_CachedAnnotationTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement4 self, out IUIAutomationElementArray* retVal) get_CachedAnnotationObjects;
 			}
 		}
 		[CRepr]
@@ -4559,18 +4559,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentLandmarkType(out int32 retVal) mut => VT.get_CurrentLandmarkType(ref this, out retVal);
-			public HRESULT get_CurrentLocalizedLandmarkType(out BSTR retVal) mut => VT.get_CurrentLocalizedLandmarkType(ref this, out retVal);
-			public HRESULT get_CachedLandmarkType(out int32 retVal) mut => VT.get_CachedLandmarkType(ref this, out retVal);
-			public HRESULT get_CachedLocalizedLandmarkType(out BSTR retVal) mut => VT.get_CachedLocalizedLandmarkType(ref this, out retVal);
+			public HResult get_CurrentLandmarkType(out int32 retVal) mut => VT.get_CurrentLandmarkType(ref this, out retVal);
+			public HResult get_CurrentLocalizedLandmarkType(out BSTR retVal) mut => VT.get_CurrentLocalizedLandmarkType(ref this, out retVal);
+			public HResult get_CachedLandmarkType(out int32 retVal) mut => VT.get_CachedLandmarkType(ref this, out retVal);
+			public HResult get_CachedLocalizedLandmarkType(out BSTR retVal) mut => VT.get_CachedLocalizedLandmarkType(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement4.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement5 self, out int32 retVal) get_CurrentLandmarkType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement5 self, out BSTR retVal) get_CurrentLocalizedLandmarkType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement5 self, out int32 retVal) get_CachedLandmarkType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement5 self, out BSTR retVal) get_CachedLocalizedLandmarkType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement5 self, out int32 retVal) get_CurrentLandmarkType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement5 self, out BSTR retVal) get_CurrentLocalizedLandmarkType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement5 self, out int32 retVal) get_CachedLandmarkType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement5 self, out BSTR retVal) get_CachedLocalizedLandmarkType;
 			}
 		}
 		[CRepr]
@@ -4580,14 +4580,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentFullDescription(out BSTR retVal) mut => VT.get_CurrentFullDescription(ref this, out retVal);
-			public HRESULT get_CachedFullDescription(out BSTR retVal) mut => VT.get_CachedFullDescription(ref this, out retVal);
+			public HResult get_CurrentFullDescription(out BSTR retVal) mut => VT.get_CurrentFullDescription(ref this, out retVal);
+			public HResult get_CachedFullDescription(out BSTR retVal) mut => VT.get_CachedFullDescription(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement5.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement6 self, out BSTR retVal) get_CurrentFullDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement6 self, out BSTR retVal) get_CachedFullDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement6 self, out BSTR retVal) get_CurrentFullDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement6 self, out BSTR retVal) get_CachedFullDescription;
 			}
 		}
 		[CRepr]
@@ -4597,20 +4597,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT FindFirstWithOptions(TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) mut => VT.FindFirstWithOptions(ref this, @scope, ref condition, traversalOptions, ref root, out found);
-			public HRESULT FindAllWithOptions(TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) mut => VT.FindAllWithOptions(ref this, @scope, ref condition, traversalOptions, ref root, out found);
-			public HRESULT FindFirstWithOptionsBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) mut => VT.FindFirstWithOptionsBuildCache(ref this, @scope, ref condition, ref cacheRequest, traversalOptions, ref root, out found);
-			public HRESULT FindAllWithOptionsBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) mut => VT.FindAllWithOptionsBuildCache(ref this, @scope, ref condition, ref cacheRequest, traversalOptions, ref root, out found);
-			public HRESULT GetCurrentMetadataValue(int32 targetId, int32 metadataId, out VARIANT returnVal) mut => VT.GetCurrentMetadataValue(ref this, targetId, metadataId, out returnVal);
+			public HResult FindFirstWithOptions(TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) mut => VT.FindFirstWithOptions(ref this, @scope, ref condition, traversalOptions, ref root, out found);
+			public HResult FindAllWithOptions(TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) mut => VT.FindAllWithOptions(ref this, @scope, ref condition, traversalOptions, ref root, out found);
+			public HResult FindFirstWithOptionsBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) mut => VT.FindFirstWithOptionsBuildCache(ref this, @scope, ref condition, ref cacheRequest, traversalOptions, ref root, out found);
+			public HResult FindAllWithOptionsBuildCache(TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) mut => VT.FindAllWithOptionsBuildCache(ref this, @scope, ref condition, ref cacheRequest, traversalOptions, ref root, out found);
+			public HResult GetCurrentMetadataValue(int32 targetId, int32 metadataId, out VARIANT returnVal) mut => VT.GetCurrentMetadataValue(ref this, targetId, metadataId, out returnVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement6.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) FindFirstWithOptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) FindAllWithOptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) FindFirstWithOptionsBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) FindAllWithOptionsBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement7 self, int32 targetId, int32 metadataId, out VARIANT returnVal) GetCurrentMetadataValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) FindFirstWithOptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) FindAllWithOptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElement* found) FindFirstWithOptionsBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement7 self, TreeScope @scope, ref IUIAutomationCondition condition, ref IUIAutomationCacheRequest cacheRequest, TreeTraversalOptions traversalOptions, ref IUIAutomationElement root, out IUIAutomationElementArray* found) FindAllWithOptionsBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement7 self, int32 targetId, int32 metadataId, out VARIANT returnVal) GetCurrentMetadataValue;
 			}
 		}
 		[CRepr]
@@ -4620,14 +4620,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentHeadingLevel(out int32 retVal) mut => VT.get_CurrentHeadingLevel(ref this, out retVal);
-			public HRESULT get_CachedHeadingLevel(out int32 retVal) mut => VT.get_CachedHeadingLevel(ref this, out retVal);
+			public HResult get_CurrentHeadingLevel(out int32 retVal) mut => VT.get_CurrentHeadingLevel(ref this, out retVal);
+			public HResult get_CachedHeadingLevel(out int32 retVal) mut => VT.get_CachedHeadingLevel(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement7.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement8 self, out int32 retVal) get_CurrentHeadingLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement8 self, out int32 retVal) get_CachedHeadingLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement8 self, out int32 retVal) get_CurrentHeadingLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement8 self, out int32 retVal) get_CachedHeadingLevel;
 			}
 		}
 		[CRepr]
@@ -4637,14 +4637,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_CurrentIsDialog(out BOOL retVal) mut => VT.get_CurrentIsDialog(ref this, out retVal);
-			public HRESULT get_CachedIsDialog(out BOOL retVal) mut => VT.get_CachedIsDialog(ref this, out retVal);
+			public HResult get_CurrentIsDialog(out IntBool retVal) mut => VT.get_CurrentIsDialog(ref this, out retVal);
+			public HResult get_CachedIsDialog(out IntBool retVal) mut => VT.get_CachedIsDialog(ref this, out retVal);
 
 			[CRepr]
 			public struct VTable : IUIAutomationElement8.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement9 self, out BOOL retVal) get_CurrentIsDialog;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationElement9 self, out BOOL retVal) get_CachedIsDialog;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement9 self, out IntBool retVal) get_CurrentIsDialog;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationElement9 self, out IntBool retVal) get_CachedIsDialog;
 			}
 		}
 		[CRepr]
@@ -4654,14 +4654,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateProvider(HWND hwnd, int32 idObject, int32 idChild, out IRawElementProviderSimple* provider) mut => VT.CreateProvider(ref this, hwnd, idObject, idChild, out provider);
-			public HRESULT get_ProxyFactoryId(out BSTR factoryId) mut => VT.get_ProxyFactoryId(ref this, out factoryId);
+			public HResult CreateProvider(HWnd hwnd, int32 idObject, int32 idChild, out IRawElementProviderSimple* provider) mut => VT.CreateProvider(ref this, hwnd, idObject, idChild, out provider);
+			public HResult get_ProxyFactoryId(out BSTR factoryId) mut => VT.get_ProxyFactoryId(ref this, out factoryId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactory self, HWND hwnd, int32 idObject, int32 idChild, out IRawElementProviderSimple* provider) CreateProvider;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactory self, out BSTR factoryId) get_ProxyFactoryId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactory self, HWnd hwnd, int32 idObject, int32 idChild, out IRawElementProviderSimple* provider) CreateProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactory self, out BSTR factoryId) get_ProxyFactoryId;
 			}
 		}
 		[CRepr]
@@ -4671,36 +4671,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProxyFactory(out IUIAutomationProxyFactory* factory) mut => VT.get_ProxyFactory(ref this, out factory);
-			public HRESULT get_ClassName(out BSTR className) mut => VT.get_ClassName(ref this, out className);
-			public HRESULT get_ImageName(out BSTR imageName) mut => VT.get_ImageName(ref this, out imageName);
-			public HRESULT get_AllowSubstringMatch(out BOOL allowSubstringMatch) mut => VT.get_AllowSubstringMatch(ref this, out allowSubstringMatch);
-			public HRESULT get_CanCheckBaseClass(out BOOL canCheckBaseClass) mut => VT.get_CanCheckBaseClass(ref this, out canCheckBaseClass);
-			public HRESULT get_NeedsAdviseEvents(out BOOL adviseEvents) mut => VT.get_NeedsAdviseEvents(ref this, out adviseEvents);
-			public HRESULT put_ClassName(PWSTR className) mut => VT.put_ClassName(ref this, className);
-			public HRESULT put_ImageName(PWSTR imageName) mut => VT.put_ImageName(ref this, imageName);
-			public HRESULT put_AllowSubstringMatch(BOOL allowSubstringMatch) mut => VT.put_AllowSubstringMatch(ref this, allowSubstringMatch);
-			public HRESULT put_CanCheckBaseClass(BOOL canCheckBaseClass) mut => VT.put_CanCheckBaseClass(ref this, canCheckBaseClass);
-			public HRESULT put_NeedsAdviseEvents(BOOL adviseEvents) mut => VT.put_NeedsAdviseEvents(ref this, adviseEvents);
-			public HRESULT SetWinEventsForAutomationEvent(int32 eventId, int32 propertyId, ref SAFEARRAY winEvents) mut => VT.SetWinEventsForAutomationEvent(ref this, eventId, propertyId, ref winEvents);
-			public HRESULT GetWinEventsForAutomationEvent(int32 eventId, int32 propertyId, out SAFEARRAY* winEvents) mut => VT.GetWinEventsForAutomationEvent(ref this, eventId, propertyId, out winEvents);
+			public HResult get_ProxyFactory(out IUIAutomationProxyFactory* factory) mut => VT.get_ProxyFactory(ref this, out factory);
+			public HResult get_ClassName(out BSTR className) mut => VT.get_ClassName(ref this, out className);
+			public HResult get_ImageName(out BSTR imageName) mut => VT.get_ImageName(ref this, out imageName);
+			public HResult get_AllowSubstringMatch(out IntBool allowSubstringMatch) mut => VT.get_AllowSubstringMatch(ref this, out allowSubstringMatch);
+			public HResult get_CanCheckBaseClass(out IntBool canCheckBaseClass) mut => VT.get_CanCheckBaseClass(ref this, out canCheckBaseClass);
+			public HResult get_NeedsAdviseEvents(out IntBool adviseEvents) mut => VT.get_NeedsAdviseEvents(ref this, out adviseEvents);
+			public HResult put_ClassName(char16* className) mut => VT.put_ClassName(ref this, className);
+			public HResult put_ImageName(char16* imageName) mut => VT.put_ImageName(ref this, imageName);
+			public HResult put_AllowSubstringMatch(IntBool allowSubstringMatch) mut => VT.put_AllowSubstringMatch(ref this, allowSubstringMatch);
+			public HResult put_CanCheckBaseClass(IntBool canCheckBaseClass) mut => VT.put_CanCheckBaseClass(ref this, canCheckBaseClass);
+			public HResult put_NeedsAdviseEvents(IntBool adviseEvents) mut => VT.put_NeedsAdviseEvents(ref this, adviseEvents);
+			public HResult SetWinEventsForAutomationEvent(int32 eventId, int32 propertyId, ref SAFEARRAY winEvents) mut => VT.SetWinEventsForAutomationEvent(ref this, eventId, propertyId, ref winEvents);
+			public HResult GetWinEventsForAutomationEvent(int32 eventId, int32 propertyId, out SAFEARRAY* winEvents) mut => VT.GetWinEventsForAutomationEvent(ref this, eventId, propertyId, out winEvents);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, out IUIAutomationProxyFactory* factory) get_ProxyFactory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, out BSTR className) get_ClassName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, out BSTR imageName) get_ImageName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, out BOOL allowSubstringMatch) get_AllowSubstringMatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, out BOOL canCheckBaseClass) get_CanCheckBaseClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, out BOOL adviseEvents) get_NeedsAdviseEvents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, PWSTR className) put_ClassName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, PWSTR imageName) put_ImageName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, BOOL allowSubstringMatch) put_AllowSubstringMatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, BOOL canCheckBaseClass) put_CanCheckBaseClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, BOOL adviseEvents) put_NeedsAdviseEvents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, int32 eventId, int32 propertyId, ref SAFEARRAY winEvents) SetWinEventsForAutomationEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryEntry self, int32 eventId, int32 propertyId, out SAFEARRAY* winEvents) GetWinEventsForAutomationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, out IUIAutomationProxyFactory* factory) get_ProxyFactory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, out BSTR className) get_ClassName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, out BSTR imageName) get_ImageName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, out IntBool allowSubstringMatch) get_AllowSubstringMatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, out IntBool canCheckBaseClass) get_CanCheckBaseClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, out IntBool adviseEvents) get_NeedsAdviseEvents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, char16* className) put_ClassName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, char16* imageName) put_ImageName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, IntBool allowSubstringMatch) put_AllowSubstringMatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, IntBool canCheckBaseClass) put_CanCheckBaseClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, IntBool adviseEvents) put_NeedsAdviseEvents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, int32 eventId, int32 propertyId, ref SAFEARRAY winEvents) SetWinEventsForAutomationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryEntry self, int32 eventId, int32 propertyId, out SAFEARRAY* winEvents) GetWinEventsForAutomationEvent;
 			}
 		}
 		[CRepr]
@@ -4710,28 +4710,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Count(out uint32 count) mut => VT.get_Count(ref this, out count);
-			public HRESULT GetTable(out SAFEARRAY* table) mut => VT.GetTable(ref this, out table);
-			public HRESULT GetEntry(uint32 index, out IUIAutomationProxyFactoryEntry* entry) mut => VT.GetEntry(ref this, index, out entry);
-			public HRESULT SetTable(ref SAFEARRAY factoryList) mut => VT.SetTable(ref this, ref factoryList);
-			public HRESULT InsertEntries(uint32 before, ref SAFEARRAY factoryList) mut => VT.InsertEntries(ref this, before, ref factoryList);
-			public HRESULT InsertEntry(uint32 before, ref IUIAutomationProxyFactoryEntry factory) mut => VT.InsertEntry(ref this, before, ref factory);
-			public HRESULT RemoveEntry(uint32 index) mut => VT.RemoveEntry(ref this, index);
-			public HRESULT ClearTable() mut => VT.ClearTable(ref this);
-			public HRESULT RestoreDefaultTable() mut => VT.RestoreDefaultTable(ref this);
+			public HResult get_Count(out uint32 count) mut => VT.get_Count(ref this, out count);
+			public HResult GetTable(out SAFEARRAY* table) mut => VT.GetTable(ref this, out table);
+			public HResult GetEntry(uint32 index, out IUIAutomationProxyFactoryEntry* entry) mut => VT.GetEntry(ref this, index, out entry);
+			public HResult SetTable(ref SAFEARRAY factoryList) mut => VT.SetTable(ref this, ref factoryList);
+			public HResult InsertEntries(uint32 before, ref SAFEARRAY factoryList) mut => VT.InsertEntries(ref this, before, ref factoryList);
+			public HResult InsertEntry(uint32 before, ref IUIAutomationProxyFactoryEntry factory) mut => VT.InsertEntry(ref this, before, ref factory);
+			public HResult RemoveEntry(uint32 index) mut => VT.RemoveEntry(ref this, index);
+			public HResult ClearTable() mut => VT.ClearTable(ref this);
+			public HResult RestoreDefaultTable() mut => VT.RestoreDefaultTable(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, out uint32 count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, out SAFEARRAY* table) GetTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, uint32 index, out IUIAutomationProxyFactoryEntry* entry) GetEntry;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, ref SAFEARRAY factoryList) SetTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, uint32 before, ref SAFEARRAY factoryList) InsertEntries;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, uint32 before, ref IUIAutomationProxyFactoryEntry factory) InsertEntry;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self, uint32 index) RemoveEntry;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self) ClearTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationProxyFactoryMapping self) RestoreDefaultTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, out uint32 count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, out SAFEARRAY* table) GetTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, uint32 index, out IUIAutomationProxyFactoryEntry* entry) GetEntry;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, ref SAFEARRAY factoryList) SetTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, uint32 before, ref SAFEARRAY factoryList) InsertEntries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, uint32 before, ref IUIAutomationProxyFactoryEntry factory) InsertEntry;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self, uint32 index) RemoveEntry;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self) ClearTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationProxyFactoryMapping self) RestoreDefaultTable;
 			}
 		}
 		[CRepr]
@@ -4741,24 +4741,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddActiveTextPositionChangedEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) mut => VT.AddActiveTextPositionChangedEventHandler(ref this, @scope, ref cacheRequest, ref handler);
-			public HRESULT AddAutomationEventHandler(int32 eventId, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) mut => VT.AddAutomationEventHandler(ref this, eventId, @scope, ref cacheRequest, ref handler);
-			public HRESULT AddChangesEventHandler(TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationChangesEventHandler handler) mut => VT.AddChangesEventHandler(ref this, @scope, changeTypes, changesCount, ref cacheRequest, ref handler);
-			public HRESULT AddNotificationEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) mut => VT.AddNotificationEventHandler(ref this, @scope, ref cacheRequest, ref handler);
-			public HRESULT AddPropertyChangedEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) mut => VT.AddPropertyChangedEventHandler(ref this, @scope, ref cacheRequest, ref handler, propertyArray, propertyCount);
-			public HRESULT AddStructureChangedEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) mut => VT.AddStructureChangedEventHandler(ref this, @scope, ref cacheRequest, ref handler);
-			public HRESULT AddTextEditTextChangedEventHandler(TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) mut => VT.AddTextEditTextChangedEventHandler(ref this, @scope, textEditChangeType, ref cacheRequest, ref handler);
+			public HResult AddActiveTextPositionChangedEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) mut => VT.AddActiveTextPositionChangedEventHandler(ref this, @scope, ref cacheRequest, ref handler);
+			public HResult AddAutomationEventHandler(int32 eventId, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) mut => VT.AddAutomationEventHandler(ref this, eventId, @scope, ref cacheRequest, ref handler);
+			public HResult AddChangesEventHandler(TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationChangesEventHandler handler) mut => VT.AddChangesEventHandler(ref this, @scope, changeTypes, changesCount, ref cacheRequest, ref handler);
+			public HResult AddNotificationEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) mut => VT.AddNotificationEventHandler(ref this, @scope, ref cacheRequest, ref handler);
+			public HResult AddPropertyChangedEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) mut => VT.AddPropertyChangedEventHandler(ref this, @scope, ref cacheRequest, ref handler, propertyArray, propertyCount);
+			public HResult AddStructureChangedEventHandler(TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) mut => VT.AddStructureChangedEventHandler(ref this, @scope, ref cacheRequest, ref handler);
+			public HResult AddTextEditTextChangedEventHandler(TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) mut => VT.AddTextEditTextChangedEventHandler(ref this, @scope, textEditChangeType, ref cacheRequest, ref handler);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) AddActiveTextPositionChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, int32 eventId, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) AddAutomationEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationChangesEventHandler handler) AddChangesEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) AddNotificationEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) AddPropertyChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) AddStructureChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) AddTextEditTextChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) AddActiveTextPositionChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, int32 eventId, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) AddAutomationEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationChangesEventHandler handler) AddChangesEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) AddNotificationEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) AddPropertyChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) AddStructureChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomationEventHandlerGroup self, TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) AddTextEditTextChangedEventHandler;
 			}
 		}
 		[CRepr]
@@ -4768,120 +4768,120 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CompareElements(ref IUIAutomationElement el1, ref IUIAutomationElement el2, out BOOL areSame) mut => VT.CompareElements(ref this, ref el1, ref el2, out areSame);
-			public HRESULT CompareRuntimeIds(ref SAFEARRAY runtimeId1, ref SAFEARRAY runtimeId2, out BOOL areSame) mut => VT.CompareRuntimeIds(ref this, ref runtimeId1, ref runtimeId2, out areSame);
-			public HRESULT GetRootElement(out IUIAutomationElement* root) mut => VT.GetRootElement(ref this, out root);
-			public HRESULT ElementFromHandle(HWND hwnd, out IUIAutomationElement* element) mut => VT.ElementFromHandle(ref this, hwnd, out element);
-			public HRESULT ElementFromPoint(POINT pt, out IUIAutomationElement* element) mut => VT.ElementFromPoint(ref this, pt, out element);
-			public HRESULT GetFocusedElement(out IUIAutomationElement* element) mut => VT.GetFocusedElement(ref this, out element);
-			public HRESULT GetRootElementBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* root) mut => VT.GetRootElementBuildCache(ref this, ref cacheRequest, out root);
-			public HRESULT ElementFromHandleBuildCache(HWND hwnd, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.ElementFromHandleBuildCache(ref this, hwnd, ref cacheRequest, out element);
-			public HRESULT ElementFromPointBuildCache(POINT pt, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.ElementFromPointBuildCache(ref this, pt, ref cacheRequest, out element);
-			public HRESULT GetFocusedElementBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.GetFocusedElementBuildCache(ref this, ref cacheRequest, out element);
-			public HRESULT CreateTreeWalker(ref IUIAutomationCondition pCondition, out IUIAutomationTreeWalker* walker) mut => VT.CreateTreeWalker(ref this, ref pCondition, out walker);
-			public HRESULT get_ControlViewWalker(out IUIAutomationTreeWalker* walker) mut => VT.get_ControlViewWalker(ref this, out walker);
-			public HRESULT get_ContentViewWalker(out IUIAutomationTreeWalker* walker) mut => VT.get_ContentViewWalker(ref this, out walker);
-			public HRESULT get_RawViewWalker(out IUIAutomationTreeWalker* walker) mut => VT.get_RawViewWalker(ref this, out walker);
-			public HRESULT get_RawViewCondition(out IUIAutomationCondition* condition) mut => VT.get_RawViewCondition(ref this, out condition);
-			public HRESULT get_ControlViewCondition(out IUIAutomationCondition* condition) mut => VT.get_ControlViewCondition(ref this, out condition);
-			public HRESULT get_ContentViewCondition(out IUIAutomationCondition* condition) mut => VT.get_ContentViewCondition(ref this, out condition);
-			public HRESULT CreateCacheRequest(out IUIAutomationCacheRequest* cacheRequest) mut => VT.CreateCacheRequest(ref this, out cacheRequest);
-			public HRESULT CreateTrueCondition(out IUIAutomationCondition* newCondition) mut => VT.CreateTrueCondition(ref this, out newCondition);
-			public HRESULT CreateFalseCondition(out IUIAutomationCondition* newCondition) mut => VT.CreateFalseCondition(ref this, out newCondition);
-			public HRESULT CreatePropertyCondition(int32 propertyId, VARIANT value, out IUIAutomationCondition* newCondition) mut => VT.CreatePropertyCondition(ref this, propertyId, value, out newCondition);
-			public HRESULT CreatePropertyConditionEx(int32 propertyId, VARIANT value, PropertyConditionFlags flags, out IUIAutomationCondition* newCondition) mut => VT.CreatePropertyConditionEx(ref this, propertyId, value, flags, out newCondition);
-			public HRESULT CreateAndCondition(ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) mut => VT.CreateAndCondition(ref this, ref condition1, ref condition2, out newCondition);
-			public HRESULT CreateAndConditionFromArray(ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) mut => VT.CreateAndConditionFromArray(ref this, ref conditions, out newCondition);
-			public HRESULT CreateAndConditionFromNativeArray(IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) mut => VT.CreateAndConditionFromNativeArray(ref this, conditions, conditionCount, out newCondition);
-			public HRESULT CreateOrCondition(ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) mut => VT.CreateOrCondition(ref this, ref condition1, ref condition2, out newCondition);
-			public HRESULT CreateOrConditionFromArray(ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) mut => VT.CreateOrConditionFromArray(ref this, ref conditions, out newCondition);
-			public HRESULT CreateOrConditionFromNativeArray(IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) mut => VT.CreateOrConditionFromNativeArray(ref this, conditions, conditionCount, out newCondition);
-			public HRESULT CreateNotCondition(ref IUIAutomationCondition condition, out IUIAutomationCondition* newCondition) mut => VT.CreateNotCondition(ref this, ref condition, out newCondition);
-			public HRESULT AddAutomationEventHandler(int32 eventId, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) mut => VT.AddAutomationEventHandler(ref this, eventId, ref element, @scope, ref cacheRequest, ref handler);
-			public HRESULT RemoveAutomationEventHandler(int32 eventId, ref IUIAutomationElement element, ref IUIAutomationEventHandler handler) mut => VT.RemoveAutomationEventHandler(ref this, eventId, ref element, ref handler);
-			public HRESULT AddPropertyChangedEventHandlerNativeArray(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) mut => VT.AddPropertyChangedEventHandlerNativeArray(ref this, ref element, @scope, ref cacheRequest, ref handler, propertyArray, propertyCount);
-			public HRESULT AddPropertyChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, ref SAFEARRAY propertyArray) mut => VT.AddPropertyChangedEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler, ref propertyArray);
-			public HRESULT RemovePropertyChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationPropertyChangedEventHandler handler) mut => VT.RemovePropertyChangedEventHandler(ref this, ref element, ref handler);
-			public HRESULT AddStructureChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) mut => VT.AddStructureChangedEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler);
-			public HRESULT RemoveStructureChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationStructureChangedEventHandler handler) mut => VT.RemoveStructureChangedEventHandler(ref this, ref element, ref handler);
-			public HRESULT AddFocusChangedEventHandler(ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationFocusChangedEventHandler handler) mut => VT.AddFocusChangedEventHandler(ref this, ref cacheRequest, ref handler);
-			public HRESULT RemoveFocusChangedEventHandler(ref IUIAutomationFocusChangedEventHandler handler) mut => VT.RemoveFocusChangedEventHandler(ref this, ref handler);
-			public HRESULT RemoveAllEventHandlers() mut => VT.RemoveAllEventHandlers(ref this);
-			public HRESULT IntNativeArrayToSafeArray(int32* array, int32 arrayCount, out SAFEARRAY* safeArray) mut => VT.IntNativeArrayToSafeArray(ref this, array, arrayCount, out safeArray);
-			public HRESULT IntSafeArrayToNativeArray(ref SAFEARRAY intArray, int32** array, out int32 arrayCount) mut => VT.IntSafeArrayToNativeArray(ref this, ref intArray, array, out arrayCount);
-			public HRESULT RectToVariant(RECT rc, out VARIANT @var) mut => VT.RectToVariant(ref this, rc, out @var);
-			public HRESULT VariantToRect(VARIANT @var, out RECT rc) mut => VT.VariantToRect(ref this, @var, out rc);
-			public HRESULT SafeArrayToRectNativeArray(ref SAFEARRAY rects, RECT** rectArray, out int32 rectArrayCount) mut => VT.SafeArrayToRectNativeArray(ref this, ref rects, rectArray, out rectArrayCount);
-			public HRESULT CreateProxyFactoryEntry(ref IUIAutomationProxyFactory factory, out IUIAutomationProxyFactoryEntry* factoryEntry) mut => VT.CreateProxyFactoryEntry(ref this, ref factory, out factoryEntry);
-			public HRESULT get_ProxyFactoryMapping(out IUIAutomationProxyFactoryMapping* factoryMapping) mut => VT.get_ProxyFactoryMapping(ref this, out factoryMapping);
-			public HRESULT GetPropertyProgrammaticName(int32 property, out BSTR name) mut => VT.GetPropertyProgrammaticName(ref this, property, out name);
-			public HRESULT GetPatternProgrammaticName(int32 pattern, out BSTR name) mut => VT.GetPatternProgrammaticName(ref this, pattern, out name);
-			public HRESULT PollForPotentialSupportedPatterns(ref IUIAutomationElement pElement, out SAFEARRAY* patternIds, out SAFEARRAY* patternNames) mut => VT.PollForPotentialSupportedPatterns(ref this, ref pElement, out patternIds, out patternNames);
-			public HRESULT PollForPotentialSupportedProperties(ref IUIAutomationElement pElement, out SAFEARRAY* propertyIds, out SAFEARRAY* propertyNames) mut => VT.PollForPotentialSupportedProperties(ref this, ref pElement, out propertyIds, out propertyNames);
-			public HRESULT CheckNotSupported(VARIANT value, out BOOL isNotSupported) mut => VT.CheckNotSupported(ref this, value, out isNotSupported);
-			public HRESULT get_ReservedNotSupportedValue(out IUnknown* notSupportedValue) mut => VT.get_ReservedNotSupportedValue(ref this, out notSupportedValue);
-			public HRESULT get_ReservedMixedAttributeValue(out IUnknown* mixedAttributeValue) mut => VT.get_ReservedMixedAttributeValue(ref this, out mixedAttributeValue);
-			public HRESULT ElementFromIAccessible(ref IAccessible accessible, int32 childId, out IUIAutomationElement* element) mut => VT.ElementFromIAccessible(ref this, ref accessible, childId, out element);
-			public HRESULT ElementFromIAccessibleBuildCache(ref IAccessible accessible, int32 childId, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.ElementFromIAccessibleBuildCache(ref this, ref accessible, childId, ref cacheRequest, out element);
+			public HResult CompareElements(ref IUIAutomationElement el1, ref IUIAutomationElement el2, out IntBool areSame) mut => VT.CompareElements(ref this, ref el1, ref el2, out areSame);
+			public HResult CompareRuntimeIds(ref SAFEARRAY runtimeId1, ref SAFEARRAY runtimeId2, out IntBool areSame) mut => VT.CompareRuntimeIds(ref this, ref runtimeId1, ref runtimeId2, out areSame);
+			public HResult GetRootElement(out IUIAutomationElement* root) mut => VT.GetRootElement(ref this, out root);
+			public HResult ElementFromHandle(HWnd hwnd, out IUIAutomationElement* element) mut => VT.ElementFromHandle(ref this, hwnd, out element);
+			public HResult ElementFromPoint(POINT pt, out IUIAutomationElement* element) mut => VT.ElementFromPoint(ref this, pt, out element);
+			public HResult GetFocusedElement(out IUIAutomationElement* element) mut => VT.GetFocusedElement(ref this, out element);
+			public HResult GetRootElementBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* root) mut => VT.GetRootElementBuildCache(ref this, ref cacheRequest, out root);
+			public HResult ElementFromHandleBuildCache(HWnd hwnd, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.ElementFromHandleBuildCache(ref this, hwnd, ref cacheRequest, out element);
+			public HResult ElementFromPointBuildCache(POINT pt, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.ElementFromPointBuildCache(ref this, pt, ref cacheRequest, out element);
+			public HResult GetFocusedElementBuildCache(ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.GetFocusedElementBuildCache(ref this, ref cacheRequest, out element);
+			public HResult CreateTreeWalker(ref IUIAutomationCondition pCondition, out IUIAutomationTreeWalker* walker) mut => VT.CreateTreeWalker(ref this, ref pCondition, out walker);
+			public HResult get_ControlViewWalker(out IUIAutomationTreeWalker* walker) mut => VT.get_ControlViewWalker(ref this, out walker);
+			public HResult get_ContentViewWalker(out IUIAutomationTreeWalker* walker) mut => VT.get_ContentViewWalker(ref this, out walker);
+			public HResult get_RawViewWalker(out IUIAutomationTreeWalker* walker) mut => VT.get_RawViewWalker(ref this, out walker);
+			public HResult get_RawViewCondition(out IUIAutomationCondition* condition) mut => VT.get_RawViewCondition(ref this, out condition);
+			public HResult get_ControlViewCondition(out IUIAutomationCondition* condition) mut => VT.get_ControlViewCondition(ref this, out condition);
+			public HResult get_ContentViewCondition(out IUIAutomationCondition* condition) mut => VT.get_ContentViewCondition(ref this, out condition);
+			public HResult CreateCacheRequest(out IUIAutomationCacheRequest* cacheRequest) mut => VT.CreateCacheRequest(ref this, out cacheRequest);
+			public HResult CreateTrueCondition(out IUIAutomationCondition* newCondition) mut => VT.CreateTrueCondition(ref this, out newCondition);
+			public HResult CreateFalseCondition(out IUIAutomationCondition* newCondition) mut => VT.CreateFalseCondition(ref this, out newCondition);
+			public HResult CreatePropertyCondition(int32 propertyId, VARIANT value, out IUIAutomationCondition* newCondition) mut => VT.CreatePropertyCondition(ref this, propertyId, value, out newCondition);
+			public HResult CreatePropertyConditionEx(int32 propertyId, VARIANT value, PropertyConditionFlags flags, out IUIAutomationCondition* newCondition) mut => VT.CreatePropertyConditionEx(ref this, propertyId, value, flags, out newCondition);
+			public HResult CreateAndCondition(ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) mut => VT.CreateAndCondition(ref this, ref condition1, ref condition2, out newCondition);
+			public HResult CreateAndConditionFromArray(ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) mut => VT.CreateAndConditionFromArray(ref this, ref conditions, out newCondition);
+			public HResult CreateAndConditionFromNativeArray(IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) mut => VT.CreateAndConditionFromNativeArray(ref this, conditions, conditionCount, out newCondition);
+			public HResult CreateOrCondition(ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) mut => VT.CreateOrCondition(ref this, ref condition1, ref condition2, out newCondition);
+			public HResult CreateOrConditionFromArray(ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) mut => VT.CreateOrConditionFromArray(ref this, ref conditions, out newCondition);
+			public HResult CreateOrConditionFromNativeArray(IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) mut => VT.CreateOrConditionFromNativeArray(ref this, conditions, conditionCount, out newCondition);
+			public HResult CreateNotCondition(ref IUIAutomationCondition condition, out IUIAutomationCondition* newCondition) mut => VT.CreateNotCondition(ref this, ref condition, out newCondition);
+			public HResult AddAutomationEventHandler(int32 eventId, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) mut => VT.AddAutomationEventHandler(ref this, eventId, ref element, @scope, ref cacheRequest, ref handler);
+			public HResult RemoveAutomationEventHandler(int32 eventId, ref IUIAutomationElement element, ref IUIAutomationEventHandler handler) mut => VT.RemoveAutomationEventHandler(ref this, eventId, ref element, ref handler);
+			public HResult AddPropertyChangedEventHandlerNativeArray(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) mut => VT.AddPropertyChangedEventHandlerNativeArray(ref this, ref element, @scope, ref cacheRequest, ref handler, propertyArray, propertyCount);
+			public HResult AddPropertyChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, ref SAFEARRAY propertyArray) mut => VT.AddPropertyChangedEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler, ref propertyArray);
+			public HResult RemovePropertyChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationPropertyChangedEventHandler handler) mut => VT.RemovePropertyChangedEventHandler(ref this, ref element, ref handler);
+			public HResult AddStructureChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) mut => VT.AddStructureChangedEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler);
+			public HResult RemoveStructureChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationStructureChangedEventHandler handler) mut => VT.RemoveStructureChangedEventHandler(ref this, ref element, ref handler);
+			public HResult AddFocusChangedEventHandler(ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationFocusChangedEventHandler handler) mut => VT.AddFocusChangedEventHandler(ref this, ref cacheRequest, ref handler);
+			public HResult RemoveFocusChangedEventHandler(ref IUIAutomationFocusChangedEventHandler handler) mut => VT.RemoveFocusChangedEventHandler(ref this, ref handler);
+			public HResult RemoveAllEventHandlers() mut => VT.RemoveAllEventHandlers(ref this);
+			public HResult IntNativeArrayToSafeArray(int32* array, int32 arrayCount, out SAFEARRAY* safeArray) mut => VT.IntNativeArrayToSafeArray(ref this, array, arrayCount, out safeArray);
+			public HResult IntSafeArrayToNativeArray(ref SAFEARRAY intArray, int32** array, out int32 arrayCount) mut => VT.IntSafeArrayToNativeArray(ref this, ref intArray, array, out arrayCount);
+			public HResult RectToVariant(RectI rc, out VARIANT @var) mut => VT.RectToVariant(ref this, rc, out @var);
+			public HResult VariantToRect(VARIANT @var, out RectI rc) mut => VT.VariantToRect(ref this, @var, out rc);
+			public HResult SafeArrayToRectNativeArray(ref SAFEARRAY rects, RECT** rectArray, out int32 rectArrayCount) mut => VT.SafeArrayToRectNativeArray(ref this, ref rects, rectArray, out rectArrayCount);
+			public HResult CreateProxyFactoryEntry(ref IUIAutomationProxyFactory factory, out IUIAutomationProxyFactoryEntry* factoryEntry) mut => VT.CreateProxyFactoryEntry(ref this, ref factory, out factoryEntry);
+			public HResult get_ProxyFactoryMapping(out IUIAutomationProxyFactoryMapping* factoryMapping) mut => VT.get_ProxyFactoryMapping(ref this, out factoryMapping);
+			public HResult GetPropertyProgrammaticName(int32 property, out BSTR name) mut => VT.GetPropertyProgrammaticName(ref this, property, out name);
+			public HResult GetPatternProgrammaticName(int32 pattern, out BSTR name) mut => VT.GetPatternProgrammaticName(ref this, pattern, out name);
+			public HResult PollForPotentialSupportedPatterns(ref IUIAutomationElement pElement, out SAFEARRAY* patternIds, out SAFEARRAY* patternNames) mut => VT.PollForPotentialSupportedPatterns(ref this, ref pElement, out patternIds, out patternNames);
+			public HResult PollForPotentialSupportedProperties(ref IUIAutomationElement pElement, out SAFEARRAY* propertyIds, out SAFEARRAY* propertyNames) mut => VT.PollForPotentialSupportedProperties(ref this, ref pElement, out propertyIds, out propertyNames);
+			public HResult CheckNotSupported(VARIANT value, out IntBool isNotSupported) mut => VT.CheckNotSupported(ref this, value, out isNotSupported);
+			public HResult get_ReservedNotSupportedValue(out IUnknown* notSupportedValue) mut => VT.get_ReservedNotSupportedValue(ref this, out notSupportedValue);
+			public HResult get_ReservedMixedAttributeValue(out IUnknown* mixedAttributeValue) mut => VT.get_ReservedMixedAttributeValue(ref this, out mixedAttributeValue);
+			public HResult ElementFromIAccessible(ref IAccessible accessible, int32 childId, out IUIAutomationElement* element) mut => VT.ElementFromIAccessible(ref this, ref accessible, childId, out element);
+			public HResult ElementFromIAccessibleBuildCache(ref IAccessible accessible, int32 childId, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) mut => VT.ElementFromIAccessibleBuildCache(ref this, ref accessible, childId, ref cacheRequest, out element);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement el1, ref IUIAutomationElement el2, out BOOL areSame) CompareElements;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref SAFEARRAY runtimeId1, ref SAFEARRAY runtimeId2, out BOOL areSame) CompareRuntimeIds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationElement* root) GetRootElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, HWND hwnd, out IUIAutomationElement* element) ElementFromHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, POINT pt, out IUIAutomationElement* element) ElementFromPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationElement* element) GetFocusedElement;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* root) GetRootElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, HWND hwnd, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) ElementFromHandleBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, POINT pt, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) ElementFromPointBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) GetFocusedElementBuildCache;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCondition pCondition, out IUIAutomationTreeWalker* walker) CreateTreeWalker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationTreeWalker* walker) get_ControlViewWalker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationTreeWalker* walker) get_ContentViewWalker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationTreeWalker* walker) get_RawViewWalker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationCondition* condition) get_RawViewCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationCondition* condition) get_ControlViewCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationCondition* condition) get_ContentViewCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationCacheRequest* cacheRequest) CreateCacheRequest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationCondition* newCondition) CreateTrueCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationCondition* newCondition) CreateFalseCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32 propertyId, VARIANT value, out IUIAutomationCondition* newCondition) CreatePropertyCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32 propertyId, VARIANT value, PropertyConditionFlags flags, out IUIAutomationCondition* newCondition) CreatePropertyConditionEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) CreateAndCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) CreateAndConditionFromArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) CreateAndConditionFromNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) CreateOrCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) CreateOrConditionFromArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) CreateOrConditionFromNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCondition condition, out IUIAutomationCondition* newCondition) CreateNotCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32 eventId, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) AddAutomationEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32 eventId, ref IUIAutomationElement element, ref IUIAutomationEventHandler handler) RemoveAutomationEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) AddPropertyChangedEventHandlerNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, ref SAFEARRAY propertyArray) AddPropertyChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement element, ref IUIAutomationPropertyChangedEventHandler handler) RemovePropertyChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) AddStructureChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement element, ref IUIAutomationStructureChangedEventHandler handler) RemoveStructureChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationFocusChangedEventHandler handler) AddFocusChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationFocusChangedEventHandler handler) RemoveFocusChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self) RemoveAllEventHandlers;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32* array, int32 arrayCount, out SAFEARRAY* safeArray) IntNativeArrayToSafeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref SAFEARRAY intArray, int32** array, out int32 arrayCount) IntSafeArrayToNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, RECT rc, out VARIANT @var) RectToVariant;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, VARIANT @var, out RECT rc) VariantToRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref SAFEARRAY rects, RECT** rectArray, out int32 rectArrayCount) SafeArrayToRectNativeArray;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationProxyFactory factory, out IUIAutomationProxyFactoryEntry* factoryEntry) CreateProxyFactoryEntry;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUIAutomationProxyFactoryMapping* factoryMapping) get_ProxyFactoryMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32 property, out BSTR name) GetPropertyProgrammaticName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, int32 pattern, out BSTR name) GetPatternProgrammaticName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement pElement, out SAFEARRAY* patternIds, out SAFEARRAY* patternNames) PollForPotentialSupportedPatterns;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IUIAutomationElement pElement, out SAFEARRAY* propertyIds, out SAFEARRAY* propertyNames) PollForPotentialSupportedProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, VARIANT value, out BOOL isNotSupported) CheckNotSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUnknown* notSupportedValue) get_ReservedNotSupportedValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, out IUnknown* mixedAttributeValue) get_ReservedMixedAttributeValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IAccessible accessible, int32 childId, out IUIAutomationElement* element) ElementFromIAccessible;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation self, ref IAccessible accessible, int32 childId, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) ElementFromIAccessibleBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement el1, ref IUIAutomationElement el2, out IntBool areSame) CompareElements;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref SAFEARRAY runtimeId1, ref SAFEARRAY runtimeId2, out IntBool areSame) CompareRuntimeIds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationElement* root) GetRootElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, HWnd hwnd, out IUIAutomationElement* element) ElementFromHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, POINT pt, out IUIAutomationElement* element) ElementFromPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationElement* element) GetFocusedElement;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* root) GetRootElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, HWnd hwnd, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) ElementFromHandleBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, POINT pt, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) ElementFromPointBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) GetFocusedElementBuildCache;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCondition pCondition, out IUIAutomationTreeWalker* walker) CreateTreeWalker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationTreeWalker* walker) get_ControlViewWalker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationTreeWalker* walker) get_ContentViewWalker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationTreeWalker* walker) get_RawViewWalker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationCondition* condition) get_RawViewCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationCondition* condition) get_ControlViewCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationCondition* condition) get_ContentViewCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationCacheRequest* cacheRequest) CreateCacheRequest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationCondition* newCondition) CreateTrueCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationCondition* newCondition) CreateFalseCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32 propertyId, VARIANT value, out IUIAutomationCondition* newCondition) CreatePropertyCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32 propertyId, VARIANT value, PropertyConditionFlags flags, out IUIAutomationCondition* newCondition) CreatePropertyConditionEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) CreateAndCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) CreateAndConditionFromArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) CreateAndConditionFromNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCondition condition1, ref IUIAutomationCondition condition2, out IUIAutomationCondition* newCondition) CreateOrCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref SAFEARRAY conditions, out IUIAutomationCondition* newCondition) CreateOrConditionFromArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, IUIAutomationCondition** conditions, int32 conditionCount, out IUIAutomationCondition* newCondition) CreateOrConditionFromNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCondition condition, out IUIAutomationCondition* newCondition) CreateNotCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32 eventId, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationEventHandler handler) AddAutomationEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32 eventId, ref IUIAutomationElement element, ref IUIAutomationEventHandler handler) RemoveAutomationEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, int32* propertyArray, int32 propertyCount) AddPropertyChangedEventHandlerNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationPropertyChangedEventHandler handler, ref SAFEARRAY propertyArray) AddPropertyChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement element, ref IUIAutomationPropertyChangedEventHandler handler) RemovePropertyChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationStructureChangedEventHandler handler) AddStructureChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement element, ref IUIAutomationStructureChangedEventHandler handler) RemoveStructureChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationFocusChangedEventHandler handler) AddFocusChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationFocusChangedEventHandler handler) RemoveFocusChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self) RemoveAllEventHandlers;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32* array, int32 arrayCount, out SAFEARRAY* safeArray) IntNativeArrayToSafeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref SAFEARRAY intArray, int32** array, out int32 arrayCount) IntSafeArrayToNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, RectI rc, out VARIANT @var) RectToVariant;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, VARIANT @var, out RectI rc) VariantToRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref SAFEARRAY rects, RECT** rectArray, out int32 rectArrayCount) SafeArrayToRectNativeArray;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationProxyFactory factory, out IUIAutomationProxyFactoryEntry* factoryEntry) CreateProxyFactoryEntry;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUIAutomationProxyFactoryMapping* factoryMapping) get_ProxyFactoryMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32 property, out BSTR name) GetPropertyProgrammaticName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, int32 pattern, out BSTR name) GetPatternProgrammaticName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement pElement, out SAFEARRAY* patternIds, out SAFEARRAY* patternNames) PollForPotentialSupportedPatterns;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IUIAutomationElement pElement, out SAFEARRAY* propertyIds, out SAFEARRAY* propertyNames) PollForPotentialSupportedProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, VARIANT value, out IntBool isNotSupported) CheckNotSupported;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUnknown* notSupportedValue) get_ReservedNotSupportedValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, out IUnknown* mixedAttributeValue) get_ReservedMixedAttributeValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IAccessible accessible, int32 childId, out IUIAutomationElement* element) ElementFromIAccessible;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation self, ref IAccessible accessible, int32 childId, ref IUIAutomationCacheRequest cacheRequest, out IUIAutomationElement* element) ElementFromIAccessibleBuildCache;
 			}
 		}
 		[CRepr]
@@ -4891,22 +4891,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AutoSetFocus(out BOOL autoSetFocus) mut => VT.get_AutoSetFocus(ref this, out autoSetFocus);
-			public HRESULT put_AutoSetFocus(BOOL autoSetFocus) mut => VT.put_AutoSetFocus(ref this, autoSetFocus);
-			public HRESULT get_ConnectionTimeout(out uint32 timeout) mut => VT.get_ConnectionTimeout(ref this, out timeout);
-			public HRESULT put_ConnectionTimeout(uint32 timeout) mut => VT.put_ConnectionTimeout(ref this, timeout);
-			public HRESULT get_TransactionTimeout(out uint32 timeout) mut => VT.get_TransactionTimeout(ref this, out timeout);
-			public HRESULT put_TransactionTimeout(uint32 timeout) mut => VT.put_TransactionTimeout(ref this, timeout);
+			public HResult get_AutoSetFocus(out IntBool autoSetFocus) mut => VT.get_AutoSetFocus(ref this, out autoSetFocus);
+			public HResult put_AutoSetFocus(IntBool autoSetFocus) mut => VT.put_AutoSetFocus(ref this, autoSetFocus);
+			public HResult get_ConnectionTimeout(out uint32 timeout) mut => VT.get_ConnectionTimeout(ref this, out timeout);
+			public HResult put_ConnectionTimeout(uint32 timeout) mut => VT.put_ConnectionTimeout(ref this, timeout);
+			public HResult get_TransactionTimeout(out uint32 timeout) mut => VT.get_TransactionTimeout(ref this, out timeout);
+			public HResult put_TransactionTimeout(uint32 timeout) mut => VT.put_TransactionTimeout(ref this, timeout);
 
 			[CRepr]
 			public struct VTable : IUIAutomation.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation2 self, out BOOL autoSetFocus) get_AutoSetFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation2 self, BOOL autoSetFocus) put_AutoSetFocus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation2 self, out uint32 timeout) get_ConnectionTimeout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation2 self, uint32 timeout) put_ConnectionTimeout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation2 self, out uint32 timeout) get_TransactionTimeout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation2 self, uint32 timeout) put_TransactionTimeout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation2 self, out IntBool autoSetFocus) get_AutoSetFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation2 self, IntBool autoSetFocus) put_AutoSetFocus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation2 self, out uint32 timeout) get_ConnectionTimeout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation2 self, uint32 timeout) put_ConnectionTimeout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation2 self, out uint32 timeout) get_TransactionTimeout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation2 self, uint32 timeout) put_TransactionTimeout;
 			}
 		}
 		[CRepr]
@@ -4916,14 +4916,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddTextEditTextChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) mut => VT.AddTextEditTextChangedEventHandler(ref this, ref element, @scope, textEditChangeType, ref cacheRequest, ref handler);
-			public HRESULT RemoveTextEditTextChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationTextEditTextChangedEventHandler handler) mut => VT.RemoveTextEditTextChangedEventHandler(ref this, ref element, ref handler);
+			public HResult AddTextEditTextChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) mut => VT.AddTextEditTextChangedEventHandler(ref this, ref element, @scope, textEditChangeType, ref cacheRequest, ref handler);
+			public HResult RemoveTextEditTextChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationTextEditTextChangedEventHandler handler) mut => VT.RemoveTextEditTextChangedEventHandler(ref this, ref element, ref handler);
 
 			[CRepr]
 			public struct VTable : IUIAutomation2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation3 self, ref IUIAutomationElement element, TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) AddTextEditTextChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation3 self, ref IUIAutomationElement element, ref IUIAutomationTextEditTextChangedEventHandler handler) RemoveTextEditTextChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation3 self, ref IUIAutomationElement element, TreeScope @scope, TextEditChangeType textEditChangeType, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationTextEditTextChangedEventHandler handler) AddTextEditTextChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation3 self, ref IUIAutomationElement element, ref IUIAutomationTextEditTextChangedEventHandler handler) RemoveTextEditTextChangedEventHandler;
 			}
 		}
 		[CRepr]
@@ -4933,14 +4933,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddChangesEventHandler(ref IUIAutomationElement element, TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest pCacheRequest, ref IUIAutomationChangesEventHandler handler) mut => VT.AddChangesEventHandler(ref this, ref element, @scope, changeTypes, changesCount, ref pCacheRequest, ref handler);
-			public HRESULT RemoveChangesEventHandler(ref IUIAutomationElement element, ref IUIAutomationChangesEventHandler handler) mut => VT.RemoveChangesEventHandler(ref this, ref element, ref handler);
+			public HResult AddChangesEventHandler(ref IUIAutomationElement element, TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest pCacheRequest, ref IUIAutomationChangesEventHandler handler) mut => VT.AddChangesEventHandler(ref this, ref element, @scope, changeTypes, changesCount, ref pCacheRequest, ref handler);
+			public HResult RemoveChangesEventHandler(ref IUIAutomationElement element, ref IUIAutomationChangesEventHandler handler) mut => VT.RemoveChangesEventHandler(ref this, ref element, ref handler);
 
 			[CRepr]
 			public struct VTable : IUIAutomation3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation4 self, ref IUIAutomationElement element, TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest pCacheRequest, ref IUIAutomationChangesEventHandler handler) AddChangesEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation4 self, ref IUIAutomationElement element, ref IUIAutomationChangesEventHandler handler) RemoveChangesEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation4 self, ref IUIAutomationElement element, TreeScope @scope, int32* changeTypes, int32 changesCount, ref IUIAutomationCacheRequest pCacheRequest, ref IUIAutomationChangesEventHandler handler) AddChangesEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation4 self, ref IUIAutomationElement element, ref IUIAutomationChangesEventHandler handler) RemoveChangesEventHandler;
 			}
 		}
 		[CRepr]
@@ -4950,14 +4950,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddNotificationEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) mut => VT.AddNotificationEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler);
-			public HRESULT RemoveNotificationEventHandler(ref IUIAutomationElement element, ref IUIAutomationNotificationEventHandler handler) mut => VT.RemoveNotificationEventHandler(ref this, ref element, ref handler);
+			public HResult AddNotificationEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) mut => VT.AddNotificationEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler);
+			public HResult RemoveNotificationEventHandler(ref IUIAutomationElement element, ref IUIAutomationNotificationEventHandler handler) mut => VT.RemoveNotificationEventHandler(ref this, ref element, ref handler);
 
 			[CRepr]
 			public struct VTable : IUIAutomation4.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation5 self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) AddNotificationEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation5 self, ref IUIAutomationElement element, ref IUIAutomationNotificationEventHandler handler) RemoveNotificationEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation5 self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationNotificationEventHandler handler) AddNotificationEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation5 self, ref IUIAutomationElement element, ref IUIAutomationNotificationEventHandler handler) RemoveNotificationEventHandler;
 			}
 		}
 		[CRepr]
@@ -4967,28 +4967,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateEventHandlerGroup(out IUIAutomationEventHandlerGroup* handlerGroup) mut => VT.CreateEventHandlerGroup(ref this, out handlerGroup);
-			public HRESULT AddEventHandlerGroup(ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) mut => VT.AddEventHandlerGroup(ref this, ref element, ref handlerGroup);
-			public HRESULT RemoveEventHandlerGroup(ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) mut => VT.RemoveEventHandlerGroup(ref this, ref element, ref handlerGroup);
-			public HRESULT get_ConnectionRecoveryBehavior(out ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) mut => VT.get_ConnectionRecoveryBehavior(ref this, out connectionRecoveryBehaviorOptions);
-			public HRESULT put_ConnectionRecoveryBehavior(ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) mut => VT.put_ConnectionRecoveryBehavior(ref this, connectionRecoveryBehaviorOptions);
-			public HRESULT get_CoalesceEvents(out CoalesceEventsOptions coalesceEventsOptions) mut => VT.get_CoalesceEvents(ref this, out coalesceEventsOptions);
-			public HRESULT put_CoalesceEvents(CoalesceEventsOptions coalesceEventsOptions) mut => VT.put_CoalesceEvents(ref this, coalesceEventsOptions);
-			public HRESULT AddActiveTextPositionChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) mut => VT.AddActiveTextPositionChangedEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler);
-			public HRESULT RemoveActiveTextPositionChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationActiveTextPositionChangedEventHandler handler) mut => VT.RemoveActiveTextPositionChangedEventHandler(ref this, ref element, ref handler);
+			public HResult CreateEventHandlerGroup(out IUIAutomationEventHandlerGroup* handlerGroup) mut => VT.CreateEventHandlerGroup(ref this, out handlerGroup);
+			public HResult AddEventHandlerGroup(ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) mut => VT.AddEventHandlerGroup(ref this, ref element, ref handlerGroup);
+			public HResult RemoveEventHandlerGroup(ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) mut => VT.RemoveEventHandlerGroup(ref this, ref element, ref handlerGroup);
+			public HResult get_ConnectionRecoveryBehavior(out ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) mut => VT.get_ConnectionRecoveryBehavior(ref this, out connectionRecoveryBehaviorOptions);
+			public HResult put_ConnectionRecoveryBehavior(ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) mut => VT.put_ConnectionRecoveryBehavior(ref this, connectionRecoveryBehaviorOptions);
+			public HResult get_CoalesceEvents(out CoalesceEventsOptions coalesceEventsOptions) mut => VT.get_CoalesceEvents(ref this, out coalesceEventsOptions);
+			public HResult put_CoalesceEvents(CoalesceEventsOptions coalesceEventsOptions) mut => VT.put_CoalesceEvents(ref this, coalesceEventsOptions);
+			public HResult AddActiveTextPositionChangedEventHandler(ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) mut => VT.AddActiveTextPositionChangedEventHandler(ref this, ref element, @scope, ref cacheRequest, ref handler);
+			public HResult RemoveActiveTextPositionChangedEventHandler(ref IUIAutomationElement element, ref IUIAutomationActiveTextPositionChangedEventHandler handler) mut => VT.RemoveActiveTextPositionChangedEventHandler(ref this, ref element, ref handler);
 
 			[CRepr]
 			public struct VTable : IUIAutomation5.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, out IUIAutomationEventHandlerGroup* handlerGroup) CreateEventHandlerGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) AddEventHandlerGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) RemoveEventHandlerGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, out ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) get_ConnectionRecoveryBehavior;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) put_ConnectionRecoveryBehavior;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, out CoalesceEventsOptions coalesceEventsOptions) get_CoalesceEvents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, CoalesceEventsOptions coalesceEventsOptions) put_CoalesceEvents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) AddActiveTextPositionChangedEventHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUIAutomation6 self, ref IUIAutomationElement element, ref IUIAutomationActiveTextPositionChangedEventHandler handler) RemoveActiveTextPositionChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, out IUIAutomationEventHandlerGroup* handlerGroup) CreateEventHandlerGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) AddEventHandlerGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, ref IUIAutomationElement element, ref IUIAutomationEventHandlerGroup handlerGroup) RemoveEventHandlerGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, out ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) get_ConnectionRecoveryBehavior;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) put_ConnectionRecoveryBehavior;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, out CoalesceEventsOptions coalesceEventsOptions) get_CoalesceEvents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, CoalesceEventsOptions coalesceEventsOptions) put_CoalesceEvents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, ref IUIAutomationElement element, TreeScope @scope, ref IUIAutomationCacheRequest cacheRequest, ref IUIAutomationActiveTextPositionChangedEventHandler handler) AddActiveTextPositionChangedEventHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUIAutomation6 self, ref IUIAutomationElement element, ref IUIAutomationActiveTextPositionChangedEventHandler handler) RemoveActiveTextPositionChangedEventHandler;
 			}
 		}
 		
@@ -4997,17 +4997,17 @@ namespace Win32
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern LRESULT LresultFromObject(in Guid riid, WPARAM wParam, ref IUnknown punk);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ObjectFromLresult(LRESULT lResult, in Guid riid, WPARAM wParam, void** ppvObject);
+		public static extern HResult ObjectFromLresult(LRESULT lResult, in Guid riid, WPARAM wParam, void** ppvObject);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WindowFromAccessibleObject(ref IAccessible param0, HWND* phwnd);
+		public static extern HResult WindowFromAccessibleObject(ref IAccessible param0, HWND* phwnd);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AccessibleObjectFromWindow(HWND hwnd, uint32 dwId, in Guid riid, void** ppvObject);
+		public static extern HResult AccessibleObjectFromWindow(HWnd hwnd, uint32 dwId, in Guid riid, void** ppvObject);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AccessibleObjectFromEvent(HWND hwnd, uint32 dwId, uint32 dwChildId, out IAccessible* ppacc, out VARIANT pvarChild);
+		public static extern HResult AccessibleObjectFromEvent(HWnd hwnd, uint32 dwId, uint32 dwChildId, out IAccessible* ppacc, out VARIANT pvarChild);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AccessibleObjectFromPoint(POINT ptScreen, out IAccessible* ppacc, out VARIANT pvarChild);
+		public static extern HResult AccessibleObjectFromPoint(POINT ptScreen, out IAccessible* ppacc, out VARIANT pvarChild);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AccessibleChildren(ref IAccessible paccContainer, int32 iChildStart, int32 cChildren, VARIANT* rgvarChildren, out int32 pcObtained);
+		public static extern HResult AccessibleChildren(ref IAccessible paccContainer, int32 iChildStart, int32 cChildren, VARIANT* rgvarChildren, out int32 pcObtained);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetRoleTextA(uint32 lRole, uint8* lpszRole, uint32 cchRoleMax);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5019,226 +5019,226 @@ namespace Win32
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void GetOleaccVersionInfo(out uint32 pVer, out uint32 pBuild);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateStdAccessibleObject(HWND hwnd, int32 idObject, in Guid riid, void** ppvObject);
+		public static extern HResult CreateStdAccessibleObject(HWnd hwnd, int32 idObject, in Guid riid, void** ppvObject);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateStdAccessibleProxyA(HWND hwnd, PSTR pClassName, int32 idObject, in Guid riid, void** ppvObject);
+		public static extern HResult CreateStdAccessibleProxyA(HWnd hwnd, char8* pClassName, int32 idObject, in Guid riid, void** ppvObject);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateStdAccessibleProxyW(HWND hwnd, PWSTR pClassName, int32 idObject, in Guid riid, void** ppvObject);
+		public static extern HResult CreateStdAccessibleProxyW(HWnd hwnd, char16* pClassName, int32 idObject, in Guid riid, void** ppvObject);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AccSetRunningUtilityState(HWND hwndApp, uint32 dwUtilityStateMask, ACC_UTILITY_STATE_FLAGS dwUtilityState);
+		public static extern HResult AccSetRunningUtilityState(HWnd hwndApp, uint32 dwUtilityStateMask, ACC_UTILITY_STATE_FLAGS dwUtilityState);
 		[Import("oleacc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AccNotifyTouchInteraction(HWND hwndApp, HWND hwndTarget, POINT ptTarget);
+		public static extern HResult AccNotifyTouchInteraction(HWnd hwndApp, HWnd hwndTarget, POINT ptTarget);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UiaGetErrorDescription(out BSTR pDescription);
+		public static extern IntBool UiaGetErrorDescription(out BSTR pDescription);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaHUiaNodeFromVariant(out VARIANT pvar, out HUIANODE phnode);
+		public static extern HResult UiaHUiaNodeFromVariant(out VARIANT pvar, out HUIANODE phnode);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaHPatternObjectFromVariant(out VARIANT pvar, out HUIAPATTERNOBJECT phobj);
+		public static extern HResult UiaHPatternObjectFromVariant(out VARIANT pvar, out HUIAPATTERNOBJECT phobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaHTextRangeFromVariant(out VARIANT pvar, out HUIATEXTRANGE phtextrange);
+		public static extern HResult UiaHTextRangeFromVariant(out VARIANT pvar, out HUIATEXTRANGE phtextrange);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UiaNodeRelease(HUIANODE hnode);
+		public static extern IntBool UiaNodeRelease(HUIANODE hnode);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetPropertyValue(HUIANODE hnode, int32 propertyId, out VARIANT pValue);
+		public static extern HResult UiaGetPropertyValue(HUIANODE hnode, int32 propertyId, out VARIANT pValue);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetPatternProvider(HUIANODE hnode, int32 patternId, out HUIAPATTERNOBJECT phobj);
+		public static extern HResult UiaGetPatternProvider(HUIANODE hnode, int32 patternId, out HUIAPATTERNOBJECT phobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetRuntimeId(HUIANODE hnode, out SAFEARRAY* pruntimeId);
+		public static extern HResult UiaGetRuntimeId(HUIANODE hnode, out SAFEARRAY* pruntimeId);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaSetFocus(HUIANODE hnode);
+		public static extern HResult UiaSetFocus(HUIANODE hnode);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaNavigate(HUIANODE hnode, NavigateDirection direction, out UiaCondition pCondition, out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
+		public static extern HResult UiaNavigate(HUIANODE hnode, NavigateDirection direction, out UiaCondition pCondition, out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetUpdatedCache(HUIANODE hnode, out UiaCacheRequest pRequest, NormalizeState normalizeState, out UiaCondition pNormalizeCondition, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
+		public static extern HResult UiaGetUpdatedCache(HUIANODE hnode, out UiaCacheRequest pRequest, NormalizeState normalizeState, out UiaCondition pNormalizeCondition, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaFind(HUIANODE hnode, out UiaFindParams pParams, out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out SAFEARRAY* ppOffsets, out SAFEARRAY* ppTreeStructures);
+		public static extern HResult UiaFind(HUIANODE hnode, out UiaFindParams pParams, out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out SAFEARRAY* ppOffsets, out SAFEARRAY* ppTreeStructures);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaNodeFromPoint(double x, double y, out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
+		public static extern HResult UiaNodeFromPoint(double x, double y, out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaNodeFromFocus(out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
+		public static extern HResult UiaNodeFromFocus(out UiaCacheRequest pRequest, out SAFEARRAY* ppRequestedData, out BSTR ppTreeStructure);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaNodeFromHandle(HWND hwnd, out HUIANODE phnode);
+		public static extern HResult UiaNodeFromHandle(HWnd hwnd, out HUIANODE phnode);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaNodeFromProvider(ref IRawElementProviderSimple pProvider, out HUIANODE phnode);
+		public static extern HResult UiaNodeFromProvider(ref IRawElementProviderSimple pProvider, out HUIANODE phnode);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetRootNode(out HUIANODE phnode);
+		public static extern HResult UiaGetRootNode(out HUIANODE phnode);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void UiaRegisterProviderCallback(out UiaProviderCallback pCallback);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 UiaLookupId(AutomationIdentifierType type, in Guid pGuid);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetReservedNotSupportedValue(out IUnknown* punkNotSupportedValue);
+		public static extern HResult UiaGetReservedNotSupportedValue(out IUnknown* punkNotSupportedValue);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaGetReservedMixedAttributeValue(out IUnknown* punkMixedAttributeValue);
+		public static extern HResult UiaGetReservedMixedAttributeValue(out IUnknown* punkMixedAttributeValue);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UiaClientsAreListening();
+		public static extern IntBool UiaClientsAreListening();
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseAutomationPropertyChangedEvent(ref IRawElementProviderSimple pProvider, int32 id, VARIANT oldValue, VARIANT newValue);
+		public static extern HResult UiaRaiseAutomationPropertyChangedEvent(ref IRawElementProviderSimple pProvider, int32 id, VARIANT oldValue, VARIANT newValue);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseAutomationEvent(ref IRawElementProviderSimple pProvider, int32 id);
+		public static extern HResult UiaRaiseAutomationEvent(ref IRawElementProviderSimple pProvider, int32 id);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseStructureChangedEvent(ref IRawElementProviderSimple pProvider, StructureChangeType structureChangeType, out int32 pRuntimeId, int32 cRuntimeIdLen);
+		public static extern HResult UiaRaiseStructureChangedEvent(ref IRawElementProviderSimple pProvider, StructureChangeType structureChangeType, out int32 pRuntimeId, int32 cRuntimeIdLen);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseAsyncContentLoadedEvent(ref IRawElementProviderSimple pProvider, AsyncContentLoadedState asyncContentLoadedState, double percentComplete);
+		public static extern HResult UiaRaiseAsyncContentLoadedEvent(ref IRawElementProviderSimple pProvider, AsyncContentLoadedState asyncContentLoadedState, double percentComplete);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseTextEditTextChangedEvent(ref IRawElementProviderSimple pProvider, TextEditChangeType textEditChangeType, out SAFEARRAY pChangedData);
+		public static extern HResult UiaRaiseTextEditTextChangedEvent(ref IRawElementProviderSimple pProvider, TextEditChangeType textEditChangeType, out SAFEARRAY pChangedData);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseChangesEvent(ref IRawElementProviderSimple pProvider, int32 eventIdCount, out UiaChangeInfo pUiaChanges);
+		public static extern HResult UiaRaiseChangesEvent(ref IRawElementProviderSimple pProvider, int32 eventIdCount, out UiaChangeInfo pUiaChanges);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseNotificationEvent(ref IRawElementProviderSimple provider, NotificationKind notificationKind, NotificationProcessing notificationProcessing, BSTR displayString, BSTR activityId);
+		public static extern HResult UiaRaiseNotificationEvent(ref IRawElementProviderSimple provider, NotificationKind notificationKind, NotificationProcessing notificationProcessing, BSTR displayString, BSTR activityId);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRaiseActiveTextPositionChangedEvent(ref IRawElementProviderSimple provider, ITextRangeProvider* textRange);
+		public static extern HResult UiaRaiseActiveTextPositionChangedEvent(ref IRawElementProviderSimple provider, ITextRangeProvider* textRange);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaAddEvent(HUIANODE hnode, int32 eventId, out UiaEventCallback pCallback, TreeScope @scope, out int32 pProperties, int32 cProperties, out UiaCacheRequest pRequest, out HUIAEVENT phEvent);
+		public static extern HResult UiaAddEvent(HUIANODE hnode, int32 eventId, out UiaEventCallback pCallback, TreeScope @scope, out int32 pProperties, int32 cProperties, out UiaCacheRequest pRequest, out HUIAEVENT phEvent);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaRemoveEvent(HUIAEVENT hEvent);
+		public static extern HResult UiaRemoveEvent(HUIAEVENT hEvent);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaEventAddWindow(HUIAEVENT hEvent, HWND hwnd);
+		public static extern HResult UiaEventAddWindow(HUIAEVENT hEvent, HWnd hwnd);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
+		public static extern HResult UiaEventRemoveWindow(HUIAEVENT hEvent, HWnd hwnd);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DockPattern_SetDockPosition(HUIAPATTERNOBJECT hobj, DockPosition dockPosition);
+		public static extern HResult DockPattern_SetDockPosition(HUIAPATTERNOBJECT hobj, DockPosition dockPosition);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ExpandCollapsePattern_Collapse(HUIAPATTERNOBJECT hobj);
+		public static extern HResult ExpandCollapsePattern_Collapse(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ExpandCollapsePattern_Expand(HUIAPATTERNOBJECT hobj);
+		public static extern HResult ExpandCollapsePattern_Expand(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int32 row, int32 column, out HUIANODE pResult);
+		public static extern HResult GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int32 row, int32 column, out HUIANODE pResult);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InvokePattern_Invoke(HUIAPATTERNOBJECT hobj);
+		public static extern HResult InvokePattern_Invoke(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MultipleViewPattern_GetViewName(HUIAPATTERNOBJECT hobj, int32 viewId, out BSTR ppStr);
+		public static extern HResult MultipleViewPattern_GetViewName(HUIAPATTERNOBJECT hobj, int32 viewId, out BSTR ppStr);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MultipleViewPattern_SetCurrentView(HUIAPATTERNOBJECT hobj, int32 viewId);
+		public static extern HResult MultipleViewPattern_SetCurrentView(HUIAPATTERNOBJECT hobj, int32 viewId);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RangeValuePattern_SetValue(HUIAPATTERNOBJECT hobj, double val);
+		public static extern HResult RangeValuePattern_SetValue(HUIAPATTERNOBJECT hobj, double val);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScrollItemPattern_ScrollIntoView(HUIAPATTERNOBJECT hobj);
+		public static extern HResult ScrollItemPattern_ScrollIntoView(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScrollPattern_Scroll(HUIAPATTERNOBJECT hobj, ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
+		public static extern HResult ScrollPattern_Scroll(HUIAPATTERNOBJECT hobj, ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ScrollPattern_SetScrollPercent(HUIAPATTERNOBJECT hobj, double horizontalPercent, double verticalPercent);
+		public static extern HResult ScrollPattern_SetScrollPercent(HUIAPATTERNOBJECT hobj, double horizontalPercent, double verticalPercent);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SelectionItemPattern_AddToSelection(HUIAPATTERNOBJECT hobj);
+		public static extern HResult SelectionItemPattern_AddToSelection(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SelectionItemPattern_RemoveFromSelection(HUIAPATTERNOBJECT hobj);
+		public static extern HResult SelectionItemPattern_RemoveFromSelection(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SelectionItemPattern_Select(HUIAPATTERNOBJECT hobj);
+		public static extern HResult SelectionItemPattern_Select(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TogglePattern_Toggle(HUIAPATTERNOBJECT hobj);
+		public static extern HResult TogglePattern_Toggle(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TransformPattern_Move(HUIAPATTERNOBJECT hobj, double x, double y);
+		public static extern HResult TransformPattern_Move(HUIAPATTERNOBJECT hobj, double x, double y);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TransformPattern_Resize(HUIAPATTERNOBJECT hobj, double width, double height);
+		public static extern HResult TransformPattern_Resize(HUIAPATTERNOBJECT hobj, double width, double height);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TransformPattern_Rotate(HUIAPATTERNOBJECT hobj, double degrees);
+		public static extern HResult TransformPattern_Rotate(HUIAPATTERNOBJECT hobj, double degrees);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ValuePattern_SetValue(HUIAPATTERNOBJECT hobj, PWSTR pVal);
+		public static extern HResult ValuePattern_SetValue(HUIAPATTERNOBJECT hobj, char16* pVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WindowPattern_Close(HUIAPATTERNOBJECT hobj);
+		public static extern HResult WindowPattern_Close(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WindowPattern_SetWindowVisualState(HUIAPATTERNOBJECT hobj, WindowVisualState state);
+		public static extern HResult WindowPattern_SetWindowVisualState(HUIAPATTERNOBJECT hobj, WindowVisualState state);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WindowPattern_WaitForInputIdle(HUIAPATTERNOBJECT hobj, int32 milliseconds, out BOOL pResult);
+		public static extern HResult WindowPattern_WaitForInputIdle(HUIAPATTERNOBJECT hobj, int32 milliseconds, out IntBool pResult);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextPattern_GetSelection(HUIAPATTERNOBJECT hobj, out SAFEARRAY* pRetVal);
+		public static extern HResult TextPattern_GetSelection(HUIAPATTERNOBJECT hobj, out SAFEARRAY* pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextPattern_GetVisibleRanges(HUIAPATTERNOBJECT hobj, out SAFEARRAY* pRetVal);
+		public static extern HResult TextPattern_GetVisibleRanges(HUIAPATTERNOBJECT hobj, out SAFEARRAY* pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, out HUIATEXTRANGE pRetVal);
+		public static extern HResult TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, out HUIATEXTRANGE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, UiaPoint point, out HUIATEXTRANGE pRetVal);
+		public static extern HResult TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, UiaPoint point, out HUIATEXTRANGE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, out HUIATEXTRANGE pRetVal);
+		public static extern HResult TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, out HUIATEXTRANGE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, out SupportedTextSelection pRetVal);
+		public static extern HResult TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, out SupportedTextSelection pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_Clone(HUIATEXTRANGE hobj, out HUIATEXTRANGE pRetVal);
+		public static extern HResult TextRange_Clone(HUIATEXTRANGE hobj, out HUIATEXTRANGE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_Compare(HUIATEXTRANGE hobj, HUIATEXTRANGE range, out BOOL pRetVal);
+		public static extern HResult TextRange_Compare(HUIATEXTRANGE hobj, HUIATEXTRANGE range, out IntBool pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_CompareEndpoints(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, TextPatternRangeEndpoint targetEndpoint, out int32 pRetVal);
+		public static extern HResult TextRange_CompareEndpoints(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, TextPatternRangeEndpoint targetEndpoint, out int32 pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_ExpandToEnclosingUnit(HUIATEXTRANGE hobj, TextUnit unit);
+		public static extern HResult TextRange_ExpandToEnclosingUnit(HUIATEXTRANGE hobj, TextUnit unit);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_GetAttributeValue(HUIATEXTRANGE hobj, int32 attributeId, out VARIANT pRetVal);
+		public static extern HResult TextRange_GetAttributeValue(HUIATEXTRANGE hobj, int32 attributeId, out VARIANT pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_FindAttribute(HUIATEXTRANGE hobj, int32 attributeId, VARIANT val, BOOL backward, out HUIATEXTRANGE pRetVal);
+		public static extern HResult TextRange_FindAttribute(HUIATEXTRANGE hobj, int32 attributeId, VARIANT val, IntBool backward, out HUIATEXTRANGE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, BOOL backward, BOOL ignoreCase, out HUIATEXTRANGE pRetVal);
+		public static extern HResult TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, IntBool backward, IntBool ignoreCase, out HUIATEXTRANGE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_GetBoundingRectangles(HUIATEXTRANGE hobj, out SAFEARRAY* pRetVal);
+		public static extern HResult TextRange_GetBoundingRectangles(HUIATEXTRANGE hobj, out SAFEARRAY* pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, out HUIANODE pRetVal);
+		public static extern HResult TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, out HUIANODE pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_GetText(HUIATEXTRANGE hobj, int32 maxLength, out BSTR pRetVal);
+		public static extern HResult TextRange_GetText(HUIATEXTRANGE hobj, int32 maxLength, out BSTR pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_Move(HUIATEXTRANGE hobj, TextUnit unit, int32 count, out int32 pRetVal);
+		public static extern HResult TextRange_Move(HUIATEXTRANGE hobj, TextUnit unit, int32 count, out int32 pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_MoveEndpointByUnit(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 pRetVal);
+		public static extern HResult TextRange_MoveEndpointByUnit(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count, out int32 pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_MoveEndpointByRange(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, TextPatternRangeEndpoint targetEndpoint);
+		public static extern HResult TextRange_MoveEndpointByRange(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, TextPatternRangeEndpoint targetEndpoint);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_Select(HUIATEXTRANGE hobj);
+		public static extern HResult TextRange_Select(HUIATEXTRANGE hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_AddToSelection(HUIATEXTRANGE hobj);
+		public static extern HResult TextRange_AddToSelection(HUIATEXTRANGE hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_RemoveFromSelection(HUIATEXTRANGE hobj);
+		public static extern HResult TextRange_RemoveFromSelection(HUIATEXTRANGE hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_ScrollIntoView(HUIATEXTRANGE hobj, BOOL alignToTop);
+		public static extern HResult TextRange_ScrollIntoView(HUIATEXTRANGE hobj, IntBool alignToTop);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TextRange_GetChildren(HUIATEXTRANGE hobj, out SAFEARRAY* pRetVal);
+		public static extern HResult TextRange_GetChildren(HUIATEXTRANGE hobj, out SAFEARRAY* pRetVal);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ItemContainerPattern_FindItemByProperty(HUIAPATTERNOBJECT hobj, HUIANODE hnodeStartAfter, int32 propertyId, VARIANT value, out HUIANODE pFound);
+		public static extern HResult ItemContainerPattern_FindItemByProperty(HUIAPATTERNOBJECT hobj, HUIANODE hnodeStartAfter, int32 propertyId, VARIANT value, out HUIANODE pFound);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LegacyIAccessiblePattern_Select(HUIAPATTERNOBJECT hobj, int32 flagsSelect);
+		public static extern HResult LegacyIAccessiblePattern_Select(HUIAPATTERNOBJECT hobj, int32 flagsSelect);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LegacyIAccessiblePattern_DoDefaultAction(HUIAPATTERNOBJECT hobj);
+		public static extern HResult LegacyIAccessiblePattern_DoDefaultAction(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LegacyIAccessiblePattern_SetValue(HUIAPATTERNOBJECT hobj, PWSTR szValue);
+		public static extern HResult LegacyIAccessiblePattern_SetValue(HUIAPATTERNOBJECT hobj, char16* szValue);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LegacyIAccessiblePattern_GetIAccessible(HUIAPATTERNOBJECT hobj, out IAccessible* pAccessible);
+		public static extern HResult LegacyIAccessiblePattern_GetIAccessible(HUIAPATTERNOBJECT hobj, out IAccessible* pAccessible);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SynchronizedInputPattern_StartListening(HUIAPATTERNOBJECT hobj, SynchronizedInputType inputType);
+		public static extern HResult SynchronizedInputPattern_StartListening(HUIAPATTERNOBJECT hobj, SynchronizedInputType inputType);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SynchronizedInputPattern_Cancel(HUIAPATTERNOBJECT hobj);
+		public static extern HResult SynchronizedInputPattern_Cancel(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT VirtualizedItemPattern_Realize(HUIAPATTERNOBJECT hobj);
+		public static extern HResult VirtualizedItemPattern_Realize(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UiaPatternRelease(HUIAPATTERNOBJECT hobj);
+		public static extern IntBool UiaPatternRelease(HUIAPATTERNOBJECT hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UiaTextRangeRelease(HUIATEXTRANGE hobj);
+		public static extern IntBool UiaTextRangeRelease(HUIATEXTRANGE hobj);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern LRESULT UiaReturnRawElementProvider(HWND hwnd, WPARAM wParam, LPARAM lParam, ref IRawElementProviderSimple el);
+		public static extern LRESULT UiaReturnRawElementProvider(HWnd hwnd, WPARAM wParam, LPARAM lParam, ref IRawElementProviderSimple el);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaHostProviderFromHwnd(HWND hwnd, out IRawElementProviderSimple* ppProvider);
+		public static extern HResult UiaHostProviderFromHwnd(HWnd hwnd, out IRawElementProviderSimple* ppProvider);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaProviderForNonClient(HWND hwnd, int32 idObject, int32 idChild, out IRawElementProviderSimple* ppProvider);
+		public static extern HResult UiaProviderForNonClient(HWnd hwnd, int32 idObject, int32 idChild, out IRawElementProviderSimple* ppProvider);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaIAccessibleFromProvider(ref IRawElementProviderSimple pProvider, uint32 dwFlags, out IAccessible* ppAccessible, out VARIANT pvarChild);
+		public static extern HResult UiaIAccessibleFromProvider(ref IRawElementProviderSimple pProvider, uint32 dwFlags, out IAccessible* ppAccessible, out VARIANT pvarChild);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaProviderFromIAccessible(ref IAccessible pAccessible, int32 idChild, uint32 dwFlags, out IRawElementProviderSimple* ppProvider);
+		public static extern HResult UiaProviderFromIAccessible(ref IAccessible pAccessible, int32 idChild, uint32 dwFlags, out IRawElementProviderSimple* ppProvider);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaDisconnectAllProviders();
+		public static extern HResult UiaDisconnectAllProviders();
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UiaDisconnectProvider(ref IRawElementProviderSimple pProvider);
+		public static extern HResult UiaDisconnectProvider(ref IRawElementProviderSimple pProvider);
 		[Import("uiautomationcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UiaHasServerSideProvider(HWND hwnd);
+		public static extern IntBool UiaHasServerSideProvider(HWnd hwnd);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RegisterPointerInputTarget(HWND hwnd, POINTER_INPUT_TYPE pointerType);
+		public static extern IntBool RegisterPointerInputTarget(HWnd hwnd, POINTER_INPUT_TYPE pointerType);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterPointerInputTarget(HWND hwnd, POINTER_INPUT_TYPE pointerType);
+		public static extern IntBool UnregisterPointerInputTarget(HWnd hwnd, POINTER_INPUT_TYPE pointerType);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RegisterPointerInputTargetEx(HWND hwnd, POINTER_INPUT_TYPE pointerType, BOOL fObserve);
+		public static extern IntBool RegisterPointerInputTargetEx(HWnd hwnd, POINTER_INPUT_TYPE pointerType, IntBool fObserve);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterPointerInputTargetEx(HWND hwnd, POINTER_INPUT_TYPE pointerType);
+		public static extern IntBool UnregisterPointerInputTargetEx(HWnd hwnd, POINTER_INPUT_TYPE pointerType);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void NotifyWinEvent(uint32 event, HWND hwnd, int32 idObject, int32 idChild);
+		public static extern void NotifyWinEvent(uint32 event, HWnd hwnd, int32 idObject, int32 idChild);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HWINEVENTHOOK SetWinEventHook(uint32 eventMin, uint32 eventMax, HINSTANCE hmodWinEventProc, WINEVENTPROC pfnWinEventProc, uint32 idProcess, uint32 idThread, uint32 dwFlags);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsWinEventHookInstalled(uint32 event);
+		public static extern IntBool IsWinEventHookInstalled(uint32 event);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnhookWinEvent(HWINEVENTHOOK hWinEventHook);
+		public static extern IntBool UnhookWinEvent(HWINEVENTHOOK hWinEventHook);
 	}
 }

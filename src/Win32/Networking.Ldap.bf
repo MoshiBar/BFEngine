@@ -224,12 +224,12 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function uint32 DBGPRINT(PSTR Format);
-		public function uint32 QUERYFORCONNECTION(out ldap PrimaryConnection, out ldap ReferralFromConnection, PWSTR NewDN, PSTR HostName, uint32 PortNumber, void* SecAuthIdentity, void* CurrentUserToken, out ldap* ConnectionToUse);
-		public function BOOLEAN NOTIFYOFNEWCONNECTION(out ldap PrimaryConnection, out ldap ReferralFromConnection, PWSTR NewDN, PSTR HostName, out ldap NewConnection, uint32 PortNumber, void* SecAuthIdentity, void* CurrentUser, uint32 ErrorCodeFromBind);
+		public function uint32 DBGPRINT(char8* Format);
+		public function uint32 QUERYFORCONNECTION(out ldap PrimaryConnection, out ldap ReferralFromConnection, char16* NewDN, char8* HostName, uint32 PortNumber, void* SecAuthIdentity, void* CurrentUserToken, out ldap* ConnectionToUse);
+		public function bool NOTIFYOFNEWCONNECTION(out ldap PrimaryConnection, out ldap ReferralFromConnection, char16* NewDN, char8* HostName, out ldap NewConnection, uint32 PortNumber, void* SecAuthIdentity, void* CurrentUser, uint32 ErrorCodeFromBind);
 		public function uint32 DEREFERENCECONNECTION(out ldap PrimaryConnection, out ldap ConnectionToDereference);
-		public function BOOLEAN QUERYCLIENTCERT(out ldap Connection, out SecPkgContext_IssuerListInfoEx trusted_CAs, out CERT_CONTEXT* ppCertificate);
-		public function BOOLEAN VERIFYSERVERCERT(out ldap Connection, out CERT_CONTEXT* pServerCert);
+		public function bool QUERYCLIENTCERT(out ldap Connection, out SecPkgContext_IssuerListInfoEx trusted_CAs, out CERT_CONTEXT* ppCertificate);
+		public function bool VERIFYSERVERCERT(out ldap Connection, out CERT_CONTEXT* pServerCert);
 		
 		// --- Structs ---
 		
@@ -237,15 +237,15 @@ namespace Win32
 		public struct ldap
 		{
 			public _ld_sb_e__Struct ld_sb;
-			public PSTR ld_host;
+			public char8* ld_host;
 			public uint32 ld_version;
 			public uint8 ld_lberoptions;
 			public uint32 ld_deref;
 			public uint32 ld_timelimit;
 			public uint32 ld_sizelimit;
 			public uint32 ld_errno;
-			public PSTR ld_matched;
-			public PSTR ld_error;
+			public char8* ld_matched;
+			public char8* ld_error;
 			public uint32 ld_msgid;
 			public uint8[25] Reserved3;
 			public uint32 ld_cldaptries;
@@ -272,7 +272,7 @@ namespace Win32
 		public struct LDAP_BERVAL
 		{
 			public uint32 bv_len;
-			public PSTR bv_val;
+			public char8* bv_val;
 		}
 		[CRepr]
 		public struct LDAPMessage
@@ -287,35 +287,35 @@ namespace Win32
 			public void* Request;
 			public uint32 lm_returncode;
 			public uint16 lm_referral;
-			public BOOLEAN lm_chased;
-			public BOOLEAN lm_eom;
-			public BOOLEAN ConnectionReferenced;
+			public bool lm_chased;
+			public bool lm_eom;
+			public bool ConnectionReferenced;
 		}
 		[CRepr]
 		public struct ldapcontrolA
 		{
-			public PSTR ldctl_oid;
+			public char8* ldctl_oid;
 			public LDAP_BERVAL ldctl_value;
-			public BOOLEAN ldctl_iscritical;
+			public bool ldctl_iscritical;
 		}
 		[CRepr]
 		public struct ldapcontrolW
 		{
-			public PWSTR ldctl_oid;
+			public char16* ldctl_oid;
 			public LDAP_BERVAL ldctl_value;
-			public BOOLEAN ldctl_iscritical;
+			public bool ldctl_iscritical;
 		}
 		[CRepr]
 		public struct ldapmodW
 		{
 			public uint32 mod_op;
-			public PWSTR mod_type;
+			public char16* mod_type;
 			public _mod_vals_e__Union mod_vals;
 			
 			[CRepr, Union]
 			public struct _mod_vals_e__Union
 			{
-				public PWSTR* modv_strvals;
+				public char16** modv_strvals;
 				public LDAP_BERVAL** modv_bvals;
 			}
 		}
@@ -323,7 +323,7 @@ namespace Win32
 		public struct ldapmodA
 		{
 			public uint32 mod_op;
-			public PSTR mod_type;
+			public char8* mod_type;
 			public _mod_vals_e__Union mod_vals;
 			
 			[CRepr, Union]
@@ -336,7 +336,7 @@ namespace Win32
 		[CRepr]
 		public struct berelement
 		{
-			public PSTR opaque;
+			public char8* opaque;
 		}
 		[CRepr]
 		public struct ldap_version_info
@@ -352,7 +352,7 @@ namespace Win32
 			public int32 ldapai_api_version;
 			public int32 ldapai_protocol_version;
 			public int8** ldapai_extensions;
-			public PSTR ldapai_vendor_name;
+			public char8* ldapai_vendor_name;
 			public int32 ldapai_vendor_version;
 		}
 		[CRepr]
@@ -361,22 +361,22 @@ namespace Win32
 			public int32 ldapai_info_version;
 			public int32 ldapai_api_version;
 			public int32 ldapai_protocol_version;
-			public PWSTR* ldapai_extensions;
-			public PWSTR ldapai_vendor_name;
+			public char16** ldapai_extensions;
+			public char16* ldapai_vendor_name;
 			public int32 ldapai_vendor_version;
 		}
 		[CRepr]
 		public struct LDAPAPIFeatureInfoA
 		{
 			public int32 ldapaif_info_version;
-			public PSTR ldapaif_name;
+			public char8* ldapaif_name;
 			public int32 ldapaif_version;
 		}
 		[CRepr]
 		public struct LDAPAPIFeatureInfoW
 		{
 			public int32 ldapaif_info_version;
-			public PWSTR ldapaif_name;
+			public char16* ldapaif_name;
 			public int32 ldapaif_version;
 		}
 		[CRepr]
@@ -384,16 +384,16 @@ namespace Win32
 		[CRepr]
 		public struct ldapsortkeyW
 		{
-			public PWSTR sk_attrtype;
-			public PWSTR sk_matchruleoid;
-			public BOOLEAN sk_reverseorder;
+			public char16* sk_attrtype;
+			public char16* sk_matchruleoid;
+			public bool sk_reverseorder;
 		}
 		[CRepr]
 		public struct ldapsortkeyA
 		{
-			public PSTR sk_attrtype;
-			public PSTR sk_matchruleoid;
-			public BOOLEAN sk_reverseorder;
+			public char8* sk_attrtype;
+			public char8* sk_matchruleoid;
+			public bool sk_reverseorder;
 		}
 		[CRepr]
 		public struct ldapvlvinfo
@@ -419,31 +419,31 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_openW(PWSTR HostName, uint32 PortNumber);
+		public static extern ldap* ldap_openW(char16* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_openA(PSTR HostName, uint32 PortNumber);
+		public static extern ldap* ldap_openA(char8* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_initW(PWSTR HostName, uint32 PortNumber);
+		public static extern ldap* ldap_initW(char16* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_initA(PSTR HostName, uint32 PortNumber);
+		public static extern ldap* ldap_initA(char8* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_sslinitW(PWSTR HostName, uint32 PortNumber, int32 secure);
+		public static extern ldap* ldap_sslinitW(char16* HostName, uint32 PortNumber, int32 secure);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_sslinitA(PSTR HostName, uint32 PortNumber, int32 secure);
+		public static extern ldap* ldap_sslinitA(char8* HostName, uint32 PortNumber, int32 secure);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_connect(out ldap ld, out LDAP_TIMEVAL timeout);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_open(PSTR HostName, uint32 PortNumber);
+		public static extern ldap* ldap_open(char8* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_init(PSTR HostName, uint32 PortNumber);
+		public static extern ldap* ldap_init(char8* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* ldap_sslinit(PSTR HostName, uint32 PortNumber, int32 secure);
+		public static extern ldap* ldap_sslinit(char8* HostName, uint32 PortNumber, int32 secure);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* cldap_openW(PWSTR HostName, uint32 PortNumber);
+		public static extern ldap* cldap_openW(char16* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* cldap_openA(PSTR HostName, uint32 PortNumber);
+		public static extern ldap* cldap_openA(char8* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldap* cldap_open(PSTR HostName, uint32 PortNumber);
+		public static extern ldap* cldap_open(char8* HostName, uint32 PortNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_unbind(out ldap ld);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -457,203 +457,203 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_set_optionW(out ldap ld, int32 option, void* invalue);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_simple_bindW(out ldap ld, PWSTR dn, PWSTR passwd);
+		public static extern uint32 ldap_simple_bindW(out ldap ld, char16* dn, char16* passwd);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_simple_bindA(out ldap ld, PSTR dn, PSTR passwd);
+		public static extern uint32 ldap_simple_bindA(out ldap ld, char8* dn, char8* passwd);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_simple_bind_sW(out ldap ld, PWSTR dn, PWSTR passwd);
+		public static extern uint32 ldap_simple_bind_sW(out ldap ld, char16* dn, char16* passwd);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_simple_bind_sA(out ldap ld, PSTR dn, PSTR passwd);
+		public static extern uint32 ldap_simple_bind_sA(out ldap ld, char8* dn, char8* passwd);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_bindW(out ldap ld, PWSTR dn, PWSTR cred, uint32 method);
+		public static extern uint32 ldap_bindW(out ldap ld, char16* dn, char16* cred, uint32 method);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_bindA(out ldap ld, PSTR dn, PSTR cred, uint32 method);
+		public static extern uint32 ldap_bindA(out ldap ld, char8* dn, char8* cred, uint32 method);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_bind_sW(out ldap ld, PWSTR dn, PWSTR cred, uint32 method);
+		public static extern uint32 ldap_bind_sW(out ldap ld, char16* dn, char16* cred, uint32 method);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_bind_sA(out ldap ld, PSTR dn, PSTR cred, uint32 method);
+		public static extern uint32 ldap_bind_sA(out ldap ld, char8* dn, char8* cred, uint32 method);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ldap_sasl_bindA(out ldap ExternalHandle, PSTR DistName, PSTR AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolA* ServerCtrls, out ldapcontrolA* ClientCtrls, out int32 MessageNumber);
+		public static extern int32 ldap_sasl_bindA(out ldap ExternalHandle, char8* DistName, char8* AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolA* ServerCtrls, out ldapcontrolA* ClientCtrls, out int32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ldap_sasl_bindW(out ldap ExternalHandle, PWSTR DistName, PWSTR AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolW* ServerCtrls, out ldapcontrolW* ClientCtrls, out int32 MessageNumber);
+		public static extern int32 ldap_sasl_bindW(out ldap ExternalHandle, char16* DistName, char16* AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolW* ServerCtrls, out ldapcontrolW* ClientCtrls, out int32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ldap_sasl_bind_sA(out ldap ExternalHandle, PSTR DistName, PSTR AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolA* ServerCtrls, out ldapcontrolA* ClientCtrls, out LDAP_BERVAL* ServerData);
+		public static extern int32 ldap_sasl_bind_sA(out ldap ExternalHandle, char8* DistName, char8* AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolA* ServerCtrls, out ldapcontrolA* ClientCtrls, out LDAP_BERVAL* ServerData);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ldap_sasl_bind_sW(out ldap ExternalHandle, PWSTR DistName, PWSTR AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolW* ServerCtrls, out ldapcontrolW* ClientCtrls, out LDAP_BERVAL* ServerData);
+		public static extern int32 ldap_sasl_bind_sW(out ldap ExternalHandle, char16* DistName, char16* AuthMechanism, in LDAP_BERVAL cred, out ldapcontrolW* ServerCtrls, out ldapcontrolW* ClientCtrls, out LDAP_BERVAL* ServerData);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_simple_bind(out ldap ld, PSTR dn, PSTR passwd);
+		public static extern uint32 ldap_simple_bind(out ldap ld, char8* dn, char8* passwd);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_simple_bind_s(out ldap ld, PSTR dn, PSTR passwd);
+		public static extern uint32 ldap_simple_bind_s(out ldap ld, char8* dn, char8* passwd);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_bind(out ldap ld, PSTR dn, PSTR cred, uint32 method);
+		public static extern uint32 ldap_bind(out ldap ld, char8* dn, char8* cred, uint32 method);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_bind_s(out ldap ld, PSTR dn, PSTR cred, uint32 method);
+		public static extern uint32 ldap_bind_s(out ldap ld, char8* dn, char8* cred, uint32 method);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_searchW(out ldap ld, PWSTR @base, uint32 @scope, PWSTR filter, ref uint16* attrs, uint32 attrsonly);
+		public static extern uint32 ldap_searchW(out ldap ld, char16* @base, uint32 @scope, char16* filter, ref uint16* attrs, uint32 attrsonly);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_searchA(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly);
+		public static extern uint32 ldap_searchA(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_sW(out ldap ld, PWSTR @base, uint32 @scope, PWSTR filter, ref uint16* attrs, uint32 attrsonly, LDAPMessage** res);
+		public static extern uint32 ldap_search_sW(out ldap ld, char16* @base, uint32 @scope, char16* filter, ref uint16* attrs, uint32 attrsonly, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_sA(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, LDAPMessage** res);
+		public static extern uint32 ldap_search_sA(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_stW(out ldap ld, PWSTR @base, uint32 @scope, PWSTR filter, ref uint16* attrs, uint32 attrsonly, out LDAP_TIMEVAL timeout, LDAPMessage** res);
+		public static extern uint32 ldap_search_stW(out ldap ld, char16* @base, uint32 @scope, char16* filter, ref uint16* attrs, uint32 attrsonly, out LDAP_TIMEVAL timeout, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_stA(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, out LDAP_TIMEVAL timeout, LDAPMessage** res);
+		public static extern uint32 ldap_search_stA(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, out LDAP_TIMEVAL timeout, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_extW(out ldap ld, PWSTR @base, uint32 @scope, PWSTR filter, ref uint16* attrs, uint32 attrsonly, ldapcontrolW** ServerControls, ldapcontrolW** ClientControls, uint32 TimeLimit, uint32 SizeLimit, out uint32 MessageNumber);
+		public static extern uint32 ldap_search_extW(out ldap ld, char16* @base, uint32 @scope, char16* filter, ref uint16* attrs, uint32 attrsonly, ldapcontrolW** ServerControls, ldapcontrolW** ClientControls, uint32 TimeLimit, uint32 SizeLimit, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_extA(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, uint32 TimeLimit, uint32 SizeLimit, out uint32 MessageNumber);
+		public static extern uint32 ldap_search_extA(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, uint32 TimeLimit, uint32 SizeLimit, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_ext_sW(out ldap ld, PWSTR @base, uint32 @scope, PWSTR filter, ref uint16* attrs, uint32 attrsonly, ldapcontrolW** ServerControls, ldapcontrolW** ClientControls, out LDAP_TIMEVAL timeout, uint32 SizeLimit, LDAPMessage** res);
+		public static extern uint32 ldap_search_ext_sW(out ldap ld, char16* @base, uint32 @scope, char16* filter, ref uint16* attrs, uint32 attrsonly, ldapcontrolW** ServerControls, ldapcontrolW** ClientControls, out LDAP_TIMEVAL timeout, uint32 SizeLimit, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_ext_sA(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, out LDAP_TIMEVAL timeout, uint32 SizeLimit, LDAPMessage** res);
+		public static extern uint32 ldap_search_ext_sA(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, out LDAP_TIMEVAL timeout, uint32 SizeLimit, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly);
+		public static extern uint32 ldap_search(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_s(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, LDAPMessage** res);
+		public static extern uint32 ldap_search_s(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_st(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, out LDAP_TIMEVAL timeout, LDAPMessage** res);
+		public static extern uint32 ldap_search_st(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, out LDAP_TIMEVAL timeout, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_ext(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, uint32 TimeLimit, uint32 SizeLimit, out uint32 MessageNumber);
+		public static extern uint32 ldap_search_ext(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, uint32 TimeLimit, uint32 SizeLimit, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_search_ext_s(out ldap ld, PSTR @base, uint32 @scope, PSTR filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, out LDAP_TIMEVAL timeout, uint32 SizeLimit, LDAPMessage** res);
+		public static extern uint32 ldap_search_ext_s(out ldap ld, char8* @base, uint32 @scope, char8* filter, ref int8* attrs, uint32 attrsonly, ldapcontrolA** ServerControls, ldapcontrolA** ClientControls, out LDAP_TIMEVAL timeout, uint32 SizeLimit, LDAPMessage** res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_check_filterW(out ldap ld, PWSTR SearchFilter);
+		public static extern uint32 ldap_check_filterW(out ldap ld, char16* SearchFilter);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_check_filterA(out ldap ld, PSTR SearchFilter);
+		public static extern uint32 ldap_check_filterA(out ldap ld, char8* SearchFilter);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modifyW(out ldap ld, PWSTR dn, out ldapmodW* mods);
+		public static extern uint32 ldap_modifyW(out ldap ld, char16* dn, out ldapmodW* mods);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modifyA(out ldap ld, PSTR dn, out ldapmodA* mods);
+		public static extern uint32 ldap_modifyA(out ldap ld, char8* dn, out ldapmodA* mods);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_sW(out ldap ld, PWSTR dn, out ldapmodW* mods);
+		public static extern uint32 ldap_modify_sW(out ldap ld, char16* dn, out ldapmodW* mods);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_sA(out ldap ld, PSTR dn, out ldapmodA* mods);
+		public static extern uint32 ldap_modify_sA(out ldap ld, char8* dn, out ldapmodA* mods);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_extW(out ldap ld, PWSTR dn, out ldapmodW* mods, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_modify_extW(out ldap ld, char16* dn, out ldapmodW* mods, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_extA(out ldap ld, PSTR dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_modify_extA(out ldap ld, char8* dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_ext_sW(out ldap ld, PWSTR dn, out ldapmodW* mods, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
+		public static extern uint32 ldap_modify_ext_sW(out ldap ld, char16* dn, out ldapmodW* mods, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_ext_sA(out ldap ld, PSTR dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_modify_ext_sA(out ldap ld, char8* dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify(out ldap ld, PSTR dn, out ldapmodA* mods);
+		public static extern uint32 ldap_modify(out ldap ld, char8* dn, out ldapmodA* mods);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_s(out ldap ld, PSTR dn, out ldapmodA* mods);
+		public static extern uint32 ldap_modify_s(out ldap ld, char8* dn, out ldapmodA* mods);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_ext(out ldap ld, PSTR dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_modify_ext(out ldap ld, char8* dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modify_ext_s(out ldap ld, PSTR dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_modify_ext_s(out ldap ld, char8* dn, out ldapmodA* mods, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn2W(out ldap ExternalHandle, PWSTR DistinguishedName, PWSTR NewDistinguishedName, int32 DeleteOldRdn);
+		public static extern uint32 ldap_modrdn2W(out ldap ExternalHandle, char16* DistinguishedName, char16* NewDistinguishedName, int32 DeleteOldRdn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn2A(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName, int32 DeleteOldRdn);
+		public static extern uint32 ldap_modrdn2A(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName, int32 DeleteOldRdn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdnW(out ldap ExternalHandle, PWSTR DistinguishedName, PWSTR NewDistinguishedName);
+		public static extern uint32 ldap_modrdnW(out ldap ExternalHandle, char16* DistinguishedName, char16* NewDistinguishedName);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdnA(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName);
+		public static extern uint32 ldap_modrdnA(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn2_sW(out ldap ExternalHandle, PWSTR DistinguishedName, PWSTR NewDistinguishedName, int32 DeleteOldRdn);
+		public static extern uint32 ldap_modrdn2_sW(out ldap ExternalHandle, char16* DistinguishedName, char16* NewDistinguishedName, int32 DeleteOldRdn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn2_sA(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName, int32 DeleteOldRdn);
+		public static extern uint32 ldap_modrdn2_sA(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName, int32 DeleteOldRdn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn_sW(out ldap ExternalHandle, PWSTR DistinguishedName, PWSTR NewDistinguishedName);
+		public static extern uint32 ldap_modrdn_sW(out ldap ExternalHandle, char16* DistinguishedName, char16* NewDistinguishedName);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn_sA(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName);
+		public static extern uint32 ldap_modrdn_sA(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn2(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName, int32 DeleteOldRdn);
+		public static extern uint32 ldap_modrdn2(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName, int32 DeleteOldRdn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName);
+		public static extern uint32 ldap_modrdn(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn2_s(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName, int32 DeleteOldRdn);
+		public static extern uint32 ldap_modrdn2_s(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName, int32 DeleteOldRdn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_modrdn_s(out ldap ExternalHandle, PSTR DistinguishedName, PSTR NewDistinguishedName);
+		public static extern uint32 ldap_modrdn_s(out ldap ExternalHandle, char8* DistinguishedName, char8* NewDistinguishedName);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_rename_extW(out ldap ld, PWSTR dn, PWSTR NewRDN, PWSTR NewParent, int32 DeleteOldRdn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_rename_extW(out ldap ld, char16* dn, char16* NewRDN, char16* NewParent, int32 DeleteOldRdn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_rename_extA(out ldap ld, PSTR dn, PSTR NewRDN, PSTR NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_rename_extA(out ldap ld, char8* dn, char8* NewRDN, char8* NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_rename_ext_sW(out ldap ld, PWSTR dn, PWSTR NewRDN, PWSTR NewParent, int32 DeleteOldRdn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
+		public static extern uint32 ldap_rename_ext_sW(out ldap ld, char16* dn, char16* NewRDN, char16* NewParent, int32 DeleteOldRdn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_rename_ext_sA(out ldap ld, PSTR dn, PSTR NewRDN, PSTR NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_rename_ext_sA(out ldap ld, char8* dn, char8* NewRDN, char8* NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_rename_ext(out ldap ld, PSTR dn, PSTR NewRDN, PSTR NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_rename_ext(out ldap ld, char8* dn, char8* NewRDN, char8* NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_rename_ext_s(out ldap ld, PSTR dn, PSTR NewRDN, PSTR NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_rename_ext_s(out ldap ld, char8* dn, char8* NewRDN, char8* NewParent, int32 DeleteOldRdn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_addW(out ldap ld, PWSTR dn, out ldapmodW* attrs);
+		public static extern uint32 ldap_addW(out ldap ld, char16* dn, out ldapmodW* attrs);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_addA(out ldap ld, PSTR dn, out ldapmodA* attrs);
+		public static extern uint32 ldap_addA(out ldap ld, char8* dn, out ldapmodA* attrs);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_sW(out ldap ld, PWSTR dn, out ldapmodW* attrs);
+		public static extern uint32 ldap_add_sW(out ldap ld, char16* dn, out ldapmodW* attrs);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_sA(out ldap ld, PSTR dn, out ldapmodA* attrs);
+		public static extern uint32 ldap_add_sA(out ldap ld, char8* dn, out ldapmodA* attrs);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_extW(out ldap ld, PWSTR dn, out ldapmodW* attrs, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_add_extW(out ldap ld, char16* dn, out ldapmodW* attrs, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_extA(out ldap ld, PSTR dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_add_extA(out ldap ld, char8* dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_ext_sW(out ldap ld, PWSTR dn, out ldapmodW* attrs, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
+		public static extern uint32 ldap_add_ext_sW(out ldap ld, char16* dn, out ldapmodW* attrs, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_ext_sA(out ldap ld, PSTR dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_add_ext_sA(out ldap ld, char8* dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add(out ldap ld, PSTR dn, out ldapmodA* attrs);
+		public static extern uint32 ldap_add(out ldap ld, char8* dn, out ldapmodA* attrs);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_s(out ldap ld, PSTR dn, out ldapmodA* attrs);
+		public static extern uint32 ldap_add_s(out ldap ld, char8* dn, out ldapmodA* attrs);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_ext(out ldap ld, PSTR dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_add_ext(out ldap ld, char8* dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_add_ext_s(out ldap ld, PSTR dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_add_ext_s(out ldap ld, char8* dn, out ldapmodA* attrs, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compareW(out ldap ld, PWSTR dn, PWSTR attr, PWSTR value);
+		public static extern uint32 ldap_compareW(out ldap ld, char16* dn, char16* attr, char16* value);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compareA(out ldap ld, PSTR dn, PSTR attr, PSTR value);
+		public static extern uint32 ldap_compareA(out ldap ld, char8* dn, char8* attr, char8* value);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_sW(out ldap ld, PWSTR dn, PWSTR attr, PWSTR value);
+		public static extern uint32 ldap_compare_sW(out ldap ld, char16* dn, char16* attr, char16* value);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_sA(out ldap ld, PSTR dn, PSTR attr, PSTR value);
+		public static extern uint32 ldap_compare_sA(out ldap ld, char8* dn, char8* attr, char8* value);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare(out ldap ld, PSTR dn, PSTR attr, PSTR value);
+		public static extern uint32 ldap_compare(out ldap ld, char8* dn, char8* attr, char8* value);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_s(out ldap ld, PSTR dn, PSTR attr, PSTR value);
+		public static extern uint32 ldap_compare_s(out ldap ld, char8* dn, char8* attr, char8* value);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_extW(out ldap ld, PWSTR dn, PWSTR Attr, PWSTR Value, LDAP_BERVAL* Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_compare_extW(out ldap ld, char16* dn, char16* Attr, char16* Value, LDAP_BERVAL* Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_extA(out ldap ld, PSTR dn, PSTR Attr, PSTR Value, LDAP_BERVAL* Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_compare_extA(out ldap ld, char8* dn, char8* Attr, char8* Value, LDAP_BERVAL* Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_ext_sW(out ldap ld, PWSTR dn, PWSTR Attr, PWSTR Value, LDAP_BERVAL* Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
+		public static extern uint32 ldap_compare_ext_sW(out ldap ld, char16* dn, char16* Attr, char16* Value, LDAP_BERVAL* Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_ext_sA(out ldap ld, PSTR dn, PSTR Attr, PSTR Value, LDAP_BERVAL* Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_compare_ext_sA(out ldap ld, char8* dn, char8* Attr, char8* Value, LDAP_BERVAL* Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_ext(out ldap ld, PSTR dn, PSTR Attr, PSTR Value, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_compare_ext(out ldap ld, char8* dn, char8* Attr, char8* Value, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_compare_ext_s(out ldap ld, PSTR dn, PSTR Attr, PSTR Value, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_compare_ext_s(out ldap ld, char8* dn, char8* Attr, char8* Value, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_deleteW(out ldap ld, PWSTR dn);
+		public static extern uint32 ldap_deleteW(out ldap ld, char16* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_deleteA(out ldap ld, PSTR dn);
+		public static extern uint32 ldap_deleteA(out ldap ld, char8* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_sW(out ldap ld, PWSTR dn);
+		public static extern uint32 ldap_delete_sW(out ldap ld, char16* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_sA(out ldap ld, PSTR dn);
+		public static extern uint32 ldap_delete_sA(out ldap ld, char8* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_extW(out ldap ld, PWSTR dn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_delete_extW(out ldap ld, char16* dn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_extA(out ldap ld, PSTR dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_delete_extA(out ldap ld, char8* dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_ext_sW(out ldap ld, PWSTR dn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
+		public static extern uint32 ldap_delete_ext_sW(out ldap ld, char16* dn, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_ext_sA(out ldap ld, PSTR dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_delete_ext_sA(out ldap ld, char8* dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete(out ldap ld, PSTR dn);
+		public static extern uint32 ldap_delete(out ldap ld, char8* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_s(out ldap ld, PSTR dn);
+		public static extern uint32 ldap_delete_s(out ldap ld, char8* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_ext(out ldap ld, PSTR dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_delete_ext(out ldap ld, char8* dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_delete_ext_s(out ldap ld, PSTR dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
+		public static extern uint32 ldap_delete_ext_s(out ldap ld, char8* dn, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_abandon(out ldap ld, uint32 msgid);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -663,13 +663,13 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_result2error(out ldap ld, out LDAPMessage res, uint32 freeit);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_resultW(out ldap Connection, out LDAPMessage ResultMessage, out uint32 ReturnCode, PWSTR* MatchedDNs, PWSTR* ErrorMessage, uint16*** Referrals, out ldapcontrolW** ServerControls, BOOLEAN Freeit);
+		public static extern uint32 ldap_parse_resultW(out ldap Connection, out LDAPMessage ResultMessage, out uint32 ReturnCode, char16** MatchedDNs, char16** ErrorMessage, uint16*** Referrals, out ldapcontrolW** ServerControls, bool Freeit);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_resultA(out ldap Connection, out LDAPMessage ResultMessage, out uint32 ReturnCode, PSTR* MatchedDNs, PSTR* ErrorMessage, int8*** Referrals, out ldapcontrolA** ServerControls, BOOLEAN Freeit);
+		public static extern uint32 ldap_parse_resultA(out ldap Connection, out LDAPMessage ResultMessage, out uint32 ReturnCode, PSTR* MatchedDNs, PSTR* ErrorMessage, int8*** Referrals, out ldapcontrolA** ServerControls, bool Freeit);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_extended_resultA(out ldap Connection, out LDAPMessage ResultMessage, PSTR* ResultOID, out LDAP_BERVAL* ResultData, BOOLEAN Freeit);
+		public static extern uint32 ldap_parse_extended_resultA(out ldap Connection, out LDAPMessage ResultMessage, PSTR* ResultOID, out LDAP_BERVAL* ResultData, bool Freeit);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_extended_resultW(out ldap Connection, out LDAPMessage ResultMessage, PWSTR* ResultOID, out LDAP_BERVAL* ResultData, BOOLEAN Freeit);
+		public static extern uint32 ldap_parse_extended_resultW(out ldap Connection, out LDAPMessage ResultMessage, char16** ResultOID, out LDAP_BERVAL* ResultData, bool Freeit);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_controls_freeA(out ldapcontrolA* Controls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -683,7 +683,7 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_free_controlsA(out ldapcontrolA* Controls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_result(out ldap Connection, out LDAPMessage ResultMessage, out uint32 ReturnCode, PSTR* MatchedDNs, PSTR* ErrorMessage, PSTR** Referrals, out ldapcontrolA** ServerControls, BOOLEAN Freeit);
+		public static extern uint32 ldap_parse_result(out ldap Connection, out LDAPMessage ResultMessage, out uint32 ReturnCode, PSTR* MatchedDNs, PSTR* ErrorMessage, PSTR** Referrals, out ldapcontrolA** ServerControls, bool Freeit);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_controls_free(out ldapcontrolA* Controls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -691,13 +691,13 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_free_controls(out ldapcontrolA* Controls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR ldap_err2stringW(uint32 err);
+		public static extern char16* ldap_err2stringW(uint32 err);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_err2stringA(uint32 err);
+		public static extern char8* ldap_err2stringA(uint32 err);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_err2string(uint32 err);
+		public static extern char8* ldap_err2string(uint32 err);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ldap_perror(out ldap ld, PSTR msg);
+		public static extern void ldap_perror(out ldap ld, char8* msg);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern LDAPMessage* ldap_first_entry(out ldap ld, out LDAPMessage res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -705,29 +705,29 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_count_entries(out ldap ld, out LDAPMessage res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR ldap_first_attributeW(out ldap ld, out LDAPMessage entry, out berelement* ptr);
+		public static extern char16* ldap_first_attributeW(out ldap ld, out LDAPMessage entry, out berelement* ptr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_first_attributeA(out ldap ld, out LDAPMessage entry, out berelement* ptr);
+		public static extern char8* ldap_first_attributeA(out ldap ld, out LDAPMessage entry, out berelement* ptr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_first_attribute(out ldap ld, out LDAPMessage entry, out berelement* ptr);
+		public static extern char8* ldap_first_attribute(out ldap ld, out LDAPMessage entry, out berelement* ptr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR ldap_next_attributeW(out ldap ld, out LDAPMessage entry, out berelement ptr);
+		public static extern char16* ldap_next_attributeW(out ldap ld, out LDAPMessage entry, out berelement ptr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_next_attributeA(out ldap ld, out LDAPMessage entry, out berelement ptr);
+		public static extern char8* ldap_next_attributeA(out ldap ld, out LDAPMessage entry, out berelement ptr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_next_attribute(out ldap ld, out LDAPMessage entry, out berelement ptr);
+		public static extern char8* ldap_next_attribute(out ldap ld, out LDAPMessage entry, out berelement ptr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR* ldap_get_valuesW(out ldap ld, out LDAPMessage entry, PWSTR attr);
+		public static extern char16** ldap_get_valuesW(out ldap ld, out LDAPMessage entry, char16* attr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR* ldap_get_valuesA(out ldap ld, out LDAPMessage entry, PSTR attr);
+		public static extern PSTR* ldap_get_valuesA(out ldap ld, out LDAPMessage entry, char8* attr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR* ldap_get_values(out ldap ld, out LDAPMessage entry, PSTR attr);
+		public static extern PSTR* ldap_get_values(out ldap ld, out LDAPMessage entry, char8* attr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern LDAP_BERVAL** ldap_get_values_lenW(out ldap ExternalHandle, out LDAPMessage Message, PWSTR attr);
+		public static extern LDAP_BERVAL** ldap_get_values_lenW(out ldap ExternalHandle, out LDAPMessage Message, char16* attr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern LDAP_BERVAL** ldap_get_values_lenA(out ldap ExternalHandle, out LDAPMessage Message, PSTR attr);
+		public static extern LDAP_BERVAL** ldap_get_values_lenA(out ldap ExternalHandle, out LDAPMessage Message, char8* attr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern LDAP_BERVAL** ldap_get_values_len(out ldap ExternalHandle, out LDAPMessage Message, PSTR attr);
+		public static extern LDAP_BERVAL** ldap_get_values_len(out ldap ExternalHandle, out LDAPMessage Message, char8* attr);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_count_valuesW(PWSTR* vals);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -745,47 +745,47 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_value_free_len(out LDAP_BERVAL* vals);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR ldap_get_dnW(out ldap ld, out LDAPMessage entry);
+		public static extern char16* ldap_get_dnW(out ldap ld, out LDAPMessage entry);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_get_dnA(out ldap ld, out LDAPMessage entry);
+		public static extern char8* ldap_get_dnA(out ldap ld, out LDAPMessage entry);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_get_dn(out ldap ld, out LDAPMessage entry);
+		public static extern char8* ldap_get_dn(out ldap ld, out LDAPMessage entry);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR* ldap_explode_dnW(PWSTR dn, uint32 notypes);
+		public static extern char16** ldap_explode_dnW(char16* dn, uint32 notypes);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR* ldap_explode_dnA(PSTR dn, uint32 notypes);
+		public static extern PSTR* ldap_explode_dnA(char8* dn, uint32 notypes);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR* ldap_explode_dn(PSTR dn, uint32 notypes);
+		public static extern PSTR* ldap_explode_dn(char8* dn, uint32 notypes);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR ldap_dn2ufnW(PWSTR dn);
+		public static extern char16* ldap_dn2ufnW(char16* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_dn2ufnA(PSTR dn);
+		public static extern char8* ldap_dn2ufnA(char8* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR ldap_dn2ufn(PSTR dn);
+		public static extern char8* ldap_dn2ufn(char8* dn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ldap_memfreeW(PWSTR Block);
+		public static extern void ldap_memfreeW(char16* Block);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ldap_memfreeA(PSTR Block);
+		public static extern void ldap_memfreeA(char8* Block);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ber_bvfree(out LDAP_BERVAL bv);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ldap_memfree(PSTR Block);
+		public static extern void ldap_memfree(char8* Block);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_ufn2dnW(PWSTR ufn, out PWSTR pDn);
+		public static extern uint32 ldap_ufn2dnW(char16* ufn, out char16* pDn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_ufn2dnA(PSTR ufn, out PSTR pDn);
+		public static extern uint32 ldap_ufn2dnA(char8* ufn, out char8* pDn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_ufn2dn(PSTR ufn, out PSTR pDn);
+		public static extern uint32 ldap_ufn2dn(char8* ufn, out char8* pDn);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_startup(out ldap_version_info version, out HANDLE Instance);
+		public static extern uint32 ldap_startup(out ldap_version_info version, out Handle Instance);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_cleanup(HANDLE hInstance);
+		public static extern uint32 ldap_cleanup(Handle hInstance);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_escape_filter_elementW(PSTR sourceFilterElement, uint32 sourceLength, PWSTR destFilterElement, uint32 destLength);
+		public static extern uint32 ldap_escape_filter_elementW(char8* sourceFilterElement, uint32 sourceLength, char16* destFilterElement, uint32 destLength);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_escape_filter_elementA(PSTR sourceFilterElement, uint32 sourceLength, PSTR destFilterElement, uint32 destLength);
+		public static extern uint32 ldap_escape_filter_elementA(char8* sourceFilterElement, uint32 sourceLength, char8* destFilterElement, uint32 destLength);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_escape_filter_element(PSTR sourceFilterElement, uint32 sourceLength, PSTR destFilterElement, uint32 destLength);
+		public static extern uint32 ldap_escape_filter_element(char8* sourceFilterElement, uint32 sourceLength, char8* destFilterElement, uint32 destLength);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_set_dbg_flags(uint32 NewFlags);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -801,15 +801,15 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_parse_sort_controlA(out ldap ExternalHandle, out ldapcontrolA* Control, out uint32 Result, PSTR* Attribute);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_sort_controlW(out ldap ExternalHandle, out ldapcontrolW* Control, out uint32 Result, PWSTR* Attribute);
+		public static extern uint32 ldap_parse_sort_controlW(out ldap ExternalHandle, out ldapcontrolW* Control, out uint32 Result, char16** Attribute);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_create_sort_control(out ldap ExternalHandle, out ldapsortkeyA* SortKeys, uint8 IsCritical, out ldapcontrolA* Control);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_sort_control(out ldap ExternalHandle, out ldapcontrolA* Control, out uint32 Result, out PSTR Attribute);
+		public static extern uint32 ldap_parse_sort_control(out ldap ExternalHandle, out ldapcontrolA* Control, out uint32 Result, out char8* Attribute);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_encode_sort_controlW(out ldap ExternalHandle, out ldapsortkeyW* SortKeys, out ldapcontrolW Control, BOOLEAN Criticality);
+		public static extern uint32 ldap_encode_sort_controlW(out ldap ExternalHandle, out ldapsortkeyW* SortKeys, out ldapcontrolW Control, bool Criticality);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_encode_sort_controlA(out ldap ExternalHandle, out ldapsortkeyA* SortKeys, out ldapcontrolA Control, BOOLEAN Criticality);
+		public static extern uint32 ldap_encode_sort_controlA(out ldap ExternalHandle, out ldapsortkeyA* SortKeys, out ldapcontrolA Control, bool Criticality);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_create_page_controlW(out ldap ExternalHandle, uint32 PageSize, out LDAP_BERVAL Cookie, uint8 IsCritical, out ldapcontrolW* Control);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -823,11 +823,11 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_parse_page_control(out ldap ExternalHandle, out ldapcontrolA* ServerControls, out uint32 TotalCount, out LDAP_BERVAL* Cookie);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldapsearch* ldap_search_init_pageW(out ldap ExternalHandle, PWSTR DistinguishedName, uint32 ScopeOfSearch, PWSTR SearchFilter, ref uint16* AttributeList, uint32 AttributesOnly, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, uint32 PageTimeLimit, uint32 TotalSizeLimit, out ldapsortkeyW* SortKeys);
+		public static extern ldapsearch* ldap_search_init_pageW(out ldap ExternalHandle, char16* DistinguishedName, uint32 ScopeOfSearch, char16* SearchFilter, ref uint16* AttributeList, uint32 AttributesOnly, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, uint32 PageTimeLimit, uint32 TotalSizeLimit, out ldapsortkeyW* SortKeys);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldapsearch* ldap_search_init_pageA(out ldap ExternalHandle, PSTR DistinguishedName, uint32 ScopeOfSearch, PSTR SearchFilter, ref int8* AttributeList, uint32 AttributesOnly, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, uint32 PageTimeLimit, uint32 TotalSizeLimit, out ldapsortkeyA* SortKeys);
+		public static extern ldapsearch* ldap_search_init_pageA(out ldap ExternalHandle, char8* DistinguishedName, uint32 ScopeOfSearch, char8* SearchFilter, ref int8* AttributeList, uint32 AttributesOnly, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, uint32 PageTimeLimit, uint32 TotalSizeLimit, out ldapsortkeyA* SortKeys);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern ldapsearch* ldap_search_init_page(out ldap ExternalHandle, PSTR DistinguishedName, uint32 ScopeOfSearch, PSTR SearchFilter, out int8* AttributeList, uint32 AttributesOnly, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, uint32 PageTimeLimit, uint32 TotalSizeLimit, out ldapsortkeyA* SortKeys);
+		public static extern ldapsearch* ldap_search_init_page(out ldap ExternalHandle, char8* DistinguishedName, uint32 ScopeOfSearch, char8* SearchFilter, out int8* AttributeList, uint32 AttributesOnly, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, uint32 PageTimeLimit, uint32 TotalSizeLimit, out ldapsortkeyA* SortKeys);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_get_next_page(out ldap ExternalHandle, out ldapsearch SearchHandle, uint32 PageSize, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -849,7 +849,7 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_start_tls_sA(out ldap ExternalHandle, out uint32 ServerReturnValue, out LDAPMessage* result, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN ldap_stop_tls_s(out ldap ExternalHandle);
+		public static extern bool ldap_stop_tls_s(out ldap ExternalHandle);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern LDAPMessage* ldap_first_reference(out ldap ld, out LDAPMessage res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -857,21 +857,21 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_count_references(out ldap ld, out LDAPMessage res);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_parse_referenceW(out ldap Connection, out LDAPMessage ResultMessage, out PWSTR* Referrals);
+		public static extern uint32 ldap_parse_referenceW(out ldap Connection, out LDAPMessage ResultMessage, out char16** Referrals);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_parse_referenceA(out ldap Connection, out LDAPMessage ResultMessage, out PSTR* Referrals);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_parse_reference(out ldap Connection, out LDAPMessage ResultMessage, out PSTR* Referrals);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_extended_operationW(out ldap ld, PWSTR Oid, out LDAP_BERVAL Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_extended_operationW(out ldap ld, char16* Oid, out LDAP_BERVAL Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_extended_operationA(out ldap ld, PSTR Oid, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_extended_operationA(out ldap ld, char8* Oid, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_extended_operation_sA(out ldap ExternalHandle, PSTR Oid, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out PSTR ReturnedOid, out LDAP_BERVAL* ReturnedData);
+		public static extern uint32 ldap_extended_operation_sA(out ldap ExternalHandle, char8* Oid, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out char8* ReturnedOid, out LDAP_BERVAL* ReturnedData);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_extended_operation_sW(out ldap ExternalHandle, PWSTR Oid, out LDAP_BERVAL Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out PWSTR ReturnedOid, out LDAP_BERVAL* ReturnedData);
+		public static extern uint32 ldap_extended_operation_sW(out ldap ExternalHandle, char16* Oid, out LDAP_BERVAL Data, out ldapcontrolW* ServerControls, out ldapcontrolW* ClientControls, out char16* ReturnedOid, out LDAP_BERVAL* ReturnedData);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ldap_extended_operation(out ldap ld, PSTR Oid, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
+		public static extern uint32 ldap_extended_operation(out ldap ld, char8* Oid, out LDAP_BERVAL Data, out ldapcontrolA* ServerControls, out ldapcontrolA* ClientControls, out uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ldap_close_extended_op(out ldap ld, uint32 MessageNumber);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -897,12 +897,12 @@ namespace Win32
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 ber_first_element(out berelement pBerElement, out uint32 pLen, out CHAR* ppOpaque);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ber_next_element(out berelement pBerElement, out uint32 pLen, PSTR opaque);
+		public static extern uint32 ber_next_element(out berelement pBerElement, out uint32 pLen, char8* opaque);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 ber_flatten(out berelement pBerElement, out LDAP_BERVAL* pBerVal);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 ber_printf(out berelement pBerElement, PSTR fmt);
+		public static extern int32 ber_printf(out berelement pBerElement, char8* fmt);
 		[Import("wldap32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ber_scanf(out berelement pBerElement, PSTR fmt);
+		public static extern uint32 ber_scanf(out berelement pBerElement, char8* fmt);
 	}
 }

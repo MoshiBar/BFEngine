@@ -85,7 +85,7 @@ namespace Win32
 		[CRepr]
 		public struct PWM_PIN_IS_STARTED_OUTPUT
 		{
-			public BOOLEAN IsStarted;
+			public bool IsStarted;
 		}
 		
 	}

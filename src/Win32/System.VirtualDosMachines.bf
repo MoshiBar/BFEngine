@@ -105,34 +105,34 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function uint32 DEBUGEVENTPROC(out DEBUG_EVENT param0, void* param1);
-		public function BOOL PROCESSENUMPROC(uint32 dwProcessId, uint32 dwAttributes, LPARAM lpUserDefined);
-		public function BOOL TASKENUMPROC(uint32 dwThreadId, uint16 hMod16, uint16 hTask16, LPARAM lpUserDefined);
-		public function BOOL TASKENUMPROCEX(uint32 dwThreadId, uint16 hMod16, uint16 hTask16, out int8 pszModName, out int8 pszFileName, LPARAM lpUserDefined);
-		public function BOOL VDMPROCESSEXCEPTIONPROC(out DEBUG_EVENT param0);
-		public function BOOL VDMGETTHREADSELECTORENTRYPROC(HANDLE param0, HANDLE param1, uint32 param2, out VDMLDT_ENTRY param3);
-		public function uint32 VDMGETPOINTERPROC(HANDLE param0, HANDLE param1, uint16 param2, uint32 param3, BOOL param4);
-		public function BOOL VDMGETCONTEXTPROC(HANDLE param0, HANDLE param1, out VDMCONTEXT param2);
-		public function BOOL VDMSETCONTEXTPROC(HANDLE param0, HANDLE param1, out VDMCONTEXT param2);
-		public function BOOL VDMKILLWOWPROC();
-		public function BOOL VDMDETECTWOWPROC();
-		public function BOOL VDMBREAKTHREADPROC(HANDLE param0);
-		public function BOOL VDMGETSELECTORMODULEPROC(HANDLE param0, HANDLE param1, uint16 param2, out uint32 param3, PSTR param4, uint32 param5, PSTR param6, uint32 param7);
-		public function BOOL VDMGETMODULESELECTORPROC(HANDLE param0, HANDLE param1, uint32 param2, PSTR param3, out uint16 param4);
-		public function BOOL VDMMODULEFIRSTPROC(HANDLE param0, HANDLE param1, out MODULEENTRY param2, DEBUGEVENTPROC param3, void* param4);
-		public function BOOL VDMMODULENEXTPROC(HANDLE param0, HANDLE param1, out MODULEENTRY param2, DEBUGEVENTPROC param3, void* param4);
-		public function BOOL VDMGLOBALFIRSTPROC(HANDLE param0, HANDLE param1, out GLOBALENTRY param2, uint16 param3, DEBUGEVENTPROC param4, void* param5);
-		public function BOOL VDMGLOBALNEXTPROC(HANDLE param0, HANDLE param1, out GLOBALENTRY param2, uint16 param3, DEBUGEVENTPROC param4, void* param5);
+		public function IntBool PROCESSENUMPROC(uint32 dwProcessId, uint32 dwAttributes, LPARAM lpUserDefined);
+		public function IntBool TASKENUMPROC(uint32 dwThreadId, uint16 hMod16, uint16 hTask16, LPARAM lpUserDefined);
+		public function IntBool TASKENUMPROCEX(uint32 dwThreadId, uint16 hMod16, uint16 hTask16, out int8 pszModName, out int8 pszFileName, LPARAM lpUserDefined);
+		public function IntBool VDMPROCESSEXCEPTIONPROC(out DEBUG_EVENT param0);
+		public function IntBool VDMGETTHREADSELECTORENTRYPROC(Handle param0, Handle param1, uint32 param2, out VDMLDT_ENTRY param3);
+		public function uint32 VDMGETPOINTERPROC(Handle param0, Handle param1, uint16 param2, uint32 param3, IntBool param4);
+		public function IntBool VDMGETCONTEXTPROC(Handle param0, Handle param1, out VDMCONTEXT param2);
+		public function IntBool VDMSETCONTEXTPROC(Handle param0, Handle param1, out VDMCONTEXT param2);
+		public function IntBool VDMKILLWOWPROC();
+		public function IntBool VDMDETECTWOWPROC();
+		public function IntBool VDMBREAKTHREADPROC(Handle param0);
+		public function IntBool VDMGETSELECTORMODULEPROC(Handle param0, Handle param1, uint16 param2, out uint32 param3, char8* param4, uint32 param5, char8* param6, uint32 param7);
+		public function IntBool VDMGETMODULESELECTORPROC(Handle param0, Handle param1, uint32 param2, char8* param3, out uint16 param4);
+		public function IntBool VDMMODULEFIRSTPROC(Handle param0, Handle param1, out MODULEENTRY param2, DEBUGEVENTPROC param3, void* param4);
+		public function IntBool VDMMODULENEXTPROC(Handle param0, Handle param1, out MODULEENTRY param2, DEBUGEVENTPROC param3, void* param4);
+		public function IntBool VDMGLOBALFIRSTPROC(Handle param0, Handle param1, out GLOBALENTRY param2, uint16 param3, DEBUGEVENTPROC param4, void* param5);
+		public function IntBool VDMGLOBALNEXTPROC(Handle param0, Handle param1, out GLOBALENTRY param2, uint16 param3, DEBUGEVENTPROC param4, void* param5);
 		public function int32 VDMENUMPROCESSWOWPROC(PROCESSENUMPROC param0, LPARAM param1);
 		public function int32 VDMENUMTASKWOWPROC(uint32 param0, TASKENUMPROC param1, LPARAM param2);
 		public function int32 VDMENUMTASKWOWEXPROC(uint32 param0, TASKENUMPROCEX param1, LPARAM param2);
-		public function BOOL VDMTERMINATETASKINWOWPROC(uint32 param0, uint16 param1);
-		public function BOOL VDMSTARTTASKINWOWPROC(uint32 param0, PSTR param1, uint16 param2);
-		public function uint32 VDMGETDBGFLAGSPROC(HANDLE param0);
-		public function BOOL VDMSETDBGFLAGSPROC(HANDLE param0, uint32 param1);
-		public function BOOL VDMISMODULELOADEDPROC(PSTR param0);
-		public function BOOL VDMGETSEGMENTINFOPROC(uint16 param0, uint32 param1, BOOL param2, VDM_SEGINFO param3);
-		public function BOOL VDMGETSYMBOLPROC(PSTR param0, uint16 param1, uint32 param2, BOOL param3, BOOL param4, uint8* param5, out uint32 param6);
-		public function BOOL VDMGETADDREXPRESSIONPROC(PSTR param0, PSTR param1, out uint16 param2, out uint32 param3, out uint16 param4);
+		public function IntBool VDMTERMINATETASKINWOWPROC(uint32 param0, uint16 param1);
+		public function IntBool VDMSTARTTASKINWOWPROC(uint32 param0, char8* param1, uint16 param2);
+		public function uint32 VDMGETDBGFLAGSPROC(Handle param0);
+		public function IntBool VDMSETDBGFLAGSPROC(Handle param0, uint32 param1);
+		public function IntBool VDMISMODULELOADEDPROC(char8* param0);
+		public function IntBool VDMGETSEGMENTINFOPROC(uint16 param0, uint32 param1, IntBool param2, VDM_SEGINFO param3);
+		public function IntBool VDMGETSYMBOLPROC(char8* param0, uint16 param1, uint32 param2, IntBool param3, IntBool param4, uint8* param5, out uint32 param6);
+		public function IntBool VDMGETADDREXPRESSIONPROC(char8* param0, char8* param1, out uint16 param2, out uint32 param3, out uint16 param4);
 		
 		// --- Structs ---
 		
@@ -227,16 +227,16 @@ namespace Win32
 			public uint16 Selector1;
 			public uint16 Selector2;
 			public uint16 Segment;
-			public CHAR[10] Module;
-			public CHAR[256] FileName;
+			public char8[10] Module;
+			public char8[256] FileName;
 			public uint16 Type;
 			public uint32 Length;
 		}
 		[CRepr]
 		public struct IMAGE_NOTE
 		{
-			public CHAR[10] Module;
-			public CHAR[256] FileName;
+			public char8[10] Module;
+			public char8[256] FileName;
 			public uint16 hModule;
 			public uint16 hTask;
 		}
@@ -244,10 +244,10 @@ namespace Win32
 		public struct MODULEENTRY
 		{
 			public uint32 dwSize;
-			public CHAR[10] szModule;
-			public HANDLE hModule;
+			public char8[10] szModule;
+			public Handle hModule;
 			public uint16 wcUsage;
-			public CHAR[256] szExePath;
+			public char8[256] szExePath;
 			public uint16 wNext;
 		}
 		[CRepr]
@@ -255,7 +255,7 @@ namespace Win32
 		{
 			public uint16 Seg;
 			public uint32 Offset;
-			public BOOL bPM;
+			public IntBool bPM;
 		}
 		[CRepr]
 		public struct VDM_SEGINFO
@@ -264,8 +264,8 @@ namespace Win32
 			public uint16 SegNumber;
 			public uint32 Length;
 			public uint16 Type;
-			public CHAR[9] ModuleName;
-			public CHAR[255] FileName;
+			public char8[9] ModuleName;
+			public char8[255] FileName;
 		}
 		[CRepr, Packed(4)]
 		public struct GLOBALENTRY
@@ -273,12 +273,12 @@ namespace Win32
 			public uint32 dwSize;
 			public uint32 dwAddress;
 			public uint32 dwBlockSize;
-			public HANDLE hBlock;
+			public Handle hBlock;
 			public uint16 wcLock;
 			public uint16 wcPageLock;
 			public uint16 wFlags;
-			public BOOL wHeapPresent;
-			public HANDLE hOwner;
+			public IntBool wHeapPresent;
+			public Handle hOwner;
 			public uint16 wType;
 			public uint16 wData;
 			public uint32 dwNext;

@@ -1,9 +1,13 @@
 using System;
+using static Win32.System.Com;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.Direct3D
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	static class Direct3D
 	{
 		// --- Constants ---
 		
@@ -64,7 +68,7 @@ namespace Win32
 		
 		// --- Enums ---
 		
-		public enum D3D_DRIVER_TYPE : int32
+		public enum DriverType : int32
 		{
 			UNKNOWN = 0,
 			HARDWARE = 1,
@@ -73,7 +77,7 @@ namespace Win32
 			SOFTWARE = 4,
 			WARP = 5,
 		}
-		public enum D3D_FEATURE_LEVEL : int32
+		public enum FeatureLevel : int32
 		{
 			_1_0_CORE = 4096,
 			_9_1 = 37120,
@@ -88,7 +92,7 @@ namespace Win32
 			_12_2 = 49664,
 		}
 		[AllowDuplicates]
-		public enum D3D_PRIMITIVE_TOPOLOGY : int32
+		public enum PrimitiveTopology : int32
 		{
 			D3D_PRIMITIVE_TOPOLOGY_UNDEFINED = 0,
 			D3D_PRIMITIVE_TOPOLOGY_POINTLIST = 1,
@@ -186,7 +190,7 @@ namespace Win32
 			D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST = 64,
 		}
 		[AllowDuplicates]
-		public enum D3D_PRIMITIVE : int32
+		public enum Primitive : int32
 		{
 			D3D_PRIMITIVE_UNDEFINED = 0,
 			D3D_PRIMITIVE_POINT = 1,
@@ -271,66 +275,30 @@ namespace Win32
 			D3D11_PRIMITIVE_31_CONTROL_POINT_PATCH = 38,
 			D3D11_PRIMITIVE_32_CONTROL_POINT_PATCH = 39,
 		}
-		[AllowDuplicates]
-		public enum D3D_SRV_DIMENSION : int32
+
+		public enum SRVDimension : int32
 		{
-			D3D_SRV_DIMENSION_UNKNOWN = 0,
-			D3D_SRV_DIMENSION_BUFFER = 1,
-			D3D_SRV_DIMENSION_TEXTURE1D = 2,
-			D3D_SRV_DIMENSION_TEXTURE1DARRAY = 3,
-			D3D_SRV_DIMENSION_TEXTURE2D = 4,
-			D3D_SRV_DIMENSION_TEXTURE2DARRAY = 5,
-			D3D_SRV_DIMENSION_TEXTURE2DMS = 6,
-			D3D_SRV_DIMENSION_TEXTURE2DMSARRAY = 7,
-			D3D_SRV_DIMENSION_TEXTURE3D = 8,
-			D3D_SRV_DIMENSION_TEXTURECUBE = 9,
-			D3D_SRV_DIMENSION_TEXTURECUBEARRAY = 10,
-			D3D_SRV_DIMENSION_BUFFEREX = 11,
-			D3D10_SRV_DIMENSION_UNKNOWN = 0,
-			D3D10_SRV_DIMENSION_BUFFER = 1,
-			D3D10_SRV_DIMENSION_TEXTURE1D = 2,
-			D3D10_SRV_DIMENSION_TEXTURE1DARRAY = 3,
-			D3D10_SRV_DIMENSION_TEXTURE2D = 4,
-			D3D10_SRV_DIMENSION_TEXTURE2DARRAY = 5,
-			D3D10_SRV_DIMENSION_TEXTURE2DMS = 6,
-			D3D10_SRV_DIMENSION_TEXTURE2DMSARRAY = 7,
-			D3D10_SRV_DIMENSION_TEXTURE3D = 8,
-			D3D10_SRV_DIMENSION_TEXTURECUBE = 9,
-			D3D10_1_SRV_DIMENSION_UNKNOWN = 0,
-			D3D10_1_SRV_DIMENSION_BUFFER = 1,
-			D3D10_1_SRV_DIMENSION_TEXTURE1D = 2,
-			D3D10_1_SRV_DIMENSION_TEXTURE1DARRAY = 3,
-			D3D10_1_SRV_DIMENSION_TEXTURE2D = 4,
-			D3D10_1_SRV_DIMENSION_TEXTURE2DARRAY = 5,
-			D3D10_1_SRV_DIMENSION_TEXTURE2DMS = 6,
-			D3D10_1_SRV_DIMENSION_TEXTURE2DMSARRAY = 7,
-			D3D10_1_SRV_DIMENSION_TEXTURE3D = 8,
-			D3D10_1_SRV_DIMENSION_TEXTURECUBE = 9,
-			D3D10_1_SRV_DIMENSION_TEXTURECUBEARRAY = 10,
-			D3D11_SRV_DIMENSION_UNKNOWN = 0,
-			D3D11_SRV_DIMENSION_BUFFER = 1,
-			D3D11_SRV_DIMENSION_TEXTURE1D = 2,
-			D3D11_SRV_DIMENSION_TEXTURE1DARRAY = 3,
-			D3D11_SRV_DIMENSION_TEXTURE2D = 4,
-			D3D11_SRV_DIMENSION_TEXTURE2DARRAY = 5,
-			D3D11_SRV_DIMENSION_TEXTURE2DMS = 6,
-			D3D11_SRV_DIMENSION_TEXTURE2DMSARRAY = 7,
-			D3D11_SRV_DIMENSION_TEXTURE3D = 8,
-			D3D11_SRV_DIMENSION_TEXTURECUBE = 9,
-			D3D11_SRV_DIMENSION_TEXTURECUBEARRAY = 10,
-			D3D11_SRV_DIMENSION_BUFFEREX = 11,
+			Unknown = 0,
+			Buffer = 1,
+			Texture1D = 2,
+			Texture1DArray = 3,
+			Texture2D = 4,
+			Texture2DArray = 5,
+			Texture2DMS = 6,
+			Texture2DMSArray = 7,
+			Texture3D = 8,
+			TextureCube = 9,
+			TextureCubeArray = 10,
+			BufferEx = 11,
 		}
 		[AllowDuplicates]
-		public enum D3D_INCLUDE_TYPE : int32
+		public enum IncludeType : int32
 		{
-			D3D_INCLUDE_LOCAL = 0,
-			D3D_INCLUDE_SYSTEM = 1,
-			D3D10_INCLUDE_LOCAL = 0,
-			D3D10_INCLUDE_SYSTEM = 1,
-			D3D_INCLUDE_FORCE_DWORD = 2147483647,
+			Local = 0,
+			System = 1,
 		}
 		[AllowDuplicates]
-		public enum D3D_SHADER_VARIABLE_CLASS : int32
+		public enum ShaderVariableClass : int32
 		{
 			D3D_SVC_SCALAR = 0,
 			D3D_SVC_VECTOR = 1,
@@ -363,143 +331,85 @@ namespace Win32
 			D3D11_SVF_INTERFACE_PARAMETER = 8,
 			D3D_SVF_FORCE_DWORD = 2147483647,
 		}
-		[AllowDuplicates]
-		public enum D3D_SHADER_VARIABLE_TYPE : int32
+
+		public enum ShaderVariableType : int32
 		{
-			D3D_SVT_VOID = 0,
-			D3D_SVT_BOOL = 1,
-			D3D_SVT_INT = 2,
-			D3D_SVT_FLOAT = 3,
-			D3D_SVT_STRING = 4,
-			D3D_SVT_TEXTURE = 5,
-			D3D_SVT_TEXTURE1D = 6,
-			D3D_SVT_TEXTURE2D = 7,
-			D3D_SVT_TEXTURE3D = 8,
-			D3D_SVT_TEXTURECUBE = 9,
-			D3D_SVT_SAMPLER = 10,
-			D3D_SVT_SAMPLER1D = 11,
-			D3D_SVT_SAMPLER2D = 12,
-			D3D_SVT_SAMPLER3D = 13,
-			D3D_SVT_SAMPLERCUBE = 14,
-			D3D_SVT_PIXELSHADER = 15,
-			D3D_SVT_VERTEXSHADER = 16,
-			D3D_SVT_PIXELFRAGMENT = 17,
-			D3D_SVT_VERTEXFRAGMENT = 18,
-			D3D_SVT_UINT = 19,
-			D3D_SVT_UINT8 = 20,
-			D3D_SVT_GEOMETRYSHADER = 21,
-			D3D_SVT_RASTERIZER = 22,
-			D3D_SVT_DEPTHSTENCIL = 23,
-			D3D_SVT_BLEND = 24,
-			D3D_SVT_BUFFER = 25,
-			D3D_SVT_CBUFFER = 26,
-			D3D_SVT_TBUFFER = 27,
-			D3D_SVT_TEXTURE1DARRAY = 28,
-			D3D_SVT_TEXTURE2DARRAY = 29,
-			D3D_SVT_RENDERTARGETVIEW = 30,
-			D3D_SVT_DEPTHSTENCILVIEW = 31,
-			D3D_SVT_TEXTURE2DMS = 32,
-			D3D_SVT_TEXTURE2DMSARRAY = 33,
-			D3D_SVT_TEXTURECUBEARRAY = 34,
-			D3D_SVT_HULLSHADER = 35,
-			D3D_SVT_DOMAINSHADER = 36,
-			D3D_SVT_INTERFACE_POINTER = 37,
-			D3D_SVT_COMPUTESHADER = 38,
-			D3D_SVT_DOUBLE = 39,
-			D3D_SVT_RWTEXTURE1D = 40,
-			D3D_SVT_RWTEXTURE1DARRAY = 41,
-			D3D_SVT_RWTEXTURE2D = 42,
-			D3D_SVT_RWTEXTURE2DARRAY = 43,
-			D3D_SVT_RWTEXTURE3D = 44,
-			D3D_SVT_RWBUFFER = 45,
-			D3D_SVT_BYTEADDRESS_BUFFER = 46,
-			D3D_SVT_RWBYTEADDRESS_BUFFER = 47,
-			D3D_SVT_STRUCTURED_BUFFER = 48,
-			D3D_SVT_RWSTRUCTURED_BUFFER = 49,
-			D3D_SVT_APPEND_STRUCTURED_BUFFER = 50,
-			D3D_SVT_CONSUME_STRUCTURED_BUFFER = 51,
-			D3D_SVT_MIN8FLOAT = 52,
-			D3D_SVT_MIN10FLOAT = 53,
-			D3D_SVT_MIN16FLOAT = 54,
-			D3D_SVT_MIN12INT = 55,
-			D3D_SVT_MIN16INT = 56,
-			D3D_SVT_MIN16UINT = 57,
-			D3D_SVT_INT16 = 58,
-			D3D_SVT_UINT16 = 59,
-			D3D_SVT_FLOAT16 = 60,
-			D3D_SVT_INT64 = 61,
-			D3D_SVT_UINT64 = 62,
-			D3D10_SVT_VOID = 0,
-			D3D10_SVT_BOOL = 1,
-			D3D10_SVT_INT = 2,
-			D3D10_SVT_FLOAT = 3,
-			D3D10_SVT_STRING = 4,
-			D3D10_SVT_TEXTURE = 5,
-			D3D10_SVT_TEXTURE1D = 6,
-			D3D10_SVT_TEXTURE2D = 7,
-			D3D10_SVT_TEXTURE3D = 8,
-			D3D10_SVT_TEXTURECUBE = 9,
-			D3D10_SVT_SAMPLER = 10,
-			D3D10_SVT_SAMPLER1D = 11,
-			D3D10_SVT_SAMPLER2D = 12,
-			D3D10_SVT_SAMPLER3D = 13,
-			D3D10_SVT_SAMPLERCUBE = 14,
-			D3D10_SVT_PIXELSHADER = 15,
-			D3D10_SVT_VERTEXSHADER = 16,
-			D3D10_SVT_PIXELFRAGMENT = 17,
-			D3D10_SVT_VERTEXFRAGMENT = 18,
-			D3D10_SVT_UINT = 19,
-			D3D10_SVT_UINT8 = 20,
-			D3D10_SVT_GEOMETRYSHADER = 21,
-			D3D10_SVT_RASTERIZER = 22,
-			D3D10_SVT_DEPTHSTENCIL = 23,
-			D3D10_SVT_BLEND = 24,
-			D3D10_SVT_BUFFER = 25,
-			D3D10_SVT_CBUFFER = 26,
-			D3D10_SVT_TBUFFER = 27,
-			D3D10_SVT_TEXTURE1DARRAY = 28,
-			D3D10_SVT_TEXTURE2DARRAY = 29,
-			D3D10_SVT_RENDERTARGETVIEW = 30,
-			D3D10_SVT_DEPTHSTENCILVIEW = 31,
-			D3D10_SVT_TEXTURE2DMS = 32,
-			D3D10_SVT_TEXTURE2DMSARRAY = 33,
-			D3D10_SVT_TEXTURECUBEARRAY = 34,
-			D3D11_SVT_HULLSHADER = 35,
-			D3D11_SVT_DOMAINSHADER = 36,
-			D3D11_SVT_INTERFACE_POINTER = 37,
-			D3D11_SVT_COMPUTESHADER = 38,
-			D3D11_SVT_DOUBLE = 39,
-			D3D11_SVT_RWTEXTURE1D = 40,
-			D3D11_SVT_RWTEXTURE1DARRAY = 41,
-			D3D11_SVT_RWTEXTURE2D = 42,
-			D3D11_SVT_RWTEXTURE2DARRAY = 43,
-			D3D11_SVT_RWTEXTURE3D = 44,
-			D3D11_SVT_RWBUFFER = 45,
-			D3D11_SVT_BYTEADDRESS_BUFFER = 46,
-			D3D11_SVT_RWBYTEADDRESS_BUFFER = 47,
-			D3D11_SVT_STRUCTURED_BUFFER = 48,
-			D3D11_SVT_RWSTRUCTURED_BUFFER = 49,
-			D3D11_SVT_APPEND_STRUCTURED_BUFFER = 50,
-			D3D11_SVT_CONSUME_STRUCTURED_BUFFER = 51,
-			D3D_SVT_FORCE_DWORD = 2147483647,
+			Void = 0,
+			Bool = 1,
+			Int = 2,
+			Float = 3,
+			String = 4,
+			Texture = 5,
+			Texture1D = 6,
+			Texture2D = 7,
+			Texture3D = 8,
+			TextureCube = 9,
+			Sampler = 10,
+			Sampler1D = 11,
+			Sampler2D = 12,
+			Sampler3D = 13,
+			SamplerCube = 14,
+			PixelShader = 15,
+			VertexShader = 16,
+			PixelFragment = 17,
+			VertexFragment = 18,
+			Uint = 19,
+			Uint8 = 20,
+			GeometryShader = 21,
+			Rasterizer = 22,
+			DepthStencil = 23,
+			Blend = 24,
+			Buffer = 25,
+			CBuffer = 26,
+			TBuffer = 27,
+			Texture1DArray = 28,
+			Texture2DArray = 29,
+			RENDERTARGETVIEW = 30,
+			DEPTHSTENCILVIEW = 31,
+			Texture2DMS = 32,
+			Texture2DMSArray = 33,
+			TextureCubeArray = 34,
+			HullShader = 35,
+			DomainShader = 36,
+			InterfacePointer = 37,
+			ComputeShader = 38,
+			Double = 39,
+			RWTexture1D = 40,
+			RWTexture1DArray = 41,
+			RWTexture2D = 42,
+			RWTexture2DArray = 43,
+			RWTexture3D = 44,
+			RWBuffer = 45,
+			ByteAddressBuffer = 46,
+			RWByteAddressBuffer = 47,
+			StructuredBuffer = 48,
+			RWStructuredBuffer = 49,
+			AppendStructuredBuffer = 50,
+			ConsumeStructuredBuffer = 51,
+			Min8Float = 52,
+			Min10Float = 53,
+			Min16Float = 54,
+			Min12Int = 55,
+			Min16Int = 56,
+			Min16Uint = 57,
+			Int16 = 58,
+			Uint16 = 59,
+			Float16 = 60,
+			Int64 = 61,
+			Uint64 = 62,
 		}
+
 		[AllowDuplicates]
-		public enum D3D_SHADER_INPUT_FLAGS : int32
+		public enum ShaderInputFlags : int32
 		{
-			D3D_SIF_USERPACKED = 1,
-			D3D_SIF_COMPARISON_SAMPLER = 2,
-			D3D_SIF_TEXTURE_COMPONENT_0 = 4,
-			D3D_SIF_TEXTURE_COMPONENT_1 = 8,
-			D3D_SIF_TEXTURE_COMPONENTS = 12,
-			D3D_SIF_UNUSED = 16,
-			D3D10_SIF_USERPACKED = 1,
-			D3D10_SIF_COMPARISON_SAMPLER = 2,
-			D3D10_SIF_TEXTURE_COMPONENT_0 = 4,
-			D3D10_SIF_TEXTURE_COMPONENT_1 = 8,
-			D3D10_SIF_TEXTURE_COMPONENTS = 12,
-			D3D_SIF_FORCE_DWORD = 2147483647,
+			USERPACKED = 1,
+			COMPARISON_SAMPLER = 2,
+			TEXTURE_COMPONENT_0 = 4,
+			TEXTURE_COMPONENT_1 = 8,
+			TEXTURE_COMPONENTS = 12,
+			UNUSED = 16,
 		}
-		[AllowDuplicates]
+		//[AllowDuplicates]
 		public enum D3D_SHADER_INPUT_TYPE : int32
 		{
 			D3D_SIT_CBUFFER = 0,
@@ -516,18 +426,6 @@ namespace Win32
 			D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = 11,
 			D3D_SIT_RTACCELERATIONSTRUCTURE = 12,
 			D3D_SIT_UAV_FEEDBACKTEXTURE = 13,
-			D3D10_SIT_CBUFFER = 0,
-			D3D10_SIT_TBUFFER = 1,
-			D3D10_SIT_TEXTURE = 2,
-			D3D10_SIT_SAMPLER = 3,
-			D3D11_SIT_UAV_RWTYPED = 4,
-			D3D11_SIT_STRUCTURED = 5,
-			D3D11_SIT_UAV_RWSTRUCTURED = 6,
-			D3D11_SIT_BYTEADDRESS = 7,
-			D3D11_SIT_UAV_RWBYTEADDRESS = 8,
-			D3D11_SIT_UAV_APPEND_STRUCTURED = 9,
-			D3D11_SIT_UAV_CONSUME_STRUCTURED = 10,
-			D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = 11,
 		}
 		[AllowDuplicates]
 		public enum D3D_SHADER_CBUFFER_FLAGS : int32
@@ -550,8 +448,8 @@ namespace Win32
 			D3D11_CT_INTERFACE_POINTERS = 2,
 			D3D11_CT_RESOURCE_BIND_INFO = 3,
 		}
-		[AllowDuplicates]
-		public enum D3D_NAME : int32
+
+		public enum Name : int32
 		{
 			D3D_NAME_UNDEFINED = 0,
 			D3D_NAME_POSITION = 1,
@@ -580,36 +478,9 @@ namespace Win32
 			D3D_NAME_DEPTH_LESS_EQUAL = 68,
 			D3D_NAME_STENCIL_REF = 69,
 			D3D_NAME_INNER_COVERAGE = 70,
-			D3D10_NAME_UNDEFINED = 0,
-			D3D10_NAME_POSITION = 1,
-			D3D10_NAME_CLIP_DISTANCE = 2,
-			D3D10_NAME_CULL_DISTANCE = 3,
-			D3D10_NAME_RENDER_TARGET_ARRAY_INDEX = 4,
-			D3D10_NAME_VIEWPORT_ARRAY_INDEX = 5,
-			D3D10_NAME_VERTEX_ID = 6,
-			D3D10_NAME_PRIMITIVE_ID = 7,
-			D3D10_NAME_INSTANCE_ID = 8,
-			D3D10_NAME_IS_FRONT_FACE = 9,
-			D3D10_NAME_SAMPLE_INDEX = 10,
-			D3D10_NAME_TARGET = 64,
-			D3D10_NAME_DEPTH = 65,
-			D3D10_NAME_COVERAGE = 66,
-			D3D11_NAME_FINAL_QUAD_EDGE_TESSFACTOR = 11,
-			D3D11_NAME_FINAL_QUAD_INSIDE_TESSFACTOR = 12,
-			D3D11_NAME_FINAL_TRI_EDGE_TESSFACTOR = 13,
-			D3D11_NAME_FINAL_TRI_INSIDE_TESSFACTOR = 14,
-			D3D11_NAME_FINAL_LINE_DETAIL_TESSFACTOR = 15,
-			D3D11_NAME_FINAL_LINE_DENSITY_TESSFACTOR = 16,
-			D3D11_NAME_DEPTH_GREATER_EQUAL = 67,
-			D3D11_NAME_DEPTH_LESS_EQUAL = 68,
-			D3D11_NAME_STENCIL_REF = 69,
-			D3D11_NAME_INNER_COVERAGE = 70,
-			D3D12_NAME_BARYCENTRICS = 23,
-			D3D12_NAME_SHADINGRATE = 24,
-			D3D12_NAME_CULLPRIMITIVE = 25,
 		}
-		[AllowDuplicates]
-		public enum D3D_RESOURCE_RETURN_TYPE : int32
+
+		public enum ResourceReturnType : int32
 		{
 			D3D_RETURN_TYPE_UNORM = 1,
 			D3D_RETURN_TYPE_SNORM = 2,
@@ -619,58 +490,31 @@ namespace Win32
 			D3D_RETURN_TYPE_MIXED = 6,
 			D3D_RETURN_TYPE_DOUBLE = 7,
 			D3D_RETURN_TYPE_CONTINUED = 8,
-			D3D10_RETURN_TYPE_UNORM = 1,
-			D3D10_RETURN_TYPE_SNORM = 2,
-			D3D10_RETURN_TYPE_SINT = 3,
-			D3D10_RETURN_TYPE_UINT = 4,
-			D3D10_RETURN_TYPE_FLOAT = 5,
-			D3D10_RETURN_TYPE_MIXED = 6,
-			D3D11_RETURN_TYPE_UNORM = 1,
-			D3D11_RETURN_TYPE_SNORM = 2,
-			D3D11_RETURN_TYPE_SINT = 3,
-			D3D11_RETURN_TYPE_UINT = 4,
-			D3D11_RETURN_TYPE_FLOAT = 5,
-			D3D11_RETURN_TYPE_MIXED = 6,
-			D3D11_RETURN_TYPE_DOUBLE = 7,
-			D3D11_RETURN_TYPE_CONTINUED = 8,
 		}
-		[AllowDuplicates]
-		public enum D3D_REGISTER_COMPONENT_TYPE : int32
+
+		public enum RegisterComponentType : int32
 		{
 			D3D_REGISTER_COMPONENT_UNKNOWN = 0,
 			D3D_REGISTER_COMPONENT_UINT32 = 1,
 			D3D_REGISTER_COMPONENT_SINT32 = 2,
 			D3D_REGISTER_COMPONENT_FLOAT32 = 3,
-			D3D10_REGISTER_COMPONENT_UNKNOWN = 0,
-			D3D10_REGISTER_COMPONENT_UINT32 = 1,
-			D3D10_REGISTER_COMPONENT_SINT32 = 2,
-			D3D10_REGISTER_COMPONENT_FLOAT32 = 3,
 		}
-		[AllowDuplicates]
-		public enum D3D_TESSELLATOR_DOMAIN : int32
+
+		public enum TessellatorDomain : int32
 		{
 			D3D_TESSELLATOR_DOMAIN_UNDEFINED = 0,
 			D3D_TESSELLATOR_DOMAIN_ISOLINE = 1,
 			D3D_TESSELLATOR_DOMAIN_TRI = 2,
 			D3D_TESSELLATOR_DOMAIN_QUAD = 3,
-			D3D11_TESSELLATOR_DOMAIN_UNDEFINED = 0,
-			D3D11_TESSELLATOR_DOMAIN_ISOLINE = 1,
-			D3D11_TESSELLATOR_DOMAIN_TRI = 2,
-			D3D11_TESSELLATOR_DOMAIN_QUAD = 3,
 		}
-		[AllowDuplicates]
-		public enum D3D_TESSELLATOR_PARTITIONING : int32
+
+		public enum TessellatorPartitioning : int32
 		{
 			D3D_TESSELLATOR_PARTITIONING_UNDEFINED = 0,
 			D3D_TESSELLATOR_PARTITIONING_INTEGER = 1,
 			D3D_TESSELLATOR_PARTITIONING_POW2 = 2,
 			D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD = 3,
 			D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN = 4,
-			D3D11_TESSELLATOR_PARTITIONING_UNDEFINED = 0,
-			D3D11_TESSELLATOR_PARTITIONING_INTEGER = 1,
-			D3D11_TESSELLATOR_PARTITIONING_POW2 = 2,
-			D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD = 3,
-			D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN = 4,
 		}
 		[AllowDuplicates]
 		public enum D3D_TESSELLATOR_OUTPUT_PRIMITIVE : int32
@@ -725,16 +569,10 @@ namespace Win32
 		[CRepr]
 		public struct D3D_SHADER_MACRO
 		{
-			public PSTR Name;
-			public PSTR Definition;
+			public char8* Name;
+			public char8* Definition;
 		}
-		[CRepr]
-		public struct D3DVECTOR
-		{
-			public float x;
-			public float y;
-			public float z;
-		}
+
 		[CRepr]
 		public struct D3DMATRIX
 		{
@@ -795,14 +633,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterDestructionCallback(PFN_DESTRUCTION_CALLBACK callbackFn, void* pData, out uint32 pCallbackID) mut => VT.RegisterDestructionCallback(ref this, callbackFn, pData, out pCallbackID);
-			public HRESULT UnregisterDestructionCallback(uint32 callbackID) mut => VT.UnregisterDestructionCallback(ref this, callbackID);
+			public HResult RegisterDestructionCallback(PFN_DESTRUCTION_CALLBACK callbackFn, void* pData, out uint32 pCallbackID) mut => VT.RegisterDestructionCallback(ref this, callbackFn, pData, out pCallbackID);
+			public HResult UnregisterDestructionCallback(uint32 callbackID) mut => VT.UnregisterDestructionCallback(ref this, callbackID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID3DDestructionNotifier self, PFN_DESTRUCTION_CALLBACK callbackFn, void* pData, out uint32 pCallbackID) RegisterDestructionCallback;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID3DDestructionNotifier self, uint32 callbackID) UnregisterDestructionCallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ID3DDestructionNotifier self, PFN_DESTRUCTION_CALLBACK callbackFn, void* pData, out uint32 pCallbackID) RegisterDestructionCallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ID3DDestructionNotifier self, uint32 callbackID) UnregisterDestructionCallback;
 			}
 		}
 		[CRepr]
@@ -811,14 +649,14 @@ namespace Win32
 			protected VTable* vt;
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Open(D3D_INCLUDE_TYPE IncludeType, PSTR pFileName, void* pParentData, void** ppData, out uint32 pBytes) mut => VT.Open(ref this, IncludeType, pFileName, pParentData, ppData, out pBytes);
-			public HRESULT Close(void* pData) mut => VT.Close(ref this, pData);
+			public HResult Open(IncludeType IncludeType, char8* pFileName, void* pParentData, void** ppData, out uint32 pBytes) mut => VT.Open(ref this, IncludeType, pFileName, pParentData, ppData, out pBytes);
+			public HResult Close(void* pData) mut => VT.Close(ref this, pData);
 
 			[CRepr]
 			public struct VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID3DInclude self, D3D_INCLUDE_TYPE IncludeType, PSTR pFileName, void* pParentData, void** ppData, out uint32 pBytes) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ID3DInclude self, void* pData) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ID3DInclude self, IncludeType IncludeType, char8* pFileName, void* pParentData, void** ppData, out uint32 pBytes) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ID3DInclude self, void* pData) Close;
 			}
 		}
 		

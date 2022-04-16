@@ -1,9 +1,14 @@
 using System;
+using static Win32.Graphics.Gdi;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows;
+using static Win32.Diagnostics.Debug;
 
 // namespace System.SystemServices
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	public static class SystemServices
 	{
 		// --- Constants ---
 		
@@ -2446,10 +2451,10 @@ namespace Win32
 		public const uint32 _NT_D3DVS_CONSTINTREG_MAX_V2_0 = 16;
 		public const uint32 _NT_D3DVS_CONSTINTREG_MAX_V2_1 = 16;
 		public const uint32 _NT_D3DVS_CONSTINTREG_MAX_V3_0 = 16;
-		public const uint32 _NT_D3DVS_CONSTBOOLREG_MAX_SW_DX9 = 2048;
-		public const uint32 _NT_D3DVS_CONSTBOOLREG_MAX_V2_0 = 16;
-		public const uint32 _NT_D3DVS_CONSTBOOLREG_MAX_V2_1 = 16;
-		public const uint32 _NT_D3DVS_CONSTBOOLREG_MAX_V3_0 = 16;
+		public const uint32 _NT_D3DVS_CONSTIntBoolREG_MAX_SW_DX9 = 2048;
+		public const uint32 _NT_D3DVS_CONSTIntBoolREG_MAX_V2_0 = 16;
+		public const uint32 _NT_D3DVS_CONSTIntBoolREG_MAX_V2_1 = 16;
+		public const uint32 _NT_D3DVS_CONSTIntBoolREG_MAX_V3_0 = 16;
 		public const uint32 _NT_D3DVS_ADDRREG_MAX_V1_1 = 1;
 		public const uint32 _NT_D3DVS_ADDRREG_MAX_V2_0 = 1;
 		public const uint32 _NT_D3DVS_ADDRREG_MAX_V2_1 = 1;
@@ -2499,9 +2504,9 @@ namespace Win32
 		public const uint32 _NT_D3DPS_CONSTREG_MAX_V2_0 = 32;
 		public const uint32 _NT_D3DPS_CONSTREG_MAX_V2_1 = 32;
 		public const uint32 _NT_D3DPS_CONSTREG_MAX_V3_0 = 224;
-		public const uint32 _NT_D3DPS_CONSTBOOLREG_MAX_SW_DX9 = 2048;
-		public const uint32 _NT_D3DPS_CONSTBOOLREG_MAX_V2_1 = 16;
-		public const uint32 _NT_D3DPS_CONSTBOOLREG_MAX_V3_0 = 16;
+		public const uint32 _NT_D3DPS_CONSTIntBoolREG_MAX_SW_DX9 = 2048;
+		public const uint32 _NT_D3DPS_CONSTIntBoolREG_MAX_V2_1 = 16;
+		public const uint32 _NT_D3DPS_CONSTIntBoolREG_MAX_V3_0 = 16;
 		public const uint32 _NT_D3DPS_CONSTINTREG_MAX_SW_DX9 = 2048;
 		public const uint32 _NT_D3DPS_CONSTINTREG_MAX_V2_1 = 16;
 		public const uint32 _NT_D3DPS_CONSTINTREG_MAX_V3_0 = 16;
@@ -3714,8 +3719,8 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function void PUMS_SCHEDULER_ENTRY_POINT(RTL_UMS_SCHEDULER_REASON Reason, uint ActivationPayload, void* SchedulerParam);
-		public function void PTERMINATION_HANDLER(BOOLEAN _abnormal_termination, uint64 EstablisherFrame);
-		public function uint32 POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(HANDLE Process, void* TableAddress, out uint32 Entries, out IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY* Functions);
+		public function void PTERMINATION_HANDLER(bool _abnormal_termination, uint64 EstablisherFrame);
+		public function uint32 POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK(Handle Process, void* TableAddress, out uint32 Entries, out IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY* Functions);
 		public function int32 PEXCEPTION_FILTER(out EXCEPTION_POINTERS ExceptionPointers, void* EstablisherFrame);
 		public function void PIMAGE_TLS_CALLBACK(void* DllHandle, uint32 Reason, void* Reserved);
 		public function void WORKERCALLBACKFUNC(void* param0);
@@ -3779,7 +3784,7 @@ namespace Win32
 			public struct _u_e__Struct
 			{
 				public uint32 dwValue;
-				public PWSTR pwszName;
+				public char16* pwszName;
 			}
 		}
 		[CRepr]
@@ -4025,7 +4030,7 @@ namespace Win32
 			public uint32 dbcp_size;
 			public uint32 dbcp_devicetype;
 			public uint32 dbcp_reserved;
-			public CHAR[0] dbcp_name;
+			public char8[0] dbcp_name;
 		}
 		[CRepr]
 		public struct DEV_BROADCAST_PORT_W
@@ -4051,7 +4056,7 @@ namespace Win32
 			public uint32 dbcc_devicetype;
 			public uint32 dbcc_reserved;
 			public Guid dbcc_classguid;
-			public CHAR[0] dbcc_name;
+			public char8[0] dbcc_name;
 		}
 		[CRepr]
 		public struct DEV_BROADCAST_DEVICEINTERFACE_W
@@ -4068,7 +4073,7 @@ namespace Win32
 			public uint32 dbch_size;
 			public uint32 dbch_devicetype;
 			public uint32 dbch_reserved;
-			public HANDLE dbch_handle;
+			public Handle dbch_handle;
 			public void* dbch_hdevnotify;
 			public Guid dbch_eventguid;
 			public int32 dbch_nameoffset;
@@ -4102,7 +4107,7 @@ namespace Win32
 		public struct _DEV_BROADCAST_USERDEFINED
 		{
 			public DEV_BROADCAST_HDR dbud_dbh;
-			public CHAR[0] dbud_szName;
+			public char8[0] dbud_szName;
 		}
 		[CRepr]
 		public struct AtlThunkData_t {}
@@ -4236,8 +4241,8 @@ namespace Win32
 		[CRepr]
 		public struct TOKEN_BNO_ISOLATION_INFORMATION
 		{
-			public PWSTR IsolationPrefix;
-			public BOOLEAN IsolationEnabled;
+			public char16* IsolationPrefix;
+			public bool IsolationEnabled;
 		}
 		[CRepr]
 		public struct NT_TIB32
@@ -4337,7 +4342,7 @@ namespace Win32
 		public struct PROCESS_MITIGATION_DEP_POLICY
 		{
 			public _Anonymous_e__Union Anonymous;
-			public BOOLEAN Permanent;
+			public bool Permanent;
 			
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
@@ -4610,7 +4615,7 @@ namespace Win32
 			public uint32 SiloId;
 			public uint32 SiloParentId;
 			public uint32 NumberOfProcesses;
-			public BOOLEAN IsInServerSilo;
+			public bool IsInServerSilo;
 			public uint8[3] Reserved;
 		}
 		[CRepr]
@@ -4619,7 +4624,7 @@ namespace Win32
 			public uint32 ServiceSessionId;
 			public SERVERSILO_STATE State;
 			public uint32 ExitStatus;
-			public BOOLEAN IsDownlevelContainer;
+			public bool IsDownlevelContainer;
 			public void* ApiSetSchema;
 			public void* HostApiSetSchema;
 		}
@@ -4712,7 +4717,7 @@ namespace Win32
 		{
 			public uint64 SourceStartingOffset;
 			public uint64 TargetOffset;
-			public HANDLE SourceFileHandle;
+			public Handle SourceFileHandle;
 			public uint32 Length;
 			public uint32 Flags;
 		}
@@ -4746,8 +4751,8 @@ namespace Win32
 		[CRepr]
 		public struct POWER_SESSION_CONNECT
 		{
-			public BOOLEAN Connected;
-			public BOOLEAN Console;
+			public bool Connected;
+			public bool Console;
 		}
 		[CRepr]
 		public struct POWER_SESSION_TIMEOUTS
@@ -4758,20 +4763,20 @@ namespace Win32
 		[CRepr]
 		public struct POWER_SESSION_RIT_STATE
 		{
-			public BOOLEAN Active;
+			public bool Active;
 			public uint64 LastInputTime;
 		}
 		[CRepr]
 		public struct POWER_SESSION_WINLOGON
 		{
 			public uint32 SessionId;
-			public BOOLEAN Console;
-			public BOOLEAN Locked;
+			public bool Console;
+			public bool Locked;
 		}
 		[CRepr]
 		public struct POWER_SESSION_ALLOW_EXTERNAL_DMA_DEVICES
 		{
-			public BOOLEAN IsAllowed;
+			public bool IsAllowed;
 		}
 		[CRepr]
 		public struct POWER_IDLE_RESILIENCY
@@ -4782,7 +4787,7 @@ namespace Win32
 		[CRepr]
 		public struct POWER_MONITOR_INVOCATION
 		{
-			public BOOLEAN Console;
+			public bool Console;
 			public POWER_MONITOR_REQUEST_REASON RequestReason;
 		}
 		[CRepr]
@@ -4807,7 +4812,7 @@ namespace Win32
 		[CRepr]
 		public struct POWER_PLATFORM_INFORMATION
 		{
-			public BOOLEAN AoAc;
+			public bool AoAc;
 		}
 		[CRepr]
 		public struct PPM_WMI_LEGACY_PERFSTATE
@@ -5099,8 +5104,8 @@ namespace Win32
 		public struct IMAGE_OS2_HEADER
 		{
 			public uint16 ne_magic;
-			public CHAR ne_ver;
-			public CHAR ne_rev;
+			public char8 ne_ver;
+			public char8 ne_rev;
 			public uint16 ne_enttab;
 			public uint16 ne_cbenttab;
 			public int32 ne_crc;
@@ -5467,7 +5472,7 @@ namespace Win32
 		public struct IMAGE_IMPORT_BY_NAME
 		{
 			public uint16 Hint;
-			public CHAR[0] Name;
+			public char8[0] Name;
 		}
 		[CRepr, Packed(4)]
 		public struct IMAGE_TLS_DIRECTORY64
@@ -5591,7 +5596,7 @@ namespace Win32
 		public struct IMAGE_RESOURCE_DIRECTORY_STRING
 		{
 			public uint16 Length;
-			public CHAR[0] NameString;
+			public char8[0] NameString;
 		}
 		[CRepr]
 		public struct IMAGE_RESOURCE_DIR_STRING_U
@@ -5760,7 +5765,7 @@ namespace Win32
 		{
 			public uint32 DataType;
 			public uint32 Length;
-			public BOOLEAN Unicode;
+			public bool Unicode;
 			public uint8[3] Reserved;
 			public uint8[0] Data;
 		}
@@ -5836,7 +5841,7 @@ namespace Win32
 			public struct _u_e__Union
 			{
 				public void* None;
-				public BOOLEAN BoolValue;
+				public bool BoolValue;
 				public int8 Int8Value;
 				public uint8 UInt8Value;
 				public int16 Int16Value;
@@ -5845,8 +5850,8 @@ namespace Win32
 				public uint32 UInt32Value;
 				public int64 Int64Value;
 				public uint64 UInt64Value;
-				public PSTR AnsiStringValue;
-				public PWSTR UnicodeStringValue;
+				public char8* AnsiStringValue;
+				public char16* UnicodeStringValue;
 			}
 		}
 		[CRepr]
@@ -5884,10 +5889,10 @@ namespace Win32
 		[CRepr]
 		public struct TAPE_GET_DRIVE_PARAMETERS
 		{
-			public BOOLEAN ECC;
-			public BOOLEAN Compression;
-			public BOOLEAN DataPadding;
-			public BOOLEAN ReportSetmarks;
+			public bool ECC;
+			public bool Compression;
+			public bool DataPadding;
+			public bool ReportSetmarks;
 			public uint32 DefaultBlockSize;
 			public uint32 MaximumBlockSize;
 			public uint32 MinimumBlockSize;
@@ -5899,10 +5904,10 @@ namespace Win32
 		[CRepr]
 		public struct TAPE_SET_DRIVE_PARAMETERS
 		{
-			public BOOLEAN ECC;
-			public BOOLEAN Compression;
-			public BOOLEAN DataPadding;
-			public BOOLEAN ReportSetmarks;
+			public bool ECC;
+			public bool Compression;
+			public bool DataPadding;
+			public bool ReportSetmarks;
 			public uint32 EOTWarningZoneSize;
 		}
 		[CRepr]
@@ -5912,7 +5917,7 @@ namespace Win32
 			public LARGE_INTEGER Remaining;
 			public uint32 BlockSize;
 			public uint32 PartitionCount;
-			public BOOLEAN WriteProtected;
+			public bool WriteProtected;
 		}
 		[CRepr]
 		public struct TAPE_SET_MEDIA_PARAMETERS
@@ -5980,7 +5985,7 @@ namespace Win32
 		[CRepr]
 		public struct TRANSACTION_BIND_INFORMATION
 		{
-			public HANDLE TmHandle;
+			public Handle TmHandle;
 		}
 		[CRepr]
 		public struct TRANSACTION_ENLISTMENT_PAIR
@@ -6009,7 +6014,7 @@ namespace Win32
 		[CRepr]
 		public struct RESOURCEMANAGER_COMPLETION_INFORMATION
 		{
-			public HANDLE IoCompletionPortHandle;
+			public Handle IoCompletionPortHandle;
 			public uint CompletionKey;
 		}
 		[CRepr]
@@ -6048,6 +6053,6 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterDeviceNotification(void* Handle);
+		public static extern IntBool UnregisterDeviceNotification(void* Handle);
 	}
 }

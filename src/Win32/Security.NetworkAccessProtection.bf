@@ -65,13 +65,13 @@ namespace Win32
 		public struct CountedString
 		{
 			public uint16 length;
-			public PWSTR string;
+			public char16* string;
 		}
 		[CRepr]
 		public struct IsolationInfo
 		{
 			public IsolationState isolationState;
-			public FILETIME probEndTime;
+			public FileTime probEndTime;
 			public CountedString failureUrl;
 		}
 		[CRepr]
@@ -79,25 +79,25 @@ namespace Win32
 		{
 			public IsolationState isolationState;
 			public ExtendedIsolationState extendedIsolationState;
-			public FILETIME probEndTime;
+			public FileTime probEndTime;
 			public CountedString failureUrl;
 		}
 		[CRepr]
 		public struct FailureCategoryMapping
 		{
-			public BOOL[5] mappingCompliance;
+			public IntBool[5] mappingCompliance;
 		}
 		[CRepr]
 		public struct CorrelationId
 		{
 			public Guid connId;
-			public FILETIME timeStamp;
+			public FileTime timeStamp;
 		}
 		[CRepr]
 		public struct ResultCodes
 		{
 			public uint16 count;
-			public HRESULT* results;
+			public HResult* results;
 		}
 		[CRepr]
 		public struct Ipv4Address
@@ -160,7 +160,7 @@ namespace Win32
 			public CountedString vendorName;
 			public Guid infoClsid;
 			public Guid configClsid;
-			public FILETIME registrationDate;
+			public FileTime registrationDate;
 			public uint32 componentType;
 		}
 		

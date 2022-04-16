@@ -21,92 +21,92 @@ namespace Win32
 		public const uint32 WINBIO_BIR_ALGIN_SIZE = 8;
 		public const uint32 FACILITY_WINBIO = 9;
 		public const uint32 FACILITY_NONE = 0;
-		public const HRESULT WINBIO_E_UNSUPPORTED_FACTOR = -2146861055;
-		public const HRESULT WINBIO_E_INVALID_UNIT = -2146861054;
-		public const HRESULT WINBIO_E_UNKNOWN_ID = -2146861053;
-		public const HRESULT WINBIO_E_CANCELED = -2146861052;
-		public const HRESULT WINBIO_E_NO_MATCH = -2146861051;
-		public const HRESULT WINBIO_E_CAPTURE_ABORTED = -2146861050;
-		public const HRESULT WINBIO_E_ENROLLMENT_IN_PROGRESS = -2146861049;
-		public const HRESULT WINBIO_E_BAD_CAPTURE = -2146861048;
-		public const HRESULT WINBIO_E_INVALID_CONTROL_CODE = -2146861047;
-		public const HRESULT WINBIO_E_DATA_COLLECTION_IN_PROGRESS = -2146861045;
-		public const HRESULT WINBIO_E_UNSUPPORTED_DATA_FORMAT = -2146861044;
-		public const HRESULT WINBIO_E_UNSUPPORTED_DATA_TYPE = -2146861043;
-		public const HRESULT WINBIO_E_UNSUPPORTED_PURPOSE = -2146861042;
-		public const HRESULT WINBIO_E_INVALID_DEVICE_STATE = -2146861041;
-		public const HRESULT WINBIO_E_DEVICE_BUSY = -2146861040;
-		public const HRESULT WINBIO_E_DATABASE_CANT_CREATE = -2146861039;
-		public const HRESULT WINBIO_E_DATABASE_CANT_OPEN = -2146861038;
-		public const HRESULT WINBIO_E_DATABASE_CANT_CLOSE = -2146861037;
-		public const HRESULT WINBIO_E_DATABASE_CANT_ERASE = -2146861036;
-		public const HRESULT WINBIO_E_DATABASE_CANT_FIND = -2146861035;
-		public const HRESULT WINBIO_E_DATABASE_ALREADY_EXISTS = -2146861034;
-		public const HRESULT WINBIO_E_DATABASE_FULL = -2146861032;
-		public const HRESULT WINBIO_E_DATABASE_LOCKED = -2146861031;
-		public const HRESULT WINBIO_E_DATABASE_CORRUPTED = -2146861030;
-		public const HRESULT WINBIO_E_DATABASE_NO_SUCH_RECORD = -2146861029;
-		public const HRESULT WINBIO_E_DUPLICATE_ENROLLMENT = -2146861028;
-		public const HRESULT WINBIO_E_DATABASE_READ_ERROR = -2146861027;
-		public const HRESULT WINBIO_E_DATABASE_WRITE_ERROR = -2146861026;
-		public const HRESULT WINBIO_E_DATABASE_NO_RESULTS = -2146861025;
-		public const HRESULT WINBIO_E_DATABASE_NO_MORE_RECORDS = -2146861024;
-		public const HRESULT WINBIO_E_DATABASE_EOF = -2146861023;
-		public const HRESULT WINBIO_E_DATABASE_BAD_INDEX_VECTOR = -2146861022;
-		public const HRESULT WINBIO_E_INCORRECT_BSP = -2146861020;
-		public const HRESULT WINBIO_E_INCORRECT_SENSOR_POOL = -2146861019;
-		public const HRESULT WINBIO_E_NO_CAPTURE_DATA = -2146861018;
-		public const HRESULT WINBIO_E_INVALID_SENSOR_MODE = -2146861017;
-		public const HRESULT WINBIO_E_LOCK_VIOLATION = -2146861014;
-		public const HRESULT WINBIO_E_DUPLICATE_TEMPLATE = -2146861013;
-		public const HRESULT WINBIO_E_INVALID_OPERATION = -2146861012;
-		public const HRESULT WINBIO_E_SESSION_BUSY = -2146861011;
-		public const HRESULT WINBIO_E_CRED_PROV_DISABLED = -2146861008;
-		public const HRESULT WINBIO_E_CRED_PROV_NO_CREDENTIAL = -2146861007;
-		public const HRESULT WINBIO_E_DISABLED = -2146861006;
-		public const HRESULT WINBIO_E_CONFIGURATION_FAILURE = -2146861005;
-		public const HRESULT WINBIO_E_SENSOR_UNAVAILABLE = -2146861004;
-		public const HRESULT WINBIO_E_SAS_ENABLED = -2146861003;
-		public const HRESULT WINBIO_E_DEVICE_FAILURE = -2146861002;
-		public const HRESULT WINBIO_E_FAST_USER_SWITCH_DISABLED = -2146861001;
-		public const HRESULT WINBIO_E_NOT_ACTIVE_CONSOLE = -2146861000;
-		public const HRESULT WINBIO_E_EVENT_MONITOR_ACTIVE = -2146860999;
-		public const HRESULT WINBIO_E_INVALID_PROPERTY_TYPE = -2146860998;
-		public const HRESULT WINBIO_E_INVALID_PROPERTY_ID = -2146860997;
-		public const HRESULT WINBIO_E_UNSUPPORTED_PROPERTY = -2146860996;
-		public const HRESULT WINBIO_E_ADAPTER_INTEGRITY_FAILURE = -2146860995;
-		public const HRESULT WINBIO_E_INCORRECT_SESSION_TYPE = -2146860994;
-		public const HRESULT WINBIO_E_SESSION_HANDLE_CLOSED = -2146860993;
-		public const HRESULT WINBIO_E_DEADLOCK_DETECTED = -2146860992;
-		public const HRESULT WINBIO_E_NO_PREBOOT_IDENTITY = -2146860991;
-		public const HRESULT WINBIO_E_MAX_ERROR_COUNT_EXCEEDED = -2146860990;
-		public const HRESULT WINBIO_E_AUTO_LOGON_DISABLED = -2146860989;
-		public const HRESULT WINBIO_E_INVALID_TICKET = -2146860988;
-		public const HRESULT WINBIO_E_TICKET_QUOTA_EXCEEDED = -2146860987;
-		public const HRESULT WINBIO_E_DATA_PROTECTION_FAILURE = -2146860986;
-		public const HRESULT WINBIO_E_CRED_PROV_SECURITY_LOCKOUT = -2146860985;
-		public const HRESULT WINBIO_E_UNSUPPORTED_POOL_TYPE = -2146860984;
-		public const HRESULT WINBIO_E_SELECTION_REQUIRED = -2146860983;
-		public const HRESULT WINBIO_E_PRESENCE_MONITOR_ACTIVE = -2146860982;
-		public const HRESULT WINBIO_E_INVALID_SUBFACTOR = -2146860981;
-		public const HRESULT WINBIO_E_INVALID_CALIBRATION_FORMAT_ARRAY = -2146860980;
-		public const HRESULT WINBIO_E_NO_SUPPORTED_CALIBRATION_FORMAT = -2146860979;
-		public const HRESULT WINBIO_E_UNSUPPORTED_SENSOR_CALIBRATION_FORMAT = -2146860978;
-		public const HRESULT WINBIO_E_CALIBRATION_BUFFER_TOO_SMALL = -2146860977;
-		public const HRESULT WINBIO_E_CALIBRATION_BUFFER_TOO_LARGE = -2146860976;
-		public const HRESULT WINBIO_E_CALIBRATION_BUFFER_INVALID = -2146860975;
-		public const HRESULT WINBIO_E_INVALID_KEY_IDENTIFIER = -2146860974;
-		public const HRESULT WINBIO_E_KEY_CREATION_FAILED = -2146860973;
-		public const HRESULT WINBIO_E_KEY_IDENTIFIER_BUFFER_TOO_SMALL = -2146860972;
-		public const HRESULT WINBIO_E_PROPERTY_UNAVAILABLE = -2146860971;
-		public const HRESULT WINBIO_E_POLICY_PROTECTION_UNAVAILABLE = -2146860970;
-		public const HRESULT WINBIO_E_INSECURE_SENSOR = -2146860969;
-		public const HRESULT WINBIO_E_INVALID_BUFFER_ID = -2146860968;
-		public const HRESULT WINBIO_E_INVALID_BUFFER = -2146860967;
-		public const HRESULT WINBIO_E_TRUSTLET_INTEGRITY_FAIL = -2146860966;
-		public const HRESULT WINBIO_E_ENROLLMENT_CANCELED_BY_SUSPEND = -2146860965;
-		public const HRESULT WINBIO_I_MORE_DATA = 589825;
-		public const HRESULT WINBIO_I_EXTENDED_STATUS_INFORMATION = 589826;
+		public const HResult WINBIO_E_UNSUPPORTED_FACTOR = -2146861055;
+		public const HResult WINBIO_E_INVALID_UNIT = -2146861054;
+		public const HResult WINBIO_E_UNKNOWN_ID = -2146861053;
+		public const HResult WINBIO_E_CANCELED = -2146861052;
+		public const HResult WINBIO_E_NO_MATCH = -2146861051;
+		public const HResult WINBIO_E_CAPTURE_ABORTED = -2146861050;
+		public const HResult WINBIO_E_ENROLLMENT_IN_PROGRESS = -2146861049;
+		public const HResult WINBIO_E_BAD_CAPTURE = -2146861048;
+		public const HResult WINBIO_E_INVALID_CONTROL_CODE = -2146861047;
+		public const HResult WINBIO_E_DATA_COLLECTION_IN_PROGRESS = -2146861045;
+		public const HResult WINBIO_E_UNSUPPORTED_DATA_FORMAT = -2146861044;
+		public const HResult WINBIO_E_UNSUPPORTED_DATA_TYPE = -2146861043;
+		public const HResult WINBIO_E_UNSUPPORTED_PURPOSE = -2146861042;
+		public const HResult WINBIO_E_INVALID_DEVICE_STATE = -2146861041;
+		public const HResult WINBIO_E_DEVICE_BUSY = -2146861040;
+		public const HResult WINBIO_E_DATABASE_CANT_CREATE = -2146861039;
+		public const HResult WINBIO_E_DATABASE_CANT_OPEN = -2146861038;
+		public const HResult WINBIO_E_DATABASE_CANT_CLOSE = -2146861037;
+		public const HResult WINBIO_E_DATABASE_CANT_ERASE = -2146861036;
+		public const HResult WINBIO_E_DATABASE_CANT_FIND = -2146861035;
+		public const HResult WINBIO_E_DATABASE_ALREADY_EXISTS = -2146861034;
+		public const HResult WINBIO_E_DATABASE_FULL = -2146861032;
+		public const HResult WINBIO_E_DATABASE_LOCKED = -2146861031;
+		public const HResult WINBIO_E_DATABASE_CORRUPTED = -2146861030;
+		public const HResult WINBIO_E_DATABASE_NO_SUCH_RECORD = -2146861029;
+		public const HResult WINBIO_E_DUPLICATE_ENROLLMENT = -2146861028;
+		public const HResult WINBIO_E_DATABASE_READ_ERROR = -2146861027;
+		public const HResult WINBIO_E_DATABASE_WRITE_ERROR = -2146861026;
+		public const HResult WINBIO_E_DATABASE_NO_RESULTS = -2146861025;
+		public const HResult WINBIO_E_DATABASE_NO_MORE_RECORDS = -2146861024;
+		public const HResult WINBIO_E_DATABASE_EOF = -2146861023;
+		public const HResult WINBIO_E_DATABASE_BAD_INDEX_VECTOR = -2146861022;
+		public const HResult WINBIO_E_INCORRECT_BSP = -2146861020;
+		public const HResult WINBIO_E_INCORRECT_SENSOR_POOL = -2146861019;
+		public const HResult WINBIO_E_NO_CAPTURE_DATA = -2146861018;
+		public const HResult WINBIO_E_INVALID_SENSOR_MODE = -2146861017;
+		public const HResult WINBIO_E_LOCK_VIOLATION = -2146861014;
+		public const HResult WINBIO_E_DUPLICATE_TEMPLATE = -2146861013;
+		public const HResult WINBIO_E_INVALID_OPERATION = -2146861012;
+		public const HResult WINBIO_E_SESSION_BUSY = -2146861011;
+		public const HResult WINBIO_E_CRED_PROV_DISABLED = -2146861008;
+		public const HResult WINBIO_E_CRED_PROV_NO_CREDENTIAL = -2146861007;
+		public const HResult WINBIO_E_DISABLED = -2146861006;
+		public const HResult WINBIO_E_CONFIGURATION_FAILURE = -2146861005;
+		public const HResult WINBIO_E_SENSOR_UNAVAILABLE = -2146861004;
+		public const HResult WINBIO_E_SAS_ENABLED = -2146861003;
+		public const HResult WINBIO_E_DEVICE_FAILURE = -2146861002;
+		public const HResult WINBIO_E_FAST_USER_SWITCH_DISABLED = -2146861001;
+		public const HResult WINBIO_E_NOT_ACTIVE_CONSOLE = -2146861000;
+		public const HResult WINBIO_E_EVENT_MONITOR_ACTIVE = -2146860999;
+		public const HResult WINBIO_E_INVALID_PROPERTY_TYPE = -2146860998;
+		public const HResult WINBIO_E_INVALID_PROPERTY_ID = -2146860997;
+		public const HResult WINBIO_E_UNSUPPORTED_PROPERTY = -2146860996;
+		public const HResult WINBIO_E_ADAPTER_INTEGRITY_FAILURE = -2146860995;
+		public const HResult WINBIO_E_INCORRECT_SESSION_TYPE = -2146860994;
+		public const HResult WINBIO_E_SESSION_HANDLE_CLOSED = -2146860993;
+		public const HResult WINBIO_E_DEADLOCK_DETECTED = -2146860992;
+		public const HResult WINBIO_E_NO_PREBOOT_IDENTITY = -2146860991;
+		public const HResult WINBIO_E_MAX_ERROR_COUNT_EXCEEDED = -2146860990;
+		public const HResult WINBIO_E_AUTO_LOGON_DISABLED = -2146860989;
+		public const HResult WINBIO_E_INVALID_TICKET = -2146860988;
+		public const HResult WINBIO_E_TICKET_QUOTA_EXCEEDED = -2146860987;
+		public const HResult WINBIO_E_DATA_PROTECTION_FAILURE = -2146860986;
+		public const HResult WINBIO_E_CRED_PROV_SECURITY_LOCKOUT = -2146860985;
+		public const HResult WINBIO_E_UNSUPPORTED_POOL_TYPE = -2146860984;
+		public const HResult WINBIO_E_SELECTION_REQUIRED = -2146860983;
+		public const HResult WINBIO_E_PRESENCE_MONITOR_ACTIVE = -2146860982;
+		public const HResult WINBIO_E_INVALID_SUBFACTOR = -2146860981;
+		public const HResult WINBIO_E_INVALID_CALIBRATION_FORMAT_ARRAY = -2146860980;
+		public const HResult WINBIO_E_NO_SUPPORTED_CALIBRATION_FORMAT = -2146860979;
+		public const HResult WINBIO_E_UNSUPPORTED_SENSOR_CALIBRATION_FORMAT = -2146860978;
+		public const HResult WINBIO_E_CALIBRATION_BUFFER_TOO_SMALL = -2146860977;
+		public const HResult WINBIO_E_CALIBRATION_BUFFER_TOO_LARGE = -2146860976;
+		public const HResult WINBIO_E_CALIBRATION_BUFFER_INVALID = -2146860975;
+		public const HResult WINBIO_E_INVALID_KEY_IDENTIFIER = -2146860974;
+		public const HResult WINBIO_E_KEY_CREATION_FAILED = -2146860973;
+		public const HResult WINBIO_E_KEY_IDENTIFIER_BUFFER_TOO_SMALL = -2146860972;
+		public const HResult WINBIO_E_PROPERTY_UNAVAILABLE = -2146860971;
+		public const HResult WINBIO_E_POLICY_PROTECTION_UNAVAILABLE = -2146860970;
+		public const HResult WINBIO_E_INSECURE_SENSOR = -2146860969;
+		public const HResult WINBIO_E_INVALID_BUFFER_ID = -2146860968;
+		public const HResult WINBIO_E_INVALID_BUFFER = -2146860967;
+		public const HResult WINBIO_E_TRUSTLET_INTEGRITY_FAIL = -2146860966;
+		public const HResult WINBIO_E_ENROLLMENT_CANCELED_BY_SUSPEND = -2146860965;
+		public const HResult WINBIO_I_MORE_DATA = 589825;
+		public const HResult WINBIO_I_EXTENDED_STATUS_INFORMATION = 589826;
 		public const Guid GUID_DEVINTERFACE_BIOMETRIC_READER = .(0xe2b5183a, 0x99ea, 0x4cc3, 0xad, 0x6b, 0x80, 0xca, 0x8d, 0x71, 0x5b, 0x80);
 		public const uint32 IOCTL_BIOMETRIC_VENDOR = 4464640;
 		public const uint32 WINBIO_WBDI_MAJOR_VERSION = 1;
@@ -172,135 +172,135 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function void PWINBIO_ASYNC_COMPLETION_CALLBACK(ref WINBIO_ASYNC_RESULT AsyncResult);
-		public function void PWINBIO_VERIFY_CALLBACK(void* VerifyCallbackContext, HRESULT OperationStatus, uint32 UnitId, BOOLEAN Match, uint32 RejectDetail);
-		public function void PWINBIO_IDENTIFY_CALLBACK(void* IdentifyCallbackContext, HRESULT OperationStatus, uint32 UnitId, ref WINBIO_IDENTITY Identity, uint8 SubFactor, uint32 RejectDetail);
-		public function void PWINBIO_LOCATE_SENSOR_CALLBACK(void* LocateCallbackContext, HRESULT OperationStatus, uint32 UnitId);
-		public function void PWINBIO_ENROLL_CAPTURE_CALLBACK(void* EnrollCallbackContext, HRESULT OperationStatus, uint32 RejectDetail);
-		public function void PWINBIO_EVENT_CALLBACK(void* EventCallbackContext, HRESULT OperationStatus, ref WINBIO_EVENT Event);
-		public function void PWINBIO_CAPTURE_CALLBACK(void* CaptureCallbackContext, HRESULT OperationStatus, uint32 UnitId, ref WINBIO_BIR Sample, uint SampleSize, uint32 RejectDetail);
-		public function HRESULT PIBIO_SENSOR_ATTACH_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_DETACH_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_CLEAR_CONTEXT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_QUERY_STATUS_FN(out WINBIO_PIPELINE Pipeline, out uint32 Status);
-		public function HRESULT PIBIO_SENSOR_RESET_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_SET_MODE_FN(out WINBIO_PIPELINE Pipeline, uint32 Mode);
-		public function HRESULT PIBIO_SENSOR_SET_INDICATOR_STATUS_FN(out WINBIO_PIPELINE Pipeline, uint32 IndicatorStatus);
-		public function HRESULT PIBIO_SENSOR_GET_INDICATOR_STATUS_FN(out WINBIO_PIPELINE Pipeline, out uint32 IndicatorStatus);
-		public function HRESULT PIBIO_SENSOR_START_CAPTURE_FN(out WINBIO_PIPELINE Pipeline, uint8 Purpose, out OVERLAPPED* Overlapped);
-		public function HRESULT PIBIO_SENSOR_FINISH_CAPTURE_FN(out WINBIO_PIPELINE Pipeline, out uint32 RejectDetail);
-		public function HRESULT PIBIO_SENSOR_EXPORT_SENSOR_DATA_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_BIR* SampleBuffer, out uint SampleSize);
-		public function HRESULT PIBIO_SENSOR_CANCEL_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN(out WINBIO_PIPELINE Pipeline, uint8 Purpose, uint8 Flags, out uint32 RejectDetail);
-		public function HRESULT PIBIO_SENSOR_CONTROL_UNIT_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
-		public function HRESULT PIBIO_SENSOR_CONTROL_UNIT_PRIVILEGED_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
-		public function HRESULT PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN(out WINBIO_PIPELINE Pipeline, uint32 PowerEventType);
-		public function HRESULT PIBIO_SENSOR_PIPELINE_INIT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_PIPELINE_CLEANUP_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_ACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_DEACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_SENSOR_QUERY_EXTENDED_INFO_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_SENSOR_INFO SensorInfo, uint SensorInfoSize);
-		public function HRESULT PIBIO_SENSOR_QUERY_CALIBRATION_FORMATS_FN(out WINBIO_PIPELINE Pipeline, Guid* FormatArray, uint FormatArraySize, out uint FormatCount);
-		public function HRESULT PIBIO_SENSOR_SET_CALIBRATION_FORMAT_FN(out WINBIO_PIPELINE Pipeline, ref Guid Format);
-		public function HRESULT PIBIO_SENSOR_ACCEPT_CALIBRATION_DATA_FN(out WINBIO_PIPELINE Pipeline, ref uint8 CalibrationBuffer, uint CalibrationBufferSize);
-		public function HRESULT PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN(out WINBIO_PIPELINE Pipeline, uint8* RawBufferAddress, uint RawBufferSize, uint8** ResultBufferAddress, uint* ResultBufferSize);
-		public function HRESULT PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN(out WINBIO_PIPELINE Pipeline, Guid SecureBufferIdentifier, uint8* MetadataBufferAddress, uint MetadataBufferSize, uint8** ResultBufferAddress, uint* ResultBufferSize);
-		public function HRESULT PIBIO_SENSOR_QUERY_PRIVATE_SENSOR_TYPE_FN(out WINBIO_PIPELINE Pipeline, out uint8 TypeInfoBufferAddress, uint TypeInfoBufferSize, out uint TypeInfoDataSize);
-		public function HRESULT PIBIO_SENSOR_CONNECT_SECURE_FN(out WINBIO_PIPELINE Pipeline, in WINBIO_SECURE_CONNECTION_PARAMS ConnectionParams, out WINBIO_SECURE_CONNECTION_DATA* ConnectionData);
-		public function HRESULT PIBIO_SENSOR_START_CAPTURE_EX_FN(out WINBIO_PIPELINE Pipeline, uint8 Purpose, uint8* Nonce, uint NonceSize, uint8 Flags, out OVERLAPPED* Overlapped);
-		public function HRESULT PIBIO_SENSOR_START_NOTIFY_WAKE_FN(out WINBIO_PIPELINE Pipeline, out OVERLAPPED* Overlapped);
-		public function HRESULT PIBIO_SENSOR_FINISH_NOTIFY_WAKE_FN(out WINBIO_PIPELINE Pipeline, out uint32 Reason);
-		public function HRESULT PWINBIO_QUERY_SENSOR_INTERFACE_FN(out WINBIO_SENSOR_INTERFACE* SensorInterface);
-		public function HRESULT PIBIO_ENGINE_ATTACH_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_DETACH_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_CLEAR_CONTEXT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_QUERY_PREFERRED_FORMAT_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_REGISTERED_FORMAT StandardFormat, out Guid VendorFormat);
-		public function HRESULT PIBIO_ENGINE_QUERY_INDEX_VECTOR_SIZE_FN(out WINBIO_PIPELINE Pipeline, out uint IndexElementCount);
-		public function HRESULT PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN(out WINBIO_PIPELINE Pipeline, out uint AlgorithmCount, out uint AlgorithmBufferSize, out uint8* AlgorithmBuffer);
-		public function HRESULT PIBIO_ENGINE_SET_HASH_ALGORITHM_FN(out WINBIO_PIPELINE Pipeline, uint AlgorithmBufferSize, uint8* AlgorithmBuffer);
-		public function HRESULT PIBIO_ENGINE_QUERY_SAMPLE_HINT_FN(out WINBIO_PIPELINE Pipeline, out uint SampleHint);
-		public function HRESULT PIBIO_ENGINE_ACCEPT_SAMPLE_DATA_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_BIR SampleBuffer, uint SampleSize, uint8 Purpose, out uint32 RejectDetail);
-		public function HRESULT PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN(out WINBIO_PIPELINE Pipeline, uint8 Flags, out WINBIO_BIR* SampleBuffer, out uint SampleSize);
-		public function HRESULT PIBIO_ENGINE_VERIFY_FEATURE_SET_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor, out BOOLEAN Match, out uint8* PayloadBlob, out uint PayloadBlobSize, out uint8* HashValue, out uint HashSize, out uint32 RejectDetail);
-		public function HRESULT PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out uint8* PayloadBlob, out uint PayloadBlobSize, out uint8* HashValue, out uint HashSize, out uint32 RejectDetail);
-		public function HRESULT PIBIO_ENGINE_CREATE_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_UPDATE_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline, out uint32 RejectDetail);
-		public function HRESULT PIBIO_ENGINE_GET_ENROLLMENT_STATUS_FN(out WINBIO_PIPELINE Pipeline, out uint32 RejectDetail);
-		public function HRESULT PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN(out WINBIO_PIPELINE Pipeline, out uint8* HashValue, out uint HashSize);
-		public function HRESULT PIBIO_ENGINE_CHECK_FOR_DUPLICATE_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out BOOLEAN Duplicate);
-		public function HRESULT PIBIO_ENGINE_COMMIT_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor, ref uint8 PayloadBlob, uint PayloadBlobSize);
-		public function HRESULT PIBIO_ENGINE_DISCARD_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_CONTROL_UNIT_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
-		public function HRESULT PIBIO_ENGINE_CONTROL_UNIT_PRIVILEGED_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
-		public function HRESULT PIBIO_ENGINE_NOTIFY_POWER_CHANGE_FN(out WINBIO_PIPELINE Pipeline, uint32 PowerEventType);
-		public function HRESULT PIBIO_ENGINE_RESERVED_1_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity);
-		public function HRESULT PIBIO_ENGINE_PIPELINE_INIT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_PIPELINE_CLEANUP_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_ACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_DEACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_QUERY_EXTENDED_INFO_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_ENGINE_INFO EngineInfo, uint EngineInfoSize);
-		public function HRESULT PIBIO_ENGINE_IDENTIFY_ALL_FN(out WINBIO_PIPELINE Pipeline, out uint PresenceCount, out WINBIO_PRESENCE* PresenceArray);
-		public function HRESULT PIBIO_ENGINE_SET_ENROLLMENT_SELECTOR_FN(out WINBIO_PIPELINE Pipeline, uint64 SelectorValue);
-		public function HRESULT PIBIO_ENGINE_SET_ENROLLMENT_PARAMETERS_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_EXTENDED_ENROLLMENT_PARAMETERS Parameters);
-		public function HRESULT PIBIO_ENGINE_QUERY_EXTENDED_ENROLLMENT_STATUS_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_ENROLLMENT_STATUS EnrollmentStatus, uint EnrollmentStatusSize);
-		public function HRESULT PIBIO_ENGINE_REFRESH_CACHE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_ENGINE_SELECT_CALIBRATION_FORMAT_FN(out WINBIO_PIPELINE Pipeline, Guid* FormatArray, uint FormatCount, out Guid SelectedFormat, out uint MaxBufferSize);
-		public function HRESULT PIBIO_ENGINE_QUERY_CALIBRATION_DATA_FN(out WINBIO_PIPELINE Pipeline, out BOOLEAN DiscardAndRepeatCapture, out uint8 CalibrationBuffer, out uint CalibrationBufferSize, uint MaxBufferSize);
-		public function HRESULT PIBIO_ENGINE_SET_ACCOUNT_POLICY_FN(out WINBIO_PIPELINE Pipeline, WINBIO_ACCOUNT_POLICY* PolicyItemArray, uint PolicyItemCount);
-		public function HRESULT PIBIO_ENGINE_CREATE_KEY_FN(out WINBIO_PIPELINE Pipeline, uint8* Key, uint KeySize, out uint8 KeyIdentifier, uint KeyIdentifierSize, out uint ResultSize);
-		public function HRESULT PIBIO_ENGINE_IDENTIFY_FEATURE_SET_SECURE_FN(out WINBIO_PIPELINE Pipeline, uint8* Nonce, uint NonceSize, uint8* KeyIdentifier, uint KeyIdentifierSize, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out uint32 RejectDetail, out uint8* Authorization, out uint AuthorizationSize);
-		public function HRESULT PIBIO_ENGINE_ACCEPT_PRIVATE_SENSOR_TYPE_INFO_FN(out WINBIO_PIPELINE Pipeline, uint8* TypeInfoBufferAddress, uint TypeInfoBufferSize);
-		public function HRESULT PIBIO_ENGINE_CREATE_ENROLLMENT_AUTHENTICATED_FN(out WINBIO_PIPELINE Pipeline, out uint8* Nonce, out uint NonceSize);
-		public function HRESULT PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN(out WINBIO_PIPELINE Pipeline, in uint8 Nonce, uint NonceSize, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out uint32 RejectDetail, out uint8* Authentication, out uint AuthenticationSize);
-		public function HRESULT PWINBIO_QUERY_ENGINE_INTERFACE_FN(out WINBIO_ENGINE_INTERFACE* EngineInterface);
-		public function HRESULT PIBIO_STORAGE_ATTACH_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_DETACH_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_CLEAR_CONTEXT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_CREATE_DATABASE_FN(out WINBIO_PIPELINE Pipeline, ref Guid DatabaseId, uint32 Factor, ref Guid Format, PWSTR FilePath, PWSTR ConnectString, uint IndexElementCount, uint InitialSize);
-		public function HRESULT PIBIO_STORAGE_ERASE_DATABASE_FN(out WINBIO_PIPELINE Pipeline, ref Guid DatabaseId, PWSTR FilePath, PWSTR ConnectString);
-		public function HRESULT PIBIO_STORAGE_OPEN_DATABASE_FN(out WINBIO_PIPELINE Pipeline, ref Guid DatabaseId, PWSTR FilePath, PWSTR ConnectString);
-		public function HRESULT PIBIO_STORAGE_CLOSE_DATABASE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_GET_DATA_FORMAT_FN(out WINBIO_PIPELINE Pipeline, out Guid Format, out WINBIO_VERSION Version);
-		public function HRESULT PIBIO_STORAGE_GET_DATABASE_SIZE_FN(out WINBIO_PIPELINE Pipeline, out uint AvailableRecordCount, out uint TotalRecordCount);
-		public function HRESULT PIBIO_STORAGE_ADD_RECORD_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_STORAGE_RECORD RecordContents);
-		public function HRESULT PIBIO_STORAGE_DELETE_RECORD_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor);
-		public function HRESULT PIBIO_STORAGE_QUERY_BY_SUBJECT_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor);
-		public function HRESULT PIBIO_STORAGE_QUERY_BY_CONTENT_FN(out WINBIO_PIPELINE Pipeline, uint8 SubFactor, uint32* IndexVector, uint IndexElementCount);
-		public function HRESULT PIBIO_STORAGE_GET_RECORD_COUNT_FN(out WINBIO_PIPELINE Pipeline, out uint RecordCount);
-		public function HRESULT PIBIO_STORAGE_FIRST_RECORD_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_NEXT_RECORD_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_GET_CURRENT_RECORD_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_STORAGE_RECORD RecordContents);
-		public function HRESULT PIBIO_STORAGE_CONTROL_UNIT_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
-		public function HRESULT PIBIO_STORAGE_CONTROL_UNIT_PRIVILEGED_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
-		public function HRESULT PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN(out WINBIO_PIPELINE Pipeline, uint32 PowerEventType);
-		public function HRESULT PIBIO_STORAGE_PIPELINE_INIT_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_PIPELINE_CLEANUP_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_ACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_DEACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_STORAGE_INFO StorageInfo, uint StorageInfoSize);
-		public function HRESULT PIBIO_STORAGE_NOTIFY_DATABASE_CHANGE_FN(out WINBIO_PIPELINE Pipeline, BOOLEAN RecordsAdded);
-		public function HRESULT PIBIO_STORAGE_RESERVED_1_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity, out uint64 Reserved1, out uint64 Reserved2);
-		public function HRESULT PIBIO_STORAGE_RESERVED_2_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity);
-		public function HRESULT PIBIO_STORAGE_UPDATE_RECORD_BEGIN_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor, out WINBIO_STORAGE_RECORD RecordContents);
-		public function HRESULT PIBIO_STORAGE_UPDATE_RECORD_COMMIT_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_STORAGE_RECORD RecordContents);
-		public function HRESULT PWINBIO_QUERY_STORAGE_INTERFACE_FN(out WINBIO_STORAGE_INTERFACE* StorageInterface);
-		public function HRESULT PIBIO_FRAMEWORK_SET_UNIT_STATUS_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_EXTENDED_UNIT_STATUS ExtendedStatus, uint ExtendedStatusSize);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_CLEAR_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_BEGIN_FN(out WINBIO_PIPELINE Pipeline, uint RequiredCapacity, out uint MaxBufferSize);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_NEXT_FN(out WINBIO_PIPELINE Pipeline, ref uint8 BufferAddress, uint BufferSize);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_END_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_BEGIN_FN(out WINBIO_PIPELINE Pipeline, out uint RequiredCapacity, out uint MaxBufferSize);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_NEXT_FN(out WINBIO_PIPELINE Pipeline, out uint8 BufferAddress, uint BufferSize, out uint ReturnedDataSize);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_END_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN(out WINBIO_PIPELINE Pipeline, uint Reserved1, out uint Reserved2);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN(out WINBIO_PIPELINE Pipeline, out uint8 Reserved1, uint Reserved2);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN(out WINBIO_PIPELINE Pipeline);
-		public function HRESULT PIBIO_FRAMEWORK_ALLOCATE_MEMORY_FN(out WINBIO_PIPELINE Pipeline, uint AllocationSize, void** Address);
-		public function HRESULT PIBIO_FRAMEWORK_FREE_MEMORY_FN(out WINBIO_PIPELINE Pipeline, void* Address);
-		public function HRESULT PIBIO_FRAMEWORK_GET_PROPERTY_FN(out WINBIO_PIPELINE Pipeline, uint32 PropertyType, uint32 PropertyId, WINBIO_IDENTITY* Identity, uint8 SubFactor, void** PropertyBuffer, uint* PropertyBufferSize);
-		public function HRESULT PIBIO_FRAMEWORK_LOCK_AND_VALIDATE_SECURE_BUFFER_FN(out WINBIO_PIPELINE Pipeline, Guid SecureBufferIdentifier, void** SecureBufferAddress, out uint SecureBufferSize);
-		public function HRESULT PIBIO_FRAMEWORK_RELEASE_SECURE_BUFFER_FN(out WINBIO_PIPELINE Pipeline, Guid SecureBufferIdentifier);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_QUERY_AUTHORIZED_ENROLLMENTS_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, out uint SecureIdentityCount, out WINBIO_IDENTITY* SecureIdentities);
-		public function HRESULT PIBIO_FRAMEWORK_VSM_DECRYPT_SAMPLE_FN(out WINBIO_PIPELINE Pipeline, in uint8 Authentication, uint AuthenticationSize, in uint8 Iv, uint IvSize, out uint8 EncryptedData, uint EncryptedDataSize);
+		public function void PWINBIO_VERIFY_CALLBACK(void* VerifyCallbackContext, HResult OperationStatus, uint32 UnitId, bool Match, uint32 RejectDetail);
+		public function void PWINBIO_IDENTIFY_CALLBACK(void* IdentifyCallbackContext, HResult OperationStatus, uint32 UnitId, ref WINBIO_IDENTITY Identity, uint8 SubFactor, uint32 RejectDetail);
+		public function void PWINBIO_LOCATE_SENSOR_CALLBACK(void* LocateCallbackContext, HResult OperationStatus, uint32 UnitId);
+		public function void PWINBIO_ENROLL_CAPTURE_CALLBACK(void* EnrollCallbackContext, HResult OperationStatus, uint32 RejectDetail);
+		public function void PWINBIO_EVENT_CALLBACK(void* EventCallbackContext, HResult OperationStatus, ref WINBIO_EVENT Event);
+		public function void PWINBIO_CAPTURE_CALLBACK(void* CaptureCallbackContext, HResult OperationStatus, uint32 UnitId, ref WINBIO_BIR Sample, uint SampleSize, uint32 RejectDetail);
+		public function HResult PIBIO_SENSOR_ATTACH_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_DETACH_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_CLEAR_CONTEXT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_QUERY_STATUS_FN(out WINBIO_PIPELINE Pipeline, out uint32 Status);
+		public function HResult PIBIO_SENSOR_RESET_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_SET_MODE_FN(out WINBIO_PIPELINE Pipeline, uint32 Mode);
+		public function HResult PIBIO_SENSOR_SET_INDICATOR_STATUS_FN(out WINBIO_PIPELINE Pipeline, uint32 IndicatorStatus);
+		public function HResult PIBIO_SENSOR_GET_INDICATOR_STATUS_FN(out WINBIO_PIPELINE Pipeline, out uint32 IndicatorStatus);
+		public function HResult PIBIO_SENSOR_START_CAPTURE_FN(out WINBIO_PIPELINE Pipeline, uint8 Purpose, out OVERLAPPED* Overlapped);
+		public function HResult PIBIO_SENSOR_FINISH_CAPTURE_FN(out WINBIO_PIPELINE Pipeline, out uint32 RejectDetail);
+		public function HResult PIBIO_SENSOR_EXPORT_SENSOR_DATA_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_BIR* SampleBuffer, out uint SampleSize);
+		public function HResult PIBIO_SENSOR_CANCEL_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN(out WINBIO_PIPELINE Pipeline, uint8 Purpose, uint8 Flags, out uint32 RejectDetail);
+		public function HResult PIBIO_SENSOR_CONTROL_UNIT_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
+		public function HResult PIBIO_SENSOR_CONTROL_UNIT_PRIVILEGED_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
+		public function HResult PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN(out WINBIO_PIPELINE Pipeline, uint32 PowerEventType);
+		public function HResult PIBIO_SENSOR_PIPELINE_INIT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_PIPELINE_CLEANUP_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_ACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_DEACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_SENSOR_QUERY_EXTENDED_INFO_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_SENSOR_INFO SensorInfo, uint SensorInfoSize);
+		public function HResult PIBIO_SENSOR_QUERY_CALIBRATION_FORMATS_FN(out WINBIO_PIPELINE Pipeline, Guid* FormatArray, uint FormatArraySize, out uint FormatCount);
+		public function HResult PIBIO_SENSOR_SET_CALIBRATION_FORMAT_FN(out WINBIO_PIPELINE Pipeline, ref Guid Format);
+		public function HResult PIBIO_SENSOR_ACCEPT_CALIBRATION_DATA_FN(out WINBIO_PIPELINE Pipeline, ref uint8 CalibrationBuffer, uint CalibrationBufferSize);
+		public function HResult PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN(out WINBIO_PIPELINE Pipeline, uint8* RawBufferAddress, uint RawBufferSize, uint8** ResultBufferAddress, uint* ResultBufferSize);
+		public function HResult PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN(out WINBIO_PIPELINE Pipeline, Guid SecureBufferIdentifier, uint8* MetadataBufferAddress, uint MetadataBufferSize, uint8** ResultBufferAddress, uint* ResultBufferSize);
+		public function HResult PIBIO_SENSOR_QUERY_PRIVATE_SENSOR_TYPE_FN(out WINBIO_PIPELINE Pipeline, out uint8 TypeInfoBufferAddress, uint TypeInfoBufferSize, out uint TypeInfoDataSize);
+		public function HResult PIBIO_SENSOR_CONNECT_SECURE_FN(out WINBIO_PIPELINE Pipeline, in WINBIO_SECURE_CONNECTION_PARAMS ConnectionParams, out WINBIO_SECURE_CONNECTION_DATA* ConnectionData);
+		public function HResult PIBIO_SENSOR_START_CAPTURE_EX_FN(out WINBIO_PIPELINE Pipeline, uint8 Purpose, uint8* Nonce, uint NonceSize, uint8 Flags, out OVERLAPPED* Overlapped);
+		public function HResult PIBIO_SENSOR_START_NOTIFY_WAKE_FN(out WINBIO_PIPELINE Pipeline, out OVERLAPPED* Overlapped);
+		public function HResult PIBIO_SENSOR_FINISH_NOTIFY_WAKE_FN(out WINBIO_PIPELINE Pipeline, out uint32 Reason);
+		public function HResult PWINBIO_QUERY_SENSOR_INTERFACE_FN(out WINBIO_SENSOR_INTERFACE* SensorInterface);
+		public function HResult PIBIO_ENGINE_ATTACH_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_DETACH_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_CLEAR_CONTEXT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_QUERY_PREFERRED_FORMAT_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_REGISTERED_FORMAT StandardFormat, out Guid VendorFormat);
+		public function HResult PIBIO_ENGINE_QUERY_INDEX_VECTOR_SIZE_FN(out WINBIO_PIPELINE Pipeline, out uint IndexElementCount);
+		public function HResult PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN(out WINBIO_PIPELINE Pipeline, out uint AlgorithmCount, out uint AlgorithmBufferSize, out uint8* AlgorithmBuffer);
+		public function HResult PIBIO_ENGINE_SET_HASH_ALGORITHM_FN(out WINBIO_PIPELINE Pipeline, uint AlgorithmBufferSize, uint8* AlgorithmBuffer);
+		public function HResult PIBIO_ENGINE_QUERY_SAMPLE_HINT_FN(out WINBIO_PIPELINE Pipeline, out uint SampleHint);
+		public function HResult PIBIO_ENGINE_ACCEPT_SAMPLE_DATA_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_BIR SampleBuffer, uint SampleSize, uint8 Purpose, out uint32 RejectDetail);
+		public function HResult PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN(out WINBIO_PIPELINE Pipeline, uint8 Flags, out WINBIO_BIR* SampleBuffer, out uint SampleSize);
+		public function HResult PIBIO_ENGINE_VERIFY_FEATURE_SET_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor, out bool Match, out uint8* PayloadBlob, out uint PayloadBlobSize, out uint8* HashValue, out uint HashSize, out uint32 RejectDetail);
+		public function HResult PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out uint8* PayloadBlob, out uint PayloadBlobSize, out uint8* HashValue, out uint HashSize, out uint32 RejectDetail);
+		public function HResult PIBIO_ENGINE_CREATE_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_UPDATE_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline, out uint32 RejectDetail);
+		public function HResult PIBIO_ENGINE_GET_ENROLLMENT_STATUS_FN(out WINBIO_PIPELINE Pipeline, out uint32 RejectDetail);
+		public function HResult PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN(out WINBIO_PIPELINE Pipeline, out uint8* HashValue, out uint HashSize);
+		public function HResult PIBIO_ENGINE_CHECK_FOR_DUPLICATE_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out bool Duplicate);
+		public function HResult PIBIO_ENGINE_COMMIT_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor, ref uint8 PayloadBlob, uint PayloadBlobSize);
+		public function HResult PIBIO_ENGINE_DISCARD_ENROLLMENT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_CONTROL_UNIT_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
+		public function HResult PIBIO_ENGINE_CONTROL_UNIT_PRIVILEGED_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
+		public function HResult PIBIO_ENGINE_NOTIFY_POWER_CHANGE_FN(out WINBIO_PIPELINE Pipeline, uint32 PowerEventType);
+		public function HResult PIBIO_ENGINE_RESERVED_1_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity);
+		public function HResult PIBIO_ENGINE_PIPELINE_INIT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_PIPELINE_CLEANUP_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_ACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_DEACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_QUERY_EXTENDED_INFO_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_ENGINE_INFO EngineInfo, uint EngineInfoSize);
+		public function HResult PIBIO_ENGINE_IDENTIFY_ALL_FN(out WINBIO_PIPELINE Pipeline, out uint PresenceCount, out WINBIO_PRESENCE* PresenceArray);
+		public function HResult PIBIO_ENGINE_SET_ENROLLMENT_SELECTOR_FN(out WINBIO_PIPELINE Pipeline, uint64 SelectorValue);
+		public function HResult PIBIO_ENGINE_SET_ENROLLMENT_PARAMETERS_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_EXTENDED_ENROLLMENT_PARAMETERS Parameters);
+		public function HResult PIBIO_ENGINE_QUERY_EXTENDED_ENROLLMENT_STATUS_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_ENROLLMENT_STATUS EnrollmentStatus, uint EnrollmentStatusSize);
+		public function HResult PIBIO_ENGINE_REFRESH_CACHE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_ENGINE_SELECT_CALIBRATION_FORMAT_FN(out WINBIO_PIPELINE Pipeline, Guid* FormatArray, uint FormatCount, out Guid SelectedFormat, out uint MaxBufferSize);
+		public function HResult PIBIO_ENGINE_QUERY_CALIBRATION_DATA_FN(out WINBIO_PIPELINE Pipeline, out bool DiscardAndRepeatCapture, out uint8 CalibrationBuffer, out uint CalibrationBufferSize, uint MaxBufferSize);
+		public function HResult PIBIO_ENGINE_SET_ACCOUNT_POLICY_FN(out WINBIO_PIPELINE Pipeline, WINBIO_ACCOUNT_POLICY* PolicyItemArray, uint PolicyItemCount);
+		public function HResult PIBIO_ENGINE_CREATE_KEY_FN(out WINBIO_PIPELINE Pipeline, uint8* Key, uint KeySize, out uint8 KeyIdentifier, uint KeyIdentifierSize, out uint ResultSize);
+		public function HResult PIBIO_ENGINE_IDENTIFY_FEATURE_SET_SECURE_FN(out WINBIO_PIPELINE Pipeline, uint8* Nonce, uint NonceSize, uint8* KeyIdentifier, uint KeyIdentifierSize, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out uint32 RejectDetail, out uint8* Authorization, out uint AuthorizationSize);
+		public function HResult PIBIO_ENGINE_ACCEPT_PRIVATE_SENSOR_TYPE_INFO_FN(out WINBIO_PIPELINE Pipeline, uint8* TypeInfoBufferAddress, uint TypeInfoBufferSize);
+		public function HResult PIBIO_ENGINE_CREATE_ENROLLMENT_AUTHENTICATED_FN(out WINBIO_PIPELINE Pipeline, out uint8* Nonce, out uint NonceSize);
+		public function HResult PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN(out WINBIO_PIPELINE Pipeline, in uint8 Nonce, uint NonceSize, out WINBIO_IDENTITY Identity, out uint8 SubFactor, out uint32 RejectDetail, out uint8* Authentication, out uint AuthenticationSize);
+		public function HResult PWINBIO_QUERY_ENGINE_INTERFACE_FN(out WINBIO_ENGINE_INTERFACE* EngineInterface);
+		public function HResult PIBIO_STORAGE_ATTACH_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_DETACH_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_CLEAR_CONTEXT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_CREATE_DATABASE_FN(out WINBIO_PIPELINE Pipeline, ref Guid DatabaseId, uint32 Factor, ref Guid Format, char16* FilePath, char16* ConnectString, uint IndexElementCount, uint InitialSize);
+		public function HResult PIBIO_STORAGE_ERASE_DATABASE_FN(out WINBIO_PIPELINE Pipeline, ref Guid DatabaseId, char16* FilePath, char16* ConnectString);
+		public function HResult PIBIO_STORAGE_OPEN_DATABASE_FN(out WINBIO_PIPELINE Pipeline, ref Guid DatabaseId, char16* FilePath, char16* ConnectString);
+		public function HResult PIBIO_STORAGE_CLOSE_DATABASE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_GET_DATA_FORMAT_FN(out WINBIO_PIPELINE Pipeline, out Guid Format, out WINBIO_VERSION Version);
+		public function HResult PIBIO_STORAGE_GET_DATABASE_SIZE_FN(out WINBIO_PIPELINE Pipeline, out uint AvailableRecordCount, out uint TotalRecordCount);
+		public function HResult PIBIO_STORAGE_ADD_RECORD_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_STORAGE_RECORD RecordContents);
+		public function HResult PIBIO_STORAGE_DELETE_RECORD_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor);
+		public function HResult PIBIO_STORAGE_QUERY_BY_SUBJECT_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor);
+		public function HResult PIBIO_STORAGE_QUERY_BY_CONTENT_FN(out WINBIO_PIPELINE Pipeline, uint8 SubFactor, uint32* IndexVector, uint IndexElementCount);
+		public function HResult PIBIO_STORAGE_GET_RECORD_COUNT_FN(out WINBIO_PIPELINE Pipeline, out uint RecordCount);
+		public function HResult PIBIO_STORAGE_FIRST_RECORD_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_NEXT_RECORD_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_GET_CURRENT_RECORD_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_STORAGE_RECORD RecordContents);
+		public function HResult PIBIO_STORAGE_CONTROL_UNIT_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
+		public function HResult PIBIO_STORAGE_CONTROL_UNIT_PRIVILEGED_FN(out WINBIO_PIPELINE Pipeline, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, out uint32 OperationStatus);
+		public function HResult PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN(out WINBIO_PIPELINE Pipeline, uint32 PowerEventType);
+		public function HResult PIBIO_STORAGE_PIPELINE_INIT_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_PIPELINE_CLEANUP_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_ACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_DEACTIVATE_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_EXTENDED_STORAGE_INFO StorageInfo, uint StorageInfoSize);
+		public function HResult PIBIO_STORAGE_NOTIFY_DATABASE_CHANGE_FN(out WINBIO_PIPELINE Pipeline, bool RecordsAdded);
+		public function HResult PIBIO_STORAGE_RESERVED_1_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity, out uint64 Reserved1, out uint64 Reserved2);
+		public function HResult PIBIO_STORAGE_RESERVED_2_FN(out WINBIO_PIPELINE Pipeline, out WINBIO_IDENTITY Identity);
+		public function HResult PIBIO_STORAGE_UPDATE_RECORD_BEGIN_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, uint8 SubFactor, out WINBIO_STORAGE_RECORD RecordContents);
+		public function HResult PIBIO_STORAGE_UPDATE_RECORD_COMMIT_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_STORAGE_RECORD RecordContents);
+		public function HResult PWINBIO_QUERY_STORAGE_INTERFACE_FN(out WINBIO_STORAGE_INTERFACE* StorageInterface);
+		public function HResult PIBIO_FRAMEWORK_SET_UNIT_STATUS_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_EXTENDED_UNIT_STATUS ExtendedStatus, uint ExtendedStatusSize);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_CLEAR_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_BEGIN_FN(out WINBIO_PIPELINE Pipeline, uint RequiredCapacity, out uint MaxBufferSize);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_NEXT_FN(out WINBIO_PIPELINE Pipeline, ref uint8 BufferAddress, uint BufferSize);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_END_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_BEGIN_FN(out WINBIO_PIPELINE Pipeline, out uint RequiredCapacity, out uint MaxBufferSize);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_NEXT_FN(out WINBIO_PIPELINE Pipeline, out uint8 BufferAddress, uint BufferSize, out uint ReturnedDataSize);
+		public function HResult PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_END_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN(out WINBIO_PIPELINE Pipeline, uint Reserved1, out uint Reserved2);
+		public function HResult PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN(out WINBIO_PIPELINE Pipeline, out uint8 Reserved1, uint Reserved2);
+		public function HResult PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN(out WINBIO_PIPELINE Pipeline);
+		public function HResult PIBIO_FRAMEWORK_ALLOCATE_MEMORY_FN(out WINBIO_PIPELINE Pipeline, uint AllocationSize, void** Address);
+		public function HResult PIBIO_FRAMEWORK_FREE_MEMORY_FN(out WINBIO_PIPELINE Pipeline, void* Address);
+		public function HResult PIBIO_FRAMEWORK_GET_PROPERTY_FN(out WINBIO_PIPELINE Pipeline, uint32 PropertyType, uint32 PropertyId, WINBIO_IDENTITY* Identity, uint8 SubFactor, void** PropertyBuffer, uint* PropertyBufferSize);
+		public function HResult PIBIO_FRAMEWORK_LOCK_AND_VALIDATE_SECURE_BUFFER_FN(out WINBIO_PIPELINE Pipeline, Guid SecureBufferIdentifier, void** SecureBufferAddress, out uint SecureBufferSize);
+		public function HResult PIBIO_FRAMEWORK_RELEASE_SECURE_BUFFER_FN(out WINBIO_PIPELINE Pipeline, Guid SecureBufferIdentifier);
+		public function HResult PIBIO_FRAMEWORK_VSM_QUERY_AUTHORIZED_ENROLLMENTS_FN(out WINBIO_PIPELINE Pipeline, ref WINBIO_IDENTITY Identity, out uint SecureIdentityCount, out WINBIO_IDENTITY* SecureIdentities);
+		public function HResult PIBIO_FRAMEWORK_VSM_DECRYPT_SAMPLE_FN(out WINBIO_PIPELINE Pipeline, in uint8 Authentication, uint AuthenticationSize, in uint8 Iv, uint IvSize, out uint8 EncryptedData, uint EncryptedDataSize);
 		
 		// --- Structs ---
 		
@@ -463,7 +463,7 @@ namespace Win32
 				[CRepr]
 				public struct _Error_e__Struct
 				{
-					public HRESULT ErrorCode;
+					public HResult ErrorCode;
 				}
 			}
 		}
@@ -476,8 +476,8 @@ namespace Win32
 			[CRepr]
 			public struct _Iris_e__Struct
 			{
-				public RECT EyeBoundingBox_1;
-				public RECT EyeBoundingBox_2;
+				public RectI EyeBoundingBox_1;
+				public RectI EyeBoundingBox_2;
 				public POINT PupilCenter_1;
 				public POINT PupilCenter_2;
 				public int32 Distance;
@@ -485,7 +485,7 @@ namespace Win32
 			[CRepr]
 			public struct _FacialFeatures_e__Struct
 			{
-				public RECT BoundingBox;
+				public RectI BoundingBox;
 				public int32 Distance;
 				public _OpaqueEngineData_e__Struct OpaqueEngineData;
 				
@@ -502,7 +502,7 @@ namespace Win32
 		{
 			public uint32 Factor;
 			public uint8 SubFactor;
-			public HRESULT Status;
+			public HResult Status;
 			public uint32 RejectDetail;
 			public WINBIO_IDENTITY Identity;
 			public uint64 TrackingId;
@@ -570,14 +570,14 @@ namespace Win32
 				[CRepr]
 				public struct _Iris_e__Struct
 				{
-					public RECT FrameSize;
+					public RectI FrameSize;
 					public POINT FrameOffset;
 					public uint32 MandatoryOrientation;
 				}
 				[CRepr]
 				public struct _FacialFeatures_e__Struct
 				{
-					public RECT FrameSize;
+					public RectI FrameSize;
 					public POINT FrameOffset;
 					public uint32 MandatoryOrientation;
 					public _HardwareInfo_e__Struct HardwareInfo;
@@ -714,7 +714,7 @@ namespace Win32
 		[CRepr]
 		public struct WINBIO_EXTENDED_ENROLLMENT_STATUS
 		{
-			public HRESULT TemplateStatus;
+			public HResult TemplateStatus;
 			public uint32 RejectDetail;
 			public uint32 PercentComplete;
 			public uint32 Factor;
@@ -738,15 +738,15 @@ namespace Win32
 				[CRepr]
 				public struct _Iris_e__Struct
 				{
-					public RECT EyeBoundingBox_1;
-					public RECT EyeBoundingBox_2;
+					public RectI EyeBoundingBox_1;
+					public RectI EyeBoundingBox_2;
 					public POINT PupilCenter_1;
 					public POINT PupilCenter_2;
 					public int32 Distance;
 					public uint32 GridPointCompletionPercent;
 					public uint16 GridPointIndex;
 					public _Point3D_e__Struct Point3D;
-					public BOOL StopCaptureAndShowCriticalFeedback;
+					public IntBool StopCaptureAndShowCriticalFeedback;
 					
 					[CRepr]
 					public struct _Point3D_e__Struct
@@ -759,7 +759,7 @@ namespace Win32
 				[CRepr]
 				public struct _FacialFeatures_e__Struct
 				{
-					public RECT BoundingBox;
+					public RectI BoundingBox;
 					public int32 Distance;
 					public _OpaqueEngineData_e__Struct OpaqueEngineData;
 					
@@ -791,8 +791,8 @@ namespace Win32
 		[CRepr]
 		public struct WINBIO_FP_BU_STATE
 		{
-			public BOOL SensorAttached;
-			public HRESULT CreationResult;
+			public IntBool SensorAttached;
+			public HResult CreationResult;
 		}
 		[CRepr]
 		public struct WINBIO_ANTI_SPOOF_POLICY
@@ -837,7 +837,7 @@ namespace Win32
 			public uint32 Operation;
 			public uint64 SequenceNumber;
 			public int64 TimeStamp;
-			public HRESULT ApiStatus;
+			public HResult ApiStatus;
 			public uint32 UnitId;
 			public void* UserData;
 			public _Parameters_e__Union Parameters;
@@ -881,7 +881,7 @@ namespace Win32
 				[CRepr]
 				public struct _VerifyAndReleaseTicket_e__Struct
 				{
-					public BOOLEAN Match;
+					public bool Match;
 					public uint32 RejectDetail;
 					public uint64 Ticket;
 				}
@@ -983,7 +983,7 @@ namespace Win32
 				public struct _EnrollCommit_e__Struct
 				{
 					public WINBIO_IDENTITY Identity;
-					public BOOLEAN IsNewTemplate;
+					public bool IsNewTemplate;
 				}
 				[CRepr]
 				public struct _GetProperty_e__Struct
@@ -1006,7 +1006,7 @@ namespace Win32
 				[CRepr]
 				public struct _Verify_e__Struct
 				{
-					public BOOLEAN Match;
+					public bool Match;
 					public uint32 RejectDetail;
 				}
 			}
@@ -1032,9 +1032,9 @@ namespace Win32
 		[CRepr]
 		public struct WINBIO_PIPELINE
 		{
-			public HANDLE SensorHandle;
-			public HANDLE EngineHandle;
-			public HANDLE StorageHandle;
+			public Handle SensorHandle;
+			public Handle EngineHandle;
+			public Handle StorageHandle;
 			public WINBIO_SENSOR_INTERFACE* SensorInterface;
 			public WINBIO_ENGINE_INTERFACE* EngineInterface;
 			public WINBIO_STORAGE_INTERFACE* StorageInterface;
@@ -1231,7 +1231,7 @@ namespace Win32
 		public struct WINBIO_SENSOR_ATTRIBUTES
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public WINBIO_VERSION WinBioVersion;
 			public uint32 SensorType;
 			public uint32 SensorSubType;
@@ -1259,14 +1259,14 @@ namespace Win32
 		public struct WINBIO_CALIBRATION_INFO
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public WINBIO_DATA CalibrationData;
 		}
 		[CRepr]
 		public struct WINBIO_DIAGNOSTICS
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public uint32 SensorStatus;
 			public WINBIO_DATA VendorDiagnostics;
 		}
@@ -1274,7 +1274,7 @@ namespace Win32
 		public struct WINBIO_BLANK_PAYLOAD
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 		}
 		[CRepr]
 		public struct WINBIO_CAPTURE_PARAMETERS
@@ -1289,7 +1289,7 @@ namespace Win32
 		public struct WINBIO_CAPTURE_DATA
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public uint32 SensorStatus;
 			public uint32 RejectDetail;
 			public WINBIO_DATA CaptureData;
@@ -1298,7 +1298,7 @@ namespace Win32
 		public struct WINBIO_SUPPORTED_ALGORITHMS
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public uint32 NumberOfAlgorithms;
 			public WINBIO_DATA AlgorithmData;
 		}
@@ -1306,7 +1306,7 @@ namespace Win32
 		public struct WINBIO_GET_INDICATOR
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public uint32 IndicatorStatus;
 		}
 		[CRepr]
@@ -1319,7 +1319,7 @@ namespace Win32
 		public struct WINBIO_PRIVATE_SENSOR_TYPE_INFO
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public WINBIO_DATA PrivateSensorTypeInfo;
 		}
 		[CRepr]
@@ -1336,110 +1336,110 @@ namespace Win32
 		public struct WINBIO_NOTIFY_WAKE
 		{
 			public uint32 PayloadSize;
-			public HRESULT WinBioHresult;
+			public HResult WinBioHResult;
 			public uint32 Reason;
 		}
 		
 		// --- Functions ---
 		
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnumServiceProviders(uint32 Factor, out WINBIO_BSP_SCHEMA* BspSchemaArray, out uint BspCount);
+		public static extern HResult WinBioEnumServiceProviders(uint32 Factor, out WINBIO_BSP_SCHEMA* BspSchemaArray, out uint BspCount);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnumBiometricUnits(uint32 Factor, out WINBIO_UNIT_SCHEMA* UnitSchemaArray, out uint UnitCount);
+		public static extern HResult WinBioEnumBiometricUnits(uint32 Factor, out WINBIO_UNIT_SCHEMA* UnitSchemaArray, out uint UnitCount);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnumDatabases(uint32 Factor, out WINBIO_STORAGE_SCHEMA* StorageSchemaArray, out uint StorageCount);
+		public static extern HResult WinBioEnumDatabases(uint32 Factor, out WINBIO_STORAGE_SCHEMA* StorageSchemaArray, out uint StorageCount);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAsyncOpenFramework(WINBIO_ASYNC_NOTIFICATION_METHOD NotificationMethod, HWND TargetWindow, uint32 MessageCode, PWINBIO_ASYNC_COMPLETION_CALLBACK CallbackRoutine, void* UserData, BOOL AsynchronousOpen, uint32* FrameworkHandle);
+		public static extern HResult WinBioAsyncOpenFramework(WINBIO_ASYNC_NOTIFICATION_METHOD NotificationMethod, HWnd TargetWindow, uint32 MessageCode, PWINBIO_ASYNC_COMPLETION_CALLBACK CallbackRoutine, void* UserData, IntBool AsynchronousOpen, uint32* FrameworkHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioCloseFramework(uint32 FrameworkHandle);
+		public static extern HResult WinBioCloseFramework(uint32 FrameworkHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAsyncEnumServiceProviders(uint32 FrameworkHandle, uint32 Factor);
+		public static extern HResult WinBioAsyncEnumServiceProviders(uint32 FrameworkHandle, uint32 Factor);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAsyncEnumBiometricUnits(uint32 FrameworkHandle, uint32 Factor);
+		public static extern HResult WinBioAsyncEnumBiometricUnits(uint32 FrameworkHandle, uint32 Factor);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAsyncEnumDatabases(uint32 FrameworkHandle, uint32 Factor);
+		public static extern HResult WinBioAsyncEnumDatabases(uint32 FrameworkHandle, uint32 Factor);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAsyncMonitorFrameworkChanges(uint32 FrameworkHandle, uint32 ChangeTypes);
+		public static extern HResult WinBioAsyncMonitorFrameworkChanges(uint32 FrameworkHandle, uint32 ChangeTypes);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioOpenSession(uint32 Factor, WINBIO_POOL PoolType, uint32 Flags, uint32* UnitArray, uint UnitCount, Guid* DatabaseId, out uint32 SessionHandle);
+		public static extern HResult WinBioOpenSession(uint32 Factor, WINBIO_POOL PoolType, uint32 Flags, uint32* UnitArray, uint UnitCount, Guid* DatabaseId, out uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAsyncOpenSession(uint32 Factor, WINBIO_POOL PoolType, uint32 Flags, uint32* UnitArray, uint UnitCount, Guid* DatabaseId, WINBIO_ASYNC_NOTIFICATION_METHOD NotificationMethod, HWND TargetWindow, uint32 MessageCode, PWINBIO_ASYNC_COMPLETION_CALLBACK CallbackRoutine, void* UserData, BOOL AsynchronousOpen, uint32* SessionHandle);
+		public static extern HResult WinBioAsyncOpenSession(uint32 Factor, WINBIO_POOL PoolType, uint32 Flags, uint32* UnitArray, uint UnitCount, Guid* DatabaseId, WINBIO_ASYNC_NOTIFICATION_METHOD NotificationMethod, HWnd TargetWindow, uint32 MessageCode, PWINBIO_ASYNC_COMPLETION_CALLBACK CallbackRoutine, void* UserData, IntBool AsynchronousOpen, uint32* SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioCloseSession(uint32 SessionHandle);
+		public static extern HResult WinBioCloseSession(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioVerify(uint32 SessionHandle, ref WINBIO_IDENTITY Identity, uint8 SubFactor, uint32* UnitId, uint8* Match, uint32* RejectDetail);
+		public static extern HResult WinBioVerify(uint32 SessionHandle, ref WINBIO_IDENTITY Identity, uint8 SubFactor, uint32* UnitId, uint8* Match, uint32* RejectDetail);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioVerifyWithCallback(uint32 SessionHandle, ref WINBIO_IDENTITY Identity, uint8 SubFactor, PWINBIO_VERIFY_CALLBACK VerifyCallback, void* VerifyCallbackContext);
+		public static extern HResult WinBioVerifyWithCallback(uint32 SessionHandle, ref WINBIO_IDENTITY Identity, uint8 SubFactor, PWINBIO_VERIFY_CALLBACK VerifyCallback, void* VerifyCallbackContext);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioIdentify(uint32 SessionHandle, uint32* UnitId, WINBIO_IDENTITY* Identity, uint8* SubFactor, uint32* RejectDetail);
+		public static extern HResult WinBioIdentify(uint32 SessionHandle, uint32* UnitId, WINBIO_IDENTITY* Identity, uint8* SubFactor, uint32* RejectDetail);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioIdentifyWithCallback(uint32 SessionHandle, PWINBIO_IDENTIFY_CALLBACK IdentifyCallback, void* IdentifyCallbackContext);
+		public static extern HResult WinBioIdentifyWithCallback(uint32 SessionHandle, PWINBIO_IDENTIFY_CALLBACK IdentifyCallback, void* IdentifyCallbackContext);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioWait(uint32 SessionHandle);
+		public static extern HResult WinBioWait(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioCancel(uint32 SessionHandle);
+		public static extern HResult WinBioCancel(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioLocateSensor(uint32 SessionHandle, uint32* UnitId);
+		public static extern HResult WinBioLocateSensor(uint32 SessionHandle, uint32* UnitId);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioLocateSensorWithCallback(uint32 SessionHandle, PWINBIO_LOCATE_SENSOR_CALLBACK LocateCallback, void* LocateCallbackContext);
+		public static extern HResult WinBioLocateSensorWithCallback(uint32 SessionHandle, PWINBIO_LOCATE_SENSOR_CALLBACK LocateCallback, void* LocateCallbackContext);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnrollBegin(uint32 SessionHandle, uint8 SubFactor, uint32 UnitId);
+		public static extern HResult WinBioEnrollBegin(uint32 SessionHandle, uint8 SubFactor, uint32 UnitId);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnrollSelect(uint32 SessionHandle, uint64 SelectorValue);
+		public static extern HResult WinBioEnrollSelect(uint32 SessionHandle, uint64 SelectorValue);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnrollCapture(uint32 SessionHandle, uint32* RejectDetail);
+		public static extern HResult WinBioEnrollCapture(uint32 SessionHandle, uint32* RejectDetail);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnrollCaptureWithCallback(uint32 SessionHandle, PWINBIO_ENROLL_CAPTURE_CALLBACK EnrollCallback, void* EnrollCallbackContext);
+		public static extern HResult WinBioEnrollCaptureWithCallback(uint32 SessionHandle, PWINBIO_ENROLL_CAPTURE_CALLBACK EnrollCallback, void* EnrollCallbackContext);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnrollCommit(uint32 SessionHandle, WINBIO_IDENTITY* Identity, uint8* IsNewTemplate);
+		public static extern HResult WinBioEnrollCommit(uint32 SessionHandle, WINBIO_IDENTITY* Identity, uint8* IsNewTemplate);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnrollDiscard(uint32 SessionHandle);
+		public static extern HResult WinBioEnrollDiscard(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioEnumEnrollments(uint32 SessionHandle, uint32 UnitId, ref WINBIO_IDENTITY Identity, uint8** SubFactorArray, uint* SubFactorCount);
+		public static extern HResult WinBioEnumEnrollments(uint32 SessionHandle, uint32 UnitId, ref WINBIO_IDENTITY Identity, uint8** SubFactorArray, uint* SubFactorCount);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioImproveBegin(uint32 SessionHandle, uint32 UnitId);
+		public static extern HResult WinBioImproveBegin(uint32 SessionHandle, uint32 UnitId);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioImproveEnd(uint32 SessionHandle);
+		public static extern HResult WinBioImproveEnd(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioRegisterEventMonitor(uint32 SessionHandle, uint32 EventMask, PWINBIO_EVENT_CALLBACK EventCallback, void* EventCallbackContext);
+		public static extern HResult WinBioRegisterEventMonitor(uint32 SessionHandle, uint32 EventMask, PWINBIO_EVENT_CALLBACK EventCallback, void* EventCallbackContext);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioUnregisterEventMonitor(uint32 SessionHandle);
+		public static extern HResult WinBioUnregisterEventMonitor(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioMonitorPresence(uint32 SessionHandle, uint32 UnitId);
+		public static extern HResult WinBioMonitorPresence(uint32 SessionHandle, uint32 UnitId);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioCaptureSample(uint32 SessionHandle, uint8 Purpose, uint8 Flags, uint32* UnitId, WINBIO_BIR** Sample, uint* SampleSize, uint32* RejectDetail);
+		public static extern HResult WinBioCaptureSample(uint32 SessionHandle, uint8 Purpose, uint8 Flags, uint32* UnitId, WINBIO_BIR** Sample, uint* SampleSize, uint32* RejectDetail);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioCaptureSampleWithCallback(uint32 SessionHandle, uint8 Purpose, uint8 Flags, PWINBIO_CAPTURE_CALLBACK CaptureCallback, void* CaptureCallbackContext);
+		public static extern HResult WinBioCaptureSampleWithCallback(uint32 SessionHandle, uint8 Purpose, uint8 Flags, PWINBIO_CAPTURE_CALLBACK CaptureCallback, void* CaptureCallbackContext);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioDeleteTemplate(uint32 SessionHandle, uint32 UnitId, ref WINBIO_IDENTITY Identity, uint8 SubFactor);
+		public static extern HResult WinBioDeleteTemplate(uint32 SessionHandle, uint32 UnitId, ref WINBIO_IDENTITY Identity, uint8 SubFactor);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioLockUnit(uint32 SessionHandle, uint32 UnitId);
+		public static extern HResult WinBioLockUnit(uint32 SessionHandle, uint32 UnitId);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioUnlockUnit(uint32 SessionHandle, uint32 UnitId);
+		public static extern HResult WinBioUnlockUnit(uint32 SessionHandle, uint32 UnitId);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioControlUnit(uint32 SessionHandle, uint32 UnitId, WINBIO_COMPONENT Component, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, uint32* OperationStatus);
+		public static extern HResult WinBioControlUnit(uint32 SessionHandle, uint32 UnitId, WINBIO_COMPONENT Component, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, uint32* OperationStatus);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioControlUnitPrivileged(uint32 SessionHandle, uint32 UnitId, WINBIO_COMPONENT Component, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, uint32* OperationStatus);
+		public static extern HResult WinBioControlUnitPrivileged(uint32 SessionHandle, uint32 UnitId, WINBIO_COMPONENT Component, uint32 ControlCode, ref uint8 SendBuffer, uint SendBufferSize, out uint8 ReceiveBuffer, uint ReceiveBufferSize, out uint ReceiveDataSize, uint32* OperationStatus);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioGetProperty(uint32 SessionHandle, uint32 PropertyType, uint32 PropertyId, uint32 UnitId, WINBIO_IDENTITY* Identity, uint8 SubFactor, void** PropertyBuffer, uint* PropertyBufferSize);
+		public static extern HResult WinBioGetProperty(uint32 SessionHandle, uint32 PropertyType, uint32 PropertyId, uint32 UnitId, WINBIO_IDENTITY* Identity, uint8 SubFactor, void** PropertyBuffer, uint* PropertyBufferSize);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioSetProperty(uint32 SessionHandle, uint32 PropertyType, uint32 PropertyId, uint32 UnitId, WINBIO_IDENTITY* Identity, uint8 SubFactor, void* PropertyBuffer, uint PropertyBufferSize);
+		public static extern HResult WinBioSetProperty(uint32 SessionHandle, uint32 PropertyType, uint32 PropertyId, uint32 UnitId, WINBIO_IDENTITY* Identity, uint8 SubFactor, void* PropertyBuffer, uint PropertyBufferSize);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioFree(void* Address);
+		public static extern HResult WinBioFree(void* Address);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioSetCredential(WINBIO_CREDENTIAL_TYPE Type, ref uint8 Credential, uint CredentialSize, WINBIO_CREDENTIAL_FORMAT Format);
+		public static extern HResult WinBioSetCredential(WINBIO_CREDENTIAL_TYPE Type, ref uint8 Credential, uint CredentialSize, WINBIO_CREDENTIAL_FORMAT Format);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioRemoveCredential(WINBIO_IDENTITY Identity, WINBIO_CREDENTIAL_TYPE Type);
+		public static extern HResult WinBioRemoveCredential(WINBIO_IDENTITY Identity, WINBIO_CREDENTIAL_TYPE Type);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioRemoveAllCredentials();
+		public static extern HResult WinBioRemoveAllCredentials();
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioRemoveAllDomainCredentials();
+		public static extern HResult WinBioRemoveAllDomainCredentials();
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioGetCredentialState(WINBIO_IDENTITY Identity, WINBIO_CREDENTIAL_TYPE Type, out WINBIO_CREDENTIAL_STATE CredentialState);
+		public static extern HResult WinBioGetCredentialState(WINBIO_IDENTITY Identity, WINBIO_CREDENTIAL_TYPE Type, out WINBIO_CREDENTIAL_STATE CredentialState);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioLogonIdentifiedUser(uint32 SessionHandle);
+		public static extern HResult WinBioLogonIdentifiedUser(uint32 SessionHandle);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioGetEnrolledFactors(ref WINBIO_IDENTITY AccountOwner, out uint32 EnrolledFactors);
+		public static extern HResult WinBioGetEnrolledFactors(ref WINBIO_IDENTITY AccountOwner, out uint32 EnrolledFactors);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WinBioGetEnabledSetting(out uint8 Value, out WINBIO_SETTING_SOURCE Source);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1447,8 +1447,8 @@ namespace Win32
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WinBioGetDomainLogonSetting(out uint8 Value, out WINBIO_SETTING_SOURCE Source);
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioAcquireFocus();
+		public static extern HResult WinBioAcquireFocus();
 		[Import("winbio.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WinBioReleaseFocus();
+		public static extern HResult WinBioReleaseFocus();
 	}
 }

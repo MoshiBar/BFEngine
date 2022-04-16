@@ -1,22 +1,25 @@
 using System;
+using System.IO;
+using static Win32.Win32;
+using static System.Windows;
 
 // namespace System.Registry
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	static class Registry
 	{
 		// --- Constants ---
 		
-		public const HKEY HKEY_CLASSES_ROOT = -2147483648;
-		public const HKEY HKEY_CURRENT_USER = -2147483647;
-		public const HKEY HKEY_LOCAL_MACHINE = -2147483646;
-		public const HKEY HKEY_USERS = -2147483645;
-		public const HKEY HKEY_PERFORMANCE_DATA = -2147483644;
-		public const HKEY HKEY_PERFORMANCE_TEXT = -2147483568;
-		public const HKEY HKEY_PERFORMANCE_NLSTEXT = -2147483552;
-		public const HKEY HKEY_CURRENT_CONFIG = -2147483643;
-		public const HKEY HKEY_DYN_DATA = -2147483642;
-		public const HKEY HKEY_CURRENT_USER_LOCAL_SETTINGS = -2147483641;
+		public const HKey HKEY_CLASSES_ROOT = (.)-2147483648;
+		public const HKey HKEY_CURRENT_USER = (.)-2147483647;
+		public const HKey HKEY_LOCAL_MACHINE = (.)-2147483646;
+		public const HKey HKEY_USERS = (.)-2147483645;
+		public const HKey HKEY_PERFORMANCE_DATA = (.)-2147483644;
+		public const HKey HKEY_PERFORMANCE_TEXT = (.)-2147483568;
+		public const HKey HKEY_PERFORMANCE_NLSTEXT = (.)-2147483552;
+		public const HKey HKEY_CURRENT_CONFIG = (.)-2147483643;
+		public const HKey HKEY_DYN_DATA = (.)-2147483642;
+		public const HKey HKEY_CURRENT_USER_LOCAL_SETTINGS = (.)-2147483641;
 		public const uint32 RRF_SUBKEY_WOW6464KEY = 65536;
 		public const uint32 RRF_SUBKEY_WOW6432KEY = 131072;
 		public const uint32 RRF_WOW64_MASK = 196608;
@@ -170,10 +173,6 @@ namespace Win32
 		public const uint32 LASTGOOD_OPERATION_NOPOSTPROC = 0;
 		public const uint32 LASTGOOD_OPERATION_DELETE = 1;
 		
-		// --- Typedefs ---
-		
-		public typealias HKEY = int;
-		
 		// --- Enums ---
 		
 		[AllowDuplicates]
@@ -276,7 +275,7 @@ namespace Win32
 		[CRepr]
 		public struct pvalueA
 		{
-			public PSTR pv_valuename;
+			public char8* pv_valuename;
 			public int32 pv_valuelen;
 			public void* pv_value_context;
 			public uint32 pv_type;
@@ -284,7 +283,7 @@ namespace Win32
 		[CRepr]
 		public struct pvalueW
 		{
-			public PWSTR pv_valuename;
+			public char16* pv_valuename;
 			public int32 pv_valuelen;
 			public void* pv_value_context;
 			public uint32 pv_type;
@@ -302,7 +301,7 @@ namespace Win32
 		[CRepr]
 		public struct VALENTA
 		{
-			public PSTR ve_valuename;
+			public char8* ve_valuename;
 			public uint32 ve_valuelen;
 			public uint ve_valueptr;
 			public REG_VALUE_TYPE ve_type;
@@ -310,7 +309,7 @@ namespace Win32
 		[CRepr]
 		public struct VALENTW
 		{
-			public PWSTR ve_valuename;
+			public char16* ve_valuename;
 			public uint32 ve_valuelen;
 			public uint ve_valueptr;
 			public REG_VALUE_TYPE ve_type;
@@ -332,170 +331,170 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCloseKey(HKEY hKey);
+		public static extern LSTATUS RegCloseKey(HKey hKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOverridePredefKey(HKEY hKey, HKEY hNewHKey);
+		public static extern LSTATUS RegOverridePredefKey(HKey hKey, HKey hNewHKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenUserClassesRoot(HANDLE hToken, uint32 dwOptions, uint32 samDesired, out HKEY phkResult);
+		public static extern LSTATUS RegOpenUserClassesRoot(Handle hToken, uint32 dwOptions, uint32 samDesired, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenCurrentUser(uint32 samDesired, out HKEY phkResult);
+		public static extern LSTATUS RegOpenCurrentUser(uint32 samDesired, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern LSTATUS RegDisablePredefinedCache();
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern LSTATUS RegDisablePredefinedCacheEx();
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegConnectRegistryA(PSTR lpMachineName, HKEY hKey, out HKEY phkResult);
+		public static extern LSTATUS RegConnectRegistryA(char8* lpMachineName, HKey hKey, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegConnectRegistryW(PWSTR lpMachineName, HKEY hKey, out HKEY phkResult);
+		public static extern LSTATUS RegConnectRegistryW(char16* lpMachineName, HKey hKey, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegConnectRegistryExA(PSTR lpMachineName, HKEY hKey, uint32 Flags, out HKEY phkResult);
+		public static extern LSTATUS RegConnectRegistryExA(char8* lpMachineName, HKey hKey, uint32 Flags, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegConnectRegistryExW(PWSTR lpMachineName, HKEY hKey, uint32 Flags, out HKEY phkResult);
+		public static extern LSTATUS RegConnectRegistryExW(char16* lpMachineName, HKey hKey, uint32 Flags, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCreateKeyA(HKEY hKey, PSTR lpSubKey, out HKEY phkResult);
+		public static extern LSTATUS RegCreateKeyA(HKey hKey, char8* lpSubKey, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCreateKeyW(HKEY hKey, PWSTR lpSubKey, out HKEY phkResult);
+		public static extern LSTATUS RegCreateKeyW(HKey hKey, char16* lpSubKey, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCreateKeyExA(HKEY hKey, PSTR lpSubKey, uint32 Reserved, PSTR lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SECURITY_ATTRIBUTES* lpSecurityAttributes, out HKEY phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition);
+		public static extern LSTATUS RegCreateKeyExA(HKey hKey, char8* lpSubKey, uint32 Reserved, char8* lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SecurityAttributes* lpSecurityAttributes, out HKey phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCreateKeyExW(HKEY hKey, PWSTR lpSubKey, uint32 Reserved, PWSTR lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SECURITY_ATTRIBUTES* lpSecurityAttributes, out HKEY phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition);
+		public static extern LSTATUS RegCreateKeyExW(HKey hKey, char16* lpSubKey, uint32 Reserved, char16* lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SecurityAttributes* lpSecurityAttributes, out HKey phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCreateKeyTransactedA(HKEY hKey, PSTR lpSubKey, uint32 Reserved, PSTR lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SECURITY_ATTRIBUTES* lpSecurityAttributes, out HKEY phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition, HANDLE hTransaction, void* pExtendedParemeter);
+		public static extern LSTATUS RegCreateKeyTransactedA(HKey hKey, char8* lpSubKey, uint32 Reserved, char8* lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SecurityAttributes* lpSecurityAttributes, out HKey phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition, Handle hTransaction, void* pExtendedParemeter);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCreateKeyTransactedW(HKEY hKey, PWSTR lpSubKey, uint32 Reserved, PWSTR lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SECURITY_ATTRIBUTES* lpSecurityAttributes, out HKEY phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition, HANDLE hTransaction, void* pExtendedParemeter);
+		public static extern LSTATUS RegCreateKeyTransactedW(HKey hKey, char16* lpSubKey, uint32 Reserved, char16* lpClass, REG_OPEN_CREATE_OPTIONS dwOptions, REG_SAM_FLAGS samDesired, SecurityAttributes* lpSecurityAttributes, out HKey phkResult, REG_CREATE_KEY_DISPOSITION* lpdwDisposition, Handle hTransaction, void* pExtendedParemeter);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyA(HKEY hKey, PSTR lpSubKey);
+		public static extern LSTATUS RegDeleteKeyA(HKey hKey, char8* lpSubKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyW(HKEY hKey, PWSTR lpSubKey);
+		public static extern LSTATUS RegDeleteKeyW(HKey hKey, char16* lpSubKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyExA(HKEY hKey, PSTR lpSubKey, uint32 samDesired, uint32 Reserved);
+		public static extern LSTATUS RegDeleteKeyExA(HKey hKey, char8* lpSubKey, uint32 samDesired, uint32 Reserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyExW(HKEY hKey, PWSTR lpSubKey, uint32 samDesired, uint32 Reserved);
+		public static extern LSTATUS RegDeleteKeyExW(HKey hKey, char16* lpSubKey, uint32 samDesired, uint32 Reserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyTransactedA(HKEY hKey, PSTR lpSubKey, uint32 samDesired, uint32 Reserved, HANDLE hTransaction, void* pExtendedParameter);
+		public static extern LSTATUS RegDeleteKeyTransactedA(HKey hKey, char8* lpSubKey, uint32 samDesired, uint32 Reserved, Handle hTransaction, void* pExtendedParameter);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyTransactedW(HKEY hKey, PWSTR lpSubKey, uint32 samDesired, uint32 Reserved, HANDLE hTransaction, void* pExtendedParameter);
+		public static extern LSTATUS RegDeleteKeyTransactedW(HKey hKey, char16* lpSubKey, uint32 samDesired, uint32 Reserved, Handle hTransaction, void* pExtendedParameter);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 RegDisableReflectionKey(HKEY hBase);
+		public static extern int32 RegDisableReflectionKey(HKey hBase);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 RegEnableReflectionKey(HKEY hBase);
+		public static extern int32 RegEnableReflectionKey(HKey hBase);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 RegQueryReflectionKey(HKEY hBase, out BOOL bIsReflectionDisabled);
+		public static extern int32 RegQueryReflectionKey(HKey hBase, out IntBool bIsReflectionDisabled);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteValueA(HKEY hKey, PSTR lpValueName);
+		public static extern LSTATUS RegDeleteValueA(HKey hKey, char8* lpValueName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteValueW(HKEY hKey, PWSTR lpValueName);
+		public static extern LSTATUS RegDeleteValueW(HKey hKey, char16* lpValueName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegEnumKeyA(HKEY hKey, uint32 dwIndex, uint8* lpName, uint32 cchName);
+		public static extern LSTATUS RegEnumKeyA(HKey hKey, uint32 dwIndex, uint8* lpName, uint32 cchName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegEnumKeyW(HKEY hKey, uint32 dwIndex, char16* lpName, uint32 cchName);
+		public static extern LSTATUS RegEnumKeyW(HKey hKey, uint32 dwIndex, char16* lpName, uint32 cchName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegEnumKeyExA(HKEY hKey, uint32 dwIndex, uint8* lpName, out uint32 lpcchName, out uint32 lpReserved, uint8* lpClass, uint32* lpcchClass, FILETIME* lpftLastWriteTime);
+		public static extern LSTATUS RegEnumKeyExA(HKey hKey, uint32 dwIndex, uint8* lpName, out uint32 lpcchName, out uint32 lpReserved, uint8* lpClass, uint32* lpcchClass, FileTime* lpftLastWriteTime);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegEnumKeyExW(HKEY hKey, uint32 dwIndex, char16* lpName, out uint32 lpcchName, out uint32 lpReserved, char16* lpClass, uint32* lpcchClass, FILETIME* lpftLastWriteTime);
+		public static extern LSTATUS RegEnumKeyExW(HKey hKey, uint32 dwIndex, char16* lpName, out uint32 lpcchName, out uint32 lpReserved, char16* lpClass, uint32* lpcchClass, FileTime* lpftLastWriteTime);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegEnumValueA(HKEY hKey, uint32 dwIndex, uint8* lpValueName, out uint32 lpcchValueName, out uint32 lpReserved, uint32* lpType, uint8* lpData, uint32* lpcbData);
+		public static extern LSTATUS RegEnumValueA(HKey hKey, uint32 dwIndex, uint8* lpValueName, out uint32 lpcchValueName, out uint32 lpReserved, uint32* lpType, uint8* lpData, uint32* lpcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegEnumValueW(HKEY hKey, uint32 dwIndex, char16* lpValueName, out uint32 lpcchValueName, out uint32 lpReserved, uint32* lpType, uint8* lpData, uint32* lpcbData);
+		public static extern LSTATUS RegEnumValueW(HKey hKey, uint32 dwIndex, char16* lpValueName, out uint32 lpcchValueName, out uint32 lpReserved, uint32* lpType, uint8* lpData, uint32* lpcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegFlushKey(HKEY hKey);
+		public static extern LSTATUS RegFlushKey(HKey hKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegGetKeySecurity(HKEY hKey, uint32 SecurityInformation, SECURITY_DESCRIPTOR* pSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
+		public static extern LSTATUS RegGetKeySecurity(HKey hKey, uint32 SecurityInformation, SECURITY_DESCRIPTOR* pSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegLoadKeyA(HKEY hKey, PSTR lpSubKey, PSTR lpFile);
+		public static extern LSTATUS RegLoadKeyA(HKey hKey, char8* lpSubKey, char8* lpFile);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegLoadKeyW(HKEY hKey, PWSTR lpSubKey, PWSTR lpFile);
+		public static extern LSTATUS RegLoadKeyW(HKey hKey, char16* lpSubKey, char16* lpFile);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegNotifyChangeKeyValue(HKEY hKey, BOOL bWatchSubtree, REG_NOTIFY_FILTER dwNotifyFilter, HANDLE hEvent, BOOL fAsynchronous);
+		public static extern LSTATUS RegNotifyChangeKeyValue(HKey hKey, IntBool bWatchSubtree, REG_NOTIFY_FILTER dwNotifyFilter, Handle hEvent, IntBool fAsynchronous);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenKeyA(HKEY hKey, PSTR lpSubKey, out HKEY phkResult);
+		public static extern LSTATUS RegOpenKeyA(HKey hKey, char8* lpSubKey, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenKeyW(HKEY hKey, PWSTR lpSubKey, out HKEY phkResult);
+		public static extern LSTATUS RegOpenKeyW(HKey hKey, char16* lpSubKey, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenKeyExA(HKEY hKey, PSTR lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKEY phkResult);
+		public static extern LSTATUS RegOpenKeyExA(HKey hKey, char8* lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenKeyExW(HKEY hKey, PWSTR lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKEY phkResult);
+		public static extern LSTATUS RegOpenKeyExW(HKey hKey, char16* lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKey phkResult);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenKeyTransactedA(HKEY hKey, PSTR lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKEY phkResult, HANDLE hTransaction, void* pExtendedParemeter);
+		public static extern LSTATUS RegOpenKeyTransactedA(HKey hKey, char8* lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKey phkResult, Handle hTransaction, void* pExtendedParemeter);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegOpenKeyTransactedW(HKEY hKey, PWSTR lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKEY phkResult, HANDLE hTransaction, void* pExtendedParemeter);
+		public static extern LSTATUS RegOpenKeyTransactedW(HKey hKey, char16* lpSubKey, uint32 ulOptions, REG_SAM_FLAGS samDesired, out HKey phkResult, Handle hTransaction, void* pExtendedParemeter);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryInfoKeyA(HKEY hKey, uint8* lpClass, uint32* lpcchClass, out uint32 lpReserved, uint32* lpcSubKeys, uint32* lpcbMaxSubKeyLen, uint32* lpcbMaxClassLen, uint32* lpcValues, uint32* lpcbMaxValueNameLen, uint32* lpcbMaxValueLen, uint32* lpcbSecurityDescriptor, FILETIME* lpftLastWriteTime);
+		public static extern LSTATUS RegQueryInfoKeyA(HKey hKey, uint8* lpClass, uint32* lpcchClass, out uint32 lpReserved, uint32* lpcSubKeys, uint32* lpcbMaxSubKeyLen, uint32* lpcbMaxClassLen, uint32* lpcValues, uint32* lpcbMaxValueNameLen, uint32* lpcbMaxValueLen, uint32* lpcbSecurityDescriptor, FileTime* lpftLastWriteTime);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryInfoKeyW(HKEY hKey, char16* lpClass, uint32* lpcchClass, out uint32 lpReserved, uint32* lpcSubKeys, uint32* lpcbMaxSubKeyLen, uint32* lpcbMaxClassLen, uint32* lpcValues, uint32* lpcbMaxValueNameLen, uint32* lpcbMaxValueLen, uint32* lpcbSecurityDescriptor, FILETIME* lpftLastWriteTime);
+		public static extern LSTATUS RegQueryInfoKeyW(HKey hKey, char16* lpClass, uint32* lpcchClass, out uint32 lpReserved, uint32* lpcSubKeys, uint32* lpcbMaxSubKeyLen, uint32* lpcbMaxClassLen, uint32* lpcValues, uint32* lpcbMaxValueNameLen, uint32* lpcbMaxValueLen, uint32* lpcbSecurityDescriptor, FileTime* lpftLastWriteTime);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryValueA(HKEY hKey, PSTR lpSubKey, PSTR lpData, int32* lpcbData);
+		public static extern LSTATUS RegQueryValueA(HKey hKey, char8* lpSubKey, char8* lpData, int32* lpcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryValueW(HKEY hKey, PWSTR lpSubKey, PWSTR lpData, int32* lpcbData);
+		public static extern LSTATUS RegQueryValueW(HKey hKey, char16* lpSubKey, char16* lpData, int32* lpcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryMultipleValuesA(HKEY hKey, VALENTA* val_list, uint32 num_vals, PSTR lpValueBuf, uint32* ldwTotsize);
+		public static extern LSTATUS RegQueryMultipleValuesA(HKey hKey, VALENTA* val_list, uint32 num_vals, char8* lpValueBuf, uint32* ldwTotsize);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryMultipleValuesW(HKEY hKey, VALENTW* val_list, uint32 num_vals, PWSTR lpValueBuf, uint32* ldwTotsize);
+		public static extern LSTATUS RegQueryMultipleValuesW(HKey hKey, VALENTW* val_list, uint32 num_vals, char16* lpValueBuf, uint32* ldwTotsize);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryValueExA(HKEY hKey, PSTR lpValueName, out uint32 lpReserved, REG_VALUE_TYPE* lpType, uint8* lpData, uint32* lpcbData);
+		public static extern LSTATUS RegQueryValueExA(HKey hKey, char8* lpValueName, out uint32 lpReserved, REG_VALUE_TYPE* lpType, uint8* lpData, uint32* lpcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegQueryValueExW(HKEY hKey, PWSTR lpValueName, out uint32 lpReserved, REG_VALUE_TYPE* lpType, uint8* lpData, uint32* lpcbData);
+		public static extern LSTATUS RegQueryValueExW(HKey hKey, char16* lpValueName, out uint32 lpReserved, REG_VALUE_TYPE* lpType, uint8* lpData, uint32* lpcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegReplaceKeyA(HKEY hKey, PSTR lpSubKey, PSTR lpNewFile, PSTR lpOldFile);
+		public static extern LSTATUS RegReplaceKeyA(HKey hKey, char8* lpSubKey, char8* lpNewFile, char8* lpOldFile);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegReplaceKeyW(HKEY hKey, PWSTR lpSubKey, PWSTR lpNewFile, PWSTR lpOldFile);
+		public static extern LSTATUS RegReplaceKeyW(HKey hKey, char16* lpSubKey, char16* lpNewFile, char16* lpOldFile);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegRestoreKeyA(HKEY hKey, PSTR lpFile, REG_RESTORE_KEY_FLAGS dwFlags);
+		public static extern LSTATUS RegRestoreKeyA(HKey hKey, char8* lpFile, REG_RESTORE_KEY_FLAGS dwFlags);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegRestoreKeyW(HKEY hKey, PWSTR lpFile, REG_RESTORE_KEY_FLAGS dwFlags);
+		public static extern LSTATUS RegRestoreKeyW(HKey hKey, char16* lpFile, REG_RESTORE_KEY_FLAGS dwFlags);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegRenameKey(HKEY hKey, PWSTR lpSubKeyName, PWSTR lpNewKeyName);
+		public static extern LSTATUS RegRenameKey(HKey hKey, char16* lpSubKeyName, char16* lpNewKeyName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSaveKeyA(HKEY hKey, PSTR lpFile, SECURITY_ATTRIBUTES* lpSecurityAttributes);
+		public static extern LSTATUS RegSaveKeyA(HKey hKey, char8* lpFile, SecurityAttributes* lpSecurityAttributes);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSaveKeyW(HKEY hKey, PWSTR lpFile, SECURITY_ATTRIBUTES* lpSecurityAttributes);
+		public static extern LSTATUS RegSaveKeyW(HKey hKey, char16* lpFile, SecurityAttributes* lpSecurityAttributes);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetKeySecurity(HKEY hKey, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
+		public static extern LSTATUS RegSetKeySecurity(HKey hKey, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetValueA(HKEY hKey, PSTR lpSubKey, REG_VALUE_TYPE dwType, PSTR lpData, uint32 cbData);
+		public static extern LSTATUS RegSetValueA(HKey hKey, char8* lpSubKey, REG_VALUE_TYPE dwType, char8* lpData, uint32 cbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetValueW(HKEY hKey, PWSTR lpSubKey, REG_VALUE_TYPE dwType, PWSTR lpData, uint32 cbData);
+		public static extern LSTATUS RegSetValueW(HKey hKey, char16* lpSubKey, REG_VALUE_TYPE dwType, char16* lpData, uint32 cbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetValueExA(HKEY hKey, PSTR lpValueName, uint32 Reserved, REG_VALUE_TYPE dwType, uint8* lpData, uint32 cbData);
+		public static extern LSTATUS RegSetValueExA(HKey hKey, char8* lpValueName, uint32 Reserved, REG_VALUE_TYPE dwType, uint8* lpData, uint32 cbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetValueExW(HKEY hKey, PWSTR lpValueName, uint32 Reserved, REG_VALUE_TYPE dwType, uint8* lpData, uint32 cbData);
+		public static extern LSTATUS RegSetValueExW(HKey hKey, char16* lpValueName, uint32 Reserved, REG_VALUE_TYPE dwType, uint8* lpData, uint32 cbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegUnLoadKeyA(HKEY hKey, PSTR lpSubKey);
+		public static extern LSTATUS RegUnLoadKeyA(HKey hKey, char8* lpSubKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegUnLoadKeyW(HKEY hKey, PWSTR lpSubKey);
+		public static extern LSTATUS RegUnLoadKeyW(HKey hKey, char16* lpSubKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyValueA(HKEY hKey, PSTR lpSubKey, PSTR lpValueName);
+		public static extern LSTATUS RegDeleteKeyValueA(HKey hKey, char8* lpSubKey, char8* lpValueName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteKeyValueW(HKEY hKey, PWSTR lpSubKey, PWSTR lpValueName);
+		public static extern LSTATUS RegDeleteKeyValueW(HKey hKey, char16* lpSubKey, char16* lpValueName);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetKeyValueA(HKEY hKey, PSTR lpSubKey, PSTR lpValueName, uint32 dwType, void* lpData, uint32 cbData);
+		public static extern LSTATUS RegSetKeyValueA(HKey hKey, char8* lpSubKey, char8* lpValueName, uint32 dwType, void* lpData, uint32 cbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSetKeyValueW(HKEY hKey, PWSTR lpSubKey, PWSTR lpValueName, uint32 dwType, void* lpData, uint32 cbData);
+		public static extern LSTATUS RegSetKeyValueW(HKey hKey, char16* lpSubKey, char16* lpValueName, uint32 dwType, void* lpData, uint32 cbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteTreeA(HKEY hKey, PSTR lpSubKey);
+		public static extern LSTATUS RegDeleteTreeA(HKey hKey, char8* lpSubKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegDeleteTreeW(HKEY hKey, PWSTR lpSubKey);
+		public static extern LSTATUS RegDeleteTreeW(HKey hKey, char16* lpSubKey);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCopyTreeA(HKEY hKeySrc, PSTR lpSubKey, HKEY hKeyDest);
+		public static extern LSTATUS RegCopyTreeA(HKey hKeySrc, char8* lpSubKey, HKey hKeyDest);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegGetValueA(HKEY hkey, PSTR lpSubKey, PSTR lpValue, RRF_RT dwFlags, uint32* pdwType, void* pvData, uint32* pcbData);
+		public static extern LSTATUS RegGetValueA(HKey hkey, char8* lpSubKey, char8* lpValue, RRF_RT dwFlags, uint32* pdwType, void* pvData, uint32* pcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegGetValueW(HKEY hkey, PWSTR lpSubKey, PWSTR lpValue, RRF_RT dwFlags, uint32* pdwType, void* pvData, uint32* pcbData);
+		public static extern LSTATUS RegGetValueW(HKey hkey, char16* lpSubKey, char16* lpValue, RRF_RT dwFlags, uint32* pdwType, void* pvData, uint32* pcbData);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegCopyTreeW(HKEY hKeySrc, PWSTR lpSubKey, HKEY hKeyDest);
+		public static extern LSTATUS RegCopyTreeW(HKey hKeySrc, char16* lpSubKey, HKey hKeyDest);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegLoadMUIStringA(HKEY hKey, PSTR pszValue, PSTR pszOutBuf, uint32 cbOutBuf, uint32* pcbData, uint32 Flags, PSTR pszDirectory);
+		public static extern LSTATUS RegLoadMUIStringA(HKey hKey, char8* pszValue, char8* pszOutBuf, uint32 cbOutBuf, uint32* pcbData, uint32 Flags, char8* pszDirectory);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegLoadMUIStringW(HKEY hKey, PWSTR pszValue, PWSTR pszOutBuf, uint32 cbOutBuf, uint32* pcbData, uint32 Flags, PWSTR pszDirectory);
+		public static extern LSTATUS RegLoadMUIStringW(HKey hKey, char16* pszValue, char16* pszOutBuf, uint32 cbOutBuf, uint32* pcbData, uint32 Flags, char16* pszDirectory);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegLoadAppKeyA(PSTR lpFile, out HKEY phkResult, uint32 samDesired, uint32 dwOptions, uint32 Reserved);
+		public static extern LSTATUS RegLoadAppKeyA(char8* lpFile, out HKey phkResult, uint32 samDesired, uint32 dwOptions, uint32 Reserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegLoadAppKeyW(PWSTR lpFile, out HKEY phkResult, uint32 samDesired, uint32 dwOptions, uint32 Reserved);
+		public static extern LSTATUS RegLoadAppKeyW(char16* lpFile, out HKey phkResult, uint32 samDesired, uint32 dwOptions, uint32 Reserved);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSaveKeyExA(HKEY hKey, PSTR lpFile, SECURITY_ATTRIBUTES* lpSecurityAttributes, REG_SAVE_FORMAT Flags);
+		public static extern LSTATUS RegSaveKeyExA(HKey hKey, char8* lpFile, SecurityAttributes* lpSecurityAttributes, REG_SAVE_FORMAT Flags);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS RegSaveKeyExW(HKEY hKey, PWSTR lpFile, SECURITY_ATTRIBUTES* lpSecurityAttributes, REG_SAVE_FORMAT Flags);
+		public static extern LSTATUS RegSaveKeyExW(HKey hKey, char16* lpFile, SecurityAttributes* lpSecurityAttributes, REG_SAVE_FORMAT Flags);
 		[Import("api-ms-win-core-state-helpers-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern LSTATUS GetRegistryValueWithFallbackW(HKEY hkeyPrimary, PWSTR pwszPrimarySubKey, HKEY hkeyFallback, PWSTR pwszFallbackSubKey, PWSTR pwszValue, uint32 dwFlags, uint32* pdwType, void* pvData, uint32 cbDataIn, uint32* pcbDataOut);
+		public static extern LSTATUS GetRegistryValueWithFallbackW(HKey hkeyPrimary, char16* pwszPrimarySubKey, HKey hkeyFallback, char16* pwszFallbackSubKey, char16* pwszValue, uint32 dwFlags, uint32* pdwType, void* pvData, uint32 cbDataIn, uint32* pcbDataOut);
 	}
 }

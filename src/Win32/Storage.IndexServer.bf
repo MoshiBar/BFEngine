@@ -1,9 +1,13 @@
 using System;
+using static Win32.System.Com.StructuredStorage;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Storage.IndexServer
-namespace Win32
+namespace Win32.Storage
 {
-	extension Win32
+	static class IndexServer
 	{
 		// --- Constants ---
 		
@@ -130,20 +134,20 @@ namespace Win32
 		public const uint32 PROXIMITY_UNIT_SENTENCE = 1;
 		public const uint32 PROXIMITY_UNIT_PARAGRAPH = 2;
 		public const uint32 PROXIMITY_UNIT_CHAPTER = 3;
-		public const HRESULT NOT_AN_ERROR = (.)524288;
-		public const HRESULT FILTER_E_END_OF_CHUNKS = (.)-2147215616;
-		public const HRESULT FILTER_E_NO_MORE_TEXT = (.)-2147215615;
-		public const HRESULT FILTER_E_NO_MORE_VALUES = (.)-2147215614;
-		public const HRESULT FILTER_E_ACCESS = (.)-2147215613;
-		public const HRESULT FILTER_W_MONIKER_CLIPPED = (.)268036;
-		public const HRESULT FILTER_E_NO_TEXT = (.)-2147215611;
-		public const HRESULT FILTER_E_NO_VALUES = (.)-2147215610;
-		public const HRESULT FILTER_E_EMBEDDING_UNAVAILABLE = (.)-2147215609;
-		public const HRESULT FILTER_E_LINK_UNAVAILABLE = (.)-2147215608;
-		public const HRESULT FILTER_S_LAST_TEXT = (.)268041;
-		public const HRESULT FILTER_S_LAST_VALUES = (.)268042;
-		public const HRESULT FILTER_E_PASSWORD = (.)-2147215605;
-		public const HRESULT FILTER_E_UNKNOWNFORMAT = (.)-2147215604;
+		public const HResult NOT_AN_ERROR = (.)524288;
+		public const HResult FILTER_E_END_OF_CHUNKS = (.)-2147215616;
+		public const HResult FILTER_E_NO_MORE_TEXT = (.)-2147215615;
+		public const HResult FILTER_E_NO_MORE_VALUES = (.)-2147215614;
+		public const HResult FILTER_E_ACCESS = (.)-2147215613;
+		public const HResult FILTER_W_MONIKER_CLIPPED = (.)268036;
+		public const HResult FILTER_E_NO_TEXT = (.)-2147215611;
+		public const HResult FILTER_E_NO_VALUES = (.)-2147215610;
+		public const HResult FILTER_E_EMBEDDING_UNAVAILABLE = (.)-2147215609;
+		public const HResult FILTER_E_LINK_UNAVAILABLE = (.)-2147215608;
+		public const HResult FILTER_S_LAST_TEXT = (.)268041;
+		public const HResult FILTER_S_LAST_VALUES = (.)268042;
+		public const HResult FILTER_E_PASSWORD = (.)-2147215605;
+		public const HResult FILTER_E_UNKNOWNFORMAT = (.)-2147215604;
 		
 		// --- Enums ---
 		
@@ -255,7 +259,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _uName_e__Union
 			{
-				public PWSTR pwszName;
+				public char16* pwszName;
 				public uint32 ulPropid;
 			}
 			[CRepr, Union]
@@ -298,26 +302,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PutSmallPhrase(PWSTR pwcNoun, uint32 cwcNoun, PWSTR pwcModifier, uint32 cwcModifier, uint32 ulAttachmentType) mut => VT.PutSmallPhrase(ref this, pwcNoun, cwcNoun, pwcModifier, cwcModifier, ulAttachmentType);
-			public HRESULT PutPhrase(PWSTR pwcPhrase, uint32 cwcPhrase) mut => VT.PutPhrase(ref this, pwcPhrase, cwcPhrase);
+			public HResult PutSmallPhrase(char16* pwcNoun, uint32 cwcNoun, char16* pwcModifier, uint32 cwcModifier, uint32 ulAttachmentType) mut => VT.PutSmallPhrase(ref this, pwcNoun, cwcNoun, pwcModifier, cwcModifier, ulAttachmentType);
+			public HResult PutPhrase(char16* pwcPhrase, uint32 cwcPhrase) mut => VT.PutPhrase(ref this, pwcPhrase, cwcPhrase);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPhraseSink self, PWSTR pwcNoun, uint32 cwcNoun, PWSTR pwcModifier, uint32 cwcModifier, uint32 ulAttachmentType) PutSmallPhrase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPhraseSink self, PWSTR pwcPhrase, uint32 cwcPhrase) PutPhrase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPhraseSink self, char16* pwcNoun, uint32 cwcNoun, char16* pwcModifier, uint32 cwcModifier, uint32 ulAttachmentType) PutSmallPhrase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPhraseSink self, char16* pwcPhrase, uint32 cwcPhrase) PutPhrase;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("query.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LoadIFilter(PWSTR pwcsPath, ref IUnknown pUnkOuter, void** ppIUnk);
+		public static extern HResult LoadIFilter(char16* pwcsPath, ref IUnknown pUnkOuter, void** ppIUnk);
 		[Import("query.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LoadIFilterEx(PWSTR pwcsPath, uint32 dwFlags, in Guid riid, void** ppIUnk);
+		public static extern HResult LoadIFilterEx(char16* pwcsPath, uint32 dwFlags, in Guid riid, void** ppIUnk);
 		[Import("query.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT BindIFilterFromStorage(ref IStorage pStg, ref IUnknown pUnkOuter, void** ppIUnk);
+		public static extern HResult BindIFilterFromStorage(ref IStorage pStg, ref IUnknown pUnkOuter, void** ppIUnk);
 		[Import("query.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT BindIFilterFromStream(ref IStream pStm, ref IUnknown pUnkOuter, void** ppIUnk);
+		public static extern HResult BindIFilterFromStream(ref IStream pStm, ref IUnknown pUnkOuter, void** ppIUnk);
 	}
 }

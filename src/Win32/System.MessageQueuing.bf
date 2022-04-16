@@ -187,11 +187,11 @@ namespace Win32
 		public const uint32 MQSEC_CHANGE_QUEUE_PERMISSIONS = 262144;
 		public const uint32 MQSEC_TAKE_QUEUE_OWNERSHIP = 524288;
 		public const uint32 MQSEC_QUEUE_GENERIC_EXECUTE = 0;
-		public const HRESULT MQ_OK = 0;
-		public const HRESULT MQ_ERROR_RESOLVE_ADDRESS = -1072824167;
-		public const HRESULT MQ_ERROR_TOO_MANY_PROPERTIES = -1072824166;
-		public const HRESULT MQ_ERROR_MESSAGE_NOT_AUTHENTICATED = -1072824165;
-		public const HRESULT MQ_ERROR_MESSAGE_LOCKED_UNDER_TRANSACTION = -1072824164;
+		public const HResult MQ_OK = 0;
+		public const HResult MQ_ERROR_RESOLVE_ADDRESS = -1072824167;
+		public const HResult MQ_ERROR_TOO_MANY_PROPERTIES = -1072824166;
+		public const HResult MQ_ERROR_MESSAGE_NOT_AUTHENTICATED = -1072824165;
+		public const HResult MQ_ERROR_MESSAGE_LOCKED_UNDER_TRANSACTION = -1072824164;
 		
 		// --- Enums ---
 		
@@ -610,12 +610,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
+			public HResult LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos** ppqinfos) LookupQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos** ppqinfos) LookupQueue;
 			}
 		}
 		[CRepr]
@@ -625,70 +625,70 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
-			public HRESULT get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
-			public HRESULT put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
-			public HRESULT put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
-			public HRESULT get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
-			public HRESULT put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
-			public HRESULT get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
-			public HRESULT put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
-			public HRESULT get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
-			public HRESULT put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
-			public HRESULT get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
-			public HRESULT get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
-			public HRESULT get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
-			public HRESULT put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
-			public HRESULT get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
-			public HRESULT put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
-			public HRESULT get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
-			public HRESULT Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Open(int32 Access, int32 ShareMode, IMSMQQueue** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
-			public HRESULT Refresh() mut => VT.Refresh(ref this);
-			public HRESULT Update() mut => VT.Update(ref this);
+			public HResult get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
+			public HResult get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
+			public HResult put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
+			public HResult put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
+			public HResult get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
+			public HResult put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
+			public HResult get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
+			public HResult put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
+			public HResult get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
+			public HResult put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
+			public HResult get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
+			public HResult get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
+			public HResult get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
+			public HResult put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
+			public HResult get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
+			public HResult put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
+			public HResult get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
+			public HResult Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Open(int32 Access, int32 ShareMode, IMSMQQueue** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
+			public HResult Refresh() mut => VT.Refresh(ref this);
+			public HResult Update() mut => VT.Update(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR* pbstrGuidQueue) get_QueueGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR* pbstrPathName) get_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR bstrPathName) put_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR* pbstrFormatName) get_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, BSTR bstrFormatName) put_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int16 pisTransactional) get_IsTransactional;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int32 plQuota) get_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 lQuota) put_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int32 plBasePriority) get_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 lBasePriority) put_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out VARIANT pvarCreateTime) get_CreateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out VARIANT pvarModifyTime) get_ModifyTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int32 plAuthenticate) get_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 lAuthenticate) put_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int32 plJournalQuota) get_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 lJournalQuota) put_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, out int16 pisWorldReadable) get_IsWorldReadable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self, int32 Access, int32 ShareMode, IMSMQQueue** ppq) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo self) Update;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR* pbstrGuidQueue) get_QueueGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR* pbstrPathName) get_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR bstrPathName) put_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR* pbstrFormatName) get_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, BSTR bstrFormatName) put_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int16 pisTransactional) get_IsTransactional;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int32 plQuota) get_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 lQuota) put_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int32 plBasePriority) get_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 lBasePriority) put_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out VARIANT pvarCreateTime) get_CreateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out VARIANT pvarModifyTime) get_ModifyTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int32 plAuthenticate) get_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 lAuthenticate) put_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int32 plJournalQuota) get_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 lJournalQuota) put_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, out int16 pisWorldReadable) get_IsWorldReadable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self, int32 Access, int32 ShareMode, IMSMQQueue** ppq) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo self) Update;
 			}
 		}
 		[CRepr]
@@ -698,78 +698,78 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
-			public HRESULT get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
-			public HRESULT put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
-			public HRESULT put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
-			public HRESULT get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
-			public HRESULT put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
-			public HRESULT get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
-			public HRESULT put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
-			public HRESULT get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
-			public HRESULT put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
-			public HRESULT get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
-			public HRESULT get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
-			public HRESULT get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
-			public HRESULT put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
-			public HRESULT get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
-			public HRESULT put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
-			public HRESULT get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
-			public HRESULT Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Open(int32 Access, int32 ShareMode, IMSMQQueue2** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
-			public HRESULT Refresh() mut => VT.Refresh(ref this);
-			public HRESULT Update() mut => VT.Update(ref this);
-			public HRESULT get_PathNameDNS(BSTR* pbstrPathNameDNS) mut => VT.get_PathNameDNS(ref this, pbstrPathNameDNS);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_Security(out VARIANT pvarSecurity) mut => VT.get_Security(ref this, out pvarSecurity);
-			public HRESULT put_Security(VARIANT varSecurity) mut => VT.put_Security(ref this, varSecurity);
+			public HResult get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
+			public HResult get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
+			public HResult put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
+			public HResult put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
+			public HResult get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
+			public HResult put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
+			public HResult get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
+			public HResult put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
+			public HResult get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
+			public HResult put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
+			public HResult get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
+			public HResult get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
+			public HResult get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
+			public HResult put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
+			public HResult get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
+			public HResult put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
+			public HResult get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
+			public HResult Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Open(int32 Access, int32 ShareMode, IMSMQQueue2** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
+			public HResult Refresh() mut => VT.Refresh(ref this);
+			public HResult Update() mut => VT.Update(ref this);
+			public HResult get_PathNameDNS(BSTR* pbstrPathNameDNS) mut => VT.get_PathNameDNS(ref this, pbstrPathNameDNS);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Security(out VARIANT pvarSecurity) mut => VT.get_Security(ref this, out pvarSecurity);
+			public HResult put_Security(VARIANT varSecurity) mut => VT.put_Security(ref this, varSecurity);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR* pbstrGuidQueue) get_QueueGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR* pbstrPathName) get_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR bstrPathName) put_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR* pbstrFormatName) get_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR bstrFormatName) put_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int16 pisTransactional) get_IsTransactional;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int32 plQuota) get_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 lQuota) put_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int32 plBasePriority) get_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 lBasePriority) put_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out VARIANT pvarCreateTime) get_CreateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out VARIANT pvarModifyTime) get_ModifyTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int32 plAuthenticate) get_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 lAuthenticate) put_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int32 plJournalQuota) get_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 lJournalQuota) put_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out int16 pisWorldReadable) get_IsWorldReadable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, int32 Access, int32 ShareMode, IMSMQQueue2** ppq) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self) Update;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, BSTR* pbstrPathNameDNS) get_PathNameDNS;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, out VARIANT pvarSecurity) get_Security;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo2 self, VARIANT varSecurity) put_Security;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR* pbstrGuidQueue) get_QueueGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR* pbstrPathName) get_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR bstrPathName) put_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR* pbstrFormatName) get_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR bstrFormatName) put_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int16 pisTransactional) get_IsTransactional;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int32 plQuota) get_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 lQuota) put_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int32 plBasePriority) get_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 lBasePriority) put_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out VARIANT pvarCreateTime) get_CreateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out VARIANT pvarModifyTime) get_ModifyTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int32 plAuthenticate) get_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 lAuthenticate) put_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int32 plJournalQuota) get_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 lJournalQuota) put_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out int16 pisWorldReadable) get_IsWorldReadable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, int32 Access, int32 ShareMode, IMSMQQueue2** ppq) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self) Update;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, BSTR* pbstrPathNameDNS) get_PathNameDNS;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, out VARIANT pvarSecurity) get_Security;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo2 self, VARIANT varSecurity) put_Security;
 			}
 		}
 		[CRepr]
@@ -779,88 +779,88 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
-			public HRESULT get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
-			public HRESULT put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
-			public HRESULT put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
-			public HRESULT get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
-			public HRESULT put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
-			public HRESULT get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
-			public HRESULT put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
-			public HRESULT get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
-			public HRESULT put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
-			public HRESULT get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
-			public HRESULT get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
-			public HRESULT get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
-			public HRESULT put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
-			public HRESULT get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
-			public HRESULT put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
-			public HRESULT get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
-			public HRESULT Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Open(int32 Access, int32 ShareMode, IMSMQQueue3** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
-			public HRESULT Refresh() mut => VT.Refresh(ref this);
-			public HRESULT Update() mut => VT.Update(ref this);
-			public HRESULT get_PathNameDNS(BSTR* pbstrPathNameDNS) mut => VT.get_PathNameDNS(ref this, pbstrPathNameDNS);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_Security(out VARIANT pvarSecurity) mut => VT.get_Security(ref this, out pvarSecurity);
-			public HRESULT put_Security(VARIANT varSecurity) mut => VT.put_Security(ref this, varSecurity);
-			public HRESULT get_IsTransactional2(out int16 pisTransactional) mut => VT.get_IsTransactional2(ref this, out pisTransactional);
-			public HRESULT get_IsWorldReadable2(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable2(ref this, out pisWorldReadable);
-			public HRESULT get_MulticastAddress(BSTR* pbstrMulticastAddress) mut => VT.get_MulticastAddress(ref this, pbstrMulticastAddress);
-			public HRESULT put_MulticastAddress(BSTR bstrMulticastAddress) mut => VT.put_MulticastAddress(ref this, bstrMulticastAddress);
-			public HRESULT get_ADsPath(BSTR* pbstrADsPath) mut => VT.get_ADsPath(ref this, pbstrADsPath);
+			public HResult get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
+			public HResult get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
+			public HResult put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
+			public HResult put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
+			public HResult get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
+			public HResult put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
+			public HResult get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
+			public HResult put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
+			public HResult get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
+			public HResult put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
+			public HResult get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
+			public HResult get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
+			public HResult get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
+			public HResult put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
+			public HResult get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
+			public HResult put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
+			public HResult get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
+			public HResult Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Open(int32 Access, int32 ShareMode, IMSMQQueue3** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
+			public HResult Refresh() mut => VT.Refresh(ref this);
+			public HResult Update() mut => VT.Update(ref this);
+			public HResult get_PathNameDNS(BSTR* pbstrPathNameDNS) mut => VT.get_PathNameDNS(ref this, pbstrPathNameDNS);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Security(out VARIANT pvarSecurity) mut => VT.get_Security(ref this, out pvarSecurity);
+			public HResult put_Security(VARIANT varSecurity) mut => VT.put_Security(ref this, varSecurity);
+			public HResult get_IsTransactional2(out int16 pisTransactional) mut => VT.get_IsTransactional2(ref this, out pisTransactional);
+			public HResult get_IsWorldReadable2(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable2(ref this, out pisWorldReadable);
+			public HResult get_MulticastAddress(BSTR* pbstrMulticastAddress) mut => VT.get_MulticastAddress(ref this, pbstrMulticastAddress);
+			public HResult put_MulticastAddress(BSTR bstrMulticastAddress) mut => VT.put_MulticastAddress(ref this, bstrMulticastAddress);
+			public HResult get_ADsPath(BSTR* pbstrADsPath) mut => VT.get_ADsPath(ref this, pbstrADsPath);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrGuidQueue) get_QueueGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrPathName) get_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR bstrPathName) put_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrFormatName) get_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR bstrFormatName) put_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int16 pisTransactional) get_IsTransactional;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int32 plQuota) get_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 lQuota) put_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int32 plBasePriority) get_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 lBasePriority) put_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out VARIANT pvarCreateTime) get_CreateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out VARIANT pvarModifyTime) get_ModifyTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int32 plAuthenticate) get_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 lAuthenticate) put_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int32 plJournalQuota) get_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 lJournalQuota) put_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int16 pisWorldReadable) get_IsWorldReadable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, int32 Access, int32 ShareMode, IMSMQQueue3** ppq) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self) Update;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrPathNameDNS) get_PathNameDNS;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out VARIANT pvarSecurity) get_Security;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, VARIANT varSecurity) put_Security;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int16 pisTransactional) get_IsTransactional2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, out int16 pisWorldReadable) get_IsWorldReadable2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrMulticastAddress) get_MulticastAddress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR bstrMulticastAddress) put_MulticastAddress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo3 self, BSTR* pbstrADsPath) get_ADsPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrGuidQueue) get_QueueGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrPathName) get_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR bstrPathName) put_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrFormatName) get_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR bstrFormatName) put_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int16 pisTransactional) get_IsTransactional;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int32 plQuota) get_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 lQuota) put_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int32 plBasePriority) get_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 lBasePriority) put_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out VARIANT pvarCreateTime) get_CreateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out VARIANT pvarModifyTime) get_ModifyTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int32 plAuthenticate) get_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 lAuthenticate) put_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int32 plJournalQuota) get_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 lJournalQuota) put_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int16 pisWorldReadable) get_IsWorldReadable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, int32 Access, int32 ShareMode, IMSMQQueue3** ppq) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self) Update;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrPathNameDNS) get_PathNameDNS;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out VARIANT pvarSecurity) get_Security;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, VARIANT varSecurity) put_Security;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int16 pisTransactional) get_IsTransactional2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, out int16 pisWorldReadable) get_IsWorldReadable2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrMulticastAddress) get_MulticastAddress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR bstrMulticastAddress) put_MulticastAddress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo3 self, BSTR* pbstrADsPath) get_ADsPath;
 			}
 		}
 		[CRepr]
@@ -870,88 +870,88 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
-			public HRESULT get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
-			public HRESULT put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
-			public HRESULT put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
-			public HRESULT get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
-			public HRESULT put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
-			public HRESULT get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
-			public HRESULT put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
-			public HRESULT get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
-			public HRESULT put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
-			public HRESULT get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
-			public HRESULT get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
-			public HRESULT get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
-			public HRESULT put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
-			public HRESULT get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
-			public HRESULT put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
-			public HRESULT get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
-			public HRESULT Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Open(int32 Access, int32 ShareMode, IMSMQQueue4** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
-			public HRESULT Refresh() mut => VT.Refresh(ref this);
-			public HRESULT Update() mut => VT.Update(ref this);
-			public HRESULT get_PathNameDNS(BSTR* pbstrPathNameDNS) mut => VT.get_PathNameDNS(ref this, pbstrPathNameDNS);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_Security(out VARIANT pvarSecurity) mut => VT.get_Security(ref this, out pvarSecurity);
-			public HRESULT put_Security(VARIANT varSecurity) mut => VT.put_Security(ref this, varSecurity);
-			public HRESULT get_IsTransactional2(out int16 pisTransactional) mut => VT.get_IsTransactional2(ref this, out pisTransactional);
-			public HRESULT get_IsWorldReadable2(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable2(ref this, out pisWorldReadable);
-			public HRESULT get_MulticastAddress(BSTR* pbstrMulticastAddress) mut => VT.get_MulticastAddress(ref this, pbstrMulticastAddress);
-			public HRESULT put_MulticastAddress(BSTR bstrMulticastAddress) mut => VT.put_MulticastAddress(ref this, bstrMulticastAddress);
-			public HRESULT get_ADsPath(BSTR* pbstrADsPath) mut => VT.get_ADsPath(ref this, pbstrADsPath);
+			public HResult get_QueueGuid(BSTR* pbstrGuidQueue) mut => VT.get_QueueGuid(ref this, pbstrGuidQueue);
+			public HResult get_ServiceTypeGuid(BSTR* pbstrGuidServiceType) mut => VT.get_ServiceTypeGuid(ref this, pbstrGuidServiceType);
+			public HResult put_ServiceTypeGuid(BSTR bstrGuidServiceType) mut => VT.put_ServiceTypeGuid(ref this, bstrGuidServiceType);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
+			public HResult put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
+			public HResult get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
+			public HResult put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
+			public HResult get_IsTransactional(out int16 pisTransactional) mut => VT.get_IsTransactional(ref this, out pisTransactional);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_Quota(out int32 plQuota) mut => VT.get_Quota(ref this, out plQuota);
+			public HResult put_Quota(int32 lQuota) mut => VT.put_Quota(ref this, lQuota);
+			public HResult get_BasePriority(out int32 plBasePriority) mut => VT.get_BasePriority(ref this, out plBasePriority);
+			public HResult put_BasePriority(int32 lBasePriority) mut => VT.put_BasePriority(ref this, lBasePriority);
+			public HResult get_CreateTime(out VARIANT pvarCreateTime) mut => VT.get_CreateTime(ref this, out pvarCreateTime);
+			public HResult get_ModifyTime(out VARIANT pvarModifyTime) mut => VT.get_ModifyTime(ref this, out pvarModifyTime);
+			public HResult get_Authenticate(out int32 plAuthenticate) mut => VT.get_Authenticate(ref this, out plAuthenticate);
+			public HResult put_Authenticate(int32 lAuthenticate) mut => VT.put_Authenticate(ref this, lAuthenticate);
+			public HResult get_JournalQuota(out int32 plJournalQuota) mut => VT.get_JournalQuota(ref this, out plJournalQuota);
+			public HResult put_JournalQuota(int32 lJournalQuota) mut => VT.put_JournalQuota(ref this, lJournalQuota);
+			public HResult get_IsWorldReadable(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable(ref this, out pisWorldReadable);
+			public HResult Create(ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) mut => VT.Create(ref this, ref IsTransactional, ref IsWorldReadable);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Open(int32 Access, int32 ShareMode, IMSMQQueue4** ppq) mut => VT.Open(ref this, Access, ShareMode, ppq);
+			public HResult Refresh() mut => VT.Refresh(ref this);
+			public HResult Update() mut => VT.Update(ref this);
+			public HResult get_PathNameDNS(BSTR* pbstrPathNameDNS) mut => VT.get_PathNameDNS(ref this, pbstrPathNameDNS);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Security(out VARIANT pvarSecurity) mut => VT.get_Security(ref this, out pvarSecurity);
+			public HResult put_Security(VARIANT varSecurity) mut => VT.put_Security(ref this, varSecurity);
+			public HResult get_IsTransactional2(out int16 pisTransactional) mut => VT.get_IsTransactional2(ref this, out pisTransactional);
+			public HResult get_IsWorldReadable2(out int16 pisWorldReadable) mut => VT.get_IsWorldReadable2(ref this, out pisWorldReadable);
+			public HResult get_MulticastAddress(BSTR* pbstrMulticastAddress) mut => VT.get_MulticastAddress(ref this, pbstrMulticastAddress);
+			public HResult put_MulticastAddress(BSTR bstrMulticastAddress) mut => VT.put_MulticastAddress(ref this, bstrMulticastAddress);
+			public HResult get_ADsPath(BSTR* pbstrADsPath) mut => VT.get_ADsPath(ref this, pbstrADsPath);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrGuidQueue) get_QueueGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrPathName) get_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR bstrPathName) put_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrFormatName) get_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR bstrFormatName) put_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int16 pisTransactional) get_IsTransactional;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int32 plQuota) get_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 lQuota) put_Quota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int32 plBasePriority) get_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 lBasePriority) put_BasePriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out VARIANT pvarCreateTime) get_CreateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out VARIANT pvarModifyTime) get_ModifyTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int32 plAuthenticate) get_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 lAuthenticate) put_Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int32 plJournalQuota) get_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 lJournalQuota) put_JournalQuota;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int16 pisWorldReadable) get_IsWorldReadable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, int32 Access, int32 ShareMode, IMSMQQueue4** ppq) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self) Update;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrPathNameDNS) get_PathNameDNS;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out VARIANT pvarSecurity) get_Security;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, VARIANT varSecurity) put_Security;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int16 pisTransactional) get_IsTransactional2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, out int16 pisWorldReadable) get_IsWorldReadable2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrMulticastAddress) get_MulticastAddress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR bstrMulticastAddress) put_MulticastAddress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfo4 self, BSTR* pbstrADsPath) get_ADsPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrGuidQueue) get_QueueGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrGuidServiceType) get_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR bstrGuidServiceType) put_ServiceTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrPathName) get_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR bstrPathName) put_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrFormatName) get_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR bstrFormatName) put_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int16 pisTransactional) get_IsTransactional;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int32 plQuota) get_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 lQuota) put_Quota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int32 plBasePriority) get_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 lBasePriority) put_BasePriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out VARIANT pvarCreateTime) get_CreateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out VARIANT pvarModifyTime) get_ModifyTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int32 plAuthenticate) get_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 lAuthenticate) put_Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int32 plJournalQuota) get_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 lJournalQuota) put_JournalQuota;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int16 pisWorldReadable) get_IsWorldReadable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, ref VARIANT IsTransactional, ref VARIANT IsWorldReadable) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, int32 Access, int32 ShareMode, IMSMQQueue4** ppq) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self) Update;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrPathNameDNS) get_PathNameDNS;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out VARIANT pvarSecurity) get_Security;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, VARIANT varSecurity) put_Security;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int16 pisTransactional) get_IsTransactional2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, out int16 pisWorldReadable) get_IsWorldReadable2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrMulticastAddress) get_MulticastAddress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR bstrMulticastAddress) put_MulticastAddress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfo4 self, BSTR* pbstrADsPath) get_ADsPath;
 			}
 		}
 		[CRepr]
@@ -961,36 +961,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
-			public HRESULT get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
-			public HRESULT get_QueueInfo(IMSMQQueueInfo** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
-			public HRESULT get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
-			public HRESULT get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT EnableNotification(IMSMQEvent* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
+			public HResult get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
+			public HResult get_QueueInfo(IMSMQQueueInfo** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
+			public HResult get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
+			public HResult get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult EnableNotification(IMSMQEvent* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, out int32 plAccess) get_Access;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, out int32 plShareMode) get_ShareMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, IMSMQQueueInfo** ppqinfo) get_QueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, out int32 plHandle) get_Handle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, out int16 pisOpen) get_IsOpen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, IMSMQEvent* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, out int32 plAccess) get_Access;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, out int32 plShareMode) get_ShareMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, IMSMQQueueInfo** ppqinfo) get_QueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, out int32 plHandle) get_Handle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, out int16 pisOpen) get_IsOpen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, IMSMQEvent* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent;
 			}
 		}
 		[CRepr]
@@ -1000,48 +1000,48 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
-			public HRESULT get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
-			public HRESULT get_QueueInfo(IMSMQQueueInfo2** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
-			public HRESULT get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
-			public HRESULT get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT Receive_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Peek_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT EnableNotification(IMSMQEvent2* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT ReceiveCurrent_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekNext_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekCurrent_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
+			public HResult get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
+			public HResult get_QueueInfo(IMSMQQueueInfo2** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
+			public HResult get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
+			public HResult get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult Receive_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Peek_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult EnableNotification(IMSMQEvent2* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult ReceiveCurrent_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekNext_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekCurrent_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, out int32 plAccess) get_Access;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, out int32 plShareMode) get_ShareMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, IMSMQQueueInfo2** ppqinfo) get_QueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, out int32 plHandle) get_Handle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, out int16 pisOpen) get_IsOpen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, IMSMQEvent2* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) Receive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) Peek;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) ReceiveCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) PeekNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) PeekCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, out int32 plAccess) get_Access;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, out int32 plShareMode) get_ShareMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, IMSMQQueueInfo2** ppqinfo) get_QueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, out int32 plHandle) get_Handle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, out int16 pisOpen) get_IsOpen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, IMSMQEvent2* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) Receive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) Peek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) ReceiveCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) PeekNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage2** ppmsg) PeekCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -1051,74 +1051,74 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
-			public HRESULT get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
-			public HRESULT get_QueueInfo(IMSMQQueueInfo3** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
-			public HRESULT get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
-			public HRESULT get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT Receive_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Peek_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT EnableNotification(IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT ReceiveCurrent_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekNext_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekCurrent_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_Handle2(out VARIANT pvarHandle) mut => VT.get_Handle2(ref this, out pvarHandle);
-			public HRESULT ReceiveByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveNextByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveNextByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceivePreviousByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceivePreviousByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveFirstByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveFirstByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveLastByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveLastByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekNextByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekNextByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekPreviousByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekPreviousByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekFirstByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekFirstByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekLastByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekLastByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT Purge() mut => VT.Purge(ref this);
-			public HRESULT get_IsOpen2(out int16 pisOpen) mut => VT.get_IsOpen2(ref this, out pisOpen);
+			public HResult get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
+			public HResult get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
+			public HResult get_QueueInfo(IMSMQQueueInfo3** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
+			public HResult get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
+			public HResult get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult Receive_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Peek_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult EnableNotification(IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult ReceiveCurrent_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekNext_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekCurrent_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Handle2(out VARIANT pvarHandle) mut => VT.get_Handle2(ref this, out pvarHandle);
+			public HResult ReceiveByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceiveNextByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveNextByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceivePreviousByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceivePreviousByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceiveFirstByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveFirstByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceiveLastByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.ReceiveLastByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekNextByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekNextByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekPreviousByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekPreviousByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekFirstByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekFirstByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekLastByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) mut => VT.PeekLastByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult Purge() mut => VT.Purge(ref this);
+			public HResult get_IsOpen2(out int16 pisOpen) mut => VT.get_IsOpen2(ref this, out pisOpen);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, out int32 plAccess) get_Access;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, out int32 plShareMode) get_ShareMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, IMSMQQueueInfo3** ppqinfo) get_QueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, out int32 plHandle) get_Handle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, out int16 pisOpen) get_IsOpen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) Receive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) Peek;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, out VARIANT pvarHandle) get_Handle2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveNextByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceivePreviousByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveFirstByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveLastByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekNextByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekPreviousByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekFirstByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekLastByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self) Purge;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue3 self, out int16 pisOpen) get_IsOpen2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, out int32 plAccess) get_Access;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, out int32 plShareMode) get_ShareMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, IMSMQQueueInfo3** ppqinfo) get_QueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, out int32 plHandle) get_Handle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, out int16 pisOpen) get_IsOpen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) Receive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) Peek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, out VARIANT pvarHandle) get_Handle2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveNextByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceivePreviousByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveFirstByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) ReceiveLastByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekNextByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekPreviousByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekFirstByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage3** ppmsg) PeekLastByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self) Purge;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue3 self, out int16 pisOpen) get_IsOpen2;
 			}
 		}
 		[CRepr]
@@ -1128,76 +1128,76 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
-			public HRESULT get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
-			public HRESULT get_QueueInfo(IMSMQQueueInfo4** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
-			public HRESULT get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
-			public HRESULT get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT Receive_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Peek_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT EnableNotification(IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT ReceiveCurrent_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekNext_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT PeekCurrent_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
-			public HRESULT Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_Handle2(out VARIANT pvarHandle) mut => VT.get_Handle2(ref this, out pvarHandle);
-			public HRESULT ReceiveByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveNextByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveNextByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceivePreviousByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceivePreviousByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveFirstByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveFirstByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT ReceiveLastByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveLastByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekNextByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekNextByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekPreviousByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekPreviousByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekFirstByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekFirstByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT PeekLastByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekLastByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
-			public HRESULT Purge() mut => VT.Purge(ref this);
-			public HRESULT get_IsOpen2(out int16 pisOpen) mut => VT.get_IsOpen2(ref this, out pisOpen);
-			public HRESULT ReceiveByLookupIdAllowPeek(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveByLookupIdAllowPeek(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult get_Access(out int32 plAccess) mut => VT.get_Access(ref this, out plAccess);
+			public HResult get_ShareMode(out int32 plShareMode) mut => VT.get_ShareMode(ref this, out plShareMode);
+			public HResult get_QueueInfo(IMSMQQueueInfo4** ppqinfo) mut => VT.get_QueueInfo(ref this, ppqinfo);
+			public HResult get_Handle(out int32 plHandle) mut => VT.get_Handle(ref this, out plHandle);
+			public HResult get_IsOpen(out int16 pisOpen) mut => VT.get_IsOpen(ref this, out pisOpen);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult Receive_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Receive_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Peek_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.Peek_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult EnableNotification(IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) mut => VT.EnableNotification(ref this, Event, ref Cursor, ref ReceiveTimeout);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult ReceiveCurrent_v1(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.ReceiveCurrent_v1(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekNext_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekNext_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult PeekCurrent_v1(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) mut => VT.PeekCurrent_v1(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ppmsg);
+			public HResult Receive(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.Receive(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult Peek(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.Peek(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult ReceiveCurrent(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveCurrent(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult PeekNext(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekNext(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult PeekCurrent(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekCurrent(ref this, ref WantDestinationQueue, ref WantBody, ref ReceiveTimeout, ref WantConnectorType, ppmsg);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Handle2(out VARIANT pvarHandle) mut => VT.get_Handle2(ref this, out pvarHandle);
+			public HResult ReceiveByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceiveNextByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveNextByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceivePreviousByLookupId(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceivePreviousByLookupId(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceiveFirstByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveFirstByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult ReceiveLastByLookupId(ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveLastByLookupId(ref this, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekNextByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekNextByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekPreviousByLookupId(VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekPreviousByLookupId(ref this, LookupId, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekFirstByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekFirstByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult PeekLastByLookupId(ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.PeekLastByLookupId(ref this, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
+			public HResult Purge() mut => VT.Purge(ref this);
+			public HResult get_IsOpen2(out int16 pisOpen) mut => VT.get_IsOpen2(ref this, out pisOpen);
+			public HResult ReceiveByLookupIdAllowPeek(VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) mut => VT.ReceiveByLookupIdAllowPeek(ref this, LookupId, ref Transaction, ref WantDestinationQueue, ref WantBody, ref WantConnectorType, ppmsg);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, out int32 plAccess) get_Access;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, out int32 plShareMode) get_ShareMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, IMSMQQueueInfo4** ppqinfo) get_QueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, out int32 plHandle) get_Handle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, out int16 pisOpen) get_IsOpen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) Receive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) Peek;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekNext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekCurrent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, out VARIANT pvarHandle) get_Handle2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveNextByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceivePreviousByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveFirstByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveLastByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekNextByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekPreviousByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekFirstByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekLastByLookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self) Purge;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, out int16 pisOpen) get_IsOpen2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveByLookupIdAllowPeek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, out int32 plAccess) get_Access;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, out int32 plShareMode) get_ShareMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, IMSMQQueueInfo4** ppqinfo) get_QueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, out int32 plHandle) get_Handle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, out int16 pisOpen) get_IsOpen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Receive_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) Peek_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, IMSMQEvent3* Event, ref VARIANT Cursor, ref VARIANT ReceiveTimeout) EnableNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) ReceiveCurrent_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekNext_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, IMSMQMessage** ppmsg) PeekCurrent_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) Receive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) Peek;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekNext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT ReceiveTimeout, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, out VARIANT pvarHandle) get_Handle2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveNextByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceivePreviousByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveFirstByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveLastByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekNextByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekPreviousByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekFirstByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) PeekLastByLookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self) Purge;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, out int16 pisOpen) get_IsOpen2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueue4 self, VARIANT LookupId, ref VARIANT Transaction, ref VARIANT WantDestinationQueue, ref VARIANT WantBody, ref VARIANT WantConnectorType, IMSMQMessage4** ppmsg) ReceiveByLookupIdAllowPeek;
 			}
 		}
 		[CRepr]
@@ -1207,108 +1207,108 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
-			public HRESULT put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
-			public HRESULT get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
-			public HRESULT get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
-			public HRESULT put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
-			public HRESULT get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
-			public HRESULT put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
-			public HRESULT get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
-			public HRESULT put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_ResponseQueueInfo(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
-			public HRESULT get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
-			public HRESULT put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
-			public HRESULT get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
-			public HRESULT get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
-			public HRESULT get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
-			public HRESULT put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
-			public HRESULT get_AdminQueueInfo(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
-			public HRESULT get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
-			public HRESULT get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
-			public HRESULT put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
-			public HRESULT get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
-			public HRESULT put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
-			public HRESULT put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
-			public HRESULT get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
-			public HRESULT put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
-			public HRESULT get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
-			public HRESULT put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
-			public HRESULT get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
-			public HRESULT put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
-			public HRESULT get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
-			public HRESULT get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
-			public HRESULT get_DestinationQueueInfo(IMSMQQueueInfo** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
-			public HRESULT get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
-			public HRESULT put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
-			public HRESULT get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
-			public HRESULT get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
-			public HRESULT put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
-			public HRESULT Send(IMSMQQueue* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
-			public HRESULT AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
+			public HResult get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
+			public HResult put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
+			public HResult get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
+			public HResult get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
+			public HResult put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
+			public HResult get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
+			public HResult put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
+			public HResult get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
+			public HResult put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_ResponseQueueInfo(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
+			public HResult get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
+			public HResult put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
+			public HResult get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
+			public HResult get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
+			public HResult get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
+			public HResult put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
+			public HResult get_AdminQueueInfo(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
+			public HResult get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
+			public HResult get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
+			public HResult put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
+			public HResult get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
+			public HResult put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
+			public HResult put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
+			public HResult get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
+			public HResult put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
+			public HResult get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
+			public HResult put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
+			public HResult get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
+			public HResult put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
+			public HResult get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
+			public HResult get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
+			public HResult get_DestinationQueueInfo(IMSMQQueueInfo** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
+			public HResult get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
+			public HResult put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
+			public HResult get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
+			public HResult get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
+			public HResult put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
+			public HResult Send(IMSMQQueue* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
+			public HResult AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plClass) get_Class;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plAuthLevel) get_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lAuthLevel) put_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int16 pisAuthenticated) get_IsAuthenticated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plDelivery) get_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lDelivery) put_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plTrace) get_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lTrace) put_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plPriority) get_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lPriority) put_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plAppSpecific) get_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lAppSpecific) put_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 pcbBody) get_BodyLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT pvarBody) get_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, VARIANT varBody) put_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT pvarMsgId) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT pvarMsgId) get_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, VARIANT varMsgId) put_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plAck) get_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lAck) put_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plHashAlg) get_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lHashAlg) put_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plEncryptAlg) get_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lEncryptAlg) put_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT pvarSentTime) get_SentTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT plArrivedTime) get_ArrivedTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, IMSMQQueueInfo** ppqinfoDest) get_DestinationQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT pvarSenderCert) get_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, VARIANT varSenderCert) put_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out VARIANT pvarSenderId) get_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, out int32 plSenderIdType) get_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, int32 lSenderIdType) put_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self, IMSMQQueue* DestinationQueue, ref VARIANT Transaction) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage self) AttachCurrentSecurityContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plClass) get_Class;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plAuthLevel) get_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lAuthLevel) put_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int16 pisAuthenticated) get_IsAuthenticated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plDelivery) get_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lDelivery) put_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plTrace) get_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lTrace) put_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plPriority) get_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lPriority) put_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plAppSpecific) get_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lAppSpecific) put_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 pcbBody) get_BodyLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT pvarBody) get_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, VARIANT varBody) put_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT pvarMsgId) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT pvarMsgId) get_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, VARIANT varMsgId) put_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plAck) get_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lAck) put_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plHashAlg) get_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lHashAlg) put_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plEncryptAlg) get_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lEncryptAlg) put_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT pvarSentTime) get_SentTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT plArrivedTime) get_ArrivedTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, IMSMQQueueInfo** ppqinfoDest) get_DestinationQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT pvarSenderCert) get_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, VARIANT varSenderCert) put_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out VARIANT pvarSenderId) get_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, out int32 plSenderIdType) get_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, int32 lSenderIdType) put_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self, IMSMQQueue* DestinationQueue, ref VARIANT Transaction) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage self) AttachCurrentSecurityContext;
 			}
 		}
 		[CRepr]
@@ -1318,14 +1318,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Next(IMSMQQueueInfo** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Next(IMSMQQueueInfo** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos self, IMSMQQueueInfo** ppqinfoNext) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos self, IMSMQQueueInfo** ppqinfoNext) Next;
 			}
 		}
 		[CRepr]
@@ -1335,16 +1335,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Next(IMSMQQueueInfo2** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Next(IMSMQQueueInfo2** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos2 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos2 self, IMSMQQueueInfo2** ppqinfoNext) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos2 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos2 self, IMSMQQueueInfo2** ppqinfoNext) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -1354,16 +1354,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Next(IMSMQQueueInfo3** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Next(IMSMQQueueInfo3** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos3 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos3 self, IMSMQQueueInfo3** ppqinfoNext) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos3 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos3 self, IMSMQQueueInfo3** ppqinfoNext) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos3 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -1373,16 +1373,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Next(IMSMQQueueInfo4** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Next(IMSMQQueueInfo4** ppqinfoNext) mut => VT.Next(ref this, ppqinfoNext);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos4 self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos4 self, IMSMQQueueInfo4** ppqinfoNext) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueInfos4 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos4 self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos4 self, IMSMQQueueInfo4** ppqinfoNext) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueInfos4 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -1402,12 +1402,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IMSMQEvent.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQEvent2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQEvent2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -1427,16 +1427,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Transaction(out int32 plTransaction) mut => VT.get_Transaction(ref this, out plTransaction);
-			public HRESULT Commit(ref VARIANT fRetaining, ref VARIANT grfTC, ref VARIANT grfRM) mut => VT.Commit(ref this, ref fRetaining, ref grfTC, ref grfRM);
-			public HRESULT Abort(ref VARIANT fRetaining, ref VARIANT fAsync) mut => VT.Abort(ref this, ref fRetaining, ref fAsync);
+			public HResult get_Transaction(out int32 plTransaction) mut => VT.get_Transaction(ref this, out plTransaction);
+			public HResult Commit(ref VARIANT fRetaining, ref VARIANT grfTC, ref VARIANT grfRM) mut => VT.Commit(ref this, ref fRetaining, ref grfTC, ref grfRM);
+			public HResult Abort(ref VARIANT fRetaining, ref VARIANT fAsync) mut => VT.Abort(ref this, ref fRetaining, ref fAsync);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransaction self, out int32 plTransaction) get_Transaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransaction self, ref VARIANT fRetaining, ref VARIANT grfTC, ref VARIANT grfRM) Commit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransaction self, ref VARIANT fRetaining, ref VARIANT fAsync) Abort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransaction self, out int32 plTransaction) get_Transaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransaction self, ref VARIANT fRetaining, ref VARIANT grfTC, ref VARIANT grfRM) Commit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransaction self, ref VARIANT fRetaining, ref VARIANT fAsync) Abort;
 			}
 		}
 		[CRepr]
@@ -1446,12 +1446,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginTransaction(IMSMQTransaction** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
+			public HResult BeginTransaction(IMSMQTransaction** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCoordinatedTransactionDispenser self, IMSMQTransaction** ptransaction) BeginTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCoordinatedTransactionDispenser self, IMSMQTransaction** ptransaction) BeginTransaction;
 			}
 		}
 		[CRepr]
@@ -1461,12 +1461,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginTransaction(IMSMQTransaction** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
+			public HResult BeginTransaction(IMSMQTransaction** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransactionDispenser self, IMSMQTransaction** ptransaction) BeginTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransactionDispenser self, IMSMQTransaction** ptransaction) BeginTransaction;
 			}
 		}
 		[CRepr]
@@ -1476,14 +1476,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos2** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos2** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery2 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos2** ppqinfos) LookupQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery2 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos2** ppqinfos) LookupQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -1493,16 +1493,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LookupQueue_v2(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos3** ppqinfos) mut => VT.LookupQueue_v2(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos3** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ref MulticastAddress, ref RelMulticastAddress, ppqinfos);
+			public HResult LookupQueue_v2(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos3** ppqinfos) mut => VT.LookupQueue_v2(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos3** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ref MulticastAddress, ref RelMulticastAddress, ppqinfos);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery3 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos3** ppqinfos) LookupQueue_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery3 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery3 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos3** ppqinfos) LookupQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery3 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos3** ppqinfos) LookupQueue_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery3 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos3** ppqinfos) LookupQueue;
 			}
 		}
 		[CRepr]
@@ -1512,16 +1512,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LookupQueue_v2(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos4** ppqinfos) mut => VT.LookupQueue_v2(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos4** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ref MulticastAddress, ref RelMulticastAddress, ppqinfos);
+			public HResult LookupQueue_v2(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos4** ppqinfos) mut => VT.LookupQueue_v2(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ppqinfos);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult LookupQueue(ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos4** ppqinfos) mut => VT.LookupQueue(ref this, ref QueueGuid, ref ServiceTypeGuid, ref Label, ref CreateTime, ref ModifyTime, ref RelServiceType, ref RelLabel, ref RelCreateTime, ref RelModifyTime, ref MulticastAddress, ref RelMulticastAddress, ppqinfos);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery4 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos4** ppqinfos) LookupQueue_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery4 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQuery4 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos4** ppqinfos) LookupQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery4 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, IMSMQQueueInfos4** ppqinfos) LookupQueue_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery4 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQuery4 self, ref VARIANT QueueGuid, ref VARIANT ServiceTypeGuid, ref VARIANT Label, ref VARIANT CreateTime, ref VARIANT ModifyTime, ref VARIANT RelServiceType, ref VARIANT RelLabel, ref VARIANT RelCreateTime, ref VARIANT RelModifyTime, ref VARIANT MulticastAddress, ref VARIANT RelMulticastAddress, IMSMQQueueInfos4** ppqinfos) LookupQueue;
 			}
 		}
 		[CRepr]
@@ -1531,160 +1531,160 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
-			public HRESULT put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
-			public HRESULT get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
-			public HRESULT get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
-			public HRESULT put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
-			public HRESULT get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
-			public HRESULT put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
-			public HRESULT get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
-			public HRESULT put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_ResponseQueueInfo_v1(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v1(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo_v1(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v1(ref this, pqinfoResponse);
-			public HRESULT get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
-			public HRESULT put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
-			public HRESULT get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
-			public HRESULT get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
-			public HRESULT get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
-			public HRESULT put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
-			public HRESULT get_AdminQueueInfo_v1(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v1(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo_v1(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v1(ref this, pqinfoAdmin);
-			public HRESULT get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
-			public HRESULT get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
-			public HRESULT put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
-			public HRESULT get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
-			public HRESULT put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
-			public HRESULT put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
-			public HRESULT get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
-			public HRESULT put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
-			public HRESULT get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
-			public HRESULT put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
-			public HRESULT get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
-			public HRESULT put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
-			public HRESULT get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
-			public HRESULT get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
-			public HRESULT get_DestinationQueueInfo(IMSMQQueueInfo2** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
-			public HRESULT get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
-			public HRESULT put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
-			public HRESULT get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
-			public HRESULT get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
-			public HRESULT put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
-			public HRESULT Send(IMSMQQueue2* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
-			public HRESULT AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
-			public HRESULT get_SenderVersion(out int32 plSenderVersion) mut => VT.get_SenderVersion(ref this, out plSenderVersion);
-			public HRESULT get_Extension(out VARIANT pvarExtension) mut => VT.get_Extension(ref this, out pvarExtension);
-			public HRESULT put_Extension(VARIANT varExtension) mut => VT.put_Extension(ref this, varExtension);
-			public HRESULT get_ConnectorTypeGuid(BSTR* pbstrGuidConnectorType) mut => VT.get_ConnectorTypeGuid(ref this, pbstrGuidConnectorType);
-			public HRESULT put_ConnectorTypeGuid(BSTR bstrGuidConnectorType) mut => VT.put_ConnectorTypeGuid(ref this, bstrGuidConnectorType);
-			public HRESULT get_TransactionStatusQueueInfo(IMSMQQueueInfo2** ppqinfoXactStatus) mut => VT.get_TransactionStatusQueueInfo(ref this, ppqinfoXactStatus);
-			public HRESULT get_DestinationSymmetricKey(out VARIANT pvarDestSymmKey) mut => VT.get_DestinationSymmetricKey(ref this, out pvarDestSymmKey);
-			public HRESULT put_DestinationSymmetricKey(VARIANT varDestSymmKey) mut => VT.put_DestinationSymmetricKey(ref this, varDestSymmKey);
-			public HRESULT get_Signature(out VARIANT pvarSignature) mut => VT.get_Signature(ref this, out pvarSignature);
-			public HRESULT put_Signature(VARIANT varSignature) mut => VT.put_Signature(ref this, varSignature);
-			public HRESULT get_AuthenticationProviderType(out int32 plAuthProvType) mut => VT.get_AuthenticationProviderType(ref this, out plAuthProvType);
-			public HRESULT put_AuthenticationProviderType(int32 lAuthProvType) mut => VT.put_AuthenticationProviderType(ref this, lAuthProvType);
-			public HRESULT get_AuthenticationProviderName(BSTR* pbstrAuthProvName) mut => VT.get_AuthenticationProviderName(ref this, pbstrAuthProvName);
-			public HRESULT put_AuthenticationProviderName(BSTR bstrAuthProvName) mut => VT.put_AuthenticationProviderName(ref this, bstrAuthProvName);
-			public HRESULT put_SenderId(VARIANT varSenderId) mut => VT.put_SenderId(ref this, varSenderId);
-			public HRESULT get_MsgClass(out int32 plMsgClass) mut => VT.get_MsgClass(ref this, out plMsgClass);
-			public HRESULT put_MsgClass(int32 lMsgClass) mut => VT.put_MsgClass(ref this, lMsgClass);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_TransactionId(out VARIANT pvarXactId) mut => VT.get_TransactionId(ref this, out pvarXactId);
-			public HRESULT get_IsFirstInTransaction(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction(ref this, out pisFirstInXact);
-			public HRESULT get_IsLastInTransaction(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction(ref this, out pisLastInXact);
-			public HRESULT get_ResponseQueueInfo(IMSMQQueueInfo2** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo(IMSMQQueueInfo2* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
-			public HRESULT get_AdminQueueInfo(IMSMQQueueInfo2** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo(IMSMQQueueInfo2* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
-			public HRESULT get_ReceivedAuthenticationLevel(out int16 psReceivedAuthenticationLevel) mut => VT.get_ReceivedAuthenticationLevel(ref this, out psReceivedAuthenticationLevel);
+			public HResult get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
+			public HResult put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
+			public HResult get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
+			public HResult get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
+			public HResult put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
+			public HResult get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
+			public HResult put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
+			public HResult get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
+			public HResult put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_ResponseQueueInfo_v1(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v1(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo_v1(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v1(ref this, pqinfoResponse);
+			public HResult get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
+			public HResult put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
+			public HResult get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
+			public HResult get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
+			public HResult get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
+			public HResult put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
+			public HResult get_AdminQueueInfo_v1(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v1(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo_v1(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v1(ref this, pqinfoAdmin);
+			public HResult get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
+			public HResult get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
+			public HResult put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
+			public HResult get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
+			public HResult put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
+			public HResult put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
+			public HResult get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
+			public HResult put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
+			public HResult get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
+			public HResult put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
+			public HResult get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
+			public HResult put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
+			public HResult get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
+			public HResult get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
+			public HResult get_DestinationQueueInfo(IMSMQQueueInfo2** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
+			public HResult get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
+			public HResult put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
+			public HResult get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
+			public HResult get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
+			public HResult put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
+			public HResult Send(IMSMQQueue2* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
+			public HResult AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
+			public HResult get_SenderVersion(out int32 plSenderVersion) mut => VT.get_SenderVersion(ref this, out plSenderVersion);
+			public HResult get_Extension(out VARIANT pvarExtension) mut => VT.get_Extension(ref this, out pvarExtension);
+			public HResult put_Extension(VARIANT varExtension) mut => VT.put_Extension(ref this, varExtension);
+			public HResult get_ConnectorTypeGuid(BSTR* pbstrGuidConnectorType) mut => VT.get_ConnectorTypeGuid(ref this, pbstrGuidConnectorType);
+			public HResult put_ConnectorTypeGuid(BSTR bstrGuidConnectorType) mut => VT.put_ConnectorTypeGuid(ref this, bstrGuidConnectorType);
+			public HResult get_TransactionStatusQueueInfo(IMSMQQueueInfo2** ppqinfoXactStatus) mut => VT.get_TransactionStatusQueueInfo(ref this, ppqinfoXactStatus);
+			public HResult get_DestinationSymmetricKey(out VARIANT pvarDestSymmKey) mut => VT.get_DestinationSymmetricKey(ref this, out pvarDestSymmKey);
+			public HResult put_DestinationSymmetricKey(VARIANT varDestSymmKey) mut => VT.put_DestinationSymmetricKey(ref this, varDestSymmKey);
+			public HResult get_Signature(out VARIANT pvarSignature) mut => VT.get_Signature(ref this, out pvarSignature);
+			public HResult put_Signature(VARIANT varSignature) mut => VT.put_Signature(ref this, varSignature);
+			public HResult get_AuthenticationProviderType(out int32 plAuthProvType) mut => VT.get_AuthenticationProviderType(ref this, out plAuthProvType);
+			public HResult put_AuthenticationProviderType(int32 lAuthProvType) mut => VT.put_AuthenticationProviderType(ref this, lAuthProvType);
+			public HResult get_AuthenticationProviderName(BSTR* pbstrAuthProvName) mut => VT.get_AuthenticationProviderName(ref this, pbstrAuthProvName);
+			public HResult put_AuthenticationProviderName(BSTR bstrAuthProvName) mut => VT.put_AuthenticationProviderName(ref this, bstrAuthProvName);
+			public HResult put_SenderId(VARIANT varSenderId) mut => VT.put_SenderId(ref this, varSenderId);
+			public HResult get_MsgClass(out int32 plMsgClass) mut => VT.get_MsgClass(ref this, out plMsgClass);
+			public HResult put_MsgClass(int32 lMsgClass) mut => VT.put_MsgClass(ref this, lMsgClass);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_TransactionId(out VARIANT pvarXactId) mut => VT.get_TransactionId(ref this, out pvarXactId);
+			public HResult get_IsFirstInTransaction(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction(ref this, out pisFirstInXact);
+			public HResult get_IsLastInTransaction(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction(ref this, out pisLastInXact);
+			public HResult get_ResponseQueueInfo(IMSMQQueueInfo2** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo(IMSMQQueueInfo2* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
+			public HResult get_AdminQueueInfo(IMSMQQueueInfo2** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo(IMSMQQueueInfo2* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
+			public HResult get_ReceivedAuthenticationLevel(out int16 psReceivedAuthenticationLevel) mut => VT.get_ReceivedAuthenticationLevel(ref this, out psReceivedAuthenticationLevel);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plClass) get_Class;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plAuthLevel) get_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lAuthLevel) put_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int16 pisAuthenticated) get_IsAuthenticated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plDelivery) get_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lDelivery) put_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plTrace) get_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lTrace) put_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plPriority) get_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lPriority) put_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plAppSpecific) get_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lAppSpecific) put_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 pcbBody) get_BodyLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarBody) get_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varBody) put_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarMsgId) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarMsgId) get_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varMsgId) put_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plAck) get_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lAck) put_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plHashAlg) get_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lHashAlg) put_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plEncryptAlg) get_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lEncryptAlg) put_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarSentTime) get_SentTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT plArrivedTime) get_ArrivedTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoDest) get_DestinationQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarSenderCert) get_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varSenderCert) put_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarSenderId) get_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plSenderIdType) get_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lSenderIdType) put_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueue2* DestinationQueue, ref VARIANT Transaction) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self) AttachCurrentSecurityContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plSenderVersion) get_SenderVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarExtension) get_Extension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varExtension) put_Extension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR* pbstrGuidConnectorType) get_ConnectorTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR bstrGuidConnectorType) put_ConnectorTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoXactStatus) get_TransactionStatusQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarDestSymmKey) get_DestinationSymmetricKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varDestSymmKey) put_DestinationSymmetricKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarSignature) get_Signature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varSignature) put_Signature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plAuthProvType) get_AuthenticationProviderType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lAuthProvType) put_AuthenticationProviderType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR* pbstrAuthProvName) get_AuthenticationProviderName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, BSTR bstrAuthProvName) put_AuthenticationProviderName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, VARIANT varSenderId) put_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int32 plMsgClass) get_MsgClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, int32 lMsgClass) put_MsgClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out VARIANT pvarXactId) get_TransactionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int16 pisFirstInXact) get_IsFirstInTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int16 pisLastInXact) get_IsLastInTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoResponse) get_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo2* pqinfoResponse) putref_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoAdmin) get_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, IMSMQQueueInfo2* pqinfoAdmin) putref_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage2 self, out int16 psReceivedAuthenticationLevel) get_ReceivedAuthenticationLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plClass) get_Class;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plAuthLevel) get_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lAuthLevel) put_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int16 pisAuthenticated) get_IsAuthenticated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plDelivery) get_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lDelivery) put_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plTrace) get_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lTrace) put_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plPriority) get_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lPriority) put_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plAppSpecific) get_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lAppSpecific) put_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 pcbBody) get_BodyLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarBody) get_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varBody) put_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarMsgId) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarMsgId) get_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varMsgId) put_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plAck) get_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lAck) put_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plHashAlg) get_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lHashAlg) put_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plEncryptAlg) get_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lEncryptAlg) put_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarSentTime) get_SentTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT plArrivedTime) get_ArrivedTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoDest) get_DestinationQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarSenderCert) get_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varSenderCert) put_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarSenderId) get_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plSenderIdType) get_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lSenderIdType) put_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueue2* DestinationQueue, ref VARIANT Transaction) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self) AttachCurrentSecurityContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plSenderVersion) get_SenderVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarExtension) get_Extension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varExtension) put_Extension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR* pbstrGuidConnectorType) get_ConnectorTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR bstrGuidConnectorType) put_ConnectorTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoXactStatus) get_TransactionStatusQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarDestSymmKey) get_DestinationSymmetricKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varDestSymmKey) put_DestinationSymmetricKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarSignature) get_Signature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varSignature) put_Signature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plAuthProvType) get_AuthenticationProviderType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lAuthProvType) put_AuthenticationProviderType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR* pbstrAuthProvName) get_AuthenticationProviderName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, BSTR bstrAuthProvName) put_AuthenticationProviderName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, VARIANT varSenderId) put_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int32 plMsgClass) get_MsgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, int32 lMsgClass) put_MsgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out VARIANT pvarXactId) get_TransactionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int16 pisFirstInXact) get_IsFirstInTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int16 pisLastInXact) get_IsLastInTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoResponse) get_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo2* pqinfoResponse) putref_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo2** ppqinfoAdmin) get_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, IMSMQQueueInfo2* pqinfoAdmin) putref_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage2 self, out int16 psReceivedAuthenticationLevel) get_ReceivedAuthenticationLevel;
 			}
 		}
 		[CRepr]
@@ -1694,192 +1694,192 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
-			public HRESULT put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
-			public HRESULT get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
-			public HRESULT get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
-			public HRESULT put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
-			public HRESULT get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
-			public HRESULT put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
-			public HRESULT get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
-			public HRESULT put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_ResponseQueueInfo_v1(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v1(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo_v1(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v1(ref this, pqinfoResponse);
-			public HRESULT get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
-			public HRESULT put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
-			public HRESULT get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
-			public HRESULT get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
-			public HRESULT get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
-			public HRESULT put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
-			public HRESULT get_AdminQueueInfo_v1(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v1(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo_v1(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v1(ref this, pqinfoAdmin);
-			public HRESULT get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
-			public HRESULT get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
-			public HRESULT put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
-			public HRESULT get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
-			public HRESULT put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
-			public HRESULT put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
-			public HRESULT get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
-			public HRESULT put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
-			public HRESULT get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
-			public HRESULT put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
-			public HRESULT get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
-			public HRESULT put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
-			public HRESULT get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
-			public HRESULT get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
-			public HRESULT get_DestinationQueueInfo(IMSMQQueueInfo3** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
-			public HRESULT get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
-			public HRESULT put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
-			public HRESULT get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
-			public HRESULT get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
-			public HRESULT put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
-			public HRESULT Send(IDispatch* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
-			public HRESULT AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
-			public HRESULT get_SenderVersion(out int32 plSenderVersion) mut => VT.get_SenderVersion(ref this, out plSenderVersion);
-			public HRESULT get_Extension(out VARIANT pvarExtension) mut => VT.get_Extension(ref this, out pvarExtension);
-			public HRESULT put_Extension(VARIANT varExtension) mut => VT.put_Extension(ref this, varExtension);
-			public HRESULT get_ConnectorTypeGuid(BSTR* pbstrGuidConnectorType) mut => VT.get_ConnectorTypeGuid(ref this, pbstrGuidConnectorType);
-			public HRESULT put_ConnectorTypeGuid(BSTR bstrGuidConnectorType) mut => VT.put_ConnectorTypeGuid(ref this, bstrGuidConnectorType);
-			public HRESULT get_TransactionStatusQueueInfo(IMSMQQueueInfo3** ppqinfoXactStatus) mut => VT.get_TransactionStatusQueueInfo(ref this, ppqinfoXactStatus);
-			public HRESULT get_DestinationSymmetricKey(out VARIANT pvarDestSymmKey) mut => VT.get_DestinationSymmetricKey(ref this, out pvarDestSymmKey);
-			public HRESULT put_DestinationSymmetricKey(VARIANT varDestSymmKey) mut => VT.put_DestinationSymmetricKey(ref this, varDestSymmKey);
-			public HRESULT get_Signature(out VARIANT pvarSignature) mut => VT.get_Signature(ref this, out pvarSignature);
-			public HRESULT put_Signature(VARIANT varSignature) mut => VT.put_Signature(ref this, varSignature);
-			public HRESULT get_AuthenticationProviderType(out int32 plAuthProvType) mut => VT.get_AuthenticationProviderType(ref this, out plAuthProvType);
-			public HRESULT put_AuthenticationProviderType(int32 lAuthProvType) mut => VT.put_AuthenticationProviderType(ref this, lAuthProvType);
-			public HRESULT get_AuthenticationProviderName(BSTR* pbstrAuthProvName) mut => VT.get_AuthenticationProviderName(ref this, pbstrAuthProvName);
-			public HRESULT put_AuthenticationProviderName(BSTR bstrAuthProvName) mut => VT.put_AuthenticationProviderName(ref this, bstrAuthProvName);
-			public HRESULT put_SenderId(VARIANT varSenderId) mut => VT.put_SenderId(ref this, varSenderId);
-			public HRESULT get_MsgClass(out int32 plMsgClass) mut => VT.get_MsgClass(ref this, out plMsgClass);
-			public HRESULT put_MsgClass(int32 lMsgClass) mut => VT.put_MsgClass(ref this, lMsgClass);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_TransactionId(out VARIANT pvarXactId) mut => VT.get_TransactionId(ref this, out pvarXactId);
-			public HRESULT get_IsFirstInTransaction(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction(ref this, out pisFirstInXact);
-			public HRESULT get_IsLastInTransaction(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction(ref this, out pisLastInXact);
-			public HRESULT get_ResponseQueueInfo_v2(IMSMQQueueInfo2** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v2(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo_v2(IMSMQQueueInfo2* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v2(ref this, pqinfoResponse);
-			public HRESULT get_AdminQueueInfo_v2(IMSMQQueueInfo2** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v2(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo_v2(IMSMQQueueInfo2* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v2(ref this, pqinfoAdmin);
-			public HRESULT get_ReceivedAuthenticationLevel(out int16 psReceivedAuthenticationLevel) mut => VT.get_ReceivedAuthenticationLevel(ref this, out psReceivedAuthenticationLevel);
-			public HRESULT get_ResponseQueueInfo(IMSMQQueueInfo3** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo(IMSMQQueueInfo3* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
-			public HRESULT get_AdminQueueInfo(IMSMQQueueInfo3** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo(IMSMQQueueInfo3* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
-			public HRESULT get_ResponseDestination(IDispatch** ppdestResponse) mut => VT.get_ResponseDestination(ref this, ppdestResponse);
-			public HRESULT putref_ResponseDestination(IDispatch* pdestResponse) mut => VT.putref_ResponseDestination(ref this, pdestResponse);
-			public HRESULT get_Destination(IDispatch** ppdestDestination) mut => VT.get_Destination(ref this, ppdestDestination);
-			public HRESULT get_LookupId(out VARIANT pvarLookupId) mut => VT.get_LookupId(ref this, out pvarLookupId);
-			public HRESULT get_IsAuthenticated2(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated2(ref this, out pisAuthenticated);
-			public HRESULT get_IsFirstInTransaction2(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction2(ref this, out pisFirstInXact);
-			public HRESULT get_IsLastInTransaction2(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction2(ref this, out pisLastInXact);
-			public HRESULT AttachCurrentSecurityContext2() mut => VT.AttachCurrentSecurityContext2(ref this);
-			public HRESULT get_SoapEnvelope(BSTR* pbstrSoapEnvelope) mut => VT.get_SoapEnvelope(ref this, pbstrSoapEnvelope);
-			public HRESULT get_CompoundMessage(out VARIANT pvarCompoundMessage) mut => VT.get_CompoundMessage(ref this, out pvarCompoundMessage);
-			public HRESULT put_SoapHeader(BSTR bstrSoapHeader) mut => VT.put_SoapHeader(ref this, bstrSoapHeader);
-			public HRESULT put_SoapBody(BSTR bstrSoapBody) mut => VT.put_SoapBody(ref this, bstrSoapBody);
+			public HResult get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
+			public HResult put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
+			public HResult get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
+			public HResult get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
+			public HResult put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
+			public HResult get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
+			public HResult put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
+			public HResult get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
+			public HResult put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_ResponseQueueInfo_v1(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v1(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo_v1(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v1(ref this, pqinfoResponse);
+			public HResult get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
+			public HResult put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
+			public HResult get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
+			public HResult get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
+			public HResult get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
+			public HResult put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
+			public HResult get_AdminQueueInfo_v1(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v1(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo_v1(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v1(ref this, pqinfoAdmin);
+			public HResult get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
+			public HResult get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
+			public HResult put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
+			public HResult get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
+			public HResult put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
+			public HResult put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
+			public HResult get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
+			public HResult put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
+			public HResult get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
+			public HResult put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
+			public HResult get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
+			public HResult put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
+			public HResult get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
+			public HResult get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
+			public HResult get_DestinationQueueInfo(IMSMQQueueInfo3** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
+			public HResult get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
+			public HResult put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
+			public HResult get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
+			public HResult get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
+			public HResult put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
+			public HResult Send(IDispatch* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
+			public HResult AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
+			public HResult get_SenderVersion(out int32 plSenderVersion) mut => VT.get_SenderVersion(ref this, out plSenderVersion);
+			public HResult get_Extension(out VARIANT pvarExtension) mut => VT.get_Extension(ref this, out pvarExtension);
+			public HResult put_Extension(VARIANT varExtension) mut => VT.put_Extension(ref this, varExtension);
+			public HResult get_ConnectorTypeGuid(BSTR* pbstrGuidConnectorType) mut => VT.get_ConnectorTypeGuid(ref this, pbstrGuidConnectorType);
+			public HResult put_ConnectorTypeGuid(BSTR bstrGuidConnectorType) mut => VT.put_ConnectorTypeGuid(ref this, bstrGuidConnectorType);
+			public HResult get_TransactionStatusQueueInfo(IMSMQQueueInfo3** ppqinfoXactStatus) mut => VT.get_TransactionStatusQueueInfo(ref this, ppqinfoXactStatus);
+			public HResult get_DestinationSymmetricKey(out VARIANT pvarDestSymmKey) mut => VT.get_DestinationSymmetricKey(ref this, out pvarDestSymmKey);
+			public HResult put_DestinationSymmetricKey(VARIANT varDestSymmKey) mut => VT.put_DestinationSymmetricKey(ref this, varDestSymmKey);
+			public HResult get_Signature(out VARIANT pvarSignature) mut => VT.get_Signature(ref this, out pvarSignature);
+			public HResult put_Signature(VARIANT varSignature) mut => VT.put_Signature(ref this, varSignature);
+			public HResult get_AuthenticationProviderType(out int32 plAuthProvType) mut => VT.get_AuthenticationProviderType(ref this, out plAuthProvType);
+			public HResult put_AuthenticationProviderType(int32 lAuthProvType) mut => VT.put_AuthenticationProviderType(ref this, lAuthProvType);
+			public HResult get_AuthenticationProviderName(BSTR* pbstrAuthProvName) mut => VT.get_AuthenticationProviderName(ref this, pbstrAuthProvName);
+			public HResult put_AuthenticationProviderName(BSTR bstrAuthProvName) mut => VT.put_AuthenticationProviderName(ref this, bstrAuthProvName);
+			public HResult put_SenderId(VARIANT varSenderId) mut => VT.put_SenderId(ref this, varSenderId);
+			public HResult get_MsgClass(out int32 plMsgClass) mut => VT.get_MsgClass(ref this, out plMsgClass);
+			public HResult put_MsgClass(int32 lMsgClass) mut => VT.put_MsgClass(ref this, lMsgClass);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_TransactionId(out VARIANT pvarXactId) mut => VT.get_TransactionId(ref this, out pvarXactId);
+			public HResult get_IsFirstInTransaction(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction(ref this, out pisFirstInXact);
+			public HResult get_IsLastInTransaction(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction(ref this, out pisLastInXact);
+			public HResult get_ResponseQueueInfo_v2(IMSMQQueueInfo2** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v2(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo_v2(IMSMQQueueInfo2* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v2(ref this, pqinfoResponse);
+			public HResult get_AdminQueueInfo_v2(IMSMQQueueInfo2** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v2(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo_v2(IMSMQQueueInfo2* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v2(ref this, pqinfoAdmin);
+			public HResult get_ReceivedAuthenticationLevel(out int16 psReceivedAuthenticationLevel) mut => VT.get_ReceivedAuthenticationLevel(ref this, out psReceivedAuthenticationLevel);
+			public HResult get_ResponseQueueInfo(IMSMQQueueInfo3** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo(IMSMQQueueInfo3* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
+			public HResult get_AdminQueueInfo(IMSMQQueueInfo3** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo(IMSMQQueueInfo3* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
+			public HResult get_ResponseDestination(IDispatch** ppdestResponse) mut => VT.get_ResponseDestination(ref this, ppdestResponse);
+			public HResult putref_ResponseDestination(IDispatch* pdestResponse) mut => VT.putref_ResponseDestination(ref this, pdestResponse);
+			public HResult get_Destination(IDispatch** ppdestDestination) mut => VT.get_Destination(ref this, ppdestDestination);
+			public HResult get_LookupId(out VARIANT pvarLookupId) mut => VT.get_LookupId(ref this, out pvarLookupId);
+			public HResult get_IsAuthenticated2(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated2(ref this, out pisAuthenticated);
+			public HResult get_IsFirstInTransaction2(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction2(ref this, out pisFirstInXact);
+			public HResult get_IsLastInTransaction2(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction2(ref this, out pisLastInXact);
+			public HResult AttachCurrentSecurityContext2() mut => VT.AttachCurrentSecurityContext2(ref this);
+			public HResult get_SoapEnvelope(BSTR* pbstrSoapEnvelope) mut => VT.get_SoapEnvelope(ref this, pbstrSoapEnvelope);
+			public HResult get_CompoundMessage(out VARIANT pvarCompoundMessage) mut => VT.get_CompoundMessage(ref this, out pvarCompoundMessage);
+			public HResult put_SoapHeader(BSTR bstrSoapHeader) mut => VT.put_SoapHeader(ref this, bstrSoapHeader);
+			public HResult put_SoapBody(BSTR bstrSoapBody) mut => VT.put_SoapBody(ref this, bstrSoapBody);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plClass) get_Class;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plAuthLevel) get_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lAuthLevel) put_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 pisAuthenticated) get_IsAuthenticated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plDelivery) get_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lDelivery) put_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plTrace) get_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lTrace) put_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plPriority) get_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lPriority) put_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plAppSpecific) get_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lAppSpecific) put_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 pcbBody) get_BodyLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarBody) get_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varBody) put_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarMsgId) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarMsgId) get_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varMsgId) put_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plAck) get_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lAck) put_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plHashAlg) get_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lHashAlg) put_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plEncryptAlg) get_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lEncryptAlg) put_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarSentTime) get_SentTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT plArrivedTime) get_ArrivedTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoDest) get_DestinationQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarSenderCert) get_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varSenderCert) put_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarSenderId) get_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plSenderIdType) get_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lSenderIdType) put_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IDispatch* DestinationQueue, ref VARIANT Transaction) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self) AttachCurrentSecurityContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plSenderVersion) get_SenderVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarExtension) get_Extension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varExtension) put_Extension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR* pbstrGuidConnectorType) get_ConnectorTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR bstrGuidConnectorType) put_ConnectorTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoXactStatus) get_TransactionStatusQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarDestSymmKey) get_DestinationSymmetricKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varDestSymmKey) put_DestinationSymmetricKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarSignature) get_Signature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varSignature) put_Signature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plAuthProvType) get_AuthenticationProviderType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lAuthProvType) put_AuthenticationProviderType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR* pbstrAuthProvName) get_AuthenticationProviderName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR bstrAuthProvName) put_AuthenticationProviderName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, VARIANT varSenderId) put_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int32 plMsgClass) get_MsgClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, int32 lMsgClass) put_MsgClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarXactId) get_TransactionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 pisFirstInXact) get_IsFirstInTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 pisLastInXact) get_IsLastInTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo2** ppqinfoResponse) get_ResponseQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo2* pqinfoResponse) putref_ResponseQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo2** ppqinfoAdmin) get_AdminQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo2* pqinfoAdmin) putref_AdminQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 psReceivedAuthenticationLevel) get_ReceivedAuthenticationLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoResponse) get_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo3* pqinfoResponse) putref_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoAdmin) get_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IMSMQQueueInfo3* pqinfoAdmin) putref_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IDispatch** ppdestResponse) get_ResponseDestination;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IDispatch* pdestResponse) putref_ResponseDestination;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, IDispatch** ppdestDestination) get_Destination;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarLookupId) get_LookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 pisAuthenticated) get_IsAuthenticated2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 pisFirstInXact) get_IsFirstInTransaction2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out int16 pisLastInXact) get_IsLastInTransaction2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self) AttachCurrentSecurityContext2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR* pbstrSoapEnvelope) get_SoapEnvelope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, out VARIANT pvarCompoundMessage) get_CompoundMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR bstrSoapHeader) put_SoapHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage3 self, BSTR bstrSoapBody) put_SoapBody;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plClass) get_Class;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plAuthLevel) get_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lAuthLevel) put_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 pisAuthenticated) get_IsAuthenticated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plDelivery) get_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lDelivery) put_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plTrace) get_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lTrace) put_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plPriority) get_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lPriority) put_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plAppSpecific) get_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lAppSpecific) put_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 pcbBody) get_BodyLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarBody) get_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varBody) put_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarMsgId) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarMsgId) get_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varMsgId) put_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plAck) get_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lAck) put_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plHashAlg) get_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lHashAlg) put_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plEncryptAlg) get_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lEncryptAlg) put_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarSentTime) get_SentTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT plArrivedTime) get_ArrivedTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoDest) get_DestinationQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarSenderCert) get_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varSenderCert) put_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarSenderId) get_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plSenderIdType) get_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lSenderIdType) put_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IDispatch* DestinationQueue, ref VARIANT Transaction) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self) AttachCurrentSecurityContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plSenderVersion) get_SenderVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarExtension) get_Extension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varExtension) put_Extension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR* pbstrGuidConnectorType) get_ConnectorTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR bstrGuidConnectorType) put_ConnectorTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoXactStatus) get_TransactionStatusQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarDestSymmKey) get_DestinationSymmetricKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varDestSymmKey) put_DestinationSymmetricKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarSignature) get_Signature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varSignature) put_Signature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plAuthProvType) get_AuthenticationProviderType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lAuthProvType) put_AuthenticationProviderType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR* pbstrAuthProvName) get_AuthenticationProviderName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR bstrAuthProvName) put_AuthenticationProviderName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, VARIANT varSenderId) put_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int32 plMsgClass) get_MsgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, int32 lMsgClass) put_MsgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarXactId) get_TransactionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 pisFirstInXact) get_IsFirstInTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 pisLastInXact) get_IsLastInTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo2** ppqinfoResponse) get_ResponseQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo2* pqinfoResponse) putref_ResponseQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo2** ppqinfoAdmin) get_AdminQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo2* pqinfoAdmin) putref_AdminQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 psReceivedAuthenticationLevel) get_ReceivedAuthenticationLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoResponse) get_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo3* pqinfoResponse) putref_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo3** ppqinfoAdmin) get_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IMSMQQueueInfo3* pqinfoAdmin) putref_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IDispatch** ppdestResponse) get_ResponseDestination;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IDispatch* pdestResponse) putref_ResponseDestination;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, IDispatch** ppdestDestination) get_Destination;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarLookupId) get_LookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 pisAuthenticated) get_IsAuthenticated2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 pisFirstInXact) get_IsFirstInTransaction2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out int16 pisLastInXact) get_IsLastInTransaction2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self) AttachCurrentSecurityContext2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR* pbstrSoapEnvelope) get_SoapEnvelope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, out VARIANT pvarCompoundMessage) get_CompoundMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR bstrSoapHeader) put_SoapHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage3 self, BSTR bstrSoapBody) put_SoapBody;
 			}
 		}
 		[CRepr]
@@ -1889,192 +1889,192 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
-			public HRESULT get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
-			public HRESULT put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
-			public HRESULT get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
-			public HRESULT put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
-			public HRESULT get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
-			public HRESULT get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
-			public HRESULT put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
-			public HRESULT get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
-			public HRESULT put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
-			public HRESULT get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
-			public HRESULT put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
-			public HRESULT get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
-			public HRESULT put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
-			public HRESULT get_ResponseQueueInfo_v1(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v1(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo_v1(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v1(ref this, pqinfoResponse);
-			public HRESULT get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
-			public HRESULT put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
-			public HRESULT get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
-			public HRESULT get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
-			public HRESULT get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
-			public HRESULT put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
-			public HRESULT get_AdminQueueInfo_v1(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v1(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo_v1(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v1(ref this, pqinfoAdmin);
-			public HRESULT get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
-			public HRESULT get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
-			public HRESULT put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
-			public HRESULT get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
-			public HRESULT put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
-			public HRESULT get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
-			public HRESULT put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
-			public HRESULT get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
-			public HRESULT put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
-			public HRESULT get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
-			public HRESULT put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
-			public HRESULT get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
-			public HRESULT put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
-			public HRESULT get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
-			public HRESULT put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
-			public HRESULT get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
-			public HRESULT get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
-			public HRESULT get_DestinationQueueInfo(IMSMQQueueInfo4** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
-			public HRESULT get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
-			public HRESULT put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
-			public HRESULT get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
-			public HRESULT get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
-			public HRESULT put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
-			public HRESULT Send(IDispatch* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
-			public HRESULT AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
-			public HRESULT get_SenderVersion(out int32 plSenderVersion) mut => VT.get_SenderVersion(ref this, out plSenderVersion);
-			public HRESULT get_Extension(out VARIANT pvarExtension) mut => VT.get_Extension(ref this, out pvarExtension);
-			public HRESULT put_Extension(VARIANT varExtension) mut => VT.put_Extension(ref this, varExtension);
-			public HRESULT get_ConnectorTypeGuid(BSTR* pbstrGuidConnectorType) mut => VT.get_ConnectorTypeGuid(ref this, pbstrGuidConnectorType);
-			public HRESULT put_ConnectorTypeGuid(BSTR bstrGuidConnectorType) mut => VT.put_ConnectorTypeGuid(ref this, bstrGuidConnectorType);
-			public HRESULT get_TransactionStatusQueueInfo(IMSMQQueueInfo4** ppqinfoXactStatus) mut => VT.get_TransactionStatusQueueInfo(ref this, ppqinfoXactStatus);
-			public HRESULT get_DestinationSymmetricKey(out VARIANT pvarDestSymmKey) mut => VT.get_DestinationSymmetricKey(ref this, out pvarDestSymmKey);
-			public HRESULT put_DestinationSymmetricKey(VARIANT varDestSymmKey) mut => VT.put_DestinationSymmetricKey(ref this, varDestSymmKey);
-			public HRESULT get_Signature(out VARIANT pvarSignature) mut => VT.get_Signature(ref this, out pvarSignature);
-			public HRESULT put_Signature(VARIANT varSignature) mut => VT.put_Signature(ref this, varSignature);
-			public HRESULT get_AuthenticationProviderType(out int32 plAuthProvType) mut => VT.get_AuthenticationProviderType(ref this, out plAuthProvType);
-			public HRESULT put_AuthenticationProviderType(int32 lAuthProvType) mut => VT.put_AuthenticationProviderType(ref this, lAuthProvType);
-			public HRESULT get_AuthenticationProviderName(BSTR* pbstrAuthProvName) mut => VT.get_AuthenticationProviderName(ref this, pbstrAuthProvName);
-			public HRESULT put_AuthenticationProviderName(BSTR bstrAuthProvName) mut => VT.put_AuthenticationProviderName(ref this, bstrAuthProvName);
-			public HRESULT put_SenderId(VARIANT varSenderId) mut => VT.put_SenderId(ref this, varSenderId);
-			public HRESULT get_MsgClass(out int32 plMsgClass) mut => VT.get_MsgClass(ref this, out plMsgClass);
-			public HRESULT put_MsgClass(int32 lMsgClass) mut => VT.put_MsgClass(ref this, lMsgClass);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
-			public HRESULT get_TransactionId(out VARIANT pvarXactId) mut => VT.get_TransactionId(ref this, out pvarXactId);
-			public HRESULT get_IsFirstInTransaction(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction(ref this, out pisFirstInXact);
-			public HRESULT get_IsLastInTransaction(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction(ref this, out pisLastInXact);
-			public HRESULT get_ResponseQueueInfo_v2(IMSMQQueueInfo2** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v2(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo_v2(IMSMQQueueInfo2* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v2(ref this, pqinfoResponse);
-			public HRESULT get_AdminQueueInfo_v2(IMSMQQueueInfo2** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v2(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo_v2(IMSMQQueueInfo2* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v2(ref this, pqinfoAdmin);
-			public HRESULT get_ReceivedAuthenticationLevel(out int16 psReceivedAuthenticationLevel) mut => VT.get_ReceivedAuthenticationLevel(ref this, out psReceivedAuthenticationLevel);
-			public HRESULT get_ResponseQueueInfo(IMSMQQueueInfo4** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
-			public HRESULT putref_ResponseQueueInfo(IMSMQQueueInfo4* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
-			public HRESULT get_AdminQueueInfo(IMSMQQueueInfo4** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
-			public HRESULT putref_AdminQueueInfo(IMSMQQueueInfo4* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
-			public HRESULT get_ResponseDestination(IDispatch** ppdestResponse) mut => VT.get_ResponseDestination(ref this, ppdestResponse);
-			public HRESULT putref_ResponseDestination(IDispatch* pdestResponse) mut => VT.putref_ResponseDestination(ref this, pdestResponse);
-			public HRESULT get_Destination(IDispatch** ppdestDestination) mut => VT.get_Destination(ref this, ppdestDestination);
-			public HRESULT get_LookupId(out VARIANT pvarLookupId) mut => VT.get_LookupId(ref this, out pvarLookupId);
-			public HRESULT get_IsAuthenticated2(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated2(ref this, out pisAuthenticated);
-			public HRESULT get_IsFirstInTransaction2(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction2(ref this, out pisFirstInXact);
-			public HRESULT get_IsLastInTransaction2(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction2(ref this, out pisLastInXact);
-			public HRESULT AttachCurrentSecurityContext2() mut => VT.AttachCurrentSecurityContext2(ref this);
-			public HRESULT get_SoapEnvelope(BSTR* pbstrSoapEnvelope) mut => VT.get_SoapEnvelope(ref this, pbstrSoapEnvelope);
-			public HRESULT get_CompoundMessage(out VARIANT pvarCompoundMessage) mut => VT.get_CompoundMessage(ref this, out pvarCompoundMessage);
-			public HRESULT put_SoapHeader(BSTR bstrSoapHeader) mut => VT.put_SoapHeader(ref this, bstrSoapHeader);
-			public HRESULT put_SoapBody(BSTR bstrSoapBody) mut => VT.put_SoapBody(ref this, bstrSoapBody);
+			public HResult get_Class(out int32 plClass) mut => VT.get_Class(ref this, out plClass);
+			public HResult get_PrivLevel(out int32 plPrivLevel) mut => VT.get_PrivLevel(ref this, out plPrivLevel);
+			public HResult put_PrivLevel(int32 lPrivLevel) mut => VT.put_PrivLevel(ref this, lPrivLevel);
+			public HResult get_AuthLevel(out int32 plAuthLevel) mut => VT.get_AuthLevel(ref this, out plAuthLevel);
+			public HResult put_AuthLevel(int32 lAuthLevel) mut => VT.put_AuthLevel(ref this, lAuthLevel);
+			public HResult get_IsAuthenticated(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated(ref this, out pisAuthenticated);
+			public HResult get_Delivery(out int32 plDelivery) mut => VT.get_Delivery(ref this, out plDelivery);
+			public HResult put_Delivery(int32 lDelivery) mut => VT.put_Delivery(ref this, lDelivery);
+			public HResult get_Trace(out int32 plTrace) mut => VT.get_Trace(ref this, out plTrace);
+			public HResult put_Trace(int32 lTrace) mut => VT.put_Trace(ref this, lTrace);
+			public HResult get_Priority(out int32 plPriority) mut => VT.get_Priority(ref this, out plPriority);
+			public HResult put_Priority(int32 lPriority) mut => VT.put_Priority(ref this, lPriority);
+			public HResult get_Journal(out int32 plJournal) mut => VT.get_Journal(ref this, out plJournal);
+			public HResult put_Journal(int32 lJournal) mut => VT.put_Journal(ref this, lJournal);
+			public HResult get_ResponseQueueInfo_v1(IMSMQQueueInfo** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v1(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo_v1(IMSMQQueueInfo* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v1(ref this, pqinfoResponse);
+			public HResult get_AppSpecific(out int32 plAppSpecific) mut => VT.get_AppSpecific(ref this, out plAppSpecific);
+			public HResult put_AppSpecific(int32 lAppSpecific) mut => VT.put_AppSpecific(ref this, lAppSpecific);
+			public HResult get_SourceMachineGuid(BSTR* pbstrGuidSrcMachine) mut => VT.get_SourceMachineGuid(ref this, pbstrGuidSrcMachine);
+			public HResult get_BodyLength(out int32 pcbBody) mut => VT.get_BodyLength(ref this, out pcbBody);
+			public HResult get_Body(out VARIANT pvarBody) mut => VT.get_Body(ref this, out pvarBody);
+			public HResult put_Body(VARIANT varBody) mut => VT.put_Body(ref this, varBody);
+			public HResult get_AdminQueueInfo_v1(IMSMQQueueInfo** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v1(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo_v1(IMSMQQueueInfo* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v1(ref this, pqinfoAdmin);
+			public HResult get_Id(out VARIANT pvarMsgId) mut => VT.get_Id(ref this, out pvarMsgId);
+			public HResult get_CorrelationId(out VARIANT pvarMsgId) mut => VT.get_CorrelationId(ref this, out pvarMsgId);
+			public HResult put_CorrelationId(VARIANT varMsgId) mut => VT.put_CorrelationId(ref this, varMsgId);
+			public HResult get_Ack(out int32 plAck) mut => VT.get_Ack(ref this, out plAck);
+			public HResult put_Ack(int32 lAck) mut => VT.put_Ack(ref this, lAck);
+			public HResult get_Label(BSTR* pbstrLabel) mut => VT.get_Label(ref this, pbstrLabel);
+			public HResult put_Label(BSTR bstrLabel) mut => VT.put_Label(ref this, bstrLabel);
+			public HResult get_MaxTimeToReachQueue(out int32 plMaxTimeToReachQueue) mut => VT.get_MaxTimeToReachQueue(ref this, out plMaxTimeToReachQueue);
+			public HResult put_MaxTimeToReachQueue(int32 lMaxTimeToReachQueue) mut => VT.put_MaxTimeToReachQueue(ref this, lMaxTimeToReachQueue);
+			public HResult get_MaxTimeToReceive(out int32 plMaxTimeToReceive) mut => VT.get_MaxTimeToReceive(ref this, out plMaxTimeToReceive);
+			public HResult put_MaxTimeToReceive(int32 lMaxTimeToReceive) mut => VT.put_MaxTimeToReceive(ref this, lMaxTimeToReceive);
+			public HResult get_HashAlgorithm(out int32 plHashAlg) mut => VT.get_HashAlgorithm(ref this, out plHashAlg);
+			public HResult put_HashAlgorithm(int32 lHashAlg) mut => VT.put_HashAlgorithm(ref this, lHashAlg);
+			public HResult get_EncryptAlgorithm(out int32 plEncryptAlg) mut => VT.get_EncryptAlgorithm(ref this, out plEncryptAlg);
+			public HResult put_EncryptAlgorithm(int32 lEncryptAlg) mut => VT.put_EncryptAlgorithm(ref this, lEncryptAlg);
+			public HResult get_SentTime(out VARIANT pvarSentTime) mut => VT.get_SentTime(ref this, out pvarSentTime);
+			public HResult get_ArrivedTime(out VARIANT plArrivedTime) mut => VT.get_ArrivedTime(ref this, out plArrivedTime);
+			public HResult get_DestinationQueueInfo(IMSMQQueueInfo4** ppqinfoDest) mut => VT.get_DestinationQueueInfo(ref this, ppqinfoDest);
+			public HResult get_SenderCertificate(out VARIANT pvarSenderCert) mut => VT.get_SenderCertificate(ref this, out pvarSenderCert);
+			public HResult put_SenderCertificate(VARIANT varSenderCert) mut => VT.put_SenderCertificate(ref this, varSenderCert);
+			public HResult get_SenderId(out VARIANT pvarSenderId) mut => VT.get_SenderId(ref this, out pvarSenderId);
+			public HResult get_SenderIdType(out int32 plSenderIdType) mut => VT.get_SenderIdType(ref this, out plSenderIdType);
+			public HResult put_SenderIdType(int32 lSenderIdType) mut => VT.put_SenderIdType(ref this, lSenderIdType);
+			public HResult Send(IDispatch* DestinationQueue, ref VARIANT Transaction) mut => VT.Send(ref this, DestinationQueue, ref Transaction);
+			public HResult AttachCurrentSecurityContext() mut => VT.AttachCurrentSecurityContext(ref this);
+			public HResult get_SenderVersion(out int32 plSenderVersion) mut => VT.get_SenderVersion(ref this, out plSenderVersion);
+			public HResult get_Extension(out VARIANT pvarExtension) mut => VT.get_Extension(ref this, out pvarExtension);
+			public HResult put_Extension(VARIANT varExtension) mut => VT.put_Extension(ref this, varExtension);
+			public HResult get_ConnectorTypeGuid(BSTR* pbstrGuidConnectorType) mut => VT.get_ConnectorTypeGuid(ref this, pbstrGuidConnectorType);
+			public HResult put_ConnectorTypeGuid(BSTR bstrGuidConnectorType) mut => VT.put_ConnectorTypeGuid(ref this, bstrGuidConnectorType);
+			public HResult get_TransactionStatusQueueInfo(IMSMQQueueInfo4** ppqinfoXactStatus) mut => VT.get_TransactionStatusQueueInfo(ref this, ppqinfoXactStatus);
+			public HResult get_DestinationSymmetricKey(out VARIANT pvarDestSymmKey) mut => VT.get_DestinationSymmetricKey(ref this, out pvarDestSymmKey);
+			public HResult put_DestinationSymmetricKey(VARIANT varDestSymmKey) mut => VT.put_DestinationSymmetricKey(ref this, varDestSymmKey);
+			public HResult get_Signature(out VARIANT pvarSignature) mut => VT.get_Signature(ref this, out pvarSignature);
+			public HResult put_Signature(VARIANT varSignature) mut => VT.put_Signature(ref this, varSignature);
+			public HResult get_AuthenticationProviderType(out int32 plAuthProvType) mut => VT.get_AuthenticationProviderType(ref this, out plAuthProvType);
+			public HResult put_AuthenticationProviderType(int32 lAuthProvType) mut => VT.put_AuthenticationProviderType(ref this, lAuthProvType);
+			public HResult get_AuthenticationProviderName(BSTR* pbstrAuthProvName) mut => VT.get_AuthenticationProviderName(ref this, pbstrAuthProvName);
+			public HResult put_AuthenticationProviderName(BSTR bstrAuthProvName) mut => VT.put_AuthenticationProviderName(ref this, bstrAuthProvName);
+			public HResult put_SenderId(VARIANT varSenderId) mut => VT.put_SenderId(ref this, varSenderId);
+			public HResult get_MsgClass(out int32 plMsgClass) mut => VT.get_MsgClass(ref this, out plMsgClass);
+			public HResult put_MsgClass(int32 lMsgClass) mut => VT.put_MsgClass(ref this, lMsgClass);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult get_TransactionId(out VARIANT pvarXactId) mut => VT.get_TransactionId(ref this, out pvarXactId);
+			public HResult get_IsFirstInTransaction(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction(ref this, out pisFirstInXact);
+			public HResult get_IsLastInTransaction(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction(ref this, out pisLastInXact);
+			public HResult get_ResponseQueueInfo_v2(IMSMQQueueInfo2** ppqinfoResponse) mut => VT.get_ResponseQueueInfo_v2(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo_v2(IMSMQQueueInfo2* pqinfoResponse) mut => VT.putref_ResponseQueueInfo_v2(ref this, pqinfoResponse);
+			public HResult get_AdminQueueInfo_v2(IMSMQQueueInfo2** ppqinfoAdmin) mut => VT.get_AdminQueueInfo_v2(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo_v2(IMSMQQueueInfo2* pqinfoAdmin) mut => VT.putref_AdminQueueInfo_v2(ref this, pqinfoAdmin);
+			public HResult get_ReceivedAuthenticationLevel(out int16 psReceivedAuthenticationLevel) mut => VT.get_ReceivedAuthenticationLevel(ref this, out psReceivedAuthenticationLevel);
+			public HResult get_ResponseQueueInfo(IMSMQQueueInfo4** ppqinfoResponse) mut => VT.get_ResponseQueueInfo(ref this, ppqinfoResponse);
+			public HResult putref_ResponseQueueInfo(IMSMQQueueInfo4* pqinfoResponse) mut => VT.putref_ResponseQueueInfo(ref this, pqinfoResponse);
+			public HResult get_AdminQueueInfo(IMSMQQueueInfo4** ppqinfoAdmin) mut => VT.get_AdminQueueInfo(ref this, ppqinfoAdmin);
+			public HResult putref_AdminQueueInfo(IMSMQQueueInfo4* pqinfoAdmin) mut => VT.putref_AdminQueueInfo(ref this, pqinfoAdmin);
+			public HResult get_ResponseDestination(IDispatch** ppdestResponse) mut => VT.get_ResponseDestination(ref this, ppdestResponse);
+			public HResult putref_ResponseDestination(IDispatch* pdestResponse) mut => VT.putref_ResponseDestination(ref this, pdestResponse);
+			public HResult get_Destination(IDispatch** ppdestDestination) mut => VT.get_Destination(ref this, ppdestDestination);
+			public HResult get_LookupId(out VARIANT pvarLookupId) mut => VT.get_LookupId(ref this, out pvarLookupId);
+			public HResult get_IsAuthenticated2(out int16 pisAuthenticated) mut => VT.get_IsAuthenticated2(ref this, out pisAuthenticated);
+			public HResult get_IsFirstInTransaction2(out int16 pisFirstInXact) mut => VT.get_IsFirstInTransaction2(ref this, out pisFirstInXact);
+			public HResult get_IsLastInTransaction2(out int16 pisLastInXact) mut => VT.get_IsLastInTransaction2(ref this, out pisLastInXact);
+			public HResult AttachCurrentSecurityContext2() mut => VT.AttachCurrentSecurityContext2(ref this);
+			public HResult get_SoapEnvelope(BSTR* pbstrSoapEnvelope) mut => VT.get_SoapEnvelope(ref this, pbstrSoapEnvelope);
+			public HResult get_CompoundMessage(out VARIANT pvarCompoundMessage) mut => VT.get_CompoundMessage(ref this, out pvarCompoundMessage);
+			public HResult put_SoapHeader(BSTR bstrSoapHeader) mut => VT.put_SoapHeader(ref this, bstrSoapHeader);
+			public HResult put_SoapBody(BSTR bstrSoapBody) mut => VT.put_SoapBody(ref this, bstrSoapBody);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plClass) get_Class;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plPrivLevel) get_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lPrivLevel) put_PrivLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plAuthLevel) get_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lAuthLevel) put_AuthLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 pisAuthenticated) get_IsAuthenticated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plDelivery) get_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lDelivery) put_Delivery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plTrace) get_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lTrace) put_Trace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plPriority) get_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lPriority) put_Priority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plJournal) get_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lJournal) put_Journal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plAppSpecific) get_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lAppSpecific) put_AppSpecific;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 pcbBody) get_BodyLength;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarBody) get_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varBody) put_Body;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo_v1;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarMsgId) get_Id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarMsgId) get_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varMsgId) put_CorrelationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plAck) get_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lAck) put_Ack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR* pbstrLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR bstrLabel) put_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plHashAlg) get_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lHashAlg) put_HashAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plEncryptAlg) get_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lEncryptAlg) put_EncryptAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarSentTime) get_SentTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT plArrivedTime) get_ArrivedTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoDest) get_DestinationQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarSenderCert) get_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varSenderCert) put_SenderCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarSenderId) get_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plSenderIdType) get_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lSenderIdType) put_SenderIdType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IDispatch* DestinationQueue, ref VARIANT Transaction) Send;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self) AttachCurrentSecurityContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plSenderVersion) get_SenderVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarExtension) get_Extension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varExtension) put_Extension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR* pbstrGuidConnectorType) get_ConnectorTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR bstrGuidConnectorType) put_ConnectorTypeGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoXactStatus) get_TransactionStatusQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarDestSymmKey) get_DestinationSymmetricKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varDestSymmKey) put_DestinationSymmetricKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarSignature) get_Signature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varSignature) put_Signature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plAuthProvType) get_AuthenticationProviderType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lAuthProvType) put_AuthenticationProviderType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR* pbstrAuthProvName) get_AuthenticationProviderName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR bstrAuthProvName) put_AuthenticationProviderName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, VARIANT varSenderId) put_SenderId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int32 plMsgClass) get_MsgClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, int32 lMsgClass) put_MsgClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IDispatch** ppcolProperties) get_Properties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarXactId) get_TransactionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 pisFirstInXact) get_IsFirstInTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 pisLastInXact) get_IsLastInTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo2** ppqinfoResponse) get_ResponseQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo2* pqinfoResponse) putref_ResponseQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo2** ppqinfoAdmin) get_AdminQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo2* pqinfoAdmin) putref_AdminQueueInfo_v2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 psReceivedAuthenticationLevel) get_ReceivedAuthenticationLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoResponse) get_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo4* pqinfoResponse) putref_ResponseQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoAdmin) get_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IMSMQQueueInfo4* pqinfoAdmin) putref_AdminQueueInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IDispatch** ppdestResponse) get_ResponseDestination;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IDispatch* pdestResponse) putref_ResponseDestination;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, IDispatch** ppdestDestination) get_Destination;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarLookupId) get_LookupId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 pisAuthenticated) get_IsAuthenticated2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 pisFirstInXact) get_IsFirstInTransaction2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out int16 pisLastInXact) get_IsLastInTransaction2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self) AttachCurrentSecurityContext2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR* pbstrSoapEnvelope) get_SoapEnvelope;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, out VARIANT pvarCompoundMessage) get_CompoundMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR bstrSoapHeader) put_SoapHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQMessage4 self, BSTR bstrSoapBody) put_SoapBody;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plClass) get_Class;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plPrivLevel) get_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lPrivLevel) put_PrivLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plAuthLevel) get_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lAuthLevel) put_AuthLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 pisAuthenticated) get_IsAuthenticated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plDelivery) get_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lDelivery) put_Delivery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plTrace) get_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lTrace) put_Trace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plPriority) get_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lPriority) put_Priority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plJournal) get_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lJournal) put_Journal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo** ppqinfoResponse) get_ResponseQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo* pqinfoResponse) putref_ResponseQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plAppSpecific) get_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lAppSpecific) put_AppSpecific;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR* pbstrGuidSrcMachine) get_SourceMachineGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 pcbBody) get_BodyLength;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarBody) get_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varBody) put_Body;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo** ppqinfoAdmin) get_AdminQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo* pqinfoAdmin) putref_AdminQueueInfo_v1;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarMsgId) get_Id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarMsgId) get_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varMsgId) put_CorrelationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plAck) get_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lAck) put_Ack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR* pbstrLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR bstrLabel) put_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plMaxTimeToReachQueue) get_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lMaxTimeToReachQueue) put_MaxTimeToReachQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plMaxTimeToReceive) get_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lMaxTimeToReceive) put_MaxTimeToReceive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plHashAlg) get_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lHashAlg) put_HashAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plEncryptAlg) get_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lEncryptAlg) put_EncryptAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarSentTime) get_SentTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT plArrivedTime) get_ArrivedTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoDest) get_DestinationQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarSenderCert) get_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varSenderCert) put_SenderCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarSenderId) get_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plSenderIdType) get_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lSenderIdType) put_SenderIdType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IDispatch* DestinationQueue, ref VARIANT Transaction) Send;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self) AttachCurrentSecurityContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plSenderVersion) get_SenderVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarExtension) get_Extension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varExtension) put_Extension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR* pbstrGuidConnectorType) get_ConnectorTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR bstrGuidConnectorType) put_ConnectorTypeGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoXactStatus) get_TransactionStatusQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarDestSymmKey) get_DestinationSymmetricKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varDestSymmKey) put_DestinationSymmetricKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarSignature) get_Signature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varSignature) put_Signature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plAuthProvType) get_AuthenticationProviderType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lAuthProvType) put_AuthenticationProviderType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR* pbstrAuthProvName) get_AuthenticationProviderName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR bstrAuthProvName) put_AuthenticationProviderName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, VARIANT varSenderId) put_SenderId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int32 plMsgClass) get_MsgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, int32 lMsgClass) put_MsgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarXactId) get_TransactionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 pisFirstInXact) get_IsFirstInTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 pisLastInXact) get_IsLastInTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo2** ppqinfoResponse) get_ResponseQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo2* pqinfoResponse) putref_ResponseQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo2** ppqinfoAdmin) get_AdminQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo2* pqinfoAdmin) putref_AdminQueueInfo_v2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 psReceivedAuthenticationLevel) get_ReceivedAuthenticationLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoResponse) get_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo4* pqinfoResponse) putref_ResponseQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo4** ppqinfoAdmin) get_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IMSMQQueueInfo4* pqinfoAdmin) putref_AdminQueueInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IDispatch** ppdestResponse) get_ResponseDestination;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IDispatch* pdestResponse) putref_ResponseDestination;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, IDispatch** ppdestDestination) get_Destination;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarLookupId) get_LookupId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 pisAuthenticated) get_IsAuthenticated2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 pisFirstInXact) get_IsFirstInTransaction2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out int16 pisLastInXact) get_IsLastInTransaction2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self) AttachCurrentSecurityContext2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR* pbstrSoapEnvelope) get_SoapEnvelope;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, out VARIANT pvarCompoundMessage) get_CompoundMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR bstrSoapHeader) put_SoapHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQMessage4 self, BSTR bstrSoapBody) put_SoapBody;
 			}
 		}
 		[CRepr]
@@ -2084,16 +2084,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Hwnd(out int32 phwnd) mut => VT.get_Hwnd(ref this, out phwnd);
-			public HRESULT FireArrivedEvent(IMSMQQueue* pq, int32 msgcursor) mut => VT.FireArrivedEvent(ref this, pq, msgcursor);
-			public HRESULT FireArrivedErrorEvent(IMSMQQueue* pq, HRESULT hrStatus, int32 msgcursor) mut => VT.FireArrivedErrorEvent(ref this, pq, hrStatus, msgcursor);
+			public HResult get_Hwnd(out int32 phwnd) mut => VT.get_Hwnd(ref this, out phwnd);
+			public HResult FireArrivedEvent(IMSMQQueue* pq, int32 msgcursor) mut => VT.FireArrivedEvent(ref this, pq, msgcursor);
+			public HResult FireArrivedErrorEvent(IMSMQQueue* pq, HResult hrStatus, int32 msgcursor) mut => VT.FireArrivedErrorEvent(ref this, pq, hrStatus, msgcursor);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQPrivateEvent self, out int32 phwnd) get_Hwnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQPrivateEvent self, IMSMQQueue* pq, int32 msgcursor) FireArrivedEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQPrivateEvent self, IMSMQQueue* pq, HRESULT hrStatus, int32 msgcursor) FireArrivedErrorEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQPrivateEvent self, out int32 phwnd) get_Hwnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQPrivateEvent self, IMSMQQueue* pq, int32 msgcursor) FireArrivedEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQPrivateEvent self, IMSMQQueue* pq, HResult hrStatus, int32 msgcursor) FireArrivedErrorEvent;
 			}
 		}
 		[CRepr]
@@ -2113,14 +2113,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InitNew(VARIANT varTransaction) mut => VT.InitNew(ref this, varTransaction);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult InitNew(VARIANT varTransaction) mut => VT.InitNew(ref this, varTransaction);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IMSMQTransaction.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransaction2 self, VARIANT varTransaction) InitNew;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransaction2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransaction2 self, VARIANT varTransaction) InitNew;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransaction2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2130,12 +2130,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ITransaction(out VARIANT pvarITransaction) mut => VT.get_ITransaction(ref this, out pvarITransaction);
+			public HResult get_ITransaction(out VARIANT pvarITransaction) mut => VT.get_ITransaction(ref this, out pvarITransaction);
 
 			[CRepr]
 			public struct VTable : IMSMQTransaction2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransaction3 self, out VARIANT pvarITransaction) get_ITransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransaction3 self, out VARIANT pvarITransaction) get_ITransaction;
 			}
 		}
 		[CRepr]
@@ -2145,14 +2145,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginTransaction(IMSMQTransaction2** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult BeginTransaction(IMSMQTransaction2** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCoordinatedTransactionDispenser2 self, IMSMQTransaction2** ptransaction) BeginTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCoordinatedTransactionDispenser2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCoordinatedTransactionDispenser2 self, IMSMQTransaction2** ptransaction) BeginTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCoordinatedTransactionDispenser2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2162,14 +2162,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginTransaction(IMSMQTransaction3** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult BeginTransaction(IMSMQTransaction3** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCoordinatedTransactionDispenser3 self, IMSMQTransaction3** ptransaction) BeginTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCoordinatedTransactionDispenser3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCoordinatedTransactionDispenser3 self, IMSMQTransaction3** ptransaction) BeginTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCoordinatedTransactionDispenser3 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2179,14 +2179,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginTransaction(IMSMQTransaction2** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult BeginTransaction(IMSMQTransaction2** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransactionDispenser2 self, IMSMQTransaction2** ptransaction) BeginTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransactionDispenser2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransactionDispenser2 self, IMSMQTransaction2** ptransaction) BeginTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransactionDispenser2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2196,14 +2196,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeginTransaction(IMSMQTransaction3** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult BeginTransaction(IMSMQTransaction3** ptransaction) mut => VT.BeginTransaction(ref this, ptransaction);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransactionDispenser3 self, IMSMQTransaction3** ptransaction) BeginTransaction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQTransactionDispenser3 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransactionDispenser3 self, IMSMQTransaction3** ptransaction) BeginTransaction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQTransactionDispenser3 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2213,12 +2213,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT MachineIdOfMachineName(BSTR MachineName, BSTR* pbstrGuid) mut => VT.MachineIdOfMachineName(ref this, MachineName, pbstrGuid);
+			public HResult MachineIdOfMachineName(BSTR MachineName, BSTR* pbstrGuid) mut => VT.MachineIdOfMachineName(ref this, MachineName, pbstrGuid);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication self, BSTR MachineName, BSTR* pbstrGuid) MachineIdOfMachineName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication self, BSTR MachineName, BSTR* pbstrGuid) MachineIdOfMachineName;
 			}
 		}
 		[CRepr]
@@ -2228,24 +2228,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterCertificate(ref VARIANT Flags, ref VARIANT ExternalCertificate) mut => VT.RegisterCertificate(ref this, ref Flags, ref ExternalCertificate);
-			public HRESULT MachineNameOfMachineId(BSTR bstrGuid, BSTR* pbstrMachineName) mut => VT.MachineNameOfMachineId(ref this, bstrGuid, pbstrMachineName);
-			public HRESULT get_MSMQVersionMajor(out int16 psMSMQVersionMajor) mut => VT.get_MSMQVersionMajor(ref this, out psMSMQVersionMajor);
-			public HRESULT get_MSMQVersionMinor(out int16 psMSMQVersionMinor) mut => VT.get_MSMQVersionMinor(ref this, out psMSMQVersionMinor);
-			public HRESULT get_MSMQVersionBuild(out int16 psMSMQVersionBuild) mut => VT.get_MSMQVersionBuild(ref this, out psMSMQVersionBuild);
-			public HRESULT get_IsDsEnabled(out int16 pfIsDsEnabled) mut => VT.get_IsDsEnabled(ref this, out pfIsDsEnabled);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult RegisterCertificate(ref VARIANT Flags, ref VARIANT ExternalCertificate) mut => VT.RegisterCertificate(ref this, ref Flags, ref ExternalCertificate);
+			public HResult MachineNameOfMachineId(BSTR bstrGuid, BSTR* pbstrMachineName) mut => VT.MachineNameOfMachineId(ref this, bstrGuid, pbstrMachineName);
+			public HResult get_MSMQVersionMajor(out int16 psMSMQVersionMajor) mut => VT.get_MSMQVersionMajor(ref this, out psMSMQVersionMajor);
+			public HResult get_MSMQVersionMinor(out int16 psMSMQVersionMinor) mut => VT.get_MSMQVersionMinor(ref this, out psMSMQVersionMinor);
+			public HResult get_MSMQVersionBuild(out int16 psMSMQVersionBuild) mut => VT.get_MSMQVersionBuild(ref this, out psMSMQVersionBuild);
+			public HResult get_IsDsEnabled(out int16 pfIsDsEnabled) mut => VT.get_IsDsEnabled(ref this, out pfIsDsEnabled);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IMSMQApplication.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, ref VARIANT Flags, ref VARIANT ExternalCertificate) RegisterCertificate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, BSTR bstrGuid, BSTR* pbstrMachineName) MachineNameOfMachineId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, out int16 psMSMQVersionMajor) get_MSMQVersionMajor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, out int16 psMSMQVersionMinor) get_MSMQVersionMinor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, out int16 psMSMQVersionBuild) get_MSMQVersionBuild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, out int16 pfIsDsEnabled) get_IsDsEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication2 self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, ref VARIANT Flags, ref VARIANT ExternalCertificate) RegisterCertificate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, BSTR bstrGuid, BSTR* pbstrMachineName) MachineNameOfMachineId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, out int16 psMSMQVersionMajor) get_MSMQVersionMajor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, out int16 psMSMQVersionMinor) get_MSMQVersionMinor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, out int16 psMSMQVersionBuild) get_MSMQVersionBuild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, out int16 pfIsDsEnabled) get_IsDsEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication2 self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2255,30 +2255,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ActiveQueues(out VARIANT pvActiveQueues) mut => VT.get_ActiveQueues(ref this, out pvActiveQueues);
-			public HRESULT get_PrivateQueues(out VARIANT pvPrivateQueues) mut => VT.get_PrivateQueues(ref this, out pvPrivateQueues);
-			public HRESULT get_DirectoryServiceServer(BSTR* pbstrDirectoryServiceServer) mut => VT.get_DirectoryServiceServer(ref this, pbstrDirectoryServiceServer);
-			public HRESULT get_IsConnected(out int16 pfIsConnected) mut => VT.get_IsConnected(ref this, out pfIsConnected);
-			public HRESULT get_BytesInAllQueues(out VARIANT pvBytesInAllQueues) mut => VT.get_BytesInAllQueues(ref this, out pvBytesInAllQueues);
-			public HRESULT put_Machine(BSTR bstrMachine) mut => VT.put_Machine(ref this, bstrMachine);
-			public HRESULT get_Machine(BSTR* pbstrMachine) mut => VT.get_Machine(ref this, pbstrMachine);
-			public HRESULT Connect() mut => VT.Connect(ref this);
-			public HRESULT Disconnect() mut => VT.Disconnect(ref this);
-			public HRESULT Tidy() mut => VT.Tidy(ref this);
+			public HResult get_ActiveQueues(out VARIANT pvActiveQueues) mut => VT.get_ActiveQueues(ref this, out pvActiveQueues);
+			public HResult get_PrivateQueues(out VARIANT pvPrivateQueues) mut => VT.get_PrivateQueues(ref this, out pvPrivateQueues);
+			public HResult get_DirectoryServiceServer(BSTR* pbstrDirectoryServiceServer) mut => VT.get_DirectoryServiceServer(ref this, pbstrDirectoryServiceServer);
+			public HResult get_IsConnected(out int16 pfIsConnected) mut => VT.get_IsConnected(ref this, out pfIsConnected);
+			public HResult get_BytesInAllQueues(out VARIANT pvBytesInAllQueues) mut => VT.get_BytesInAllQueues(ref this, out pvBytesInAllQueues);
+			public HResult put_Machine(BSTR bstrMachine) mut => VT.put_Machine(ref this, bstrMachine);
+			public HResult get_Machine(BSTR* pbstrMachine) mut => VT.get_Machine(ref this, pbstrMachine);
+			public HResult Connect() mut => VT.Connect(ref this);
+			public HResult Disconnect() mut => VT.Disconnect(ref this);
+			public HResult Tidy() mut => VT.Tidy(ref this);
 
 			[CRepr]
 			public struct VTable : IMSMQApplication2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, out VARIANT pvActiveQueues) get_ActiveQueues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, out VARIANT pvPrivateQueues) get_PrivateQueues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, BSTR* pbstrDirectoryServiceServer) get_DirectoryServiceServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, out int16 pfIsConnected) get_IsConnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, out VARIANT pvBytesInAllQueues) get_BytesInAllQueues;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, BSTR bstrMachine) put_Machine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self, BSTR* pbstrMachine) get_Machine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self) Connect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self) Disconnect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQApplication3 self) Tidy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, out VARIANT pvActiveQueues) get_ActiveQueues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, out VARIANT pvPrivateQueues) get_PrivateQueues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, BSTR* pbstrDirectoryServiceServer) get_DirectoryServiceServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, out int16 pfIsConnected) get_IsConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, out VARIANT pvBytesInAllQueues) get_BytesInAllQueues;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, BSTR bstrMachine) put_Machine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self, BSTR* pbstrMachine) get_Machine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self) Disconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQApplication3 self) Tidy;
 			}
 		}
 		[CRepr]
@@ -2288,38 +2288,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Open() mut => VT.Open(ref this);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT get_IsOpen(out int16 pfIsOpen) mut => VT.get_IsOpen(ref this, out pfIsOpen);
-			public HRESULT get_IADs(IDispatch** ppIADs) mut => VT.get_IADs(ref this, ppIADs);
-			public HRESULT putref_IADs(IDispatch* pIADs) mut => VT.putref_IADs(ref this, pIADs);
-			public HRESULT get_ADsPath(BSTR* pbstrADsPath) mut => VT.get_ADsPath(ref this, pbstrADsPath);
-			public HRESULT put_ADsPath(BSTR bstrADsPath) mut => VT.put_ADsPath(ref this, bstrADsPath);
-			public HRESULT get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
-			public HRESULT put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
-			public HRESULT get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
-			public HRESULT put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
-			public HRESULT get_Destinations(IDispatch** ppDestinations) mut => VT.get_Destinations(ref this, ppDestinations);
-			public HRESULT putref_Destinations(IDispatch* pDestinations) mut => VT.putref_Destinations(ref this, pDestinations);
-			public HRESULT get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
+			public HResult Open() mut => VT.Open(ref this);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult get_IsOpen(out int16 pfIsOpen) mut => VT.get_IsOpen(ref this, out pfIsOpen);
+			public HResult get_IADs(IDispatch** ppIADs) mut => VT.get_IADs(ref this, ppIADs);
+			public HResult putref_IADs(IDispatch* pIADs) mut => VT.putref_IADs(ref this, pIADs);
+			public HResult get_ADsPath(BSTR* pbstrADsPath) mut => VT.get_ADsPath(ref this, pbstrADsPath);
+			public HResult put_ADsPath(BSTR bstrADsPath) mut => VT.put_ADsPath(ref this, bstrADsPath);
+			public HResult get_PathName(BSTR* pbstrPathName) mut => VT.get_PathName(ref this, pbstrPathName);
+			public HResult put_PathName(BSTR bstrPathName) mut => VT.put_PathName(ref this, bstrPathName);
+			public HResult get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
+			public HResult put_FormatName(BSTR bstrFormatName) mut => VT.put_FormatName(ref this, bstrFormatName);
+			public HResult get_Destinations(IDispatch** ppDestinations) mut => VT.get_Destinations(ref this, ppDestinations);
+			public HResult putref_Destinations(IDispatch* pDestinations) mut => VT.putref_Destinations(ref this, pDestinations);
+			public HResult get_Properties(IDispatch** ppcolProperties) mut => VT.get_Properties(ref this, ppcolProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, out int16 pfIsOpen) get_IsOpen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, IDispatch** ppIADs) get_IADs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, IDispatch* pIADs) putref_IADs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, BSTR* pbstrADsPath) get_ADsPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, BSTR bstrADsPath) put_ADsPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, BSTR* pbstrPathName) get_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, BSTR bstrPathName) put_PathName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, BSTR* pbstrFormatName) get_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, BSTR bstrFormatName) put_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, IDispatch** ppDestinations) get_Destinations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, IDispatch* pDestinations) putref_Destinations;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQDestination self, IDispatch** ppcolProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, out int16 pfIsOpen) get_IsOpen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, IDispatch** ppIADs) get_IADs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, IDispatch* pIADs) putref_IADs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, BSTR* pbstrADsPath) get_ADsPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, BSTR bstrADsPath) put_ADsPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, BSTR* pbstrPathName) get_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, BSTR bstrPathName) put_PathName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, BSTR* pbstrFormatName) get_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, BSTR bstrFormatName) put_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, IDispatch** ppDestinations) get_Destinations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, IDispatch* pDestinations) putref_Destinations;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQDestination self, IDispatch** ppcolProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -2329,14 +2329,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Handle(out VARIANT pvarHandle) mut => VT.get_Handle(ref this, out pvarHandle);
-			public HRESULT put_Handle(VARIANT varHandle) mut => VT.put_Handle(ref this, varHandle);
+			public HResult get_Handle(out VARIANT pvarHandle) mut => VT.get_Handle(ref this, out pvarHandle);
+			public HResult put_Handle(VARIANT varHandle) mut => VT.put_Handle(ref this, varHandle);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQPrivateDestination self, out VARIANT pvarHandle) get_Handle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQPrivateDestination self, VARIANT varHandle) put_Handle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQPrivateDestination self, out VARIANT pvarHandle) get_Handle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQPrivateDestination self, VARIANT varHandle) put_Handle;
 			}
 		}
 		[CRepr]
@@ -2346,16 +2346,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Item(ref VARIANT Index, out VARIANT pvarRet) mut => VT.Item(ref this, ref Index, out pvarRet);
-			public HRESULT get_Count(out int32 pCount) mut => VT.get_Count(ref this, out pCount);
-			public HRESULT _NewEnum(IUnknown** ppunk) mut => VT._NewEnum(ref this, ppunk);
+			public HResult Item(ref VARIANT Index, out VARIANT pvarRet) mut => VT.Item(ref this, ref Index, out pvarRet);
+			public HResult get_Count(out int32 pCount) mut => VT.get_Count(ref this, out pCount);
+			public HResult _NewEnum(IUnknown** ppunk) mut => VT._NewEnum(ref this, ppunk);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCollection self, ref VARIANT Index, out VARIANT pvarRet) Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCollection self, out int32 pCount) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQCollection self, IUnknown** ppunk) _NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCollection self, ref VARIANT Index, out VARIANT pvarRet) Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCollection self, out int32 pCount) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQCollection self, IUnknown** ppunk) _NewEnum;
 			}
 		}
 		[CRepr]
@@ -2365,28 +2365,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Init(ref VARIANT Machine, ref VARIANT Pathname, ref VARIANT FormatName) mut => VT.Init(ref this, ref Machine, ref Pathname, ref FormatName);
-			public HRESULT get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
-			public HRESULT get_Machine(BSTR* pbstrMachine) mut => VT.get_Machine(ref this, pbstrMachine);
-			public HRESULT get_MessageCount(out int32 plMessageCount) mut => VT.get_MessageCount(ref this, out plMessageCount);
-			public HRESULT get_ForeignStatus(out int32 plForeignStatus) mut => VT.get_ForeignStatus(ref this, out plForeignStatus);
-			public HRESULT get_QueueType(out int32 plQueueType) mut => VT.get_QueueType(ref this, out plQueueType);
-			public HRESULT get_IsLocal(out int16 pfIsLocal) mut => VT.get_IsLocal(ref this, out pfIsLocal);
-			public HRESULT get_TransactionalStatus(out int32 plTransactionalStatus) mut => VT.get_TransactionalStatus(ref this, out plTransactionalStatus);
-			public HRESULT get_BytesInQueue(out VARIANT pvBytesInQueue) mut => VT.get_BytesInQueue(ref this, out pvBytesInQueue);
+			public HResult Init(ref VARIANT Machine, ref VARIANT Pathname, ref VARIANT FormatName) mut => VT.Init(ref this, ref Machine, ref Pathname, ref FormatName);
+			public HResult get_FormatName(BSTR* pbstrFormatName) mut => VT.get_FormatName(ref this, pbstrFormatName);
+			public HResult get_Machine(BSTR* pbstrMachine) mut => VT.get_Machine(ref this, pbstrMachine);
+			public HResult get_MessageCount(out int32 plMessageCount) mut => VT.get_MessageCount(ref this, out plMessageCount);
+			public HResult get_ForeignStatus(out int32 plForeignStatus) mut => VT.get_ForeignStatus(ref this, out plForeignStatus);
+			public HResult get_QueueType(out int32 plQueueType) mut => VT.get_QueueType(ref this, out plQueueType);
+			public HResult get_IsLocal(out int16 pfIsLocal) mut => VT.get_IsLocal(ref this, out pfIsLocal);
+			public HResult get_TransactionalStatus(out int32 plTransactionalStatus) mut => VT.get_TransactionalStatus(ref this, out plTransactionalStatus);
+			public HResult get_BytesInQueue(out VARIANT pvBytesInQueue) mut => VT.get_BytesInQueue(ref this, out pvBytesInQueue);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, ref VARIANT Machine, ref VARIANT Pathname, ref VARIANT FormatName) Init;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, BSTR* pbstrFormatName) get_FormatName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, BSTR* pbstrMachine) get_Machine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, out int32 plMessageCount) get_MessageCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, out int32 plForeignStatus) get_ForeignStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, out int32 plQueueType) get_QueueType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, out int16 pfIsLocal) get_IsLocal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, out int32 plTransactionalStatus) get_TransactionalStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQManagement self, out VARIANT pvBytesInQueue) get_BytesInQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, ref VARIANT Machine, ref VARIANT Pathname, ref VARIANT FormatName) Init;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, BSTR* pbstrFormatName) get_FormatName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, BSTR* pbstrMachine) get_Machine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, out int32 plMessageCount) get_MessageCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, out int32 plForeignStatus) get_ForeignStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, out int32 plQueueType) get_QueueType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, out int16 pfIsLocal) get_IsLocal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, out int32 plTransactionalStatus) get_TransactionalStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQManagement self, out VARIANT pvBytesInQueue) get_BytesInQueue;
 			}
 		}
 		[CRepr]
@@ -2396,22 +2396,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_State(out int32 plState) mut => VT.get_State(ref this, out plState);
-			public HRESULT get_NextHops(out VARIANT pvNextHops) mut => VT.get_NextHops(ref this, out pvNextHops);
-			public HRESULT EodGetSendInfo(IMSMQCollection** ppCollection) mut => VT.EodGetSendInfo(ref this, ppCollection);
-			public HRESULT Resume() mut => VT.Resume(ref this);
-			public HRESULT Pause() mut => VT.Pause(ref this);
-			public HRESULT EodResend() mut => VT.EodResend(ref this);
+			public HResult get_State(out int32 plState) mut => VT.get_State(ref this, out plState);
+			public HResult get_NextHops(out VARIANT pvNextHops) mut => VT.get_NextHops(ref this, out pvNextHops);
+			public HResult EodGetSendInfo(IMSMQCollection** ppCollection) mut => VT.EodGetSendInfo(ref this, ppCollection);
+			public HResult Resume() mut => VT.Resume(ref this);
+			public HResult Pause() mut => VT.Pause(ref this);
+			public HResult EodResend() mut => VT.EodResend(ref this);
 
 			[CRepr]
 			public struct VTable : IMSMQManagement.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQOutgoingQueueManagement self, out int32 plState) get_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQOutgoingQueueManagement self, out VARIANT pvNextHops) get_NextHops;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQOutgoingQueueManagement self, IMSMQCollection** ppCollection) EodGetSendInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQOutgoingQueueManagement self) Resume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQOutgoingQueueManagement self) Pause;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQOutgoingQueueManagement self) EodResend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQOutgoingQueueManagement self, out int32 plState) get_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQOutgoingQueueManagement self, out VARIANT pvNextHops) get_NextHops;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQOutgoingQueueManagement self, IMSMQCollection** ppCollection) EodGetSendInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQOutgoingQueueManagement self) Resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQOutgoingQueueManagement self) Pause;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQOutgoingQueueManagement self) EodResend;
 			}
 		}
 		[CRepr]
@@ -2421,16 +2421,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_JournalMessageCount(out int32 plJournalMessageCount) mut => VT.get_JournalMessageCount(ref this, out plJournalMessageCount);
-			public HRESULT get_BytesInJournal(out VARIANT pvBytesInJournal) mut => VT.get_BytesInJournal(ref this, out pvBytesInJournal);
-			public HRESULT EodGetReceiveInfo(out VARIANT pvCollection) mut => VT.EodGetReceiveInfo(ref this, out pvCollection);
+			public HResult get_JournalMessageCount(out int32 plJournalMessageCount) mut => VT.get_JournalMessageCount(ref this, out plJournalMessageCount);
+			public HResult get_BytesInJournal(out VARIANT pvBytesInJournal) mut => VT.get_BytesInJournal(ref this, out pvBytesInJournal);
+			public HResult EodGetReceiveInfo(out VARIANT pvCollection) mut => VT.EodGetReceiveInfo(ref this, out pvCollection);
 
 			[CRepr]
 			public struct VTable : IMSMQManagement.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueManagement self, out int32 plJournalMessageCount) get_JournalMessageCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueManagement self, out VARIANT pvBytesInJournal) get_BytesInJournal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMSMQQueueManagement self, out VARIANT pvCollection) EodGetReceiveInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueManagement self, out int32 plJournalMessageCount) get_JournalMessageCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueManagement self, out VARIANT pvBytesInJournal) get_BytesInJournal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMSMQQueueManagement self, out VARIANT pvCollection) EodGetReceiveInfo;
 			}
 		}
 		

@@ -72,7 +72,7 @@ namespace Win32
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 McastGenUID(out MCAST_CLIENT_UID pRequestID);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 McastEnumerateScopes(uint16 AddrFamily, BOOL ReQuery, out MCAST_SCOPE_ENTRY pScopeList, out uint32 pScopeLen, out uint32 pScopeCount);
+		public static extern uint32 McastEnumerateScopes(uint16 AddrFamily, IntBool ReQuery, out MCAST_SCOPE_ENTRY pScopeList, out uint32 pScopeLen, out uint32 pScopeCount);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 McastRequestAddress(uint16 AddrFamily, out MCAST_CLIENT_UID pRequestID, out MCAST_SCOPE_CTX pScopeCtx, out MCAST_LEASE_REQUEST pAddrRequest, out MCAST_LEASE_RESPONSE pAddrResponse);
 		[Import("dhcpcsvc.dll"), CLink, CallingConvention(.Stdcall)]

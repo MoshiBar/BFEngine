@@ -7,11 +7,11 @@ namespace Win32
 	{
 		// --- Constants ---
 		
-		public const HRESULT WCN_E_PEER_NOT_FOUND = -2147206143;
-		public const HRESULT WCN_E_AUTHENTICATION_FAILED = -2147206142;
-		public const HRESULT WCN_E_CONNECTION_REJECTED = -2147206141;
-		public const HRESULT WCN_E_SESSION_TIMEDOUT = -2147206140;
-		public const HRESULT WCN_E_PROTOCOL_ERROR = -2147206139;
+		public const HResult WCN_E_PEER_NOT_FOUND = -2147206143;
+		public const HResult WCN_E_AUTHENTICATION_FAILED = -2147206142;
+		public const HResult WCN_E_CONNECTION_REJECTED = -2147206141;
+		public const HResult WCN_E_SESSION_TIMEDOUT = -2147206140;
+		public const HResult WCN_E_PROTOCOL_ERROR = -2147206139;
 		public const uint32 WCN_VALUE_DT_CATEGORY_COMPUTER = 1;
 		public const uint32 WCN_VALUE_DT_CATEGORY_INPUT_DEVICE = 2;
 		public const uint32 WCN_VALUE_DT_CATEGORY_PRINTER = 3;
@@ -203,7 +203,7 @@ namespace Win32
 			_1_0 = 16,
 			_2_0 = 32,
 		}
-		public enum WCN_VALUE_TYPE_BOOLEAN : int32
+		public enum WCN_VALUE_TYPE_Boolean : int32
 		{
 			FALSE = 0,
 			TRUE = 1,
@@ -379,32 +379,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetPassword(WCN_PASSWORD_TYPE Type, uint32 dwPasswordLength, uint8* pbPassword) mut => VT.SetPassword(ref this, Type, dwPasswordLength, pbPassword);
-			public HRESULT Connect(IWCNConnectNotify* pNotify) mut => VT.Connect(ref this, pNotify);
-			public HRESULT GetAttribute(WCN_ATTRIBUTE_TYPE AttributeType, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) mut => VT.GetAttribute(ref this, AttributeType, dwMaxBufferSize, pbBuffer, out pdwBufferUsed);
-			public HRESULT GetIntegerAttribute(WCN_ATTRIBUTE_TYPE AttributeType, out uint32 puInteger) mut => VT.GetIntegerAttribute(ref this, AttributeType, out puInteger);
-			public HRESULT GetStringAttribute(WCN_ATTRIBUTE_TYPE AttributeType, uint32 cchMaxString, char16* wszString) mut => VT.GetStringAttribute(ref this, AttributeType, cchMaxString, wszString);
-			public HRESULT GetNetworkProfile(uint32 cchMaxStringLength, char16* wszProfile) mut => VT.GetNetworkProfile(ref this, cchMaxStringLength, wszProfile);
-			public HRESULT SetNetworkProfile(PWSTR pszProfileXml) mut => VT.SetNetworkProfile(ref this, pszProfileXml);
-			public HRESULT GetVendorExtension(in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) mut => VT.GetVendorExtension(ref this, pVendorExtSpec, dwMaxBufferSize, pbBuffer, out pdwBufferUsed);
-			public HRESULT SetVendorExtension(in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 cbBuffer, uint8* pbBuffer) mut => VT.SetVendorExtension(ref this, pVendorExtSpec, cbBuffer, pbBuffer);
-			public HRESULT Unadvise() mut => VT.Unadvise(ref this);
-			public HRESULT SetNFCPasswordParams(WCN_PASSWORD_TYPE Type, uint32 dwOOBPasswordID, uint32 dwPasswordLength, uint8* pbPassword, uint32 dwRemotePublicKeyHashLength, uint8* pbRemotePublicKeyHash, uint32 dwDHKeyBlobLength, uint8* pbDHKeyBlob) mut => VT.SetNFCPasswordParams(ref this, Type, dwOOBPasswordID, dwPasswordLength, pbPassword, dwRemotePublicKeyHashLength, pbRemotePublicKeyHash, dwDHKeyBlobLength, pbDHKeyBlob);
+			public HResult SetPassword(WCN_PASSWORD_TYPE Type, uint32 dwPasswordLength, uint8* pbPassword) mut => VT.SetPassword(ref this, Type, dwPasswordLength, pbPassword);
+			public HResult Connect(IWCNConnectNotify* pNotify) mut => VT.Connect(ref this, pNotify);
+			public HResult GetAttribute(WCN_ATTRIBUTE_TYPE AttributeType, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) mut => VT.GetAttribute(ref this, AttributeType, dwMaxBufferSize, pbBuffer, out pdwBufferUsed);
+			public HResult GetIntegerAttribute(WCN_ATTRIBUTE_TYPE AttributeType, out uint32 puInteger) mut => VT.GetIntegerAttribute(ref this, AttributeType, out puInteger);
+			public HResult GetStringAttribute(WCN_ATTRIBUTE_TYPE AttributeType, uint32 cchMaxString, char16* wszString) mut => VT.GetStringAttribute(ref this, AttributeType, cchMaxString, wszString);
+			public HResult GetNetworkProfile(uint32 cchMaxStringLength, char16* wszProfile) mut => VT.GetNetworkProfile(ref this, cchMaxStringLength, wszProfile);
+			public HResult SetNetworkProfile(char16* pszProfileXml) mut => VT.SetNetworkProfile(ref this, pszProfileXml);
+			public HResult GetVendorExtension(in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) mut => VT.GetVendorExtension(ref this, pVendorExtSpec, dwMaxBufferSize, pbBuffer, out pdwBufferUsed);
+			public HResult SetVendorExtension(in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 cbBuffer, uint8* pbBuffer) mut => VT.SetVendorExtension(ref this, pVendorExtSpec, cbBuffer, pbBuffer);
+			public HResult Unadvise() mut => VT.Unadvise(ref this);
+			public HResult SetNFCPasswordParams(WCN_PASSWORD_TYPE Type, uint32 dwOOBPasswordID, uint32 dwPasswordLength, uint8* pbPassword, uint32 dwRemotePublicKeyHashLength, uint8* pbRemotePublicKeyHash, uint32 dwDHKeyBlobLength, uint8* pbDHKeyBlob) mut => VT.SetNFCPasswordParams(ref this, Type, dwOOBPasswordID, dwPasswordLength, pbPassword, dwRemotePublicKeyHashLength, pbRemotePublicKeyHash, dwDHKeyBlobLength, pbDHKeyBlob);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, WCN_PASSWORD_TYPE Type, uint32 dwPasswordLength, uint8* pbPassword) SetPassword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, IWCNConnectNotify* pNotify) Connect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, WCN_ATTRIBUTE_TYPE AttributeType, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) GetAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, WCN_ATTRIBUTE_TYPE AttributeType, out uint32 puInteger) GetIntegerAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, WCN_ATTRIBUTE_TYPE AttributeType, uint32 cchMaxString, char16* wszString) GetStringAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, uint32 cchMaxStringLength, char16* wszProfile) GetNetworkProfile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, PWSTR pszProfileXml) SetNetworkProfile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) GetVendorExtension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 cbBuffer, uint8* pbBuffer) SetVendorExtension;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self) Unadvise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNDevice self, WCN_PASSWORD_TYPE Type, uint32 dwOOBPasswordID, uint32 dwPasswordLength, uint8* pbPassword, uint32 dwRemotePublicKeyHashLength, uint8* pbRemotePublicKeyHash, uint32 dwDHKeyBlobLength, uint8* pbDHKeyBlob) SetNFCPasswordParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, WCN_PASSWORD_TYPE Type, uint32 dwPasswordLength, uint8* pbPassword) SetPassword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, IWCNConnectNotify* pNotify) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, WCN_ATTRIBUTE_TYPE AttributeType, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) GetAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, WCN_ATTRIBUTE_TYPE AttributeType, out uint32 puInteger) GetIntegerAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, WCN_ATTRIBUTE_TYPE AttributeType, uint32 cchMaxString, char16* wszString) GetStringAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, uint32 cchMaxStringLength, char16* wszProfile) GetNetworkProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, char16* pszProfileXml) SetNetworkProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 dwMaxBufferSize, uint8* pbBuffer, out uint32 pdwBufferUsed) GetVendorExtension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, in WCN_VENDOR_EXTENSION_SPEC pVendorExtSpec, uint32 cbBuffer, uint8* pbBuffer) SetVendorExtension;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self) Unadvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNDevice self, WCN_PASSWORD_TYPE Type, uint32 dwOOBPasswordID, uint32 dwPasswordLength, uint8* pbPassword, uint32 dwRemotePublicKeyHashLength, uint8* pbRemotePublicKeyHash, uint32 dwDHKeyBlobLength, uint8* pbDHKeyBlob) SetNFCPasswordParams;
 			}
 		}
 		[CRepr]
@@ -414,14 +414,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ConnectSucceeded() mut => VT.ConnectSucceeded(ref this);
-			public HRESULT ConnectFailed(HRESULT hrFailure) mut => VT.ConnectFailed(ref this, hrFailure);
+			public HResult ConnectSucceeded() mut => VT.ConnectSucceeded(ref this);
+			public HResult ConnectFailed(HResult hrFailure) mut => VT.ConnectFailed(ref this, hrFailure);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNConnectNotify self) ConnectSucceeded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWCNConnectNotify self, HRESULT hrFailure) ConnectFailed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNConnectNotify self) ConnectSucceeded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWCNConnectNotify self, HResult hrFailure) ConnectFailed;
 			}
 		}
 		

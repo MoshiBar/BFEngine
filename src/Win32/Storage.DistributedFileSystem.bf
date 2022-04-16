@@ -71,7 +71,7 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_1
 		{
-			public PWSTR EntryPath;
+			public char16* EntryPath;
 		}
 		[CRepr]
 		public struct DFS_INFO_1_32
@@ -81,8 +81,8 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_2
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 NumberOfStorages;
 		}
@@ -98,8 +98,8 @@ namespace Win32
 		public struct DFS_STORAGE_INFO
 		{
 			public uint32 State;
-			public PWSTR ServerName;
-			public PWSTR ShareName;
+			public char16* ServerName;
+			public char16* ShareName;
 		}
 		[CRepr]
 		public struct DFS_STORAGE_INFO_0_32
@@ -112,15 +112,15 @@ namespace Win32
 		public struct DFS_STORAGE_INFO_1
 		{
 			public uint32 State;
-			public PWSTR ServerName;
-			public PWSTR ShareName;
+			public char16* ServerName;
+			public char16* ShareName;
 			public DFS_TARGET_PRIORITY TargetPriority;
 		}
 		[CRepr]
 		public struct DFS_INFO_3
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 NumberOfStorages;
 			public DFS_STORAGE_INFO* Storage;
@@ -137,8 +137,8 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_4
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public Guid Guid;
@@ -159,8 +159,8 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_5
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public Guid Guid;
@@ -171,8 +171,8 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_6
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public Guid Guid;
@@ -189,8 +189,8 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_8
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public Guid Guid;
@@ -203,8 +203,8 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_9
 		{
-			public PWSTR EntryPath;
-			public PWSTR Comment;
+			public char16* EntryPath;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public Guid Guid;
@@ -225,7 +225,7 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_100
 		{
-			public PWSTR Comment;
+			public char16* Comment;
 		}
 		[CRepr]
 		public struct DFS_INFO_101
@@ -251,7 +251,7 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_105
 		{
-			public PWSTR Comment;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public uint32 PropertyFlagMask;
@@ -266,7 +266,7 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_107
 		{
-			public PWSTR Comment;
+			public char16* Comment;
 			public uint32 State;
 			public uint32 Timeout;
 			public uint32 PropertyFlagMask;
@@ -283,19 +283,19 @@ namespace Win32
 		[CRepr]
 		public struct DFS_INFO_200
 		{
-			public PWSTR FtDfsName;
+			public char16* FtDfsName;
 		}
 		[CRepr]
 		public struct DFS_INFO_300
 		{
 			public uint32 Flags;
-			public PWSTR DfsName;
+			public char16* DfsName;
 		}
 		[CRepr]
 		public struct DFS_SITENAME_INFO
 		{
 			public uint32 SiteFlags;
-			public PWSTR SiteName;
+			public char16* SiteName;
 		}
 		[CRepr]
 		public struct DFS_SITELIST_INFO
@@ -326,48 +326,48 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsAdd(PWSTR DfsEntryPath, PWSTR ServerName, PWSTR ShareName, PWSTR Comment, uint32 Flags);
+		public static extern uint32 NetDfsAdd(char16* DfsEntryPath, char16* ServerName, char16* ShareName, char16* Comment, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsAddStdRoot(PWSTR ServerName, PWSTR RootShare, PWSTR Comment, uint32 Flags);
+		public static extern uint32 NetDfsAddStdRoot(char16* ServerName, char16* RootShare, char16* Comment, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsRemoveStdRoot(PWSTR ServerName, PWSTR RootShare, uint32 Flags);
+		public static extern uint32 NetDfsRemoveStdRoot(char16* ServerName, char16* RootShare, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsAddFtRoot(PWSTR ServerName, PWSTR RootShare, PWSTR FtDfsName, PWSTR Comment, uint32 Flags);
+		public static extern uint32 NetDfsAddFtRoot(char16* ServerName, char16* RootShare, char16* FtDfsName, char16* Comment, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsRemoveFtRoot(PWSTR ServerName, PWSTR RootShare, PWSTR FtDfsName, uint32 Flags);
+		public static extern uint32 NetDfsRemoveFtRoot(char16* ServerName, char16* RootShare, char16* FtDfsName, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsRemoveFtRootForced(PWSTR DomainName, PWSTR ServerName, PWSTR RootShare, PWSTR FtDfsName, uint32 Flags);
+		public static extern uint32 NetDfsRemoveFtRootForced(char16* DomainName, char16* ServerName, char16* RootShare, char16* FtDfsName, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsRemove(PWSTR DfsEntryPath, PWSTR ServerName, PWSTR ShareName);
+		public static extern uint32 NetDfsRemove(char16* DfsEntryPath, char16* ServerName, char16* ShareName);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsEnum(PWSTR DfsName, uint32 Level, uint32 PrefMaxLen, out uint8* Buffer, out uint32 EntriesRead, out uint32 ResumeHandle);
+		public static extern uint32 NetDfsEnum(char16* DfsName, uint32 Level, uint32 PrefMaxLen, out uint8* Buffer, out uint32 EntriesRead, out uint32 ResumeHandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsGetInfo(PWSTR DfsEntryPath, PWSTR ServerName, PWSTR ShareName, uint32 Level, out uint8* Buffer);
+		public static extern uint32 NetDfsGetInfo(char16* DfsEntryPath, char16* ServerName, char16* ShareName, uint32 Level, out uint8* Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsSetInfo(PWSTR DfsEntryPath, PWSTR ServerName, PWSTR ShareName, uint32 Level, ref uint8 Buffer);
+		public static extern uint32 NetDfsSetInfo(char16* DfsEntryPath, char16* ServerName, char16* ShareName, uint32 Level, ref uint8 Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsGetClientInfo(PWSTR DfsEntryPath, PWSTR ServerName, PWSTR ShareName, uint32 Level, out uint8* Buffer);
+		public static extern uint32 NetDfsGetClientInfo(char16* DfsEntryPath, char16* ServerName, char16* ShareName, uint32 Level, out uint8* Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsSetClientInfo(PWSTR DfsEntryPath, PWSTR ServerName, PWSTR ShareName, uint32 Level, ref uint8 Buffer);
+		public static extern uint32 NetDfsSetClientInfo(char16* DfsEntryPath, char16* ServerName, char16* ShareName, uint32 Level, ref uint8 Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsMove(PWSTR OldDfsEntryPath, PWSTR NewDfsEntryPath, uint32 Flags);
+		public static extern uint32 NetDfsMove(char16* OldDfsEntryPath, char16* NewDfsEntryPath, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsAddRootTarget(PWSTR pDfsPath, PWSTR pTargetPath, uint32 MajorVersion, PWSTR pComment, uint32 Flags);
+		public static extern uint32 NetDfsAddRootTarget(char16* pDfsPath, char16* pTargetPath, uint32 MajorVersion, char16* pComment, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsRemoveRootTarget(PWSTR pDfsPath, PWSTR pTargetPath, uint32 Flags);
+		public static extern uint32 NetDfsRemoveRootTarget(char16* pDfsPath, char16* pTargetPath, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsGetSecurity(PWSTR DfsEntryPath, uint32 SecurityInformation, out SECURITY_DESCRIPTOR* ppSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
+		public static extern uint32 NetDfsGetSecurity(char16* DfsEntryPath, uint32 SecurityInformation, out SECURITY_DESCRIPTOR* ppSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsSetSecurity(PWSTR DfsEntryPath, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
+		public static extern uint32 NetDfsSetSecurity(char16* DfsEntryPath, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsGetStdContainerSecurity(PWSTR MachineName, uint32 SecurityInformation, out SECURITY_DESCRIPTOR* ppSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
+		public static extern uint32 NetDfsGetStdContainerSecurity(char16* MachineName, uint32 SecurityInformation, out SECURITY_DESCRIPTOR* ppSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsSetStdContainerSecurity(PWSTR MachineName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
+		public static extern uint32 NetDfsSetStdContainerSecurity(char16* MachineName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsGetFtContainerSecurity(PWSTR DomainName, uint32 SecurityInformation, out SECURITY_DESCRIPTOR* ppSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
+		public static extern uint32 NetDfsGetFtContainerSecurity(char16* DomainName, uint32 SecurityInformation, out SECURITY_DESCRIPTOR* ppSecurityDescriptor, out uint32 lpcbSecurityDescriptor);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsSetFtContainerSecurity(PWSTR DomainName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
+		public static extern uint32 NetDfsSetFtContainerSecurity(char16* DomainName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetDfsGetSupportedNamespaceVersion(DFS_NAMESPACE_VERSION_ORIGIN Origin, PWSTR pName, out DFS_SUPPORTED_NAMESPACE_VERSION_INFO* ppVersionInfo);
+		public static extern uint32 NetDfsGetSupportedNamespaceVersion(DFS_NAMESPACE_VERSION_ORIGIN Origin, char16* pName, out DFS_SUPPORTED_NAMESPACE_VERSION_INFO* ppVersionInfo);
 	}
 }

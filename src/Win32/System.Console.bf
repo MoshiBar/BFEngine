@@ -1,9 +1,13 @@
 using System;
+using System.IO;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace System.Console
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	static class Console
 	{
 		// --- Constants ---
 		
@@ -107,7 +111,7 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL PHANDLER_ROUTINE(uint32 CtrlType);
+		public function IntBool PHANDLER_ROUTINE(uint32 CtrlType);
 		
 		// --- Structs ---
 		
@@ -128,7 +132,7 @@ namespace Win32
 		[CRepr]
 		public struct KEY_EVENT_RECORD
 		{
-			public BOOL bKeyDown;
+			public IntBool bKeyDown;
 			public uint16 wRepeatCount;
 			public uint16 wVirtualKeyCode;
 			public uint16 wVirtualScanCode;
@@ -139,7 +143,7 @@ namespace Win32
 			public struct _uChar_e__Union
 			{
 				public char16 UnicodeChar;
-				public CHAR AsciiChar;
+				public char8 AsciiChar;
 			}
 		}
 		[CRepr]
@@ -163,7 +167,7 @@ namespace Win32
 		[CRepr]
 		public struct FOCUS_EVENT_RECORD
 		{
-			public BOOL bSetFocus;
+			public IntBool bSetFocus;
 		}
 		[CRepr]
 		public struct INPUT_RECORD
@@ -191,7 +195,7 @@ namespace Win32
 			public struct _Char_e__Union
 			{
 				public char16 UnicodeChar;
-				public CHAR AsciiChar;
+				public char8 AsciiChar;
 			}
 		}
 		[CRepr]
@@ -212,7 +216,7 @@ namespace Win32
 		public struct CONSOLE_CURSOR_INFO
 		{
 			public uint32 dwSize;
-			public BOOL bVisible;
+			public IntBool bVisible;
 		}
 		[CRepr]
 		public struct CONSOLE_SCREEN_BUFFER_INFO
@@ -233,7 +237,7 @@ namespace Win32
 			public SMALL_RECT srWindow;
 			public COORD dwMaximumWindowSize;
 			public uint16 wPopupAttributes;
-			public BOOL bFullscreenSupported;
+			public IntBool bFullscreenSupported;
 			public uint32[16] ColorTable;
 		}
 		[CRepr]
@@ -265,111 +269,111 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AllocConsole();
+		public static extern IntBool AllocConsole();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FreeConsole();
+		public static extern IntBool FreeConsole();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AttachConsole(uint32 dwProcessId);
+		public static extern IntBool AttachConsole(uint32 dwProcessId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleCP();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleOutputCP();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleMode(HANDLE hConsoleHandle, out CONSOLE_MODE lpMode);
+		public static extern IntBool GetConsoleMode(Handle hConsoleHandle, out CONSOLE_MODE lpMode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleMode(HANDLE hConsoleHandle, CONSOLE_MODE dwMode);
+		public static extern IntBool SetConsoleMode(Handle hConsoleHandle, CONSOLE_MODE dwMode);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumberOfConsoleInputEvents(HANDLE hConsoleInput, out uint32 lpNumberOfEvents);
+		public static extern IntBool GetNumberOfConsoleInputEvents(Handle hConsoleInput, out uint32 lpNumberOfEvents);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleInputA(HANDLE hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
+		public static extern IntBool ReadConsoleInputA(Handle hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleInputW(HANDLE hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
+		public static extern IntBool ReadConsoleInputW(Handle hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PeekConsoleInputA(HANDLE hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
+		public static extern IntBool PeekConsoleInputA(Handle hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PeekConsoleInputW(HANDLE hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
+		public static extern IntBool PeekConsoleInputW(Handle hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleA(HANDLE hConsoleInput, void* lpBuffer, uint32 nNumberOfCharsToRead, out uint32 lpNumberOfCharsRead, CONSOLE_READCONSOLE_CONTROL* pInputControl);
+		public static extern IntBool ReadConsoleA(Handle hConsoleInput, void* lpBuffer, uint32 nNumberOfCharsToRead, out uint32 lpNumberOfCharsRead, CONSOLE_READCONSOLE_CONTROL* pInputControl);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleW(HANDLE hConsoleInput, void* lpBuffer, uint32 nNumberOfCharsToRead, out uint32 lpNumberOfCharsRead, CONSOLE_READCONSOLE_CONTROL* pInputControl);
+		public static extern IntBool ReadConsoleW(Handle hConsoleInput, void* lpBuffer, uint32 nNumberOfCharsToRead, out uint32 lpNumberOfCharsRead, CONSOLE_READCONSOLE_CONTROL* pInputControl);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleA(HANDLE hConsoleOutput, void* lpBuffer, uint32 nNumberOfCharsToWrite, uint32* lpNumberOfCharsWritten, void* lpReserved);
+		public static extern IntBool WriteConsoleA(Handle hConsoleOutput, void* lpBuffer, uint32 nNumberOfCharsToWrite, uint32* lpNumberOfCharsWritten, void* lpReserved);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleW(HANDLE hConsoleOutput, void* lpBuffer, uint32 nNumberOfCharsToWrite, uint32* lpNumberOfCharsWritten, void* lpReserved);
+		public static extern IntBool WriteConsoleW(Handle hConsoleOutput, void* lpBuffer, uint32 nNumberOfCharsToWrite, uint32* lpNumberOfCharsWritten, void* lpReserved);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleCtrlHandler(PHANDLER_ROUTINE HandlerRoutine, BOOL Add);
+		public static extern IntBool SetConsoleCtrlHandler(PHANDLER_ROUTINE HandlerRoutine, IntBool Add);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreatePseudoConsole(COORD size, HANDLE hInput, HANDLE hOutput, uint32 dwFlags, out HPCON phPC);
+		public static extern HResult CreatePseudoConsole(COORD size, Handle hInput, Handle hOutput, uint32 dwFlags, out HPCON phPC);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ResizePseudoConsole(HPCON hPC, COORD size);
+		public static extern HResult ResizePseudoConsole(HPCON hPC, COORD size);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void ClosePseudoConsole(HPCON hPC);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FillConsoleOutputCharacterA(HANDLE hConsoleOutput, CHAR cCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
+		public static extern IntBool FillConsoleOutputCharacterA(Handle hConsoleOutput, char8 cCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FillConsoleOutputCharacterW(HANDLE hConsoleOutput, char16 cCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
+		public static extern IntBool FillConsoleOutputCharacterW(Handle hConsoleOutput, char16 cCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FillConsoleOutputAttribute(HANDLE hConsoleOutput, uint16 wAttribute, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfAttrsWritten);
+		public static extern IntBool FillConsoleOutputAttribute(Handle hConsoleOutput, uint16 wAttribute, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfAttrsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GenerateConsoleCtrlEvent(uint32 dwCtrlEvent, uint32 dwProcessGroupId);
+		public static extern IntBool GenerateConsoleCtrlEvent(uint32 dwCtrlEvent, uint32 dwProcessGroupId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateConsoleScreenBuffer(uint32 dwDesiredAccess, uint32 dwShareMode, SECURITY_ATTRIBUTES* lpSecurityAttributes, uint32 dwFlags, void* lpScreenBufferData);
+		public static extern Handle CreateConsoleScreenBuffer(uint32 dwDesiredAccess, uint32 dwShareMode, SecurityAttributes* lpSecurityAttributes, uint32 dwFlags, void* lpScreenBufferData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleActiveScreenBuffer(HANDLE hConsoleOutput);
+		public static extern IntBool SetConsoleActiveScreenBuffer(Handle hConsoleOutput);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FlushConsoleInputBuffer(HANDLE hConsoleInput);
+		public static extern IntBool FlushConsoleInputBuffer(Handle hConsoleInput);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleCP(uint32 wCodePageID);
+		public static extern IntBool SetConsoleCP(uint32 wCodePageID);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleOutputCP(uint32 wCodePageID);
+		public static extern IntBool SetConsoleOutputCP(uint32 wCodePageID);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleCursorInfo(HANDLE hConsoleOutput, out CONSOLE_CURSOR_INFO lpConsoleCursorInfo);
+		public static extern IntBool GetConsoleCursorInfo(Handle hConsoleOutput, out CONSOLE_CURSOR_INFO lpConsoleCursorInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleCursorInfo(HANDLE hConsoleOutput, in CONSOLE_CURSOR_INFO lpConsoleCursorInfo);
+		public static extern IntBool SetConsoleCursorInfo(Handle hConsoleOutput, in CONSOLE_CURSOR_INFO lpConsoleCursorInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleScreenBufferInfo(HANDLE hConsoleOutput, out CONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo);
+		public static extern IntBool GetConsoleScreenBufferInfo(Handle hConsoleOutput, out CONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleScreenBufferInfoEx(HANDLE hConsoleOutput, out CONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx);
+		public static extern IntBool GetConsoleScreenBufferInfoEx(Handle hConsoleOutput, out CONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleScreenBufferInfoEx(HANDLE hConsoleOutput, ref CONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx);
+		public static extern IntBool SetConsoleScreenBufferInfoEx(Handle hConsoleOutput, ref CONSOLE_SCREEN_BUFFER_INFOEX lpConsoleScreenBufferInfoEx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleScreenBufferSize(HANDLE hConsoleOutput, COORD dwSize);
+		public static extern IntBool SetConsoleScreenBufferSize(Handle hConsoleOutput, COORD dwSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleCursorPosition(HANDLE hConsoleOutput, COORD dwCursorPosition);
+		public static extern IntBool SetConsoleCursorPosition(Handle hConsoleOutput, COORD dwCursorPosition);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern COORD GetLargestConsoleWindowSize(HANDLE hConsoleOutput);
+		public static extern COORD GetLargestConsoleWindowSize(Handle hConsoleOutput);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleTextAttribute(HANDLE hConsoleOutput, uint16 wAttributes);
+		public static extern IntBool SetConsoleTextAttribute(Handle hConsoleOutput, uint16 wAttributes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleWindowInfo(HANDLE hConsoleOutput, BOOL bAbsolute, in SMALL_RECT lpConsoleWindow);
+		public static extern IntBool SetConsoleWindowInfo(Handle hConsoleOutput, IntBool bAbsolute, in SMALL_RECT lpConsoleWindow);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleOutputCharacterA(HANDLE hConsoleOutput, uint8* lpCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
+		public static extern IntBool WriteConsoleOutputCharacterA(Handle hConsoleOutput, uint8* lpCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleOutputCharacterW(HANDLE hConsoleOutput, char16* lpCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
+		public static extern IntBool WriteConsoleOutputCharacterW(Handle hConsoleOutput, char16* lpCharacter, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfCharsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleOutputAttribute(HANDLE hConsoleOutput, uint16* lpAttribute, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfAttrsWritten);
+		public static extern IntBool WriteConsoleOutputAttribute(Handle hConsoleOutput, uint16* lpAttribute, uint32 nLength, COORD dwWriteCoord, out uint32 lpNumberOfAttrsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleOutputCharacterA(HANDLE hConsoleOutput, uint8* lpCharacter, uint32 nLength, COORD dwReadCoord, out uint32 lpNumberOfCharsRead);
+		public static extern IntBool ReadConsoleOutputCharacterA(Handle hConsoleOutput, uint8* lpCharacter, uint32 nLength, COORD dwReadCoord, out uint32 lpNumberOfCharsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleOutputCharacterW(HANDLE hConsoleOutput, char16* lpCharacter, uint32 nLength, COORD dwReadCoord, out uint32 lpNumberOfCharsRead);
+		public static extern IntBool ReadConsoleOutputCharacterW(Handle hConsoleOutput, char16* lpCharacter, uint32 nLength, COORD dwReadCoord, out uint32 lpNumberOfCharsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleOutputAttribute(HANDLE hConsoleOutput, uint16* lpAttribute, uint32 nLength, COORD dwReadCoord, out uint32 lpNumberOfAttrsRead);
+		public static extern IntBool ReadConsoleOutputAttribute(Handle hConsoleOutput, uint16* lpAttribute, uint32 nLength, COORD dwReadCoord, out uint32 lpNumberOfAttrsRead);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleInputA(HANDLE hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsWritten);
+		public static extern IntBool WriteConsoleInputA(Handle hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleInputW(HANDLE hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsWritten);
+		public static extern IntBool WriteConsoleInputW(Handle hConsoleInput, INPUT_RECORD* lpBuffer, uint32 nLength, out uint32 lpNumberOfEventsWritten);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ScrollConsoleScreenBufferA(HANDLE hConsoleOutput, in SMALL_RECT lpScrollRectangle, SMALL_RECT* lpClipRectangle, COORD dwDestinationOrigin, in CHAR_INFO lpFill);
+		public static extern IntBool ScrollConsoleScreenBufferA(Handle hConsoleOutput, in SMALL_RECT lpScrollRectangle, SMALL_RECT* lpClipRectangle, COORD dwDestinationOrigin, in CHAR_INFO lpFill);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ScrollConsoleScreenBufferW(HANDLE hConsoleOutput, in SMALL_RECT lpScrollRectangle, SMALL_RECT* lpClipRectangle, COORD dwDestinationOrigin, in CHAR_INFO lpFill);
+		public static extern IntBool ScrollConsoleScreenBufferW(Handle hConsoleOutput, in SMALL_RECT lpScrollRectangle, SMALL_RECT* lpClipRectangle, COORD dwDestinationOrigin, in CHAR_INFO lpFill);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleOutputA(HANDLE hConsoleOutput, in CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpWriteRegion);
+		public static extern IntBool WriteConsoleOutputA(Handle hConsoleOutput, in CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpWriteRegion);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteConsoleOutputW(HANDLE hConsoleOutput, in CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpWriteRegion);
+		public static extern IntBool WriteConsoleOutputW(Handle hConsoleOutput, in CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpWriteRegion);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleOutputA(HANDLE hConsoleOutput, out CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpReadRegion);
+		public static extern IntBool ReadConsoleOutputA(Handle hConsoleOutput, out CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpReadRegion);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReadConsoleOutputW(HANDLE hConsoleOutput, out CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpReadRegion);
+		public static extern IntBool ReadConsoleOutputW(Handle hConsoleOutput, out CHAR_INFO lpBuffer, COORD dwBufferSize, COORD dwBufferCoord, out SMALL_RECT lpReadRegion);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleTitleA(uint8* lpConsoleTitle, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -379,78 +383,78 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleOriginalTitleW(char16* lpConsoleTitle, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleTitleA(PSTR lpConsoleTitle);
+		public static extern IntBool SetConsoleTitleA(char8* lpConsoleTitle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleTitleW(PWSTR lpConsoleTitle);
+		public static extern IntBool SetConsoleTitleW(char16* lpConsoleTitle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetNumberOfConsoleMouseButtons(out uint32 lpNumberOfMouseButtons);
+		public static extern IntBool GetNumberOfConsoleMouseButtons(out uint32 lpNumberOfMouseButtons);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern COORD GetConsoleFontSize(HANDLE hConsoleOutput, uint32 nFont);
+		public static extern COORD GetConsoleFontSize(Handle hConsoleOutput, uint32 nFont);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCurrentConsoleFont(HANDLE hConsoleOutput, BOOL bMaximumWindow, out CONSOLE_FONT_INFO lpConsoleCurrentFont);
+		public static extern IntBool GetCurrentConsoleFont(Handle hConsoleOutput, IntBool bMaximumWindow, out CONSOLE_FONT_INFO lpConsoleCurrentFont);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCurrentConsoleFontEx(HANDLE hConsoleOutput, BOOL bMaximumWindow, out CONSOLE_FONT_INFOEX lpConsoleCurrentFontEx);
+		public static extern IntBool GetCurrentConsoleFontEx(Handle hConsoleOutput, IntBool bMaximumWindow, out CONSOLE_FONT_INFOEX lpConsoleCurrentFontEx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetCurrentConsoleFontEx(HANDLE hConsoleOutput, BOOL bMaximumWindow, ref CONSOLE_FONT_INFOEX lpConsoleCurrentFontEx);
+		public static extern IntBool SetCurrentConsoleFontEx(Handle hConsoleOutput, IntBool bMaximumWindow, ref CONSOLE_FONT_INFOEX lpConsoleCurrentFontEx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleSelectionInfo(out CONSOLE_SELECTION_INFO lpConsoleSelectionInfo);
+		public static extern IntBool GetConsoleSelectionInfo(out CONSOLE_SELECTION_INFO lpConsoleSelectionInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleHistoryInfo(out CONSOLE_HISTORY_INFO lpConsoleHistoryInfo);
+		public static extern IntBool GetConsoleHistoryInfo(out CONSOLE_HISTORY_INFO lpConsoleHistoryInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleHistoryInfo(ref CONSOLE_HISTORY_INFO lpConsoleHistoryInfo);
+		public static extern IntBool SetConsoleHistoryInfo(ref CONSOLE_HISTORY_INFO lpConsoleHistoryInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetConsoleDisplayMode(out uint32 lpModeFlags);
+		public static extern IntBool GetConsoleDisplayMode(out uint32 lpModeFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleDisplayMode(HANDLE hConsoleOutput, uint32 dwFlags, COORD* lpNewScreenBufferDimensions);
+		public static extern IntBool SetConsoleDisplayMode(Handle hConsoleOutput, uint32 dwFlags, COORD* lpNewScreenBufferDimensions);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWND GetConsoleWindow();
+		public static extern HWnd GetConsoleWindow();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AddConsoleAliasA(PSTR Source, PSTR Target, PSTR ExeName);
+		public static extern IntBool AddConsoleAliasA(char8* Source, char8* Target, char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AddConsoleAliasW(PWSTR Source, PWSTR Target, PWSTR ExeName);
+		public static extern IntBool AddConsoleAliasW(char16* Source, char16* Target, char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleAliasA(PSTR Source, uint8* TargetBuffer, uint32 TargetBufferLength, PSTR ExeName);
+		public static extern uint32 GetConsoleAliasA(char8* Source, uint8* TargetBuffer, uint32 TargetBufferLength, char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleAliasW(PWSTR Source, char16* TargetBuffer, uint32 TargetBufferLength, PWSTR ExeName);
+		public static extern uint32 GetConsoleAliasW(char16* Source, char16* TargetBuffer, uint32 TargetBufferLength, char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleAliasesLengthA(PSTR ExeName);
+		public static extern uint32 GetConsoleAliasesLengthA(char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleAliasesLengthW(PWSTR ExeName);
+		public static extern uint32 GetConsoleAliasesLengthW(char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleAliasExesLengthA();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleAliasExesLengthW();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleAliasesA(uint8* AliasBuffer, uint32 AliasBufferLength, PSTR ExeName);
+		public static extern uint32 GetConsoleAliasesA(uint8* AliasBuffer, uint32 AliasBufferLength, char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleAliasesW(char16* AliasBuffer, uint32 AliasBufferLength, PWSTR ExeName);
+		public static extern uint32 GetConsoleAliasesW(char16* AliasBuffer, uint32 AliasBufferLength, char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleAliasExesA(uint8* ExeNameBuffer, uint32 ExeNameBufferLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleAliasExesW(char16* ExeNameBuffer, uint32 ExeNameBufferLength);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ExpungeConsoleCommandHistoryA(PSTR ExeName);
+		public static extern void ExpungeConsoleCommandHistoryA(char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ExpungeConsoleCommandHistoryW(PWSTR ExeName);
+		public static extern void ExpungeConsoleCommandHistoryW(char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleNumberOfCommandsA(uint32 Number, PSTR ExeName);
+		public static extern IntBool SetConsoleNumberOfCommandsA(uint32 Number, char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetConsoleNumberOfCommandsW(uint32 Number, PWSTR ExeName);
+		public static extern IntBool SetConsoleNumberOfCommandsW(uint32 Number, char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleCommandHistoryLengthA(PSTR ExeName);
+		public static extern uint32 GetConsoleCommandHistoryLengthA(char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleCommandHistoryLengthW(PWSTR ExeName);
+		public static extern uint32 GetConsoleCommandHistoryLengthW(char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleCommandHistoryA(PSTR Commands, uint32 CommandBufferLength, PSTR ExeName);
+		public static extern uint32 GetConsoleCommandHistoryA(char8* Commands, uint32 CommandBufferLength, char8* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetConsoleCommandHistoryW(PWSTR Commands, uint32 CommandBufferLength, PWSTR ExeName);
+		public static extern uint32 GetConsoleCommandHistoryW(char16* Commands, uint32 CommandBufferLength, char16* ExeName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetConsoleProcessList(uint32* lpdwProcessList, uint32 dwProcessCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE GetStdHandle(STD_HANDLE nStdHandle);
+		public static extern Handle GetStdHandle(STD_HANDLE nStdHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetStdHandle(STD_HANDLE nStdHandle, HANDLE hHandle);
+		public static extern IntBool SetStdHandle(STD_HANDLE nStdHandle, Handle hHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetStdHandleEx(STD_HANDLE nStdHandle, HANDLE hHandle, HANDLE* phPrevValue);
+		public static extern IntBool SetStdHandleEx(STD_HANDLE nStdHandle, Handle hHandle, Handle* phPrevValue);
 	}
 }

@@ -51,12 +51,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMode(out uint32 fileAccessMode) mut => VT.GetMode(ref this, out fileAccessMode);
+			public HResult GetMode(out uint32 fileAccessMode) mut => VT.GetMode(ref this, out fileAccessMode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRandomAccessStreamFileAccessMode self, out uint32 fileAccessMode) GetMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRandomAccessStreamFileAccessMode self, out uint32 fileAccessMode) GetMode;
 			}
 		}
 		[CRepr]
@@ -66,12 +66,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnBrokenCallback() mut => VT.OnBrokenCallback(ref this);
+			public HResult OnBrokenCallback() mut => VT.OnBrokenCallback(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUnbufferedFileHandleOplockCallback self) OnBrokenCallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUnbufferedFileHandleOplockCallback self) OnBrokenCallback;
 			}
 		}
 		[CRepr]
@@ -81,14 +81,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OpenUnbufferedFileHandle(ref IUnbufferedFileHandleOplockCallback oplockBreakCallback, out uint fileHandle) mut => VT.OpenUnbufferedFileHandle(ref this, ref oplockBreakCallback, out fileHandle);
-			public HRESULT CloseUnbufferedFileHandle() mut => VT.CloseUnbufferedFileHandle(ref this);
+			public HResult OpenUnbufferedFileHandle(ref IUnbufferedFileHandleOplockCallback oplockBreakCallback, out uint fileHandle) mut => VT.OpenUnbufferedFileHandle(ref this, ref oplockBreakCallback, out fileHandle);
+			public HResult CloseUnbufferedFileHandle() mut => VT.CloseUnbufferedFileHandle(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUnbufferedFileHandleProvider self, ref IUnbufferedFileHandleOplockCallback oplockBreakCallback, out uint fileHandle) OpenUnbufferedFileHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IUnbufferedFileHandleProvider self) CloseUnbufferedFileHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUnbufferedFileHandleProvider self, ref IUnbufferedFileHandleOplockCallback oplockBreakCallback, out uint fileHandle) OpenUnbufferedFileHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUnbufferedFileHandleProvider self) CloseUnbufferedFileHandle;
 			}
 		}
 		[CRepr]
@@ -98,12 +98,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OplockBreaking() mut => VT.OplockBreaking(ref this);
+			public HResult OplockBreaking() mut => VT.OplockBreaking(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IOplockBreakingHandler self) OplockBreaking;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IOplockBreakingHandler self) OplockBreaking;
 			}
 		}
 		[CRepr]
@@ -113,12 +113,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Create(HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, HANDLE* interopHandle) mut => VT.Create(ref this, accessOptions, sharingOptions, options, oplockBreakingHandler, interopHandle);
+			public HResult Create(HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, Handle* interopHandle) mut => VT.Create(ref this, accessOptions, sharingOptions, options, oplockBreakingHandler, interopHandle);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStorageItemHandleAccess self, HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, HANDLE* interopHandle) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStorageItemHandleAccess self, HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, Handle* interopHandle) Create;
 			}
 		}
 		[CRepr]
@@ -128,12 +128,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Create(PWSTR fileName, HANDLE_CREATION_OPTIONS creationOptions, HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, HANDLE* interopHandle) mut => VT.Create(ref this, fileName, creationOptions, accessOptions, sharingOptions, options, oplockBreakingHandler, interopHandle);
+			public HResult Create(char16* fileName, HANDLE_CREATION_OPTIONS creationOptions, HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, Handle* interopHandle) mut => VT.Create(ref this, fileName, creationOptions, accessOptions, sharingOptions, options, oplockBreakingHandler, interopHandle);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IStorageFolderHandleAccess self, PWSTR fileName, HANDLE_CREATION_OPTIONS creationOptions, HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, HANDLE* interopHandle) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IStorageFolderHandleAccess self, char16* fileName, HANDLE_CREATION_OPTIONS creationOptions, HANDLE_ACCESS_OPTIONS accessOptions, HANDLE_SHARING_OPTIONS sharingOptions, HANDLE_OPTIONS options, IOplockBreakingHandler* oplockBreakingHandler, Handle* interopHandle) Create;
 			}
 		}
 		

@@ -14,14 +14,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateSharedHandle(ref IInspectable pObject, in SECURITY_ATTRIBUTES pSecurityAttributes, uint32 Access, HSTRING Name, out HANDLE pHandle) mut => VT.CreateSharedHandle(ref this, ref pObject, pSecurityAttributes, Access, Name, out pHandle);
-			public HRESULT OpenSharedHandle(HANDLE NTHandle, Guid riid, void** ppvObj) mut => VT.OpenSharedHandle(ref this, NTHandle, riid, ppvObj);
+			public HResult CreateSharedHandle(ref IInspectable pObject, in SECURITY_ATTRIBUTES pSecurityAttributes, uint32 Access, HSTRING Name, out Handle pHandle) mut => VT.CreateSharedHandle(ref this, ref pObject, pSecurityAttributes, Access, Name, out pHandle);
+			public HResult OpenSharedHandle(Handle NTHandle, Guid riid, void** ppvObj) mut => VT.OpenSharedHandle(ref this, NTHandle, riid, ppvObj);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDisplayDeviceInterop self, ref IInspectable pObject, in SECURITY_ATTRIBUTES pSecurityAttributes, uint32 Access, HSTRING Name, out HANDLE pHandle) CreateSharedHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDisplayDeviceInterop self, HANDLE NTHandle, Guid riid, void** ppvObj) OpenSharedHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDisplayDeviceInterop self, ref IInspectable pObject, in SECURITY_ATTRIBUTES pSecurityAttributes, uint32 Access, HSTRING Name, out Handle pHandle) CreateSharedHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDisplayDeviceInterop self, Handle NTHandle, Guid riid, void** ppvObj) OpenSharedHandle;
 			}
 		}
 		[CRepr]
@@ -31,14 +31,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateSourcePresentationHandle(out HANDLE pValue) mut => VT.CreateSourcePresentationHandle(ref this, out pValue);
-			public HRESULT GetSourceId(out uint32 pSourceId) mut => VT.GetSourceId(ref this, out pSourceId);
+			public HResult CreateSourcePresentationHandle(out Handle pValue) mut => VT.CreateSourcePresentationHandle(ref this, out pValue);
+			public HResult GetSourceId(out uint32 pSourceId) mut => VT.GetSourceId(ref this, out pSourceId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDisplayPathInterop self, out HANDLE pValue) CreateSourcePresentationHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDisplayPathInterop self, out uint32 pSourceId) GetSourceId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDisplayPathInterop self, out Handle pValue) CreateSourcePresentationHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDisplayPathInterop self, out uint32 pSourceId) GetSourceId;
 			}
 		}
 		

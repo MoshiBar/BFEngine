@@ -2,17 +2,16 @@ using BfEngine;
 using System;
 using BfEngine.UI;
 using System.Diagnostics;
-using Windows;
 using System.Collections;
 #if IMGUI_ENABLE
 using ImGui;
 #endif //IMGUI_ENABLE
 using BfEngine.Text;
+using static Win32.Graphics.Gdi;
+using static Win32.UI.WindowsAndMessaging;
+using static Win32.Graphics.OpenGL;
+using static Win32.Win32;
 using static System.Windows;
-using static Windows.GDI32;
-using static Windows.OpenGL32;
-using static Windows.User32;
-using static Windows.Kernel32;
 
 
 namespace BfEngine
@@ -31,7 +30,7 @@ namespace BfEngine
 
 		static HDC hdc;
 		public static HWnd hwnd;
-		static HINSTANCE hInstance;
+		static HInstance hInstance;
 
 		public static HCURSOR handcursor, pointer, ibeam;
 		public static HCURSOR currentCursor;
@@ -43,7 +42,7 @@ namespace BfEngine
 #endif //IMGUI_ENABLE
 
 		[CallingConvention(.Stdcall)]
-		static int testWndProc(HWnd hwnd, WndProcMessage uMsg, int wParam, int lParam){
+		static int testWndProc(HWnd hwnd, WndProcMessage uMsg, uint wParam, int lParam){
 			switch(uMsg){
 			case .Size:{
 #unwarn
@@ -81,12 +80,13 @@ namespace BfEngine
 			case .NCHitTest: {
 				var result = (HitTestResult)DefWindowProcA(hwnd, uMsg, wParam, lParam);
 				Input.cursorInBounds = ((HitTestResult)result & (.)int16.MaxValue) == .Client;//cursor is only considered in bounds if it is inside the client area(inner area)
-				
+				if(Input.cursorInBounds) SetCursor(pointer);
 				return (.)result;
 			}
 			case .SetCursor: {
-				if(((HitTestResult)(int)lParam & (.)int16.MaxValue) == .Client){
-					User32.SetCursor(currentCursor);
+				HitTestResult testResult = (.)lParam;
+				if((testResult & (.)int16.MaxValue) == .Client){
+					SetCursor(currentCursor);
 				}
 				break;
 			}
@@ -128,6 +128,7 @@ namespace BfEngine
 
 		public static void SetCursor(HCURSOR cursor){
 			currentCursor = cursor;
+			Win32.UI.WindowsAndMessaging.SetCursor(cursor);
 		}
 
 		public static void SetDefaultBlendFunc(){
@@ -143,11 +144,11 @@ namespace BfEngine
 			// Register the window class.
 			char8* CLASS_NAME  = "wclass";
 
-			hInstance = GetModuleHandleA(null);
+			hInstance = (.)GetModuleHandleA(null);
 
-			handcursor = LoadCursorA(null, IDC_HAND);
-			pointer = LoadCursorA(null, IDC_ARROW);
-			ibeam = LoadCursorA(null, IDC_IBEAM);
+			handcursor = LoadCursorA(0, (.)IDC_HAND);
+			pointer = LoadCursorA(0, (.)IDC_ARROW);
+			ibeam = LoadCursorA(0, (.)IDC_IBEAM);
 
 			//defaults to arrow pointer
 			currentCursor = pointer;
@@ -157,18 +158,18 @@ namespace BfEngine
 			wc.cbSize = sizeof(WNDCLASSEXA);
 			wc.cbClsExtra = 0;
 			wc.cbWndExtra = 0;
-			wc.hCursor = null;//pointer;
-			wc.hIcon = LoadIconA(null, IDI_WINLOGO);
-			wc.hIconSm = null;
+			wc.hCursor = 0;
+			wc.hIcon = LoadIconA(0, (.)IDI_WINLOGO);
+			wc.hIconSm = 0;
 			wc.lpszMenuName = null;
-			wc.style = .OwnDC | .HRedraw | .VRedraw;
-			wc.hbrBackground = null;
+			wc.style = .OwnDeviceContext | .HRedraw | .VRedraw;
+			wc.hbrBackground = 0;
 
 			wc.lpfnWndProc   = => testWndProc;
 			wc.hInstance     = hInstance;
 			wc.lpszClassName = CLASS_NAME;
 
-			RegisterClassExA(&wc);
+			RegisterClassExA(wc);
 
 			//creates window for false opengl context
 			hwnd = CreateWindowExA(
@@ -178,7 +179,7 @@ namespace BfEngine
 			    default,            // Window style
 			    0, 0, 0, 0, // Size and position
 			    0,       // Parent window    
-			    null,       // Menu
+			    0,       // Menu
 			    hInstance,  // Instance handle
 			    null        // Additional application data
 			    );
@@ -207,21 +208,21 @@ namespace BfEngine
 				);
 			hdc = GetDC(hwnd);
 
-			var current = wglMakeCurrent(hdc, null);
+			var current = wglMakeCurrent(hdc, 0);
 
-			int32 iPixelformat = ChoosePixelFormat(hdc, &pfd);
-			/*var result =*/ SetPixelFormat(hdc, iPixelformat, &pfd);
+			int32 iPixelformat = ChoosePixelFormat(hdc, pfd);
+			/*var result =*/ SetPixelFormat(hdc, iPixelformat, pfd);
 			var context1 = wglCreateContext(hdc);
 			current = wglMakeCurrent(hdc, context1);
 			//var ctx = wglGetCurrentContext();
 
-			WGL.Init( => OpenGL32.wglGetProcAddress);
+			WGL.Init( => wglGetProcAddress);
 
 			int32 nPixelFormat2 = default;
 
-			BOOL bValidPixFormat;
-			UINT nMaxFormats = 1;
-			UINT nNumFormats;
+			IntBool bValidPixFormat;
+			uint32 nMaxFormats = 1;
+			uint32 nNumFormats;
 			float[?] pfAttribFList = .( 0, 0 );
 			WGL.ARBEnum[?] piAttribIList = .( 
 			    .DrawToWindow, .True,
@@ -258,7 +259,7 @@ namespace BfEngine
 			    0, 0, 600, 400,
 
 			    0,       // Parent window    
-			    null,       // Menu
+			    0,       // Menu
 			    hInstance,  // Instance handle
 			    null        // Additional application data
 			    );
@@ -271,21 +272,21 @@ namespace BfEngine
 			/*var showwindow =*/ ShowWindow(hwnd, .Normal);
 			hdc = GetDC(hwnd);
 
-			SetPixelFormat(hdc, nPixelFormat2, &pfd);
+			SetPixelFormat(hdc, nPixelFormat2, pfd);
 
 
 			var mGLRenderContext = wglCreateContext(hdc);
 
-			wglMakeCurrent(hdc, null);
+			wglMakeCurrent(hdc, 0);
 			wglDeleteContext(context1);
 			wglMakeCurrent(hdc, mGLRenderContext);
 			
 
 			
 			GL.Init((_) => {
-					var addr = OpenGL32.wglGetProcAddress(_);
+					var addr = wglGetProcAddress(_);
 					if(addr == null) {
-						addr = GetProcAddress(LoadLibraryA("opengl32.dll"), _);
+						addr = (.)GetProcAddress(LoadLibraryA("opengl32.dll"), _);
 						//var error = Win32.GetLastError();
 						//Debug.Break();
 					}
@@ -339,7 +340,7 @@ namespace BfEngine
 
 			GL.Clear(.COLOR_BUFFER_BIT);
 
-			User32.SetCursor(pointer);
+			SetCursor(pointer);
 
 #if IMGUI_ENABLE
 			imctx = ImGui.CreateContext();
@@ -432,7 +433,7 @@ namespace BfEngine
 
 			Input.cursorInBounds &= WindowFromPoint(GetCursorPos()) == hwnd;//cursor is considered out of bounds if the mouse is over another window that is obscuring it
 			
-			Windows.GDI32.SwapBuffers(hdc);
+			SwapBuffers(hdc);
 		}
 
 		public static void LateUpdate()

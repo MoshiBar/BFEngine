@@ -1846,22 +1846,22 @@ namespace Win32
 		public const uint32 REPL_STATE_NO_MASTER = 1;
 		public const uint32 REPL_STATE_NO_SYNC = 2;
 		public const uint32 REPL_STATE_NEVER_REPLICATED = 3;
-		public const HRESULT NETCFG_E_ALREADY_INITIALIZED = -2147180512;
-		public const HRESULT NETCFG_E_NOT_INITIALIZED = -2147180511;
-		public const HRESULT NETCFG_E_IN_USE = -2147180510;
-		public const HRESULT NETCFG_E_NO_WRITE_LOCK = -2147180508;
-		public const HRESULT NETCFG_E_NEED_REBOOT = -2147180507;
-		public const HRESULT NETCFG_E_ACTIVE_RAS_CONNECTIONS = -2147180506;
-		public const HRESULT NETCFG_E_ADAPTER_NOT_FOUND = -2147180505;
-		public const HRESULT NETCFG_E_COMPONENT_REMOVED_PENDING_REBOOT = -2147180504;
-		public const HRESULT NETCFG_E_MAX_FILTER_LIMIT = -2147180503;
-		public const HRESULT NETCFG_E_VMSWITCH_ACTIVE_OVER_ADAPTER = -2147180502;
-		public const HRESULT NETCFG_E_DUPLICATE_INSTANCEID = -2147180501;
-		public const HRESULT NETCFG_S_REBOOT = 303136;
-		public const HRESULT NETCFG_S_DISABLE_QUERY = 303138;
-		public const HRESULT NETCFG_S_STILL_REFERENCED = 303139;
-		public const HRESULT NETCFG_S_CAUSED_SETUP_CHANGE = 303140;
-		public const HRESULT NETCFG_S_COMMIT_NOW = 303141;
+		public const HResult NETCFG_E_ALREADY_INITIALIZED = -2147180512;
+		public const HResult NETCFG_E_NOT_INITIALIZED = -2147180511;
+		public const HResult NETCFG_E_IN_USE = -2147180510;
+		public const HResult NETCFG_E_NO_WRITE_LOCK = -2147180508;
+		public const HResult NETCFG_E_NEED_REBOOT = -2147180507;
+		public const HResult NETCFG_E_ACTIVE_RAS_CONNECTIONS = -2147180506;
+		public const HResult NETCFG_E_ADAPTER_NOT_FOUND = -2147180505;
+		public const HResult NETCFG_E_COMPONENT_REMOVED_PENDING_REBOOT = -2147180504;
+		public const HResult NETCFG_E_MAX_FILTER_LIMIT = -2147180503;
+		public const HResult NETCFG_E_VMSWITCH_ACTIVE_OVER_ADAPTER = -2147180502;
+		public const HResult NETCFG_E_DUPLICATE_INSTANCEID = -2147180501;
+		public const HResult NETCFG_S_REBOOT = 303136;
+		public const HResult NETCFG_S_DISABLE_QUERY = 303138;
+		public const HResult NETCFG_S_STILL_REFERENCED = 303139;
+		public const HResult NETCFG_S_CAUSED_SETUP_CHANGE = 303140;
+		public const HResult NETCFG_S_COMMIT_NOW = 303141;
 		public const uint32 WZC_PROFILE_SUCCESS = 0;
 		public const uint32 WZC_PROFILE_XML_ERROR_NO_VERSION = 1;
 		public const uint32 WZC_PROFILE_XML_ERROR_BAD_VERSION = 2;
@@ -2281,36 +2281,36 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_0
 		{
-			public PWSTR usri0_name;
+			public char16* usri0_name;
 		}
 		[CRepr]
 		public struct USER_INFO_1
 		{
-			public PWSTR usri1_name;
-			public PWSTR usri1_password;
+			public char16* usri1_name;
+			public char16* usri1_password;
 			public uint32 usri1_password_age;
 			public USER_PRIV usri1_priv;
-			public PWSTR usri1_home_dir;
-			public PWSTR usri1_comment;
+			public char16* usri1_home_dir;
+			public char16* usri1_comment;
 			public USER_ACCOUNT_FLAGS usri1_flags;
-			public PWSTR usri1_script_path;
+			public char16* usri1_script_path;
 		}
 		[CRepr]
 		public struct USER_INFO_2
 		{
-			public PWSTR usri2_name;
-			public PWSTR usri2_password;
+			public char16* usri2_name;
+			public char16* usri2_password;
 			public uint32 usri2_password_age;
 			public USER_PRIV usri2_priv;
-			public PWSTR usri2_home_dir;
-			public PWSTR usri2_comment;
+			public char16* usri2_home_dir;
+			public char16* usri2_comment;
 			public USER_ACCOUNT_FLAGS usri2_flags;
-			public PWSTR usri2_script_path;
+			public char16* usri2_script_path;
 			public AF_OP usri2_auth_flags;
-			public PWSTR usri2_full_name;
-			public PWSTR usri2_usr_comment;
-			public PWSTR usri2_parms;
-			public PWSTR usri2_workstations;
+			public char16* usri2_full_name;
+			public char16* usri2_usr_comment;
+			public char16* usri2_parms;
+			public char16* usri2_workstations;
 			public uint32 usri2_last_logon;
 			public uint32 usri2_last_logoff;
 			public uint32 usri2_acct_expires;
@@ -2319,26 +2319,26 @@ namespace Win32
 			public uint8* usri2_logon_hours;
 			public uint32 usri2_bad_pw_count;
 			public uint32 usri2_num_logons;
-			public PWSTR usri2_logon_server;
+			public char16* usri2_logon_server;
 			public uint32 usri2_country_code;
 			public uint32 usri2_code_page;
 		}
 		[CRepr]
 		public struct USER_INFO_3
 		{
-			public PWSTR usri3_name;
-			public PWSTR usri3_password;
+			public char16* usri3_name;
+			public char16* usri3_password;
 			public uint32 usri3_password_age;
 			public USER_PRIV usri3_priv;
-			public PWSTR usri3_home_dir;
-			public PWSTR usri3_comment;
+			public char16* usri3_home_dir;
+			public char16* usri3_comment;
 			public USER_ACCOUNT_FLAGS usri3_flags;
-			public PWSTR usri3_script_path;
+			public char16* usri3_script_path;
 			public AF_OP usri3_auth_flags;
-			public PWSTR usri3_full_name;
-			public PWSTR usri3_usr_comment;
-			public PWSTR usri3_parms;
-			public PWSTR usri3_workstations;
+			public char16* usri3_full_name;
+			public char16* usri3_usr_comment;
+			public char16* usri3_parms;
+			public char16* usri3_workstations;
 			public uint32 usri3_last_logon;
 			public uint32 usri3_last_logoff;
 			public uint32 usri3_acct_expires;
@@ -2347,31 +2347,31 @@ namespace Win32
 			public uint8* usri3_logon_hours;
 			public uint32 usri3_bad_pw_count;
 			public uint32 usri3_num_logons;
-			public PWSTR usri3_logon_server;
+			public char16* usri3_logon_server;
 			public uint32 usri3_country_code;
 			public uint32 usri3_code_page;
 			public uint32 usri3_user_id;
 			public uint32 usri3_primary_group_id;
-			public PWSTR usri3_profile;
-			public PWSTR usri3_home_dir_drive;
+			public char16* usri3_profile;
+			public char16* usri3_home_dir_drive;
 			public uint32 usri3_password_expired;
 		}
 		[CRepr]
 		public struct USER_INFO_4
 		{
-			public PWSTR usri4_name;
-			public PWSTR usri4_password;
+			public char16* usri4_name;
+			public char16* usri4_password;
 			public uint32 usri4_password_age;
 			public USER_PRIV usri4_priv;
-			public PWSTR usri4_home_dir;
-			public PWSTR usri4_comment;
+			public char16* usri4_home_dir;
+			public char16* usri4_comment;
 			public USER_ACCOUNT_FLAGS usri4_flags;
-			public PWSTR usri4_script_path;
+			public char16* usri4_script_path;
 			public AF_OP usri4_auth_flags;
-			public PWSTR usri4_full_name;
-			public PWSTR usri4_usr_comment;
-			public PWSTR usri4_parms;
-			public PWSTR usri4_workstations;
+			public char16* usri4_full_name;
+			public char16* usri4_usr_comment;
+			public char16* usri4_parms;
+			public char16* usri4_workstations;
 			public uint32 usri4_last_logon;
 			public uint32 usri4_last_logoff;
 			public uint32 usri4_acct_expires;
@@ -2380,42 +2380,42 @@ namespace Win32
 			public uint8* usri4_logon_hours;
 			public uint32 usri4_bad_pw_count;
 			public uint32 usri4_num_logons;
-			public PWSTR usri4_logon_server;
+			public char16* usri4_logon_server;
 			public uint32 usri4_country_code;
 			public uint32 usri4_code_page;
 			public PSID usri4_user_sid;
 			public uint32 usri4_primary_group_id;
-			public PWSTR usri4_profile;
-			public PWSTR usri4_home_dir_drive;
+			public char16* usri4_profile;
+			public char16* usri4_home_dir_drive;
 			public uint32 usri4_password_expired;
 		}
 		[CRepr]
 		public struct USER_INFO_10
 		{
-			public PWSTR usri10_name;
-			public PWSTR usri10_comment;
-			public PWSTR usri10_usr_comment;
-			public PWSTR usri10_full_name;
+			public char16* usri10_name;
+			public char16* usri10_comment;
+			public char16* usri10_usr_comment;
+			public char16* usri10_full_name;
 		}
 		[CRepr]
 		public struct USER_INFO_11
 		{
-			public PWSTR usri11_name;
-			public PWSTR usri11_comment;
-			public PWSTR usri11_usr_comment;
-			public PWSTR usri11_full_name;
+			public char16* usri11_name;
+			public char16* usri11_comment;
+			public char16* usri11_usr_comment;
+			public char16* usri11_full_name;
 			public USER_PRIV usri11_priv;
 			public AF_OP usri11_auth_flags;
 			public uint32 usri11_password_age;
-			public PWSTR usri11_home_dir;
-			public PWSTR usri11_parms;
+			public char16* usri11_home_dir;
+			public char16* usri11_parms;
 			public uint32 usri11_last_logon;
 			public uint32 usri11_last_logoff;
 			public uint32 usri11_bad_pw_count;
 			public uint32 usri11_num_logons;
-			public PWSTR usri11_logon_server;
+			public char16* usri11_logon_server;
 			public uint32 usri11_country_code;
-			public PWSTR usri11_workstations;
+			public char16* usri11_workstations;
 			public uint32 usri11_max_storage;
 			public uint32 usri11_units_per_week;
 			public uint8* usri11_logon_hours;
@@ -2424,9 +2424,9 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_20
 		{
-			public PWSTR usri20_name;
-			public PWSTR usri20_full_name;
-			public PWSTR usri20_comment;
+			public char16* usri20_name;
+			public char16* usri20_full_name;
+			public char16* usri20_comment;
 			public USER_ACCOUNT_FLAGS usri20_flags;
 			public uint32 usri20_user_id;
 		}
@@ -2438,19 +2438,19 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_22
 		{
-			public PWSTR usri22_name;
+			public char16* usri22_name;
 			public uint8[16] usri22_password;
 			public uint32 usri22_password_age;
 			public USER_PRIV usri22_priv;
-			public PWSTR usri22_home_dir;
-			public PWSTR usri22_comment;
+			public char16* usri22_home_dir;
+			public char16* usri22_comment;
 			public USER_ACCOUNT_FLAGS usri22_flags;
-			public PWSTR usri22_script_path;
+			public char16* usri22_script_path;
 			public AF_OP usri22_auth_flags;
-			public PWSTR usri22_full_name;
-			public PWSTR usri22_usr_comment;
-			public PWSTR usri22_parms;
-			public PWSTR usri22_workstations;
+			public char16* usri22_full_name;
+			public char16* usri22_usr_comment;
+			public char16* usri22_parms;
+			public char16* usri22_workstations;
 			public uint32 usri22_last_logon;
 			public uint32 usri22_last_logoff;
 			public uint32 usri22_acct_expires;
@@ -2459,32 +2459,32 @@ namespace Win32
 			public uint8* usri22_logon_hours;
 			public uint32 usri22_bad_pw_count;
 			public uint32 usri22_num_logons;
-			public PWSTR usri22_logon_server;
+			public char16* usri22_logon_server;
 			public uint32 usri22_country_code;
 			public uint32 usri22_code_page;
 		}
 		[CRepr]
 		public struct USER_INFO_23
 		{
-			public PWSTR usri23_name;
-			public PWSTR usri23_full_name;
-			public PWSTR usri23_comment;
+			public char16* usri23_name;
+			public char16* usri23_full_name;
+			public char16* usri23_comment;
 			public USER_ACCOUNT_FLAGS usri23_flags;
 			public PSID usri23_user_sid;
 		}
 		[CRepr]
 		public struct USER_INFO_24
 		{
-			public BOOL usri24_internet_identity;
+			public IntBool usri24_internet_identity;
 			public uint32 usri24_flags;
-			public PWSTR usri24_internet_provider_name;
-			public PWSTR usri24_internet_principal_name;
+			public char16* usri24_internet_provider_name;
+			public char16* usri24_internet_principal_name;
 			public PSID usri24_user_sid;
 		}
 		[CRepr]
 		public struct USER_INFO_1003
 		{
-			public PWSTR usri1003_password;
+			public char16* usri1003_password;
 		}
 		[CRepr]
 		public struct USER_INFO_1005
@@ -2494,12 +2494,12 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_1006
 		{
-			public PWSTR usri1006_home_dir;
+			public char16* usri1006_home_dir;
 		}
 		[CRepr]
 		public struct USER_INFO_1007
 		{
-			public PWSTR usri1007_comment;
+			public char16* usri1007_comment;
 		}
 		[CRepr]
 		public struct USER_INFO_1008
@@ -2509,7 +2509,7 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_1009
 		{
-			public PWSTR usri1009_script_path;
+			public char16* usri1009_script_path;
 		}
 		[CRepr]
 		public struct USER_INFO_1010
@@ -2519,22 +2519,22 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_1011
 		{
-			public PWSTR usri1011_full_name;
+			public char16* usri1011_full_name;
 		}
 		[CRepr]
 		public struct USER_INFO_1012
 		{
-			public PWSTR usri1012_usr_comment;
+			public char16* usri1012_usr_comment;
 		}
 		[CRepr]
 		public struct USER_INFO_1013
 		{
-			public PWSTR usri1013_parms;
+			public char16* usri1013_parms;
 		}
 		[CRepr]
 		public struct USER_INFO_1014
 		{
-			public PWSTR usri1014_workstations;
+			public char16* usri1014_workstations;
 		}
 		[CRepr]
 		public struct USER_INFO_1017
@@ -2555,7 +2555,7 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_1023
 		{
-			public PWSTR usri1023_logon_server;
+			public char16* usri1023_logon_server;
 		}
 		[CRepr]
 		public struct USER_INFO_1024
@@ -2575,12 +2575,12 @@ namespace Win32
 		[CRepr]
 		public struct USER_INFO_1052
 		{
-			public PWSTR usri1052_profile;
+			public char16* usri1052_profile;
 		}
 		[CRepr]
 		public struct USER_INFO_1053
 		{
-			public PWSTR usri1053_home_dir_drive;
+			public char16* usri1053_home_dir_drive;
 		}
 		[CRepr]
 		public struct USER_MODALS_INFO_0
@@ -2595,12 +2595,12 @@ namespace Win32
 		public struct USER_MODALS_INFO_1
 		{
 			public uint32 usrmod1_role;
-			public PWSTR usrmod1_primary;
+			public char16* usrmod1_primary;
 		}
 		[CRepr]
 		public struct USER_MODALS_INFO_2
 		{
-			public PWSTR usrmod2_domain_name;
+			public char16* usrmod2_domain_name;
 			public PSID usrmod2_domain_id;
 		}
 		[CRepr]
@@ -2643,39 +2643,39 @@ namespace Win32
 		[CRepr]
 		public struct USER_MODALS_INFO_1007
 		{
-			public PWSTR usrmod1007_primary;
+			public char16* usrmod1007_primary;
 		}
 		[CRepr]
 		public struct GROUP_INFO_0
 		{
-			public PWSTR grpi0_name;
+			public char16* grpi0_name;
 		}
 		[CRepr]
 		public struct GROUP_INFO_1
 		{
-			public PWSTR grpi1_name;
-			public PWSTR grpi1_comment;
+			public char16* grpi1_name;
+			public char16* grpi1_comment;
 		}
 		[CRepr]
 		public struct GROUP_INFO_2
 		{
-			public PWSTR grpi2_name;
-			public PWSTR grpi2_comment;
+			public char16* grpi2_name;
+			public char16* grpi2_comment;
 			public uint32 grpi2_group_id;
 			public uint32 grpi2_attributes;
 		}
 		[CRepr]
 		public struct GROUP_INFO_3
 		{
-			public PWSTR grpi3_name;
-			public PWSTR grpi3_comment;
+			public char16* grpi3_name;
+			public char16* grpi3_comment;
 			public PSID grpi3_group_sid;
 			public uint32 grpi3_attributes;
 		}
 		[CRepr]
 		public struct GROUP_INFO_1002
 		{
-			public PWSTR grpi1002_comment;
+			public char16* grpi1002_comment;
 		}
 		[CRepr]
 		public struct GROUP_INFO_1005
@@ -2685,29 +2685,29 @@ namespace Win32
 		[CRepr]
 		public struct GROUP_USERS_INFO_0
 		{
-			public PWSTR grui0_name;
+			public char16* grui0_name;
 		}
 		[CRepr]
 		public struct GROUP_USERS_INFO_1
 		{
-			public PWSTR grui1_name;
+			public char16* grui1_name;
 			public uint32 grui1_attributes;
 		}
 		[CRepr]
 		public struct LOCALGROUP_INFO_0
 		{
-			public PWSTR lgrpi0_name;
+			public char16* lgrpi0_name;
 		}
 		[CRepr]
 		public struct LOCALGROUP_INFO_1
 		{
-			public PWSTR lgrpi1_name;
-			public PWSTR lgrpi1_comment;
+			public char16* lgrpi1_name;
+			public char16* lgrpi1_comment;
 		}
 		[CRepr]
 		public struct LOCALGROUP_INFO_1002
 		{
-			public PWSTR lgrpi1002_comment;
+			public char16* lgrpi1002_comment;
 		}
 		[CRepr]
 		public struct LOCALGROUP_MEMBERS_INFO_0
@@ -2719,40 +2719,40 @@ namespace Win32
 		{
 			public PSID lgrmi1_sid;
 			public SID_NAME_USE lgrmi1_sidusage;
-			public PWSTR lgrmi1_name;
+			public char16* lgrmi1_name;
 		}
 		[CRepr]
 		public struct LOCALGROUP_MEMBERS_INFO_2
 		{
 			public PSID lgrmi2_sid;
 			public SID_NAME_USE lgrmi2_sidusage;
-			public PWSTR lgrmi2_domainandname;
+			public char16* lgrmi2_domainandname;
 		}
 		[CRepr]
 		public struct LOCALGROUP_MEMBERS_INFO_3
 		{
-			public PWSTR lgrmi3_domainandname;
+			public char16* lgrmi3_domainandname;
 		}
 		[CRepr]
 		public struct LOCALGROUP_USERS_INFO_0
 		{
-			public PWSTR lgrui0_name;
+			public char16* lgrui0_name;
 		}
 		[CRepr]
 		public struct NET_DISPLAY_USER
 		{
-			public PWSTR usri1_name;
-			public PWSTR usri1_comment;
+			public char16* usri1_name;
+			public char16* usri1_comment;
 			public USER_ACCOUNT_FLAGS usri1_flags;
-			public PWSTR usri1_full_name;
+			public char16* usri1_full_name;
 			public uint32 usri1_user_id;
 			public uint32 usri1_next_index;
 		}
 		[CRepr]
 		public struct NET_DISPLAY_MACHINE
 		{
-			public PWSTR usri2_name;
-			public PWSTR usri2_comment;
+			public char16* usri2_name;
+			public char16* usri2_comment;
 			public USER_ACCOUNT_FLAGS usri2_flags;
 			public uint32 usri2_user_id;
 			public uint32 usri2_next_index;
@@ -2760,8 +2760,8 @@ namespace Win32
 		[CRepr]
 		public struct NET_DISPLAY_GROUP
 		{
-			public PWSTR grpi3_name;
-			public PWSTR grpi3_comment;
+			public char16* grpi3_name;
+			public char16* grpi3_comment;
 			public uint32 grpi3_group_id;
 			public uint32 grpi3_attributes;
 			public uint32 grpi3_next_index;
@@ -2769,12 +2769,12 @@ namespace Win32
 		[CRepr]
 		public struct ACCESS_INFO_0
 		{
-			public PWSTR acc0_resource_name;
+			public char16* acc0_resource_name;
 		}
 		[CRepr]
 		public struct ACCESS_INFO_1
 		{
-			public PWSTR acc1_resource_name;
+			public char16* acc1_resource_name;
 			public uint32 acc1_attr;
 			public uint32 acc1_count;
 		}
@@ -2786,7 +2786,7 @@ namespace Win32
 		[CRepr]
 		public struct ACCESS_LIST
 		{
-			public PWSTR acl_ugname;
+			public char16* acl_ugname;
 			public uint32 acl_access;
 		}
 		[CRepr]
@@ -2799,9 +2799,9 @@ namespace Win32
 		public struct NET_VALIDATE_PERSISTED_FIELDS
 		{
 			public uint32 PresentFields;
-			public FILETIME PasswordLastSet;
-			public FILETIME BadPasswordTime;
-			public FILETIME LockoutTime;
+			public FileTime PasswordLastSet;
+			public FileTime BadPasswordTime;
+			public FileTime LockoutTime;
 			public uint32 BadPasswordCount;
 			public uint32 PasswordHistoryLength;
 			public NET_VALIDATE_PASSWORD_HASH* PasswordHistory;
@@ -2816,26 +2816,26 @@ namespace Win32
 		public struct NET_VALIDATE_AUTHENTICATION_INPUT_ARG
 		{
 			public NET_VALIDATE_PERSISTED_FIELDS InputPersistedFields;
-			public BOOLEAN PasswordMatched;
+			public bool PasswordMatched;
 		}
 		[CRepr]
 		public struct NET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG
 		{
 			public NET_VALIDATE_PERSISTED_FIELDS InputPersistedFields;
-			public PWSTR ClearPassword;
-			public PWSTR UserAccountName;
+			public char16* ClearPassword;
+			public char16* UserAccountName;
 			public NET_VALIDATE_PASSWORD_HASH HashedPassword;
-			public BOOLEAN PasswordMatch;
+			public bool PasswordMatch;
 		}
 		[CRepr]
 		public struct NET_VALIDATE_PASSWORD_RESET_INPUT_ARG
 		{
 			public NET_VALIDATE_PERSISTED_FIELDS InputPersistedFields;
-			public PWSTR ClearPassword;
-			public PWSTR UserAccountName;
+			public char16* ClearPassword;
+			public char16* UserAccountName;
 			public NET_VALIDATE_PASSWORD_HASH HashedPassword;
-			public BOOLEAN PasswordMustChangeAtNextLogon;
-			public BOOLEAN ClearLockout;
+			public bool PasswordMustChangeAtNextLogon;
+			public bool ClearLockout;
 		}
 		[CRepr]
 		public struct NETLOGON_INFO_1
@@ -2848,7 +2848,7 @@ namespace Win32
 		{
 			public uint32 netlog2_flags;
 			public uint32 netlog2_pdc_connection_status;
-			public PWSTR netlog2_trusted_dc_name;
+			public char16* netlog2_trusted_dc_name;
 			public uint32 netlog2_tc_connection_status;
 		}
 		[CRepr]
@@ -2865,8 +2865,8 @@ namespace Win32
 		[CRepr]
 		public struct NETLOGON_INFO_4
 		{
-			public PWSTR netlog4_trusted_dc_name;
-			public PWSTR netlog4_trusted_domain_name;
+			public char16* netlog4_trusted_dc_name;
+			public char16* netlog4_trusted_domain_name;
 		}
 		[CRepr]
 		public struct MSA_INFO_0
@@ -2909,14 +2909,14 @@ namespace Win32
 		[CRepr]
 		public struct MSG_INFO_0
 		{
-			public PWSTR msgi0_name;
+			public char16* msgi0_name;
 		}
 		[CRepr]
 		public struct MSG_INFO_1
 		{
-			public PWSTR msgi1_name;
+			public char16* msgi1_name;
 			public uint32 msgi1_forward_flag;
-			public PWSTR msgi1_forward;
+			public char16* msgi1_forward;
 		}
 		[CRepr]
 		public struct TIME_OF_DAY_INFO
@@ -2938,11 +2938,11 @@ namespace Win32
 		public struct REPL_INFO_0
 		{
 			public uint32 rp0_role;
-			public PWSTR rp0_exportpath;
-			public PWSTR rp0_exportlist;
-			public PWSTR rp0_importpath;
-			public PWSTR rp0_importlist;
-			public PWSTR rp0_logonusername;
+			public char16* rp0_exportpath;
+			public char16* rp0_exportlist;
+			public char16* rp0_importpath;
+			public char16* rp0_importlist;
+			public char16* rp0_logonusername;
 			public uint32 rp0_interval;
 			public uint32 rp0_pulse;
 			public uint32 rp0_guardtime;
@@ -2971,19 +2971,19 @@ namespace Win32
 		[CRepr]
 		public struct REPL_EDIR_INFO_0
 		{
-			public PWSTR rped0_dirname;
+			public char16* rped0_dirname;
 		}
 		[CRepr]
 		public struct REPL_EDIR_INFO_1
 		{
-			public PWSTR rped1_dirname;
+			public char16* rped1_dirname;
 			public uint32 rped1_integrity;
 			public uint32 rped1_extent;
 		}
 		[CRepr]
 		public struct REPL_EDIR_INFO_2
 		{
-			public PWSTR rped2_dirname;
+			public char16* rped2_dirname;
 			public uint32 rped2_integrity;
 			public uint32 rped2_extent;
 			public uint32 rped2_lockcount;
@@ -3002,14 +3002,14 @@ namespace Win32
 		[CRepr]
 		public struct REPL_IDIR_INFO_0
 		{
-			public PWSTR rpid0_dirname;
+			public char16* rpid0_dirname;
 		}
 		[CRepr]
 		public struct REPL_IDIR_INFO_1
 		{
-			public PWSTR rpid1_dirname;
+			public char16* rpid1_dirname;
 			public uint32 rpid1_state;
-			public PWSTR rpid1_mastername;
+			public char16* rpid1_mastername;
 			public uint32 rpid1_last_update_time;
 			public uint32 rpid1_lockcount;
 			public uint32 rpid1_locktime;
@@ -3018,51 +3018,51 @@ namespace Win32
 		public struct SERVER_INFO_100
 		{
 			public uint32 sv100_platform_id;
-			public PWSTR sv100_name;
+			public char16* sv100_name;
 		}
 		[CRepr]
 		public struct SERVER_INFO_101
 		{
 			public uint32 sv101_platform_id;
-			public PWSTR sv101_name;
+			public char16* sv101_name;
 			public uint32 sv101_version_major;
 			public uint32 sv101_version_minor;
 			public NET_SERVER_TYPE sv101_type;
-			public PWSTR sv101_comment;
+			public char16* sv101_comment;
 		}
 		[CRepr]
 		public struct SERVER_INFO_102
 		{
 			public uint32 sv102_platform_id;
-			public PWSTR sv102_name;
+			public char16* sv102_name;
 			public uint32 sv102_version_major;
 			public uint32 sv102_version_minor;
 			public NET_SERVER_TYPE sv102_type;
-			public PWSTR sv102_comment;
+			public char16* sv102_comment;
 			public uint32 sv102_users;
 			public int32 sv102_disc;
 			public SERVER_INFO_HIDDEN sv102_hidden;
 			public uint32 sv102_announce;
 			public uint32 sv102_anndelta;
 			public uint32 sv102_licenses;
-			public PWSTR sv102_userpath;
+			public char16* sv102_userpath;
 		}
 		[CRepr]
 		public struct SERVER_INFO_103
 		{
 			public uint32 sv103_platform_id;
-			public PWSTR sv103_name;
+			public char16* sv103_name;
 			public uint32 sv103_version_major;
 			public uint32 sv103_version_minor;
 			public uint32 sv103_type;
-			public PWSTR sv103_comment;
+			public char16* sv103_comment;
 			public uint32 sv103_users;
 			public int32 sv103_disc;
-			public BOOL sv103_hidden;
+			public IntBool sv103_hidden;
 			public uint32 sv103_announce;
 			public uint32 sv103_anndelta;
 			public uint32 sv103_licenses;
-			public PWSTR sv103_userpath;
+			public char16* sv103_userpath;
 			public uint32 sv103_capabilities;
 		}
 		[CRepr]
@@ -3071,11 +3071,11 @@ namespace Win32
 			public uint32 sv402_ulist_mtime;
 			public uint32 sv402_glist_mtime;
 			public uint32 sv402_alist_mtime;
-			public PWSTR sv402_alerts;
+			public char16* sv402_alerts;
 			public SERVER_INFO_SECURITY sv402_security;
 			public uint32 sv402_numadmin;
 			public uint32 sv402_lanmask;
-			public PWSTR sv402_guestacct;
+			public char16* sv402_guestacct;
 			public uint32 sv402_chdevs;
 			public uint32 sv402_chdevq;
 			public uint32 sv402_chdevjobs;
@@ -3098,7 +3098,7 @@ namespace Win32
 			public uint32 sv402_diskalert;
 			public uint32 sv402_netioalert;
 			public uint32 sv402_maxauditsz;
-			public PWSTR sv402_srvheuristics;
+			public char16* sv402_srvheuristics;
 		}
 		[CRepr]
 		public struct SERVER_INFO_403
@@ -3106,11 +3106,11 @@ namespace Win32
 			public uint32 sv403_ulist_mtime;
 			public uint32 sv403_glist_mtime;
 			public uint32 sv403_alist_mtime;
-			public PWSTR sv403_alerts;
+			public char16* sv403_alerts;
 			public SERVER_INFO_SECURITY sv403_security;
 			public uint32 sv403_numadmin;
 			public uint32 sv403_lanmask;
-			public PWSTR sv403_guestacct;
+			public char16* sv403_guestacct;
 			public uint32 sv403_chdevs;
 			public uint32 sv403_chdevq;
 			public uint32 sv403_chdevjobs;
@@ -3133,10 +3133,10 @@ namespace Win32
 			public uint32 sv403_diskalert;
 			public uint32 sv403_netioalert;
 			public uint32 sv403_maxauditsz;
-			public PWSTR sv403_srvheuristics;
+			public char16* sv403_srvheuristics;
 			public uint32 sv403_auditedevents;
 			public uint32 sv403_autoprofile;
-			public PWSTR sv403_autopath;
+			public char16* sv403_autopath;
 		}
 		[CRepr]
 		public struct SERVER_INFO_502
@@ -3154,11 +3154,11 @@ namespace Win32
 			public uint32 sv502_sessconns;
 			public uint32 sv502_maxpagedmemoryusage;
 			public uint32 sv502_maxnonpagedmemoryusage;
-			public BOOL sv502_enablesoftcompat;
-			public BOOL sv502_enableforcedlogoff;
-			public BOOL sv502_timesource;
-			public BOOL sv502_acceptdownlevelapis;
-			public BOOL sv502_lmannounce;
+			public IntBool sv502_enablesoftcompat;
+			public IntBool sv502_enableforcedlogoff;
+			public IntBool sv502_timesource;
+			public IntBool sv502_acceptdownlevelapis;
+			public IntBool sv502_lmannounce;
 		}
 		[CRepr]
 		public struct SERVER_INFO_503
@@ -3176,12 +3176,12 @@ namespace Win32
 			public uint32 sv503_sessconns;
 			public uint32 sv503_maxpagedmemoryusage;
 			public uint32 sv503_maxnonpagedmemoryusage;
-			public BOOL sv503_enablesoftcompat;
-			public BOOL sv503_enableforcedlogoff;
-			public BOOL sv503_timesource;
-			public BOOL sv503_acceptdownlevelapis;
-			public BOOL sv503_lmannounce;
-			public PWSTR sv503_domain;
+			public IntBool sv503_enablesoftcompat;
+			public IntBool sv503_enableforcedlogoff;
+			public IntBool sv503_timesource;
+			public IntBool sv503_acceptdownlevelapis;
+			public IntBool sv503_lmannounce;
+			public char16* sv503_domain;
 			public uint32 sv503_maxcopyreadlen;
 			public uint32 sv503_maxcopywritelen;
 			public uint32 sv503_minkeepsearch;
@@ -3198,11 +3198,11 @@ namespace Win32
 			public uint32 sv503_maxmpxct;
 			public uint32 sv503_oplockbreakwait;
 			public uint32 sv503_oplockbreakresponsewait;
-			public BOOL sv503_enableoplocks;
-			public BOOL sv503_enableoplockforceclose;
-			public BOOL sv503_enablefcbopens;
-			public BOOL sv503_enableraw;
-			public BOOL sv503_enablesharednetdrives;
+			public IntBool sv503_enableoplocks;
+			public IntBool sv503_enableoplockforceclose;
+			public IntBool sv503_enablefcbopens;
+			public IntBool sv503_enableraw;
+			public IntBool sv503_enablesharednetdrives;
 			public uint32 sv503_minfreeconnections;
 			public uint32 sv503_maxfreeconnections;
 		}
@@ -3222,12 +3222,12 @@ namespace Win32
 			public uint32 sv599_sessconns;
 			public uint32 sv599_maxpagedmemoryusage;
 			public uint32 sv599_maxnonpagedmemoryusage;
-			public BOOL sv599_enablesoftcompat;
-			public BOOL sv599_enableforcedlogoff;
-			public BOOL sv599_timesource;
-			public BOOL sv599_acceptdownlevelapis;
-			public BOOL sv599_lmannounce;
-			public PWSTR sv599_domain;
+			public IntBool sv599_enablesoftcompat;
+			public IntBool sv599_enableforcedlogoff;
+			public IntBool sv599_timesource;
+			public IntBool sv599_acceptdownlevelapis;
+			public IntBool sv599_lmannounce;
+			public char16* sv599_domain;
 			public uint32 sv599_maxcopyreadlen;
 			public uint32 sv599_maxcopywritelen;
 			public uint32 sv599_minkeepsearch;
@@ -3244,11 +3244,11 @@ namespace Win32
 			public uint32 sv599_maxmpxct;
 			public uint32 sv599_oplockbreakwait;
 			public uint32 sv599_oplockbreakresponsewait;
-			public BOOL sv599_enableoplocks;
-			public BOOL sv599_enableoplockforceclose;
-			public BOOL sv599_enablefcbopens;
-			public BOOL sv599_enableraw;
-			public BOOL sv599_enablesharednetdrives;
+			public IntBool sv599_enableoplocks;
+			public IntBool sv599_enableoplockforceclose;
+			public IntBool sv599_enablefcbopens;
+			public IntBool sv599_enableraw;
+			public IntBool sv599_enablesharednetdrives;
 			public uint32 sv599_minfreeconnections;
 			public uint32 sv599_maxfreeconnections;
 			public uint32 sv599_initsesstable;
@@ -3283,8 +3283,8 @@ namespace Win32
 			public uint32 sv598_mdlreadswitchover;
 			public uint32 sv598_cachedopenlimit;
 			public uint32 sv598_otherqueueaffinity;
-			public BOOL sv598_restrictnullsessaccess;
-			public BOOL sv598_enablewfw311directipx;
+			public IntBool sv598_restrictnullsessaccess;
+			public IntBool sv598_enablewfw311directipx;
 			public uint32 sv598_queuesamplesecs;
 			public uint32 sv598_balancecount;
 			public uint32 sv598_preferredaffinity;
@@ -3294,29 +3294,29 @@ namespace Win32
 			public uint32 sv598_maxfreepagedpoolchunks;
 			public uint32 sv598_minpagedpoolchunksize;
 			public uint32 sv598_maxpagedpoolchunksize;
-			public BOOL sv598_sendsfrompreferredprocessor;
+			public IntBool sv598_sendsfrompreferredprocessor;
 			public uint32 sv598_cacheddirectorylimit;
 			public uint32 sv598_maxcopylength;
-			public BOOL sv598_enablecompression;
-			public BOOL sv598_autosharewks;
-			public BOOL sv598_autoshareserver;
-			public BOOL sv598_enablesecuritysignature;
-			public BOOL sv598_requiresecuritysignature;
+			public IntBool sv598_enablecompression;
+			public IntBool sv598_autosharewks;
+			public IntBool sv598_autoshareserver;
+			public IntBool sv598_enablesecuritysignature;
+			public IntBool sv598_requiresecuritysignature;
 			public uint32 sv598_minclientbuffersize;
 			public Guid sv598_serverguid;
 			public uint32 sv598_ConnectionNoSessionsTimeout;
 			public uint32 sv598_IdleThreadTimeOut;
-			public BOOL sv598_enableW9xsecuritysignature;
-			public BOOL sv598_enforcekerberosreauthentication;
-			public BOOL sv598_disabledos;
+			public IntBool sv598_enableW9xsecuritysignature;
+			public IntBool sv598_enforcekerberosreauthentication;
+			public IntBool sv598_disabledos;
 			public uint32 sv598_lowdiskspaceminimum;
-			public BOOL sv598_disablestrictnamechecking;
-			public BOOL sv598_enableauthenticateusersharing;
+			public IntBool sv598_disablestrictnamechecking;
+			public IntBool sv598_enableauthenticateusersharing;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1005
 		{
-			public PWSTR sv1005_comment;
+			public char16* sv1005_comment;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1107
@@ -3391,22 +3391,22 @@ namespace Win32
 		[CRepr]
 		public struct SERVER_INFO_1514
 		{
-			public BOOL sv1514_enablesoftcompat;
+			public IntBool sv1514_enablesoftcompat;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1515
 		{
-			public BOOL sv1515_enableforcedlogoff;
+			public IntBool sv1515_enableforcedlogoff;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1516
 		{
-			public BOOL sv1516_timesource;
+			public IntBool sv1516_timesource;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1518
 		{
-			public BOOL sv1518_lmannounce;
+			public IntBool sv1518_lmannounce;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1520
@@ -3471,37 +3471,37 @@ namespace Win32
 		[CRepr]
 		public struct SERVER_INFO_1536
 		{
-			public BOOL sv1536_enableoplocks;
+			public IntBool sv1536_enableoplocks;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1537
 		{
-			public BOOL sv1537_enableoplockforceclose;
+			public IntBool sv1537_enableoplockforceclose;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1538
 		{
-			public BOOL sv1538_enablefcbopens;
+			public IntBool sv1538_enablefcbopens;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1539
 		{
-			public BOOL sv1539_enableraw;
+			public IntBool sv1539_enableraw;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1540
 		{
-			public BOOL sv1540_enablesharednetdrives;
+			public IntBool sv1540_enablesharednetdrives;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1541
 		{
-			public BOOL sv1541_minfreeconnections;
+			public IntBool sv1541_minfreeconnections;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1542
 		{
-			public BOOL sv1542_maxfreeconnections;
+			public IntBool sv1542_maxfreeconnections;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1543
@@ -3606,7 +3606,7 @@ namespace Win32
 		[CRepr]
 		public struct SERVER_INFO_1566
 		{
-			public BOOL sv1566_removeduplicatesearches;
+			public IntBool sv1566_removeduplicatesearches;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1567
@@ -3701,7 +3701,7 @@ namespace Win32
 		[CRepr]
 		public struct SERVER_INFO_1585
 		{
-			public BOOL sv1585_sendsfrompreferredprocessor;
+			public IntBool sv1585_sendsfrompreferredprocessor;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1586
@@ -3766,12 +3766,12 @@ namespace Win32
 		[CRepr]
 		public struct SERVER_INFO_1599
 		{
-			public BOOLEAN sv1598_enforcekerberosreauthentication;
+			public bool sv1598_enforcekerberosreauthentication;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1600
 		{
-			public BOOLEAN sv1598_disabledos;
+			public bool sv1598_disabledos;
 		}
 		[CRepr]
 		public struct SERVER_INFO_1601
@@ -3781,47 +3781,47 @@ namespace Win32
 		[CRepr]
 		public struct SERVER_INFO_1602
 		{
-			public BOOL sv_1598_disablestrictnamechecking;
+			public IntBool sv_1598_disablestrictnamechecking;
 		}
 		[CRepr]
 		public struct SERVER_TRANSPORT_INFO_0
 		{
 			public uint32 svti0_numberofvcs;
-			public PWSTR svti0_transportname;
+			public char16* svti0_transportname;
 			public uint8* svti0_transportaddress;
 			public uint32 svti0_transportaddresslength;
-			public PWSTR svti0_networkaddress;
+			public char16* svti0_networkaddress;
 		}
 		[CRepr]
 		public struct SERVER_TRANSPORT_INFO_1
 		{
 			public uint32 svti1_numberofvcs;
-			public PWSTR svti1_transportname;
+			public char16* svti1_transportname;
 			public uint8* svti1_transportaddress;
 			public uint32 svti1_transportaddresslength;
-			public PWSTR svti1_networkaddress;
-			public PWSTR svti1_domain;
+			public char16* svti1_networkaddress;
+			public char16* svti1_domain;
 		}
 		[CRepr]
 		public struct SERVER_TRANSPORT_INFO_2
 		{
 			public uint32 svti2_numberofvcs;
-			public PWSTR svti2_transportname;
+			public char16* svti2_transportname;
 			public uint8* svti2_transportaddress;
 			public uint32 svti2_transportaddresslength;
-			public PWSTR svti2_networkaddress;
-			public PWSTR svti2_domain;
+			public char16* svti2_networkaddress;
+			public char16* svti2_domain;
 			public uint32 svti2_flags;
 		}
 		[CRepr]
 		public struct SERVER_TRANSPORT_INFO_3
 		{
 			public uint32 svti3_numberofvcs;
-			public PWSTR svti3_transportname;
+			public char16* svti3_transportname;
 			public uint8* svti3_transportaddress;
 			public uint32 svti3_transportaddresslength;
-			public PWSTR svti3_networkaddress;
-			public PWSTR svti3_domain;
+			public char16* svti3_networkaddress;
+			public char16* svti3_domain;
 			public uint32 svti3_flags;
 			public uint32 svti3_passwordlength;
 			public uint8[256] svti3_password;
@@ -3829,12 +3829,12 @@ namespace Win32
 		[CRepr]
 		public struct SERVICE_INFO_0
 		{
-			public PWSTR svci0_name;
+			public char16* svci0_name;
 		}
 		[CRepr]
 		public struct SERVICE_INFO_1
 		{
-			public PWSTR svci1_name;
+			public char16* svci1_name;
 			public uint32 svci1_status;
 			public uint32 svci1_code;
 			public uint32 svci1_pid;
@@ -3842,26 +3842,26 @@ namespace Win32
 		[CRepr]
 		public struct SERVICE_INFO_2
 		{
-			public PWSTR svci2_name;
+			public char16* svci2_name;
 			public uint32 svci2_status;
 			public uint32 svci2_code;
 			public uint32 svci2_pid;
-			public PWSTR svci2_text;
+			public char16* svci2_text;
 			public uint32 svci2_specific_error;
-			public PWSTR svci2_display_name;
+			public char16* svci2_display_name;
 		}
 		[CRepr]
 		public struct USE_INFO_0
 		{
-			public PWSTR ui0_local;
-			public PWSTR ui0_remote;
+			public char16* ui0_local;
+			public char16* ui0_remote;
 		}
 		[CRepr]
 		public struct USE_INFO_1
 		{
-			public PWSTR ui1_local;
-			public PWSTR ui1_remote;
-			public PWSTR ui1_password;
+			public char16* ui1_local;
+			public char16* ui1_remote;
+			public char16* ui1_password;
 			public uint32 ui1_status;
 			public USE_INFO_ASG_TYPE ui1_asg_type;
 			public uint32 ui1_refcount;
@@ -3870,15 +3870,15 @@ namespace Win32
 		[CRepr]
 		public struct USE_INFO_2
 		{
-			public PWSTR ui2_local;
-			public PWSTR ui2_remote;
-			public PWSTR ui2_password;
+			public char16* ui2_local;
+			public char16* ui2_remote;
+			public char16* ui2_password;
 			public uint32 ui2_status;
 			public USE_INFO_ASG_TYPE ui2_asg_type;
 			public uint32 ui2_refcount;
 			public uint32 ui2_usecount;
-			public PWSTR ui2_username;
-			public PWSTR ui2_domainname;
+			public char16* ui2_username;
+			public char16* ui2_domainname;
 		}
 		[CRepr]
 		public struct USE_INFO_3
@@ -3922,7 +3922,7 @@ namespace Win32
 		public struct TRANSPORT_INFO
 		{
 			public TRANSPORT_TYPE Type;
-			public BOOLEAN SkipCertificateCheck;
+			public bool SkipCertificateCheck;
 		}
 		[CRepr]
 		public struct USE_OPTION_TRANSPORT_PARAMETERS
@@ -3934,7 +3934,7 @@ namespace Win32
 		[CRepr]
 		public struct SMB_COMPRESSION_INFO
 		{
-			public BOOLEAN Switch;
+			public bool Switch;
 			public uint8 Reserved1;
 			public uint16 Reserved2;
 			public uint32 Reserved3;
@@ -3965,8 +3965,8 @@ namespace Win32
 		public struct WKSTA_INFO_100
 		{
 			public uint32 wki100_platform_id;
-			public PWSTR wki100_computername;
-			public PWSTR wki100_langroup;
+			public char16* wki100_computername;
+			public char16* wki100_langroup;
 			public uint32 wki100_ver_major;
 			public uint32 wki100_ver_minor;
 		}
@@ -3974,21 +3974,21 @@ namespace Win32
 		public struct WKSTA_INFO_101
 		{
 			public uint32 wki101_platform_id;
-			public PWSTR wki101_computername;
-			public PWSTR wki101_langroup;
+			public char16* wki101_computername;
+			public char16* wki101_langroup;
 			public uint32 wki101_ver_major;
 			public uint32 wki101_ver_minor;
-			public PWSTR wki101_lanroot;
+			public char16* wki101_lanroot;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_102
 		{
 			public uint32 wki102_platform_id;
-			public PWSTR wki102_computername;
-			public PWSTR wki102_langroup;
+			public char16* wki102_computername;
+			public char16* wki102_langroup;
 			public uint32 wki102_ver_major;
 			public uint32 wki102_ver_minor;
-			public PWSTR wki102_lanroot;
+			public char16* wki102_lanroot;
 			public uint32 wki102_logged_on_users;
 		}
 		[CRepr]
@@ -4011,7 +4011,7 @@ namespace Win32
 			public uint32 wki302_print_buf_time;
 			public uint32 wki302_num_char_buf;
 			public uint32 wki302_siz_char_buf;
-			public PWSTR wki302_wrk_heuristics;
+			public char16* wki302_wrk_heuristics;
 			public uint32 wki302_mailslots;
 			public uint32 wki302_num_dgram_buf;
 		}
@@ -4035,7 +4035,7 @@ namespace Win32
 			public uint32 wki402_print_buf_time;
 			public uint32 wki402_num_char_buf;
 			public uint32 wki402_siz_char_buf;
-			public PWSTR wki402_wrk_heuristics;
+			public char16* wki402_wrk_heuristics;
 			public uint32 wki402_mailslots;
 			public uint32 wki402_num_dgram_buf;
 			public uint32 wki402_max_threads;
@@ -4063,21 +4063,21 @@ namespace Win32
 			public uint32 wki502_num_srv_announce_buffers;
 			public uint32 wki502_max_illegal_datagram_events;
 			public uint32 wki502_illegal_datagram_event_reset_frequency;
-			public BOOL wki502_log_election_packets;
-			public BOOL wki502_use_opportunistic_locking;
-			public BOOL wki502_use_unlock_behind;
-			public BOOL wki502_use_close_behind;
-			public BOOL wki502_buf_named_pipes;
-			public BOOL wki502_use_lock_read_unlock;
-			public BOOL wki502_utilize_nt_caching;
-			public BOOL wki502_use_raw_read;
-			public BOOL wki502_use_raw_write;
-			public BOOL wki502_use_write_raw_data;
-			public BOOL wki502_use_encryption;
-			public BOOL wki502_buf_files_deny_write;
-			public BOOL wki502_buf_read_only_files;
-			public BOOL wki502_force_core_create_mode;
-			public BOOL wki502_use_512_byte_max_transfer;
+			public IntBool wki502_log_election_packets;
+			public IntBool wki502_use_opportunistic_locking;
+			public IntBool wki502_use_unlock_behind;
+			public IntBool wki502_use_close_behind;
+			public IntBool wki502_buf_named_pipes;
+			public IntBool wki502_use_lock_read_unlock;
+			public IntBool wki502_utilize_nt_caching;
+			public IntBool wki502_use_raw_read;
+			public IntBool wki502_use_raw_write;
+			public IntBool wki502_use_write_raw_data;
+			public IntBool wki502_use_encryption;
+			public IntBool wki502_buf_files_deny_write;
+			public IntBool wki502_buf_read_only_files;
+			public IntBool wki502_force_core_create_mode;
+			public IntBool wki502_use_512_byte_max_transfer;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1010
@@ -4167,72 +4167,72 @@ namespace Win32
 		[CRepr]
 		public struct WKSTA_INFO_1048
 		{
-			public BOOL wki1048_use_opportunistic_locking;
+			public IntBool wki1048_use_opportunistic_locking;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1049
 		{
-			public BOOL wki1049_use_unlock_behind;
+			public IntBool wki1049_use_unlock_behind;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1050
 		{
-			public BOOL wki1050_use_close_behind;
+			public IntBool wki1050_use_close_behind;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1051
 		{
-			public BOOL wki1051_buf_named_pipes;
+			public IntBool wki1051_buf_named_pipes;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1052
 		{
-			public BOOL wki1052_use_lock_read_unlock;
+			public IntBool wki1052_use_lock_read_unlock;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1053
 		{
-			public BOOL wki1053_utilize_nt_caching;
+			public IntBool wki1053_utilize_nt_caching;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1054
 		{
-			public BOOL wki1054_use_raw_read;
+			public IntBool wki1054_use_raw_read;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1055
 		{
-			public BOOL wki1055_use_raw_write;
+			public IntBool wki1055_use_raw_write;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1056
 		{
-			public BOOL wki1056_use_write_raw_data;
+			public IntBool wki1056_use_write_raw_data;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1057
 		{
-			public BOOL wki1057_use_encryption;
+			public IntBool wki1057_use_encryption;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1058
 		{
-			public BOOL wki1058_buf_files_deny_write;
+			public IntBool wki1058_buf_files_deny_write;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1059
 		{
-			public BOOL wki1059_buf_read_only_files;
+			public IntBool wki1059_buf_read_only_files;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1060
 		{
-			public BOOL wki1060_force_core_create_mode;
+			public IntBool wki1060_force_core_create_mode;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1061
 		{
-			public BOOL wki1061_use_512_byte_max_transfer;
+			public IntBool wki1061_use_512_byte_max_transfer;
 		}
 		[CRepr]
 		public struct WKSTA_INFO_1062
@@ -4242,29 +4242,29 @@ namespace Win32
 		[CRepr]
 		public struct WKSTA_USER_INFO_0
 		{
-			public PWSTR wkui0_username;
+			public char16* wkui0_username;
 		}
 		[CRepr]
 		public struct WKSTA_USER_INFO_1
 		{
-			public PWSTR wkui1_username;
-			public PWSTR wkui1_logon_domain;
-			public PWSTR wkui1_oth_domains;
-			public PWSTR wkui1_logon_server;
+			public char16* wkui1_username;
+			public char16* wkui1_logon_domain;
+			public char16* wkui1_oth_domains;
+			public char16* wkui1_logon_server;
 		}
 		[CRepr]
 		public struct WKSTA_USER_INFO_1101
 		{
-			public PWSTR wkui1101_oth_domains;
+			public char16* wkui1101_oth_domains;
 		}
 		[CRepr]
 		public struct WKSTA_TRANSPORT_INFO_0
 		{
 			public uint32 wkti0_quality_of_service;
 			public uint32 wkti0_number_of_vcs;
-			public PWSTR wkti0_transport_name;
-			public PWSTR wkti0_transport_address;
-			public BOOL wkti0_wan_ish;
+			public char16* wkti0_transport_name;
+			public char16* wkti0_transport_address;
+			public IntBool wkti0_wan_ish;
 		}
 		[CRepr]
 		public struct ERROR_LOG
@@ -4273,8 +4273,8 @@ namespace Win32
 			public uint32 el_reserved;
 			public uint32 el_time;
 			public uint32 el_error;
-			public PWSTR el_name;
-			public PWSTR el_text;
+			public char16* el_name;
+			public char16* el_text;
 			public uint8* el_data;
 			public uint32 el_data_size;
 			public uint32 el_nstrings;
@@ -4290,8 +4290,8 @@ namespace Win32
 		[CRepr]
 		public struct CONFIG_INFO_0
 		{
-			public PWSTR cfgi0_key;
-			public PWSTR cfgi0_data;
+			public char16* cfgi0_key;
+			public char16* cfgi0_data;
 		}
 		[CRepr]
 		public struct AUDIT_ENTRY
@@ -4463,44 +4463,44 @@ namespace Win32
 		[CRepr]
 		public struct DSREG_USER_INFO
 		{
-			public PWSTR pszUserEmail;
-			public PWSTR pszUserKeyId;
-			public PWSTR pszUserKeyName;
+			public char16* pszUserEmail;
+			public char16* pszUserKeyId;
+			public char16* pszUserKeyName;
 		}
 		[CRepr]
 		public struct DSREG_JOIN_INFO
 		{
 			public DSREG_JOIN_TYPE joinType;
 			public CERT_CONTEXT* pJoinCertificate;
-			public PWSTR pszDeviceId;
-			public PWSTR pszIdpDomain;
-			public PWSTR pszTenantId;
-			public PWSTR pszJoinUserEmail;
-			public PWSTR pszTenantDisplayName;
-			public PWSTR pszMdmEnrollmentUrl;
-			public PWSTR pszMdmTermsOfUseUrl;
-			public PWSTR pszMdmComplianceUrl;
-			public PWSTR pszUserSettingSyncUrl;
+			public char16* pszDeviceId;
+			public char16* pszIdpDomain;
+			public char16* pszTenantId;
+			public char16* pszJoinUserEmail;
+			public char16* pszTenantDisplayName;
+			public char16* pszMdmEnrollmentUrl;
+			public char16* pszMdmTermsOfUseUrl;
+			public char16* pszMdmComplianceUrl;
+			public char16* pszUserSettingSyncUrl;
 			public DSREG_USER_INFO* pUserInfo;
 		}
 		[CRepr]
 		public struct NETSETUP_PROVISIONING_PARAMS
 		{
 			public uint32 dwVersion;
-			public PWSTR lpDomain;
-			public PWSTR lpHostName;
-			public PWSTR lpMachineAccountOU;
-			public PWSTR lpDcName;
+			public char16* lpDomain;
+			public char16* lpHostName;
+			public char16* lpMachineAccountOU;
+			public char16* lpDcName;
 			public NETSETUP_PROVISION dwProvisionOptions;
-			public PWSTR* aCertTemplateNames;
+			public char16** aCertTemplateNames;
 			public uint32 cCertTemplateNames;
-			public PWSTR* aMachinePolicyNames;
+			public char16** aMachinePolicyNames;
 			public uint32 cMachinePolicyNames;
-			public PWSTR* aMachinePolicyPaths;
+			public char16** aMachinePolicyPaths;
 			public uint32 cMachinePolicyPaths;
-			public PWSTR lpNetbiosName;
-			public PWSTR lpSiteName;
-			public PWSTR lpPrimaryDNSDomain;
+			public char16* lpNetbiosName;
+			public char16* lpSiteName;
+			public char16* lpPrimaryDNSDomain;
 		}
 		[CRepr]
 		public struct AT_INFO
@@ -4509,7 +4509,7 @@ namespace Win32
 			public uint32 DaysOfMonth;
 			public uint8 DaysOfWeek;
 			public uint8 Flags;
-			public PWSTR Command;
+			public char16* Command;
 		}
 		[CRepr]
 		public struct AT_ENUM
@@ -4519,14 +4519,14 @@ namespace Win32
 			public uint32 DaysOfMonth;
 			public uint8 DaysOfWeek;
 			public uint8 Flags;
-			public PWSTR Command;
+			public char16* Command;
 		}
 		[CRepr]
 		public struct FLAT_STRING
 		{
 			public int16 MaximumLength;
 			public int16 Length;
-			public CHAR[0] Buffer;
+			public char8[0] Buffer;
 		}
 		[CRepr]
 		public struct NETWORK_NAME
@@ -4543,16 +4543,16 @@ namespace Win32
 		{
 			public OBO_TOKEN_TYPE Type;
 			public INetCfgComponent* pncc;
-			public PWSTR pszwManufacturer;
-			public PWSTR pszwProduct;
-			public PWSTR pszwDisplayName;
-			public BOOL fRegistered;
+			public char16* pszwManufacturer;
+			public char16* pszwProduct;
+			public char16* pszwDisplayName;
+			public IntBool fRegistered;
 		}
 		[CRepr]
 		public struct RASCON_IPUI
 		{
 			public Guid guidConnection;
-			public BOOL fIPv6Cfg;
+			public IntBool fIPv6Cfg;
 			public uint32 dwFlags;
 			public char16[16] pszwIpAddr;
 			public char16[16] pszwDnsAddr;
@@ -4604,18 +4604,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, INetCfgBindingInterface** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumNetCfgBindingInterface* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, INetCfgBindingInterface** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumNetCfgBindingInterface* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingInterface self, uint32 celt, INetCfgBindingInterface** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingInterface self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingInterface self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingInterface self, out IEnumNetCfgBindingInterface* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingInterface self, uint32 celt, INetCfgBindingInterface** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingInterface self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingInterface self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingInterface self, out IEnumNetCfgBindingInterface* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -4625,18 +4625,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, INetCfgBindingPath** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumNetCfgBindingPath* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, INetCfgBindingPath** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumNetCfgBindingPath* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingPath self, uint32 celt, INetCfgBindingPath** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingPath self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingPath self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgBindingPath self, out IEnumNetCfgBindingPath* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingPath self, uint32 celt, INetCfgBindingPath** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingPath self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingPath self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgBindingPath self, out IEnumNetCfgBindingPath* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -4646,18 +4646,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 celt, INetCfgComponent** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
-			public HRESULT Skip(uint32 celt) mut => VT.Skip(ref this, celt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumNetCfgComponent* ppenum) mut => VT.Clone(ref this, out ppenum);
+			public HResult Next(uint32 celt, INetCfgComponent** rgelt, uint32* pceltFetched) mut => VT.Next(ref this, celt, rgelt, pceltFetched);
+			public HResult Skip(uint32 celt) mut => VT.Skip(ref this, celt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumNetCfgComponent* ppenum) mut => VT.Clone(ref this, out ppenum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgComponent self, uint32 celt, INetCfgComponent** rgelt, uint32* pceltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgComponent self, uint32 celt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgComponent self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumNetCfgComponent self, out IEnumNetCfgComponent* ppenum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgComponent self, uint32 celt, INetCfgComponent** rgelt, uint32* pceltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgComponent self, uint32 celt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgComponent self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumNetCfgComponent self, out IEnumNetCfgComponent* ppenum) Clone;
 			}
 		}
 		[CRepr]
@@ -4667,24 +4667,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(void* pvReserved) mut => VT.Initialize(ref this, pvReserved);
-			public HRESULT Uninitialize() mut => VT.Uninitialize(ref this);
-			public HRESULT Apply() mut => VT.Apply(ref this);
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
-			public HRESULT EnumComponents(in Guid pguidClass, IEnumNetCfgComponent** ppenumComponent) mut => VT.EnumComponents(ref this, pguidClass, ppenumComponent);
-			public HRESULT FindComponent(PWSTR pszwInfId, INetCfgComponent** pComponent) mut => VT.FindComponent(ref this, pszwInfId, pComponent);
-			public HRESULT QueryNetCfgClass(in Guid pguidClass, in Guid riid, void** ppvObject) mut => VT.QueryNetCfgClass(ref this, pguidClass, riid, ppvObject);
+			public HResult Initialize(void* pvReserved) mut => VT.Initialize(ref this, pvReserved);
+			public HResult Uninitialize() mut => VT.Uninitialize(ref this);
+			public HResult Apply() mut => VT.Apply(ref this);
+			public HResult Cancel() mut => VT.Cancel(ref this);
+			public HResult EnumComponents(in Guid pguidClass, IEnumNetCfgComponent** ppenumComponent) mut => VT.EnumComponents(ref this, pguidClass, ppenumComponent);
+			public HResult FindComponent(char16* pszwInfId, INetCfgComponent** pComponent) mut => VT.FindComponent(ref this, pszwInfId, pComponent);
+			public HResult QueryNetCfgClass(in Guid pguidClass, in Guid riid, void** ppvObject) mut => VT.QueryNetCfgClass(ref this, pguidClass, riid, ppvObject);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self, void* pvReserved) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self) Uninitialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self) Apply;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self, in Guid pguidClass, IEnumNetCfgComponent** ppenumComponent) EnumComponents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self, PWSTR pszwInfId, INetCfgComponent** pComponent) FindComponent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfg self, in Guid pguidClass, in Guid riid, void** ppvObject) QueryNetCfgClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self, void* pvReserved) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self) Uninitialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self) Apply;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self, in Guid pguidClass, IEnumNetCfgComponent** ppenumComponent) EnumComponents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self, char16* pszwInfId, INetCfgComponent** pComponent) FindComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfg self, in Guid pguidClass, in Guid riid, void** ppvObject) QueryNetCfgClass;
 			}
 		}
 		[CRepr]
@@ -4694,16 +4694,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AcquireWriteLock(uint32 cmsTimeout, PWSTR pszwClientDescription, PWSTR* ppszwClientDescription) mut => VT.AcquireWriteLock(ref this, cmsTimeout, pszwClientDescription, ppszwClientDescription);
-			public HRESULT ReleaseWriteLock() mut => VT.ReleaseWriteLock(ref this);
-			public HRESULT IsWriteLocked(PWSTR* ppszwClientDescription) mut => VT.IsWriteLocked(ref this, ppszwClientDescription);
+			public HResult AcquireWriteLock(uint32 cmsTimeout, char16* pszwClientDescription, char16** ppszwClientDescription) mut => VT.AcquireWriteLock(ref this, cmsTimeout, pszwClientDescription, ppszwClientDescription);
+			public HResult ReleaseWriteLock() mut => VT.ReleaseWriteLock(ref this);
+			public HResult IsWriteLocked(PWSTR* ppszwClientDescription) mut => VT.IsWriteLocked(ref this, ppszwClientDescription);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgLock self, uint32 cmsTimeout, PWSTR pszwClientDescription, PWSTR* ppszwClientDescription) AcquireWriteLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgLock self) ReleaseWriteLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgLock self, PWSTR* ppszwClientDescription) IsWriteLocked;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgLock self, uint32 cmsTimeout, char16* pszwClientDescription, char16** ppszwClientDescription) AcquireWriteLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgLock self) ReleaseWriteLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgLock self, char16** ppszwClientDescription) IsWriteLocked;
 			}
 		}
 		[CRepr]
@@ -4713,16 +4713,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetName(PWSTR* ppszwInterfaceName) mut => VT.GetName(ref this, ppszwInterfaceName);
-			public HRESULT GetUpperComponent(INetCfgComponent** ppnccItem) mut => VT.GetUpperComponent(ref this, ppnccItem);
-			public HRESULT GetLowerComponent(INetCfgComponent** ppnccItem) mut => VT.GetLowerComponent(ref this, ppnccItem);
+			public HResult GetName(PWSTR* ppszwInterfaceName) mut => VT.GetName(ref this, ppszwInterfaceName);
+			public HResult GetUpperComponent(INetCfgComponent** ppnccItem) mut => VT.GetUpperComponent(ref this, ppnccItem);
+			public HResult GetLowerComponent(INetCfgComponent** ppnccItem) mut => VT.GetLowerComponent(ref this, ppnccItem);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingInterface self, PWSTR* ppszwInterfaceName) GetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingInterface self, INetCfgComponent** ppnccItem) GetUpperComponent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingInterface self, INetCfgComponent** ppnccItem) GetLowerComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingInterface self, char16** ppszwInterfaceName) GetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingInterface self, INetCfgComponent** ppnccItem) GetUpperComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingInterface self, INetCfgComponent** ppnccItem) GetLowerComponent;
 			}
 		}
 		[CRepr]
@@ -4732,26 +4732,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsSamePathAs(ref INetCfgBindingPath pPath) mut => VT.IsSamePathAs(ref this, ref pPath);
-			public HRESULT IsSubPathOf(ref INetCfgBindingPath pPath) mut => VT.IsSubPathOf(ref this, ref pPath);
-			public HRESULT IsEnabled() mut => VT.IsEnabled(ref this);
-			public HRESULT Enable(BOOL fEnable) mut => VT.Enable(ref this, fEnable);
-			public HRESULT GetPathToken(PWSTR* ppszwPathToken) mut => VT.GetPathToken(ref this, ppszwPathToken);
-			public HRESULT GetOwner(INetCfgComponent** ppComponent) mut => VT.GetOwner(ref this, ppComponent);
-			public HRESULT GetDepth(out uint32 pcInterfaces) mut => VT.GetDepth(ref this, out pcInterfaces);
-			public HRESULT EnumBindingInterfaces(IEnumNetCfgBindingInterface** ppenumInterface) mut => VT.EnumBindingInterfaces(ref this, ppenumInterface);
+			public HResult IsSamePathAs(ref INetCfgBindingPath pPath) mut => VT.IsSamePathAs(ref this, ref pPath);
+			public HResult IsSubPathOf(ref INetCfgBindingPath pPath) mut => VT.IsSubPathOf(ref this, ref pPath);
+			public HResult IsEnabled() mut => VT.IsEnabled(ref this);
+			public HResult Enable(IntBool fEnable) mut => VT.Enable(ref this, fEnable);
+			public HResult GetPathToken(PWSTR* ppszwPathToken) mut => VT.GetPathToken(ref this, ppszwPathToken);
+			public HResult GetOwner(INetCfgComponent** ppComponent) mut => VT.GetOwner(ref this, ppComponent);
+			public HResult GetDepth(out uint32 pcInterfaces) mut => VT.GetDepth(ref this, out pcInterfaces);
+			public HResult EnumBindingInterfaces(IEnumNetCfgBindingInterface** ppenumInterface) mut => VT.EnumBindingInterfaces(ref this, ppenumInterface);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, ref INetCfgBindingPath pPath) IsSamePathAs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, ref INetCfgBindingPath pPath) IsSubPathOf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self) IsEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, BOOL fEnable) Enable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, PWSTR* ppszwPathToken) GetPathToken;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, INetCfgComponent** ppComponent) GetOwner;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, out uint32 pcInterfaces) GetDepth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgBindingPath self, IEnumNetCfgBindingInterface** ppenumInterface) EnumBindingInterfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, ref INetCfgBindingPath pPath) IsSamePathAs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, ref INetCfgBindingPath pPath) IsSubPathOf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self) IsEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, IntBool fEnable) Enable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, char16** ppszwPathToken) GetPathToken;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, INetCfgComponent** ppComponent) GetOwner;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, out uint32 pcInterfaces) GetDepth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgBindingPath self, IEnumNetCfgBindingInterface** ppenumInterface) EnumBindingInterfaces;
 			}
 		}
 		[CRepr]
@@ -4761,14 +4761,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT FindComponent(PWSTR pszwInfId, INetCfgComponent** ppnccItem) mut => VT.FindComponent(ref this, pszwInfId, ppnccItem);
-			public HRESULT EnumComponents(IEnumNetCfgComponent** ppenumComponent) mut => VT.EnumComponents(ref this, ppenumComponent);
+			public HResult FindComponent(char16* pszwInfId, INetCfgComponent** ppnccItem) mut => VT.FindComponent(ref this, pszwInfId, ppnccItem);
+			public HResult EnumComponents(IEnumNetCfgComponent** ppenumComponent) mut => VT.EnumComponents(ref this, ppenumComponent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgClass self, PWSTR pszwInfId, INetCfgComponent** ppnccItem) FindComponent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgClass self, IEnumNetCfgComponent** ppenumComponent) EnumComponents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgClass self, char16* pszwInfId, INetCfgComponent** ppnccItem) FindComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgClass self, IEnumNetCfgComponent** ppenumComponent) EnumComponents;
 			}
 		}
 		[CRepr]
@@ -4778,16 +4778,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SelectAndInstall(HWND hwndParent, OBO_TOKEN* pOboToken, INetCfgComponent** ppnccItem) mut => VT.SelectAndInstall(ref this, hwndParent, pOboToken, ppnccItem);
-			public HRESULT Install(PWSTR pszwInfId, OBO_TOKEN* pOboToken, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo, PWSTR pszwAnswerFile, PWSTR pszwAnswerSections, INetCfgComponent** ppnccItem) mut => VT.Install(ref this, pszwInfId, pOboToken, dwSetupFlags, dwUpgradeFromBuildNo, pszwAnswerFile, pszwAnswerSections, ppnccItem);
-			public HRESULT DeInstall(ref INetCfgComponent pComponent, OBO_TOKEN* pOboToken, PWSTR* pmszwRefs) mut => VT.DeInstall(ref this, ref pComponent, pOboToken, pmszwRefs);
+			public HResult SelectAndInstall(HWnd hwndParent, OBO_TOKEN* pOboToken, INetCfgComponent** ppnccItem) mut => VT.SelectAndInstall(ref this, hwndParent, pOboToken, ppnccItem);
+			public HResult Install(char16* pszwInfId, OBO_TOKEN* pOboToken, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo, char16* pszwAnswerFile, char16* pszwAnswerSections, INetCfgComponent** ppnccItem) mut => VT.Install(ref this, pszwInfId, pOboToken, dwSetupFlags, dwUpgradeFromBuildNo, pszwAnswerFile, pszwAnswerSections, ppnccItem);
+			public HResult DeInstall(ref INetCfgComponent pComponent, OBO_TOKEN* pOboToken, char16** pmszwRefs) mut => VT.DeInstall(ref this, ref pComponent, pOboToken, pmszwRefs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgClassSetup self, HWND hwndParent, OBO_TOKEN* pOboToken, INetCfgComponent** ppnccItem) SelectAndInstall;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgClassSetup self, PWSTR pszwInfId, OBO_TOKEN* pOboToken, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo, PWSTR pszwAnswerFile, PWSTR pszwAnswerSections, INetCfgComponent** ppnccItem) Install;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgClassSetup self, ref INetCfgComponent pComponent, OBO_TOKEN* pOboToken, PWSTR* pmszwRefs) DeInstall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgClassSetup self, HWnd hwndParent, OBO_TOKEN* pOboToken, INetCfgComponent** ppnccItem) SelectAndInstall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgClassSetup self, char16* pszwInfId, OBO_TOKEN* pOboToken, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo, char16* pszwAnswerFile, char16* pszwAnswerSections, INetCfgComponent** ppnccItem) Install;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgClassSetup self, ref INetCfgComponent pComponent, OBO_TOKEN* pOboToken, char16** pmszwRefs) DeInstall;
 			}
 		}
 		[CRepr]
@@ -4797,12 +4797,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT UpdateNonEnumeratedComponent(ref INetCfgComponent pIComp, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo) mut => VT.UpdateNonEnumeratedComponent(ref this, ref pIComp, dwSetupFlags, dwUpgradeFromBuildNo);
+			public HResult UpdateNonEnumeratedComponent(ref INetCfgComponent pIComp, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo) mut => VT.UpdateNonEnumeratedComponent(ref this, ref pIComp, dwSetupFlags, dwUpgradeFromBuildNo);
 
 			[CRepr]
 			public struct VTable : INetCfgClassSetup.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgClassSetup2 self, ref INetCfgComponent pIComp, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo) UpdateNonEnumeratedComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgClassSetup2 self, ref INetCfgComponent pIComp, uint32 dwSetupFlags, uint32 dwUpgradeFromBuildNo) UpdateNonEnumeratedComponent;
 			}
 		}
 		[CRepr]
@@ -4812,34 +4812,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDisplayName(PWSTR* ppszwDisplayName) mut => VT.GetDisplayName(ref this, ppszwDisplayName);
-			public HRESULT SetDisplayName(PWSTR pszwDisplayName) mut => VT.SetDisplayName(ref this, pszwDisplayName);
-			public HRESULT GetHelpText(PWSTR* pszwHelpText) mut => VT.GetHelpText(ref this, pszwHelpText);
-			public HRESULT GetId(PWSTR* ppszwId) mut => VT.GetId(ref this, ppszwId);
-			public HRESULT GetCharacteristics(out uint32 pdwCharacteristics) mut => VT.GetCharacteristics(ref this, out pdwCharacteristics);
-			public HRESULT GetInstanceGuid(Guid* pGuid) mut => VT.GetInstanceGuid(ref this, pGuid);
-			public HRESULT GetPnpDevNodeId(PWSTR* ppszwDevNodeId) mut => VT.GetPnpDevNodeId(ref this, ppszwDevNodeId);
-			public HRESULT GetClassGuid(Guid* pGuid) mut => VT.GetClassGuid(ref this, pGuid);
-			public HRESULT GetBindName(PWSTR* ppszwBindName) mut => VT.GetBindName(ref this, ppszwBindName);
-			public HRESULT GetDeviceStatus(out uint32 pulStatus) mut => VT.GetDeviceStatus(ref this, out pulStatus);
-			public HRESULT OpenParamKey(HKEY* phkey) mut => VT.OpenParamKey(ref this, phkey);
-			public HRESULT RaisePropertyUi(HWND hwndParent, uint32 dwFlags, IUnknown* punkContext) mut => VT.RaisePropertyUi(ref this, hwndParent, dwFlags, punkContext);
+			public HResult GetDisplayName(PWSTR* ppszwDisplayName) mut => VT.GetDisplayName(ref this, ppszwDisplayName);
+			public HResult SetDisplayName(char16* pszwDisplayName) mut => VT.SetDisplayName(ref this, pszwDisplayName);
+			public HResult GetHelpText(PWSTR* pszwHelpText) mut => VT.GetHelpText(ref this, pszwHelpText);
+			public HResult GetId(PWSTR* ppszwId) mut => VT.GetId(ref this, ppszwId);
+			public HResult GetCharacteristics(out uint32 pdwCharacteristics) mut => VT.GetCharacteristics(ref this, out pdwCharacteristics);
+			public HResult GetInstanceGuid(Guid* pGuid) mut => VT.GetInstanceGuid(ref this, pGuid);
+			public HResult GetPnpDevNodeId(PWSTR* ppszwDevNodeId) mut => VT.GetPnpDevNodeId(ref this, ppszwDevNodeId);
+			public HResult GetClassGuid(Guid* pGuid) mut => VT.GetClassGuid(ref this, pGuid);
+			public HResult GetBindName(PWSTR* ppszwBindName) mut => VT.GetBindName(ref this, ppszwBindName);
+			public HResult GetDeviceStatus(out uint32 pulStatus) mut => VT.GetDeviceStatus(ref this, out pulStatus);
+			public HResult OpenParamKey(HKEY* phkey) mut => VT.OpenParamKey(ref this, phkey);
+			public HResult RaisePropertyUi(HWnd hwndParent, uint32 dwFlags, IUnknown* punkContext) mut => VT.RaisePropertyUi(ref this, hwndParent, dwFlags, punkContext);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, PWSTR* ppszwDisplayName) GetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, PWSTR pszwDisplayName) SetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, PWSTR* pszwHelpText) GetHelpText;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, PWSTR* ppszwId) GetId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, out uint32 pdwCharacteristics) GetCharacteristics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, Guid* pGuid) GetInstanceGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, PWSTR* ppszwDevNodeId) GetPnpDevNodeId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, Guid* pGuid) GetClassGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, PWSTR* ppszwBindName) GetBindName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, out uint32 pulStatus) GetDeviceStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, HKEY* phkey) OpenParamKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponent self, HWND hwndParent, uint32 dwFlags, IUnknown* punkContext) RaisePropertyUi;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, char16** ppszwDisplayName) GetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, char16* pszwDisplayName) SetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, char16** pszwHelpText) GetHelpText;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, char16** ppszwId) GetId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, out uint32 pdwCharacteristics) GetCharacteristics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, Guid* pGuid) GetInstanceGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, char16** ppszwDevNodeId) GetPnpDevNodeId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, Guid* pGuid) GetClassGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, char16** ppszwBindName) GetBindName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, out uint32 pulStatus) GetDeviceStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, HKEY* phkey) OpenParamKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponent self, HWnd hwndParent, uint32 dwFlags, IUnknown* punkContext) RaisePropertyUi;
 			}
 		}
 		[CRepr]
@@ -4849,26 +4849,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BindTo(ref INetCfgComponent pnccItem) mut => VT.BindTo(ref this, ref pnccItem);
-			public HRESULT UnbindFrom(ref INetCfgComponent pnccItem) mut => VT.UnbindFrom(ref this, ref pnccItem);
-			public HRESULT SupportsBindingInterface(uint32 dwFlags, PWSTR pszwInterfaceName) mut => VT.SupportsBindingInterface(ref this, dwFlags, pszwInterfaceName);
-			public HRESULT IsBoundTo(ref INetCfgComponent pnccItem) mut => VT.IsBoundTo(ref this, ref pnccItem);
-			public HRESULT IsBindableTo(ref INetCfgComponent pnccItem) mut => VT.IsBindableTo(ref this, ref pnccItem);
-			public HRESULT EnumBindingPaths(uint32 dwFlags, IEnumNetCfgBindingPath** ppIEnum) mut => VT.EnumBindingPaths(ref this, dwFlags, ppIEnum);
-			public HRESULT MoveBefore(ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) mut => VT.MoveBefore(ref this, ref pncbItemSrc, pncbItemDest);
-			public HRESULT MoveAfter(ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) mut => VT.MoveAfter(ref this, ref pncbItemSrc, pncbItemDest);
+			public HResult BindTo(ref INetCfgComponent pnccItem) mut => VT.BindTo(ref this, ref pnccItem);
+			public HResult UnbindFrom(ref INetCfgComponent pnccItem) mut => VT.UnbindFrom(ref this, ref pnccItem);
+			public HResult SupportsBindingInterface(uint32 dwFlags, char16* pszwInterfaceName) mut => VT.SupportsBindingInterface(ref this, dwFlags, pszwInterfaceName);
+			public HResult IsBoundTo(ref INetCfgComponent pnccItem) mut => VT.IsBoundTo(ref this, ref pnccItem);
+			public HResult IsBindableTo(ref INetCfgComponent pnccItem) mut => VT.IsBindableTo(ref this, ref pnccItem);
+			public HResult EnumBindingPaths(uint32 dwFlags, IEnumNetCfgBindingPath** ppIEnum) mut => VT.EnumBindingPaths(ref this, dwFlags, ppIEnum);
+			public HResult MoveBefore(ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) mut => VT.MoveBefore(ref this, ref pncbItemSrc, pncbItemDest);
+			public HResult MoveAfter(ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) mut => VT.MoveAfter(ref this, ref pncbItemSrc, pncbItemDest);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) BindTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) UnbindFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, uint32 dwFlags, PWSTR pszwInterfaceName) SupportsBindingInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) IsBoundTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) IsBindableTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, uint32 dwFlags, IEnumNetCfgBindingPath** ppIEnum) EnumBindingPaths;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) MoveBefore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentBindings self, ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) MoveAfter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) BindTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) UnbindFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, uint32 dwFlags, char16* pszwInterfaceName) SupportsBindingInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) IsBoundTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, ref INetCfgComponent pnccItem) IsBindableTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, uint32 dwFlags, IEnumNetCfgBindingPath** ppIEnum) EnumBindingPaths;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) MoveBefore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentBindings self, ref INetCfgBindingPath pncbItemSrc, INetCfgBindingPath* pncbItemDest) MoveAfter;
 			}
 		}
 		[CRepr]
@@ -4878,18 +4878,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT HrSetupSetFirstDword(PWSTR pwszSection, PWSTR pwszKey, uint32 dwValue) mut => VT.HrSetupSetFirstDword(ref this, pwszSection, pwszKey, dwValue);
-			public HRESULT HrSetupSetFirstString(PWSTR pwszSection, PWSTR pwszKey, PWSTR pwszValue) mut => VT.HrSetupSetFirstString(ref this, pwszSection, pwszKey, pwszValue);
-			public HRESULT HrSetupSetFirstStringAsBool(PWSTR pwszSection, PWSTR pwszKey, BOOL fValue) mut => VT.HrSetupSetFirstStringAsBool(ref this, pwszSection, pwszKey, fValue);
-			public HRESULT HrSetupSetFirstMultiSzField(PWSTR pwszSection, PWSTR pwszKey, PWSTR pmszValue) mut => VT.HrSetupSetFirstMultiSzField(ref this, pwszSection, pwszKey, pmszValue);
+			public HResult HrSetupSetFirstDword(char16* pwszSection, char16* pwszKey, uint32 dwValue) mut => VT.HrSetupSetFirstDword(ref this, pwszSection, pwszKey, dwValue);
+			public HResult HrSetupSetFirstString(char16* pwszSection, char16* pwszKey, char16* pwszValue) mut => VT.HrSetupSetFirstString(ref this, pwszSection, pwszKey, pwszValue);
+			public HResult HrSetupSetFirstStringAsBool(char16* pwszSection, char16* pwszKey, IntBool fValue) mut => VT.HrSetupSetFirstStringAsBool(ref this, pwszSection, pwszKey, fValue);
+			public HResult HrSetupSetFirstMultiSzField(char16* pwszSection, char16* pwszKey, char16* pmszValue) mut => VT.HrSetupSetFirstMultiSzField(ref this, pwszSection, pwszKey, pmszValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgSysPrep self, PWSTR pwszSection, PWSTR pwszKey, uint32 dwValue) HrSetupSetFirstDword;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgSysPrep self, PWSTR pwszSection, PWSTR pwszKey, PWSTR pwszValue) HrSetupSetFirstString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgSysPrep self, PWSTR pwszSection, PWSTR pwszKey, BOOL fValue) HrSetupSetFirstStringAsBool;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgSysPrep self, PWSTR pwszSection, PWSTR pwszKey, PWSTR pmszValue) HrSetupSetFirstMultiSzField;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgSysPrep self, char16* pwszSection, char16* pwszKey, uint32 dwValue) HrSetupSetFirstDword;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgSysPrep self, char16* pwszSection, char16* pwszKey, char16* pwszValue) HrSetupSetFirstString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgSysPrep self, char16* pwszSection, char16* pwszKey, IntBool fValue) HrSetupSetFirstStringAsBool;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgSysPrep self, char16* pwszSection, char16* pwszKey, char16* pmszValue) HrSetupSetFirstMultiSzField;
 			}
 		}
 		[CRepr]
@@ -4899,12 +4899,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SendPnpReconfig(NCPNP_RECONFIG_LAYER Layer, PWSTR pszwUpper, PWSTR pszwLower, void* pvData, uint32 dwSizeOfData) mut => VT.SendPnpReconfig(ref this, Layer, pszwUpper, pszwLower, pvData, dwSizeOfData);
+			public HResult SendPnpReconfig(NCPNP_RECONFIG_LAYER Layer, char16* pszwUpper, char16* pszwLower, void* pvData, uint32 dwSizeOfData) mut => VT.SendPnpReconfig(ref this, Layer, pszwUpper, pszwLower, pvData, dwSizeOfData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgPnpReconfigCallback self, NCPNP_RECONFIG_LAYER Layer, PWSTR pszwUpper, PWSTR pszwLower, void* pvData, uint32 dwSizeOfData) SendPnpReconfig;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgPnpReconfigCallback self, NCPNP_RECONFIG_LAYER Layer, char16* pszwUpper, char16* pszwLower, void* pvData, uint32 dwSizeOfData) SendPnpReconfig;
 			}
 		}
 		[CRepr]
@@ -4914,18 +4914,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(ref INetCfgComponent pIComp, ref INetCfg pINetCfg, BOOL fInstalling) mut => VT.Initialize(ref this, ref pIComp, ref pINetCfg, fInstalling);
-			public HRESULT ApplyRegistryChanges() mut => VT.ApplyRegistryChanges(ref this);
-			public HRESULT ApplyPnpChanges(ref INetCfgPnpReconfigCallback pICallback) mut => VT.ApplyPnpChanges(ref this, ref pICallback);
-			public HRESULT CancelChanges() mut => VT.CancelChanges(ref this);
+			public HResult Initialize(ref INetCfgComponent pIComp, ref INetCfg pINetCfg, IntBool fInstalling) mut => VT.Initialize(ref this, ref pIComp, ref pINetCfg, fInstalling);
+			public HResult ApplyRegistryChanges() mut => VT.ApplyRegistryChanges(ref this);
+			public HResult ApplyPnpChanges(ref INetCfgPnpReconfigCallback pICallback) mut => VT.ApplyPnpChanges(ref this, ref pICallback);
+			public HResult CancelChanges() mut => VT.CancelChanges(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentControl self, ref INetCfgComponent pIComp, ref INetCfg pINetCfg, BOOL fInstalling) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentControl self) ApplyRegistryChanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentControl self, ref INetCfgPnpReconfigCallback pICallback) ApplyPnpChanges;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentControl self) CancelChanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentControl self, ref INetCfgComponent pIComp, ref INetCfg pINetCfg, IntBool fInstalling) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentControl self) ApplyRegistryChanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentControl self, ref INetCfgPnpReconfigCallback pICallback) ApplyPnpChanges;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentControl self) CancelChanges;
 			}
 		}
 		[CRepr]
@@ -4935,18 +4935,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Install(uint32 dwSetupFlags) mut => VT.Install(ref this, dwSetupFlags);
-			public HRESULT Upgrade(uint32 dwSetupFlags, uint32 dwUpgradeFomBuildNo) mut => VT.Upgrade(ref this, dwSetupFlags, dwUpgradeFomBuildNo);
-			public HRESULT ReadAnswerFile(PWSTR pszwAnswerFile, PWSTR pszwAnswerSections) mut => VT.ReadAnswerFile(ref this, pszwAnswerFile, pszwAnswerSections);
-			public HRESULT Removing() mut => VT.Removing(ref this);
+			public HResult Install(uint32 dwSetupFlags) mut => VT.Install(ref this, dwSetupFlags);
+			public HResult Upgrade(uint32 dwSetupFlags, uint32 dwUpgradeFomBuildNo) mut => VT.Upgrade(ref this, dwSetupFlags, dwUpgradeFomBuildNo);
+			public HResult ReadAnswerFile(char16* pszwAnswerFile, char16* pszwAnswerSections) mut => VT.ReadAnswerFile(ref this, pszwAnswerFile, pszwAnswerSections);
+			public HResult Removing() mut => VT.Removing(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentSetup self, uint32 dwSetupFlags) Install;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentSetup self, uint32 dwSetupFlags, uint32 dwUpgradeFomBuildNo) Upgrade;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentSetup self, PWSTR pszwAnswerFile, PWSTR pszwAnswerSections) ReadAnswerFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentSetup self) Removing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentSetup self, uint32 dwSetupFlags) Install;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentSetup self, uint32 dwSetupFlags, uint32 dwUpgradeFomBuildNo) Upgrade;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentSetup self, char16* pszwAnswerFile, char16* pszwAnswerSections) ReadAnswerFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentSetup self) Removing;
 			}
 		}
 		[CRepr]
@@ -4956,22 +4956,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryPropertyUi(ref IUnknown pUnkReserved) mut => VT.QueryPropertyUi(ref this, ref pUnkReserved);
-			public HRESULT SetContext(ref IUnknown pUnkReserved) mut => VT.SetContext(ref this, ref pUnkReserved);
-			public HRESULT MergePropPages(out uint32 pdwDefPages, out uint8* pahpspPrivate, out uint32 pcPages, HWND hwndParent, PWSTR* pszStartPage) mut => VT.MergePropPages(ref this, out pdwDefPages, out pahpspPrivate, out pcPages, hwndParent, pszStartPage);
-			public HRESULT ValidateProperties(HWND hwndSheet) mut => VT.ValidateProperties(ref this, hwndSheet);
-			public HRESULT ApplyProperties() mut => VT.ApplyProperties(ref this);
-			public HRESULT CancelProperties() mut => VT.CancelProperties(ref this);
+			public HResult QueryPropertyUi(ref IUnknown pUnkReserved) mut => VT.QueryPropertyUi(ref this, ref pUnkReserved);
+			public HResult SetContext(ref IUnknown pUnkReserved) mut => VT.SetContext(ref this, ref pUnkReserved);
+			public HResult MergePropPages(out uint32 pdwDefPages, out uint8* pahpspPrivate, out uint32 pcPages, HWnd hwndParent, char16** pszStartPage) mut => VT.MergePropPages(ref this, out pdwDefPages, out pahpspPrivate, out pcPages, hwndParent, pszStartPage);
+			public HResult ValidateProperties(HWnd hwndSheet) mut => VT.ValidateProperties(ref this, hwndSheet);
+			public HResult ApplyProperties() mut => VT.ApplyProperties(ref this);
+			public HResult CancelProperties() mut => VT.CancelProperties(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentPropertyUi self, ref IUnknown pUnkReserved) QueryPropertyUi;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentPropertyUi self, ref IUnknown pUnkReserved) SetContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentPropertyUi self, out uint32 pdwDefPages, out uint8* pahpspPrivate, out uint32 pcPages, HWND hwndParent, PWSTR* pszStartPage) MergePropPages;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentPropertyUi self, HWND hwndSheet) ValidateProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentPropertyUi self) ApplyProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentPropertyUi self) CancelProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentPropertyUi self, ref IUnknown pUnkReserved) QueryPropertyUi;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentPropertyUi self, ref IUnknown pUnkReserved) SetContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentPropertyUi self, out uint32 pdwDefPages, out uint8* pahpspPrivate, out uint32 pcPages, HWnd hwndParent, char16** pszStartPage) MergePropPages;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentPropertyUi self, HWnd hwndSheet) ValidateProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentPropertyUi self) ApplyProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentPropertyUi self) CancelProperties;
 			}
 		}
 		[CRepr]
@@ -4981,14 +4981,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.QueryBindingPath(ref this, dwChangeFlag, ref pIPath);
-			public HRESULT NotifyBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.NotifyBindingPath(ref this, dwChangeFlag, ref pIPath);
+			public HResult QueryBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.QueryBindingPath(ref this, dwChangeFlag, ref pIPath);
+			public HResult NotifyBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.NotifyBindingPath(ref this, dwChangeFlag, ref pIPath);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentNotifyBinding self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) QueryBindingPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentNotifyBinding self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) NotifyBindingPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentNotifyBinding self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) QueryBindingPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentNotifyBinding self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) NotifyBindingPath;
 			}
 		}
 		[CRepr]
@@ -4998,18 +4998,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSupportedNotifications(out uint32 dwNotifications) mut => VT.GetSupportedNotifications(ref this, out dwNotifications);
-			public HRESULT SysQueryBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.SysQueryBindingPath(ref this, dwChangeFlag, ref pIPath);
-			public HRESULT SysNotifyBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.SysNotifyBindingPath(ref this, dwChangeFlag, ref pIPath);
-			public HRESULT SysNotifyComponent(uint32 dwChangeFlag, ref INetCfgComponent pIComp) mut => VT.SysNotifyComponent(ref this, dwChangeFlag, ref pIComp);
+			public HResult GetSupportedNotifications(out uint32 dwNotifications) mut => VT.GetSupportedNotifications(ref this, out dwNotifications);
+			public HResult SysQueryBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.SysQueryBindingPath(ref this, dwChangeFlag, ref pIPath);
+			public HResult SysNotifyBindingPath(uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) mut => VT.SysNotifyBindingPath(ref this, dwChangeFlag, ref pIPath);
+			public HResult SysNotifyComponent(uint32 dwChangeFlag, ref INetCfgComponent pIComp) mut => VT.SysNotifyComponent(ref this, dwChangeFlag, ref pIComp);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentNotifyGlobal self, out uint32 dwNotifications) GetSupportedNotifications;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentNotifyGlobal self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) SysQueryBindingPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentNotifyGlobal self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) SysNotifyBindingPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentNotifyGlobal self, uint32 dwChangeFlag, ref INetCfgComponent pIComp) SysNotifyComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentNotifyGlobal self, out uint32 dwNotifications) GetSupportedNotifications;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentNotifyGlobal self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) SysQueryBindingPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentNotifyGlobal self, uint32 dwChangeFlag, ref INetCfgBindingPath pIPath) SysNotifyBindingPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentNotifyGlobal self, uint32 dwChangeFlag, ref INetCfgComponent pIComp) SysNotifyComponent;
 			}
 		}
 		[CRepr]
@@ -5019,16 +5019,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInterfaceIdsForAdapter(ref INetCfgComponent pAdapter, out uint32 pdwNumInterfaces, Guid** ppguidInterfaceIds) mut => VT.GetInterfaceIdsForAdapter(ref this, ref pAdapter, out pdwNumInterfaces, ppguidInterfaceIds);
-			public HRESULT AddInterfacesToAdapter() mut => VT.AddInterfacesToAdapter(ref this);
-			public HRESULT RemoveInterfacesFromAdapter(ref INetCfgComponent pAdapter, uint32 dwNumInterfaces, Guid* pguidInterfaceIds) mut => VT.RemoveInterfacesFromAdapter(ref this, ref pAdapter, dwNumInterfaces, pguidInterfaceIds);
+			public HResult GetInterfaceIdsForAdapter(ref INetCfgComponent pAdapter, out uint32 pdwNumInterfaces, Guid** ppguidInterfaceIds) mut => VT.GetInterfaceIdsForAdapter(ref this, ref pAdapter, out pdwNumInterfaces, ppguidInterfaceIds);
+			public HResult AddInterfacesToAdapter() mut => VT.AddInterfacesToAdapter(ref this);
+			public HResult RemoveInterfacesFromAdapter(ref INetCfgComponent pAdapter, uint32 dwNumInterfaces, Guid* pguidInterfaceIds) mut => VT.RemoveInterfacesFromAdapter(ref this, ref pAdapter, dwNumInterfaces, pguidInterfaceIds);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentUpperEdge self, ref INetCfgComponent pAdapter, out uint32 pdwNumInterfaces, Guid** ppguidInterfaceIds) GetInterfaceIdsForAdapter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentUpperEdge self) AddInterfacesToAdapter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentUpperEdge self, ref INetCfgComponent pAdapter, uint32 dwNumInterfaces, Guid* pguidInterfaceIds) RemoveInterfacesFromAdapter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentUpperEdge self, ref INetCfgComponent pAdapter, out uint32 pdwNumInterfaces, Guid** ppguidInterfaceIds) GetInterfaceIdsForAdapter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentUpperEdge self) AddInterfacesToAdapter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentUpperEdge self, ref INetCfgComponent pAdapter, uint32 dwNumInterfaces, Guid* pguidInterfaceIds) RemoveInterfacesFromAdapter;
 			}
 		}
 		[CRepr]
@@ -5038,12 +5038,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDeviceGuid(out Guid pguid) mut => VT.GetDeviceGuid(ref this, out pguid);
+			public HResult GetDeviceGuid(out Guid pguid) mut => VT.GetDeviceGuid(ref this, out pguid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetLanConnectionUiInfo self, out Guid pguid) GetDeviceGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetLanConnectionUiInfo self, out Guid pguid) GetDeviceGuid;
 			}
 		}
 		[CRepr]
@@ -5053,12 +5053,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetUiInfo(out RASCON_IPUI pInfo) mut => VT.GetUiInfo(ref this, out pInfo);
+			public HResult GetUiInfo(out RASCON_IPUI pInfo) mut => VT.GetUiInfo(ref this, out pInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetRasConnectionIpUiInfo self, out RASCON_IPUI pInfo) GetUiInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetRasConnectionIpUiInfo self, out RASCON_IPUI pInfo) GetUiInfo;
 			}
 		}
 		[CRepr]
@@ -5068,14 +5068,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SaveAdapterParameters(ref INetCfgSysPrep pncsp, PWSTR pszwAnswerSections, ref Guid pAdapterInstanceGuid) mut => VT.SaveAdapterParameters(ref this, ref pncsp, pszwAnswerSections, ref pAdapterInstanceGuid);
-			public HRESULT RestoreAdapterParameters(PWSTR pszwAnswerFile, PWSTR pszwAnswerSection, ref Guid pAdapterInstanceGuid) mut => VT.RestoreAdapterParameters(ref this, pszwAnswerFile, pszwAnswerSection, ref pAdapterInstanceGuid);
+			public HResult SaveAdapterParameters(ref INetCfgSysPrep pncsp, char16* pszwAnswerSections, ref Guid pAdapterInstanceGuid) mut => VT.SaveAdapterParameters(ref this, ref pncsp, pszwAnswerSections, ref pAdapterInstanceGuid);
+			public HResult RestoreAdapterParameters(char16* pszwAnswerFile, char16* pszwAnswerSection, ref Guid pAdapterInstanceGuid) mut => VT.RestoreAdapterParameters(ref this, pszwAnswerFile, pszwAnswerSection, ref pAdapterInstanceGuid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentSysPrep self, ref INetCfgSysPrep pncsp, PWSTR pszwAnswerSections, ref Guid pAdapterInstanceGuid) SaveAdapterParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INetCfgComponentSysPrep self, PWSTR pszwAnswerFile, PWSTR pszwAnswerSection, ref Guid pAdapterInstanceGuid) RestoreAdapterParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentSysPrep self, ref INetCfgSysPrep pncsp, char16* pszwAnswerSections, ref Guid pAdapterInstanceGuid) SaveAdapterParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INetCfgComponentSysPrep self, char16* pszwAnswerFile, char16* pszwAnswerSection, ref Guid pAdapterInstanceGuid) RestoreAdapterParameters;
 			}
 		}
 		[CRepr]
@@ -5085,14 +5085,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Add(PWSTR pszwPathToFolder) mut => VT.Add(ref this, pszwPathToFolder);
-			public HRESULT Query(PWSTR pszwDomain, PWSTR pszwLanguage, PWSTR pszwXPathQuery, out IXMLDOMNodeList* Nodes) mut => VT.Query(ref this, pszwDomain, pszwLanguage, pszwXPathQuery, out Nodes);
+			public HResult Add(char16* pszwPathToFolder) mut => VT.Add(ref this, pszwPathToFolder);
+			public HResult Query(char16* pszwDomain, char16* pszwLanguage, char16* pszwXPathQuery, out IXMLDOMNodeList* Nodes) mut => VT.Query(ref this, pszwDomain, pszwLanguage, pszwXPathQuery, out Nodes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProvisioningDomain self, PWSTR pszwPathToFolder) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProvisioningDomain self, PWSTR pszwDomain, PWSTR pszwLanguage, PWSTR pszwXPathQuery, out IXMLDOMNodeList* Nodes) Query;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProvisioningDomain self, char16* pszwPathToFolder) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProvisioningDomain self, char16* pszwDomain, char16* pszwLanguage, char16* pszwXPathQuery, out IXMLDOMNodeList* Nodes) Query;
 			}
 		}
 		[CRepr]
@@ -5102,213 +5102,213 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateProfile(BSTR bstrXMLWirelessConfigProfile, BSTR bstrXMLConnectionConfigProfile, ref Guid pAdapterInstanceGuid, out uint32 pulStatus) mut => VT.CreateProfile(ref this, bstrXMLWirelessConfigProfile, bstrXMLConnectionConfigProfile, ref pAdapterInstanceGuid, out pulStatus);
+			public HResult CreateProfile(BSTR bstrXMLWirelessConfigProfile, BSTR bstrXMLConnectionConfigProfile, ref Guid pAdapterInstanceGuid, out uint32 pulStatus) mut => VT.CreateProfile(ref this, bstrXMLWirelessConfigProfile, bstrXMLConnectionConfigProfile, ref pAdapterInstanceGuid, out pulStatus);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IProvisioningProfileWireless self, BSTR bstrXMLWirelessConfigProfile, BSTR bstrXMLConnectionConfigProfile, ref Guid pAdapterInstanceGuid, out uint32 pulStatus) CreateProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IProvisioningProfileWireless self, BSTR bstrXMLWirelessConfigProfile, BSTR bstrXMLConnectionConfigProfile, ref Guid pAdapterInstanceGuid, out uint32 pulStatus) CreateProfile;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserAdd(PWSTR servername, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetUserAdd(char16* servername, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserEnum(PWSTR servername, uint32 level, NET_USER_ENUM_FILTER_FLAGS filter, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
+		public static extern uint32 NetUserEnum(char16* servername, uint32 level, NET_USER_ENUM_FILTER_FLAGS filter, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserGetInfo(PWSTR servername, PWSTR username, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetUserGetInfo(char16* servername, char16* username, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserSetInfo(PWSTR servername, PWSTR username, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetUserSetInfo(char16* servername, char16* username, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserDel(PWSTR servername, PWSTR username);
+		public static extern uint32 NetUserDel(char16* servername, char16* username);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserGetGroups(PWSTR servername, PWSTR username, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries);
+		public static extern uint32 NetUserGetGroups(char16* servername, char16* username, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserSetGroups(PWSTR servername, PWSTR username, uint32 level, ref uint8 buf, uint32 num_entries);
+		public static extern uint32 NetUserSetGroups(char16* servername, char16* username, uint32 level, ref uint8 buf, uint32 num_entries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserGetLocalGroups(PWSTR servername, PWSTR username, uint32 level, uint32 flags, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries);
+		public static extern uint32 NetUserGetLocalGroups(char16* servername, char16* username, uint32 level, uint32 flags, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserModalsGet(PWSTR servername, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetUserModalsGet(char16* servername, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserModalsSet(PWSTR servername, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetUserModalsSet(char16* servername, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUserChangePassword(PWSTR domainname, PWSTR username, PWSTR oldpassword, PWSTR newpassword);
+		public static extern uint32 NetUserChangePassword(char16* domainname, char16* username, char16* oldpassword, char16* newpassword);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupAdd(PWSTR servername, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetGroupAdd(char16* servername, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupAddUser(PWSTR servername, PWSTR GroupName, PWSTR username);
+		public static extern uint32 NetGroupAddUser(char16* servername, char16* GroupName, char16* username);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* resume_handle);
+		public static extern uint32 NetGroupEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupGetInfo(PWSTR servername, PWSTR groupname, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetGroupGetInfo(char16* servername, char16* groupname, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupSetInfo(PWSTR servername, PWSTR groupname, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetGroupSetInfo(char16* servername, char16* groupname, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupDel(PWSTR servername, PWSTR groupname);
+		public static extern uint32 NetGroupDel(char16* servername, char16* groupname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupDelUser(PWSTR servername, PWSTR GroupName, PWSTR Username);
+		public static extern uint32 NetGroupDelUser(char16* servername, char16* GroupName, char16* Username);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupGetUsers(PWSTR servername, PWSTR groupname, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* ResumeHandle);
+		public static extern uint32 NetGroupGetUsers(char16* servername, char16* groupname, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* ResumeHandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGroupSetUsers(PWSTR servername, PWSTR groupname, uint32 level, ref uint8 buf, uint32 totalentries);
+		public static extern uint32 NetGroupSetUsers(char16* servername, char16* groupname, uint32 level, ref uint8 buf, uint32 totalentries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupAdd(PWSTR servername, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetLocalGroupAdd(char16* servername, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupAddMember(PWSTR servername, PWSTR groupname, PSID membersid);
+		public static extern uint32 NetLocalGroupAddMember(char16* servername, char16* groupname, PSID membersid);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* resumehandle);
+		public static extern uint32 NetLocalGroupEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* resumehandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupGetInfo(PWSTR servername, PWSTR groupname, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetLocalGroupGetInfo(char16* servername, char16* groupname, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupSetInfo(PWSTR servername, PWSTR groupname, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetLocalGroupSetInfo(char16* servername, char16* groupname, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupDel(PWSTR servername, PWSTR groupname);
+		public static extern uint32 NetLocalGroupDel(char16* servername, char16* groupname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupDelMember(PWSTR servername, PWSTR groupname, PSID membersid);
+		public static extern uint32 NetLocalGroupDelMember(char16* servername, char16* groupname, PSID membersid);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupGetMembers(PWSTR servername, PWSTR localgroupname, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* resumehandle);
+		public static extern uint32 NetLocalGroupGetMembers(char16* servername, char16* localgroupname, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint* resumehandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupSetMembers(PWSTR servername, PWSTR groupname, uint32 level, ref uint8 buf, uint32 totalentries);
+		public static extern uint32 NetLocalGroupSetMembers(char16* servername, char16* groupname, uint32 level, ref uint8 buf, uint32 totalentries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupAddMembers(PWSTR servername, PWSTR groupname, uint32 level, ref uint8 buf, uint32 totalentries);
+		public static extern uint32 NetLocalGroupAddMembers(char16* servername, char16* groupname, uint32 level, ref uint8 buf, uint32 totalentries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetLocalGroupDelMembers(PWSTR servername, PWSTR groupname, uint32 level, ref uint8 buf, uint32 totalentries);
+		public static extern uint32 NetLocalGroupDelMembers(char16* servername, char16* groupname, uint32 level, ref uint8 buf, uint32 totalentries);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetQueryDisplayInformation(PWSTR ServerName, uint32 Level, uint32 Index, uint32 EntriesRequested, uint32 PreferredMaximumLength, out uint32 ReturnedEntryCount, void** SortedBuffer);
+		public static extern uint32 NetQueryDisplayInformation(char16* ServerName, uint32 Level, uint32 Index, uint32 EntriesRequested, uint32 PreferredMaximumLength, out uint32 ReturnedEntryCount, void** SortedBuffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGetDisplayInformationIndex(PWSTR ServerName, uint32 Level, PWSTR Prefix, out uint32 Index);
+		public static extern uint32 NetGetDisplayInformationIndex(char16* ServerName, uint32 Level, char16* Prefix, out uint32 Index);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAccessAdd(PWSTR servername, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetAccessAdd(char16* servername, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAccessEnum(PWSTR servername, PWSTR BasePath, uint32 Recursive, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
+		public static extern uint32 NetAccessEnum(char16* servername, char16* BasePath, uint32 Recursive, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAccessGetInfo(PWSTR servername, PWSTR resource, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetAccessGetInfo(char16* servername, char16* resource, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAccessSetInfo(PWSTR servername, PWSTR resource, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetAccessSetInfo(char16* servername, char16* resource, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAccessDel(PWSTR servername, PWSTR resource);
+		public static extern uint32 NetAccessDel(char16* servername, char16* resource);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAccessGetUserPerms(PWSTR servername, PWSTR UGname, PWSTR resource, out uint32 Perms);
+		public static extern uint32 NetAccessGetUserPerms(char16* servername, char16* UGname, char16* resource, out uint32 Perms);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetValidatePasswordPolicy(PWSTR ServerName, void* Qualifier, NET_VALIDATE_PASSWORD_TYPE ValidationType, void* InputArg, void** OutputArg);
+		public static extern uint32 NetValidatePasswordPolicy(char16* ServerName, void* Qualifier, NET_VALIDATE_PASSWORD_TYPE ValidationType, void* InputArg, void** OutputArg);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NetValidatePasswordPolicyFree(void** OutputArg);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGetDCName(PWSTR ServerName, PWSTR DomainName, out uint8* Buffer);
+		public static extern uint32 NetGetDCName(char16* ServerName, char16* DomainName, out uint8* Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGetAnyDCName(PWSTR ServerName, PWSTR DomainName, out uint8* Buffer);
+		public static extern uint32 NetGetAnyDCName(char16* ServerName, char16* DomainName, out uint8* Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 I_NetLogonControl2(PWSTR ServerName, uint32 FunctionCode, uint32 QueryLevel, ref uint8 Data, out uint8* Buffer);
+		public static extern uint32 I_NetLogonControl2(char16* ServerName, uint32 FunctionCode, uint32 QueryLevel, ref uint8 Data, out uint8* Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NetAddServiceAccount(PWSTR ServerName, PWSTR AccountName, PWSTR Password, uint32 Flags);
+		public static extern NTSTATUS NetAddServiceAccount(char16* ServerName, char16* AccountName, char16* Password, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NetRemoveServiceAccount(PWSTR ServerName, PWSTR AccountName, uint32 Flags);
+		public static extern NTSTATUS NetRemoveServiceAccount(char16* ServerName, char16* AccountName, uint32 Flags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NetEnumerateServiceAccounts(PWSTR ServerName, uint32 Flags, out uint32 AccountsCount, out uint16** Accounts);
+		public static extern NTSTATUS NetEnumerateServiceAccounts(char16* ServerName, uint32 Flags, out uint32 AccountsCount, out uint16** Accounts);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NetIsServiceAccount(PWSTR ServerName, PWSTR AccountName, out BOOL IsService);
+		public static extern NTSTATUS NetIsServiceAccount(char16* ServerName, char16* AccountName, out IntBool IsService);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NetQueryServiceAccount(PWSTR ServerName, PWSTR AccountName, uint32 InfoLevel, out uint8* Buffer);
+		public static extern NTSTATUS NetQueryServiceAccount(char16* ServerName, char16* AccountName, uint32 InfoLevel, out uint8* Buffer);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAlertRaise(PWSTR AlertType, void* Buffer, uint32 BufferSize);
+		public static extern uint32 NetAlertRaise(char16* AlertType, void* Buffer, uint32 BufferSize);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAlertRaiseEx(PWSTR AlertType, void* VariableInfo, uint32 VariableInfoSize, PWSTR ServiceName);
+		public static extern uint32 NetAlertRaiseEx(char16* AlertType, void* VariableInfo, uint32 VariableInfoSize, char16* ServiceName);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetMessageNameAdd(PWSTR servername, PWSTR msgname);
+		public static extern uint32 NetMessageNameAdd(char16* servername, char16* msgname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetMessageNameEnum(PWSTR servername, uint32 level, ref uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, out uint32 resume_handle);
+		public static extern uint32 NetMessageNameEnum(char16* servername, uint32 level, ref uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, out uint32 resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetMessageNameGetInfo(PWSTR servername, PWSTR msgname, uint32 level, ref uint8* bufptr);
+		public static extern uint32 NetMessageNameGetInfo(char16* servername, char16* msgname, uint32 level, ref uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetMessageNameDel(PWSTR servername, PWSTR msgname);
+		public static extern uint32 NetMessageNameDel(char16* servername, char16* msgname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetMessageBufferSend(PWSTR servername, PWSTR msgname, PWSTR fromname, ref uint8 buf, uint32 buflen);
+		public static extern uint32 NetMessageBufferSend(char16* servername, char16* msgname, char16* fromname, ref uint8 buf, uint32 buflen);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetRemoteTOD(PWSTR UncServerName, out uint8* BufferPtr);
+		public static extern uint32 NetRemoteTOD(char16* UncServerName, out uint8* BufferPtr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetRemoteComputerSupports(PWSTR UncServerName, NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS OptionsWanted, out uint32 OptionsSupported);
+		public static extern uint32 NetRemoteComputerSupports(char16* UncServerName, NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS OptionsWanted, out uint32 OptionsSupported);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplGetInfo(PWSTR servername, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetReplGetInfo(char16* servername, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplSetInfo(PWSTR servername, uint32 level, in uint8 buf, out uint32 parm_err);
+		public static extern uint32 NetReplSetInfo(char16* servername, uint32 level, in uint8 buf, out uint32 parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirAdd(PWSTR servername, uint32 level, in uint8 buf, out uint32 parm_err);
+		public static extern uint32 NetReplExportDirAdd(char16* servername, uint32 level, in uint8 buf, out uint32 parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirDel(PWSTR servername, PWSTR dirname);
+		public static extern uint32 NetReplExportDirDel(char16* servername, char16* dirname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, out uint32 resumehandle);
+		public static extern uint32 NetReplExportDirEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, out uint32 resumehandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirGetInfo(PWSTR servername, PWSTR dirname, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetReplExportDirGetInfo(char16* servername, char16* dirname, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirSetInfo(PWSTR servername, PWSTR dirname, uint32 level, in uint8 buf, out uint32 parm_err);
+		public static extern uint32 NetReplExportDirSetInfo(char16* servername, char16* dirname, uint32 level, in uint8 buf, out uint32 parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirLock(PWSTR servername, PWSTR dirname);
+		public static extern uint32 NetReplExportDirLock(char16* servername, char16* dirname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplExportDirUnlock(PWSTR servername, PWSTR dirname, uint32 unlockforce);
+		public static extern uint32 NetReplExportDirUnlock(char16* servername, char16* dirname, uint32 unlockforce);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplImportDirAdd(PWSTR servername, uint32 level, in uint8 buf, out uint32 parm_err);
+		public static extern uint32 NetReplImportDirAdd(char16* servername, uint32 level, in uint8 buf, out uint32 parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplImportDirDel(PWSTR servername, PWSTR dirname);
+		public static extern uint32 NetReplImportDirDel(char16* servername, char16* dirname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplImportDirEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, out uint32 resumehandle);
+		public static extern uint32 NetReplImportDirEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, out uint32 resumehandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplImportDirGetInfo(PWSTR servername, PWSTR dirname, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetReplImportDirGetInfo(char16* servername, char16* dirname, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplImportDirLock(PWSTR servername, PWSTR dirname);
+		public static extern uint32 NetReplImportDirLock(char16* servername, char16* dirname);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetReplImportDirUnlock(PWSTR servername, PWSTR dirname, uint32 unlockforce);
+		public static extern uint32 NetReplImportDirUnlock(char16* servername, char16* dirname, uint32 unlockforce);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, NET_SERVER_TYPE servertype, PWSTR domain, uint32* resume_handle);
+		public static extern uint32 NetServerEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, NET_SERVER_TYPE servertype, char16* domain, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerGetInfo(PWSTR servername, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetServerGetInfo(char16* servername, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerSetInfo(PWSTR servername, uint32 level, ref uint8 buf, uint32* ParmError);
+		public static extern uint32 NetServerSetInfo(char16* servername, uint32 level, ref uint8 buf, uint32* ParmError);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerDiskEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
+		public static extern uint32 NetServerDiskEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerComputerNameAdd(PWSTR ServerName, PWSTR EmulatedDomainName, PWSTR EmulatedServerName);
+		public static extern uint32 NetServerComputerNameAdd(char16* ServerName, char16* EmulatedDomainName, char16* EmulatedServerName);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerComputerNameDel(PWSTR ServerName, PWSTR EmulatedServerName);
+		public static extern uint32 NetServerComputerNameDel(char16* ServerName, char16* EmulatedServerName);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerTransportAdd(PWSTR servername, uint32 level, ref uint8 bufptr);
+		public static extern uint32 NetServerTransportAdd(char16* servername, uint32 level, ref uint8 bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerTransportAddEx(PWSTR servername, uint32 level, ref uint8 bufptr);
+		public static extern uint32 NetServerTransportAddEx(char16* servername, uint32 level, ref uint8 bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerTransportDel(PWSTR servername, uint32 level, ref uint8 bufptr);
+		public static extern uint32 NetServerTransportDel(char16* servername, uint32 level, ref uint8 bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServerTransportEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
+		public static extern uint32 NetServerTransportEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServiceControl(PWSTR servername, PWSTR service, uint32 opcode, uint32 arg, out uint8* bufptr);
+		public static extern uint32 NetServiceControl(char16* servername, char16* service, uint32 opcode, uint32 arg, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServiceEnum(PWSTR servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
+		public static extern uint32 NetServiceEnum(char16* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServiceGetInfo(PWSTR servername, PWSTR service, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetServiceGetInfo(char16* servername, char16* service, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetServiceInstall(PWSTR servername, PWSTR service, uint32 argc, PWSTR* argv, out uint8* bufptr);
+		public static extern uint32 NetServiceInstall(char16* servername, char16* service, uint32 argc, char16** argv, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NetUseAdd(int8* servername, uint32 LevelFlags, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUseDel(PWSTR UncServerName, PWSTR UseName, FORCE_LEVEL_FLAGS ForceLevelFlags);
+		public static extern uint32 NetUseDel(char16* UncServerName, char16* UseName, FORCE_LEVEL_FLAGS ForceLevelFlags);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUseEnum(PWSTR UncServerName, uint32 LevelFlags, uint8** BufPtr, uint32 PreferedMaximumSize, uint32* EntriesRead, out uint32 TotalEntries, uint32* ResumeHandle);
+		public static extern uint32 NetUseEnum(char16* UncServerName, uint32 LevelFlags, uint8** BufPtr, uint32 PreferedMaximumSize, uint32* EntriesRead, out uint32 TotalEntries, uint32* ResumeHandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUseGetInfo(PWSTR UncServerName, PWSTR UseName, uint32 LevelFlags, uint8** bufptr);
+		public static extern uint32 NetUseGetInfo(char16* UncServerName, char16* UseName, uint32 LevelFlags, uint8** bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetWkstaGetInfo(PWSTR servername, uint32 level, uint8** bufptr);
+		public static extern uint32 NetWkstaGetInfo(char16* servername, uint32 level, uint8** bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetWkstaSetInfo(PWSTR servername, uint32 level, ref uint8 buffer, uint32* parm_err);
+		public static extern uint32 NetWkstaSetInfo(char16* servername, uint32 level, ref uint8 buffer, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetWkstaUserGetInfo(PWSTR reserved, uint32 level, out uint8* bufptr);
+		public static extern uint32 NetWkstaUserGetInfo(char16* reserved, uint32 level, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetWkstaUserSetInfo(PWSTR reserved, uint32 level, ref uint8 buf, uint32* parm_err);
+		public static extern uint32 NetWkstaUserSetInfo(char16* reserved, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetWkstaUserEnum(PWSTR servername, uint32 level, uint8** bufptr, uint32 prefmaxlen, uint32* entriesread, out uint32 totalentries, uint32* resumehandle);
+		public static extern uint32 NetWkstaUserEnum(char16* servername, uint32 level, uint8** bufptr, uint32 prefmaxlen, uint32* entriesread, out uint32 totalentries, uint32* resumehandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NetWkstaTransportAdd(int8* servername, uint32 level, ref uint8 buf, uint32* parm_err);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetWkstaTransportDel(PWSTR servername, PWSTR transportname, FORCE_LEVEL_FLAGS ucond);
+		public static extern uint32 NetWkstaTransportDel(char16* servername, char16* transportname, FORCE_LEVEL_FLAGS ucond);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NetWkstaTransportEnum(int8* servername, uint32 level, out uint8* bufptr, uint32 prefmaxlen, out uint32 entriesread, out uint32 totalentries, uint32* resume_handle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -5320,145 +5320,145 @@ namespace Win32
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NetApiBufferSize(void* Buffer, out uint32 ByteCount);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetErrorLogClear(PWSTR UncServerName, PWSTR BackupFile, uint8* Reserved);
+		public static extern uint32 NetErrorLogClear(char16* UncServerName, char16* BackupFile, uint8* Reserved);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetErrorLogRead(PWSTR UncServerName, PWSTR Reserved1, ref HLOG ErrorLogHandle, uint32 Offset, uint32* Reserved2, uint32 Reserved3, uint32 OffsetFlag, out uint8* BufPtr, uint32 PrefMaxSize, out uint32 BytesRead, out uint32 TotalAvailable);
+		public static extern uint32 NetErrorLogRead(char16* UncServerName, char16* Reserved1, ref HLOG ErrorLogHandle, uint32 Offset, uint32* Reserved2, uint32 Reserved3, uint32 OffsetFlag, out uint8* BufPtr, uint32 PrefMaxSize, out uint32 BytesRead, out uint32 TotalAvailable);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetErrorLogWrite(uint8* Reserved1, uint32 Code, PWSTR Component, ref uint8 Buffer, uint32 NumBytes, ref uint8 MsgBuf, uint32 StrCount, uint8* Reserved2);
+		public static extern uint32 NetErrorLogWrite(uint8* Reserved1, uint32 Code, char16* Component, ref uint8 Buffer, uint32 NumBytes, ref uint8 MsgBuf, uint32 StrCount, uint8* Reserved2);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetConfigGet(PWSTR server, PWSTR component, PWSTR parameter, out uint8* bufptr);
+		public static extern uint32 NetConfigGet(char16* server, char16* component, char16* parameter, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetConfigGetAll(PWSTR server, PWSTR component, out uint8* bufptr);
+		public static extern uint32 NetConfigGetAll(char16* server, char16* component, out uint8* bufptr);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetConfigSet(PWSTR server, PWSTR reserved1, PWSTR component, uint32 level, uint32 reserved2, out uint8 buf, uint32 reserved3);
+		public static extern uint32 NetConfigSet(char16* server, char16* reserved1, char16* component, uint32 level, uint32 reserved2, out uint8 buf, uint32 reserved3);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAuditClear(PWSTR server, PWSTR backupfile, PWSTR service);
+		public static extern uint32 NetAuditClear(char16* server, char16* backupfile, char16* service);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAuditRead(PWSTR server, PWSTR service, out HLOG auditloghandle, uint32 offset, out uint32 reserved1, uint32 reserved2, uint32 offsetflag, out uint8* bufptr, uint32 prefmaxlen, out uint32 bytesread, out uint32 totalavailable);
+		public static extern uint32 NetAuditRead(char16* server, char16* service, out HLOG auditloghandle, uint32 offset, out uint32 reserved1, uint32 reserved2, uint32 offsetflag, out uint8* bufptr, uint32 prefmaxlen, out uint32 bytesread, out uint32 totalavailable);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAuditWrite(uint32 type, out uint8 buf, uint32 numbytes, PWSTR service, out uint8 reserved);
+		public static extern uint32 NetAuditWrite(uint32 type, out uint8 buf, uint32 numbytes, char16* service, out uint8 reserved);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetJoinDomain(PWSTR lpServer, PWSTR lpDomain, PWSTR lpMachineAccountOU, PWSTR lpAccount, PWSTR lpPassword, NET_JOIN_DOMAIN_JOIN_OPTIONS fJoinOptions);
+		public static extern uint32 NetJoinDomain(char16* lpServer, char16* lpDomain, char16* lpMachineAccountOU, char16* lpAccount, char16* lpPassword, NET_JOIN_DOMAIN_JOIN_OPTIONS fJoinOptions);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetUnjoinDomain(PWSTR lpServer, PWSTR lpAccount, PWSTR lpPassword, uint32 fUnjoinOptions);
+		public static extern uint32 NetUnjoinDomain(char16* lpServer, char16* lpAccount, char16* lpPassword, uint32 fUnjoinOptions);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetRenameMachineInDomain(PWSTR lpServer, PWSTR lpNewMachineName, PWSTR lpAccount, PWSTR lpPassword, uint32 fRenameOptions);
+		public static extern uint32 NetRenameMachineInDomain(char16* lpServer, char16* lpNewMachineName, char16* lpAccount, char16* lpPassword, uint32 fRenameOptions);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetValidateName(PWSTR lpServer, PWSTR lpName, PWSTR lpAccount, PWSTR lpPassword, NETSETUP_NAME_TYPE NameType);
+		public static extern uint32 NetValidateName(char16* lpServer, char16* lpName, char16* lpAccount, char16* lpPassword, NETSETUP_NAME_TYPE NameType);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGetJoinableOUs(PWSTR lpServer, PWSTR lpDomain, PWSTR lpAccount, PWSTR lpPassword, out uint32 OUCount, out PWSTR* OUs);
+		public static extern uint32 NetGetJoinableOUs(char16* lpServer, char16* lpDomain, char16* lpAccount, char16* lpPassword, out uint32 OUCount, out char16** OUs);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetAddAlternateComputerName(PWSTR Server, PWSTR AlternateName, PWSTR DomainAccount, PWSTR DomainAccountPassword, uint32 Reserved);
+		public static extern uint32 NetAddAlternateComputerName(char16* Server, char16* AlternateName, char16* DomainAccount, char16* DomainAccountPassword, uint32 Reserved);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetRemoveAlternateComputerName(PWSTR Server, PWSTR AlternateName, PWSTR DomainAccount, PWSTR DomainAccountPassword, uint32 Reserved);
+		public static extern uint32 NetRemoveAlternateComputerName(char16* Server, char16* AlternateName, char16* DomainAccount, char16* DomainAccountPassword, uint32 Reserved);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetSetPrimaryComputerName(PWSTR Server, PWSTR PrimaryName, PWSTR DomainAccount, PWSTR DomainAccountPassword, uint32 Reserved);
+		public static extern uint32 NetSetPrimaryComputerName(char16* Server, char16* PrimaryName, char16* DomainAccount, char16* DomainAccountPassword, uint32 Reserved);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetEnumerateComputerNames(PWSTR Server, NET_COMPUTER_NAME_TYPE NameType, uint32 Reserved, out uint32 EntryCount, out PWSTR* ComputerNames);
+		public static extern uint32 NetEnumerateComputerNames(char16* Server, NET_COMPUTER_NAME_TYPE NameType, uint32 Reserved, out uint32 EntryCount, out char16** ComputerNames);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetProvisionComputerAccount(PWSTR lpDomain, PWSTR lpMachineName, PWSTR lpMachineAccountOU, PWSTR lpDcName, NETSETUP_PROVISION dwOptions, uint8** pProvisionBinData, uint32* pdwProvisionBinDataSize, PWSTR* pProvisionTextData);
+		public static extern uint32 NetProvisionComputerAccount(char16* lpDomain, char16* lpMachineName, char16* lpMachineAccountOU, char16* lpDcName, NETSETUP_PROVISION dwOptions, uint8** pProvisionBinData, uint32* pdwProvisionBinDataSize, char16** pProvisionTextData);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetRequestOfflineDomainJoin(ref uint8 pProvisionBinData, uint32 cbProvisionBinDataSize, NET_REQUEST_PROVISION_OPTIONS dwOptions, PWSTR lpWindowsPath);
+		public static extern uint32 NetRequestOfflineDomainJoin(ref uint8 pProvisionBinData, uint32 cbProvisionBinDataSize, NET_REQUEST_PROVISION_OPTIONS dwOptions, char16* lpWindowsPath);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetCreateProvisioningPackage(ref NETSETUP_PROVISIONING_PARAMS pProvisioningParams, uint8** ppPackageBinData, uint32* pdwPackageBinDataSize, PWSTR* ppPackageTextData);
+		public static extern uint32 NetCreateProvisioningPackage(ref NETSETUP_PROVISIONING_PARAMS pProvisioningParams, uint8** ppPackageBinData, uint32* pdwPackageBinDataSize, char16** ppPackageTextData);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetRequestProvisioningPackageInstall(ref uint8 pPackageBinData, uint32 dwPackageBinDataSize, NET_REQUEST_PROVISION_OPTIONS dwProvisionOptions, PWSTR lpWindowsPath, void* pvReserved);
+		public static extern uint32 NetRequestProvisioningPackageInstall(ref uint8 pPackageBinData, uint32 dwPackageBinDataSize, NET_REQUEST_PROVISION_OPTIONS dwProvisionOptions, char16* lpWindowsPath, void* pvReserved);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT NetGetAadJoinInformation(PWSTR pcszTenantId, DSREG_JOIN_INFO** ppJoinInfo);
+		public static extern HResult NetGetAadJoinInformation(char16* pcszTenantId, DSREG_JOIN_INFO** ppJoinInfo);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void NetFreeAadJoinInformation(DSREG_JOIN_INFO* pJoinInfo);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetGetJoinInformation(PWSTR lpServer, out PWSTR lpNameBuffer, out NETSETUP_JOIN_STATUS BufferType);
+		public static extern uint32 NetGetJoinInformation(char16* lpServer, out char16* lpNameBuffer, out NETSETUP_JOIN_STATUS BufferType);
 		[Import("mstask.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetNetScheduleAccountInformation(PWSTR pwszServerName, uint32 ccAccount, char16* wszAccount);
+		public static extern HResult GetNetScheduleAccountInformation(char16* pwszServerName, uint32 ccAccount, char16* wszAccount);
 		[Import("mstask.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetNetScheduleAccountInformation(PWSTR pwszServerName, PWSTR pwszAccount, PWSTR pwszPassword);
+		public static extern HResult SetNetScheduleAccountInformation(char16* pwszServerName, char16* pwszAccount, char16* pwszPassword);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetScheduleJobAdd(PWSTR Servername, out uint8 Buffer, out uint32 JobId);
+		public static extern uint32 NetScheduleJobAdd(char16* Servername, out uint8 Buffer, out uint32 JobId);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetScheduleJobDel(PWSTR Servername, uint32 MinJobId, uint32 MaxJobId);
+		public static extern uint32 NetScheduleJobDel(char16* Servername, uint32 MinJobId, uint32 MaxJobId);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetScheduleJobEnum(PWSTR Servername, out uint8* PointerToBuffer, uint32 PrefferedMaximumLength, out uint32 EntriesRead, out uint32 TotalEntries, out uint32 ResumeHandle);
+		public static extern uint32 NetScheduleJobEnum(char16* Servername, out uint8* PointerToBuffer, uint32 PrefferedMaximumLength, out uint32 EntriesRead, out uint32 TotalEntries, out uint32 ResumeHandle);
 		[Import("netapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 NetScheduleJobGetInfo(PWSTR Servername, uint32 JobId, out uint8* PointerToBuffer);
+		public static extern uint32 NetScheduleJobGetInfo(char16* Servername, uint32 JobId, out uint8* PointerToBuffer);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceRegisterExA(PSTR lpszCallerName, uint32 dwFlags);
+		public static extern uint32 TraceRegisterExA(char8* lpszCallerName, uint32 dwFlags);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 TraceDeregisterA(uint32 dwTraceID);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 TraceDeregisterExA(uint32 dwTraceID, uint32 dwFlags);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceGetConsoleA(uint32 dwTraceID, out HANDLE lphConsole);
+		public static extern uint32 TraceGetConsoleA(uint32 dwTraceID, out Handle lphConsole);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TracePrintfA(uint32 dwTraceID, PSTR lpszFormat);
+		public static extern uint32 TracePrintfA(uint32 dwTraceID, char8* lpszFormat);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TracePrintfExA(uint32 dwTraceID, uint32 dwFlags, PSTR lpszFormat);
+		public static extern uint32 TracePrintfExA(uint32 dwTraceID, uint32 dwFlags, char8* lpszFormat);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceVprintfExA(uint32 dwTraceID, uint32 dwFlags, PSTR lpszFormat, out int8 arglist);
+		public static extern uint32 TraceVprintfExA(uint32 dwTraceID, uint32 dwFlags, char8* lpszFormat, out int8 arglist);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TracePutsExA(uint32 dwTraceID, uint32 dwFlags, PSTR lpszString);
+		public static extern uint32 TracePutsExA(uint32 dwTraceID, uint32 dwFlags, char8* lpszString);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceDumpExA(uint32 dwTraceID, uint32 dwFlags, out uint8 lpbBytes, uint32 dwByteCount, uint32 dwGroupSize, BOOL bAddressPrefix, PSTR lpszPrefix);
+		public static extern uint32 TraceDumpExA(uint32 dwTraceID, uint32 dwFlags, out uint8 lpbBytes, uint32 dwByteCount, uint32 dwGroupSize, IntBool bAddressPrefix, char8* lpszPrefix);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceRegisterExW(PWSTR lpszCallerName, uint32 dwFlags);
+		public static extern uint32 TraceRegisterExW(char16* lpszCallerName, uint32 dwFlags);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 TraceDeregisterW(uint32 dwTraceID);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 TraceDeregisterExW(uint32 dwTraceID, uint32 dwFlags);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceGetConsoleW(uint32 dwTraceID, out HANDLE lphConsole);
+		public static extern uint32 TraceGetConsoleW(uint32 dwTraceID, out Handle lphConsole);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TracePrintfW(uint32 dwTraceID, PWSTR lpszFormat);
+		public static extern uint32 TracePrintfW(uint32 dwTraceID, char16* lpszFormat);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TracePrintfExW(uint32 dwTraceID, uint32 dwFlags, PWSTR lpszFormat);
+		public static extern uint32 TracePrintfExW(uint32 dwTraceID, uint32 dwFlags, char16* lpszFormat);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceVprintfExW(uint32 dwTraceID, uint32 dwFlags, PWSTR lpszFormat, out int8 arglist);
+		public static extern uint32 TraceVprintfExW(uint32 dwTraceID, uint32 dwFlags, char16* lpszFormat, out int8 arglist);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TracePutsExW(uint32 dwTraceID, uint32 dwFlags, PWSTR lpszString);
+		public static extern uint32 TracePutsExW(uint32 dwTraceID, uint32 dwFlags, char16* lpszString);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 TraceDumpExW(uint32 dwTraceID, uint32 dwFlags, out uint8 lpbBytes, uint32 dwByteCount, uint32 dwGroupSize, BOOL bAddressPrefix, PWSTR lpszPrefix);
+		public static extern uint32 TraceDumpExW(uint32 dwTraceID, uint32 dwFlags, out uint8 lpbBytes, uint32 dwByteCount, uint32 dwGroupSize, IntBool bAddressPrefix, char16* lpszPrefix);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void LogErrorA(uint32 dwMessageId, uint32 cNumberOfSubStrings, PSTR* plpwsSubStrings, uint32 dwErrorCode);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void LogEventA(uint32 wEventType, uint32 dwMessageId, uint32 cNumberOfSubStrings, PSTR* plpwsSubStrings);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void LogErrorW(uint32 dwMessageId, uint32 cNumberOfSubStrings, PWSTR* plpwsSubStrings, uint32 dwErrorCode);
+		public static extern void LogErrorW(uint32 dwMessageId, uint32 cNumberOfSubStrings, char16** plpwsSubStrings, uint32 dwErrorCode);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void LogEventW(uint32 wEventType, uint32 dwMessageId, uint32 cNumberOfSubStrings, PWSTR* plpwsSubStrings);
+		public static extern void LogEventW(uint32 wEventType, uint32 dwMessageId, uint32 cNumberOfSubStrings, char16** plpwsSubStrings);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE RouterLogRegisterA(PSTR lpszSource);
+		public static extern Handle RouterLogRegisterA(char8* lpszSource);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogDeregisterA(HANDLE hLogHandle);
+		public static extern void RouterLogDeregisterA(Handle hLogHandle);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventA(HANDLE hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PSTR* plpszSubStringArray, uint32 dwErrorCode);
+		public static extern void RouterLogEventA(Handle hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PSTR* plpszSubStringArray, uint32 dwErrorCode);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventDataA(HANDLE hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PSTR* plpszSubStringArray, uint32 dwDataBytes, out uint8 lpDataBytes);
+		public static extern void RouterLogEventDataA(Handle hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PSTR* plpszSubStringArray, uint32 dwDataBytes, out uint8 lpDataBytes);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventStringA(HANDLE hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PSTR* plpszSubStringArray, uint32 dwErrorCode, uint32 dwErrorIndex);
+		public static extern void RouterLogEventStringA(Handle hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PSTR* plpszSubStringArray, uint32 dwErrorCode, uint32 dwErrorIndex);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventExA(HANDLE hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, PSTR ptszFormat);
+		public static extern void RouterLogEventExA(Handle hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, char8* ptszFormat);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventValistExA(HANDLE hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, PSTR ptszFormat, out int8 arglist);
+		public static extern void RouterLogEventValistExA(Handle hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, char8* ptszFormat, out int8 arglist);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RouterGetErrorStringA(uint32 dwErrorCode, out PSTR lplpszErrorString);
+		public static extern uint32 RouterGetErrorStringA(uint32 dwErrorCode, out char8* lplpszErrorString);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE RouterLogRegisterW(PWSTR lpszSource);
+		public static extern Handle RouterLogRegisterW(char16* lpszSource);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogDeregisterW(HANDLE hLogHandle);
+		public static extern void RouterLogDeregisterW(Handle hLogHandle);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventW(HANDLE hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PWSTR* plpszSubStringArray, uint32 dwErrorCode);
+		public static extern void RouterLogEventW(Handle hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, char16** plpszSubStringArray, uint32 dwErrorCode);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventDataW(HANDLE hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PWSTR* plpszSubStringArray, uint32 dwDataBytes, out uint8 lpDataBytes);
+		public static extern void RouterLogEventDataW(Handle hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, char16** plpszSubStringArray, uint32 dwDataBytes, out uint8 lpDataBytes);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventStringW(HANDLE hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, PWSTR* plpszSubStringArray, uint32 dwErrorCode, uint32 dwErrorIndex);
+		public static extern void RouterLogEventStringW(Handle hLogHandle, uint32 dwEventType, uint32 dwMessageId, uint32 dwSubStringCount, char16** plpszSubStringArray, uint32 dwErrorCode, uint32 dwErrorIndex);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventExW(HANDLE hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, PWSTR ptszFormat);
+		public static extern void RouterLogEventExW(Handle hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, char16* ptszFormat);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterLogEventValistExW(HANDLE hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, PWSTR ptszFormat, out int8 arglist);
+		public static extern void RouterLogEventValistExW(Handle hLogHandle, uint32 dwEventType, uint32 dwErrorCode, uint32 dwMessageId, char16* ptszFormat, out int8 arglist);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 RouterGetErrorStringW(uint32 dwErrorCode, out PWSTR lplpwszErrorString);
+		public static extern uint32 RouterGetErrorStringW(uint32 dwErrorCode, out char16* lplpwszErrorString);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RouterAssert(PSTR pszFailedAssertion, PSTR pszFileName, uint32 dwLineNumber, PSTR pszMessage);
+		public static extern void RouterAssert(char8* pszFailedAssertion, char8* pszFileName, uint32 dwLineNumber, char8* pszMessage);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MprSetupProtocolEnum(uint32 dwTransportId, out uint8* lplpBuffer, out uint32 lpdwEntriesRead);
 		[Import("rtutils.dll"), CLink, CallingConvention(.Stdcall)]

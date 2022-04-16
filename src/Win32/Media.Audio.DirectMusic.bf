@@ -1,9 +1,17 @@
 using System;
+using static Win32.Media.Multimedia;
+using static Win32.Media.Audio.DirectSound;
+using static Win32.Win32;
+using static Win32.System.IO;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Media.Audio.DirectMusic
-namespace Win32
+namespace Win32.Media
 {
-	extension Win32
+	extension Audio{
+	public static class DirectMusic
 	{
 		// --- Constants ---
 		
@@ -276,9 +284,9 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1(out DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA param0, void* param1);
-		public function BOOL LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA(out DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA param0, void* param1);
-		public function BOOL LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW(out DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA param0, void* param1);
+		public function IntBool LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1(out DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA param0, void* param1);
+		public function IntBool LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA(out DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA param0, void* param1);
+		public function IntBool LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW(out DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA param0, void* param1);
 		
 		// --- Structs ---
 		
@@ -562,7 +570,7 @@ namespace Win32
 			public uint32 dwAudioChannels;
 			public uint32 dwSampleRate;
 			public uint32 dwEffectFlags;
-			public BOOL fShare;
+			public IntBool fShare;
 		}
 		[CRepr]
 		public struct DMUS_PORTPARAMS8
@@ -574,7 +582,7 @@ namespace Win32
 			public uint32 dwAudioChannels;
 			public uint32 dwSampleRate;
 			public uint32 dwEffectFlags;
-			public BOOL fShare;
+			public IntBool fShare;
 			public uint32 dwFeatures;
 		}
 		[CRepr]
@@ -630,20 +638,20 @@ namespace Win32
 		[CRepr]
 		public struct DMUS_VOICE_STATE
 		{
-			public BOOL bExists;
+			public IntBool bExists;
 			public uint64 spPosition;
 		}
 		[CRepr]
 		public struct DSPROPERTY_DIRECTSOUNDDEVICE_WAVEDEVICEMAPPING_A_DATA
 		{
-			public PSTR DeviceName;
+			public char8* DeviceName;
 			public DIRECTSOUNDDEVICE_DATAFLOW DataFlow;
 			public Guid DeviceId;
 		}
 		[CRepr]
 		public struct DSPROPERTY_DIRECTSOUNDDEVICE_WAVEDEVICEMAPPING_W_DATA
 		{
-			public PWSTR DeviceName;
+			public char16* DeviceName;
 			public DIRECTSOUNDDEVICE_DATAFLOW DataFlow;
 			public Guid DeviceId;
 		}
@@ -651,9 +659,9 @@ namespace Win32
 		public struct DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA
 		{
 			public Guid DeviceId;
-			public CHAR[256] DescriptionA;
+			public char8[256] DescriptionA;
 			public char16[256] DescriptionW;
-			public CHAR[260] ModuleA;
+			public char8[260] ModuleA;
 			public char16[260] ModuleW;
 			public DIRECTSOUNDDEVICE_TYPE Type;
 			public DIRECTSOUNDDEVICE_DATAFLOW DataFlow;
@@ -666,9 +674,9 @@ namespace Win32
 			public DIRECTSOUNDDEVICE_TYPE Type;
 			public DIRECTSOUNDDEVICE_DATAFLOW DataFlow;
 			public Guid DeviceId;
-			public PSTR Description;
-			public PSTR Module;
-			public PSTR Interface;
+			public char8* Description;
+			public char8* Module;
+			public char8* Interface;
 			public uint32 WaveDeviceId;
 		}
 		[CRepr]
@@ -677,9 +685,9 @@ namespace Win32
 			public DIRECTSOUNDDEVICE_TYPE Type;
 			public DIRECTSOUNDDEVICE_DATAFLOW DataFlow;
 			public Guid DeviceId;
-			public PWSTR Description;
-			public PWSTR Module;
-			public PWSTR Interface;
+			public char16* Description;
+			public char16* Module;
+			public char16* Interface;
 			public uint32 WaveDeviceId;
 		}
 		[CRepr]
@@ -737,28 +745,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnumPort(uint32 dwIndex, out DMUS_PORTCAPS pPortCaps) mut => VT.EnumPort(ref this, dwIndex, out pPortCaps);
-			public HRESULT CreateMusicBuffer(out DMUS_BUFFERDESC pBufferDesc, out IDirectMusicBuffer* ppBuffer, ref IUnknown pUnkOuter) mut => VT.CreateMusicBuffer(ref this, out pBufferDesc, out ppBuffer, ref pUnkOuter);
-			public HRESULT CreatePort(in Guid rclsidPort, out DMUS_PORTPARAMS8 pPortParams, out IDirectMusicPort* ppPort, ref IUnknown pUnkOuter) mut => VT.CreatePort(ref this, rclsidPort, out pPortParams, out ppPort, ref pUnkOuter);
-			public HRESULT EnumMasterClock(uint32 dwIndex, out DMUS_CLOCKINFO8 lpClockInfo) mut => VT.EnumMasterClock(ref this, dwIndex, out lpClockInfo);
-			public HRESULT GetMasterClock(out Guid pguidClock, out IReferenceClock* ppReferenceClock) mut => VT.GetMasterClock(ref this, out pguidClock, out ppReferenceClock);
-			public HRESULT SetMasterClock(in Guid rguidClock) mut => VT.SetMasterClock(ref this, rguidClock);
-			public HRESULT Activate(BOOL fEnable) mut => VT.Activate(ref this, fEnable);
-			public HRESULT GetDefaultPort(out Guid pguidPort) mut => VT.GetDefaultPort(ref this, out pguidPort);
-			public HRESULT SetDirectSound(ref IDirectSound pDirectSound, HWND hWnd) mut => VT.SetDirectSound(ref this, ref pDirectSound, hWnd);
+			public HResult EnumPort(uint32 dwIndex, out DMUS_PORTCAPS pPortCaps) mut => VT.EnumPort(ref this, dwIndex, out pPortCaps);
+			public HResult CreateMusicBuffer(out DMUS_BUFFERDESC pBufferDesc, out IDirectMusicBuffer* ppBuffer, ref IUnknown pUnkOuter) mut => VT.CreateMusicBuffer(ref this, out pBufferDesc, out ppBuffer, ref pUnkOuter);
+			public HResult CreatePort(in Guid rclsidPort, out DMUS_PORTPARAMS8 pPortParams, out IDirectMusicPort* ppPort, ref IUnknown pUnkOuter) mut => VT.CreatePort(ref this, rclsidPort, out pPortParams, out ppPort, ref pUnkOuter);
+			public HResult EnumMasterClock(uint32 dwIndex, out DMUS_CLOCKINFO8 lpClockInfo) mut => VT.EnumMasterClock(ref this, dwIndex, out lpClockInfo);
+			public HResult GetMasterClock(out Guid pguidClock, out IReferenceClock* ppReferenceClock) mut => VT.GetMasterClock(ref this, out pguidClock, out ppReferenceClock);
+			public HResult SetMasterClock(in Guid rguidClock) mut => VT.SetMasterClock(ref this, rguidClock);
+			public HResult Activate(IntBool fEnable) mut => VT.Activate(ref this, fEnable);
+			public HResult GetDefaultPort(out Guid pguidPort) mut => VT.GetDefaultPort(ref this, out pguidPort);
+			public HResult SetDirectSound(ref IDirectSound pDirectSound, HWnd hWnd) mut => VT.SetDirectSound(ref this, ref pDirectSound, hWnd);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, uint32 dwIndex, out DMUS_PORTCAPS pPortCaps) EnumPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, out DMUS_BUFFERDESC pBufferDesc, out IDirectMusicBuffer* ppBuffer, ref IUnknown pUnkOuter) CreateMusicBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, in Guid rclsidPort, out DMUS_PORTPARAMS8 pPortParams, out IDirectMusicPort* ppPort, ref IUnknown pUnkOuter) CreatePort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, uint32 dwIndex, out DMUS_CLOCKINFO8 lpClockInfo) EnumMasterClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, out Guid pguidClock, out IReferenceClock* ppReferenceClock) GetMasterClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, in Guid rguidClock) SetMasterClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, BOOL fEnable) Activate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, out Guid pguidPort) GetDefaultPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic self, ref IDirectSound pDirectSound, HWND hWnd) SetDirectSound;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, uint32 dwIndex, out DMUS_PORTCAPS pPortCaps) EnumPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, out DMUS_BUFFERDESC pBufferDesc, out IDirectMusicBuffer* ppBuffer, ref IUnknown pUnkOuter) CreateMusicBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, in Guid rclsidPort, out DMUS_PORTPARAMS8 pPortParams, out IDirectMusicPort* ppPort, ref IUnknown pUnkOuter) CreatePort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, uint32 dwIndex, out DMUS_CLOCKINFO8 lpClockInfo) EnumMasterClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, out Guid pguidClock, out IReferenceClock* ppReferenceClock) GetMasterClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, in Guid rguidClock) SetMasterClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, IntBool fEnable) Activate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, out Guid pguidPort) GetDefaultPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic self, ref IDirectSound pDirectSound, HWnd hWnd) SetDirectSound;
 			}
 		}
 		[CRepr]
@@ -768,12 +776,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetExternalMasterClock(ref IReferenceClock pClock) mut => VT.SetExternalMasterClock(ref this, ref pClock);
+			public HResult SetExternalMasterClock(ref IReferenceClock pClock) mut => VT.SetExternalMasterClock(ref this, ref pClock);
 
 			[CRepr]
 			public struct VTable : IDirectMusic.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusic8 self, ref IReferenceClock pClock) SetExternalMasterClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusic8 self, ref IReferenceClock pClock) SetExternalMasterClock;
 			}
 		}
 		[CRepr]
@@ -783,36 +791,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Flush() mut => VT.Flush(ref this);
-			public HRESULT TotalTime(out int64 prtTime) mut => VT.TotalTime(ref this, out prtTime);
-			public HRESULT PackStructured(int64 rt, uint32 dwChannelGroup, uint32 dwChannelMessage) mut => VT.PackStructured(ref this, rt, dwChannelGroup, dwChannelMessage);
-			public HRESULT PackUnstructured(int64 rt, uint32 dwChannelGroup, uint32 cb, out uint8 lpb) mut => VT.PackUnstructured(ref this, rt, dwChannelGroup, cb, out lpb);
-			public HRESULT ResetReadPtr() mut => VT.ResetReadPtr(ref this);
-			public HRESULT GetNextEvent(out int64 prt, out uint32 pdwChannelGroup, out uint32 pdwLength, out uint8* ppData) mut => VT.GetNextEvent(ref this, out prt, out pdwChannelGroup, out pdwLength, out ppData);
-			public HRESULT GetRawBufferPtr(out uint8* ppData) mut => VT.GetRawBufferPtr(ref this, out ppData);
-			public HRESULT GetStartTime(out int64 prt) mut => VT.GetStartTime(ref this, out prt);
-			public HRESULT GetUsedBytes(out uint32 pcb) mut => VT.GetUsedBytes(ref this, out pcb);
-			public HRESULT GetMaxBytes(out uint32 pcb) mut => VT.GetMaxBytes(ref this, out pcb);
-			public HRESULT GetBufferFormat(out Guid pGuidFormat) mut => VT.GetBufferFormat(ref this, out pGuidFormat);
-			public HRESULT SetStartTime(int64 rt) mut => VT.SetStartTime(ref this, rt);
-			public HRESULT SetUsedBytes(uint32 cb) mut => VT.SetUsedBytes(ref this, cb);
+			public HResult Flush() mut => VT.Flush(ref this);
+			public HResult TotalTime(out int64 prtTime) mut => VT.TotalTime(ref this, out prtTime);
+			public HResult PackStructured(int64 rt, uint32 dwChannelGroup, uint32 dwChannelMessage) mut => VT.PackStructured(ref this, rt, dwChannelGroup, dwChannelMessage);
+			public HResult PackUnstructured(int64 rt, uint32 dwChannelGroup, uint32 cb, out uint8 lpb) mut => VT.PackUnstructured(ref this, rt, dwChannelGroup, cb, out lpb);
+			public HResult ResetReadPtr() mut => VT.ResetReadPtr(ref this);
+			public HResult GetNextEvent(out int64 prt, out uint32 pdwChannelGroup, out uint32 pdwLength, out uint8* ppData) mut => VT.GetNextEvent(ref this, out prt, out pdwChannelGroup, out pdwLength, out ppData);
+			public HResult GetRawBufferPtr(out uint8* ppData) mut => VT.GetRawBufferPtr(ref this, out ppData);
+			public HResult GetStartTime(out int64 prt) mut => VT.GetStartTime(ref this, out prt);
+			public HResult GetUsedBytes(out uint32 pcb) mut => VT.GetUsedBytes(ref this, out pcb);
+			public HResult GetMaxBytes(out uint32 pcb) mut => VT.GetMaxBytes(ref this, out pcb);
+			public HResult GetBufferFormat(out Guid pGuidFormat) mut => VT.GetBufferFormat(ref this, out pGuidFormat);
+			public HResult SetStartTime(int64 rt) mut => VT.SetStartTime(ref this, rt);
+			public HResult SetUsedBytes(uint32 cb) mut => VT.SetUsedBytes(ref this, cb);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self) Flush;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out int64 prtTime) TotalTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, int64 rt, uint32 dwChannelGroup, uint32 dwChannelMessage) PackStructured;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, int64 rt, uint32 dwChannelGroup, uint32 cb, out uint8 lpb) PackUnstructured;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self) ResetReadPtr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out int64 prt, out uint32 pdwChannelGroup, out uint32 pdwLength, out uint8* ppData) GetNextEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out uint8* ppData) GetRawBufferPtr;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out int64 prt) GetStartTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out uint32 pcb) GetUsedBytes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out uint32 pcb) GetMaxBytes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, out Guid pGuidFormat) GetBufferFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, int64 rt) SetStartTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicBuffer self, uint32 cb) SetUsedBytes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self) Flush;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out int64 prtTime) TotalTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, int64 rt, uint32 dwChannelGroup, uint32 dwChannelMessage) PackStructured;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, int64 rt, uint32 dwChannelGroup, uint32 cb, out uint8 lpb) PackUnstructured;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self) ResetReadPtr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out int64 prt, out uint32 pdwChannelGroup, out uint32 pdwLength, out uint8* ppData) GetNextEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out uint8* ppData) GetRawBufferPtr;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out int64 prt) GetStartTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out uint32 pcb) GetUsedBytes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out uint32 pcb) GetMaxBytes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, out Guid pGuidFormat) GetBufferFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, int64 rt) SetStartTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicBuffer self, uint32 cb) SetUsedBytes;
 			}
 		}
 		[CRepr]
@@ -822,14 +830,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPatch(out uint32 pdwPatch) mut => VT.GetPatch(ref this, out pdwPatch);
-			public HRESULT SetPatch(uint32 dwPatch) mut => VT.SetPatch(ref this, dwPatch);
+			public HResult GetPatch(out uint32 pdwPatch) mut => VT.GetPatch(ref this, out pdwPatch);
+			public HResult SetPatch(uint32 dwPatch) mut => VT.SetPatch(ref this, dwPatch);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicInstrument self, out uint32 pdwPatch) GetPatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicInstrument self, uint32 dwPatch) SetPatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicInstrument self, out uint32 pdwPatch) GetPatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicInstrument self, uint32 dwPatch) SetPatch;
 			}
 		}
 		[CRepr]
@@ -849,14 +857,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetInstrument(uint32 dwPatch, out IDirectMusicInstrument* ppInstrument) mut => VT.GetInstrument(ref this, dwPatch, out ppInstrument);
-			public HRESULT EnumInstrument(uint32 dwIndex, out uint32 pdwPatch, PWSTR pwszName, uint32 dwNameLen) mut => VT.EnumInstrument(ref this, dwIndex, out pdwPatch, pwszName, dwNameLen);
+			public HResult GetInstrument(uint32 dwPatch, out IDirectMusicInstrument* ppInstrument) mut => VT.GetInstrument(ref this, dwPatch, out ppInstrument);
+			public HResult EnumInstrument(uint32 dwIndex, out uint32 pdwPatch, char16* pwszName, uint32 dwNameLen) mut => VT.EnumInstrument(ref this, dwIndex, out pdwPatch, pwszName, dwNameLen);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicCollection self, uint32 dwPatch, out IDirectMusicInstrument* ppInstrument) GetInstrument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicCollection self, uint32 dwIndex, out uint32 pdwPatch, PWSTR pwszName, uint32 dwNameLen) EnumInstrument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicCollection self, uint32 dwPatch, out IDirectMusicInstrument* ppInstrument) GetInstrument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicCollection self, uint32 dwIndex, out uint32 pdwPatch, char16* pwszName, uint32 dwNameLen) EnumInstrument;
 			}
 		}
 		[CRepr]
@@ -866,12 +874,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBuffer(void** ppvBuffer, out uint32 pdwSize) mut => VT.GetBuffer(ref this, ppvBuffer, out pdwSize);
+			public HResult GetBuffer(void** ppvBuffer, out uint32 pdwSize) mut => VT.GetBuffer(ref this, ppvBuffer, out pdwSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicDownload self, void** ppvBuffer, out uint32 pdwSize) GetBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicDownload self, void** ppvBuffer, out uint32 pdwSize) GetBuffer;
 			}
 		}
 		[CRepr]
@@ -881,22 +889,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetBuffer(uint32 dwDLId, out IDirectMusicDownload* ppIDMDownload) mut => VT.GetBuffer(ref this, dwDLId, out ppIDMDownload);
-			public HRESULT AllocateBuffer(uint32 dwSize, out IDirectMusicDownload* ppIDMDownload) mut => VT.AllocateBuffer(ref this, dwSize, out ppIDMDownload);
-			public HRESULT GetDLId(out uint32 pdwStartDLId, uint32 dwCount) mut => VT.GetDLId(ref this, out pdwStartDLId, dwCount);
-			public HRESULT GetAppend(out uint32 pdwAppend) mut => VT.GetAppend(ref this, out pdwAppend);
-			public HRESULT Download(ref IDirectMusicDownload pIDMDownload) mut => VT.Download(ref this, ref pIDMDownload);
-			public HRESULT Unload(ref IDirectMusicDownload pIDMDownload) mut => VT.Unload(ref this, ref pIDMDownload);
+			public HResult GetBuffer(uint32 dwDLId, out IDirectMusicDownload* ppIDMDownload) mut => VT.GetBuffer(ref this, dwDLId, out ppIDMDownload);
+			public HResult AllocateBuffer(uint32 dwSize, out IDirectMusicDownload* ppIDMDownload) mut => VT.AllocateBuffer(ref this, dwSize, out ppIDMDownload);
+			public HResult GetDLId(out uint32 pdwStartDLId, uint32 dwCount) mut => VT.GetDLId(ref this, out pdwStartDLId, dwCount);
+			public HResult GetAppend(out uint32 pdwAppend) mut => VT.GetAppend(ref this, out pdwAppend);
+			public HResult Download(ref IDirectMusicDownload pIDMDownload) mut => VT.Download(ref this, ref pIDMDownload);
+			public HResult Unload(ref IDirectMusicDownload pIDMDownload) mut => VT.Unload(ref this, ref pIDMDownload);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPortDownload self, uint32 dwDLId, out IDirectMusicDownload* ppIDMDownload) GetBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPortDownload self, uint32 dwSize, out IDirectMusicDownload* ppIDMDownload) AllocateBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPortDownload self, out uint32 pdwStartDLId, uint32 dwCount) GetDLId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPortDownload self, out uint32 pdwAppend) GetAppend;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPortDownload self, ref IDirectMusicDownload pIDMDownload) Download;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPortDownload self, ref IDirectMusicDownload pIDMDownload) Unload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPortDownload self, uint32 dwDLId, out IDirectMusicDownload* ppIDMDownload) GetBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPortDownload self, uint32 dwSize, out IDirectMusicDownload* ppIDMDownload) AllocateBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPortDownload self, out uint32 pdwStartDLId, uint32 dwCount) GetDLId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPortDownload self, out uint32 pdwAppend) GetAppend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPortDownload self, ref IDirectMusicDownload pIDMDownload) Download;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPortDownload self, ref IDirectMusicDownload pIDMDownload) Unload;
 			}
 		}
 		[CRepr]
@@ -906,44 +914,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PlayBuffer(ref IDirectMusicBuffer pBuffer) mut => VT.PlayBuffer(ref this, ref pBuffer);
-			public HRESULT SetReadNotificationHandle(HANDLE hEvent) mut => VT.SetReadNotificationHandle(ref this, hEvent);
-			public HRESULT Read(ref IDirectMusicBuffer pBuffer) mut => VT.Read(ref this, ref pBuffer);
-			public HRESULT DownloadInstrument(ref IDirectMusicInstrument pInstrument, out IDirectMusicDownloadedInstrument* ppDownloadedInstrument, out DMUS_NOTERANGE pNoteRanges, uint32 dwNumNoteRanges) mut => VT.DownloadInstrument(ref this, ref pInstrument, out ppDownloadedInstrument, out pNoteRanges, dwNumNoteRanges);
-			public HRESULT UnloadInstrument(ref IDirectMusicDownloadedInstrument pDownloadedInstrument) mut => VT.UnloadInstrument(ref this, ref pDownloadedInstrument);
-			public HRESULT GetLatencyClock(out IReferenceClock* ppClock) mut => VT.GetLatencyClock(ref this, out ppClock);
-			public HRESULT GetRunningStats(out DMUS_SYNTHSTATS pStats) mut => VT.GetRunningStats(ref this, out pStats);
-			public HRESULT Compact() mut => VT.Compact(ref this);
-			public HRESULT GetCaps(out DMUS_PORTCAPS pPortCaps) mut => VT.GetCaps(ref this, out pPortCaps);
-			public HRESULT DeviceIoControl(uint32 dwIoControlCode, void* lpInBuffer, uint32 nInBufferSize, void* lpOutBuffer, uint32 nOutBufferSize, out uint32 lpBytesReturned, out OVERLAPPED lpOverlapped) mut => VT.DeviceIoControl(ref this, dwIoControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, out lpBytesReturned, out lpOverlapped);
-			public HRESULT SetNumChannelGroups(uint32 dwChannelGroups) mut => VT.SetNumChannelGroups(ref this, dwChannelGroups);
-			public HRESULT GetNumChannelGroups(out uint32 pdwChannelGroups) mut => VT.GetNumChannelGroups(ref this, out pdwChannelGroups);
-			public HRESULT Activate(BOOL fActive) mut => VT.Activate(ref this, fActive);
-			public HRESULT SetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) mut => VT.SetChannelPriority(ref this, dwChannelGroup, dwChannel, dwPriority);
-			public HRESULT GetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) mut => VT.GetChannelPriority(ref this, dwChannelGroup, dwChannel, out pdwPriority);
-			public HRESULT SetDirectSound(ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) mut => VT.SetDirectSound(ref this, ref pDirectSound, ref pDirectSoundBuffer);
-			public HRESULT GetFormat(out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize, out uint32 pdwBufferSize) mut => VT.GetFormat(ref this, out pWaveFormatEx, out pdwWaveFormatExSize, out pdwBufferSize);
+			public HResult PlayBuffer(ref IDirectMusicBuffer pBuffer) mut => VT.PlayBuffer(ref this, ref pBuffer);
+			public HResult SetReadNotificationHandle(Handle hEvent) mut => VT.SetReadNotificationHandle(ref this, hEvent);
+			public HResult Read(ref IDirectMusicBuffer pBuffer) mut => VT.Read(ref this, ref pBuffer);
+			public HResult DownloadInstrument(ref IDirectMusicInstrument pInstrument, out IDirectMusicDownloadedInstrument* ppDownloadedInstrument, out DMUS_NOTERANGE pNoteRanges, uint32 dwNumNoteRanges) mut => VT.DownloadInstrument(ref this, ref pInstrument, out ppDownloadedInstrument, out pNoteRanges, dwNumNoteRanges);
+			public HResult UnloadInstrument(ref IDirectMusicDownloadedInstrument pDownloadedInstrument) mut => VT.UnloadInstrument(ref this, ref pDownloadedInstrument);
+			public HResult GetLatencyClock(out IReferenceClock* ppClock) mut => VT.GetLatencyClock(ref this, out ppClock);
+			public HResult GetRunningStats(out DMUS_SYNTHSTATS pStats) mut => VT.GetRunningStats(ref this, out pStats);
+			public HResult Compact() mut => VT.Compact(ref this);
+			public HResult GetCaps(out DMUS_PORTCAPS pPortCaps) mut => VT.GetCaps(ref this, out pPortCaps);
+			public HResult DeviceIoControl(uint32 dwIoControlCode, void* lpInBuffer, uint32 nInBufferSize, void* lpOutBuffer, uint32 nOutBufferSize, out uint32 lpBytesReturned, out OVERLAPPED lpOverlapped) mut => VT._DeviceIoControl(ref this, dwIoControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, out lpBytesReturned, out lpOverlapped);
+			public HResult SetNumChannelGroups(uint32 dwChannelGroups) mut => VT.SetNumChannelGroups(ref this, dwChannelGroups);
+			public HResult GetNumChannelGroups(out uint32 pdwChannelGroups) mut => VT.GetNumChannelGroups(ref this, out pdwChannelGroups);
+			public HResult Activate(IntBool fActive) mut => VT.Activate(ref this, fActive);
+			public HResult SetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) mut => VT.SetChannelPriority(ref this, dwChannelGroup, dwChannel, dwPriority);
+			public HResult GetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) mut => VT.GetChannelPriority(ref this, dwChannelGroup, dwChannel, out pdwPriority);
+			public HResult SetDirectSound(ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) mut => VT.SetDirectSound(ref this, ref pDirectSound, ref pDirectSoundBuffer);
+			public HResult GetFormat(out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize, out uint32 pdwBufferSize) mut => VT.GetFormat(ref this, out pWaveFormatEx, out pdwWaveFormatExSize, out pdwBufferSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, ref IDirectMusicBuffer pBuffer) PlayBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, HANDLE hEvent) SetReadNotificationHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, ref IDirectMusicBuffer pBuffer) Read;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, ref IDirectMusicInstrument pInstrument, out IDirectMusicDownloadedInstrument* ppDownloadedInstrument, out DMUS_NOTERANGE pNoteRanges, uint32 dwNumNoteRanges) DownloadInstrument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, ref IDirectMusicDownloadedInstrument pDownloadedInstrument) UnloadInstrument;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, out IReferenceClock* ppClock) GetLatencyClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, out DMUS_SYNTHSTATS pStats) GetRunningStats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self) Compact;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, out DMUS_PORTCAPS pPortCaps) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, uint32 dwIoControlCode, void* lpInBuffer, uint32 nInBufferSize, void* lpOutBuffer, uint32 nOutBufferSize, out uint32 lpBytesReturned, out OVERLAPPED lpOverlapped) DeviceIoControl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, uint32 dwChannelGroups) SetNumChannelGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, out uint32 pdwChannelGroups) GetNumChannelGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, BOOL fActive) Activate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) SetChannelPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) GetChannelPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) SetDirectSound;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicPort self, out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize, out uint32 pdwBufferSize) GetFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, ref IDirectMusicBuffer pBuffer) PlayBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, Handle hEvent) SetReadNotificationHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, ref IDirectMusicBuffer pBuffer) Read;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, ref IDirectMusicInstrument pInstrument, out IDirectMusicDownloadedInstrument* ppDownloadedInstrument, out DMUS_NOTERANGE pNoteRanges, uint32 dwNumNoteRanges) DownloadInstrument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, ref IDirectMusicDownloadedInstrument pDownloadedInstrument) UnloadInstrument;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, out IReferenceClock* ppClock) GetLatencyClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, out DMUS_SYNTHSTATS pStats) GetRunningStats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self) Compact;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, out DMUS_PORTCAPS pPortCaps) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, uint32 dwIoControlCode, void* lpInBuffer, uint32 nInBufferSize, void* lpOutBuffer, uint32 nOutBufferSize, out uint32 lpBytesReturned, out OVERLAPPED lpOverlapped) _DeviceIoControl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, uint32 dwChannelGroups) SetNumChannelGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, out uint32 pdwChannelGroups) GetNumChannelGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, IntBool fActive) Activate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) SetChannelPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) GetChannelPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) SetDirectSound;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicPort self, out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize, out uint32 pdwBufferSize) GetFormat;
 			}
 		}
 		[CRepr]
@@ -953,12 +961,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ThruChannel(uint32 dwSourceChannelGroup, uint32 dwSourceChannel, uint32 dwDestinationChannelGroup, uint32 dwDestinationChannel, ref IDirectMusicPort pDestinationPort) mut => VT.ThruChannel(ref this, dwSourceChannelGroup, dwSourceChannel, dwDestinationChannelGroup, dwDestinationChannel, ref pDestinationPort);
+			public HResult ThruChannel(uint32 dwSourceChannelGroup, uint32 dwSourceChannel, uint32 dwDestinationChannelGroup, uint32 dwDestinationChannel, ref IDirectMusicPort pDestinationPort) mut => VT.ThruChannel(ref this, dwSourceChannelGroup, dwSourceChannel, dwDestinationChannelGroup, dwDestinationChannel, ref pDestinationPort);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicThru self, uint32 dwSourceChannelGroup, uint32 dwSourceChannel, uint32 dwDestinationChannelGroup, uint32 dwDestinationChannel, ref IDirectMusicPort pDestinationPort) ThruChannel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicThru self, uint32 dwSourceChannelGroup, uint32 dwSourceChannel, uint32 dwDestinationChannelGroup, uint32 dwDestinationChannel, ref IDirectMusicPort pDestinationPort) ThruChannel;
 			}
 		}
 		[CRepr]
@@ -968,44 +976,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Open(out DMUS_PORTPARAMS8 pPortParams) mut => VT.Open(ref this, out pPortParams);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT SetNumChannelGroups(uint32 dwGroups) mut => VT.SetNumChannelGroups(ref this, dwGroups);
-			public HRESULT Download(out HANDLE phDownload, void* pvData, out int32 pbFree) mut => VT.Download(ref this, out phDownload, pvData, out pbFree);
-			public HRESULT Unload(HANDLE hDownload, int lpFreeHandle, HANDLE hUserData) mut => VT.Unload(ref this, hDownload, lpFreeHandle, hUserData);
-			public HRESULT PlayBuffer(int64 rt, out uint8 pbBuffer, uint32 cbBuffer) mut => VT.PlayBuffer(ref this, rt, out pbBuffer, cbBuffer);
-			public HRESULT GetRunningStats(out DMUS_SYNTHSTATS pStats) mut => VT.GetRunningStats(ref this, out pStats);
-			public HRESULT GetPortCaps(out DMUS_PORTCAPS pCaps) mut => VT.GetPortCaps(ref this, out pCaps);
-			public HRESULT SetMasterClock(ref IReferenceClock pClock) mut => VT.SetMasterClock(ref this, ref pClock);
-			public HRESULT GetLatencyClock(out IReferenceClock* ppClock) mut => VT.GetLatencyClock(ref this, out ppClock);
-			public HRESULT Activate(BOOL fEnable) mut => VT.Activate(ref this, fEnable);
-			public HRESULT SetSynthSink(ref IDirectMusicSynthSink pSynthSink) mut => VT.SetSynthSink(ref this, ref pSynthSink);
-			public HRESULT Render(out int16 pBuffer, uint32 dwLength, int64 llPosition) mut => VT.Render(ref this, out pBuffer, dwLength, llPosition);
-			public HRESULT SetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) mut => VT.SetChannelPriority(ref this, dwChannelGroup, dwChannel, dwPriority);
-			public HRESULT GetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) mut => VT.GetChannelPriority(ref this, dwChannelGroup, dwChannel, out pdwPriority);
-			public HRESULT GetFormat(out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize) mut => VT.GetFormat(ref this, out pWaveFormatEx, out pdwWaveFormatExSize);
-			public HRESULT GetAppend(out uint32 pdwAppend) mut => VT.GetAppend(ref this, out pdwAppend);
+			public HResult Open(out DMUS_PORTPARAMS8 pPortParams) mut => VT.Open(ref this, out pPortParams);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult SetNumChannelGroups(uint32 dwGroups) mut => VT.SetNumChannelGroups(ref this, dwGroups);
+			public HResult Download(out Handle phDownload, void* pvData, out int32 pbFree) mut => VT.Download(ref this, out phDownload, pvData, out pbFree);
+			public HResult Unload(Handle hDownload, int lpFreeHandle, Handle hUserData) mut => VT.Unload(ref this, hDownload, lpFreeHandle, hUserData);
+			public HResult PlayBuffer(int64 rt, out uint8 pbBuffer, uint32 cbBuffer) mut => VT.PlayBuffer(ref this, rt, out pbBuffer, cbBuffer);
+			public HResult GetRunningStats(out DMUS_SYNTHSTATS pStats) mut => VT.GetRunningStats(ref this, out pStats);
+			public HResult GetPortCaps(out DMUS_PORTCAPS pCaps) mut => VT.GetPortCaps(ref this, out pCaps);
+			public HResult SetMasterClock(ref IReferenceClock pClock) mut => VT.SetMasterClock(ref this, ref pClock);
+			public HResult GetLatencyClock(out IReferenceClock* ppClock) mut => VT.GetLatencyClock(ref this, out ppClock);
+			public HResult Activate(IntBool fEnable) mut => VT.Activate(ref this, fEnable);
+			public HResult SetSynthSink(ref IDirectMusicSynthSink pSynthSink) mut => VT.SetSynthSink(ref this, ref pSynthSink);
+			public HResult Render(out int16 pBuffer, uint32 dwLength, int64 llPosition) mut => VT.Render(ref this, out pBuffer, dwLength, llPosition);
+			public HResult SetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) mut => VT.SetChannelPriority(ref this, dwChannelGroup, dwChannel, dwPriority);
+			public HResult GetChannelPriority(uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) mut => VT.GetChannelPriority(ref this, dwChannelGroup, dwChannel, out pdwPriority);
+			public HResult GetFormat(out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize) mut => VT.GetFormat(ref this, out pWaveFormatEx, out pdwWaveFormatExSize);
+			public HResult GetAppend(out uint32 pdwAppend) mut => VT.GetAppend(ref this, out pdwAppend);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out DMUS_PORTPARAMS8 pPortParams) Open;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, uint32 dwGroups) SetNumChannelGroups;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out HANDLE phDownload, void* pvData, out int32 pbFree) Download;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, HANDLE hDownload, int lpFreeHandle, HANDLE hUserData) Unload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, int64 rt, out uint8 pbBuffer, uint32 cbBuffer) PlayBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out DMUS_SYNTHSTATS pStats) GetRunningStats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out DMUS_PORTCAPS pCaps) GetPortCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, ref IReferenceClock pClock) SetMasterClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out IReferenceClock* ppClock) GetLatencyClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, BOOL fEnable) Activate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, ref IDirectMusicSynthSink pSynthSink) SetSynthSink;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out int16 pBuffer, uint32 dwLength, int64 llPosition) Render;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) SetChannelPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) GetChannelPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize) GetFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth self, out uint32 pdwAppend) GetAppend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out DMUS_PORTPARAMS8 pPortParams) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, uint32 dwGroups) SetNumChannelGroups;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out Handle phDownload, void* pvData, out int32 pbFree) Download;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, Handle hDownload, int lpFreeHandle, Handle hUserData) Unload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, int64 rt, out uint8 pbBuffer, uint32 cbBuffer) PlayBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out DMUS_SYNTHSTATS pStats) GetRunningStats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out DMUS_PORTCAPS pCaps) GetPortCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, ref IReferenceClock pClock) SetMasterClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out IReferenceClock* ppClock) GetLatencyClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, IntBool fEnable) Activate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, ref IDirectMusicSynthSink pSynthSink) SetSynthSink;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out int16 pBuffer, uint32 dwLength, int64 llPosition) Render;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwPriority) SetChannelPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwPriority) GetChannelPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out WaveFormatEx pWaveFormatEx, out uint32 pdwWaveFormatExSize) GetFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth self, out uint32 pdwAppend) GetAppend;
 			}
 		}
 		[CRepr]
@@ -1015,20 +1023,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PlayVoice(int64 rt, uint32 dwVoiceId, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwDLId, int32 prPitch, int32 vrVolume, uint64 stVoiceStart, uint64 stLoopStart, uint64 stLoopEnd) mut => VT.PlayVoice(ref this, rt, dwVoiceId, dwChannelGroup, dwChannel, dwDLId, prPitch, vrVolume, stVoiceStart, stLoopStart, stLoopEnd);
-			public HRESULT StopVoice(int64 rt, uint32 dwVoiceId) mut => VT.StopVoice(ref this, rt, dwVoiceId);
-			public HRESULT GetVoiceState(out uint32 dwVoice, uint32 cbVoice, out DMUS_VOICE_STATE dwVoiceState) mut => VT.GetVoiceState(ref this, out dwVoice, cbVoice, out dwVoiceState);
-			public HRESULT Refresh(uint32 dwDownloadID, uint32 dwFlags) mut => VT.Refresh(ref this, dwDownloadID, dwFlags);
-			public HRESULT AssignChannelToBuses(uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwBuses, uint32 cBuses) mut => VT.AssignChannelToBuses(ref this, dwChannelGroup, dwChannel, out pdwBuses, cBuses);
+			public HResult PlayVoice(int64 rt, uint32 dwVoiceId, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwDLId, int32 prPitch, int32 vrVolume, uint64 stVoiceStart, uint64 stLoopStart, uint64 stLoopEnd) mut => VT.PlayVoice(ref this, rt, dwVoiceId, dwChannelGroup, dwChannel, dwDLId, prPitch, vrVolume, stVoiceStart, stLoopStart, stLoopEnd);
+			public HResult StopVoice(int64 rt, uint32 dwVoiceId) mut => VT.StopVoice(ref this, rt, dwVoiceId);
+			public HResult GetVoiceState(out uint32 dwVoice, uint32 cbVoice, out DMUS_VOICE_STATE dwVoiceState) mut => VT.GetVoiceState(ref this, out dwVoice, cbVoice, out dwVoiceState);
+			public HResult Refresh(uint32 dwDownloadID, uint32 dwFlags) mut => VT.Refresh(ref this, dwDownloadID, dwFlags);
+			public HResult AssignChannelToBuses(uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwBuses, uint32 cBuses) mut => VT.AssignChannelToBuses(ref this, dwChannelGroup, dwChannel, out pdwBuses, cBuses);
 
 			[CRepr]
 			public struct VTable : IDirectMusicSynth.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth8 self, int64 rt, uint32 dwVoiceId, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwDLId, int32 prPitch, int32 vrVolume, uint64 stVoiceStart, uint64 stLoopStart, uint64 stLoopEnd) PlayVoice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth8 self, int64 rt, uint32 dwVoiceId) StopVoice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth8 self, out uint32 dwVoice, uint32 cbVoice, out DMUS_VOICE_STATE dwVoiceState) GetVoiceState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth8 self, uint32 dwDownloadID, uint32 dwFlags) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynth8 self, uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwBuses, uint32 cBuses) AssignChannelToBuses;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth8 self, int64 rt, uint32 dwVoiceId, uint32 dwChannelGroup, uint32 dwChannel, uint32 dwDLId, int32 prPitch, int32 vrVolume, uint64 stVoiceStart, uint64 stLoopStart, uint64 stLoopEnd) PlayVoice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth8 self, int64 rt, uint32 dwVoiceId) StopVoice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth8 self, out uint32 dwVoice, uint32 cbVoice, out DMUS_VOICE_STATE dwVoiceState) GetVoiceState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth8 self, uint32 dwDownloadID, uint32 dwFlags) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynth8 self, uint32 dwChannelGroup, uint32 dwChannel, out uint32 pdwBuses, uint32 cBuses) AssignChannelToBuses;
 			}
 		}
 		[CRepr]
@@ -1038,28 +1046,29 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Init(ref IDirectMusicSynth pSynth) mut => VT.Init(ref this, ref pSynth);
-			public HRESULT SetMasterClock(ref IReferenceClock pClock) mut => VT.SetMasterClock(ref this, ref pClock);
-			public HRESULT GetLatencyClock(out IReferenceClock* ppClock) mut => VT.GetLatencyClock(ref this, out ppClock);
-			public HRESULT Activate(BOOL fEnable) mut => VT.Activate(ref this, fEnable);
-			public HRESULT SampleToRefTime(int64 llSampleTime, out int64 prfTime) mut => VT.SampleToRefTime(ref this, llSampleTime, out prfTime);
-			public HRESULT RefTimeToSample(int64 rfTime, out int64 pllSampleTime) mut => VT.RefTimeToSample(ref this, rfTime, out pllSampleTime);
-			public HRESULT SetDirectSound(ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) mut => VT.SetDirectSound(ref this, ref pDirectSound, ref pDirectSoundBuffer);
-			public HRESULT GetDesiredBufferSize(out uint32 pdwBufferSizeInSamples) mut => VT.GetDesiredBufferSize(ref this, out pdwBufferSizeInSamples);
+			public HResult Init(ref IDirectMusicSynth pSynth) mut => VT.Init(ref this, ref pSynth);
+			public HResult SetMasterClock(ref IReferenceClock pClock) mut => VT.SetMasterClock(ref this, ref pClock);
+			public HResult GetLatencyClock(out IReferenceClock* ppClock) mut => VT.GetLatencyClock(ref this, out ppClock);
+			public HResult Activate(IntBool fEnable) mut => VT.Activate(ref this, fEnable);
+			public HResult SampleToRefTime(int64 llSampleTime, out int64 prfTime) mut => VT.SampleToRefTime(ref this, llSampleTime, out prfTime);
+			public HResult RefTimeToSample(int64 rfTime, out int64 pllSampleTime) mut => VT.RefTimeToSample(ref this, rfTime, out pllSampleTime);
+			public HResult SetDirectSound(ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) mut => VT.SetDirectSound(ref this, ref pDirectSound, ref pDirectSoundBuffer);
+			public HResult GetDesiredBufferSize(out uint32 pdwBufferSizeInSamples) mut => VT.GetDesiredBufferSize(ref this, out pdwBufferSizeInSamples);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, ref IDirectMusicSynth pSynth) Init;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, ref IReferenceClock pClock) SetMasterClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, out IReferenceClock* ppClock) GetLatencyClock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, BOOL fEnable) Activate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, int64 llSampleTime, out int64 prfTime) SampleToRefTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, int64 rfTime, out int64 pllSampleTime) RefTimeToSample;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) SetDirectSound;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectMusicSynthSink self, out uint32 pdwBufferSizeInSamples) GetDesiredBufferSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, ref IDirectMusicSynth pSynth) Init;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, ref IReferenceClock pClock) SetMasterClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, out IReferenceClock* ppClock) GetLatencyClock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, IntBool fEnable) Activate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, int64 llSampleTime, out int64 prfTime) SampleToRefTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, int64 rfTime, out int64 pllSampleTime) RefTimeToSample;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, ref IDirectSound pDirectSound, ref IDirectSoundBuffer pDirectSoundBuffer) SetDirectSound;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectMusicSynthSink self, out uint32 pdwBufferSizeInSamples) GetDesiredBufferSize;
 			}
 		}
 		
+	}
 	}
 }

@@ -1,9 +1,10 @@
 using System;
+using static Win32.UI.Shell.PropertiesSystem;
 
 // namespace Devices.Properties
-namespace Win32
+namespace Win32.Devices
 {
-	extension Win32
+	public static class Properties
 	{
 		// --- Constants ---
 		
@@ -221,7 +222,7 @@ namespace Win32
 		public const uint32 DEVPROP_TYPE_CURRENCY = 14;
 		public const uint32 DEVPROP_TYPE_DATE = 15;
 		public const uint32 DEVPROP_TYPE_FILETIME = 16;
-		public const uint32 DEVPROP_TYPE_BOOLEAN = 17;
+		public const uint32 DEVPROP_TYPE_Boolean = 17;
 		public const uint32 DEVPROP_TYPE_STRING = 18;
 		public const uint32 DEVPROP_TYPE_SECURITY_DESCRIPTOR = 19;
 		public const uint32 DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING = 20;
@@ -257,7 +258,7 @@ namespace Win32
 		{
 			public DEVPROPKEY Key;
 			public DEVPROPSTORE Store;
-			public PWSTR LocaleName;
+			public char16* LocaleName;
 		}
 		[CRepr]
 		public struct DEVPROPERTY

@@ -1,9 +1,14 @@
 using System;
+using static Win32.System.Com;
+using static Win32.Graphics.Direct2D;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.Imaging.D2D
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	extension Imaging{
+	public static class D2D
 	{
 		// --- COM Interfaces ---
 		
@@ -14,16 +19,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT WriteFrame(ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) mut => VT.WriteFrame(ref this, ref pImage, ref pFrameEncode, pImageParameters);
-			public HRESULT WriteFrameThumbnail(ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) mut => VT.WriteFrameThumbnail(ref this, ref pImage, ref pFrameEncode, pImageParameters);
-			public HRESULT WriteThumbnail(ref ID2D1Image pImage, ref IWICBitmapEncoder pEncoder, in WICImageParameters pImageParameters) mut => VT.WriteThumbnail(ref this, ref pImage, ref pEncoder, pImageParameters);
+			public HResult WriteFrame(ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) mut => VT.WriteFrame(ref this, ref pImage, ref pFrameEncode, pImageParameters);
+			public HResult WriteFrameThumbnail(ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) mut => VT.WriteFrameThumbnail(ref this, ref pImage, ref pFrameEncode, pImageParameters);
+			public HResult WriteThumbnail(ref ID2D1Image pImage, ref IWICBitmapEncoder pEncoder, in WICImageParameters pImageParameters) mut => VT.WriteThumbnail(ref this, ref pImage, ref pEncoder, pImageParameters);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICImageEncoder self, ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) WriteFrame;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICImageEncoder self, ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) WriteFrameThumbnail;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICImageEncoder self, ref ID2D1Image pImage, ref IWICBitmapEncoder pEncoder, in WICImageParameters pImageParameters) WriteThumbnail;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWICImageEncoder self, ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) WriteFrame;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWICImageEncoder self, ref ID2D1Image pImage, ref IWICBitmapFrameEncode pFrameEncode, in WICImageParameters pImageParameters) WriteFrameThumbnail;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWICImageEncoder self, ref ID2D1Image pImage, ref IWICBitmapEncoder pEncoder, in WICImageParameters pImageParameters) WriteThumbnail;
 			}
 		}
 		[CRepr]
@@ -33,14 +38,15 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateImageEncoder(ref ID2D1Device pD2DDevice, out IWICImageEncoder* ppWICImageEncoder) mut => VT.CreateImageEncoder(ref this, ref pD2DDevice, out ppWICImageEncoder);
+			public HResult CreateImageEncoder(ref ID2D1Device pD2DDevice, out IWICImageEncoder* ppWICImageEncoder) mut => VT.CreateImageEncoder(ref this, ref pD2DDevice, out ppWICImageEncoder);
 
 			[CRepr]
 			public struct VTable : IWICImagingFactory.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWICImagingFactory2 self, ref ID2D1Device pD2DDevice, out IWICImageEncoder* ppWICImageEncoder) CreateImageEncoder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWICImagingFactory2 self, ref ID2D1Device pD2DDevice, out IWICImageEncoder* ppWICImageEncoder) CreateImageEncoder;
 			}
 		}
 		
+	}
 	}
 }

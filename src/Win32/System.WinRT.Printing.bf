@@ -14,14 +14,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetForWindow(HWND appWindow, in Guid riid, void** printManager) mut => VT.GetForWindow(ref this, appWindow, riid, printManager);
-			public HRESULT ShowPrintUIForWindowAsync(HWND appWindow, in Guid riid, void** asyncOperation) mut => VT.ShowPrintUIForWindowAsync(ref this, appWindow, riid, asyncOperation);
+			public HResult GetForWindow(HWnd appWindow, in Guid riid, void** printManager) mut => VT.GetForWindow(ref this, appWindow, riid, printManager);
+			public HResult ShowPrintUIForWindowAsync(HWnd appWindow, in Guid riid, void** asyncOperation) mut => VT.ShowPrintUIForWindowAsync(ref this, appWindow, riid, asyncOperation);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrinting3DManagerInterop self, HWND appWindow, in Guid riid, void** printManager) GetForWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrinting3DManagerInterop self, HWND appWindow, in Guid riid, void** asyncOperation) ShowPrintUIForWindowAsync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrinting3DManagerInterop self, HWnd appWindow, in Guid riid, void** printManager) GetForWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrinting3DManagerInterop self, HWnd appWindow, in Guid riid, void** asyncOperation) ShowPrintUIForWindowAsync;
 			}
 		}
 		[CRepr]
@@ -31,14 +31,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetForWindow(HWND appWindow, in Guid riid, void** printManager) mut => VT.GetForWindow(ref this, appWindow, riid, printManager);
-			public HRESULT ShowPrintUIForWindowAsync(HWND appWindow, in Guid riid, void** asyncOperation) mut => VT.ShowPrintUIForWindowAsync(ref this, appWindow, riid, asyncOperation);
+			public HResult GetForWindow(HWnd appWindow, in Guid riid, void** printManager) mut => VT.GetForWindow(ref this, appWindow, riid, printManager);
+			public HResult ShowPrintUIForWindowAsync(HWnd appWindow, in Guid riid, void** asyncOperation) mut => VT.ShowPrintUIForWindowAsync(ref this, appWindow, riid, asyncOperation);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintManagerInterop self, HWND appWindow, in Guid riid, void** printManager) GetForWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintManagerInterop self, HWND appWindow, in Guid riid, void** asyncOperation) ShowPrintUIForWindowAsync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintManagerInterop self, HWnd appWindow, in Guid riid, void** printManager) GetForWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintManagerInterop self, HWnd appWindow, in Guid riid, void** asyncOperation) ShowPrintUIForWindowAsync;
 			}
 		}
 		[CRepr]
@@ -48,20 +48,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetDocumentSequencePrintTicket(ref IStream documentSequencePrintTicket) mut => VT.SetDocumentSequencePrintTicket(ref this, ref documentSequencePrintTicket);
-			public HRESULT SetDocumentSequenceUri(PWSTR documentSequenceUri) mut => VT.SetDocumentSequenceUri(ref this, documentSequenceUri);
-			public HRESULT AddDocumentData(uint32 documentId, ref IStream documentPrintTicket, PWSTR documentUri) mut => VT.AddDocumentData(ref this, documentId, ref documentPrintTicket, documentUri);
-			public HRESULT AddPage(uint32 documentId, uint32 pageId, ref IXpsOMPageReference pageReference, PWSTR pageUri) mut => VT.AddPage(ref this, documentId, pageId, ref pageReference, pageUri);
-			public HRESULT Close() mut => VT.Close(ref this);
+			public HResult SetDocumentSequencePrintTicket(ref IStream documentSequencePrintTicket) mut => VT.SetDocumentSequencePrintTicket(ref this, ref documentSequencePrintTicket);
+			public HResult SetDocumentSequenceUri(char16* documentSequenceUri) mut => VT.SetDocumentSequenceUri(ref this, documentSequenceUri);
+			public HResult AddDocumentData(uint32 documentId, ref IStream documentPrintTicket, char16* documentUri) mut => VT.AddDocumentData(ref this, documentId, ref documentPrintTicket, documentUri);
+			public HResult AddPage(uint32 documentId, uint32 pageId, ref IXpsOMPageReference pageReference, char16* pageUri) mut => VT.AddPage(ref this, documentId, pageId, ref pageReference, pageUri);
+			public HResult Close() mut => VT.Close(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsReceiver self, ref IStream documentSequencePrintTicket) SetDocumentSequencePrintTicket;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsReceiver self, PWSTR documentSequenceUri) SetDocumentSequenceUri;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsReceiver self, uint32 documentId, ref IStream documentPrintTicket, PWSTR documentUri) AddDocumentData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsReceiver self, uint32 documentId, uint32 pageId, ref IXpsOMPageReference pageReference, PWSTR pageUri) AddPage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsReceiver self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsReceiver self, ref IStream documentSequencePrintTicket) SetDocumentSequencePrintTicket;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsReceiver self, char16* documentSequenceUri) SetDocumentSequenceUri;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsReceiver self, uint32 documentId, ref IStream documentPrintTicket, char16* documentUri) AddDocumentData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsReceiver self, uint32 documentId, uint32 pageId, ref IXpsOMPageReference pageReference, char16* pageUri) AddPage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsReceiver self) Close;
 			}
 		}
 		[CRepr]
@@ -71,12 +71,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Failed(HRESULT XpsError) mut => VT.Failed(ref this, XpsError);
+			public HResult Failed(HResult XpsError) mut => VT.Failed(ref this, XpsError);
 
 			[CRepr]
 			public struct VTable : IPrintWorkflowXpsReceiver.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsReceiver2 self, HRESULT XpsError) Failed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsReceiver2 self, HResult XpsError) Failed;
 			}
 		}
 		[CRepr]
@@ -86,14 +86,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartXpsOMGeneration(ref IPrintWorkflowXpsReceiver receiver) mut => VT.StartXpsOMGeneration(ref this, ref receiver);
-			public HRESULT get_ObjectFactory(out IXpsOMObjectFactory1* value) mut => VT.get_ObjectFactory(ref this, out value);
+			public HResult StartXpsOMGeneration(ref IPrintWorkflowXpsReceiver receiver) mut => VT.StartXpsOMGeneration(ref this, ref receiver);
+			public HResult get_ObjectFactory(out IXpsOMObjectFactory1* value) mut => VT.get_ObjectFactory(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowObjectModelSourceFileContentNative self, ref IPrintWorkflowXpsReceiver receiver) StartXpsOMGeneration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowObjectModelSourceFileContentNative self, out IXpsOMObjectFactory1* value) get_ObjectFactory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowObjectModelSourceFileContentNative self, ref IPrintWorkflowXpsReceiver receiver) StartXpsOMGeneration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowObjectModelSourceFileContentNative self, out IXpsOMObjectFactory1* value) get_ObjectFactory;
 			}
 		}
 		[CRepr]
@@ -103,12 +103,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_DocumentPackageTarget(out IXpsDocumentPackageTarget* value) mut => VT.get_DocumentPackageTarget(ref this, out value);
+			public HResult get_DocumentPackageTarget(out IXpsDocumentPackageTarget* value) mut => VT.get_DocumentPackageTarget(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowXpsObjectModelTargetPackageNative self, out IXpsDocumentPackageTarget* value) get_DocumentPackageTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowXpsObjectModelTargetPackageNative self, out IXpsDocumentPackageTarget* value) get_DocumentPackageTarget;
 			}
 		}
 		[CRepr]
@@ -118,16 +118,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_PrinterQueue(out IPrinterQueue* value) mut => VT.get_PrinterQueue(ref this, out value);
-			public HRESULT get_DriverProperties(out IPrinterPropertyBag* value) mut => VT.get_DriverProperties(ref this, out value);
-			public HRESULT get_UserProperties(out IPrinterPropertyBag* value) mut => VT.get_UserProperties(ref this, out value);
+			public HResult get_PrinterQueue(out IPrinterQueue* value) mut => VT.get_PrinterQueue(ref this, out value);
+			public HResult get_DriverProperties(out IPrinterPropertyBag* value) mut => VT.get_DriverProperties(ref this, out value);
+			public HResult get_UserProperties(out IPrinterPropertyBag* value) mut => VT.get_UserProperties(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowConfigurationNative self, out IPrinterQueue* value) get_PrinterQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowConfigurationNative self, out IPrinterPropertyBag* value) get_DriverProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPrintWorkflowConfigurationNative self, out IPrinterPropertyBag* value) get_UserProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowConfigurationNative self, out IPrinterQueue* value) get_PrinterQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowConfigurationNative self, out IPrinterPropertyBag* value) get_DriverProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPrintWorkflowConfigurationNative self, out IPrinterPropertyBag* value) get_UserProperties;
 			}
 		}
 		

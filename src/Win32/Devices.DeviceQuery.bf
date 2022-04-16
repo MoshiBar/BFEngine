@@ -106,7 +106,7 @@ namespace Win32
 		public struct DEV_OBJECT
 		{
 			public DEV_OBJECT_TYPE ObjectType;
-			public PWSTR pszObjectId;
+			public char16* pszObjectId;
 			public uint32 cPropertyCount;
 			public DEVPROPERTY* pProperties;
 		}
@@ -140,32 +140,32 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevCreateObjectQuery(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
+		public static extern HResult DevCreateObjectQuery(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevCreateObjectQueryEx(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
+		public static extern HResult DevCreateObjectQueryEx(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevCreateObjectQueryFromId(DEV_OBJECT_TYPE ObjectType, PWSTR pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
+		public static extern HResult DevCreateObjectQueryFromId(DEV_OBJECT_TYPE ObjectType, char16* pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevCreateObjectQueryFromIdEx(DEV_OBJECT_TYPE ObjectType, PWSTR pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
+		public static extern HResult DevCreateObjectQueryFromIdEx(DEV_OBJECT_TYPE ObjectType, char16* pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevCreateObjectQueryFromIds(DEV_OBJECT_TYPE ObjectType, PWSTR pszzObjectIds, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
+		public static extern HResult DevCreateObjectQueryFromIds(DEV_OBJECT_TYPE ObjectType, char16* pszzObjectIds, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevCreateObjectQueryFromIdsEx(DEV_OBJECT_TYPE ObjectType, PWSTR pszzObjectIds, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
+		public static extern HResult DevCreateObjectQueryFromIdsEx(DEV_OBJECT_TYPE ObjectType, char16* pszzObjectIds, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, PDEV_QUERY_RESULT_CALLBACK pCallback, void* pContext, out HDEVQUERY__* phDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DevCloseObjectQuery(ref HDEVQUERY__ hDevQuery);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevGetObjects(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, out uint32 pcObjectCount, DEV_OBJECT** ppObjects);
+		public static extern HResult DevGetObjects(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, out uint32 pcObjectCount, DEV_OBJECT** ppObjects);
 		[Import("api-ms-win-devices-query-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevGetObjectsEx(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, out uint32 pcObjectCount, DEV_OBJECT** ppObjects);
+		public static extern HResult DevGetObjectsEx(DEV_OBJECT_TYPE ObjectType, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cFilterExpressionCount, DEVPROP_FILTER_EXPRESSION* pFilter, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, out uint32 pcObjectCount, DEV_OBJECT** ppObjects);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DevFreeObjects(uint32 cObjectCount, DEV_OBJECT* pObjects);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevGetObjectProperties(DEV_OBJECT_TYPE ObjectType, PWSTR pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, out uint32 pcPropertyCount, out DEVPROPERTY* ppProperties);
+		public static extern HResult DevGetObjectProperties(DEV_OBJECT_TYPE ObjectType, char16* pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, out uint32 pcPropertyCount, out DEVPROPERTY* ppProperties);
 		[Import("api-ms-win-devices-query-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DevGetObjectPropertiesEx(DEV_OBJECT_TYPE ObjectType, PWSTR pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, out uint32 pcPropertyCount, out DEVPROPERTY* ppProperties);
+		public static extern HResult DevGetObjectPropertiesEx(DEV_OBJECT_TYPE ObjectType, char16* pszObjectId, uint32 QueryFlags, uint32 cRequestedProperties, DEVPROPCOMPKEY* pRequestedProperties, uint32 cExtendedParameterCount, DEV_QUERY_PARAMETER* pExtendedParameters, out uint32 pcPropertyCount, out DEVPROPERTY* ppProperties);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DevFreeObjectProperties(uint32 cPropertyCount, DEVPROPERTY* pProperties);
 		[Import("api-ms-win-devices-query-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern DEVPROPERTY* DevFindProperty(in DEVPROPKEY pKey, DEVPROPSTORE Store, PWSTR pszLocaleName, uint32 cProperties, DEVPROPERTY* pProperties);
+		public static extern DEVPROPERTY* DevFindProperty(in DEVPROPKEY pKey, DEVPROPSTORE Store, char16* pszLocaleName, uint32 cProperties, DEVPROPERTY* pProperties);
 	}
 }

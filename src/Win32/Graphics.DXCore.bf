@@ -1,9 +1,13 @@
 using System;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.DXCore
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	public static class DXCore
 	{
 		// --- Constants ---
 		
@@ -106,13 +110,13 @@ namespace Win32
 			public Boolean IsValid() mut => VT.IsValid(ref this);
 			public Boolean IsAttributeSupported(in Guid attributeGUID) mut => VT.IsAttributeSupported(ref this, attributeGUID);
 			public Boolean IsPropertySupported(DXCoreAdapterProperty property) mut => VT.IsPropertySupported(ref this, property);
-			public HRESULT GetProperty(DXCoreAdapterProperty property, uint bufferSize, void* propertyData) mut => VT.GetProperty(ref this, property, bufferSize, propertyData);
-			public HRESULT GetPropertySize(DXCoreAdapterProperty property, out uint bufferSize) mut => VT.GetPropertySize(ref this, property, out bufferSize);
+			public HResult GetProperty(DXCoreAdapterProperty property, uint bufferSize, void* propertyData) mut => VT.GetProperty(ref this, property, bufferSize, propertyData);
+			public HResult GetPropertySize(DXCoreAdapterProperty property, out uint bufferSize) mut => VT.GetPropertySize(ref this, property, out bufferSize);
 			public Boolean IsQueryStateSupported(DXCoreAdapterState property) mut => VT.IsQueryStateSupported(ref this, property);
-			public HRESULT QueryState(DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint outputBufferSize, void* outputBuffer) mut => VT.QueryState(ref this, state, inputStateDetailsSize, inputStateDetails, outputBufferSize, outputBuffer);
+			public HResult QueryState(DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint outputBufferSize, void* outputBuffer) mut => VT.QueryState(ref this, state, inputStateDetailsSize, inputStateDetails, outputBufferSize, outputBuffer);
 			public Boolean IsSetStateSupported(DXCoreAdapterState property) mut => VT.IsSetStateSupported(ref this, property);
-			public HRESULT SetState(DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint inputDataSize, void* inputData) mut => VT.SetState(ref this, state, inputStateDetailsSize, inputStateDetails, inputDataSize, inputData);
-			public HRESULT GetFactory(in Guid riid, void** ppvFactory) mut => VT.GetFactory(ref this, riid, ppvFactory);
+			public HResult SetState(DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint inputDataSize, void* inputData) mut => VT.SetState(ref this, state, inputStateDetailsSize, inputStateDetails, inputDataSize, inputData);
+			public HResult GetFactory(in Guid riid, void** ppvFactory) mut => VT.GetFactory(ref this, riid, ppvFactory);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
@@ -120,13 +124,13 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapter self) IsValid;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapter self, in Guid attributeGUID) IsAttributeSupported;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapter self, DXCoreAdapterProperty property) IsPropertySupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapter self, DXCoreAdapterProperty property, uint bufferSize, void* propertyData) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapter self, DXCoreAdapterProperty property, out uint bufferSize) GetPropertySize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapter self, DXCoreAdapterProperty property, uint bufferSize, void* propertyData) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapter self, DXCoreAdapterProperty property, out uint bufferSize) GetPropertySize;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapter self, DXCoreAdapterState property) IsQueryStateSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapter self, DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint outputBufferSize, void* outputBuffer) QueryState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapter self, DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint outputBufferSize, void* outputBuffer) QueryState;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapter self, DXCoreAdapterState property) IsSetStateSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapter self, DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint inputDataSize, void* inputData) SetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapter self, in Guid riid, void** ppvFactory) GetFactory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapter self, DXCoreAdapterState state, uint inputStateDetailsSize, void* inputStateDetails, uint inputDataSize, void* inputData) SetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapter self, in Guid riid, void** ppvFactory) GetFactory;
 			}
 		}
 		[CRepr]
@@ -136,21 +140,21 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAdapter(uint32 index, in Guid riid, void** ppvAdapter) mut => VT.GetAdapter(ref this, index, riid, ppvAdapter);
+			public HResult GetAdapter(uint32 index, in Guid riid, void** ppvAdapter) mut => VT.GetAdapter(ref this, index, riid, ppvAdapter);
 			public uint32 GetAdapterCount() mut => VT.GetAdapterCount(ref this);
 			public Boolean IsStale() mut => VT.IsStale(ref this);
-			public HRESULT GetFactory(in Guid riid, void** ppvFactory) mut => VT.GetFactory(ref this, riid, ppvFactory);
-			public HRESULT Sort(uint32 numPreferences, DXCoreAdapterPreference* preferences) mut => VT.Sort(ref this, numPreferences, preferences);
+			public HResult GetFactory(in Guid riid, void** ppvFactory) mut => VT.GetFactory(ref this, riid, ppvFactory);
+			public HResult Sort(uint32 numPreferences, DXCoreAdapterPreference* preferences) mut => VT.Sort(ref this, numPreferences, preferences);
 			public Boolean IsAdapterPreferenceSupported(DXCoreAdapterPreference preference) mut => VT.IsAdapterPreferenceSupported(ref this, preference);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterList self, uint32 index, in Guid riid, void** ppvAdapter) GetAdapter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterList self, uint32 index, in Guid riid, void** ppvAdapter) GetAdapter;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDXCoreAdapterList self) GetAdapterCount;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapterList self) IsStale;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterList self, in Guid riid, void** ppvFactory) GetFactory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterList self, uint32 numPreferences, DXCoreAdapterPreference* preferences) Sort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterList self, in Guid riid, void** ppvFactory) GetFactory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterList self, uint32 numPreferences, DXCoreAdapterPreference* preferences) Sort;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapterList self, DXCoreAdapterPreference preference) IsAdapterPreferenceSupported;
 			}
 		}
@@ -161,26 +165,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateAdapterList(uint32 numAttributes, Guid* filterAttributes, in Guid riid, void** ppvAdapterList) mut => VT.CreateAdapterList(ref this, numAttributes, filterAttributes, riid, ppvAdapterList);
-			public HRESULT GetAdapterByLuid(in LUID adapterLUID, in Guid riid, void** ppvAdapter) mut => VT.GetAdapterByLuid(ref this, adapterLUID, riid, ppvAdapter);
+			public HResult CreateAdapterList(uint32 numAttributes, Guid* filterAttributes, in Guid riid, void** ppvAdapterList) mut => VT.CreateAdapterList(ref this, numAttributes, filterAttributes, riid, ppvAdapterList);
+			public HResult GetAdapterByLuid(in LUID adapterLUID, in Guid riid, void** ppvAdapter) mut => VT.GetAdapterByLuid(ref this, adapterLUID, riid, ppvAdapter);
 			public Boolean IsNotificationTypeSupported(DXCoreNotificationType notificationType) mut => VT.IsNotificationTypeSupported(ref this, notificationType);
-			public HRESULT RegisterEventNotification(ref IUnknown dxCoreObject, DXCoreNotificationType notificationType, PFN_DXCORE_NOTIFICATION_CALLBACK callbackFunction, void* callbackContext, out uint32 eventCookie) mut => VT.RegisterEventNotification(ref this, ref dxCoreObject, notificationType, callbackFunction, callbackContext, out eventCookie);
-			public HRESULT UnregisterEventNotification(uint32 eventCookie) mut => VT.UnregisterEventNotification(ref this, eventCookie);
+			public HResult RegisterEventNotification(ref IUnknown dxCoreObject, DXCoreNotificationType notificationType, PFN_DXCORE_NOTIFICATION_CALLBACK callbackFunction, void* callbackContext, out uint32 eventCookie) mut => VT.RegisterEventNotification(ref this, ref dxCoreObject, notificationType, callbackFunction, callbackContext, out eventCookie);
+			public HResult UnregisterEventNotification(uint32 eventCookie) mut => VT.UnregisterEventNotification(ref this, eventCookie);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterFactory self, uint32 numAttributes, Guid* filterAttributes, in Guid riid, void** ppvAdapterList) CreateAdapterList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterFactory self, in LUID adapterLUID, in Guid riid, void** ppvAdapter) GetAdapterByLuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterFactory self, uint32 numAttributes, Guid* filterAttributes, in Guid riid, void** ppvAdapterList) CreateAdapterList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterFactory self, in LUID adapterLUID, in Guid riid, void** ppvAdapter) GetAdapterByLuid;
 				public new function [CallingConvention(.Stdcall)] Boolean(ref IDXCoreAdapterFactory self, DXCoreNotificationType notificationType) IsNotificationTypeSupported;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterFactory self, ref IUnknown dxCoreObject, DXCoreNotificationType notificationType, PFN_DXCORE_NOTIFICATION_CALLBACK callbackFunction, void* callbackContext, out uint32 eventCookie) RegisterEventNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDXCoreAdapterFactory self, uint32 eventCookie) UnregisterEventNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterFactory self, ref IUnknown dxCoreObject, DXCoreNotificationType notificationType, PFN_DXCORE_NOTIFICATION_CALLBACK callbackFunction, void* callbackContext, out uint32 eventCookie) RegisterEventNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDXCoreAdapterFactory self, uint32 eventCookie) UnregisterEventNotification;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("dxcore.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DXCoreCreateAdapterFactory(in Guid riid, void** ppvFactory);
+		public static extern HResult DXCoreCreateAdapterFactory(in Guid riid, void** ppvFactory);
 	}
 }

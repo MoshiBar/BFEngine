@@ -143,14 +143,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterContent(ref Guid in_applicationId, ref Guid in_endpointId, ISideShowContentManager** out_ppIContent) mut => VT.RegisterContent(ref this, ref in_applicationId, ref in_endpointId, out_ppIContent);
-			public HRESULT RegisterNotifications(ref Guid in_applicationId, ISideShowNotificationManager** out_ppINotification) mut => VT.RegisterNotifications(ref this, ref in_applicationId, out_ppINotification);
+			public HResult RegisterContent(ref Guid in_applicationId, ref Guid in_endpointId, ISideShowContentManager** out_ppIContent) mut => VT.RegisterContent(ref this, ref in_applicationId, ref in_endpointId, out_ppIContent);
+			public HResult RegisterNotifications(ref Guid in_applicationId, ISideShowNotificationManager** out_ppINotification) mut => VT.RegisterNotifications(ref this, ref in_applicationId, out_ppINotification);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowSession self, ref Guid in_applicationId, ref Guid in_endpointId, ISideShowContentManager** out_ppIContent) RegisterContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowSession self, ref Guid in_applicationId, ISideShowNotificationManager** out_ppINotification) RegisterNotifications;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowSession self, ref Guid in_applicationId, ref Guid in_endpointId, ISideShowContentManager** out_ppIContent) RegisterContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowSession self, ref Guid in_applicationId, ISideShowNotificationManager** out_ppINotification) RegisterNotifications;
 			}
 		}
 		[CRepr]
@@ -160,16 +160,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Show(ISideShowNotification* in_pINotification) mut => VT.Show(ref this, in_pINotification);
-			public HRESULT Revoke(uint32 in_notificationId) mut => VT.Revoke(ref this, in_notificationId);
-			public HRESULT RevokeAll() mut => VT.RevokeAll(ref this);
+			public HResult Show(ISideShowNotification* in_pINotification) mut => VT.Show(ref this, in_pINotification);
+			public HResult Revoke(uint32 in_notificationId) mut => VT.Revoke(ref this, in_notificationId);
+			public HResult RevokeAll() mut => VT.RevokeAll(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotificationManager self, ISideShowNotification* in_pINotification) Show;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotificationManager self, uint32 in_notificationId) Revoke;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotificationManager self) RevokeAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotificationManager self, ISideShowNotification* in_pINotification) Show;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotificationManager self, uint32 in_notificationId) Revoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotificationManager self) RevokeAll;
 			}
 		}
 		[CRepr]
@@ -179,30 +179,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_NotificationId(out uint32 out_pNotificationId) mut => VT.get_NotificationId(ref this, out out_pNotificationId);
-			public HRESULT put_NotificationId(uint32 in_notificationId) mut => VT.put_NotificationId(ref this, in_notificationId);
-			public HRESULT get_Title(PWSTR* out_ppwszTitle) mut => VT.get_Title(ref this, out_ppwszTitle);
-			public HRESULT put_Title(PWSTR in_pwszTitle) mut => VT.put_Title(ref this, in_pwszTitle);
-			public HRESULT get_Message(PWSTR* out_ppwszMessage) mut => VT.get_Message(ref this, out_ppwszMessage);
-			public HRESULT put_Message(PWSTR in_pwszMessage) mut => VT.put_Message(ref this, in_pwszMessage);
-			public HRESULT get_Image(HICON* out_phIcon) mut => VT.get_Image(ref this, out_phIcon);
-			public HRESULT put_Image(HICON in_hIcon) mut => VT.put_Image(ref this, in_hIcon);
-			public HRESULT get_ExpirationTime(out SYSTEMTIME out_pTime) mut => VT.get_ExpirationTime(ref this, out out_pTime);
-			public HRESULT put_ExpirationTime(SYSTEMTIME* in_pTime) mut => VT.put_ExpirationTime(ref this, in_pTime);
+			public HResult get_NotificationId(out uint32 out_pNotificationId) mut => VT.get_NotificationId(ref this, out out_pNotificationId);
+			public HResult put_NotificationId(uint32 in_notificationId) mut => VT.put_NotificationId(ref this, in_notificationId);
+			public HResult get_Title(PWSTR* out_ppwszTitle) mut => VT.get_Title(ref this, out_ppwszTitle);
+			public HResult put_Title(char16* in_pwszTitle) mut => VT.put_Title(ref this, in_pwszTitle);
+			public HResult get_Message(PWSTR* out_ppwszMessage) mut => VT.get_Message(ref this, out_ppwszMessage);
+			public HResult put_Message(char16* in_pwszMessage) mut => VT.put_Message(ref this, in_pwszMessage);
+			public HResult get_Image(HICON* out_phIcon) mut => VT.get_Image(ref this, out_phIcon);
+			public HResult put_Image(HICON in_hIcon) mut => VT.put_Image(ref this, in_hIcon);
+			public HResult get_ExpirationTime(out SYSTEMTIME out_pTime) mut => VT.get_ExpirationTime(ref this, out out_pTime);
+			public HResult put_ExpirationTime(SYSTEMTIME* in_pTime) mut => VT.put_ExpirationTime(ref this, in_pTime);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, out uint32 out_pNotificationId) get_NotificationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, uint32 in_notificationId) put_NotificationId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, PWSTR* out_ppwszTitle) get_Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, PWSTR in_pwszTitle) put_Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, PWSTR* out_ppwszMessage) get_Message;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, PWSTR in_pwszMessage) put_Message;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, HICON* out_phIcon) get_Image;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, HICON in_hIcon) put_Image;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, out SYSTEMTIME out_pTime) get_ExpirationTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowNotification self, SYSTEMTIME* in_pTime) put_ExpirationTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, out uint32 out_pNotificationId) get_NotificationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, uint32 in_notificationId) put_NotificationId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, char16** out_ppwszTitle) get_Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, char16* in_pwszTitle) put_Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, char16** out_ppwszMessage) get_Message;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, char16* in_pwszMessage) put_Message;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, HICON* out_phIcon) get_Image;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, HICON in_hIcon) put_Image;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, out SYSTEMTIME out_pTime) get_ExpirationTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowNotification self, SYSTEMTIME* in_pTime) put_ExpirationTime;
 			}
 		}
 		[CRepr]
@@ -212,20 +212,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Add(ISideShowContent* in_pIContent) mut => VT.Add(ref this, in_pIContent);
-			public HRESULT Remove(uint32 in_contentId) mut => VT.Remove(ref this, in_contentId);
-			public HRESULT RemoveAll() mut => VT.RemoveAll(ref this);
-			public HRESULT SetEventSink(ISideShowEvents* in_pIEvents) mut => VT.SetEventSink(ref this, in_pIEvents);
-			public HRESULT GetDeviceCapabilities(ISideShowCapabilitiesCollection** out_ppCollection) mut => VT.GetDeviceCapabilities(ref this, out_ppCollection);
+			public HResult Add(ISideShowContent* in_pIContent) mut => VT.Add(ref this, in_pIContent);
+			public HResult Remove(uint32 in_contentId) mut => VT.Remove(ref this, in_contentId);
+			public HResult RemoveAll() mut => VT.RemoveAll(ref this);
+			public HResult SetEventSink(ISideShowEvents* in_pIEvents) mut => VT.SetEventSink(ref this, in_pIEvents);
+			public HResult GetDeviceCapabilities(ISideShowCapabilitiesCollection** out_ppCollection) mut => VT.GetDeviceCapabilities(ref this, out_ppCollection);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContentManager self, ISideShowContent* in_pIContent) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContentManager self, uint32 in_contentId) Remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContentManager self) RemoveAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContentManager self, ISideShowEvents* in_pIEvents) SetEventSink;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContentManager self, ISideShowCapabilitiesCollection** out_ppCollection) GetDeviceCapabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContentManager self, ISideShowContent* in_pIContent) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContentManager self, uint32 in_contentId) Remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContentManager self) RemoveAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContentManager self, ISideShowEvents* in_pIEvents) SetEventSink;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContentManager self, ISideShowCapabilitiesCollection** out_ppCollection) GetDeviceCapabilities;
 			}
 		}
 		[CRepr]
@@ -235,16 +235,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetContent(ISideShowCapabilities* in_pICapabilities, out uint32 out_pdwSize, uint8** out_ppbData) mut => VT.GetContent(ref this, in_pICapabilities, out out_pdwSize, out_ppbData);
-			public HRESULT get_ContentId(out uint32 out_pcontentId) mut => VT.get_ContentId(ref this, out out_pcontentId);
-			public HRESULT get_DifferentiateContent(out BOOL out_pfDifferentiateContent) mut => VT.get_DifferentiateContent(ref this, out out_pfDifferentiateContent);
+			public HResult GetContent(ISideShowCapabilities* in_pICapabilities, out uint32 out_pdwSize, uint8** out_ppbData) mut => VT.GetContent(ref this, in_pICapabilities, out out_pdwSize, out_ppbData);
+			public HResult get_ContentId(out uint32 out_pcontentId) mut => VT.get_ContentId(ref this, out out_pcontentId);
+			public HResult get_DifferentiateContent(out IntBool out_pfDifferentiateContent) mut => VT.get_DifferentiateContent(ref this, out out_pfDifferentiateContent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContent self, ISideShowCapabilities* in_pICapabilities, out uint32 out_pdwSize, uint8** out_ppbData) GetContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContent self, out uint32 out_pcontentId) get_ContentId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowContent self, out BOOL out_pfDifferentiateContent) get_DifferentiateContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContent self, ISideShowCapabilities* in_pICapabilities, out uint32 out_pdwSize, uint8** out_ppbData) GetContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContent self, out uint32 out_pcontentId) get_ContentId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowContent self, out IntBool out_pfDifferentiateContent) get_DifferentiateContent;
 			}
 		}
 		[CRepr]
@@ -254,18 +254,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ContentMissing(uint32 in_contentId, ISideShowContent** out_ppIContent) mut => VT.ContentMissing(ref this, in_contentId, out_ppIContent);
-			public HRESULT ApplicationEvent(ISideShowCapabilities* in_pICapabilities, uint32 in_dwEventId, uint32 in_dwEventSize, uint8* in_pbEventData) mut => VT.ApplicationEvent(ref this, in_pICapabilities, in_dwEventId, in_dwEventSize, in_pbEventData);
-			public HRESULT DeviceAdded(ISideShowCapabilities* in_pIDevice) mut => VT.DeviceAdded(ref this, in_pIDevice);
-			public HRESULT DeviceRemoved(ISideShowCapabilities* in_pIDevice) mut => VT.DeviceRemoved(ref this, in_pIDevice);
+			public HResult ContentMissing(uint32 in_contentId, ISideShowContent** out_ppIContent) mut => VT.ContentMissing(ref this, in_contentId, out_ppIContent);
+			public HResult ApplicationEvent(ISideShowCapabilities* in_pICapabilities, uint32 in_dwEventId, uint32 in_dwEventSize, uint8* in_pbEventData) mut => VT.ApplicationEvent(ref this, in_pICapabilities, in_dwEventId, in_dwEventSize, in_pbEventData);
+			public HResult DeviceAdded(ISideShowCapabilities* in_pIDevice) mut => VT.DeviceAdded(ref this, in_pIDevice);
+			public HResult DeviceRemoved(ISideShowCapabilities* in_pIDevice) mut => VT.DeviceRemoved(ref this, in_pIDevice);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowEvents self, uint32 in_contentId, ISideShowContent** out_ppIContent) ContentMissing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowEvents self, ISideShowCapabilities* in_pICapabilities, uint32 in_dwEventId, uint32 in_dwEventSize, uint8* in_pbEventData) ApplicationEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowEvents self, ISideShowCapabilities* in_pIDevice) DeviceAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowEvents self, ISideShowCapabilities* in_pIDevice) DeviceRemoved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowEvents self, uint32 in_contentId, ISideShowContent** out_ppIContent) ContentMissing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowEvents self, ISideShowCapabilities* in_pICapabilities, uint32 in_dwEventId, uint32 in_dwEventSize, uint8* in_pbEventData) ApplicationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowEvents self, ISideShowCapabilities* in_pIDevice) DeviceAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowEvents self, ISideShowCapabilities* in_pIDevice) DeviceRemoved;
 			}
 		}
 		[CRepr]
@@ -275,12 +275,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCapability(in PROPERTYKEY in_keyCapability, out PROPVARIANT inout_pValue) mut => VT.GetCapability(ref this, in_keyCapability, out inout_pValue);
+			public HResult GetCapability(in PROPERTYKEY in_keyCapability, out PROPVARIANT inout_pValue) mut => VT.GetCapability(ref this, in_keyCapability, out inout_pValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowCapabilities self, in PROPERTYKEY in_keyCapability, out PROPVARIANT inout_pValue) GetCapability;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowCapabilities self, in PROPERTYKEY in_keyCapability, out PROPVARIANT inout_pValue) GetCapability;
 			}
 		}
 		[CRepr]
@@ -290,14 +290,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCount(out uint32 out_pdwCount) mut => VT.GetCount(ref this, out out_pdwCount);
-			public HRESULT GetAt(uint32 in_dwIndex, ISideShowCapabilities** out_ppCapabilities) mut => VT.GetAt(ref this, in_dwIndex, out_ppCapabilities);
+			public HResult GetCount(out uint32 out_pdwCount) mut => VT.GetCount(ref this, out out_pdwCount);
+			public HResult GetAt(uint32 in_dwIndex, ISideShowCapabilities** out_ppCapabilities) mut => VT.GetAt(ref this, in_dwIndex, out_ppCapabilities);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowCapabilitiesCollection self, out uint32 out_pdwCount) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowCapabilitiesCollection self, uint32 in_dwIndex, ISideShowCapabilities** out_ppCapabilities) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowCapabilitiesCollection self, out uint32 out_pdwCount) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowCapabilitiesCollection self, uint32 in_dwIndex, ISideShowCapabilities** out_ppCapabilities) GetAt;
 			}
 		}
 		[CRepr]
@@ -307,12 +307,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCapabilities(ISideShowKeyCollection* in_keyCollection, ISideShowPropVariantCollection** inout_pValues) mut => VT.GetCapabilities(ref this, in_keyCollection, inout_pValues);
+			public HResult GetCapabilities(ISideShowKeyCollection* in_keyCollection, ISideShowPropVariantCollection** inout_pValues) mut => VT.GetCapabilities(ref this, in_keyCollection, inout_pValues);
 
 			[CRepr]
 			public struct VTable : ISideShowCapabilities.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowBulkCapabilities self, ISideShowKeyCollection* in_keyCollection, ISideShowPropVariantCollection** inout_pValues) GetCapabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowBulkCapabilities self, ISideShowKeyCollection* in_keyCollection, ISideShowPropVariantCollection** inout_pValues) GetCapabilities;
 			}
 		}
 		[CRepr]
@@ -322,20 +322,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Add(in PROPERTYKEY Key) mut => VT.Add(ref this, Key);
-			public HRESULT Clear() mut => VT.Clear(ref this);
-			public HRESULT GetAt(uint32 dwIndex, out PROPERTYKEY pKey) mut => VT.GetAt(ref this, dwIndex, out pKey);
-			public HRESULT GetCount(ref uint32 pcElems) mut => VT.GetCount(ref this, ref pcElems);
-			public HRESULT RemoveAt(uint32 dwIndex) mut => VT.RemoveAt(ref this, dwIndex);
+			public HResult Add(in PROPERTYKEY Key) mut => VT.Add(ref this, Key);
+			public HResult Clear() mut => VT.Clear(ref this);
+			public HResult GetAt(uint32 dwIndex, out PROPERTYKEY pKey) mut => VT.GetAt(ref this, dwIndex, out pKey);
+			public HResult GetCount(ref uint32 pcElems) mut => VT.GetCount(ref this, ref pcElems);
+			public HResult RemoveAt(uint32 dwIndex) mut => VT.RemoveAt(ref this, dwIndex);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowKeyCollection self, in PROPERTYKEY Key) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowKeyCollection self) Clear;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowKeyCollection self, uint32 dwIndex, out PROPERTYKEY pKey) GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowKeyCollection self, ref uint32 pcElems) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowKeyCollection self, uint32 dwIndex) RemoveAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowKeyCollection self, in PROPERTYKEY Key) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowKeyCollection self) Clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowKeyCollection self, uint32 dwIndex, out PROPERTYKEY pKey) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowKeyCollection self, ref uint32 pcElems) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowKeyCollection self, uint32 dwIndex) RemoveAt;
 			}
 		}
 		[CRepr]
@@ -345,20 +345,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Add(in PROPVARIANT pValue) mut => VT.Add(ref this, pValue);
-			public HRESULT Clear() mut => VT.Clear(ref this);
-			public HRESULT GetAt(uint32 dwIndex, out PROPVARIANT pValue) mut => VT.GetAt(ref this, dwIndex, out pValue);
-			public HRESULT GetCount(ref uint32 pcElems) mut => VT.GetCount(ref this, ref pcElems);
-			public HRESULT RemoveAt(uint32 dwIndex) mut => VT.RemoveAt(ref this, dwIndex);
+			public HResult Add(in PROPVARIANT pValue) mut => VT.Add(ref this, pValue);
+			public HResult Clear() mut => VT.Clear(ref this);
+			public HResult GetAt(uint32 dwIndex, out PROPVARIANT pValue) mut => VT.GetAt(ref this, dwIndex, out pValue);
+			public HResult GetCount(ref uint32 pcElems) mut => VT.GetCount(ref this, ref pcElems);
+			public HResult RemoveAt(uint32 dwIndex) mut => VT.RemoveAt(ref this, dwIndex);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowPropVariantCollection self, in PROPVARIANT pValue) Add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowPropVariantCollection self) Clear;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowPropVariantCollection self, uint32 dwIndex, out PROPVARIANT pValue) GetAt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowPropVariantCollection self, ref uint32 pcElems) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISideShowPropVariantCollection self, uint32 dwIndex) RemoveAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowPropVariantCollection self, in PROPVARIANT pValue) Add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowPropVariantCollection self) Clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowPropVariantCollection self, uint32 dwIndex, out PROPVARIANT pValue) GetAt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowPropVariantCollection self, ref uint32 pcElems) GetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISideShowPropVariantCollection self, uint32 dwIndex) RemoveAt;
 			}
 		}
 		

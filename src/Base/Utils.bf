@@ -95,11 +95,11 @@ namespace BfEngine
 			}
 		}
 
-		public static Rect GetCurveBounds(Span<Vector2> span) => GetCurveBounds(span[0], span[1], span[2], span[3]);
+		public static RectF GetCurveBounds(Span<Vector2> span) => GetCurveBounds(span[0], span[1], span[2], span[3]);
 
-		public static Rect GetCurveBounds(Vector2 a, Vector2 b, Vector2 c, Vector2 d) => GetCurveBounds(a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y);
+		public static RectF GetCurveBounds(Vector2 a, Vector2 b, Vector2 c, Vector2 d) => GetCurveBounds(a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y);
 
-		public static Rect GetCurveBounds(float ax, float ay, float bx, float by, float cx, float cy, float dx, float dy)
+		public static RectF GetCurveBounds(float ax, float ay, float bx, float by, float cx, float cy, float dx, float dy)
 		{
 		        float minx = float.PositiveInfinity;
 				float miny = float.PositiveInfinity;

@@ -522,14 +522,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Enable() mut => VT.Enable(ref this);
-			public HRESULT Disable() mut => VT.Disable(ref this);
+			public HResult Enable() mut => VT.Enable(ref this);
+			public HResult Disable() mut => VT.Disable(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCProviderState self) Enable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCProviderState self) Disable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCProviderState self) Enable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCProviderState self) Disable;
 			}
 		}
 		[CRepr]
@@ -539,16 +539,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetUserSummary(BSTR bstrSID, BSTR* pbstrUserSummary) mut => VT.GetUserSummary(ref this, bstrSID, pbstrUserSummary);
-			public HRESULT Configure(HWND hWnd, BSTR bstrSID) mut => VT.Configure(ref this, hWnd, bstrSID);
-			public HRESULT RequestOverride(HWND hWnd, BSTR bstrPath, WPCFLAG_RESTRICTION dwFlags) mut => VT.RequestOverride(ref this, hWnd, bstrPath, dwFlags);
+			public HResult GetUserSummary(BSTR bstrSID, BSTR* pbstrUserSummary) mut => VT.GetUserSummary(ref this, bstrSID, pbstrUserSummary);
+			public HResult Configure(HWnd hWnd, BSTR bstrSID) mut => VT.Configure(ref this, hWnd, bstrSID);
+			public HResult RequestOverride(HWnd hWnd, BSTR bstrPath, WPCFLAG_RESTRICTION dwFlags) mut => VT.RequestOverride(ref this, hWnd, bstrPath, dwFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCProviderConfig self, BSTR bstrSID, BSTR* pbstrUserSummary) GetUserSummary;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCProviderConfig self, HWND hWnd, BSTR bstrSID) Configure;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCProviderConfig self, HWND hWnd, BSTR bstrPath, WPCFLAG_RESTRICTION dwFlags) RequestOverride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCProviderConfig self, BSTR bstrSID, BSTR* pbstrUserSummary) GetUserSummary;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCProviderConfig self, HWnd hWnd, BSTR bstrSID) Configure;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCProviderConfig self, HWnd hWnd, BSTR bstrPath, WPCFLAG_RESTRICTION dwFlags) RequestOverride;
 			}
 		}
 		[CRepr]
@@ -558,16 +558,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsLoggingRequired(out BOOL pfRequired) mut => VT.IsLoggingRequired(ref this, out pfRequired);
-			public HRESULT GetLastSettingsChangeTime(out SYSTEMTIME pTime) mut => VT.GetLastSettingsChangeTime(ref this, out pTime);
-			public HRESULT GetRestrictions(out WPCFLAG_RESTRICTION pdwRestrictions) mut => VT.GetRestrictions(ref this, out pdwRestrictions);
+			public HResult IsLoggingRequired(out IntBool pfRequired) mut => VT.IsLoggingRequired(ref this, out pfRequired);
+			public HResult GetLastSettingsChangeTime(out SYSTEMTIME pTime) mut => VT.GetLastSettingsChangeTime(ref this, out pTime);
+			public HResult GetRestrictions(out WPCFLAG_RESTRICTION pdwRestrictions) mut => VT.GetRestrictions(ref this, out pdwRestrictions);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCSettings self, out BOOL pfRequired) IsLoggingRequired;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCSettings self, out SYSTEMTIME pTime) GetLastSettingsChangeTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCSettings self, out WPCFLAG_RESTRICTION pdwRestrictions) GetRestrictions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCSettings self, out IntBool pfRequired) IsLoggingRequired;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCSettings self, out SYSTEMTIME pTime) GetLastSettingsChangeTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCSettings self, out WPCFLAG_RESTRICTION pdwRestrictions) GetRestrictions;
 			}
 		}
 		[CRepr]
@@ -577,12 +577,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT IsBlocked(Guid guidAppID, out uint32 pdwReasons) mut => VT.IsBlocked(ref this, guidAppID, out pdwReasons);
+			public HResult IsBlocked(Guid guidAppID, out uint32 pdwReasons) mut => VT.IsBlocked(ref this, guidAppID, out pdwReasons);
 
 			[CRepr]
 			public struct VTable : IWPCSettings.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCGamesSettings self, Guid guidAppID, out uint32 pdwReasons) IsBlocked;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCGamesSettings self, Guid guidAppID, out uint32 pdwReasons) IsBlocked;
 			}
 		}
 		[CRepr]
@@ -592,14 +592,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSettings(out WPCFLAG_WEB_SETTING pdwSettings) mut => VT.GetSettings(ref this, out pdwSettings);
-			public HRESULT RequestURLOverride(HWND hWnd, PWSTR pcszURL, uint32 cURLs, PWSTR* ppcszSubURLs, out BOOL pfChanged) mut => VT.RequestURLOverride(ref this, hWnd, pcszURL, cURLs, ppcszSubURLs, out pfChanged);
+			public HResult GetSettings(out WPCFLAG_WEB_SETTING pdwSettings) mut => VT.GetSettings(ref this, out pdwSettings);
+			public HResult RequestURLOverride(HWnd hWnd, char16* pcszURL, uint32 cURLs, char16** ppcszSubURLs, out IntBool pfChanged) mut => VT.RequestURLOverride(ref this, hWnd, pcszURL, cURLs, ppcszSubURLs, out pfChanged);
 
 			[CRepr]
 			public struct VTable : IWPCSettings.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCWebSettings self, out WPCFLAG_WEB_SETTING pdwSettings) GetSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCWebSettings self, HWND hWnd, PWSTR pcszURL, uint32 cURLs, PWSTR* ppcszSubURLs, out BOOL pfChanged) RequestURLOverride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCWebSettings self, out WPCFLAG_WEB_SETTING pdwSettings) GetSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCWebSettings self, HWnd hWnd, char16* pcszURL, uint32 cURLs, char16** ppcszSubURLs, out IntBool pfChanged) RequestURLOverride;
 			}
 		}
 		[CRepr]
@@ -609,18 +609,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetVisibility(out WPCFLAG_VISIBILITY peVisibility) mut => VT.GetVisibility(ref this, out peVisibility);
-			public HRESULT GetUserSettings(PWSTR pcszSID, IWPCSettings** ppSettings) mut => VT.GetUserSettings(ref this, pcszSID, ppSettings);
-			public HRESULT GetWebSettings(PWSTR pcszSID, IWPCWebSettings** ppSettings) mut => VT.GetWebSettings(ref this, pcszSID, ppSettings);
-			public HRESULT GetWebFilterInfo(out Guid pguidID, PWSTR* ppszName) mut => VT.GetWebFilterInfo(ref this, out pguidID, ppszName);
+			public HResult GetVisibility(out WPCFLAG_VISIBILITY peVisibility) mut => VT.GetVisibility(ref this, out peVisibility);
+			public HResult GetUserSettings(char16* pcszSID, IWPCSettings** ppSettings) mut => VT.GetUserSettings(ref this, pcszSID, ppSettings);
+			public HResult GetWebSettings(char16* pcszSID, IWPCWebSettings** ppSettings) mut => VT.GetWebSettings(ref this, pcszSID, ppSettings);
+			public HResult GetWebFilterInfo(out Guid pguidID, char16** ppszName) mut => VT.GetWebFilterInfo(ref this, out pguidID, ppszName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsParentalControlsCore self, out WPCFLAG_VISIBILITY peVisibility) GetVisibility;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsParentalControlsCore self, PWSTR pcszSID, IWPCSettings** ppSettings) GetUserSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsParentalControlsCore self, PWSTR pcszSID, IWPCWebSettings** ppSettings) GetWebSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsParentalControlsCore self, out Guid pguidID, PWSTR* ppszName) GetWebFilterInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsParentalControlsCore self, out WPCFLAG_VISIBILITY peVisibility) GetVisibility;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsParentalControlsCore self, char16* pcszSID, IWPCSettings** ppSettings) GetUserSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsParentalControlsCore self, char16* pcszSID, IWPCWebSettings** ppSettings) GetWebSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsParentalControlsCore self, out Guid pguidID, char16** ppszName) GetWebFilterInfo;
 			}
 		}
 		[CRepr]
@@ -630,12 +630,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGamesSettings(PWSTR pcszSID, IWPCGamesSettings** ppSettings) mut => VT.GetGamesSettings(ref this, pcszSID, ppSettings);
+			public HResult GetGamesSettings(char16* pcszSID, IWPCGamesSettings** ppSettings) mut => VT.GetGamesSettings(ref this, pcszSID, ppSettings);
 
 			[CRepr]
 			public struct VTable : IWindowsParentalControlsCore.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsParentalControls self, PWSTR pcszSID, IWPCGamesSettings** ppSettings) GetGamesSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsParentalControls self, char16* pcszSID, IWPCGamesSettings** ppSettings) GetGamesSettings;
 			}
 		}
 		[CRepr]
@@ -645,12 +645,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCurrent(out Guid pguidProvider) mut => VT.GetCurrent(ref this, out pguidProvider);
+			public HResult GetCurrent(out Guid pguidProvider) mut => VT.GetCurrent(ref this, out pguidProvider);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWPCProviderSupport self, out Guid pguidProvider) GetCurrent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWPCProviderSupport self, out Guid pguidProvider) GetCurrent;
 			}
 		}
 		

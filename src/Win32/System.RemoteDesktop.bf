@@ -705,10 +705,10 @@ namespace Win32
 		public function void PCHANNEL_INIT_EVENT_FN(void* pInitHandle, uint32 event, void* pData, uint32 dataLength);
 		public function void PCHANNEL_OPEN_EVENT_FN(uint32 openHandle, uint32 event, void* pData, uint32 dataLength, uint32 totalLength, uint32 dataFlags);
 		public function uint32 PVIRTUALCHANNELINIT(void** ppInitHandle, out CHANNEL_DEF pChannel, int32 channelCount, uint32 versionRequested, PCHANNEL_INIT_EVENT_FN pChannelInitEventProc);
-		public function uint32 PVIRTUALCHANNELOPEN(void* pInitHandle, out uint32 pOpenHandle, PSTR pChannelName, PCHANNEL_OPEN_EVENT_FN pChannelOpenEventProc);
+		public function uint32 PVIRTUALCHANNELOPEN(void* pInitHandle, out uint32 pOpenHandle, char8* pChannelName, PCHANNEL_OPEN_EVENT_FN pChannelOpenEventProc);
 		public function uint32 PVIRTUALCHANNELCLOSE(uint32 openHandle);
 		public function uint32 PVIRTUALCHANNELWRITE(uint32 openHandle, void* pData, uint32 dataLength, void* pUserData);
-		public function BOOL PVIRTUALCHANNELENTRY(out CHANNEL_ENTRY_POINTS pEntryPoints);
+		public function IntBool PVIRTUALCHANNELENTRY(out CHANNEL_ENTRY_POINTS pEntryPoints);
 		
 		// --- Structs ---
 		
@@ -740,25 +740,25 @@ namespace Win32
 		[CRepr]
 		public struct WTS_SERVER_INFOW
 		{
-			public PWSTR pServerName;
+			public char16* pServerName;
 		}
 		[CRepr]
 		public struct WTS_SERVER_INFOA
 		{
-			public PSTR pServerName;
+			public char8* pServerName;
 		}
 		[CRepr]
 		public struct WTS_SESSION_INFOW
 		{
 			public uint32 SessionId;
-			public PWSTR pWinStationName;
+			public char16* pWinStationName;
 			public WTS_CONNECTSTATE_CLASS State;
 		}
 		[CRepr]
 		public struct WTS_SESSION_INFOA
 		{
 			public uint32 SessionId;
-			public PSTR pWinStationName;
+			public char8* pWinStationName;
 			public WTS_CONNECTSTATE_CLASS State;
 		}
 		[CRepr]
@@ -767,11 +767,11 @@ namespace Win32
 			public uint32 ExecEnvId;
 			public WTS_CONNECTSTATE_CLASS State;
 			public uint32 SessionId;
-			public PWSTR pSessionName;
-			public PWSTR pHostName;
-			public PWSTR pUserName;
-			public PWSTR pDomainName;
-			public PWSTR pFarmName;
+			public char16* pSessionName;
+			public char16* pHostName;
+			public char16* pUserName;
+			public char16* pDomainName;
+			public char16* pFarmName;
 		}
 		[CRepr]
 		public struct WTS_SESSION_INFO_1A
@@ -779,18 +779,18 @@ namespace Win32
 			public uint32 ExecEnvId;
 			public WTS_CONNECTSTATE_CLASS State;
 			public uint32 SessionId;
-			public PSTR pSessionName;
-			public PSTR pHostName;
-			public PSTR pUserName;
-			public PSTR pDomainName;
-			public PSTR pFarmName;
+			public char8* pSessionName;
+			public char8* pHostName;
+			public char8* pUserName;
+			public char8* pDomainName;
+			public char8* pFarmName;
 		}
 		[CRepr]
 		public struct WTS_PROCESS_INFOW
 		{
 			public uint32 SessionId;
 			public uint32 ProcessId;
-			public PWSTR pProcessName;
+			public char16* pProcessName;
 			public PSID pUserSid;
 		}
 		[CRepr]
@@ -798,7 +798,7 @@ namespace Win32
 		{
 			public uint32 SessionId;
 			public uint32 ProcessId;
-			public PSTR pProcessName;
+			public char8* pProcessName;
 			public PSID pUserSid;
 		}
 		[CRepr]
@@ -825,11 +825,11 @@ namespace Win32
 			public uint32 fDisablePrinterRedirection;
 			public uint32 fDisableDefaultMainClientPrinter;
 			public uint32 ShadowSettings;
-			public CHAR[21] LogonUserName;
-			public CHAR[18] LogonDomain;
-			public CHAR[261] WorkDirectory;
-			public CHAR[261] InitialProgram;
-			public CHAR[261] ApplicationName;
+			public char8[21] LogonUserName;
+			public char8[18] LogonDomain;
+			public char8[261] WorkDirectory;
+			public char8[261] InitialProgram;
+			public char8[261] ApplicationName;
 		}
 		[CRepr]
 		public struct WTSINFOW
@@ -862,9 +862,9 @@ namespace Win32
 			public uint32 OutgoingFrames;
 			public uint32 IncomingCompressedBytes;
 			public uint32 OutgoingCompressedBy;
-			public CHAR[32] WinStationName;
-			public CHAR[17] Domain;
-			public CHAR[21] UserName;
+			public char8[32] WinStationName;
+			public char8[17] Domain;
+			public char8[21] UserName;
 			public LARGE_INTEGER ConnectTime;
 			public LARGE_INTEGER DisconnectTime;
 			public LARGE_INTEGER LastInputTime;
@@ -898,9 +898,9 @@ namespace Win32
 			public uint32 SessionId;
 			public WTS_CONNECTSTATE_CLASS SessionState;
 			public int32 SessionFlags;
-			public CHAR[33] WinStationName;
-			public CHAR[21] UserName;
-			public CHAR[18] DomainName;
+			public char8[33] WinStationName;
+			public char8[21] UserName;
+			public char8[18] DomainName;
 			public LARGE_INTEGER LogonTime;
 			public LARGE_INTEGER ConnectTime;
 			public LARGE_INTEGER DisconnectTime;
@@ -961,31 +961,31 @@ namespace Win32
 		[CRepr]
 		public struct WTSCLIENTA
 		{
-			public CHAR[21] ClientName;
-			public CHAR[18] Domain;
-			public CHAR[21] UserName;
-			public CHAR[261] WorkDirectory;
-			public CHAR[261] InitialProgram;
+			public char8[21] ClientName;
+			public char8[18] Domain;
+			public char8[21] UserName;
+			public char8[261] WorkDirectory;
+			public char8[261] InitialProgram;
 			public uint8 EncryptionLevel;
 			public uint32 ClientAddressFamily;
 			public uint16[31] ClientAddress;
 			public uint16 HRes;
 			public uint16 VRes;
 			public uint16 ColorDepth;
-			public CHAR[261] ClientDirectory;
+			public char8[261] ClientDirectory;
 			public uint32 ClientBuildNumber;
 			public uint32 ClientHardwareId;
 			public uint16 ClientProductId;
 			public uint16 OutBufCountHost;
 			public uint16 OutBufCountClient;
 			public uint16 OutBufLength;
-			public CHAR[261] DeviceId;
+			public char8[261] DeviceId;
 		}
 		[CRepr]
 		public struct _WTS_PRODUCT_INFOA
 		{
-			public CHAR[256] CompanyName;
-			public CHAR[4] ProductID;
+			public char8[256] CompanyName;
+			public char8[4] ProductID;
 		}
 		[CRepr]
 		public struct _WTS_PRODUCT_INFOW
@@ -1040,11 +1040,11 @@ namespace Win32
 			public uint32 ReconnectSettings;
 			public uint32 ShadowingSettings;
 			public uint32 TerminalServerRemoteHomeDir;
-			public CHAR[261] InitialProgram;
-			public CHAR[261] WorkDirectory;
-			public CHAR[261] TerminalServerProfilePath;
-			public CHAR[261] TerminalServerHomeDir;
-			public CHAR[4] TerminalServerHomeDirDrive;
+			public char8[261] InitialProgram;
+			public char8[261] WorkDirectory;
+			public char8[261] TerminalServerProfilePath;
+			public char8[261] TerminalServerHomeDir;
+			public char8[4] TerminalServerHomeDirDrive;
 		}
 		[CRepr]
 		public struct WTSUSERCONFIGW
@@ -1079,7 +1079,7 @@ namespace Win32
 		{
 			public uint32 SessionId;
 			public uint32 ProcessId;
-			public PWSTR pProcessName;
+			public char16* pProcessName;
 			public PSID pUserSid;
 			public uint32 NumberOfThreads;
 			public uint32 HandleCount;
@@ -1095,7 +1095,7 @@ namespace Win32
 		{
 			public uint32 SessionId;
 			public uint32 ProcessId;
-			public PSTR pProcessName;
+			public char8* pProcessName;
 			public PSID pUserSid;
 			public uint32 NumberOfThreads;
 			public uint32 HandleCount;
@@ -1170,11 +1170,11 @@ namespace Win32
 			public uint32 SecurityLayer;
 			public uint32 MinEncryptionLevel;
 			public uint32 UserAuthentication;
-			public CHAR[61] Comment;
-			public CHAR[21] LogonUserName;
-			public CHAR[18] LogonDomain;
-			public CHAR[261] WorkDirectory;
-			public CHAR[261] InitialProgram;
+			public char8[61] Comment;
+			public char8[21] LogonUserName;
+			public char8[18] LogonDomain;
+			public char8[261] WorkDirectory;
+			public char8[261] InitialProgram;
 		}
 		[CRepr]
 		public struct WTSSBX_IP_ADDRESS
@@ -1211,14 +1211,14 @@ namespace Win32
 			public char16[257] wszDomainName;
 			public char16[257] ApplicationType;
 			public uint32 dwSessionId;
-			public FILETIME CreateTime;
-			public FILETIME DisconnectTime;
+			public FileTime CreateTime;
+			public FileTime DisconnectTime;
 			public WTSSBX_SESSION_STATE SessionState;
 		}
 		[CRepr, Packed(1)]
 		public struct CHANNEL_DEF
 		{
-			public CHAR[8] name;
+			public char8[8] name;
 			public uint32 options;
 		}
 		[CRepr]
@@ -1262,7 +1262,7 @@ namespace Win32
 		public struct VM_PATCH_INFO
 		{
 			public uint32 dwNumEntries;
-			public PWSTR* pVmNames;
+			public char16** pVmNames;
 		}
 		[CRepr]
 		public struct VM_NOTIFY_INFO
@@ -1275,7 +1275,7 @@ namespace Win32
 		{
 			public char16[256] alias;
 			public char16[256] name;
-			public PWSTR resourceFileContents;
+			public char16* resourceFileContents;
 			public char16[256] fileExtension;
 			public char16[256] resourcePluginType;
 			public uint8 isDiscoverable;
@@ -1299,7 +1299,7 @@ namespace Win32
 			public pluginResource resourceV1;
 			public uint32 pceFileAssocListSize;
 			public pluginResource2FileAssociation* fileAssocList;
-			public PWSTR securityDescriptor;
+			public char16* securityDescriptor;
 			public uint32 pceFolderListSize;
 			public uint16** folderList;
 		}
@@ -1333,7 +1333,7 @@ namespace Win32
 			public uint32 physicalWidth;
 			public uint32 physicalHeight;
 			public uint32 orientation;
-			public BOOL primary;
+			public IntBool primary;
 		}
 		[CRepr]
 		public struct RFX_GFX_MSG_CLIENT_DESKTOP_INFO_REQUEST
@@ -1483,40 +1483,40 @@ namespace Win32
 		[CRepr]
 		public struct WTS_CLIENT_DATA
 		{
-			public BOOLEAN fDisableCtrlAltDel;
-			public BOOLEAN fDoubleClickDetect;
-			public BOOLEAN fEnableWindowsKey;
-			public BOOLEAN fHideTitleBar;
-			public BOOL fInheritAutoLogon;
-			public BOOLEAN fPromptForPassword;
-			public BOOLEAN fUsingSavedCreds;
+			public bool fDisableCtrlAltDel;
+			public bool fDoubleClickDetect;
+			public bool fEnableWindowsKey;
+			public bool fHideTitleBar;
+			public IntBool fInheritAutoLogon;
+			public bool fPromptForPassword;
+			public bool fUsingSavedCreds;
 			public char16[256] Domain;
 			public char16[256] UserName;
 			public char16[256] Password;
-			public BOOLEAN fPasswordIsScPin;
-			public BOOL fInheritInitialProgram;
+			public bool fPasswordIsScPin;
+			public IntBool fInheritInitialProgram;
 			public char16[257] WorkDirectory;
 			public char16[257] InitialProgram;
-			public BOOLEAN fMaximizeShell;
+			public bool fMaximizeShell;
 			public uint8 EncryptionLevel;
 			public uint32 PerformanceFlags;
 			public char16[9] ProtocolName;
 			public uint16 ProtocolType;
-			public BOOL fInheritColorDepth;
+			public IntBool fInheritColorDepth;
 			public uint16 HRes;
 			public uint16 VRes;
 			public uint16 ColorDepth;
 			public char16[9] DisplayDriverName;
 			public char16[20] DisplayDeviceName;
-			public BOOLEAN fMouse;
+			public bool fMouse;
 			public uint32 KeyboardLayout;
 			public uint32 KeyboardType;
 			public uint32 KeyboardSubType;
 			public uint32 KeyboardFunctionKey;
 			public char16[33] imeFileName;
 			public uint32 ActiveInputLocale;
-			public BOOLEAN fNoAudioPlayback;
-			public BOOLEAN fRemoteConsoleAudio;
+			public bool fNoAudioPlayback;
+			public bool fRemoteConsoleAudio;
 			public char16[9] AudioDriverName;
 			public WTS_TIME_ZONE_INFORMATION ClientTimeZone;
 			public char16[21] ClientName;
@@ -1532,12 +1532,12 @@ namespace Win32
 			public uint16 OutBufLength;
 			public uint32 ClientSessionId;
 			public char16[33] ClientDigProductId;
-			public BOOLEAN fDisableCpm;
-			public BOOLEAN fDisableCdm;
-			public BOOLEAN fDisableCcm;
-			public BOOLEAN fDisableLPT;
-			public BOOLEAN fDisableClip;
-			public BOOLEAN fDisablePNP;
+			public bool fDisableCpm;
+			public bool fDisableCdm;
+			public bool fDisableCcm;
+			public bool fDisableLPT;
+			public bool fDisableClip;
+			public bool fDisablePNP;
 		}
 		[CRepr]
 		public struct WTS_USER_DATA
@@ -1549,16 +1549,16 @@ namespace Win32
 		[CRepr]
 		public struct WTS_POLICY_DATA
 		{
-			public BOOLEAN fDisableEncryption;
-			public BOOLEAN fDisableAutoReconnect;
+			public bool fDisableEncryption;
+			public bool fDisableAutoReconnect;
 			public uint32 ColorDepth;
 			public uint8 MinEncryptionLevel;
-			public BOOLEAN fDisableCpm;
-			public BOOLEAN fDisableCdm;
-			public BOOLEAN fDisableCcm;
-			public BOOLEAN fDisableLPT;
-			public BOOLEAN fDisableClip;
-			public BOOLEAN fDisablePNPRedir;
+			public bool fDisableCpm;
+			public bool fDisableCdm;
+			public bool fDisableCcm;
+			public bool fDisableLPT;
+			public bool fDisableClip;
+			public bool fDisablePNPRedir;
 		}
 		[CRepr]
 		public struct WTS_PROTOCOL_CACHE
@@ -1637,13 +1637,13 @@ namespace Win32
 				public struct _bVal_e__Struct
 				{
 					public uint32 size;
-					public PSTR pbVal;
+					public char8* pbVal;
 				}
 				[CRepr]
 				public struct _strVal_e__Struct
 				{
 					public uint32 size;
-					public PWSTR pstrVal;
+					public char16* pstrVal;
 				}
 			}
 		}
@@ -1652,7 +1652,7 @@ namespace Win32
 		{
 			public uint32 KeyExchangeAlg;
 			public uint32 ProtocolVer;
-			public BOOL fAuthenticateServer;
+			public IntBool fAuthenticateServer;
 			public WTS_CERT_TYPE CertType;
 			public uint32 cbClientName;
 			public uint8[42] rgbClientName;
@@ -1678,29 +1678,29 @@ namespace Win32
 		[CRepr]
 		public struct WRDS_CONNECTION_SETTINGS_1
 		{
-			public BOOLEAN fInheritInitialProgram;
-			public BOOLEAN fInheritColorDepth;
-			public BOOLEAN fHideTitleBar;
-			public BOOLEAN fInheritAutoLogon;
-			public BOOLEAN fMaximizeShell;
-			public BOOLEAN fDisablePNP;
-			public BOOLEAN fPasswordIsScPin;
-			public BOOLEAN fPromptForPassword;
-			public BOOLEAN fDisableCpm;
-			public BOOLEAN fDisableCdm;
-			public BOOLEAN fDisableCcm;
-			public BOOLEAN fDisableLPT;
-			public BOOLEAN fDisableClip;
-			public BOOLEAN fResetBroken;
-			public BOOLEAN fDisableEncryption;
-			public BOOLEAN fDisableAutoReconnect;
-			public BOOLEAN fDisableCtrlAltDel;
-			public BOOLEAN fDoubleClickDetect;
-			public BOOLEAN fEnableWindowsKey;
-			public BOOLEAN fUsingSavedCreds;
-			public BOOLEAN fMouse;
-			public BOOLEAN fNoAudioPlayback;
-			public BOOLEAN fRemoteConsoleAudio;
+			public bool fInheritInitialProgram;
+			public bool fInheritColorDepth;
+			public bool fHideTitleBar;
+			public bool fInheritAutoLogon;
+			public bool fMaximizeShell;
+			public bool fDisablePNP;
+			public bool fPasswordIsScPin;
+			public bool fPromptForPassword;
+			public bool fDisableCpm;
+			public bool fDisableCdm;
+			public bool fDisableCcm;
+			public bool fDisableLPT;
+			public bool fDisableClip;
+			public bool fResetBroken;
+			public bool fDisableEncryption;
+			public bool fDisableAutoReconnect;
+			public bool fDisableCtrlAltDel;
+			public bool fDoubleClickDetect;
+			public bool fEnableWindowsKey;
+			public bool fUsingSavedCreds;
+			public bool fMouse;
+			public bool fNoAudioPlayback;
+			public bool fRemoteConsoleAudio;
 			public uint8 EncryptionLevel;
 			public uint16 ColorDepth;
 			public uint16 ProtocolType;
@@ -1776,7 +1776,7 @@ namespace Win32
 			public WRDS_SETTING_STATUS WRdsMaxConnectTimeStatus;
 			public uint32 WRdsMaxConnectTimeValue;
 			public WRDS_SETTING_STATUS WRdsKeepAliveStatus;
-			public BOOLEAN WRdsKeepAliveStartValue;
+			public bool WRdsKeepAliveStartValue;
 			public uint32 WRdsKeepAliveIntervalValue;
 		}
 		[CRepr, Union]
@@ -1824,20 +1824,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFrameFormat(out WAVEFORMATEX* ppFormat) mut => VT.GetFrameFormat(ref this, out ppFormat);
-			public HRESULT GetFramesPerPacket(out uint32 pFramesPerPacket) mut => VT.GetFramesPerPacket(ref this, out pFramesPerPacket);
-			public HRESULT GetLatency(out int64 pLatency) mut => VT.GetLatency(ref this, out pLatency);
-			public HRESULT SetStreamFlags(uint32 streamFlags) mut => VT.SetStreamFlags(ref this, streamFlags);
-			public HRESULT SetEventHandle(HANDLE eventHandle) mut => VT.SetEventHandle(ref this, eventHandle);
+			public HResult GetFrameFormat(out WaveFormatEx* ppFormat) mut => VT.GetFrameFormat(ref this, out ppFormat);
+			public HResult GetFramesPerPacket(out uint32 pFramesPerPacket) mut => VT.GetFramesPerPacket(ref this, out pFramesPerPacket);
+			public HResult GetLatency(out int64 pLatency) mut => VT.GetLatency(ref this, out pLatency);
+			public HResult SetStreamFlags(uint32 streamFlags) mut => VT.SetStreamFlags(ref this, streamFlags);
+			public HResult SetEventHandle(Handle eventHandle) mut => VT.SetEventHandle(ref this, eventHandle);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpoint self, out WAVEFORMATEX* ppFormat) GetFrameFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpoint self, out uint32 pFramesPerPacket) GetFramesPerPacket;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpoint self, out int64 pLatency) GetLatency;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpoint self, uint32 streamFlags) SetStreamFlags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpoint self, HANDLE eventHandle) SetEventHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpoint self, out WaveFormatEx* ppFormat) GetFrameFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpoint self, out uint32 pFramesPerPacket) GetFramesPerPacket;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpoint self, out int64 pLatency) GetLatency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpoint self, uint32 streamFlags) SetStreamFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpoint self, Handle eventHandle) SetEventHandle;
 			}
 		}
 		[CRepr]
@@ -1849,16 +1849,16 @@ namespace Win32
 			
 			public void GetCurrentPadding(out int64 pPadding, out AE_CURRENT_POSITION pAeCurrentPosition) mut => VT.GetCurrentPadding(ref this, out pPadding, out pAeCurrentPosition);
 			public void ProcessingComplete() mut => VT.ProcessingComplete(ref this);
-			public HRESULT SetPinInactive() mut => VT.SetPinInactive(ref this);
-			public HRESULT SetPinActive() mut => VT.SetPinActive(ref this);
+			public HResult SetPinInactive() mut => VT.SetPinInactive(ref this);
+			public HResult SetPinActive() mut => VT.SetPinActive(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref IAudioEndpointRT self, out int64 pPadding, out AE_CURRENT_POSITION pAeCurrentPosition) GetCurrentPadding;
 				public new function [CallingConvention(.Stdcall)] void(ref IAudioEndpointRT self) ProcessingComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointRT self) SetPinInactive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointRT self) SetPinActive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointRT self) SetPinInactive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointRT self) SetPinActive;
 			}
 		}
 		[CRepr]
@@ -1906,18 +1906,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetBuffer(int64 MaxPeriod, uint32 u32LatencyCoefficient) mut => VT.SetBuffer(ref this, MaxPeriod, u32LatencyCoefficient);
-			public HRESULT GetRTCaps(out BOOL pbIsRTCapable) mut => VT.GetRTCaps(ref this, out pbIsRTCapable);
-			public HRESULT GetEventDrivenCapable(out BOOL pbisEventCapable) mut => VT.GetEventDrivenCapable(ref this, out pbisEventCapable);
-			public HRESULT WriteExclusiveModeParametersToSharedMemory(uint hTargetProcess, int64 hnsPeriod, int64 hnsBufferDuration, uint32 u32LatencyCoefficient, out uint32 pu32SharedMemorySize, out uint phSharedMemory) mut => VT.WriteExclusiveModeParametersToSharedMemory(ref this, hTargetProcess, hnsPeriod, hnsBufferDuration, u32LatencyCoefficient, out pu32SharedMemorySize, out phSharedMemory);
+			public HResult SetBuffer(int64 MaxPeriod, uint32 u32LatencyCoefficient) mut => VT.SetBuffer(ref this, MaxPeriod, u32LatencyCoefficient);
+			public HResult GetRTCaps(out IntBool pbIsRTCapable) mut => VT.GetRTCaps(ref this, out pbIsRTCapable);
+			public HResult GetEventDrivenCapable(out IntBool pbisEventCapable) mut => VT.GetEventDrivenCapable(ref this, out pbisEventCapable);
+			public HResult WriteExclusiveModeParametersToSharedMemory(uint hTargetProcess, int64 hnsPeriod, int64 hnsBufferDuration, uint32 u32LatencyCoefficient, out uint32 pu32SharedMemorySize, out uint phSharedMemory) mut => VT.WriteExclusiveModeParametersToSharedMemory(ref this, hTargetProcess, hnsPeriod, hnsBufferDuration, u32LatencyCoefficient, out pu32SharedMemorySize, out phSharedMemory);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioDeviceEndpoint self, int64 MaxPeriod, uint32 u32LatencyCoefficient) SetBuffer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioDeviceEndpoint self, out BOOL pbIsRTCapable) GetRTCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioDeviceEndpoint self, out BOOL pbisEventCapable) GetEventDrivenCapable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioDeviceEndpoint self, uint hTargetProcess, int64 hnsPeriod, int64 hnsBufferDuration, uint32 u32LatencyCoefficient, out uint32 pu32SharedMemorySize, out uint phSharedMemory) WriteExclusiveModeParametersToSharedMemory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioDeviceEndpoint self, int64 MaxPeriod, uint32 u32LatencyCoefficient) SetBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioDeviceEndpoint self, out IntBool pbIsRTCapable) GetRTCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioDeviceEndpoint self, out IntBool pbisEventCapable) GetEventDrivenCapable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioDeviceEndpoint self, uint hTargetProcess, int64 hnsPeriod, int64 hnsBufferDuration, uint32 u32LatencyCoefficient, out uint32 pu32SharedMemorySize, out uint phSharedMemory) WriteExclusiveModeParametersToSharedMemory;
 			}
 		}
 		[CRepr]
@@ -1927,16 +1927,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Start() mut => VT.Start(ref this);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Stop() mut => VT.Stop(ref this);
+			public HResult Start() mut => VT.Start(ref this);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Stop() mut => VT.Stop(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointControl self) Start;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointControl self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAudioEndpointControl self) Stop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointControl self) Start;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointControl self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAudioEndpointControl self) Stop;
 			}
 		}
 		[CRepr]
@@ -1946,70 +1946,70 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_TerminalServicesProfilePath(BSTR* pVal) mut => VT.get_TerminalServicesProfilePath(ref this, pVal);
-			public HRESULT put_TerminalServicesProfilePath(BSTR pNewVal) mut => VT.put_TerminalServicesProfilePath(ref this, pNewVal);
-			public HRESULT get_TerminalServicesHomeDirectory(BSTR* pVal) mut => VT.get_TerminalServicesHomeDirectory(ref this, pVal);
-			public HRESULT put_TerminalServicesHomeDirectory(BSTR pNewVal) mut => VT.put_TerminalServicesHomeDirectory(ref this, pNewVal);
-			public HRESULT get_TerminalServicesHomeDrive(BSTR* pVal) mut => VT.get_TerminalServicesHomeDrive(ref this, pVal);
-			public HRESULT put_TerminalServicesHomeDrive(BSTR pNewVal) mut => VT.put_TerminalServicesHomeDrive(ref this, pNewVal);
-			public HRESULT get_AllowLogon(out int32 pVal) mut => VT.get_AllowLogon(ref this, out pVal);
-			public HRESULT put_AllowLogon(int32 NewVal) mut => VT.put_AllowLogon(ref this, NewVal);
-			public HRESULT get_EnableRemoteControl(out int32 pVal) mut => VT.get_EnableRemoteControl(ref this, out pVal);
-			public HRESULT put_EnableRemoteControl(int32 NewVal) mut => VT.put_EnableRemoteControl(ref this, NewVal);
-			public HRESULT get_MaxDisconnectionTime(out int32 pVal) mut => VT.get_MaxDisconnectionTime(ref this, out pVal);
-			public HRESULT put_MaxDisconnectionTime(int32 NewVal) mut => VT.put_MaxDisconnectionTime(ref this, NewVal);
-			public HRESULT get_MaxConnectionTime(out int32 pVal) mut => VT.get_MaxConnectionTime(ref this, out pVal);
-			public HRESULT put_MaxConnectionTime(int32 NewVal) mut => VT.put_MaxConnectionTime(ref this, NewVal);
-			public HRESULT get_MaxIdleTime(out int32 pVal) mut => VT.get_MaxIdleTime(ref this, out pVal);
-			public HRESULT put_MaxIdleTime(int32 NewVal) mut => VT.put_MaxIdleTime(ref this, NewVal);
-			public HRESULT get_ReconnectionAction(out int32 pNewVal) mut => VT.get_ReconnectionAction(ref this, out pNewVal);
-			public HRESULT put_ReconnectionAction(int32 NewVal) mut => VT.put_ReconnectionAction(ref this, NewVal);
-			public HRESULT get_BrokenConnectionAction(out int32 pNewVal) mut => VT.get_BrokenConnectionAction(ref this, out pNewVal);
-			public HRESULT put_BrokenConnectionAction(int32 NewVal) mut => VT.put_BrokenConnectionAction(ref this, NewVal);
-			public HRESULT get_ConnectClientDrivesAtLogon(out int32 pNewVal) mut => VT.get_ConnectClientDrivesAtLogon(ref this, out pNewVal);
-			public HRESULT put_ConnectClientDrivesAtLogon(int32 NewVal) mut => VT.put_ConnectClientDrivesAtLogon(ref this, NewVal);
-			public HRESULT get_ConnectClientPrintersAtLogon(out int32 pVal) mut => VT.get_ConnectClientPrintersAtLogon(ref this, out pVal);
-			public HRESULT put_ConnectClientPrintersAtLogon(int32 NewVal) mut => VT.put_ConnectClientPrintersAtLogon(ref this, NewVal);
-			public HRESULT get_DefaultToMainPrinter(out int32 pVal) mut => VT.get_DefaultToMainPrinter(ref this, out pVal);
-			public HRESULT put_DefaultToMainPrinter(int32 NewVal) mut => VT.put_DefaultToMainPrinter(ref this, NewVal);
-			public HRESULT get_TerminalServicesWorkDirectory(BSTR* pVal) mut => VT.get_TerminalServicesWorkDirectory(ref this, pVal);
-			public HRESULT put_TerminalServicesWorkDirectory(BSTR pNewVal) mut => VT.put_TerminalServicesWorkDirectory(ref this, pNewVal);
-			public HRESULT get_TerminalServicesInitialProgram(BSTR* pVal) mut => VT.get_TerminalServicesInitialProgram(ref this, pVal);
-			public HRESULT put_TerminalServicesInitialProgram(BSTR pNewVal) mut => VT.put_TerminalServicesInitialProgram(ref this, pNewVal);
+			public HResult get_TerminalServicesProfilePath(BSTR* pVal) mut => VT.get_TerminalServicesProfilePath(ref this, pVal);
+			public HResult put_TerminalServicesProfilePath(BSTR pNewVal) mut => VT.put_TerminalServicesProfilePath(ref this, pNewVal);
+			public HResult get_TerminalServicesHomeDirectory(BSTR* pVal) mut => VT.get_TerminalServicesHomeDirectory(ref this, pVal);
+			public HResult put_TerminalServicesHomeDirectory(BSTR pNewVal) mut => VT.put_TerminalServicesHomeDirectory(ref this, pNewVal);
+			public HResult get_TerminalServicesHomeDrive(BSTR* pVal) mut => VT.get_TerminalServicesHomeDrive(ref this, pVal);
+			public HResult put_TerminalServicesHomeDrive(BSTR pNewVal) mut => VT.put_TerminalServicesHomeDrive(ref this, pNewVal);
+			public HResult get_AllowLogon(out int32 pVal) mut => VT.get_AllowLogon(ref this, out pVal);
+			public HResult put_AllowLogon(int32 NewVal) mut => VT.put_AllowLogon(ref this, NewVal);
+			public HResult get_EnableRemoteControl(out int32 pVal) mut => VT.get_EnableRemoteControl(ref this, out pVal);
+			public HResult put_EnableRemoteControl(int32 NewVal) mut => VT.put_EnableRemoteControl(ref this, NewVal);
+			public HResult get_MaxDisconnectionTime(out int32 pVal) mut => VT.get_MaxDisconnectionTime(ref this, out pVal);
+			public HResult put_MaxDisconnectionTime(int32 NewVal) mut => VT.put_MaxDisconnectionTime(ref this, NewVal);
+			public HResult get_MaxConnectionTime(out int32 pVal) mut => VT.get_MaxConnectionTime(ref this, out pVal);
+			public HResult put_MaxConnectionTime(int32 NewVal) mut => VT.put_MaxConnectionTime(ref this, NewVal);
+			public HResult get_MaxIdleTime(out int32 pVal) mut => VT.get_MaxIdleTime(ref this, out pVal);
+			public HResult put_MaxIdleTime(int32 NewVal) mut => VT.put_MaxIdleTime(ref this, NewVal);
+			public HResult get_ReconnectionAction(out int32 pNewVal) mut => VT.get_ReconnectionAction(ref this, out pNewVal);
+			public HResult put_ReconnectionAction(int32 NewVal) mut => VT.put_ReconnectionAction(ref this, NewVal);
+			public HResult get_BrokenConnectionAction(out int32 pNewVal) mut => VT.get_BrokenConnectionAction(ref this, out pNewVal);
+			public HResult put_BrokenConnectionAction(int32 NewVal) mut => VT.put_BrokenConnectionAction(ref this, NewVal);
+			public HResult get_ConnectClientDrivesAtLogon(out int32 pNewVal) mut => VT.get_ConnectClientDrivesAtLogon(ref this, out pNewVal);
+			public HResult put_ConnectClientDrivesAtLogon(int32 NewVal) mut => VT.put_ConnectClientDrivesAtLogon(ref this, NewVal);
+			public HResult get_ConnectClientPrintersAtLogon(out int32 pVal) mut => VT.get_ConnectClientPrintersAtLogon(ref this, out pVal);
+			public HResult put_ConnectClientPrintersAtLogon(int32 NewVal) mut => VT.put_ConnectClientPrintersAtLogon(ref this, NewVal);
+			public HResult get_DefaultToMainPrinter(out int32 pVal) mut => VT.get_DefaultToMainPrinter(ref this, out pVal);
+			public HResult put_DefaultToMainPrinter(int32 NewVal) mut => VT.put_DefaultToMainPrinter(ref this, NewVal);
+			public HResult get_TerminalServicesWorkDirectory(BSTR* pVal) mut => VT.get_TerminalServicesWorkDirectory(ref this, pVal);
+			public HResult put_TerminalServicesWorkDirectory(BSTR pNewVal) mut => VT.put_TerminalServicesWorkDirectory(ref this, pNewVal);
+			public HResult get_TerminalServicesInitialProgram(BSTR* pVal) mut => VT.get_TerminalServicesInitialProgram(ref this, pVal);
+			public HResult put_TerminalServicesInitialProgram(BSTR pNewVal) mut => VT.put_TerminalServicesInitialProgram(ref this, pNewVal);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesProfilePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesProfilePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesHomeDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesHomeDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesHomeDrive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesHomeDrive;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_AllowLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_AllowLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_EnableRemoteControl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_EnableRemoteControl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_MaxDisconnectionTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_MaxDisconnectionTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_MaxConnectionTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_MaxConnectionTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_MaxIdleTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_MaxIdleTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pNewVal) get_ReconnectionAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_ReconnectionAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pNewVal) get_BrokenConnectionAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_BrokenConnectionAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pNewVal) get_ConnectClientDrivesAtLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_ConnectClientDrivesAtLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_ConnectClientPrintersAtLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_ConnectClientPrintersAtLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, out int32 pVal) get_DefaultToMainPrinter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, int32 NewVal) put_DefaultToMainPrinter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesWorkDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesWorkDirectory;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesInitialProgram;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesInitialProgram;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesProfilePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesProfilePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesHomeDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesHomeDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesHomeDrive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesHomeDrive;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_AllowLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_AllowLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_EnableRemoteControl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_EnableRemoteControl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_MaxDisconnectionTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_MaxDisconnectionTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_MaxConnectionTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_MaxConnectionTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_MaxIdleTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_MaxIdleTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pNewVal) get_ReconnectionAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_ReconnectionAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pNewVal) get_BrokenConnectionAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_BrokenConnectionAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pNewVal) get_ConnectClientDrivesAtLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_ConnectClientDrivesAtLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_ConnectClientPrintersAtLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_ConnectClientPrintersAtLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, out int32 pVal) get_DefaultToMainPrinter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, int32 NewVal) put_DefaultToMainPrinter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesWorkDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesWorkDirectory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR* pVal) get_TerminalServicesInitialProgram;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IADsTSUserEx self, BSTR pNewVal) put_TerminalServicesInitialProgram;
 			}
 		}
 		[CRepr]
@@ -2019,12 +2019,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnConnectionAuthorized(HRESULT hrIn, Guid mainSessionId, uint32 cbSoHResponse, uint8* pbSoHResponse, uint32 idleTimeout, uint32 sessionTimeout, SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction, AATrustClassID trustClass, ref uint32 policyAttributes) mut => VT.OnConnectionAuthorized(ref this, hrIn, mainSessionId, cbSoHResponse, pbSoHResponse, idleTimeout, sessionTimeout, sessionTimeoutAction, trustClass, ref policyAttributes);
+			public HResult OnConnectionAuthorized(HResult hrIn, Guid mainSessionId, uint32 cbSoHResponse, uint8* pbSoHResponse, uint32 idleTimeout, uint32 sessionTimeout, SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction, AATrustClassID trustClass, ref uint32 policyAttributes) mut => VT.OnConnectionAuthorized(ref this, hrIn, mainSessionId, cbSoHResponse, pbSoHResponse, idleTimeout, sessionTimeout, sessionTimeoutAction, trustClass, ref policyAttributes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthorizeConnectionSink self, HRESULT hrIn, Guid mainSessionId, uint32 cbSoHResponse, uint8* pbSoHResponse, uint32 idleTimeout, uint32 sessionTimeout, SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction, AATrustClassID trustClass, ref uint32 policyAttributes) OnConnectionAuthorized;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthorizeConnectionSink self, HResult hrIn, Guid mainSessionId, uint32 cbSoHResponse, uint8* pbSoHResponse, uint32 idleTimeout, uint32 sessionTimeout, SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction, AATrustClassID trustClass, ref uint32 policyAttributes) OnConnectionAuthorized;
 			}
 		}
 		[CRepr]
@@ -2034,12 +2034,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnChannelAuthorized(HRESULT hrIn, Guid mainSessionId, int32 subSessionId, BSTR* allowedResourceNames, uint32 numAllowedResourceNames, BSTR* failedResourceNames, uint32 numFailedResourceNames) mut => VT.OnChannelAuthorized(ref this, hrIn, mainSessionId, subSessionId, allowedResourceNames, numAllowedResourceNames, failedResourceNames, numFailedResourceNames);
+			public HResult OnChannelAuthorized(HResult hrIn, Guid mainSessionId, int32 subSessionId, BSTR* allowedResourceNames, uint32 numAllowedResourceNames, BSTR* failedResourceNames, uint32 numFailedResourceNames) mut => VT.OnChannelAuthorized(ref this, hrIn, mainSessionId, subSessionId, allowedResourceNames, numAllowedResourceNames, failedResourceNames, numFailedResourceNames);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthorizeResourceSink self, HRESULT hrIn, Guid mainSessionId, int32 subSessionId, BSTR* allowedResourceNames, uint32 numAllowedResourceNames, BSTR* failedResourceNames, uint32 numFailedResourceNames) OnChannelAuthorized;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthorizeResourceSink self, HResult hrIn, Guid mainSessionId, int32 subSessionId, BSTR* allowedResourceNames, uint32 numAllowedResourceNames, BSTR* failedResourceNames, uint32 numFailedResourceNames) OnChannelAuthorized;
 			}
 		}
 		[CRepr]
@@ -2049,18 +2049,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AuthorizeConnection(Guid mainSessionId, BSTR username, AAAuthSchemes authType, BSTR clientMachineIP, BSTR clientMachineName, uint8* sohData, uint32 numSOHBytes, uint8* cookieData, uint32 numCookieBytes, HANDLE_PTR userToken, ref ITSGAuthorizeConnectionSink pSink) mut => VT.AuthorizeConnection(ref this, mainSessionId, username, authType, clientMachineIP, clientMachineName, sohData, numSOHBytes, cookieData, numCookieBytes, userToken, ref pSink);
-			public HRESULT AuthorizeResource(Guid mainSessionId, int32 subSessionId, BSTR username, BSTR* resourceNames, uint32 numResources, BSTR* alternateResourceNames, uint32 numAlternateResourceName, uint32 portNumber, BSTR operation, uint8* cookie, uint32 numBytesInCookie, ref ITSGAuthorizeResourceSink pSink) mut => VT.AuthorizeResource(ref this, mainSessionId, subSessionId, username, resourceNames, numResources, alternateResourceNames, numAlternateResourceName, portNumber, operation, cookie, numBytesInCookie, ref pSink);
-			public HRESULT Refresh() mut => VT.Refresh(ref this);
-			public HRESULT IsQuarantineEnabled(out BOOL quarantineEnabled) mut => VT.IsQuarantineEnabled(ref this, out quarantineEnabled);
+			public HResult AuthorizeConnection(Guid mainSessionId, BSTR username, AAAuthSchemes authType, BSTR clientMachineIP, BSTR clientMachineName, uint8* sohData, uint32 numSOHBytes, uint8* cookieData, uint32 numCookieBytes, HANDLE_PTR userToken, ref ITSGAuthorizeConnectionSink pSink) mut => VT.AuthorizeConnection(ref this, mainSessionId, username, authType, clientMachineIP, clientMachineName, sohData, numSOHBytes, cookieData, numCookieBytes, userToken, ref pSink);
+			public HResult AuthorizeResource(Guid mainSessionId, int32 subSessionId, BSTR username, BSTR* resourceNames, uint32 numResources, BSTR* alternateResourceNames, uint32 numAlternateResourceName, uint32 portNumber, BSTR operation, uint8* cookie, uint32 numBytesInCookie, ref ITSGAuthorizeResourceSink pSink) mut => VT.AuthorizeResource(ref this, mainSessionId, subSessionId, username, resourceNames, numResources, alternateResourceNames, numAlternateResourceName, portNumber, operation, cookie, numBytesInCookie, ref pSink);
+			public HResult Refresh() mut => VT.Refresh(ref this);
+			public HResult IsQuarantineEnabled(out IntBool quarantineEnabled) mut => VT.IsQuarantineEnabled(ref this, out quarantineEnabled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGPolicyEngine self, Guid mainSessionId, BSTR username, AAAuthSchemes authType, BSTR clientMachineIP, BSTR clientMachineName, uint8* sohData, uint32 numSOHBytes, uint8* cookieData, uint32 numCookieBytes, HANDLE_PTR userToken, ref ITSGAuthorizeConnectionSink pSink) AuthorizeConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGPolicyEngine self, Guid mainSessionId, int32 subSessionId, BSTR username, BSTR* resourceNames, uint32 numResources, BSTR* alternateResourceNames, uint32 numAlternateResourceName, uint32 portNumber, BSTR operation, uint8* cookie, uint32 numBytesInCookie, ref ITSGAuthorizeResourceSink pSink) AuthorizeResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGPolicyEngine self) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGPolicyEngine self, out BOOL quarantineEnabled) IsQuarantineEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGPolicyEngine self, Guid mainSessionId, BSTR username, AAAuthSchemes authType, BSTR clientMachineIP, BSTR clientMachineName, uint8* sohData, uint32 numSOHBytes, uint8* cookieData, uint32 numCookieBytes, HANDLE_PTR userToken, ref ITSGAuthorizeConnectionSink pSink) AuthorizeConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGPolicyEngine self, Guid mainSessionId, int32 subSessionId, BSTR username, BSTR* resourceNames, uint32 numResources, BSTR* alternateResourceNames, uint32 numAlternateResourceName, uint32 portNumber, BSTR operation, uint8* cookie, uint32 numBytesInCookie, ref ITSGAuthorizeResourceSink pSink) AuthorizeResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGPolicyEngine self) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGPolicyEngine self, out IntBool quarantineEnabled) IsQuarantineEnabled;
 			}
 		}
 		[CRepr]
@@ -2070,12 +2070,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DoAccounting(AAAccountingDataType accountingDataType, AAAccountingData accountingData) mut => VT.DoAccounting(ref this, accountingDataType, accountingData);
+			public HResult DoAccounting(AAAccountingDataType accountingDataType, AAAccountingData accountingData) mut => VT.DoAccounting(ref this, accountingDataType, accountingData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAccountingEngine self, AAAccountingDataType accountingDataType, AAAccountingData accountingData) DoAccounting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAccountingEngine self, AAAccountingDataType accountingDataType, AAAccountingData accountingData) DoAccounting;
 			}
 		}
 		[CRepr]
@@ -2085,18 +2085,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnUserAuthenticated(BSTR userName, BSTR userDomain, uint context, HANDLE_PTR userToken) mut => VT.OnUserAuthenticated(ref this, userName, userDomain, context, userToken);
-			public HRESULT OnUserAuthenticationFailed(uint context, HRESULT genericErrorCode, HRESULT specificErrorCode) mut => VT.OnUserAuthenticationFailed(ref this, context, genericErrorCode, specificErrorCode);
-			public HRESULT ReauthenticateUser(uint context) mut => VT.ReauthenticateUser(ref this, context);
-			public HRESULT DisconnectUser(uint context) mut => VT.DisconnectUser(ref this, context);
+			public HResult OnUserAuthenticated(BSTR userName, BSTR userDomain, uint context, HANDLE_PTR userToken) mut => VT.OnUserAuthenticated(ref this, userName, userDomain, context, userToken);
+			public HResult OnUserAuthenticationFailed(uint context, HResult genericErrorCode, HResult specificErrorCode) mut => VT.OnUserAuthenticationFailed(ref this, context, genericErrorCode, specificErrorCode);
+			public HResult ReauthenticateUser(uint context) mut => VT.ReauthenticateUser(ref this, context);
+			public HResult DisconnectUser(uint context) mut => VT.DisconnectUser(ref this, context);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthenticateUserSink self, BSTR userName, BSTR userDomain, uint context, HANDLE_PTR userToken) OnUserAuthenticated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthenticateUserSink self, uint context, HRESULT genericErrorCode, HRESULT specificErrorCode) OnUserAuthenticationFailed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthenticateUserSink self, uint context) ReauthenticateUser;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthenticateUserSink self, uint context) DisconnectUser;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthenticateUserSink self, BSTR userName, BSTR userDomain, uint context, HANDLE_PTR userToken) OnUserAuthenticated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthenticateUserSink self, uint context, HResult genericErrorCode, HResult specificErrorCode) OnUserAuthenticationFailed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthenticateUserSink self, uint context) ReauthenticateUser;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthenticateUserSink self, uint context) DisconnectUser;
 			}
 		}
 		[CRepr]
@@ -2106,14 +2106,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AuthenticateUser(Guid mainSessionId, ref uint8 cookieData, uint32 numCookieBytes, uint context, ref ITSGAuthenticateUserSink pSink) mut => VT.AuthenticateUser(ref this, mainSessionId, ref cookieData, numCookieBytes, context, ref pSink);
-			public HRESULT CancelAuthentication(Guid mainSessionId, uint context) mut => VT.CancelAuthentication(ref this, mainSessionId, context);
+			public HResult AuthenticateUser(Guid mainSessionId, ref uint8 cookieData, uint32 numCookieBytes, uint context, ref ITSGAuthenticateUserSink pSink) mut => VT.AuthenticateUser(ref this, mainSessionId, ref cookieData, numCookieBytes, context, ref pSink);
+			public HResult CancelAuthentication(Guid mainSessionId, uint context) mut => VT.CancelAuthentication(ref this, mainSessionId, context);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthenticationEngine self, Guid mainSessionId, ref uint8 cookieData, uint32 numCookieBytes, uint context, ref ITSGAuthenticateUserSink pSink) AuthenticateUser;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITSGAuthenticationEngine self, Guid mainSessionId, uint context) CancelAuthentication;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthenticationEngine self, Guid mainSessionId, ref uint8 cookieData, uint32 numCookieBytes, uint context, ref ITSGAuthenticateUserSink pSink) AuthenticateUser;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITSGAuthenticationEngine self, Guid mainSessionId, uint context) CancelAuthentication;
 			}
 		}
 		[CRepr]
@@ -2123,22 +2123,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(out uint32 PluginCapabilities) mut => VT.Initialize(ref this, out PluginCapabilities);
-			public HRESULT WTSSBX_MachineChangeNotification(WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, ref WTSSBX_MACHINE_INFO pMachineInfo) mut => VT.WTSSBX_MachineChangeNotification(ref this, NotificationType, MachineId, ref pMachineInfo);
-			public HRESULT WTSSBX_SessionChangeNotification(WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, uint32 NumOfSessions, WTSSBX_SESSION_INFO* SessionInfo) mut => VT.WTSSBX_SessionChangeNotification(ref this, NotificationType, MachineId, NumOfSessions, SessionInfo);
-			public HRESULT WTSSBX_GetMostSuitableServer(PWSTR UserName, PWSTR DomainName, PWSTR ApplicationType, PWSTR FarmName, out int32 pMachineId) mut => VT.WTSSBX_GetMostSuitableServer(ref this, UserName, DomainName, ApplicationType, FarmName, out pMachineId);
-			public HRESULT Terminated() mut => VT.Terminated(ref this);
-			public HRESULT WTSSBX_GetUserExternalSession(PWSTR UserName, PWSTR DomainName, PWSTR ApplicationType, ref WTSSBX_IP_ADDRESS RedirectorInternalIP, out uint32 pSessionId, out WTSSBX_MACHINE_CONNECT_INFO pMachineConnectInfo) mut => VT.WTSSBX_GetUserExternalSession(ref this, UserName, DomainName, ApplicationType, ref RedirectorInternalIP, out pSessionId, out pMachineConnectInfo);
+			public HResult Initialize(out uint32 PluginCapabilities) mut => VT.Initialize(ref this, out PluginCapabilities);
+			public HResult WTSSBX_MachineChangeNotification(WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, ref WTSSBX_MACHINE_INFO pMachineInfo) mut => VT.WTSSBX_MachineChangeNotification(ref this, NotificationType, MachineId, ref pMachineInfo);
+			public HResult WTSSBX_SessionChangeNotification(WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, uint32 NumOfSessions, WTSSBX_SESSION_INFO* SessionInfo) mut => VT.WTSSBX_SessionChangeNotification(ref this, NotificationType, MachineId, NumOfSessions, SessionInfo);
+			public HResult WTSSBX_GetMostSuitableServer(char16* UserName, char16* DomainName, char16* ApplicationType, char16* FarmName, out int32 pMachineId) mut => VT.WTSSBX_GetMostSuitableServer(ref this, UserName, DomainName, ApplicationType, FarmName, out pMachineId);
+			public HResult Terminated() mut => VT.Terminated(ref this);
+			public HResult WTSSBX_GetUserExternalSession(char16* UserName, char16* DomainName, char16* ApplicationType, ref WTSSBX_IP_ADDRESS RedirectorInternalIP, out uint32 pSessionId, out WTSSBX_MACHINE_CONNECT_INFO pMachineConnectInfo) mut => VT.WTSSBX_GetUserExternalSession(ref this, UserName, DomainName, ApplicationType, ref RedirectorInternalIP, out pSessionId, out pMachineConnectInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSSBPlugin self, out uint32 PluginCapabilities) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSSBPlugin self, WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, ref WTSSBX_MACHINE_INFO pMachineInfo) WTSSBX_MachineChangeNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSSBPlugin self, WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, uint32 NumOfSessions, WTSSBX_SESSION_INFO* SessionInfo) WTSSBX_SessionChangeNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSSBPlugin self, PWSTR UserName, PWSTR DomainName, PWSTR ApplicationType, PWSTR FarmName, out int32 pMachineId) WTSSBX_GetMostSuitableServer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSSBPlugin self) Terminated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSSBPlugin self, PWSTR UserName, PWSTR DomainName, PWSTR ApplicationType, ref WTSSBX_IP_ADDRESS RedirectorInternalIP, out uint32 pSessionId, out WTSSBX_MACHINE_CONNECT_INFO pMachineConnectInfo) WTSSBX_GetUserExternalSession;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSSBPlugin self, out uint32 PluginCapabilities) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSSBPlugin self, WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, ref WTSSBX_MACHINE_INFO pMachineInfo) WTSSBX_MachineChangeNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSSBPlugin self, WTSSBX_NOTIFICATION_TYPE NotificationType, int32 MachineId, uint32 NumOfSessions, WTSSBX_SESSION_INFO* SessionInfo) WTSSBX_SessionChangeNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSSBPlugin self, char16* UserName, char16* DomainName, char16* ApplicationType, char16* FarmName, out int32 pMachineId) WTSSBX_GetMostSuitableServer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSSBPlugin self) Terminated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSSBPlugin self, char16* UserName, char16* DomainName, char16* ApplicationType, ref WTSSBX_IP_ADDRESS RedirectorInternalIP, out uint32 pSessionId, out WTSSBX_MACHINE_CONNECT_INFO pMachineConnectInfo) WTSSBX_GetUserExternalSession;
 			}
 		}
 		[CRepr]
@@ -2148,16 +2148,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetResourceId(out BSTR bstrWorkspaceId) mut => VT.GetResourceId(ref this, out bstrWorkspaceId);
-			public HRESULT GetResourceDisplayName(out BSTR bstrWorkspaceDisplayName) mut => VT.GetResourceDisplayName(ref this, out bstrWorkspaceDisplayName);
-			public HRESULT IssueDisconnect() mut => VT.IssueDisconnect(ref this);
+			public HResult GetResourceId(out BSTR bstrWorkspaceId) mut => VT.GetResourceId(ref this, out bstrWorkspaceId);
+			public HResult GetResourceDisplayName(out BSTR bstrWorkspaceDisplayName) mut => VT.GetResourceDisplayName(ref this, out bstrWorkspaceDisplayName);
+			public HResult IssueDisconnect() mut => VT.IssueDisconnect(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceClientExt self, out BSTR bstrWorkspaceId) GetResourceId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceClientExt self, out BSTR bstrWorkspaceDisplayName) GetResourceDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceClientExt self) IssueDisconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceClientExt self, out BSTR bstrWorkspaceId) GetResourceId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceClientExt self, out BSTR bstrWorkspaceDisplayName) GetResourceDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceClientExt self) IssueDisconnect;
 			}
 		}
 		[CRepr]
@@ -2167,16 +2167,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetWorkspaceNames(out SAFEARRAY* psaWkspNames) mut => VT.GetWorkspaceNames(ref this, out psaWkspNames);
-			public HRESULT StartRemoteApplication(BSTR bstrWorkspaceId, ref SAFEARRAY psaParams) mut => VT.StartRemoteApplication(ref this, bstrWorkspaceId, ref psaParams);
-			public HRESULT GetProcessId(out uint32 pulProcessId) mut => VT.GetProcessId(ref this, out pulProcessId);
+			public HResult GetWorkspaceNames(out SAFEARRAY* psaWkspNames) mut => VT.GetWorkspaceNames(ref this, out psaWkspNames);
+			public HResult StartRemoteApplication(BSTR bstrWorkspaceId, ref SAFEARRAY psaParams) mut => VT.StartRemoteApplication(ref this, bstrWorkspaceId, ref psaParams);
+			public HResult GetProcessId(out uint32 pulProcessId) mut => VT.GetProcessId(ref this, out pulProcessId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspace self, out SAFEARRAY* psaWkspNames) GetWorkspaceNames;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspace self, BSTR bstrWorkspaceId, ref SAFEARRAY psaParams) StartRemoteApplication;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspace self, out uint32 pulProcessId) GetProcessId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspace self, out SAFEARRAY* psaWkspNames) GetWorkspaceNames;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspace self, BSTR bstrWorkspaceId, ref SAFEARRAY psaParams) StartRemoteApplication;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspace self, out uint32 pulProcessId) GetProcessId;
 			}
 		}
 		[CRepr]
@@ -2186,12 +2186,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartRemoteApplicationEx(BSTR bstrWorkspaceId, BSTR bstrRequestingAppId, BSTR bstrRequestingAppFamilyName, int16 bLaunchIntoImmersiveClient, BSTR bstrImmersiveClientActivationContext, ref SAFEARRAY psaParams) mut => VT.StartRemoteApplicationEx(ref this, bstrWorkspaceId, bstrRequestingAppId, bstrRequestingAppFamilyName, bLaunchIntoImmersiveClient, bstrImmersiveClientActivationContext, ref psaParams);
+			public HResult StartRemoteApplicationEx(BSTR bstrWorkspaceId, BSTR bstrRequestingAppId, BSTR bstrRequestingAppFamilyName, int16 bLaunchIntoImmersiveClient, BSTR bstrImmersiveClientActivationContext, ref SAFEARRAY psaParams) mut => VT.StartRemoteApplicationEx(ref this, bstrWorkspaceId, bstrRequestingAppId, bstrRequestingAppFamilyName, bLaunchIntoImmersiveClient, bstrImmersiveClientActivationContext, ref psaParams);
 
 			[CRepr]
 			public struct VTable : IWorkspace.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspace2 self, BSTR bstrWorkspaceId, BSTR bstrRequestingAppId, BSTR bstrRequestingAppFamilyName, int16 bLaunchIntoImmersiveClient, BSTR bstrImmersiveClientActivationContext, ref SAFEARRAY psaParams) StartRemoteApplicationEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspace2 self, BSTR bstrWorkspaceId, BSTR bstrRequestingAppId, BSTR bstrRequestingAppFamilyName, int16 bLaunchIntoImmersiveClient, BSTR bstrImmersiveClientActivationContext, ref SAFEARRAY psaParams) StartRemoteApplicationEx;
 			}
 		}
 		[CRepr]
@@ -2201,14 +2201,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetClaimsToken2(BSTR bstrClaimsHint, BSTR bstrUserHint, uint32 claimCookie, uint32 hwndCredUiParent, RECT rectCredUiParent, out BSTR pbstrAccessToken) mut => VT.GetClaimsToken2(ref this, bstrClaimsHint, bstrUserHint, claimCookie, hwndCredUiParent, rectCredUiParent, out pbstrAccessToken);
-			public HRESULT SetClaimsToken(BSTR bstrAccessToken, uint64 ullAccessTokenExpiration, BSTR bstrRefreshToken) mut => VT.SetClaimsToken(ref this, bstrAccessToken, ullAccessTokenExpiration, bstrRefreshToken);
+			public HResult GetClaimsToken2(BSTR bstrClaimsHint, BSTR bstrUserHint, uint32 claimCookie, uint32 hwndCredUiParent, RectI rectCredUiParent, out BSTR pbstrAccessToken) mut => VT.GetClaimsToken2(ref this, bstrClaimsHint, bstrUserHint, claimCookie, hwndCredUiParent, rectCredUiParent, out pbstrAccessToken);
+			public HResult SetClaimsToken(BSTR bstrAccessToken, uint64 ullAccessTokenExpiration, BSTR bstrRefreshToken) mut => VT.SetClaimsToken(ref this, bstrAccessToken, ullAccessTokenExpiration, bstrRefreshToken);
 
 			[CRepr]
 			public struct VTable : IWorkspace2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspace3 self, BSTR bstrClaimsHint, BSTR bstrUserHint, uint32 claimCookie, uint32 hwndCredUiParent, RECT rectCredUiParent, out BSTR pbstrAccessToken) GetClaimsToken2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspace3 self, BSTR bstrAccessToken, uint64 ullAccessTokenExpiration, BSTR bstrRefreshToken) SetClaimsToken;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspace3 self, BSTR bstrClaimsHint, BSTR bstrUserHint, uint32 claimCookie, uint32 hwndCredUiParent, RectI rectCredUiParent, out BSTR pbstrAccessToken) GetClaimsToken2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspace3 self, BSTR bstrAccessToken, uint64 ullAccessTokenExpiration, BSTR bstrRefreshToken) SetClaimsToken;
 			}
 		}
 		[CRepr]
@@ -2218,14 +2218,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddResource(ref IWorkspaceClientExt pUnk, out uint32 pdwCookie) mut => VT.AddResource(ref this, ref pUnk, out pdwCookie);
-			public HRESULT RemoveResource(uint32 dwCookieConnection) mut => VT.RemoveResource(ref this, dwCookieConnection);
+			public HResult AddResource(ref IWorkspaceClientExt pUnk, out uint32 pdwCookie) mut => VT.AddResource(ref this, ref pUnk, out pdwCookie);
+			public HResult RemoveResource(uint32 dwCookieConnection) mut => VT.RemoveResource(ref this, dwCookieConnection);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceRegistration self, ref IWorkspaceClientExt pUnk, out uint32 pdwCookie) AddResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceRegistration self, uint32 dwCookieConnection) RemoveResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceRegistration self, ref IWorkspaceClientExt pUnk, out uint32 pdwCookie) AddResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceRegistration self, uint32 dwCookieConnection) RemoveResource;
 			}
 		}
 		[CRepr]
@@ -2235,14 +2235,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddResourceEx(ref IWorkspaceClientExt pUnk, BSTR bstrEventLogUploadAddress, out uint32 pdwCookie, Guid correlationId) mut => VT.AddResourceEx(ref this, ref pUnk, bstrEventLogUploadAddress, out pdwCookie, correlationId);
-			public HRESULT RemoveResourceEx(uint32 dwCookieConnection, Guid correlationId) mut => VT.RemoveResourceEx(ref this, dwCookieConnection, correlationId);
+			public HResult AddResourceEx(ref IWorkspaceClientExt pUnk, BSTR bstrEventLogUploadAddress, out uint32 pdwCookie, Guid correlationId) mut => VT.AddResourceEx(ref this, ref pUnk, bstrEventLogUploadAddress, out pdwCookie, correlationId);
+			public HResult RemoveResourceEx(uint32 dwCookieConnection, Guid correlationId) mut => VT.RemoveResourceEx(ref this, dwCookieConnection, correlationId);
 
 			[CRepr]
 			public struct VTable : IWorkspaceRegistration.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceRegistration2 self, ref IWorkspaceClientExt pUnk, BSTR bstrEventLogUploadAddress, out uint32 pdwCookie, Guid correlationId) AddResourceEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceRegistration2 self, uint32 dwCookieConnection, Guid correlationId) RemoveResourceEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceRegistration2 self, ref IWorkspaceClientExt pUnk, BSTR bstrEventLogUploadAddress, out uint32 pdwCookie, Guid correlationId) AddResourceEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceRegistration2 self, uint32 dwCookieConnection, Guid correlationId) RemoveResourceEx;
 			}
 		}
 		[CRepr]
@@ -2252,24 +2252,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DisconnectWorkspace(BSTR bstrWorkspaceId) mut => VT.DisconnectWorkspace(ref this, bstrWorkspaceId);
-			public HRESULT StartWorkspace(BSTR bstrWorkspaceId, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) mut => VT.StartWorkspace(ref this, bstrWorkspaceId, bstrUserName, bstrPassword, bstrWorkspaceParams, lTimeout, lFlags);
-			public HRESULT IsWorkspaceCredentialSpecified(BSTR bstrWorkspaceId, int16 bCountUnauthenticatedCredentials, out int16 pbCredExist) mut => VT.IsWorkspaceCredentialSpecified(ref this, bstrWorkspaceId, bCountUnauthenticatedCredentials, out pbCredExist);
-			public HRESULT IsWorkspaceSSOEnabled(out int16 pbSSOEnabled) mut => VT.IsWorkspaceSSOEnabled(ref this, out pbSSOEnabled);
-			public HRESULT ClearWorkspaceCredential(BSTR bstrWorkspaceId) mut => VT.ClearWorkspaceCredential(ref this, bstrWorkspaceId);
-			public HRESULT OnAuthenticated(BSTR bstrWorkspaceId, BSTR bstrUserName) mut => VT.OnAuthenticated(ref this, bstrWorkspaceId, bstrUserName);
-			public HRESULT DisconnectWorkspaceByFriendlyName(BSTR bstrWorkspaceFriendlyName) mut => VT.DisconnectWorkspaceByFriendlyName(ref this, bstrWorkspaceFriendlyName);
+			public HResult DisconnectWorkspace(BSTR bstrWorkspaceId) mut => VT.DisconnectWorkspace(ref this, bstrWorkspaceId);
+			public HResult StartWorkspace(BSTR bstrWorkspaceId, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) mut => VT.StartWorkspace(ref this, bstrWorkspaceId, bstrUserName, bstrPassword, bstrWorkspaceParams, lTimeout, lFlags);
+			public HResult IsWorkspaceCredentialSpecified(BSTR bstrWorkspaceId, int16 bCountUnauthenticatedCredentials, out int16 pbCredExist) mut => VT.IsWorkspaceCredentialSpecified(ref this, bstrWorkspaceId, bCountUnauthenticatedCredentials, out pbCredExist);
+			public HResult IsWorkspaceSSOEnabled(out int16 pbSSOEnabled) mut => VT.IsWorkspaceSSOEnabled(ref this, out pbSSOEnabled);
+			public HResult ClearWorkspaceCredential(BSTR bstrWorkspaceId) mut => VT.ClearWorkspaceCredential(ref this, bstrWorkspaceId);
+			public HResult OnAuthenticated(BSTR bstrWorkspaceId, BSTR bstrUserName) mut => VT.OnAuthenticated(ref this, bstrWorkspaceId, bstrUserName);
+			public HResult DisconnectWorkspaceByFriendlyName(BSTR bstrWorkspaceFriendlyName) mut => VT.DisconnectWorkspaceByFriendlyName(ref this, bstrWorkspaceFriendlyName);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId) DisconnectWorkspace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) StartWorkspace;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId, int16 bCountUnauthenticatedCredentials, out int16 pbCredExist) IsWorkspaceCredentialSpecified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, out int16 pbSSOEnabled) IsWorkspaceSSOEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId) ClearWorkspaceCredential;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId, BSTR bstrUserName) OnAuthenticated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable self, BSTR bstrWorkspaceFriendlyName) DisconnectWorkspaceByFriendlyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId) DisconnectWorkspace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) StartWorkspace;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId, int16 bCountUnauthenticatedCredentials, out int16 pbCredExist) IsWorkspaceCredentialSpecified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, out int16 pbSSOEnabled) IsWorkspaceSSOEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId) ClearWorkspaceCredential;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, BSTR bstrWorkspaceId, BSTR bstrUserName) OnAuthenticated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable self, BSTR bstrWorkspaceFriendlyName) DisconnectWorkspaceByFriendlyName;
 			}
 		}
 		[CRepr]
@@ -2279,14 +2279,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartWorkspaceEx(BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) mut => VT.StartWorkspaceEx(ref this, bstrWorkspaceId, bstrWorkspaceFriendlyName, bstrRedirectorName, bstrUserName, bstrPassword, bstrAppContainer, bstrWorkspaceParams, lTimeout, lFlags);
-			public HRESULT ResourceDismissed(BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName) mut => VT.ResourceDismissed(ref this, bstrWorkspaceId, bstrWorkspaceFriendlyName);
+			public HResult StartWorkspaceEx(BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) mut => VT.StartWorkspaceEx(ref this, bstrWorkspaceId, bstrWorkspaceFriendlyName, bstrRedirectorName, bstrUserName, bstrPassword, bstrAppContainer, bstrWorkspaceParams, lTimeout, lFlags);
+			public HResult ResourceDismissed(BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName) mut => VT.ResourceDismissed(ref this, bstrWorkspaceId, bstrWorkspaceFriendlyName);
 
 			[CRepr]
 			public struct VTable : IWorkspaceScriptable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable2 self, BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) StartWorkspaceEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable2 self, BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName) ResourceDismissed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable2 self, BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags) StartWorkspaceEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable2 self, BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName) ResourceDismissed;
 			}
 		}
 		[CRepr]
@@ -2296,12 +2296,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartWorkspaceEx2(BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags, BSTR bstrEventLogUploadAddress, Guid correlationId) mut => VT.StartWorkspaceEx2(ref this, bstrWorkspaceId, bstrWorkspaceFriendlyName, bstrRedirectorName, bstrUserName, bstrPassword, bstrAppContainer, bstrWorkspaceParams, lTimeout, lFlags, bstrEventLogUploadAddress, correlationId);
+			public HResult StartWorkspaceEx2(BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags, BSTR bstrEventLogUploadAddress, Guid correlationId) mut => VT.StartWorkspaceEx2(ref this, bstrWorkspaceId, bstrWorkspaceFriendlyName, bstrRedirectorName, bstrUserName, bstrPassword, bstrAppContainer, bstrWorkspaceParams, lTimeout, lFlags, bstrEventLogUploadAddress, correlationId);
 
 			[CRepr]
 			public struct VTable : IWorkspaceScriptable2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceScriptable3 self, BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags, BSTR bstrEventLogUploadAddress, Guid correlationId) StartWorkspaceEx2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceScriptable3 self, BSTR bstrWorkspaceId, BSTR bstrWorkspaceFriendlyName, BSTR bstrRedirectorName, BSTR bstrUserName, BSTR bstrPassword, BSTR bstrAppContainer, BSTR bstrWorkspaceParams, int32 lTimeout, int32 lFlags, BSTR bstrEventLogUploadAddress, Guid correlationId) StartWorkspaceEx2;
 			}
 		}
 		[CRepr]
@@ -2311,16 +2311,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterErrorLogMessage(BSTR bstrMessage) mut => VT.RegisterErrorLogMessage(ref this, bstrMessage);
-			public HRESULT IsErrorMessageRegistered(BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode, out int16 pfErrorExist) mut => VT.IsErrorMessageRegistered(ref this, bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode, out pfErrorExist);
-			public HRESULT RegisterErrorEvent(BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode) mut => VT.RegisterErrorEvent(ref this, bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode);
+			public HResult RegisterErrorLogMessage(BSTR bstrMessage) mut => VT.RegisterErrorLogMessage(ref this, bstrMessage);
+			public HResult IsErrorMessageRegistered(BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode, out int16 pfErrorExist) mut => VT.IsErrorMessageRegistered(ref this, bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode, out pfErrorExist);
+			public HResult RegisterErrorEvent(BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode) mut => VT.RegisterErrorEvent(ref this, bstrWkspId, dwErrorType, bstrErrorMessageType, dwErrorCode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceReportMessage self, BSTR bstrMessage) RegisterErrorLogMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceReportMessage self, BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode, out int16 pfErrorExist) IsErrorMessageRegistered;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceReportMessage self, BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode) RegisterErrorEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceReportMessage self, BSTR bstrMessage) RegisterErrorLogMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceReportMessage self, BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode, out int16 pfErrorExist) IsErrorMessageRegistered;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceReportMessage self, BSTR bstrWkspId, uint32 dwErrorType, BSTR bstrErrorMessageType, uint32 dwErrorCode) RegisterErrorEvent;
 			}
 		}
 		[CRepr]
@@ -2340,14 +2340,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(ref ITsSbProvider pProvider, ref ITsSbPluginNotifySink pNotifySink, ref ITsSbPluginPropertySet pPropertySet) mut => VT.Initialize(ref this, ref pProvider, ref pNotifySink, ref pPropertySet);
-			public HRESULT Terminate(HRESULT hr) mut => VT.Terminate(ref this, hr);
+			public HResult Initialize(ref ITsSbProvider pProvider, ref ITsSbPluginNotifySink pNotifySink, ref ITsSbPluginPropertySet pPropertySet) mut => VT.Initialize(ref this, ref pProvider, ref pNotifySink, ref pPropertySet);
+			public HResult Terminate(HResult hr) mut => VT.Terminate(ref this, hr);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbPlugin self, ref ITsSbProvider pProvider, ref ITsSbPluginNotifySink pNotifySink, ref ITsSbPluginPropertySet pPropertySet) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbPlugin self, HRESULT hr) Terminate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbPlugin self, ref ITsSbProvider pProvider, ref ITsSbPluginNotifySink pNotifySink, ref ITsSbPluginPropertySet pPropertySet) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbPlugin self, HResult hr) Terminate;
 			}
 		}
 		[CRepr]
@@ -2367,14 +2367,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NotifyServiceFailure() mut => VT.NotifyServiceFailure(ref this);
-			public HRESULT NotifyServiceSuccess() mut => VT.NotifyServiceSuccess(ref this);
+			public HResult NotifyServiceFailure() mut => VT.NotifyServiceFailure(ref this);
+			public HResult NotifyServiceSuccess() mut => VT.NotifyServiceSuccess(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbServiceNotification self) NotifyServiceFailure;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbServiceNotification self) NotifyServiceSuccess;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbServiceNotification self) NotifyServiceFailure;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbServiceNotification self) NotifyServiceSuccess;
 			}
 		}
 		[CRepr]
@@ -2384,12 +2384,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMostSuitableTarget(ref ITsSbClientConnection pConnection, ref ITsSbLoadBalancingNotifySink pLBSink) mut => VT.GetMostSuitableTarget(ref this, ref pConnection, ref pLBSink);
+			public HResult GetMostSuitableTarget(ref ITsSbClientConnection pConnection, ref ITsSbLoadBalancingNotifySink pLBSink) mut => VT.GetMostSuitableTarget(ref this, ref pConnection, ref pLBSink);
 
 			[CRepr]
 			public struct VTable : ITsSbPlugin.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbLoadBalancing self, ref ITsSbClientConnection pConnection, ref ITsSbLoadBalancingNotifySink pLBSink) GetMostSuitableTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbLoadBalancing self, ref ITsSbClientConnection pConnection, ref ITsSbLoadBalancingNotifySink pLBSink) GetMostSuitableTarget;
 			}
 		}
 		[CRepr]
@@ -2399,12 +2399,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryEnvironmentForTarget(ref ITsSbClientConnection pConnection, ref ITsSbPlacementNotifySink pPlacementSink) mut => VT.QueryEnvironmentForTarget(ref this, ref pConnection, ref pPlacementSink);
+			public HResult QueryEnvironmentForTarget(ref ITsSbClientConnection pConnection, ref ITsSbPlacementNotifySink pPlacementSink) mut => VT.QueryEnvironmentForTarget(ref this, ref pConnection, ref pPlacementSink);
 
 			[CRepr]
 			public struct VTable : ITsSbPlugin.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbPlacement self, ref ITsSbClientConnection pConnection, ref ITsSbPlacementNotifySink pPlacementSink) QueryEnvironmentForTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbPlacement self, ref ITsSbClientConnection pConnection, ref ITsSbPlacementNotifySink pPlacementSink) QueryEnvironmentForTarget;
 			}
 		}
 		[CRepr]
@@ -2414,12 +2414,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT PrepareTargetForConnect(ref ITsSbClientConnection pConnection, ref ITsSbOrchestrationNotifySink pOrchestrationNotifySink) mut => VT.PrepareTargetForConnect(ref this, ref pConnection, ref pOrchestrationNotifySink);
+			public HResult PrepareTargetForConnect(ref ITsSbClientConnection pConnection, ref ITsSbOrchestrationNotifySink pOrchestrationNotifySink) mut => VT.PrepareTargetForConnect(ref this, ref pConnection, ref pOrchestrationNotifySink);
 
 			[CRepr]
 			public struct VTable : ITsSbPlugin.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbOrchestration self, ref ITsSbClientConnection pConnection, ref ITsSbOrchestrationNotifySink pOrchestrationNotifySink) PrepareTargetForConnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbOrchestration self, ref ITsSbClientConnection pConnection, ref ITsSbOrchestrationNotifySink pOrchestrationNotifySink) PrepareTargetForConnect;
 			}
 		}
 		[CRepr]
@@ -2429,18 +2429,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR pVal) mut => VT.get_Name(ref this, out pVal);
-			public HRESULT get_ServerWeight(out uint32 pVal) mut => VT.get_ServerWeight(ref this, out pVal);
-			public HRESULT get_EnvironmentPropertySet(out ITsSbEnvironmentPropertySet* ppPropertySet) mut => VT.get_EnvironmentPropertySet(ref this, out ppPropertySet);
-			public HRESULT put_EnvironmentPropertySet(ref ITsSbEnvironmentPropertySet pVal) mut => VT.put_EnvironmentPropertySet(ref this, ref pVal);
+			public HResult get_Name(out BSTR pVal) mut => VT.get_Name(ref this, out pVal);
+			public HResult get_ServerWeight(out uint32 pVal) mut => VT.get_ServerWeight(ref this, out pVal);
+			public HResult get_EnvironmentPropertySet(out ITsSbEnvironmentPropertySet* ppPropertySet) mut => VT.get_EnvironmentPropertySet(ref this, out ppPropertySet);
+			public HResult put_EnvironmentPropertySet(ref ITsSbEnvironmentPropertySet pVal) mut => VT.put_EnvironmentPropertySet(ref this, ref pVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbEnvironment self, out BSTR pVal) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbEnvironment self, out uint32 pVal) get_ServerWeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbEnvironment self, out ITsSbEnvironmentPropertySet* ppPropertySet) get_EnvironmentPropertySet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbEnvironment self, ref ITsSbEnvironmentPropertySet pVal) put_EnvironmentPropertySet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbEnvironment self, out BSTR pVal) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbEnvironment self, out uint32 pVal) get_ServerWeight;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbEnvironment self, out ITsSbEnvironmentPropertySet* ppPropertySet) get_EnvironmentPropertySet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbEnvironment self, ref ITsSbEnvironmentPropertySet pVal) put_EnvironmentPropertySet;
 			}
 		}
 		[CRepr]
@@ -2450,12 +2450,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_TargetName(out BSTR pVal) mut => VT.get_TargetName(ref this, out pVal);
+			public HResult get_TargetName(out BSTR pVal) mut => VT.get_TargetName(ref this, out pVal);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbLoadBalanceResult self, out BSTR pVal) get_TargetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbLoadBalanceResult self, out BSTR pVal) get_TargetName;
 			}
 		}
 		[CRepr]
@@ -2465,48 +2465,48 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_TargetName(out BSTR pVal) mut => VT.get_TargetName(ref this, out pVal);
-			public HRESULT put_TargetName(BSTR Val) mut => VT.put_TargetName(ref this, Val);
-			public HRESULT get_FarmName(out BSTR pVal) mut => VT.get_FarmName(ref this, out pVal);
-			public HRESULT put_FarmName(BSTR Val) mut => VT.put_FarmName(ref this, Val);
-			public HRESULT get_TargetFQDN(out BSTR TargetFqdnName) mut => VT.get_TargetFQDN(ref this, out TargetFqdnName);
-			public HRESULT put_TargetFQDN(BSTR Val) mut => VT.put_TargetFQDN(ref this, Val);
-			public HRESULT get_TargetNetbios(out BSTR TargetNetbiosName) mut => VT.get_TargetNetbios(ref this, out TargetNetbiosName);
-			public HRESULT put_TargetNetbios(BSTR Val) mut => VT.put_TargetNetbios(ref this, Val);
-			public HRESULT get_IpAddresses(TSSD_ConnectionPoint* SOCKADDR, out uint32 numAddresses) mut => VT.get_IpAddresses(ref this, SOCKADDR, out numAddresses);
-			public HRESULT put_IpAddresses(TSSD_ConnectionPoint* SOCKADDR, uint32 numAddresses) mut => VT.put_IpAddresses(ref this, SOCKADDR, numAddresses);
-			public HRESULT get_TargetState(out TARGET_STATE pState) mut => VT.get_TargetState(ref this, out pState);
-			public HRESULT put_TargetState(TARGET_STATE State) mut => VT.put_TargetState(ref this, State);
-			public HRESULT get_TargetPropertySet(out ITsSbTargetPropertySet* ppPropertySet) mut => VT.get_TargetPropertySet(ref this, out ppPropertySet);
-			public HRESULT put_TargetPropertySet(ref ITsSbTargetPropertySet pVal) mut => VT.put_TargetPropertySet(ref this, ref pVal);
-			public HRESULT get_EnvironmentName(out BSTR pVal) mut => VT.get_EnvironmentName(ref this, out pVal);
-			public HRESULT put_EnvironmentName(BSTR Val) mut => VT.put_EnvironmentName(ref this, Val);
-			public HRESULT get_NumSessions(out uint32 pNumSessions) mut => VT.get_NumSessions(ref this, out pNumSessions);
-			public HRESULT get_NumPendingConnections(out uint32 pNumPendingConnections) mut => VT.get_NumPendingConnections(ref this, out pNumPendingConnections);
-			public HRESULT get_TargetLoad(out uint32 pTargetLoad) mut => VT.get_TargetLoad(ref this, out pTargetLoad);
+			public HResult get_TargetName(out BSTR pVal) mut => VT.get_TargetName(ref this, out pVal);
+			public HResult put_TargetName(BSTR Val) mut => VT.put_TargetName(ref this, Val);
+			public HResult get_FarmName(out BSTR pVal) mut => VT.get_FarmName(ref this, out pVal);
+			public HResult put_FarmName(BSTR Val) mut => VT.put_FarmName(ref this, Val);
+			public HResult get_TargetFQDN(out BSTR TargetFqdnName) mut => VT.get_TargetFQDN(ref this, out TargetFqdnName);
+			public HResult put_TargetFQDN(BSTR Val) mut => VT.put_TargetFQDN(ref this, Val);
+			public HResult get_TargetNetbios(out BSTR TargetNetbiosName) mut => VT.get_TargetNetbios(ref this, out TargetNetbiosName);
+			public HResult put_TargetNetbios(BSTR Val) mut => VT.put_TargetNetbios(ref this, Val);
+			public HResult get_IpAddresses(TSSD_ConnectionPoint* SOCKADDR, out uint32 numAddresses) mut => VT.get_IpAddresses(ref this, SOCKADDR, out numAddresses);
+			public HResult put_IpAddresses(TSSD_ConnectionPoint* SOCKADDR, uint32 numAddresses) mut => VT.put_IpAddresses(ref this, SOCKADDR, numAddresses);
+			public HResult get_TargetState(out TARGET_STATE pState) mut => VT.get_TargetState(ref this, out pState);
+			public HResult put_TargetState(TARGET_STATE State) mut => VT.put_TargetState(ref this, State);
+			public HResult get_TargetPropertySet(out ITsSbTargetPropertySet* ppPropertySet) mut => VT.get_TargetPropertySet(ref this, out ppPropertySet);
+			public HResult put_TargetPropertySet(ref ITsSbTargetPropertySet pVal) mut => VT.put_TargetPropertySet(ref this, ref pVal);
+			public HResult get_EnvironmentName(out BSTR pVal) mut => VT.get_EnvironmentName(ref this, out pVal);
+			public HResult put_EnvironmentName(BSTR Val) mut => VT.put_EnvironmentName(ref this, Val);
+			public HResult get_NumSessions(out uint32 pNumSessions) mut => VT.get_NumSessions(ref this, out pNumSessions);
+			public HResult get_NumPendingConnections(out uint32 pNumPendingConnections) mut => VT.get_NumPendingConnections(ref this, out pNumPendingConnections);
+			public HResult get_TargetLoad(out uint32 pTargetLoad) mut => VT.get_TargetLoad(ref this, out pTargetLoad);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out BSTR pVal) get_TargetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, BSTR Val) put_TargetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out BSTR pVal) get_FarmName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, BSTR Val) put_FarmName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out BSTR TargetFqdnName) get_TargetFQDN;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, BSTR Val) put_TargetFQDN;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out BSTR TargetNetbiosName) get_TargetNetbios;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, BSTR Val) put_TargetNetbios;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, TSSD_ConnectionPoint* SOCKADDR, out uint32 numAddresses) get_IpAddresses;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, TSSD_ConnectionPoint* SOCKADDR, uint32 numAddresses) put_IpAddresses;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out TARGET_STATE pState) get_TargetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, TARGET_STATE State) put_TargetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out ITsSbTargetPropertySet* ppPropertySet) get_TargetPropertySet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, ref ITsSbTargetPropertySet pVal) put_TargetPropertySet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out BSTR pVal) get_EnvironmentName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, BSTR Val) put_EnvironmentName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out uint32 pNumSessions) get_NumSessions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out uint32 pNumPendingConnections) get_NumPendingConnections;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTarget self, out uint32 pTargetLoad) get_TargetLoad;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out BSTR pVal) get_TargetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, BSTR Val) put_TargetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out BSTR pVal) get_FarmName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, BSTR Val) put_FarmName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out BSTR TargetFqdnName) get_TargetFQDN;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, BSTR Val) put_TargetFQDN;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out BSTR TargetNetbiosName) get_TargetNetbios;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, BSTR Val) put_TargetNetbios;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, TSSD_ConnectionPoint* SOCKADDR, out uint32 numAddresses) get_IpAddresses;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, TSSD_ConnectionPoint* SOCKADDR, uint32 numAddresses) put_IpAddresses;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out TARGET_STATE pState) get_TargetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, TARGET_STATE State) put_TargetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out ITsSbTargetPropertySet* ppPropertySet) get_TargetPropertySet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, ref ITsSbTargetPropertySet pVal) put_TargetPropertySet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out BSTR pVal) get_EnvironmentName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, BSTR Val) put_EnvironmentName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out uint32 pNumSessions) get_NumSessions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out uint32 pNumPendingConnections) get_NumPendingConnections;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTarget self, out uint32 pTargetLoad) get_TargetLoad;
 			}
 		}
 		[CRepr]
@@ -2516,44 +2516,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SessionId(out uint32 pVal) mut => VT.get_SessionId(ref this, out pVal);
-			public HRESULT get_TargetName(out BSTR targetName) mut => VT.get_TargetName(ref this, out targetName);
-			public HRESULT put_TargetName(BSTR targetName) mut => VT.put_TargetName(ref this, targetName);
-			public HRESULT get_Username(out BSTR userName) mut => VT.get_Username(ref this, out userName);
-			public HRESULT get_Domain(out BSTR domain) mut => VT.get_Domain(ref this, out domain);
-			public HRESULT get_State(out TSSESSION_STATE pState) mut => VT.get_State(ref this, out pState);
-			public HRESULT put_State(TSSESSION_STATE State) mut => VT.put_State(ref this, State);
-			public HRESULT get_CreateTime(out FILETIME pTime) mut => VT.get_CreateTime(ref this, out pTime);
-			public HRESULT put_CreateTime(FILETIME Time) mut => VT.put_CreateTime(ref this, Time);
-			public HRESULT get_DisconnectTime(out FILETIME pTime) mut => VT.get_DisconnectTime(ref this, out pTime);
-			public HRESULT put_DisconnectTime(FILETIME Time) mut => VT.put_DisconnectTime(ref this, Time);
-			public HRESULT get_InitialProgram(out BSTR app) mut => VT.get_InitialProgram(ref this, out app);
-			public HRESULT put_InitialProgram(BSTR Application) mut => VT.put_InitialProgram(ref this, Application);
-			public HRESULT get_ClientDisplay(out CLIENT_DISPLAY pClientDisplay) mut => VT.get_ClientDisplay(ref this, out pClientDisplay);
-			public HRESULT put_ClientDisplay(CLIENT_DISPLAY pClientDisplay) mut => VT.put_ClientDisplay(ref this, pClientDisplay);
-			public HRESULT get_ProtocolType(out uint32 pVal) mut => VT.get_ProtocolType(ref this, out pVal);
-			public HRESULT put_ProtocolType(uint32 Val) mut => VT.put_ProtocolType(ref this, Val);
+			public HResult get_SessionId(out uint32 pVal) mut => VT.get_SessionId(ref this, out pVal);
+			public HResult get_TargetName(out BSTR targetName) mut => VT.get_TargetName(ref this, out targetName);
+			public HResult put_TargetName(BSTR targetName) mut => VT.put_TargetName(ref this, targetName);
+			public HResult get_Username(out BSTR userName) mut => VT.get_Username(ref this, out userName);
+			public HResult get_Domain(out BSTR domain) mut => VT.get_Domain(ref this, out domain);
+			public HResult get_State(out TSSESSION_STATE pState) mut => VT.get_State(ref this, out pState);
+			public HResult put_State(TSSESSION_STATE State) mut => VT.put_State(ref this, State);
+			public HResult get_CreateTime(out FileTime pTime) mut => VT.get_CreateTime(ref this, out pTime);
+			public HResult put_CreateTime(FILETIME Time) mut => VT.put_CreateTime(ref this, Time);
+			public HResult get_DisconnectTime(out FileTime pTime) mut => VT.get_DisconnectTime(ref this, out pTime);
+			public HResult put_DisconnectTime(FILETIME Time) mut => VT.put_DisconnectTime(ref this, Time);
+			public HResult get_InitialProgram(out BSTR app) mut => VT.get_InitialProgram(ref this, out app);
+			public HResult put_InitialProgram(BSTR Application) mut => VT.put_InitialProgram(ref this, Application);
+			public HResult get_ClientDisplay(out CLIENT_DISPLAY pClientDisplay) mut => VT.get_ClientDisplay(ref this, out pClientDisplay);
+			public HResult put_ClientDisplay(CLIENT_DISPLAY pClientDisplay) mut => VT.put_ClientDisplay(ref this, pClientDisplay);
+			public HResult get_ProtocolType(out uint32 pVal) mut => VT.get_ProtocolType(ref this, out pVal);
+			public HResult put_ProtocolType(uint32 Val) mut => VT.put_ProtocolType(ref this, Val);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out uint32 pVal) get_SessionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out BSTR targetName) get_TargetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, BSTR targetName) put_TargetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out BSTR userName) get_Username;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out BSTR domain) get_Domain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out TSSESSION_STATE pState) get_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, TSSESSION_STATE State) put_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out FILETIME pTime) get_CreateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, FILETIME Time) put_CreateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out FILETIME pTime) get_DisconnectTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, FILETIME Time) put_DisconnectTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out BSTR app) get_InitialProgram;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, BSTR Application) put_InitialProgram;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out CLIENT_DISPLAY pClientDisplay) get_ClientDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, CLIENT_DISPLAY pClientDisplay) put_ClientDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, out uint32 pVal) get_ProtocolType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbSession self, uint32 Val) put_ProtocolType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out uint32 pVal) get_SessionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out BSTR targetName) get_TargetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, BSTR targetName) put_TargetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out BSTR userName) get_Username;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out BSTR domain) get_Domain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out TSSESSION_STATE pState) get_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, TSSESSION_STATE State) put_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out FileTime pTime) get_CreateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, FileTime Time) put_CreateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out FileTime pTime) get_DisconnectTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, FileTime Time) put_DisconnectTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out BSTR app) get_InitialProgram;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, BSTR Application) put_InitialProgram;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out CLIENT_DISPLAY pClientDisplay) get_ClientDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, CLIENT_DISPLAY pClientDisplay) put_ClientDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, out uint32 pVal) get_ProtocolType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbSession self, uint32 Val) put_ProtocolType;
 			}
 		}
 		[CRepr]
@@ -2563,16 +2563,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NotifySessionChange(TSSESSION_STATE changeType, ref ITsSbSession pSession) mut => VT.NotifySessionChange(ref this, changeType, ref pSession);
-			public HRESULT NotifyTargetChange(uint32 TargetChangeType, ref ITsSbTarget pTarget) mut => VT.NotifyTargetChange(ref this, TargetChangeType, ref pTarget);
-			public HRESULT NotifyClientConnectionStateChange(CONNECTION_CHANGE_NOTIFICATION ChangeType, ref ITsSbClientConnection pConnection) mut => VT.NotifyClientConnectionStateChange(ref this, ChangeType, ref pConnection);
+			public HResult NotifySessionChange(TSSESSION_STATE changeType, ref ITsSbSession pSession) mut => VT.NotifySessionChange(ref this, changeType, ref pSession);
+			public HResult NotifyTargetChange(uint32 TargetChangeType, ref ITsSbTarget pTarget) mut => VT.NotifyTargetChange(ref this, TargetChangeType, ref pTarget);
+			public HResult NotifyClientConnectionStateChange(CONNECTION_CHANGE_NOTIFICATION ChangeType, ref ITsSbClientConnection pConnection) mut => VT.NotifyClientConnectionStateChange(ref this, ChangeType, ref pConnection);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourceNotification self, TSSESSION_STATE changeType, ref ITsSbSession pSession) NotifySessionChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourceNotification self, uint32 TargetChangeType, ref ITsSbTarget pTarget) NotifyTargetChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourceNotification self, CONNECTION_CHANGE_NOTIFICATION ChangeType, ref ITsSbClientConnection pConnection) NotifyClientConnectionStateChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourceNotification self, TSSESSION_STATE changeType, ref ITsSbSession pSession) NotifySessionChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourceNotification self, uint32 TargetChangeType, ref ITsSbTarget pTarget) NotifyTargetChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourceNotification self, CONNECTION_CHANGE_NOTIFICATION ChangeType, ref ITsSbClientConnection pConnection) NotifyClientConnectionStateChange;
 			}
 		}
 		[CRepr]
@@ -2582,16 +2582,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NotifySessionChangeEx(BSTR targetName, BSTR userName, BSTR domain, uint32 sessionId, TSSESSION_STATE sessionState) mut => VT.NotifySessionChangeEx(ref this, targetName, userName, domain, sessionId, sessionState);
-			public HRESULT NotifyTargetChangeEx(BSTR targetName, uint32 targetChangeType) mut => VT.NotifyTargetChangeEx(ref this, targetName, targetChangeType);
-			public HRESULT NotifyClientConnectionStateChangeEx(BSTR userName, BSTR domain, BSTR initialProgram, BSTR poolName, BSTR targetName, CONNECTION_CHANGE_NOTIFICATION connectionChangeType) mut => VT.NotifyClientConnectionStateChangeEx(ref this, userName, domain, initialProgram, poolName, targetName, connectionChangeType);
+			public HResult NotifySessionChangeEx(BSTR targetName, BSTR userName, BSTR domain, uint32 sessionId, TSSESSION_STATE sessionState) mut => VT.NotifySessionChangeEx(ref this, targetName, userName, domain, sessionId, sessionState);
+			public HResult NotifyTargetChangeEx(BSTR targetName, uint32 targetChangeType) mut => VT.NotifyTargetChangeEx(ref this, targetName, targetChangeType);
+			public HResult NotifyClientConnectionStateChangeEx(BSTR userName, BSTR domain, BSTR initialProgram, BSTR poolName, BSTR targetName, CONNECTION_CHANGE_NOTIFICATION connectionChangeType) mut => VT.NotifyClientConnectionStateChangeEx(ref this, userName, domain, initialProgram, poolName, targetName, connectionChangeType);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourceNotificationEx self, BSTR targetName, BSTR userName, BSTR domain, uint32 sessionId, TSSESSION_STATE sessionState) NotifySessionChangeEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourceNotificationEx self, BSTR targetName, uint32 targetChangeType) NotifyTargetChangeEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourceNotificationEx self, BSTR userName, BSTR domain, BSTR initialProgram, BSTR poolName, BSTR targetName, CONNECTION_CHANGE_NOTIFICATION connectionChangeType) NotifyClientConnectionStateChangeEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourceNotificationEx self, BSTR targetName, BSTR userName, BSTR domain, uint32 sessionId, TSSESSION_STATE sessionState) NotifySessionChangeEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourceNotificationEx self, BSTR targetName, uint32 targetChangeType) NotifyTargetChangeEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourceNotificationEx self, BSTR userName, BSTR domain, BSTR initialProgram, BSTR poolName, BSTR targetName, CONNECTION_CHANGE_NOTIFICATION connectionChangeType) NotifyClientConnectionStateChangeEx;
 			}
 		}
 		[CRepr]
@@ -2601,28 +2601,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_TargetId(out BSTR pName) mut => VT.get_TargetId(ref this, out pName);
-			public HRESULT get_StartTime(out FILETIME pStartTime) mut => VT.get_StartTime(ref this, out pStartTime);
-			public HRESULT get_EndTime(out FILETIME pEndTime) mut => VT.get_EndTime(ref this, out pEndTime);
-			public HRESULT get_Deadline(out FILETIME pDeadline) mut => VT.get_Deadline(ref this, out pDeadline);
-			public HRESULT get_Identifier(out BSTR pIdentifier) mut => VT.get_Identifier(ref this, out pIdentifier);
-			public HRESULT get_Label(out BSTR pLabel) mut => VT.get_Label(ref this, out pLabel);
-			public HRESULT get_Context(out SAFEARRAY* pContext) mut => VT.get_Context(ref this, out pContext);
-			public HRESULT get_Plugin(out BSTR pPlugin) mut => VT.get_Plugin(ref this, out pPlugin);
-			public HRESULT get_Status(out RDV_TASK_STATUS pStatus) mut => VT.get_Status(ref this, out pStatus);
+			public HResult get_TargetId(out BSTR pName) mut => VT.get_TargetId(ref this, out pName);
+			public HResult get_StartTime(out FileTime pStartTime) mut => VT.get_StartTime(ref this, out pStartTime);
+			public HResult get_EndTime(out FileTime pEndTime) mut => VT.get_EndTime(ref this, out pEndTime);
+			public HResult get_Deadline(out FileTime pDeadline) mut => VT.get_Deadline(ref this, out pDeadline);
+			public HResult get_Identifier(out BSTR pIdentifier) mut => VT.get_Identifier(ref this, out pIdentifier);
+			public HResult get_Label(out BSTR pLabel) mut => VT.get_Label(ref this, out pLabel);
+			public HResult get_Context(out SAFEARRAY* pContext) mut => VT.get_Context(ref this, out pContext);
+			public HResult get_Plugin(out BSTR pPlugin) mut => VT.get_Plugin(ref this, out pPlugin);
+			public HResult get_Status(out RDV_TASK_STATUS pStatus) mut => VT.get_Status(ref this, out pStatus);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out BSTR pName) get_TargetId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out FILETIME pStartTime) get_StartTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out FILETIME pEndTime) get_EndTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out FILETIME pDeadline) get_Deadline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out BSTR pIdentifier) get_Identifier;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out BSTR pLabel) get_Label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out SAFEARRAY* pContext) get_Context;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out BSTR pPlugin) get_Plugin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskInfo self, out RDV_TASK_STATUS pStatus) get_Status;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out BSTR pName) get_TargetId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out FileTime pStartTime) get_StartTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out FileTime pEndTime) get_EndTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out FileTime pDeadline) get_Deadline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out BSTR pIdentifier) get_Identifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out BSTR pLabel) get_Label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out SAFEARRAY* pContext) get_Context;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out BSTR pPlugin) get_Plugin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskInfo self, out RDV_TASK_STATUS pStatus) get_Status;
 			}
 		}
 		[CRepr]
@@ -2632,14 +2632,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InitializeTaskPlugin(ref ITsSbTaskPluginNotifySink pITsSbTaskPluginNotifySink) mut => VT.InitializeTaskPlugin(ref this, ref pITsSbTaskPluginNotifySink);
-			public HRESULT SetTaskQueue(BSTR pszHostName, uint32 SbTaskInfoSize, ITsSbTaskInfo** pITsSbTaskInfo) mut => VT.SetTaskQueue(ref this, pszHostName, SbTaskInfoSize, pITsSbTaskInfo);
+			public HResult InitializeTaskPlugin(ref ITsSbTaskPluginNotifySink pITsSbTaskPluginNotifySink) mut => VT.InitializeTaskPlugin(ref this, ref pITsSbTaskPluginNotifySink);
+			public HResult SetTaskQueue(BSTR pszHostName, uint32 SbTaskInfoSize, ITsSbTaskInfo** pITsSbTaskInfo) mut => VT.SetTaskQueue(ref this, pszHostName, SbTaskInfoSize, pITsSbTaskInfo);
 
 			[CRepr]
 			public struct VTable : ITsSbPlugin.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskPlugin self, ref ITsSbTaskPluginNotifySink pITsSbTaskPluginNotifySink) InitializeTaskPlugin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskPlugin self, BSTR pszHostName, uint32 SbTaskInfoSize, ITsSbTaskInfo** pITsSbTaskInfo) SetTaskQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskPlugin self, ref ITsSbTaskPluginNotifySink pITsSbTaskPluginNotifySink) InitializeTaskPlugin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskPlugin self, BSTR pszHostName, uint32 SbTaskInfoSize, ITsSbTaskInfo** pITsSbTaskInfo) SetTaskQueue;
 			}
 		}
 		[CRepr]
@@ -2699,14 +2699,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnError(HRESULT hrError) mut => VT.OnError(ref this, hrError);
-			public HRESULT OnReportStatus(CLIENT_MESSAGE_TYPE messageType, uint32 messageID) mut => VT.OnReportStatus(ref this, messageType, messageID);
+			public HResult OnError(HResult hrError) mut => VT.OnError(ref this, hrError);
+			public HResult OnReportStatus(CLIENT_MESSAGE_TYPE messageType, uint32 messageID) mut => VT.OnReportStatus(ref this, messageType, messageID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbBaseNotifySink self, HRESULT hrError) OnError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbBaseNotifySink self, CLIENT_MESSAGE_TYPE messageType, uint32 messageID) OnReportStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbBaseNotifySink self, HResult hrError) OnError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbBaseNotifySink self, CLIENT_MESSAGE_TYPE messageType, uint32 messageID) OnReportStatus;
 			}
 		}
 		[CRepr]
@@ -2716,14 +2716,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnInitialized(HRESULT hr) mut => VT.OnInitialized(ref this, hr);
-			public HRESULT OnTerminated() mut => VT.OnTerminated(ref this);
+			public HResult OnInitialized(HResult hr) mut => VT.OnInitialized(ref this, hr);
+			public HResult OnTerminated() mut => VT.OnTerminated(ref this);
 
 			[CRepr]
 			public struct VTable : ITsSbBaseNotifySink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbPluginNotifySink self, HRESULT hr) OnInitialized;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbPluginNotifySink self) OnTerminated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbPluginNotifySink self, HResult hr) OnInitialized;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbPluginNotifySink self) OnTerminated;
 			}
 		}
 		[CRepr]
@@ -2733,12 +2733,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnGetMostSuitableTarget(ref ITsSbLoadBalanceResult pLBResult, BOOL fIsNewConnection) mut => VT.OnGetMostSuitableTarget(ref this, ref pLBResult, fIsNewConnection);
+			public HResult OnGetMostSuitableTarget(ref ITsSbLoadBalanceResult pLBResult, IntBool fIsNewConnection) mut => VT.OnGetMostSuitableTarget(ref this, ref pLBResult, fIsNewConnection);
 
 			[CRepr]
 			public struct VTable : ITsSbBaseNotifySink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbLoadBalancingNotifySink self, ref ITsSbLoadBalanceResult pLBResult, BOOL fIsNewConnection) OnGetMostSuitableTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbLoadBalancingNotifySink self, ref ITsSbLoadBalanceResult pLBResult, IntBool fIsNewConnection) OnGetMostSuitableTarget;
 			}
 		}
 		[CRepr]
@@ -2748,12 +2748,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnQueryEnvironmentCompleted(ref ITsSbEnvironment pEnvironment) mut => VT.OnQueryEnvironmentCompleted(ref this, ref pEnvironment);
+			public HResult OnQueryEnvironmentCompleted(ref ITsSbEnvironment pEnvironment) mut => VT.OnQueryEnvironmentCompleted(ref this, ref pEnvironment);
 
 			[CRepr]
 			public struct VTable : ITsSbBaseNotifySink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbPlacementNotifySink self, ref ITsSbEnvironment pEnvironment) OnQueryEnvironmentCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbPlacementNotifySink self, ref ITsSbEnvironment pEnvironment) OnQueryEnvironmentCompleted;
 			}
 		}
 		[CRepr]
@@ -2763,12 +2763,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnReadyToConnect(ref ITsSbTarget pTarget) mut => VT.OnReadyToConnect(ref this, ref pTarget);
+			public HResult OnReadyToConnect(ref ITsSbTarget pTarget) mut => VT.OnReadyToConnect(ref this, ref pTarget);
 
 			[CRepr]
 			public struct VTable : ITsSbBaseNotifySink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbOrchestrationNotifySink self, ref ITsSbTarget pTarget) OnReadyToConnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbOrchestrationNotifySink self, ref ITsSbTarget pTarget) OnReadyToConnect;
 			}
 		}
 		[CRepr]
@@ -2778,18 +2778,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnSetTaskTime(BSTR szTargetName, FILETIME TaskStartTime, FILETIME TaskEndTime, FILETIME TaskDeadline, BSTR szTaskLabel, BSTR szTaskIdentifier, BSTR szTaskPlugin, uint32 dwTaskStatus, ref SAFEARRAY saContext) mut => VT.OnSetTaskTime(ref this, szTargetName, TaskStartTime, TaskEndTime, TaskDeadline, szTaskLabel, szTaskIdentifier, szTaskPlugin, dwTaskStatus, ref saContext);
-			public HRESULT OnDeleteTaskTime(BSTR szTargetName, BSTR szTaskIdentifier) mut => VT.OnDeleteTaskTime(ref this, szTargetName, szTaskIdentifier);
-			public HRESULT OnUpdateTaskStatus(BSTR szTargetName, BSTR TaskIdentifier, RDV_TASK_STATUS TaskStatus) mut => VT.OnUpdateTaskStatus(ref this, szTargetName, TaskIdentifier, TaskStatus);
-			public HRESULT OnReportTasks(BSTR szHostName) mut => VT.OnReportTasks(ref this, szHostName);
+			public HResult OnSetTaskTime(BSTR szTargetName, FileTime TaskStartTime, FileTime TaskEndTime, FileTime TaskDeadline, BSTR szTaskLabel, BSTR szTaskIdentifier, BSTR szTaskPlugin, uint32 dwTaskStatus, ref SAFEARRAY saContext) mut => VT.OnSetTaskTime(ref this, szTargetName, TaskStartTime, TaskEndTime, TaskDeadline, szTaskLabel, szTaskIdentifier, szTaskPlugin, dwTaskStatus, ref saContext);
+			public HResult OnDeleteTaskTime(BSTR szTargetName, BSTR szTaskIdentifier) mut => VT.OnDeleteTaskTime(ref this, szTargetName, szTaskIdentifier);
+			public HResult OnUpdateTaskStatus(BSTR szTargetName, BSTR TaskIdentifier, RDV_TASK_STATUS TaskStatus) mut => VT.OnUpdateTaskStatus(ref this, szTargetName, TaskIdentifier, TaskStatus);
+			public HResult OnReportTasks(BSTR szHostName) mut => VT.OnReportTasks(ref this, szHostName);
 
 			[CRepr]
 			public struct VTable : ITsSbBaseNotifySink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskPluginNotifySink self, BSTR szTargetName, FILETIME TaskStartTime, FILETIME TaskEndTime, FILETIME TaskDeadline, BSTR szTaskLabel, BSTR szTaskIdentifier, BSTR szTaskPlugin, uint32 dwTaskStatus, ref SAFEARRAY saContext) OnSetTaskTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskPluginNotifySink self, BSTR szTargetName, BSTR szTaskIdentifier) OnDeleteTaskTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskPluginNotifySink self, BSTR szTargetName, BSTR TaskIdentifier, RDV_TASK_STATUS TaskStatus) OnUpdateTaskStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbTaskPluginNotifySink self, BSTR szHostName) OnReportTasks;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskPluginNotifySink self, BSTR szTargetName, FileTime TaskStartTime, FileTime TaskEndTime, FileTime TaskDeadline, BSTR szTaskLabel, BSTR szTaskIdentifier, BSTR szTaskPlugin, uint32 dwTaskStatus, ref SAFEARRAY saContext) OnSetTaskTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskPluginNotifySink self, BSTR szTargetName, BSTR szTaskIdentifier) OnDeleteTaskTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskPluginNotifySink self, BSTR szTargetName, BSTR TaskIdentifier, RDV_TASK_STATUS TaskStatus) OnUpdateTaskStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbTaskPluginNotifySink self, BSTR szHostName) OnReportTasks;
 			}
 		}
 		[CRepr]
@@ -2799,40 +2799,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_UserName(out BSTR pVal) mut => VT.get_UserName(ref this, out pVal);
-			public HRESULT get_Domain(out BSTR pVal) mut => VT.get_Domain(ref this, out pVal);
-			public HRESULT get_InitialProgram(out BSTR pVal) mut => VT.get_InitialProgram(ref this, out pVal);
-			public HRESULT get_LoadBalanceResult(out ITsSbLoadBalanceResult* ppVal) mut => VT.get_LoadBalanceResult(ref this, out ppVal);
-			public HRESULT get_FarmName(out BSTR pVal) mut => VT.get_FarmName(ref this, out pVal);
-			public HRESULT PutContext(BSTR contextId, VARIANT context, VARIANT* existingContext) mut => VT.PutContext(ref this, contextId, context, existingContext);
-			public HRESULT GetContext(BSTR contextId, out VARIANT context) mut => VT.GetContext(ref this, contextId, out context);
-			public HRESULT get_Environment(out ITsSbEnvironment* ppEnvironment) mut => VT.get_Environment(ref this, out ppEnvironment);
-			public HRESULT get_ConnectionError() mut => VT.get_ConnectionError(ref this);
-			public HRESULT get_SamUserAccount(out BSTR pVal) mut => VT.get_SamUserAccount(ref this, out pVal);
-			public HRESULT get_ClientConnectionPropertySet(out ITsSbClientConnectionPropertySet* ppPropertySet) mut => VT.get_ClientConnectionPropertySet(ref this, out ppPropertySet);
-			public HRESULT get_IsFirstAssignment(out BOOL ppVal) mut => VT.get_IsFirstAssignment(ref this, out ppVal);
-			public HRESULT get_RdFarmType(out RD_FARM_TYPE pRdFarmType) mut => VT.get_RdFarmType(ref this, out pRdFarmType);
-			public HRESULT get_UserSidString(out int8* pszUserSidString) mut => VT.get_UserSidString(ref this, out pszUserSidString);
-			public HRESULT GetDisconnectedSession(out ITsSbSession* ppSession) mut => VT.GetDisconnectedSession(ref this, out ppSession);
+			public HResult get_UserName(out BSTR pVal) mut => VT.get_UserName(ref this, out pVal);
+			public HResult get_Domain(out BSTR pVal) mut => VT.get_Domain(ref this, out pVal);
+			public HResult get_InitialProgram(out BSTR pVal) mut => VT.get_InitialProgram(ref this, out pVal);
+			public HResult get_LoadBalanceResult(out ITsSbLoadBalanceResult* ppVal) mut => VT.get_LoadBalanceResult(ref this, out ppVal);
+			public HResult get_FarmName(out BSTR pVal) mut => VT.get_FarmName(ref this, out pVal);
+			public HResult PutContext(BSTR contextId, VARIANT context, VARIANT* existingContext) mut => VT.PutContext(ref this, contextId, context, existingContext);
+			public HResult GetContext(BSTR contextId, out VARIANT context) mut => VT.GetContext(ref this, contextId, out context);
+			public HResult get_Environment(out ITsSbEnvironment* ppEnvironment) mut => VT.get_Environment(ref this, out ppEnvironment);
+			public HResult get_ConnectionError() mut => VT.get_ConnectionError(ref this);
+			public HResult get_SamUserAccount(out BSTR pVal) mut => VT.get_SamUserAccount(ref this, out pVal);
+			public HResult get_ClientConnectionPropertySet(out ITsSbClientConnectionPropertySet* ppPropertySet) mut => VT.get_ClientConnectionPropertySet(ref this, out ppPropertySet);
+			public HResult get_IsFirstAssignment(out IntBool ppVal) mut => VT.get_IsFirstAssignment(ref this, out ppVal);
+			public HResult get_RdFarmType(out RD_FARM_TYPE pRdFarmType) mut => VT.get_RdFarmType(ref this, out pRdFarmType);
+			public HResult get_UserSidString(out int8* pszUserSidString) mut => VT.get_UserSidString(ref this, out pszUserSidString);
+			public HResult GetDisconnectedSession(out ITsSbSession* ppSession) mut => VT.GetDisconnectedSession(ref this, out ppSession);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out BSTR pVal) get_UserName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out BSTR pVal) get_Domain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out BSTR pVal) get_InitialProgram;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out ITsSbLoadBalanceResult* ppVal) get_LoadBalanceResult;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out BSTR pVal) get_FarmName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, BSTR contextId, VARIANT context, VARIANT* existingContext) PutContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, BSTR contextId, out VARIANT context) GetContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out ITsSbEnvironment* ppEnvironment) get_Environment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self) get_ConnectionError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out BSTR pVal) get_SamUserAccount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out ITsSbClientConnectionPropertySet* ppPropertySet) get_ClientConnectionPropertySet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out BOOL ppVal) get_IsFirstAssignment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out RD_FARM_TYPE pRdFarmType) get_RdFarmType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out int8* pszUserSidString) get_UserSidString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbClientConnection self, out ITsSbSession* ppSession) GetDisconnectedSession;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out BSTR pVal) get_UserName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out BSTR pVal) get_Domain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out BSTR pVal) get_InitialProgram;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out ITsSbLoadBalanceResult* ppVal) get_LoadBalanceResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out BSTR pVal) get_FarmName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, BSTR contextId, VARIANT context, VARIANT* existingContext) PutContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, BSTR contextId, out VARIANT context) GetContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out ITsSbEnvironment* ppEnvironment) get_Environment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self) get_ConnectionError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out BSTR pVal) get_SamUserAccount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out ITsSbClientConnectionPropertySet* ppPropertySet) get_ClientConnectionPropertySet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out IntBool ppVal) get_IsFirstAssignment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out RD_FARM_TYPE pRdFarmType) get_RdFarmType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out int8* pszUserSidString) get_UserSidString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbClientConnection self, out ITsSbSession* ppSession) GetDisconnectedSession;
 			}
 		}
 		[CRepr]
@@ -2842,34 +2842,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateTargetObject(BSTR TargetName, BSTR EnvironmentName, out ITsSbTarget* ppTarget) mut => VT.CreateTargetObject(ref this, TargetName, EnvironmentName, out ppTarget);
-			public HRESULT CreateLoadBalanceResultObject(BSTR TargetName, out ITsSbLoadBalanceResult* ppLBResult) mut => VT.CreateLoadBalanceResultObject(ref this, TargetName, out ppLBResult);
-			public HRESULT CreateSessionObject(BSTR TargetName, BSTR UserName, BSTR Domain, uint32 SessionId, out ITsSbSession* ppSession) mut => VT.CreateSessionObject(ref this, TargetName, UserName, Domain, SessionId, out ppSession);
-			public HRESULT CreatePluginPropertySet(out ITsSbPluginPropertySet* ppPropertySet) mut => VT.CreatePluginPropertySet(ref this, out ppPropertySet);
-			public HRESULT CreateTargetPropertySetObject(out ITsSbTargetPropertySet* ppPropertySet) mut => VT.CreateTargetPropertySetObject(ref this, out ppPropertySet);
-			public HRESULT CreateEnvironmentObject(BSTR Name, uint32 ServerWeight, out ITsSbEnvironment* ppEnvironment) mut => VT.CreateEnvironmentObject(ref this, Name, ServerWeight, out ppEnvironment);
-			public HRESULT GetResourcePluginStore(out ITsSbResourcePluginStore* ppStore) mut => VT.GetResourcePluginStore(ref this, out ppStore);
-			public HRESULT GetFilterPluginStore(out ITsSbFilterPluginStore* ppStore) mut => VT.GetFilterPluginStore(ref this, out ppStore);
-			public HRESULT RegisterForNotification(uint32 notificationType, BSTR ResourceToMonitor, ref ITsSbResourceNotification pPluginNotification) mut => VT.RegisterForNotification(ref this, notificationType, ResourceToMonitor, ref pPluginNotification);
-			public HRESULT UnRegisterForNotification(uint32 notificationType, BSTR ResourceToMonitor) mut => VT.UnRegisterForNotification(ref this, notificationType, ResourceToMonitor);
-			public HRESULT GetInstanceOfGlobalStore(out ITsSbGlobalStore* ppGlobalStore) mut => VT.GetInstanceOfGlobalStore(ref this, out ppGlobalStore);
-			public HRESULT CreateEnvironmentPropertySetObject(out ITsSbEnvironmentPropertySet* ppPropertySet) mut => VT.CreateEnvironmentPropertySetObject(ref this, out ppPropertySet);
+			public HResult CreateTargetObject(BSTR TargetName, BSTR EnvironmentName, out ITsSbTarget* ppTarget) mut => VT.CreateTargetObject(ref this, TargetName, EnvironmentName, out ppTarget);
+			public HResult CreateLoadBalanceResultObject(BSTR TargetName, out ITsSbLoadBalanceResult* ppLBResult) mut => VT.CreateLoadBalanceResultObject(ref this, TargetName, out ppLBResult);
+			public HResult CreateSessionObject(BSTR TargetName, BSTR UserName, BSTR Domain, uint32 SessionId, out ITsSbSession* ppSession) mut => VT.CreateSessionObject(ref this, TargetName, UserName, Domain, SessionId, out ppSession);
+			public HResult CreatePluginPropertySet(out ITsSbPluginPropertySet* ppPropertySet) mut => VT.CreatePluginPropertySet(ref this, out ppPropertySet);
+			public HResult CreateTargetPropertySetObject(out ITsSbTargetPropertySet* ppPropertySet) mut => VT.CreateTargetPropertySetObject(ref this, out ppPropertySet);
+			public HResult CreateEnvironmentObject(BSTR Name, uint32 ServerWeight, out ITsSbEnvironment* ppEnvironment) mut => VT.CreateEnvironmentObject(ref this, Name, ServerWeight, out ppEnvironment);
+			public HResult GetResourcePluginStore(out ITsSbResourcePluginStore* ppStore) mut => VT.GetResourcePluginStore(ref this, out ppStore);
+			public HResult GetFilterPluginStore(out ITsSbFilterPluginStore* ppStore) mut => VT.GetFilterPluginStore(ref this, out ppStore);
+			public HResult RegisterForNotification(uint32 notificationType, BSTR ResourceToMonitor, ref ITsSbResourceNotification pPluginNotification) mut => VT.RegisterForNotification(ref this, notificationType, ResourceToMonitor, ref pPluginNotification);
+			public HResult UnRegisterForNotification(uint32 notificationType, BSTR ResourceToMonitor) mut => VT.UnRegisterForNotification(ref this, notificationType, ResourceToMonitor);
+			public HResult GetInstanceOfGlobalStore(out ITsSbGlobalStore* ppGlobalStore) mut => VT.GetInstanceOfGlobalStore(ref this, out ppGlobalStore);
+			public HResult CreateEnvironmentPropertySetObject(out ITsSbEnvironmentPropertySet* ppPropertySet) mut => VT.CreateEnvironmentPropertySetObject(ref this, out ppPropertySet);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, BSTR TargetName, BSTR EnvironmentName, out ITsSbTarget* ppTarget) CreateTargetObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, BSTR TargetName, out ITsSbLoadBalanceResult* ppLBResult) CreateLoadBalanceResultObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, BSTR TargetName, BSTR UserName, BSTR Domain, uint32 SessionId, out ITsSbSession* ppSession) CreateSessionObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, out ITsSbPluginPropertySet* ppPropertySet) CreatePluginPropertySet;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, out ITsSbTargetPropertySet* ppPropertySet) CreateTargetPropertySetObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, BSTR Name, uint32 ServerWeight, out ITsSbEnvironment* ppEnvironment) CreateEnvironmentObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, out ITsSbResourcePluginStore* ppStore) GetResourcePluginStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, out ITsSbFilterPluginStore* ppStore) GetFilterPluginStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, uint32 notificationType, BSTR ResourceToMonitor, ref ITsSbResourceNotification pPluginNotification) RegisterForNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, uint32 notificationType, BSTR ResourceToMonitor) UnRegisterForNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, out ITsSbGlobalStore* ppGlobalStore) GetInstanceOfGlobalStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvider self, out ITsSbEnvironmentPropertySet* ppPropertySet) CreateEnvironmentPropertySetObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, BSTR TargetName, BSTR EnvironmentName, out ITsSbTarget* ppTarget) CreateTargetObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, BSTR TargetName, out ITsSbLoadBalanceResult* ppLBResult) CreateLoadBalanceResultObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, BSTR TargetName, BSTR UserName, BSTR Domain, uint32 SessionId, out ITsSbSession* ppSession) CreateSessionObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, out ITsSbPluginPropertySet* ppPropertySet) CreatePluginPropertySet;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, out ITsSbTargetPropertySet* ppPropertySet) CreateTargetPropertySetObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, BSTR Name, uint32 ServerWeight, out ITsSbEnvironment* ppEnvironment) CreateEnvironmentObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, out ITsSbResourcePluginStore* ppStore) GetResourcePluginStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, out ITsSbFilterPluginStore* ppStore) GetFilterPluginStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, uint32 notificationType, BSTR ResourceToMonitor, ref ITsSbResourceNotification pPluginNotification) RegisterForNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, uint32 notificationType, BSTR ResourceToMonitor) UnRegisterForNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, out ITsSbGlobalStore* ppGlobalStore) GetInstanceOfGlobalStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvider self, out ITsSbEnvironmentPropertySet* ppPropertySet) CreateEnvironmentPropertySetObject;
 			}
 		}
 		[CRepr]
@@ -2879,66 +2879,66 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryTarget(BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) mut => VT.QueryTarget(ref this, TargetName, FarmName, out ppTarget);
-			public HRESULT QuerySessionBySessionId(uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) mut => VT.QuerySessionBySessionId(ref this, dwSessionId, TargetName, out ppSession);
-			public HRESULT AddTargetToStore(ref ITsSbTarget pTarget) mut => VT.AddTargetToStore(ref this, ref pTarget);
-			public HRESULT AddSessionToStore(ref ITsSbSession pSession) mut => VT.AddSessionToStore(ref this, ref pSession);
-			public HRESULT AddEnvironmentToStore(ref ITsSbEnvironment pEnvironment) mut => VT.AddEnvironmentToStore(ref this, ref pEnvironment);
-			public HRESULT RemoveEnvironmentFromStore(BSTR EnvironmentName, BOOL bIgnoreOwner) mut => VT.RemoveEnvironmentFromStore(ref this, EnvironmentName, bIgnoreOwner);
-			public HRESULT EnumerateFarms(out uint32 pdwCount, out SAFEARRAY* pVal) mut => VT.EnumerateFarms(ref this, out pdwCount, out pVal);
-			public HRESULT QueryEnvironment(BSTR EnvironmentName, out ITsSbEnvironment* ppEnvironment) mut => VT.QueryEnvironment(ref this, EnvironmentName, out ppEnvironment);
-			public HRESULT EnumerateEnvironments(out uint32 pdwCount, ITsSbEnvironment*** pVal) mut => VT.EnumerateEnvironments(ref this, out pdwCount, pVal);
-			public HRESULT SaveTarget(ref ITsSbTarget pTarget, BOOL bForceWrite) mut => VT.SaveTarget(ref this, ref pTarget, bForceWrite);
-			public HRESULT SaveEnvironment(ref ITsSbEnvironment pEnvironment, BOOL bForceWrite) mut => VT.SaveEnvironment(ref this, ref pEnvironment, bForceWrite);
-			public HRESULT SaveSession(ref ITsSbSession pSession) mut => VT.SaveSession(ref this, ref pSession);
-			public HRESULT SetTargetProperty(BSTR TargetName, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetTargetProperty(ref this, TargetName, PropertyName, ref pProperty);
-			public HRESULT SetEnvironmentProperty(BSTR EnvironmentName, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetEnvironmentProperty(ref this, EnvironmentName, PropertyName, ref pProperty);
-			public HRESULT SetTargetState(BSTR targetName, TARGET_STATE newState, out TARGET_STATE pOldState) mut => VT.SetTargetState(ref this, targetName, newState, out pOldState);
-			public HRESULT SetSessionState(ref ITsSbSession sbSession) mut => VT.SetSessionState(ref this, ref sbSession);
-			public HRESULT EnumerateTargets(BSTR FarmName, BSTR EnvName, TS_SB_SORT_BY sortByFieldId, BSTR sortyByPropName, out uint32 pdwCount, ITsSbTarget*** pVal) mut => VT.EnumerateTargets(ref this, FarmName, EnvName, sortByFieldId, sortyByPropName, out pdwCount, pVal);
-			public HRESULT EnumerateSessions(BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) mut => VT.EnumerateSessions(ref this, targetName, userName, userDomain, poolName, initialProgram, ref pSessionState, out pdwCount, ppVal);
-			public HRESULT GetFarmProperty(BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) mut => VT.GetFarmProperty(ref this, farmName, propertyName, ref pVarValue);
-			public HRESULT DeleteTarget(BSTR targetName, BSTR hostName) mut => VT.DeleteTarget(ref this, targetName, hostName);
-			public HRESULT SetTargetPropertyWithVersionCheck(ref ITsSbTarget pTarget, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetTargetPropertyWithVersionCheck(ref this, ref pTarget, PropertyName, ref pProperty);
-			public HRESULT SetEnvironmentPropertyWithVersionCheck(ref ITsSbEnvironment pEnvironment, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetEnvironmentPropertyWithVersionCheck(ref this, ref pEnvironment, PropertyName, ref pProperty);
-			public HRESULT AcquireTargetLock(BSTR targetName, uint32 dwTimeout, out IUnknown* ppContext) mut => VT.AcquireTargetLock(ref this, targetName, dwTimeout, out ppContext);
-			public HRESULT ReleaseTargetLock(ref IUnknown pContext) mut => VT.ReleaseTargetLock(ref this, ref pContext);
-			public HRESULT TestAndSetServerState(BSTR PoolName, BSTR ServerFQDN, TARGET_STATE NewState, TARGET_STATE TestState, out TARGET_STATE pInitState) mut => VT.TestAndSetServerState(ref this, PoolName, ServerFQDN, NewState, TestState, out pInitState);
-			public HRESULT SetServerWaitingToStart(BSTR PoolName, BSTR serverName) mut => VT.SetServerWaitingToStart(ref this, PoolName, serverName);
-			public HRESULT GetServerState(BSTR PoolName, BSTR ServerFQDN, out TARGET_STATE pState) mut => VT.GetServerState(ref this, PoolName, ServerFQDN, out pState);
-			public HRESULT SetServerDrainMode(BSTR ServerFQDN, uint32 DrainMode) mut => VT.SetServerDrainMode(ref this, ServerFQDN, DrainMode);
+			public HResult QueryTarget(BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) mut => VT.QueryTarget(ref this, TargetName, FarmName, out ppTarget);
+			public HResult QuerySessionBySessionId(uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) mut => VT.QuerySessionBySessionId(ref this, dwSessionId, TargetName, out ppSession);
+			public HResult AddTargetToStore(ref ITsSbTarget pTarget) mut => VT.AddTargetToStore(ref this, ref pTarget);
+			public HResult AddSessionToStore(ref ITsSbSession pSession) mut => VT.AddSessionToStore(ref this, ref pSession);
+			public HResult AddEnvironmentToStore(ref ITsSbEnvironment pEnvironment) mut => VT.AddEnvironmentToStore(ref this, ref pEnvironment);
+			public HResult RemoveEnvironmentFromStore(BSTR EnvironmentName, IntBool bIgnoreOwner) mut => VT.RemoveEnvironmentFromStore(ref this, EnvironmentName, bIgnoreOwner);
+			public HResult EnumerateFarms(out uint32 pdwCount, out SAFEARRAY* pVal) mut => VT.EnumerateFarms(ref this, out pdwCount, out pVal);
+			public HResult QueryEnvironment(BSTR EnvironmentName, out ITsSbEnvironment* ppEnvironment) mut => VT.QueryEnvironment(ref this, EnvironmentName, out ppEnvironment);
+			public HResult EnumerateEnvironments(out uint32 pdwCount, ITsSbEnvironment*** pVal) mut => VT.EnumerateEnvironments(ref this, out pdwCount, pVal);
+			public HResult SaveTarget(ref ITsSbTarget pTarget, IntBool bForceWrite) mut => VT.SaveTarget(ref this, ref pTarget, bForceWrite);
+			public HResult SaveEnvironment(ref ITsSbEnvironment pEnvironment, IntBool bForceWrite) mut => VT.SaveEnvironment(ref this, ref pEnvironment, bForceWrite);
+			public HResult SaveSession(ref ITsSbSession pSession) mut => VT.SaveSession(ref this, ref pSession);
+			public HResult SetTargetProperty(BSTR TargetName, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetTargetProperty(ref this, TargetName, PropertyName, ref pProperty);
+			public HResult SetEnvironmentProperty(BSTR EnvironmentName, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetEnvironmentProperty(ref this, EnvironmentName, PropertyName, ref pProperty);
+			public HResult SetTargetState(BSTR targetName, TARGET_STATE newState, out TARGET_STATE pOldState) mut => VT.SetTargetState(ref this, targetName, newState, out pOldState);
+			public HResult SetSessionState(ref ITsSbSession sbSession) mut => VT.SetSessionState(ref this, ref sbSession);
+			public HResult EnumerateTargets(BSTR FarmName, BSTR EnvName, TS_SB_SORT_BY sortByFieldId, BSTR sortyByPropName, out uint32 pdwCount, ITsSbTarget*** pVal) mut => VT.EnumerateTargets(ref this, FarmName, EnvName, sortByFieldId, sortyByPropName, out pdwCount, pVal);
+			public HResult EnumerateSessions(BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) mut => VT.EnumerateSessions(ref this, targetName, userName, userDomain, poolName, initialProgram, ref pSessionState, out pdwCount, ppVal);
+			public HResult GetFarmProperty(BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) mut => VT.GetFarmProperty(ref this, farmName, propertyName, ref pVarValue);
+			public HResult DeleteTarget(BSTR targetName, BSTR hostName) mut => VT.DeleteTarget(ref this, targetName, hostName);
+			public HResult SetTargetPropertyWithVersionCheck(ref ITsSbTarget pTarget, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetTargetPropertyWithVersionCheck(ref this, ref pTarget, PropertyName, ref pProperty);
+			public HResult SetEnvironmentPropertyWithVersionCheck(ref ITsSbEnvironment pEnvironment, BSTR PropertyName, ref VARIANT pProperty) mut => VT.SetEnvironmentPropertyWithVersionCheck(ref this, ref pEnvironment, PropertyName, ref pProperty);
+			public HResult AcquireTargetLock(BSTR targetName, uint32 dwTimeout, out IUnknown* ppContext) mut => VT.AcquireTargetLock(ref this, targetName, dwTimeout, out ppContext);
+			public HResult ReleaseTargetLock(ref IUnknown pContext) mut => VT.ReleaseTargetLock(ref this, ref pContext);
+			public HResult TestAndSetServerState(BSTR PoolName, BSTR ServerFQDN, TARGET_STATE NewState, TARGET_STATE TestState, out TARGET_STATE pInitState) mut => VT.TestAndSetServerState(ref this, PoolName, ServerFQDN, NewState, TestState, out pInitState);
+			public HResult SetServerWaitingToStart(BSTR PoolName, BSTR serverName) mut => VT.SetServerWaitingToStart(ref this, PoolName, serverName);
+			public HResult GetServerState(BSTR PoolName, BSTR ServerFQDN, out TARGET_STATE pState) mut => VT.GetServerState(ref this, PoolName, ServerFQDN, out pState);
+			public HResult SetServerDrainMode(BSTR ServerFQDN, uint32 DrainMode) mut => VT.SetServerDrainMode(ref this, ServerFQDN, DrainMode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) QueryTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) QuerySessionBySessionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbTarget pTarget) AddTargetToStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbSession pSession) AddSessionToStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbEnvironment pEnvironment) AddEnvironmentToStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR EnvironmentName, BOOL bIgnoreOwner) RemoveEnvironmentFromStore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, out uint32 pdwCount, out SAFEARRAY* pVal) EnumerateFarms;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR EnvironmentName, out ITsSbEnvironment* ppEnvironment) QueryEnvironment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, out uint32 pdwCount, ITsSbEnvironment*** pVal) EnumerateEnvironments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbTarget pTarget, BOOL bForceWrite) SaveTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbEnvironment pEnvironment, BOOL bForceWrite) SaveEnvironment;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbSession pSession) SaveSession;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR TargetName, BSTR PropertyName, ref VARIANT pProperty) SetTargetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR EnvironmentName, BSTR PropertyName, ref VARIANT pProperty) SetEnvironmentProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR targetName, TARGET_STATE newState, out TARGET_STATE pOldState) SetTargetState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbSession sbSession) SetSessionState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR FarmName, BSTR EnvName, TS_SB_SORT_BY sortByFieldId, BSTR sortyByPropName, out uint32 pdwCount, ITsSbTarget*** pVal) EnumerateTargets;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) EnumerateSessions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) GetFarmProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR targetName, BSTR hostName) DeleteTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbTarget pTarget, BSTR PropertyName, ref VARIANT pProperty) SetTargetPropertyWithVersionCheck;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref ITsSbEnvironment pEnvironment, BSTR PropertyName, ref VARIANT pProperty) SetEnvironmentPropertyWithVersionCheck;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR targetName, uint32 dwTimeout, out IUnknown* ppContext) AcquireTargetLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, ref IUnknown pContext) ReleaseTargetLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR PoolName, BSTR ServerFQDN, TARGET_STATE NewState, TARGET_STATE TestState, out TARGET_STATE pInitState) TestAndSetServerState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR PoolName, BSTR serverName) SetServerWaitingToStart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR PoolName, BSTR ServerFQDN, out TARGET_STATE pState) GetServerState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbResourcePluginStore self, BSTR ServerFQDN, uint32 DrainMode) SetServerDrainMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) QueryTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) QuerySessionBySessionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbTarget pTarget) AddTargetToStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbSession pSession) AddSessionToStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbEnvironment pEnvironment) AddEnvironmentToStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR EnvironmentName, IntBool bIgnoreOwner) RemoveEnvironmentFromStore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, out uint32 pdwCount, out SAFEARRAY* pVal) EnumerateFarms;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR EnvironmentName, out ITsSbEnvironment* ppEnvironment) QueryEnvironment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, out uint32 pdwCount, ITsSbEnvironment*** pVal) EnumerateEnvironments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbTarget pTarget, IntBool bForceWrite) SaveTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbEnvironment pEnvironment, IntBool bForceWrite) SaveEnvironment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbSession pSession) SaveSession;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR TargetName, BSTR PropertyName, ref VARIANT pProperty) SetTargetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR EnvironmentName, BSTR PropertyName, ref VARIANT pProperty) SetEnvironmentProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR targetName, TARGET_STATE newState, out TARGET_STATE pOldState) SetTargetState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbSession sbSession) SetSessionState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR FarmName, BSTR EnvName, TS_SB_SORT_BY sortByFieldId, BSTR sortyByPropName, out uint32 pdwCount, ITsSbTarget*** pVal) EnumerateTargets;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) EnumerateSessions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) GetFarmProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR targetName, BSTR hostName) DeleteTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbTarget pTarget, BSTR PropertyName, ref VARIANT pProperty) SetTargetPropertyWithVersionCheck;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref ITsSbEnvironment pEnvironment, BSTR PropertyName, ref VARIANT pProperty) SetEnvironmentPropertyWithVersionCheck;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR targetName, uint32 dwTimeout, out IUnknown* ppContext) AcquireTargetLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, ref IUnknown pContext) ReleaseTargetLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR PoolName, BSTR ServerFQDN, TARGET_STATE NewState, TARGET_STATE TestState, out TARGET_STATE pInitState) TestAndSetServerState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR PoolName, BSTR serverName) SetServerWaitingToStart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR PoolName, BSTR ServerFQDN, out TARGET_STATE pState) GetServerState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbResourcePluginStore self, BSTR ServerFQDN, uint32 DrainMode) SetServerDrainMode;
 			}
 		}
 		[CRepr]
@@ -2948,16 +2948,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SaveProperties(ref ITsSbPropertySet pPropertySet) mut => VT.SaveProperties(ref this, ref pPropertySet);
-			public HRESULT EnumerateProperties(out ITsSbPropertySet* ppPropertySet) mut => VT.EnumerateProperties(ref this, out ppPropertySet);
-			public HRESULT DeleteProperties(BSTR propertyName) mut => VT.DeleteProperties(ref this, propertyName);
+			public HResult SaveProperties(ref ITsSbPropertySet pPropertySet) mut => VT.SaveProperties(ref this, ref pPropertySet);
+			public HResult EnumerateProperties(out ITsSbPropertySet* ppPropertySet) mut => VT.EnumerateProperties(ref this, out ppPropertySet);
+			public HResult DeleteProperties(BSTR propertyName) mut => VT.DeleteProperties(ref this, propertyName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbFilterPluginStore self, ref ITsSbPropertySet pPropertySet) SaveProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbFilterPluginStore self, out ITsSbPropertySet* ppPropertySet) EnumerateProperties;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbFilterPluginStore self, BSTR propertyName) DeleteProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbFilterPluginStore self, ref ITsSbPropertySet pPropertySet) SaveProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbFilterPluginStore self, out ITsSbPropertySet* ppPropertySet) EnumerateProperties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbFilterPluginStore self, BSTR propertyName) DeleteProperties;
 			}
 		}
 		[CRepr]
@@ -2967,24 +2967,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueryTarget(BSTR ProviderName, BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) mut => VT.QueryTarget(ref this, ProviderName, TargetName, FarmName, out ppTarget);
-			public HRESULT QuerySessionBySessionId(BSTR ProviderName, uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) mut => VT.QuerySessionBySessionId(ref this, ProviderName, dwSessionId, TargetName, out ppSession);
-			public HRESULT EnumerateFarms(BSTR ProviderName, out uint32 pdwCount, out SAFEARRAY* pVal) mut => VT.EnumerateFarms(ref this, ProviderName, out pdwCount, out pVal);
-			public HRESULT EnumerateTargets(BSTR ProviderName, BSTR FarmName, BSTR EnvName, out uint32 pdwCount, ITsSbTarget*** pVal) mut => VT.EnumerateTargets(ref this, ProviderName, FarmName, EnvName, out pdwCount, pVal);
-			public HRESULT EnumerateEnvironmentsByProvider(BSTR ProviderName, out uint32 pdwCount, ITsSbEnvironment*** ppVal) mut => VT.EnumerateEnvironmentsByProvider(ref this, ProviderName, out pdwCount, ppVal);
-			public HRESULT EnumerateSessions(BSTR ProviderName, BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) mut => VT.EnumerateSessions(ref this, ProviderName, targetName, userName, userDomain, poolName, initialProgram, ref pSessionState, out pdwCount, ppVal);
-			public HRESULT GetFarmProperty(BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) mut => VT.GetFarmProperty(ref this, farmName, propertyName, ref pVarValue);
+			public HResult QueryTarget(BSTR ProviderName, BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) mut => VT.QueryTarget(ref this, ProviderName, TargetName, FarmName, out ppTarget);
+			public HResult QuerySessionBySessionId(BSTR ProviderName, uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) mut => VT.QuerySessionBySessionId(ref this, ProviderName, dwSessionId, TargetName, out ppSession);
+			public HResult EnumerateFarms(BSTR ProviderName, out uint32 pdwCount, out SAFEARRAY* pVal) mut => VT.EnumerateFarms(ref this, ProviderName, out pdwCount, out pVal);
+			public HResult EnumerateTargets(BSTR ProviderName, BSTR FarmName, BSTR EnvName, out uint32 pdwCount, ITsSbTarget*** pVal) mut => VT.EnumerateTargets(ref this, ProviderName, FarmName, EnvName, out pdwCount, pVal);
+			public HResult EnumerateEnvironmentsByProvider(BSTR ProviderName, out uint32 pdwCount, ITsSbEnvironment*** ppVal) mut => VT.EnumerateEnvironmentsByProvider(ref this, ProviderName, out pdwCount, ppVal);
+			public HResult EnumerateSessions(BSTR ProviderName, BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) mut => VT.EnumerateSessions(ref this, ProviderName, targetName, userName, userDomain, poolName, initialProgram, ref pSessionState, out pdwCount, ppVal);
+			public HResult GetFarmProperty(BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) mut => VT.GetFarmProperty(ref this, farmName, propertyName, ref pVarValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR ProviderName, BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) QueryTarget;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR ProviderName, uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) QuerySessionBySessionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR ProviderName, out uint32 pdwCount, out SAFEARRAY* pVal) EnumerateFarms;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR ProviderName, BSTR FarmName, BSTR EnvName, out uint32 pdwCount, ITsSbTarget*** pVal) EnumerateTargets;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR ProviderName, out uint32 pdwCount, ITsSbEnvironment*** ppVal) EnumerateEnvironmentsByProvider;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR ProviderName, BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) EnumerateSessions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGlobalStore self, BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) GetFarmProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR ProviderName, BSTR TargetName, BSTR FarmName, out ITsSbTarget* ppTarget) QueryTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR ProviderName, uint32 dwSessionId, BSTR TargetName, out ITsSbSession* ppSession) QuerySessionBySessionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR ProviderName, out uint32 pdwCount, out SAFEARRAY* pVal) EnumerateFarms;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR ProviderName, BSTR FarmName, BSTR EnvName, out uint32 pdwCount, ITsSbTarget*** pVal) EnumerateTargets;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR ProviderName, out uint32 pdwCount, ITsSbEnvironment*** ppVal) EnumerateEnvironmentsByProvider;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR ProviderName, BSTR targetName, BSTR userName, BSTR userDomain, BSTR poolName, BSTR initialProgram, ref TSSESSION_STATE pSessionState, out uint32 pdwCount, ITsSbSession*** ppVal) EnumerateSessions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGlobalStore self, BSTR farmName, BSTR propertyName, ref VARIANT pVarValue) GetFarmProperty;
 			}
 		}
 		[CRepr]
@@ -2994,22 +2994,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnJobCreated(ref VM_NOTIFY_INFO pVmNotifyInfo) mut => VT.OnJobCreated(ref this, ref pVmNotifyInfo);
-			public HRESULT OnVirtualMachineStatusChanged(ref VM_NOTIFY_ENTRY pVmNotifyEntry, VM_NOTIFY_STATUS VmNotifyStatus, HRESULT ErrorCode, BSTR ErrorDescr) mut => VT.OnVirtualMachineStatusChanged(ref this, ref pVmNotifyEntry, VmNotifyStatus, ErrorCode, ErrorDescr);
-			public HRESULT OnJobCompleted(HRESULT ResultCode, BSTR ResultDescription) mut => VT.OnJobCompleted(ref this, ResultCode, ResultDescription);
-			public HRESULT OnJobCancelled() mut => VT.OnJobCancelled(ref this);
-			public HRESULT LockVirtualMachine(ref VM_NOTIFY_ENTRY pVmNotifyEntry) mut => VT.LockVirtualMachine(ref this, ref pVmNotifyEntry);
-			public HRESULT OnVirtualMachineHostStatusChanged(BSTR VmHost, VM_HOST_NOTIFY_STATUS VmHostNotifyStatus, HRESULT ErrorCode, BSTR ErrorDescr) mut => VT.OnVirtualMachineHostStatusChanged(ref this, VmHost, VmHostNotifyStatus, ErrorCode, ErrorDescr);
+			public HResult OnJobCreated(ref VM_NOTIFY_INFO pVmNotifyInfo) mut => VT.OnJobCreated(ref this, ref pVmNotifyInfo);
+			public HResult OnVirtualMachineStatusChanged(ref VM_NOTIFY_ENTRY pVmNotifyEntry, VM_NOTIFY_STATUS VmNotifyStatus, HResult ErrorCode, BSTR ErrorDescr) mut => VT.OnVirtualMachineStatusChanged(ref this, ref pVmNotifyEntry, VmNotifyStatus, ErrorCode, ErrorDescr);
+			public HResult OnJobCompleted(HResult ResultCode, BSTR ResultDescription) mut => VT.OnJobCompleted(ref this, ResultCode, ResultDescription);
+			public HResult OnJobCancelled() mut => VT.OnJobCancelled(ref this);
+			public HResult LockVirtualMachine(ref VM_NOTIFY_ENTRY pVmNotifyEntry) mut => VT.LockVirtualMachine(ref this, ref pVmNotifyEntry);
+			public HResult OnVirtualMachineHostStatusChanged(BSTR VmHost, VM_HOST_NOTIFY_STATUS VmHostNotifyStatus, HResult ErrorCode, BSTR ErrorDescr) mut => VT.OnVirtualMachineHostStatusChanged(ref this, VmHost, VmHostNotifyStatus, ErrorCode, ErrorDescr);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioningPluginNotifySink self, ref VM_NOTIFY_INFO pVmNotifyInfo) OnJobCreated;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioningPluginNotifySink self, ref VM_NOTIFY_ENTRY pVmNotifyEntry, VM_NOTIFY_STATUS VmNotifyStatus, HRESULT ErrorCode, BSTR ErrorDescr) OnVirtualMachineStatusChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioningPluginNotifySink self, HRESULT ResultCode, BSTR ResultDescription) OnJobCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioningPluginNotifySink self) OnJobCancelled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioningPluginNotifySink self, ref VM_NOTIFY_ENTRY pVmNotifyEntry) LockVirtualMachine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioningPluginNotifySink self, BSTR VmHost, VM_HOST_NOTIFY_STATUS VmHostNotifyStatus, HRESULT ErrorCode, BSTR ErrorDescr) OnVirtualMachineHostStatusChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioningPluginNotifySink self, ref VM_NOTIFY_INFO pVmNotifyInfo) OnJobCreated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioningPluginNotifySink self, ref VM_NOTIFY_ENTRY pVmNotifyEntry, VM_NOTIFY_STATUS VmNotifyStatus, HResult ErrorCode, BSTR ErrorDescr) OnVirtualMachineStatusChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioningPluginNotifySink self, HResult ResultCode, BSTR ResultDescription) OnJobCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioningPluginNotifySink self) OnJobCancelled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioningPluginNotifySink self, ref VM_NOTIFY_ENTRY pVmNotifyEntry) LockVirtualMachine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioningPluginNotifySink self, BSTR VmHost, VM_HOST_NOTIFY_STATUS VmHostNotifyStatus, HResult ErrorCode, BSTR ErrorDescr) OnVirtualMachineHostStatusChanged;
 			}
 		}
 		[CRepr]
@@ -3019,18 +3019,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateVirtualMachines(BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) mut => VT.CreateVirtualMachines(ref this, JobXmlString, JobGuid, ref pSink);
-			public HRESULT PatchVirtualMachines(BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink, ref VM_PATCH_INFO pVMPatchInfo) mut => VT.PatchVirtualMachines(ref this, JobXmlString, JobGuid, ref pSink, ref pVMPatchInfo);
-			public HRESULT DeleteVirtualMachines(BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) mut => VT.DeleteVirtualMachines(ref this, JobXmlString, JobGuid, ref pSink);
-			public HRESULT CancelJob(BSTR JobGuid) mut => VT.CancelJob(ref this, JobGuid);
+			public HResult CreateVirtualMachines(BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) mut => VT.CreateVirtualMachines(ref this, JobXmlString, JobGuid, ref pSink);
+			public HResult PatchVirtualMachines(BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink, ref VM_PATCH_INFO pVMPatchInfo) mut => VT.PatchVirtualMachines(ref this, JobXmlString, JobGuid, ref pSink, ref pVMPatchInfo);
+			public HResult DeleteVirtualMachines(BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) mut => VT.DeleteVirtualMachines(ref this, JobXmlString, JobGuid, ref pSink);
+			public HResult CancelJob(BSTR JobGuid) mut => VT.CancelJob(ref this, JobGuid);
 
 			[CRepr]
 			public struct VTable : ITsSbPlugin.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioning self, BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) CreateVirtualMachines;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioning self, BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink, ref VM_PATCH_INFO pVMPatchInfo) PatchVirtualMachines;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioning self, BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) DeleteVirtualMachines;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbProvisioning self, BSTR JobGuid) CancelJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioning self, BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) CreateVirtualMachines;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioning self, BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink, ref VM_PATCH_INFO pVMPatchInfo) PatchVirtualMachines;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioning self, BSTR JobXmlString, BSTR JobGuid, ref ITsSbProvisioningPluginNotifySink pSink) DeleteVirtualMachines;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbProvisioning self, BSTR JobGuid) CancelJob;
 			}
 		}
 		[CRepr]
@@ -3040,14 +3040,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnCompleted(HRESULT Status) mut => VT.OnCompleted(ref this, Status);
-			public HRESULT GetWaitTimeout(out FILETIME pftTimeout) mut => VT.GetWaitTimeout(ref this, out pftTimeout);
+			public HResult OnCompleted(HResult Status) mut => VT.OnCompleted(ref this, Status);
+			public HResult GetWaitTimeout(out FileTime pftTimeout) mut => VT.GetWaitTimeout(ref this, out pftTimeout);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGenericNotifySink self, HRESULT Status) OnCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ITsSbGenericNotifySink self, out FILETIME pftTimeout) GetWaitTimeout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGenericNotifySink self, HResult Status) OnCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ITsSbGenericNotifySink self, out FileTime pftTimeout) GetWaitTimeout;
 			}
 		}
 		[CRepr]
@@ -3057,22 +3057,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetResourceList(PWSTR userID, out int32 pceAppListSize, out pluginResource* resourceList) mut => VT.GetResourceList(ref this, userID, out pceAppListSize, out resourceList);
-			public HRESULT GetResource(PWSTR alias, int32 flags, out pluginResource resource) mut => VT.GetResource(ref this, alias, flags, out resource);
-			public HRESULT GetCacheLastUpdateTime(out uint64 lastUpdateTime) mut => VT.GetCacheLastUpdateTime(ref this, out lastUpdateTime);
-			public HRESULT get_pluginName(out BSTR pVal) mut => VT.get_pluginName(ref this, out pVal);
-			public HRESULT get_pluginVersion(out BSTR pVal) mut => VT.get_pluginVersion(ref this, out pVal);
-			public HRESULT ResolveResource(out uint32 resourceType, PWSTR resourceLocation, PWSTR endPointName, PWSTR userID, PWSTR alias) mut => VT.ResolveResource(ref this, out resourceType, resourceLocation, endPointName, userID, alias);
+			public HResult GetResourceList(char16* userID, out int32 pceAppListSize, out pluginResource* resourceList) mut => VT.GetResourceList(ref this, userID, out pceAppListSize, out resourceList);
+			public HResult GetResource(char16* alias, int32 flags, out pluginResource resource) mut => VT.GetResource(ref this, alias, flags, out resource);
+			public HResult GetCacheLastUpdateTime(out uint64 lastUpdateTime) mut => VT.GetCacheLastUpdateTime(ref this, out lastUpdateTime);
+			public HResult get_pluginName(out BSTR pVal) mut => VT.get_pluginName(ref this, out pVal);
+			public HResult get_pluginVersion(out BSTR pVal) mut => VT.get_pluginVersion(ref this, out pVal);
+			public HResult ResolveResource(out uint32 resourceType, char16* resourceLocation, char16* endPointName, char16* userID, char16* alias) mut => VT.ResolveResource(ref this, out resourceType, resourceLocation, endPointName, userID, alias);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin self, PWSTR userID, out int32 pceAppListSize, out pluginResource* resourceList) GetResourceList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin self, PWSTR alias, int32 flags, out pluginResource resource) GetResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin self, out uint64 lastUpdateTime) GetCacheLastUpdateTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin self, out BSTR pVal) get_pluginName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin self, out BSTR pVal) get_pluginVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin self, out uint32 resourceType, PWSTR resourceLocation, PWSTR endPointName, PWSTR userID, PWSTR alias) ResolveResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin self, char16* userID, out int32 pceAppListSize, out pluginResource* resourceList) GetResourceList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin self, char16* alias, int32 flags, out pluginResource resource) GetResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin self, out uint64 lastUpdateTime) GetCacheLastUpdateTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin self, out BSTR pVal) get_pluginName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin self, out BSTR pVal) get_pluginVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin self, out uint32 resourceType, char16* resourceLocation, char16* endPointName, char16* userID, char16* alias) ResolveResource;
 			}
 		}
 		[CRepr]
@@ -3082,18 +3082,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetResource2List(PWSTR userID, out int32 pceAppListSize, out pluginResource2* resourceList) mut => VT.GetResource2List(ref this, userID, out pceAppListSize, out resourceList);
-			public HRESULT GetResource2(PWSTR alias, int32 flags, out pluginResource2 resource) mut => VT.GetResource2(ref this, alias, flags, out resource);
-			public HRESULT ResolvePersonalDesktop(PWSTR userId, PWSTR poolId, TSPUB_PLUGIN_PD_RESOLUTION_TYPE ePdResolutionType, out TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE pPdAssignmentType, PWSTR endPointName) mut => VT.ResolvePersonalDesktop(ref this, userId, poolId, ePdResolutionType, out pPdAssignmentType, endPointName);
-			public HRESULT DeletePersonalDesktopAssignment(PWSTR userId, PWSTR poolId, PWSTR endpointName) mut => VT.DeletePersonalDesktopAssignment(ref this, userId, poolId, endpointName);
+			public HResult GetResource2List(char16* userID, out int32 pceAppListSize, out pluginResource2* resourceList) mut => VT.GetResource2List(ref this, userID, out pceAppListSize, out resourceList);
+			public HResult GetResource2(char16* alias, int32 flags, out pluginResource2 resource) mut => VT.GetResource2(ref this, alias, flags, out resource);
+			public HResult ResolvePersonalDesktop(char16* userId, char16* poolId, TSPUB_PLUGIN_PD_RESOLUTION_TYPE ePdResolutionType, out TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE pPdAssignmentType, char16* endPointName) mut => VT.ResolvePersonalDesktop(ref this, userId, poolId, ePdResolutionType, out pPdAssignmentType, endPointName);
+			public HResult DeletePersonalDesktopAssignment(char16* userId, char16* poolId, char16* endpointName) mut => VT.DeletePersonalDesktopAssignment(ref this, userId, poolId, endpointName);
 
 			[CRepr]
 			public struct VTable : ItsPubPlugin.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin2 self, PWSTR userID, out int32 pceAppListSize, out pluginResource2* resourceList) GetResource2List;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin2 self, PWSTR alias, int32 flags, out pluginResource2 resource) GetResource2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin2 self, PWSTR userId, PWSTR poolId, TSPUB_PLUGIN_PD_RESOLUTION_TYPE ePdResolutionType, out TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE pPdAssignmentType, PWSTR endPointName) ResolvePersonalDesktop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ItsPubPlugin2 self, PWSTR userId, PWSTR poolId, PWSTR endpointName) DeletePersonalDesktopAssignment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin2 self, char16* userID, out int32 pceAppListSize, out pluginResource2* resourceList) GetResource2List;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin2 self, char16* alias, int32 flags, out pluginResource2 resource) GetResource2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin2 self, char16* userId, char16* poolId, TSPUB_PLUGIN_PD_RESOLUTION_TYPE ePdResolutionType, out TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE pPdAssignmentType, char16* endPointName) ResolvePersonalDesktop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ItsPubPlugin2 self, char16* userId, char16* poolId, char16* endpointName) DeletePersonalDesktopAssignment;
 			}
 		}
 		[CRepr]
@@ -3103,20 +3103,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddResourceType(int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) mut => VT.AddResourceType(ref this, fMachineWide, bstrFileExtension, bstrLauncher);
-			public HRESULT DeleteResourceType(int16 fMachineWide, BSTR bstrFileExtension) mut => VT.DeleteResourceType(ref this, fMachineWide, bstrFileExtension);
-			public HRESULT GetRegisteredFileExtensions(int16 fMachineWide, SAFEARRAY** psaFileExtensions) mut => VT.GetRegisteredFileExtensions(ref this, fMachineWide, psaFileExtensions);
-			public HRESULT GetResourceTypeInfo(int16 fMachineWide, BSTR bstrFileExtension, BSTR* pbstrLauncher) mut => VT.GetResourceTypeInfo(ref this, fMachineWide, bstrFileExtension, pbstrLauncher);
-			public HRESULT ModifyResourceType(int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) mut => VT.ModifyResourceType(ref this, fMachineWide, bstrFileExtension, bstrLauncher);
+			public HResult AddResourceType(int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) mut => VT.AddResourceType(ref this, fMachineWide, bstrFileExtension, bstrLauncher);
+			public HResult DeleteResourceType(int16 fMachineWide, BSTR bstrFileExtension) mut => VT.DeleteResourceType(ref this, fMachineWide, bstrFileExtension);
+			public HResult GetRegisteredFileExtensions(int16 fMachineWide, SAFEARRAY** psaFileExtensions) mut => VT.GetRegisteredFileExtensions(ref this, fMachineWide, psaFileExtensions);
+			public HResult GetResourceTypeInfo(int16 fMachineWide, BSTR bstrFileExtension, BSTR* pbstrLauncher) mut => VT.GetResourceTypeInfo(ref this, fMachineWide, bstrFileExtension, pbstrLauncher);
+			public HResult ModifyResourceType(int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) mut => VT.ModifyResourceType(ref this, fMachineWide, bstrFileExtension, bstrLauncher);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) AddResourceType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension) DeleteResourceType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, SAFEARRAY** psaFileExtensions) GetRegisteredFileExtensions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension, BSTR* pbstrLauncher) GetResourceTypeInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) ModifyResourceType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) AddResourceType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension) DeleteResourceType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, SAFEARRAY** psaFileExtensions) GetRegisteredFileExtensions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension, BSTR* pbstrLauncher) GetResourceTypeInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWorkspaceResTypeRegistry self, int16 fMachineWide, BSTR bstrFileExtension, BSTR bstrLauncher) ModifyResourceType;
 			}
 		}
 		[CRepr]
@@ -3126,18 +3126,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(ref IWTSVirtualChannelManager pChannelMgr) mut => VT.Initialize(ref this, ref pChannelMgr);
-			public HRESULT Connected() mut => VT.Connected(ref this);
-			public HRESULT Disconnected(uint32 dwDisconnectCode) mut => VT.Disconnected(ref this, dwDisconnectCode);
-			public HRESULT Terminated() mut => VT.Terminated(ref this);
+			public HResult Initialize(ref IWTSVirtualChannelManager pChannelMgr) mut => VT.Initialize(ref this, ref pChannelMgr);
+			public HResult Connected() mut => VT.Connected(ref this);
+			public HResult Disconnected(uint32 dwDisconnectCode) mut => VT.Disconnected(ref this, dwDisconnectCode);
+			public HResult Terminated() mut => VT.Terminated(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSPlugin self, ref IWTSVirtualChannelManager pChannelMgr) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSPlugin self) Connected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSPlugin self, uint32 dwDisconnectCode) Disconnected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSPlugin self) Terminated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSPlugin self, ref IWTSVirtualChannelManager pChannelMgr) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSPlugin self) Connected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSPlugin self, uint32 dwDisconnectCode) Disconnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSPlugin self) Terminated;
 			}
 		}
 		[CRepr]
@@ -3147,12 +3147,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetConfiguration(out IPropertyBag* ppPropertyBag) mut => VT.GetConfiguration(ref this, out ppPropertyBag);
+			public HResult GetConfiguration(out IPropertyBag* ppPropertyBag) mut => VT.GetConfiguration(ref this, out ppPropertyBag);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSListener self, out IPropertyBag* ppPropertyBag) GetConfiguration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSListener self, out IPropertyBag* ppPropertyBag) GetConfiguration;
 			}
 		}
 		[CRepr]
@@ -3162,12 +3162,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnNewChannelConnection(ref IWTSVirtualChannel pChannel, BSTR data, out BOOL pbAccept, out IWTSVirtualChannelCallback* ppCallback) mut => VT.OnNewChannelConnection(ref this, ref pChannel, data, out pbAccept, out ppCallback);
+			public HResult OnNewChannelConnection(ref IWTSVirtualChannel pChannel, BSTR data, out IntBool pbAccept, out IWTSVirtualChannelCallback* ppCallback) mut => VT.OnNewChannelConnection(ref this, ref pChannel, data, out pbAccept, out ppCallback);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSListenerCallback self, ref IWTSVirtualChannel pChannel, BSTR data, out BOOL pbAccept, out IWTSVirtualChannelCallback* ppCallback) OnNewChannelConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSListenerCallback self, ref IWTSVirtualChannel pChannel, BSTR data, out IntBool pbAccept, out IWTSVirtualChannelCallback* ppCallback) OnNewChannelConnection;
 			}
 		}
 		[CRepr]
@@ -3177,14 +3177,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnDataReceived(uint32 cbSize, uint8* pBuffer) mut => VT.OnDataReceived(ref this, cbSize, pBuffer);
-			public HRESULT OnClose() mut => VT.OnClose(ref this);
+			public HResult OnDataReceived(uint32 cbSize, uint8* pBuffer) mut => VT.OnDataReceived(ref this, cbSize, pBuffer);
+			public HResult OnClose() mut => VT.OnClose(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSVirtualChannelCallback self, uint32 cbSize, uint8* pBuffer) OnDataReceived;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSVirtualChannelCallback self) OnClose;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSVirtualChannelCallback self, uint32 cbSize, uint8* pBuffer) OnDataReceived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSVirtualChannelCallback self) OnClose;
 			}
 		}
 		[CRepr]
@@ -3194,12 +3194,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateListener(in uint8 pszChannelName, uint32 uFlags, ref IWTSListenerCallback pListenerCallback, out IWTSListener* ppListener) mut => VT.CreateListener(ref this, pszChannelName, uFlags, ref pListenerCallback, out ppListener);
+			public HResult CreateListener(in uint8 pszChannelName, uint32 uFlags, ref IWTSListenerCallback pListenerCallback, out IWTSListener* ppListener) mut => VT.CreateListener(ref this, pszChannelName, uFlags, ref pListenerCallback, out ppListener);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSVirtualChannelManager self, in uint8 pszChannelName, uint32 uFlags, ref IWTSListenerCallback pListenerCallback, out IWTSListener* ppListener) CreateListener;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSVirtualChannelManager self, in uint8 pszChannelName, uint32 uFlags, ref IWTSListenerCallback pListenerCallback, out IWTSListener* ppListener) CreateListener;
 			}
 		}
 		[CRepr]
@@ -3209,14 +3209,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Write(uint32 cbSize, uint8* pBuffer, ref IUnknown pReserved) mut => VT.Write(ref this, cbSize, pBuffer, ref pReserved);
-			public HRESULT Close() mut => VT.Close(ref this);
+			public HResult Write(uint32 cbSize, uint8* pBuffer, ref IUnknown pReserved) mut => VT.Write(ref this, cbSize, pBuffer, ref pReserved);
+			public HResult Close() mut => VT.Close(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSVirtualChannel self, uint32 cbSize, uint8* pBuffer, ref IUnknown pReserved) Write;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSVirtualChannel self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSVirtualChannel self, uint32 cbSize, uint8* pBuffer, ref IUnknown pReserved) Write;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSVirtualChannel self) Close;
 			}
 		}
 		[CRepr]
@@ -3226,12 +3226,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetService(Guid ServiceId, out IUnknown* ppunkObject) mut => VT.GetService(ref this, ServiceId, out ppunkObject);
+			public HResult GetService(Guid ServiceId, out IUnknown* ppunkObject) mut => VT.GetService(ref this, ServiceId, out ppunkObject);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSPluginServiceProvider self, Guid ServiceId, out IUnknown* ppunkObject) GetService;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSPluginServiceProvider self, Guid ServiceId, out IUnknown* ppunkObject) GetService;
 			}
 		}
 		[CRepr]
@@ -3241,16 +3241,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Render(Guid imageFormat, uint32 dwWidth, uint32 dwHeight, int32 cbStride, uint32 cbImageBuffer, uint8* pImageBuffer) mut => VT.Render(ref this, imageFormat, dwWidth, dwHeight, cbStride, cbImageBuffer, pImageBuffer);
-			public HRESULT GetRendererStatistics(out BITMAP_RENDERER_STATISTICS pStatistics) mut => VT.GetRendererStatistics(ref this, out pStatistics);
-			public HRESULT RemoveMapping() mut => VT.RemoveMapping(ref this);
+			public HResult Render(Guid imageFormat, uint32 dwWidth, uint32 dwHeight, int32 cbStride, uint32 cbImageBuffer, uint8* pImageBuffer) mut => VT.Render(ref this, imageFormat, dwWidth, dwHeight, cbStride, cbImageBuffer, pImageBuffer);
+			public HResult GetRendererStatistics(out BITMAP_RENDERER_STATISTICS pStatistics) mut => VT.GetRendererStatistics(ref this, out pStatistics);
+			public HResult RemoveMapping() mut => VT.RemoveMapping(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSBitmapRenderer self, Guid imageFormat, uint32 dwWidth, uint32 dwHeight, int32 cbStride, uint32 cbImageBuffer, uint8* pImageBuffer) Render;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSBitmapRenderer self, out BITMAP_RENDERER_STATISTICS pStatistics) GetRendererStatistics;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSBitmapRenderer self) RemoveMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSBitmapRenderer self, Guid imageFormat, uint32 dwWidth, uint32 dwHeight, int32 cbStride, uint32 cbImageBuffer, uint8* pImageBuffer) Render;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSBitmapRenderer self, out BITMAP_RENDERER_STATISTICS pStatistics) GetRendererStatistics;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSBitmapRenderer self) RemoveMapping;
 			}
 		}
 		[CRepr]
@@ -3260,12 +3260,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnTargetSizeChanged(RECT rcNewSize) mut => VT.OnTargetSizeChanged(ref this, rcNewSize);
+			public HResult OnTargetSizeChanged(RectI rcNewSize) mut => VT.OnTargetSizeChanged(ref this, rcNewSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSBitmapRendererCallback self, RECT rcNewSize) OnTargetSizeChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSBitmapRendererCallback self, RectI rcNewSize) OnTargetSizeChanged;
 			}
 		}
 		[CRepr]
@@ -3275,12 +3275,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMappedRenderer(uint64 mappingId, ref IWTSBitmapRendererCallback pMappedRendererCallback, out IWTSBitmapRenderer* ppMappedRenderer) mut => VT.GetMappedRenderer(ref this, mappingId, ref pMappedRendererCallback, out ppMappedRenderer);
+			public HResult GetMappedRenderer(uint64 mappingId, ref IWTSBitmapRendererCallback pMappedRendererCallback, out IWTSBitmapRenderer* ppMappedRenderer) mut => VT.GetMappedRenderer(ref this, mappingId, ref pMappedRendererCallback, out ppMappedRenderer);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSBitmapRenderService self, uint64 mappingId, ref IWTSBitmapRendererCallback pMappedRendererCallback, out IWTSBitmapRenderer* ppMappedRenderer) GetMappedRenderer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSBitmapRenderService self, uint64 mappingId, ref IWTSBitmapRendererCallback pMappedRendererCallback, out IWTSBitmapRenderer* ppMappedRenderer) GetMappedRenderer;
 			}
 		}
 		[CRepr]
@@ -3290,20 +3290,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnDataReceived(uint32 cbSize, ref uint8 pBuffer) mut => VT.OnDataReceived(ref this, cbSize, ref pBuffer);
-			public HRESULT OnClose() mut => VT.OnClose(ref this);
-			public HRESULT OnChannelOpened(HRESULT OpenResult, ref IUnknown pOpenContext) mut => VT.OnChannelOpened(ref this, OpenResult, ref pOpenContext);
-			public HRESULT OnDataSent(ref IUnknown pWriteContext, BOOL bCancelled, ref uint8 pBuffer, uint32 cbBuffer) mut => VT.OnDataSent(ref this, ref pWriteContext, bCancelled, ref pBuffer, cbBuffer);
-			public HRESULT OnMetricsUpdate(uint32 bandwidth, uint32 RTT, uint64 lastSentByteIndex) mut => VT.OnMetricsUpdate(ref this, bandwidth, RTT, lastSentByteIndex);
+			public HResult OnDataReceived(uint32 cbSize, ref uint8 pBuffer) mut => VT.OnDataReceived(ref this, cbSize, ref pBuffer);
+			public HResult OnClose() mut => VT.OnClose(ref this);
+			public HResult OnChannelOpened(HResult OpenResult, ref IUnknown pOpenContext) mut => VT.OnChannelOpened(ref this, OpenResult, ref pOpenContext);
+			public HResult OnDataSent(ref IUnknown pWriteContext, IntBool bCancelled, ref uint8 pBuffer, uint32 cbBuffer) mut => VT.OnDataSent(ref this, ref pWriteContext, bCancelled, ref pBuffer, cbBuffer);
+			public HResult OnMetricsUpdate(uint32 bandwidth, uint32 RTT, uint64 lastSentByteIndex) mut => VT.OnMetricsUpdate(ref this, bandwidth, RTT, lastSentByteIndex);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannelEvents self, uint32 cbSize, ref uint8 pBuffer) OnDataReceived;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannelEvents self) OnClose;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannelEvents self, HRESULT OpenResult, ref IUnknown pOpenContext) OnChannelOpened;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannelEvents self, ref IUnknown pWriteContext, BOOL bCancelled, ref uint8 pBuffer, uint32 cbBuffer) OnDataSent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannelEvents self, uint32 bandwidth, uint32 RTT, uint64 lastSentByteIndex) OnMetricsUpdate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannelEvents self, uint32 cbSize, ref uint8 pBuffer) OnDataReceived;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannelEvents self) OnClose;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannelEvents self, HResult OpenResult, ref IUnknown pOpenContext) OnChannelOpened;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannelEvents self, ref IUnknown pWriteContext, IntBool bCancelled, ref uint8 pBuffer, uint32 cbBuffer) OnDataSent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannelEvents self, uint32 bandwidth, uint32 RTT, uint64 lastSentByteIndex) OnMetricsUpdate;
 			}
 		}
 		[CRepr]
@@ -3313,16 +3313,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Write(uint32 cbSize, ref uint8 pBuffer, ref IUnknown pContext) mut => VT.Write(ref this, cbSize, ref pBuffer, ref pContext);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT Open(ref IWRdsGraphicsChannelEvents pChannelEvents, ref IUnknown pOpenContext) mut => VT.Open(ref this, ref pChannelEvents, ref pOpenContext);
+			public HResult Write(uint32 cbSize, ref uint8 pBuffer, ref IUnknown pContext) mut => VT.Write(ref this, cbSize, ref pBuffer, ref pContext);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult Open(ref IWRdsGraphicsChannelEvents pChannelEvents, ref IUnknown pOpenContext) mut => VT.Open(ref this, ref pChannelEvents, ref pOpenContext);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannel self, uint32 cbSize, ref uint8 pBuffer, ref IUnknown pContext) Write;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannel self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannel self, ref IWRdsGraphicsChannelEvents pChannelEvents, ref IUnknown pOpenContext) Open;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannel self, uint32 cbSize, ref uint8 pBuffer, ref IUnknown pContext) Write;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannel self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannel self, ref IWRdsGraphicsChannelEvents pChannelEvents, ref IUnknown pOpenContext) Open;
 			}
 		}
 		[CRepr]
@@ -3332,12 +3332,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateChannel(in uint8 pszChannelName, WRdsGraphicsChannelType channelType, out IWRdsGraphicsChannel* ppVirtualChannel) mut => VT.CreateChannel(ref this, pszChannelName, channelType, out ppVirtualChannel);
+			public HResult CreateChannel(in uint8 pszChannelName, WRdsGraphicsChannelType channelType, out IWRdsGraphicsChannel* ppVirtualChannel) mut => VT.CreateChannel(ref this, pszChannelName, channelType, out ppVirtualChannel);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsGraphicsChannelManager self, in uint8 pszChannelName, WRdsGraphicsChannelType channelType, out IWRdsGraphicsChannel* ppVirtualChannel) CreateChannel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsGraphicsChannelManager self, in uint8 pszChannelName, WRdsGraphicsChannelType channelType, out IWRdsGraphicsChannel* ppVirtualChannel) CreateChannel;
 			}
 		}
 		[CRepr]
@@ -3347,20 +3347,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateListener(PWSTR wszListenerName, out IWTSProtocolListener* pProtocolListener) mut => VT.CreateListener(ref this, wszListenerName, out pProtocolListener);
-			public HRESULT NotifyServiceStateChange(ref WTS_SERVICE_STATE pTSServiceStateChange) mut => VT.NotifyServiceStateChange(ref this, ref pTSServiceStateChange);
-			public HRESULT NotifySessionOfServiceStart(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStart(ref this, ref SessionId);
-			public HRESULT NotifySessionOfServiceStop(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStop(ref this, ref SessionId);
-			public HRESULT NotifySessionStateChange(ref WTS_SESSION_ID SessionId, uint32 EventId) mut => VT.NotifySessionStateChange(ref this, ref SessionId, EventId);
+			public HResult CreateListener(char16* wszListenerName, out IWTSProtocolListener* pProtocolListener) mut => VT.CreateListener(ref this, wszListenerName, out pProtocolListener);
+			public HResult NotifyServiceStateChange(ref WTS_SERVICE_STATE pTSServiceStateChange) mut => VT.NotifyServiceStateChange(ref this, ref pTSServiceStateChange);
+			public HResult NotifySessionOfServiceStart(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStart(ref this, ref SessionId);
+			public HResult NotifySessionOfServiceStop(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStop(ref this, ref SessionId);
+			public HResult NotifySessionStateChange(ref WTS_SESSION_ID SessionId, uint32 EventId) mut => VT.NotifySessionStateChange(ref this, ref SessionId, EventId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolManager self, PWSTR wszListenerName, out IWTSProtocolListener* pProtocolListener) CreateListener;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolManager self, ref WTS_SERVICE_STATE pTSServiceStateChange) NotifyServiceStateChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolManager self, ref WTS_SESSION_ID SessionId, uint32 EventId) NotifySessionStateChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolManager self, char16* wszListenerName, out IWTSProtocolListener* pProtocolListener) CreateListener;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolManager self, ref WTS_SERVICE_STATE pTSServiceStateChange) NotifyServiceStateChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolManager self, ref WTS_SESSION_ID SessionId, uint32 EventId) NotifySessionStateChange;
 			}
 		}
 		[CRepr]
@@ -3370,14 +3370,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StartListen(ref IWTSProtocolListenerCallback pCallback) mut => VT.StartListen(ref this, ref pCallback);
-			public HRESULT StopListen() mut => VT.StopListen(ref this);
+			public HResult StartListen(ref IWTSProtocolListenerCallback pCallback) mut => VT.StartListen(ref this, ref pCallback);
+			public HResult StopListen() mut => VT.StopListen(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolListener self, ref IWTSProtocolListenerCallback pCallback) StartListen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolListener self) StopListen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolListener self, ref IWTSProtocolListenerCallback pCallback) StartListen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolListener self) StopListen;
 			}
 		}
 		[CRepr]
@@ -3387,12 +3387,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnConnected(ref IWTSProtocolConnection pConnection, out IWTSProtocolConnectionCallback* pCallback) mut => VT.OnConnected(ref this, ref pConnection, out pCallback);
+			public HResult OnConnected(ref IWTSProtocolConnection pConnection, out IWTSProtocolConnectionCallback* pCallback) mut => VT.OnConnected(ref this, ref pConnection, out pCallback);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolListenerCallback self, ref IWTSProtocolConnection pConnection, out IWTSProtocolConnectionCallback* pCallback) OnConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolListenerCallback self, ref IWTSProtocolConnection pConnection, out IWTSProtocolConnectionCallback* pCallback) OnConnected;
 			}
 		}
 		[CRepr]
@@ -3402,56 +3402,56 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetLogonErrorRedirector(out IWTSProtocolLogonErrorRedirector* ppLogonErrorRedir) mut => VT.GetLogonErrorRedirector(ref this, out ppLogonErrorRedir);
-			public HRESULT SendPolicyData(ref WTS_POLICY_DATA pPolicyData) mut => VT.SendPolicyData(ref this, ref pPolicyData);
-			public HRESULT AcceptConnection() mut => VT.AcceptConnection(ref this);
-			public HRESULT GetClientData(out WTS_CLIENT_DATA pClientData) mut => VT.GetClientData(ref this, out pClientData);
-			public HRESULT GetUserCredentials(out WTS_USER_CREDENTIAL pUserCreds) mut => VT.GetUserCredentials(ref this, out pUserCreds);
-			public HRESULT GetLicenseConnection(out IWTSProtocolLicenseConnection* ppLicenseConnection) mut => VT.GetLicenseConnection(ref this, out ppLicenseConnection);
-			public HRESULT AuthenticateClientToSession(out WTS_SESSION_ID SessionId) mut => VT.AuthenticateClientToSession(ref this, out SessionId);
-			public HRESULT NotifySessionId(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionId(ref this, ref SessionId);
-			public HRESULT GetProtocolHandles(out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle, out HANDLE_PTR pVideoHandle) mut => VT.GetProtocolHandles(ref this, out pKeyboardHandle, out pMouseHandle, out pBeepHandle, out pVideoHandle);
-			public HRESULT ConnectNotify(uint32 SessionId) mut => VT.ConnectNotify(ref this, SessionId);
-			public HRESULT IsUserAllowedToLogon(uint32 SessionId, HANDLE_PTR UserToken, PWSTR pDomainName, PWSTR pUserName) mut => VT.IsUserAllowedToLogon(ref this, SessionId, UserToken, pDomainName, pUserName);
-			public HRESULT SessionArbitrationEnumeration(HANDLE_PTR hUserToken, BOOL bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) mut => VT.SessionArbitrationEnumeration(ref this, hUserToken, bSingleSessionPerUserEnabled, pSessionIdArray, out pdwSessionIdentifierCount);
-			public HRESULT LogonNotify(HANDLE_PTR hClientToken, PWSTR wszUserName, PWSTR wszDomainName, ref WTS_SESSION_ID SessionId) mut => VT.LogonNotify(ref this, hClientToken, wszUserName, wszDomainName, ref SessionId);
-			public HRESULT GetUserData(ref WTS_POLICY_DATA pPolicyData, out WTS_USER_DATA pClientData) mut => VT.GetUserData(ref this, ref pPolicyData, out pClientData);
-			public HRESULT DisconnectNotify() mut => VT.DisconnectNotify(ref this);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT GetProtocolStatus(out WTS_PROTOCOL_STATUS pProtocolStatus) mut => VT.GetProtocolStatus(ref this, out pProtocolStatus);
-			public HRESULT GetLastInputTime(out uint64 pLastInputTime) mut => VT.GetLastInputTime(ref this, out pLastInputTime);
-			public HRESULT SetErrorInfo(uint32 ulError) mut => VT.SetErrorInfo(ref this, ulError);
-			public HRESULT SendBeep(uint32 Frequency, uint32 Duration) mut => VT.SendBeep(ref this, Frequency, Duration);
-			public HRESULT CreateVirtualChannel(PSTR szEndpointName, BOOL bStatic, uint32 RequestedPriority, out uint phChannel) mut => VT.CreateVirtualChannel(ref this, szEndpointName, bStatic, RequestedPriority, out phChannel);
-			public HRESULT QueryProperty(Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) mut => VT.QueryProperty(ref this, QueryType, ulNumEntriesIn, ulNumEntriesOut, pPropertyEntriesIn, pPropertyEntriesOut);
-			public HRESULT GetShadowConnection(out IWTSProtocolShadowConnection* ppShadowConnection) mut => VT.GetShadowConnection(ref this, out ppShadowConnection);
+			public HResult GetLogonErrorRedirector(out IWTSProtocolLogonErrorRedirector* ppLogonErrorRedir) mut => VT.GetLogonErrorRedirector(ref this, out ppLogonErrorRedir);
+			public HResult SendPolicyData(ref WTS_POLICY_DATA pPolicyData) mut => VT.SendPolicyData(ref this, ref pPolicyData);
+			public HResult AcceptConnection() mut => VT.AcceptConnection(ref this);
+			public HResult GetClientData(out WTS_CLIENT_DATA pClientData) mut => VT.GetClientData(ref this, out pClientData);
+			public HResult GetUserCredentials(out WTS_USER_CREDENTIAL pUserCreds) mut => VT.GetUserCredentials(ref this, out pUserCreds);
+			public HResult GetLicenseConnection(out IWTSProtocolLicenseConnection* ppLicenseConnection) mut => VT.GetLicenseConnection(ref this, out ppLicenseConnection);
+			public HResult AuthenticateClientToSession(out WTS_SESSION_ID SessionId) mut => VT.AuthenticateClientToSession(ref this, out SessionId);
+			public HResult NotifySessionId(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionId(ref this, ref SessionId);
+			public HResult GetProtocolHandles(out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle, out HANDLE_PTR pVideoHandle) mut => VT.GetProtocolHandles(ref this, out pKeyboardHandle, out pMouseHandle, out pBeepHandle, out pVideoHandle);
+			public HResult ConnectNotify(uint32 SessionId) mut => VT.ConnectNotify(ref this, SessionId);
+			public HResult IsUserAllowedToLogon(uint32 SessionId, HANDLE_PTR UserToken, char16* pDomainName, char16* pUserName) mut => VT.IsUserAllowedToLogon(ref this, SessionId, UserToken, pDomainName, pUserName);
+			public HResult SessionArbitrationEnumeration(HANDLE_PTR hUserToken, IntBool bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) mut => VT.SessionArbitrationEnumeration(ref this, hUserToken, bSingleSessionPerUserEnabled, pSessionIdArray, out pdwSessionIdentifierCount);
+			public HResult LogonNotify(HANDLE_PTR hClientToken, char16* wszUserName, char16* wszDomainName, ref WTS_SESSION_ID SessionId) mut => VT.LogonNotify(ref this, hClientToken, wszUserName, wszDomainName, ref SessionId);
+			public HResult GetUserData(ref WTS_POLICY_DATA pPolicyData, out WTS_USER_DATA pClientData) mut => VT.GetUserData(ref this, ref pPolicyData, out pClientData);
+			public HResult DisconnectNotify() mut => VT.DisconnectNotify(ref this);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult GetProtocolStatus(out WTS_PROTOCOL_STATUS pProtocolStatus) mut => VT.GetProtocolStatus(ref this, out pProtocolStatus);
+			public HResult GetLastInputTime(out uint64 pLastInputTime) mut => VT.GetLastInputTime(ref this, out pLastInputTime);
+			public HResult SetErrorInfo(uint32 ulError) mut => VT.SetErrorInfo(ref this, ulError);
+			public HResult SendBeep(uint32 Frequency, uint32 Duration) mut => VT.SendBeep(ref this, Frequency, Duration);
+			public HResult CreateVirtualChannel(char8* szEndpointName, IntBool bStatic, uint32 RequestedPriority, out uint phChannel) mut => VT.CreateVirtualChannel(ref this, szEndpointName, bStatic, RequestedPriority, out phChannel);
+			public HResult QueryProperty(Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) mut => VT.QueryProperty(ref this, QueryType, ulNumEntriesIn, ulNumEntriesOut, pPropertyEntriesIn, pPropertyEntriesOut);
+			public HResult GetShadowConnection(out IWTSProtocolShadowConnection* ppShadowConnection) mut => VT.GetShadowConnection(ref this, out ppShadowConnection);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out IWTSProtocolLogonErrorRedirector* ppLogonErrorRedir) GetLogonErrorRedirector;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, ref WTS_POLICY_DATA pPolicyData) SendPolicyData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self) AcceptConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out WTS_CLIENT_DATA pClientData) GetClientData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out WTS_USER_CREDENTIAL pUserCreds) GetUserCredentials;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out IWTSProtocolLicenseConnection* ppLicenseConnection) GetLicenseConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out WTS_SESSION_ID SessionId) AuthenticateClientToSession;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, ref WTS_SESSION_ID SessionId) NotifySessionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle, out HANDLE_PTR pVideoHandle) GetProtocolHandles;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, uint32 SessionId) ConnectNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, uint32 SessionId, HANDLE_PTR UserToken, PWSTR pDomainName, PWSTR pUserName) IsUserAllowedToLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, HANDLE_PTR hUserToken, BOOL bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) SessionArbitrationEnumeration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, HANDLE_PTR hClientToken, PWSTR wszUserName, PWSTR wszDomainName, ref WTS_SESSION_ID SessionId) LogonNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, ref WTS_POLICY_DATA pPolicyData, out WTS_USER_DATA pClientData) GetUserData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self) DisconnectNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out WTS_PROTOCOL_STATUS pProtocolStatus) GetProtocolStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out uint64 pLastInputTime) GetLastInputTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, uint32 ulError) SetErrorInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, uint32 Frequency, uint32 Duration) SendBeep;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, PSTR szEndpointName, BOOL bStatic, uint32 RequestedPriority, out uint phChannel) CreateVirtualChannel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) QueryProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnection self, out IWTSProtocolShadowConnection* ppShadowConnection) GetShadowConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out IWTSProtocolLogonErrorRedirector* ppLogonErrorRedir) GetLogonErrorRedirector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, ref WTS_POLICY_DATA pPolicyData) SendPolicyData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self) AcceptConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out WTS_CLIENT_DATA pClientData) GetClientData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out WTS_USER_CREDENTIAL pUserCreds) GetUserCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out IWTSProtocolLicenseConnection* ppLicenseConnection) GetLicenseConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out WTS_SESSION_ID SessionId) AuthenticateClientToSession;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, ref WTS_SESSION_ID SessionId) NotifySessionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle, out HANDLE_PTR pVideoHandle) GetProtocolHandles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, uint32 SessionId) ConnectNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, uint32 SessionId, HANDLE_PTR UserToken, char16* pDomainName, char16* pUserName) IsUserAllowedToLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, HANDLE_PTR hUserToken, IntBool bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) SessionArbitrationEnumeration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, HANDLE_PTR hClientToken, char16* wszUserName, char16* wszDomainName, ref WTS_SESSION_ID SessionId) LogonNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, ref WTS_POLICY_DATA pPolicyData, out WTS_USER_DATA pClientData) GetUserData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self) DisconnectNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out WTS_PROTOCOL_STATUS pProtocolStatus) GetProtocolStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out uint64 pLastInputTime) GetLastInputTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, uint32 ulError) SetErrorInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, uint32 Frequency, uint32 Duration) SendBeep;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, char8* szEndpointName, IntBool bStatic, uint32 RequestedPriority, out uint phChannel) CreateVirtualChannel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) QueryProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnection self, out IWTSProtocolShadowConnection* ppShadowConnection) GetShadowConnection;
 			}
 		}
 		[CRepr]
@@ -3461,20 +3461,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnReady() mut => VT.OnReady(ref this);
-			public HRESULT BrokenConnection(uint32 Reason, uint32 Source) mut => VT.BrokenConnection(ref this, Reason, Source);
-			public HRESULT StopScreenUpdates() mut => VT.StopScreenUpdates(ref this);
-			public HRESULT RedrawWindow(ref WTS_SMALL_RECT rect) mut => VT.RedrawWindow(ref this, ref rect);
-			public HRESULT DisplayIOCtl(ref WTS_DISPLAY_IOCTL DisplayIOCtl) mut => VT.DisplayIOCtl(ref this, ref DisplayIOCtl);
+			public HResult OnReady() mut => VT.OnReady(ref this);
+			public HResult BrokenConnection(uint32 Reason, uint32 Source) mut => VT.BrokenConnection(ref this, Reason, Source);
+			public HResult StopScreenUpdates() mut => VT.StopScreenUpdates(ref this);
+			public HResult RedrawWindow(ref WTS_SMALL_RECT rect) mut => VT.RedrawWindow(ref this, ref rect);
+			public HResult DisplayIOCtl(ref WTS_DISPLAY_IOCTL DisplayIOCtl) mut => VT.DisplayIOCtl(ref this, ref DisplayIOCtl);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnectionCallback self) OnReady;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnectionCallback self, uint32 Reason, uint32 Source) BrokenConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnectionCallback self) StopScreenUpdates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnectionCallback self, ref WTS_SMALL_RECT rect) RedrawWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolConnectionCallback self, ref WTS_DISPLAY_IOCTL DisplayIOCtl) DisplayIOCtl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnectionCallback self) OnReady;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnectionCallback self, uint32 Reason, uint32 Source) BrokenConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnectionCallback self) StopScreenUpdates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnectionCallback self, ref WTS_SMALL_RECT rect) RedrawWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolConnectionCallback self, ref WTS_DISPLAY_IOCTL DisplayIOCtl) DisplayIOCtl;
 			}
 		}
 		[CRepr]
@@ -3484,16 +3484,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Start(PWSTR pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWTSProtocolShadowCallback pShadowCallback) mut => VT.Start(ref this, pTargetServerName, TargetSessionId, HotKeyVk, HotkeyModifiers, ref pShadowCallback);
-			public HRESULT Stop() mut => VT.Stop(ref this);
-			public HRESULT DoTarget(uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) mut => VT.DoTarget(ref this, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
+			public HResult Start(char16* pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWTSProtocolShadowCallback pShadowCallback) mut => VT.Start(ref this, pTargetServerName, TargetSessionId, HotKeyVk, HotkeyModifiers, ref pShadowCallback);
+			public HResult Stop() mut => VT.Stop(ref this);
+			public HResult DoTarget(uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) mut => VT.DoTarget(ref this, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolShadowConnection self, PWSTR pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWTSProtocolShadowCallback pShadowCallback) Start;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolShadowConnection self) Stop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolShadowConnection self, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) DoTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolShadowConnection self, char16* pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWTSProtocolShadowCallback pShadowCallback) Start;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolShadowConnection self) Stop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolShadowConnection self, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) DoTarget;
 			}
 		}
 		[CRepr]
@@ -3503,14 +3503,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StopShadow() mut => VT.StopShadow(ref this);
-			public HRESULT InvokeTargetShadow(PWSTR pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) mut => VT.InvokeTargetShadow(ref this, pTargetServerName, TargetSessionId, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
+			public HResult StopShadow() mut => VT.StopShadow(ref this);
+			public HResult InvokeTargetShadow(char16* pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) mut => VT.InvokeTargetShadow(ref this, pTargetServerName, TargetSessionId, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolShadowCallback self) StopShadow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolShadowCallback self, PWSTR pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) InvokeTargetShadow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolShadowCallback self) StopShadow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolShadowCallback self, char16* pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) InvokeTargetShadow;
 			}
 		}
 		[CRepr]
@@ -3520,18 +3520,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RequestLicensingCapabilities(out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) mut => VT.RequestLicensingCapabilities(ref this, out ppLicenseCapabilities, out pcbLicenseCapabilities);
-			public HRESULT SendClientLicense(uint8* pClientLicense, uint32 cbClientLicense) mut => VT.SendClientLicense(ref this, pClientLicense, cbClientLicense);
-			public HRESULT RequestClientLicense(uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) mut => VT.RequestClientLicense(ref this, Reserve1, Reserve2, ppClientLicense, out pcbClientLicense);
-			public HRESULT ProtocolComplete(uint32 ulComplete) mut => VT.ProtocolComplete(ref this, ulComplete);
+			public HResult RequestLicensingCapabilities(out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) mut => VT.RequestLicensingCapabilities(ref this, out ppLicenseCapabilities, out pcbLicenseCapabilities);
+			public HResult SendClientLicense(uint8* pClientLicense, uint32 cbClientLicense) mut => VT.SendClientLicense(ref this, pClientLicense, cbClientLicense);
+			public HResult RequestClientLicense(uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) mut => VT.RequestClientLicense(ref this, Reserve1, Reserve2, ppClientLicense, out pcbClientLicense);
+			public HResult ProtocolComplete(uint32 ulComplete) mut => VT.ProtocolComplete(ref this, ulComplete);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLicenseConnection self, out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) RequestLicensingCapabilities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLicenseConnection self, uint8* pClientLicense, uint32 cbClientLicense) SendClientLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLicenseConnection self, uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) RequestClientLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLicenseConnection self, uint32 ulComplete) ProtocolComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLicenseConnection self, out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) RequestLicensingCapabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLicenseConnection self, uint8* pClientLicense, uint32 cbClientLicense) SendClientLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLicenseConnection self, uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) RequestClientLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLicenseConnection self, uint32 ulComplete) ProtocolComplete;
 			}
 		}
 		[CRepr]
@@ -3541,18 +3541,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnBeginPainting() mut => VT.OnBeginPainting(ref this);
-			public HRESULT RedirectStatus(PWSTR pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectStatus(ref this, pszMessage, out pResponse);
-			public HRESULT RedirectMessage(PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectMessage(ref this, pszCaption, pszMessage, uType, out pResponse);
-			public HRESULT RedirectLogonError(int32 ntsStatus, int32 ntsSubstatus, PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectLogonError(ref this, ntsStatus, ntsSubstatus, pszCaption, pszMessage, uType, out pResponse);
+			public HResult OnBeginPainting() mut => VT.OnBeginPainting(ref this);
+			public HResult RedirectStatus(char16* pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectStatus(ref this, pszMessage, out pResponse);
+			public HResult RedirectMessage(char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectMessage(ref this, pszCaption, pszMessage, uType, out pResponse);
+			public HResult RedirectLogonError(int32 ntsStatus, int32 ntsSubstatus, char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectLogonError(ref this, ntsStatus, ntsSubstatus, pszCaption, pszMessage, uType, out pResponse);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLogonErrorRedirector self) OnBeginPainting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLogonErrorRedirector self, PWSTR pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLogonErrorRedirector self, PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWTSProtocolLogonErrorRedirector self, int32 ntsStatus, int32 ntsSubstatus, PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectLogonError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLogonErrorRedirector self) OnBeginPainting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLogonErrorRedirector self, char16* pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLogonErrorRedirector self, char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWTSProtocolLogonErrorRedirector self, int32 ntsStatus, int32 ntsSubstatus, char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectLogonError;
 			}
 		}
 		[CRepr]
@@ -3562,14 +3562,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSettings(WRDS_SETTING_TYPE WRdsSettingType, WRDS_SETTING_LEVEL WRdsSettingLevel, out WRDS_SETTINGS pWRdsSettings) mut => VT.GetSettings(ref this, WRdsSettingType, WRdsSettingLevel, out pWRdsSettings);
-			public HRESULT MergeSettings(ref WRDS_SETTINGS pWRdsSettings, WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) mut => VT.MergeSettings(ref this, ref pWRdsSettings, WRdsConnectionSettingLevel, out pWRdsConnectionSettings);
+			public HResult GetSettings(WRDS_SETTING_TYPE WRdsSettingType, WRDS_SETTING_LEVEL WRdsSettingLevel, out WRDS_SETTINGS pWRdsSettings) mut => VT.GetSettings(ref this, WRdsSettingType, WRdsSettingLevel, out pWRdsSettings);
+			public HResult MergeSettings(ref WRDS_SETTINGS pWRdsSettings, WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) mut => VT.MergeSettings(ref this, ref pWRdsSettings, WRdsConnectionSettingLevel, out pWRdsConnectionSettings);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolSettings self, WRDS_SETTING_TYPE WRdsSettingType, WRDS_SETTING_LEVEL WRdsSettingLevel, out WRDS_SETTINGS pWRdsSettings) GetSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolSettings self, ref WRDS_SETTINGS pWRdsSettings, WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) MergeSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolSettings self, WRDS_SETTING_TYPE WRdsSettingType, WRDS_SETTING_LEVEL WRdsSettingLevel, out WRDS_SETTINGS pWRdsSettings) GetSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolSettings self, ref WRDS_SETTINGS pWRdsSettings, WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) MergeSettings;
 			}
 		}
 		[CRepr]
@@ -3579,26 +3579,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Initialize(ref IWRdsProtocolSettings pIWRdsSettings, ref WRDS_SETTINGS pWRdsSettings) mut => VT.Initialize(ref this, ref pIWRdsSettings, ref pWRdsSettings);
-			public HRESULT CreateListener(PWSTR wszListenerName, out IWRdsProtocolListener* pProtocolListener) mut => VT.CreateListener(ref this, wszListenerName, out pProtocolListener);
-			public HRESULT NotifyServiceStateChange(ref WTS_SERVICE_STATE pTSServiceStateChange) mut => VT.NotifyServiceStateChange(ref this, ref pTSServiceStateChange);
-			public HRESULT NotifySessionOfServiceStart(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStart(ref this, ref SessionId);
-			public HRESULT NotifySessionOfServiceStop(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStop(ref this, ref SessionId);
-			public HRESULT NotifySessionStateChange(ref WTS_SESSION_ID SessionId, uint32 EventId) mut => VT.NotifySessionStateChange(ref this, ref SessionId, EventId);
-			public HRESULT NotifySettingsChange(ref WRDS_SETTINGS pWRdsSettings) mut => VT.NotifySettingsChange(ref this, ref pWRdsSettings);
-			public HRESULT Uninitialize() mut => VT.Uninitialize(ref this);
+			public HResult Initialize(ref IWRdsProtocolSettings pIWRdsSettings, ref WRDS_SETTINGS pWRdsSettings) mut => VT.Initialize(ref this, ref pIWRdsSettings, ref pWRdsSettings);
+			public HResult CreateListener(char16* wszListenerName, out IWRdsProtocolListener* pProtocolListener) mut => VT.CreateListener(ref this, wszListenerName, out pProtocolListener);
+			public HResult NotifyServiceStateChange(ref WTS_SERVICE_STATE pTSServiceStateChange) mut => VT.NotifyServiceStateChange(ref this, ref pTSServiceStateChange);
+			public HResult NotifySessionOfServiceStart(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStart(ref this, ref SessionId);
+			public HResult NotifySessionOfServiceStop(ref WTS_SESSION_ID SessionId) mut => VT.NotifySessionOfServiceStop(ref this, ref SessionId);
+			public HResult NotifySessionStateChange(ref WTS_SESSION_ID SessionId, uint32 EventId) mut => VT.NotifySessionStateChange(ref this, ref SessionId, EventId);
+			public HResult NotifySettingsChange(ref WRDS_SETTINGS pWRdsSettings) mut => VT.NotifySettingsChange(ref this, ref pWRdsSettings);
+			public HResult Uninitialize() mut => VT.Uninitialize(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, ref IWRdsProtocolSettings pIWRdsSettings, ref WRDS_SETTINGS pWRdsSettings) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, PWSTR wszListenerName, out IWRdsProtocolListener* pProtocolListener) CreateListener;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, ref WTS_SERVICE_STATE pTSServiceStateChange) NotifyServiceStateChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, ref WTS_SESSION_ID SessionId, uint32 EventId) NotifySessionStateChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self, ref WRDS_SETTINGS pWRdsSettings) NotifySettingsChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolManager self) Uninitialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, ref IWRdsProtocolSettings pIWRdsSettings, ref WRDS_SETTINGS pWRdsSettings) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, char16* wszListenerName, out IWRdsProtocolListener* pProtocolListener) CreateListener;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, ref WTS_SERVICE_STATE pTSServiceStateChange) NotifyServiceStateChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, ref WTS_SESSION_ID SessionId) NotifySessionOfServiceStop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, ref WTS_SESSION_ID SessionId, uint32 EventId) NotifySessionStateChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self, ref WRDS_SETTINGS pWRdsSettings) NotifySettingsChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolManager self) Uninitialize;
 			}
 		}
 		[CRepr]
@@ -3608,16 +3608,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSettings(WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel, out WRDS_LISTENER_SETTINGS pWRdsListenerSettings) mut => VT.GetSettings(ref this, WRdsListenerSettingLevel, out pWRdsListenerSettings);
-			public HRESULT StartListen(ref IWRdsProtocolListenerCallback pCallback) mut => VT.StartListen(ref this, ref pCallback);
-			public HRESULT StopListen() mut => VT.StopListen(ref this);
+			public HResult GetSettings(WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel, out WRDS_LISTENER_SETTINGS pWRdsListenerSettings) mut => VT.GetSettings(ref this, WRdsListenerSettingLevel, out pWRdsListenerSettings);
+			public HResult StartListen(ref IWRdsProtocolListenerCallback pCallback) mut => VT.StartListen(ref this, ref pCallback);
+			public HResult StopListen() mut => VT.StopListen(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolListener self, WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel, out WRDS_LISTENER_SETTINGS pWRdsListenerSettings) GetSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolListener self, ref IWRdsProtocolListenerCallback pCallback) StartListen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolListener self) StopListen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolListener self, WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel, out WRDS_LISTENER_SETTINGS pWRdsListenerSettings) GetSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolListener self, ref IWRdsProtocolListenerCallback pCallback) StartListen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolListener self) StopListen;
 			}
 		}
 		[CRepr]
@@ -3627,12 +3627,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnConnected(ref IWRdsProtocolConnection pConnection, ref WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings, out IWRdsProtocolConnectionCallback* pCallback) mut => VT.OnConnected(ref this, ref pConnection, ref pWRdsConnectionSettings, out pCallback);
+			public HResult OnConnected(ref IWRdsProtocolConnection pConnection, ref WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings, out IWRdsProtocolConnectionCallback* pCallback) mut => VT.OnConnected(ref this, ref pConnection, ref pWRdsConnectionSettings, out pCallback);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolListenerCallback self, ref IWRdsProtocolConnection pConnection, ref WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings, out IWRdsProtocolConnectionCallback* pCallback) OnConnected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolListenerCallback self, ref IWRdsProtocolConnection pConnection, ref WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings, out IWRdsProtocolConnectionCallback* pCallback) OnConnected;
 			}
 		}
 		[CRepr]
@@ -3642,58 +3642,58 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetLogonErrorRedirector(out IWRdsProtocolLogonErrorRedirector* ppLogonErrorRedir) mut => VT.GetLogonErrorRedirector(ref this, out ppLogonErrorRedir);
-			public HRESULT AcceptConnection() mut => VT.AcceptConnection(ref this);
-			public HRESULT GetClientData(out WTS_CLIENT_DATA pClientData) mut => VT.GetClientData(ref this, out pClientData);
-			public HRESULT GetClientMonitorData(out uint32 pNumMonitors, out uint32 pPrimaryMonitor) mut => VT.GetClientMonitorData(ref this, out pNumMonitors, out pPrimaryMonitor);
-			public HRESULT GetUserCredentials(out WTS_USER_CREDENTIAL pUserCreds) mut => VT.GetUserCredentials(ref this, out pUserCreds);
-			public HRESULT GetLicenseConnection(out IWRdsProtocolLicenseConnection* ppLicenseConnection) mut => VT.GetLicenseConnection(ref this, out ppLicenseConnection);
-			public HRESULT AuthenticateClientToSession(out WTS_SESSION_ID SessionId) mut => VT.AuthenticateClientToSession(ref this, out SessionId);
-			public HRESULT NotifySessionId(ref WTS_SESSION_ID SessionId, HANDLE_PTR SessionHandle) mut => VT.NotifySessionId(ref this, ref SessionId, SessionHandle);
-			public HRESULT GetInputHandles(out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle) mut => VT.GetInputHandles(ref this, out pKeyboardHandle, out pMouseHandle, out pBeepHandle);
-			public HRESULT GetVideoHandle(out HANDLE_PTR pVideoHandle) mut => VT.GetVideoHandle(ref this, out pVideoHandle);
-			public HRESULT ConnectNotify(uint32 SessionId) mut => VT.ConnectNotify(ref this, SessionId);
-			public HRESULT IsUserAllowedToLogon(uint32 SessionId, HANDLE_PTR UserToken, PWSTR pDomainName, PWSTR pUserName) mut => VT.IsUserAllowedToLogon(ref this, SessionId, UserToken, pDomainName, pUserName);
-			public HRESULT SessionArbitrationEnumeration(HANDLE_PTR hUserToken, BOOL bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) mut => VT.SessionArbitrationEnumeration(ref this, hUserToken, bSingleSessionPerUserEnabled, pSessionIdArray, out pdwSessionIdentifierCount);
-			public HRESULT LogonNotify(HANDLE_PTR hClientToken, PWSTR wszUserName, PWSTR wszDomainName, ref WTS_SESSION_ID SessionId, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) mut => VT.LogonNotify(ref this, hClientToken, wszUserName, wszDomainName, ref SessionId, out pWRdsConnectionSettings);
-			public HRESULT PreDisconnect(uint32 DisconnectReason) mut => VT.PreDisconnect(ref this, DisconnectReason);
-			public HRESULT DisconnectNotify() mut => VT.DisconnectNotify(ref this);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT GetProtocolStatus(out WTS_PROTOCOL_STATUS pProtocolStatus) mut => VT.GetProtocolStatus(ref this, out pProtocolStatus);
-			public HRESULT GetLastInputTime(out uint64 pLastInputTime) mut => VT.GetLastInputTime(ref this, out pLastInputTime);
-			public HRESULT SetErrorInfo(uint32 ulError) mut => VT.SetErrorInfo(ref this, ulError);
-			public HRESULT CreateVirtualChannel(PSTR szEndpointName, BOOL bStatic, uint32 RequestedPriority, out uint phChannel) mut => VT.CreateVirtualChannel(ref this, szEndpointName, bStatic, RequestedPriority, out phChannel);
-			public HRESULT QueryProperty(Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) mut => VT.QueryProperty(ref this, QueryType, ulNumEntriesIn, ulNumEntriesOut, pPropertyEntriesIn, pPropertyEntriesOut);
-			public HRESULT GetShadowConnection(out IWRdsProtocolShadowConnection* ppShadowConnection) mut => VT.GetShadowConnection(ref this, out ppShadowConnection);
-			public HRESULT NotifyCommandProcessCreated(uint32 SessionId) mut => VT.NotifyCommandProcessCreated(ref this, SessionId);
+			public HResult GetLogonErrorRedirector(out IWRdsProtocolLogonErrorRedirector* ppLogonErrorRedir) mut => VT.GetLogonErrorRedirector(ref this, out ppLogonErrorRedir);
+			public HResult AcceptConnection() mut => VT.AcceptConnection(ref this);
+			public HResult GetClientData(out WTS_CLIENT_DATA pClientData) mut => VT.GetClientData(ref this, out pClientData);
+			public HResult GetClientMonitorData(out uint32 pNumMonitors, out uint32 pPrimaryMonitor) mut => VT.GetClientMonitorData(ref this, out pNumMonitors, out pPrimaryMonitor);
+			public HResult GetUserCredentials(out WTS_USER_CREDENTIAL pUserCreds) mut => VT.GetUserCredentials(ref this, out pUserCreds);
+			public HResult GetLicenseConnection(out IWRdsProtocolLicenseConnection* ppLicenseConnection) mut => VT.GetLicenseConnection(ref this, out ppLicenseConnection);
+			public HResult AuthenticateClientToSession(out WTS_SESSION_ID SessionId) mut => VT.AuthenticateClientToSession(ref this, out SessionId);
+			public HResult NotifySessionId(ref WTS_SESSION_ID SessionId, HANDLE_PTR SessionHandle) mut => VT.NotifySessionId(ref this, ref SessionId, SessionHandle);
+			public HResult GetInputHandles(out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle) mut => VT.GetInputHandles(ref this, out pKeyboardHandle, out pMouseHandle, out pBeepHandle);
+			public HResult GetVideoHandle(out HANDLE_PTR pVideoHandle) mut => VT.GetVideoHandle(ref this, out pVideoHandle);
+			public HResult ConnectNotify(uint32 SessionId) mut => VT.ConnectNotify(ref this, SessionId);
+			public HResult IsUserAllowedToLogon(uint32 SessionId, HANDLE_PTR UserToken, char16* pDomainName, char16* pUserName) mut => VT.IsUserAllowedToLogon(ref this, SessionId, UserToken, pDomainName, pUserName);
+			public HResult SessionArbitrationEnumeration(HANDLE_PTR hUserToken, IntBool bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) mut => VT.SessionArbitrationEnumeration(ref this, hUserToken, bSingleSessionPerUserEnabled, pSessionIdArray, out pdwSessionIdentifierCount);
+			public HResult LogonNotify(HANDLE_PTR hClientToken, char16* wszUserName, char16* wszDomainName, ref WTS_SESSION_ID SessionId, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) mut => VT.LogonNotify(ref this, hClientToken, wszUserName, wszDomainName, ref SessionId, out pWRdsConnectionSettings);
+			public HResult PreDisconnect(uint32 DisconnectReason) mut => VT.PreDisconnect(ref this, DisconnectReason);
+			public HResult DisconnectNotify() mut => VT.DisconnectNotify(ref this);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult GetProtocolStatus(out WTS_PROTOCOL_STATUS pProtocolStatus) mut => VT.GetProtocolStatus(ref this, out pProtocolStatus);
+			public HResult GetLastInputTime(out uint64 pLastInputTime) mut => VT.GetLastInputTime(ref this, out pLastInputTime);
+			public HResult SetErrorInfo(uint32 ulError) mut => VT.SetErrorInfo(ref this, ulError);
+			public HResult CreateVirtualChannel(char8* szEndpointName, IntBool bStatic, uint32 RequestedPriority, out uint phChannel) mut => VT.CreateVirtualChannel(ref this, szEndpointName, bStatic, RequestedPriority, out phChannel);
+			public HResult QueryProperty(Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) mut => VT.QueryProperty(ref this, QueryType, ulNumEntriesIn, ulNumEntriesOut, pPropertyEntriesIn, pPropertyEntriesOut);
+			public HResult GetShadowConnection(out IWRdsProtocolShadowConnection* ppShadowConnection) mut => VT.GetShadowConnection(ref this, out ppShadowConnection);
+			public HResult NotifyCommandProcessCreated(uint32 SessionId) mut => VT.NotifyCommandProcessCreated(ref this, SessionId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out IWRdsProtocolLogonErrorRedirector* ppLogonErrorRedir) GetLogonErrorRedirector;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self) AcceptConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out WTS_CLIENT_DATA pClientData) GetClientData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out uint32 pNumMonitors, out uint32 pPrimaryMonitor) GetClientMonitorData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out WTS_USER_CREDENTIAL pUserCreds) GetUserCredentials;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out IWRdsProtocolLicenseConnection* ppLicenseConnection) GetLicenseConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out WTS_SESSION_ID SessionId) AuthenticateClientToSession;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, ref WTS_SESSION_ID SessionId, HANDLE_PTR SessionHandle) NotifySessionId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle) GetInputHandles;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out HANDLE_PTR pVideoHandle) GetVideoHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, uint32 SessionId) ConnectNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, uint32 SessionId, HANDLE_PTR UserToken, PWSTR pDomainName, PWSTR pUserName) IsUserAllowedToLogon;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, HANDLE_PTR hUserToken, BOOL bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) SessionArbitrationEnumeration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, HANDLE_PTR hClientToken, PWSTR wszUserName, PWSTR wszDomainName, ref WTS_SESSION_ID SessionId, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) LogonNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, uint32 DisconnectReason) PreDisconnect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self) DisconnectNotify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out WTS_PROTOCOL_STATUS pProtocolStatus) GetProtocolStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out uint64 pLastInputTime) GetLastInputTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, uint32 ulError) SetErrorInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, PSTR szEndpointName, BOOL bStatic, uint32 RequestedPriority, out uint phChannel) CreateVirtualChannel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) QueryProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, out IWRdsProtocolShadowConnection* ppShadowConnection) GetShadowConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnection self, uint32 SessionId) NotifyCommandProcessCreated;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out IWRdsProtocolLogonErrorRedirector* ppLogonErrorRedir) GetLogonErrorRedirector;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self) AcceptConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out WTS_CLIENT_DATA pClientData) GetClientData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out uint32 pNumMonitors, out uint32 pPrimaryMonitor) GetClientMonitorData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out WTS_USER_CREDENTIAL pUserCreds) GetUserCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out IWRdsProtocolLicenseConnection* ppLicenseConnection) GetLicenseConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out WTS_SESSION_ID SessionId) AuthenticateClientToSession;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, ref WTS_SESSION_ID SessionId, HANDLE_PTR SessionHandle) NotifySessionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out HANDLE_PTR pKeyboardHandle, out HANDLE_PTR pMouseHandle, out HANDLE_PTR pBeepHandle) GetInputHandles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out HANDLE_PTR pVideoHandle) GetVideoHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, uint32 SessionId) ConnectNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, uint32 SessionId, HANDLE_PTR UserToken, char16* pDomainName, char16* pUserName) IsUserAllowedToLogon;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, HANDLE_PTR hUserToken, IntBool bSingleSessionPerUserEnabled, uint32* pSessionIdArray, out uint32 pdwSessionIdentifierCount) SessionArbitrationEnumeration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, HANDLE_PTR hClientToken, char16* wszUserName, char16* wszDomainName, ref WTS_SESSION_ID SessionId, out WRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) LogonNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, uint32 DisconnectReason) PreDisconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self) DisconnectNotify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out WTS_PROTOCOL_STATUS pProtocolStatus) GetProtocolStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out uint64 pLastInputTime) GetLastInputTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, uint32 ulError) SetErrorInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, char8* szEndpointName, IntBool bStatic, uint32 RequestedPriority, out uint phChannel) CreateVirtualChannel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, Guid QueryType, uint32 ulNumEntriesIn, uint32 ulNumEntriesOut, WTS_PROPERTY_VALUE* pPropertyEntriesIn, WTS_PROPERTY_VALUE* pPropertyEntriesOut) QueryProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, out IWRdsProtocolShadowConnection* ppShadowConnection) GetShadowConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnection self, uint32 SessionId) NotifyCommandProcessCreated;
 			}
 		}
 		[CRepr]
@@ -3703,20 +3703,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnReady() mut => VT.OnReady(ref this);
-			public HRESULT BrokenConnection(uint32 Reason, uint32 Source) mut => VT.BrokenConnection(ref this, Reason, Source);
-			public HRESULT StopScreenUpdates() mut => VT.StopScreenUpdates(ref this);
-			public HRESULT RedrawWindow(ref WTS_SMALL_RECT rect) mut => VT.RedrawWindow(ref this, ref rect);
-			public HRESULT GetConnectionId(out uint32 pConnectionId) mut => VT.GetConnectionId(ref this, out pConnectionId);
+			public HResult OnReady() mut => VT.OnReady(ref this);
+			public HResult BrokenConnection(uint32 Reason, uint32 Source) mut => VT.BrokenConnection(ref this, Reason, Source);
+			public HResult StopScreenUpdates() mut => VT.StopScreenUpdates(ref this);
+			public HResult RedrawWindow(ref WTS_SMALL_RECT rect) mut => VT.RedrawWindow(ref this, ref rect);
+			public HResult GetConnectionId(out uint32 pConnectionId) mut => VT.GetConnectionId(ref this, out pConnectionId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionCallback self) OnReady;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionCallback self, uint32 Reason, uint32 Source) BrokenConnection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionCallback self) StopScreenUpdates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionCallback self, ref WTS_SMALL_RECT rect) RedrawWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionCallback self, out uint32 pConnectionId) GetConnectionId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionCallback self) OnReady;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionCallback self, uint32 Reason, uint32 Source) BrokenConnection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionCallback self) StopScreenUpdates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionCallback self, ref WTS_SMALL_RECT rect) RedrawWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionCallback self, out uint32 pConnectionId) GetConnectionId;
 			}
 		}
 		[CRepr]
@@ -3726,16 +3726,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Start(PWSTR pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWRdsProtocolShadowCallback pShadowCallback) mut => VT.Start(ref this, pTargetServerName, TargetSessionId, HotKeyVk, HotkeyModifiers, ref pShadowCallback);
-			public HRESULT Stop() mut => VT.Stop(ref this);
-			public HRESULT DoTarget(uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) mut => VT.DoTarget(ref this, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
+			public HResult Start(char16* pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWRdsProtocolShadowCallback pShadowCallback) mut => VT.Start(ref this, pTargetServerName, TargetSessionId, HotKeyVk, HotkeyModifiers, ref pShadowCallback);
+			public HResult Stop() mut => VT.Stop(ref this);
+			public HResult DoTarget(uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) mut => VT.DoTarget(ref this, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolShadowConnection self, PWSTR pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWRdsProtocolShadowCallback pShadowCallback) Start;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolShadowConnection self) Stop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolShadowConnection self, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) DoTarget;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolShadowConnection self, char16* pTargetServerName, uint32 TargetSessionId, uint8 HotKeyVk, uint16 HotkeyModifiers, ref IWRdsProtocolShadowCallback pShadowCallback) Start;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolShadowConnection self) Stop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolShadowConnection self, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) DoTarget;
 			}
 		}
 		[CRepr]
@@ -3745,14 +3745,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT StopShadow() mut => VT.StopShadow(ref this);
-			public HRESULT InvokeTargetShadow(PWSTR pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) mut => VT.InvokeTargetShadow(ref this, pTargetServerName, TargetSessionId, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
+			public HResult StopShadow() mut => VT.StopShadow(ref this);
+			public HResult InvokeTargetShadow(char16* pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) mut => VT.InvokeTargetShadow(ref this, pTargetServerName, TargetSessionId, pParam1, Param1Size, pParam2, Param2Size, pParam3, Param3Size, pParam4, Param4Size, pClientName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolShadowCallback self) StopShadow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolShadowCallback self, PWSTR pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, PWSTR pClientName) InvokeTargetShadow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolShadowCallback self) StopShadow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolShadowCallback self, char16* pTargetServerName, uint32 TargetSessionId, uint8* pParam1, uint32 Param1Size, uint8* pParam2, uint32 Param2Size, uint8* pParam3, uint32 Param3Size, uint8* pParam4, uint32 Param4Size, char16* pClientName) InvokeTargetShadow;
 			}
 		}
 		[CRepr]
@@ -3762,18 +3762,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RequestLicensingCapabilities(out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) mut => VT.RequestLicensingCapabilities(ref this, out ppLicenseCapabilities, out pcbLicenseCapabilities);
-			public HRESULT SendClientLicense(uint8* pClientLicense, uint32 cbClientLicense) mut => VT.SendClientLicense(ref this, pClientLicense, cbClientLicense);
-			public HRESULT RequestClientLicense(uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) mut => VT.RequestClientLicense(ref this, Reserve1, Reserve2, ppClientLicense, out pcbClientLicense);
-			public HRESULT ProtocolComplete(uint32 ulComplete) mut => VT.ProtocolComplete(ref this, ulComplete);
+			public HResult RequestLicensingCapabilities(out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) mut => VT.RequestLicensingCapabilities(ref this, out ppLicenseCapabilities, out pcbLicenseCapabilities);
+			public HResult SendClientLicense(uint8* pClientLicense, uint32 cbClientLicense) mut => VT.SendClientLicense(ref this, pClientLicense, cbClientLicense);
+			public HResult RequestClientLicense(uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) mut => VT.RequestClientLicense(ref this, Reserve1, Reserve2, ppClientLicense, out pcbClientLicense);
+			public HResult ProtocolComplete(uint32 ulComplete) mut => VT.ProtocolComplete(ref this, ulComplete);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLicenseConnection self, out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) RequestLicensingCapabilities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLicenseConnection self, uint8* pClientLicense, uint32 cbClientLicense) SendClientLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLicenseConnection self, uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) RequestClientLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLicenseConnection self, uint32 ulComplete) ProtocolComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLicenseConnection self, out WTS_LICENSE_CAPABILITIES ppLicenseCapabilities, out uint32 pcbLicenseCapabilities) RequestLicensingCapabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLicenseConnection self, uint8* pClientLicense, uint32 cbClientLicense) SendClientLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLicenseConnection self, uint8* Reserve1, uint32 Reserve2, uint8* ppClientLicense, out uint32 pcbClientLicense) RequestClientLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLicenseConnection self, uint32 ulComplete) ProtocolComplete;
 			}
 		}
 		[CRepr]
@@ -3783,18 +3783,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnBeginPainting() mut => VT.OnBeginPainting(ref this);
-			public HRESULT RedirectStatus(PWSTR pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectStatus(ref this, pszMessage, out pResponse);
-			public HRESULT RedirectMessage(PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectMessage(ref this, pszCaption, pszMessage, uType, out pResponse);
-			public HRESULT RedirectLogonError(int32 ntsStatus, int32 ntsSubstatus, PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectLogonError(ref this, ntsStatus, ntsSubstatus, pszCaption, pszMessage, uType, out pResponse);
+			public HResult OnBeginPainting() mut => VT.OnBeginPainting(ref this);
+			public HResult RedirectStatus(char16* pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectStatus(ref this, pszMessage, out pResponse);
+			public HResult RedirectMessage(char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectMessage(ref this, pszCaption, pszMessage, uType, out pResponse);
+			public HResult RedirectLogonError(int32 ntsStatus, int32 ntsSubstatus, char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) mut => VT.RedirectLogonError(ref this, ntsStatus, ntsSubstatus, pszCaption, pszMessage, uType, out pResponse);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLogonErrorRedirector self) OnBeginPainting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLogonErrorRedirector self, PWSTR pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLogonErrorRedirector self, PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolLogonErrorRedirector self, int32 ntsStatus, int32 ntsSubstatus, PWSTR pszCaption, PWSTR pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectLogonError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLogonErrorRedirector self) OnBeginPainting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLogonErrorRedirector self, char16* pszMessage, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLogonErrorRedirector self, char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolLogonErrorRedirector self, int32 ntsStatus, int32 ntsSubstatus, char16* pszCaption, char16* pszMessage, uint32 uType, out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE pResponse) RedirectLogonError;
 			}
 		}
 		[CRepr]
@@ -3804,18 +3804,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetHardwareId(char16* pDisplayDriverHardwareId, uint32 Count) mut => VT.GetHardwareId(ref this, pDisplayDriverHardwareId, Count);
-			public HRESULT OnDriverLoad(uint32 SessionId, HANDLE_PTR DriverHandle) mut => VT.OnDriverLoad(ref this, SessionId, DriverHandle);
-			public HRESULT OnDriverUnload(uint32 SessionId) mut => VT.OnDriverUnload(ref this, SessionId);
-			public HRESULT EnableWddmIdd(BOOL Enabled) mut => VT.EnableWddmIdd(ref this, Enabled);
+			public HResult GetHardwareId(char16* pDisplayDriverHardwareId, uint32 Count) mut => VT.GetHardwareId(ref this, pDisplayDriverHardwareId, Count);
+			public HResult OnDriverLoad(uint32 SessionId, HANDLE_PTR DriverHandle) mut => VT.OnDriverLoad(ref this, SessionId, DriverHandle);
+			public HResult OnDriverUnload(uint32 SessionId) mut => VT.OnDriverUnload(ref this, SessionId);
+			public HResult EnableWddmIdd(IntBool Enabled) mut => VT.EnableWddmIdd(ref this, Enabled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsWddmIddProps self, char16* pDisplayDriverHardwareId, uint32 Count) GetHardwareId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsWddmIddProps self, uint32 SessionId, HANDLE_PTR DriverHandle) OnDriverLoad;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsWddmIddProps self, uint32 SessionId) OnDriverUnload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsWddmIddProps self, BOOL Enabled) EnableWddmIdd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsWddmIddProps self, char16* pDisplayDriverHardwareId, uint32 Count) GetHardwareId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsWddmIddProps self, uint32 SessionId, HANDLE_PTR DriverHandle) OnDriverLoad;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsWddmIddProps self, uint32 SessionId) OnDriverUnload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsWddmIddProps self, IntBool Enabled) EnableWddmIdd;
 			}
 		}
 		[CRepr]
@@ -3825,14 +3825,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetConnectionSetting(Guid PropertyID, ref WTS_PROPERTY_VALUE pPropertyEntriesIn) mut => VT.SetConnectionSetting(ref this, PropertyID, ref pPropertyEntriesIn);
-			public HRESULT GetConnectionSetting(Guid PropertyID, out WTS_PROPERTY_VALUE pPropertyEntriesOut) mut => VT.GetConnectionSetting(ref this, PropertyID, out pPropertyEntriesOut);
+			public HResult SetConnectionSetting(Guid PropertyID, ref WTS_PROPERTY_VALUE pPropertyEntriesIn) mut => VT.SetConnectionSetting(ref this, PropertyID, ref pPropertyEntriesIn);
+			public HResult GetConnectionSetting(Guid PropertyID, out WTS_PROPERTY_VALUE pPropertyEntriesOut) mut => VT.GetConnectionSetting(ref this, PropertyID, out pPropertyEntriesOut);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionSettings self, Guid PropertyID, ref WTS_PROPERTY_VALUE pPropertyEntriesIn) SetConnectionSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsProtocolConnectionSettings self, Guid PropertyID, out WTS_PROPERTY_VALUE pPropertyEntriesOut) GetConnectionSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionSettings self, Guid PropertyID, ref WTS_PROPERTY_VALUE pPropertyEntriesIn) SetConnectionSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsProtocolConnectionSettings self, Guid PropertyID, out WTS_PROPERTY_VALUE pPropertyEntriesOut) GetConnectionSetting;
 			}
 		}
 		[CRepr]
@@ -3842,12 +3842,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSessionForEnhancedFastReconnect(ref int32 pSessionIdArray, uint32 dwSessionCount, out int32 pResultSessionId) mut => VT.GetSessionForEnhancedFastReconnect(ref this, ref pSessionIdArray, dwSessionCount, out pResultSessionId);
+			public HResult GetSessionForEnhancedFastReconnect(ref int32 pSessionIdArray, uint32 dwSessionCount, out int32 pResultSessionId) mut => VT.GetSessionForEnhancedFastReconnect(ref this, ref pSessionIdArray, dwSessionCount, out pResultSessionId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWRdsEnhancedFastReconnectArbitrator self, ref int32 pSessionIdArray, uint32 dwSessionCount, out int32 pResultSessionId) GetSessionForEnhancedFastReconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWRdsEnhancedFastReconnectArbitrator self, ref int32 pSessionIdArray, uint32 dwSessionCount, out int32 pResultSessionId) GetSessionForEnhancedFastReconnect;
 			}
 		}
 		[CRepr]
@@ -3857,18 +3857,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ApplySettings(BSTR rdpFileContents) mut => VT.ApplySettings(ref this, rdpFileContents);
-			public HRESULT RetrieveSettings(BSTR* rdpFileContents) mut => VT.RetrieveSettings(ref this, rdpFileContents);
-			public HRESULT GetRdpProperty(BSTR propertyName, out VARIANT value) mut => VT.GetRdpProperty(ref this, propertyName, out value);
-			public HRESULT SetRdpProperty(BSTR propertyName, VARIANT value) mut => VT.SetRdpProperty(ref this, propertyName, value);
+			public HResult ApplySettings(BSTR rdpFileContents) mut => VT.ApplySettings(ref this, rdpFileContents);
+			public HResult RetrieveSettings(BSTR* rdpFileContents) mut => VT.RetrieveSettings(ref this, rdpFileContents);
+			public HResult GetRdpProperty(BSTR propertyName, out VARIANT value) mut => VT.GetRdpProperty(ref this, propertyName, out value);
+			public HResult SetRdpProperty(BSTR propertyName, VARIANT value) mut => VT.SetRdpProperty(ref this, propertyName, value);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientSettings self, BSTR rdpFileContents) ApplySettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientSettings self, BSTR* rdpFileContents) RetrieveSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientSettings self, BSTR propertyName, out VARIANT value) GetRdpProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientSettings self, BSTR propertyName, VARIANT value) SetRdpProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientSettings self, BSTR rdpFileContents) ApplySettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientSettings self, BSTR* rdpFileContents) RetrieveSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientSettings self, BSTR propertyName, out VARIANT value) GetRdpProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientSettings self, BSTR propertyName, VARIANT value) SetRdpProperty;
 			}
 		}
 		[CRepr]
@@ -3878,18 +3878,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SuspendScreenUpdates() mut => VT.SuspendScreenUpdates(ref this);
-			public HRESULT ResumeScreenUpdates() mut => VT.ResumeScreenUpdates(ref this);
-			public HRESULT ExecuteRemoteAction(RemoteActionType remoteAction) mut => VT.ExecuteRemoteAction(ref this, remoteAction);
-			public HRESULT GetSnapshot(SnapshotEncodingType snapshotEncoding, SnapshotFormatType snapshotFormat, uint32 snapshotWidth, uint32 snapshotHeight, BSTR* snapshotData) mut => VT.GetSnapshot(ref this, snapshotEncoding, snapshotFormat, snapshotWidth, snapshotHeight, snapshotData);
+			public HResult SuspendScreenUpdates() mut => VT.SuspendScreenUpdates(ref this);
+			public HResult ResumeScreenUpdates() mut => VT.ResumeScreenUpdates(ref this);
+			public HResult ExecuteRemoteAction(RemoteActionType remoteAction) mut => VT.ExecuteRemoteAction(ref this, remoteAction);
+			public HResult GetSnapshot(SnapshotEncodingType snapshotEncoding, SnapshotFormatType snapshotFormat, uint32 snapshotWidth, uint32 snapshotHeight, BSTR* snapshotData) mut => VT.GetSnapshot(ref this, snapshotEncoding, snapshotFormat, snapshotWidth, snapshotHeight, snapshotData);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientActions self) SuspendScreenUpdates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientActions self) ResumeScreenUpdates;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientActions self, RemoteActionType remoteAction) ExecuteRemoteAction;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientActions self, SnapshotEncodingType snapshotEncoding, SnapshotFormatType snapshotFormat, uint32 snapshotWidth, uint32 snapshotHeight, BSTR* snapshotData) GetSnapshot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientActions self) SuspendScreenUpdates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientActions self) ResumeScreenUpdates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientActions self, RemoteActionType remoteAction) ExecuteRemoteAction;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientActions self, SnapshotEncodingType snapshotEncoding, SnapshotFormatType snapshotFormat, uint32 snapshotWidth, uint32 snapshotHeight, BSTR* snapshotData) GetSnapshot;
 			}
 		}
 		[CRepr]
@@ -3899,22 +3899,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_Enabled(int16 enabled) mut => VT.put_Enabled(ref this, enabled);
-			public HRESULT get_Enabled(out int16 enabled) mut => VT.get_Enabled(ref this, out enabled);
-			public HRESULT put_EventsEnabled(int16 eventsEnabled) mut => VT.put_EventsEnabled(ref this, eventsEnabled);
-			public HRESULT get_EventsEnabled(out int16 eventsEnabled) mut => VT.get_EventsEnabled(ref this, out eventsEnabled);
-			public HRESULT put_PointerSpeed(uint32 pointerSpeed) mut => VT.put_PointerSpeed(ref this, pointerSpeed);
-			public HRESULT get_PointerSpeed(out uint32 pointerSpeed) mut => VT.get_PointerSpeed(ref this, out pointerSpeed);
+			public HResult put_Enabled(int16 enabled) mut => VT.put_Enabled(ref this, enabled);
+			public HResult get_Enabled(out int16 enabled) mut => VT.get_Enabled(ref this, out enabled);
+			public HResult put_EventsEnabled(int16 eventsEnabled) mut => VT.put_EventsEnabled(ref this, eventsEnabled);
+			public HResult get_EventsEnabled(out int16 eventsEnabled) mut => VT.get_EventsEnabled(ref this, out eventsEnabled);
+			public HResult put_PointerSpeed(uint32 pointerSpeed) mut => VT.put_PointerSpeed(ref this, pointerSpeed);
+			public HResult get_PointerSpeed(out uint32 pointerSpeed) mut => VT.get_PointerSpeed(ref this, out pointerSpeed);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientTouchPointer self, int16 enabled) put_Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientTouchPointer self, out int16 enabled) get_Enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientTouchPointer self, int16 eventsEnabled) put_EventsEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientTouchPointer self, out int16 eventsEnabled) get_EventsEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientTouchPointer self, uint32 pointerSpeed) put_PointerSpeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClientTouchPointer self, out uint32 pointerSpeed) get_PointerSpeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientTouchPointer self, int16 enabled) put_Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientTouchPointer self, out int16 enabled) get_Enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientTouchPointer self, int16 eventsEnabled) put_EventsEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientTouchPointer self, out int16 eventsEnabled) get_EventsEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientTouchPointer self, uint32 pointerSpeed) put_PointerSpeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClientTouchPointer self, out uint32 pointerSpeed) get_PointerSpeed;
 			}
 		}
 		[CRepr]
@@ -3924,30 +3924,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Connect() mut => VT.Connect(ref this);
-			public HRESULT Disconnect() mut => VT.Disconnect(ref this);
-			public HRESULT Reconnect(uint32 width, uint32 height) mut => VT.Reconnect(ref this, width, height);
-			public HRESULT get_Settings(IRemoteDesktopClientSettings** settings) mut => VT.get_Settings(ref this, settings);
-			public HRESULT get_Actions(IRemoteDesktopClientActions** actions) mut => VT.get_Actions(ref this, actions);
-			public HRESULT get_TouchPointer(IRemoteDesktopClientTouchPointer** touchPointer) mut => VT.get_TouchPointer(ref this, touchPointer);
-			public HRESULT DeleteSavedCredentials(BSTR serverName) mut => VT.DeleteSavedCredentials(ref this, serverName);
-			public HRESULT UpdateSessionDisplaySettings(uint32 width, uint32 height) mut => VT.UpdateSessionDisplaySettings(ref this, width, height);
-			public HRESULT attachEvent(BSTR eventName, IDispatch* callback) mut => VT.attachEvent(ref this, eventName, callback);
-			public HRESULT detachEvent(BSTR eventName, IDispatch* callback) mut => VT.detachEvent(ref this, eventName, callback);
+			public HResult Connect() mut => VT.Connect(ref this);
+			public HResult Disconnect() mut => VT.Disconnect(ref this);
+			public HResult Reconnect(uint32 width, uint32 height) mut => VT.Reconnect(ref this, width, height);
+			public HResult get_Settings(IRemoteDesktopClientSettings** settings) mut => VT.get_Settings(ref this, settings);
+			public HResult get_Actions(IRemoteDesktopClientActions** actions) mut => VT.get_Actions(ref this, actions);
+			public HResult get_TouchPointer(IRemoteDesktopClientTouchPointer** touchPointer) mut => VT.get_TouchPointer(ref this, touchPointer);
+			public HResult DeleteSavedCredentials(BSTR serverName) mut => VT.DeleteSavedCredentials(ref this, serverName);
+			public HResult UpdateSessionDisplaySettings(uint32 width, uint32 height) mut => VT.UpdateSessionDisplaySettings(ref this, width, height);
+			public HResult attachEvent(BSTR eventName, IDispatch* callback) mut => VT.attachEvent(ref this, eventName, callback);
+			public HResult detachEvent(BSTR eventName, IDispatch* callback) mut => VT.detachEvent(ref this, eventName, callback);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self) Connect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self) Disconnect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, uint32 width, uint32 height) Reconnect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, IRemoteDesktopClientSettings** settings) get_Settings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, IRemoteDesktopClientActions** actions) get_Actions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, IRemoteDesktopClientTouchPointer** touchPointer) get_TouchPointer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, BSTR serverName) DeleteSavedCredentials;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, uint32 width, uint32 height) UpdateSessionDisplaySettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, BSTR eventName, IDispatch* callback) attachEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteDesktopClient self, BSTR eventName, IDispatch* callback) detachEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self) Disconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, uint32 width, uint32 height) Reconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, IRemoteDesktopClientSettings** settings) get_Settings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, IRemoteDesktopClientActions** actions) get_Actions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, IRemoteDesktopClientTouchPointer** touchPointer) get_TouchPointer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, BSTR serverName) DeleteSavedCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, uint32 width, uint32 height) UpdateSessionDisplaySettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, BSTR eventName, IDispatch* callback) attachEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteDesktopClient self, BSTR eventName, IDispatch* callback) detachEvent;
 			}
 		}
 		[CRepr]
@@ -3957,145 +3957,145 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAdditionalInfo(out HSTRING deduplicationId, in Guid riid, void** mapView) mut => VT.GetAdditionalInfo(ref this, out deduplicationId, riid, mapView);
+			public HResult GetAdditionalInfo(out HSTRING deduplicationId, in Guid riid, void** mapView) mut => VT.GetAdditionalInfo(ref this, out deduplicationId, riid, mapView);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteSystemAdditionalInfoProvider self, out HSTRING deduplicationId, in Guid riid, void** mapView) GetAdditionalInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteSystemAdditionalInfoProvider self, out HSTRING deduplicationId, in Guid riid, void** mapView) GetAdditionalInfo;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSStopRemoteControlSession(uint32 LogonId);
+		public static extern IntBool WTSStopRemoteControlSession(uint32 LogonId);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSStartRemoteControlSessionW(PWSTR pTargetServerName, uint32 TargetLogonId, uint8 HotkeyVk, uint16 HotkeyModifiers);
+		public static extern IntBool WTSStartRemoteControlSessionW(char16* pTargetServerName, uint32 TargetLogonId, uint8 HotkeyVk, uint16 HotkeyModifiers);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSStartRemoteControlSessionA(PSTR pTargetServerName, uint32 TargetLogonId, uint8 HotkeyVk, uint16 HotkeyModifiers);
+		public static extern IntBool WTSStartRemoteControlSessionA(char8* pTargetServerName, uint32 TargetLogonId, uint8 HotkeyVk, uint16 HotkeyModifiers);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSConnectSessionA(uint32 LogonId, uint32 TargetLogonId, PSTR pPassword, BOOL bWait);
+		public static extern IntBool WTSConnectSessionA(uint32 LogonId, uint32 TargetLogonId, char8* pPassword, IntBool bWait);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSConnectSessionW(uint32 LogonId, uint32 TargetLogonId, PWSTR pPassword, BOOL bWait);
+		public static extern IntBool WTSConnectSessionW(uint32 LogonId, uint32 TargetLogonId, char16* pPassword, IntBool bWait);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateServersW(PWSTR pDomainName, uint32 Reserved, uint32 Version, out WTS_SERVER_INFOW* ppServerInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateServersW(char16* pDomainName, uint32 Reserved, uint32 Version, out WTS_SERVER_INFOW* ppServerInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateServersA(PSTR pDomainName, uint32 Reserved, uint32 Version, out WTS_SERVER_INFOA* ppServerInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateServersA(char8* pDomainName, uint32 Reserved, uint32 Version, out WTS_SERVER_INFOA* ppServerInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE WTSOpenServerW(PWSTR pServerName);
+		public static extern Handle WTSOpenServerW(char16* pServerName);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE WTSOpenServerA(PSTR pServerName);
+		public static extern Handle WTSOpenServerA(char8* pServerName);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE WTSOpenServerExW(PWSTR pServerName);
+		public static extern Handle WTSOpenServerExW(char16* pServerName);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE WTSOpenServerExA(PSTR pServerName);
+		public static extern Handle WTSOpenServerExA(char8* pServerName);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void WTSCloseServer(HANDLE hServer);
+		public static extern void WTSCloseServer(Handle hServer);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateSessionsW(HANDLE hServer, uint32 Reserved, uint32 Version, out WTS_SESSION_INFOW* ppSessionInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateSessionsW(Handle hServer, uint32 Reserved, uint32 Version, out WTS_SESSION_INFOW* ppSessionInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateSessionsA(HANDLE hServer, uint32 Reserved, uint32 Version, out WTS_SESSION_INFOA* ppSessionInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateSessionsA(Handle hServer, uint32 Reserved, uint32 Version, out WTS_SESSION_INFOA* ppSessionInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateSessionsExW(HANDLE hServer, out uint32 pLevel, uint32 Filter, out WTS_SESSION_INFO_1W* ppSessionInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateSessionsExW(Handle hServer, out uint32 pLevel, uint32 Filter, out WTS_SESSION_INFO_1W* ppSessionInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateSessionsExA(HANDLE hServer, out uint32 pLevel, uint32 Filter, out WTS_SESSION_INFO_1A* ppSessionInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateSessionsExA(Handle hServer, out uint32 pLevel, uint32 Filter, out WTS_SESSION_INFO_1A* ppSessionInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateProcessesW(HANDLE hServer, uint32 Reserved, uint32 Version, out WTS_PROCESS_INFOW* ppProcessInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateProcessesW(Handle hServer, uint32 Reserved, uint32 Version, out WTS_PROCESS_INFOW* ppProcessInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateProcessesA(HANDLE hServer, uint32 Reserved, uint32 Version, out WTS_PROCESS_INFOA* ppProcessInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateProcessesA(Handle hServer, uint32 Reserved, uint32 Version, out WTS_PROCESS_INFOA* ppProcessInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSTerminateProcess(HANDLE hServer, uint32 ProcessId, uint32 ExitCode);
+		public static extern IntBool WTSTerminateProcess(Handle hServer, uint32 ProcessId, uint32 ExitCode);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQuerySessionInformationW(HANDLE hServer, uint32 SessionId, WTS_INFO_CLASS WTSInfoClass, out PWSTR ppBuffer, out uint32 pBytesReturned);
+		public static extern IntBool WTSQuerySessionInformationW(Handle hServer, uint32 SessionId, WTS_INFO_CLASS WTSInfoClass, out char16* ppBuffer, out uint32 pBytesReturned);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQuerySessionInformationA(HANDLE hServer, uint32 SessionId, WTS_INFO_CLASS WTSInfoClass, out PSTR ppBuffer, out uint32 pBytesReturned);
+		public static extern IntBool WTSQuerySessionInformationA(Handle hServer, uint32 SessionId, WTS_INFO_CLASS WTSInfoClass, out char8* ppBuffer, out uint32 pBytesReturned);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQueryUserConfigW(PWSTR pServerName, PWSTR pUserName, WTS_CONFIG_CLASS WTSConfigClass, out PWSTR ppBuffer, out uint32 pBytesReturned);
+		public static extern IntBool WTSQueryUserConfigW(char16* pServerName, char16* pUserName, WTS_CONFIG_CLASS WTSConfigClass, out char16* ppBuffer, out uint32 pBytesReturned);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQueryUserConfigA(PSTR pServerName, PSTR pUserName, WTS_CONFIG_CLASS WTSConfigClass, out PSTR ppBuffer, out uint32 pBytesReturned);
+		public static extern IntBool WTSQueryUserConfigA(char8* pServerName, char8* pUserName, WTS_CONFIG_CLASS WTSConfigClass, out char8* ppBuffer, out uint32 pBytesReturned);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSSetUserConfigW(PWSTR pServerName, PWSTR pUserName, WTS_CONFIG_CLASS WTSConfigClass, PWSTR pBuffer, uint32 DataLength);
+		public static extern IntBool WTSSetUserConfigW(char16* pServerName, char16* pUserName, WTS_CONFIG_CLASS WTSConfigClass, char16* pBuffer, uint32 DataLength);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSSetUserConfigA(PSTR pServerName, PSTR pUserName, WTS_CONFIG_CLASS WTSConfigClass, PSTR pBuffer, uint32 DataLength);
+		public static extern IntBool WTSSetUserConfigA(char8* pServerName, char8* pUserName, WTS_CONFIG_CLASS WTSConfigClass, char8* pBuffer, uint32 DataLength);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSSendMessageW(HANDLE hServer, uint32 SessionId, PWSTR pTitle, uint32 TitleLength, PWSTR pMessage, uint32 MessageLength, MESSAGEBOX_STYLE Style, uint32 Timeout, out MESSAGEBOX_RESULT pResponse, BOOL bWait);
+		public static extern IntBool WTSSendMessageW(Handle hServer, uint32 SessionId, char16* pTitle, uint32 TitleLength, char16* pMessage, uint32 MessageLength, MESSAGEBOX_STYLE Style, uint32 Timeout, out MESSAGEBOX_RESULT pResponse, IntBool bWait);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSSendMessageA(HANDLE hServer, uint32 SessionId, PSTR pTitle, uint32 TitleLength, PSTR pMessage, uint32 MessageLength, MESSAGEBOX_STYLE Style, uint32 Timeout, out MESSAGEBOX_RESULT pResponse, BOOL bWait);
+		public static extern IntBool WTSSendMessageA(Handle hServer, uint32 SessionId, char8* pTitle, uint32 TitleLength, char8* pMessage, uint32 MessageLength, MESSAGEBOX_STYLE Style, uint32 Timeout, out MESSAGEBOX_RESULT pResponse, IntBool bWait);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSDisconnectSession(HANDLE hServer, uint32 SessionId, BOOL bWait);
+		public static extern IntBool WTSDisconnectSession(Handle hServer, uint32 SessionId, IntBool bWait);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSLogoffSession(HANDLE hServer, uint32 SessionId, BOOL bWait);
+		public static extern IntBool WTSLogoffSession(Handle hServer, uint32 SessionId, IntBool bWait);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSShutdownSystem(HANDLE hServer, uint32 ShutdownFlag);
+		public static extern IntBool WTSShutdownSystem(Handle hServer, uint32 ShutdownFlag);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSWaitSystemEvent(HANDLE hServer, uint32 EventMask, out uint32 pEventFlags);
+		public static extern IntBool WTSWaitSystemEvent(Handle hServer, uint32 EventMask, out uint32 pEventFlags);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HwtsVirtualChannelHandle WTSVirtualChannelOpen(HANDLE hServer, uint32 SessionId, PSTR pVirtualName);
+		public static extern HwtsVirtualChannelHandle WTSVirtualChannelOpen(Handle hServer, uint32 SessionId, char8* pVirtualName);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HwtsVirtualChannelHandle WTSVirtualChannelOpenEx(uint32 SessionId, PSTR pVirtualName, uint32 flags);
+		public static extern HwtsVirtualChannelHandle WTSVirtualChannelOpenEx(uint32 SessionId, char8* pVirtualName, uint32 flags);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSVirtualChannelClose(HANDLE hChannelHandle);
+		public static extern IntBool WTSVirtualChannelClose(Handle hChannelHandle);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSVirtualChannelRead(HANDLE hChannelHandle, uint32 TimeOut, PSTR Buffer, uint32 BufferSize, out uint32 pBytesRead);
+		public static extern IntBool WTSVirtualChannelRead(Handle hChannelHandle, uint32 TimeOut, char8* Buffer, uint32 BufferSize, out uint32 pBytesRead);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSVirtualChannelWrite(HANDLE hChannelHandle, PSTR Buffer, uint32 Length, out uint32 pBytesWritten);
+		public static extern IntBool WTSVirtualChannelWrite(Handle hChannelHandle, char8* Buffer, uint32 Length, out uint32 pBytesWritten);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSVirtualChannelPurgeInput(HANDLE hChannelHandle);
+		public static extern IntBool WTSVirtualChannelPurgeInput(Handle hChannelHandle);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSVirtualChannelPurgeOutput(HANDLE hChannelHandle);
+		public static extern IntBool WTSVirtualChannelPurgeOutput(Handle hChannelHandle);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSVirtualChannelQuery(HANDLE hChannelHandle, WTS_VIRTUAL_CLASS param1, void** ppBuffer, out uint32 pBytesReturned);
+		public static extern IntBool WTSVirtualChannelQuery(Handle hChannelHandle, WTS_VIRTUAL_CLASS param1, void** ppBuffer, out uint32 pBytesReturned);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WTSFreeMemory(void* pMemory);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSRegisterSessionNotification(HWND hWnd, uint32 dwFlags);
+		public static extern IntBool WTSRegisterSessionNotification(HWnd hWnd, uint32 dwFlags);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSUnRegisterSessionNotification(HWND hWnd);
+		public static extern IntBool WTSUnRegisterSessionNotification(HWnd hWnd);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSRegisterSessionNotificationEx(HANDLE hServer, HWND hWnd, uint32 dwFlags);
+		public static extern IntBool WTSRegisterSessionNotificationEx(Handle hServer, HWnd hWnd, uint32 dwFlags);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSUnRegisterSessionNotificationEx(HANDLE hServer, HWND hWnd);
+		public static extern IntBool WTSUnRegisterSessionNotificationEx(Handle hServer, HWnd hWnd);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQueryUserToken(uint32 SessionId, out HANDLE phToken);
+		public static extern IntBool WTSQueryUserToken(uint32 SessionId, out Handle phToken);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSFreeMemoryExW(WTS_TYPE_CLASS WTSTypeClass, void* pMemory, uint32 NumberOfEntries);
+		public static extern IntBool WTSFreeMemoryExW(WTS_TYPE_CLASS WTSTypeClass, void* pMemory, uint32 NumberOfEntries);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSFreeMemoryExA(WTS_TYPE_CLASS WTSTypeClass, void* pMemory, uint32 NumberOfEntries);
+		public static extern IntBool WTSFreeMemoryExA(WTS_TYPE_CLASS WTSTypeClass, void* pMemory, uint32 NumberOfEntries);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateProcessesExW(HANDLE hServer, out uint32 pLevel, uint32 SessionId, out PWSTR ppProcessInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateProcessesExW(Handle hServer, out uint32 pLevel, uint32 SessionId, out char16* ppProcessInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateProcessesExA(HANDLE hServer, out uint32 pLevel, uint32 SessionId, out PSTR ppProcessInfo, out uint32 pCount);
+		public static extern IntBool WTSEnumerateProcessesExA(Handle hServer, out uint32 pLevel, uint32 SessionId, out char8* ppProcessInfo, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateListenersW(HANDLE hServer, void* pReserved, uint32 Reserved, uint16** pListeners, out uint32 pCount);
+		public static extern IntBool WTSEnumerateListenersW(Handle hServer, void* pReserved, uint32 Reserved, uint16** pListeners, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnumerateListenersA(HANDLE hServer, void* pReserved, uint32 Reserved, int8** pListeners, out uint32 pCount);
+		public static extern IntBool WTSEnumerateListenersA(Handle hServer, void* pReserved, uint32 Reserved, int8** pListeners, out uint32 pCount);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQueryListenerConfigW(HANDLE hServer, void* pReserved, uint32 Reserved, PWSTR pListenerName, out WTSLISTENERCONFIGW pBuffer);
+		public static extern IntBool WTSQueryListenerConfigW(Handle hServer, void* pReserved, uint32 Reserved, char16* pListenerName, out WTSLISTENERCONFIGW pBuffer);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSQueryListenerConfigA(HANDLE hServer, void* pReserved, uint32 Reserved, PSTR pListenerName, out WTSLISTENERCONFIGA pBuffer);
+		public static extern IntBool WTSQueryListenerConfigA(Handle hServer, void* pReserved, uint32 Reserved, char8* pListenerName, out WTSLISTENERCONFIGA pBuffer);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSCreateListenerW(HANDLE hServer, void* pReserved, uint32 Reserved, PWSTR pListenerName, ref WTSLISTENERCONFIGW pBuffer, uint32 flag);
+		public static extern IntBool WTSCreateListenerW(Handle hServer, void* pReserved, uint32 Reserved, char16* pListenerName, ref WTSLISTENERCONFIGW pBuffer, uint32 flag);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSCreateListenerA(HANDLE hServer, void* pReserved, uint32 Reserved, PSTR pListenerName, ref WTSLISTENERCONFIGA pBuffer, uint32 flag);
+		public static extern IntBool WTSCreateListenerA(Handle hServer, void* pReserved, uint32 Reserved, char8* pListenerName, ref WTSLISTENERCONFIGA pBuffer, uint32 flag);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSSetListenerSecurityW(HANDLE hServer, void* pReserved, uint32 Reserved, PWSTR pListenerName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
+		public static extern IntBool WTSSetListenerSecurityW(Handle hServer, void* pReserved, uint32 Reserved, char16* pListenerName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSSetListenerSecurityA(HANDLE hServer, void* pReserved, uint32 Reserved, PSTR pListenerName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
+		public static extern IntBool WTSSetListenerSecurityA(Handle hServer, void* pReserved, uint32 Reserved, char8* pListenerName, uint32 SecurityInformation, ref SECURITY_DESCRIPTOR pSecurityDescriptor);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSGetListenerSecurityW(HANDLE hServer, void* pReserved, uint32 Reserved, PWSTR pListenerName, uint32 SecurityInformation, SECURITY_DESCRIPTOR* pSecurityDescriptor, uint32 nLength, out uint32 lpnLengthNeeded);
+		public static extern IntBool WTSGetListenerSecurityW(Handle hServer, void* pReserved, uint32 Reserved, char16* pListenerName, uint32 SecurityInformation, SECURITY_DESCRIPTOR* pSecurityDescriptor, uint32 nLength, out uint32 lpnLengthNeeded);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSGetListenerSecurityA(HANDLE hServer, void* pReserved, uint32 Reserved, PSTR pListenerName, uint32 SecurityInformation, SECURITY_DESCRIPTOR* pSecurityDescriptor, uint32 nLength, out uint32 lpnLengthNeeded);
+		public static extern IntBool WTSGetListenerSecurityA(Handle hServer, void* pReserved, uint32 Reserved, char8* pListenerName, uint32 SecurityInformation, SECURITY_DESCRIPTOR* pSecurityDescriptor, uint32 nLength, out uint32 lpnLengthNeeded);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSEnableChildSessions(BOOL bEnable);
+		public static extern IntBool WTSEnableChildSessions(IntBool bEnable);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSIsChildSessionsEnabled(out BOOL pbEnabled);
+		public static extern IntBool WTSIsChildSessionsEnabled(out IntBool pbEnabled);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WTSGetChildSessionId(out uint32 pSessionId);
+		public static extern IntBool WTSGetChildSessionId(out uint32 pSessionId);
 		[Import("wtsapi32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WTSSetRenderHint(out uint64 pRenderHintID, HWND hwndOwner, uint32 renderHintType, uint32 cbHintDataLength, uint8* pHintData);
+		public static extern HResult WTSSetRenderHint(out uint64 pRenderHintID, HWnd hwndOwner, uint32 renderHintType, uint32 cbHintDataLength, uint8* pHintData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ProcessIdToSessionId(uint32 dwProcessId, out uint32 pSessionId);
+		public static extern IntBool ProcessIdToSessionId(uint32 dwProcessId, out uint32 pSessionId);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WTSGetActiveConsoleSessionId();
 	}

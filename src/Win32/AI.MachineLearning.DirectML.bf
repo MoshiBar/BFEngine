@@ -792,7 +792,7 @@ namespace Win32
 			public uint32* WindowSize;
 			public uint32* StartPadding;
 			public uint32* EndPadding;
-			public BOOL IncludePadding;
+			public IntBool IncludePadding;
 		}
 		[CRepr]
 		public struct DML_LP_POOLING_OPERATOR_DESC
@@ -935,7 +935,7 @@ namespace Win32
 			public DML_TENSOR_DESC* ScaleTensor;
 			public DML_TENSOR_DESC* BiasTensor;
 			public DML_TENSOR_DESC* OutputTensor;
-			public BOOL Spatial;
+			public IntBool Spatial;
 			public float Epsilon;
 			public DML_OPERATOR_DESC* FusedActivation;
 		}
@@ -946,8 +946,8 @@ namespace Win32
 			public DML_TENSOR_DESC* ScaleTensor;
 			public DML_TENSOR_DESC* BiasTensor;
 			public DML_TENSOR_DESC* OutputTensor;
-			public BOOL CrossChannel;
-			public BOOL NormalizeVariance;
+			public IntBool CrossChannel;
+			public IntBool NormalizeVariance;
 			public float Epsilon;
 			public DML_OPERATOR_DESC* FusedActivation;
 		}
@@ -956,7 +956,7 @@ namespace Win32
 		{
 			public DML_TENSOR_DESC* InputTensor;
 			public DML_TENSOR_DESC* OutputTensor;
-			public BOOL CrossChannel;
+			public IntBool CrossChannel;
 			public uint32 LocalSize;
 			public float Alpha;
 			public float Beta;
@@ -1004,8 +1004,8 @@ namespace Win32
 			public DML_OPERATOR_DESC* ActivationDescs;
 			public DML_RECURRENT_NETWORK_DIRECTION Direction;
 			public float ClipThreshold;
-			public BOOL UseClipThreshold;
-			public BOOL CoupleInputForget;
+			public IntBool UseClipThreshold;
+			public IntBool CoupleInputForget;
 		}
 		[CRepr]
 		public struct DML_GRU_OPERATOR_DESC
@@ -1021,7 +1021,7 @@ namespace Win32
 			public uint32 ActivationDescCount;
 			public DML_OPERATOR_DESC* ActivationDescs;
 			public DML_RECURRENT_NETWORK_DIRECTION Direction;
-			public BOOL LinearBeforeReset;
+			public IntBool LinearBeforeReset;
 		}
 		[CRepr]
 		public struct DML_ELEMENT_WISE_SIGN_OPERATOR_DESC
@@ -1216,7 +1216,7 @@ namespace Win32
 			public DML_TENSOR_DESC* OutputTensor;
 			public uint32 Axis;
 			public DML_AXIS_DIRECTION AxisDirection;
-			public BOOL HasExclusiveSum;
+			public IntBool HasExclusiveSum;
 		}
 		[CRepr]
 		public struct DML_REVERSE_SUBSEQUENCES_OPERATOR_DESC
@@ -1311,7 +1311,7 @@ namespace Win32
 			public DML_TENSOR_DESC* OutputTensor;
 			public uint32 AxisCount;
 			public uint32* Axes;
-			public BOOL NormalizeVariance;
+			public IntBool NormalizeVariance;
 			public float Epsilon;
 			public DML_OPERATOR_DESC* FusedActivation;
 		}
@@ -1454,7 +1454,7 @@ namespace Win32
 			public uint32* WindowSize;
 			public uint32* StartPadding;
 			public uint32* EndPadding;
-			public BOOL IncludePadding;
+			public IntBool IncludePadding;
 		}
 		[CRepr]
 		public struct DML_MAX_POOLING_GRAD_OPERATOR_DESC
@@ -1593,7 +1593,7 @@ namespace Win32
 			public DML_TENSOR_DESC* InputTensor;
 			public DML_TENSOR_DESC* InputGradientTensor;
 			public DML_TENSOR_DESC* OutputGradientTensor;
-			public BOOL CrossChannel;
+			public IntBool CrossChannel;
 			public uint32 LocalSize;
 			public float Alpha;
 			public float Beta;
@@ -1606,7 +1606,7 @@ namespace Win32
 			public DML_TENSOR_DESC* OutputTensor;
 			public uint32 Axis;
 			public DML_AXIS_DIRECTION AxisDirection;
-			public BOOL HasExclusiveProduct;
+			public IntBool HasExclusiveProduct;
 		}
 		[CRepr]
 		public struct DML_BATCH_NORMALIZATION_GRAD_OPERATOR_DESC
@@ -1658,7 +1658,7 @@ namespace Win32
 			public float OutOfBoundsInputValue;
 			public uint32 MinimumSamplesPerOutput;
 			public uint32 MaximumSamplesPerOutput;
-			public BOOL AlignRegionsToCorners;
+			public IntBool AlignRegionsToCorners;
 		}
 		[CRepr]
 		public struct DML_FEATURE_QUERY_TENSOR_DATA_TYPE_SUPPORT
@@ -1668,7 +1668,7 @@ namespace Win32
 		[CRepr]
 		public struct DML_FEATURE_DATA_TENSOR_DATA_TYPE_SUPPORT
 		{
-			public BOOL IsSupported;
+			public IntBool IsSupported;
 		}
 		[CRepr]
 		public struct DML_FEATURE_QUERY_FEATURE_LEVELS
@@ -1727,7 +1727,7 @@ namespace Win32
 			public uint32 GraphInputIndex;
 			public uint32 ToNodeIndex;
 			public uint32 ToNodeInputIndex;
-			public PSTR Name;
+			public char8* Name;
 		}
 		[CRepr]
 		public struct DML_OUTPUT_GRAPH_EDGE_DESC
@@ -1735,7 +1735,7 @@ namespace Win32
 			public uint32 FromNodeIndex;
 			public uint32 FromNodeOutputIndex;
 			public uint32 GraphOutputIndex;
-			public PSTR Name;
+			public char8* Name;
 		}
 		[CRepr]
 		public struct DML_INTERMEDIATE_GRAPH_EDGE_DESC
@@ -1744,7 +1744,7 @@ namespace Win32
 			public uint32 FromNodeOutputIndex;
 			public uint32 ToNodeIndex;
 			public uint32 ToNodeInputIndex;
-			public PSTR Name;
+			public char8* Name;
 		}
 		[CRepr]
 		public struct DML_GRAPH_NODE_DESC
@@ -1756,7 +1756,7 @@ namespace Win32
 		public struct DML_OPERATOR_GRAPH_NODE_DESC
 		{
 			public IDMLOperator* Operator;
-			public PSTR Name;
+			public char8* Name;
 		}
 		[CRepr]
 		public struct DML_GRAPH_DESC
@@ -1782,18 +1782,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPrivateData(in Guid guid, out uint32 dataSize, void* data) mut => VT.GetPrivateData(ref this, guid, out dataSize, data);
-			public HRESULT SetPrivateData(in Guid guid, uint32 dataSize, void* data) mut => VT.SetPrivateData(ref this, guid, dataSize, data);
-			public HRESULT SetPrivateDataInterface(in Guid guid, IUnknown* data) mut => VT.SetPrivateDataInterface(ref this, guid, data);
-			public HRESULT SetName(PWSTR name) mut => VT.SetName(ref this, name);
+			public HResult GetPrivateData(in Guid guid, out uint32 dataSize, void* data) mut => VT.GetPrivateData(ref this, guid, out dataSize, data);
+			public HResult SetPrivateData(in Guid guid, uint32 dataSize, void* data) mut => VT.SetPrivateData(ref this, guid, dataSize, data);
+			public HResult SetPrivateDataInterface(in Guid guid, IUnknown* data) mut => VT.SetPrivateDataInterface(ref this, guid, data);
+			public HResult SetName(char16* name) mut => VT.SetName(ref this, name);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLObject self, in Guid guid, out uint32 dataSize, void* data) GetPrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLObject self, in Guid guid, uint32 dataSize, void* data) SetPrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLObject self, in Guid guid, IUnknown* data) SetPrivateDataInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLObject self, PWSTR name) SetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLObject self, in Guid guid, out uint32 dataSize, void* data) GetPrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLObject self, in Guid guid, uint32 dataSize, void* data) SetPrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLObject self, in Guid guid, IUnknown* data) SetPrivateDataInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLObject self, char16* name) SetName;
 			}
 		}
 		[CRepr]
@@ -1803,30 +1803,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CheckFeatureSupport(DML_FEATURE feature, uint32 featureQueryDataSize, void* featureQueryData, uint32 featureSupportDataSize, void* featureSupportData) mut => VT.CheckFeatureSupport(ref this, feature, featureQueryDataSize, featureQueryData, featureSupportDataSize, featureSupportData);
-			public HRESULT CreateOperator(in DML_OPERATOR_DESC desc, in Guid riid, void** ppv) mut => VT.CreateOperator(ref this, desc, riid, ppv);
-			public HRESULT CompileOperator(ref IDMLOperator op, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) mut => VT.CompileOperator(ref this, ref op, flags, riid, ppv);
-			public HRESULT CreateOperatorInitializer(uint32 operatorCount, IDMLCompiledOperator** operators, in Guid riid, void** ppv) mut => VT.CreateOperatorInitializer(ref this, operatorCount, operators, riid, ppv);
-			public HRESULT CreateCommandRecorder(in Guid riid, void** ppv) mut => VT.CreateCommandRecorder(ref this, riid, ppv);
-			public HRESULT CreateBindingTable(DML_BINDING_TABLE_DESC* desc, in Guid riid, void** ppv) mut => VT.CreateBindingTable(ref this, desc, riid, ppv);
-			public HRESULT Evict(uint32 count, IDMLPageable** ppObjects) mut => VT.Evict(ref this, count, ppObjects);
-			public HRESULT MakeResident(uint32 count, IDMLPageable** ppObjects) mut => VT.MakeResident(ref this, count, ppObjects);
-			public HRESULT GetDeviceRemovedReason() mut => VT.GetDeviceRemovedReason(ref this);
-			public HRESULT GetParentDevice(in Guid riid, void** ppv) mut => VT.GetParentDevice(ref this, riid, ppv);
+			public HResult CheckFeatureSupport(DML_FEATURE feature, uint32 featureQueryDataSize, void* featureQueryData, uint32 featureSupportDataSize, void* featureSupportData) mut => VT.CheckFeatureSupport(ref this, feature, featureQueryDataSize, featureQueryData, featureSupportDataSize, featureSupportData);
+			public HResult CreateOperator(in DML_OPERATOR_DESC desc, in Guid riid, void** ppv) mut => VT.CreateOperator(ref this, desc, riid, ppv);
+			public HResult CompileOperator(ref IDMLOperator op, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) mut => VT.CompileOperator(ref this, ref op, flags, riid, ppv);
+			public HResult CreateOperatorInitializer(uint32 operatorCount, IDMLCompiledOperator** operators, in Guid riid, void** ppv) mut => VT.CreateOperatorInitializer(ref this, operatorCount, operators, riid, ppv);
+			public HResult CreateCommandRecorder(in Guid riid, void** ppv) mut => VT.CreateCommandRecorder(ref this, riid, ppv);
+			public HResult CreateBindingTable(DML_BINDING_TABLE_DESC* desc, in Guid riid, void** ppv) mut => VT.CreateBindingTable(ref this, desc, riid, ppv);
+			public HResult Evict(uint32 count, IDMLPageable** ppObjects) mut => VT.Evict(ref this, count, ppObjects);
+			public HResult MakeResident(uint32 count, IDMLPageable** ppObjects) mut => VT.MakeResident(ref this, count, ppObjects);
+			public HResult GetDeviceRemovedReason() mut => VT.GetDeviceRemovedReason(ref this);
+			public HResult GetParentDevice(in Guid riid, void** ppv) mut => VT.GetParentDevice(ref this, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IDMLObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, DML_FEATURE feature, uint32 featureQueryDataSize, void* featureQueryData, uint32 featureSupportDataSize, void* featureSupportData) CheckFeatureSupport;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, in DML_OPERATOR_DESC desc, in Guid riid, void** ppv) CreateOperator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, ref IDMLOperator op, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) CompileOperator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, uint32 operatorCount, IDMLCompiledOperator** operators, in Guid riid, void** ppv) CreateOperatorInitializer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, in Guid riid, void** ppv) CreateCommandRecorder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, DML_BINDING_TABLE_DESC* desc, in Guid riid, void** ppv) CreateBindingTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, uint32 count, IDMLPageable** ppObjects) Evict;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, uint32 count, IDMLPageable** ppObjects) MakeResident;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self) GetDeviceRemovedReason;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice self, in Guid riid, void** ppv) GetParentDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, DML_FEATURE feature, uint32 featureQueryDataSize, void* featureQueryData, uint32 featureSupportDataSize, void* featureSupportData) CheckFeatureSupport;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, in DML_OPERATOR_DESC desc, in Guid riid, void** ppv) CreateOperator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, ref IDMLOperator op, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) CompileOperator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, uint32 operatorCount, IDMLCompiledOperator** operators, in Guid riid, void** ppv) CreateOperatorInitializer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, in Guid riid, void** ppv) CreateCommandRecorder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, DML_BINDING_TABLE_DESC* desc, in Guid riid, void** ppv) CreateBindingTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, uint32 count, IDMLPageable** ppObjects) Evict;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, uint32 count, IDMLPageable** ppObjects) MakeResident;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self) GetDeviceRemovedReason;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice self, in Guid riid, void** ppv) GetParentDevice;
 			}
 		}
 		[CRepr]
@@ -1836,12 +1836,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDevice(in Guid riid, void** ppv) mut => VT.GetDevice(ref this, riid, ppv);
+			public HResult GetDevice(in Guid riid, void** ppv) mut => VT.GetDevice(ref this, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IDMLObject.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDeviceChild self, in Guid riid, void** ppv) GetDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDeviceChild self, in Guid riid, void** ppv) GetDevice;
 			}
 		}
 		[CRepr]
@@ -1896,12 +1896,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Reset(uint32 operatorCount, IDMLCompiledOperator** operators) mut => VT.Reset(ref this, operatorCount, operators);
+			public HResult Reset(uint32 operatorCount, IDMLCompiledOperator** operators) mut => VT.Reset(ref this, operatorCount, operators);
 
 			[CRepr]
 			public struct VTable : IDMLDispatchable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLOperatorInitializer self, uint32 operatorCount, IDMLCompiledOperator** operators) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLOperatorInitializer self, uint32 operatorCount, IDMLCompiledOperator** operators) Reset;
 			}
 		}
 		[CRepr]
@@ -1915,7 +1915,7 @@ namespace Win32
 			public void BindOutputs(uint32 bindingCount, DML_BINDING_DESC* bindings) mut => VT.BindOutputs(ref this, bindingCount, bindings);
 			public void BindTemporaryResource(DML_BINDING_DESC* binding) mut => VT.BindTemporaryResource(ref this, binding);
 			public void BindPersistentResource(DML_BINDING_DESC* binding) mut => VT.BindPersistentResource(ref this, binding);
-			public HRESULT Reset(DML_BINDING_TABLE_DESC* desc) mut => VT.Reset(ref this, desc);
+			public HResult Reset(DML_BINDING_TABLE_DESC* desc) mut => VT.Reset(ref this, desc);
 
 			[CRepr]
 			public struct VTable : IDMLDeviceChild.VTable
@@ -1924,7 +1924,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] void(ref IDMLBindingTable self, uint32 bindingCount, DML_BINDING_DESC* bindings) BindOutputs;
 				public new function [CallingConvention(.Stdcall)] void(ref IDMLBindingTable self, DML_BINDING_DESC* binding) BindTemporaryResource;
 				public new function [CallingConvention(.Stdcall)] void(ref IDMLBindingTable self, DML_BINDING_DESC* binding) BindPersistentResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLBindingTable self, DML_BINDING_TABLE_DESC* desc) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLBindingTable self, DML_BINDING_TABLE_DESC* desc) Reset;
 			}
 		}
 		[CRepr]
@@ -1949,12 +1949,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void SetMuteDebugOutput(BOOL mute) mut => VT.SetMuteDebugOutput(ref this, mute);
+			public void SetMuteDebugOutput(IntBool mute) mut => VT.SetMuteDebugOutput(ref this, mute);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref IDMLDebugDevice self, BOOL mute) SetMuteDebugOutput;
+				public new function [CallingConvention(.Stdcall)] void(ref IDMLDebugDevice self, IntBool mute) SetMuteDebugOutput;
 			}
 		}
 		[CRepr]
@@ -1964,20 +1964,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CompileGraph(in DML_GRAPH_DESC desc, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) mut => VT.CompileGraph(ref this, desc, flags, riid, ppv);
+			public HResult CompileGraph(in DML_GRAPH_DESC desc, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) mut => VT.CompileGraph(ref this, desc, flags, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IDMLDevice.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDMLDevice1 self, in DML_GRAPH_DESC desc, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) CompileGraph;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDMLDevice1 self, in DML_GRAPH_DESC desc, DML_EXECUTION_FLAGS flags, in Guid riid, void** ppv) CompileGraph;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("directml.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DMLCreateDevice(ref ID3D12Device d3d12Device, DML_CREATE_DEVICE_FLAGS flags, in Guid riid, void** ppv);
+		public static extern HResult DMLCreateDevice(ref ID3D12Device d3d12Device, DML_CREATE_DEVICE_FLAGS flags, in Guid riid, void** ppv);
 		[Import("directml.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DMLCreateDevice1(ref ID3D12Device d3d12Device, DML_CREATE_DEVICE_FLAGS flags, DML_FEATURE_LEVEL minimumFeatureLevel, in Guid riid, void** ppv);
+		public static extern HResult DMLCreateDevice1(ref ID3D12Device d3d12Device, DML_CREATE_DEVICE_FLAGS flags, DML_FEATURE_LEVEL minimumFeatureLevel, in Guid riid, void** ppv);
 	}
 }

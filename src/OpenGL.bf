@@ -1,5 +1,4 @@
 using System;
-using Windows;
 
 static class GL {
     public const uint32 RESCALE_NORMAL = 0x803A;

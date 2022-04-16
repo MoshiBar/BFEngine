@@ -1,10 +1,15 @@
 using System;
+using static Win32.Graphics.Gdi;
+using static Win32.UI.WindowsAndMessaging;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace System.Com.Marshal
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
-	{
+	extension Com{
+	public static class Marshal{
 		// --- Enums ---
 		
 		public enum STDMSHLFLAGS : int32
@@ -22,22 +27,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetUnmarshalClass(in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out Guid pCid) mut => VT.GetUnmarshalClass(ref this, riid, pv, dwDestContext, pvDestContext, mshlflags, out pCid);
-			public HRESULT GetMarshalSizeMax(in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out uint32 pSize) mut => VT.GetMarshalSizeMax(ref this, riid, pv, dwDestContext, pvDestContext, mshlflags, out pSize);
-			public HRESULT MarshalInterface(ref IStream pStm, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags) mut => VT.MarshalInterface(ref this, ref pStm, riid, pv, dwDestContext, pvDestContext, mshlflags);
-			public HRESULT UnmarshalInterface(ref IStream pStm, in Guid riid, void** ppv) mut => VT.UnmarshalInterface(ref this, ref pStm, riid, ppv);
-			public HRESULT ReleaseMarshalData(ref IStream pStm) mut => VT.ReleaseMarshalData(ref this, ref pStm);
-			public HRESULT DisconnectObject(uint32 dwReserved) mut => VT.DisconnectObject(ref this, dwReserved);
+			public HResult GetUnmarshalClass(in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out Guid pCid) mut => VT.GetUnmarshalClass(ref this, riid, pv, dwDestContext, pvDestContext, mshlflags, out pCid);
+			public HResult GetMarshalSizeMax(in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out uint32 pSize) mut => VT.GetMarshalSizeMax(ref this, riid, pv, dwDestContext, pvDestContext, mshlflags, out pSize);
+			public HResult MarshalInterface(ref IStream pStm, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags) mut => VT.MarshalInterface(ref this, ref pStm, riid, pv, dwDestContext, pvDestContext, mshlflags);
+			public HResult UnmarshalInterface(ref IStream pStm, in Guid riid, void** ppv) mut => VT.UnmarshalInterface(ref this, ref pStm, riid, ppv);
+			public HResult ReleaseMarshalData(ref IStream pStm) mut => VT.ReleaseMarshalData(ref this, ref pStm);
+			public HResult DisconnectObject(uint32 dwReserved) mut => VT.DisconnectObject(ref this, dwReserved);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshal self, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out Guid pCid) GetUnmarshalClass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshal self, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out uint32 pSize) GetMarshalSizeMax;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshal self, ref IStream pStm, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags) MarshalInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshal self, ref IStream pStm, in Guid riid, void** ppv) UnmarshalInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshal self, ref IStream pStm) ReleaseMarshalData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshal self, uint32 dwReserved) DisconnectObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshal self, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out Guid pCid) GetUnmarshalClass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshal self, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out uint32 pSize) GetMarshalSizeMax;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshal self, ref IStream pStm, in Guid riid, void* pv, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags) MarshalInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshal self, ref IStream pStm, in Guid riid, void** ppv) UnmarshalInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshal self, ref IStream pStm) ReleaseMarshalData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshal self, uint32 dwReserved) DisconnectObject;
 			}
 		}
 		[CRepr]
@@ -57,33 +62,33 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetMarshalingContextAttribute(CO_MARSHALING_CONTEXT_ATTRIBUTES attribute, out uint pAttributeValue) mut => VT.GetMarshalingContextAttribute(ref this, attribute, out pAttributeValue);
+			public HResult GetMarshalingContextAttribute(CO_MARSHALING_CONTEXT_ATTRIBUTES attribute, out uint pAttributeValue) mut => VT.GetMarshalingContextAttribute(ref this, attribute, out pAttributeValue);
 
 			[CRepr]
 			public struct VTable : IStream.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMarshalingStream self, CO_MARSHALING_CONTEXT_ATTRIBUTES attribute, out uint pAttributeValue) GetMarshalingContextAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMarshalingStream self, CO_MARSHALING_CONTEXT_ATTRIBUTES attribute, out uint pAttributeValue) GetMarshalingContextAttribute;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 BSTR_UserSize(ref uint32 param0, uint32 param1, ref BSTR param2);
+		public static extern uint32 BSTR_UserSize(ref uint32 param0, uint32 param1, ref char16* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* BSTR_UserMarshal(ref uint32 param0, out uint8 param1, ref BSTR param2);
+		public static extern uint8* BSTR_UserMarshal(ref uint32 param0, out uint8 param1, ref char16* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* BSTR_UserUnmarshal(ref uint32 param0, uint8* param1, out BSTR param2);
+		public static extern uint8* BSTR_UserUnmarshal(ref uint32 param0, uint8* param1, out char16* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void BSTR_UserFree(ref uint32 param0, ref BSTR param1);
+		public static extern void BSTR_UserFree(ref uint32 param0, ref char16* param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 HWND_UserSize(ref uint32 param0, uint32 param1, ref HWND param2);
+		public static extern uint32 HWND_UserSize(ref uint32 param0, uint32 param1, ref HWnd param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HWND_UserMarshal(ref uint32 param0, out uint8 param1, ref HWND param2);
+		public static extern uint8* HWND_UserMarshal(ref uint32 param0, out uint8 param1, ref HWnd param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HWND_UserUnmarshal(ref uint32 param0, uint8* param1, out HWND param2);
+		public static extern uint8* HWND_UserUnmarshal(ref uint32 param0, uint8* param1, out HWnd param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void HWND_UserFree(ref uint32 param0, ref HWND param1);
+		public static extern void HWND_UserFree(ref uint32 param0, ref HWnd param1);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 VARIANT_UserSize(ref uint32 param0, uint32 param1, ref VARIANT param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -93,21 +98,21 @@ namespace Win32
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void VARIANT_UserFree(ref uint32 param0, ref VARIANT param1);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 BSTR_UserSize64(ref uint32 param0, uint32 param1, ref BSTR param2);
+		public static extern uint32 BSTR_UserSize64(ref uint32 param0, uint32 param1, ref char16* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* BSTR_UserMarshal64(ref uint32 param0, out uint8 param1, ref BSTR param2);
+		public static extern uint8* BSTR_UserMarshal64(ref uint32 param0, out uint8 param1, ref char16* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* BSTR_UserUnmarshal64(ref uint32 param0, uint8* param1, out BSTR param2);
+		public static extern uint8* BSTR_UserUnmarshal64(ref uint32 param0, uint8* param1, out char16* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void BSTR_UserFree64(ref uint32 param0, ref BSTR param1);
+		public static extern void BSTR_UserFree64(ref uint32 param0, ref char16* param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 HWND_UserSize64(ref uint32 param0, uint32 param1, ref HWND param2);
+		public static extern uint32 HWND_UserSize64(ref uint32 param0, uint32 param1, ref HWnd param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HWND_UserMarshal64(ref uint32 param0, out uint8 param1, ref HWND param2);
+		public static extern uint8* HWND_UserMarshal64(ref uint32 param0, out uint8 param1, ref HWnd param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HWND_UserUnmarshal64(ref uint32 param0, uint8* param1, out HWND param2);
+		public static extern uint8* HWND_UserUnmarshal64(ref uint32 param0, uint8* param1, out HWnd param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void HWND_UserFree64(ref uint32 param0, ref HWND param1);
+		public static extern void HWND_UserFree64(ref uint32 param0, ref HWnd param1);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 VARIANT_UserSize64(ref uint32 param0, uint32 param1, ref VARIANT param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -125,13 +130,13 @@ namespace Win32
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CLIPFORMAT_UserFree(ref uint32 param0, ref uint16 param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 HBITMAP_UserSize(ref uint32 param0, uint32 param1, ref HBITMAP param2);
+		public static extern uint32 HBITMAP_UserSize(ref uint32 param0, uint32 param1, ref HBitmap param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HBITMAP_UserMarshal(ref uint32 param0, out uint8 param1, ref HBITMAP param2);
+		public static extern uint8* HBITMAP_UserMarshal(ref uint32 param0, out uint8 param1, ref HBitmap param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HBITMAP_UserUnmarshal(ref uint32 param0, uint8* param1, out HBITMAP param2);
+		public static extern uint8* HBITMAP_UserUnmarshal(ref uint32 param0, uint8* param1, out HBitmap param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void HBITMAP_UserFree(ref uint32 param0, ref HBITMAP param1);
+		public static extern void HBITMAP_UserFree(ref uint32 param0, ref HBitmap param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 HDC_UserSize(ref uint32 param0, uint32 param1, ref HDC param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -173,13 +178,13 @@ namespace Win32
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void CLIPFORMAT_UserFree64(ref uint32 param0, ref uint16 param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 HBITMAP_UserSize64(ref uint32 param0, uint32 param1, ref HBITMAP param2);
+		public static extern uint32 HBITMAP_UserSize64(ref uint32 param0, uint32 param1, ref HBitmap param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HBITMAP_UserMarshal64(ref uint32 param0, out uint8 param1, ref HBITMAP param2);
+		public static extern uint8* HBITMAP_UserMarshal64(ref uint32 param0, out uint8 param1, ref HBitmap param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8* HBITMAP_UserUnmarshal64(ref uint32 param0, uint8* param1, out HBITMAP param2);
+		public static extern uint8* HBITMAP_UserUnmarshal64(ref uint32 param0, uint8* param1, out HBitmap param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void HBITMAP_UserFree64(ref uint32 param0, ref HBITMAP param1);
+		public static extern void HBITMAP_UserFree64(ref uint32 param0, ref HBitmap param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 HDC_UserSize64(ref uint32 param0, uint32 param1, ref HDC param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -213,23 +218,23 @@ namespace Win32
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void STGMEDIUM_UserFree64(ref uint32 param0, ref STGMEDIUM param1);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetMarshalSizeMax(out uint32 pulSize, in Guid riid, ref IUnknown pUnk, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags);
+		public static extern HResult CoGetMarshalSizeMax(out uint32 pulSize, in Guid riid, ref IUnknown pUnk, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoMarshalInterface(ref IStream pStm, in Guid riid, ref IUnknown pUnk, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags);
+		public static extern HResult CoMarshalInterface(ref IStream pStm, in Guid riid, ref IUnknown pUnk, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoUnmarshalInterface(ref IStream pStm, in Guid riid, void** ppv);
+		public static extern HResult CoUnmarshalInterface(ref IStream pStm, in Guid riid, void** ppv);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoMarshalHresult(ref IStream pstm, HRESULT hresult);
+		public static extern HResult CoMarshalHresult(ref IStream pstm, HResult hresult);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoUnmarshalHresult(ref IStream pstm, out HRESULT phresult);
+		public static extern HResult CoUnmarshalHresult(ref IStream pstm, out HResult phresult);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoReleaseMarshalData(ref IStream pStm);
+		public static extern HResult CoReleaseMarshalData(ref IStream pStm);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetStandardMarshal(in Guid riid, ref IUnknown pUnk, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out IMarshal* ppMarshal);
+		public static extern HResult CoGetStandardMarshal(in Guid riid, ref IUnknown pUnk, uint32 dwDestContext, void* pvDestContext, uint32 mshlflags, out IMarshal* ppMarshal);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoGetStdMarshalEx(ref IUnknown pUnkOuter, uint32 smexflags, out IUnknown* ppUnkInner);
+		public static extern HResult CoGetStdMarshalEx(ref IUnknown pUnkOuter, uint32 smexflags, out IUnknown* ppUnkInner);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CoMarshalInterThreadInterfaceInStream(in Guid riid, ref IUnknown pUnk, out IStream* ppStm);
+		public static extern HResult CoMarshalInterThreadInterfaceInStream(in Guid riid, ref IUnknown pUnk, out IStream* ppStm);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 LPSAFEARRAY_UserSize(ref uint32 param0, uint32 param1, ref SAFEARRAY* param2);
 		[Import("oleaut32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -310,5 +315,6 @@ namespace Win32
 		public static extern uint8* HPALETTE_UserUnmarshal64(ref uint32 param0, uint8* param1, out HPALETTE param2);
 		[Import("ole32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void HPALETTE_UserFree64(ref uint32 param0, ref HPALETTE param1);
+	}
 	}
 }

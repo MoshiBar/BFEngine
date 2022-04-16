@@ -447,7 +447,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_ADDR
 		{
-			public CHAR[32] MaxSa;
+			public char8[32] MaxSa;
 			public _Data_e__Union Data;
 			
 			[CRepr, Union, Packed(1)]
@@ -510,18 +510,18 @@ namespace Win32
 		[CRepr]
 		public struct DNS_PTR_DATAW
 		{
-			public PWSTR pNameHost;
+			public char16* pNameHost;
 		}
 		[CRepr]
 		public struct DNS_PTR_DATAA
 		{
-			public PSTR pNameHost;
+			public char8* pNameHost;
 		}
 		[CRepr]
 		public struct DNS_SOA_DATAW
 		{
-			public PWSTR pNamePrimaryServer;
-			public PWSTR pNameAdministrator;
+			public char16* pNamePrimaryServer;
+			public char16* pNameAdministrator;
 			public uint32 dwSerialNo;
 			public uint32 dwRefresh;
 			public uint32 dwRetry;
@@ -531,8 +531,8 @@ namespace Win32
 		[CRepr]
 		public struct DNS_SOA_DATAA
 		{
-			public PSTR pNamePrimaryServer;
-			public PSTR pNameAdministrator;
+			public char8* pNamePrimaryServer;
+			public char8* pNameAdministrator;
 			public uint32 dwSerialNo;
 			public uint32 dwRefresh;
 			public uint32 dwRetry;
@@ -542,26 +542,26 @@ namespace Win32
 		[CRepr]
 		public struct DNS_MINFO_DATAW
 		{
-			public PWSTR pNameMailbox;
-			public PWSTR pNameErrorsMailbox;
+			public char16* pNameMailbox;
+			public char16* pNameErrorsMailbox;
 		}
 		[CRepr]
 		public struct DNS_MINFO_DATAA
 		{
-			public PSTR pNameMailbox;
-			public PSTR pNameErrorsMailbox;
+			public char8* pNameMailbox;
+			public char8* pNameErrorsMailbox;
 		}
 		[CRepr]
 		public struct DNS_MX_DATAW
 		{
-			public PWSTR pNameExchange;
+			public char16* pNameExchange;
 			public uint16 wPreference;
 			public uint16 Pad;
 		}
 		[CRepr]
 		public struct DNS_MX_DATAA
 		{
-			public PSTR pNameExchange;
+			public char8* pNameExchange;
 			public uint16 wPreference;
 			public uint16 Pad;
 		}
@@ -606,7 +606,7 @@ namespace Win32
 			public uint32 dwTimeSigned;
 			public uint16 wKeyTag;
 			public uint16 wSignatureLength;
-			public PWSTR pNameSigner;
+			public char16* pNameSigner;
 			public uint8[0] Signature;
 		}
 		[CRepr]
@@ -620,7 +620,7 @@ namespace Win32
 			public uint32 dwTimeSigned;
 			public uint16 wKeyTag;
 			public uint16 wSignatureLength;
-			public PSTR pNameSigner;
+			public char8* pNameSigner;
 			public uint8[0] Signature;
 		}
 		[CRepr]
@@ -642,7 +642,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_NSEC_DATAW
 		{
-			public PWSTR pNextDomainName;
+			public char16* pNextDomainName;
 			public uint16 wTypeBitMapsLength;
 			public uint16 wPad;
 			public uint8[0] TypeBitMaps;
@@ -650,7 +650,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_NSEC_DATAA
 		{
-			public PSTR pNextDomainName;
+			public char8* pNextDomainName;
 			public uint16 wTypeBitMapsLength;
 			public uint16 wPad;
 			public uint8[0] TypeBitMaps;
@@ -717,21 +717,21 @@ namespace Win32
 		[CRepr]
 		public struct DNS_NXT_DATAW
 		{
-			public PWSTR pNameNext;
+			public char16* pNameNext;
 			public uint16 wNumTypes;
 			public uint16[0] wTypes;
 		}
 		[CRepr]
 		public struct DNS_NXT_DATAA
 		{
-			public PSTR pNameNext;
+			public char8* pNameNext;
 			public uint16 wNumTypes;
 			public uint16[0] wTypes;
 		}
 		[CRepr]
 		public struct DNS_SRV_DATAW
 		{
-			public PWSTR pNameTarget;
+			public char16* pNameTarget;
 			public uint16 wPriority;
 			public uint16 wWeight;
 			public uint16 wPort;
@@ -740,7 +740,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_SRV_DATAA
 		{
-			public PSTR pNameTarget;
+			public char8* pNameTarget;
 			public uint16 wPriority;
 			public uint16 wWeight;
 			public uint16 wPort;
@@ -751,20 +751,20 @@ namespace Win32
 		{
 			public uint16 wOrder;
 			public uint16 wPreference;
-			public PWSTR pFlags;
-			public PWSTR pService;
-			public PWSTR pRegularExpression;
-			public PWSTR pReplacement;
+			public char16* pFlags;
+			public char16* pService;
+			public char16* pRegularExpression;
+			public char16* pReplacement;
 		}
 		[CRepr]
 		public struct DNS_NAPTR_DATAA
 		{
 			public uint16 wOrder;
 			public uint16 wPreference;
-			public PSTR pFlags;
-			public PSTR pService;
-			public PSTR pRegularExpression;
-			public PSTR pReplacement;
+			public char8* pFlags;
+			public char8* pService;
+			public char8* pRegularExpression;
+			public char8* pReplacement;
 		}
 		[CRepr]
 		public struct DNS_ATMA_DATA
@@ -775,7 +775,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_TKEY_DATAW
 		{
-			public PWSTR pNameAlgorithm;
+			public char16* pNameAlgorithm;
 			public uint8* pAlgorithmPacket;
 			public uint8* pKey;
 			public uint8* pOtherData;
@@ -786,12 +786,12 @@ namespace Win32
 			public uint16 wKeyLength;
 			public uint16 wOtherLength;
 			public uint8 cAlgNameLength;
-			public BOOL bPacketPointers;
+			public IntBool bPacketPointers;
 		}
 		[CRepr]
 		public struct DNS_TKEY_DATAA
 		{
-			public PSTR pNameAlgorithm;
+			public char8* pNameAlgorithm;
 			public uint8* pAlgorithmPacket;
 			public uint8* pKey;
 			public uint8* pOtherData;
@@ -802,12 +802,12 @@ namespace Win32
 			public uint16 wKeyLength;
 			public uint16 wOtherLength;
 			public uint8 cAlgNameLength;
-			public BOOL bPacketPointers;
+			public IntBool bPacketPointers;
 		}
 		[CRepr]
 		public struct DNS_TSIG_DATAW
 		{
-			public PWSTR pNameAlgorithm;
+			public char16* pNameAlgorithm;
 			public uint8* pAlgorithmPacket;
 			public uint8* pSignature;
 			public uint8* pOtherData;
@@ -818,12 +818,12 @@ namespace Win32
 			public uint16 wSigLength;
 			public uint16 wOtherLength;
 			public uint8 cAlgNameLength;
-			public BOOL bPacketPointers;
+			public IntBool bPacketPointers;
 		}
 		[CRepr]
 		public struct DNS_TSIG_DATAA
 		{
-			public PSTR pNameAlgorithm;
+			public char8* pNameAlgorithm;
 			public uint8* pAlgorithmPacket;
 			public uint8* pSignature;
 			public uint8* pOtherData;
@@ -834,7 +834,7 @@ namespace Win32
 			public uint16 wSigLength;
 			public uint16 wOtherLength;
 			public uint8 cAlgNameLength;
-			public BOOL bPacketPointers;
+			public IntBool bPacketPointers;
 		}
 		[CRepr]
 		public struct DNS_UNKNOWN_DATA
@@ -857,7 +857,7 @@ namespace Win32
 			public uint32 dwMappingFlag;
 			public uint32 dwLookupTimeout;
 			public uint32 dwCacheTimeout;
-			public PWSTR pNameResultDomain;
+			public char16* pNameResultDomain;
 		}
 		[CRepr]
 		public struct DNS_WINSR_DATAA
@@ -865,7 +865,7 @@ namespace Win32
 			public uint32 dwMappingFlag;
 			public uint32 dwLookupTimeout;
 			public uint32 dwCacheTimeout;
-			public PSTR pNameResultDomain;
+			public char8* pNameResultDomain;
 		}
 		[CRepr]
 		public struct DNS_RECORD_FLAGS
@@ -876,7 +876,7 @@ namespace Win32
 		public struct DNS_RECORDW
 		{
 			public DNS_RECORDW* pNext;
-			public PWSTR pName;
+			public char16* pName;
 			public uint16 wType;
 			public uint16 wDataLength;
 			public _Flags_e__Union Flags;
@@ -983,7 +983,7 @@ namespace Win32
 		public struct _DnsRecordOptW
 		{
 			public DNS_RECORDW* pNext;
-			public PWSTR pName;
+			public char16* pName;
 			public uint16 wType;
 			public uint16 wDataLength;
 			public _Flags_e__Union Flags;
@@ -1009,7 +1009,7 @@ namespace Win32
 		public struct DNS_RECORDA
 		{
 			public DNS_RECORDA* pNext;
-			public PSTR pName;
+			public char8* pName;
 			public uint16 wType;
 			public uint16 wDataLength;
 			public _Flags_e__Union Flags;
@@ -1116,7 +1116,7 @@ namespace Win32
 		public struct _DnsRecordOptA
 		{
 			public DNS_RECORDA* pNext;
-			public PSTR pName;
+			public char8* pName;
 			public uint16 wType;
 			public uint16 wDataLength;
 			public _Flags_e__Union Flags;
@@ -1149,7 +1149,7 @@ namespace Win32
 		{
 			public uint32 version;
 			public DNS_PROXY_INFORMATION_TYPE proxyInformationType;
-			public PWSTR proxyName;
+			public char16* proxyName;
 		}
 		[CRepr]
 		public struct DNS_QUERY_RESULT
@@ -1164,7 +1164,7 @@ namespace Win32
 		public struct DNS_QUERY_REQUEST
 		{
 			public uint32 Version;
-			public PWSTR QueryName;
+			public char16* QueryName;
 			public uint16 QueryType;
 			public uint64 QueryOptions;
 			public DNS_ADDR_ARRAY* pDnsServerList;
@@ -1175,7 +1175,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_QUERY_CANCEL
 		{
-			public CHAR[32] Reserved;
+			public char8[32] Reserved;
 		}
 		[CRepr]
 		public struct DNS_CUSTOM_SERVER
@@ -1188,26 +1188,26 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous1_e__Union
 			{
-				public PWSTR pwszTemplate;
+				public char16* pwszTemplate;
 			}
 			[CRepr, Union]
 			public struct _Anonymous2_e__Union
 			{
-				public CHAR[32] MaxSa;
+				public char8[32] MaxSa;
 			}
 		}
 		[CRepr]
 		public struct DNS_QUERY_REQUEST3
 		{
 			public uint32 Version;
-			public PWSTR QueryName;
+			public char16* QueryName;
 			public uint16 QueryType;
 			public uint64 QueryOptions;
 			public DNS_ADDR_ARRAY* pDnsServerList;
 			public uint32 InterfaceIndex;
 			public PDNS_QUERY_COMPLETION_ROUTINE pQueryCompletionCallback;
 			public void* pQueryContext;
-			public BOOL IsNetworkQueryRequired;
+			public IntBool IsNetworkQueryRequired;
 			public uint32 RequiredNetworkIndex;
 			public uint32 cCustomServers;
 			public DNS_CUSTOM_SERVER* pCustomServers;
@@ -1222,13 +1222,13 @@ namespace Win32
 		public struct DNS_MESSAGE_BUFFER
 		{
 			public DNS_HEADER MessageHead;
-			public CHAR[0] MessageBody;
+			public char8[0] MessageBody;
 		}
 		[CRepr]
 		public struct DNS_CONNECTION_PROXY_INFO
 		{
 			public uint32 Version;
-			public PWSTR pwszFriendlyName;
+			public char16* pwszFriendlyName;
 			public uint32 Flags;
 			public DNS_CONNECTION_PROXY_INFO_SWITCH Switch;
 			public _Anonymous_e__Union Anonymous;
@@ -1242,18 +1242,18 @@ namespace Win32
 				[CRepr]
 				public struct _DNS_CONNECTION_PROXY_INFO_SCRIPT
 				{
-					public PWSTR pwszScript;
-					public PWSTR pwszUsername;
-					public PWSTR pwszPassword;
+					public char16* pwszScript;
+					public char16* pwszUsername;
+					public char16* pwszPassword;
 				}
 				[CRepr]
 				public struct _DNS_CONNECTION_PROXY_INFO_CONFIG
 				{
-					public PWSTR pwszServer;
-					public PWSTR pwszUsername;
-					public PWSTR pwszPassword;
-					public PWSTR pwszException;
-					public PWSTR pwszExtraInfo;
+					public char16* pwszServer;
+					public char16* pwszUsername;
+					public char16* pwszPassword;
+					public char16* pwszException;
+					public char16* pwszExtraInfo;
 					public uint16 Port;
 				}
 			}
@@ -1263,9 +1263,9 @@ namespace Win32
 		{
 			public DNS_CONNECTION_PROXY_INFO ProxyInfo;
 			public uint32 dwInterfaceIndex;
-			public PWSTR pwszConnectionName;
-			public BOOL fDirectConfiguration;
-			public HANDLE hConnection;
+			public char16* pwszConnectionName;
+			public IntBool fDirectConfiguration;
+			public Handle hConnection;
 		}
 		[CRepr]
 		public struct DNS_CONNECTION_PROXY_ELEMENT
@@ -1293,7 +1293,7 @@ namespace Win32
 		[CRepr]
 		public struct DNS_CONNECTION_IFINDEX_ENTRY
 		{
-			public PWSTR pwszConnectionName;
+			public char16* pwszConnectionName;
 			public uint32 dwIfIndex;
 		}
 		[CRepr]
@@ -1305,12 +1305,12 @@ namespace Win32
 		[CRepr]
 		public struct DNS_CONNECTION_POLICY_ENTRY
 		{
-			public PWSTR pwszHost;
-			public PWSTR pwszAppId;
+			public char16* pwszHost;
+			public char16* pwszAppId;
 			public uint32 cbAppSid;
 			public uint8* pbAppSid;
 			public uint32 nConnections;
-			public PWSTR* ppwszConnections;
+			public char16** ppwszConnections;
 			public uint32 dwPolicyEntryFlags;
 		}
 		[CRepr]
@@ -1322,16 +1322,16 @@ namespace Win32
 		[CRepr]
 		public struct DNS_SERVICE_INSTANCE
 		{
-			public PWSTR pszInstanceName;
-			public PWSTR pszHostName;
+			public char16* pszInstanceName;
+			public char16* pszHostName;
 			public uint32* ip4Address;
 			public IP6_ADDRESS* ip6Address;
 			public uint16 wPort;
 			public uint16 wPriority;
 			public uint16 wWeight;
 			public uint32 dwPropertyCount;
-			public PWSTR* keys;
-			public PWSTR* values;
+			public char16** keys;
+			public char16** values;
 			public uint32 dwInterfaceIndex;
 		}
 		[CRepr]
@@ -1344,7 +1344,7 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 InterfaceIndex;
-			public PWSTR QueryName;
+			public char16* QueryName;
 			public _Anonymous_e__Union Anonymous;
 			public void* pQueryContext;
 			
@@ -1360,7 +1360,7 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 InterfaceIndex;
-			public PWSTR QueryName;
+			public char16* QueryName;
 			public PDNS_SERVICE_RESOLVE_COMPLETE pResolveCompletionCallback;
 			public void* pQueryContext;
 		}
@@ -1372,8 +1372,8 @@ namespace Win32
 			public DNS_SERVICE_INSTANCE* pServiceInstance;
 			public PDNS_SERVICE_REGISTER_COMPLETE pRegisterCompletionCallback;
 			public void* pQueryContext;
-			public HANDLE hCredentials;
-			public BOOL unicastEnabled;
+			public Handle hCredentials;
+			public IntBool unicastEnabled;
 		}
 		[CRepr]
 		public struct MDNS_QUERY_HANDLE
@@ -1389,38 +1389,38 @@ namespace Win32
 		{
 			public uint32 Version;
 			public uint32 ulRefCount;
-			public PWSTR Query;
+			public char16* Query;
 			public uint16 QueryType;
 			public uint64 QueryOptions;
 			public uint32 InterfaceIndex;
 			public PMDNS_QUERY_CALLBACK pQueryCallback;
 			public void* pQueryContext;
-			public BOOL fAnswerReceived;
+			public IntBool fAnswerReceived;
 			public uint32 ulResendCount;
 		}
 		
 		// --- Functions ---
 		
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsQueryConfig(DNS_CONFIG_TYPE Config, uint32 Flag, PWSTR pwsAdapterName, void* pReserved, void* pBuffer, out uint32 pBufLen);
+		public static extern int32 DnsQueryConfig(DNS_CONFIG_TYPE Config, uint32 Flag, char16* pwsAdapterName, void* pReserved, void* pBuffer, out uint32 pBufLen);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern DNS_RECORDA* DnsRecordCopyEx(ref DNS_RECORDA pRecord, DNS_CHARSET CharSetIn, DNS_CHARSET CharSetOut);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern DNS_RECORDA* DnsRecordSetCopyEx(ref DNS_RECORDA pRecordSet, DNS_CHARSET CharSetIn, DNS_CHARSET CharSetOut);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsRecordCompare(ref DNS_RECORDA pRecord1, ref DNS_RECORDA pRecord2);
+		public static extern IntBool DnsRecordCompare(ref DNS_RECORDA pRecord1, ref DNS_RECORDA pRecord2);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsRecordSetCompare(out DNS_RECORDA pRR1, out DNS_RECORDA pRR2, DNS_RECORDA** ppDiff1, DNS_RECORDA** ppDiff2);
+		public static extern IntBool DnsRecordSetCompare(out DNS_RECORDA pRR1, out DNS_RECORDA pRR2, DNS_RECORDA** ppDiff1, DNS_RECORDA** ppDiff2);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern DNS_RECORDA* DnsRecordSetDetach(out DNS_RECORDA pRecordList);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DnsFree(void* pData, DNS_FREE_TYPE FreeType);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsQuery_A(PSTR pszName, uint16 wType, uint32 Options, void* pExtra, DNS_RECORDA** ppQueryResults, void** pReserved);
+		public static extern int32 DnsQuery_A(char8* pszName, uint16 wType, uint32 Options, void* pExtra, DNS_RECORDA** ppQueryResults, void** pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsQuery_UTF8(PSTR pszName, uint16 wType, uint32 Options, void* pExtra, DNS_RECORDA** ppQueryResults, void** pReserved);
+		public static extern int32 DnsQuery_UTF8(char8* pszName, uint16 wType, uint32 Options, void* pExtra, DNS_RECORDA** ppQueryResults, void** pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsQuery_W(PWSTR pszName, uint16 wType, uint32 Options, void* pExtra, DNS_RECORDA** ppQueryResults, void** pReserved);
+		public static extern int32 DnsQuery_W(char16* pszName, uint16 wType, uint32 Options, void* pExtra, DNS_RECORDA** ppQueryResults, void** pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DnsQueryEx(ref DNS_QUERY_REQUEST pQueryRequest, out DNS_QUERY_RESULT pQueryResults, DNS_QUERY_CANCEL* pCancelHandle);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1436,55 +1436,55 @@ namespace Win32
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DnsAcquireContextHandle_A(uint32 CredentialFlags, void* Credentials, out DnsContextHandle pContext);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void DnsReleaseContextHandle(HANDLE hContext);
+		public static extern void DnsReleaseContextHandle(Handle hContext);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsModifyRecordsInSet_W(DNS_RECORDA* pAddRecords, DNS_RECORDA* pDeleteRecords, uint32 Options, HANDLE hCredentials, void* pExtraList, void* pReserved);
+		public static extern int32 DnsModifyRecordsInSet_W(DNS_RECORDA* pAddRecords, DNS_RECORDA* pDeleteRecords, uint32 Options, Handle hCredentials, void* pExtraList, void* pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsModifyRecordsInSet_A(DNS_RECORDA* pAddRecords, DNS_RECORDA* pDeleteRecords, uint32 Options, HANDLE hCredentials, void* pExtraList, void* pReserved);
+		public static extern int32 DnsModifyRecordsInSet_A(DNS_RECORDA* pAddRecords, DNS_RECORDA* pDeleteRecords, uint32 Options, Handle hCredentials, void* pExtraList, void* pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsModifyRecordsInSet_UTF8(DNS_RECORDA* pAddRecords, DNS_RECORDA* pDeleteRecords, uint32 Options, HANDLE hCredentials, void* pExtraList, void* pReserved);
+		public static extern int32 DnsModifyRecordsInSet_UTF8(DNS_RECORDA* pAddRecords, DNS_RECORDA* pDeleteRecords, uint32 Options, Handle hCredentials, void* pExtraList, void* pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsReplaceRecordSetW(ref DNS_RECORDA pReplaceSet, uint32 Options, HANDLE hContext, void* pExtraInfo, void* pReserved);
+		public static extern int32 DnsReplaceRecordSetW(ref DNS_RECORDA pReplaceSet, uint32 Options, Handle hContext, void* pExtraInfo, void* pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsReplaceRecordSetA(ref DNS_RECORDA pReplaceSet, uint32 Options, HANDLE hContext, void* pExtraInfo, void* pReserved);
+		public static extern int32 DnsReplaceRecordSetA(ref DNS_RECORDA pReplaceSet, uint32 Options, Handle hContext, void* pExtraInfo, void* pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsReplaceRecordSetUTF8(ref DNS_RECORDA pReplaceSet, uint32 Options, HANDLE hContext, void* pExtraInfo, void* pReserved);
+		public static extern int32 DnsReplaceRecordSetUTF8(ref DNS_RECORDA pReplaceSet, uint32 Options, Handle hContext, void* pExtraInfo, void* pReserved);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsValidateName_W(PWSTR pszName, DNS_NAME_FORMAT Format);
+		public static extern int32 DnsValidateName_W(char16* pszName, DNS_NAME_FORMAT Format);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsValidateName_A(PSTR pszName, DNS_NAME_FORMAT Format);
+		public static extern int32 DnsValidateName_A(char8* pszName, DNS_NAME_FORMAT Format);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DnsValidateName_UTF8(PSTR pszName, DNS_NAME_FORMAT Format);
+		public static extern int32 DnsValidateName_UTF8(char8* pszName, DNS_NAME_FORMAT Format);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsNameCompare_A(PSTR pName1, PSTR pName2);
+		public static extern IntBool DnsNameCompare_A(char8* pName1, char8* pName2);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsNameCompare_W(PWSTR pName1, PWSTR pName2);
+		public static extern IntBool DnsNameCompare_W(char16* pName1, char16* pName2);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsWriteQuestionToBuffer_W(out DNS_MESSAGE_BUFFER pDnsBuffer, out uint32 pdwBufferSize, PWSTR pszName, uint16 wType, uint16 Xid, BOOL fRecursionDesired);
+		public static extern IntBool DnsWriteQuestionToBuffer_W(out DNS_MESSAGE_BUFFER pDnsBuffer, out uint32 pdwBufferSize, char16* pszName, uint16 wType, uint16 Xid, IntBool fRecursionDesired);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsWriteQuestionToBuffer_UTF8(out DNS_MESSAGE_BUFFER pDnsBuffer, out uint32 pdwBufferSize, PSTR pszName, uint16 wType, uint16 Xid, BOOL fRecursionDesired);
+		public static extern IntBool DnsWriteQuestionToBuffer_UTF8(out DNS_MESSAGE_BUFFER pDnsBuffer, out uint32 pdwBufferSize, char8* pszName, uint16 wType, uint16 Xid, IntBool fRecursionDesired);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DnsExtractRecordsFromMessage_W(ref DNS_MESSAGE_BUFFER pDnsBuffer, uint16 wMessageLength, out DNS_RECORDA* ppRecord);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DnsExtractRecordsFromMessage_UTF8(ref DNS_MESSAGE_BUFFER pDnsBuffer, uint16 wMessageLength, out DNS_RECORDA* ppRecord);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DnsGetProxyInformation(PWSTR hostName, out DNS_PROXY_INFORMATION proxyInformation, DNS_PROXY_INFORMATION* defaultProxyInformation, DNS_PROXY_COMPLETION_ROUTINE completionRoutine, void* completionContext);
+		public static extern uint32 DnsGetProxyInformation(char16* hostName, out DNS_PROXY_INFORMATION proxyInformation, DNS_PROXY_INFORMATION* defaultProxyInformation, DNS_PROXY_COMPLETION_ROUTINE completionRoutine, void* completionContext);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void DnsFreeProxyName(PWSTR proxyName);
+		public static extern void DnsFreeProxyName(char16* proxyName);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DnsConnectionGetProxyInfoForHostUrl(PWSTR pwszHostUrl, uint8* pSelectionContext, uint32 dwSelectionContextLength, uint32 dwExplicitInterfaceIndex, out DNS_CONNECTION_PROXY_INFO_EX pProxyInfoEx);
+		public static extern uint32 DnsConnectionGetProxyInfoForHostUrl(char16* pwszHostUrl, uint8* pSelectionContext, uint32 dwSelectionContextLength, uint32 dwExplicitInterfaceIndex, out DNS_CONNECTION_PROXY_INFO_EX pProxyInfoEx);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DnsConnectionFreeProxyInfoEx(out DNS_CONNECTION_PROXY_INFO_EX pProxyInfoEx);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DnsConnectionGetProxyInfo(PWSTR pwszConnectionName, DNS_CONNECTION_PROXY_TYPE Type, out DNS_CONNECTION_PROXY_INFO pProxyInfo);
+		public static extern uint32 DnsConnectionGetProxyInfo(char16* pwszConnectionName, DNS_CONNECTION_PROXY_TYPE Type, out DNS_CONNECTION_PROXY_INFO pProxyInfo);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DnsConnectionFreeProxyInfo(out DNS_CONNECTION_PROXY_INFO pProxyInfo);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DnsConnectionSetProxyInfo(PWSTR pwszConnectionName, DNS_CONNECTION_PROXY_TYPE Type, in DNS_CONNECTION_PROXY_INFO pProxyInfo);
+		public static extern uint32 DnsConnectionSetProxyInfo(char16* pwszConnectionName, DNS_CONNECTION_PROXY_TYPE Type, in DNS_CONNECTION_PROXY_INFO pProxyInfo);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DnsConnectionDeleteProxyInfo(PWSTR pwszConnectionName, DNS_CONNECTION_PROXY_TYPE Type);
+		public static extern uint32 DnsConnectionDeleteProxyInfo(char16* pwszConnectionName, DNS_CONNECTION_PROXY_TYPE Type);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DnsConnectionGetProxyList(PWSTR pwszConnectionName, out DNS_CONNECTION_PROXY_LIST pProxyList);
+		public static extern uint32 DnsConnectionGetProxyList(char16* pwszConnectionName, out DNS_CONNECTION_PROXY_LIST pProxyList);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DnsConnectionFreeProxyList(out DNS_CONNECTION_PROXY_LIST pProxyList);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1498,7 +1498,7 @@ namespace Win32
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 DnsConnectionDeletePolicyEntries(DNS_CONNECTION_POLICY_TAG PolicyEntryTag);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern DNS_SERVICE_INSTANCE* DnsServiceConstructInstance(PWSTR pServiceName, PWSTR pHostName, uint32* pIp4, IP6_ADDRESS* pIp6, uint16 wPort, uint16 wPriority, uint16 wWeight, uint32 dwPropertiesCount, PWSTR* keys, PWSTR* values);
+		public static extern DNS_SERVICE_INSTANCE* DnsServiceConstructInstance(char16* pServiceName, char16* pHostName, uint32* pIp4, IP6_ADDRESS* pIp6, uint16 wPort, uint16 wPriority, uint16 wWeight, uint32 dwPropertiesCount, char16** keys, char16** values);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern DNS_SERVICE_INSTANCE* DnsServiceCopyInstance(ref DNS_SERVICE_INSTANCE pOrig);
 		[Import("dnsapi.dll"), CLink, CallingConvention(.Stdcall)]

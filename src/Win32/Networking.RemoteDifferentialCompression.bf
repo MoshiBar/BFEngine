@@ -166,18 +166,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGeneratorParametersType(out GeneratorParametersType parametersType) mut => VT.GetGeneratorParametersType(ref this, out parametersType);
-			public HRESULT GetParametersVersion(out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) mut => VT.GetParametersVersion(ref this, out currentVersion, out minimumCompatibleAppVersion);
-			public HRESULT GetSerializeSize(out uint32 size) mut => VT.GetSerializeSize(ref this, out size);
-			public HRESULT Serialize(uint32 size, out uint8 parametersBlob, out uint32 bytesWritten) mut => VT.Serialize(ref this, size, out parametersBlob, out bytesWritten);
+			public HResult GetGeneratorParametersType(out GeneratorParametersType parametersType) mut => VT.GetGeneratorParametersType(ref this, out parametersType);
+			public HResult GetParametersVersion(out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) mut => VT.GetParametersVersion(ref this, out currentVersion, out minimumCompatibleAppVersion);
+			public HResult GetSerializeSize(out uint32 size) mut => VT.GetSerializeSize(ref this, out size);
+			public HResult Serialize(uint32 size, out uint8 parametersBlob, out uint32 bytesWritten) mut => VT.Serialize(ref this, size, out parametersBlob, out bytesWritten);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorParameters self, out GeneratorParametersType parametersType) GetGeneratorParametersType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorParameters self, out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) GetParametersVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorParameters self, out uint32 size) GetSerializeSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorParameters self, uint32 size, out uint8 parametersBlob, out uint32 bytesWritten) Serialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorParameters self, out GeneratorParametersType parametersType) GetGeneratorParametersType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorParameters self, out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) GetParametersVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorParameters self, out uint32 size) GetSerializeSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorParameters self, uint32 size, out uint8 parametersBlob, out uint32 bytesWritten) Serialize;
 			}
 		}
 		[CRepr]
@@ -187,18 +187,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetHorizonSize(out uint32 horizonSize) mut => VT.GetHorizonSize(ref this, out horizonSize);
-			public HRESULT SetHorizonSize(uint32 horizonSize) mut => VT.SetHorizonSize(ref this, horizonSize);
-			public HRESULT GetHashWindowSize(out uint32 hashWindowSize) mut => VT.GetHashWindowSize(ref this, out hashWindowSize);
-			public HRESULT SetHashWindowSize(uint32 hashWindowSize) mut => VT.SetHashWindowSize(ref this, hashWindowSize);
+			public HResult GetHorizonSize(out uint32 horizonSize) mut => VT.GetHorizonSize(ref this, out horizonSize);
+			public HResult SetHorizonSize(uint32 horizonSize) mut => VT.SetHorizonSize(ref this, horizonSize);
+			public HResult GetHashWindowSize(out uint32 hashWindowSize) mut => VT.GetHashWindowSize(ref this, out hashWindowSize);
+			public HResult SetHashWindowSize(uint32 hashWindowSize) mut => VT.SetHashWindowSize(ref this, hashWindowSize);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorFilterMaxParameters self, out uint32 horizonSize) GetHorizonSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorFilterMaxParameters self, uint32 horizonSize) SetHorizonSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorFilterMaxParameters self, out uint32 hashWindowSize) GetHashWindowSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGeneratorFilterMaxParameters self, uint32 hashWindowSize) SetHashWindowSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorFilterMaxParameters self, out uint32 horizonSize) GetHorizonSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorFilterMaxParameters self, uint32 horizonSize) SetHorizonSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorFilterMaxParameters self, out uint32 hashWindowSize) GetHashWindowSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGeneratorFilterMaxParameters self, uint32 hashWindowSize) SetHashWindowSize;
 			}
 		}
 		[CRepr]
@@ -208,14 +208,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGeneratorParameters(uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) mut => VT.GetGeneratorParameters(ref this, level, out iGeneratorParameters);
-			public HRESULT Process(BOOL endOfInput, out BOOL endOfOutput, out RdcBufferPointer inputBuffer, uint32 depth, RdcBufferPointer** outputBuffers, out RDC_ErrorCode rdc_ErrorCode) mut => VT.Process(ref this, endOfInput, out endOfOutput, out inputBuffer, depth, outputBuffers, out rdc_ErrorCode);
+			public HResult GetGeneratorParameters(uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) mut => VT.GetGeneratorParameters(ref this, level, out iGeneratorParameters);
+			public HResult Process(IntBool endOfInput, out IntBool endOfOutput, out RdcBufferPointer inputBuffer, uint32 depth, RdcBufferPointer** outputBuffers, out RDC_ErrorCode rdc_ErrorCode) mut => VT.Process(ref this, endOfInput, out endOfOutput, out inputBuffer, depth, outputBuffers, out rdc_ErrorCode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGenerator self, uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) GetGeneratorParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcGenerator self, BOOL endOfInput, out BOOL endOfOutput, out RdcBufferPointer inputBuffer, uint32 depth, RdcBufferPointer** outputBuffers, out RDC_ErrorCode rdc_ErrorCode) Process;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGenerator self, uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) GetGeneratorParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcGenerator self, IntBool endOfInput, out IntBool endOfOutput, out RdcBufferPointer inputBuffer, uint32 depth, RdcBufferPointer** outputBuffers, out RDC_ErrorCode rdc_ErrorCode) Process;
 			}
 		}
 		[CRepr]
@@ -225,16 +225,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetFileSize(out uint64 fileSize) mut => VT.GetFileSize(ref this, out fileSize);
-			public HRESULT Read(uint64 offsetFileStart, uint32 bytesToRead, out uint32 bytesActuallyRead, out uint8 buffer, out BOOL eof) mut => VT.Read(ref this, offsetFileStart, bytesToRead, out bytesActuallyRead, out buffer, out eof);
-			public HRESULT GetFilePosition(out uint64 offsetFromStart) mut => VT.GetFilePosition(ref this, out offsetFromStart);
+			public HResult GetFileSize(out uint64 fileSize) mut => VT.GetFileSize(ref this, out fileSize);
+			public HResult Read(uint64 offsetFileStart, uint32 bytesToRead, out uint32 bytesActuallyRead, out uint8 buffer, out IntBool eof) mut => VT.Read(ref this, offsetFileStart, bytesToRead, out bytesActuallyRead, out buffer, out eof);
+			public HResult GetFilePosition(out uint64 offsetFromStart) mut => VT.GetFilePosition(ref this, out offsetFromStart);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcFileReader self, out uint64 fileSize) GetFileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcFileReader self, uint64 offsetFileStart, uint32 bytesToRead, out uint32 bytesActuallyRead, out uint8 buffer, out BOOL eof) Read;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcFileReader self, out uint64 offsetFromStart) GetFilePosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcFileReader self, out uint64 fileSize) GetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcFileReader self, uint64 offsetFileStart, uint32 bytesToRead, out uint32 bytesActuallyRead, out uint8 buffer, out IntBool eof) Read;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcFileReader self, out uint64 offsetFromStart) GetFilePosition;
 			}
 		}
 		[CRepr]
@@ -244,16 +244,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Write(uint64 offsetFileStart, uint32 bytesToWrite, out uint8 buffer) mut => VT.Write(ref this, offsetFileStart, bytesToWrite, out buffer);
-			public HRESULT Truncate() mut => VT.Truncate(ref this);
-			public HRESULT DeleteOnClose() mut => VT.DeleteOnClose(ref this);
+			public HResult Write(uint64 offsetFileStart, uint32 bytesToWrite, out uint8 buffer) mut => VT.Write(ref this, offsetFileStart, bytesToWrite, out buffer);
+			public HResult Truncate() mut => VT.Truncate(ref this);
+			public HResult DeleteOnClose() mut => VT.DeleteOnClose(ref this);
 
 			[CRepr]
 			public struct VTable : IRdcFileReader.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcFileWriter self, uint64 offsetFileStart, uint32 bytesToWrite, out uint8 buffer) Write;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcFileWriter self) Truncate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcFileWriter self) DeleteOnClose;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcFileWriter self, uint64 offsetFileStart, uint32 bytesToWrite, out uint8 buffer) Write;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcFileWriter self) Truncate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcFileWriter self) DeleteOnClose;
 			}
 		}
 		[CRepr]
@@ -263,14 +263,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ReadHeader(out RDC_ErrorCode rdc_ErrorCode) mut => VT.ReadHeader(ref this, out rdc_ErrorCode);
-			public HRESULT ReadSignatures(out RdcSignaturePointer rdcSignaturePointer, out BOOL endOfOutput) mut => VT.ReadSignatures(ref this, out rdcSignaturePointer, out endOfOutput);
+			public HResult ReadHeader(out RDC_ErrorCode rdc_ErrorCode) mut => VT.ReadHeader(ref this, out rdc_ErrorCode);
+			public HResult ReadSignatures(out RdcSignaturePointer rdcSignaturePointer, out IntBool endOfOutput) mut => VT.ReadSignatures(ref this, out rdcSignaturePointer, out endOfOutput);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcSignatureReader self, out RDC_ErrorCode rdc_ErrorCode) ReadHeader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcSignatureReader self, out RdcSignaturePointer rdcSignaturePointer, out BOOL endOfOutput) ReadSignatures;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcSignatureReader self, out RDC_ErrorCode rdc_ErrorCode) ReadHeader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcSignatureReader self, out RdcSignaturePointer rdcSignaturePointer, out IntBool endOfOutput) ReadSignatures;
 			}
 		}
 		[CRepr]
@@ -280,12 +280,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Process(BOOL endOfInput, out BOOL endOfOutput, out RdcBufferPointer inputBuffer, out RdcNeedPointer outputBuffer, out RDC_ErrorCode rdc_ErrorCode) mut => VT.Process(ref this, endOfInput, out endOfOutput, out inputBuffer, out outputBuffer, out rdc_ErrorCode);
+			public HResult Process(IntBool endOfInput, out IntBool endOfOutput, out RdcBufferPointer inputBuffer, out RdcNeedPointer outputBuffer, out RDC_ErrorCode rdc_ErrorCode) mut => VT.Process(ref this, endOfInput, out endOfOutput, out inputBuffer, out outputBuffer, out rdc_ErrorCode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcComparator self, BOOL endOfInput, out BOOL endOfOutput, out RdcBufferPointer inputBuffer, out RdcNeedPointer outputBuffer, out RDC_ErrorCode rdc_ErrorCode) Process;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcComparator self, IntBool endOfInput, out IntBool endOfOutput, out RdcBufferPointer inputBuffer, out RdcNeedPointer outputBuffer, out RDC_ErrorCode rdc_ErrorCode) Process;
 			}
 		}
 		[CRepr]
@@ -295,24 +295,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ComputeDefaultRecursionDepth(uint64 fileSize, out uint32 depth) mut => VT.ComputeDefaultRecursionDepth(ref this, fileSize, out depth);
-			public HRESULT CreateGeneratorParameters(GeneratorParametersType parametersType, uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) mut => VT.CreateGeneratorParameters(ref this, parametersType, level, out iGeneratorParameters);
-			public HRESULT OpenGeneratorParameters(uint32 size, in uint8 parametersBlob, out IRdcGeneratorParameters* iGeneratorParameters) mut => VT.OpenGeneratorParameters(ref this, size, parametersBlob, out iGeneratorParameters);
-			public HRESULT CreateGenerator(uint32 depth, IRdcGeneratorParameters** iGeneratorParametersArray, out IRdcGenerator* iGenerator) mut => VT.CreateGenerator(ref this, depth, iGeneratorParametersArray, out iGenerator);
-			public HRESULT CreateComparator(ref IRdcFileReader iSeedSignaturesFile, uint32 comparatorBufferSize, out IRdcComparator* iComparator) mut => VT.CreateComparator(ref this, ref iSeedSignaturesFile, comparatorBufferSize, out iComparator);
-			public HRESULT CreateSignatureReader(ref IRdcFileReader iFileReader, out IRdcSignatureReader* iSignatureReader) mut => VT.CreateSignatureReader(ref this, ref iFileReader, out iSignatureReader);
-			public HRESULT GetRDCVersion(out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) mut => VT.GetRDCVersion(ref this, out currentVersion, out minimumCompatibleAppVersion);
+			public HResult ComputeDefaultRecursionDepth(uint64 fileSize, out uint32 depth) mut => VT.ComputeDefaultRecursionDepth(ref this, fileSize, out depth);
+			public HResult CreateGeneratorParameters(GeneratorParametersType parametersType, uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) mut => VT.CreateGeneratorParameters(ref this, parametersType, level, out iGeneratorParameters);
+			public HResult OpenGeneratorParameters(uint32 size, in uint8 parametersBlob, out IRdcGeneratorParameters* iGeneratorParameters) mut => VT.OpenGeneratorParameters(ref this, size, parametersBlob, out iGeneratorParameters);
+			public HResult CreateGenerator(uint32 depth, IRdcGeneratorParameters** iGeneratorParametersArray, out IRdcGenerator* iGenerator) mut => VT.CreateGenerator(ref this, depth, iGeneratorParametersArray, out iGenerator);
+			public HResult CreateComparator(ref IRdcFileReader iSeedSignaturesFile, uint32 comparatorBufferSize, out IRdcComparator* iComparator) mut => VT.CreateComparator(ref this, ref iSeedSignaturesFile, comparatorBufferSize, out iComparator);
+			public HResult CreateSignatureReader(ref IRdcFileReader iFileReader, out IRdcSignatureReader* iSignatureReader) mut => VT.CreateSignatureReader(ref this, ref iFileReader, out iSignatureReader);
+			public HResult GetRDCVersion(out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) mut => VT.GetRDCVersion(ref this, out currentVersion, out minimumCompatibleAppVersion);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, uint64 fileSize, out uint32 depth) ComputeDefaultRecursionDepth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, GeneratorParametersType parametersType, uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) CreateGeneratorParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, uint32 size, in uint8 parametersBlob, out IRdcGeneratorParameters* iGeneratorParameters) OpenGeneratorParameters;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, uint32 depth, IRdcGeneratorParameters** iGeneratorParametersArray, out IRdcGenerator* iGenerator) CreateGenerator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, ref IRdcFileReader iSeedSignaturesFile, uint32 comparatorBufferSize, out IRdcComparator* iComparator) CreateComparator;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, ref IRdcFileReader iFileReader, out IRdcSignatureReader* iSignatureReader) CreateSignatureReader;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcLibrary self, out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) GetRDCVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, uint64 fileSize, out uint32 depth) ComputeDefaultRecursionDepth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, GeneratorParametersType parametersType, uint32 level, out IRdcGeneratorParameters* iGeneratorParameters) CreateGeneratorParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, uint32 size, in uint8 parametersBlob, out IRdcGeneratorParameters* iGeneratorParameters) OpenGeneratorParameters;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, uint32 depth, IRdcGeneratorParameters** iGeneratorParametersArray, out IRdcGenerator* iGenerator) CreateGenerator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, ref IRdcFileReader iSeedSignaturesFile, uint32 comparatorBufferSize, out IRdcComparator* iComparator) CreateComparator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, ref IRdcFileReader iFileReader, out IRdcSignatureReader* iSignatureReader) CreateSignatureReader;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcLibrary self, out uint32 currentVersion, out uint32 minimumCompatibleAppVersion) GetRDCVersion;
 			}
 		}
 		[CRepr]
@@ -322,12 +322,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ReportProgress(uint32 percentCompleted) mut => VT.ReportProgress(ref this, percentCompleted);
+			public HResult ReportProgress(uint32 percentCompleted) mut => VT.ReportProgress(ref this, percentCompleted);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityReportProgress self, uint32 percentCompleted) ReportProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityReportProgress self, uint32 percentCompleted) ReportProgress;
 			}
 		}
 		[CRepr]
@@ -337,12 +337,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetNextData(uint32 resultsSize, out uint32 resultsUsed, out BOOL eof, out SimilarityDumpData results) mut => VT.GetNextData(ref this, resultsSize, out resultsUsed, out eof, out results);
+			public HResult GetNextData(uint32 resultsSize, out uint32 resultsUsed, out IntBool eof, out SimilarityDumpData results) mut => VT.GetNextData(ref this, resultsSize, out resultsUsed, out eof, out results);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTableDumpState self, uint32 resultsSize, out uint32 resultsUsed, out BOOL eof, out SimilarityDumpData results) GetNextData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTableDumpState self, uint32 resultsSize, out uint32 resultsUsed, out IntBool eof, out SimilarityDumpData results) GetNextData;
 			}
 		}
 		[CRepr]
@@ -352,17 +352,17 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Flush() mut => VT.Flush(ref this);
-			public HRESULT Unmap() mut => VT.Unmap(ref this);
-			public HRESULT Get(uint64 index, BOOL dirty, uint32 numElements, out SimilarityMappedViewInfo viewInfo) mut => VT.Get(ref this, index, dirty, numElements, out viewInfo);
+			public HResult Flush() mut => VT.Flush(ref this);
+			public HResult Unmap() mut => VT.Unmap(ref this);
+			public HResult Get(uint64 index, IntBool dirty, uint32 numElements, out SimilarityMappedViewInfo viewInfo) mut => VT.Get(ref this, index, dirty, numElements, out viewInfo);
 			public void GetView(out uint8* mappedPageBegin, out uint8* mappedPageEnd) mut => VT.GetView(ref this, out mappedPageBegin, out mappedPageEnd);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMappedView self) Flush;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMappedView self) Unmap;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMappedView self, uint64 index, BOOL dirty, uint32 numElements, out SimilarityMappedViewInfo viewInfo) Get;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMappedView self) Flush;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMappedView self) Unmap;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMappedView self, uint64 index, IntBool dirty, uint32 numElements, out SimilarityMappedViewInfo viewInfo) Get;
 				public new function [CallingConvention(.Stdcall)] void(ref ISimilarityTraitsMappedView self, out uint8* mappedPageBegin, out uint8* mappedPageEnd) GetView;
 			}
 		}
@@ -374,23 +374,23 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public void CloseMapping() mut => VT.CloseMapping(ref this);
-			public HRESULT SetFileSize(uint64 fileSize) mut => VT.SetFileSize(ref this, fileSize);
-			public HRESULT GetFileSize(out uint64 fileSize) mut => VT.GetFileSize(ref this, out fileSize);
-			public HRESULT OpenMapping(RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) mut => VT.OpenMapping(ref this, accessMode, begin, end, out actualEnd);
-			public HRESULT ResizeMapping(RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) mut => VT.ResizeMapping(ref this, accessMode, begin, end, out actualEnd);
+			public HResult SetFileSize(uint64 fileSize) mut => VT.SetFileSize(ref this, fileSize);
+			public HResult GetFileSize(out uint64 fileSize) mut => VT.GetFileSize(ref this, out fileSize);
+			public HResult OpenMapping(RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) mut => VT.OpenMapping(ref this, accessMode, begin, end, out actualEnd);
+			public HResult ResizeMapping(RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) mut => VT.ResizeMapping(ref this, accessMode, begin, end, out actualEnd);
 			public void GetPageSize(out uint32 pageSize) mut => VT.GetPageSize(ref this, out pageSize);
-			public HRESULT CreateView(uint32 minimumMappedPages, RdcMappingAccessMode accessMode, out ISimilarityTraitsMappedView* mappedView) mut => VT.CreateView(ref this, minimumMappedPages, accessMode, out mappedView);
+			public HResult CreateView(uint32 minimumMappedPages, RdcMappingAccessMode accessMode, out ISimilarityTraitsMappedView* mappedView) mut => VT.CreateView(ref this, minimumMappedPages, accessMode, out mappedView);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref ISimilarityTraitsMapping self) CloseMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMapping self, uint64 fileSize) SetFileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMapping self, out uint64 fileSize) GetFileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMapping self, RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) OpenMapping;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMapping self, RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) ResizeMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMapping self, uint64 fileSize) SetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMapping self, out uint64 fileSize) GetFileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMapping self, RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) OpenMapping;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMapping self, RdcMappingAccessMode accessMode, uint64 begin, uint64 end, out uint64 actualEnd) ResizeMapping;
 				public new function [CallingConvention(.Stdcall)] void(ref ISimilarityTraitsMapping self, out uint32 pageSize) GetPageSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsMapping self, uint32 minimumMappedPages, RdcMappingAccessMode accessMode, out ISimilarityTraitsMappedView* mappedView) CreateView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsMapping self, uint32 minimumMappedPages, RdcMappingAccessMode accessMode, out ISimilarityTraitsMappedView* mappedView) CreateView;
 			}
 		}
 		[CRepr]
@@ -400,24 +400,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateTable(PWSTR path, BOOL truncate, ref uint8 securityDescriptor, out RdcCreatedTables isNew) mut => VT.CreateTable(ref this, path, truncate, ref securityDescriptor, out isNew);
-			public HRESULT CreateTableIndirect(ref ISimilarityTraitsMapping mapping, BOOL truncate, out RdcCreatedTables isNew) mut => VT.CreateTableIndirect(ref this, ref mapping, truncate, out isNew);
-			public HRESULT CloseTable(BOOL isValid) mut => VT.CloseTable(ref this, isValid);
-			public HRESULT Append(ref SimilarityData data, uint32 fileIndex) mut => VT.Append(ref this, ref data, fileIndex);
-			public HRESULT FindSimilarFileIndex(ref SimilarityData similarityData, uint16 numberOfMatchesRequired, out FindSimilarFileIndexResults findSimilarFileIndexResults, uint32 resultsSize, out uint32 resultsUsed) mut => VT.FindSimilarFileIndex(ref this, ref similarityData, numberOfMatchesRequired, out findSimilarFileIndexResults, resultsSize, out resultsUsed);
-			public HRESULT BeginDump(out ISimilarityTableDumpState* similarityTableDumpState) mut => VT.BeginDump(ref this, out similarityTableDumpState);
-			public HRESULT GetLastIndex(out uint32 fileIndex) mut => VT.GetLastIndex(ref this, out fileIndex);
+			public HResult CreateTable(char16* path, IntBool truncate, ref uint8 securityDescriptor, out RdcCreatedTables isNew) mut => VT.CreateTable(ref this, path, truncate, ref securityDescriptor, out isNew);
+			public HResult CreateTableIndirect(ref ISimilarityTraitsMapping mapping, IntBool truncate, out RdcCreatedTables isNew) mut => VT.CreateTableIndirect(ref this, ref mapping, truncate, out isNew);
+			public HResult CloseTable(IntBool isValid) mut => VT.CloseTable(ref this, isValid);
+			public HResult Append(ref SimilarityData data, uint32 fileIndex) mut => VT.Append(ref this, ref data, fileIndex);
+			public HResult FindSimilarFileIndex(ref SimilarityData similarityData, uint16 numberOfMatchesRequired, out FindSimilarFileIndexResults findSimilarFileIndexResults, uint32 resultsSize, out uint32 resultsUsed) mut => VT.FindSimilarFileIndex(ref this, ref similarityData, numberOfMatchesRequired, out findSimilarFileIndexResults, resultsSize, out resultsUsed);
+			public HResult BeginDump(out ISimilarityTableDumpState* similarityTableDumpState) mut => VT.BeginDump(ref this, out similarityTableDumpState);
+			public HResult GetLastIndex(out uint32 fileIndex) mut => VT.GetLastIndex(ref this, out fileIndex);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, PWSTR path, BOOL truncate, ref uint8 securityDescriptor, out RdcCreatedTables isNew) CreateTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, ref ISimilarityTraitsMapping mapping, BOOL truncate, out RdcCreatedTables isNew) CreateTableIndirect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, BOOL isValid) CloseTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, ref SimilarityData data, uint32 fileIndex) Append;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, ref SimilarityData similarityData, uint16 numberOfMatchesRequired, out FindSimilarFileIndexResults findSimilarFileIndexResults, uint32 resultsSize, out uint32 resultsUsed) FindSimilarFileIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, out ISimilarityTableDumpState* similarityTableDumpState) BeginDump;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityTraitsTable self, out uint32 fileIndex) GetLastIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, char16* path, IntBool truncate, ref uint8 securityDescriptor, out RdcCreatedTables isNew) CreateTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, ref ISimilarityTraitsMapping mapping, IntBool truncate, out RdcCreatedTables isNew) CreateTableIndirect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, IntBool isValid) CloseTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, ref SimilarityData data, uint32 fileIndex) Append;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, ref SimilarityData similarityData, uint16 numberOfMatchesRequired, out FindSimilarFileIndexResults findSimilarFileIndexResults, uint32 resultsSize, out uint32 resultsUsed) FindSimilarFileIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, out ISimilarityTableDumpState* similarityTableDumpState) BeginDump;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityTraitsTable self, out uint32 fileIndex) GetLastIndex;
 			}
 		}
 		[CRepr]
@@ -427,24 +427,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateTable(PWSTR path, BOOL truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTable(ref this, path, truncate, ref securityDescriptor, recordSize, out isNew);
-			public HRESULT CreateTableIndirect(ref IRdcFileWriter fileIdFile, BOOL truncate, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTableIndirect(ref this, ref fileIdFile, truncate, recordSize, out isNew);
-			public HRESULT CloseTable(BOOL isValid) mut => VT.CloseTable(ref this, isValid);
-			public HRESULT Append(ref SimilarityFileId similarityFileId, out uint32 similarityFileIndex) mut => VT.Append(ref this, ref similarityFileId, out similarityFileIndex);
-			public HRESULT Lookup(uint32 similarityFileIndex, out SimilarityFileId similarityFileId) mut => VT.Lookup(ref this, similarityFileIndex, out similarityFileId);
-			public HRESULT Invalidate(uint32 similarityFileIndex) mut => VT.Invalidate(ref this, similarityFileIndex);
-			public HRESULT GetRecordCount(out uint32 recordCount) mut => VT.GetRecordCount(ref this, out recordCount);
+			public HResult CreateTable(char16* path, IntBool truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTable(ref this, path, truncate, ref securityDescriptor, recordSize, out isNew);
+			public HResult CreateTableIndirect(ref IRdcFileWriter fileIdFile, IntBool truncate, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTableIndirect(ref this, ref fileIdFile, truncate, recordSize, out isNew);
+			public HResult CloseTable(IntBool isValid) mut => VT.CloseTable(ref this, isValid);
+			public HResult Append(ref SimilarityFileId similarityFileId, out uint32 similarityFileIndex) mut => VT.Append(ref this, ref similarityFileId, out similarityFileIndex);
+			public HResult Lookup(uint32 similarityFileIndex, out SimilarityFileId similarityFileId) mut => VT.Lookup(ref this, similarityFileIndex, out similarityFileId);
+			public HResult Invalidate(uint32 similarityFileIndex) mut => VT.Invalidate(ref this, similarityFileIndex);
+			public HResult GetRecordCount(out uint32 recordCount) mut => VT.GetRecordCount(ref this, out recordCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, PWSTR path, BOOL truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) CreateTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, ref IRdcFileWriter fileIdFile, BOOL truncate, uint32 recordSize, out RdcCreatedTables isNew) CreateTableIndirect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, BOOL isValid) CloseTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, ref SimilarityFileId similarityFileId, out uint32 similarityFileIndex) Append;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, uint32 similarityFileIndex, out SimilarityFileId similarityFileId) Lookup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, uint32 similarityFileIndex) Invalidate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarityFileIdTable self, out uint32 recordCount) GetRecordCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, char16* path, IntBool truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) CreateTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, ref IRdcFileWriter fileIdFile, IntBool truncate, uint32 recordSize, out RdcCreatedTables isNew) CreateTableIndirect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, IntBool isValid) CloseTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, ref SimilarityFileId similarityFileId, out uint32 similarityFileIndex) Append;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, uint32 similarityFileIndex, out SimilarityFileId similarityFileId) Lookup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, uint32 similarityFileIndex) Invalidate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarityFileIdTable self, out uint32 recordCount) GetRecordCount;
 			}
 		}
 		[CRepr]
@@ -454,14 +454,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EnableSimilarity() mut => VT.EnableSimilarity(ref this);
-			public HRESULT Results(out SimilarityData similarityData) mut => VT.Results(ref this, out similarityData);
+			public HResult EnableSimilarity() mut => VT.EnableSimilarity(ref this);
+			public HResult Results(out SimilarityData similarityData) mut => VT.Results(ref this, out similarityData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcSimilarityGenerator self) EnableSimilarity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRdcSimilarityGenerator self, out SimilarityData similarityData) Results;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcSimilarityGenerator self) EnableSimilarity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRdcSimilarityGenerator self, out SimilarityData similarityData) Results;
 			}
 		}
 		[CRepr]
@@ -471,14 +471,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSize(out uint32 size) mut => VT.GetSize(ref this, out size);
-			public HRESULT GetNextFileId(out uint32 numTraitsMatched, out SimilarityFileId similarityFileId) mut => VT.GetNextFileId(ref this, out numTraitsMatched, out similarityFileId);
+			public HResult GetSize(out uint32 size) mut => VT.GetSize(ref this, out size);
+			public HResult GetNextFileId(out uint32 numTraitsMatched, out SimilarityFileId similarityFileId) mut => VT.GetNextFileId(ref this, out numTraitsMatched, out similarityFileId);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFindSimilarResults self, out uint32 size) GetSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFindSimilarResults self, out uint32 numTraitsMatched, out SimilarityFileId similarityFileId) GetNextFileId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFindSimilarResults self, out uint32 size) GetSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFindSimilarResults self, out uint32 numTraitsMatched, out SimilarityFileId similarityFileId) GetNextFileId;
 			}
 		}
 		[CRepr]
@@ -488,24 +488,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateTable(PWSTR path, BOOL truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTable(ref this, path, truncate, ref securityDescriptor, recordSize, out isNew);
-			public HRESULT CreateTableIndirect(ref ISimilarityTraitsMapping mapping, ref IRdcFileWriter fileIdFile, BOOL truncate, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTableIndirect(ref this, ref mapping, ref fileIdFile, truncate, recordSize, out isNew);
-			public HRESULT CloseTable(BOOL isValid) mut => VT.CloseTable(ref this, isValid);
-			public HRESULT Append(ref SimilarityFileId similarityFileId, ref SimilarityData similarityData) mut => VT.Append(ref this, ref similarityFileId, ref similarityData);
-			public HRESULT FindSimilarFileId(ref SimilarityData similarityData, uint16 numberOfMatchesRequired, uint32 resultsSize, out IFindSimilarResults* findSimilarResults) mut => VT.FindSimilarFileId(ref this, ref similarityData, numberOfMatchesRequired, resultsSize, out findSimilarResults);
-			public HRESULT CopyAndSwap(ref ISimilarity newSimilarityTables, ref ISimilarityReportProgress reportProgress) mut => VT.CopyAndSwap(ref this, ref newSimilarityTables, ref reportProgress);
-			public HRESULT GetRecordCount(out uint32 recordCount) mut => VT.GetRecordCount(ref this, out recordCount);
+			public HResult CreateTable(char16* path, IntBool truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTable(ref this, path, truncate, ref securityDescriptor, recordSize, out isNew);
+			public HResult CreateTableIndirect(ref ISimilarityTraitsMapping mapping, ref IRdcFileWriter fileIdFile, IntBool truncate, uint32 recordSize, out RdcCreatedTables isNew) mut => VT.CreateTableIndirect(ref this, ref mapping, ref fileIdFile, truncate, recordSize, out isNew);
+			public HResult CloseTable(IntBool isValid) mut => VT.CloseTable(ref this, isValid);
+			public HResult Append(ref SimilarityFileId similarityFileId, ref SimilarityData similarityData) mut => VT.Append(ref this, ref similarityFileId, ref similarityData);
+			public HResult FindSimilarFileId(ref SimilarityData similarityData, uint16 numberOfMatchesRequired, uint32 resultsSize, out IFindSimilarResults* findSimilarResults) mut => VT.FindSimilarFileId(ref this, ref similarityData, numberOfMatchesRequired, resultsSize, out findSimilarResults);
+			public HResult CopyAndSwap(ref ISimilarity newSimilarityTables, ref ISimilarityReportProgress reportProgress) mut => VT.CopyAndSwap(ref this, ref newSimilarityTables, ref reportProgress);
+			public HResult GetRecordCount(out uint32 recordCount) mut => VT.GetRecordCount(ref this, out recordCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, PWSTR path, BOOL truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) CreateTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, ref ISimilarityTraitsMapping mapping, ref IRdcFileWriter fileIdFile, BOOL truncate, uint32 recordSize, out RdcCreatedTables isNew) CreateTableIndirect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, BOOL isValid) CloseTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, ref SimilarityFileId similarityFileId, ref SimilarityData similarityData) Append;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, ref SimilarityData similarityData, uint16 numberOfMatchesRequired, uint32 resultsSize, out IFindSimilarResults* findSimilarResults) FindSimilarFileId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, ref ISimilarity newSimilarityTables, ref ISimilarityReportProgress reportProgress) CopyAndSwap;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISimilarity self, out uint32 recordCount) GetRecordCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, char16* path, IntBool truncate, ref uint8 securityDescriptor, uint32 recordSize, out RdcCreatedTables isNew) CreateTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, ref ISimilarityTraitsMapping mapping, ref IRdcFileWriter fileIdFile, IntBool truncate, uint32 recordSize, out RdcCreatedTables isNew) CreateTableIndirect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, IntBool isValid) CloseTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, ref SimilarityFileId similarityFileId, ref SimilarityData similarityData) Append;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, ref SimilarityData similarityData, uint16 numberOfMatchesRequired, uint32 resultsSize, out IFindSimilarResults* findSimilarResults) FindSimilarFileId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, ref ISimilarity newSimilarityTables, ref ISimilarityReportProgress reportProgress) CopyAndSwap;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISimilarity self, out uint32 recordCount) GetRecordCount;
 			}
 		}
 		

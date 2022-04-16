@@ -1,5 +1,6 @@
 using System;
-using Windows;
+using static Win32.Win32;
+
 namespace BfEngine
 {
 	class Time
@@ -25,12 +26,12 @@ namespace BfEngine
 		public static float UITime;
 
 		public static void Init(){
-			TimerFrequency = Kernel32.QueryPerformanceFrequency();
-			StartTicks = ElapsedTicks = Kernel32.QueryPerformanceCounter();
+			TimerFrequency = QueryPerformanceFrequency();
+			StartTicks = ElapsedTicks = QueryPerformanceCounter();
 		}
 
 		public static void Update(){
-			uint64 newElapsedTicks = Kernel32.QueryPerformanceCounter();
+			uint64 newElapsedTicks = QueryPerformanceCounter();
 			UnscaledTime = (double)(newElapsedTicks - StartTicks) / (double)TimerFrequency;
 			UnscaledDeltaTime = (double)(newElapsedTicks - ElapsedTicks) / (double)TimerFrequency;
 
@@ -45,7 +46,6 @@ namespace BfEngine
 			SmoothDeltaTime = averager.average;
 		}
 
-		public static double GetTimeExact() => (double)(Kernel32.QueryPerformanceCounter() - StartTicks) / (double)TimerFrequency;
-
+		public static double GetTimeExact() => (double)(QueryPerformanceCounter() - StartTicks) / (double)TimerFrequency;
 	}
 }

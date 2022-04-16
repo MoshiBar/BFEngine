@@ -39,7 +39,7 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function void HCN_NOTIFICATION_CALLBACK(uint32 NotificationType, void* Context, HRESULT NotificationStatus, PWSTR NotificationData);
+		public function void HCN_NOTIFICATION_CALLBACK(uint32 NotificationType, void* Context, HResult NotificationStatus, char16* NotificationData);
 		
 		// --- Structs ---
 		
@@ -66,85 +66,85 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnEnumerateNetworks(PWSTR Query, out PWSTR Networks, PWSTR* ErrorRecord);
+		public static extern HResult HcnEnumerateNetworks(char16* Query, out char16* Networks, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCreateNetwork(in Guid Id, PWSTR Settings, void** Network, PWSTR* ErrorRecord);
+		public static extern HResult HcnCreateNetwork(in Guid Id, char16* Settings, void** Network, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnOpenNetwork(in Guid Id, void** Network, PWSTR* ErrorRecord);
+		public static extern HResult HcnOpenNetwork(in Guid Id, void** Network, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnModifyNetwork(void* Network, PWSTR Settings, PWSTR* ErrorRecord);
+		public static extern HResult HcnModifyNetwork(void* Network, char16* Settings, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnQueryNetworkProperties(void* Network, PWSTR Query, out PWSTR Properties, PWSTR* ErrorRecord);
+		public static extern HResult HcnQueryNetworkProperties(void* Network, char16* Query, out char16* Properties, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnDeleteNetwork(in Guid Id, PWSTR* ErrorRecord);
+		public static extern HResult HcnDeleteNetwork(in Guid Id, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCloseNetwork(void* Network);
+		public static extern HResult HcnCloseNetwork(void* Network);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnEnumerateNamespaces(PWSTR Query, out PWSTR Namespaces, PWSTR* ErrorRecord);
+		public static extern HResult HcnEnumerateNamespaces(char16* Query, out char16* Namespaces, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCreateNamespace(in Guid Id, PWSTR Settings, void** Namespace, PWSTR* ErrorRecord);
+		public static extern HResult HcnCreateNamespace(in Guid Id, char16* Settings, void** Namespace, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnOpenNamespace(in Guid Id, void** Namespace, PWSTR* ErrorRecord);
+		public static extern HResult HcnOpenNamespace(in Guid Id, void** Namespace, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnModifyNamespace(void* Namespace, PWSTR Settings, PWSTR* ErrorRecord);
+		public static extern HResult HcnModifyNamespace(void* Namespace, char16* Settings, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnQueryNamespaceProperties(void* Namespace, PWSTR Query, out PWSTR Properties, PWSTR* ErrorRecord);
+		public static extern HResult HcnQueryNamespaceProperties(void* Namespace, char16* Query, out char16* Properties, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnDeleteNamespace(in Guid Id, PWSTR* ErrorRecord);
+		public static extern HResult HcnDeleteNamespace(in Guid Id, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCloseNamespace(void* Namespace);
+		public static extern HResult HcnCloseNamespace(void* Namespace);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnEnumerateEndpoints(PWSTR Query, out PWSTR Endpoints, PWSTR* ErrorRecord);
+		public static extern HResult HcnEnumerateEndpoints(char16* Query, out char16* Endpoints, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCreateEndpoint(void* Network, in Guid Id, PWSTR Settings, void** Endpoint, PWSTR* ErrorRecord);
+		public static extern HResult HcnCreateEndpoint(void* Network, in Guid Id, char16* Settings, void** Endpoint, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnOpenEndpoint(in Guid Id, void** Endpoint, PWSTR* ErrorRecord);
+		public static extern HResult HcnOpenEndpoint(in Guid Id, void** Endpoint, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnModifyEndpoint(void* Endpoint, PWSTR Settings, PWSTR* ErrorRecord);
+		public static extern HResult HcnModifyEndpoint(void* Endpoint, char16* Settings, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnQueryEndpointProperties(void* Endpoint, PWSTR Query, out PWSTR Properties, PWSTR* ErrorRecord);
+		public static extern HResult HcnQueryEndpointProperties(void* Endpoint, char16* Query, out char16* Properties, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnDeleteEndpoint(in Guid Id, PWSTR* ErrorRecord);
+		public static extern HResult HcnDeleteEndpoint(in Guid Id, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCloseEndpoint(void* Endpoint);
+		public static extern HResult HcnCloseEndpoint(void* Endpoint);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnEnumerateLoadBalancers(PWSTR Query, out PWSTR LoadBalancer, PWSTR* ErrorRecord);
+		public static extern HResult HcnEnumerateLoadBalancers(char16* Query, out char16* LoadBalancer, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCreateLoadBalancer(in Guid Id, PWSTR Settings, void** LoadBalancer, PWSTR* ErrorRecord);
+		public static extern HResult HcnCreateLoadBalancer(in Guid Id, char16* Settings, void** LoadBalancer, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnOpenLoadBalancer(in Guid Id, void** LoadBalancer, PWSTR* ErrorRecord);
+		public static extern HResult HcnOpenLoadBalancer(in Guid Id, void** LoadBalancer, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnModifyLoadBalancer(void* LoadBalancer, PWSTR Settings, PWSTR* ErrorRecord);
+		public static extern HResult HcnModifyLoadBalancer(void* LoadBalancer, char16* Settings, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnQueryLoadBalancerProperties(void* LoadBalancer, PWSTR Query, out PWSTR Properties, PWSTR* ErrorRecord);
+		public static extern HResult HcnQueryLoadBalancerProperties(void* LoadBalancer, char16* Query, out char16* Properties, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnDeleteLoadBalancer(in Guid Id, PWSTR* ErrorRecord);
+		public static extern HResult HcnDeleteLoadBalancer(in Guid Id, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCloseLoadBalancer(void* LoadBalancer);
+		public static extern HResult HcnCloseLoadBalancer(void* LoadBalancer);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnRegisterServiceCallback(HCN_NOTIFICATION_CALLBACK Callback, void* Context, void** CallbackHandle);
+		public static extern HResult HcnRegisterServiceCallback(HCN_NOTIFICATION_CALLBACK Callback, void* Context, void** CallbackHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnUnregisterServiceCallback(void* CallbackHandle);
+		public static extern HResult HcnUnregisterServiceCallback(void* CallbackHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnRegisterGuestNetworkServiceCallback(void* GuestNetworkService, HCN_NOTIFICATION_CALLBACK Callback, void* Context, void** CallbackHandle);
+		public static extern HResult HcnRegisterGuestNetworkServiceCallback(void* GuestNetworkService, HCN_NOTIFICATION_CALLBACK Callback, void* Context, void** CallbackHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnUnregisterGuestNetworkServiceCallback(void* CallbackHandle);
+		public static extern HResult HcnUnregisterGuestNetworkServiceCallback(void* CallbackHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCreateGuestNetworkService(in Guid Id, PWSTR Settings, void** GuestNetworkService, PWSTR* ErrorRecord);
+		public static extern HResult HcnCreateGuestNetworkService(in Guid Id, char16* Settings, void** GuestNetworkService, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnCloseGuestNetworkService(void* GuestNetworkService);
+		public static extern HResult HcnCloseGuestNetworkService(void* GuestNetworkService);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnModifyGuestNetworkService(void* GuestNetworkService, PWSTR Settings, PWSTR* ErrorRecord);
+		public static extern HResult HcnModifyGuestNetworkService(void* GuestNetworkService, char16* Settings, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnDeleteGuestNetworkService(in Guid Id, PWSTR* ErrorRecord);
+		public static extern HResult HcnDeleteGuestNetworkService(in Guid Id, char16** ErrorRecord);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnReserveGuestNetworkServicePort(void* GuestNetworkService, HCN_PORT_PROTOCOL Protocol, HCN_PORT_ACCESS Access, uint16 Port, out HANDLE PortReservationHandle);
+		public static extern HResult HcnReserveGuestNetworkServicePort(void* GuestNetworkService, HCN_PORT_PROTOCOL Protocol, HCN_PORT_ACCESS Access, uint16 Port, out Handle PortReservationHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnReserveGuestNetworkServicePortRange(void* GuestNetworkService, uint16 PortCount, out HCN_PORT_RANGE_RESERVATION PortRangeReservation, out HANDLE PortReservationHandle);
+		public static extern HResult HcnReserveGuestNetworkServicePortRange(void* GuestNetworkService, uint16 PortCount, out HCN_PORT_RANGE_RESERVATION PortRangeReservation, out Handle PortReservationHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnReleaseGuestNetworkServicePortReservationHandle(HANDLE PortReservationHandle);
+		public static extern HResult HcnReleaseGuestNetworkServicePortReservationHandle(Handle PortReservationHandle);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT HcnEnumerateGuestNetworkPortReservations(out uint32 ReturnCount, out HCN_PORT_RANGE_ENTRY* PortEntries);
+		public static extern HResult HcnEnumerateGuestNetworkPortReservations(out uint32 ReturnCount, out HCN_PORT_RANGE_ENTRY* PortEntries);
 		[Import("computenetwork.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void HcnFreeGuestNetworkPortReservations(HCN_PORT_RANGE_ENTRY* PortEntries);
 	}

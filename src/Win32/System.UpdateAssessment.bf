@@ -42,16 +42,16 @@ namespace Win32
 		[CRepr]
 		public struct OSUpdateAssessment
 		{
-			public BOOL isEndOfSupport;
+			public IntBool isEndOfSupport;
 			public UpdateAssessment assessmentForCurrent;
 			public UpdateAssessment assessmentForUpToDate;
 			public UpdateAssessmentStatus securityStatus;
-			public FILETIME assessmentTime;
-			public FILETIME releaseInfoTime;
-			public PWSTR currentOSBuild;
-			public FILETIME currentOSReleaseTime;
-			public PWSTR upToDateOSBuild;
-			public FILETIME upToDateOSReleaseTime;
+			public FileTime assessmentTime;
+			public FileTime releaseInfoTime;
+			public char16* currentOSBuild;
+			public FileTime currentOSReleaseTime;
+			public char16* upToDateOSBuild;
+			public FileTime upToDateOSReleaseTime;
 		}
 		
 		// --- COM Class IDs ---
@@ -67,12 +67,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetOSUpdateAssessment(out OSUpdateAssessment result) mut => VT.GetOSUpdateAssessment(ref this, out result);
+			public HResult GetOSUpdateAssessment(out OSUpdateAssessment result) mut => VT.GetOSUpdateAssessment(ref this, out result);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWaaSAssessor self, out OSUpdateAssessment result) GetOSUpdateAssessment;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWaaSAssessor self, out OSUpdateAssessment result) GetOSUpdateAssessment;
 			}
 		}
 		

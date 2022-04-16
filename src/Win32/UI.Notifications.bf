@@ -10,8 +10,8 @@ namespace Win32
 		[CRepr]
 		public struct NOTIFICATION_USER_INPUT_DATA
 		{
-			public PWSTR Key;
-			public PWSTR Value;
+			public char16* Key;
+			public char16* Value;
 		}
 		
 		// --- COM Interfaces ---
@@ -23,12 +23,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Activate(PWSTR appUserModelId, PWSTR invokedArgs, NOTIFICATION_USER_INPUT_DATA* data, uint32 count) mut => VT.Activate(ref this, appUserModelId, invokedArgs, data, count);
+			public HResult Activate(char16* appUserModelId, char16* invokedArgs, NOTIFICATION_USER_INPUT_DATA* data, uint32 count) mut => VT.Activate(ref this, appUserModelId, invokedArgs, data, count);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref INotificationActivationCallback self, PWSTR appUserModelId, PWSTR invokedArgs, NOTIFICATION_USER_INPUT_DATA* data, uint32 count) Activate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref INotificationActivationCallback self, char16* appUserModelId, char16* invokedArgs, NOTIFICATION_USER_INPUT_DATA* data, uint32 count) Activate;
 			}
 		}
 		

@@ -20,12 +20,12 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("ualapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UalStart(ref UAL_DATA_BLOB Data);
+		public static extern HResult UalStart(ref UAL_DATA_BLOB Data);
 		[Import("ualapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UalStop(ref UAL_DATA_BLOB Data);
+		public static extern HResult UalStop(ref UAL_DATA_BLOB Data);
 		[Import("ualapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UalInstrument(ref UAL_DATA_BLOB Data);
+		public static extern HResult UalInstrument(ref UAL_DATA_BLOB Data);
 		[Import("ualapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UalRegisterProduct(PWSTR wszProductName, PWSTR wszRoleName, PWSTR wszGuid);
+		public static extern HResult UalRegisterProduct(char16* wszProductName, char16* wszRoleName, char16* wszGuid);
 	}
 }

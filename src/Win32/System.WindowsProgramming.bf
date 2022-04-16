@@ -1,9 +1,15 @@
 using System;
+using System.IO;
+using static Win32.Graphics.Gdi;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace System.WindowsProgramming
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	public static class WindowsProgramming
 	{
 		// --- Constants ---
 		
@@ -762,28 +768,28 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function void* PFIBER_CALLOUT_ROUTINE(void* lpParameter);
-		public function BOOL PQUERYACTCTXW_FUNC(uint32 dwFlags, HANDLE hActCtx, void* pvSubInstance, uint32 ulInfoClass, void* pvBuffer, uint cbBuffer, uint* pcbWrittenOrRequired);
+		public function IntBool PQUERYACTCTXW_FUNC(uint32 dwFlags, Handle hActCtx, void* pvSubInstance, uint32 ulInfoClass, void* pvBuffer, uint cbBuffer, uint* pcbWrittenOrRequired);
 		public function uint32 APPLICATION_RECOVERY_CALLBACK(void* pvParameter);
 		public function void PIO_APC_ROUTINE(void* ApcContext, out IO_STATUS_BLOCK IoStatusBlock, uint32 Reserved);
-		public function BOOLEAN PWINSTATIONQUERYINFORMATIONW(HANDLE param0, uint32 param1, WINSTATIONINFOCLASS param2, void* param3, uint32 param4, out uint32 param5);
+		public function bool PWINSTATIONQUERYINFORMATIONW(Handle param0, uint32 param1, WINSTATIONINFOCLASS param2, void* param3, uint32 param4, out uint32 param5);
 		public function void PFEATURE_STATE_CHANGE_CALLBACK(void* context);
 		public function void ENUM_CALLBACK(out DCISURFACEINFO lpSurfaceInfo, void* lpContext);
-		public function void WINWATCHNOTIFYPROC(HWINWATCH hww, HWND hwnd, uint32 code, LPARAM lParam);
-		public function HRESULT REGINSTALLA(HINSTANCE hm, PSTR pszSection, out STRTABLEA pstTable);
-		public function HRESULT PWLDP_SETDYNAMICCODETRUST_API(HANDLE hFileHandle);
-		public function HRESULT PWLDP_ISDYNAMICCODEPOLICYENABLED_API(out BOOL pbEnabled);
-		public function HRESULT PWLDP_QUERYDYNAMICODETRUST_API(HANDLE fileHandle, void* baseImage, uint32 imageSize);
-		public function HRESULT PWLDP_QUERYWINDOWSLOCKDOWNMODE_API(out WLDP_WINDOWS_LOCKDOWN_MODE lockdownMode);
-		public function HRESULT PWLDP_QUERYDEVICESECURITYINFORMATION_API(WLDP_DEVICE_SECURITY_INFORMATION* information, uint32 informationLength, out uint32 returnLength);
-		public function HRESULT PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API(out WLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction);
-		public function HRESULT PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API(WLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction);
-		public function HRESULT PWLDP_ISAPPAPPROVEDBYPOLICY_API(PWSTR PackageFamilyName, uint64 PackageVersion);
-		public function HRESULT PWLDP_QUERYPOLICYSETTINGENABLED_API(WLDP_POLICY_SETTING Setting, out BOOL Enabled);
-		public function HRESULT PWLDP_QUERYPOLICYSETTINGENABLED2_API(PWSTR Setting, out BOOL Enabled);
-		public function HRESULT PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API(out BOOL IsProductionConfiguration);
-		public function HRESULT PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API();
-		public function HRESULT PWLDP_ISPRODUCTIONCONFIGURATION_API(out BOOL IsProductionConfiguration);
-		public function HRESULT PWLDP_RESETPRODUCTIONCONFIGURATION_API();
+		public function void WINWATCHNOTIFYPROC(HWINWATCH hww, HWnd hwnd, uint32 code, LPARAM lParam);
+		public function HResult REGINSTALLA(HInstance hm, char8* pszSection, out STRTABLEA pstTable);
+		public function HResult PWLDP_SETDYNAMICCODETRUST_API(Handle hFileHandle);
+		public function HResult PWLDP_ISDYNAMICCODEPOLICYENABLED_API(out IntBool pbEnabled);
+		public function HResult PWLDP_QUERYDYNAMICODETRUST_API(Handle fileHandle, void* baseImage, uint32 imageSize);
+		public function HResult PWLDP_QUERYWINDOWSLOCKDOWNMODE_API(out WLDP_WINDOWS_LOCKDOWN_MODE lockdownMode);
+		public function HResult PWLDP_QUERYDEVICESECURITYINFORMATION_API(WLDP_DEVICE_SECURITY_INFORMATION* information, uint32 informationLength, out uint32 returnLength);
+		public function HResult PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API(out WLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction);
+		public function HResult PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API(WLDP_WINDOWS_LOCKDOWN_RESTRICTION LockdownRestriction);
+		public function HResult PWLDP_ISAPPAPPROVEDBYPOLICY_API(char16* PackageFamilyName, uint64 PackageVersion);
+		public function HResult PWLDP_QUERYPOLICYSETTINGENABLED_API(WLDP_POLICY_SETTING Setting, out IntBool Enabled);
+		public function HResult PWLDP_QUERYPOLICYSETTINGENABLED2_API(char16* Setting, out IntBool Enabled);
+		public function HResult PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API(out IntBool IsProductionConfiguration);
+		public function HResult PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API();
+		public function HResult PWLDP_ISPRODUCTIONCONFIGURATION_API(out IntBool IsProductionConfiguration);
+		public function HResult PWLDP_RESETPRODUCTIONCONFIGURATION_API();
 		public function void* PDELAYLOAD_FAILURE_DLL_CALLBACK(uint32 NotificationReason, ref DELAYLOAD_INFO DelayloadInfo);
 		
 		// --- Structs ---
@@ -849,7 +855,7 @@ namespace Win32
 		public struct CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG
 		{
 			public uint32 Size;
-			public PWSTR TriggerId;
+			public char16* TriggerId;
 		}
 		[CRepr]
 		public struct JIT_DEBUG_INFO
@@ -866,8 +872,8 @@ namespace Win32
 		public struct HW_PROFILE_INFOA
 		{
 			public uint32 dwDockInfo;
-			public CHAR[39] szHwProfileGuid;
-			public CHAR[80] szHwProfileName;
+			public char8[39] szHwProfileGuid;
+			public char8[80] szHwProfileName;
 		}
 		[CRepr]
 		public struct HW_PROFILE_INFOW
@@ -887,7 +893,7 @@ namespace Win32
 			public uint32 ulSectionGlobalDataLength;
 			public void* lpSectionBase;
 			public uint32 ulSectionTotalLength;
-			public HANDLE hActCtx;
+			public Handle hActCtx;
 			public uint32 ulAssemblyRosterIndex;
 		}
 		[CRepr]
@@ -902,7 +908,7 @@ namespace Win32
 		[CRepr]
 		public struct ACTIVATION_CONTEXT_BASIC_INFORMATION
 		{
-			public HANDLE hActCtx;
+			public Handle hActCtx;
 			public uint32 dwFlags;
 		}
 		[CRepr]
@@ -918,18 +924,18 @@ namespace Win32
 		[CRepr]
 		public struct CLIENT_ID
 		{
-			public HANDLE UniqueProcess;
-			public HANDLE UniqueThread;
+			public Handle UniqueProcess;
+			public Handle UniqueThread;
 		}
 		[CRepr]
 		public struct LDR_DATA_TABLE_ENTRY
 		{
 			public void*[2] Reserved1;
-			public LIST_ENTRY InMemoryOrderLinks;
+			public ListEntry InMemoryOrderLinks;
 			public void*[2] Reserved2;
 			public void* DllBase;
 			public void*[2] Reserved3;
-			public UNICODE_STRING FullDllName;
+			public UnicodeString FullDllName;
 			public uint8[8] Reserved4;
 			public void*[3] Reserved5;
 			public _Anonymous_e__Union Anonymous;
@@ -946,8 +952,8 @@ namespace Win32
 		public struct OBJECT_ATTRIBUTES
 		{
 			public uint32 Length;
-			public HANDLE RootDirectory;
-			public UNICODE_STRING* ObjectName;
+			public Handle RootDirectory;
+			public UnicodeString* ObjectName;
 			public uint32 Attributes;
 			public void* SecurityDescriptor;
 			public void* SecurityQualityOfService;
@@ -980,9 +986,9 @@ namespace Win32
 			public uint32 NextEntryOffset;
 			public uint32 NumberOfThreads;
 			public uint8[48] Reserved1;
-			public UNICODE_STRING ImageName;
+			public UnicodeString ImageName;
 			public int32 BasePriority;
-			public HANDLE UniqueProcessId;
+			public Handle UniqueProcessId;
 			public void* Reserved2;
 			public uint32 HandleCount;
 			public uint32 SessionId;
@@ -1062,7 +1068,7 @@ namespace Win32
 		[CRepr]
 		public struct THREAD_NAME_INFORMATION
 		{
-			public UNICODE_STRING ThreadName;
+			public UnicodeString ThreadName;
 		}
 		[CRepr]
 		public struct SYSTEM_CODEINTEGRITY_INFORMATION
@@ -1082,13 +1088,13 @@ namespace Win32
 		[CRepr]
 		public struct PUBLIC_OBJECT_TYPE_INFORMATION
 		{
-			public UNICODE_STRING TypeName;
+			public UnicodeString TypeName;
 			public uint32[22] Reserved;
 		}
 		[CRepr]
 		public struct KEY_VALUE_ENTRY
 		{
-			public UNICODE_STRING* ValueName;
+			public UnicodeString* ValueName;
 			public uint32 DataLength;
 			public uint32 DataOffset;
 			public uint32 Type;
@@ -1103,20 +1109,20 @@ namespace Win32
 		[CRepr]
 		public struct FEATURE_ERROR
 		{
-			public HRESULT hr;
+			public HResult hr;
 			public uint16 lineNumber;
-			public PSTR file;
-			public PSTR process;
-			public PSTR module;
+			public char8* file;
+			public char8* process;
+			public char8* module;
 			public uint32 callerReturnAddressOffset;
-			public PSTR callerModule;
-			public PSTR message;
+			public char8* callerModule;
+			public char8* message;
 			public uint16 originLineNumber;
-			public PSTR originFile;
-			public PSTR originModule;
+			public char8* originFile;
+			public char8* originModule;
 			public uint32 originCallerReturnAddressOffset;
-			public PSTR originCallerModule;
-			public PSTR originName;
+			public char8* originCallerModule;
+			public char8* originName;
 		}
 		[CRepr]
 		public struct DCICMD
@@ -1164,8 +1170,8 @@ namespace Win32
 		public struct DCIENUMINPUT
 		{
 			public DCICMD cmd;
-			public RECT rSrc;
-			public RECT rDst;
+			public RectI rSrc;
+			public RectI rDst;
 			public int EnumCallback;
 			public void* lpContext;
 		}
@@ -1187,14 +1193,14 @@ namespace Win32
 		[CRepr]
 		public struct STRENTRYA
 		{
-			public PSTR pszName;
-			public PSTR pszValue;
+			public char8* pszName;
+			public char8* pszValue;
 		}
 		[CRepr]
 		public struct STRENTRYW
 		{
-			public PWSTR pszName;
-			public PWSTR pszValue;
+			public char16* pszName;
+			public char16* pszValue;
 		}
 		[CRepr]
 		public struct STRTABLEA
@@ -1211,32 +1217,32 @@ namespace Win32
 		[CRepr]
 		public struct CABINFOA
 		{
-			public PSTR pszCab;
-			public PSTR pszInf;
-			public PSTR pszSection;
-			public CHAR[260] szSrcPath;
+			public char8* pszCab;
+			public char8* pszInf;
+			public char8* pszSection;
+			public char8[260] szSrcPath;
 			public uint32 dwFlags;
 		}
 		[CRepr]
 		public struct CABINFOW
 		{
-			public PWSTR pszCab;
-			public PWSTR pszInf;
-			public PWSTR pszSection;
+			public char16* pszCab;
+			public char16* pszInf;
+			public char16* pszSection;
 			public char16[260] szSrcPath;
 			public uint32 dwFlags;
 		}
 		[CRepr]
 		public struct PERUSERSECTIONA
 		{
-			public CHAR[59] szGUID;
-			public CHAR[128] szDispName;
-			public CHAR[10] szLocale;
-			public CHAR[1040] szStub;
-			public CHAR[32] szVersion;
-			public CHAR[128] szCompID;
+			public char8[59] szGUID;
+			public char8[128] szDispName;
+			public char8[10] szLocale;
+			public char8[1040] szStub;
+			public char8[32] szVersion;
+			public char8[128] szCompID;
 			public uint32 dwIsInstalled;
-			public BOOL bRollback;
+			public IntBool bRollback;
 		}
 		[CRepr]
 		public struct PERUSERSECTIONW
@@ -1248,7 +1254,7 @@ namespace Win32
 			public char16[32] szVersion;
 			public char16[128] szCompID;
 			public uint32 dwIsInstalled;
-			public BOOL bRollback;
+			public IntBool bRollback;
 		}
 		[CRepr]
 		public struct IMESTRUCT
@@ -1302,7 +1308,7 @@ namespace Win32
 		[CRepr]
 		public struct IMEPROA
 		{
-			public HWND hWnd;
+			public HWnd hWnd;
 			public DATETIME InstDate;
 			public uint32 wVersion;
 			public uint8[50] szDescription;
@@ -1312,7 +1318,7 @@ namespace Win32
 		[CRepr]
 		public struct IMEPROW
 		{
-			public HWND hWnd;
+			public HWnd hWnd;
 			public DATETIME InstDate;
 			public uint32 wVersion;
 			public char16[50] szDescription;
@@ -1324,16 +1330,16 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public uint32 flag;
-			public BOOL fAllActiveXPermissions;
-			public BOOL fAllPermissions;
+			public IntBool fAllActiveXPermissions;
+			public IntBool fAllPermissions;
 			public uint32 dwEncodingType;
 			public uint8* pbJavaPermissions;
 			public uint32 cbJavaPermissions;
 			public uint8* pbSigner;
 			public uint32 cbSigner;
-			public PWSTR pwszZone;
+			public char16* pwszZone;
 			public Guid guidZone;
-			public HRESULT hVerify;
+			public HResult hVerify;
 		}
 		[CRepr]
 		public struct TDIEntityID
@@ -1397,8 +1403,8 @@ namespace Win32
 		{
 			public uint32 dwRevision;
 			public WLDP_HOST_ID dwHostId;
-			public PWSTR szSource;
-			public HANDLE hSource;
+			public char16* szSource;
+			public Handle hSource;
 		}
 		[CRepr]
 		public struct WLDP_DEVICE_SECURITY_INFORMATION
@@ -1406,7 +1412,7 @@ namespace Win32
 			public uint32 UnlockIdSize;
 			public uint8* UnlockId;
 			public uint32 ManufacturerIDLength;
-			public PWSTR ManufacturerID;
+			public char16* ManufacturerID;
 		}
 		[CRepr]
 		public struct DELAYLOAD_PROC_DESCRIPTOR
@@ -1417,7 +1423,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Description_e__Union
 			{
-				public PSTR Name;
+				public char8* Name;
 				public uint32 Ordinal;
 			}
 		}
@@ -1427,7 +1433,7 @@ namespace Win32
 			public uint32 Size;
 			public IMAGE_DELAYLOAD_DESCRIPTOR* DelayloadDescriptor;
 			public IMAGE_THUNK_DATA64* ThunkAddress;
-			public PSTR TargetDllName;
+			public char8* TargetDllName;
 			public DELAYLOAD_PROC_DESCRIPTOR TargetApiDescriptor;
 			public void* TargetModuleBase;
 			public void* Unused;
@@ -1452,8 +1458,8 @@ namespace Win32
 			
 			public void OnStartupComplete() mut => VT.OnStartupComplete(ref this);
 			public void OnSuspendComplete() mut => VT.OnSuspendComplete(ref this);
-			public void OnItemCaptured(PWSTR pszPath) mut => VT.OnItemCaptured(ref this, pszPath);
-			public void OnItemDeleted(PWSTR pszPath) mut => VT.OnItemDeleted(ref this, pszPath);
+			public void OnItemCaptured(char16* pszPath) mut => VT.OnItemCaptured(ref this, pszPath);
+			public void OnItemDeleted(char16* pszPath) mut => VT.OnItemDeleted(ref this, pszPath);
 			public void OnClosed() mut => VT.OnClosed(ref this);
 
 			[CRepr]
@@ -1461,8 +1467,8 @@ namespace Win32
 			{
 				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self) OnStartupComplete;
 				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self) OnSuspendComplete;
-				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self, PWSTR pszPath) OnItemCaptured;
-				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self, PWSTR pszPath) OnItemDeleted;
+				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self, char16* pszPath) OnItemCaptured;
+				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self, char16* pszPath) OnItemDeleted;
 				public new function [CallingConvention(.Stdcall)] void(ref ICameraUIControlEventCallback self) OnClosed;
 			}
 		}
@@ -1473,26 +1479,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Show(ref IUnknown pWindow, CameraUIControlMode mode, CameraUIControlLinearSelectionMode selectionMode, CameraUIControlCaptureMode captureMode, CameraUIControlPhotoFormat photoFormat, CameraUIControlVideoFormat videoFormat, BOOL bHasCloseButton, ICameraUIControlEventCallback* pEventCallback) mut => VT.Show(ref this, ref pWindow, mode, selectionMode, captureMode, photoFormat, videoFormat, bHasCloseButton, pEventCallback);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT Suspend(out BOOL pbDeferralRequired) mut => VT.Suspend(ref this, out pbDeferralRequired);
-			public HRESULT Resume() mut => VT.Resume(ref this);
-			public HRESULT GetCurrentViewType(out CameraUIControlViewType pViewType) mut => VT.GetCurrentViewType(ref this, out pViewType);
-			public HRESULT GetActiveItem(BSTR* pbstrActiveItemPath) mut => VT.GetActiveItem(ref this, pbstrActiveItemPath);
-			public HRESULT GetSelectedItems(out SAFEARRAY* ppSelectedItemPaths) mut => VT.GetSelectedItems(ref this, out ppSelectedItemPaths);
-			public HRESULT RemoveCapturedItem(PWSTR pszPath) mut => VT.RemoveCapturedItem(ref this, pszPath);
+			public HResult Show(ref IUnknown pWindow, CameraUIControlMode mode, CameraUIControlLinearSelectionMode selectionMode, CameraUIControlCaptureMode captureMode, CameraUIControlPhotoFormat photoFormat, CameraUIControlVideoFormat videoFormat, IntBool bHasCloseButton, ICameraUIControlEventCallback* pEventCallback) mut => VT.Show(ref this, ref pWindow, mode, selectionMode, captureMode, photoFormat, videoFormat, bHasCloseButton, pEventCallback);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult Suspend(out IntBool pbDeferralRequired) mut => VT.Suspend(ref this, out pbDeferralRequired);
+			public HResult Resume() mut => VT.Resume(ref this);
+			public HResult GetCurrentViewType(out CameraUIControlViewType pViewType) mut => VT.GetCurrentViewType(ref this, out pViewType);
+			public HResult GetActiveItem(char16** pbstrActiveItemPath) mut => VT.GetActiveItem(ref this, pbstrActiveItemPath);
+			public HResult GetSelectedItems(out SAFEARRAY* ppSelectedItemPaths) mut => VT.GetSelectedItems(ref this, out ppSelectedItemPaths);
+			public HResult RemoveCapturedItem(char16* pszPath) mut => VT.RemoveCapturedItem(ref this, pszPath);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self, ref IUnknown pWindow, CameraUIControlMode mode, CameraUIControlLinearSelectionMode selectionMode, CameraUIControlCaptureMode captureMode, CameraUIControlPhotoFormat photoFormat, CameraUIControlVideoFormat videoFormat, BOOL bHasCloseButton, ICameraUIControlEventCallback* pEventCallback) Show;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self, out BOOL pbDeferralRequired) Suspend;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self) Resume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self, out CameraUIControlViewType pViewType) GetCurrentViewType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self, BSTR* pbstrActiveItemPath) GetActiveItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self, out SAFEARRAY* ppSelectedItemPaths) GetSelectedItems;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICameraUIControl self, PWSTR pszPath) RemoveCapturedItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self, ref IUnknown pWindow, CameraUIControlMode mode, CameraUIControlLinearSelectionMode selectionMode, CameraUIControlCaptureMode captureMode, CameraUIControlPhotoFormat photoFormat, CameraUIControlVideoFormat videoFormat, IntBool bHasCloseButton, ICameraUIControlEventCallback* pEventCallback) Show;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self, out IntBool pbDeferralRequired) Suspend;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self) Resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self, out CameraUIControlViewType pViewType) GetCurrentViewType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self, char16** pbstrActiveItemPath) GetActiveItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self, out SAFEARRAY* ppSelectedItemPaths) GetSelectedItems;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICameraUIControl self, char16* pszPath) RemoveCapturedItem;
 			}
 		}
 		[CRepr]
@@ -1502,20 +1508,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CanUpgrade(out BOOL isAllowed) mut => VT.CanUpgrade(ref this, out isAllowed);
-			public HRESULT UpdateOperatingSystem(PWSTR contentId) mut => VT.UpdateOperatingSystem(ref this, contentId);
-			public HRESULT ShowProductKeyUI() mut => VT.ShowProductKeyUI(ref this);
-			public HRESULT GetOsProductContentId(out PWSTR contentId) mut => VT.GetOsProductContentId(ref this, out contentId);
-			public HRESULT GetGenuineLocalStatus(out BOOL isGenuine) mut => VT.GetGenuineLocalStatus(ref this, out isGenuine);
+			public HResult CanUpgrade(out IntBool isAllowed) mut => VT.CanUpgrade(ref this, out isAllowed);
+			public HResult UpdateOperatingSystem(char16* contentId) mut => VT.UpdateOperatingSystem(ref this, contentId);
+			public HResult ShowProductKeyUI() mut => VT.ShowProductKeyUI(ref this);
+			public HResult GetOsProductContentId(out char16* contentId) mut => VT.GetOsProductContentId(ref this, out contentId);
+			public HResult GetGenuineLocalStatus(out IntBool isGenuine) mut => VT.GetGenuineLocalStatus(ref this, out isGenuine);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeHelper self, out BOOL isAllowed) CanUpgrade;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeHelper self, PWSTR contentId) UpdateOperatingSystem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeHelper self) ShowProductKeyUI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeHelper self, out PWSTR contentId) GetOsProductContentId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeHelper self, out BOOL isGenuine) GetGenuineLocalStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeHelper self, out IntBool isAllowed) CanUpgrade;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeHelper self, char16* contentId) UpdateOperatingSystem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeHelper self) ShowProductKeyUI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeHelper self, out char16* contentId) GetOsProductContentId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeHelper self, out IntBool isGenuine) GetGenuineLocalStatus;
 			}
 		}
 		[CRepr]
@@ -1525,12 +1531,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetSMode(out BOOL isSmode) mut => VT.GetSMode(ref this, out isSmode);
+			public HResult GetSMode(out IntBool isSmode) mut => VT.GetSMode(ref this, out isSmode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsLockModeHelper self, out BOOL isSmode) GetSMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsLockModeHelper self, out IntBool isSmode) GetSMode;
 			}
 		}
 		[CRepr]
@@ -1540,18 +1546,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InitializeParentWindow(uint32 parentHandle) mut => VT.InitializeParentWindow(ref this, parentHandle);
-			public HRESULT UpdateOperatingSystem(BSTR parameter) mut => VT.UpdateOperatingSystem(ref this, parameter);
-			public HRESULT ShowProductKeyUI() mut => VT.ShowProductKeyUI(ref this);
-			public HRESULT CanUpgrade() mut => VT.CanUpgrade(ref this);
+			public HResult InitializeParentWindow(uint32 parentHandle) mut => VT.InitializeParentWindow(ref this, parentHandle);
+			public HResult UpdateOperatingSystem(char16* parameter) mut => VT.UpdateOperatingSystem(ref this, parameter);
+			public HResult ShowProductKeyUI() mut => VT.ShowProductKeyUI(ref this);
+			public HResult CanUpgrade() mut => VT.CanUpgrade(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeBroker self, uint32 parentHandle) InitializeParentWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeBroker self, BSTR parameter) UpdateOperatingSystem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeBroker self) ShowProductKeyUI;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEditionUpgradeBroker self) CanUpgrade;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeBroker self, uint32 parentHandle) InitializeParentWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeBroker self, char16* parameter) UpdateOperatingSystem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeBroker self) ShowProductKeyUI;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEditionUpgradeBroker self) CanUpgrade;
 			}
 		}
 		[CRepr]
@@ -1561,12 +1567,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CanActivateClientVM(out int16 isAllowed) mut => VT.CanActivateClientVM(ref this, out isAllowed);
+			public HResult CanActivateClientVM(out int16 isAllowed) mut => VT.CanActivateClientVM(ref this, out isAllowed);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IContainerActivationHelper self, out int16 isAllowed) CanActivateClientVM;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IContainerActivationHelper self, out int16 isAllowed) CanActivateClientVM;
 			}
 		}
 		[CRepr]
@@ -1576,12 +1582,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ShowToast(BSTR titleText, BSTR bodyText, BSTR packageName, BSTR appId, BSTR launchCommand) mut => VT.ShowToast(ref this, titleText, bodyText, packageName, appId, launchCommand);
+			public HResult ShowToast(char16* titleText, char16* bodyText, char16* packageName, char16* appId, char16* launchCommand) mut => VT.ShowToast(ref this, titleText, bodyText, packageName, appId, launchCommand);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IClipServiceNotificationHelper self, BSTR titleText, BSTR bodyText, BSTR packageName, BSTR appId, BSTR launchCommand) ShowToast;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IClipServiceNotificationHelper self, char16* titleText, char16* bodyText, char16* packageName, char16* appId, char16* launchCommand) ShowToast;
 			}
 		}
 		[CRepr]
@@ -1591,12 +1597,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public BOOL IsEnabled() mut => VT.IsEnabled(ref this);
+			public IntBool IsEnabled() mut => VT.IsEnabled(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDefaultBrowserSyncSettings self) IsEnabled;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDefaultBrowserSyncSettings self) IsEnabled;
 			}
 		}
 		[CRepr]
@@ -1606,12 +1612,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DeleteBrowsingHistory(uint32 dwFlags) mut => VT.DeleteBrowsingHistory(ref this, dwFlags);
+			public HResult DeleteBrowsingHistory(uint32 dwFlags) mut => VT.DeleteBrowsingHistory(ref this, dwFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeleteBrowsingHistory self, uint32 dwFlags) DeleteBrowsingHistory;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeleteBrowsingHistory self, uint32 dwFlags) DeleteBrowsingHistory;
 			}
 		}
 		
@@ -1622,15 +1628,15 @@ namespace Win32
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RtlRaiseCustomSystemEventTrigger(ref CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG TriggerConfig);
 		[Import("api-ms-win-core-apiquery-l2-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsApiSetImplemented(PSTR Contract);
+		public static extern IntBool IsApiSetImplemented(char8* Contract);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryThreadCycleTime(HANDLE ThreadHandle, out uint64 CycleTime);
+		public static extern IntBool QueryThreadCycleTime(Handle ThreadHandle, out uint64 CycleTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryProcessCycleTime(HANDLE ProcessHandle, out uint64 CycleTime);
+		public static extern IntBool QueryProcessCycleTime(Handle ProcessHandle, out uint64 CycleTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryIdleProcessorCycleTime(out uint32 BufferLength, uint64* ProcessorIdleCycleTime);
+		public static extern IntBool QueryIdleProcessorCycleTime(out uint32 BufferLength, uint64* ProcessorIdleCycleTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryIdleProcessorCycleTimeEx(uint16 Group, out uint32 BufferLength, uint64* ProcessorIdleCycleTime);
+		public static extern IntBool QueryIdleProcessorCycleTimeEx(uint16 Group, out uint32 BufferLength, uint64* ProcessorIdleCycleTime);
 		[Import("api-ms-win-core-realtime-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void QueryInterruptTimePrecise(out uint64 lpInterruptTimePrecise);
 		[Import("api-ms-win-core-realtime-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1638,13 +1644,13 @@ namespace Win32
 		[Import("api-ms-win-core-realtime-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void QueryInterruptTime(out uint64 lpInterruptTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryUnbiasedInterruptTime(out uint64 UnbiasedTime);
+		public static extern IntBool QueryUnbiasedInterruptTime(out uint64 UnbiasedTime);
 		[Import("api-ms-win-core-realtime-l1-1-2.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT QueryAuxiliaryCounterFrequency(out uint64 lpAuxiliaryCounterFrequency);
+		public static extern HResult QueryAuxiliaryCounterFrequency(out uint64 lpAuxiliaryCounterFrequency);
 		[Import("api-ms-win-core-realtime-l1-1-2.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ConvertAuxiliaryCounterToPerformanceCounter(uint64 ullAuxiliaryCounterValue, out uint64 lpPerformanceCounterValue, uint64* lpConversionError);
+		public static extern HResult ConvertAuxiliaryCounterToPerformanceCounter(uint64 ullAuxiliaryCounterValue, out uint64 lpPerformanceCounterValue, uint64* lpConversionError);
 		[Import("api-ms-win-core-realtime-l1-1-2.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ConvertPerformanceCounterToAuxiliaryCounter(uint64 ullPerformanceCounterValue, out uint64 lpAuxiliaryCounterValue, uint64* lpConversionError);
+		public static extern HResult ConvertPerformanceCounterToAuxiliaryCounter(uint64 ullPerformanceCounterValue, out uint64 lpAuxiliaryCounterValue, uint64* lpConversionError);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint GlobalCompact(uint32 dwMinFree);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -1654,157 +1660,157 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void* GlobalWire(int hMem);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GlobalUnWire(int hMem);
+		public static extern IntBool GlobalUnWire(int hMem);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint LocalShrink(int hMem, uint32 cbNewSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint LocalCompact(uint32 uMinFree);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetEnvironmentStringsA(PSTR NewEnvironment);
+		public static extern IntBool SetEnvironmentStringsA(char8* NewEnvironment);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 SetHandleCount(uint32 uNumber);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RequestDeviceWakeup(HANDLE hDevice);
+		public static extern IntBool RequestDeviceWakeup(Handle hDevice);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CancelDeviceWakeupRequest(HANDLE hDevice);
+		public static extern IntBool CancelDeviceWakeupRequest(Handle hDevice);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetMessageWaitingIndicator(HANDLE hMsgIndicator, uint32 ulMsgCount);
+		public static extern IntBool SetMessageWaitingIndicator(Handle hMsgIndicator, uint32 ulMsgCount);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 MulDiv(int32 nNumber, int32 nNumerator, int32 nDenominator);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetSystemRegistryQuota(uint32* pdwQuotaAllowed, uint32* pdwQuotaUsed);
+		public static extern IntBool GetSystemRegistryQuota(uint32* pdwQuotaAllowed, uint32* pdwQuotaUsed);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FileTimeToDosDateTime(in FILETIME lpFileTime, out uint16 lpFatDate, out uint16 lpFatTime);
+		public static extern IntBool FileTimeToDosDateTime(in FileTime lpFileTime, out uint16 lpFatDate, out uint16 lpFatTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DosDateTimeToFileTime(uint16 wFatDate, uint16 wFatTime, out FILETIME lpFileTime);
+		public static extern IntBool DosDateTimeToFileTime(uint16 wFatDate, uint16 wFatTime, out FileTime lpFileTime);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 _lopen(PSTR lpPathName, int32 iReadWrite);
+		public static extern int32 _lopen(char8* lpPathName, int32 iReadWrite);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 _lcreat(PSTR lpPathName, int32 iAttribute);
+		public static extern int32 _lcreat(char8* lpPathName, int32 iAttribute);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 _lread(int32 hFile, void* lpBuffer, uint32 uBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 _lwrite(int32 hFile, PSTR lpBuffer, uint32 uBytes);
+		public static extern uint32 _lwrite(int32 hFile, char8* lpBuffer, uint32 uBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 _hread(int32 hFile, void* lpBuffer, int32 lBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 _hwrite(int32 hFile, PSTR lpBuffer, int32 lBytes);
+		public static extern int32 _hwrite(int32 hFile, char8* lpBuffer, int32 lBytes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 _lclose(int32 hFile);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 _llseek(int32 hFile, int32 lOffset, int32 iOrigin);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 SignalObjectAndWait(HANDLE hObjectToSignal, HANDLE hObjectToWaitOn, uint32 dwMilliseconds, BOOL bAlertable);
+		public static extern uint32 SignalObjectAndWait(Handle hObjectToSignal, Handle hObjectToWaitOn, uint32 dwMilliseconds, IntBool bAlertable);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenMutexA(uint32 dwDesiredAccess, BOOL bInheritHandle, PSTR lpName);
+		public static extern Handle OpenMutexA(uint32 dwDesiredAccess, IntBool bInheritHandle, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenSemaphoreA(uint32 dwDesiredAccess, BOOL bInheritHandle, PSTR lpName);
+		public static extern Handle OpenSemaphoreA(uint32 dwDesiredAccess, IntBool bInheritHandle, char8* lpName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateWaitableTimerA(SECURITY_ATTRIBUTES* lpTimerAttributes, BOOL bManualReset, PSTR lpTimerName);
+		public static extern Handle CreateWaitableTimerA(SecurityAttributes* lpTimerAttributes, IntBool bManualReset, char8* lpTimerName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE OpenWaitableTimerA(uint32 dwDesiredAccess, BOOL bInheritHandle, PSTR lpTimerName);
+		public static extern Handle OpenWaitableTimerA(uint32 dwDesiredAccess, IntBool bInheritHandle, char8* lpTimerName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateWaitableTimerExA(SECURITY_ATTRIBUTES* lpTimerAttributes, PSTR lpTimerName, uint32 dwFlags, uint32 dwDesiredAccess);
+		public static extern Handle CreateWaitableTimerExA(SecurityAttributes* lpTimerAttributes, char8* lpTimerName, uint32 dwFlags, uint32 dwDesiredAccess);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetFirmwareEnvironmentVariableA(PSTR lpName, PSTR lpGuid, void* pBuffer, uint32 nSize);
+		public static extern uint32 GetFirmwareEnvironmentVariableA(char8* lpName, char8* lpGuid, void* pBuffer, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetFirmwareEnvironmentVariableW(PWSTR lpName, PWSTR lpGuid, void* pBuffer, uint32 nSize);
+		public static extern uint32 GetFirmwareEnvironmentVariableW(char16* lpName, char16* lpGuid, void* pBuffer, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetFirmwareEnvironmentVariableExA(PSTR lpName, PSTR lpGuid, void* pBuffer, uint32 nSize, uint32* pdwAttribubutes);
+		public static extern uint32 GetFirmwareEnvironmentVariableExA(char8* lpName, char8* lpGuid, void* pBuffer, uint32 nSize, uint32* pdwAttribubutes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetFirmwareEnvironmentVariableExW(PWSTR lpName, PWSTR lpGuid, void* pBuffer, uint32 nSize, uint32* pdwAttribubutes);
+		public static extern uint32 GetFirmwareEnvironmentVariableExW(char16* lpName, char16* lpGuid, void* pBuffer, uint32 nSize, uint32* pdwAttribubutes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetFirmwareEnvironmentVariableA(PSTR lpName, PSTR lpGuid, void* pValue, uint32 nSize);
+		public static extern IntBool SetFirmwareEnvironmentVariableA(char8* lpName, char8* lpGuid, void* pValue, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetFirmwareEnvironmentVariableW(PWSTR lpName, PWSTR lpGuid, void* pValue, uint32 nSize);
+		public static extern IntBool SetFirmwareEnvironmentVariableW(char16* lpName, char16* lpGuid, void* pValue, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetFirmwareEnvironmentVariableExA(PSTR lpName, PSTR lpGuid, void* pValue, uint32 nSize, uint32 dwAttributes);
+		public static extern IntBool SetFirmwareEnvironmentVariableExA(char8* lpName, char8* lpGuid, void* pValue, uint32 nSize, uint32 dwAttributes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetFirmwareEnvironmentVariableExW(PWSTR lpName, PWSTR lpGuid, void* pValue, uint32 nSize, uint32 dwAttributes);
+		public static extern IntBool SetFirmwareEnvironmentVariableExW(char16* lpName, char16* lpGuid, void* pValue, uint32 nSize, uint32 dwAttributes);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsNativeVhdBoot(out BOOL NativeVhdBoot);
+		public static extern IntBool IsNativeVhdBoot(out IntBool NativeVhdBoot);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProfileIntA(PSTR lpAppName, PSTR lpKeyName, int32 nDefault);
+		public static extern uint32 GetProfileIntA(char8* lpAppName, char8* lpKeyName, int32 nDefault);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProfileIntW(PWSTR lpAppName, PWSTR lpKeyName, int32 nDefault);
+		public static extern uint32 GetProfileIntW(char16* lpAppName, char16* lpKeyName, int32 nDefault);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProfileStringA(PSTR lpAppName, PSTR lpKeyName, PSTR lpDefault, uint8* lpReturnedString, uint32 nSize);
+		public static extern uint32 GetProfileStringA(char8* lpAppName, char8* lpKeyName, char8* lpDefault, uint8* lpReturnedString, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProfileStringW(PWSTR lpAppName, PWSTR lpKeyName, PWSTR lpDefault, char16* lpReturnedString, uint32 nSize);
+		public static extern uint32 GetProfileStringW(char16* lpAppName, char16* lpKeyName, char16* lpDefault, char16* lpReturnedString, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteProfileStringA(PSTR lpAppName, PSTR lpKeyName, PSTR lpString);
+		public static extern IntBool WriteProfileStringA(char8* lpAppName, char8* lpKeyName, char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteProfileStringW(PWSTR lpAppName, PWSTR lpKeyName, PWSTR lpString);
+		public static extern IntBool WriteProfileStringW(char16* lpAppName, char16* lpKeyName, char16* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProfileSectionA(PSTR lpAppName, uint8* lpReturnedString, uint32 nSize);
+		public static extern uint32 GetProfileSectionA(char8* lpAppName, uint8* lpReturnedString, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetProfileSectionW(PWSTR lpAppName, char16* lpReturnedString, uint32 nSize);
+		public static extern uint32 GetProfileSectionW(char16* lpAppName, char16* lpReturnedString, uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteProfileSectionA(PSTR lpAppName, PSTR lpString);
+		public static extern IntBool WriteProfileSectionA(char8* lpAppName, char8* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WriteProfileSectionW(PWSTR lpAppName, PWSTR lpString);
+		public static extern IntBool WriteProfileSectionW(char16* lpAppName, char16* lpString);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileIntA(PSTR lpAppName, PSTR lpKeyName, int32 nDefault, PSTR lpFileName);
+		public static extern uint32 GetPrivateProfileIntA(char8* lpAppName, char8* lpKeyName, int32 nDefault, char8* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileIntW(PWSTR lpAppName, PWSTR lpKeyName, int32 nDefault, PWSTR lpFileName);
+		public static extern uint32 GetPrivateProfileIntW(char16* lpAppName, char16* lpKeyName, int32 nDefault, char16* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileStringA(PSTR lpAppName, PSTR lpKeyName, PSTR lpDefault, uint8* lpReturnedString, uint32 nSize, PSTR lpFileName);
+		public static extern uint32 GetPrivateProfileStringA(char8* lpAppName, char8* lpKeyName, char8* lpDefault, uint8* lpReturnedString, uint32 nSize, char8* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileStringW(PWSTR lpAppName, PWSTR lpKeyName, PWSTR lpDefault, char16* lpReturnedString, uint32 nSize, PWSTR lpFileName);
+		public static extern uint32 GetPrivateProfileStringW(char16* lpAppName, char16* lpKeyName, char16* lpDefault, char16* lpReturnedString, uint32 nSize, char16* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WritePrivateProfileStringA(PSTR lpAppName, PSTR lpKeyName, PSTR lpString, PSTR lpFileName);
+		public static extern IntBool WritePrivateProfileStringA(char8* lpAppName, char8* lpKeyName, char8* lpString, char8* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WritePrivateProfileStringW(PWSTR lpAppName, PWSTR lpKeyName, PWSTR lpString, PWSTR lpFileName);
+		public static extern IntBool WritePrivateProfileStringW(char16* lpAppName, char16* lpKeyName, char16* lpString, char16* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileSectionA(PSTR lpAppName, uint8* lpReturnedString, uint32 nSize, PSTR lpFileName);
+		public static extern uint32 GetPrivateProfileSectionA(char8* lpAppName, uint8* lpReturnedString, uint32 nSize, char8* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileSectionW(PWSTR lpAppName, char16* lpReturnedString, uint32 nSize, PWSTR lpFileName);
+		public static extern uint32 GetPrivateProfileSectionW(char16* lpAppName, char16* lpReturnedString, uint32 nSize, char16* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WritePrivateProfileSectionA(PSTR lpAppName, PSTR lpString, PSTR lpFileName);
+		public static extern IntBool WritePrivateProfileSectionA(char8* lpAppName, char8* lpString, char8* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WritePrivateProfileSectionW(PWSTR lpAppName, PWSTR lpString, PWSTR lpFileName);
+		public static extern IntBool WritePrivateProfileSectionW(char16* lpAppName, char16* lpString, char16* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileSectionNamesA(uint8* lpszReturnBuffer, uint32 nSize, PSTR lpFileName);
+		public static extern uint32 GetPrivateProfileSectionNamesA(uint8* lpszReturnBuffer, uint32 nSize, char8* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetPrivateProfileSectionNamesW(char16* lpszReturnBuffer, uint32 nSize, PWSTR lpFileName);
+		public static extern uint32 GetPrivateProfileSectionNamesW(char16* lpszReturnBuffer, uint32 nSize, char16* lpFileName);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPrivateProfileStructA(PSTR lpszSection, PSTR lpszKey, void* lpStruct, uint32 uSizeStruct, PSTR szFile);
+		public static extern IntBool GetPrivateProfileStructA(char8* lpszSection, char8* lpszKey, void* lpStruct, uint32 uSizeStruct, char8* szFile);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetPrivateProfileStructW(PWSTR lpszSection, PWSTR lpszKey, void* lpStruct, uint32 uSizeStruct, PWSTR szFile);
+		public static extern IntBool GetPrivateProfileStructW(char16* lpszSection, char16* lpszKey, void* lpStruct, uint32 uSizeStruct, char16* szFile);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WritePrivateProfileStructA(PSTR lpszSection, PSTR lpszKey, void* lpStruct, uint32 uSizeStruct, PSTR szFile);
+		public static extern IntBool WritePrivateProfileStructA(char8* lpszSection, char8* lpszKey, void* lpStruct, uint32 uSizeStruct, char8* szFile);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WritePrivateProfileStructW(PWSTR lpszSection, PWSTR lpszKey, void* lpStruct, uint32 uSizeStruct, PWSTR szFile);
+		public static extern IntBool WritePrivateProfileStructW(char16* lpszSection, char16* lpszKey, void* lpStruct, uint32 uSizeStruct, char16* szFile);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsBadHugeReadPtr(void* lp, uint ucb);
+		public static extern IntBool IsBadHugeReadPtr(void* lp, uint ucb);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsBadHugeWritePtr(void* lp, uint ucb);
+		public static extern IntBool IsBadHugeWritePtr(void* lp, uint ucb);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetComputerNameA(uint8* lpBuffer, out uint32 nSize);
+		public static extern IntBool GetComputerNameA(uint8* lpBuffer, out uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetComputerNameW(char16* lpBuffer, out uint32 nSize);
+		public static extern IntBool GetComputerNameW(char16* lpBuffer, out uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsHostnameToComputerNameA(PSTR Hostname, uint8* ComputerName, out uint32 nSize);
+		public static extern IntBool DnsHostnameToComputerNameA(char8* Hostname, uint8* ComputerName, out uint32 nSize);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DnsHostnameToComputerNameW(PWSTR Hostname, char16* ComputerName, out uint32 nSize);
+		public static extern IntBool DnsHostnameToComputerNameW(char16* Hostname, char16* ComputerName, out uint32 nSize);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUserNameA(uint8* lpBuffer, out uint32 pcbBuffer);
+		public static extern IntBool GetUserNameA(uint8* lpBuffer, out uint32 pcbBuffer);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetUserNameW(char16* lpBuffer, out uint32 pcbBuffer);
+		public static extern IntBool GetUserNameW(char16* lpBuffer, out uint32 pcbBuffer);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsTokenUntrusted(HANDLE TokenHandle);
+		public static extern IntBool IsTokenUntrusted(Handle TokenHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CancelTimerQueueTimer(HANDLE TimerQueue, HANDLE Timer);
+		public static extern IntBool CancelTimerQueueTimer(Handle TimerQueue, Handle Timer);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCurrentHwProfileA(out HW_PROFILE_INFOA lpHwProfileInfo);
+		public static extern IntBool GetCurrentHwProfileA(out HW_PROFILE_INFOA lpHwProfileInfo);
 		[Import("advapi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCurrentHwProfileW(out HW_PROFILE_INFOW lpHwProfileInfo);
+		public static extern IntBool GetCurrentHwProfileW(out HW_PROFILE_INFOW lpHwProfileInfo);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ReplacePartitionUnit(PWSTR TargetPartition, PWSTR SparePartition, uint32 Flags);
+		public static extern IntBool ReplacePartitionUnit(char16* TargetPartition, char16* SparePartition, uint32 Flags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint64 GetThreadEnabledXStateFeatures();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL EnableProcessOptionalXStateFeatures(uint64 Features);
+		public static extern IntBool EnableProcessOptionalXStateFeatures(uint64 Features);
 		[Import("api-ms-win-core-backgroundtask-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 RaiseCustomSystemEventTrigger(ref CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG CustomSystemEventTriggerConfig);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -1824,25 +1830,25 @@ namespace Win32
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16* uaw_wcsrchr(ref uint16 String, char16 Character);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtClose(HANDLE Handle);
+		public static extern NTSTATUS NtClose(Handle Handle);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtOpenFile(out HANDLE FileHandle, uint32 DesiredAccess, out OBJECT_ATTRIBUTES ObjectAttributes, out IO_STATUS_BLOCK IoStatusBlock, uint32 ShareAccess, uint32 OpenOptions);
+		public static extern NTSTATUS NtOpenFile(out Handle FileHandle, uint32 DesiredAccess, out OBJECT_ATTRIBUTES ObjectAttributes, out IO_STATUS_BLOCK IoStatusBlock, uint32 ShareAccess, uint32 OpenOptions);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtRenameKey(HANDLE KeyHandle, ref UNICODE_STRING NewName);
+		public static extern NTSTATUS NtRenameKey(Handle KeyHandle, ref UnicodeString NewName);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtNotifyChangeMultipleKeys(HANDLE MasterKeyHandle, uint32 Count, OBJECT_ATTRIBUTES* SubordinateObjects, HANDLE Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, out IO_STATUS_BLOCK IoStatusBlock, uint32 CompletionFilter, BOOLEAN WatchTree, void* Buffer, uint32 BufferSize, BOOLEAN Asynchronous);
+		public static extern NTSTATUS NtNotifyChangeMultipleKeys(Handle MasterKeyHandle, uint32 Count, OBJECT_ATTRIBUTES* SubordinateObjects, Handle Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, out IO_STATUS_BLOCK IoStatusBlock, uint32 CompletionFilter, bool WatchTree, void* Buffer, uint32 BufferSize, bool Asynchronous);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtQueryMultipleValueKey(HANDLE KeyHandle, KEY_VALUE_ENTRY* ValueEntries, uint32 EntryCount, void* ValueBuffer, out uint32 BufferLength, uint32* RequiredBufferLength);
+		public static extern NTSTATUS NtQueryMultipleValueKey(Handle KeyHandle, KEY_VALUE_ENTRY* ValueEntries, uint32 EntryCount, void* ValueBuffer, out uint32 BufferLength, uint32* RequiredBufferLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtSetInformationKey(HANDLE KeyHandle, KEY_SET_INFORMATION_CLASS KeySetInformationClass, void* KeySetInformation, uint32 KeySetInformationLength);
+		public static extern NTSTATUS NtSetInformationKey(Handle KeyHandle, KEY_SET_INFORMATION_CLASS KeySetInformationClass, void* KeySetInformation, uint32 KeySetInformationLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtDeviceIoControlFile(HANDLE FileHandle, HANDLE Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, out IO_STATUS_BLOCK IoStatusBlock, uint32 IoControlCode, void* InputBuffer, uint32 InputBufferLength, void* OutputBuffer, uint32 OutputBufferLength);
+		public static extern NTSTATUS NtDeviceIoControlFile(Handle FileHandle, Handle Event, PIO_APC_ROUTINE ApcRoutine, void* ApcContext, out IO_STATUS_BLOCK IoStatusBlock, uint32 IoControlCode, void* InputBuffer, uint32 InputBufferLength, void* OutputBuffer, uint32 OutputBufferLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtWaitForSingleObject(HANDLE Handle, BOOLEAN Alertable, out LARGE_INTEGER Timeout);
+		public static extern NTSTATUS NtWaitForSingleObject(Handle Handle, bool Alertable, out LARGE_INTEGER Timeout);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN RtlIsNameLegalDOS8Dot3(out UNICODE_STRING Name, out STRING OemName, out BOOLEAN NameContainsSpaces);
+		public static extern bool RtlIsNameLegalDOS8Dot3(out UnicodeString Name, out STRING OemName, out bool NameContainsSpaces);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS NtQueryObject(HANDLE Handle, OBJECT_INFORMATION_CLASS ObjectInformationClass, void* ObjectInformation, uint32 ObjectInformationLength, uint32* ReturnLength);
+		public static extern NTSTATUS NtQueryObject(Handle Handle, OBJECT_INFORMATION_CLASS ObjectInformationClass, void* ObjectInformation, uint32 ObjectInformationLength, uint32* ReturnLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS NtQuerySystemInformation(SYSTEM_INFORMATION_CLASS SystemInformationClass, void* SystemInformation, uint32 SystemInformationLength, out uint32 ReturnLength);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1852,11 +1858,11 @@ namespace Win32
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS RtlLocalTimeToSystemTime(out LARGE_INTEGER LocalTime, out LARGE_INTEGER SystemTime);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN RtlTimeToSecondsSince1970(out LARGE_INTEGER Time, out uint32 ElapsedSeconds);
+		public static extern bool RtlTimeToSecondsSince1970(out LARGE_INTEGER Time, out uint32 ElapsedSeconds);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void RtlFreeAnsiString(out STRING AnsiString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RtlFreeUnicodeString(out UNICODE_STRING UnicodeString);
+		public static extern void RtlFreeUnicodeString(out UnicodeString UnicodeString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void RtlFreeOemString(out STRING OemString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1868,15 +1874,15 @@ namespace Win32
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS RtlInitAnsiStringEx(out STRING DestinationString, out int8 SourceString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RtlInitUnicodeString(out UNICODE_STRING DestinationString, PWSTR SourceString);
+		public static extern void RtlInitUnicodeString(out UnicodeString DestinationString, char16* SourceString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS RtlAnsiStringToUnicodeString(out UNICODE_STRING DestinationString, out STRING SourceString, BOOLEAN AllocateDestinationString);
+		public static extern NTSTATUS RtlAnsiStringToUnicodeString(out UnicodeString DestinationString, out STRING SourceString, bool AllocateDestinationString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS RtlUnicodeStringToAnsiString(out STRING DestinationString, out UNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
+		public static extern NTSTATUS RtlUnicodeStringToAnsiString(out STRING DestinationString, out UnicodeString SourceString, bool AllocateDestinationString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS RtlUnicodeStringToOemString(out STRING DestinationString, out UNICODE_STRING SourceString, BOOLEAN AllocateDestinationString);
+		public static extern NTSTATUS RtlUnicodeStringToOemString(out STRING DestinationString, out UnicodeString SourceString, bool AllocateDestinationString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern NTSTATUS RtlUnicodeToMultiByteSize(out uint32 BytesInMultiByteString, PWSTR UnicodeString, uint32 BytesInUnicodeString);
+		public static extern NTSTATUS RtlUnicodeToMultiByteSize(out uint32 BytesInMultiByteString, char16* UnicodeString, uint32 BytesInUnicodeString);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern NTSTATUS RtlCharToInteger(out int8 String, uint32 Base, out uint32 Value);
 		[Import("ntdll.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1884,7 +1890,7 @@ namespace Win32
 		[Import("api-ms-win-core-featurestaging-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern FEATURE_ENABLED_STATE GetFeatureEnabledState(uint32 featureId, FEATURE_CHANGE_TIME changeTime);
 		[Import("api-ms-win-core-featurestaging-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void RecordFeatureUsage(uint32 featureId, uint32 kind, uint32 addend, PSTR originName);
+		public static extern void RecordFeatureUsage(uint32 featureId, uint32 kind, uint32 addend, char8* originName);
 		[Import("api-ms-win-core-featurestaging-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void RecordFeatureError(uint32 featureId, in FEATURE_ERROR error);
 		[Import("api-ms-win-core-featurestaging-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1892,7 +1898,7 @@ namespace Win32
 		[Import("api-ms-win-core-featurestaging-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void UnsubscribeFeatureStateChangeNotification(FEATURE_STATE_CHANGE_SUBSCRIPTION subscription);
 		[Import("api-ms-win-core-featurestaging-l1-1-1.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetFeatureVariant(uint32 featureId, FEATURE_CHANGE_TIME changeTime, out uint32 payloadId, out BOOL hasNotification);
+		public static extern uint32 GetFeatureVariant(uint32 featureId, FEATURE_CHANGE_TIME changeTime, out uint32 payloadId, out IntBool hasNotification);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HDC DCIOpenProvider();
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1904,23 +1910,23 @@ namespace Win32
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DCICreateOverlay(HDC hdc, void* lpOffscreenSurf, out DCIOVERLAY* lplpSurface);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DCIEnum(HDC hdc, out RECT lprDst, out RECT lprSrc, void* lpFnCallback, void* lpContext);
+		public static extern int32 DCIEnum(HDC hdc, out RectI lprDst, out RectI lprSrc, void* lpFnCallback, void* lpContext);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DCISetSrcDestClip(out DCIOFFSCREEN pdci, out RECT srcrc, out RECT destrc, out RGNDATA prd);
+		public static extern int32 DCISetSrcDestClip(out DCIOFFSCREEN pdci, out RectI srcrc, out RectI destrc, out RGNDATA prd);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HWINWATCH WinWatchOpen(HWND hwnd);
+		public static extern HWINWATCH WinWatchOpen(HWnd hwnd);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WinWatchClose(HWINWATCH hWW);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WinWatchGetClipList(HWINWATCH hWW, out RECT prc, uint32 size, out RGNDATA prd);
+		public static extern uint32 WinWatchGetClipList(HWINWATCH hWW, out RectI prc, uint32 size, out RGNDATA prd);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinWatchDidStatusChange(HWINWATCH hWW);
+		public static extern IntBool WinWatchDidStatusChange(HWINWATCH hWW);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 GetWindowRegionData(HWND hwnd, uint32 size, out RGNDATA prd);
+		public static extern uint32 GetWindowRegionData(HWnd hwnd, uint32 size, out RGNDATA prd);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetDCRegionData(HDC hdc, uint32 size, out RGNDATA prd);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WinWatchNotify(HWINWATCH hWW, WINWATCHNOTIFYPROC NotifyCallback, LPARAM NotifyParam);
+		public static extern IntBool WinWatchNotify(HWINWATCH hWW, WINWATCHNOTIFYPROC NotifyCallback, LPARAM NotifyParam);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void DCIEndAccess(out DCISURFACEINFO pdci);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1932,144 +1938,144 @@ namespace Win32
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 DCISetClipList(out DCIOFFSCREEN pdci, out RGNDATA prd);
 		[Import("dciman32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 DCISetDestination(out DCIOFFSCREEN pdci, out RECT dst, out RECT src);
+		public static extern int32 DCISetDestination(out DCIOFFSCREEN pdci, out RectI dst, out RectI src);
 		[Import("api-ms-win-dx-d3dkmt-l1-1-0.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GdiEntry13();
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RunSetupCommandA(HWND hWnd, PSTR szCmdName, PSTR szInfSection, PSTR szDir, PSTR lpszTitle, out HANDLE phEXE, uint32 dwFlags, void* pvReserved);
+		public static extern HResult RunSetupCommandA(HWnd hWnd, char8* szCmdName, char8* szInfSection, char8* szDir, char8* lpszTitle, out Handle phEXE, uint32 dwFlags, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RunSetupCommandW(HWND hWnd, PWSTR szCmdName, PWSTR szInfSection, PWSTR szDir, PWSTR lpszTitle, out HANDLE phEXE, uint32 dwFlags, void* pvReserved);
+		public static extern HResult RunSetupCommandW(HWnd hWnd, char16* szCmdName, char16* szInfSection, char16* szDir, char16* lpszTitle, out Handle phEXE, uint32 dwFlags, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 NeedRebootInit();
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL NeedReboot(uint32 dwRebootCheck);
+		public static extern IntBool NeedReboot(uint32 dwRebootCheck);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RebootCheckOnInstallA(HWND hwnd, PSTR pszINF, PSTR pszSec, uint32 dwReserved);
+		public static extern HResult RebootCheckOnInstallA(HWnd hwnd, char8* pszINF, char8* pszSec, uint32 dwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RebootCheckOnInstallW(HWND hwnd, PWSTR pszINF, PWSTR pszSec, uint32 dwReserved);
+		public static extern HResult RebootCheckOnInstallW(HWnd hwnd, char16* pszINF, char16* pszSec, uint32 dwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TranslateInfStringA(PSTR pszInfFilename, PSTR pszInstallSection, PSTR pszTranslateSection, PSTR pszTranslateKey, uint8* pszBuffer, uint32 cchBuffer, out uint32 pdwRequiredSize, void* pvReserved);
+		public static extern HResult TranslateInfStringA(char8* pszInfFilename, char8* pszInstallSection, char8* pszTranslateSection, char8* pszTranslateKey, uint8* pszBuffer, uint32 cchBuffer, out uint32 pdwRequiredSize, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TranslateInfStringW(PWSTR pszInfFilename, PWSTR pszInstallSection, PWSTR pszTranslateSection, PWSTR pszTranslateKey, char16* pszBuffer, uint32 cchBuffer, out uint32 pdwRequiredSize, void* pvReserved);
+		public static extern HResult TranslateInfStringW(char16* pszInfFilename, char16* pszInstallSection, char16* pszTranslateSection, char16* pszTranslateKey, char16* pszBuffer, uint32 cchBuffer, out uint32 pdwRequiredSize, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegInstallA(HINSTANCE hmod, PSTR pszSection, in STRTABLEA pstTable);
+		public static extern HResult RegInstallA(HInstance hmod, char8* pszSection, in STRTABLEA pstTable);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegInstallW(HINSTANCE hmod, PWSTR pszSection, in STRTABLEW pstTable);
+		public static extern HResult RegInstallW(HInstance hmod, char16* pszSection, in STRTABLEW pstTable);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT LaunchINFSectionExW(HWND hwnd, HINSTANCE hInstance, PWSTR pszParms, int32 nShow);
+		public static extern HResult LaunchINFSectionExW(HWnd hwnd, HInstance hInstance, char16* pszParms, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ExecuteCabA(HWND hwnd, out CABINFOA pCab, void* pReserved);
+		public static extern HResult ExecuteCabA(HWnd hwnd, out CABINFOA pCab, void* pReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ExecuteCabW(HWND hwnd, out CABINFOW pCab, void* pReserved);
+		public static extern HResult ExecuteCabW(HWnd hwnd, out CABINFOW pCab, void* pReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AdvInstallFileA(HWND hwnd, PSTR lpszSourceDir, PSTR lpszSourceFile, PSTR lpszDestDir, PSTR lpszDestFile, uint32 dwFlags, uint32 dwReserved);
+		public static extern HResult AdvInstallFileA(HWnd hwnd, char8* lpszSourceDir, char8* lpszSourceFile, char8* lpszDestDir, char8* lpszDestFile, uint32 dwFlags, uint32 dwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AdvInstallFileW(HWND hwnd, PWSTR lpszSourceDir, PWSTR lpszSourceFile, PWSTR lpszDestDir, PWSTR lpszDestFile, uint32 dwFlags, uint32 dwReserved);
+		public static extern HResult AdvInstallFileW(HWnd hwnd, char16* lpszSourceDir, char16* lpszSourceFile, char16* lpszDestDir, char16* lpszDestFile, uint32 dwFlags, uint32 dwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegSaveRestoreA(HWND hWnd, PSTR pszTitleString, HKEY hkBckupKey, PSTR pcszRootKey, PSTR pcszSubKey, PSTR pcszValueName, uint32 dwFlags);
+		public static extern HResult RegSaveRestoreA(HWnd hWnd, char8* pszTitleString, HKey hkBckupKey, char8* pcszRootKey, char8* pcszSubKey, char8* pcszValueName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegSaveRestoreW(HWND hWnd, PWSTR pszTitleString, HKEY hkBckupKey, PWSTR pcszRootKey, PWSTR pcszSubKey, PWSTR pcszValueName, uint32 dwFlags);
+		public static extern HResult RegSaveRestoreW(HWnd hWnd, char16* pszTitleString, HKey hkBckupKey, char16* pcszRootKey, char16* pcszSubKey, char16* pcszValueName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegSaveRestoreOnINFA(HWND hWnd, PSTR pszTitle, PSTR pszINF, PSTR pszSection, HKEY hHKLMBackKey, HKEY hHKCUBackKey, uint32 dwFlags);
+		public static extern HResult RegSaveRestoreOnINFA(HWnd hWnd, char8* pszTitle, char8* pszINF, char8* pszSection, HKey hHKLMBackKey, HKey hHKCUBackKey, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegSaveRestoreOnINFW(HWND hWnd, PWSTR pszTitle, PWSTR pszINF, PWSTR pszSection, HKEY hHKLMBackKey, HKEY hHKCUBackKey, uint32 dwFlags);
+		public static extern HResult RegSaveRestoreOnINFW(HWnd hWnd, char16* pszTitle, char16* pszINF, char16* pszSection, HKey hHKLMBackKey, HKey hHKCUBackKey, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegRestoreAllA(HWND hWnd, PSTR pszTitleString, HKEY hkBckupKey);
+		public static extern HResult RegRestoreAllA(HWnd hWnd, char8* pszTitleString, HKey hkBckupKey);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT RegRestoreAllW(HWND hWnd, PWSTR pszTitleString, HKEY hkBckupKey);
+		public static extern HResult RegRestoreAllW(HWnd hWnd, char16* pszTitleString, HKey hkBckupKey);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FileSaveRestoreW(HWND hDlg, PWSTR lpFileList, PWSTR lpDir, PWSTR lpBaseName, uint32 dwFlags);
+		public static extern HResult FileSaveRestoreW(HWnd hDlg, char16* lpFileList, char16* lpDir, char16* lpBaseName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FileSaveRestoreOnINFA(HWND hWnd, PSTR pszTitle, PSTR pszINF, PSTR pszSection, PSTR pszBackupDir, PSTR pszBaseBackupFile, uint32 dwFlags);
+		public static extern HResult FileSaveRestoreOnINFA(HWnd hWnd, char8* pszTitle, char8* pszINF, char8* pszSection, char8* pszBackupDir, char8* pszBaseBackupFile, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FileSaveRestoreOnINFW(HWND hWnd, PWSTR pszTitle, PWSTR pszINF, PWSTR pszSection, PWSTR pszBackupDir, PWSTR pszBaseBackupFile, uint32 dwFlags);
+		public static extern HResult FileSaveRestoreOnINFW(HWnd hWnd, char16* pszTitle, char16* pszINF, char16* pszSection, char16* pszBackupDir, char16* pszBaseBackupFile, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AddDelBackupEntryA(PSTR lpcszFileList, PSTR lpcszBackupDir, PSTR lpcszBaseName, uint32 dwFlags);
+		public static extern HResult AddDelBackupEntryA(char8* lpcszFileList, char8* lpcszBackupDir, char8* lpcszBaseName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT AddDelBackupEntryW(PWSTR lpcszFileList, PWSTR lpcszBackupDir, PWSTR lpcszBaseName, uint32 dwFlags);
+		public static extern HResult AddDelBackupEntryW(char16* lpcszFileList, char16* lpcszBackupDir, char16* lpcszBaseName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FileSaveMarkNotExistA(PSTR lpFileList, PSTR lpDir, PSTR lpBaseName);
+		public static extern HResult FileSaveMarkNotExistA(char8* lpFileList, char8* lpDir, char8* lpBaseName);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT FileSaveMarkNotExistW(PWSTR lpFileList, PWSTR lpDir, PWSTR lpBaseName);
+		public static extern HResult FileSaveMarkNotExistW(char16* lpFileList, char16* lpDir, char16* lpBaseName);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetVersionFromFileA(PSTR lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, BOOL bVersion);
+		public static extern HResult GetVersionFromFileA(char8* lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, IntBool bVersion);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetVersionFromFileW(PWSTR lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, BOOL bVersion);
+		public static extern HResult GetVersionFromFileW(char16* lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, IntBool bVersion);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetVersionFromFileExA(PSTR lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, BOOL bVersion);
+		public static extern HResult GetVersionFromFileExA(char8* lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, IntBool bVersion);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT GetVersionFromFileExW(PWSTR lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, BOOL bVersion);
+		public static extern HResult GetVersionFromFileExW(char16* lpszFilename, out uint32 pdwMSVer, out uint32 pdwLSVer, IntBool bVersion);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsNTAdmin(uint32 dwReserved, out uint32 lpdwReserved);
+		public static extern IntBool IsNTAdmin(uint32 dwReserved, out uint32 lpdwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DelNodeA(PSTR pszFileOrDirName, uint32 dwFlags);
+		public static extern HResult DelNodeA(char8* pszFileOrDirName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DelNodeW(PWSTR pszFileOrDirName, uint32 dwFlags);
+		public static extern HResult DelNodeW(char16* pszFileOrDirName, uint32 dwFlags);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DelNodeRunDLL32W(HWND hwnd, HINSTANCE hInstance, PWSTR pszParms, int32 nShow);
+		public static extern HResult DelNodeRunDLL32W(HWnd hwnd, HInstance hInstance, char16* pszParms, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT OpenINFEngineA(PSTR pszInfFilename, PSTR pszInstallSection, uint32 dwFlags, void** phInf, void* pvReserved);
+		public static extern HResult OpenINFEngineA(char8* pszInfFilename, char8* pszInstallSection, uint32 dwFlags, void** phInf, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT OpenINFEngineW(PWSTR pszInfFilename, PWSTR pszInstallSection, uint32 dwFlags, void** phInf, void* pvReserved);
+		public static extern HResult OpenINFEngineW(char16* pszInfFilename, char16* pszInstallSection, uint32 dwFlags, void** phInf, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TranslateInfStringExA(void* hInf, PSTR pszInfFilename, PSTR pszTranslateSection, PSTR pszTranslateKey, uint8* pszBuffer, uint32 dwBufferSize, out uint32 pdwRequiredSize, void* pvReserved);
+		public static extern HResult TranslateInfStringExA(void* hInf, char8* pszInfFilename, char8* pszTranslateSection, char8* pszTranslateKey, uint8* pszBuffer, uint32 dwBufferSize, out uint32 pdwRequiredSize, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT TranslateInfStringExW(void* hInf, PWSTR pszInfFilename, PWSTR pszTranslateSection, PWSTR pszTranslateKey, char16* pszBuffer, uint32 dwBufferSize, out uint32 pdwRequiredSize, void* pvReserved);
+		public static extern HResult TranslateInfStringExW(void* hInf, char16* pszInfFilename, char16* pszTranslateSection, char16* pszTranslateKey, char16* pszBuffer, uint32 dwBufferSize, out uint32 pdwRequiredSize, void* pvReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CloseINFEngine(void* hInf);
+		public static extern HResult CloseINFEngine(void* hInf);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ExtractFilesA(PSTR pszCabName, PSTR pszExpandDir, uint32 dwFlags, PSTR pszFileList, void* lpReserved, uint32 dwReserved);
+		public static extern HResult ExtractFilesA(char8* pszCabName, char8* pszExpandDir, uint32 dwFlags, char8* pszFileList, void* lpReserved, uint32 dwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT ExtractFilesW(PWSTR pszCabName, PWSTR pszExpandDir, uint32 dwFlags, PWSTR pszFileList, void* lpReserved, uint32 dwReserved);
+		public static extern HResult ExtractFilesW(char16* pszCabName, char16* pszExpandDir, uint32 dwFlags, char16* pszFileList, void* lpReserved, uint32 dwReserved);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 LaunchINFSectionW(HWND hwndOwner, HINSTANCE hInstance, PWSTR pszParams, int32 nShow);
+		public static extern int32 LaunchINFSectionW(HWnd hwndOwner, HInstance hInstance, char16* pszParams, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UserInstStubWrapperA(HWND hwnd, HINSTANCE hInstance, PSTR pszParms, int32 nShow);
+		public static extern HResult UserInstStubWrapperA(HWnd hwnd, HInstance hInstance, char8* pszParms, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UserInstStubWrapperW(HWND hwnd, HINSTANCE hInstance, PWSTR pszParms, int32 nShow);
+		public static extern HResult UserInstStubWrapperW(HWnd hwnd, HInstance hInstance, char16* pszParms, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UserUnInstStubWrapperA(HWND hwnd, HINSTANCE hInstance, PSTR pszParms, int32 nShow);
+		public static extern HResult UserUnInstStubWrapperA(HWnd hwnd, HInstance hInstance, char8* pszParms, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT UserUnInstStubWrapperW(HWND hwnd, HINSTANCE hInstance, PWSTR pszParms, int32 nShow);
+		public static extern HResult UserUnInstStubWrapperW(HWnd hwnd, HInstance hInstance, char16* pszParms, int32 nShow);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetPerUserSecValuesA(out PERUSERSECTIONA pPerUser);
+		public static extern HResult SetPerUserSecValuesA(out PERUSERSECTIONA pPerUser);
 		[Import("advpack.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT SetPerUserSecValuesW(out PERUSERSECTIONW pPerUser);
+		public static extern HResult SetPerUserSecValuesW(out PERUSERSECTIONW pPerUser);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LRESULT SendIMEMessageExA(HWND param0, LPARAM param1);
+		public static extern LRESULT SendIMEMessageExA(HWnd param0, LPARAM param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern LRESULT SendIMEMessageExW(HWND param0, LPARAM param1);
+		public static extern LRESULT SendIMEMessageExW(HWnd param0, LPARAM param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IMPGetIMEA(HWND param0, out IMEPROA param1);
+		public static extern IntBool IMPGetIMEA(HWnd param0, out IMEPROA param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IMPGetIMEW(HWND param0, out IMEPROW param1);
+		public static extern IntBool IMPGetIMEW(HWnd param0, out IMEPROW param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IMPQueryIMEA(out IMEPROA param0);
+		public static extern IntBool IMPQueryIMEA(out IMEPROA param0);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IMPQueryIMEW(out IMEPROW param0);
+		public static extern IntBool IMPQueryIMEW(out IMEPROW param0);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IMPSetIMEA(HWND param0, out IMEPROA param1);
+		public static extern IntBool IMPSetIMEA(HWnd param0, out IMEPROA param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IMPSetIMEW(HWND param0, out IMEPROW param1);
+		public static extern IntBool IMPSetIMEW(HWnd param0, out IMEPROW param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WINNLSGetIMEHotkey(HWND param0);
+		public static extern uint32 WINNLSGetIMEHotkey(HWnd param0);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WINNLSEnableIME(HWND param0, BOOL param1);
+		public static extern IntBool WINNLSEnableIME(HWnd param0, IntBool param1);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL WINNLSGetEnableStatus(HWND param0);
+		public static extern IntBool WINNLSGetEnableStatus(HWnd param0);
 		[Import("apphelp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApphelpCheckShellObject(in Guid ObjectCLSID, BOOL bShimIfNecessary, out uint64 pullFlags);
+		public static extern IntBool ApphelpCheckShellObject(in Guid ObjectCLSID, IntBool bShimIfNecessary, out uint64 pullFlags);
 		[Import("wldp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WldpGetLockdownPolicy(WLDP_HOST_INFORMATION* hostInformation, out uint32 lockdownState, uint32 lockdownFlags);
+		public static extern HResult WldpGetLockdownPolicy(WLDP_HOST_INFORMATION* hostInformation, out uint32 lockdownState, uint32 lockdownFlags);
 		[Import("wldp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WldpIsClassInApprovedList(in Guid classID, ref WLDP_HOST_INFORMATION hostInformation, out BOOL isApproved, uint32 optionalFlags);
+		public static extern HResult WldpIsClassInApprovedList(in Guid classID, ref WLDP_HOST_INFORMATION hostInformation, out IntBool isApproved, uint32 optionalFlags);
 		[Import("wldp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WldpSetDynamicCodeTrust(HANDLE fileHandle);
+		public static extern HResult WldpSetDynamicCodeTrust(Handle fileHandle);
 		[Import("wldp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WldpIsDynamicCodePolicyEnabled(out BOOL isEnabled);
+		public static extern HResult WldpIsDynamicCodePolicyEnabled(out IntBool isEnabled);
 		[Import("wldp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WldpQueryDynamicCodeTrust(HANDLE fileHandle, void* baseImage, uint32 imageSize);
+		public static extern HResult WldpQueryDynamicCodeTrust(Handle fileHandle, void* baseImage, uint32 imageSize);
 		[Import("wldp.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT WldpQueryDeviceSecurityInformation(WLDP_DEVICE_SECURITY_INFORMATION* information, uint32 informationLength, out uint32 returnLength);
+		public static extern HResult WldpQueryDeviceSecurityInformation(WLDP_DEVICE_SECURITY_INFORMATION* information, uint32 informationLength, out uint32 returnLength);
 	}
 }

@@ -1,9 +1,15 @@
 using System;
+using static Win32.System.Threading;
+using static Win32.Win32;
+using static Win32.System.Registry;
+using static Win32.UI.Shell.PropertiesSystem;
+using static System.Windows.COM_IUnknown;
+using static System.Windows;
 
 // namespace System.Power
-namespace Win32
+namespace Win32.System
 {
-	extension Win32
+	static class Power
 	{
 		// --- Constants ---
 		
@@ -424,8 +430,8 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function void EFFECTIVE_POWER_MODE_CALLBACK(EFFECTIVE_POWER_MODE Mode, void* Context);
-		public function BOOLEAN PWRSCHEMESENUMPROC_V1(uint32 Index, uint32 NameSize, ref int8 Name, uint32 DescriptionSize, ref int8 Description, ref POWER_POLICY Policy, LPARAM Context);
-		public function BOOLEAN PWRSCHEMESENUMPROC(uint32 Index, uint32 NameSize, PWSTR Name, uint32 DescriptionSize, PWSTR Description, ref POWER_POLICY Policy, LPARAM Context);
+		public function bool PWRSCHEMESENUMPROC_V1(uint32 Index, uint32 NameSize, ref int8 Name, uint32 DescriptionSize, ref int8 Description, ref POWER_POLICY Policy, LPARAM Context);
+		public function bool PWRSCHEMESENUMPROC(uint32 Index, uint32 NameSize, char16* Name, uint32 DescriptionSize, char16* Description, ref POWER_POLICY Policy, LPARAM Context);
 		public function uint32 PDEVICE_NOTIFY_CALLBACK_ROUTINE(void* Context, uint32 Type, void* Setting);
 		
 		// --- Structs ---
@@ -501,8 +507,8 @@ namespace Win32
 			public uint32 VideoTimeoutDc;
 			public uint32 SpindownTimeoutAc;
 			public uint32 SpindownTimeoutDc;
-			public BOOLEAN OptimizeForPowerAc;
-			public BOOLEAN OptimizeForPowerDc;
+			public bool OptimizeForPowerAc;
+			public bool OptimizeForPowerDc;
 			public uint8 FanThrottleToleranceAc;
 			public uint8 FanThrottleToleranceDc;
 			public uint8 ForcedThrottleAc;
@@ -528,7 +534,7 @@ namespace Win32
 			public uint32 Type;
 			public uint32 Temperature;
 			public uint32 TripPointTemperature;
-			public PWSTR Initiator;
+			public char16* Initiator;
 		}
 		[CRepr]
 		public struct BATTERY_QUERY_INFORMATION
@@ -561,7 +567,7 @@ namespace Win32
 		public struct BATTERY_CHARGING_SOURCE_INFORMATION
 		{
 			public BATTERY_CHARGING_SOURCE_TYPE Type;
-			public BOOLEAN SourceOnline;
+			public bool SourceOnline;
 		}
 		[CRepr]
 		public struct BATTERY_SET_INFORMATION
@@ -638,14 +644,14 @@ namespace Win32
 		public struct THERMAL_POLICY
 		{
 			public uint32 Version;
-			public BOOLEAN WaitForUpdate;
-			public BOOLEAN Hibernate;
-			public BOOLEAN Critical;
-			public BOOLEAN ThermalStandby;
+			public bool WaitForUpdate;
+			public bool Hibernate;
+			public bool Critical;
+			public bool ThermalStandby;
 			public uint32 ActivationReasons;
 			public uint32 PassiveLimit;
 			public uint32 ActiveLevel;
-			public BOOLEAN OverThrottled;
+			public bool OverThrottled;
 		}
 		[CRepr]
 		public struct PROCESSOR_OBJECT_INFO
@@ -767,7 +773,7 @@ namespace Win32
 		[CRepr]
 		public struct SYSTEM_POWER_LEVEL
 		{
-			public BOOLEAN Enable;
+			public bool Enable;
 			public uint8[3] Spare;
 			public uint32 BatteryLevel;
 			public POWER_ACTION_POLICY PowerPolicy;
@@ -796,10 +802,10 @@ namespace Win32
 			public uint32 BroadcastCapacityResolution;
 			public SYSTEM_POWER_LEVEL[4] DischargePolicy;
 			public uint32 VideoTimeout;
-			public BOOLEAN VideoDimDisplay;
+			public bool VideoDimDisplay;
 			public uint32[3] VideoReserved;
 			public uint32 SpindownTimeout;
-			public BOOLEAN OptimizeForPower;
+			public bool OptimizeForPower;
 			public uint8 FanThrottleTolerance;
 			public uint8 ForcedThrottle;
 			public uint8 MinThrottle;
@@ -839,33 +845,33 @@ namespace Win32
 		[CRepr]
 		public struct SYSTEM_POWER_CAPABILITIES
 		{
-			public BOOLEAN PowerButtonPresent;
-			public BOOLEAN SleepButtonPresent;
-			public BOOLEAN LidPresent;
-			public BOOLEAN SystemS1;
-			public BOOLEAN SystemS2;
-			public BOOLEAN SystemS3;
-			public BOOLEAN SystemS4;
-			public BOOLEAN SystemS5;
-			public BOOLEAN HiberFilePresent;
-			public BOOLEAN FullWake;
-			public BOOLEAN VideoDimPresent;
-			public BOOLEAN ApmPresent;
-			public BOOLEAN UpsPresent;
-			public BOOLEAN ThermalControl;
-			public BOOLEAN ProcessorThrottle;
+			public bool PowerButtonPresent;
+			public bool SleepButtonPresent;
+			public bool LidPresent;
+			public bool SystemS1;
+			public bool SystemS2;
+			public bool SystemS3;
+			public bool SystemS4;
+			public bool SystemS5;
+			public bool HiberFilePresent;
+			public bool FullWake;
+			public bool VideoDimPresent;
+			public bool ApmPresent;
+			public bool UpsPresent;
+			public bool ThermalControl;
+			public bool ProcessorThrottle;
 			public uint8 ProcessorMinThrottle;
 			public uint8 ProcessorMaxThrottle;
-			public BOOLEAN FastSystemS4;
-			public BOOLEAN Hiberboot;
-			public BOOLEAN WakeAlarmPresent;
-			public BOOLEAN AoAc;
-			public BOOLEAN DiskSpinDown;
+			public bool FastSystemS4;
+			public bool Hiberboot;
+			public bool WakeAlarmPresent;
+			public bool AoAc;
+			public bool DiskSpinDown;
 			public uint8 HiberFileType;
-			public BOOLEAN AoAcConnectivitySupported;
+			public bool AoAcConnectivitySupported;
 			public uint8[6] spare3;
-			public BOOLEAN SystemBatteriesPresent;
-			public BOOLEAN BatteriesAreShortTerm;
+			public bool SystemBatteriesPresent;
+			public bool BatteriesAreShortTerm;
 			public BATTERY_REPORTING_SCALE[3] BatteryScale;
 			public SYSTEM_POWER_STATE AcOnLineWake;
 			public SYSTEM_POWER_STATE SoftLidWake;
@@ -876,11 +882,11 @@ namespace Win32
 		[CRepr]
 		public struct SYSTEM_BATTERY_STATE
 		{
-			public BOOLEAN AcOnLine;
-			public BOOLEAN BatteryPresent;
-			public BOOLEAN Charging;
-			public BOOLEAN Discharging;
-			public BOOLEAN[3] Spare1;
+			public bool AcOnLine;
+			public bool BatteryPresent;
+			public bool Charging;
+			public bool Discharging;
+			public bool[3] Spare1;
 			public uint8 Tag;
 			public uint32 MaxCapacity;
 			public uint32 RemainingCapacity;
@@ -912,151 +918,151 @@ namespace Win32
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 CallNtPowerInformation(POWER_INFORMATION_LEVEL InformationLevel, void* InputBuffer, uint32 InputBufferLength, void* OutputBuffer, uint32 OutputBufferLength);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN GetPwrCapabilities(out SYSTEM_POWER_CAPABILITIES lpspc);
+		public static extern bool GetPwrCapabilities(out SYSTEM_POWER_CAPABILITIES lpspc);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern POWER_PLATFORM_ROLE PowerDeterminePlatformRoleEx(POWER_PLATFORM_ROLE_VERSION Version);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerRegisterSuspendResumeNotification(uint32 Flags, HANDLE Recipient, void** RegistrationHandle);
+		public static extern uint32 PowerRegisterSuspendResumeNotification(uint32 Flags, Handle Recipient, void** RegistrationHandle);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerUnregisterSuspendResumeNotification(HPOWERNOTIFY RegistrationHandle);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadACValue(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32* Type, uint8* Buffer, uint32* BufferSize);
+		public static extern uint32 PowerReadACValue(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32* Type, uint8* Buffer, uint32* BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadDCValue(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32* Type, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadDCValue(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32* Type, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteACValueIndex(HKEY RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 AcValueIndex);
+		public static extern uint32 PowerWriteACValueIndex(HKey RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 AcValueIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteDCValueIndex(HKEY RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 DcValueIndex);
+		public static extern uint32 PowerWriteDCValueIndex(HKey RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 DcValueIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerGetActiveScheme(HKEY UserRootPowerKey, out Guid* ActivePolicyGuid);
+		public static extern uint32 PowerGetActiveScheme(HKey UserRootPowerKey, out Guid* ActivePolicyGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerSetActiveScheme(HKEY UserRootPowerKey, Guid* SchemeGuid);
+		public static extern uint32 PowerSetActiveScheme(HKey UserRootPowerKey, Guid* SchemeGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerSettingRegisterNotification(in Guid SettingGuid, POWER_SETTING_REGISTER_NOTIFICATION_FLAGS Flags, HANDLE Recipient, void** RegistrationHandle);
+		public static extern uint32 PowerSettingRegisterNotification(in Guid SettingGuid, POWER_SETTING_REGISTER_NOTIFICATION_FLAGS Flags, Handle Recipient, void** RegistrationHandle);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerSettingUnregisterNotification(HPOWERNOTIFY RegistrationHandle);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PowerRegisterForEffectivePowerModeNotifications(uint32 Version, EFFECTIVE_POWER_MODE_CALLBACK Callback, void* Context, void** RegistrationHandle);
+		public static extern HResult PowerRegisterForEffectivePowerModeNotifications(uint32 Version, EFFECTIVE_POWER_MODE_CALLBACK Callback, void* Context, void** RegistrationHandle);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT PowerUnregisterFromEffectivePowerModeNotifications(void* RegistrationHandle);
+		public static extern HResult PowerUnregisterFromEffectivePowerModeNotifications(void* RegistrationHandle);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN GetPwrDiskSpindownRange(out uint32 puiMax, out uint32 puiMin);
+		public static extern bool GetPwrDiskSpindownRange(out uint32 puiMax, out uint32 puiMin);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN EnumPwrSchemes(PWRSCHEMESENUMPROC lpfn, LPARAM lParam);
+		public static extern bool EnumPwrSchemes(PWRSCHEMESENUMPROC lpfn, LPARAM lParam);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN ReadGlobalPwrPolicy(ref GLOBAL_POWER_POLICY pGlobalPowerPolicy);
+		public static extern bool ReadGlobalPwrPolicy(ref GLOBAL_POWER_POLICY pGlobalPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN ReadPwrScheme(uint32 uiID, out POWER_POLICY pPowerPolicy);
+		public static extern bool ReadPwrScheme(uint32 uiID, out POWER_POLICY pPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN WritePwrScheme(ref uint32 puiID, PWSTR lpszSchemeName, PWSTR lpszDescription, ref POWER_POLICY lpScheme);
+		public static extern bool WritePwrScheme(ref uint32 puiID, char16* lpszSchemeName, char16* lpszDescription, ref POWER_POLICY lpScheme);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN WriteGlobalPwrPolicy(ref GLOBAL_POWER_POLICY pGlobalPowerPolicy);
+		public static extern bool WriteGlobalPwrPolicy(ref GLOBAL_POWER_POLICY pGlobalPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN DeletePwrScheme(uint32 uiID);
+		public static extern bool DeletePwrScheme(uint32 uiID);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN GetActivePwrScheme(out uint32 puiID);
+		public static extern bool GetActivePwrScheme(out uint32 puiID);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN SetActivePwrScheme(uint32 uiID, GLOBAL_POWER_POLICY* pGlobalPowerPolicy, POWER_POLICY* pPowerPolicy);
+		public static extern bool SetActivePwrScheme(uint32 uiID, GLOBAL_POWER_POLICY* pGlobalPowerPolicy, POWER_POLICY* pPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN IsPwrSuspendAllowed();
+		public static extern bool IsPwrSuspendAllowed();
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN IsPwrHibernateAllowed();
+		public static extern bool IsPwrHibernateAllowed();
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN IsPwrShutdownAllowed();
+		public static extern bool IsPwrShutdownAllowed();
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN IsAdminOverrideActive(ref ADMINISTRATOR_POWER_POLICY papp);
+		public static extern bool IsAdminOverrideActive(ref ADMINISTRATOR_POWER_POLICY papp);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN SetSuspendState(BOOLEAN bHibernate, BOOLEAN bForce, BOOLEAN bWakeupEventsDisabled);
+		public static extern bool SetSuspendState(bool bHibernate, bool bForce, bool bWakeupEventsDisabled);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN GetCurrentPowerPolicies(out GLOBAL_POWER_POLICY pGlobalPowerPolicy, out POWER_POLICY pPowerPolicy);
+		public static extern bool GetCurrentPowerPolicies(out GLOBAL_POWER_POLICY pGlobalPowerPolicy, out POWER_POLICY pPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN CanUserWritePwrScheme();
+		public static extern bool CanUserWritePwrScheme();
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN ReadProcessorPwrScheme(uint32 uiID, out MACHINE_PROCESSOR_POWER_POLICY pMachineProcessorPowerPolicy);
+		public static extern bool ReadProcessorPwrScheme(uint32 uiID, out MACHINE_PROCESSOR_POWER_POLICY pMachineProcessorPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN WriteProcessorPwrScheme(uint32 uiID, ref MACHINE_PROCESSOR_POWER_POLICY pMachineProcessorPowerPolicy);
+		public static extern bool WriteProcessorPwrScheme(uint32 uiID, ref MACHINE_PROCESSOR_POWER_POLICY pMachineProcessorPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN ValidatePowerPolicies(GLOBAL_POWER_POLICY* pGlobalPowerPolicy, POWER_POLICY* pPowerPolicy);
+		public static extern bool ValidatePowerPolicies(GLOBAL_POWER_POLICY* pGlobalPowerPolicy, POWER_POLICY* pPowerPolicy);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN PowerIsSettingRangeDefined(Guid* SubKeyGuid, Guid* SettingGuid);
+		public static extern bool PowerIsSettingRangeDefined(Guid* SubKeyGuid, Guid* SettingGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerSettingAccessCheckEx(POWER_DATA_ACCESSOR AccessFlags, Guid* PowerGuid, REG_SAM_FLAGS AccessType);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerSettingAccessCheck(POWER_DATA_ACCESSOR AccessFlags, Guid* PowerGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadACValueIndex(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 AcValueIndex);
+		public static extern uint32 PowerReadACValueIndex(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 AcValueIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadDCValueIndex(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 DcValueIndex);
+		public static extern uint32 PowerReadDCValueIndex(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 DcValueIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadFriendlyName(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadFriendlyName(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadDescription(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadDescription(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadPossibleValue(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32* Type, uint32 PossibleSettingIndex, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadPossibleValue(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32* Type, uint32 PossibleSettingIndex, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadPossibleFriendlyName(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadPossibleFriendlyName(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadPossibleDescription(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadPossibleDescription(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadValueMin(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 ValueMinimum);
+		public static extern uint32 PowerReadValueMin(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 ValueMinimum);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadValueMax(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 ValueMaximum);
+		public static extern uint32 PowerReadValueMax(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 ValueMaximum);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadValueIncrement(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 ValueIncrement);
+		public static extern uint32 PowerReadValueIncrement(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, out uint32 ValueIncrement);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadValueUnitsSpecifier(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadValueUnitsSpecifier(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadACDefaultIndex(HKEY RootPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, out uint32 AcDefaultIndex);
+		public static extern uint32 PowerReadACDefaultIndex(HKey RootPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, out uint32 AcDefaultIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadDCDefaultIndex(HKEY RootPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, out uint32 DcDefaultIndex);
+		public static extern uint32 PowerReadDCDefaultIndex(HKey RootPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, out uint32 DcDefaultIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerReadIconResourceSpecifier(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerReadIconResourceSpecifier(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerReadSettingAttributes(Guid* SubGroupGuid, Guid* PowerSettingGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteFriendlyName(HKEY RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWriteFriendlyName(HKey RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteDescription(HKEY RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWriteDescription(HKey RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWritePossibleValue(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 Type, uint32 PossibleSettingIndex, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWritePossibleValue(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 Type, uint32 PossibleSettingIndex, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWritePossibleFriendlyName(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWritePossibleFriendlyName(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWritePossibleDescription(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWritePossibleDescription(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 PossibleSettingIndex, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteValueMin(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 ValueMinimum);
+		public static extern uint32 PowerWriteValueMin(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 ValueMinimum);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteValueMax(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 ValueMaximum);
+		public static extern uint32 PowerWriteValueMax(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 ValueMaximum);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteValueIncrement(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 ValueIncrement);
+		public static extern uint32 PowerWriteValueIncrement(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, uint32 ValueIncrement);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteValueUnitsSpecifier(HKEY RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWriteValueUnitsSpecifier(HKey RootPowerKey, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteACDefaultIndex(HKEY RootSystemPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, uint32 DefaultAcIndex);
+		public static extern uint32 PowerWriteACDefaultIndex(HKey RootSystemPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, uint32 DefaultAcIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteDCDefaultIndex(HKEY RootSystemPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, uint32 DefaultDcIndex);
+		public static extern uint32 PowerWriteDCDefaultIndex(HKey RootSystemPowerKey, in Guid SchemePersonalityGuid, Guid* SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, uint32 DefaultDcIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerWriteIconResourceSpecifier(HKEY RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
+		public static extern uint32 PowerWriteIconResourceSpecifier(HKey RootPowerKey, in Guid SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, Guid* PowerSettingGuid, ref uint8 Buffer, uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerWriteSettingAttributes(Guid* SubGroupGuid, Guid* PowerSettingGuid, uint32 Attributes);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerDuplicateScheme(HKEY RootPowerKey, in Guid SourceSchemeGuid, out Guid* DestinationSchemeGuid);
+		public static extern uint32 PowerDuplicateScheme(HKey RootPowerKey, in Guid SourceSchemeGuid, out Guid* DestinationSchemeGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerImportPowerScheme(HKEY RootPowerKey, PWSTR ImportFileNamePath, out Guid* DestinationSchemeGuid);
+		public static extern uint32 PowerImportPowerScheme(HKey RootPowerKey, char16* ImportFileNamePath, out Guid* DestinationSchemeGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerDeleteScheme(HKEY RootPowerKey, in Guid SchemeGuid);
+		public static extern uint32 PowerDeleteScheme(HKey RootPowerKey, in Guid SchemeGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerRemovePowerSetting(in Guid PowerSettingSubKeyGuid, in Guid PowerSettingGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerCreateSetting(HKEY RootSystemPowerKey, in Guid SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid);
+		public static extern uint32 PowerCreateSetting(HKey RootSystemPowerKey, in Guid SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerCreatePossibleSetting(HKEY RootSystemPowerKey, in Guid SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, uint32 PossibleSettingIndex);
+		public static extern uint32 PowerCreatePossibleSetting(HKey RootSystemPowerKey, in Guid SubGroupOfPowerSettingsGuid, in Guid PowerSettingGuid, uint32 PossibleSettingIndex);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerEnumerate(HKEY RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, POWER_DATA_ACCESSOR AccessFlags, uint32 Index, uint8* Buffer, out uint32 BufferSize);
+		public static extern uint32 PowerEnumerate(HKey RootPowerKey, Guid* SchemeGuid, Guid* SubGroupOfPowerSettingsGuid, POWER_DATA_ACCESSOR AccessFlags, uint32 Index, uint8* Buffer, out uint32 BufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerOpenUserPowerKey(out HKEY phUserPowerKey, uint32 Access, BOOL OpenExisting);
+		public static extern uint32 PowerOpenUserPowerKey(out HKey phUserPowerKey, uint32 Access, IntBool OpenExisting);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 PowerOpenSystemPowerKey(out HKEY phSystemPowerKey, uint32 Access, BOOL OpenExisting);
+		public static extern uint32 PowerOpenSystemPowerKey(out HKey phSystemPowerKey, uint32 Access, IntBool OpenExisting);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerCanRestoreIndividualDefaultPowerScheme(in Guid SchemeGuid);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1068,40 +1074,40 @@ namespace Win32
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern POWER_PLATFORM_ROLE PowerDeterminePlatformRole();
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN DevicePowerEnumDevices(uint32 QueryIndex, uint32 QueryInterpretationFlags, uint32 QueryFlags, uint8* pReturnBuffer, out uint32 pBufferSize);
+		public static extern bool DevicePowerEnumDevices(uint32 QueryIndex, uint32 QueryInterpretationFlags, uint32 QueryFlags, uint8* pReturnBuffer, out uint32 pBufferSize);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DevicePowerSetDeviceState(PWSTR DeviceDescription, uint32 SetFlags, void* SetData);
+		public static extern uint32 DevicePowerSetDeviceState(char16* DeviceDescription, uint32 SetFlags, void* SetData);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN DevicePowerOpen(uint32 DebugMask);
+		public static extern bool DevicePowerOpen(uint32 DebugMask);
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOLEAN DevicePowerClose();
+		public static extern bool DevicePowerClose();
 		[Import("powrprof.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 PowerReportThermalEvent(ref THERMAL_EVENT Event);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HPOWERNOTIFY RegisterPowerSettingNotification(HANDLE hRecipient, in Guid PowerSettingGuid, uint32 Flags);
+		public static extern HPOWERNOTIFY RegisterPowerSettingNotification(Handle hRecipient, in Guid PowerSettingGuid, uint32 Flags);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterPowerSettingNotification(HPOWERNOTIFY Handle);
+		public static extern IntBool UnregisterPowerSettingNotification(HPOWERNOTIFY Handle);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HPOWERNOTIFY RegisterSuspendResumeNotification(HANDLE hRecipient, uint32 Flags);
+		public static extern HPOWERNOTIFY RegisterSuspendResumeNotification(Handle hRecipient, uint32 Flags);
 		[Import("user32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL UnregisterSuspendResumeNotification(HPOWERNOTIFY Handle);
+		public static extern IntBool UnregisterSuspendResumeNotification(HPOWERNOTIFY Handle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL RequestWakeupLatency(LATENCY_TIME latency);
+		public static extern IntBool RequestWakeupLatency(LATENCY_TIME latency);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL IsSystemResumeAutomatic();
+		public static extern IntBool IsSystemResumeAutomatic();
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE PowerCreateRequest(ref REASON_CONTEXT Context);
+		public static extern Handle PowerCreateRequest(ref REASON_CONTEXT Context);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PowerSetRequest(HANDLE PowerRequest, POWER_REQUEST_TYPE RequestType);
+		public static extern IntBool PowerSetRequest(Handle PowerRequest, POWER_REQUEST_TYPE RequestType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL PowerClearRequest(HANDLE PowerRequest, POWER_REQUEST_TYPE RequestType);
+		public static extern IntBool PowerClearRequest(Handle PowerRequest, POWER_REQUEST_TYPE RequestType);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDevicePowerState(HANDLE hDevice, out BOOL pfOn);
+		public static extern IntBool GetDevicePowerState(Handle hDevice, out IntBool pfOn);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetSystemPowerState(BOOL fSuspend, BOOL fForce);
+		public static extern IntBool SetSystemPowerState(IntBool fSuspend, IntBool fForce);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetSystemPowerStatus(out SYSTEM_POWER_STATUS lpSystemPowerStatus);
+		public static extern IntBool GetSystemPowerStatus(out SYSTEM_POWER_STATUS lpSystemPowerStatus);
 	}
 }

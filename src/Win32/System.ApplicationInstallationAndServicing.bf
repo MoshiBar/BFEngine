@@ -1315,13 +1315,13 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL LPDISPLAYVAL(void* pContext, RESULTTYPES uiType, PWSTR szwVal, PWSTR szwDescription, PWSTR szwLocation);
-		public function BOOL LPEVALCOMCALLBACK(STATUSTYPES iStatus, PWSTR szData, void* pContext);
-		public function int32 INSTALLUI_HANDLERA(void* pvContext, uint32 iMessageType, PSTR szMessage);
-		public function int32 INSTALLUI_HANDLERW(void* pvContext, uint32 iMessageType, PWSTR szMessage);
+		public function IntBool LPDISPLAYVAL(void* pContext, RESULTTYPES uiType, char16* szwVal, char16* szwDescription, char16* szwLocation);
+		public function IntBool LPEVALCOMCALLBACK(STATUSTYPES iStatus, char16* szData, void* pContext);
+		public function int32 INSTALLUI_HANDLERA(void* pvContext, uint32 iMessageType, char8* szMessage);
+		public function int32 INSTALLUI_HANDLERW(void* pvContext, uint32 iMessageType, char16* szMessage);
 		public function int32 PINSTALLUI_HANDLER_RECORD(void* pvContext, uint32 iMessageType, MSIHANDLE hRecord);
-		public function BOOL PPATCH_PROGRESS_CALLBACK(void* CallbackContext, uint32 CurrentPosition, uint32 MaximumPosition);
-		public function BOOL PPATCH_SYMLOAD_CALLBACK(uint32 WhichFile, PSTR SymbolFileName, uint32 SymType, uint32 SymbolFileCheckSum, uint32 SymbolFileTimeDate, uint32 ImageFileCheckSum, uint32 ImageFileTimeDate, void* CallbackContext);
+		public function IntBool PPATCH_PROGRESS_CALLBACK(void* CallbackContext, uint32 CurrentPosition, uint32 MaximumPosition);
+		public function IntBool PPATCH_SYMLOAD_CALLBACK(uint32 WhichFile, char8* SymbolFileName, uint32 SymType, uint32 SymbolFileCheckSum, uint32 SymbolFileTimeDate, uint32 ImageFileCheckSum, uint32 ImageFileTimeDate, void* CallbackContext);
 		
 		// --- Structs ---
 		
@@ -1333,7 +1333,7 @@ namespace Win32
 		[CRepr]
 		public struct MSIPATCHSEQUENCEINFOA
 		{
-			public PSTR szPatchData;
+			public char8* szPatchData;
 			public MSIPATCHDATATYPE ePatchDataType;
 			public uint32 dwOrder;
 			public uint32 uStatus;
@@ -1341,7 +1341,7 @@ namespace Win32
 		[CRepr]
 		public struct MSIPATCHSEQUENCEINFOW
 		{
-			public PWSTR szPatchData;
+			public char16* szPatchData;
 			public MSIPATCHDATATYPE ePatchDataType;
 			public uint32 dwOrder;
 			public uint32 uStatus;
@@ -1358,7 +1358,7 @@ namespace Win32
 			public uint32 cbAssemblyInfo;
 			public uint32 dwAssemblyFlags;
 			public ULARGE_INTEGER uliAssemblySizeInKB;
-			public PWSTR pszCurrentAssemblyPathBuf;
+			public char16* pszCurrentAssemblyPathBuf;
 			public uint32 cchBuf;
 		}
 		[CRepr]
@@ -1367,8 +1367,8 @@ namespace Win32
 			public uint32 cbSize;
 			public uint32 dwFlags;
 			public Guid guidScheme;
-			public PWSTR szIdentifier;
-			public PWSTR szNonCannonicalData;
+			public char16* szIdentifier;
+			public char16* szNonCannonicalData;
 		}
 		[CRepr]
 		public struct PROTECTED_FILE_DATA
@@ -1435,12 +1435,12 @@ namespace Win32
 			public Guid ProductID;
 			public BSTR AppTitle;
 			public BSTR IconPath;
-			public BOOL IsUninstallable;
+			public IntBool IsUninstallable;
 			public PM_APPLICATION_INSTALL_TYPE AppInstallType;
 			public Guid InstanceID;
 			public PM_APPLICATION_STATE State;
-			public BOOL IsModern;
-			public BOOL IsModernLightUp;
+			public IntBool IsModern;
+			public IntBool IsModernLightUp;
 			public uint16 LightUpSupportMask;
 		}
 		[CRepr]
@@ -1458,12 +1458,12 @@ namespace Win32
 			public TILE_TEMPLATE_TYPE TemplateType;
 			public uint32[32] HubPosition;
 			public uint32 HubVisibilityBitmask;
-			public BOOL IsDefault;
+			public IntBool IsDefault;
 			public PM_STARTTILE_TYPE TileType;
 			public uint8* pbPropBlob;
 			public uint32 cbPropBlob;
-			public BOOL IsRestoring;
-			public BOOL IsModern;
+			public IntBool IsRestoring;
+			public IntBool IsModern;
 			public PM_INVOCATIONINFO InvocationInfo;
 		}
 		[CRepr]
@@ -1474,7 +1474,7 @@ namespace Win32
 			public Guid InstanceID;
 			public uint8* pbLicense;
 			public uint32 cbLicense;
-			public BOOL IsUninstallDisabled;
+			public IntBool IsUninstallDisabled;
 			public uint32 DeploymentOptions;
 			public Guid OfferID;
 			public BSTR MarketplaceAppVersion;
@@ -1517,7 +1517,7 @@ namespace Win32
 		public struct PATCH_OLD_FILE_INFO_A
 		{
 			public uint32 SizeOfThisStruct;
-			public PSTR OldFileName;
+			public char8* OldFileName;
 			public uint32 IgnoreRangeCount;
 			public PATCH_IGNORE_RANGE* IgnoreRangeArray;
 			public uint32 RetainRangeCount;
@@ -1527,7 +1527,7 @@ namespace Win32
 		public struct PATCH_OLD_FILE_INFO_W
 		{
 			public uint32 SizeOfThisStruct;
-			public PWSTR OldFileName;
+			public char16* OldFileName;
 			public uint32 IgnoreRangeCount;
 			public PATCH_IGNORE_RANGE* IgnoreRangeArray;
 			public uint32 RetainRangeCount;
@@ -1537,7 +1537,7 @@ namespace Win32
 		public struct PATCH_OLD_FILE_INFO_H
 		{
 			public uint32 SizeOfThisStruct;
-			public HANDLE OldFileHandle;
+			public Handle OldFileHandle;
 			public uint32 IgnoreRangeCount;
 			public PATCH_IGNORE_RANGE* IgnoreRangeArray;
 			public uint32 RetainRangeCount;
@@ -1556,9 +1556,9 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public PSTR OldFileNameA;
-				public PWSTR OldFileNameW;
-				public HANDLE OldFileHandle;
+				public char8* OldFileNameA;
+				public char16* OldFileNameW;
+				public Handle OldFileHandle;
 			}
 		}
 		[CRepr]
@@ -1580,7 +1580,7 @@ namespace Win32
 		{
 			public uint32 SizeOfThisStruct;
 			public uint32 SymbolOptionFlags;
-			public PSTR NewFileSymbolPath;
+			public char8* NewFileSymbolPath;
 			public PSTR* OldFileSymbolPathArray;
 			public uint32 ExtendedOptionFlags;
 			public PPATCH_SYMLOAD_CALLBACK SymLoadCallback;
@@ -1593,7 +1593,7 @@ namespace Win32
 		{
 			public _Anonymous_e__Union Anonymous;
 			public uint uSize;
-			public BOOL Editable;
+			public IntBool Editable;
 			
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
@@ -1621,7 +1621,7 @@ namespace Win32
 			public int64 FileType;
 			public int64 Flags;
 			public uint TargetSize;
-			public FILETIME TargetFileTime;
+			public FileTime TargetFileTime;
 			public uint32 TargetHashAlgId;
 			public DELTA_HASH TargetHash;
 		}
@@ -1637,8 +1637,8 @@ namespace Win32
 			public uint32 ulFlags;
 			public uint32 ulFilenameLength;
 			public uint32 ulPathLength;
-			public PWSTR lpFileName;
-			public PWSTR lpFilePath;
+			public char16* lpFileName;
+			public char16* lpFilePath;
 		}
 		[CRepr]
 		public struct ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION
@@ -1657,10 +1657,10 @@ namespace Win32
 			public uint32 ulPolicyVersionMajor;
 			public uint32 ulPolicyVersionMinor;
 			public uint32 ulAssemblyDirectoryNameLength;
-			public PWSTR lpAssemblyEncodedAssemblyIdentity;
-			public PWSTR lpAssemblyManifestPath;
-			public PWSTR lpAssemblyPolicyPath;
-			public PWSTR lpAssemblyDirectoryName;
+			public char16* lpAssemblyEncodedAssemblyIdentity;
+			public char16* lpAssemblyManifestPath;
+			public char16* lpAssemblyPolicyPath;
+			public char16* lpAssemblyDirectoryName;
 			public uint32 ulFileCount;
 		}
 		[CRepr]
@@ -1695,21 +1695,21 @@ namespace Win32
 			public uint32 ulRootConfigurationPathChars;
 			public uint32 ulAppDirPathType;
 			public uint32 ulAppDirPathChars;
-			public PWSTR lpRootManifestPath;
-			public PWSTR lpRootConfigurationPath;
-			public PWSTR lpAppDirPath;
+			public char16* lpRootManifestPath;
+			public char16* lpRootConfigurationPath;
+			public char16* lpAppDirPath;
 		}
 		[CRepr]
 		public struct ACTCTXA
 		{
 			public uint32 cbSize;
 			public uint32 dwFlags;
-			public PSTR lpSource;
+			public char8* lpSource;
 			public uint16 wProcessorArchitecture;
 			public uint16 wLangId;
-			public PSTR lpAssemblyDirectory;
-			public PSTR lpResourceName;
-			public PSTR lpApplicationName;
+			public char8* lpAssemblyDirectory;
+			public char8* lpResourceName;
+			public char8* lpApplicationName;
 			public HINSTANCE hModule;
 		}
 		[CRepr]
@@ -1717,12 +1717,12 @@ namespace Win32
 		{
 			public uint32 cbSize;
 			public uint32 dwFlags;
-			public PWSTR lpSource;
+			public char16* lpSource;
 			public uint16 wProcessorArchitecture;
 			public uint16 wLangId;
-			public PWSTR lpAssemblyDirectory;
-			public PWSTR lpResourceName;
-			public PWSTR lpApplicationName;
+			public char16* lpAssemblyDirectory;
+			public char16* lpResourceName;
+			public char16* lpApplicationName;
 			public HINSTANCE hModule;
 		}
 		[CRepr]
@@ -1736,7 +1736,7 @@ namespace Win32
 			public uint32 ulSectionGlobalDataLength;
 			public void* lpSectionBase;
 			public uint32 ulSectionTotalLength;
-			public HANDLE hActCtx;
+			public Handle hActCtx;
 			public uint32 ulAssemblyRosterIndex;
 			public uint32 ulFlags;
 			public ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA AssemblyMetadata;
@@ -1756,24 +1756,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OpenDatabase(PWSTR szDatabase) mut => VT.OpenDatabase(ref this, szDatabase);
-			public HRESULT OpenCUB(PWSTR szCUBFile) mut => VT.OpenCUB(ref this, szCUBFile);
-			public HRESULT CloseDatabase() mut => VT.CloseDatabase(ref this);
-			public HRESULT CloseCUB() mut => VT.CloseCUB(ref this);
-			public HRESULT SetDisplay(LPDISPLAYVAL pDisplayFunction, void* pContext) mut => VT.SetDisplay(ref this, pDisplayFunction, pContext);
-			public HRESULT SetStatus(LPEVALCOMCALLBACK pStatusFunction, void* pContext) mut => VT.SetStatus(ref this, pStatusFunction, pContext);
-			public HRESULT Validate(PWSTR wzICEs) mut => VT.Validate(ref this, wzICEs);
+			public HResult OpenDatabase(char16* szDatabase) mut => VT.OpenDatabase(ref this, szDatabase);
+			public HResult OpenCUB(char16* szCUBFile) mut => VT.OpenCUB(ref this, szCUBFile);
+			public HResult CloseDatabase() mut => VT.CloseDatabase(ref this);
+			public HResult CloseCUB() mut => VT.CloseCUB(ref this);
+			public HResult SetDisplay(LPDISPLAYVAL pDisplayFunction, void* pContext) mut => VT.SetDisplay(ref this, pDisplayFunction, pContext);
+			public HResult SetStatus(LPEVALCOMCALLBACK pStatusFunction, void* pContext) mut => VT.SetStatus(ref this, pStatusFunction, pContext);
+			public HResult Validate(char16* wzICEs) mut => VT.Validate(ref this, wzICEs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self, PWSTR szDatabase) OpenDatabase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self, PWSTR szCUBFile) OpenCUB;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self) CloseDatabase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self) CloseCUB;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self, LPDISPLAYVAL pDisplayFunction, void* pContext) SetDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self, LPEVALCOMCALLBACK pStatusFunction, void* pContext) SetStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IValidate self, PWSTR wzICEs) Validate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self, char16* szDatabase) OpenDatabase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self, char16* szCUBFile) OpenCUB;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self) CloseDatabase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self) CloseCUB;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self, LPDISPLAYVAL pDisplayFunction, void* pContext) SetDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self, LPEVALCOMCALLBACK pStatusFunction, void* pContext) SetStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IValidate self, char16* wzICEs) Validate;
 			}
 		}
 		[CRepr]
@@ -1783,18 +1783,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cFetch, out BSTR rgbstrStrings, out uint32 pcFetched) mut => VT.Next(ref this, cFetch, out rgbstrStrings, out pcFetched);
-			public HRESULT Skip(uint32 cSkip) mut => VT.Skip(ref this, cSkip);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumMsmString* pemsmStrings) mut => VT.Clone(ref this, out pemsmStrings);
+			public HResult Next(uint32 cFetch, out BSTR rgbstrStrings, out uint32 pcFetched) mut => VT.Next(ref this, cFetch, out rgbstrStrings, out pcFetched);
+			public HResult Skip(uint32 cSkip) mut => VT.Skip(ref this, cSkip);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumMsmString* pemsmStrings) mut => VT.Clone(ref this, out pemsmStrings);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmString self, uint32 cFetch, out BSTR rgbstrStrings, out uint32 pcFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmString self, uint32 cSkip) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmString self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmString self, out IEnumMsmString* pemsmStrings) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmString self, uint32 cFetch, out BSTR rgbstrStrings, out uint32 pcFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmString self, uint32 cSkip) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmString self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmString self, out IEnumMsmString* pemsmStrings) Clone;
 			}
 		}
 		[CRepr]
@@ -1804,16 +1804,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Item(int32 Item, out BSTR Return) mut => VT.get_Item(ref this, Item, out Return);
-			public HRESULT get_Count(out int32 Count) mut => VT.get_Count(ref this, out Count);
-			public HRESULT get__NewEnum(out IUnknown* NewEnum) mut => VT.get__NewEnum(ref this, out NewEnum);
+			public HResult get_Item(int32 Item, out BSTR Return) mut => VT.get_Item(ref this, Item, out Return);
+			public HResult get_Count(out int32 Count) mut => VT.get_Count(ref this, out Count);
+			public HResult get__NewEnum(out IUnknown* NewEnum) mut => VT.get__NewEnum(ref this, out NewEnum);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmStrings self, int32 Item, out BSTR Return) get_Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmStrings self, out int32 Count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmStrings self, out IUnknown* NewEnum) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmStrings self, int32 Item, out BSTR Return) get_Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmStrings self, out int32 Count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmStrings self, out IUnknown* NewEnum) get__NewEnum;
 			}
 		}
 		[CRepr]
@@ -1823,24 +1823,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Type(out msmErrorType ErrorType) mut => VT.get_Type(ref this, out ErrorType);
-			public HRESULT get_Path(out BSTR ErrorPath) mut => VT.get_Path(ref this, out ErrorPath);
-			public HRESULT get_Language(out int16 ErrorLanguage) mut => VT.get_Language(ref this, out ErrorLanguage);
-			public HRESULT get_DatabaseTable(out BSTR ErrorTable) mut => VT.get_DatabaseTable(ref this, out ErrorTable);
-			public HRESULT get_DatabaseKeys(out IMsmStrings* ErrorKeys) mut => VT.get_DatabaseKeys(ref this, out ErrorKeys);
-			public HRESULT get_ModuleTable(out BSTR ErrorTable) mut => VT.get_ModuleTable(ref this, out ErrorTable);
-			public HRESULT get_ModuleKeys(out IMsmStrings* ErrorKeys) mut => VT.get_ModuleKeys(ref this, out ErrorKeys);
+			public HResult get_Type(out msmErrorType ErrorType) mut => VT.get_Type(ref this, out ErrorType);
+			public HResult get_Path(out BSTR ErrorPath) mut => VT.get_Path(ref this, out ErrorPath);
+			public HResult get_Language(out int16 ErrorLanguage) mut => VT.get_Language(ref this, out ErrorLanguage);
+			public HResult get_DatabaseTable(out BSTR ErrorTable) mut => VT.get_DatabaseTable(ref this, out ErrorTable);
+			public HResult get_DatabaseKeys(out IMsmStrings* ErrorKeys) mut => VT.get_DatabaseKeys(ref this, out ErrorKeys);
+			public HResult get_ModuleTable(out BSTR ErrorTable) mut => VT.get_ModuleTable(ref this, out ErrorTable);
+			public HResult get_ModuleKeys(out IMsmStrings* ErrorKeys) mut => VT.get_ModuleKeys(ref this, out ErrorKeys);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out msmErrorType ErrorType) get_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out BSTR ErrorPath) get_Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out int16 ErrorLanguage) get_Language;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out BSTR ErrorTable) get_DatabaseTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out IMsmStrings* ErrorKeys) get_DatabaseKeys;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out BSTR ErrorTable) get_ModuleTable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmError self, out IMsmStrings* ErrorKeys) get_ModuleKeys;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out msmErrorType ErrorType) get_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out BSTR ErrorPath) get_Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out int16 ErrorLanguage) get_Language;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out BSTR ErrorTable) get_DatabaseTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out IMsmStrings* ErrorKeys) get_DatabaseKeys;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out BSTR ErrorTable) get_ModuleTable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmError self, out IMsmStrings* ErrorKeys) get_ModuleKeys;
 			}
 		}
 		[CRepr]
@@ -1850,18 +1850,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cFetch, out IMsmError* rgmsmErrors, out uint32 pcFetched) mut => VT.Next(ref this, cFetch, out rgmsmErrors, out pcFetched);
-			public HRESULT Skip(uint32 cSkip) mut => VT.Skip(ref this, cSkip);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumMsmError* pemsmErrors) mut => VT.Clone(ref this, out pemsmErrors);
+			public HResult Next(uint32 cFetch, out IMsmError* rgmsmErrors, out uint32 pcFetched) mut => VT.Next(ref this, cFetch, out rgmsmErrors, out pcFetched);
+			public HResult Skip(uint32 cSkip) mut => VT.Skip(ref this, cSkip);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumMsmError* pemsmErrors) mut => VT.Clone(ref this, out pemsmErrors);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmError self, uint32 cFetch, out IMsmError* rgmsmErrors, out uint32 pcFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmError self, uint32 cSkip) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmError self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmError self, out IEnumMsmError* pemsmErrors) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmError self, uint32 cFetch, out IMsmError* rgmsmErrors, out uint32 pcFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmError self, uint32 cSkip) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmError self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmError self, out IEnumMsmError* pemsmErrors) Clone;
 			}
 		}
 		[CRepr]
@@ -1871,16 +1871,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Item(int32 Item, out IMsmError* Return) mut => VT.get_Item(ref this, Item, out Return);
-			public HRESULT get_Count(out int32 Count) mut => VT.get_Count(ref this, out Count);
-			public HRESULT get__NewEnum(out IUnknown* NewEnum) mut => VT.get__NewEnum(ref this, out NewEnum);
+			public HResult get_Item(int32 Item, out IMsmError* Return) mut => VT.get_Item(ref this, Item, out Return);
+			public HResult get_Count(out int32 Count) mut => VT.get_Count(ref this, out Count);
+			public HResult get__NewEnum(out IUnknown* NewEnum) mut => VT.get__NewEnum(ref this, out NewEnum);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmErrors self, int32 Item, out IMsmError* Return) get_Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmErrors self, out int32 Count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmErrors self, out IUnknown* NewEnum) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmErrors self, int32 Item, out IMsmError* Return) get_Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmErrors self, out int32 Count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmErrors self, out IUnknown* NewEnum) get__NewEnum;
 			}
 		}
 		[CRepr]
@@ -1890,16 +1890,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Module(out BSTR Module) mut => VT.get_Module(ref this, out Module);
-			public HRESULT get_Language(out int16 Language) mut => VT.get_Language(ref this, out Language);
-			public HRESULT get_Version(out BSTR Version) mut => VT.get_Version(ref this, out Version);
+			public HResult get_Module(out BSTR Module) mut => VT.get_Module(ref this, out Module);
+			public HResult get_Language(out int16 Language) mut => VT.get_Language(ref this, out Language);
+			public HResult get_Version(out BSTR Version) mut => VT.get_Version(ref this, out Version);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmDependency self, out BSTR Module) get_Module;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmDependency self, out int16 Language) get_Language;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmDependency self, out BSTR Version) get_Version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmDependency self, out BSTR Module) get_Module;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmDependency self, out int16 Language) get_Language;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmDependency self, out BSTR Version) get_Version;
 			}
 		}
 		[CRepr]
@@ -1909,18 +1909,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cFetch, out IMsmDependency* rgmsmDependencies, out uint32 pcFetched) mut => VT.Next(ref this, cFetch, out rgmsmDependencies, out pcFetched);
-			public HRESULT Skip(uint32 cSkip) mut => VT.Skip(ref this, cSkip);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumMsmDependency* pemsmDependencies) mut => VT.Clone(ref this, out pemsmDependencies);
+			public HResult Next(uint32 cFetch, out IMsmDependency* rgmsmDependencies, out uint32 pcFetched) mut => VT.Next(ref this, cFetch, out rgmsmDependencies, out pcFetched);
+			public HResult Skip(uint32 cSkip) mut => VT.Skip(ref this, cSkip);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumMsmDependency* pemsmDependencies) mut => VT.Clone(ref this, out pemsmDependencies);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmDependency self, uint32 cFetch, out IMsmDependency* rgmsmDependencies, out uint32 pcFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmDependency self, uint32 cSkip) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmDependency self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumMsmDependency self, out IEnumMsmDependency* pemsmDependencies) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmDependency self, uint32 cFetch, out IMsmDependency* rgmsmDependencies, out uint32 pcFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmDependency self, uint32 cSkip) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmDependency self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumMsmDependency self, out IEnumMsmDependency* pemsmDependencies) Clone;
 			}
 		}
 		[CRepr]
@@ -1930,16 +1930,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Item(int32 Item, out IMsmDependency* Return) mut => VT.get_Item(ref this, Item, out Return);
-			public HRESULT get_Count(out int32 Count) mut => VT.get_Count(ref this, out Count);
-			public HRESULT get__NewEnum(out IUnknown* NewEnum) mut => VT.get__NewEnum(ref this, out NewEnum);
+			public HResult get_Item(int32 Item, out IMsmDependency* Return) mut => VT.get_Item(ref this, Item, out Return);
+			public HResult get_Count(out int32 Count) mut => VT.get_Count(ref this, out Count);
+			public HResult get__NewEnum(out IUnknown* NewEnum) mut => VT.get__NewEnum(ref this, out NewEnum);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmDependencies self, int32 Item, out IMsmDependency* Return) get_Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmDependencies self, out int32 Count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmDependencies self, out IUnknown* NewEnum) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmDependencies self, int32 Item, out IMsmDependency* Return) get_Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmDependencies self, out int32 Count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmDependencies self, out IUnknown* NewEnum) get__NewEnum;
 			}
 		}
 		[CRepr]
@@ -1949,36 +1949,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OpenDatabase(BSTR Path) mut => VT.OpenDatabase(ref this, Path);
-			public HRESULT OpenModule(BSTR Path, int16 Language) mut => VT.OpenModule(ref this, Path, Language);
-			public HRESULT CloseDatabase(int16 Commit) mut => VT.CloseDatabase(ref this, Commit);
-			public HRESULT CloseModule() mut => VT.CloseModule(ref this);
-			public HRESULT OpenLog(BSTR Path) mut => VT.OpenLog(ref this, Path);
-			public HRESULT CloseLog() mut => VT.CloseLog(ref this);
-			public HRESULT Log(BSTR Message) mut => VT.Log(ref this, Message);
-			public HRESULT get_Errors(out IMsmErrors* Errors) mut => VT.get_Errors(ref this, out Errors);
-			public HRESULT get_Dependencies(out IMsmDependencies* Dependencies) mut => VT.get_Dependencies(ref this, out Dependencies);
-			public HRESULT Merge(BSTR Feature, BSTR RedirectDir) mut => VT.Merge(ref this, Feature, RedirectDir);
-			public HRESULT Connect(BSTR Feature) mut => VT.Connect(ref this, Feature);
-			public HRESULT ExtractCAB(BSTR FileName) mut => VT.ExtractCAB(ref this, FileName);
-			public HRESULT ExtractFiles(BSTR Path) mut => VT.ExtractFiles(ref this, Path);
+			public HResult OpenDatabase(BSTR Path) mut => VT.OpenDatabase(ref this, Path);
+			public HResult OpenModule(BSTR Path, int16 Language) mut => VT.OpenModule(ref this, Path, Language);
+			public HResult CloseDatabase(int16 Commit) mut => VT.CloseDatabase(ref this, Commit);
+			public HResult CloseModule() mut => VT.CloseModule(ref this);
+			public HResult OpenLog(BSTR Path) mut => VT.OpenLog(ref this, Path);
+			public HResult CloseLog() mut => VT.CloseLog(ref this);
+			public HResult Log(BSTR Message) mut => VT.Log(ref this, Message);
+			public HResult get_Errors(out IMsmErrors* Errors) mut => VT.get_Errors(ref this, out Errors);
+			public HResult get_Dependencies(out IMsmDependencies* Dependencies) mut => VT.get_Dependencies(ref this, out Dependencies);
+			public HResult Merge(BSTR Feature, BSTR RedirectDir) mut => VT.Merge(ref this, Feature, RedirectDir);
+			public HResult Connect(BSTR Feature) mut => VT.Connect(ref this, Feature);
+			public HResult ExtractCAB(BSTR FileName) mut => VT.ExtractCAB(ref this, FileName);
+			public HResult ExtractFiles(BSTR Path) mut => VT.ExtractFiles(ref this, Path);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Path) OpenDatabase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Path, int16 Language) OpenModule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, int16 Commit) CloseDatabase;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self) CloseModule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Path) OpenLog;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self) CloseLog;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Message) Log;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, out IMsmErrors* Errors) get_Errors;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, out IMsmDependencies* Dependencies) get_Dependencies;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Feature, BSTR RedirectDir) Merge;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Feature) Connect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR FileName) ExtractCAB;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmMerge self, BSTR Path) ExtractFiles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Path) OpenDatabase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Path, int16 Language) OpenModule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, int16 Commit) CloseDatabase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self) CloseModule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Path) OpenLog;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self) CloseLog;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Message) Log;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, out IMsmErrors* Errors) get_Errors;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, out IMsmDependencies* Dependencies) get_Dependencies;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Feature, BSTR RedirectDir) Merge;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Feature) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR FileName) ExtractCAB;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmMerge self, BSTR Path) ExtractFiles;
 			}
 		}
 		[CRepr]
@@ -1988,12 +1988,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ModuleFiles(out IMsmStrings* Files) mut => VT.get_ModuleFiles(ref this, out Files);
+			public HResult get_ModuleFiles(out IMsmStrings* Files) mut => VT.get_ModuleFiles(ref this, out Files);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IMsmGetFiles self, out IMsmStrings* Files) get_ModuleFiles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMsmGetFiles self, out IMsmStrings* Files) get_ModuleFiles;
 			}
 		}
 		[CRepr]
@@ -2003,28 +2003,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetProperty(uint32 PropertyId, void* pvProperty, uint32 cbProperty) mut => VT.SetProperty(ref this, PropertyId, pvProperty, cbProperty);
-			public HRESULT GetProperty(uint32 PropertyId, void* pvProperty, out uint32 pcbProperty) mut => VT.GetProperty(ref this, PropertyId, pvProperty, out pcbProperty);
-			public HRESULT Finalize() mut => VT.Finalize(ref this);
-			public HRESULT GetDisplayName(char16* szDisplayName, out uint32 pccDisplayName, uint32 dwDisplayFlags) mut => VT.GetDisplayName(ref this, szDisplayName, out pccDisplayName, dwDisplayFlags);
-			public HRESULT Reserved(in Guid refIID, ref IUnknown pUnkReserved1, ref IUnknown pUnkReserved2, PWSTR szReserved, int64 llReserved, void* pvReserved, uint32 cbReserved, void** ppReserved) mut => VT.Reserved(ref this, refIID, ref pUnkReserved1, ref pUnkReserved2, szReserved, llReserved, pvReserved, cbReserved, ppReserved);
-			public HRESULT GetName(out uint32 lpcwBuffer, char16* pwzName) mut => VT.GetName(ref this, out lpcwBuffer, pwzName);
-			public HRESULT GetVersion(out uint32 pdwVersionHi, out uint32 pdwVersionLow) mut => VT.GetVersion(ref this, out pdwVersionHi, out pdwVersionLow);
-			public HRESULT IsEqual(ref IAssemblyName pName, uint32 dwCmpFlags) mut => VT.IsEqual(ref this, ref pName, dwCmpFlags);
-			public HRESULT Clone(out IAssemblyName* pName) mut => VT.Clone(ref this, out pName);
+			public HResult SetProperty(uint32 PropertyId, void* pvProperty, uint32 cbProperty) mut => VT.SetProperty(ref this, PropertyId, pvProperty, cbProperty);
+			public HResult GetProperty(uint32 PropertyId, void* pvProperty, out uint32 pcbProperty) mut => VT.GetProperty(ref this, PropertyId, pvProperty, out pcbProperty);
+			public HResult Finalize() mut => VT.Finalize(ref this);
+			public HResult GetDisplayName(char16* szDisplayName, out uint32 pccDisplayName, uint32 dwDisplayFlags) mut => VT.GetDisplayName(ref this, szDisplayName, out pccDisplayName, dwDisplayFlags);
+			public HResult Reserved(in Guid refIID, ref IUnknown pUnkReserved1, ref IUnknown pUnkReserved2, char16* szReserved, int64 llReserved, void* pvReserved, uint32 cbReserved, void** ppReserved) mut => VT.Reserved(ref this, refIID, ref pUnkReserved1, ref pUnkReserved2, szReserved, llReserved, pvReserved, cbReserved, ppReserved);
+			public HResult GetName(out uint32 lpcwBuffer, char16* pwzName) mut => VT.GetName(ref this, out lpcwBuffer, pwzName);
+			public HResult GetVersion(out uint32 pdwVersionHi, out uint32 pdwVersionLow) mut => VT.GetVersion(ref this, out pdwVersionHi, out pdwVersionLow);
+			public HResult IsEqual(ref IAssemblyName pName, uint32 dwCmpFlags) mut => VT.IsEqual(ref this, ref pName, dwCmpFlags);
+			public HResult Clone(out IAssemblyName* pName) mut => VT.Clone(ref this, out pName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, uint32 PropertyId, void* pvProperty, uint32 cbProperty) SetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, uint32 PropertyId, void* pvProperty, out uint32 pcbProperty) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self) Finalize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, char16* szDisplayName, out uint32 pccDisplayName, uint32 dwDisplayFlags) GetDisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, in Guid refIID, ref IUnknown pUnkReserved1, ref IUnknown pUnkReserved2, PWSTR szReserved, int64 llReserved, void* pvReserved, uint32 cbReserved, void** ppReserved) Reserved;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, out uint32 lpcwBuffer, char16* pwzName) GetName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, out uint32 pdwVersionHi, out uint32 pdwVersionLow) GetVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, ref IAssemblyName pName, uint32 dwCmpFlags) IsEqual;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyName self, out IAssemblyName* pName) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, uint32 PropertyId, void* pvProperty, uint32 cbProperty) SetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, uint32 PropertyId, void* pvProperty, out uint32 pcbProperty) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self) Finalize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, char16* szDisplayName, out uint32 pccDisplayName, uint32 dwDisplayFlags) GetDisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, in Guid refIID, ref IUnknown pUnkReserved1, ref IUnknown pUnkReserved2, char16* szReserved, int64 llReserved, void* pvReserved, uint32 cbReserved, void** ppReserved) Reserved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, out uint32 lpcwBuffer, char16* pwzName) GetName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, out uint32 pdwVersionHi, out uint32 pdwVersionLow) GetVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, ref IAssemblyName pName, uint32 dwCmpFlags) IsEqual;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyName self, out IAssemblyName* pName) Clone;
 			}
 		}
 		[CRepr]
@@ -2034,16 +2034,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateStream(uint32 dwFlags, PWSTR pszStreamName, uint32 dwFormat, uint32 dwFormatFlags, out IStream* ppIStream, out ULARGE_INTEGER puliMaxSize) mut => VT.CreateStream(ref this, dwFlags, pszStreamName, dwFormat, dwFormatFlags, out ppIStream, out puliMaxSize);
-			public HRESULT Commit(uint32 dwFlags, out uint32 pulDisposition) mut => VT.Commit(ref this, dwFlags, out pulDisposition);
-			public HRESULT AbortItem() mut => VT.AbortItem(ref this);
+			public HResult CreateStream(uint32 dwFlags, char16* pszStreamName, uint32 dwFormat, uint32 dwFormatFlags, out IStream* ppIStream, out ULARGE_INTEGER puliMaxSize) mut => VT.CreateStream(ref this, dwFlags, pszStreamName, dwFormat, dwFormatFlags, out ppIStream, out puliMaxSize);
+			public HResult Commit(uint32 dwFlags, out uint32 pulDisposition) mut => VT.Commit(ref this, dwFlags, out pulDisposition);
+			public HResult AbortItem() mut => VT.AbortItem(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCacheItem self, uint32 dwFlags, PWSTR pszStreamName, uint32 dwFormat, uint32 dwFormatFlags, out IStream* ppIStream, out ULARGE_INTEGER puliMaxSize) CreateStream;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCacheItem self, uint32 dwFlags, out uint32 pulDisposition) Commit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCacheItem self) AbortItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCacheItem self, uint32 dwFlags, char16* pszStreamName, uint32 dwFormat, uint32 dwFormatFlags, out IStream* ppIStream, out ULARGE_INTEGER puliMaxSize) CreateStream;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCacheItem self, uint32 dwFlags, out uint32 pulDisposition) Commit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCacheItem self) AbortItem;
 			}
 		}
 		[CRepr]
@@ -2053,20 +2053,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT UninstallAssembly(uint32 dwFlags, PWSTR pszAssemblyName, out FUSION_INSTALL_REFERENCE pRefData, out IASSEMBLYCACHE_UNINSTALL_DISPOSITION pulDisposition) mut => VT.UninstallAssembly(ref this, dwFlags, pszAssemblyName, out pRefData, out pulDisposition);
-			public HRESULT QueryAssemblyInfo(QUERYASMINFO_FLAGS dwFlags, PWSTR pszAssemblyName, out ASSEMBLY_INFO pAsmInfo) mut => VT.QueryAssemblyInfo(ref this, dwFlags, pszAssemblyName, out pAsmInfo);
-			public HRESULT CreateAssemblyCacheItem(uint32 dwFlags, void* pvReserved, out IAssemblyCacheItem* ppAsmItem, PWSTR pszAssemblyName) mut => VT.CreateAssemblyCacheItem(ref this, dwFlags, pvReserved, out ppAsmItem, pszAssemblyName);
-			public HRESULT Reserved(out IUnknown* ppUnk) mut => VT.Reserved(ref this, out ppUnk);
-			public HRESULT InstallAssembly(uint32 dwFlags, PWSTR pszManifestFilePath, out FUSION_INSTALL_REFERENCE pRefData) mut => VT.InstallAssembly(ref this, dwFlags, pszManifestFilePath, out pRefData);
+			public HResult UninstallAssembly(uint32 dwFlags, char16* pszAssemblyName, out FUSION_INSTALL_REFERENCE pRefData, out IASSEMBLYCACHE_UNINSTALL_DISPOSITION pulDisposition) mut => VT.UninstallAssembly(ref this, dwFlags, pszAssemblyName, out pRefData, out pulDisposition);
+			public HResult QueryAssemblyInfo(QUERYASMINFO_FLAGS dwFlags, char16* pszAssemblyName, out ASSEMBLY_INFO pAsmInfo) mut => VT.QueryAssemblyInfo(ref this, dwFlags, pszAssemblyName, out pAsmInfo);
+			public HResult CreateAssemblyCacheItem(uint32 dwFlags, void* pvReserved, out IAssemblyCacheItem* ppAsmItem, char16* pszAssemblyName) mut => VT.CreateAssemblyCacheItem(ref this, dwFlags, pvReserved, out ppAsmItem, pszAssemblyName);
+			public HResult Reserved(out IUnknown* ppUnk) mut => VT.Reserved(ref this, out ppUnk);
+			public HResult InstallAssembly(uint32 dwFlags, char16* pszManifestFilePath, out FUSION_INSTALL_REFERENCE pRefData) mut => VT.InstallAssembly(ref this, dwFlags, pszManifestFilePath, out pRefData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCache self, uint32 dwFlags, PWSTR pszAssemblyName, out FUSION_INSTALL_REFERENCE pRefData, out IASSEMBLYCACHE_UNINSTALL_DISPOSITION pulDisposition) UninstallAssembly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCache self, QUERYASMINFO_FLAGS dwFlags, PWSTR pszAssemblyName, out ASSEMBLY_INFO pAsmInfo) QueryAssemblyInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCache self, uint32 dwFlags, void* pvReserved, out IAssemblyCacheItem* ppAsmItem, PWSTR pszAssemblyName) CreateAssemblyCacheItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCache self, out IUnknown* ppUnk) Reserved;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IAssemblyCache self, uint32 dwFlags, PWSTR pszManifestFilePath, out FUSION_INSTALL_REFERENCE pRefData) InstallAssembly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCache self, uint32 dwFlags, char16* pszAssemblyName, out FUSION_INSTALL_REFERENCE pRefData, out IASSEMBLYCACHE_UNINSTALL_DISPOSITION pulDisposition) UninstallAssembly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCache self, QUERYASMINFO_FLAGS dwFlags, char16* pszAssemblyName, out ASSEMBLY_INFO pAsmInfo) QueryAssemblyInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCache self, uint32 dwFlags, void* pvReserved, out IAssemblyCacheItem* ppAsmItem, char16* pszAssemblyName) CreateAssemblyCacheItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCache self, out IUnknown* ppUnk) Reserved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IAssemblyCache self, uint32 dwFlags, char16* pszManifestFilePath, out FUSION_INSTALL_REFERENCE pRefData) InstallAssembly;
 			}
 		}
 		[CRepr]
@@ -2076,120 +2076,120 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
-			public HRESULT get_InstanceID(out Guid pInstanceID) mut => VT.get_InstanceID(ref this, out pInstanceID);
-			public HRESULT get_OfferID(out Guid pOfferID) mut => VT.get_OfferID(ref this, out pOfferID);
-			public HRESULT get_DefaultTask(BSTR* pDefaultTask) mut => VT.get_DefaultTask(ref this, pDefaultTask);
-			public HRESULT get_AppTitle(BSTR* pAppTitle) mut => VT.get_AppTitle(ref this, pAppTitle);
-			public HRESULT get_IconPath(BSTR* pAppIconPath) mut => VT.get_IconPath(ref this, pAppIconPath);
-			public HRESULT get_NotificationState(out BOOL pIsNotified) mut => VT.get_NotificationState(ref this, out pIsNotified);
-			public HRESULT get_AppInstallType(out PM_APPLICATION_INSTALL_TYPE pAppInstallType) mut => VT.get_AppInstallType(ref this, out pAppInstallType);
-			public HRESULT get_State(out PM_APPLICATION_STATE pState) mut => VT.get_State(ref this, out pState);
-			public HRESULT get_IsRevoked(out BOOL pIsRevoked) mut => VT.get_IsRevoked(ref this, out pIsRevoked);
-			public HRESULT get_UpdateAvailable(out BOOL pIsUpdateAvailable) mut => VT.get_UpdateAvailable(ref this, out pIsUpdateAvailable);
-			public HRESULT get_InstallDate(out FILETIME pInstallDate) mut => VT.get_InstallDate(ref this, out pInstallDate);
-			public HRESULT get_IsUninstallable(out BOOL pIsUninstallable) mut => VT.get_IsUninstallable(ref this, out pIsUninstallable);
-			public HRESULT get_IsThemable(out BOOL pIsThemable) mut => VT.get_IsThemable(ref this, out pIsThemable);
-			public HRESULT get_IsTrial(out BOOL pIsTrial) mut => VT.get_IsTrial(ref this, out pIsTrial);
-			public HRESULT get_InstallPath(BSTR* pInstallPath) mut => VT.get_InstallPath(ref this, pInstallPath);
-			public HRESULT get_DataRoot(BSTR* pDataRoot) mut => VT.get_DataRoot(ref this, pDataRoot);
-			public HRESULT get_Genre(out PM_APP_GENRE pGenre) mut => VT.get_Genre(ref this, out pGenre);
-			public HRESULT get_Publisher(BSTR* pPublisher) mut => VT.get_Publisher(ref this, pPublisher);
-			public HRESULT get_Author(BSTR* pAuthor) mut => VT.get_Author(ref this, pAuthor);
-			public HRESULT get_Description(BSTR* pDescription) mut => VT.get_Description(ref this, pDescription);
-			public HRESULT get_Version(BSTR* pVersion) mut => VT.get_Version(ref this, pVersion);
-			public HRESULT get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
-			public HRESULT get_AppPlatMajorVersion(out uint8 pMajorVer) mut => VT.get_AppPlatMajorVersion(ref this, out pMajorVer);
-			public HRESULT get_AppPlatMinorVersion(out uint8 pMinorVer) mut => VT.get_AppPlatMinorVersion(ref this, out pMinorVer);
-			public HRESULT get_PublisherID(out Guid pPublisherID) mut => VT.get_PublisherID(ref this, out pPublisherID);
-			public HRESULT get_IsMultiCore(out BOOL pIsMultiCore) mut => VT.get_IsMultiCore(ref this, out pIsMultiCore);
-			public HRESULT get_SID(BSTR* pSID) mut => VT.get_SID(ref this, pSID);
-			public HRESULT get_AppPlatMajorVersionLightUp(out uint8 pMajorVer) mut => VT.get_AppPlatMajorVersionLightUp(ref this, out pMajorVer);
-			public HRESULT get_AppPlatMinorVersionLightUp(out uint8 pMinorVer) mut => VT.get_AppPlatMinorVersionLightUp(ref this, out pMinorVer);
-			public HRESULT set_UpdateAvailable(BOOL IsUpdateAvailable) mut => VT.set_UpdateAvailable(ref this, IsUpdateAvailable);
-			public HRESULT set_NotificationState(BOOL IsNotified) mut => VT.set_NotificationState(ref this, IsNotified);
-			public HRESULT set_IconPath(BSTR AppIconPath) mut => VT.set_IconPath(ref this, AppIconPath);
-			public HRESULT set_UninstallableState(BOOL IsUninstallable) mut => VT.set_UninstallableState(ref this, IsUninstallable);
-			public HRESULT get_IsPinableOnKidZone(out BOOL pIsPinable) mut => VT.get_IsPinableOnKidZone(ref this, out pIsPinable);
-			public HRESULT get_IsOriginallyPreInstalled(out BOOL pIsPreinstalled) mut => VT.get_IsOriginallyPreInstalled(ref this, out pIsPreinstalled);
-			public HRESULT get_IsInstallOnSD(out BOOL pIsInstallOnSD) mut => VT.get_IsInstallOnSD(ref this, out pIsInstallOnSD);
-			public HRESULT get_IsOptoutOnSD(out BOOL pIsOptoutOnSD) mut => VT.get_IsOptoutOnSD(ref this, out pIsOptoutOnSD);
-			public HRESULT get_IsOptoutBackupRestore(out BOOL pIsOptoutBackupRestore) mut => VT.get_IsOptoutBackupRestore(ref this, out pIsOptoutBackupRestore);
-			public HRESULT set_EnterpriseDisabled(BOOL IsDisabled) mut => VT.set_EnterpriseDisabled(ref this, IsDisabled);
-			public HRESULT set_EnterpriseUninstallable(BOOL IsUninstallable) mut => VT.set_EnterpriseUninstallable(ref this, IsUninstallable);
-			public HRESULT get_EnterpriseDisabled(out BOOL IsDisabled) mut => VT.get_EnterpriseDisabled(ref this, out IsDisabled);
-			public HRESULT get_EnterpriseUninstallable(out BOOL IsUninstallable) mut => VT.get_EnterpriseUninstallable(ref this, out IsUninstallable);
-			public HRESULT get_IsVisibleOnAppList(out BOOL pIsVisible) mut => VT.get_IsVisibleOnAppList(ref this, out pIsVisible);
-			public HRESULT get_IsInboxApp(out BOOL pIsInboxApp) mut => VT.get_IsInboxApp(ref this, out pIsInboxApp);
-			public HRESULT get_StorageID(out Guid pStorageID) mut => VT.get_StorageID(ref this, out pStorageID);
-			public HRESULT get_StartAppBlob(out PM_STARTAPPBLOB pBlob) mut => VT.get_StartAppBlob(ref this, out pBlob);
-			public HRESULT get_IsMovable(out BOOL pIsMovable) mut => VT.get_IsMovable(ref this, out pIsMovable);
-			public HRESULT get_DeploymentAppEnumerationHubFilter(out PM_TILE_HUBTYPE HubType) mut => VT.get_DeploymentAppEnumerationHubFilter(ref this, out HubType);
-			public HRESULT get_ModifiedDate(out FILETIME pModifiedDate) mut => VT.get_ModifiedDate(ref this, out pModifiedDate);
-			public HRESULT get_IsOriginallyRestored(out BOOL pIsRestored) mut => VT.get_IsOriginallyRestored(ref this, out pIsRestored);
-			public HRESULT get_ShouldDeferMdilBind(out BOOL pfDeferMdilBind) mut => VT.get_ShouldDeferMdilBind(ref this, out pfDeferMdilBind);
-			public HRESULT get_IsFullyPreInstall(out BOOL pfIsFullyPreInstall) mut => VT.get_IsFullyPreInstall(ref this, out pfIsFullyPreInstall);
-			public HRESULT set_IsMdilMaintenanceNeeded(BOOL fIsMdilMaintenanceNeeded) mut => VT.set_IsMdilMaintenanceNeeded(ref this, fIsMdilMaintenanceNeeded);
-			public HRESULT set_Title(BSTR AppTitle) mut => VT.set_Title(ref this, AppTitle);
+			public HResult get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
+			public HResult get_InstanceID(out Guid pInstanceID) mut => VT.get_InstanceID(ref this, out pInstanceID);
+			public HResult get_OfferID(out Guid pOfferID) mut => VT.get_OfferID(ref this, out pOfferID);
+			public HResult get_DefaultTask(BSTR* pDefaultTask) mut => VT.get_DefaultTask(ref this, pDefaultTask);
+			public HResult get_AppTitle(BSTR* pAppTitle) mut => VT.get_AppTitle(ref this, pAppTitle);
+			public HResult get_IconPath(BSTR* pAppIconPath) mut => VT.get_IconPath(ref this, pAppIconPath);
+			public HResult get_NotificationState(out IntBool pIsNotified) mut => VT.get_NotificationState(ref this, out pIsNotified);
+			public HResult get_AppInstallType(out PM_APPLICATION_INSTALL_TYPE pAppInstallType) mut => VT.get_AppInstallType(ref this, out pAppInstallType);
+			public HResult get_State(out PM_APPLICATION_STATE pState) mut => VT.get_State(ref this, out pState);
+			public HResult get_IsRevoked(out IntBool pIsRevoked) mut => VT.get_IsRevoked(ref this, out pIsRevoked);
+			public HResult get_UpdateAvailable(out IntBool pIsUpdateAvailable) mut => VT.get_UpdateAvailable(ref this, out pIsUpdateAvailable);
+			public HResult get_InstallDate(out FileTime pInstallDate) mut => VT.get_InstallDate(ref this, out pInstallDate);
+			public HResult get_IsUninstallable(out IntBool pIsUninstallable) mut => VT.get_IsUninstallable(ref this, out pIsUninstallable);
+			public HResult get_IsThemable(out IntBool pIsThemable) mut => VT.get_IsThemable(ref this, out pIsThemable);
+			public HResult get_IsTrial(out IntBool pIsTrial) mut => VT.get_IsTrial(ref this, out pIsTrial);
+			public HResult get_InstallPath(BSTR* pInstallPath) mut => VT.get_InstallPath(ref this, pInstallPath);
+			public HResult get_DataRoot(BSTR* pDataRoot) mut => VT.get_DataRoot(ref this, pDataRoot);
+			public HResult get_Genre(out PM_APP_GENRE pGenre) mut => VT.get_Genre(ref this, out pGenre);
+			public HResult get_Publisher(BSTR* pPublisher) mut => VT.get_Publisher(ref this, pPublisher);
+			public HResult get_Author(BSTR* pAuthor) mut => VT.get_Author(ref this, pAuthor);
+			public HResult get_Description(BSTR* pDescription) mut => VT.get_Description(ref this, pDescription);
+			public HResult get_Version(BSTR* pVersion) mut => VT.get_Version(ref this, pVersion);
+			public HResult get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
+			public HResult get_AppPlatMajorVersion(out uint8 pMajorVer) mut => VT.get_AppPlatMajorVersion(ref this, out pMajorVer);
+			public HResult get_AppPlatMinorVersion(out uint8 pMinorVer) mut => VT.get_AppPlatMinorVersion(ref this, out pMinorVer);
+			public HResult get_PublisherID(out Guid pPublisherID) mut => VT.get_PublisherID(ref this, out pPublisherID);
+			public HResult get_IsMultiCore(out IntBool pIsMultiCore) mut => VT.get_IsMultiCore(ref this, out pIsMultiCore);
+			public HResult get_SID(BSTR* pSID) mut => VT.get_SID(ref this, pSID);
+			public HResult get_AppPlatMajorVersionLightUp(out uint8 pMajorVer) mut => VT.get_AppPlatMajorVersionLightUp(ref this, out pMajorVer);
+			public HResult get_AppPlatMinorVersionLightUp(out uint8 pMinorVer) mut => VT.get_AppPlatMinorVersionLightUp(ref this, out pMinorVer);
+			public HResult set_UpdateAvailable(IntBool IsUpdateAvailable) mut => VT.set_UpdateAvailable(ref this, IsUpdateAvailable);
+			public HResult set_NotificationState(IntBool IsNotified) mut => VT.set_NotificationState(ref this, IsNotified);
+			public HResult set_IconPath(BSTR AppIconPath) mut => VT.set_IconPath(ref this, AppIconPath);
+			public HResult set_UninstallableState(IntBool IsUninstallable) mut => VT.set_UninstallableState(ref this, IsUninstallable);
+			public HResult get_IsPinableOnKidZone(out IntBool pIsPinable) mut => VT.get_IsPinableOnKidZone(ref this, out pIsPinable);
+			public HResult get_IsOriginallyPreInstalled(out IntBool pIsPreinstalled) mut => VT.get_IsOriginallyPreInstalled(ref this, out pIsPreinstalled);
+			public HResult get_IsInstallOnSD(out IntBool pIsInstallOnSD) mut => VT.get_IsInstallOnSD(ref this, out pIsInstallOnSD);
+			public HResult get_IsOptoutOnSD(out IntBool pIsOptoutOnSD) mut => VT.get_IsOptoutOnSD(ref this, out pIsOptoutOnSD);
+			public HResult get_IsOptoutBackupRestore(out IntBool pIsOptoutBackupRestore) mut => VT.get_IsOptoutBackupRestore(ref this, out pIsOptoutBackupRestore);
+			public HResult set_EnterpriseDisabled(IntBool IsDisabled) mut => VT.set_EnterpriseDisabled(ref this, IsDisabled);
+			public HResult set_EnterpriseUninstallable(IntBool IsUninstallable) mut => VT.set_EnterpriseUninstallable(ref this, IsUninstallable);
+			public HResult get_EnterpriseDisabled(out IntBool IsDisabled) mut => VT.get_EnterpriseDisabled(ref this, out IsDisabled);
+			public HResult get_EnterpriseUninstallable(out IntBool IsUninstallable) mut => VT.get_EnterpriseUninstallable(ref this, out IsUninstallable);
+			public HResult get_IsVisibleOnAppList(out IntBool pIsVisible) mut => VT.get_IsVisibleOnAppList(ref this, out pIsVisible);
+			public HResult get_IsInboxApp(out IntBool pIsInboxApp) mut => VT.get_IsInboxApp(ref this, out pIsInboxApp);
+			public HResult get_StorageID(out Guid pStorageID) mut => VT.get_StorageID(ref this, out pStorageID);
+			public HResult get_StartAppBlob(out PM_STARTAPPBLOB pBlob) mut => VT.get_StartAppBlob(ref this, out pBlob);
+			public HResult get_IsMovable(out IntBool pIsMovable) mut => VT.get_IsMovable(ref this, out pIsMovable);
+			public HResult get_DeploymentAppEnumerationHubFilter(out PM_TILE_HUBTYPE HubType) mut => VT.get_DeploymentAppEnumerationHubFilter(ref this, out HubType);
+			public HResult get_ModifiedDate(out FileTime pModifiedDate) mut => VT.get_ModifiedDate(ref this, out pModifiedDate);
+			public HResult get_IsOriginallyRestored(out IntBool pIsRestored) mut => VT.get_IsOriginallyRestored(ref this, out pIsRestored);
+			public HResult get_ShouldDeferMdilBind(out IntBool pfDeferMdilBind) mut => VT.get_ShouldDeferMdilBind(ref this, out pfDeferMdilBind);
+			public HResult get_IsFullyPreInstall(out IntBool pfIsFullyPreInstall) mut => VT.get_IsFullyPreInstall(ref this, out pfIsFullyPreInstall);
+			public HResult set_IsMdilMaintenanceNeeded(IntBool fIsMdilMaintenanceNeeded) mut => VT.set_IsMdilMaintenanceNeeded(ref this, fIsMdilMaintenanceNeeded);
+			public HResult set_Title(BSTR AppTitle) mut => VT.set_Title(ref this, AppTitle);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out Guid pProductID) get_ProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out Guid pInstanceID) get_InstanceID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out Guid pOfferID) get_OfferID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pDefaultTask) get_DefaultTask;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pAppTitle) get_AppTitle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pAppIconPath) get_IconPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsNotified) get_NotificationState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out PM_APPLICATION_INSTALL_TYPE pAppInstallType) get_AppInstallType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out PM_APPLICATION_STATE pState) get_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsRevoked) get_IsRevoked;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsUpdateAvailable) get_UpdateAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out FILETIME pInstallDate) get_InstallDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsUninstallable) get_IsUninstallable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsThemable) get_IsThemable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsTrial) get_IsTrial;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pInstallPath) get_InstallPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pDataRoot) get_DataRoot;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out PM_APP_GENRE pGenre) get_Genre;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pPublisher) get_Publisher;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pAuthor) get_Author;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pDescription) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pVersion) get_Version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out uint8 pMajorVer) get_AppPlatMajorVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out uint8 pMinorVer) get_AppPlatMinorVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out Guid pPublisherID) get_PublisherID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsMultiCore) get_IsMultiCore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR* pSID) get_SID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out uint8 pMajorVer) get_AppPlatMajorVersionLightUp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out uint8 pMinorVer) get_AppPlatMinorVersionLightUp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BOOL IsUpdateAvailable) set_UpdateAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BOOL IsNotified) set_NotificationState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR AppIconPath) set_IconPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BOOL IsUninstallable) set_UninstallableState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsPinable) get_IsPinableOnKidZone;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsPreinstalled) get_IsOriginallyPreInstalled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsInstallOnSD) get_IsInstallOnSD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsOptoutOnSD) get_IsOptoutOnSD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsOptoutBackupRestore) get_IsOptoutBackupRestore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BOOL IsDisabled) set_EnterpriseDisabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BOOL IsUninstallable) set_EnterpriseUninstallable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL IsDisabled) get_EnterpriseDisabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL IsUninstallable) get_EnterpriseUninstallable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsVisible) get_IsVisibleOnAppList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsInboxApp) get_IsInboxApp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out Guid pStorageID) get_StorageID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out PM_STARTAPPBLOB pBlob) get_StartAppBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsMovable) get_IsMovable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out PM_TILE_HUBTYPE HubType) get_DeploymentAppEnumerationHubFilter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out FILETIME pModifiedDate) get_ModifiedDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pIsRestored) get_IsOriginallyRestored;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pfDeferMdilBind) get_ShouldDeferMdilBind;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, out BOOL pfIsFullyPreInstall) get_IsFullyPreInstall;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BOOL fIsMdilMaintenanceNeeded) set_IsMdilMaintenanceNeeded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfo self, BSTR AppTitle) set_Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out Guid pProductID) get_ProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out Guid pInstanceID) get_InstanceID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out Guid pOfferID) get_OfferID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pDefaultTask) get_DefaultTask;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pAppTitle) get_AppTitle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pAppIconPath) get_IconPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsNotified) get_NotificationState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out PM_APPLICATION_INSTALL_TYPE pAppInstallType) get_AppInstallType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out PM_APPLICATION_STATE pState) get_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsRevoked) get_IsRevoked;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsUpdateAvailable) get_UpdateAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out FileTime pInstallDate) get_InstallDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsUninstallable) get_IsUninstallable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsThemable) get_IsThemable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsTrial) get_IsTrial;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pInstallPath) get_InstallPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pDataRoot) get_DataRoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out PM_APP_GENRE pGenre) get_Genre;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pPublisher) get_Publisher;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pAuthor) get_Author;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pDescription) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pVersion) get_Version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out uint8 pMajorVer) get_AppPlatMajorVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out uint8 pMinorVer) get_AppPlatMinorVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out Guid pPublisherID) get_PublisherID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsMultiCore) get_IsMultiCore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR* pSID) get_SID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out uint8 pMajorVer) get_AppPlatMajorVersionLightUp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out uint8 pMinorVer) get_AppPlatMinorVersionLightUp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, IntBool IsUpdateAvailable) set_UpdateAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, IntBool IsNotified) set_NotificationState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR AppIconPath) set_IconPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, IntBool IsUninstallable) set_UninstallableState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsPinable) get_IsPinableOnKidZone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsPreinstalled) get_IsOriginallyPreInstalled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsInstallOnSD) get_IsInstallOnSD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsOptoutOnSD) get_IsOptoutOnSD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsOptoutBackupRestore) get_IsOptoutBackupRestore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, IntBool IsDisabled) set_EnterpriseDisabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, IntBool IsUninstallable) set_EnterpriseUninstallable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool IsDisabled) get_EnterpriseDisabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool IsUninstallable) get_EnterpriseUninstallable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsVisible) get_IsVisibleOnAppList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsInboxApp) get_IsInboxApp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out Guid pStorageID) get_StorageID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out PM_STARTAPPBLOB pBlob) get_StartAppBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsMovable) get_IsMovable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out PM_TILE_HUBTYPE HubType) get_DeploymentAppEnumerationHubFilter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out FileTime pModifiedDate) get_ModifiedDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pIsRestored) get_IsOriginallyRestored;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pfDeferMdilBind) get_ShouldDeferMdilBind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, out IntBool pfIsFullyPreInstall) get_IsFullyPreInstall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, IntBool fIsMdilMaintenanceNeeded) set_IsMdilMaintenanceNeeded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfo self, BSTR AppTitle) set_Title;
 			}
 		}
 		[CRepr]
@@ -2199,16 +2199,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_PropertyID(out uint32 pPropID) mut => VT.get_PropertyID(ref this, out pPropID);
-			public HRESULT get_PropertyValue(BSTR* pPropValue) mut => VT.get_PropertyValue(ref this, pPropValue);
-			public HRESULT set_Property(BSTR PropValue) mut => VT.set_Property(ref this, PropValue);
+			public HResult get_PropertyID(out uint32 pPropID) mut => VT.get_PropertyID(ref this, out pPropID);
+			public HResult get_PropertyValue(BSTR* pPropValue) mut => VT.get_PropertyValue(ref this, pPropValue);
+			public HResult set_Property(BSTR PropValue) mut => VT.set_Property(ref this, PropValue);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTilePropertyInfo self, out uint32 pPropID) get_PropertyID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTilePropertyInfo self, BSTR* pPropValue) get_PropertyValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTilePropertyInfo self, BSTR PropValue) set_Property;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTilePropertyInfo self, out uint32 pPropID) get_PropertyID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTilePropertyInfo self, BSTR* pPropValue) get_PropertyValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTilePropertyInfo self, BSTR PropValue) set_Property;
 			}
 		}
 		[CRepr]
@@ -2218,12 +2218,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMTilePropertyInfo** ppPropInfo) mut => VT.get_Next(ref this, ppPropInfo);
+			public HResult get_Next(IPMTilePropertyInfo** ppPropInfo) mut => VT.get_Next(ref this, ppPropInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTilePropertyEnumerator self, IPMTilePropertyInfo** ppPropInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTilePropertyEnumerator self, IPMTilePropertyInfo** ppPropInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2233,58 +2233,58 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
-			public HRESULT get_TileID(BSTR* pTileID) mut => VT.get_TileID(ref this, pTileID);
-			public HRESULT get_TemplateType(out TILE_TEMPLATE_TYPE pTemplateType) mut => VT.get_TemplateType(ref this, out pTemplateType);
-			public HRESULT get_HubPinnedState(PM_TILE_HUBTYPE HubType, out BOOL pPinned) mut => VT.get_HubPinnedState(ref this, HubType, out pPinned);
-			public HRESULT get_HubPosition(PM_TILE_HUBTYPE HubType, out uint32 pPosition) mut => VT.get_HubPosition(ref this, HubType, out pPosition);
-			public HRESULT get_IsNotified(out BOOL pIsNotified) mut => VT.get_IsNotified(ref this, out pIsNotified);
-			public HRESULT get_IsDefault(out BOOL pIsDefault) mut => VT.get_IsDefault(ref this, out pIsDefault);
-			public HRESULT get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
-			public HRESULT get_TileType(out PM_STARTTILE_TYPE pStartTileType) mut => VT.get_TileType(ref this, out pStartTileType);
-			public HRESULT get_IsThemable(out BOOL pIsThemable) mut => VT.get_IsThemable(ref this, out pIsThemable);
-			public HRESULT get_PropertyById(uint32 PropID, IPMTilePropertyInfo** ppPropInfo) mut => VT.get_PropertyById(ref this, PropID, ppPropInfo);
-			public HRESULT get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
-			public HRESULT get_PropertyEnum(IPMTilePropertyEnumerator** ppTilePropEnum) mut => VT.get_PropertyEnum(ref this, ppTilePropEnum);
-			public HRESULT get_HubTileSize(PM_TILE_HUBTYPE HubType, out PM_TILE_SIZE pSize) mut => VT.get_HubTileSize(ref this, HubType, out pSize);
-			public HRESULT set_HubPosition(PM_TILE_HUBTYPE HubType, uint32 Position) mut => VT.set_HubPosition(ref this, HubType, Position);
-			public HRESULT set_NotifiedState(BOOL Notified) mut => VT.set_NotifiedState(ref this, Notified);
-			public HRESULT set_HubPinnedState(PM_TILE_HUBTYPE HubType, BOOL Pinned) mut => VT.set_HubPinnedState(ref this, HubType, Pinned);
-			public HRESULT set_HubTileSize(PM_TILE_HUBTYPE HubType, PM_TILE_SIZE Size) mut => VT.set_HubTileSize(ref this, HubType, Size);
-			public HRESULT set_InvocationInfo(BSTR TaskName, BSTR TaskParameters) mut => VT.set_InvocationInfo(ref this, TaskName, TaskParameters);
-			public HRESULT get_StartTileBlob(out PM_STARTTILEBLOB pBlob) mut => VT.get_StartTileBlob(ref this, out pBlob);
-			public HRESULT get_IsRestoring(out BOOL pIsRestoring) mut => VT.get_IsRestoring(ref this, out pIsRestoring);
-			public HRESULT get_IsAutoRestoreDisabled(out BOOL pIsAutoRestoreDisabled) mut => VT.get_IsAutoRestoreDisabled(ref this, out pIsAutoRestoreDisabled);
-			public HRESULT set_IsRestoring(BOOL Restoring) mut => VT.set_IsRestoring(ref this, Restoring);
-			public HRESULT set_IsAutoRestoreDisabled(BOOL AutoRestoreDisabled) mut => VT.set_IsAutoRestoreDisabled(ref this, AutoRestoreDisabled);
+			public HResult get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
+			public HResult get_TileID(BSTR* pTileID) mut => VT.get_TileID(ref this, pTileID);
+			public HResult get_TemplateType(out TILE_TEMPLATE_TYPE pTemplateType) mut => VT.get_TemplateType(ref this, out pTemplateType);
+			public HResult get_HubPinnedState(PM_TILE_HUBTYPE HubType, out IntBool pPinned) mut => VT.get_HubPinnedState(ref this, HubType, out pPinned);
+			public HResult get_HubPosition(PM_TILE_HUBTYPE HubType, out uint32 pPosition) mut => VT.get_HubPosition(ref this, HubType, out pPosition);
+			public HResult get_IsNotified(out IntBool pIsNotified) mut => VT.get_IsNotified(ref this, out pIsNotified);
+			public HResult get_IsDefault(out IntBool pIsDefault) mut => VT.get_IsDefault(ref this, out pIsDefault);
+			public HResult get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
+			public HResult get_TileType(out PM_STARTTILE_TYPE pStartTileType) mut => VT.get_TileType(ref this, out pStartTileType);
+			public HResult get_IsThemable(out IntBool pIsThemable) mut => VT.get_IsThemable(ref this, out pIsThemable);
+			public HResult get_PropertyById(uint32 PropID, IPMTilePropertyInfo** ppPropInfo) mut => VT.get_PropertyById(ref this, PropID, ppPropInfo);
+			public HResult get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
+			public HResult get_PropertyEnum(IPMTilePropertyEnumerator** ppTilePropEnum) mut => VT.get_PropertyEnum(ref this, ppTilePropEnum);
+			public HResult get_HubTileSize(PM_TILE_HUBTYPE HubType, out PM_TILE_SIZE pSize) mut => VT.get_HubTileSize(ref this, HubType, out pSize);
+			public HResult set_HubPosition(PM_TILE_HUBTYPE HubType, uint32 Position) mut => VT.set_HubPosition(ref this, HubType, Position);
+			public HResult set_NotifiedState(IntBool Notified) mut => VT.set_NotifiedState(ref this, Notified);
+			public HResult set_HubPinnedState(PM_TILE_HUBTYPE HubType, IntBool Pinned) mut => VT.set_HubPinnedState(ref this, HubType, Pinned);
+			public HResult set_HubTileSize(PM_TILE_HUBTYPE HubType, PM_TILE_SIZE Size) mut => VT.set_HubTileSize(ref this, HubType, Size);
+			public HResult set_InvocationInfo(BSTR TaskName, BSTR TaskParameters) mut => VT.set_InvocationInfo(ref this, TaskName, TaskParameters);
+			public HResult get_StartTileBlob(out PM_STARTTILEBLOB pBlob) mut => VT.get_StartTileBlob(ref this, out pBlob);
+			public HResult get_IsRestoring(out IntBool pIsRestoring) mut => VT.get_IsRestoring(ref this, out pIsRestoring);
+			public HResult get_IsAutoRestoreDisabled(out IntBool pIsAutoRestoreDisabled) mut => VT.get_IsAutoRestoreDisabled(ref this, out pIsAutoRestoreDisabled);
+			public HResult set_IsRestoring(IntBool Restoring) mut => VT.set_IsRestoring(ref this, Restoring);
+			public HResult set_IsAutoRestoreDisabled(IntBool AutoRestoreDisabled) mut => VT.set_IsAutoRestoreDisabled(ref this, AutoRestoreDisabled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out Guid pProductID) get_ProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BSTR* pTileID) get_TileID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out TILE_TEMPLATE_TYPE pTemplateType) get_TemplateType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, out BOOL pPinned) get_HubPinnedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, out uint32 pPosition) get_HubPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out BOOL pIsNotified) get_IsNotified;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out BOOL pIsDefault) get_IsDefault;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BSTR* pTaskID) get_TaskID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out PM_STARTTILE_TYPE pStartTileType) get_TileType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out BOOL pIsThemable) get_IsThemable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, uint32 PropID, IPMTilePropertyInfo** ppPropInfo) get_PropertyById;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, IPMTilePropertyEnumerator** ppTilePropEnum) get_PropertyEnum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, out PM_TILE_SIZE pSize) get_HubTileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, uint32 Position) set_HubPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BOOL Notified) set_NotifiedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, BOOL Pinned) set_HubPinnedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, PM_TILE_SIZE Size) set_HubTileSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BSTR TaskName, BSTR TaskParameters) set_InvocationInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out PM_STARTTILEBLOB pBlob) get_StartTileBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out BOOL pIsRestoring) get_IsRestoring;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, out BOOL pIsAutoRestoreDisabled) get_IsAutoRestoreDisabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BOOL Restoring) set_IsRestoring;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfo self, BOOL AutoRestoreDisabled) set_IsAutoRestoreDisabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out Guid pProductID) get_ProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, BSTR* pTileID) get_TileID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out TILE_TEMPLATE_TYPE pTemplateType) get_TemplateType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, out IntBool pPinned) get_HubPinnedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, out uint32 pPosition) get_HubPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out IntBool pIsNotified) get_IsNotified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out IntBool pIsDefault) get_IsDefault;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, BSTR* pTaskID) get_TaskID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out PM_STARTTILE_TYPE pStartTileType) get_TileType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out IntBool pIsThemable) get_IsThemable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, uint32 PropID, IPMTilePropertyInfo** ppPropInfo) get_PropertyById;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, IPMTilePropertyEnumerator** ppTilePropEnum) get_PropertyEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, out PM_TILE_SIZE pSize) get_HubTileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, uint32 Position) set_HubPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, IntBool Notified) set_NotifiedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, IntBool Pinned) set_HubPinnedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, PM_TILE_HUBTYPE HubType, PM_TILE_SIZE Size) set_HubTileSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, BSTR TaskName, BSTR TaskParameters) set_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out PM_STARTTILEBLOB pBlob) get_StartTileBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out IntBool pIsRestoring) get_IsRestoring;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, out IntBool pIsAutoRestoreDisabled) get_IsAutoRestoreDisabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, IntBool Restoring) set_IsRestoring;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfo self, IntBool AutoRestoreDisabled) set_IsAutoRestoreDisabled;
 			}
 		}
 		[CRepr]
@@ -2294,12 +2294,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMTileInfo** ppTileInfo) mut => VT.get_Next(ref this, ppTileInfo);
+			public HResult get_Next(IPMTileInfo** ppTileInfo) mut => VT.get_Next(ref this, ppTileInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTileInfoEnumerator self, IPMTileInfo** ppTileInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTileInfoEnumerator self, IPMTileInfo** ppTileInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2309,12 +2309,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMApplicationInfo** ppAppInfo) mut => VT.get_Next(ref this, ppAppInfo);
+			public HResult get_Next(IPMApplicationInfo** ppAppInfo) mut => VT.get_Next(ref this, ppAppInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMApplicationInfoEnumerator self, IPMApplicationInfo** ppAppInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMApplicationInfoEnumerator self, IPMApplicationInfo** ppAppInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2324,58 +2324,58 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
-			public HRESULT get_TileID(BSTR* pTileID) mut => VT.get_TileID(ref this, pTileID);
-			public HRESULT get_NextSchedule(out FILETIME pNextSchedule) mut => VT.get_NextSchedule(ref this, out pNextSchedule);
-			public HRESULT set_NextSchedule(FILETIME ftNextSchedule) mut => VT.set_NextSchedule(ref this, ftNextSchedule);
-			public HRESULT get_StartSchedule(out FILETIME pStartSchedule) mut => VT.get_StartSchedule(ref this, out pStartSchedule);
-			public HRESULT set_StartSchedule(FILETIME ftStartSchedule) mut => VT.set_StartSchedule(ref this, ftStartSchedule);
-			public HRESULT get_IntervalDuration(out uint32 pIntervalDuration) mut => VT.get_IntervalDuration(ref this, out pIntervalDuration);
-			public HRESULT set_IntervalDuration(uint32 ulIntervalDuration) mut => VT.set_IntervalDuration(ref this, ulIntervalDuration);
-			public HRESULT get_RunForever(out BOOL IsRunForever) mut => VT.get_RunForever(ref this, out IsRunForever);
-			public HRESULT set_RunForever(BOOL fRunForever) mut => VT.set_RunForever(ref this, fRunForever);
-			public HRESULT get_MaxRunCount(out uint32 pMaxRunCount) mut => VT.get_MaxRunCount(ref this, out pMaxRunCount);
-			public HRESULT set_MaxRunCount(uint32 ulMaxRunCount) mut => VT.set_MaxRunCount(ref this, ulMaxRunCount);
-			public HRESULT get_RunCount(out uint32 pRunCount) mut => VT.get_RunCount(ref this, out pRunCount);
-			public HRESULT set_RunCount(uint32 ulRunCount) mut => VT.set_RunCount(ref this, ulRunCount);
-			public HRESULT get_RecurrenceType(out uint32 pRecurrenceType) mut => VT.get_RecurrenceType(ref this, out pRecurrenceType);
-			public HRESULT set_RecurrenceType(uint32 ulRecurrenceType) mut => VT.set_RecurrenceType(ref this, ulRecurrenceType);
-			public HRESULT get_TileXML(uint8** pTileXml, out uint32 pcbTileXml) mut => VT.get_TileXML(ref this, pTileXml, out pcbTileXml);
-			public HRESULT set_TileXML(uint8* pTileXml, uint32 cbTileXml) mut => VT.set_TileXML(ref this, pTileXml, cbTileXml);
-			public HRESULT get_UrlXML(uint8** pUrlXML, out uint32 pcbUrlXML) mut => VT.get_UrlXML(ref this, pUrlXML, out pcbUrlXML);
-			public HRESULT set_UrlXML(uint8* pUrlXML, uint32 cbUrlXML) mut => VT.set_UrlXML(ref this, pUrlXML, cbUrlXML);
-			public HRESULT get_AttemptCount(out uint32 pAttemptCount) mut => VT.get_AttemptCount(ref this, out pAttemptCount);
-			public HRESULT set_AttemptCount(uint32 ulAttemptCount) mut => VT.set_AttemptCount(ref this, ulAttemptCount);
-			public HRESULT get_DownloadState(out uint32 pDownloadState) mut => VT.get_DownloadState(ref this, out pDownloadState);
-			public HRESULT set_DownloadState(uint32 ulDownloadState) mut => VT.set_DownloadState(ref this, ulDownloadState);
+			public HResult get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
+			public HResult get_TileID(BSTR* pTileID) mut => VT.get_TileID(ref this, pTileID);
+			public HResult get_NextSchedule(out FileTime pNextSchedule) mut => VT.get_NextSchedule(ref this, out pNextSchedule);
+			public HResult set_NextSchedule(FILETIME ftNextSchedule) mut => VT.set_NextSchedule(ref this, ftNextSchedule);
+			public HResult get_StartSchedule(out FileTime pStartSchedule) mut => VT.get_StartSchedule(ref this, out pStartSchedule);
+			public HResult set_StartSchedule(FILETIME ftStartSchedule) mut => VT.set_StartSchedule(ref this, ftStartSchedule);
+			public HResult get_IntervalDuration(out uint32 pIntervalDuration) mut => VT.get_IntervalDuration(ref this, out pIntervalDuration);
+			public HResult set_IntervalDuration(uint32 ulIntervalDuration) mut => VT.set_IntervalDuration(ref this, ulIntervalDuration);
+			public HResult get_RunForever(out IntBool IsRunForever) mut => VT.get_RunForever(ref this, out IsRunForever);
+			public HResult set_RunForever(IntBool fRunForever) mut => VT.set_RunForever(ref this, fRunForever);
+			public HResult get_MaxRunCount(out uint32 pMaxRunCount) mut => VT.get_MaxRunCount(ref this, out pMaxRunCount);
+			public HResult set_MaxRunCount(uint32 ulMaxRunCount) mut => VT.set_MaxRunCount(ref this, ulMaxRunCount);
+			public HResult get_RunCount(out uint32 pRunCount) mut => VT.get_RunCount(ref this, out pRunCount);
+			public HResult set_RunCount(uint32 ulRunCount) mut => VT.set_RunCount(ref this, ulRunCount);
+			public HResult get_RecurrenceType(out uint32 pRecurrenceType) mut => VT.get_RecurrenceType(ref this, out pRecurrenceType);
+			public HResult set_RecurrenceType(uint32 ulRecurrenceType) mut => VT.set_RecurrenceType(ref this, ulRecurrenceType);
+			public HResult get_TileXML(uint8** pTileXml, out uint32 pcbTileXml) mut => VT.get_TileXML(ref this, pTileXml, out pcbTileXml);
+			public HResult set_TileXML(uint8* pTileXml, uint32 cbTileXml) mut => VT.set_TileXML(ref this, pTileXml, cbTileXml);
+			public HResult get_UrlXML(uint8** pUrlXML, out uint32 pcbUrlXML) mut => VT.get_UrlXML(ref this, pUrlXML, out pcbUrlXML);
+			public HResult set_UrlXML(uint8* pUrlXML, uint32 cbUrlXML) mut => VT.set_UrlXML(ref this, pUrlXML, cbUrlXML);
+			public HResult get_AttemptCount(out uint32 pAttemptCount) mut => VT.get_AttemptCount(ref this, out pAttemptCount);
+			public HResult set_AttemptCount(uint32 ulAttemptCount) mut => VT.set_AttemptCount(ref this, ulAttemptCount);
+			public HResult get_DownloadState(out uint32 pDownloadState) mut => VT.get_DownloadState(ref this, out pDownloadState);
+			public HResult set_DownloadState(uint32 ulDownloadState) mut => VT.set_DownloadState(ref this, ulDownloadState);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out Guid pProductID) get_ProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, BSTR* pTileID) get_TileID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out FILETIME pNextSchedule) get_NextSchedule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, FILETIME ftNextSchedule) set_NextSchedule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out FILETIME pStartSchedule) get_StartSchedule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, FILETIME ftStartSchedule) set_StartSchedule;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out uint32 pIntervalDuration) get_IntervalDuration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint32 ulIntervalDuration) set_IntervalDuration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out BOOL IsRunForever) get_RunForever;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, BOOL fRunForever) set_RunForever;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out uint32 pMaxRunCount) get_MaxRunCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint32 ulMaxRunCount) set_MaxRunCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out uint32 pRunCount) get_RunCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint32 ulRunCount) set_RunCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out uint32 pRecurrenceType) get_RecurrenceType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint32 ulRecurrenceType) set_RecurrenceType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint8** pTileXml, out uint32 pcbTileXml) get_TileXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint8* pTileXml, uint32 cbTileXml) set_TileXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint8** pUrlXML, out uint32 pcbUrlXML) get_UrlXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint8* pUrlXML, uint32 cbUrlXML) set_UrlXML;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out uint32 pAttemptCount) get_AttemptCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint32 ulAttemptCount) set_AttemptCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, out uint32 pDownloadState) get_DownloadState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfo self, uint32 ulDownloadState) set_DownloadState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out Guid pProductID) get_ProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, BSTR* pTileID) get_TileID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out FileTime pNextSchedule) get_NextSchedule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, FileTime ftNextSchedule) set_NextSchedule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out FileTime pStartSchedule) get_StartSchedule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, FileTime ftStartSchedule) set_StartSchedule;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out uint32 pIntervalDuration) get_IntervalDuration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint32 ulIntervalDuration) set_IntervalDuration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out IntBool IsRunForever) get_RunForever;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, IntBool fRunForever) set_RunForever;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out uint32 pMaxRunCount) get_MaxRunCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint32 ulMaxRunCount) set_MaxRunCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out uint32 pRunCount) get_RunCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint32 ulRunCount) set_RunCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out uint32 pRecurrenceType) get_RecurrenceType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint32 ulRecurrenceType) set_RecurrenceType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint8** pTileXml, out uint32 pcbTileXml) get_TileXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint8* pTileXml, uint32 cbTileXml) set_TileXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint8** pUrlXML, out uint32 pcbUrlXML) get_UrlXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint8* pUrlXML, uint32 cbUrlXML) set_UrlXML;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out uint32 pAttemptCount) get_AttemptCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint32 ulAttemptCount) set_AttemptCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, out uint32 pDownloadState) get_DownloadState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfo self, uint32 ulDownloadState) set_DownloadState;
 			}
 		}
 		[CRepr]
@@ -2385,12 +2385,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMLiveTileJobInfo** ppLiveTileJobInfo) mut => VT.get_Next(ref this, ppLiveTileJobInfo);
+			public HResult get_Next(IPMLiveTileJobInfo** ppLiveTileJobInfo) mut => VT.get_Next(ref this, ppLiveTileJobInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMLiveTileJobInfoEnumerator self, IPMLiveTileJobInfo** ppLiveTileJobInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMLiveTileJobInfoEnumerator self, IPMLiveTileJobInfo** ppLiveTileJobInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2400,80 +2400,80 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ReportDownloadBegin(Guid productID) mut => VT.ReportDownloadBegin(ref this, productID);
-			public HRESULT ReportDownloadProgress(Guid productID, uint16 usProgress) mut => VT.ReportDownloadProgress(ref this, productID, usProgress);
-			public HRESULT ReportDownloadComplete(Guid productID, HRESULT hrResult) mut => VT.ReportDownloadComplete(ref this, productID, hrResult);
-			public HRESULT BeginInstall(ref PM_INSTALLINFO pInstallInfo) mut => VT.BeginInstall(ref this, ref pInstallInfo);
-			public HRESULT BeginUpdate(ref PM_UPDATEINFO pUpdateInfo) mut => VT.BeginUpdate(ref this, ref pUpdateInfo);
-			public HRESULT BeginDeployPackage(ref PM_INSTALLINFO pInstallInfo) mut => VT.BeginDeployPackage(ref this, ref pInstallInfo);
-			public HRESULT BeginUpdateDeployedPackageLegacy(ref PM_UPDATEINFO_LEGACY pUpdateInfo) mut => VT.BeginUpdateDeployedPackageLegacy(ref this, ref pUpdateInfo);
-			public HRESULT BeginUninstall(Guid productID) mut => VT.BeginUninstall(ref this, productID);
-			public HRESULT BeginEnterpriseAppInstall(ref PM_INSTALLINFO pInstallInfo) mut => VT.BeginEnterpriseAppInstall(ref this, ref pInstallInfo);
-			public HRESULT BeginEnterpriseAppUpdate(ref PM_UPDATEINFO pUpdateInfo) mut => VT.BeginEnterpriseAppUpdate(ref this, ref pUpdateInfo);
-			public HRESULT BeginUpdateLicense(Guid productID, Guid offerID, uint8* pbLicense, uint32 cbLicense) mut => VT.BeginUpdateLicense(ref this, productID, offerID, pbLicense, cbLicense);
-			public HRESULT GetLicenseChallenge(BSTR PackagePath, uint8** ppbChallenge, out uint32 pcbChallenge, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) mut => VT.GetLicenseChallenge(ref this, PackagePath, ppbChallenge, out pcbChallenge, ppbKID, pcbKID, ppbDeviceID, pcbDeviceID, ppbSaltValue, pcbSaltValue, ppbKGVValue, pcbKGVValue);
-			public HRESULT GetLicenseChallengeByProductID(Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense) mut => VT.GetLicenseChallengeByProductID(ref this, ProductID, ppbChallenge, out pcbLicense);
-			public HRESULT GetLicenseChallengeByProductID2(Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) mut => VT.GetLicenseChallengeByProductID2(ref this, ProductID, ppbChallenge, out pcbLicense, ppbKID, pcbKID, ppbDeviceID, pcbDeviceID, ppbSaltValue, pcbSaltValue, ppbKGVValue, pcbKGVValue);
-			public HRESULT RevokeLicense(Guid productID) mut => VT.RevokeLicense(ref this, productID);
-			public HRESULT RebindMdilBinaries(Guid ProductID, ref SAFEARRAY FileNames) mut => VT.RebindMdilBinaries(ref this, ProductID, ref FileNames);
-			public HRESULT RebindAllMdilBinaries(Guid ProductID, Guid InstanceID) mut => VT.RebindAllMdilBinaries(ref this, ProductID, InstanceID);
-			public HRESULT RegenerateXbf(Guid ProductID, ref SAFEARRAY AssemblyPaths) mut => VT.RegenerateXbf(ref this, ProductID, ref AssemblyPaths);
-			public HRESULT GenerateXbfForCurrentLocale(Guid ProductID) mut => VT.GenerateXbfForCurrentLocale(ref this, ProductID);
-			public HRESULT BeginProvision(Guid ProductID, BSTR XMLpath) mut => VT.BeginProvision(ref this, ProductID, XMLpath);
-			public HRESULT BeginDeprovision(Guid ProductID) mut => VT.BeginDeprovision(ref this, ProductID);
-			public HRESULT ReindexSQLCEDatabases(Guid ProductID) mut => VT.ReindexSQLCEDatabases(ref this, ProductID);
-			public HRESULT SetApplicationsNeedMaintenance(uint32 RequiredMaintenanceOperations, out uint32 pcApplications) mut => VT.SetApplicationsNeedMaintenance(ref this, RequiredMaintenanceOperations, out pcApplications);
-			public HRESULT UpdateChamberProfile(Guid ProductID) mut => VT.UpdateChamberProfile(ref this, ProductID);
-			public HRESULT EnterprisePolicyIsApplicationAllowed(Guid productId, PWSTR publisherName, out BOOL pIsAllowed) mut => VT.EnterprisePolicyIsApplicationAllowed(ref this, productId, publisherName, out pIsAllowed);
-			public HRESULT BeginUpdateDeployedPackage(ref PM_UPDATEINFO pUpdateInfo) mut => VT.BeginUpdateDeployedPackage(ref this, ref pUpdateInfo);
-			public HRESULT ReportRestoreCancelled(Guid productID) mut => VT.ReportRestoreCancelled(ref this, productID);
-			public HRESULT ResolveResourceString(PWSTR resourceString, BSTR* pResolvedResourceString) mut => VT.ResolveResourceString(ref this, resourceString, pResolvedResourceString);
-			public HRESULT UpdateCapabilitiesForModernApps() mut => VT.UpdateCapabilitiesForModernApps(ref this);
-			public HRESULT ReportDownloadStatusUpdate(Guid productId) mut => VT.ReportDownloadStatusUpdate(ref this, productId);
-			public HRESULT BeginUninstallWithOptions(Guid productID, uint32 removalOptions) mut => VT.BeginUninstallWithOptions(ref this, productID, removalOptions);
-			public HRESULT BindDeferredMdilBinaries() mut => VT.BindDeferredMdilBinaries(ref this);
-			public HRESULT GenerateXamlLightupXbfForCurrentLocale(BSTR PackageFamilyName) mut => VT.GenerateXamlLightupXbfForCurrentLocale(ref this, PackageFamilyName);
-			public HRESULT AddLicenseForAppx(Guid productID, uint8* pbLicense, uint32 cbLicense, uint8* pbPlayReadyHeader, uint32 cbPlayReadyHeader) mut => VT.AddLicenseForAppx(ref this, productID, pbLicense, cbLicense, pbPlayReadyHeader, cbPlayReadyHeader);
-			public HRESULT FixJunctionsForAppsOnSDCard() mut => VT.FixJunctionsForAppsOnSDCard(ref this);
+			public HResult ReportDownloadBegin(Guid productID) mut => VT.ReportDownloadBegin(ref this, productID);
+			public HResult ReportDownloadProgress(Guid productID, uint16 usProgress) mut => VT.ReportDownloadProgress(ref this, productID, usProgress);
+			public HResult ReportDownloadComplete(Guid productID, HResult hrResult) mut => VT.ReportDownloadComplete(ref this, productID, hrResult);
+			public HResult BeginInstall(ref PM_INSTALLINFO pInstallInfo) mut => VT.BeginInstall(ref this, ref pInstallInfo);
+			public HResult BeginUpdate(ref PM_UPDATEINFO pUpdateInfo) mut => VT.BeginUpdate(ref this, ref pUpdateInfo);
+			public HResult BeginDeployPackage(ref PM_INSTALLINFO pInstallInfo) mut => VT.BeginDeployPackage(ref this, ref pInstallInfo);
+			public HResult BeginUpdateDeployedPackageLegacy(ref PM_UPDATEINFO_LEGACY pUpdateInfo) mut => VT.BeginUpdateDeployedPackageLegacy(ref this, ref pUpdateInfo);
+			public HResult BeginUninstall(Guid productID) mut => VT.BeginUninstall(ref this, productID);
+			public HResult BeginEnterpriseAppInstall(ref PM_INSTALLINFO pInstallInfo) mut => VT.BeginEnterpriseAppInstall(ref this, ref pInstallInfo);
+			public HResult BeginEnterpriseAppUpdate(ref PM_UPDATEINFO pUpdateInfo) mut => VT.BeginEnterpriseAppUpdate(ref this, ref pUpdateInfo);
+			public HResult BeginUpdateLicense(Guid productID, Guid offerID, uint8* pbLicense, uint32 cbLicense) mut => VT.BeginUpdateLicense(ref this, productID, offerID, pbLicense, cbLicense);
+			public HResult GetLicenseChallenge(BSTR PackagePath, uint8** ppbChallenge, out uint32 pcbChallenge, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) mut => VT.GetLicenseChallenge(ref this, PackagePath, ppbChallenge, out pcbChallenge, ppbKID, pcbKID, ppbDeviceID, pcbDeviceID, ppbSaltValue, pcbSaltValue, ppbKGVValue, pcbKGVValue);
+			public HResult GetLicenseChallengeByProductID(Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense) mut => VT.GetLicenseChallengeByProductID(ref this, ProductID, ppbChallenge, out pcbLicense);
+			public HResult GetLicenseChallengeByProductID2(Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) mut => VT.GetLicenseChallengeByProductID2(ref this, ProductID, ppbChallenge, out pcbLicense, ppbKID, pcbKID, ppbDeviceID, pcbDeviceID, ppbSaltValue, pcbSaltValue, ppbKGVValue, pcbKGVValue);
+			public HResult RevokeLicense(Guid productID) mut => VT.RevokeLicense(ref this, productID);
+			public HResult RebindMdilBinaries(Guid ProductID, ref SAFEARRAY FileNames) mut => VT.RebindMdilBinaries(ref this, ProductID, ref FileNames);
+			public HResult RebindAllMdilBinaries(Guid ProductID, Guid InstanceID) mut => VT.RebindAllMdilBinaries(ref this, ProductID, InstanceID);
+			public HResult RegenerateXbf(Guid ProductID, ref SAFEARRAY AssemblyPaths) mut => VT.RegenerateXbf(ref this, ProductID, ref AssemblyPaths);
+			public HResult GenerateXbfForCurrentLocale(Guid ProductID) mut => VT.GenerateXbfForCurrentLocale(ref this, ProductID);
+			public HResult BeginProvision(Guid ProductID, BSTR XMLpath) mut => VT.BeginProvision(ref this, ProductID, XMLpath);
+			public HResult BeginDeprovision(Guid ProductID) mut => VT.BeginDeprovision(ref this, ProductID);
+			public HResult ReindexSQLCEDatabases(Guid ProductID) mut => VT.ReindexSQLCEDatabases(ref this, ProductID);
+			public HResult SetApplicationsNeedMaintenance(uint32 RequiredMaintenanceOperations, out uint32 pcApplications) mut => VT.SetApplicationsNeedMaintenance(ref this, RequiredMaintenanceOperations, out pcApplications);
+			public HResult UpdateChamberProfile(Guid ProductID) mut => VT.UpdateChamberProfile(ref this, ProductID);
+			public HResult EnterprisePolicyIsApplicationAllowed(Guid productId, char16* publisherName, out IntBool pIsAllowed) mut => VT.EnterprisePolicyIsApplicationAllowed(ref this, productId, publisherName, out pIsAllowed);
+			public HResult BeginUpdateDeployedPackage(ref PM_UPDATEINFO pUpdateInfo) mut => VT.BeginUpdateDeployedPackage(ref this, ref pUpdateInfo);
+			public HResult ReportRestoreCancelled(Guid productID) mut => VT.ReportRestoreCancelled(ref this, productID);
+			public HResult ResolveResourceString(char16* resourceString, BSTR* pResolvedResourceString) mut => VT.ResolveResourceString(ref this, resourceString, pResolvedResourceString);
+			public HResult UpdateCapabilitiesForModernApps() mut => VT.UpdateCapabilitiesForModernApps(ref this);
+			public HResult ReportDownloadStatusUpdate(Guid productId) mut => VT.ReportDownloadStatusUpdate(ref this, productId);
+			public HResult BeginUninstallWithOptions(Guid productID, uint32 removalOptions) mut => VT.BeginUninstallWithOptions(ref this, productID, removalOptions);
+			public HResult BindDeferredMdilBinaries() mut => VT.BindDeferredMdilBinaries(ref this);
+			public HResult GenerateXamlLightupXbfForCurrentLocale(BSTR PackageFamilyName) mut => VT.GenerateXamlLightupXbfForCurrentLocale(ref this, PackageFamilyName);
+			public HResult AddLicenseForAppx(Guid productID, uint8* pbLicense, uint32 cbLicense, uint8* pbPlayReadyHeader, uint32 cbPlayReadyHeader) mut => VT.AddLicenseForAppx(ref this, productID, pbLicense, cbLicense, pbPlayReadyHeader, cbPlayReadyHeader);
+			public HResult FixJunctionsForAppsOnSDCard() mut => VT.FixJunctionsForAppsOnSDCard(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID) ReportDownloadBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID, uint16 usProgress) ReportDownloadProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID, HRESULT hrResult) ReportDownloadComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_INSTALLINFO pInstallInfo) BeginInstall;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_UPDATEINFO pUpdateInfo) BeginUpdate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_INSTALLINFO pInstallInfo) BeginDeployPackage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_UPDATEINFO_LEGACY pUpdateInfo) BeginUpdateDeployedPackageLegacy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID) BeginUninstall;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_INSTALLINFO pInstallInfo) BeginEnterpriseAppInstall;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_UPDATEINFO pUpdateInfo) BeginEnterpriseAppUpdate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID, Guid offerID, uint8* pbLicense, uint32 cbLicense) BeginUpdateLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, BSTR PackagePath, uint8** ppbChallenge, out uint32 pcbChallenge, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) GetLicenseChallenge;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense) GetLicenseChallengeByProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) GetLicenseChallengeByProductID2;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID) RevokeLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID, ref SAFEARRAY FileNames) RebindMdilBinaries;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID, Guid InstanceID) RebindAllMdilBinaries;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID, ref SAFEARRAY AssemblyPaths) RegenerateXbf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID) GenerateXbfForCurrentLocale;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID, BSTR XMLpath) BeginProvision;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID) BeginDeprovision;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID) ReindexSQLCEDatabases;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, uint32 RequiredMaintenanceOperations, out uint32 pcApplications) SetApplicationsNeedMaintenance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid ProductID) UpdateChamberProfile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productId, PWSTR publisherName, out BOOL pIsAllowed) EnterprisePolicyIsApplicationAllowed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, ref PM_UPDATEINFO pUpdateInfo) BeginUpdateDeployedPackage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID) ReportRestoreCancelled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, PWSTR resourceString, BSTR* pResolvedResourceString) ResolveResourceString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self) UpdateCapabilitiesForModernApps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productId) ReportDownloadStatusUpdate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID, uint32 removalOptions) BeginUninstallWithOptions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self) BindDeferredMdilBinaries;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, BSTR PackageFamilyName) GenerateXamlLightupXbfForCurrentLocale;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self, Guid productID, uint8* pbLicense, uint32 cbLicense, uint8* pbPlayReadyHeader, uint32 cbPlayReadyHeader) AddLicenseForAppx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMDeploymentManager self) FixJunctionsForAppsOnSDCard;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID) ReportDownloadBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID, uint16 usProgress) ReportDownloadProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID, HResult hrResult) ReportDownloadComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_INSTALLINFO pInstallInfo) BeginInstall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_UPDATEINFO pUpdateInfo) BeginUpdate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_INSTALLINFO pInstallInfo) BeginDeployPackage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_UPDATEINFO_LEGACY pUpdateInfo) BeginUpdateDeployedPackageLegacy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID) BeginUninstall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_INSTALLINFO pInstallInfo) BeginEnterpriseAppInstall;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_UPDATEINFO pUpdateInfo) BeginEnterpriseAppUpdate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID, Guid offerID, uint8* pbLicense, uint32 cbLicense) BeginUpdateLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, BSTR PackagePath, uint8** ppbChallenge, out uint32 pcbChallenge, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) GetLicenseChallenge;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense) GetLicenseChallengeByProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID, uint8** ppbChallenge, out uint32 pcbLicense, uint8** ppbKID, uint32* pcbKID, uint8** ppbDeviceID, uint32* pcbDeviceID, uint8** ppbSaltValue, uint32* pcbSaltValue, uint8** ppbKGVValue, uint32* pcbKGVValue) GetLicenseChallengeByProductID2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID) RevokeLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID, ref SAFEARRAY FileNames) RebindMdilBinaries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID, Guid InstanceID) RebindAllMdilBinaries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID, ref SAFEARRAY AssemblyPaths) RegenerateXbf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID) GenerateXbfForCurrentLocale;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID, BSTR XMLpath) BeginProvision;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID) BeginDeprovision;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID) ReindexSQLCEDatabases;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, uint32 RequiredMaintenanceOperations, out uint32 pcApplications) SetApplicationsNeedMaintenance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid ProductID) UpdateChamberProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productId, char16* publisherName, out IntBool pIsAllowed) EnterprisePolicyIsApplicationAllowed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, ref PM_UPDATEINFO pUpdateInfo) BeginUpdateDeployedPackage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID) ReportRestoreCancelled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, char16* resourceString, BSTR* pResolvedResourceString) ResolveResourceString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self) UpdateCapabilitiesForModernApps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productId) ReportDownloadStatusUpdate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID, uint32 removalOptions) BeginUninstallWithOptions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self) BindDeferredMdilBinaries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, BSTR PackageFamilyName) GenerateXamlLightupXbfForCurrentLocale;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self, Guid productID, uint8* pbLicense, uint32 cbLicense, uint8* pbPlayReadyHeader, uint32 cbPlayReadyHeader) AddLicenseForAppx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMDeploymentManager self) FixJunctionsForAppsOnSDCard;
 			}
 		}
 		[CRepr]
@@ -2483,46 +2483,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AllApplications(IPMApplicationInfoEnumerator** ppAppEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllApplications(ref this, ppAppEnum, Filter);
-			public HRESULT get_AllTiles(IPMTileInfoEnumerator** ppTileEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllTiles(ref this, ppTileEnum, Filter);
-			public HRESULT get_AllTasks(IPMTaskInfoEnumerator** ppTaskEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllTasks(ref this, ppTaskEnum, Filter);
-			public HRESULT get_AllExtensions(IPMExtensionInfoEnumerator** ppExtensionEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllExtensions(ref this, ppExtensionEnum, Filter);
-			public HRESULT get_AllBackgroundServiceAgents(IPMBackgroundServiceAgentInfoEnumerator** ppBSAEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllBackgroundServiceAgents(ref this, ppBSAEnum, Filter);
-			public HRESULT get_AllBackgroundWorkers(IPMBackgroundWorkerInfoEnumerator** ppBSWEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllBackgroundWorkers(ref this, ppBSWEnum, Filter);
-			public HRESULT get_ApplicationInfo(Guid ProductID, IPMApplicationInfo** ppAppInfo) mut => VT.get_ApplicationInfo(ref this, ProductID, ppAppInfo);
-			public HRESULT get_TileInfo(Guid ProductID, BSTR TileID, IPMTileInfo** ppTileInfo) mut => VT.get_TileInfo(ref this, ProductID, TileID, ppTileInfo);
-			public HRESULT get_TaskInfo(Guid ProductID, BSTR TaskID, IPMTaskInfo** ppTaskInfo) mut => VT.get_TaskInfo(ref this, ProductID, TaskID, ppTaskInfo);
-			public HRESULT get_TaskInfoEx(Guid ProductID, PWSTR TaskID, IPMTaskInfo** ppTaskInfo) mut => VT.get_TaskInfoEx(ref this, ProductID, TaskID, ppTaskInfo);
-			public HRESULT get_BackgroundServiceAgentInfo(uint32 BSAID, IPMBackgroundServiceAgentInfo** ppTaskInfo) mut => VT.get_BackgroundServiceAgentInfo(ref this, BSAID, ppTaskInfo);
-			public HRESULT get_AllLiveTileJobs(IPMLiveTileJobInfoEnumerator** ppLiveTileJobEnum) mut => VT.get_AllLiveTileJobs(ref this, ppLiveTileJobEnum);
-			public HRESULT get_LiveTileJob(Guid ProductID, BSTR TileID, PM_LIVETILE_RECURRENCE_TYPE RecurrenceType, IPMLiveTileJobInfo** ppLiveTileJobInfo) mut => VT.get_LiveTileJob(ref this, ProductID, TileID, RecurrenceType, ppLiveTileJobInfo);
-			public HRESULT get_ApplicationInfoExternal(Guid ProductID, IPMApplicationInfo** ppAppInfo) mut => VT.get_ApplicationInfoExternal(ref this, ProductID, ppAppInfo);
-			public HRESULT get_FileHandlerGenericLogo(BSTR FileType, PM_LOGO_SIZE LogoSize, BSTR* pLogo) mut => VT.get_FileHandlerGenericLogo(ref this, FileType, LogoSize, pLogo);
-			public HRESULT get_ApplicationInfoFromAccessClaims(BSTR SysAppID0, BSTR SysAppID1, IPMApplicationInfo** ppAppInfo) mut => VT.get_ApplicationInfoFromAccessClaims(ref this, SysAppID0, SysAppID1, ppAppInfo);
-			public HRESULT get_StartTileEnumeratorBlob(PM_ENUM_FILTER Filter, out uint32 pcTiles, PM_STARTTILEBLOB** ppTileBlobs) mut => VT.get_StartTileEnumeratorBlob(ref this, Filter, out pcTiles, ppTileBlobs);
-			public HRESULT get_StartAppEnumeratorBlob(PM_ENUM_FILTER Filter, out uint32 pcApps, PM_STARTAPPBLOB** ppAppBlobs) mut => VT.get_StartAppEnumeratorBlob(ref this, Filter, out pcApps, ppAppBlobs);
+			public HResult get_AllApplications(IPMApplicationInfoEnumerator** ppAppEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllApplications(ref this, ppAppEnum, Filter);
+			public HResult get_AllTiles(IPMTileInfoEnumerator** ppTileEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllTiles(ref this, ppTileEnum, Filter);
+			public HResult get_AllTasks(IPMTaskInfoEnumerator** ppTaskEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllTasks(ref this, ppTaskEnum, Filter);
+			public HResult get_AllExtensions(IPMExtensionInfoEnumerator** ppExtensionEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllExtensions(ref this, ppExtensionEnum, Filter);
+			public HResult get_AllBackgroundServiceAgents(IPMBackgroundServiceAgentInfoEnumerator** ppBSAEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllBackgroundServiceAgents(ref this, ppBSAEnum, Filter);
+			public HResult get_AllBackgroundWorkers(IPMBackgroundWorkerInfoEnumerator** ppBSWEnum, PM_ENUM_FILTER Filter) mut => VT.get_AllBackgroundWorkers(ref this, ppBSWEnum, Filter);
+			public HResult get_ApplicationInfo(Guid ProductID, IPMApplicationInfo** ppAppInfo) mut => VT.get_ApplicationInfo(ref this, ProductID, ppAppInfo);
+			public HResult get_TileInfo(Guid ProductID, BSTR TileID, IPMTileInfo** ppTileInfo) mut => VT.get_TileInfo(ref this, ProductID, TileID, ppTileInfo);
+			public HResult get_TaskInfo(Guid ProductID, BSTR TaskID, IPMTaskInfo** ppTaskInfo) mut => VT.get_TaskInfo(ref this, ProductID, TaskID, ppTaskInfo);
+			public HResult get_TaskInfoEx(Guid ProductID, char16* TaskID, IPMTaskInfo** ppTaskInfo) mut => VT.get_TaskInfoEx(ref this, ProductID, TaskID, ppTaskInfo);
+			public HResult get_BackgroundServiceAgentInfo(uint32 BSAID, IPMBackgroundServiceAgentInfo** ppTaskInfo) mut => VT.get_BackgroundServiceAgentInfo(ref this, BSAID, ppTaskInfo);
+			public HResult get_AllLiveTileJobs(IPMLiveTileJobInfoEnumerator** ppLiveTileJobEnum) mut => VT.get_AllLiveTileJobs(ref this, ppLiveTileJobEnum);
+			public HResult get_LiveTileJob(Guid ProductID, BSTR TileID, PM_LIVETILE_RECURRENCE_TYPE RecurrenceType, IPMLiveTileJobInfo** ppLiveTileJobInfo) mut => VT.get_LiveTileJob(ref this, ProductID, TileID, RecurrenceType, ppLiveTileJobInfo);
+			public HResult get_ApplicationInfoExternal(Guid ProductID, IPMApplicationInfo** ppAppInfo) mut => VT.get_ApplicationInfoExternal(ref this, ProductID, ppAppInfo);
+			public HResult get_FileHandlerGenericLogo(BSTR FileType, PM_LOGO_SIZE LogoSize, BSTR* pLogo) mut => VT.get_FileHandlerGenericLogo(ref this, FileType, LogoSize, pLogo);
+			public HResult get_ApplicationInfoFromAccessClaims(BSTR SysAppID0, BSTR SysAppID1, IPMApplicationInfo** ppAppInfo) mut => VT.get_ApplicationInfoFromAccessClaims(ref this, SysAppID0, SysAppID1, ppAppInfo);
+			public HResult get_StartTileEnumeratorBlob(PM_ENUM_FILTER Filter, out uint32 pcTiles, PM_STARTTILEBLOB** ppTileBlobs) mut => VT.get_StartTileEnumeratorBlob(ref this, Filter, out pcTiles, ppTileBlobs);
+			public HResult get_StartAppEnumeratorBlob(PM_ENUM_FILTER Filter, out uint32 pcApps, PM_STARTAPPBLOB** ppAppBlobs) mut => VT.get_StartAppEnumeratorBlob(ref this, Filter, out pcApps, ppAppBlobs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMApplicationInfoEnumerator** ppAppEnum, PM_ENUM_FILTER Filter) get_AllApplications;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMTileInfoEnumerator** ppTileEnum, PM_ENUM_FILTER Filter) get_AllTiles;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMTaskInfoEnumerator** ppTaskEnum, PM_ENUM_FILTER Filter) get_AllTasks;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMExtensionInfoEnumerator** ppExtensionEnum, PM_ENUM_FILTER Filter) get_AllExtensions;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMBackgroundServiceAgentInfoEnumerator** ppBSAEnum, PM_ENUM_FILTER Filter) get_AllBackgroundServiceAgents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMBackgroundWorkerInfoEnumerator** ppBSWEnum, PM_ENUM_FILTER Filter) get_AllBackgroundWorkers;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, Guid ProductID, IPMApplicationInfo** ppAppInfo) get_ApplicationInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, Guid ProductID, BSTR TileID, IPMTileInfo** ppTileInfo) get_TileInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, Guid ProductID, BSTR TaskID, IPMTaskInfo** ppTaskInfo) get_TaskInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, Guid ProductID, PWSTR TaskID, IPMTaskInfo** ppTaskInfo) get_TaskInfoEx;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, uint32 BSAID, IPMBackgroundServiceAgentInfo** ppTaskInfo) get_BackgroundServiceAgentInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, IPMLiveTileJobInfoEnumerator** ppLiveTileJobEnum) get_AllLiveTileJobs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, Guid ProductID, BSTR TileID, PM_LIVETILE_RECURRENCE_TYPE RecurrenceType, IPMLiveTileJobInfo** ppLiveTileJobInfo) get_LiveTileJob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, Guid ProductID, IPMApplicationInfo** ppAppInfo) get_ApplicationInfoExternal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, BSTR FileType, PM_LOGO_SIZE LogoSize, BSTR* pLogo) get_FileHandlerGenericLogo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, BSTR SysAppID0, BSTR SysAppID1, IPMApplicationInfo** ppAppInfo) get_ApplicationInfoFromAccessClaims;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, PM_ENUM_FILTER Filter, out uint32 pcTiles, PM_STARTTILEBLOB** ppTileBlobs) get_StartTileEnumeratorBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMEnumerationManager self, PM_ENUM_FILTER Filter, out uint32 pcApps, PM_STARTAPPBLOB** ppAppBlobs) get_StartAppEnumeratorBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMApplicationInfoEnumerator** ppAppEnum, PM_ENUM_FILTER Filter) get_AllApplications;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMTileInfoEnumerator** ppTileEnum, PM_ENUM_FILTER Filter) get_AllTiles;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMTaskInfoEnumerator** ppTaskEnum, PM_ENUM_FILTER Filter) get_AllTasks;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMExtensionInfoEnumerator** ppExtensionEnum, PM_ENUM_FILTER Filter) get_AllExtensions;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMBackgroundServiceAgentInfoEnumerator** ppBSAEnum, PM_ENUM_FILTER Filter) get_AllBackgroundServiceAgents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMBackgroundWorkerInfoEnumerator** ppBSWEnum, PM_ENUM_FILTER Filter) get_AllBackgroundWorkers;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, Guid ProductID, IPMApplicationInfo** ppAppInfo) get_ApplicationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, Guid ProductID, BSTR TileID, IPMTileInfo** ppTileInfo) get_TileInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, Guid ProductID, BSTR TaskID, IPMTaskInfo** ppTaskInfo) get_TaskInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, Guid ProductID, char16* TaskID, IPMTaskInfo** ppTaskInfo) get_TaskInfoEx;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, uint32 BSAID, IPMBackgroundServiceAgentInfo** ppTaskInfo) get_BackgroundServiceAgentInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, IPMLiveTileJobInfoEnumerator** ppLiveTileJobEnum) get_AllLiveTileJobs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, Guid ProductID, BSTR TileID, PM_LIVETILE_RECURRENCE_TYPE RecurrenceType, IPMLiveTileJobInfo** ppLiveTileJobInfo) get_LiveTileJob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, Guid ProductID, IPMApplicationInfo** ppAppInfo) get_ApplicationInfoExternal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, BSTR FileType, PM_LOGO_SIZE LogoSize, BSTR* pLogo) get_FileHandlerGenericLogo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, BSTR SysAppID0, BSTR SysAppID1, IPMApplicationInfo** ppAppInfo) get_ApplicationInfoFromAccessClaims;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, PM_ENUM_FILTER Filter, out uint32 pcTiles, PM_STARTTILEBLOB** ppTileBlobs) get_StartTileEnumeratorBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMEnumerationManager self, PM_ENUM_FILTER Filter, out uint32 pcApps, PM_STARTAPPBLOB** ppAppBlobs) get_StartAppEnumeratorBlob;
 			}
 		}
 		[CRepr]
@@ -2532,52 +2532,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
-			public HRESULT get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
-			public HRESULT get_NavigationPage(BSTR* pNavigationPage) mut => VT.get_NavigationPage(ref this, pNavigationPage);
-			public HRESULT get_TaskTransition(out PM_TASK_TRANSITION pTaskTransition) mut => VT.get_TaskTransition(ref this, out pTaskTransition);
-			public HRESULT get_RuntimeType(out PACKMAN_RUNTIME pRuntimetype) mut => VT.get_RuntimeType(ref this, out pRuntimetype);
-			public HRESULT get_ActivationPolicy(out PM_ACTIVATION_POLICY pActivationPolicy) mut => VT.get_ActivationPolicy(ref this, out pActivationPolicy);
-			public HRESULT get_TaskType(out PM_TASK_TYPE pTaskType) mut => VT.get_TaskType(ref this, out pTaskType);
-			public HRESULT get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
-			public HRESULT get_ImagePath(BSTR* pImagePath) mut => VT.get_ImagePath(ref this, pImagePath);
-			public HRESULT get_ImageParams(BSTR* pImageParams) mut => VT.get_ImageParams(ref this, pImageParams);
-			public HRESULT get_InstallRootFolder(BSTR* pInstallRootFolder) mut => VT.get_InstallRootFolder(ref this, pInstallRootFolder);
-			public HRESULT get_DataRootFolder(BSTR* pDataRootFolder) mut => VT.get_DataRootFolder(ref this, pDataRootFolder);
-			public HRESULT get_IsSingleInstanceHost(out BOOL pIsSingleInstanceHost) mut => VT.get_IsSingleInstanceHost(ref this, out pIsSingleInstanceHost);
-			public HRESULT get_IsInteropEnabled(out BOOL pIsInteropEnabled) mut => VT.get_IsInteropEnabled(ref this, out pIsInteropEnabled);
-			public HRESULT get_ApplicationState(out PM_APPLICATION_STATE pApplicationState) mut => VT.get_ApplicationState(ref this, out pApplicationState);
-			public HRESULT get_InstallType(out PM_APPLICATION_INSTALL_TYPE pInstallType) mut => VT.get_InstallType(ref this, out pInstallType);
-			public HRESULT get_Version(out uint8 pTargetMajorVersion, out uint8 pTargetMinorVersion) mut => VT.get_Version(ref this, out pTargetMajorVersion, out pTargetMinorVersion);
-			public HRESULT get_BitsPerPixel(out uint16 pBitsPerPixel) mut => VT.get_BitsPerPixel(ref this, out pBitsPerPixel);
-			public HRESULT get_SuppressesDehydration(out BOOL pSuppressesDehydration) mut => VT.get_SuppressesDehydration(ref this, out pSuppressesDehydration);
-			public HRESULT get_BackgroundExecutionAbilities(BSTR* pBackgroundExecutionAbilities) mut => VT.get_BackgroundExecutionAbilities(ref this, pBackgroundExecutionAbilities);
-			public HRESULT get_IsOptedForExtendedMem(out BOOL pIsOptedIn) mut => VT.get_IsOptedForExtendedMem(ref this, out pIsOptedIn);
+			public HResult get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
+			public HResult get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
+			public HResult get_NavigationPage(BSTR* pNavigationPage) mut => VT.get_NavigationPage(ref this, pNavigationPage);
+			public HResult get_TaskTransition(out PM_TASK_TRANSITION pTaskTransition) mut => VT.get_TaskTransition(ref this, out pTaskTransition);
+			public HResult get_RuntimeType(out PACKMAN_RUNTIME pRuntimetype) mut => VT.get_RuntimeType(ref this, out pRuntimetype);
+			public HResult get_ActivationPolicy(out PM_ACTIVATION_POLICY pActivationPolicy) mut => VT.get_ActivationPolicy(ref this, out pActivationPolicy);
+			public HResult get_TaskType(out PM_TASK_TYPE pTaskType) mut => VT.get_TaskType(ref this, out pTaskType);
+			public HResult get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
+			public HResult get_ImagePath(BSTR* pImagePath) mut => VT.get_ImagePath(ref this, pImagePath);
+			public HResult get_ImageParams(BSTR* pImageParams) mut => VT.get_ImageParams(ref this, pImageParams);
+			public HResult get_InstallRootFolder(BSTR* pInstallRootFolder) mut => VT.get_InstallRootFolder(ref this, pInstallRootFolder);
+			public HResult get_DataRootFolder(BSTR* pDataRootFolder) mut => VT.get_DataRootFolder(ref this, pDataRootFolder);
+			public HResult get_IsSingleInstanceHost(out IntBool pIsSingleInstanceHost) mut => VT.get_IsSingleInstanceHost(ref this, out pIsSingleInstanceHost);
+			public HResult get_IsInteropEnabled(out IntBool pIsInteropEnabled) mut => VT.get_IsInteropEnabled(ref this, out pIsInteropEnabled);
+			public HResult get_ApplicationState(out PM_APPLICATION_STATE pApplicationState) mut => VT.get_ApplicationState(ref this, out pApplicationState);
+			public HResult get_InstallType(out PM_APPLICATION_INSTALL_TYPE pInstallType) mut => VT.get_InstallType(ref this, out pInstallType);
+			public HResult get_Version(out uint8 pTargetMajorVersion, out uint8 pTargetMinorVersion) mut => VT.get_Version(ref this, out pTargetMajorVersion, out pTargetMinorVersion);
+			public HResult get_BitsPerPixel(out uint16 pBitsPerPixel) mut => VT.get_BitsPerPixel(ref this, out pBitsPerPixel);
+			public HResult get_SuppressesDehydration(out IntBool pSuppressesDehydration) mut => VT.get_SuppressesDehydration(ref this, out pSuppressesDehydration);
+			public HResult get_BackgroundExecutionAbilities(BSTR* pBackgroundExecutionAbilities) mut => VT.get_BackgroundExecutionAbilities(ref this, pBackgroundExecutionAbilities);
+			public HResult get_IsOptedForExtendedMem(out IntBool pIsOptedIn) mut => VT.get_IsOptedForExtendedMem(ref this, out pIsOptedIn);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out Guid pProductID) get_ProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pTaskID) get_TaskID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pNavigationPage) get_NavigationPage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out PM_TASK_TRANSITION pTaskTransition) get_TaskTransition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out PACKMAN_RUNTIME pRuntimetype) get_RuntimeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out PM_ACTIVATION_POLICY pActivationPolicy) get_ActivationPolicy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out PM_TASK_TYPE pTaskType) get_TaskType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pImagePath) get_ImagePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pImageParams) get_ImageParams;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pInstallRootFolder) get_InstallRootFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pDataRootFolder) get_DataRootFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out BOOL pIsSingleInstanceHost) get_IsSingleInstanceHost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out BOOL pIsInteropEnabled) get_IsInteropEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out PM_APPLICATION_STATE pApplicationState) get_ApplicationState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out PM_APPLICATION_INSTALL_TYPE pInstallType) get_InstallType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out uint8 pTargetMajorVersion, out uint8 pTargetMinorVersion) get_Version;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out uint16 pBitsPerPixel) get_BitsPerPixel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out BOOL pSuppressesDehydration) get_SuppressesDehydration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, BSTR* pBackgroundExecutionAbilities) get_BackgroundExecutionAbilities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfo self, out BOOL pIsOptedIn) get_IsOptedForExtendedMem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out Guid pProductID) get_ProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pTaskID) get_TaskID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pNavigationPage) get_NavigationPage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out PM_TASK_TRANSITION pTaskTransition) get_TaskTransition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out PACKMAN_RUNTIME pRuntimetype) get_RuntimeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out PM_ACTIVATION_POLICY pActivationPolicy) get_ActivationPolicy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out PM_TASK_TYPE pTaskType) get_TaskType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pImagePath) get_ImagePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pImageParams) get_ImageParams;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pInstallRootFolder) get_InstallRootFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pDataRootFolder) get_DataRootFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out IntBool pIsSingleInstanceHost) get_IsSingleInstanceHost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out IntBool pIsInteropEnabled) get_IsInteropEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out PM_APPLICATION_STATE pApplicationState) get_ApplicationState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out PM_APPLICATION_INSTALL_TYPE pInstallType) get_InstallType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out uint8 pTargetMajorVersion, out uint8 pTargetMinorVersion) get_Version;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out uint16 pBitsPerPixel) get_BitsPerPixel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out IntBool pSuppressesDehydration) get_SuppressesDehydration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, BSTR* pBackgroundExecutionAbilities) get_BackgroundExecutionAbilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfo self, out IntBool pIsOptedIn) get_IsOptedForExtendedMem;
 			}
 		}
 		[CRepr]
@@ -2587,12 +2587,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMTaskInfo** ppTaskInfo) mut => VT.get_Next(ref this, ppTaskInfo);
+			public HResult get_Next(IPMTaskInfo** ppTaskInfo) mut => VT.get_Next(ref this, ppTaskInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMTaskInfoEnumerator self, IPMTaskInfo** ppTaskInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMTaskInfoEnumerator self, IPMTaskInfo** ppTaskInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2602,22 +2602,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SupplierPID(out Guid pSupplierPID) mut => VT.get_SupplierPID(ref this, out pSupplierPID);
-			public HRESULT get_SupplierTaskID(BSTR* pSupplierTID) mut => VT.get_SupplierTaskID(ref this, pSupplierTID);
-			public HRESULT get_Title(BSTR* pTitle) mut => VT.get_Title(ref this, pTitle);
-			public HRESULT get_IconPath(BSTR* pIconPath) mut => VT.get_IconPath(ref this, pIconPath);
-			public HRESULT get_ExtraFile(BSTR* pFilePath) mut => VT.get_ExtraFile(ref this, pFilePath);
-			public HRESULT get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
+			public HResult get_SupplierPID(out Guid pSupplierPID) mut => VT.get_SupplierPID(ref this, out pSupplierPID);
+			public HResult get_SupplierTaskID(BSTR* pSupplierTID) mut => VT.get_SupplierTaskID(ref this, pSupplierTID);
+			public HResult get_Title(BSTR* pTitle) mut => VT.get_Title(ref this, pTitle);
+			public HResult get_IconPath(BSTR* pIconPath) mut => VT.get_IconPath(ref this, pIconPath);
+			public HResult get_ExtraFile(BSTR* pFilePath) mut => VT.get_ExtraFile(ref this, pFilePath);
+			public HResult get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfo self, out Guid pSupplierPID) get_SupplierPID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfo self, BSTR* pSupplierTID) get_SupplierTaskID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfo self, BSTR* pTitle) get_Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfo self, BSTR* pIconPath) get_IconPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfo self, BSTR* pFilePath) get_ExtraFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfo self, out Guid pSupplierPID) get_SupplierPID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfo self, BSTR* pSupplierTID) get_SupplierTaskID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfo self, BSTR* pTitle) get_Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfo self, BSTR* pIconPath) get_IconPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfo self, BSTR* pFilePath) get_ExtraFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
 			}
 		}
 		[CRepr]
@@ -2627,24 +2627,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(BSTR* pName) mut => VT.get_Name(ref this, pName);
-			public HRESULT get_DisplayName(BSTR* pDisplayName) mut => VT.get_DisplayName(ref this, pDisplayName);
-			public HRESULT get_Logo(PM_LOGO_SIZE LogoSize, BSTR* pLogo) mut => VT.get_Logo(ref this, LogoSize, pLogo);
-			public HRESULT get_ContentType(BSTR FileType, BSTR* pContentType) mut => VT.get_ContentType(ref this, FileType, pContentType);
-			public HRESULT get_FileType(BSTR ContentType, BSTR* pFileType) mut => VT.get_FileType(ref this, ContentType, pFileType);
-			public HRESULT get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
-			public HRESULT get_AllFileTypes(out uint32 pcbTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcbTypes, ppTypes);
+			public HResult get_Name(BSTR* pName) mut => VT.get_Name(ref this, pName);
+			public HResult get_DisplayName(BSTR* pDisplayName) mut => VT.get_DisplayName(ref this, pDisplayName);
+			public HResult get_Logo(PM_LOGO_SIZE LogoSize, BSTR* pLogo) mut => VT.get_Logo(ref this, LogoSize, pLogo);
+			public HResult get_ContentType(BSTR FileType, BSTR* pContentType) mut => VT.get_ContentType(ref this, FileType, pContentType);
+			public HResult get_FileType(BSTR ContentType, BSTR* pFileType) mut => VT.get_FileType(ref this, ContentType, pFileType);
+			public HResult get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
+			public HResult get_AllFileTypes(out uint32 pcbTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcbTypes, ppTypes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, BSTR* pName) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, BSTR* pDisplayName) get_DisplayName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, PM_LOGO_SIZE LogoSize, BSTR* pLogo) get_Logo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, BSTR FileType, BSTR* pContentType) get_ContentType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, BSTR ContentType, BSTR* pFileType) get_FileType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileExtensionInfo self, out uint32 pcbTypes, BSTR** ppTypes) get_AllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, BSTR* pName) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, BSTR* pDisplayName) get_DisplayName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, PM_LOGO_SIZE LogoSize, BSTR* pLogo) get_Logo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, BSTR FileType, BSTR* pContentType) get_ContentType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, BSTR ContentType, BSTR* pFileType) get_FileType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileExtensionInfo self, out uint32 pcbTypes, BSTR** ppTypes) get_AllFileTypes;
 			}
 		}
 		[CRepr]
@@ -2654,14 +2654,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Protocol(BSTR* pProtocol) mut => VT.get_Protocol(ref this, pProtocol);
-			public HRESULT get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
+			public HResult get_Protocol(BSTR* pProtocol) mut => VT.get_Protocol(ref this, pProtocol);
+			public HResult get_InvocationInfo(BSTR* pImageUrn, BSTR* pParameters) mut => VT.get_InvocationInfo(ref this, pImageUrn, pParameters);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionProtocolInfo self, BSTR* pProtocol) get_Protocol;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionProtocolInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionProtocolInfo self, BSTR* pProtocol) get_Protocol;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionProtocolInfo self, BSTR* pImageUrn, BSTR* pParameters) get_InvocationInfo;
 			}
 		}
 		[CRepr]
@@ -2671,16 +2671,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AllFileTypes(out uint32 pcTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcTypes, ppTypes);
-			public HRESULT get_AllDataFormats(out uint32 pcDataFormats, BSTR** ppDataFormats) mut => VT.get_AllDataFormats(ref this, out pcDataFormats, ppDataFormats);
-			public HRESULT get_SupportsAllFileTypes(out BOOL pSupportsAllTypes) mut => VT.get_SupportsAllFileTypes(ref this, out pSupportsAllTypes);
+			public HResult get_AllFileTypes(out uint32 pcTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcTypes, ppTypes);
+			public HResult get_AllDataFormats(out uint32 pcDataFormats, BSTR** ppDataFormats) mut => VT.get_AllDataFormats(ref this, out pcDataFormats, ppDataFormats);
+			public HResult get_SupportsAllFileTypes(out IntBool pSupportsAllTypes) mut => VT.get_SupportsAllFileTypes(ref this, out pSupportsAllTypes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionShareTargetInfo self, out uint32 pcTypes, BSTR** ppTypes) get_AllFileTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionShareTargetInfo self, out uint32 pcDataFormats, BSTR** ppDataFormats) get_AllDataFormats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionShareTargetInfo self, out BOOL pSupportsAllTypes) get_SupportsAllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionShareTargetInfo self, out uint32 pcTypes, BSTR** ppTypes) get_AllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionShareTargetInfo self, out uint32 pcDataFormats, BSTR** ppDataFormats) get_AllDataFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionShareTargetInfo self, out IntBool pSupportsAllTypes) get_SupportsAllFileTypes;
 			}
 		}
 		[CRepr]
@@ -2690,12 +2690,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_InvocationInfo(BSTR* pAUMID, BSTR* pArgs) mut => VT.get_InvocationInfo(ref this, pAUMID, pArgs);
+			public HResult get_InvocationInfo(BSTR* pAUMID, BSTR* pArgs) mut => VT.get_InvocationInfo(ref this, pAUMID, pArgs);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionContractInfo self, BSTR* pAUMID, BSTR* pArgs) get_InvocationInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionContractInfo self, BSTR* pAUMID, BSTR* pArgs) get_InvocationInfo;
 			}
 		}
 		[CRepr]
@@ -2705,14 +2705,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AllFileTypes(out uint32 pcTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcTypes, ppTypes);
-			public HRESULT get_SupportsAllFileTypes(out BOOL pSupportsAllTypes) mut => VT.get_SupportsAllFileTypes(ref this, out pSupportsAllTypes);
+			public HResult get_AllFileTypes(out uint32 pcTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcTypes, ppTypes);
+			public HResult get_SupportsAllFileTypes(out IntBool pSupportsAllTypes) mut => VT.get_SupportsAllFileTypes(ref this, out pSupportsAllTypes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileOpenPickerInfo self, out uint32 pcTypes, BSTR** ppTypes) get_AllFileTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileOpenPickerInfo self, out BOOL pSupportsAllTypes) get_SupportsAllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileOpenPickerInfo self, out uint32 pcTypes, BSTR** ppTypes) get_AllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileOpenPickerInfo self, out IntBool pSupportsAllTypes) get_SupportsAllFileTypes;
 			}
 		}
 		[CRepr]
@@ -2722,14 +2722,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AllFileTypes(out uint32 pcTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcTypes, ppTypes);
-			public HRESULT get_SupportsAllFileTypes(out BOOL pSupportsAllTypes) mut => VT.get_SupportsAllFileTypes(ref this, out pSupportsAllTypes);
+			public HResult get_AllFileTypes(out uint32 pcTypes, BSTR** ppTypes) mut => VT.get_AllFileTypes(ref this, out pcTypes, ppTypes);
+			public HResult get_SupportsAllFileTypes(out IntBool pSupportsAllTypes) mut => VT.get_SupportsAllFileTypes(ref this, out pSupportsAllTypes);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileSavePickerInfo self, out uint32 pcTypes, BSTR** ppTypes) get_AllFileTypes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionFileSavePickerInfo self, out BOOL pSupportsAllTypes) get_SupportsAllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileSavePickerInfo self, out uint32 pcTypes, BSTR** ppTypes) get_AllFileTypes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionFileSavePickerInfo self, out IntBool pSupportsAllTypes) get_SupportsAllFileTypes;
 			}
 		}
 		[CRepr]
@@ -2739,12 +2739,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SupportsUpdates(out BOOL pSupportsUpdates) mut => VT.get_SupportsUpdates(ref this, out pSupportsUpdates);
+			public HResult get_SupportsUpdates(out IntBool pSupportsUpdates) mut => VT.get_SupportsUpdates(ref this, out pSupportsUpdates);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionCachedFileUpdaterInfo self, out BOOL pSupportsUpdates) get_SupportsUpdates;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionCachedFileUpdaterInfo self, out IntBool pSupportsUpdates) get_SupportsUpdates;
 			}
 		}
 		[CRepr]
@@ -2754,12 +2754,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMExtensionInfo** ppExtensionInfo) mut => VT.get_Next(ref this, ppExtensionInfo);
+			public HResult get_Next(IPMExtensionInfo** ppExtensionInfo) mut => VT.get_Next(ref this, ppExtensionInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMExtensionInfoEnumerator self, IPMExtensionInfo** ppExtensionInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMExtensionInfoEnumerator self, IPMExtensionInfo** ppExtensionInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2769,38 +2769,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
-			public HRESULT get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
-			public HRESULT get_BSAID(out uint32 pBSAID) mut => VT.get_BSAID(ref this, out pBSAID);
-			public HRESULT get_BGSpecifier(BSTR* pBGSpecifier) mut => VT.get_BGSpecifier(ref this, pBGSpecifier);
-			public HRESULT get_BGName(BSTR* pBGName) mut => VT.get_BGName(ref this, pBGName);
-			public HRESULT get_BGSource(BSTR* pBGSource) mut => VT.get_BGSource(ref this, pBGSource);
-			public HRESULT get_BGType(BSTR* pBGType) mut => VT.get_BGType(ref this, pBGType);
-			public HRESULT get_IsPeriodic(out BOOL pIsPeriodic) mut => VT.get_IsPeriodic(ref this, out pIsPeriodic);
-			public HRESULT get_IsScheduled(out BOOL pIsScheduled) mut => VT.get_IsScheduled(ref this, out pIsScheduled);
-			public HRESULT get_IsScheduleAllowed(out BOOL pIsScheduleAllowed) mut => VT.get_IsScheduleAllowed(ref this, out pIsScheduleAllowed);
-			public HRESULT get_Description(BSTR* pDescription) mut => VT.get_Description(ref this, pDescription);
-			public HRESULT get_IsLaunchOnBoot(out BOOL pLaunchOnBoot) mut => VT.get_IsLaunchOnBoot(ref this, out pLaunchOnBoot);
-			public HRESULT set_IsScheduled(BOOL IsScheduled) mut => VT.set_IsScheduled(ref this, IsScheduled);
-			public HRESULT set_IsScheduleAllowed(BOOL IsScheduleAllowed) mut => VT.set_IsScheduleAllowed(ref this, IsScheduleAllowed);
+			public HResult get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
+			public HResult get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
+			public HResult get_BSAID(out uint32 pBSAID) mut => VT.get_BSAID(ref this, out pBSAID);
+			public HResult get_BGSpecifier(BSTR* pBGSpecifier) mut => VT.get_BGSpecifier(ref this, pBGSpecifier);
+			public HResult get_BGName(BSTR* pBGName) mut => VT.get_BGName(ref this, pBGName);
+			public HResult get_BGSource(BSTR* pBGSource) mut => VT.get_BGSource(ref this, pBGSource);
+			public HResult get_BGType(BSTR* pBGType) mut => VT.get_BGType(ref this, pBGType);
+			public HResult get_IsPeriodic(out IntBool pIsPeriodic) mut => VT.get_IsPeriodic(ref this, out pIsPeriodic);
+			public HResult get_IsScheduled(out IntBool pIsScheduled) mut => VT.get_IsScheduled(ref this, out pIsScheduled);
+			public HResult get_IsScheduleAllowed(out IntBool pIsScheduleAllowed) mut => VT.get_IsScheduleAllowed(ref this, out pIsScheduleAllowed);
+			public HResult get_Description(BSTR* pDescription) mut => VT.get_Description(ref this, pDescription);
+			public HResult get_IsLaunchOnBoot(out IntBool pLaunchOnBoot) mut => VT.get_IsLaunchOnBoot(ref this, out pLaunchOnBoot);
+			public HResult set_IsScheduled(IntBool IsScheduled) mut => VT.set_IsScheduled(ref this, IsScheduled);
+			public HResult set_IsScheduleAllowed(IntBool IsScheduleAllowed) mut => VT.set_IsScheduleAllowed(ref this, IsScheduleAllowed);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, out Guid pProductID) get_ProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BSTR* pTaskID) get_TaskID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, out uint32 pBSAID) get_BSAID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGSpecifier) get_BGSpecifier;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGName) get_BGName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGSource) get_BGSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGType) get_BGType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, out BOOL pIsPeriodic) get_IsPeriodic;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, out BOOL pIsScheduled) get_IsScheduled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, out BOOL pIsScheduleAllowed) get_IsScheduleAllowed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BSTR* pDescription) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, out BOOL pLaunchOnBoot) get_IsLaunchOnBoot;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BOOL IsScheduled) set_IsScheduled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfo self, BOOL IsScheduleAllowed) set_IsScheduleAllowed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, out Guid pProductID) get_ProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, BSTR* pTaskID) get_TaskID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, out uint32 pBSAID) get_BSAID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGSpecifier) get_BGSpecifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGName) get_BGName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGSource) get_BGSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, BSTR* pBGType) get_BGType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, out IntBool pIsPeriodic) get_IsPeriodic;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, out IntBool pIsScheduled) get_IsScheduled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, out IntBool pIsScheduleAllowed) get_IsScheduleAllowed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, BSTR* pDescription) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, out IntBool pLaunchOnBoot) get_IsLaunchOnBoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, IntBool IsScheduled) set_IsScheduled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfo self, IntBool IsScheduleAllowed) set_IsScheduleAllowed;
 			}
 		}
 		[CRepr]
@@ -2810,22 +2810,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
-			public HRESULT get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
-			public HRESULT get_BGName(BSTR* pBGName) mut => VT.get_BGName(ref this, pBGName);
-			public HRESULT get_MaxStartupLatency(out uint32 pMaxStartupLatency) mut => VT.get_MaxStartupLatency(ref this, out pMaxStartupLatency);
-			public HRESULT get_ExpectedRuntime(out uint32 pExpectedRuntime) mut => VT.get_ExpectedRuntime(ref this, out pExpectedRuntime);
-			public HRESULT get_IsBootWorker(out BOOL pIsBootWorker) mut => VT.get_IsBootWorker(ref this, out pIsBootWorker);
+			public HResult get_ProductID(out Guid pProductID) mut => VT.get_ProductID(ref this, out pProductID);
+			public HResult get_TaskID(BSTR* pTaskID) mut => VT.get_TaskID(ref this, pTaskID);
+			public HResult get_BGName(BSTR* pBGName) mut => VT.get_BGName(ref this, pBGName);
+			public HResult get_MaxStartupLatency(out uint32 pMaxStartupLatency) mut => VT.get_MaxStartupLatency(ref this, out pMaxStartupLatency);
+			public HResult get_ExpectedRuntime(out uint32 pExpectedRuntime) mut => VT.get_ExpectedRuntime(ref this, out pExpectedRuntime);
+			public HResult get_IsBootWorker(out IntBool pIsBootWorker) mut => VT.get_IsBootWorker(ref this, out pIsBootWorker);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfo self, out Guid pProductID) get_ProductID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfo self, BSTR* pTaskID) get_TaskID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfo self, BSTR* pBGName) get_BGName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfo self, out uint32 pMaxStartupLatency) get_MaxStartupLatency;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfo self, out uint32 pExpectedRuntime) get_ExpectedRuntime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfo self, out BOOL pIsBootWorker) get_IsBootWorker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfo self, out Guid pProductID) get_ProductID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfo self, BSTR* pTaskID) get_TaskID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfo self, BSTR* pBGName) get_BGName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfo self, out uint32 pMaxStartupLatency) get_MaxStartupLatency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfo self, out uint32 pExpectedRuntime) get_ExpectedRuntime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfo self, out IntBool pIsBootWorker) get_IsBootWorker;
 			}
 		}
 		[CRepr]
@@ -2835,12 +2835,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMBackgroundServiceAgentInfo** ppBSAInfo) mut => VT.get_Next(ref this, ppBSAInfo);
+			public HResult get_Next(IPMBackgroundServiceAgentInfo** ppBSAInfo) mut => VT.get_Next(ref this, ppBSAInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundServiceAgentInfoEnumerator self, IPMBackgroundServiceAgentInfo** ppBSAInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundServiceAgentInfoEnumerator self, IPMBackgroundServiceAgentInfo** ppBSAInfo) get_Next;
 			}
 		}
 		[CRepr]
@@ -2850,12 +2850,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Next(IPMBackgroundWorkerInfo** ppBWInfo) mut => VT.get_Next(ref this, ppBWInfo);
+			public HResult get_Next(IPMBackgroundWorkerInfo** ppBWInfo) mut => VT.get_Next(ref this, ppBWInfo);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPMBackgroundWorkerInfoEnumerator self, IPMBackgroundWorkerInfo** ppBWInfo) get_Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPMBackgroundWorkerInfoEnumerator self, IPMBackgroundWorkerInfo** ppBWInfo) get_Next;
 			}
 		}
 		
@@ -2874,329 +2874,329 @@ namespace Win32
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiSetExternalUIRecord(PINSTALLUI_HANDLER_RECORD puiHandler, uint32 dwMessageFilter, void* pvContext, PINSTALLUI_HANDLER_RECORD ppuiPrevHandler);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnableLogA(INSTALLOGMODE dwLogMode, PSTR szLogFile, uint32 dwLogAttributes);
+		public static extern uint32 MsiEnableLogA(INSTALLOGMODE dwLogMode, char8* szLogFile, uint32 dwLogAttributes);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnableLogW(INSTALLOGMODE dwLogMode, PWSTR szLogFile, uint32 dwLogAttributes);
+		public static extern uint32 MsiEnableLogW(INSTALLOGMODE dwLogMode, char16* szLogFile, uint32 dwLogAttributes);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiQueryProductStateA(PSTR szProduct);
+		public static extern INSTALLSTATE MsiQueryProductStateA(char8* szProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiQueryProductStateW(PWSTR szProduct);
+		public static extern INSTALLSTATE MsiQueryProductStateW(char16* szProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductInfoA(PSTR szProduct, PSTR szAttribute, uint8* lpValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetProductInfoA(char8* szProduct, char8* szAttribute, uint8* lpValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductInfoW(PWSTR szProduct, PWSTR szAttribute, char16* lpValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetProductInfoW(char16* szProduct, char16* szAttribute, char16* lpValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductInfoExA(PSTR szProductCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, PSTR szProperty, uint8* szValue, uint32* pcchValue);
+		public static extern uint32 MsiGetProductInfoExA(char8* szProductCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, char8* szProperty, uint8* szValue, uint32* pcchValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductInfoExW(PWSTR szProductCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, PWSTR szProperty, char16* szValue, uint32* pcchValue);
+		public static extern uint32 MsiGetProductInfoExW(char16* szProductCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, char16* szProperty, char16* szValue, uint32* pcchValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiInstallProductA(PSTR szPackagePath, PSTR szCommandLine);
+		public static extern uint32 MsiInstallProductA(char8* szPackagePath, char8* szCommandLine);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiInstallProductW(PWSTR szPackagePath, PWSTR szCommandLine);
+		public static extern uint32 MsiInstallProductW(char16* szPackagePath, char16* szCommandLine);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiConfigureProductA(PSTR szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState);
+		public static extern uint32 MsiConfigureProductA(char8* szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiConfigureProductW(PWSTR szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState);
+		public static extern uint32 MsiConfigureProductW(char16* szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiConfigureProductExA(PSTR szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState, PSTR szCommandLine);
+		public static extern uint32 MsiConfigureProductExA(char8* szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState, char8* szCommandLine);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiConfigureProductExW(PWSTR szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState, PWSTR szCommandLine);
+		public static extern uint32 MsiConfigureProductExW(char16* szProduct, INSTALLLEVEL iInstallLevel, INSTALLSTATE eInstallState, char16* szCommandLine);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiReinstallProductA(PSTR szProduct, REINSTALLMODE szReinstallMode);
+		public static extern uint32 MsiReinstallProductA(char8* szProduct, REINSTALLMODE szReinstallMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiReinstallProductW(PWSTR szProduct, REINSTALLMODE szReinstallMode);
+		public static extern uint32 MsiReinstallProductW(char16* szProduct, REINSTALLMODE szReinstallMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiAdvertiseProductExA(PSTR szPackagePath, PSTR szScriptfilePath, PSTR szTransforms, uint16 lgidLanguage, uint32 dwPlatform, uint32 dwOptions);
+		public static extern uint32 MsiAdvertiseProductExA(char8* szPackagePath, char8* szScriptfilePath, char8* szTransforms, uint16 lgidLanguage, uint32 dwPlatform, uint32 dwOptions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiAdvertiseProductExW(PWSTR szPackagePath, PWSTR szScriptfilePath, PWSTR szTransforms, uint16 lgidLanguage, uint32 dwPlatform, uint32 dwOptions);
+		public static extern uint32 MsiAdvertiseProductExW(char16* szPackagePath, char16* szScriptfilePath, char16* szTransforms, uint16 lgidLanguage, uint32 dwPlatform, uint32 dwOptions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiAdvertiseProductA(PSTR szPackagePath, PSTR szScriptfilePath, PSTR szTransforms, uint16 lgidLanguage);
+		public static extern uint32 MsiAdvertiseProductA(char8* szPackagePath, char8* szScriptfilePath, char8* szTransforms, uint16 lgidLanguage);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiAdvertiseProductW(PWSTR szPackagePath, PWSTR szScriptfilePath, PWSTR szTransforms, uint16 lgidLanguage);
+		public static extern uint32 MsiAdvertiseProductW(char16* szPackagePath, char16* szScriptfilePath, char16* szTransforms, uint16 lgidLanguage);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProcessAdvertiseScriptA(PSTR szScriptFile, PSTR szIconFolder, HKEY hRegData, BOOL fShortcuts, BOOL fRemoveItems);
+		public static extern uint32 MsiProcessAdvertiseScriptA(char8* szScriptFile, char8* szIconFolder, HKey hRegData, IntBool fShortcuts, IntBool fRemoveItems);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProcessAdvertiseScriptW(PWSTR szScriptFile, PWSTR szIconFolder, HKEY hRegData, BOOL fShortcuts, BOOL fRemoveItems);
+		public static extern uint32 MsiProcessAdvertiseScriptW(char16* szScriptFile, char16* szIconFolder, HKey hRegData, IntBool fShortcuts, IntBool fRemoveItems);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiAdvertiseScriptA(PSTR szScriptFile, uint32 dwFlags, HKEY* phRegData, BOOL fRemoveItems);
+		public static extern uint32 MsiAdvertiseScriptA(char8* szScriptFile, uint32 dwFlags, HKEY* phRegData, IntBool fRemoveItems);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiAdvertiseScriptW(PWSTR szScriptFile, uint32 dwFlags, HKEY* phRegData, BOOL fRemoveItems);
+		public static extern uint32 MsiAdvertiseScriptW(char16* szScriptFile, uint32 dwFlags, HKEY* phRegData, IntBool fRemoveItems);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductInfoFromScriptA(PSTR szScriptFile, PSTR lpProductBuf39, uint16* plgidLanguage, uint32* pdwVersion, uint8* lpNameBuf, uint32* pcchNameBuf, uint8* lpPackageBuf, uint32* pcchPackageBuf);
+		public static extern uint32 MsiGetProductInfoFromScriptA(char8* szScriptFile, char8* lpProductBuf39, uint16* plgidLanguage, uint32* pdwVersion, uint8* lpNameBuf, uint32* pcchNameBuf, uint8* lpPackageBuf, uint32* pcchPackageBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductInfoFromScriptW(PWSTR szScriptFile, PWSTR lpProductBuf39, uint16* plgidLanguage, uint32* pdwVersion, char16* lpNameBuf, uint32* pcchNameBuf, char16* lpPackageBuf, uint32* pcchPackageBuf);
+		public static extern uint32 MsiGetProductInfoFromScriptW(char16* szScriptFile, char16* lpProductBuf39, uint16* plgidLanguage, uint32* pdwVersion, char16* lpNameBuf, uint32* pcchNameBuf, char16* lpPackageBuf, uint32* pcchPackageBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductCodeA(PSTR szComponent, PSTR lpBuf39);
+		public static extern uint32 MsiGetProductCodeA(char8* szComponent, char8* lpBuf39);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductCodeW(PWSTR szComponent, PWSTR lpBuf39);
+		public static extern uint32 MsiGetProductCodeW(char16* szComponent, char16* lpBuf39);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern USERINFOSTATE MsiGetUserInfoA(PSTR szProduct, uint8* lpUserNameBuf, uint32* pcchUserNameBuf, uint8* lpOrgNameBuf, uint32* pcchOrgNameBuf, uint8* lpSerialBuf, uint32* pcchSerialBuf);
+		public static extern USERINFOSTATE MsiGetUserInfoA(char8* szProduct, uint8* lpUserNameBuf, uint32* pcchUserNameBuf, uint8* lpOrgNameBuf, uint32* pcchOrgNameBuf, uint8* lpSerialBuf, uint32* pcchSerialBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern USERINFOSTATE MsiGetUserInfoW(PWSTR szProduct, char16* lpUserNameBuf, uint32* pcchUserNameBuf, char16* lpOrgNameBuf, uint32* pcchOrgNameBuf, char16* lpSerialBuf, uint32* pcchSerialBuf);
+		public static extern USERINFOSTATE MsiGetUserInfoW(char16* szProduct, char16* lpUserNameBuf, uint32* pcchUserNameBuf, char16* lpOrgNameBuf, uint32* pcchOrgNameBuf, char16* lpSerialBuf, uint32* pcchSerialBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiCollectUserInfoA(PSTR szProduct);
+		public static extern uint32 MsiCollectUserInfoA(char8* szProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiCollectUserInfoW(PWSTR szProduct);
+		public static extern uint32 MsiCollectUserInfoW(char16* szProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiApplyPatchA(PSTR szPatchPackage, PSTR szInstallPackage, INSTALLTYPE eInstallType, PSTR szCommandLine);
+		public static extern uint32 MsiApplyPatchA(char8* szPatchPackage, char8* szInstallPackage, INSTALLTYPE eInstallType, char8* szCommandLine);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiApplyPatchW(PWSTR szPatchPackage, PWSTR szInstallPackage, INSTALLTYPE eInstallType, PWSTR szCommandLine);
+		public static extern uint32 MsiApplyPatchW(char16* szPatchPackage, char16* szInstallPackage, INSTALLTYPE eInstallType, char16* szCommandLine);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPatchInfoA(PSTR szPatch, PSTR szAttribute, uint8* lpValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetPatchInfoA(char8* szPatch, char8* szAttribute, uint8* lpValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPatchInfoW(PWSTR szPatch, PWSTR szAttribute, char16* lpValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetPatchInfoW(char16* szPatch, char16* szAttribute, char16* lpValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumPatchesA(PSTR szProduct, uint32 iPatchIndex, PSTR lpPatchBuf, uint8* lpTransformsBuf, out uint32 pcchTransformsBuf);
+		public static extern uint32 MsiEnumPatchesA(char8* szProduct, uint32 iPatchIndex, char8* lpPatchBuf, uint8* lpTransformsBuf, out uint32 pcchTransformsBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumPatchesW(PWSTR szProduct, uint32 iPatchIndex, PWSTR lpPatchBuf, char16* lpTransformsBuf, out uint32 pcchTransformsBuf);
+		public static extern uint32 MsiEnumPatchesW(char16* szProduct, uint32 iPatchIndex, char16* lpPatchBuf, char16* lpTransformsBuf, out uint32 pcchTransformsBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRemovePatchesA(PSTR szPatchList, PSTR szProductCode, INSTALLTYPE eUninstallType, PSTR szPropertyList);
+		public static extern uint32 MsiRemovePatchesA(char8* szPatchList, char8* szProductCode, INSTALLTYPE eUninstallType, char8* szPropertyList);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRemovePatchesW(PWSTR szPatchList, PWSTR szProductCode, INSTALLTYPE eUninstallType, PWSTR szPropertyList);
+		public static extern uint32 MsiRemovePatchesW(char16* szPatchList, char16* szProductCode, INSTALLTYPE eUninstallType, char16* szPropertyList);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiExtractPatchXMLDataA(PSTR szPatchPath, uint32 dwReserved, uint8* szXMLData, uint32* pcchXMLData);
+		public static extern uint32 MsiExtractPatchXMLDataA(char8* szPatchPath, uint32 dwReserved, uint8* szXMLData, uint32* pcchXMLData);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiExtractPatchXMLDataW(PWSTR szPatchPath, uint32 dwReserved, char16* szXMLData, uint32* pcchXMLData);
+		public static extern uint32 MsiExtractPatchXMLDataW(char16* szPatchPath, uint32 dwReserved, char16* szXMLData, uint32* pcchXMLData);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPatchInfoExA(PSTR szPatchCode, PSTR szProductCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, PSTR szProperty, uint8* lpValue, uint32* pcchValue);
+		public static extern uint32 MsiGetPatchInfoExA(char8* szPatchCode, char8* szProductCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, char8* szProperty, uint8* lpValue, uint32* pcchValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPatchInfoExW(PWSTR szPatchCode, PWSTR szProductCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, PWSTR szProperty, char16* lpValue, uint32* pcchValue);
+		public static extern uint32 MsiGetPatchInfoExW(char16* szPatchCode, char16* szProductCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, char16* szProperty, char16* lpValue, uint32* pcchValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiApplyMultiplePatchesA(PSTR szPatchPackages, PSTR szProductCode, PSTR szPropertiesList);
+		public static extern uint32 MsiApplyMultiplePatchesA(char8* szPatchPackages, char8* szProductCode, char8* szPropertiesList);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiApplyMultiplePatchesW(PWSTR szPatchPackages, PWSTR szProductCode, PWSTR szPropertiesList);
+		public static extern uint32 MsiApplyMultiplePatchesW(char16* szPatchPackages, char16* szProductCode, char16* szPropertiesList);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDeterminePatchSequenceA(PSTR szProductCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOA* pPatchInfo);
+		public static extern uint32 MsiDeterminePatchSequenceA(char8* szProductCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOA* pPatchInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDeterminePatchSequenceW(PWSTR szProductCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOW* pPatchInfo);
+		public static extern uint32 MsiDeterminePatchSequenceW(char16* szProductCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOW* pPatchInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDetermineApplicablePatchesA(PSTR szProductPackagePath, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOA* pPatchInfo);
+		public static extern uint32 MsiDetermineApplicablePatchesA(char8* szProductPackagePath, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOA* pPatchInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDetermineApplicablePatchesW(PWSTR szProductPackagePath, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOW* pPatchInfo);
+		public static extern uint32 MsiDetermineApplicablePatchesW(char16* szProductPackagePath, uint32 cPatchInfo, MSIPATCHSEQUENCEINFOW* pPatchInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumPatchesExA(PSTR szProductCode, PSTR szUserSid, uint32 dwContext, uint32 dwFilter, uint32 dwIndex, PSTR szPatchCode, PSTR szTargetProductCode, MSIINSTALLCONTEXT* pdwTargetProductContext, uint8* szTargetUserSid, uint32* pcchTargetUserSid);
+		public static extern uint32 MsiEnumPatchesExA(char8* szProductCode, char8* szUserSid, uint32 dwContext, uint32 dwFilter, uint32 dwIndex, char8* szPatchCode, char8* szTargetProductCode, MSIINSTALLCONTEXT* pdwTargetProductContext, uint8* szTargetUserSid, uint32* pcchTargetUserSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumPatchesExW(PWSTR szProductCode, PWSTR szUserSid, uint32 dwContext, uint32 dwFilter, uint32 dwIndex, PWSTR szPatchCode, PWSTR szTargetProductCode, MSIINSTALLCONTEXT* pdwTargetProductContext, char16* szTargetUserSid, uint32* pcchTargetUserSid);
+		public static extern uint32 MsiEnumPatchesExW(char16* szProductCode, char16* szUserSid, uint32 dwContext, uint32 dwFilter, uint32 dwIndex, char16* szPatchCode, char16* szTargetProductCode, MSIINSTALLCONTEXT* pdwTargetProductContext, char16* szTargetUserSid, uint32* pcchTargetUserSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiQueryFeatureStateA(PSTR szProduct, PSTR szFeature);
+		public static extern INSTALLSTATE MsiQueryFeatureStateA(char8* szProduct, char8* szFeature);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiQueryFeatureStateW(PWSTR szProduct, PWSTR szFeature);
+		public static extern INSTALLSTATE MsiQueryFeatureStateW(char16* szProduct, char16* szFeature);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiQueryFeatureStateExA(PSTR szProductCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, PSTR szFeature, INSTALLSTATE* pdwState);
+		public static extern uint32 MsiQueryFeatureStateExA(char8* szProductCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, char8* szFeature, INSTALLSTATE* pdwState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiQueryFeatureStateExW(PWSTR szProductCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, PWSTR szFeature, INSTALLSTATE* pdwState);
+		public static extern uint32 MsiQueryFeatureStateExW(char16* szProductCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, char16* szFeature, INSTALLSTATE* pdwState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiUseFeatureA(PSTR szProduct, PSTR szFeature);
+		public static extern INSTALLSTATE MsiUseFeatureA(char8* szProduct, char8* szFeature);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiUseFeatureW(PWSTR szProduct, PWSTR szFeature);
+		public static extern INSTALLSTATE MsiUseFeatureW(char16* szProduct, char16* szFeature);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiUseFeatureExA(PSTR szProduct, PSTR szFeature, uint32 dwInstallMode, uint32 dwReserved);
+		public static extern INSTALLSTATE MsiUseFeatureExA(char8* szProduct, char8* szFeature, uint32 dwInstallMode, uint32 dwReserved);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiUseFeatureExW(PWSTR szProduct, PWSTR szFeature, uint32 dwInstallMode, uint32 dwReserved);
+		public static extern INSTALLSTATE MsiUseFeatureExW(char16* szProduct, char16* szFeature, uint32 dwInstallMode, uint32 dwReserved);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureUsageA(PSTR szProduct, PSTR szFeature, uint32* pdwUseCount, uint16* pwDateUsed);
+		public static extern uint32 MsiGetFeatureUsageA(char8* szProduct, char8* szFeature, uint32* pdwUseCount, uint16* pwDateUsed);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureUsageW(PWSTR szProduct, PWSTR szFeature, uint32* pdwUseCount, uint16* pwDateUsed);
+		public static extern uint32 MsiGetFeatureUsageW(char16* szProduct, char16* szFeature, uint32* pdwUseCount, uint16* pwDateUsed);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiConfigureFeatureA(PSTR szProduct, PSTR szFeature, INSTALLSTATE eInstallState);
+		public static extern uint32 MsiConfigureFeatureA(char8* szProduct, char8* szFeature, INSTALLSTATE eInstallState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiConfigureFeatureW(PWSTR szProduct, PWSTR szFeature, INSTALLSTATE eInstallState);
+		public static extern uint32 MsiConfigureFeatureW(char16* szProduct, char16* szFeature, INSTALLSTATE eInstallState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiReinstallFeatureA(PSTR szProduct, PSTR szFeature, REINSTALLMODE dwReinstallMode);
+		public static extern uint32 MsiReinstallFeatureA(char8* szProduct, char8* szFeature, REINSTALLMODE dwReinstallMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiReinstallFeatureW(PWSTR szProduct, PWSTR szFeature, REINSTALLMODE dwReinstallMode);
+		public static extern uint32 MsiReinstallFeatureW(char16* szProduct, char16* szFeature, REINSTALLMODE dwReinstallMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideComponentA(PSTR szProduct, PSTR szFeature, PSTR szComponent, INSTALLMODE dwInstallMode, uint8* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideComponentA(char8* szProduct, char8* szFeature, char8* szComponent, INSTALLMODE dwInstallMode, uint8* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideComponentW(PWSTR szProduct, PWSTR szFeature, PWSTR szComponent, INSTALLMODE dwInstallMode, char16* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideComponentW(char16* szProduct, char16* szFeature, char16* szComponent, INSTALLMODE dwInstallMode, char16* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideQualifiedComponentA(PSTR szCategory, PSTR szQualifier, INSTALLMODE dwInstallMode, uint8* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideQualifiedComponentA(char8* szCategory, char8* szQualifier, INSTALLMODE dwInstallMode, uint8* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideQualifiedComponentW(PWSTR szCategory, PWSTR szQualifier, INSTALLMODE dwInstallMode, char16* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideQualifiedComponentW(char16* szCategory, char16* szQualifier, INSTALLMODE dwInstallMode, char16* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideQualifiedComponentExA(PSTR szCategory, PSTR szQualifier, INSTALLMODE dwInstallMode, PSTR szProduct, uint32 dwUnused1, uint32 dwUnused2, uint8* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideQualifiedComponentExA(char8* szCategory, char8* szQualifier, INSTALLMODE dwInstallMode, char8* szProduct, uint32 dwUnused1, uint32 dwUnused2, uint8* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideQualifiedComponentExW(PWSTR szCategory, PWSTR szQualifier, INSTALLMODE dwInstallMode, PWSTR szProduct, uint32 dwUnused1, uint32 dwUnused2, char16* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideQualifiedComponentExW(char16* szCategory, char16* szQualifier, INSTALLMODE dwInstallMode, char16* szProduct, uint32 dwUnused1, uint32 dwUnused2, char16* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiGetComponentPathA(PSTR szProduct, PSTR szComponent, uint8* lpPathBuf, uint32* pcchBuf);
+		public static extern INSTALLSTATE MsiGetComponentPathA(char8* szProduct, char8* szComponent, uint8* lpPathBuf, uint32* pcchBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiGetComponentPathW(PWSTR szProduct, PWSTR szComponent, char16* lpPathBuf, uint32* pcchBuf);
+		public static extern INSTALLSTATE MsiGetComponentPathW(char16* szProduct, char16* szComponent, char16* lpPathBuf, uint32* pcchBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiGetComponentPathExA(PSTR szProductCode, PSTR szComponentCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint8* lpOutPathBuffer, uint32* pcchOutPathBuffer);
+		public static extern INSTALLSTATE MsiGetComponentPathExA(char8* szProductCode, char8* szComponentCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint8* lpOutPathBuffer, uint32* pcchOutPathBuffer);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiGetComponentPathExW(PWSTR szProductCode, PWSTR szComponentCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, char16* lpOutPathBuffer, uint32* pcchOutPathBuffer);
+		public static extern INSTALLSTATE MsiGetComponentPathExW(char16* szProductCode, char16* szComponentCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, char16* lpOutPathBuffer, uint32* pcchOutPathBuffer);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideAssemblyA(PSTR szAssemblyName, PSTR szAppContext, INSTALLMODE dwInstallMode, MSIASSEMBLYINFO dwAssemblyInfo, uint8* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideAssemblyA(char8* szAssemblyName, char8* szAppContext, INSTALLMODE dwInstallMode, MSIASSEMBLYINFO dwAssemblyInfo, uint8* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiProvideAssemblyW(PWSTR szAssemblyName, PWSTR szAppContext, INSTALLMODE dwInstallMode, MSIASSEMBLYINFO dwAssemblyInfo, char16* lpPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiProvideAssemblyW(char16* szAssemblyName, char16* szAppContext, INSTALLMODE dwInstallMode, MSIASSEMBLYINFO dwAssemblyInfo, char16* lpPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiQueryComponentStateA(PSTR szProductCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, PSTR szComponentCode, INSTALLSTATE* pdwState);
+		public static extern uint32 MsiQueryComponentStateA(char8* szProductCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, char8* szComponentCode, INSTALLSTATE* pdwState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiQueryComponentStateW(PWSTR szProductCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, PWSTR szComponentCode, INSTALLSTATE* pdwState);
+		public static extern uint32 MsiQueryComponentStateW(char16* szProductCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, char16* szComponentCode, INSTALLSTATE* pdwState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumProductsA(uint32 iProductIndex, PSTR lpProductBuf);
+		public static extern uint32 MsiEnumProductsA(uint32 iProductIndex, char8* lpProductBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumProductsW(uint32 iProductIndex, PWSTR lpProductBuf);
+		public static extern uint32 MsiEnumProductsW(uint32 iProductIndex, char16* lpProductBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumProductsExA(PSTR szProductCode, PSTR szUserSid, uint32 dwContext, uint32 dwIndex, PSTR szInstalledProductCode, MSIINSTALLCONTEXT* pdwInstalledContext, uint8* szSid, uint32* pcchSid);
+		public static extern uint32 MsiEnumProductsExA(char8* szProductCode, char8* szUserSid, uint32 dwContext, uint32 dwIndex, char8* szInstalledProductCode, MSIINSTALLCONTEXT* pdwInstalledContext, uint8* szSid, uint32* pcchSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumProductsExW(PWSTR szProductCode, PWSTR szUserSid, uint32 dwContext, uint32 dwIndex, PWSTR szInstalledProductCode, MSIINSTALLCONTEXT* pdwInstalledContext, char16* szSid, uint32* pcchSid);
+		public static extern uint32 MsiEnumProductsExW(char16* szProductCode, char16* szUserSid, uint32 dwContext, uint32 dwIndex, char16* szInstalledProductCode, MSIINSTALLCONTEXT* pdwInstalledContext, char16* szSid, uint32* pcchSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumRelatedProductsA(PSTR lpUpgradeCode, uint32 dwReserved, uint32 iProductIndex, PSTR lpProductBuf);
+		public static extern uint32 MsiEnumRelatedProductsA(char8* lpUpgradeCode, uint32 dwReserved, uint32 iProductIndex, char8* lpProductBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumRelatedProductsW(PWSTR lpUpgradeCode, uint32 dwReserved, uint32 iProductIndex, PWSTR lpProductBuf);
+		public static extern uint32 MsiEnumRelatedProductsW(char16* lpUpgradeCode, uint32 dwReserved, uint32 iProductIndex, char16* lpProductBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumFeaturesA(PSTR szProduct, uint32 iFeatureIndex, PSTR lpFeatureBuf, PSTR lpParentBuf);
+		public static extern uint32 MsiEnumFeaturesA(char8* szProduct, uint32 iFeatureIndex, char8* lpFeatureBuf, char8* lpParentBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumFeaturesW(PWSTR szProduct, uint32 iFeatureIndex, PWSTR lpFeatureBuf, PWSTR lpParentBuf);
+		public static extern uint32 MsiEnumFeaturesW(char16* szProduct, uint32 iFeatureIndex, char16* lpFeatureBuf, char16* lpParentBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentsA(uint32 iComponentIndex, PSTR lpComponentBuf);
+		public static extern uint32 MsiEnumComponentsA(uint32 iComponentIndex, char8* lpComponentBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentsW(uint32 iComponentIndex, PWSTR lpComponentBuf);
+		public static extern uint32 MsiEnumComponentsW(uint32 iComponentIndex, char16* lpComponentBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentsExA(PSTR szUserSid, uint32 dwContext, uint32 dwIndex, PSTR szInstalledComponentCode, MSIINSTALLCONTEXT* pdwInstalledContext, uint8* szSid, uint32* pcchSid);
+		public static extern uint32 MsiEnumComponentsExA(char8* szUserSid, uint32 dwContext, uint32 dwIndex, char8* szInstalledComponentCode, MSIINSTALLCONTEXT* pdwInstalledContext, uint8* szSid, uint32* pcchSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentsExW(PWSTR szUserSid, uint32 dwContext, uint32 dwIndex, PWSTR szInstalledComponentCode, MSIINSTALLCONTEXT* pdwInstalledContext, char16* szSid, uint32* pcchSid);
+		public static extern uint32 MsiEnumComponentsExW(char16* szUserSid, uint32 dwContext, uint32 dwIndex, char16* szInstalledComponentCode, MSIINSTALLCONTEXT* pdwInstalledContext, char16* szSid, uint32* pcchSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumClientsA(PSTR szComponent, uint32 iProductIndex, PSTR lpProductBuf);
+		public static extern uint32 MsiEnumClientsA(char8* szComponent, uint32 iProductIndex, char8* lpProductBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumClientsW(PWSTR szComponent, uint32 iProductIndex, PWSTR lpProductBuf);
+		public static extern uint32 MsiEnumClientsW(char16* szComponent, uint32 iProductIndex, char16* lpProductBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumClientsExA(PSTR szComponent, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwProductIndex, PSTR szProductBuf, MSIINSTALLCONTEXT* pdwInstalledContext, uint8* szSid, uint32* pcchSid);
+		public static extern uint32 MsiEnumClientsExA(char8* szComponent, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwProductIndex, char8* szProductBuf, MSIINSTALLCONTEXT* pdwInstalledContext, uint8* szSid, uint32* pcchSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumClientsExW(PWSTR szComponent, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwProductIndex, PWSTR szProductBuf, MSIINSTALLCONTEXT* pdwInstalledContext, char16* szSid, uint32* pcchSid);
+		public static extern uint32 MsiEnumClientsExW(char16* szComponent, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwProductIndex, char16* szProductBuf, MSIINSTALLCONTEXT* pdwInstalledContext, char16* szSid, uint32* pcchSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentQualifiersA(PSTR szComponent, uint32 iIndex, uint8* lpQualifierBuf, out uint32 pcchQualifierBuf, uint8* lpApplicationDataBuf, uint32* pcchApplicationDataBuf);
+		public static extern uint32 MsiEnumComponentQualifiersA(char8* szComponent, uint32 iIndex, uint8* lpQualifierBuf, out uint32 pcchQualifierBuf, uint8* lpApplicationDataBuf, uint32* pcchApplicationDataBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentQualifiersW(PWSTR szComponent, uint32 iIndex, char16* lpQualifierBuf, out uint32 pcchQualifierBuf, char16* lpApplicationDataBuf, uint32* pcchApplicationDataBuf);
+		public static extern uint32 MsiEnumComponentQualifiersW(char16* szComponent, uint32 iIndex, char16* lpQualifierBuf, out uint32 pcchQualifierBuf, char16* lpApplicationDataBuf, uint32* pcchApplicationDataBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenProductA(PSTR szProduct, out MSIHANDLE hProduct);
+		public static extern uint32 MsiOpenProductA(char8* szProduct, out MSIHANDLE hProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenProductW(PWSTR szProduct, out MSIHANDLE hProduct);
+		public static extern uint32 MsiOpenProductW(char16* szProduct, out MSIHANDLE hProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenPackageA(PSTR szPackagePath, out MSIHANDLE hProduct);
+		public static extern uint32 MsiOpenPackageA(char8* szPackagePath, out MSIHANDLE hProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenPackageW(PWSTR szPackagePath, out MSIHANDLE hProduct);
+		public static extern uint32 MsiOpenPackageW(char16* szPackagePath, out MSIHANDLE hProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenPackageExA(PSTR szPackagePath, uint32 dwOptions, out MSIHANDLE hProduct);
+		public static extern uint32 MsiOpenPackageExA(char8* szPackagePath, uint32 dwOptions, out MSIHANDLE hProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenPackageExW(PWSTR szPackagePath, uint32 dwOptions, out MSIHANDLE hProduct);
+		public static extern uint32 MsiOpenPackageExW(char16* szPackagePath, uint32 dwOptions, out MSIHANDLE hProduct);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPatchFileListA(PSTR szProductCode, PSTR szPatchPackages, out uint32 pcFiles, MSIHANDLE** pphFileRecords);
+		public static extern uint32 MsiGetPatchFileListA(char8* szProductCode, char8* szPatchPackages, out uint32 pcFiles, MSIHANDLE** pphFileRecords);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPatchFileListW(PWSTR szProductCode, PWSTR szPatchPackages, out uint32 pcFiles, MSIHANDLE** pphFileRecords);
+		public static extern uint32 MsiGetPatchFileListW(char16* szProductCode, char16* szPatchPackages, out uint32 pcFiles, MSIHANDLE** pphFileRecords);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductPropertyA(MSIHANDLE hProduct, PSTR szProperty, uint8* lpValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetProductPropertyA(MSIHANDLE hProduct, char8* szProperty, uint8* lpValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetProductPropertyW(MSIHANDLE hProduct, PWSTR szProperty, char16* lpValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetProductPropertyW(MSIHANDLE hProduct, char16* szProperty, char16* lpValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiVerifyPackageA(PSTR szPackagePath);
+		public static extern uint32 MsiVerifyPackageA(char8* szPackagePath);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiVerifyPackageW(PWSTR szPackagePath);
+		public static extern uint32 MsiVerifyPackageW(char16* szPackagePath);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureInfoA(MSIHANDLE hProduct, PSTR szFeature, uint32* lpAttributes, uint8* lpTitleBuf, uint32* pcchTitleBuf, uint8* lpHelpBuf, uint32* pcchHelpBuf);
+		public static extern uint32 MsiGetFeatureInfoA(MSIHANDLE hProduct, char8* szFeature, uint32* lpAttributes, uint8* lpTitleBuf, uint32* pcchTitleBuf, uint8* lpHelpBuf, uint32* pcchHelpBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureInfoW(MSIHANDLE hProduct, PWSTR szFeature, uint32* lpAttributes, char16* lpTitleBuf, uint32* pcchTitleBuf, char16* lpHelpBuf, uint32* pcchHelpBuf);
+		public static extern uint32 MsiGetFeatureInfoW(MSIHANDLE hProduct, char16* szFeature, uint32* lpAttributes, char16* lpTitleBuf, uint32* pcchTitleBuf, char16* lpHelpBuf, uint32* pcchHelpBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiInstallMissingComponentA(PSTR szProduct, PSTR szComponent, INSTALLSTATE eInstallState);
+		public static extern uint32 MsiInstallMissingComponentA(char8* szProduct, char8* szComponent, INSTALLSTATE eInstallState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiInstallMissingComponentW(PWSTR szProduct, PWSTR szComponent, INSTALLSTATE eInstallState);
+		public static extern uint32 MsiInstallMissingComponentW(char16* szProduct, char16* szComponent, INSTALLSTATE eInstallState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiInstallMissingFileA(PSTR szProduct, PSTR szFile);
+		public static extern uint32 MsiInstallMissingFileA(char8* szProduct, char8* szFile);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiInstallMissingFileW(PWSTR szProduct, PWSTR szFile);
+		public static extern uint32 MsiInstallMissingFileW(char16* szProduct, char16* szFile);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiLocateComponentA(PSTR szComponent, uint8* lpPathBuf, uint32* pcchBuf);
+		public static extern INSTALLSTATE MsiLocateComponentA(char8* szComponent, uint8* lpPathBuf, uint32* pcchBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern INSTALLSTATE MsiLocateComponentW(PWSTR szComponent, char16* lpPathBuf, uint32* pcchBuf);
+		public static extern INSTALLSTATE MsiLocateComponentW(char16* szComponent, char16* lpPathBuf, uint32* pcchBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearAllA(PSTR szProduct, PSTR szUserName, uint32 dwReserved);
+		public static extern uint32 MsiSourceListClearAllA(char8* szProduct, char8* szUserName, uint32 dwReserved);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearAllW(PWSTR szProduct, PWSTR szUserName, uint32 dwReserved);
+		public static extern uint32 MsiSourceListClearAllW(char16* szProduct, char16* szUserName, uint32 dwReserved);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListAddSourceA(PSTR szProduct, PSTR szUserName, uint32 dwReserved, PSTR szSource);
+		public static extern uint32 MsiSourceListAddSourceA(char8* szProduct, char8* szUserName, uint32 dwReserved, char8* szSource);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListAddSourceW(PWSTR szProduct, PWSTR szUserName, uint32 dwReserved, PWSTR szSource);
+		public static extern uint32 MsiSourceListAddSourceW(char16* szProduct, char16* szUserName, uint32 dwReserved, char16* szSource);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListForceResolutionA(PSTR szProduct, PSTR szUserName, uint32 dwReserved);
+		public static extern uint32 MsiSourceListForceResolutionA(char8* szProduct, char8* szUserName, uint32 dwReserved);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListForceResolutionW(PWSTR szProduct, PWSTR szUserName, uint32 dwReserved);
+		public static extern uint32 MsiSourceListForceResolutionW(char16* szProduct, char16* szUserName, uint32 dwReserved);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListAddSourceExA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PSTR szSource, uint32 dwIndex);
+		public static extern uint32 MsiSourceListAddSourceExA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char8* szSource, uint32 dwIndex);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListAddSourceExW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PWSTR szSource, uint32 dwIndex);
+		public static extern uint32 MsiSourceListAddSourceExW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char16* szSource, uint32 dwIndex);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListAddMediaDiskA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId, PSTR szVolumeLabel, PSTR szDiskPrompt);
+		public static extern uint32 MsiSourceListAddMediaDiskA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId, char8* szVolumeLabel, char8* szDiskPrompt);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListAddMediaDiskW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId, PWSTR szVolumeLabel, PWSTR szDiskPrompt);
+		public static extern uint32 MsiSourceListAddMediaDiskW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId, char16* szVolumeLabel, char16* szDiskPrompt);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearSourceA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PSTR szSource);
+		public static extern uint32 MsiSourceListClearSourceA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char8* szSource);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearSourceW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PWSTR szSource);
+		public static extern uint32 MsiSourceListClearSourceW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char16* szSource);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearMediaDiskA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId);
+		public static extern uint32 MsiSourceListClearMediaDiskA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearMediaDiskW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId);
+		public static extern uint32 MsiSourceListClearMediaDiskW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwDiskId);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearAllExA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
+		public static extern uint32 MsiSourceListClearAllExA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListClearAllExW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
+		public static extern uint32 MsiSourceListClearAllExW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListForceResolutionExA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
+		public static extern uint32 MsiSourceListForceResolutionExA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListForceResolutionExW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
+		public static extern uint32 MsiSourceListForceResolutionExW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListSetInfoA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PSTR szProperty, PSTR szValue);
+		public static extern uint32 MsiSourceListSetInfoA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char8* szProperty, char8* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListSetInfoW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PWSTR szProperty, PWSTR szValue);
+		public static extern uint32 MsiSourceListSetInfoW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char16* szProperty, char16* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListGetInfoA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PSTR szProperty, uint8* szValue, uint32* pcchValue);
+		public static extern uint32 MsiSourceListGetInfoA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char8* szProperty, uint8* szValue, uint32* pcchValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListGetInfoW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, PWSTR szProperty, char16* szValue, uint32* pcchValue);
+		public static extern uint32 MsiSourceListGetInfoW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, char16* szProperty, char16* szValue, uint32* pcchValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListEnumSourcesA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, uint8* szSource, uint32* pcchSource);
+		public static extern uint32 MsiSourceListEnumSourcesA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, uint8* szSource, uint32* pcchSource);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListEnumSourcesW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, char16* szSource, uint32* pcchSource);
+		public static extern uint32 MsiSourceListEnumSourcesW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, char16* szSource, uint32* pcchSource);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListEnumMediaDisksA(PSTR szProductCodeOrPatchCode, PSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, uint32* pdwDiskId, uint8* szVolumeLabel, uint32* pcchVolumeLabel, uint8* szDiskPrompt, uint32* pcchDiskPrompt);
+		public static extern uint32 MsiSourceListEnumMediaDisksA(char8* szProductCodeOrPatchCode, char8* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, uint32* pdwDiskId, uint8* szVolumeLabel, uint32* pcchVolumeLabel, uint8* szDiskPrompt, uint32* pcchDiskPrompt);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSourceListEnumMediaDisksW(PWSTR szProductCodeOrPatchCode, PWSTR szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, uint32* pdwDiskId, char16* szVolumeLabel, uint32* pcchVolumeLabel, char16* szDiskPrompt, uint32* pcchDiskPrompt);
+		public static extern uint32 MsiSourceListEnumMediaDisksW(char16* szProductCodeOrPatchCode, char16* szUserSid, MSIINSTALLCONTEXT dwContext, uint32 dwOptions, uint32 dwIndex, uint32* pdwDiskId, char16* szVolumeLabel, uint32* pcchVolumeLabel, char16* szDiskPrompt, uint32* pcchDiskPrompt);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFileVersionA(PSTR szFilePath, uint8* lpVersionBuf, uint32* pcchVersionBuf, uint8* lpLangBuf, uint32* pcchLangBuf);
+		public static extern uint32 MsiGetFileVersionA(char8* szFilePath, uint8* lpVersionBuf, uint32* pcchVersionBuf, uint8* lpLangBuf, uint32* pcchLangBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFileVersionW(PWSTR szFilePath, char16* lpVersionBuf, uint32* pcchVersionBuf, char16* lpLangBuf, uint32* pcchLangBuf);
+		public static extern uint32 MsiGetFileVersionW(char16* szFilePath, char16* lpVersionBuf, uint32* pcchVersionBuf, char16* lpLangBuf, uint32* pcchLangBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFileHashA(PSTR szFilePath, uint32 dwOptions, out MSIFILEHASHINFO pHash);
+		public static extern uint32 MsiGetFileHashA(char8* szFilePath, uint32 dwOptions, out MSIFILEHASHINFO pHash);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFileHashW(PWSTR szFilePath, uint32 dwOptions, out MSIFILEHASHINFO pHash);
+		public static extern uint32 MsiGetFileHashW(char16* szFilePath, uint32 dwOptions, out MSIFILEHASHINFO pHash);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MsiGetFileSignatureInformationA(PSTR szSignedObjectPath, uint32 dwFlags, out CERT_CONTEXT* ppcCertContext, uint8* pbHashData, uint32* pcbHashData);
+		public static extern HResult MsiGetFileSignatureInformationA(char8* szSignedObjectPath, uint32 dwFlags, out CERT_CONTEXT* ppcCertContext, uint8* pbHashData, uint32* pcbHashData);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT MsiGetFileSignatureInformationW(PWSTR szSignedObjectPath, uint32 dwFlags, out CERT_CONTEXT* ppcCertContext, uint8* pbHashData, uint32* pcbHashData);
+		public static extern HResult MsiGetFileSignatureInformationW(char16* szSignedObjectPath, uint32 dwFlags, out CERT_CONTEXT* ppcCertContext, uint8* pbHashData, uint32* pcbHashData);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetShortcutTargetA(PSTR szShortcutPath, PSTR szProductCode, PSTR szFeatureId, PSTR szComponentCode);
+		public static extern uint32 MsiGetShortcutTargetA(char8* szShortcutPath, char8* szProductCode, char8* szFeatureId, char8* szComponentCode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetShortcutTargetW(PWSTR szShortcutPath, PWSTR szProductCode, PWSTR szFeatureId, PWSTR szComponentCode);
+		public static extern uint32 MsiGetShortcutTargetW(char16* szShortcutPath, char16* szProductCode, char16* szFeatureId, char16* szComponentCode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiIsProductElevatedA(PSTR szProduct, out BOOL pfElevated);
+		public static extern uint32 MsiIsProductElevatedA(char8* szProduct, out IntBool pfElevated);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiIsProductElevatedW(PWSTR szProduct, out BOOL pfElevated);
+		public static extern uint32 MsiIsProductElevatedW(char16* szProduct, out IntBool pfElevated);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiNotifySidChangeA(PSTR pOldSid, PSTR pNewSid);
+		public static extern uint32 MsiNotifySidChangeA(char8* pOldSid, char8* pNewSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiNotifySidChangeW(PWSTR pOldSid, PWSTR pNewSid);
+		public static extern uint32 MsiNotifySidChangeW(char16* pOldSid, char16* pNewSid);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiBeginTransactionA(PSTR szName, uint32 dwTransactionAttributes, out MSIHANDLE phTransactionHandle, out HANDLE phChangeOfOwnerEvent);
+		public static extern uint32 MsiBeginTransactionA(char8* szName, uint32 dwTransactionAttributes, out MSIHANDLE phTransactionHandle, out Handle phChangeOfOwnerEvent);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiBeginTransactionW(PWSTR szName, uint32 dwTransactionAttributes, out MSIHANDLE phTransactionHandle, out HANDLE phChangeOfOwnerEvent);
+		public static extern uint32 MsiBeginTransactionW(char16* szName, uint32 dwTransactionAttributes, out MSIHANDLE phTransactionHandle, out Handle phChangeOfOwnerEvent);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiEndTransaction(MSITRANSACTIONSTATE dwTransactionState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiJoinTransaction(MSIHANDLE hTransactionHandle, uint32 dwTransactionAttributes, out HANDLE phChangeOfOwnerEvent);
+		public static extern uint32 MsiJoinTransaction(MSIHANDLE hTransactionHandle, uint32 dwTransactionAttributes, out Handle phChangeOfOwnerEvent);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseOpenViewA(MSIHANDLE hDatabase, PSTR szQuery, out MSIHANDLE phView);
+		public static extern uint32 MsiDatabaseOpenViewA(MSIHANDLE hDatabase, char8* szQuery, out MSIHANDLE phView);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseOpenViewW(MSIHANDLE hDatabase, PWSTR szQuery, out MSIHANDLE phView);
+		public static extern uint32 MsiDatabaseOpenViewW(MSIHANDLE hDatabase, char16* szQuery, out MSIHANDLE phView);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern MSIDBERROR MsiViewGetErrorA(MSIHANDLE hView, uint8* szColumnNameBuffer, uint32* pcchBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3212,57 +3212,57 @@ namespace Win32
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiViewClose(MSIHANDLE hView);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseGetPrimaryKeysA(MSIHANDLE hDatabase, PSTR szTableName, out MSIHANDLE phRecord);
+		public static extern uint32 MsiDatabaseGetPrimaryKeysA(MSIHANDLE hDatabase, char8* szTableName, out MSIHANDLE phRecord);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase, PWSTR szTableName, out MSIHANDLE phRecord);
+		public static extern uint32 MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase, char16* szTableName, out MSIHANDLE phRecord);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern MSICONDITION MsiDatabaseIsTablePersistentA(MSIHANDLE hDatabase, PSTR szTableName);
+		public static extern MSICONDITION MsiDatabaseIsTablePersistentA(MSIHANDLE hDatabase, char8* szTableName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern MSICONDITION MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase, PWSTR szTableName);
+		public static extern MSICONDITION MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase, char16* szTableName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetSummaryInformationA(MSIHANDLE hDatabase, PSTR szDatabasePath, uint32 uiUpdateCount, out MSIHANDLE phSummaryInfo);
+		public static extern uint32 MsiGetSummaryInformationA(MSIHANDLE hDatabase, char8* szDatabasePath, uint32 uiUpdateCount, out MSIHANDLE phSummaryInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetSummaryInformationW(MSIHANDLE hDatabase, PWSTR szDatabasePath, uint32 uiUpdateCount, out MSIHANDLE phSummaryInfo);
+		public static extern uint32 MsiGetSummaryInformationW(MSIHANDLE hDatabase, char16* szDatabasePath, uint32 uiUpdateCount, out MSIHANDLE phSummaryInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiSummaryInfoGetPropertyCount(MSIHANDLE hSummaryInfo, out uint32 puiPropertyCount);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSummaryInfoSetPropertyA(MSIHANDLE hSummaryInfo, uint32 uiProperty, uint32 uiDataType, int32 iValue, out FILETIME pftValue, PSTR szValue);
+		public static extern uint32 MsiSummaryInfoSetPropertyA(MSIHANDLE hSummaryInfo, uint32 uiProperty, uint32 uiDataType, int32 iValue, out FileTime pftValue, char8* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo, uint32 uiProperty, uint32 uiDataType, int32 iValue, out FILETIME pftValue, PWSTR szValue);
+		public static extern uint32 MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo, uint32 uiProperty, uint32 uiDataType, int32 iValue, out FileTime pftValue, char16* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo, uint32 uiProperty, out uint32 puiDataType, out int32 piValue, FILETIME* pftValue, uint8* szValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo, uint32 uiProperty, out uint32 puiDataType, out int32 piValue, FileTime* pftValue, uint8* szValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo, uint32 uiProperty, out uint32 puiDataType, out int32 piValue, FILETIME* pftValue, char16* szValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo, uint32 uiProperty, out uint32 puiDataType, out int32 piValue, FileTime* pftValue, char16* szValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiSummaryInfoPersist(MSIHANDLE hSummaryInfo);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenDatabaseA(PSTR szDatabasePath, PSTR szPersist, out MSIHANDLE phDatabase);
+		public static extern uint32 MsiOpenDatabaseA(char8* szDatabasePath, char8* szPersist, out MSIHANDLE phDatabase);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiOpenDatabaseW(PWSTR szDatabasePath, PWSTR szPersist, out MSIHANDLE phDatabase);
+		public static extern uint32 MsiOpenDatabaseW(char16* szDatabasePath, char16* szPersist, out MSIHANDLE phDatabase);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseImportA(MSIHANDLE hDatabase, PSTR szFolderPath, PSTR szFileName);
+		public static extern uint32 MsiDatabaseImportA(MSIHANDLE hDatabase, char8* szFolderPath, char8* szFileName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseImportW(MSIHANDLE hDatabase, PWSTR szFolderPath, PWSTR szFileName);
+		public static extern uint32 MsiDatabaseImportW(MSIHANDLE hDatabase, char16* szFolderPath, char16* szFileName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseExportA(MSIHANDLE hDatabase, PSTR szTableName, PSTR szFolderPath, PSTR szFileName);
+		public static extern uint32 MsiDatabaseExportA(MSIHANDLE hDatabase, char8* szTableName, char8* szFolderPath, char8* szFileName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseExportW(MSIHANDLE hDatabase, PWSTR szTableName, PWSTR szFolderPath, PWSTR szFileName);
+		public static extern uint32 MsiDatabaseExportW(MSIHANDLE hDatabase, char16* szTableName, char16* szFolderPath, char16* szFileName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseMergeA(MSIHANDLE hDatabase, MSIHANDLE hDatabaseMerge, PSTR szTableName);
+		public static extern uint32 MsiDatabaseMergeA(MSIHANDLE hDatabase, MSIHANDLE hDatabaseMerge, char8* szTableName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseMergeW(MSIHANDLE hDatabase, MSIHANDLE hDatabaseMerge, PWSTR szTableName);
+		public static extern uint32 MsiDatabaseMergeW(MSIHANDLE hDatabase, MSIHANDLE hDatabaseMerge, char16* szTableName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, PSTR szTransformFile, int32 iReserved1, int32 iReserved2);
+		public static extern uint32 MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, char8* szTransformFile, int32 iReserved1, int32 iReserved2);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, PWSTR szTransformFile, int32 iReserved1, int32 iReserved2);
+		public static extern uint32 MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, char16* szTransformFile, int32 iReserved1, int32 iReserved2);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseApplyTransformA(MSIHANDLE hDatabase, PSTR szTransformFile, MSITRANSFORM_ERROR iErrorConditions);
+		public static extern uint32 MsiDatabaseApplyTransformA(MSIHANDLE hDatabase, char8* szTransformFile, MSITRANSFORM_ERROR iErrorConditions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDatabaseApplyTransformW(MSIHANDLE hDatabase, PWSTR szTransformFile, MSITRANSFORM_ERROR iErrorConditions);
+		public static extern uint32 MsiDatabaseApplyTransformW(MSIHANDLE hDatabase, char16* szTransformFile, MSITRANSFORM_ERROR iErrorConditions);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiCreateTransformSummaryInfoA(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, PSTR szTransformFile, MSITRANSFORM_ERROR iErrorConditions, MSITRANSFORM_VALIDATE iValidation);
+		public static extern uint32 MsiCreateTransformSummaryInfoA(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, char8* szTransformFile, MSITRANSFORM_ERROR iErrorConditions, MSITRANSFORM_VALIDATE iValidation);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, PWSTR szTransformFile, MSITRANSFORM_ERROR iErrorConditions, MSITRANSFORM_VALIDATE iValidation);
+		public static extern uint32 MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase, MSIHANDLE hDatabaseReference, char16* szTransformFile, MSITRANSFORM_ERROR iErrorConditions, MSITRANSFORM_VALIDATE iValidation);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiDatabaseCommit(MSIHANDLE hDatabase);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3270,15 +3270,15 @@ namespace Win32
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern MSIHANDLE MsiCreateRecord(uint32 cParams);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL MsiRecordIsNull(MSIHANDLE hRecord, uint32 iField);
+		public static extern IntBool MsiRecordIsNull(MSIHANDLE hRecord, uint32 iField);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiRecordDataSize(MSIHANDLE hRecord, uint32 iField);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiRecordSetInteger(MSIHANDLE hRecord, uint32 iField, int32 iValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRecordSetStringA(MSIHANDLE hRecord, uint32 iField, PSTR szValue);
+		public static extern uint32 MsiRecordSetStringA(MSIHANDLE hRecord, uint32 iField, char8* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRecordSetStringW(MSIHANDLE hRecord, uint32 iField, PWSTR szValue);
+		public static extern uint32 MsiRecordSetStringW(MSIHANDLE hRecord, uint32 iField, char16* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 MsiRecordGetInteger(MSIHANDLE hRecord, uint32 iField);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -3288,222 +3288,222 @@ namespace Win32
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiRecordGetFieldCount(MSIHANDLE hRecord);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRecordSetStreamA(MSIHANDLE hRecord, uint32 iField, PSTR szFilePath);
+		public static extern uint32 MsiRecordSetStreamA(MSIHANDLE hRecord, uint32 iField, char8* szFilePath);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRecordSetStreamW(MSIHANDLE hRecord, uint32 iField, PWSTR szFilePath);
+		public static extern uint32 MsiRecordSetStreamW(MSIHANDLE hRecord, uint32 iField, char16* szFilePath);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiRecordReadStream(MSIHANDLE hRecord, uint32 iField, PSTR szDataBuf, out uint32 pcbDataBuf);
+		public static extern uint32 MsiRecordReadStream(MSIHANDLE hRecord, uint32 iField, char8* szDataBuf, out uint32 pcbDataBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiRecordClearData(MSIHANDLE hRecord);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern MSIHANDLE MsiGetActiveDatabase(MSIHANDLE hInstall);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetPropertyA(MSIHANDLE hInstall, PSTR szName, PSTR szValue);
+		public static extern uint32 MsiSetPropertyA(MSIHANDLE hInstall, char8* szName, char8* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetPropertyW(MSIHANDLE hInstall, PWSTR szName, PWSTR szValue);
+		public static extern uint32 MsiSetPropertyW(MSIHANDLE hInstall, char16* szName, char16* szValue);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPropertyA(MSIHANDLE hInstall, PSTR szName, uint8* szValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetPropertyA(MSIHANDLE hInstall, char8* szName, uint8* szValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetPropertyW(MSIHANDLE hInstall, PWSTR szName, char16* szValueBuf, uint32* pcchValueBuf);
+		public static extern uint32 MsiGetPropertyW(MSIHANDLE hInstall, char16* szName, char16* szValueBuf, uint32* pcchValueBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 MsiGetLanguage(MSIHANDLE hInstall);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL MsiGetMode(MSIHANDLE hInstall, MSIRUNMODE eRunMode);
+		public static extern IntBool MsiGetMode(MSIHANDLE hInstall, MSIRUNMODE eRunMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetMode(MSIHANDLE hInstall, MSIRUNMODE eRunMode, BOOL fState);
+		public static extern uint32 MsiSetMode(MSIHANDLE hInstall, MSIRUNMODE eRunMode, IntBool fState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiFormatRecordA(MSIHANDLE hInstall, MSIHANDLE hRecord, uint8* szResultBuf, uint32* pcchResultBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiFormatRecordW(MSIHANDLE hInstall, MSIHANDLE hRecord, char16* szResultBuf, uint32* pcchResultBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDoActionA(MSIHANDLE hInstall, PSTR szAction);
+		public static extern uint32 MsiDoActionA(MSIHANDLE hInstall, char8* szAction);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiDoActionW(MSIHANDLE hInstall, PWSTR szAction);
+		public static extern uint32 MsiDoActionW(MSIHANDLE hInstall, char16* szAction);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSequenceA(MSIHANDLE hInstall, PSTR szTable, int32 iSequenceMode);
+		public static extern uint32 MsiSequenceA(MSIHANDLE hInstall, char8* szTable, int32 iSequenceMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSequenceW(MSIHANDLE hInstall, PWSTR szTable, int32 iSequenceMode);
+		public static extern uint32 MsiSequenceW(MSIHANDLE hInstall, char16* szTable, int32 iSequenceMode);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 MsiProcessMessage(MSIHANDLE hInstall, INSTALLMESSAGE eMessageType, MSIHANDLE hRecord);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern MSICONDITION MsiEvaluateConditionA(MSIHANDLE hInstall, PSTR szCondition);
+		public static extern MSICONDITION MsiEvaluateConditionA(MSIHANDLE hInstall, char8* szCondition);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern MSICONDITION MsiEvaluateConditionW(MSIHANDLE hInstall, PWSTR szCondition);
+		public static extern MSICONDITION MsiEvaluateConditionW(MSIHANDLE hInstall, char16* szCondition);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureStateA(MSIHANDLE hInstall, PSTR szFeature, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
+		public static extern uint32 MsiGetFeatureStateA(MSIHANDLE hInstall, char8* szFeature, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureStateW(MSIHANDLE hInstall, PWSTR szFeature, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
+		public static extern uint32 MsiGetFeatureStateW(MSIHANDLE hInstall, char16* szFeature, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetFeatureStateA(MSIHANDLE hInstall, PSTR szFeature, INSTALLSTATE iState);
+		public static extern uint32 MsiSetFeatureStateA(MSIHANDLE hInstall, char8* szFeature, INSTALLSTATE iState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetFeatureStateW(MSIHANDLE hInstall, PWSTR szFeature, INSTALLSTATE iState);
+		public static extern uint32 MsiSetFeatureStateW(MSIHANDLE hInstall, char16* szFeature, INSTALLSTATE iState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetFeatureAttributesA(MSIHANDLE hInstall, PSTR szFeature, uint32 dwAttributes);
+		public static extern uint32 MsiSetFeatureAttributesA(MSIHANDLE hInstall, char8* szFeature, uint32 dwAttributes);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetFeatureAttributesW(MSIHANDLE hInstall, PWSTR szFeature, uint32 dwAttributes);
+		public static extern uint32 MsiSetFeatureAttributesW(MSIHANDLE hInstall, char16* szFeature, uint32 dwAttributes);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetComponentStateA(MSIHANDLE hInstall, PSTR szComponent, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
+		public static extern uint32 MsiGetComponentStateA(MSIHANDLE hInstall, char8* szComponent, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetComponentStateW(MSIHANDLE hInstall, PWSTR szComponent, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
+		public static extern uint32 MsiGetComponentStateW(MSIHANDLE hInstall, char16* szComponent, out INSTALLSTATE piInstalled, out INSTALLSTATE piAction);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetComponentStateA(MSIHANDLE hInstall, PSTR szComponent, INSTALLSTATE iState);
+		public static extern uint32 MsiSetComponentStateA(MSIHANDLE hInstall, char8* szComponent, INSTALLSTATE iState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetComponentStateW(MSIHANDLE hInstall, PWSTR szComponent, INSTALLSTATE iState);
+		public static extern uint32 MsiSetComponentStateW(MSIHANDLE hInstall, char16* szComponent, INSTALLSTATE iState);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureCostA(MSIHANDLE hInstall, PSTR szFeature, MSICOSTTREE iCostTree, INSTALLSTATE iState, out int32 piCost);
+		public static extern uint32 MsiGetFeatureCostA(MSIHANDLE hInstall, char8* szFeature, MSICOSTTREE iCostTree, INSTALLSTATE iState, out int32 piCost);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureCostW(MSIHANDLE hInstall, PWSTR szFeature, MSICOSTTREE iCostTree, INSTALLSTATE iState, out int32 piCost);
+		public static extern uint32 MsiGetFeatureCostW(MSIHANDLE hInstall, char16* szFeature, MSICOSTTREE iCostTree, INSTALLSTATE iState, out int32 piCost);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentCostsA(MSIHANDLE hInstall, PSTR szComponent, uint32 dwIndex, INSTALLSTATE iState, uint8* szDriveBuf, out uint32 pcchDriveBuf, out int32 piCost, out int32 piTempCost);
+		public static extern uint32 MsiEnumComponentCostsA(MSIHANDLE hInstall, char8* szComponent, uint32 dwIndex, INSTALLSTATE iState, uint8* szDriveBuf, out uint32 pcchDriveBuf, out int32 piCost, out int32 piTempCost);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiEnumComponentCostsW(MSIHANDLE hInstall, PWSTR szComponent, uint32 dwIndex, INSTALLSTATE iState, char16* szDriveBuf, out uint32 pcchDriveBuf, out int32 piCost, out int32 piTempCost);
+		public static extern uint32 MsiEnumComponentCostsW(MSIHANDLE hInstall, char16* szComponent, uint32 dwIndex, INSTALLSTATE iState, char16* szDriveBuf, out uint32 pcchDriveBuf, out int32 piCost, out int32 piTempCost);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiSetInstallLevel(MSIHANDLE hInstall, int32 iInstallLevel);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureValidStatesA(MSIHANDLE hInstall, PSTR szFeature, out uint32 lpInstallStates);
+		public static extern uint32 MsiGetFeatureValidStatesA(MSIHANDLE hInstall, char8* szFeature, out uint32 lpInstallStates);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetFeatureValidStatesW(MSIHANDLE hInstall, PWSTR szFeature, out uint32 lpInstallStates);
+		public static extern uint32 MsiGetFeatureValidStatesW(MSIHANDLE hInstall, char16* szFeature, out uint32 lpInstallStates);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetSourcePathA(MSIHANDLE hInstall, PSTR szFolder, uint8* szPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiGetSourcePathA(MSIHANDLE hInstall, char8* szFolder, uint8* szPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetSourcePathW(MSIHANDLE hInstall, PWSTR szFolder, char16* szPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiGetSourcePathW(MSIHANDLE hInstall, char16* szFolder, char16* szPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetTargetPathA(MSIHANDLE hInstall, PSTR szFolder, uint8* szPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiGetTargetPathA(MSIHANDLE hInstall, char8* szFolder, uint8* szPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiGetTargetPathW(MSIHANDLE hInstall, PWSTR szFolder, char16* szPathBuf, uint32* pcchPathBuf);
+		public static extern uint32 MsiGetTargetPathW(MSIHANDLE hInstall, char16* szFolder, char16* szPathBuf, uint32* pcchPathBuf);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetTargetPathA(MSIHANDLE hInstall, PSTR szFolder, PSTR szFolderPath);
+		public static extern uint32 MsiSetTargetPathA(MSIHANDLE hInstall, char8* szFolder, char8* szFolderPath);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiSetTargetPathW(MSIHANDLE hInstall, PWSTR szFolder, PWSTR szFolderPath);
+		public static extern uint32 MsiSetTargetPathW(MSIHANDLE hInstall, char16* szFolder, char16* szFolderPath);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiVerifyDiskSpace(MSIHANDLE hInstall);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 MsiEnableUIPreview(MSIHANDLE hDatabase, out MSIHANDLE phPreview);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiPreviewDialogA(MSIHANDLE hPreview, PSTR szDialogName);
+		public static extern uint32 MsiPreviewDialogA(MSIHANDLE hPreview, char8* szDialogName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiPreviewDialogW(MSIHANDLE hPreview, PWSTR szDialogName);
+		public static extern uint32 MsiPreviewDialogW(MSIHANDLE hPreview, char16* szDialogName);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiPreviewBillboardA(MSIHANDLE hPreview, PSTR szControlName, PSTR szBillboard);
+		public static extern uint32 MsiPreviewBillboardA(MSIHANDLE hPreview, char8* szControlName, char8* szBillboard);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 MsiPreviewBillboardW(MSIHANDLE hPreview, PWSTR szControlName, PWSTR szBillboard);
+		public static extern uint32 MsiPreviewBillboardW(MSIHANDLE hPreview, char16* szControlName, char16* szBillboard);
 		[Import("msi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern MSIHANDLE MsiGetLastErrorRecord();
 		[Import("sfc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SfcGetNextProtectedFile(HANDLE RpcHandle, out PROTECTED_FILE_DATA ProtFileData);
+		public static extern IntBool SfcGetNextProtectedFile(Handle RpcHandle, out PROTECTED_FILE_DATA ProtFileData);
 		[Import("sfc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SfcIsFileProtected(HANDLE RpcHandle, PWSTR ProtFileName);
+		public static extern IntBool SfcIsFileProtected(Handle RpcHandle, char16* ProtFileName);
 		[Import("sfc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SfcIsKeyProtected(HKEY KeyHandle, PWSTR SubKeyName, uint32 KeySam);
+		public static extern IntBool SfcIsKeyProtected(HKey KeyHandle, char16* SubKeyName, uint32 KeySam);
 		[Import("sfc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SfpVerifyFile(PSTR pszFileName, uint8* pszError, uint32 dwErrSize);
+		public static extern IntBool SfpVerifyFile(char8* pszFileName, uint8* pszError, uint32 dwErrSize);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreatePatchFileA(PSTR OldFileName, PSTR NewFileName, PSTR PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData);
+		public static extern IntBool CreatePatchFileA(char8* OldFileName, char8* NewFileName, char8* PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreatePatchFileW(PWSTR OldFileName, PWSTR NewFileName, PWSTR PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData);
+		public static extern IntBool CreatePatchFileW(char16* OldFileName, char16* NewFileName, char16* PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreatePatchFileByHandles(HANDLE OldFileHandle, HANDLE NewFileHandle, HANDLE PatchFileHandle, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData);
+		public static extern IntBool CreatePatchFileByHandles(Handle OldFileHandle, Handle NewFileHandle, Handle PatchFileHandle, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreatePatchFileExA(uint32 OldFileCount, PATCH_OLD_FILE_INFO_A* OldFileInfoArray, PSTR NewFileName, PSTR PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool CreatePatchFileExA(uint32 OldFileCount, PATCH_OLD_FILE_INFO_A* OldFileInfoArray, char8* NewFileName, char8* PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreatePatchFileExW(uint32 OldFileCount, PATCH_OLD_FILE_INFO_W* OldFileInfoArray, PWSTR NewFileName, PWSTR PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool CreatePatchFileExW(uint32 OldFileCount, PATCH_OLD_FILE_INFO_W* OldFileInfoArray, char16* NewFileName, char16* PatchFileName, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreatePatchFileByHandlesEx(uint32 OldFileCount, PATCH_OLD_FILE_INFO_H* OldFileInfoArray, HANDLE NewFileHandle, HANDLE PatchFileHandle, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool CreatePatchFileByHandlesEx(uint32 OldFileCount, PATCH_OLD_FILE_INFO_H* OldFileInfoArray, Handle NewFileHandle, Handle PatchFileHandle, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ExtractPatchHeaderToFileA(PSTR PatchFileName, PSTR PatchHeaderFileName);
+		public static extern IntBool ExtractPatchHeaderToFileA(char8* PatchFileName, char8* PatchHeaderFileName);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ExtractPatchHeaderToFileW(PWSTR PatchFileName, PWSTR PatchHeaderFileName);
+		public static extern IntBool ExtractPatchHeaderToFileW(char16* PatchFileName, char16* PatchHeaderFileName);
 		[Import("mspatchc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ExtractPatchHeaderToFileByHandles(HANDLE PatchFileHandle, HANDLE PatchHeaderFileHandle);
+		public static extern IntBool ExtractPatchHeaderToFileByHandles(Handle PatchFileHandle, Handle PatchHeaderFileHandle);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TestApplyPatchToFileA(PSTR PatchFileName, PSTR OldFileName, uint32 ApplyOptionFlags);
+		public static extern IntBool TestApplyPatchToFileA(char8* PatchFileName, char8* OldFileName, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TestApplyPatchToFileW(PWSTR PatchFileName, PWSTR OldFileName, uint32 ApplyOptionFlags);
+		public static extern IntBool TestApplyPatchToFileW(char16* PatchFileName, char16* OldFileName, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TestApplyPatchToFileByHandles(HANDLE PatchFileHandle, HANDLE OldFileHandle, uint32 ApplyOptionFlags);
+		public static extern IntBool TestApplyPatchToFileByHandles(Handle PatchFileHandle, Handle OldFileHandle, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL TestApplyPatchToFileByBuffers(ref uint8 PatchFileBuffer, uint32 PatchFileSize, uint8* OldFileBuffer, uint32 OldFileSize, uint32* NewFileSize, uint32 ApplyOptionFlags);
+		public static extern IntBool TestApplyPatchToFileByBuffers(ref uint8 PatchFileBuffer, uint32 PatchFileSize, uint8* OldFileBuffer, uint32 OldFileSize, uint32* NewFileSize, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileA(PSTR PatchFileName, PSTR OldFileName, PSTR NewFileName, uint32 ApplyOptionFlags);
+		public static extern IntBool ApplyPatchToFileA(char8* PatchFileName, char8* OldFileName, char8* NewFileName, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileW(PWSTR PatchFileName, PWSTR OldFileName, PWSTR NewFileName, uint32 ApplyOptionFlags);
+		public static extern IntBool ApplyPatchToFileW(char16* PatchFileName, char16* OldFileName, char16* NewFileName, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileByHandles(HANDLE PatchFileHandle, HANDLE OldFileHandle, HANDLE NewFileHandle, uint32 ApplyOptionFlags);
+		public static extern IntBool ApplyPatchToFileByHandles(Handle PatchFileHandle, Handle OldFileHandle, Handle NewFileHandle, uint32 ApplyOptionFlags);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileExA(PSTR PatchFileName, PSTR OldFileName, PSTR NewFileName, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool ApplyPatchToFileExA(char8* PatchFileName, char8* OldFileName, char8* NewFileName, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileExW(PWSTR PatchFileName, PWSTR OldFileName, PWSTR NewFileName, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool ApplyPatchToFileExW(char16* PatchFileName, char16* OldFileName, char16* NewFileName, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileByHandlesEx(HANDLE PatchFileHandle, HANDLE OldFileHandle, HANDLE NewFileHandle, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool ApplyPatchToFileByHandlesEx(Handle PatchFileHandle, Handle OldFileHandle, Handle NewFileHandle, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyPatchToFileByBuffers(ref uint8 PatchFileMapped, uint32 PatchFileSize, uint8* OldFileMapped, uint32 OldFileSize, out uint8* NewFileBuffer, uint32 NewFileBufferSize, uint32* NewFileActualSize, FILETIME* NewFileTime, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
+		public static extern IntBool ApplyPatchToFileByBuffers(ref uint8 PatchFileMapped, uint32 PatchFileSize, uint8* OldFileMapped, uint32 OldFileSize, out uint8* NewFileBuffer, uint32 NewFileBufferSize, uint32* NewFileActualSize, FileTime* NewFileTime, uint32 ApplyOptionFlags, PPATCH_PROGRESS_CALLBACK ProgressCallback, void* CallbackContext);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetFilePatchSignatureA(PSTR FileName, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, PSTR SignatureBuffer);
+		public static extern IntBool GetFilePatchSignatureA(char8* FileName, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, char8* SignatureBuffer);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetFilePatchSignatureW(PWSTR FileName, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, PWSTR SignatureBuffer);
+		public static extern IntBool GetFilePatchSignatureW(char16* FileName, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, char16* SignatureBuffer);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetFilePatchSignatureByHandle(HANDLE FileHandle, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, PSTR SignatureBuffer);
+		public static extern IntBool GetFilePatchSignatureByHandle(Handle FileHandle, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, char8* SignatureBuffer);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetFilePatchSignatureByBuffer(out uint8 FileBufferWritable, uint32 FileSize, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, PSTR SignatureBuffer);
+		public static extern IntBool GetFilePatchSignatureByBuffer(out uint8 FileBufferWritable, uint32 FileSize, uint32 OptionFlags, void* OptionData, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray, uint32 SignatureBufferSize, char8* SignatureBuffer);
 		[Import("mspatcha.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 NormalizeFileForPatchSignature(void* FileBuffer, uint32 FileSize, uint32 OptionFlags, PATCH_OPTION_DATA* OptionData, uint32 NewFileCoffBase, uint32 NewFileCoffTime, uint32 IgnoreRangeCount, PATCH_IGNORE_RANGE* IgnoreRangeArray, uint32 RetainRangeCount, PATCH_RETAIN_RANGE* RetainRangeArray);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeltaInfoB(DELTA_INPUT Delta, out DELTA_HEADER_INFO lpHeaderInfo);
+		public static extern IntBool GetDeltaInfoB(DELTA_INPUT Delta, out DELTA_HEADER_INFO lpHeaderInfo);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeltaInfoA(PSTR lpDeltaName, out DELTA_HEADER_INFO lpHeaderInfo);
+		public static extern IntBool GetDeltaInfoA(char8* lpDeltaName, out DELTA_HEADER_INFO lpHeaderInfo);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeltaInfoW(PWSTR lpDeltaName, out DELTA_HEADER_INFO lpHeaderInfo);
+		public static extern IntBool GetDeltaInfoW(char16* lpDeltaName, out DELTA_HEADER_INFO lpHeaderInfo);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyDeltaGetReverseB(int64 ApplyFlags, DELTA_INPUT Source, DELTA_INPUT Delta, FILETIME* lpReverseFileTime, out DELTA_OUTPUT lpTarget, out DELTA_OUTPUT lpTargetReverse);
+		public static extern IntBool ApplyDeltaGetReverseB(int64 ApplyFlags, DELTA_INPUT Source, DELTA_INPUT Delta, FileTime* lpReverseFileTime, out DELTA_OUTPUT lpTarget, out DELTA_OUTPUT lpTargetReverse);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyDeltaB(int64 ApplyFlags, DELTA_INPUT Source, DELTA_INPUT Delta, out DELTA_OUTPUT lpTarget);
+		public static extern IntBool ApplyDeltaB(int64 ApplyFlags, DELTA_INPUT Source, DELTA_INPUT Delta, out DELTA_OUTPUT lpTarget);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyDeltaProvidedB(int64 ApplyFlags, DELTA_INPUT Source, DELTA_INPUT Delta, void* lpTarget, uint uTargetSize);
+		public static extern IntBool ApplyDeltaProvidedB(int64 ApplyFlags, DELTA_INPUT Source, DELTA_INPUT Delta, void* lpTarget, uint uTargetSize);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyDeltaA(int64 ApplyFlags, PSTR lpSourceName, PSTR lpDeltaName, PSTR lpTargetName);
+		public static extern IntBool ApplyDeltaA(int64 ApplyFlags, char8* lpSourceName, char8* lpDeltaName, char8* lpTargetName);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ApplyDeltaW(int64 ApplyFlags, PWSTR lpSourceName, PWSTR lpDeltaName, PWSTR lpTargetName);
+		public static extern IntBool ApplyDeltaW(int64 ApplyFlags, char16* lpSourceName, char16* lpDeltaName, char16* lpTargetName);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateDeltaB(int64 FileTypeSet, int64 SetFlags, int64 ResetFlags, DELTA_INPUT Source, DELTA_INPUT Target, DELTA_INPUT SourceOptions, DELTA_INPUT TargetOptions, DELTA_INPUT GlobalOptions, FILETIME* lpTargetFileTime, uint32 HashAlgId, out DELTA_OUTPUT lpDelta);
+		public static extern IntBool CreateDeltaB(int64 FileTypeSet, int64 SetFlags, int64 ResetFlags, DELTA_INPUT Source, DELTA_INPUT Target, DELTA_INPUT SourceOptions, DELTA_INPUT TargetOptions, DELTA_INPUT GlobalOptions, FileTime* lpTargetFileTime, uint32 HashAlgId, out DELTA_OUTPUT lpDelta);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateDeltaA(int64 FileTypeSet, int64 SetFlags, int64 ResetFlags, PSTR lpSourceName, PSTR lpTargetName, PSTR lpSourceOptionsName, PSTR lpTargetOptionsName, DELTA_INPUT GlobalOptions, FILETIME* lpTargetFileTime, uint32 HashAlgId, PSTR lpDeltaName);
+		public static extern IntBool CreateDeltaA(int64 FileTypeSet, int64 SetFlags, int64 ResetFlags, char8* lpSourceName, char8* lpTargetName, char8* lpSourceOptionsName, char8* lpTargetOptionsName, DELTA_INPUT GlobalOptions, FileTime* lpTargetFileTime, uint32 HashAlgId, char8* lpDeltaName);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CreateDeltaW(int64 FileTypeSet, int64 SetFlags, int64 ResetFlags, PWSTR lpSourceName, PWSTR lpTargetName, PWSTR lpSourceOptionsName, PWSTR lpTargetOptionsName, DELTA_INPUT GlobalOptions, FILETIME* lpTargetFileTime, uint32 HashAlgId, PWSTR lpDeltaName);
+		public static extern IntBool CreateDeltaW(int64 FileTypeSet, int64 SetFlags, int64 ResetFlags, char16* lpSourceName, char16* lpTargetName, char16* lpSourceOptionsName, char16* lpTargetOptionsName, DELTA_INPUT GlobalOptions, FileTime* lpTargetFileTime, uint32 HashAlgId, char16* lpDeltaName);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeltaSignatureB(int64 FileTypeSet, uint32 HashAlgId, DELTA_INPUT Source, out DELTA_HASH lpHash);
+		public static extern IntBool GetDeltaSignatureB(int64 FileTypeSet, uint32 HashAlgId, DELTA_INPUT Source, out DELTA_HASH lpHash);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeltaSignatureA(int64 FileTypeSet, uint32 HashAlgId, PSTR lpSourceName, out DELTA_HASH lpHash);
+		public static extern IntBool GetDeltaSignatureA(int64 FileTypeSet, uint32 HashAlgId, char8* lpSourceName, out DELTA_HASH lpHash);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetDeltaSignatureW(int64 FileTypeSet, uint32 HashAlgId, PWSTR lpSourceName, out DELTA_HASH lpHash);
+		public static extern IntBool GetDeltaSignatureW(int64 FileTypeSet, uint32 HashAlgId, char16* lpSourceName, out DELTA_HASH lpHash);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeltaNormalizeProvidedB(int64 FileTypeSet, int64 NormalizeFlags, DELTA_INPUT NormalizeOptions, void* lpSource, uint uSourceSize);
+		public static extern IntBool DeltaNormalizeProvidedB(int64 FileTypeSet, int64 NormalizeFlags, DELTA_INPUT NormalizeOptions, void* lpSource, uint uSourceSize);
 		[Import("msdelta.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeltaFree(void* lpMemory);
+		public static extern IntBool DeltaFree(void* lpMemory);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateActCtxA(ref ACTCTXA pActCtx);
+		public static extern Handle CreateActCtxA(ref ACTCTXA pActCtx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE CreateActCtxW(ref ACTCTXW pActCtx);
+		public static extern Handle CreateActCtxW(ref ACTCTXW pActCtx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void AddRefActCtx(HANDLE hActCtx);
+		public static extern void AddRefActCtx(Handle hActCtx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern void ReleaseActCtx(HANDLE hActCtx);
+		public static extern void ReleaseActCtx(Handle hActCtx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ZombifyActCtx(HANDLE hActCtx);
+		public static extern IntBool ZombifyActCtx(Handle hActCtx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL ActivateActCtx(HANDLE hActCtx, out uint lpCookie);
+		public static extern IntBool ActivateActCtx(Handle hActCtx, out uint lpCookie);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL DeactivateActCtx(uint32 dwFlags, uint ulCookie);
+		public static extern IntBool DeactivateActCtx(uint32 dwFlags, uint ulCookie);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL GetCurrentActCtx(out HANDLE lphActCtx);
+		public static extern IntBool GetCurrentActCtx(out Handle lphActCtx);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FindActCtxSectionStringA(uint32 dwFlags, in Guid lpExtensionGuid, uint32 ulSectionId, PSTR lpStringToFind, out ACTCTX_SECTION_KEYED_DATA ReturnedData);
+		public static extern IntBool FindActCtxSectionStringA(uint32 dwFlags, in Guid lpExtensionGuid, uint32 ulSectionId, char8* lpStringToFind, out ACTCTX_SECTION_KEYED_DATA ReturnedData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FindActCtxSectionStringW(uint32 dwFlags, in Guid lpExtensionGuid, uint32 ulSectionId, PWSTR lpStringToFind, out ACTCTX_SECTION_KEYED_DATA ReturnedData);
+		public static extern IntBool FindActCtxSectionStringW(uint32 dwFlags, in Guid lpExtensionGuid, uint32 ulSectionId, char16* lpStringToFind, out ACTCTX_SECTION_KEYED_DATA ReturnedData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL FindActCtxSectionGuid(uint32 dwFlags, in Guid lpExtensionGuid, uint32 ulSectionId, Guid* lpGuidToFind, out ACTCTX_SECTION_KEYED_DATA ReturnedData);
+		public static extern IntBool FindActCtxSectionGuid(uint32 dwFlags, in Guid lpExtensionGuid, uint32 ulSectionId, Guid* lpGuidToFind, out ACTCTX_SECTION_KEYED_DATA ReturnedData);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryActCtxW(uint32 dwFlags, HANDLE hActCtx, void* pvSubInstance, uint32 ulInfoClass, void* pvBuffer, uint cbBuffer, uint* pcbWrittenOrRequired);
+		public static extern IntBool QueryActCtxW(uint32 dwFlags, Handle hActCtx, void* pvSubInstance, uint32 ulInfoClass, void* pvBuffer, uint cbBuffer, uint* pcbWrittenOrRequired);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL QueryActCtxSettingsW(uint32 dwFlags, HANDLE hActCtx, PWSTR settingsNameSpace, PWSTR settingName, PWSTR pvBuffer, uint dwBuffer, uint* pdwWrittenOrRequired);
+		public static extern IntBool QueryActCtxSettingsW(uint32 dwFlags, Handle hActCtx, char16* settingsNameSpace, char16* settingName, char16* pvBuffer, uint dwBuffer, uint* pdwWrittenOrRequired);
 	}
 }

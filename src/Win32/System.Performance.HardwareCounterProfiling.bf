@@ -39,12 +39,12 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 EnableThreadProfiling(HANDLE ThreadHandle, uint32 Flags, uint64 HardwareCounters, out HANDLE PerformanceDataHandle);
+		public static extern uint32 EnableThreadProfiling(Handle ThreadHandle, uint32 Flags, uint64 HardwareCounters, out Handle PerformanceDataHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 DisableThreadProfiling(HANDLE PerformanceDataHandle);
+		public static extern uint32 DisableThreadProfiling(Handle PerformanceDataHandle);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 QueryThreadProfiling(HANDLE ThreadHandle, out BOOLEAN Enabled);
+		public static extern uint32 QueryThreadProfiling(Handle ThreadHandle, out bool Enabled);
 		[Import("kernel32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 ReadThreadProfilingData(HANDLE PerformanceDataHandle, uint32 Flags, out PERFORMANCE_DATA PerformanceData);
+		public static extern uint32 ReadThreadProfilingData(Handle PerformanceDataHandle, uint32 Flags, out PERFORMANCE_DATA PerformanceData);
 	}
 }

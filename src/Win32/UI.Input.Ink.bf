@@ -28,12 +28,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnCommitRequested() mut => VT.OnCommitRequested(ref this);
+			public HResult OnCommitRequested() mut => VT.OnCommitRequested(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkCommitRequestHandler self) OnCommitRequested;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkCommitRequestHandler self) OnCommitRequested;
 			}
 		}
 		[CRepr]
@@ -43,20 +43,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetRootVisual(ref IUnknown rootVisual, ref IUnknown device) mut => VT.SetRootVisual(ref this, ref rootVisual, ref device);
-			public HRESULT SetCommitRequestHandler(ref IInkCommitRequestHandler handler) mut => VT.SetCommitRequestHandler(ref this, ref handler);
-			public HRESULT GetSize(out float width, out float height) mut => VT.GetSize(ref this, out width, out height);
-			public HRESULT SetSize(float width, float height) mut => VT.SetSize(ref this, width, height);
-			public HRESULT OnHighContrastChanged() mut => VT.OnHighContrastChanged(ref this);
+			public HResult SetRootVisual(ref IUnknown rootVisual, ref IUnknown device) mut => VT.SetRootVisual(ref this, ref rootVisual, ref device);
+			public HResult SetCommitRequestHandler(ref IInkCommitRequestHandler handler) mut => VT.SetCommitRequestHandler(ref this, ref handler);
+			public HResult GetSize(out float width, out float height) mut => VT.GetSize(ref this, out width, out height);
+			public HResult SetSize(float width, float height) mut => VT.SetSize(ref this, width, height);
+			public HResult OnHighContrastChanged() mut => VT.OnHighContrastChanged(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkPresenterDesktop self, ref IUnknown rootVisual, ref IUnknown device) SetRootVisual;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkPresenterDesktop self, ref IInkCommitRequestHandler handler) SetCommitRequestHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkPresenterDesktop self, out float width, out float height) GetSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkPresenterDesktop self, float width, float height) SetSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkPresenterDesktop self) OnHighContrastChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkPresenterDesktop self, ref IUnknown rootVisual, ref IUnknown device) SetRootVisual;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkPresenterDesktop self, ref IInkCommitRequestHandler handler) SetCommitRequestHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkPresenterDesktop self, out float width, out float height) GetSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkPresenterDesktop self, float width, float height) SetSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkPresenterDesktop self) OnHighContrastChanged;
 			}
 		}
 		[CRepr]
@@ -66,12 +66,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Invoke() mut => VT.Invoke(ref this);
+			public HResult Invoke() mut => VT.Invoke(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkHostWorkItem self) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkHostWorkItem self) Invoke;
 			}
 		}
 		[CRepr]
@@ -81,16 +81,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT QueueWorkItem(ref IInkHostWorkItem workItem) mut => VT.QueueWorkItem(ref this, ref workItem);
-			public HRESULT CreateInkPresenter(in Guid riid, void** ppv) mut => VT.CreateInkPresenter(ref this, riid, ppv);
-			public HRESULT CreateAndInitializeInkPresenter(ref IUnknown rootVisual, float width, float height, in Guid riid, void** ppv) mut => VT.CreateAndInitializeInkPresenter(ref this, ref rootVisual, width, height, riid, ppv);
+			public HResult QueueWorkItem(ref IInkHostWorkItem workItem) mut => VT.QueueWorkItem(ref this, ref workItem);
+			public HResult CreateInkPresenter(in Guid riid, void** ppv) mut => VT.CreateInkPresenter(ref this, riid, ppv);
+			public HResult CreateAndInitializeInkPresenter(ref IUnknown rootVisual, float width, float height, in Guid riid, void** ppv) mut => VT.CreateAndInitializeInkPresenter(ref this, ref rootVisual, width, height, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkDesktopHost self, ref IInkHostWorkItem workItem) QueueWorkItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkDesktopHost self, in Guid riid, void** ppv) CreateInkPresenter;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkDesktopHost self, ref IUnknown rootVisual, float width, float height, in Guid riid, void** ppv) CreateAndInitializeInkPresenter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkDesktopHost self, ref IInkHostWorkItem workItem) QueueWorkItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkDesktopHost self, in Guid riid, void** ppv) CreateInkPresenter;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkDesktopHost self, ref IUnknown rootVisual, float width, float height, in Guid riid, void** ppv) CreateAndInitializeInkPresenter;
 			}
 		}
 		[CRepr]
@@ -100,12 +100,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Draw(ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, BOOL fHighContrast) mut => VT.Draw(ref this, ref pD2D1DeviceContext, ref pInkStrokeIterable, fHighContrast);
+			public HResult Draw(ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, IntBool fHighContrast) mut => VT.Draw(ref this, ref pD2D1DeviceContext, ref pInkStrokeIterable, fHighContrast);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkD2DRenderer self, ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, BOOL fHighContrast) Draw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkD2DRenderer self, ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, IntBool fHighContrast) Draw;
 			}
 		}
 		[CRepr]
@@ -115,12 +115,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Draw(ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, INK_HIGH_CONTRAST_ADJUSTMENT highContrastAdjustment) mut => VT.Draw(ref this, ref pD2D1DeviceContext, ref pInkStrokeIterable, highContrastAdjustment);
+			public HResult Draw(ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, INK_HIGH_CONTRAST_ADJUSTMENT highContrastAdjustment) mut => VT.Draw(ref this, ref pD2D1DeviceContext, ref pInkStrokeIterable, highContrastAdjustment);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IInkD2DRenderer2 self, ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, INK_HIGH_CONTRAST_ADJUSTMENT highContrastAdjustment) Draw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IInkD2DRenderer2 self, ref IUnknown pD2D1DeviceContext, ref IUnknown pInkStrokeIterable, INK_HIGH_CONTRAST_ADJUSTMENT highContrastAdjustment) Draw;
 			}
 		}
 		

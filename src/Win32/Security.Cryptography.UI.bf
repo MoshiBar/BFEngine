@@ -212,10 +212,10 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL PFNCMFILTERPROC(in CERT_CONTEXT pCertContext, LPARAM param1, uint32 param2, uint32 param3);
-		public function uint32 PFNCMHOOKPROC(HWND hwndDialog, uint32 message, WPARAM wParam, LPARAM lParam);
-		public function HRESULT PFNTRUSTHELPER(in CERT_CONTEXT pCertContext, LPARAM lCustData, BOOL fLeafCertificate, out uint8 pbTrustBlob);
-		public function BOOL PFNCFILTERPROC(in CERT_CONTEXT pCertContext, out BOOL pfInitialSelectedCert, void* pvCallbackData);
+		public function IntBool PFNCMFILTERPROC(in CERT_CONTEXT pCertContext, LPARAM param1, uint32 param2, uint32 param3);
+		public function uint32 PFNCMHOOKPROC(HWnd hwndDialog, uint32 message, WPARAM wParam, LPARAM lParam);
+		public function HResult PFNTRUSTHELPER(in CERT_CONTEXT pCertContext, LPARAM lCustData, IntBool fLeafCertificate, out uint8 pbTrustBlob);
+		public function IntBool PFNCFILTERPROC(in CERT_CONTEXT pCertContext, out IntBool pfInitialSelectedCert, void* pvCallbackData);
 		
 		// --- Structs ---
 		
@@ -223,20 +223,20 @@ namespace Win32
 		public struct CERT_SELECT_STRUCT_A
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public HINSTANCE hInstance;
-			public PSTR pTemplateName;
+			public char8* pTemplateName;
 			public CERT_SELECT_STRUCT_FLAGS dwFlags;
-			public PSTR szTitle;
+			public char8* szTitle;
 			public uint32 cCertStore;
 			public void** arrayCertStore;
-			public PSTR szPurposeOid;
+			public char8* szPurposeOid;
 			public uint32 cCertContext;
 			public CERT_CONTEXT** arrayCertContext;
 			public LPARAM lCustData;
 			public PFNCMHOOKPROC pfnHook;
 			public PFNCMFILTERPROC pfnFilter;
-			public PSTR szHelpFileName;
+			public char8* szHelpFileName;
 			public uint32 dwHelpId;
 			public uint hprov;
 		}
@@ -244,20 +244,20 @@ namespace Win32
 		public struct CERT_SELECT_STRUCT_W
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public HINSTANCE hInstance;
-			public PWSTR pTemplateName;
+			public char16* pTemplateName;
 			public CERT_SELECT_STRUCT_FLAGS dwFlags;
-			public PWSTR szTitle;
+			public char16* szTitle;
 			public uint32 cCertStore;
 			public void** arrayCertStore;
-			public PSTR szPurposeOid;
+			public char8* szPurposeOid;
 			public uint32 cCertContext;
 			public CERT_CONTEXT** arrayCertContext;
 			public LPARAM lCustData;
 			public PFNCMHOOKPROC pfnHook;
 			public PFNCMFILTERPROC pfnFilter;
-			public PWSTR szHelpFileName;
+			public char16* szHelpFileName;
 			public uint32 dwHelpId;
 			public uint hprov;
 		}
@@ -265,10 +265,10 @@ namespace Win32
 		public struct CERT_VIEWPROPERTIES_STRUCT_A
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public HINSTANCE hInstance;
 			public CERT_VIEWPROPERTIES_STRUCT_FLAGS dwFlags;
-			public PSTR szTitle;
+			public char8* szTitle;
 			public CERT_CONTEXT* pCertContext;
 			public PSTR* arrayPurposes;
 			public uint32 cArrayPurposes;
@@ -281,7 +281,7 @@ namespace Win32
 			public uint hprov;
 			public LPARAM lCustData;
 			public uint32 dwPad;
-			public PSTR szHelpFileName;
+			public char8* szHelpFileName;
 			public uint32 dwHelpId;
 			public uint32 nStartPage;
 			public uint32 cArrayPropSheetPages;
@@ -291,10 +291,10 @@ namespace Win32
 		public struct CERT_VIEWPROPERTIES_STRUCT_W
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public HINSTANCE hInstance;
 			public CERT_VIEWPROPERTIES_STRUCT_FLAGS dwFlags;
-			public PWSTR szTitle;
+			public char16* szTitle;
 			public CERT_CONTEXT* pCertContext;
 			public PSTR* arrayPurposes;
 			public uint32 cArrayPurposes;
@@ -307,7 +307,7 @@ namespace Win32
 			public uint hprov;
 			public LPARAM lCustData;
 			public uint32 dwPad;
-			public PWSTR szHelpFileName;
+			public char16* szHelpFileName;
 			public uint32 dwHelpId;
 			public uint32 nStartPage;
 			public uint32 cArrayPropSheetPages;
@@ -316,7 +316,7 @@ namespace Win32
 		[CRepr]
 		public struct CMOID
 		{
-			public PSTR szExtensionOID;
+			public char8* szExtensionOID;
 			public uint32 dwTestOperation;
 			public uint8* pbTestData;
 			public uint32 cbTestData;
@@ -337,7 +337,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwIgnoreErr;
 			public uint32* pdwErrors;
-			public PSTR pszUsageOid;
+			public char8* pszUsageOid;
 			public uint hprov;
 			public uint32 cRootStores;
 			public void** rghstoreRoots;
@@ -370,10 +370,10 @@ namespace Win32
 		public struct CRYPTUI_CERT_MGR_STRUCT
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public uint32 dwFlags;
-			public PWSTR pwszTitle;
-			public PSTR pszInitUsageOID;
+			public char16* pwszTitle;
+			public char8* pszInitUsageOID;
 		}
 		[CRepr]
 		public struct CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO
@@ -382,7 +382,7 @@ namespace Win32
 			public Guid* pGuidSubject;
 			public uint32 cbBlob;
 			public uint8* pbBlob;
-			public PWSTR pwszDisplayName;
+			public char16* pwszDisplayName;
 		}
 		[CRepr]
 		public struct CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO
@@ -397,15 +397,15 @@ namespace Win32
 		public struct CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO
 		{
 			public uint32 dwSize;
-			public PWSTR pwszPvkFileName;
-			public PWSTR pwszProvName;
+			public char16* pwszPvkFileName;
+			public char16* pwszProvName;
 			public uint32 dwProvType;
 		}
 		[CRepr]
 		public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO
 		{
 			public uint32 dwSize;
-			public PWSTR pwszSigningCertFileName;
+			public char16* pwszSigningCertFileName;
 			public CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION dwPvkChoice;
 			public _Anonymous_e__Union Anonymous;
 			
@@ -421,10 +421,10 @@ namespace Win32
 		{
 			public uint32 dwSize;
 			public CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE dwAttrFlags;
-			public PWSTR pwszDescription;
-			public PWSTR pwszMoreInfoLocation;
-			public PSTR pszHashAlg;
-			public PWSTR pwszSigningCertDisplayString;
+			public char16* pwszDescription;
+			public char16* pwszMoreInfoLocation;
+			public char8* pszHashAlg;
+			public char16* pwszSigningCertDisplayString;
 			public void* hAdditionalCertStore;
 			public CRYPT_ATTRIBUTES* psAuthenticated;
 			public CRYPT_ATTRIBUTES* psUnauthenticated;
@@ -437,7 +437,7 @@ namespace Win32
 			public _Anonymous1_e__Union Anonymous1;
 			public CRYPTUI_WIZ_DIGITAL_SIGN dwSigningCertChoice;
 			public _Anonymous2_e__Union Anonymous2;
-			public PWSTR pwszTimestampURL;
+			public char16* pwszTimestampURL;
 			public CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE dwAdditionalCertChoice;
 			public CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO* pSignExtInfo;
 			
@@ -451,7 +451,7 @@ namespace Win32
 			[CRepr, Union]
 			public struct _Anonymous1_e__Union
 			{
-				public PWSTR pwszFileName;
+				public char16* pwszFileName;
 				public CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO* pSignBlobInfo;
 			}
 		}
@@ -472,17 +472,17 @@ namespace Win32
 		public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public CRYPTUI_VIEWCERTIFICATE_FLAGS dwFlags;
-			public PWSTR szTitle;
+			public char16* szTitle;
 			public CERT_CONTEXT* pCertContext;
 			public PSTR* rgszPurposes;
 			public uint32 cPurposes;
 			public _Anonymous_e__Union Anonymous;
-			public BOOL fpCryptProviderDataTrustedUsage;
+			public IntBool fpCryptProviderDataTrustedUsage;
 			public uint32 idxSigner;
 			public uint32 idxCert;
-			public BOOL fCounterSigner;
+			public IntBool fCounterSigner;
 			public uint32 idxCounterSigner;
 			public uint32 cStores;
 			public void** rghStores;
@@ -494,24 +494,24 @@ namespace Win32
 			public struct _Anonymous_e__Union
 			{
 				public CRYPT_PROVIDER_DATA* pCryptProviderData;
-				public HANDLE hWVTStateData;
+				public Handle hWVTStateData;
 			}
 		}
 		[CRepr]
 		public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA
 		{
 			public uint32 dwSize;
-			public HWND hwndParent;
+			public HWnd hwndParent;
 			public CRYPTUI_VIEWCERTIFICATE_FLAGS dwFlags;
-			public PSTR szTitle;
+			public char8* szTitle;
 			public CERT_CONTEXT* pCertContext;
 			public PSTR* rgszPurposes;
 			public uint32 cPurposes;
 			public _Anonymous_e__Union Anonymous;
-			public BOOL fpCryptProviderDataTrustedUsage;
+			public IntBool fpCryptProviderDataTrustedUsage;
 			public uint32 idxSigner;
 			public uint32 idxCert;
-			public BOOL fCounterSigner;
+			public IntBool fCounterSigner;
 			public uint32 idxCounterSigner;
 			public uint32 cStores;
 			public void** rghStores;
@@ -523,14 +523,14 @@ namespace Win32
 			public struct _Anonymous_e__Union
 			{
 				public CRYPT_PROVIDER_DATA* pCryptProviderData;
-				public HANDLE hWVTStateData;
+				public Handle hWVTStateData;
 			}
 		}
 		[CRepr]
 		public struct CRYPTUI_WIZ_EXPORT_INFO
 		{
 			public uint32 dwSize;
-			public PWSTR pwszExportFileName;
+			public char16* pwszExportFileName;
 			public CRYPTUI_WIZ_EXPORT_SUBJECT dwSubjectChoice;
 			public _Anonymous_e__Union Anonymous;
 			public uint32 cStores;
@@ -550,10 +550,10 @@ namespace Win32
 		{
 			public uint32 dwSize;
 			public CRYPTUI_WIZ_EXPORT_FORMAT dwExportFormat;
-			public BOOL fExportChain;
-			public BOOL fExportPrivateKeys;
-			public PWSTR pwszPassword;
-			public BOOL fStrongEncryption;
+			public IntBool fExportChain;
+			public IntBool fExportPrivateKeys;
+			public char16* pwszPassword;
+			public IntBool fStrongEncryption;
 		}
 		[CRepr]
 		public struct CRYPTUI_WIZ_IMPORT_SRC_INFO
@@ -562,12 +562,12 @@ namespace Win32
 			public CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION dwSubjectChoice;
 			public _Anonymous_e__Union Anonymous;
 			public CRYPT_KEY_FLAGS dwFlags;
-			public PWSTR pwszPassword;
+			public char16* pwszPassword;
 			
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
 			{
-				public PWSTR pwszFileName;
+				public char16* pwszFileName;
 				public CERT_CONTEXT* pCertContext;
 				public CTL_CONTEXT* pCTLContext;
 				public CRL_CONTEXT* pCRLContext;
@@ -578,24 +578,24 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIDlgViewContext(uint32 dwContextType, void* pvContext, HWND hwnd, PWSTR pwszTitle, uint32 dwFlags, void* pvReserved);
+		public static extern IntBool CryptUIDlgViewContext(uint32 dwContextType, void* pvContext, HWnd hwnd, char16* pwszTitle, uint32 dwFlags, void* pvReserved);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern CERT_CONTEXT* CryptUIDlgSelectCertificateFromStore(void* hCertStore, HWND hwnd, PWSTR pwszTitle, PWSTR pwszDisplayString, uint32 dwDontUseColumn, uint32 dwFlags, void* pvReserved);
+		public static extern CERT_CONTEXT* CryptUIDlgSelectCertificateFromStore(void* hCertStore, HWnd hwnd, char16* pwszTitle, char16* pwszDisplayString, uint32 dwDontUseColumn, uint32 dwFlags, void* pvReserved);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CertSelectionGetSerializedBlob(ref CERT_SELECTUI_INPUT pcsi, void** ppOutBuffer, out uint32 pulOutBufferSize);
+		public static extern HResult CertSelectionGetSerializedBlob(ref CERT_SELECTUI_INPUT pcsi, void** ppOutBuffer, out uint32 pulOutBufferSize);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIDlgCertMgr(ref CRYPTUI_CERT_MGR_STRUCT pCryptUICertMgr);
+		public static extern IntBool CryptUIDlgCertMgr(ref CRYPTUI_CERT_MGR_STRUCT pCryptUICertMgr);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIWizDigitalSign(uint32 dwFlags, HWND hwndParent, PWSTR pwszWizardTitle, ref CRYPTUI_WIZ_DIGITAL_SIGN_INFO pDigitalSignInfo, CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT** ppSignContext);
+		public static extern IntBool CryptUIWizDigitalSign(uint32 dwFlags, HWnd hwndParent, char16* pwszWizardTitle, ref CRYPTUI_WIZ_DIGITAL_SIGN_INFO pDigitalSignInfo, CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT** ppSignContext);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIWizFreeDigitalSignContext(ref CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT pSignContext);
+		public static extern IntBool CryptUIWizFreeDigitalSignContext(ref CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT pSignContext);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIDlgViewCertificateW(ref CRYPTUI_VIEWCERTIFICATE_STRUCTW pCertViewInfo, out BOOL pfPropertiesChanged);
+		public static extern IntBool CryptUIDlgViewCertificateW(ref CRYPTUI_VIEWCERTIFICATE_STRUCTW pCertViewInfo, out IntBool pfPropertiesChanged);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIDlgViewCertificateA(ref CRYPTUI_VIEWCERTIFICATE_STRUCTA pCertViewInfo, out BOOL pfPropertiesChanged);
+		public static extern IntBool CryptUIDlgViewCertificateA(ref CRYPTUI_VIEWCERTIFICATE_STRUCTA pCertViewInfo, out IntBool pfPropertiesChanged);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIWizExport(CRYPTUI_WIZ_FLAGS dwFlags, HWND hwndParent, PWSTR pwszWizardTitle, ref CRYPTUI_WIZ_EXPORT_INFO pExportInfo, void* pvoid);
+		public static extern IntBool CryptUIWizExport(CRYPTUI_WIZ_FLAGS dwFlags, HWnd hwndParent, char16* pwszWizardTitle, ref CRYPTUI_WIZ_EXPORT_INFO pExportInfo, void* pvoid);
 		[Import("cryptui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL CryptUIWizImport(CRYPTUI_WIZ_FLAGS dwFlags, HWND hwndParent, PWSTR pwszWizardTitle, CRYPTUI_WIZ_IMPORT_SRC_INFO* pImportSrc, void* hDestCertStore);
+		public static extern IntBool CryptUIWizImport(CRYPTUI_WIZ_FLAGS dwFlags, HWnd hwndParent, char16* pwszWizardTitle, CRYPTUI_WIZ_IMPORT_SRC_INFO* pImportSrc, void* hDestCertStore);
 	}
 }

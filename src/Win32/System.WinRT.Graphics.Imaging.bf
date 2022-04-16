@@ -18,12 +18,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetData(in Guid riid, void** ppv) mut => VT.GetData(ref this, riid, ppv);
+			public HResult GetData(in Guid riid, void** ppv) mut => VT.GetData(ref this, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftwareBitmapNative self, in Guid riid, void** ppv) GetData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftwareBitmapNative self, in Guid riid, void** ppv) GetData;
 			}
 		}
 		[CRepr]
@@ -33,14 +33,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateFromWICBitmap(ref IWICBitmap data, BOOL forceReadOnly, in Guid riid, void** ppv) mut => VT.CreateFromWICBitmap(ref this, ref data, forceReadOnly, riid, ppv);
-			public HRESULT CreateFromMF2DBuffer2(ref IMF2DBuffer2 data, in Guid subtype, uint32 width, uint32 height, BOOL forceReadOnly, MFVideoArea* minDisplayAperture, in Guid riid, void** ppv) mut => VT.CreateFromMF2DBuffer2(ref this, ref data, subtype, width, height, forceReadOnly, minDisplayAperture, riid, ppv);
+			public HResult CreateFromWICBitmap(ref IWICBitmap data, IntBool forceReadOnly, in Guid riid, void** ppv) mut => VT.CreateFromWICBitmap(ref this, ref data, forceReadOnly, riid, ppv);
+			public HResult CreateFromMF2DBuffer2(ref IMF2DBuffer2 data, in Guid subtype, uint32 width, uint32 height, IntBool forceReadOnly, MFVideoArea* minDisplayAperture, in Guid riid, void** ppv) mut => VT.CreateFromMF2DBuffer2(ref this, ref data, subtype, width, height, forceReadOnly, minDisplayAperture, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IInspectable.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftwareBitmapNativeFactory self, ref IWICBitmap data, BOOL forceReadOnly, in Guid riid, void** ppv) CreateFromWICBitmap;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ISoftwareBitmapNativeFactory self, ref IMF2DBuffer2 data, in Guid subtype, uint32 width, uint32 height, BOOL forceReadOnly, MFVideoArea* minDisplayAperture, in Guid riid, void** ppv) CreateFromMF2DBuffer2;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftwareBitmapNativeFactory self, ref IWICBitmap data, IntBool forceReadOnly, in Guid riid, void** ppv) CreateFromWICBitmap;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ISoftwareBitmapNativeFactory self, ref IMF2DBuffer2 data, in Guid subtype, uint32 width, uint32 height, IntBool forceReadOnly, MFVideoArea* minDisplayAperture, in Guid riid, void** ppv) CreateFromMF2DBuffer2;
 			}
 		}
 		

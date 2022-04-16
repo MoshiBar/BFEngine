@@ -1,4 +1,8 @@
 using System;
+using static Win32.Media.Multimedia;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Media
 namespace Win32
@@ -201,18 +205,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTime(out int64 pTime) mut => VT.GetTime(ref this, out pTime);
-			public HRESULT AdviseTime(int64 baseTime, int64 streamTime, HANDLE hEvent, out uint pdwAdviseCookie) mut => VT.AdviseTime(ref this, baseTime, streamTime, hEvent, out pdwAdviseCookie);
-			public HRESULT AdvisePeriodic(int64 startTime, int64 periodTime, HANDLE hSemaphore, out uint pdwAdviseCookie) mut => VT.AdvisePeriodic(ref this, startTime, periodTime, hSemaphore, out pdwAdviseCookie);
-			public HRESULT Unadvise(uint dwAdviseCookie) mut => VT.Unadvise(ref this, dwAdviseCookie);
+			public HResult GetTime(out int64 pTime) mut => VT.GetTime(ref this, out pTime);
+			public HResult AdviseTime(int64 baseTime, int64 streamTime, Handle hEvent, out uint pdwAdviseCookie) mut => VT.AdviseTime(ref this, baseTime, streamTime, hEvent, out pdwAdviseCookie);
+			public HResult AdvisePeriodic(int64 startTime, int64 periodTime, Handle hSemaphore, out uint pdwAdviseCookie) mut => VT.AdvisePeriodic(ref this, startTime, periodTime, hSemaphore, out pdwAdviseCookie);
+			public HResult Unadvise(uint dwAdviseCookie) mut => VT.Unadvise(ref this, dwAdviseCookie);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReferenceClock self, out int64 pTime) GetTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReferenceClock self, int64 baseTime, int64 streamTime, HANDLE hEvent, out uint pdwAdviseCookie) AdviseTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReferenceClock self, int64 startTime, int64 periodTime, HANDLE hSemaphore, out uint pdwAdviseCookie) AdvisePeriodic;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReferenceClock self, uint dwAdviseCookie) Unadvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReferenceClock self, out int64 pTime) GetTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReferenceClock self, int64 baseTime, int64 streamTime, Handle hEvent, out uint pdwAdviseCookie) AdviseTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReferenceClock self, int64 startTime, int64 periodTime, Handle hSemaphore, out uint pdwAdviseCookie) AdvisePeriodic;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReferenceClock self, uint dwAdviseCookie) Unadvise;
 			}
 		}
 		[CRepr]
@@ -222,14 +226,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetDefaultTimerResolution(int64 timerResolution) mut => VT.SetDefaultTimerResolution(ref this, timerResolution);
-			public HRESULT GetDefaultTimerResolution(out int64 pTimerResolution) mut => VT.GetDefaultTimerResolution(ref this, out pTimerResolution);
+			public HResult SetDefaultTimerResolution(int64 timerResolution) mut => VT.SetDefaultTimerResolution(ref this, timerResolution);
+			public HResult GetDefaultTimerResolution(out int64 pTimerResolution) mut => VT.GetDefaultTimerResolution(ref this, out pTimerResolution);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReferenceClockTimerControl self, int64 timerResolution) SetDefaultTimerResolution;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IReferenceClockTimerControl self, out int64 pTimerResolution) GetDefaultTimerResolution;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReferenceClockTimerControl self, int64 timerResolution) SetDefaultTimerResolution;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IReferenceClockTimerControl self, out int64 pTimerResolution) GetDefaultTimerResolution;
 			}
 		}
 		[CRepr]

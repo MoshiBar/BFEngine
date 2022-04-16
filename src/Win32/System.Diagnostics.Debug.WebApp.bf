@@ -7,8 +7,8 @@ namespace Win32
 	{
 		// --- Function Pointers ---
 		
-		public function HRESULT RegisterAuthoringClientFunctionType(ref IWebApplicationAuthoringMode authoringModeObject, ref IWebApplicationHost host);
-		public function HRESULT UnregisterAuthoringClientFunctionType(ref IWebApplicationHost host);
+		public function HResult RegisterAuthoringClientFunctionType(ref IWebApplicationAuthoringMode authoringModeObject, ref IWebApplicationHost host);
+		public function HResult UnregisterAuthoringClientFunctionType(ref IWebApplicationHost host);
 		
 		// --- COM Interfaces ---
 		
@@ -19,14 +19,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeforeScriptExecute(ref IHTMLWindow2 htmlWindow) mut => VT.BeforeScriptExecute(ref this, ref htmlWindow);
-			public HRESULT ScriptError(IHTMLWindow2* htmlWindow, ref IActiveScriptError scriptError, PWSTR url, BOOL errorHandled) mut => VT.ScriptError(ref this, htmlWindow, ref scriptError, url, errorHandled);
+			public HResult BeforeScriptExecute(ref IHTMLWindow2 htmlWindow) mut => VT.BeforeScriptExecute(ref this, ref htmlWindow);
+			public HResult ScriptError(IHTMLWindow2* htmlWindow, ref IActiveScriptError scriptError, char16* url, IntBool errorHandled) mut => VT.ScriptError(ref this, htmlWindow, ref scriptError, url, errorHandled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationScriptEvents self, ref IHTMLWindow2 htmlWindow) BeforeScriptExecute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationScriptEvents self, IHTMLWindow2* htmlWindow, ref IActiveScriptError scriptError, PWSTR url, BOOL errorHandled) ScriptError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationScriptEvents self, ref IHTMLWindow2 htmlWindow) BeforeScriptExecute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationScriptEvents self, IHTMLWindow2* htmlWindow, ref IActiveScriptError scriptError, char16* url, IntBool errorHandled) ScriptError;
 			}
 		}
 		[CRepr]
@@ -36,22 +36,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT BeforeNavigate(ref IHTMLWindow2 htmlWindow, PWSTR url, uint32 navigationFlags, PWSTR targetFrameName) mut => VT.BeforeNavigate(ref this, ref htmlWindow, url, navigationFlags, targetFrameName);
-			public HRESULT NavigateComplete(ref IHTMLWindow2 htmlWindow, PWSTR url) mut => VT.NavigateComplete(ref this, ref htmlWindow, url);
-			public HRESULT NavigateError(ref IHTMLWindow2 htmlWindow, PWSTR url, PWSTR targetFrameName, uint32 statusCode) mut => VT.NavigateError(ref this, ref htmlWindow, url, targetFrameName, statusCode);
-			public HRESULT DocumentComplete(ref IHTMLWindow2 htmlWindow, PWSTR url) mut => VT.DocumentComplete(ref this, ref htmlWindow, url);
-			public HRESULT DownloadBegin() mut => VT.DownloadBegin(ref this);
-			public HRESULT DownloadComplete() mut => VT.DownloadComplete(ref this);
+			public HResult BeforeNavigate(ref IHTMLWindow2 htmlWindow, char16* url, uint32 navigationFlags, char16* targetFrameName) mut => VT.BeforeNavigate(ref this, ref htmlWindow, url, navigationFlags, targetFrameName);
+			public HResult NavigateComplete(ref IHTMLWindow2 htmlWindow, char16* url) mut => VT.NavigateComplete(ref this, ref htmlWindow, url);
+			public HResult NavigateError(ref IHTMLWindow2 htmlWindow, char16* url, char16* targetFrameName, uint32 statusCode) mut => VT.NavigateError(ref this, ref htmlWindow, url, targetFrameName, statusCode);
+			public HResult DocumentComplete(ref IHTMLWindow2 htmlWindow, char16* url) mut => VT.DocumentComplete(ref this, ref htmlWindow, url);
+			public HResult DownloadBegin() mut => VT.DownloadBegin(ref this);
+			public HResult DownloadComplete() mut => VT.DownloadComplete(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, PWSTR url, uint32 navigationFlags, PWSTR targetFrameName) BeforeNavigate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, PWSTR url) NavigateComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, PWSTR url, PWSTR targetFrameName, uint32 statusCode) NavigateError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, PWSTR url) DocumentComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationNavigationEvents self) DownloadBegin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationNavigationEvents self) DownloadComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, char16* url, uint32 navigationFlags, char16* targetFrameName) BeforeNavigate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, char16* url) NavigateComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, char16* url, char16* targetFrameName, uint32 statusCode) NavigateError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationNavigationEvents self, ref IHTMLWindow2 htmlWindow, char16* url) DocumentComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationNavigationEvents self) DownloadBegin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationNavigationEvents self) DownloadComplete;
 			}
 		}
 		[CRepr]
@@ -61,12 +61,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SecurityProblem(uint32 securityProblem, out HRESULT result) mut => VT.SecurityProblem(ref this, securityProblem, out result);
+			public HResult SecurityProblem(uint32 securityProblem, out HResult result) mut => VT.SecurityProblem(ref this, securityProblem, out result);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationUIEvents self, uint32 securityProblem, out HRESULT result) SecurityProblem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationUIEvents self, uint32 securityProblem, out HResult result) SecurityProblem;
 			}
 		}
 		[CRepr]
@@ -76,14 +76,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnPaint() mut => VT.OnPaint(ref this);
-			public HRESULT OnCssChanged() mut => VT.OnCssChanged(ref this);
+			public HResult OnPaint() mut => VT.OnPaint(ref this);
+			public HResult OnCssChanged() mut => VT.OnCssChanged(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationUpdateEvents self) OnPaint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationUpdateEvents self) OnCssChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationUpdateEvents self) OnPaint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationUpdateEvents self) OnCssChanged;
 			}
 		}
 		[CRepr]
@@ -93,20 +93,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_HWND(out HWND hwnd) mut => VT.get_HWND(ref this, out hwnd);
-			public HRESULT get_Document(out IHTMLDocument2* htmlDocument) mut => VT.get_Document(ref this, out htmlDocument);
-			public HRESULT Refresh() mut => VT.Refresh(ref this);
-			public HRESULT Advise(in Guid interfaceId, ref IUnknown callback, out uint32 cookie) mut => VT.Advise(ref this, interfaceId, ref callback, out cookie);
-			public HRESULT Unadvise(uint32 cookie) mut => VT.Unadvise(ref this, cookie);
+			public HResult get_HWND(out HWnd hwnd) mut => VT.get_HWND(ref this, out hwnd);
+			public HResult get_Document(out IHTMLDocument2* htmlDocument) mut => VT.get_Document(ref this, out htmlDocument);
+			public HResult Refresh() mut => VT.Refresh(ref this);
+			public HResult Advise(in Guid interfaceId, ref IUnknown callback, out uint32 cookie) mut => VT.Advise(ref this, interfaceId, ref callback, out cookie);
+			public HResult Unadvise(uint32 cookie) mut => VT.Unadvise(ref this, cookie);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationHost self, out HWND hwnd) get_HWND;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationHost self, out IHTMLDocument2* htmlDocument) get_Document;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationHost self) Refresh;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationHost self, in Guid interfaceId, ref IUnknown callback, out uint32 cookie) Advise;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationHost self, uint32 cookie) Unadvise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationHost self, out HWnd hwnd) get_HWND;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationHost self, out IHTMLDocument2* htmlDocument) get_Document;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationHost self) Refresh;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationHost self, in Guid interfaceId, ref IUnknown callback, out uint32 cookie) Advise;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationHost self, uint32 cookie) Unadvise;
 			}
 		}
 		[CRepr]
@@ -116,12 +116,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CancelPendingActivation() mut => VT.CancelPendingActivation(ref this);
+			public HResult CancelPendingActivation() mut => VT.CancelPendingActivation(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationActivation self) CancelPendingActivation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationActivation self) CancelPendingActivation;
 			}
 		}
 		[CRepr]
@@ -131,12 +131,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_AuthoringClientBinary(BSTR* designModeDllPath) mut => VT.get_AuthoringClientBinary(ref this, designModeDllPath);
+			public HResult get_AuthoringClientBinary(BSTR* designModeDllPath) mut => VT.get_AuthoringClientBinary(ref this, designModeDllPath);
 
 			[CRepr]
 			public struct VTable : IServiceProvider.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWebApplicationAuthoringMode self, BSTR* designModeDllPath) get_AuthoringClientBinary;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWebApplicationAuthoringMode self, BSTR* designModeDllPath) get_AuthoringClientBinary;
 			}
 		}
 		

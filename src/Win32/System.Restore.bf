@@ -55,7 +55,7 @@ namespace Win32
 			public RESTOREPOINTINFO_EVENT_TYPE dwEventType;
 			public RESTOREPOINTINFO_TYPE dwRestorePtType;
 			public int64 llSequenceNumber;
-			public CHAR[64] szDescription;
+			public char8[64] szDescription;
 		}
 		[CRepr, Packed(1)]
 		public struct RESTOREPOINTINFOW
@@ -68,7 +68,7 @@ namespace Win32
 		[CRepr, Packed(1)]
 		public struct _RESTOREPTINFOEX
 		{
-			public FILETIME ftCreation;
+			public FileTime ftCreation;
 			public uint32 dwEventType;
 			public uint32 dwRestorePtType;
 			public uint32 dwRPNum;
@@ -84,8 +84,8 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("sfc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SRSetRestorePointA(ref RESTOREPOINTINFOA pRestorePtSpec, out STATEMGRSTATUS pSMgrStatus);
+		public static extern IntBool SRSetRestorePointA(ref RESTOREPOINTINFOA pRestorePtSpec, out STATEMGRSTATUS pSMgrStatus);
 		[Import("sfc.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SRSetRestorePointW(ref RESTOREPOINTINFOW pRestorePtSpec, out STATEMGRSTATUS pSMgrStatus);
+		public static extern IntBool SRSetRestorePointW(ref RESTOREPOINTINFOW pRestorePtSpec, out STATEMGRSTATUS pSMgrStatus);
 	}
 }

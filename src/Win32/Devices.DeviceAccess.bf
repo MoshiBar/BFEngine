@@ -62,12 +62,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Invoke(HRESULT requestResult, uint32 bytesReturned) mut => VT.Invoke(ref this, requestResult, bytesReturned);
+			public HResult Invoke(HResult requestResult, uint32 bytesReturned) mut => VT.Invoke(ref this, requestResult, bytesReturned);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceRequestCompletionCallback self, HRESULT requestResult, uint32 bytesReturned) Invoke;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceRequestCompletionCallback self, HResult requestResult, uint32 bytesReturned) Invoke;
 			}
 		}
 		[CRepr]
@@ -77,16 +77,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT DeviceIoControlSync(uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, out uint32 bytesReturned) mut => VT.DeviceIoControlSync(ref this, ioControlCode, inputBuffer, inputBufferSize, outputBuffer, outputBufferSize, out bytesReturned);
-			public HRESULT DeviceIoControlAsync(uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, ref IDeviceRequestCompletionCallback requestCompletionCallback, uint* cancelContext) mut => VT.DeviceIoControlAsync(ref this, ioControlCode, inputBuffer, inputBufferSize, outputBuffer, outputBufferSize, ref requestCompletionCallback, cancelContext);
-			public HRESULT CancelOperation(uint cancelContext) mut => VT.CancelOperation(ref this, cancelContext);
+			public HResult DeviceIoControlSync(uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, out uint32 bytesReturned) mut => VT.DeviceIoControlSync(ref this, ioControlCode, inputBuffer, inputBufferSize, outputBuffer, outputBufferSize, out bytesReturned);
+			public HResult DeviceIoControlAsync(uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, ref IDeviceRequestCompletionCallback requestCompletionCallback, uint* cancelContext) mut => VT.DeviceIoControlAsync(ref this, ioControlCode, inputBuffer, inputBufferSize, outputBuffer, outputBufferSize, ref requestCompletionCallback, cancelContext);
+			public HResult CancelOperation(uint cancelContext) mut => VT.CancelOperation(ref this, cancelContext);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceIoControl self, uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, out uint32 bytesReturned) DeviceIoControlSync;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceIoControl self, uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, ref IDeviceRequestCompletionCallback requestCompletionCallback, uint* cancelContext) DeviceIoControlAsync;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDeviceIoControl self, uint cancelContext) CancelOperation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceIoControl self, uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, out uint32 bytesReturned) DeviceIoControlSync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceIoControl self, uint32 ioControlCode, uint8* inputBuffer, uint32 inputBufferSize, uint8* outputBuffer, uint32 outputBufferSize, ref IDeviceRequestCompletionCallback requestCompletionCallback, uint* cancelContext) DeviceIoControlAsync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDeviceIoControl self, uint cancelContext) CancelOperation;
 			}
 		}
 		[CRepr]
@@ -96,24 +96,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Cancel() mut => VT.Cancel(ref this);
-			public HRESULT Wait(uint32 timeout) mut => VT.Wait(ref this, timeout);
-			public HRESULT Close() mut => VT.Close(ref this);
-			public HRESULT GetResult(in Guid riid, void** deviceAccess) mut => VT.GetResult(ref this, riid, deviceAccess);
+			public HResult Cancel() mut => VT.Cancel(ref this);
+			public HResult Wait(uint32 timeout) mut => VT.Wait(ref this, timeout);
+			public HResult Close() mut => VT.Close(ref this);
+			public HResult GetResult(in Guid riid, void** deviceAccess) mut => VT.GetResult(ref this, riid, deviceAccess);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICreateDeviceAccessAsync self) Cancel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICreateDeviceAccessAsync self, uint32 timeout) Wait;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICreateDeviceAccessAsync self) Close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICreateDeviceAccessAsync self, in Guid riid, void** deviceAccess) GetResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICreateDeviceAccessAsync self) Cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICreateDeviceAccessAsync self, uint32 timeout) Wait;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICreateDeviceAccessAsync self) Close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICreateDeviceAccessAsync self, in Guid riid, void** deviceAccess) GetResult;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("deviceaccess.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT CreateDeviceAccessInstance(PWSTR deviceInterfacePath, uint32 desiredAccess, out ICreateDeviceAccessAsync* createAsync);
+		public static extern HResult CreateDeviceAccessInstance(char16* deviceInterfacePath, uint32 desiredAccess, out ICreateDeviceAccessAsync* createAsync);
 	}
 }

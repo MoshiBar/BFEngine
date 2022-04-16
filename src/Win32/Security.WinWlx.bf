@@ -78,68 +78,68 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function void PWLX_USE_CTRL_ALT_DEL(HANDLE hWlx);
-		public function void PWLX_SET_CONTEXT_POINTER(HANDLE hWlx, void* pWlxContext);
-		public function void PWLX_SAS_NOTIFY(HANDLE hWlx, uint32 dwSasType);
-		public function BOOL PWLX_SET_TIMEOUT(HANDLE hWlx, uint32 Timeout);
-		public function int32 PWLX_ASSIGN_SHELL_PROTECTION(HANDLE hWlx, HANDLE hToken, HANDLE hProcess, HANDLE hThread);
-		public function int32 PWLX_MESSAGE_BOX(HANDLE hWlx, HWND hwndOwner, PWSTR lpszText, PWSTR lpszTitle, uint32 fuStyle);
-		public function int32 PWLX_DIALOG_BOX(HANDLE hWlx, HANDLE hInst, PWSTR lpszTemplate, HWND hwndOwner, DLGPROC dlgprc);
-		public function int32 PWLX_DIALOG_BOX_INDIRECT(HANDLE hWlx, HANDLE hInst, out DLGTEMPLATE hDialogTemplate, HWND hwndOwner, DLGPROC dlgprc);
-		public function int32 PWLX_DIALOG_BOX_PARAM(HANDLE hWlx, HANDLE hInst, PWSTR lpszTemplate, HWND hwndOwner, DLGPROC dlgprc, LPARAM dwInitParam);
-		public function int32 PWLX_DIALOG_BOX_INDIRECT_PARAM(HANDLE hWlx, HANDLE hInst, out DLGTEMPLATE hDialogTemplate, HWND hwndOwner, DLGPROC dlgprc, LPARAM dwInitParam);
-		public function int32 PWLX_SWITCH_DESKTOP_TO_USER(HANDLE hWlx);
-		public function int32 PWLX_SWITCH_DESKTOP_TO_WINLOGON(HANDLE hWlx);
-		public function int32 PWLX_CHANGE_PASSWORD_NOTIFY(HANDLE hWlx, out WLX_MPR_NOTIFY_INFO pMprInfo, uint32 dwChangeInfo);
-		public function BOOL PWLX_GET_SOURCE_DESKTOP(HANDLE hWlx, out WLX_DESKTOP* ppDesktop);
-		public function BOOL PWLX_SET_RETURN_DESKTOP(HANDLE hWlx, out WLX_DESKTOP pDesktop);
-		public function BOOL PWLX_CREATE_USER_DESKTOP(HANDLE hWlx, HANDLE hToken, uint32 Flags, PWSTR pszDesktopName, out WLX_DESKTOP* ppDesktop);
-		public function int32 PWLX_CHANGE_PASSWORD_NOTIFY_EX(HANDLE hWlx, out WLX_MPR_NOTIFY_INFO pMprInfo, uint32 dwChangeInfo, PWSTR ProviderName, void* Reserved);
-		public function BOOL PWLX_CLOSE_USER_DESKTOP(HANDLE hWlx, out WLX_DESKTOP pDesktop, HANDLE hToken);
-		public function BOOL PWLX_SET_OPTION(HANDLE hWlx, uint32 Option, uint Value, out uint OldValue);
-		public function BOOL PWLX_GET_OPTION(HANDLE hWlx, uint32 Option, out uint Value);
-		public function void PWLX_WIN31_MIGRATE(HANDLE hWlx);
-		public function BOOL PWLX_QUERY_CLIENT_CREDENTIALS(out WLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred);
-		public function BOOL PWLX_QUERY_IC_CREDENTIALS(out WLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred);
-		public function BOOL PWLX_QUERY_TS_LOGON_CREDENTIALS(out WLX_CLIENT_CREDENTIALS_INFO_V2_0 pCred);
-		public function BOOL PWLX_DISCONNECT();
-		public function uint32 PWLX_QUERY_TERMINAL_SERVICES_DATA(HANDLE hWlx, out WLX_TERMINAL_SERVICES_DATA pTSData, PWSTR UserName, PWSTR Domain);
+		public function void PWLX_USE_CTRL_ALT_DEL(Handle hWlx);
+		public function void PWLX_SET_CONTEXT_POINTER(Handle hWlx, void* pWlxContext);
+		public function void PWLX_SAS_NOTIFY(Handle hWlx, uint32 dwSasType);
+		public function IntBool PWLX_SET_TIMEOUT(Handle hWlx, uint32 Timeout);
+		public function int32 PWLX_ASSIGN_SHELL_PROTECTION(Handle hWlx, Handle hToken, Handle hProcess, Handle hThread);
+		public function int32 PWLX_MESSAGE_BOX(Handle hWlx, HWnd hwndOwner, char16* lpszText, char16* lpszTitle, uint32 fuStyle);
+		public function int32 PWLX_DIALOG_BOX(Handle hWlx, Handle hInst, char16* lpszTemplate, HWnd hwndOwner, DLGPROC dlgprc);
+		public function int32 PWLX_DIALOG_BOX_INDIRECT(Handle hWlx, Handle hInst, out DLGTEMPLATE hDialogTemplate, HWnd hwndOwner, DLGPROC dlgprc);
+		public function int32 PWLX_DIALOG_BOX_PARAM(Handle hWlx, Handle hInst, char16* lpszTemplate, HWnd hwndOwner, DLGPROC dlgprc, LPARAM dwInitParam);
+		public function int32 PWLX_DIALOG_BOX_INDIRECT_PARAM(Handle hWlx, Handle hInst, out DLGTEMPLATE hDialogTemplate, HWnd hwndOwner, DLGPROC dlgprc, LPARAM dwInitParam);
+		public function int32 PWLX_SWITCH_DESKTOP_TO_USER(Handle hWlx);
+		public function int32 PWLX_SWITCH_DESKTOP_TO_WINLOGON(Handle hWlx);
+		public function int32 PWLX_CHANGE_PASSWORD_NOTIFY(Handle hWlx, out WLX_MPR_NOTIFY_INFO pMprInfo, uint32 dwChangeInfo);
+		public function IntBool PWLX_GET_SOURCE_DESKTOP(Handle hWlx, out WLX_DESKTOP* ppDesktop);
+		public function IntBool PWLX_SET_RETURN_DESKTOP(Handle hWlx, out WLX_DESKTOP pDesktop);
+		public function IntBool PWLX_CREATE_USER_DESKTOP(Handle hWlx, Handle hToken, uint32 Flags, char16* pszDesktopName, out WLX_DESKTOP* ppDesktop);
+		public function int32 PWLX_CHANGE_PASSWORD_NOTIFY_EX(Handle hWlx, out WLX_MPR_NOTIFY_INFO pMprInfo, uint32 dwChangeInfo, char16* ProviderName, void* Reserved);
+		public function IntBool PWLX_CLOSE_USER_DESKTOP(Handle hWlx, out WLX_DESKTOP pDesktop, Handle hToken);
+		public function IntBool PWLX_SET_OPTION(Handle hWlx, uint32 Option, uint Value, out uint OldValue);
+		public function IntBool PWLX_GET_OPTION(Handle hWlx, uint32 Option, out uint Value);
+		public function void PWLX_WIN31_MIGRATE(Handle hWlx);
+		public function IntBool PWLX_QUERY_CLIENT_CREDENTIALS(out WLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred);
+		public function IntBool PWLX_QUERY_IC_CREDENTIALS(out WLX_CLIENT_CREDENTIALS_INFO_V1_0 pCred);
+		public function IntBool PWLX_QUERY_TS_LOGON_CREDENTIALS(out WLX_CLIENT_CREDENTIALS_INFO_V2_0 pCred);
+		public function IntBool PWLX_DISCONNECT();
+		public function uint32 PWLX_QUERY_TERMINAL_SERVICES_DATA(Handle hWlx, out WLX_TERMINAL_SERVICES_DATA pTSData, char16* UserName, char16* Domain);
 		public function uint32 PWLX_QUERY_CONSOLESWITCH_CREDENTIALS(out WLX_CONSOLESWITCH_CREDENTIALS_INFO_V1_0 pCred);
-		public function uint32 PFNMSGECALLBACK(BOOL bVerbose, PWSTR lpMessage);
+		public function uint32 PFNMSGECALLBACK(IntBool bVerbose, char16* lpMessage);
 		
 		// --- Structs ---
 		
 		[CRepr]
 		public struct WLX_SC_NOTIFICATION_INFO
 		{
-			public PWSTR pszCard;
-			public PWSTR pszReader;
-			public PWSTR pszContainer;
-			public PWSTR pszCryptoProvider;
+			public char16* pszCard;
+			public char16* pszReader;
+			public char16* pszContainer;
+			public char16* pszCryptoProvider;
 		}
 		[CRepr]
 		public struct WLX_PROFILE_V1_0
 		{
 			public uint32 dwType;
-			public PWSTR pszProfile;
+			public char16* pszProfile;
 		}
 		[CRepr]
 		public struct WLX_PROFILE_V2_0
 		{
 			public uint32 dwType;
-			public PWSTR pszProfile;
-			public PWSTR pszPolicy;
-			public PWSTR pszNetworkDefaultUserProfile;
-			public PWSTR pszServerName;
-			public PWSTR pszEnvironment;
+			public char16* pszProfile;
+			public char16* pszPolicy;
+			public char16* pszNetworkDefaultUserProfile;
+			public char16* pszServerName;
+			public char16* pszEnvironment;
 		}
 		[CRepr]
 		public struct WLX_MPR_NOTIFY_INFO
 		{
-			public PWSTR pszUserName;
-			public PWSTR pszDomain;
-			public PWSTR pszPassword;
-			public PWSTR pszOldPassword;
+			public char16* pszUserName;
+			public char16* pszDomain;
+			public char16* pszPassword;
+			public char16* pszOldPassword;
 		}
 		[CRepr]
 		public struct WLX_TERMINAL_SERVICES_DATA
@@ -152,32 +152,32 @@ namespace Win32
 		public struct WLX_CLIENT_CREDENTIALS_INFO_V1_0
 		{
 			public uint32 dwType;
-			public PWSTR pszUserName;
-			public PWSTR pszDomain;
-			public PWSTR pszPassword;
-			public BOOL fPromptForPassword;
+			public char16* pszUserName;
+			public char16* pszDomain;
+			public char16* pszPassword;
+			public IntBool fPromptForPassword;
 		}
 		[CRepr]
 		public struct WLX_CLIENT_CREDENTIALS_INFO_V2_0
 		{
 			public uint32 dwType;
-			public PWSTR pszUserName;
-			public PWSTR pszDomain;
-			public PWSTR pszPassword;
-			public BOOL fPromptForPassword;
-			public BOOL fDisconnectOnLogonFailure;
+			public char16* pszUserName;
+			public char16* pszDomain;
+			public char16* pszPassword;
+			public IntBool fPromptForPassword;
+			public IntBool fDisconnectOnLogonFailure;
 		}
 		[CRepr]
 		public struct WLX_CONSOLESWITCH_CREDENTIALS_INFO_V1_0
 		{
 			public uint32 dwType;
-			public HANDLE UserToken;
+			public Handle UserToken;
 			public LUID LogonId;
 			public QUOTA_LIMITS Quotas;
-			public PWSTR UserName;
-			public PWSTR Domain;
+			public char16* UserName;
+			public char16* Domain;
 			public LARGE_INTEGER LogonTime;
-			public BOOL SmartCardLogon;
+			public IntBool SmartCardLogon;
 			public uint32 ProfileLength;
 			public uint32 MessageType;
 			public uint16 LogonCount;
@@ -188,12 +188,12 @@ namespace Win32
 			public LARGE_INTEGER PasswordLastSet;
 			public LARGE_INTEGER PasswordCanChange;
 			public LARGE_INTEGER PasswordMustChange;
-			public PWSTR LogonScript;
-			public PWSTR HomeDirectory;
-			public PWSTR FullName;
-			public PWSTR ProfilePath;
-			public PWSTR HomeDirectoryDrive;
-			public PWSTR LogonServer;
+			public char16* LogonScript;
+			public char16* HomeDirectory;
+			public char16* FullName;
+			public char16* ProfilePath;
+			public char16* HomeDirectoryDrive;
+			public char16* LogonServer;
 			public uint32 UserFlags;
 			public uint32 PrivateDataLen;
 			public uint8* PrivateData;
@@ -204,7 +204,7 @@ namespace Win32
 			public uint32 Size;
 			public uint32 Flags;
 			public HDESK hDesktop;
-			public PWSTR pszDesktopName;
+			public char16* pszDesktopName;
 		}
 		[CRepr]
 		public struct WLX_DISPATCH_VERSION_1_0
@@ -331,10 +331,10 @@ namespace Win32
 		{
 			public uint32 Size;
 			public uint32 Flags;
-			public PWSTR UserName;
-			public PWSTR Domain;
-			public PWSTR WindowStation;
-			public HANDLE hToken;
+			public char16* UserName;
+			public char16* Domain;
+			public char16* WindowStation;
+			public Handle hToken;
 			public HDESK hDesktop;
 			public PFNMSGECALLBACK pStatusCallback;
 		}

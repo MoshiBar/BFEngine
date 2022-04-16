@@ -29,7 +29,7 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function uint32 PFNCHECKCONNECTIONWIZARD(uint32 param0, out uint32 param1);
-		public function uint32 PFNSETSHELLNEXT(PSTR param0);
+		public function uint32 PFNSETSHELLNEXT(char8* param0);
 		
 	}
 }

@@ -2,7 +2,7 @@ using BfEngine;
 using System;
 using System.Collections;
 using System.Diagnostics;
-using static BfEngine.DInput;
+using static Win32.Devices.HumanInterfaceDevice;
 
 namespace BfEngine
 {
@@ -34,24 +34,25 @@ namespace BfEngine
 
 		static IDirectInput8A* dinput;
 		static List<IDirectInputDevice8A*> inputDevices = new .() ~ delete _;
-		static DInput.LPDIENUMDEVICESCALLBACKA enumDevicesCallback = (val1, val2) => {
+		static LPDIENUMDEVICESCALLBACKA enumDevicesCallback = (val1, val2) => {
+			val1 = .();
 			Console.WriteLine(StringView(&val1.tszInstanceName[0]));
 			Console.WriteLine(StringView(&val1.tszProductName[0]));
 			IDirectInputDevice8A* device = default;
-			IDirectInput8_CreateDevice(dinput, &val1.guidInstance, &device, null);
+			dinput.CreateDevice(val1.guidInstance, out device);
 #unwarn
-			IDirectInputDevice8_SetDataFormat(device, &c_dfDIJoystick2);
-			IDirectInputDevice8_Acquire(device);
+			device.SetDataFormat(c_dfDIJoystick2);
+			device.Acquire();
 			inputDevices.Add(device);
-			return .Continue;
+			return true;//Continue
 		};
 
 		public static void Init(){
 #unwarn			
-			var dinputresult = DInput.DirectInput8Create(Engine.[Friend]hInstance, 0x0800, &DInput.IID_IDirectInput8A, (void**)&dinput, null);
+			var dinputresult = DirectInput8Create((.)Engine.[Friend]hInstance, 0x0800, IDirectInput8A.IID, (void**)&dinput);
 			Console.WriteLine($"Dinput init result {dinputresult}");
 
-			IDirectInput8_EnumDevices(dinput, .GameController, enumDevicesCallback, null, .AllDevices);
+			dinput.EnumDevices(.GameController, enumDevicesCallback, null, .AllDevices);
 		}
 		static void AppendBinary(String str, uint32 val){
 			for(int i < 32){

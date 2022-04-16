@@ -1421,7 +1421,7 @@ namespace Win32
 		// --- Function Pointers ---
 		
 		public function void WLAN_NOTIFICATION_CALLBACK(out L2_NOTIFICATION_DATA param0, void* param1);
-		public function void WFD_OPEN_SESSION_COMPLETE_CALLBACK(HANDLE hSessionHandle, void* pvContext, Guid guidSessionInterface, uint32 dwError, uint32 dwReasonCode);
+		public function void WFD_OPEN_SESSION_COMPLETE_CALLBACK(Handle hSessionHandle, void* pvContext, Guid guidSessionInterface, uint32 dwError, uint32 dwReasonCode);
 		
 		// --- Structs ---
 		
@@ -1505,12 +1505,12 @@ namespace Win32
 		public struct DOT11_WEP_OFFLOAD
 		{
 			public uint32 uReserved;
-			public HANDLE hOffloadContext;
-			public HANDLE hOffload;
+			public Handle hOffloadContext;
+			public Handle hOffload;
 			public DOT11_OFFLOAD_TYPE dot11OffloadType;
 			public uint32 dwAlgorithm;
-			public BOOLEAN bRowIsOutbound;
-			public BOOLEAN bUseDefault;
+			public bool bRowIsOutbound;
+			public bool bUseDefault;
 			public uint32 uFlags;
 			public uint8[6] ucMacAddress;
 			public uint32 uNumOfRWsOnPeer;
@@ -1525,7 +1525,7 @@ namespace Win32
 		{
 			public uint32 uReserved;
 			public DOT11_OFFLOAD_TYPE dot11OffloadType;
-			public HANDLE hOffload;
+			public Handle hOffload;
 			public uint32 uNumOfRWsUsed;
 			public DOT11_IV48_COUNTER[16] dot11IV48Counters;
 			public uint16[16] usDot11RWBitMaps;
@@ -1534,8 +1534,8 @@ namespace Win32
 		public struct DOT11_DEFAULT_WEP_OFFLOAD
 		{
 			public uint32 uReserved;
-			public HANDLE hOffloadContext;
-			public HANDLE hOffload;
+			public Handle hOffloadContext;
+			public Handle hOffload;
 			public uint32 dwIndex;
 			public DOT11_OFFLOAD_TYPE dot11OffloadType;
 			public uint32 dwAlgorithm;
@@ -1553,7 +1553,7 @@ namespace Win32
 		{
 			public uint32 uReserved;
 			public DOT11_OFFLOAD_TYPE dot11OffloadType;
-			public HANDLE hOffload;
+			public Handle hOffload;
 			public uint32 uNumOfRWsUsed;
 			public DOT11_IV48_COUNTER[16] dot11IV48Counters;
 			public uint16[16] usDot11RWBitMaps;
@@ -1581,8 +1581,8 @@ namespace Win32
 			public uint8[6] dot11BSSID;
 			public DOT11_SSID dot11SSID;
 			public DOT11_SCAN_TYPE dot11ScanType;
-			public BOOLEAN bRestrictedScan;
-			public BOOLEAN bUseRequestIE;
+			public bool bRestrictedScan;
+			public bool bUseRequestIE;
 			public uint32 uRequestIDsOffset;
 			public uint32 uNumOfRequestIDs;
 			public uint32 uPhyTypesOffset;
@@ -1595,7 +1595,7 @@ namespace Win32
 		public struct DOT11_PHY_TYPE_INFO
 		{
 			public DOT11_PHY_TYPE dot11PhyType;
-			public BOOLEAN bUseParameters;
+			public bool bUseParameters;
 			public uint32 uProbeDelay;
 			public uint32 uMinChannelTime;
 			public uint32 uMaxChannelTime;
@@ -1609,10 +1609,10 @@ namespace Win32
 			public DOT11_BSS_TYPE dot11BSSType;
 			public uint8[6] dot11BSSID;
 			public DOT11_SCAN_TYPE dot11ScanType;
-			public BOOLEAN bRestrictedScan;
+			public bool bRestrictedScan;
 			public uint32 udot11SSIDsOffset;
 			public uint32 uNumOfdot11SSIDs;
-			public BOOLEAN bUseRequestIE;
+			public bool bUseRequestIE;
 			public uint32 uRequestIDsOffset;
 			public uint32 uNumOfRequestIDs;
 			public uint32 uPhyTypeInfosOffset;
@@ -1669,24 +1669,24 @@ namespace Win32
 		{
 			public DOT11_RESET_TYPE dot11ResetType;
 			public uint8[6] dot11MacAddress;
-			public BOOLEAN bSetDefaultMIB;
+			public bool bSetDefaultMIB;
 		}
 		[CRepr]
 		public struct DOT11_OPTIONAL_CAPABILITY
 		{
 			public uint32 uReserved;
-			public BOOLEAN bDot11PCF;
-			public BOOLEAN bDot11PCFMPDUTransferToPC;
-			public BOOLEAN bStrictlyOrderedServiceClass;
+			public bool bDot11PCF;
+			public bool bDot11PCFMPDUTransferToPC;
+			public bool bStrictlyOrderedServiceClass;
 		}
 		[CRepr]
 		public struct DOT11_CURRENT_OPTIONAL_CAPABILITY
 		{
 			public uint32 uReserved;
-			public BOOLEAN bDot11CFPollable;
-			public BOOLEAN bDot11PCF;
-			public BOOLEAN bDot11PCFMPDUTransferToPC;
-			public BOOLEAN bStrictlyOrderedServiceClass;
+			public bool bDot11CFPollable;
+			public bool bDot11PCF;
+			public bool bDot11PCFMPDUTransferToPC;
+			public bool bStrictlyOrderedServiceClass;
 		}
 		[CRepr]
 		public struct DOT11_POWER_MGMT_MODE
@@ -1695,7 +1695,7 @@ namespace Win32
 			public uint32 uPowerSaveLevel;
 			public uint16 usListenInterval;
 			public uint16 usAID;
-			public BOOLEAN bReceiveDTIMs;
+			public bool bReceiveDTIMs;
 		}
 		[CRepr]
 		public struct DOT11_COUNTERS_ENTRY
@@ -1744,7 +1744,7 @@ namespace Win32
 		public struct DOT11_SUPPORTED_ANTENNA
 		{
 			public uint32 uAntennaListIndex;
-			public BOOLEAN bSupportedAntenna;
+			public bool bSupportedAntenna;
 		}
 		[CRepr]
 		public struct DOT11_SUPPORTED_ANTENNA_LIST
@@ -1757,7 +1757,7 @@ namespace Win32
 		public struct DOT11_DIVERSITY_SELECTION_RX
 		{
 			public uint32 uAntennaListIndex;
-			public BOOLEAN bDiversitySelectionRX;
+			public bool bDiversitySelectionRX;
 		}
 		[CRepr]
 		public struct DOT11_DIVERSITY_SELECTION_RX_LIST
@@ -1811,7 +1811,7 @@ namespace Win32
 		{
 			public uint32 uReserved;
 			public DOT11_OFFLOAD_TYPE dot11OffloadType;
-			public HANDLE hOffload;
+			public Handle hOffload;
 			public DOT11_IV48_COUNTER dot11IV48Counter;
 		}
 		[CRepr]
@@ -1953,7 +1953,7 @@ namespace Win32
 			public DOT11_BSS_TYPE dot11BSSType;
 			public int32 lRSSI;
 			public uint32 uLinkQuality;
-			public BOOLEAN bInRegDomain;
+			public bool bInRegDomain;
 			public uint16 usBeaconPeriod;
 			public uint64 ullTimestamp;
 			public uint64 ullHostTimestamp;
@@ -2089,8 +2089,8 @@ namespace Win32
 			public uint32 uKeyIndex;
 			public DOT11_CIPHER_ALGORITHM AlgorithmId;
 			public uint8[6] MacAddr;
-			public BOOLEAN bDelete;
-			public BOOLEAN bStatic;
+			public bool bDelete;
+			public bool bStatic;
 			public uint16 usKeyLength;
 			public uint8[0] ucKey;
 		}
@@ -2143,8 +2143,8 @@ namespace Win32
 			public uint8[6] PeerMacAddr;
 			public DOT11_CIPHER_ALGORITHM AlgorithmId;
 			public DOT11_DIRECTION Direction;
-			public BOOLEAN bDelete;
-			public BOOLEAN bStatic;
+			public bool bDelete;
+			public bool bStatic;
 			public uint16 usKeyLength;
 			public uint8[0] ucKey;
 		}
@@ -2223,13 +2223,13 @@ namespace Win32
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public uint8[6] PeerMac;
-			public BOOLEAN bOpen;
+			public bool bOpen;
 		}
 		[CRepr]
 		public struct DOT11_IBSS_PARAMS
 		{
 			public NDIS_OBJECT_HEADER Header;
-			public BOOLEAN bJoinOnly;
+			public bool bJoinOnly;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
 		}
@@ -2265,9 +2265,9 @@ namespace Win32
 		[CRepr]
 		public struct DOT11_HRDSSS_PHY_ATTRIBUTES
 		{
-			public BOOLEAN bShortPreambleOptionImplemented;
-			public BOOLEAN bPBCCOptionImplemented;
-			public BOOLEAN bChannelAgilityPresent;
+			public bool bShortPreambleOptionImplemented;
+			public bool bPBCCOptionImplemented;
+			public bool bChannelAgilityPresent;
 			public uint32 uHRCCAModeSupported;
 		}
 		[CRepr]
@@ -2279,18 +2279,18 @@ namespace Win32
 		public struct DOT11_ERP_PHY_ATTRIBUTES
 		{
 			public DOT11_HRDSSS_PHY_ATTRIBUTES HRDSSSAttributes;
-			public BOOLEAN bERPPBCCOptionImplemented;
-			public BOOLEAN bDSSSOFDMOptionImplemented;
-			public BOOLEAN bShortSlotTimeOptionImplemented;
+			public bool bERPPBCCOptionImplemented;
+			public bool bDSSSOFDMOptionImplemented;
+			public bool bShortSlotTimeOptionImplemented;
 		}
 		[CRepr]
 		public struct DOT11_PHY_ATTRIBUTES
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public DOT11_PHY_TYPE PhyType;
-			public BOOLEAN bHardwarePhyState;
-			public BOOLEAN bSoftwarePhyState;
-			public BOOLEAN bCFPollable;
+			public bool bHardwarePhyState;
+			public bool bSoftwarePhyState;
+			public bool bCFPollable;
 			public uint32 uMPDUMaxLength;
 			public DOT11_TEMP_TYPE TempType;
 			public DOT11_DIVERSITY_SUPPORT DiversitySupport;
@@ -2323,9 +2323,9 @@ namespace Win32
 			public uint32 uWEPKeyValueMaxLength;
 			public uint32 uPMKIDCacheSize;
 			public uint32 uMaxNumPerSTADefaultKeyTables;
-			public BOOLEAN bStrictlyOrderedServiceClassImplemented;
+			public bool bStrictlyOrderedServiceClassImplemented;
 			public uint8 ucSupportedQoSProtocolFlags;
-			public BOOLEAN bSafeModeImplemented;
+			public bool bSafeModeImplemented;
 			public uint32 uNumSupportedCountryOrRegionStrings;
 			public uint8* pSupportedCountryOrRegionStrings;
 			public uint32 uInfraNumSupportedUcastAlgoPairs;
@@ -2336,16 +2336,16 @@ namespace Win32
 			public DOT11_AUTH_CIPHER_PAIR* pAdhocSupportedUcastAlgoPairs;
 			public uint32 uAdhocNumSupportedMcastAlgoPairs;
 			public DOT11_AUTH_CIPHER_PAIR* pAdhocSupportedMcastAlgoPairs;
-			public BOOLEAN bAutoPowerSaveMode;
+			public bool bAutoPowerSaveMode;
 			public uint32 uMaxNetworkOffloadListSize;
-			public BOOLEAN bMFPCapable;
+			public bool bMFPCapable;
 			public uint32 uInfraNumSupportedMcastMgmtAlgoPairs;
 			public DOT11_AUTH_CIPHER_PAIR* pInfraSupportedMcastMgmtAlgoPairs;
-			public BOOLEAN bNeighborReportSupported;
-			public BOOLEAN bAPChannelReportSupported;
-			public BOOLEAN bActionFramesSupported;
-			public BOOLEAN bANQPQueryOffloadSupported;
-			public BOOLEAN bHESSIDConnectionSupported;
+			public bool bNeighborReportSupported;
+			public bool bAPChannelReportSupported;
+			public bool bActionFramesSupported;
+			public bool bANQPQueryOffloadSupported;
+			public bool bHESSIDConnectionSupported;
 		}
 		[CRepr]
 		public struct DOT11_RECV_EXTENSION_INFO
@@ -2362,8 +2362,8 @@ namespace Win32
 			public uint8 ucDataRate;
 			public uint8[6] ucPeerMacAddress;
 			public uint32 dwExtendedStatus;
-			public HANDLE hWEPOffloadContext;
-			public HANDLE hAuthOffloadContext;
+			public Handle hWEPOffloadContext;
+			public Handle hAuthOffloadContext;
 			public uint16 usWEPAppliedMask;
 			public uint16 usWPAMSDUPriority;
 			public DOT11_IV48_COUNTER dot11LowestIV48Counter;
@@ -2387,8 +2387,8 @@ namespace Win32
 			public uint8 ucDataRate;
 			public uint8[6] ucPeerMacAddress;
 			public uint32 dwExtendedStatus;
-			public HANDLE hWEPOffloadContext;
-			public HANDLE hAuthOffloadContext;
+			public Handle hWEPOffloadContext;
+			public Handle hAuthOffloadContext;
 			public uint16 usWEPAppliedMask;
 			public uint16 usWPAMSDUPriority;
 			public DOT11_IV48_COUNTER dot11LowestIV48Counter;
@@ -2433,8 +2433,8 @@ namespace Win32
 			public NDIS_OBJECT_HEADER Header;
 			public uint8[6] MacAddr;
 			public uint32 uStatus;
-			public BOOLEAN bReAssocReq;
-			public BOOLEAN bReAssocResp;
+			public bool bReAssocReq;
+			public bool bReAssocResp;
 			public uint32 uAssocReqOffset;
 			public uint32 uAssocReqSize;
 			public uint32 uAssocRespOffset;
@@ -2448,8 +2448,8 @@ namespace Win32
 			public DOT11_CIPHER_ALGORITHM MulticastCipher;
 			public uint32 uActivePhyListOffset;
 			public uint32 uActivePhyListSize;
-			public BOOLEAN bFourAddressSupported;
-			public BOOLEAN bPortAuthorized;
+			public bool bFourAddressSupported;
+			public bool bPortAuthorized;
 			public uint8 ucActiveQoSProtocol;
 			public DOT11_DS_INFO DSInfo;
 			public uint32 uEncapTableOffset;
@@ -2498,7 +2498,7 @@ namespace Win32
 		public struct DOT11_TKIPMIC_FAILURE_PARAMETERS
 		{
 			public NDIS_OBJECT_HEADER Header;
-			public BOOLEAN bDefaultKeyFailure;
+			public bool bDefaultKeyFailure;
 			public uint32 uKeyIndex;
 			public uint8[6] PeerMac;
 		}
@@ -2520,8 +2520,8 @@ namespace Win32
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public uint32 uPhyId;
-			public BOOLEAN bHardwarePhyState;
-			public BOOLEAN bSoftwarePhyState;
+			public bool bHardwarePhyState;
+			public bool bSoftwarePhyState;
 		}
 		[CRepr]
 		public struct DOT11_LINK_QUALITY_ENTRY
@@ -2570,7 +2570,7 @@ namespace Win32
 			public uint32 uAssociationTableSize;
 			public uint32 uDefaultKeyTableSize;
 			public uint32 uWEPKeyValueMaxLength;
-			public BOOLEAN bStrictlyOrderedServiceClassImplemented;
+			public bool bStrictlyOrderedServiceClassImplemented;
 			public uint32 uNumSupportedCountryOrRegionStrings;
 			public uint8* pSupportedCountryOrRegionStrings;
 			public uint32 uInfraNumSupportedUcastAlgoPairs;
@@ -2589,7 +2589,7 @@ namespace Win32
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public uint8[6] PeerMacAddr;
-			public BOOLEAN bReAssocReq;
+			public bool bReAssocReq;
 			public uint32 uAssocReqOffset;
 			public uint32 uAssocReqSize;
 		}
@@ -2600,8 +2600,8 @@ namespace Win32
 			public uint8[6] PeerMacAddr;
 			public uint32 uStatus;
 			public uint8 ucErrorSource;
-			public BOOLEAN bReAssocReq;
-			public BOOLEAN bReAssocResp;
+			public bool bReAssocReq;
+			public bool bReAssocResp;
 			public uint32 uAssocReqOffset;
 			public uint32 uAssocReqSize;
 			public uint32 uAssocRespOffset;
@@ -2668,7 +2668,7 @@ namespace Win32
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public uint8[6] PeerMacAddr;
-			public BOOLEAN bAccept;
+			public bool bAccept;
 			public uint16 usReasonCode;
 			public uint32 uAssocResponseIEsOffset;
 			public uint32 uAssocResponseIEsLength;
@@ -2678,7 +2678,7 @@ namespace Win32
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public uint8[6] PeerMacAddr;
-			public BOOLEAN bAccept;
+			public bool bAccept;
 			public uint16 usReasonCode;
 			public uint32 uAssocResponseIEsOffset;
 			public uint32 uAssocResponseIEsLength;
@@ -2711,7 +2711,7 @@ namespace Win32
 			public DOT11_AUTH_ALGORITHM AuthAlgo;
 			public DOT11_CIPHER_ALGORITHM UnicastCipherAlgo;
 			public DOT11_CIPHER_ALGORITHM MulticastCipherAlgo;
-			public BOOLEAN bWpsEnabled;
+			public bool bWpsEnabled;
 			public uint16 usListenInterval;
 			public uint8[255] ucSupportedRates;
 			public uint16 usAssociationID;
@@ -2782,9 +2782,9 @@ namespace Win32
 			public uint32 uNumConcurrentGORole;
 			public uint32 uNumConcurrentClientRole;
 			public uint32 WPSVersionsSupported;
-			public BOOLEAN bServiceDiscoverySupported;
-			public BOOLEAN bClientDiscoverabilitySupported;
-			public BOOLEAN bInfrastructureManagementSupported;
+			public bool bServiceDiscoverySupported;
+			public bool bClientDiscoverabilitySupported;
+			public bool bInfrastructureManagementSupported;
 			public uint32 uMaxSecondaryDeviceTypeListSize;
 			public uint8[6] DeviceAddress;
 			public uint32 uInterfaceAddressListCount;
@@ -2834,9 +2834,9 @@ namespace Win32
 		[CRepr]
 		public struct WFDSVC_CONNECTION_CAPABILITY
 		{
-			public BOOLEAN bNew;
-			public BOOLEAN bClient;
-			public BOOLEAN bGO;
+			public bool bNew;
+			public bool bClient;
+			public bool bGO;
 		}
 		[CRepr]
 		public struct DOT11_WFD_SERVICE_HASH_LIST
@@ -3028,43 +3028,43 @@ namespace Win32
 		{
 			public NDIS_OBJECT_HEADER Header;
 			public DOT11_ANQP_QUERY_RESULT Status;
-			public HANDLE hContext;
+			public Handle hContext;
 			public uint32 uResponseLength;
 		}
 		[CRepr]
 		public struct DOT11_WFD_DEVICE_CAPABILITY_CONFIG
 		{
 			public NDIS_OBJECT_HEADER Header;
-			public BOOLEAN bServiceDiscoveryEnabled;
-			public BOOLEAN bClientDiscoverabilityEnabled;
-			public BOOLEAN bConcurrentOperationSupported;
-			public BOOLEAN bInfrastructureManagementEnabled;
-			public BOOLEAN bDeviceLimitReached;
-			public BOOLEAN bInvitationProcedureEnabled;
+			public bool bServiceDiscoveryEnabled;
+			public bool bClientDiscoverabilityEnabled;
+			public bool bConcurrentOperationSupported;
+			public bool bInfrastructureManagementEnabled;
+			public bool bDeviceLimitReached;
+			public bool bInvitationProcedureEnabled;
 			public uint32 WPSVersionsEnabled;
 		}
 		[CRepr]
 		public struct DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG
 		{
 			public NDIS_OBJECT_HEADER Header;
-			public BOOLEAN bPersistentGroupEnabled;
-			public BOOLEAN bIntraBSSDistributionSupported;
-			public BOOLEAN bCrossConnectionSupported;
-			public BOOLEAN bPersistentReconnectSupported;
-			public BOOLEAN bGroupFormationEnabled;
+			public bool bPersistentGroupEnabled;
+			public bool bIntraBSSDistributionSupported;
+			public bool bCrossConnectionSupported;
+			public bool bPersistentReconnectSupported;
+			public bool bGroupFormationEnabled;
 			public uint32 uMaximumGroupLimit;
 		}
 		[CRepr]
 		public struct DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG_V2
 		{
 			public NDIS_OBJECT_HEADER Header;
-			public BOOLEAN bPersistentGroupEnabled;
-			public BOOLEAN bIntraBSSDistributionSupported;
-			public BOOLEAN bCrossConnectionSupported;
-			public BOOLEAN bPersistentReconnectSupported;
-			public BOOLEAN bGroupFormationEnabled;
+			public bool bPersistentGroupEnabled;
+			public bool bIntraBSSDistributionSupported;
+			public bool bCrossConnectionSupported;
+			public bool bPersistentReconnectSupported;
+			public bool bGroupFormationEnabled;
 			public uint32 uMaximumGroupLimit;
-			public BOOLEAN bEapolKeyIpAddressAllocationSupported;
+			public bool bEapolKeyIpAddressAllocationSupported;
 		}
 		[CRepr]
 		public struct DOT11_WFD_DEVICE_INFO
@@ -3101,7 +3101,7 @@ namespace Win32
 			public uint32 uNumDeviceFilters;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
-			public BOOLEAN bForceScanLegacyNetworks;
+			public bool bForceScanLegacyNetworks;
 		}
 		[CRepr]
 		public struct DOT11_WFD_DEVICE_ENTRY
@@ -3162,7 +3162,7 @@ namespace Win32
 			public uint8[6] IntendedInterfaceAddress;
 			public uint8 GroupCapability;
 			public DOT11_WFD_GROUP_ID GroupID;
-			public BOOLEAN bUseGroupID;
+			public bool bUseGroupID;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
 		}
@@ -3177,7 +3177,7 @@ namespace Win32
 			public uint8 Status;
 			public uint8 GroupCapability;
 			public DOT11_WFD_GROUP_ID GroupID;
-			public BOOLEAN bUseGroupID;
+			public bool bUseGroupID;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
 		}
@@ -3196,11 +3196,11 @@ namespace Win32
 			public DOT11_WFD_CONFIGURATION_TIMEOUT MinimumConfigTimeout;
 			public DOT11_WFD_INVITATION_FLAGS InvitationFlags;
 			public uint8[6] GroupBSSID;
-			public BOOLEAN bUseGroupBSSID;
+			public bool bUseGroupBSSID;
 			public DOT11_WFD_CHANNEL OperatingChannel;
-			public BOOLEAN bUseSpecifiedOperatingChannel;
+			public bool bUseSpecifiedOperatingChannel;
 			public DOT11_WFD_GROUP_ID GroupID;
-			public BOOLEAN bLocalGO;
+			public bool bLocalGO;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
 		}
@@ -3215,9 +3215,9 @@ namespace Win32
 			public uint8 Status;
 			public DOT11_WFD_CONFIGURATION_TIMEOUT MinimumConfigTimeout;
 			public uint8[6] GroupBSSID;
-			public BOOLEAN bUseGroupBSSID;
+			public bool bUseGroupBSSID;
 			public DOT11_WFD_CHANNEL OperatingChannel;
-			public BOOLEAN bUseSpecifiedOperatingChannel;
+			public bool bUseSpecifiedOperatingChannel;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
 		}
@@ -3230,7 +3230,7 @@ namespace Win32
 			public uint32 uSendTimeout;
 			public uint8 GroupCapability;
 			public DOT11_WFD_GROUP_ID GroupID;
-			public BOOLEAN bUseGroupID;
+			public bool bUseGroupID;
 			public uint32 uIEsOffset;
 			public uint32 uIEsLength;
 		}
@@ -3263,14 +3263,14 @@ namespace Win32
 			public NDIS_OBJECT_HEADER Header;
 			public DOT11_WFD_CHANNEL GOOperatingChannel;
 			public uint32 GOConfigTime;
-			public BOOLEAN bInGroupFormation;
-			public BOOLEAN bWaitForWPSReady;
+			public bool bInGroupFormation;
+			public bool bWaitForWPSReady;
 		}
 		[CRepr]
 		public struct DOT11_POWER_MGMT_AUTO_MODE_ENABLED_INFO
 		{
 			public NDIS_OBJECT_HEADER Header;
-			public BOOLEAN bEnabled;
+			public bool bEnabled;
 		}
 		[CRepr]
 		public struct DOT11_POWER_MGMT_MODE_STATUS_INFO
@@ -3333,7 +3333,7 @@ namespace Win32
 		{
 			public DOT11_MANUFACTURING_SELF_TEST_TYPE SelfTestType;
 			public uint32 uTestID;
-			public BOOLEAN bResult;
+			public bool bResult;
 			public uint32 uPinFailedBitMask;
 			public void* pvContext;
 			public uint32 uBytesWrittenOut;
@@ -3342,7 +3342,7 @@ namespace Win32
 		[CRepr]
 		public struct DOT11_MANUFACTURING_FUNCTIONAL_TEST_RX
 		{
-			public BOOLEAN bEnabled;
+			public bool bEnabled;
 			public DOT11_BAND Dot11Band;
 			public uint32 uChannel;
 			public int32 PowerLevel;
@@ -3350,8 +3350,8 @@ namespace Win32
 		[CRepr]
 		public struct DOT11_MANUFACTURING_FUNCTIONAL_TEST_TX
 		{
-			public BOOLEAN bEnable;
-			public BOOLEAN bOpenLoop;
+			public bool bEnable;
+			public bool bOpenLoop;
 			public DOT11_BAND Dot11Band;
 			public uint32 uChannel;
 			public uint32 uSetPowerLevel;
@@ -3449,13 +3449,13 @@ namespace Win32
 			public DOT11_SSID dot11Ssid;
 			public DOT11_BSS_TYPE dot11BssType;
 			public uint32 uNumberOfBssids;
-			public BOOL bNetworkConnectable;
+			public IntBool bNetworkConnectable;
 			public uint32 wlanNotConnectableReason;
 			public uint32 uNumberOfPhyTypes;
 			public DOT11_PHY_TYPE[8] dot11PhyTypes;
-			public BOOL bMorePhyTypes;
+			public IntBool bMorePhyTypes;
 			public uint32 wlanSignalQuality;
-			public BOOL bSecurityEnabled;
+			public IntBool bSecurityEnabled;
 			public DOT11_AUTH_ALGORITHM dot11DefaultAuthAlgorithm;
 			public DOT11_CIPHER_ALGORITHM dot11DefaultCipherAlgorithm;
 			public uint32 dwFlags;
@@ -3468,13 +3468,13 @@ namespace Win32
 			public DOT11_SSID dot11Ssid;
 			public DOT11_BSS_TYPE dot11BssType;
 			public uint32 uNumberOfBssids;
-			public BOOL bNetworkConnectable;
+			public IntBool bNetworkConnectable;
 			public uint32 wlanNotConnectableReason;
 			public uint32 uNumberOfPhyTypes;
 			public DOT11_PHY_TYPE[8] dot11PhyTypes;
-			public BOOL bMorePhyTypes;
+			public IntBool bMorePhyTypes;
 			public uint32 wlanSignalQuality;
-			public BOOL bSecurityEnabled;
+			public IntBool bSecurityEnabled;
 			public DOT11_AUTH_ALGORITHM dot11DefaultAuthAlgorithm;
 			public DOT11_CIPHER_ALGORITHM dot11DefaultCipherAlgorithm;
 			public uint32 dwFlags;
@@ -3493,7 +3493,7 @@ namespace Win32
 			public DOT11_PHY_TYPE dot11BssPhyType;
 			public int32 lRssi;
 			public uint32 uLinkQuality;
-			public BOOLEAN bInRegDomain;
+			public bool bInRegDomain;
 			public uint16 usBeaconPeriod;
 			public uint64 ullTimestamp;
 			public uint64 ullHostTimestamp;
@@ -3532,8 +3532,8 @@ namespace Win32
 		[CRepr]
 		public struct WLAN_SECURITY_ATTRIBUTES
 		{
-			public BOOL bSecurityEnabled;
-			public BOOL bOneXEnabled;
+			public IntBool bSecurityEnabled;
+			public IntBool bOneXEnabled;
 			public DOT11_AUTH_ALGORITHM dot11AuthAlgorithm;
 			public DOT11_CIPHER_ALGORITHM dot11CipherAlgorithm;
 		}
@@ -3563,7 +3563,7 @@ namespace Win32
 		public struct WLAN_INTERFACE_CAPABILITY
 		{
 			public WLAN_INTERFACE_TYPE interfaceType;
-			public BOOL bDot11DSupported;
+			public IntBool bDot11DSupported;
 			public uint32 dwMaxDesiredSsidListSize;
 			public uint32 dwMaxDesiredBssidListSize;
 			public uint32 dwNumberOfSupportedPhys;
@@ -3620,7 +3620,7 @@ namespace Win32
 		public struct WLAN_CONNECTION_PARAMETERS
 		{
 			public WLAN_CONNECTION_MODE wlanConnectionMode;
-			public PWSTR strProfile;
+			public char16* strProfile;
 			public DOT11_SSID* pDot11Ssid;
 			public DOT11_BSSID_LIST* pDesiredBssidList;
 			public DOT11_BSS_TYPE dot11BssType;
@@ -3630,7 +3630,7 @@ namespace Win32
 		public struct WLAN_CONNECTION_PARAMETERS_V2
 		{
 			public WLAN_CONNECTION_MODE wlanConnectionMode;
-			public PWSTR strProfile;
+			public char16* strProfile;
 			public DOT11_SSID* pDot11Ssid;
 			public uint8* pDot11Hessid;
 			public DOT11_BSSID_LIST* pDesiredBssidList;
@@ -3646,9 +3646,9 @@ namespace Win32
 			public DOT11_SSID dot11Ssid;
 			public DOT11_BSS_TYPE dot11BssType;
 			public uint8[6] dot11MacAddr;
-			public BOOL bSecurityEnabled;
-			public BOOL bFirstPeer;
-			public BOOL bLastPeer;
+			public IntBool bSecurityEnabled;
+			public IntBool bFirstPeer;
+			public IntBool bLastPeer;
 			public uint32 wlanReasonCode;
 		}
 		[CRepr]
@@ -3658,7 +3658,7 @@ namespace Win32
 			public char16[256] strProfileName;
 			public DOT11_SSID dot11Ssid;
 			public DOT11_BSS_TYPE dot11BssType;
-			public BOOL bSecurityEnabled;
+			public IntBool bSecurityEnabled;
 			public uint32 wlanReasonCode;
 			public WLAN_CONNECTION_NOTIFICATION_FLAGS dwFlags;
 			public char16[0] strProfileXml;
@@ -3791,13 +3791,13 @@ namespace Win32
 		[CRepr]
 		public struct ONEX_AUTH_PARAMS
 		{
-			public BOOL fUpdatePending;
+			public IntBool fUpdatePending;
 			public ONEX_VARIABLE_BLOB oneXConnProfile;
 			public ONEX_AUTH_IDENTITY authIdentity;
 			public uint32 dwQuarantineState;
 			public uint32 _bitfield;
 			public uint32 dwSessionId;
-			public HANDLE hUserToken;
+			public Handle hUserToken;
 			public ONEX_VARIABLE_BLOB OneXUserProfile;
 			public ONEX_VARIABLE_BLOB Identity;
 			public ONEX_VARIABLE_BLOB UserName;
@@ -3828,7 +3828,7 @@ namespace Win32
 		{
 			public ONEX_STATUS oneXStatus;
 			public ONEX_EAP_METHOD_BACKEND_SUPPORT BackendSupport;
-			public BOOL fBackendEngaged;
+			public IntBool fBackendEngaged;
 			public uint32 _bitfield;
 			public ONEX_VARIABLE_BLOB authParams;
 			public ONEX_VARIABLE_BLOB eapError;
@@ -3855,20 +3855,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateNetwork(PWSTR Name, PWSTR Password, int32 GeographicalId, ref IDot11AdHocInterface pInterface, ref IDot11AdHocSecuritySettings pSecurity, ref Guid pContextGuid, out IDot11AdHocNetwork* pIAdHoc) mut => VT.CreateNetwork(ref this, Name, Password, GeographicalId, ref pInterface, ref pSecurity, ref pContextGuid, out pIAdHoc);
-			public HRESULT CommitCreatedNetwork(ref IDot11AdHocNetwork pIAdHoc, BOOLEAN fSaveProfile, BOOLEAN fMakeSavedProfileUserSpecific) mut => VT.CommitCreatedNetwork(ref this, ref pIAdHoc, fSaveProfile, fMakeSavedProfileUserSpecific);
-			public HRESULT GetIEnumDot11AdHocNetworks(ref Guid pContextGuid, out IEnumDot11AdHocNetworks* ppEnum) mut => VT.GetIEnumDot11AdHocNetworks(ref this, ref pContextGuid, out ppEnum);
-			public HRESULT GetIEnumDot11AdHocInterfaces(out IEnumDot11AdHocInterfaces* ppEnum) mut => VT.GetIEnumDot11AdHocInterfaces(ref this, out ppEnum);
-			public HRESULT GetNetwork(ref Guid NetworkSignature, out IDot11AdHocNetwork* pNetwork) mut => VT.GetNetwork(ref this, ref NetworkSignature, out pNetwork);
+			public HResult CreateNetwork(char16* Name, char16* Password, int32 GeographicalId, ref IDot11AdHocInterface pInterface, ref IDot11AdHocSecuritySettings pSecurity, ref Guid pContextGuid, out IDot11AdHocNetwork* pIAdHoc) mut => VT.CreateNetwork(ref this, Name, Password, GeographicalId, ref pInterface, ref pSecurity, ref pContextGuid, out pIAdHoc);
+			public HResult CommitCreatedNetwork(ref IDot11AdHocNetwork pIAdHoc, bool fSaveProfile, bool fMakeSavedProfileUserSpecific) mut => VT.CommitCreatedNetwork(ref this, ref pIAdHoc, fSaveProfile, fMakeSavedProfileUserSpecific);
+			public HResult GetIEnumDot11AdHocNetworks(ref Guid pContextGuid, out IEnumDot11AdHocNetworks* ppEnum) mut => VT.GetIEnumDot11AdHocNetworks(ref this, ref pContextGuid, out ppEnum);
+			public HResult GetIEnumDot11AdHocInterfaces(out IEnumDot11AdHocInterfaces* ppEnum) mut => VT.GetIEnumDot11AdHocInterfaces(ref this, out ppEnum);
+			public HResult GetNetwork(ref Guid NetworkSignature, out IDot11AdHocNetwork* pNetwork) mut => VT.GetNetwork(ref this, ref NetworkSignature, out pNetwork);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManager self, PWSTR Name, PWSTR Password, int32 GeographicalId, ref IDot11AdHocInterface pInterface, ref IDot11AdHocSecuritySettings pSecurity, ref Guid pContextGuid, out IDot11AdHocNetwork* pIAdHoc) CreateNetwork;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManager self, ref IDot11AdHocNetwork pIAdHoc, BOOLEAN fSaveProfile, BOOLEAN fMakeSavedProfileUserSpecific) CommitCreatedNetwork;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManager self, ref Guid pContextGuid, out IEnumDot11AdHocNetworks* ppEnum) GetIEnumDot11AdHocNetworks;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManager self, out IEnumDot11AdHocInterfaces* ppEnum) GetIEnumDot11AdHocInterfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManager self, ref Guid NetworkSignature, out IDot11AdHocNetwork* pNetwork) GetNetwork;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManager self, char16* Name, char16* Password, int32 GeographicalId, ref IDot11AdHocInterface pInterface, ref IDot11AdHocSecuritySettings pSecurity, ref Guid pContextGuid, out IDot11AdHocNetwork* pIAdHoc) CreateNetwork;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManager self, ref IDot11AdHocNetwork pIAdHoc, bool fSaveProfile, bool fMakeSavedProfileUserSpecific) CommitCreatedNetwork;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManager self, ref Guid pContextGuid, out IEnumDot11AdHocNetworks* ppEnum) GetIEnumDot11AdHocNetworks;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManager self, out IEnumDot11AdHocInterfaces* ppEnum) GetIEnumDot11AdHocInterfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManager self, ref Guid NetworkSignature, out IDot11AdHocNetwork* pNetwork) GetNetwork;
 			}
 		}
 		[CRepr]
@@ -3878,18 +3878,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnNetworkAdd(ref IDot11AdHocNetwork pIAdHocNetwork) mut => VT.OnNetworkAdd(ref this, ref pIAdHocNetwork);
-			public HRESULT OnNetworkRemove(ref Guid Signature) mut => VT.OnNetworkRemove(ref this, ref Signature);
-			public HRESULT OnInterfaceAdd(ref IDot11AdHocInterface pIAdHocInterface) mut => VT.OnInterfaceAdd(ref this, ref pIAdHocInterface);
-			public HRESULT OnInterfaceRemove(ref Guid Signature) mut => VT.OnInterfaceRemove(ref this, ref Signature);
+			public HResult OnNetworkAdd(ref IDot11AdHocNetwork pIAdHocNetwork) mut => VT.OnNetworkAdd(ref this, ref pIAdHocNetwork);
+			public HResult OnNetworkRemove(ref Guid Signature) mut => VT.OnNetworkRemove(ref this, ref Signature);
+			public HResult OnInterfaceAdd(ref IDot11AdHocInterface pIAdHocInterface) mut => VT.OnInterfaceAdd(ref this, ref pIAdHocInterface);
+			public HResult OnInterfaceRemove(ref Guid Signature) mut => VT.OnInterfaceRemove(ref this, ref Signature);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManagerNotificationSink self, ref IDot11AdHocNetwork pIAdHocNetwork) OnNetworkAdd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManagerNotificationSink self, ref Guid Signature) OnNetworkRemove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManagerNotificationSink self, ref IDot11AdHocInterface pIAdHocInterface) OnInterfaceAdd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocManagerNotificationSink self, ref Guid Signature) OnInterfaceRemove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManagerNotificationSink self, ref IDot11AdHocNetwork pIAdHocNetwork) OnNetworkAdd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManagerNotificationSink self, ref Guid Signature) OnNetworkRemove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManagerNotificationSink self, ref IDot11AdHocInterface pIAdHocInterface) OnInterfaceAdd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocManagerNotificationSink self, ref Guid Signature) OnInterfaceRemove;
 			}
 		}
 		[CRepr]
@@ -3899,18 +3899,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cElt, IDot11AdHocNetwork** rgElt, out uint32 pcEltFetched) mut => VT.Next(ref this, cElt, rgElt, out pcEltFetched);
-			public HRESULT Skip(uint32 cElt) mut => VT.Skip(ref this, cElt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumDot11AdHocNetworks* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 cElt, IDot11AdHocNetwork** rgElt, out uint32 pcEltFetched) mut => VT.Next(ref this, cElt, rgElt, out pcEltFetched);
+			public HResult Skip(uint32 cElt) mut => VT.Skip(ref this, cElt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumDot11AdHocNetworks* ppEnum) mut => VT.Clone(ref this, out ppEnum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocNetworks self, uint32 cElt, IDot11AdHocNetwork** rgElt, out uint32 pcEltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocNetworks self, uint32 cElt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocNetworks self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocNetworks self, out IEnumDot11AdHocNetworks* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocNetworks self, uint32 cElt, IDot11AdHocNetwork** rgElt, out uint32 pcEltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocNetworks self, uint32 cElt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocNetworks self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocNetworks self, out IEnumDot11AdHocNetworks* ppEnum) Clone;
 			}
 		}
 		[CRepr]
@@ -3920,34 +3920,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetStatus(out DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) mut => VT.GetStatus(ref this, out eStatus);
-			public HRESULT GetSSID(out PWSTR ppszwSSID) mut => VT.GetSSID(ref this, out ppszwSSID);
-			public HRESULT HasProfile(out uint8 pf11d) mut => VT.HasProfile(ref this, out pf11d);
-			public HRESULT GetProfileName(out PWSTR ppszwProfileName) mut => VT.GetProfileName(ref this, out ppszwProfileName);
-			public HRESULT DeleteProfile() mut => VT.DeleteProfile(ref this);
-			public HRESULT GetSignalQuality(out uint32 puStrengthValue, out uint32 puStrengthMax) mut => VT.GetSignalQuality(ref this, out puStrengthValue, out puStrengthMax);
-			public HRESULT GetSecuritySetting(out IDot11AdHocSecuritySettings* pAdHocSecuritySetting) mut => VT.GetSecuritySetting(ref this, out pAdHocSecuritySetting);
-			public HRESULT GetContextGuid(out Guid pContextGuid) mut => VT.GetContextGuid(ref this, out pContextGuid);
-			public HRESULT GetSignature(out Guid pSignature) mut => VT.GetSignature(ref this, out pSignature);
-			public HRESULT GetInterface(out IDot11AdHocInterface* pAdHocInterface) mut => VT.GetInterface(ref this, out pAdHocInterface);
-			public HRESULT Connect(PWSTR Passphrase, int32 GeographicalId, BOOLEAN fSaveProfile, BOOLEAN fMakeSavedProfileUserSpecific) mut => VT.Connect(ref this, Passphrase, GeographicalId, fSaveProfile, fMakeSavedProfileUserSpecific);
-			public HRESULT Disconnect() mut => VT.Disconnect(ref this);
+			public HResult GetStatus(out DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) mut => VT.GetStatus(ref this, out eStatus);
+			public HResult GetSSID(out char16* ppszwSSID) mut => VT.GetSSID(ref this, out ppszwSSID);
+			public HResult HasProfile(out uint8 pf11d) mut => VT.HasProfile(ref this, out pf11d);
+			public HResult GetProfileName(out char16* ppszwProfileName) mut => VT.GetProfileName(ref this, out ppszwProfileName);
+			public HResult DeleteProfile() mut => VT.DeleteProfile(ref this);
+			public HResult GetSignalQuality(out uint32 puStrengthValue, out uint32 puStrengthMax) mut => VT.GetSignalQuality(ref this, out puStrengthValue, out puStrengthMax);
+			public HResult GetSecuritySetting(out IDot11AdHocSecuritySettings* pAdHocSecuritySetting) mut => VT.GetSecuritySetting(ref this, out pAdHocSecuritySetting);
+			public HResult GetContextGuid(out Guid pContextGuid) mut => VT.GetContextGuid(ref this, out pContextGuid);
+			public HResult GetSignature(out Guid pSignature) mut => VT.GetSignature(ref this, out pSignature);
+			public HResult GetInterface(out IDot11AdHocInterface* pAdHocInterface) mut => VT.GetInterface(ref this, out pAdHocInterface);
+			public HResult Connect(char16* Passphrase, int32 GeographicalId, bool fSaveProfile, bool fMakeSavedProfileUserSpecific) mut => VT.Connect(ref this, Passphrase, GeographicalId, fSaveProfile, fMakeSavedProfileUserSpecific);
+			public HResult Disconnect() mut => VT.Disconnect(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) GetStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out PWSTR ppszwSSID) GetSSID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out uint8 pf11d) HasProfile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out PWSTR ppszwProfileName) GetProfileName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self) DeleteProfile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out uint32 puStrengthValue, out uint32 puStrengthMax) GetSignalQuality;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out IDot11AdHocSecuritySettings* pAdHocSecuritySetting) GetSecuritySetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out Guid pContextGuid) GetContextGuid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out Guid pSignature) GetSignature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, out IDot11AdHocInterface* pAdHocInterface) GetInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self, PWSTR Passphrase, int32 GeographicalId, BOOLEAN fSaveProfile, BOOLEAN fMakeSavedProfileUserSpecific) Connect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetwork self) Disconnect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) GetStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out char16* ppszwSSID) GetSSID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out uint8 pf11d) HasProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out char16* ppszwProfileName) GetProfileName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self) DeleteProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out uint32 puStrengthValue, out uint32 puStrengthMax) GetSignalQuality;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out IDot11AdHocSecuritySettings* pAdHocSecuritySetting) GetSecuritySetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out Guid pContextGuid) GetContextGuid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out Guid pSignature) GetSignature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, out IDot11AdHocInterface* pAdHocInterface) GetInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self, char16* Passphrase, int32 GeographicalId, bool fSaveProfile, bool fMakeSavedProfileUserSpecific) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetwork self) Disconnect;
 			}
 		}
 		[CRepr]
@@ -3957,14 +3957,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnStatusChange(DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) mut => VT.OnStatusChange(ref this, eStatus);
-			public HRESULT OnConnectFail(DOT11_ADHOC_CONNECT_FAIL_REASON eFailReason) mut => VT.OnConnectFail(ref this, eFailReason);
+			public HResult OnStatusChange(DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) mut => VT.OnStatusChange(ref this, eStatus);
+			public HResult OnConnectFail(DOT11_ADHOC_CONNECT_FAIL_REASON eFailReason) mut => VT.OnConnectFail(ref this, eFailReason);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetworkNotificationSink self, DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) OnStatusChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocNetworkNotificationSink self, DOT11_ADHOC_CONNECT_FAIL_REASON eFailReason) OnConnectFail;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetworkNotificationSink self, DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) OnStatusChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocNetworkNotificationSink self, DOT11_ADHOC_CONNECT_FAIL_REASON eFailReason) OnConnectFail;
 			}
 		}
 		[CRepr]
@@ -3974,28 +3974,28 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDeviceSignature(out Guid pSignature) mut => VT.GetDeviceSignature(ref this, out pSignature);
-			public HRESULT GetFriendlyName(out PWSTR ppszName) mut => VT.GetFriendlyName(ref this, out ppszName);
-			public HRESULT IsDot11d(out uint8 pf11d) mut => VT.IsDot11d(ref this, out pf11d);
-			public HRESULT IsAdHocCapable(out uint8 pfAdHocCapable) mut => VT.IsAdHocCapable(ref this, out pfAdHocCapable);
-			public HRESULT IsRadioOn(out uint8 pfIsRadioOn) mut => VT.IsRadioOn(ref this, out pfIsRadioOn);
-			public HRESULT GetActiveNetwork(out IDot11AdHocNetwork* ppNetwork) mut => VT.GetActiveNetwork(ref this, out ppNetwork);
-			public HRESULT GetIEnumSecuritySettings(out IEnumDot11AdHocSecuritySettings* ppEnum) mut => VT.GetIEnumSecuritySettings(ref this, out ppEnum);
-			public HRESULT GetIEnumDot11AdHocNetworks(ref Guid pFilterGuid, out IEnumDot11AdHocNetworks* ppEnum) mut => VT.GetIEnumDot11AdHocNetworks(ref this, ref pFilterGuid, out ppEnum);
-			public HRESULT GetStatus(out DOT11_ADHOC_NETWORK_CONNECTION_STATUS pState) mut => VT.GetStatus(ref this, out pState);
+			public HResult GetDeviceSignature(out Guid pSignature) mut => VT.GetDeviceSignature(ref this, out pSignature);
+			public HResult GetFriendlyName(out char16* ppszName) mut => VT.GetFriendlyName(ref this, out ppszName);
+			public HResult IsDot11d(out uint8 pf11d) mut => VT.IsDot11d(ref this, out pf11d);
+			public HResult IsAdHocCapable(out uint8 pfAdHocCapable) mut => VT.IsAdHocCapable(ref this, out pfAdHocCapable);
+			public HResult IsRadioOn(out uint8 pfIsRadioOn) mut => VT.IsRadioOn(ref this, out pfIsRadioOn);
+			public HResult GetActiveNetwork(out IDot11AdHocNetwork* ppNetwork) mut => VT.GetActiveNetwork(ref this, out ppNetwork);
+			public HResult GetIEnumSecuritySettings(out IEnumDot11AdHocSecuritySettings* ppEnum) mut => VT.GetIEnumSecuritySettings(ref this, out ppEnum);
+			public HResult GetIEnumDot11AdHocNetworks(ref Guid pFilterGuid, out IEnumDot11AdHocNetworks* ppEnum) mut => VT.GetIEnumDot11AdHocNetworks(ref this, ref pFilterGuid, out ppEnum);
+			public HResult GetStatus(out DOT11_ADHOC_NETWORK_CONNECTION_STATUS pState) mut => VT.GetStatus(ref this, out pState);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out Guid pSignature) GetDeviceSignature;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out PWSTR ppszName) GetFriendlyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out uint8 pf11d) IsDot11d;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out uint8 pfAdHocCapable) IsAdHocCapable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out uint8 pfIsRadioOn) IsRadioOn;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out IDot11AdHocNetwork* ppNetwork) GetActiveNetwork;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out IEnumDot11AdHocSecuritySettings* ppEnum) GetIEnumSecuritySettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, ref Guid pFilterGuid, out IEnumDot11AdHocNetworks* ppEnum) GetIEnumDot11AdHocNetworks;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterface self, out DOT11_ADHOC_NETWORK_CONNECTION_STATUS pState) GetStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out Guid pSignature) GetDeviceSignature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out char16* ppszName) GetFriendlyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out uint8 pf11d) IsDot11d;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out uint8 pfAdHocCapable) IsAdHocCapable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out uint8 pfIsRadioOn) IsRadioOn;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out IDot11AdHocNetwork* ppNetwork) GetActiveNetwork;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out IEnumDot11AdHocSecuritySettings* ppEnum) GetIEnumSecuritySettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, ref Guid pFilterGuid, out IEnumDot11AdHocNetworks* ppEnum) GetIEnumDot11AdHocNetworks;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterface self, out DOT11_ADHOC_NETWORK_CONNECTION_STATUS pState) GetStatus;
 			}
 		}
 		[CRepr]
@@ -4005,18 +4005,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cElt, IDot11AdHocInterface** rgElt, out uint32 pcEltFetched) mut => VT.Next(ref this, cElt, rgElt, out pcEltFetched);
-			public HRESULT Skip(uint32 cElt) mut => VT.Skip(ref this, cElt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumDot11AdHocInterfaces* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 cElt, IDot11AdHocInterface** rgElt, out uint32 pcEltFetched) mut => VT.Next(ref this, cElt, rgElt, out pcEltFetched);
+			public HResult Skip(uint32 cElt) mut => VT.Skip(ref this, cElt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumDot11AdHocInterfaces* ppEnum) mut => VT.Clone(ref this, out ppEnum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocInterfaces self, uint32 cElt, IDot11AdHocInterface** rgElt, out uint32 pcEltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocInterfaces self, uint32 cElt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocInterfaces self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocInterfaces self, out IEnumDot11AdHocInterfaces* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocInterfaces self, uint32 cElt, IDot11AdHocInterface** rgElt, out uint32 pcEltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocInterfaces self, uint32 cElt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocInterfaces self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocInterfaces self, out IEnumDot11AdHocInterfaces* ppEnum) Clone;
 			}
 		}
 		[CRepr]
@@ -4026,18 +4026,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Next(uint32 cElt, IDot11AdHocSecuritySettings** rgElt, out uint32 pcEltFetched) mut => VT.Next(ref this, cElt, rgElt, out pcEltFetched);
-			public HRESULT Skip(uint32 cElt) mut => VT.Skip(ref this, cElt);
-			public HRESULT Reset() mut => VT.Reset(ref this);
-			public HRESULT Clone(out IEnumDot11AdHocSecuritySettings* ppEnum) mut => VT.Clone(ref this, out ppEnum);
+			public HResult Next(uint32 cElt, IDot11AdHocSecuritySettings** rgElt, out uint32 pcEltFetched) mut => VT.Next(ref this, cElt, rgElt, out pcEltFetched);
+			public HResult Skip(uint32 cElt) mut => VT.Skip(ref this, cElt);
+			public HResult Reset() mut => VT.Reset(ref this);
+			public HResult Clone(out IEnumDot11AdHocSecuritySettings* ppEnum) mut => VT.Clone(ref this, out ppEnum);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocSecuritySettings self, uint32 cElt, IDot11AdHocSecuritySettings** rgElt, out uint32 pcEltFetched) Next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocSecuritySettings self, uint32 cElt) Skip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocSecuritySettings self) Reset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IEnumDot11AdHocSecuritySettings self, out IEnumDot11AdHocSecuritySettings* ppEnum) Clone;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocSecuritySettings self, uint32 cElt, IDot11AdHocSecuritySettings** rgElt, out uint32 pcEltFetched) Next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocSecuritySettings self, uint32 cElt) Skip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocSecuritySettings self) Reset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IEnumDot11AdHocSecuritySettings self, out IEnumDot11AdHocSecuritySettings* ppEnum) Clone;
 			}
 		}
 		[CRepr]
@@ -4047,14 +4047,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDot11AuthAlgorithm(out DOT11_ADHOC_AUTH_ALGORITHM pAuth) mut => VT.GetDot11AuthAlgorithm(ref this, out pAuth);
-			public HRESULT GetDot11CipherAlgorithm(out DOT11_ADHOC_CIPHER_ALGORITHM pCipher) mut => VT.GetDot11CipherAlgorithm(ref this, out pCipher);
+			public HResult GetDot11AuthAlgorithm(out DOT11_ADHOC_AUTH_ALGORITHM pAuth) mut => VT.GetDot11AuthAlgorithm(ref this, out pAuth);
+			public HResult GetDot11CipherAlgorithm(out DOT11_ADHOC_CIPHER_ALGORITHM pCipher) mut => VT.GetDot11CipherAlgorithm(ref this, out pCipher);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocSecuritySettings self, out DOT11_ADHOC_AUTH_ALGORITHM pAuth) GetDot11AuthAlgorithm;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocSecuritySettings self, out DOT11_ADHOC_CIPHER_ALGORITHM pCipher) GetDot11CipherAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocSecuritySettings self, out DOT11_ADHOC_AUTH_ALGORITHM pAuth) GetDot11AuthAlgorithm;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocSecuritySettings self, out DOT11_ADHOC_CIPHER_ALGORITHM pCipher) GetDot11CipherAlgorithm;
 			}
 		}
 		[CRepr]
@@ -4064,89 +4064,89 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnConnectionStatusChange(DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) mut => VT.OnConnectionStatusChange(ref this, eStatus);
+			public HResult OnConnectionStatusChange(DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) mut => VT.OnConnectionStatusChange(ref this, eStatus);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDot11AdHocInterfaceNotificationSink self, DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) OnConnectionStatusChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDot11AdHocInterfaceNotificationSink self, DOT11_ADHOC_NETWORK_CONNECTION_STATUS eStatus) OnConnectionStatusChange;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanOpenHandle(uint32 dwClientVersion, void* pReserved, out uint32 pdwNegotiatedVersion, out HANDLE phClientHandle);
+		public static extern uint32 WlanOpenHandle(uint32 dwClientVersion, void* pReserved, out uint32 pdwNegotiatedVersion, out Handle phClientHandle);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanCloseHandle(HANDLE hClientHandle, void* pReserved);
+		public static extern uint32 WlanCloseHandle(Handle hClientHandle, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanEnumInterfaces(HANDLE hClientHandle, void* pReserved, out WLAN_INTERFACE_INFO_LIST* ppInterfaceList);
+		public static extern uint32 WlanEnumInterfaces(Handle hClientHandle, void* pReserved, out WLAN_INTERFACE_INFO_LIST* ppInterfaceList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetAutoConfigParameter(HANDLE hClientHandle, WLAN_AUTOCONF_OPCODE OpCode, uint32 dwDataSize, void* pData, void* pReserved);
+		public static extern uint32 WlanSetAutoConfigParameter(Handle hClientHandle, WLAN_AUTOCONF_OPCODE OpCode, uint32 dwDataSize, void* pData, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanQueryAutoConfigParameter(HANDLE hClientHandle, WLAN_AUTOCONF_OPCODE OpCode, void* pReserved, out uint32 pdwDataSize, void** ppData, WLAN_OPCODE_VALUE_TYPE* pWlanOpcodeValueType);
+		public static extern uint32 WlanQueryAutoConfigParameter(Handle hClientHandle, WLAN_AUTOCONF_OPCODE OpCode, void* pReserved, out uint32 pdwDataSize, void** ppData, WLAN_OPCODE_VALUE_TYPE* pWlanOpcodeValueType);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetInterfaceCapability(HANDLE hClientHandle, in Guid pInterfaceGuid, void* pReserved, out WLAN_INTERFACE_CAPABILITY* ppCapability);
+		public static extern uint32 WlanGetInterfaceCapability(Handle hClientHandle, in Guid pInterfaceGuid, void* pReserved, out WLAN_INTERFACE_CAPABILITY* ppCapability);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetInterface(HANDLE hClientHandle, in Guid pInterfaceGuid, WLAN_INTF_OPCODE OpCode, uint32 dwDataSize, void* pData, void* pReserved);
+		public static extern uint32 WlanSetInterface(Handle hClientHandle, in Guid pInterfaceGuid, WLAN_INTF_OPCODE OpCode, uint32 dwDataSize, void* pData, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanQueryInterface(HANDLE hClientHandle, in Guid pInterfaceGuid, WLAN_INTF_OPCODE OpCode, void* pReserved, out uint32 pdwDataSize, void** ppData, WLAN_OPCODE_VALUE_TYPE* pWlanOpcodeValueType);
+		public static extern uint32 WlanQueryInterface(Handle hClientHandle, in Guid pInterfaceGuid, WLAN_INTF_OPCODE OpCode, void* pReserved, out uint32 pdwDataSize, void** ppData, WLAN_OPCODE_VALUE_TYPE* pWlanOpcodeValueType);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanIhvControl(HANDLE hClientHandle, in Guid pInterfaceGuid, WLAN_IHV_CONTROL_TYPE Type, uint32 dwInBufferSize, void* pInBuffer, uint32 dwOutBufferSize, void* pOutBuffer, out uint32 pdwBytesReturned);
+		public static extern uint32 WlanIhvControl(Handle hClientHandle, in Guid pInterfaceGuid, WLAN_IHV_CONTROL_TYPE Type, uint32 dwInBufferSize, void* pInBuffer, uint32 dwOutBufferSize, void* pOutBuffer, out uint32 pdwBytesReturned);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanScan(HANDLE hClientHandle, in Guid pInterfaceGuid, DOT11_SSID* pDot11Ssid, WLAN_RAW_DATA* pIeData, void* pReserved);
+		public static extern uint32 WlanScan(Handle hClientHandle, in Guid pInterfaceGuid, DOT11_SSID* pDot11Ssid, WLAN_RAW_DATA* pIeData, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetAvailableNetworkList(HANDLE hClientHandle, in Guid pInterfaceGuid, uint32 dwFlags, void* pReserved, out WLAN_AVAILABLE_NETWORK_LIST* ppAvailableNetworkList);
+		public static extern uint32 WlanGetAvailableNetworkList(Handle hClientHandle, in Guid pInterfaceGuid, uint32 dwFlags, void* pReserved, out WLAN_AVAILABLE_NETWORK_LIST* ppAvailableNetworkList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetAvailableNetworkList2(HANDLE hClientHandle, in Guid pInterfaceGuid, uint32 dwFlags, void* pReserved, out WLAN_AVAILABLE_NETWORK_LIST_V2* ppAvailableNetworkList);
+		public static extern uint32 WlanGetAvailableNetworkList2(Handle hClientHandle, in Guid pInterfaceGuid, uint32 dwFlags, void* pReserved, out WLAN_AVAILABLE_NETWORK_LIST_V2* ppAvailableNetworkList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetNetworkBssList(HANDLE hClientHandle, in Guid pInterfaceGuid, DOT11_SSID* pDot11Ssid, DOT11_BSS_TYPE dot11BssType, BOOL bSecurityEnabled, void* pReserved, out WLAN_BSS_LIST* ppWlanBssList);
+		public static extern uint32 WlanGetNetworkBssList(Handle hClientHandle, in Guid pInterfaceGuid, DOT11_SSID* pDot11Ssid, DOT11_BSS_TYPE dot11BssType, IntBool bSecurityEnabled, void* pReserved, out WLAN_BSS_LIST* ppWlanBssList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanConnect(HANDLE hClientHandle, in Guid pInterfaceGuid, in WLAN_CONNECTION_PARAMETERS pConnectionParameters, void* pReserved);
+		public static extern uint32 WlanConnect(Handle hClientHandle, in Guid pInterfaceGuid, in WLAN_CONNECTION_PARAMETERS pConnectionParameters, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanConnect2(HANDLE hClientHandle, in Guid pInterfaceGuid, in WLAN_CONNECTION_PARAMETERS_V2 pConnectionParameters, void* pReserved);
+		public static extern uint32 WlanConnect2(Handle hClientHandle, in Guid pInterfaceGuid, in WLAN_CONNECTION_PARAMETERS_V2 pConnectionParameters, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanDisconnect(HANDLE hClientHandle, in Guid pInterfaceGuid, void* pReserved);
+		public static extern uint32 WlanDisconnect(Handle hClientHandle, in Guid pInterfaceGuid, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanRegisterNotification(HANDLE hClientHandle, uint32 dwNotifSource, BOOL bIgnoreDuplicate, WLAN_NOTIFICATION_CALLBACK funcCallback, void* pCallbackContext, void* pReserved, uint32* pdwPrevNotifSource);
+		public static extern uint32 WlanRegisterNotification(Handle hClientHandle, uint32 dwNotifSource, IntBool bIgnoreDuplicate, WLAN_NOTIFICATION_CALLBACK funcCallback, void* pCallbackContext, void* pReserved, uint32* pdwPrevNotifSource);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetProfile(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, void* pReserved, out PWSTR pstrProfileXml, uint32* pdwFlags, uint32* pdwGrantedAccess);
+		public static extern uint32 WlanGetProfile(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, void* pReserved, out char16* pstrProfileXml, uint32* pdwFlags, uint32* pdwGrantedAccess);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetProfileEapUserData(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, EAP_METHOD_TYPE eapType, WLAN_SET_EAPHOST_FLAGS dwFlags, uint32 dwEapUserDataSize, uint8* pbEapUserData, void* pReserved);
+		public static extern uint32 WlanSetProfileEapUserData(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, EAP_METHOD_TYPE eapType, WLAN_SET_EAPHOST_FLAGS dwFlags, uint32 dwEapUserDataSize, uint8* pbEapUserData, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetProfileEapXmlUserData(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, WLAN_SET_EAPHOST_FLAGS dwFlags, PWSTR strEapXmlUserData, void* pReserved);
+		public static extern uint32 WlanSetProfileEapXmlUserData(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, WLAN_SET_EAPHOST_FLAGS dwFlags, char16* strEapXmlUserData, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetProfile(HANDLE hClientHandle, in Guid pInterfaceGuid, uint32 dwFlags, PWSTR strProfileXml, PWSTR strAllUserProfileSecurity, BOOL bOverwrite, void* pReserved, out uint32 pdwReasonCode);
+		public static extern uint32 WlanSetProfile(Handle hClientHandle, in Guid pInterfaceGuid, uint32 dwFlags, char16* strProfileXml, char16* strAllUserProfileSecurity, IntBool bOverwrite, void* pReserved, out uint32 pdwReasonCode);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanDeleteProfile(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, void* pReserved);
+		public static extern uint32 WlanDeleteProfile(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanRenameProfile(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strOldProfileName, PWSTR strNewProfileName, void* pReserved);
+		public static extern uint32 WlanRenameProfile(Handle hClientHandle, in Guid pInterfaceGuid, char16* strOldProfileName, char16* strNewProfileName, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetProfileList(HANDLE hClientHandle, in Guid pInterfaceGuid, void* pReserved, out WLAN_PROFILE_INFO_LIST* ppProfileList);
+		public static extern uint32 WlanGetProfileList(Handle hClientHandle, in Guid pInterfaceGuid, void* pReserved, out WLAN_PROFILE_INFO_LIST* ppProfileList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetProfileList(HANDLE hClientHandle, in Guid pInterfaceGuid, uint32 dwItems, PWSTR* strProfileNames, void* pReserved);
+		public static extern uint32 WlanSetProfileList(Handle hClientHandle, in Guid pInterfaceGuid, uint32 dwItems, char16** strProfileNames, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetProfilePosition(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, uint32 dwPosition, void* pReserved);
+		public static extern uint32 WlanSetProfilePosition(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, uint32 dwPosition, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetProfileCustomUserData(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, uint32 dwDataSize, in uint8 pData, void* pReserved);
+		public static extern uint32 WlanSetProfileCustomUserData(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, uint32 dwDataSize, in uint8 pData, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetProfileCustomUserData(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, void* pReserved, out uint32 pdwDataSize, out uint8* ppData);
+		public static extern uint32 WlanGetProfileCustomUserData(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, void* pReserved, out uint32 pdwDataSize, out uint8* ppData);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetFilterList(HANDLE hClientHandle, WLAN_FILTER_LIST_TYPE wlanFilterListType, DOT11_NETWORK_LIST* pNetworkList, void* pReserved);
+		public static extern uint32 WlanSetFilterList(Handle hClientHandle, WLAN_FILTER_LIST_TYPE wlanFilterListType, DOT11_NETWORK_LIST* pNetworkList, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetFilterList(HANDLE hClientHandle, WLAN_FILTER_LIST_TYPE wlanFilterListType, void* pReserved, out DOT11_NETWORK_LIST* ppNetworkList);
+		public static extern uint32 WlanGetFilterList(Handle hClientHandle, WLAN_FILTER_LIST_TYPE wlanFilterListType, void* pReserved, out DOT11_NETWORK_LIST* ppNetworkList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetPsdIEDataList(HANDLE hClientHandle, PWSTR strFormat, WLAN_RAW_DATA_LIST* pPsdIEDataList, void* pReserved);
+		public static extern uint32 WlanSetPsdIEDataList(Handle hClientHandle, char16* strFormat, WLAN_RAW_DATA_LIST* pPsdIEDataList, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSaveTemporaryProfile(HANDLE hClientHandle, in Guid pInterfaceGuid, PWSTR strProfileName, PWSTR strAllUserProfileSecurity, uint32 dwFlags, BOOL bOverWrite, void* pReserved);
+		public static extern uint32 WlanSaveTemporaryProfile(Handle hClientHandle, in Guid pInterfaceGuid, char16* strProfileName, char16* strAllUserProfileSecurity, uint32 dwFlags, IntBool bOverWrite, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanDeviceServiceCommand(HANDLE hClientHandle, in Guid pInterfaceGuid, ref Guid pDeviceServiceGuid, uint32 dwOpCode, uint32 dwInBufferSize, void* pInBuffer, uint32 dwOutBufferSize, void* pOutBuffer, out uint32 pdwBytesReturned);
+		public static extern uint32 WlanDeviceServiceCommand(Handle hClientHandle, in Guid pInterfaceGuid, ref Guid pDeviceServiceGuid, uint32 dwOpCode, uint32 dwInBufferSize, void* pInBuffer, uint32 dwOutBufferSize, void* pOutBuffer, out uint32 pdwBytesReturned);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetSupportedDeviceServices(HANDLE hClientHandle, in Guid pInterfaceGuid, out WLAN_DEVICE_SERVICE_GUID_LIST* ppDevSvcGuidList);
+		public static extern uint32 WlanGetSupportedDeviceServices(Handle hClientHandle, in Guid pInterfaceGuid, out WLAN_DEVICE_SERVICE_GUID_LIST* ppDevSvcGuidList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanRegisterDeviceServiceNotification(HANDLE hClientHandle, WLAN_DEVICE_SERVICE_GUID_LIST* pDevSvcGuidList);
+		public static extern uint32 WlanRegisterDeviceServiceNotification(Handle hClientHandle, WLAN_DEVICE_SERVICE_GUID_LIST* pDevSvcGuidList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanExtractPsdIEDataList(HANDLE hClientHandle, uint32 dwIeDataSize, in uint8 pRawIeData, PWSTR strFormat, void* pReserved, out WLAN_RAW_DATA_LIST* ppPsdIEDataList);
+		public static extern uint32 WlanExtractPsdIEDataList(Handle hClientHandle, uint32 dwIeDataSize, in uint8 pRawIeData, char16* strFormat, void* pReserved, out WLAN_RAW_DATA_LIST* ppPsdIEDataList);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WlanReasonCodeToString(uint32 dwReasonCode, uint32 dwBufferSize, char16* pStringBuffer, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -4154,47 +4154,47 @@ namespace Win32
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void WlanFreeMemory(void* pMemory);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanSetSecuritySettings(HANDLE hClientHandle, WLAN_SECURABLE_OBJECT SecurableObject, PWSTR strModifiedSDDL);
+		public static extern uint32 WlanSetSecuritySettings(Handle hClientHandle, WLAN_SECURABLE_OBJECT SecurableObject, char16* strModifiedSDDL);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanGetSecuritySettings(HANDLE hClientHandle, WLAN_SECURABLE_OBJECT SecurableObject, WLAN_OPCODE_VALUE_TYPE* pValueType, out PWSTR pstrCurrentSDDL, out uint32 pdwGrantedAccess);
+		public static extern uint32 WlanGetSecuritySettings(Handle hClientHandle, WLAN_SECURABLE_OBJECT SecurableObject, WLAN_OPCODE_VALUE_TYPE* pValueType, out char16* pstrCurrentSDDL, out uint32 pdwGrantedAccess);
 		[Import("wlanui.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanUIEditProfile(uint32 dwClientVersion, PWSTR wstrProfileName, ref Guid pInterfaceGuid, HWND hWnd, WL_DISPLAY_PAGES wlStartPage, void* pReserved, uint32* pWlanReasonCode);
+		public static extern uint32 WlanUIEditProfile(uint32 dwClientVersion, char16* wstrProfileName, ref Guid pInterfaceGuid, HWnd hWnd, WL_DISPLAY_PAGES wlStartPage, void* pReserved, uint32* pWlanReasonCode);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkStartUsing(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkStartUsing(Handle hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkStopUsing(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkStopUsing(Handle hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkForceStart(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkForceStart(Handle hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkForceStop(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkForceStop(Handle hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkQueryProperty(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_OPCODE OpCode, out uint32 pdwDataSize, void** ppvData, out WLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkQueryProperty(Handle hClientHandle, WLAN_HOSTED_NETWORK_OPCODE OpCode, out uint32 pdwDataSize, void** ppvData, out WLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkSetProperty(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_OPCODE OpCode, uint32 dwDataSize, void* pvData, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkSetProperty(Handle hClientHandle, WLAN_HOSTED_NETWORK_OPCODE OpCode, uint32 dwDataSize, void* pvData, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkInitSettings(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkInitSettings(Handle hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkRefreshSecuritySettings(HANDLE hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkRefreshSecuritySettings(Handle hClientHandle, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkQueryStatus(HANDLE hClientHandle, out WLAN_HOSTED_NETWORK_STATUS* ppWlanHostedNetworkStatus, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkQueryStatus(Handle hClientHandle, out WLAN_HOSTED_NETWORK_STATUS* ppWlanHostedNetworkStatus, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkSetSecondaryKey(HANDLE hClientHandle, uint32 dwKeyLength, ref uint8 pucKeyData, BOOL bIsPassPhrase, BOOL bPersistent, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkSetSecondaryKey(Handle hClientHandle, uint32 dwKeyLength, ref uint8 pucKeyData, IntBool bIsPassPhrase, IntBool bPersistent, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanHostedNetworkQuerySecondaryKey(HANDLE hClientHandle, out uint32 pdwKeyLength, out uint8* ppucKeyData, out BOOL pbIsPassPhrase, out BOOL pbPersistent, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
+		public static extern uint32 WlanHostedNetworkQuerySecondaryKey(Handle hClientHandle, out uint32 pdwKeyLength, out uint8* ppucKeyData, out IntBool pbIsPassPhrase, out IntBool pbPersistent, WLAN_HOSTED_NETWORK_REASON* pFailReason, void* pvReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WlanRegisterVirtualStationNotification(HANDLE hClientHandle, BOOL bRegister, void* pReserved);
+		public static extern uint32 WlanRegisterVirtualStationNotification(Handle hClientHandle, IntBool bRegister, void* pReserved);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WFDOpenHandle(uint32 dwClientVersion, out uint32 pdwNegotiatedVersion, out HANDLE phClientHandle);
+		public static extern uint32 WFDOpenHandle(uint32 dwClientVersion, out uint32 pdwNegotiatedVersion, out Handle phClientHandle);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WFDCloseHandle(HANDLE hClientHandle);
+		public static extern uint32 WFDCloseHandle(Handle hClientHandle);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WFDStartOpenSession(HANDLE hClientHandle, ref uint8* pDeviceAddress, void* pvContext, WFD_OPEN_SESSION_COMPLETE_CALLBACK pfnCallback, out HANDLE phSessionHandle);
+		public static extern uint32 WFDStartOpenSession(Handle hClientHandle, ref uint8* pDeviceAddress, void* pvContext, WFD_OPEN_SESSION_COMPLETE_CALLBACK pfnCallback, out Handle phSessionHandle);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WFDCancelOpenSession(HANDLE hSessionHandle);
+		public static extern uint32 WFDCancelOpenSession(Handle hSessionHandle);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WFDOpenLegacySession(HANDLE hClientHandle, ref uint8* pLegacyMacAddress, out HANDLE phSessionHandle, out Guid pGuidSessionInterface);
+		public static extern uint32 WFDOpenLegacySession(Handle hClientHandle, ref uint8* pLegacyMacAddress, out Handle phSessionHandle, out Guid pGuidSessionInterface);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 WFDCloseSession(HANDLE hSessionHandle);
+		public static extern uint32 WFDCloseSession(Handle hSessionHandle);
 		[Import("wlanapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 WFDUpdateDeviceVisibility(ref uint8* pDeviceAddress);
 	}

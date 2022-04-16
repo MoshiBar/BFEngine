@@ -1014,19 +1014,19 @@ namespace Win32
 		[CRepr]
 		public struct JET_RSTMAP_A
 		{
-			public PSTR szDatabaseName;
-			public PSTR szNewDatabaseName;
+			public char8* szDatabaseName;
+			public char8* szNewDatabaseName;
 		}
 		[CRepr]
 		public struct JET_RSTMAP_W
 		{
-			public PWSTR szDatabaseName;
-			public PWSTR szNewDatabaseName;
+			public char16* szDatabaseName;
+			public char16* szNewDatabaseName;
 		}
 		[CRepr]
 		public struct CONVERT_A
 		{
-			public PSTR szOldDll;
+			public char8* szOldDll;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -1045,7 +1045,7 @@ namespace Win32
 		[CRepr]
 		public struct CONVERT_W
 		{
-			public PWSTR szOldDll;
+			public char16* szOldDll;
 			public _Anonymous_e__Union Anonymous;
 			
 			[CRepr, Union]
@@ -1166,8 +1166,8 @@ namespace Win32
 			public uint16 wFiller;
 			public uint32 cbMax;
 			public uint32 grbit;
-			public CHAR[256] szBaseTableName;
-			public CHAR[256] szBaseColumnName;
+			public char8[256] szBaseTableName;
+			public char8[256] szBaseColumnName;
 		}
 		[CRepr]
 		public struct JET_COLUMNBASE_W
@@ -1211,7 +1211,7 @@ namespace Win32
 		public struct JET_COLUMNCREATE_A
 		{
 			public uint32 cbStruct;
-			public PSTR szColumnName;
+			public char8* szColumnName;
 			public uint32 coltyp;
 			public uint32 cbMax;
 			public uint32 grbit;
@@ -1225,7 +1225,7 @@ namespace Win32
 		public struct JET_COLUMNCREATE_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szColumnName;
+			public char16* szColumnName;
 			public uint32 coltyp;
 			public uint32 cbMax;
 			public uint32 grbit;
@@ -1238,31 +1238,31 @@ namespace Win32
 		[CRepr]
 		public struct JET_USERDEFINEDDEFAULT_A
 		{
-			public PSTR szCallback;
+			public char8* szCallback;
 			public uint8* pbUserData;
 			public uint32 cbUserData;
-			public PSTR szDependantColumns;
+			public char8* szDependantColumns;
 		}
 		[CRepr]
 		public struct JET_USERDEFINEDDEFAULT_W
 		{
-			public PWSTR szCallback;
+			public char16* szCallback;
 			public uint8* pbUserData;
 			public uint32 cbUserData;
-			public PWSTR szDependantColumns;
+			public char16* szDependantColumns;
 		}
 		[CRepr]
 		public struct JET_CONDITIONALCOLUMN_A
 		{
 			public uint32 cbStruct;
-			public PSTR szColumnName;
+			public char8* szColumnName;
 			public uint32 grbit;
 		}
 		[CRepr]
 		public struct JET_CONDITIONALCOLUMN_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szColumnName;
+			public char16* szColumnName;
 			public uint32 grbit;
 		}
 		[CRepr]
@@ -1274,7 +1274,7 @@ namespace Win32
 		[CRepr]
 		public struct JET_UNICODEINDEX2
 		{
-			public PWSTR szLocaleName;
+			public char16* szLocaleName;
 			public uint32 dwMapFlags;
 		}
 		[CRepr]
@@ -1302,8 +1302,8 @@ namespace Win32
 		public struct JET_INDEXCREATE_A
 		{
 			public uint32 cbStruct;
-			public PSTR szIndexName;
-			public PSTR szKey;
+			public char8* szIndexName;
+			public char8* szKey;
 			public uint32 cbKey;
 			public uint32 grbit;
 			public uint32 ulDensity;
@@ -1331,8 +1331,8 @@ namespace Win32
 		public struct JET_INDEXCREATE_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szIndexName;
-			public PWSTR szKey;
+			public char16* szIndexName;
+			public char16* szKey;
 			public uint32 cbKey;
 			public uint32 grbit;
 			public uint32 ulDensity;
@@ -1360,8 +1360,8 @@ namespace Win32
 		public struct JET_INDEXCREATE2_A
 		{
 			public uint32 cbStruct;
-			public PSTR szIndexName;
-			public PSTR szKey;
+			public char8* szIndexName;
+			public char8* szKey;
 			public uint32 cbKey;
 			public uint32 grbit;
 			public uint32 ulDensity;
@@ -1390,8 +1390,8 @@ namespace Win32
 		public struct JET_INDEXCREATE2_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szIndexName;
-			public PWSTR szKey;
+			public char16* szIndexName;
+			public char16* szKey;
 			public uint32 cbKey;
 			public uint32 grbit;
 			public uint32 ulDensity;
@@ -1420,8 +1420,8 @@ namespace Win32
 		public struct JET_INDEXCREATE3_A
 		{
 			public uint32 cbStruct;
-			public PSTR szIndexName;
-			public PSTR szKey;
+			public char8* szIndexName;
+			public char8* szKey;
 			public uint32 cbKey;
 			public uint32 grbit;
 			public uint32 ulDensity;
@@ -1444,8 +1444,8 @@ namespace Win32
 		public struct JET_INDEXCREATE3_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szIndexName;
-			public PWSTR szKey;
+			public char16* szIndexName;
+			public char16* szKey;
 			public uint32 cbKey;
 			public uint32 grbit;
 			public uint32 ulDensity;
@@ -1468,8 +1468,8 @@ namespace Win32
 		public struct JET_TABLECREATE_A
 		{
 			public uint32 cbStruct;
-			public PSTR szTableName;
-			public PSTR szTemplateTableName;
+			public char8* szTableName;
+			public char8* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_A* rgcolumncreate;
@@ -1484,8 +1484,8 @@ namespace Win32
 		public struct JET_TABLECREATE_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szTableName;
-			public PWSTR szTemplateTableName;
+			public char16* szTableName;
+			public char16* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_W* rgcolumncreate;
@@ -1500,15 +1500,15 @@ namespace Win32
 		public struct JET_TABLECREATE2_A
 		{
 			public uint32 cbStruct;
-			public PSTR szTableName;
-			public PSTR szTemplateTableName;
+			public char8* szTableName;
+			public char8* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_A* rgcolumncreate;
 			public uint32 cColumns;
 			public JET_INDEXCREATE_A* rgindexcreate;
 			public uint32 cIndexes;
-			public PSTR szCallback;
+			public char8* szCallback;
 			public uint32 cbtyp;
 			public uint32 grbit;
 			public JET_TABLEID tableid;
@@ -1518,15 +1518,15 @@ namespace Win32
 		public struct JET_TABLECREATE2_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szTableName;
-			public PWSTR szTemplateTableName;
+			public char16* szTableName;
+			public char16* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_W* rgcolumncreate;
 			public uint32 cColumns;
 			public JET_INDEXCREATE_W* rgindexcreate;
 			public uint32 cIndexes;
-			public PWSTR szCallback;
+			public char16* szCallback;
 			public uint32 cbtyp;
 			public uint32 grbit;
 			public JET_TABLEID tableid;
@@ -1536,15 +1536,15 @@ namespace Win32
 		public struct JET_TABLECREATE3_A
 		{
 			public uint32 cbStruct;
-			public PSTR szTableName;
-			public PSTR szTemplateTableName;
+			public char8* szTableName;
+			public char8* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_A* rgcolumncreate;
 			public uint32 cColumns;
 			public JET_INDEXCREATE2_A* rgindexcreate;
 			public uint32 cIndexes;
-			public PSTR szCallback;
+			public char8* szCallback;
 			public uint32 cbtyp;
 			public uint32 grbit;
 			public JET_SPACEHINTS* pSeqSpacehints;
@@ -1557,15 +1557,15 @@ namespace Win32
 		public struct JET_TABLECREATE3_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szTableName;
-			public PWSTR szTemplateTableName;
+			public char16* szTableName;
+			public char16* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_W* rgcolumncreate;
 			public uint32 cColumns;
 			public JET_INDEXCREATE2_W* rgindexcreate;
 			public uint32 cIndexes;
-			public PWSTR szCallback;
+			public char16* szCallback;
 			public uint32 cbtyp;
 			public uint32 grbit;
 			public JET_SPACEHINTS* pSeqSpacehints;
@@ -1578,15 +1578,15 @@ namespace Win32
 		public struct JET_TABLECREATE4_A
 		{
 			public uint32 cbStruct;
-			public PSTR szTableName;
-			public PSTR szTemplateTableName;
+			public char8* szTableName;
+			public char8* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_A* rgcolumncreate;
 			public uint32 cColumns;
 			public JET_INDEXCREATE3_A* rgindexcreate;
 			public uint32 cIndexes;
-			public PSTR szCallback;
+			public char8* szCallback;
 			public uint32 cbtyp;
 			public uint32 grbit;
 			public JET_SPACEHINTS* pSeqSpacehints;
@@ -1599,15 +1599,15 @@ namespace Win32
 		public struct JET_TABLECREATE4_W
 		{
 			public uint32 cbStruct;
-			public PWSTR szTableName;
-			public PWSTR szTemplateTableName;
+			public char16* szTableName;
+			public char16* szTemplateTableName;
 			public uint32 ulPages;
 			public uint32 ulDensity;
 			public JET_COLUMNCREATE_W* rgcolumncreate;
 			public uint32 cColumns;
 			public JET_INDEXCREATE3_W* rgindexcreate;
 			public uint32 cIndexes;
-			public PWSTR szCallback;
+			public char16* szCallback;
 			public uint32 cbtyp;
 			public uint32 grbit;
 			public JET_SPACEHINTS* pSeqSpacehints;
@@ -1783,7 +1783,7 @@ namespace Win32
 		{
 			public uint32 ulRandom;
 			public JET_LOGTIME logtimeCreate;
-			public CHAR[16] szComputerName;
+			public char8[16] szComputerName;
 		}
 		[CRepr, Packed(1)]
 		public struct JET_BKINFO
@@ -2058,7 +2058,7 @@ namespace Win32
 		{
 			public uint32 paramid;
 			public JET_API_PTR lParam;
-			public PSTR sz;
+			public char8* sz;
 			public int32 err;
 		}
 		[CRepr]
@@ -2066,7 +2066,7 @@ namespace Win32
 		{
 			public uint32 paramid;
 			public JET_API_PTR lParam;
-			public PWSTR sz;
+			public char16* sz;
 			public int32 err;
 		}
 		[CRepr]
@@ -2157,7 +2157,7 @@ namespace Win32
 			public uint32 cbSize;
 			public uint32 ulGenLow;
 			public uint32 ulGenHigh;
-			public CHAR[4] szBaseName;
+			public char8[4] szBaseName;
 		}
 		[CRepr]
 		public struct JET_LOGINFO_W
@@ -2171,7 +2171,7 @@ namespace Win32
 		public struct JET_INSTANCE_INFO_A
 		{
 			public JET_INSTANCE hInstanceId;
-			public PSTR szInstanceName;
+			public char8* szInstanceName;
 			public JET_API_PTR cDatabases;
 			public int8** szDatabaseFileName;
 			public int8** szDatabaseDisplayName;
@@ -2181,7 +2181,7 @@ namespace Win32
 		public struct JET_INSTANCE_INFO_W
 		{
 			public JET_INSTANCE hInstanceId;
-			public PWSTR szInstanceName;
+			public char16* szInstanceName;
 			public JET_API_PTR cDatabases;
 			public uint16** szDatabaseFileName;
 			public uint16** szDatabaseDisplayName;
@@ -2345,9 +2345,9 @@ namespace Win32
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 JetGetIndexInfoW(JET_SESID sesid, uint32 dbid, ref uint16 szTableName, uint16* szIndexName, void* pvResult, uint32 cbResult, uint32 InfoLevel);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 JetCreateIndexA(JET_SESID sesid, JET_TABLEID tableid, ref int8 szIndexName, uint32 grbit, PSTR szKey, uint32 cbKey, uint32 lDensity);
+		public static extern int32 JetCreateIndexA(JET_SESID sesid, JET_TABLEID tableid, ref int8 szIndexName, uint32 grbit, char8* szKey, uint32 cbKey, uint32 lDensity);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 JetCreateIndexW(JET_SESID sesid, JET_TABLEID tableid, ref uint16 szIndexName, uint32 grbit, PWSTR szKey, uint32 cbKey, uint32 lDensity);
+		public static extern int32 JetCreateIndexW(JET_SESID sesid, JET_TABLEID tableid, ref uint16 szIndexName, uint32 grbit, char16* szKey, uint32 cbKey, uint32 lDensity);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 JetCreateIndex2A(JET_SESID sesid, JET_TABLEID tableid, JET_INDEXCREATE_A* pindexcreate, uint32 cIndexCreate);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
@@ -2613,7 +2613,7 @@ namespace Win32
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 JetGetInstanceInfoW(out uint32 pcInstanceInfo, out JET_INSTANCE_INFO_W* paInstanceInfo);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 JetFreeBuffer(PSTR pbBuf);
+		public static extern int32 JetFreeBuffer(char8* pbBuf);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 JetSetLS(JET_SESID sesid, JET_TABLEID tableid, JET_LS ls, uint32 grbit);
 		[Import("esent.dll"), CLink, CallingConvention(.Stdcall)]

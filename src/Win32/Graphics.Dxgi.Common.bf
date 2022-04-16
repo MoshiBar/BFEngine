@@ -1,9 +1,10 @@
+using static System.Windows;
 using System;
 
 // namespace Graphics.Dxgi.Common
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	extension Dxgi
 	{
 		// --- Constants ---
 		
@@ -232,7 +233,7 @@ namespace Win32
 		[CRepr]
 		public struct DXGI_GAMMA_CONTROL_CAPABILITIES
 		{
-			public BOOL ScaleAndOffsetSupported;
+			public IntBool ScaleAndOffsetSupported;
 			public float MaxConvertedValue;
 			public float MinConvertedValue;
 			public uint32 NumGammaControlPoints;

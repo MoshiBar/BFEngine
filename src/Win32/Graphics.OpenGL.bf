@@ -1,9 +1,12 @@
+using static System.Windows;
 using System;
+using static Win32.Graphics.Gdi;
+using static Win32.Win32;
 
 // namespace Graphics.OpenGL
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	static class OpenGL
 	{
 		// --- Constants ---
 		
@@ -750,37 +753,67 @@ namespace Win32
 		public function void GLUnurbsErrorProc(uint32 param0);
 		
 		// --- Structs ---
-		
-		[CRepr]
-		public struct PIXELFORMATDESCRIPTOR
+
+		public enum PFDFlags : uint32
 		{
-			public uint16 nSize;
-			public uint16 nVersion;
-			public uint32 dwFlags;
-			public uint8 iPixelType;
-			public uint8 cColorBits;
-			public uint8 cRedBits;
-			public uint8 cRedShift;
-			public uint8 cGreenBits;
-			public uint8 cGreenShift;
-			public uint8 cBlueBits;
-			public uint8 cBlueShift;
-			public uint8 cAlphaBits;
-			public uint8 cAlphaShift;
-			public uint8 cAccumBits;
-			public uint8 cAccumRedBits;
-			public uint8 cAccumGreenBits;
-			public uint8 cAccumBlueBits;
-			public uint8 cAccumAlphaBits;
-			public uint8 cDepthBits;
-			public uint8 cStencilBits;
-			public uint8 cAuxBuffers;
-			public uint8 iLayerType;
-			public uint8 bReserved;
-			public uint32 dwLayerMask;
-			public uint32 dwVisibleMask;
-			public uint32 dwDamageMask;
+			DoubleBuffer = 0x00000001,
+			Stereo = 0x00000002,
+			DrawToWindow = 0x00000004,
+			DrawToBitmap = 0x00000008,
+			SupportGDI = 0x00000010,
+			SupportOpenGL = 0x00000020,
+			GenericFormat = 0x00000040,
+			NeedPallete = 0x00000080,
+			NeedSystemPalette = 0x00000100,
+			SwapExchange = 0x00000200,
+			SwapCopy = 0x00000400,
+			SwapLayerBuffers = 0x00000800,
+			GenericAccelerated = 0x00001000,
+			SupportDirectDraw = 0x00002000,
+			Direct3DAccelerated = 0x00004000,
+			SupportComposition = 0x00008000,
+
+			/* PIXELFORMATDESCRIPTOR flags for use in ChoosePixelFormat only */
+			Depth_DontCare = 0x20000000,
+			DoubleBuffer_DontCare = 0x40000000,
+			Stereo_DontCare = 0x80000000,
 		}
+
+		public enum PFDPixelType : uint8
+		{
+			PFD_TYPE_RGBA = 0,
+			PFD_TYPE_COLORINDEX = 1
+		}
+
+		[CRepr]
+		public struct PIXELFORMATDESCRIPTOR : this(
+			uint16 nSize = sizeof(PIXELFORMATDESCRIPTOR),
+			uint16 nVersion = 1,
+			PFDFlags dwFlags = default,
+			PFDPixelType iPixelType = default,
+			uint8 cColorBits = default,
+			uint8 cRedBits = default,
+			uint8 cRedShift = default,
+			uint8 cGreenBits = default,
+			uint8 cGreenShift = default,
+			uint8 cBlueBits = default,
+			uint8 cBlueShift = default,
+			uint8 cAlphaBits = default,
+			uint8 cAlphaShift = default,
+			uint8 cAccumBits = default,
+			uint8 cAccumRedBits = default,
+			uint8 cAccumGreenBits = default,
+			uint8 cAccumBlueBits = default,
+			uint8 cAccumAlphaBits = default,
+			uint8 cDepthBits = default,
+			uint8 cStencilBits = default,
+			uint8 cAuxBuffers = default,
+			uint8 iLayerType = default,
+			uint8 bReserved = default,
+			uint32 dwLayerMask = default,
+			uint32 dwVisibleMask = default,
+			uint32 dwDamageMask = default
+			);
 		[CRepr]
 		public struct EMRPIXELFORMAT
 		{
@@ -846,47 +879,47 @@ namespace Win32
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 GetPixelFormat(HDC hdc);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SetPixelFormat(HDC hdc, int32 format, in PIXELFORMATDESCRIPTOR ppfd);
+		public static extern IntBool SetPixelFormat(HDC hdc, int32 format, in PIXELFORMATDESCRIPTOR ppfd);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 GetEnhMetaFilePixelFormat(HENHMETAFILE hemf, uint32 cbBuffer, PIXELFORMATDESCRIPTOR* ppfd);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglCopyContext(HGLRC param0, HGLRC param1, uint32 param2);
+		public static extern IntBool wglCopyContext(HGLRC param0, HGLRC param1, uint32 param2);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HGLRC wglCreateContext(HDC param0);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HGLRC wglCreateLayerContext(HDC param0, int32 param1);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglDeleteContext(HGLRC param0);
+		public static extern IntBool wglDeleteContext(HGLRC param0);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HGLRC wglGetCurrentContext();
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern HDC wglGetCurrentDC();
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern PROC wglGetProcAddress(PSTR param0);
+		public static extern PROC wglGetProcAddress(char8* param0);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglMakeCurrent(HDC param0, HGLRC param1);
+		public static extern IntBool wglMakeCurrent(HDC param0, HGLRC param1);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglShareLists(HGLRC param0, HGLRC param1);
+		public static extern IntBool wglShareLists(HGLRC param0, HGLRC param1);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglUseFontBitmapsA(HDC param0, uint32 param1, uint32 param2, uint32 param3);
+		public static extern IntBool wglUseFontBitmapsA(HDC param0, uint32 param1, uint32 param2, uint32 param3);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglUseFontBitmapsW(HDC param0, uint32 param1, uint32 param2, uint32 param3);
+		public static extern IntBool wglUseFontBitmapsW(HDC param0, uint32 param1, uint32 param2, uint32 param3);
 		[Import("gdi32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL SwapBuffers(HDC param0);
+		public static extern IntBool SwapBuffers(HDC param0);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglUseFontOutlinesA(HDC param0, uint32 param1, uint32 param2, uint32 param3, float param4, float param5, int32 param6, out GLYPHMETRICSFLOAT param7);
+		public static extern IntBool wglUseFontOutlinesA(HDC param0, uint32 param1, uint32 param2, uint32 param3, float param4, float param5, int32 param6, out GLYPHMETRICSFLOAT param7);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglUseFontOutlinesW(HDC param0, uint32 param1, uint32 param2, uint32 param3, float param4, float param5, int32 param6, out GLYPHMETRICSFLOAT param7);
+		public static extern IntBool wglUseFontOutlinesW(HDC param0, uint32 param1, uint32 param2, uint32 param3, float param4, float param5, int32 param6, out GLYPHMETRICSFLOAT param7);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglDescribeLayerPlane(HDC param0, int32 param1, int32 param2, uint32 param3, out LAYERPLANEDESCRIPTOR param4);
+		public static extern IntBool wglDescribeLayerPlane(HDC param0, int32 param1, int32 param2, uint32 param3, out LAYERPLANEDESCRIPTOR param4);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 wglSetLayerPaletteEntries(HDC param0, int32 param1, int32 param2, int32 param3, in uint32 param4);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 wglGetLayerPaletteEntries(HDC param0, int32 param1, int32 param2, int32 param3, out uint32 param4);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglRealizeLayerPalette(HDC param0, int32 param1, BOOL param2);
+		public static extern IntBool wglRealizeLayerPalette(HDC param0, int32 param1, IntBool param2);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL wglSwapLayerBuffers(HDC param0, uint32 param1);
+		public static extern IntBool wglSwapLayerBuffers(HDC param0, uint32 param1);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
 		public static extern void glAccum(uint32 op, float value);
 		[Import("opengl32.lib"), CLink, CallingConvention(.Stdcall)]
@@ -1562,7 +1595,7 @@ namespace Win32
 		[Import("glu32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint8* gluErrorString(uint32 errCode);
 		[Import("glu32.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PWSTR gluErrorUnicodeStringEXT(uint32 errCode);
+		public static extern char16* gluErrorUnicodeStringEXT(uint32 errCode);
 		[Import("glu32.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint8* gluGetString(uint32 name);
 		[Import("glu32.dll"), CLink, CallingConvention(.Stdcall)]

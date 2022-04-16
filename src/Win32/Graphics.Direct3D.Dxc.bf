@@ -1,9 +1,13 @@
 using System;
+using static Win32.System.Com;
+using static Win32.Win32;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.Direct3D.Dxc
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	extension Direct3D
 	{
 		// --- Constants ---
 		
@@ -38,24 +42,23 @@ namespace Win32
 		}
 		public enum DXC_OUT_KIND : int32
 		{
-			NONE = 0,
-			OBJECT = 1,
-			ERRORS = 2,
+			None = 0,
+			Object = 1,
+			Errors = 2,
 			PDB = 3,
-			SHADER_HASH = 4,
-			DISASSEMBLY = 5,
+			ShaderHash = 4,
+			Disassembly = 5,
 			HLSL = 6,
-			TEXT = 7,
-			REFLECTION = 8,
-			ROOT_SIGNATURE = 9,
-			EXTRA_OUTPUTS = 10,
-			FORCE_DWORD = -1,
+			Text = 7,
+			Reflection = 8,
+			RootSignature = 9,
+			ExtraOutputs = 10,
 		}
 		
 		// --- Function Pointers ---
 		
-		public function HRESULT DxcCreateInstanceProc(in Guid rclsid, in Guid riid, void** ppv);
-		public function HRESULT DxcCreateInstance2Proc(ref IMalloc pMalloc, in Guid rclsid, in Guid riid, void** ppv);
+		public function HResult DxcCreateInstanceProc(in Guid rclsid, in Guid riid, void** ppv);
+		public function HResult DxcCreateInstance2Proc(ref IMalloc pMalloc, in Guid rclsid, in Guid riid, void** ppv);
 		
 		// --- Structs ---
 		
@@ -75,14 +78,14 @@ namespace Win32
 		[CRepr]
 		public struct DxcDefine
 		{
-			public PWSTR Name;
-			public PWSTR Value;
+			public char16* Name;
+			public char16* Value;
 		}
 		[CRepr]
 		public struct DxcArgPair
 		{
-			public PWSTR pName;
-			public PWSTR pValue;
+			public char16* pName;
+			public char16* pValue;
 		}
 		
 		// --- COM Interfaces ---
@@ -111,12 +114,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetEncoding(out BOOL pKnown, out DXC_CP pCodePage) mut => VT.GetEncoding(ref this, out pKnown, out pCodePage);
+			public HResult GetEncoding(out IntBool pKnown, out DXC_CP pCodePage) mut => VT.GetEncoding(ref this, out pKnown, out pCodePage);
 
 			[CRepr]
 			public struct VTable : IDxcBlob.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcBlobEncoding self, out BOOL pKnown, out DXC_CP pCodePage) GetEncoding;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcBlobEncoding self, out IntBool pKnown, out DXC_CP pCodePage) GetEncoding;
 			}
 		}
 		[CRepr]
@@ -126,13 +129,13 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public PWSTR GetStringPointer() mut => VT.GetStringPointer(ref this);
+			public char16* GetStringPointer() mut => VT.GetStringPointer(ref this);
 			public uint GetStringLength() mut => VT.GetStringLength(ref this);
 
 			[CRepr]
 			public struct VTable : IDxcBlobEncoding.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] PWSTR(ref IDxcBlobUtf16 self) GetStringPointer;
+				public new function [CallingConvention(.Stdcall)] char16*(ref IDxcBlobUtf16 self) GetStringPointer;
 				public new function [CallingConvention(.Stdcall)] uint(ref IDxcBlobUtf16 self) GetStringLength;
 			}
 		}
@@ -143,13 +146,13 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public PSTR GetStringPointer() mut => VT.GetStringPointer(ref this);
+			public char8* GetStringPointer() mut => VT.GetStringPointer(ref this);
 			public uint GetStringLength() mut => VT.GetStringLength(ref this);
 
 			[CRepr]
 			public struct VTable : IDxcBlobEncoding.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] PSTR(ref IDxcBlobUtf8 self) GetStringPointer;
+				public new function [CallingConvention(.Stdcall)] char8*(ref IDxcBlobUtf8 self) GetStringPointer;
 				public new function [CallingConvention(.Stdcall)] uint(ref IDxcBlobUtf8 self) GetStringLength;
 			}
 		}
@@ -160,12 +163,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT LoadSource(PWSTR pFilename, IDxcBlob** ppIncludeSource) mut => VT.LoadSource(ref this, pFilename, ppIncludeSource);
+			public HResult LoadSource(char16* pFilename, IDxcBlob** ppIncludeSource) mut => VT.LoadSource(ref this, pFilename, ppIncludeSource);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcIncludeHandler self, PWSTR pFilename, IDxcBlob** ppIncludeSource) LoadSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcIncludeHandler self, char16* pFilename, IDxcBlob** ppIncludeSource) LoadSource;
 			}
 		}
 		[CRepr]
@@ -175,20 +178,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public PWSTR* GetArguments() mut => VT.GetArguments(ref this);
+			public char16** GetArguments() mut => VT.GetArguments(ref this);
 			public uint32 GetCount() mut => VT.GetCount(ref this);
-			public HRESULT AddArguments(PWSTR* pArguments, uint32 argCount) mut => VT.AddArguments(ref this, pArguments, argCount);
-			public HRESULT AddArgumentsUTF8(PSTR* pArguments, uint32 argCount) mut => VT.AddArgumentsUTF8(ref this, pArguments, argCount);
-			public HRESULT AddDefines(DxcDefine* pDefines, uint32 defineCount) mut => VT.AddDefines(ref this, pDefines, defineCount);
+			public HResult AddArguments(char16** pArguments, uint32 argCount) mut => VT.AddArguments(ref this, pArguments, argCount);
+			public HResult AddArgumentsUTF8(char8** pArguments, uint32 argCount) mut => VT.AddArgumentsUTF8(ref this, pArguments, argCount);
+			public HResult AddDefines(DxcDefine* pDefines, uint32 defineCount) mut => VT.AddDefines(ref this, pDefines, defineCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] PWSTR*(ref IDxcCompilerArgs self) GetArguments;
+				public new function [CallingConvention(.Stdcall)] char16**(ref IDxcCompilerArgs self) GetArguments;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDxcCompilerArgs self) GetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompilerArgs self, PWSTR* pArguments, uint32 argCount) AddArguments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompilerArgs self, PSTR* pArguments, uint32 argCount) AddArgumentsUTF8;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompilerArgs self, DxcDefine* pDefines, uint32 defineCount) AddDefines;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompilerArgs self, char16** pArguments, uint32 argCount) AddArguments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompilerArgs self, char8** pArguments, uint32 argCount) AddArgumentsUTF8;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompilerArgs self, DxcDefine* pDefines, uint32 defineCount) AddDefines;
 			}
 		}
 		[CRepr]
@@ -198,30 +201,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetMalloc(IMalloc* pMalloc) mut => VT.SetMalloc(ref this, pMalloc);
-			public HRESULT CreateBlobFromBlob(ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) mut => VT.CreateBlobFromBlob(ref this, ref pBlob, offset, length, out ppResult);
-			public HRESULT CreateBlobFromFile(PWSTR pFileName, DXC_CP* codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobFromFile(ref this, pFileName, codePage, out pBlobEncoding);
-			public HRESULT CreateBlobWithEncodingFromPinned(void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobWithEncodingFromPinned(ref this, pText, size, codePage, out pBlobEncoding);
-			public HRESULT CreateBlobWithEncodingOnHeapCopy(void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobWithEncodingOnHeapCopy(ref this, pText, size, codePage, out pBlobEncoding);
-			public HRESULT CreateBlobWithEncodingOnMalloc(void* pText, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobWithEncodingOnMalloc(ref this, pText, ref pIMalloc, size, codePage, out pBlobEncoding);
-			public HRESULT CreateIncludeHandler(out IDxcIncludeHandler* ppResult) mut => VT.CreateIncludeHandler(ref this, out ppResult);
-			public HRESULT CreateStreamFromBlobReadOnly(ref IDxcBlob pBlob, out IStream* ppStream) mut => VT.CreateStreamFromBlobReadOnly(ref this, ref pBlob, out ppStream);
-			public HRESULT GetBlobAsUtf8(ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) mut => VT.GetBlobAsUtf8(ref this, ref pBlob, out pBlobEncoding);
-			public HRESULT GetBlobAsUtf16(ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) mut => VT.GetBlobAsUtf16(ref this, ref pBlob, out pBlobEncoding);
+			public HResult SetMalloc(IMalloc* pMalloc) mut => VT.SetMalloc(ref this, pMalloc);
+			public HResult CreateBlobFromBlob(ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) mut => VT.CreateBlobFromBlob(ref this, ref pBlob, offset, length, out ppResult);
+			public HResult CreateBlobFromFile(char16* pFileName, DXC_CP* codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobFromFile(ref this, pFileName, codePage, out pBlobEncoding);
+			public HResult CreateBlobWithEncodingFromPinned(void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobWithEncodingFromPinned(ref this, pText, size, codePage, out pBlobEncoding);
+			public HResult CreateBlobWithEncodingOnHeapCopy(void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobWithEncodingOnHeapCopy(ref this, pText, size, codePage, out pBlobEncoding);
+			public HResult CreateBlobWithEncodingOnMalloc(void* pText, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobWithEncodingOnMalloc(ref this, pText, ref pIMalloc, size, codePage, out pBlobEncoding);
+			public HResult CreateIncludeHandler(out IDxcIncludeHandler* ppResult) mut => VT.CreateIncludeHandler(ref this, out ppResult);
+			public HResult CreateStreamFromBlobReadOnly(ref IDxcBlob pBlob, out IStream* ppStream) mut => VT.CreateStreamFromBlobReadOnly(ref this, ref pBlob, out ppStream);
+			public HResult GetBlobAsUtf8(ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) mut => VT.GetBlobAsUtf8(ref this, ref pBlob, out pBlobEncoding);
+			public HResult GetBlobAsUtf16(ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) mut => VT.GetBlobAsUtf16(ref this, ref pBlob, out pBlobEncoding);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, IMalloc* pMalloc) SetMalloc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) CreateBlobFromBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, PWSTR pFileName, DXC_CP* codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobFromFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobWithEncodingFromPinned;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobWithEncodingOnHeapCopy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, void* pText, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobWithEncodingOnMalloc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, out IDxcIncludeHandler* ppResult) CreateIncludeHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, ref IDxcBlob pBlob, out IStream* ppStream) CreateStreamFromBlobReadOnly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) GetBlobAsUtf8;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLibrary self, ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) GetBlobAsUtf16;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, IMalloc* pMalloc) SetMalloc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) CreateBlobFromBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, char16* pFileName, DXC_CP* codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobFromFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobWithEncodingFromPinned;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, void* pText, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobWithEncodingOnHeapCopy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, void* pText, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobWithEncodingOnMalloc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, out IDxcIncludeHandler* ppResult) CreateIncludeHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, ref IDxcBlob pBlob, out IStream* ppStream) CreateStreamFromBlobReadOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) GetBlobAsUtf8;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLibrary self, ref IDxcBlob pBlob, out IDxcBlobEncoding* pBlobEncoding) GetBlobAsUtf16;
 			}
 		}
 		[CRepr]
@@ -231,16 +234,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetStatus(out HRESULT pStatus) mut => VT.GetStatus(ref this, out pStatus);
-			public HRESULT GetResult(IDxcBlob** ppResult) mut => VT.GetResult(ref this, ppResult);
-			public HRESULT GetErrorBuffer(IDxcBlobEncoding** ppErrors) mut => VT.GetErrorBuffer(ref this, ppErrors);
+			public HResult GetStatus(out HResult pStatus) mut => VT.GetStatus(ref this, out pStatus);
+			public HResult GetResult(IDxcBlob** ppResult) mut => VT.GetResult(ref this, ppResult);
+			public HResult GetErrorBuffer(IDxcBlobEncoding** ppErrors) mut => VT.GetErrorBuffer(ref this, ppErrors);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOperationResult self, out HRESULT pStatus) GetStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOperationResult self, IDxcBlob** ppResult) GetResult;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOperationResult self, IDxcBlobEncoding** ppErrors) GetErrorBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOperationResult self, out HResult pStatus) GetStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOperationResult self, IDxcBlob** ppResult) GetResult;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOperationResult self, IDxcBlobEncoding** ppErrors) GetErrorBuffer;
 			}
 		}
 		[CRepr]
@@ -250,16 +253,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compile(ref IDxcBlob pSource, PWSTR pSourceName, PWSTR pEntryPoint, PWSTR pTargetProfile, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) mut => VT.Compile(ref this, ref pSource, pSourceName, pEntryPoint, pTargetProfile, pArguments, argCount, pDefines, defineCount, pIncludeHandler, out ppResult);
-			public HRESULT Preprocess(ref IDxcBlob pSource, PWSTR pSourceName, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) mut => VT.Preprocess(ref this, ref pSource, pSourceName, pArguments, argCount, pDefines, defineCount, pIncludeHandler, out ppResult);
-			public HRESULT Disassemble(ref IDxcBlob pSource, out IDxcBlobEncoding* ppDisassembly) mut => VT.Disassemble(ref this, ref pSource, out ppDisassembly);
+			public HResult Compile(ref IDxcBlob pSource, char16* pSourceName, char16* pEntryPoint, char16* pTargetProfile, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) mut => VT.Compile(ref this, ref pSource, pSourceName, pEntryPoint, pTargetProfile, pArguments, argCount, pDefines, defineCount, pIncludeHandler, out ppResult);
+			public HResult Preprocess(ref IDxcBlob pSource, char16* pSourceName, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) mut => VT.Preprocess(ref this, ref pSource, pSourceName, pArguments, argCount, pDefines, defineCount, pIncludeHandler, out ppResult);
+			public HResult Disassemble(ref IDxcBlob pSource, out IDxcBlobEncoding* ppDisassembly) mut => VT.Disassemble(ref this, ref pSource, out ppDisassembly);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompiler self, ref IDxcBlob pSource, PWSTR pSourceName, PWSTR pEntryPoint, PWSTR pTargetProfile, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) Compile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompiler self, ref IDxcBlob pSource, PWSTR pSourceName, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) Preprocess;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompiler self, ref IDxcBlob pSource, out IDxcBlobEncoding* ppDisassembly) Disassemble;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompiler self, ref IDxcBlob pSource, char16* pSourceName, char16* pEntryPoint, char16* pTargetProfile, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) Compile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompiler self, ref IDxcBlob pSource, char16* pSourceName, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult) Preprocess;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompiler self, ref IDxcBlob pSource, out IDxcBlobEncoding* ppDisassembly) Disassemble;
 			}
 		}
 		[CRepr]
@@ -269,12 +272,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CompileWithDebug(ref IDxcBlob pSource, PWSTR pSourceName, PWSTR pEntryPoint, PWSTR pTargetProfile, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult, PWSTR* ppDebugBlobName, IDxcBlob** ppDebugBlob) mut => VT.CompileWithDebug(ref this, ref pSource, pSourceName, pEntryPoint, pTargetProfile, pArguments, argCount, pDefines, defineCount, pIncludeHandler, out ppResult, ppDebugBlobName, ppDebugBlob);
+			public HResult CompileWithDebug(ref IDxcBlob pSource, char16* pSourceName, char16* pEntryPoint, char16* pTargetProfile, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult, char16** ppDebugBlobName, IDxcBlob** ppDebugBlob) mut => VT.CompileWithDebug(ref this, ref pSource, pSourceName, pEntryPoint, pTargetProfile, pArguments, argCount, pDefines, defineCount, pIncludeHandler, out ppResult, ppDebugBlobName, ppDebugBlob);
 
 			[CRepr]
 			public struct VTable : IDxcCompiler.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompiler2 self, ref IDxcBlob pSource, PWSTR pSourceName, PWSTR pEntryPoint, PWSTR pTargetProfile, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult, PWSTR* ppDebugBlobName, IDxcBlob** ppDebugBlob) CompileWithDebug;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompiler2 self, ref IDxcBlob pSource, char16* pSourceName, char16* pEntryPoint, char16* pTargetProfile, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, IDxcIncludeHandler* pIncludeHandler, out IDxcOperationResult* ppResult, char16** ppDebugBlobName, IDxcBlob** ppDebugBlob) CompileWithDebug;
 			}
 		}
 		[CRepr]
@@ -284,14 +287,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RegisterLibrary(PWSTR pLibName, ref IDxcBlob pLib) mut => VT.RegisterLibrary(ref this, pLibName, ref pLib);
-			public HRESULT Link(PWSTR pEntryName, PWSTR pTargetProfile, PWSTR* pLibNames, uint32 libCount, PWSTR* pArguments, uint32 argCount, out IDxcOperationResult* ppResult) mut => VT.Link(ref this, pEntryName, pTargetProfile, pLibNames, libCount, pArguments, argCount, out ppResult);
+			public HResult RegisterLibrary(char16* pLibName, ref IDxcBlob pLib) mut => VT.RegisterLibrary(ref this, pLibName, ref pLib);
+			public HResult Link(char16* pEntryName, char16* pTargetProfile, char16** pLibNames, uint32 libCount, char16** pArguments, uint32 argCount, out IDxcOperationResult* ppResult) mut => VT.Link(ref this, pEntryName, pTargetProfile, pLibNames, libCount, pArguments, argCount, out ppResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLinker self, PWSTR pLibName, ref IDxcBlob pLib) RegisterLibrary;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcLinker self, PWSTR pEntryName, PWSTR pTargetProfile, PWSTR* pLibNames, uint32 libCount, PWSTR* pArguments, uint32 argCount, out IDxcOperationResult* ppResult) Link;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLinker self, char16* pLibName, ref IDxcBlob pLib) RegisterLibrary;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcLinker self, char16* pEntryName, char16* pTargetProfile, char16** pLibNames, uint32 libCount, char16** pArguments, uint32 argCount, out IDxcOperationResult* ppResult) Link;
 			}
 		}
 		[CRepr]
@@ -301,36 +304,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateBlobFromBlob(ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) mut => VT.CreateBlobFromBlob(ref this, ref pBlob, offset, length, out ppResult);
-			public HRESULT CreateBlobFromPinned(void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobFromPinned(ref this, pData, size, codePage, out pBlobEncoding);
-			public HRESULT MoveToBlob(void* pData, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.MoveToBlob(ref this, pData, ref pIMalloc, size, codePage, out pBlobEncoding);
-			public HRESULT CreateBlob(void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlob(ref this, pData, size, codePage, out pBlobEncoding);
-			public HRESULT LoadFile(PWSTR pFileName, DXC_CP* pCodePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.LoadFile(ref this, pFileName, pCodePage, out pBlobEncoding);
-			public HRESULT CreateReadOnlyStreamFromBlob(ref IDxcBlob pBlob, out IStream* ppStream) mut => VT.CreateReadOnlyStreamFromBlob(ref this, ref pBlob, out ppStream);
-			public HRESULT CreateDefaultIncludeHandler(out IDxcIncludeHandler* ppResult) mut => VT.CreateDefaultIncludeHandler(ref this, out ppResult);
-			public HRESULT GetBlobAsUtf8(ref IDxcBlob pBlob, out IDxcBlobUtf8* pBlobEncoding) mut => VT.GetBlobAsUtf8(ref this, ref pBlob, out pBlobEncoding);
-			public HRESULT GetBlobAsUtf16(ref IDxcBlob pBlob, out IDxcBlobUtf16* pBlobEncoding) mut => VT.GetBlobAsUtf16(ref this, ref pBlob, out pBlobEncoding);
-			public HRESULT GetDxilContainerPart(in DxcBuffer pShader, uint32 DxcPart, void** ppPartData, out uint32 pPartSizeInBytes) mut => VT.GetDxilContainerPart(ref this, pShader, DxcPart, ppPartData, out pPartSizeInBytes);
-			public HRESULT CreateReflection(in DxcBuffer pData, in Guid iid, void** ppvReflection) mut => VT.CreateReflection(ref this, pData, iid, ppvReflection);
-			public HRESULT BuildArguments(PWSTR pSourceName, PWSTR pEntryPoint, PWSTR pTargetProfile, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, out IDxcCompilerArgs* ppArgs) mut => VT.BuildArguments(ref this, pSourceName, pEntryPoint, pTargetProfile, pArguments, argCount, pDefines, defineCount, out ppArgs);
-			public HRESULT GetPDBContents(ref IDxcBlob pPDBBlob, out IDxcBlob* ppHash, out IDxcBlob* ppContainer) mut => VT.GetPDBContents(ref this, ref pPDBBlob, out ppHash, out ppContainer);
+			public HResult CreateBlobFromBlob(ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) mut => VT.CreateBlobFromBlob(ref this, ref pBlob, offset, length, out ppResult);
+			public HResult CreateBlobFromPinned(void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlobFromPinned(ref this, pData, size, codePage, out pBlobEncoding);
+			public HResult MoveToBlob(void* pData, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.MoveToBlob(ref this, pData, ref pIMalloc, size, codePage, out pBlobEncoding);
+			public HResult CreateBlob(void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.CreateBlob(ref this, pData, size, codePage, out pBlobEncoding);
+			public HResult LoadFile(char16* pFileName, DXC_CP* pCodePage, out IDxcBlobEncoding* pBlobEncoding) mut => VT.LoadFile(ref this, pFileName, pCodePage, out pBlobEncoding);
+			public HResult CreateReadOnlyStreamFromBlob(ref IDxcBlob pBlob, out IStream* ppStream) mut => VT.CreateReadOnlyStreamFromBlob(ref this, ref pBlob, out ppStream);
+			public HResult CreateDefaultIncludeHandler(out IDxcIncludeHandler* ppResult) mut => VT.CreateDefaultIncludeHandler(ref this, out ppResult);
+			public HResult GetBlobAsUtf8(ref IDxcBlob pBlob, out IDxcBlobUtf8* pBlobEncoding) mut => VT.GetBlobAsUtf8(ref this, ref pBlob, out pBlobEncoding);
+			public HResult GetBlobAsUtf16(ref IDxcBlob pBlob, out IDxcBlobUtf16* pBlobEncoding) mut => VT.GetBlobAsUtf16(ref this, ref pBlob, out pBlobEncoding);
+			public HResult GetDxilContainerPart(in DxcBuffer pShader, uint32 DxcPart, void** ppPartData, out uint32 pPartSizeInBytes) mut => VT.GetDxilContainerPart(ref this, pShader, DxcPart, ppPartData, out pPartSizeInBytes);
+			public HResult CreateReflection(in DxcBuffer pData, in Guid iid, void** ppvReflection) mut => VT.CreateReflection(ref this, pData, iid, ppvReflection);
+			public HResult BuildArguments(char16* pSourceName, char16* pEntryPoint, char16* pTargetProfile, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, out IDxcCompilerArgs* ppArgs) mut => VT.BuildArguments(ref this, pSourceName, pEntryPoint, pTargetProfile, pArguments, argCount, pDefines, defineCount, out ppArgs);
+			public HResult GetPDBContents(ref IDxcBlob pPDBBlob, out IDxcBlob* ppHash, out IDxcBlob* ppContainer) mut => VT.GetPDBContents(ref this, ref pPDBBlob, out ppHash, out ppContainer);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) CreateBlobFromBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobFromPinned;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, void* pData, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) MoveToBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, PWSTR pFileName, DXC_CP* pCodePage, out IDxcBlobEncoding* pBlobEncoding) LoadFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, ref IDxcBlob pBlob, out IStream* ppStream) CreateReadOnlyStreamFromBlob;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, out IDxcIncludeHandler* ppResult) CreateDefaultIncludeHandler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, ref IDxcBlob pBlob, out IDxcBlobUtf8* pBlobEncoding) GetBlobAsUtf8;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, ref IDxcBlob pBlob, out IDxcBlobUtf16* pBlobEncoding) GetBlobAsUtf16;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, in DxcBuffer pShader, uint32 DxcPart, void** ppPartData, out uint32 pPartSizeInBytes) GetDxilContainerPart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, in DxcBuffer pData, in Guid iid, void** ppvReflection) CreateReflection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, PWSTR pSourceName, PWSTR pEntryPoint, PWSTR pTargetProfile, PWSTR* pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, out IDxcCompilerArgs* ppArgs) BuildArguments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcUtils self, ref IDxcBlob pPDBBlob, out IDxcBlob* ppHash, out IDxcBlob* ppContainer) GetPDBContents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, ref IDxcBlob pBlob, uint32 offset, uint32 length, out IDxcBlob* ppResult) CreateBlobFromBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlobFromPinned;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, void* pData, ref IMalloc pIMalloc, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) MoveToBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, void* pData, uint32 size, DXC_CP codePage, out IDxcBlobEncoding* pBlobEncoding) CreateBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, char16* pFileName, DXC_CP* pCodePage, out IDxcBlobEncoding* pBlobEncoding) LoadFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, ref IDxcBlob pBlob, out IStream* ppStream) CreateReadOnlyStreamFromBlob;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, out IDxcIncludeHandler* ppResult) CreateDefaultIncludeHandler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, ref IDxcBlob pBlob, out IDxcBlobUtf8* pBlobEncoding) GetBlobAsUtf8;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, ref IDxcBlob pBlob, out IDxcBlobUtf16* pBlobEncoding) GetBlobAsUtf16;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, in DxcBuffer pShader, uint32 DxcPart, void** ppPartData, out uint32 pPartSizeInBytes) GetDxilContainerPart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, in DxcBuffer pData, in Guid iid, void** ppvReflection) CreateReflection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, char16* pSourceName, char16* pEntryPoint, char16* pTargetProfile, char16** pArguments, uint32 argCount, DxcDefine* pDefines, uint32 defineCount, out IDxcCompilerArgs* ppArgs) BuildArguments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcUtils self, ref IDxcBlob pPDBBlob, out IDxcBlob* ppHash, out IDxcBlob* ppContainer) GetPDBContents;
 			}
 		}
 		[CRepr]
@@ -340,8 +343,8 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public BOOL HasOutput(DXC_OUT_KIND dxcOutKind) mut => VT.HasOutput(ref this, dxcOutKind);
-			public HRESULT GetOutput(DXC_OUT_KIND dxcOutKind, in Guid iid, void** ppvObject, out IDxcBlobUtf16* ppOutputName) mut => VT.GetOutput(ref this, dxcOutKind, iid, ppvObject, out ppOutputName);
+			public IntBool HasOutput(DXC_OUT_KIND dxcOutKind) mut => VT.HasOutput(ref this, dxcOutKind);
+			public HResult GetOutput(DXC_OUT_KIND dxcOutKind, in Guid iid, void** ppvObject, out IDxcBlobUtf16* ppOutputName) mut => VT.GetOutput(ref this, dxcOutKind, iid, ppvObject, out ppOutputName);
 			public uint32 GetNumOutputs() mut => VT.GetNumOutputs(ref this);
 			public DXC_OUT_KIND GetOutputByIndex(uint32 Index) mut => VT.GetOutputByIndex(ref this, Index);
 			public DXC_OUT_KIND PrimaryOutput() mut => VT.PrimaryOutput(ref this);
@@ -349,8 +352,8 @@ namespace Win32
 			[CRepr]
 			public struct VTable : IDxcOperationResult.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDxcResult self, DXC_OUT_KIND dxcOutKind) HasOutput;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcResult self, DXC_OUT_KIND dxcOutKind, in Guid iid, void** ppvObject, out IDxcBlobUtf16* ppOutputName) GetOutput;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDxcResult self, DXC_OUT_KIND dxcOutKind) HasOutput;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcResult self, DXC_OUT_KIND dxcOutKind, in Guid iid, void** ppvObject, out IDxcBlobUtf16* ppOutputName) GetOutput;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDxcResult self) GetNumOutputs;
 				public new function [CallingConvention(.Stdcall)] DXC_OUT_KIND(ref IDxcResult self, uint32 Index) GetOutputByIndex;
 				public new function [CallingConvention(.Stdcall)] DXC_OUT_KIND(ref IDxcResult self) PrimaryOutput;
@@ -364,13 +367,13 @@ namespace Win32
 			public new VTable* VT { get => (.)vt; }
 			
 			public uint32 GetOutputCount() mut => VT.GetOutputCount(ref this);
-			public HRESULT GetOutput(uint32 uIndex, in Guid iid, void** ppvObject, IDxcBlobUtf16** ppOutputType, IDxcBlobUtf16** ppOutputName) mut => VT.GetOutput(ref this, uIndex, iid, ppvObject, ppOutputType, ppOutputName);
+			public HResult GetOutput(uint32 uIndex, in Guid iid, void** ppvObject, IDxcBlobUtf16** ppOutputType, IDxcBlobUtf16** ppOutputName) mut => VT.GetOutput(ref this, uIndex, iid, ppvObject, ppOutputType, ppOutputName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
 				public new function [CallingConvention(.Stdcall)] uint32(ref IDxcExtraOutputs self) GetOutputCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcExtraOutputs self, uint32 uIndex, in Guid iid, void** ppvObject, IDxcBlobUtf16** ppOutputType, IDxcBlobUtf16** ppOutputName) GetOutput;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcExtraOutputs self, uint32 uIndex, in Guid iid, void** ppvObject, IDxcBlobUtf16** ppOutputType, IDxcBlobUtf16** ppOutputName) GetOutput;
 			}
 		}
 		[CRepr]
@@ -380,14 +383,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compile(in DxcBuffer pSource, PWSTR* pArguments, uint32 argCount, IDxcIncludeHandler* pIncludeHandler, in Guid riid, void** ppResult) mut => VT.Compile(ref this, pSource, pArguments, argCount, pIncludeHandler, riid, ppResult);
-			public HRESULT Disassemble(in DxcBuffer pObject, in Guid riid, void** ppResult) mut => VT.Disassemble(ref this, pObject, riid, ppResult);
+			public HResult Compile(in DxcBuffer pSource, char16** pArguments, uint32 argCount, IDxcIncludeHandler* pIncludeHandler, in Guid riid, void** ppResult) mut => VT.Compile(ref this, pSource, pArguments, argCount, pIncludeHandler, riid, ppResult);
+			public HResult Disassemble(in DxcBuffer pObject, in Guid riid, void** ppResult) mut => VT.Disassemble(ref this, pObject, riid, ppResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompiler3 self, in DxcBuffer pSource, PWSTR* pArguments, uint32 argCount, IDxcIncludeHandler* pIncludeHandler, in Guid riid, void** ppResult) Compile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcCompiler3 self, in DxcBuffer pObject, in Guid riid, void** ppResult) Disassemble;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompiler3 self, in DxcBuffer pSource, char16** pArguments, uint32 argCount, IDxcIncludeHandler* pIncludeHandler, in Guid riid, void** ppResult) Compile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcCompiler3 self, in DxcBuffer pObject, in Guid riid, void** ppResult) Disassemble;
 			}
 		}
 		[CRepr]
@@ -397,12 +400,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Validate(ref IDxcBlob pShader, uint32 Flags, out IDxcOperationResult* ppResult) mut => VT.Validate(ref this, ref pShader, Flags, out ppResult);
+			public HResult Validate(ref IDxcBlob pShader, uint32 Flags, out IDxcOperationResult* ppResult) mut => VT.Validate(ref this, ref pShader, Flags, out ppResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcValidator self, ref IDxcBlob pShader, uint32 Flags, out IDxcOperationResult* ppResult) Validate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcValidator self, ref IDxcBlob pShader, uint32 Flags, out IDxcOperationResult* ppResult) Validate;
 			}
 		}
 		[CRepr]
@@ -412,12 +415,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ValidateWithDebug(ref IDxcBlob pShader, uint32 Flags, DxcBuffer* pOptDebugBitcode, out IDxcOperationResult* ppResult) mut => VT.ValidateWithDebug(ref this, ref pShader, Flags, pOptDebugBitcode, out ppResult);
+			public HResult ValidateWithDebug(ref IDxcBlob pShader, uint32 Flags, DxcBuffer* pOptDebugBitcode, out IDxcOperationResult* ppResult) mut => VT.ValidateWithDebug(ref this, ref pShader, Flags, pOptDebugBitcode, out ppResult);
 
 			[CRepr]
 			public struct VTable : IDxcValidator.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcValidator2 self, ref IDxcBlob pShader, uint32 Flags, DxcBuffer* pOptDebugBitcode, out IDxcOperationResult* ppResult) ValidateWithDebug;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcValidator2 self, ref IDxcBlob pShader, uint32 Flags, DxcBuffer* pOptDebugBitcode, out IDxcOperationResult* ppResult) ValidateWithDebug;
 			}
 		}
 		[CRepr]
@@ -427,18 +430,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Load(ref IDxcBlob pDxilContainerHeader) mut => VT.Load(ref this, ref pDxilContainerHeader);
-			public HRESULT AddPart(uint32 fourCC, ref IDxcBlob pSource) mut => VT.AddPart(ref this, fourCC, ref pSource);
-			public HRESULT RemovePart(uint32 fourCC) mut => VT.RemovePart(ref this, fourCC);
-			public HRESULT SerializeContainer(out IDxcOperationResult* ppResult) mut => VT.SerializeContainer(ref this, out ppResult);
+			public HResult Load(ref IDxcBlob pDxilContainerHeader) mut => VT.Load(ref this, ref pDxilContainerHeader);
+			public HResult AddPart(uint32 fourCC, ref IDxcBlob pSource) mut => VT.AddPart(ref this, fourCC, ref pSource);
+			public HResult RemovePart(uint32 fourCC) mut => VT.RemovePart(ref this, fourCC);
+			public HResult SerializeContainer(out IDxcOperationResult* ppResult) mut => VT.SerializeContainer(ref this, out ppResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerBuilder self, ref IDxcBlob pDxilContainerHeader) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerBuilder self, uint32 fourCC, ref IDxcBlob pSource) AddPart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerBuilder self, uint32 fourCC) RemovePart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerBuilder self, out IDxcOperationResult* ppResult) SerializeContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerBuilder self, ref IDxcBlob pDxilContainerHeader) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerBuilder self, uint32 fourCC, ref IDxcBlob pSource) AddPart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerBuilder self, uint32 fourCC) RemovePart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerBuilder self, out IDxcOperationResult* ppResult) SerializeContainer;
 			}
 		}
 		[CRepr]
@@ -448,12 +451,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AssembleToContainer(ref IDxcBlob pShader, out IDxcOperationResult* ppResult) mut => VT.AssembleToContainer(ref this, ref pShader, out ppResult);
+			public HResult AssembleToContainer(ref IDxcBlob pShader, out IDxcOperationResult* ppResult) mut => VT.AssembleToContainer(ref this, ref pShader, out ppResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcAssembler self, ref IDxcBlob pShader, out IDxcOperationResult* ppResult) AssembleToContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcAssembler self, ref IDxcBlob pShader, out IDxcOperationResult* ppResult) AssembleToContainer;
 			}
 		}
 		[CRepr]
@@ -463,22 +466,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Load(ref IDxcBlob pContainer) mut => VT.Load(ref this, ref pContainer);
-			public HRESULT GetPartCount(out uint32 pResult) mut => VT.GetPartCount(ref this, out pResult);
-			public HRESULT GetPartKind(uint32 idx, out uint32 pResult) mut => VT.GetPartKind(ref this, idx, out pResult);
-			public HRESULT GetPartContent(uint32 idx, out IDxcBlob* ppResult) mut => VT.GetPartContent(ref this, idx, out ppResult);
-			public HRESULT FindFirstPartKind(uint32 kind, out uint32 pResult) mut => VT.FindFirstPartKind(ref this, kind, out pResult);
-			public HRESULT GetPartReflection(uint32 idx, in Guid iid, void** ppvObject) mut => VT.GetPartReflection(ref this, idx, iid, ppvObject);
+			public HResult Load(ref IDxcBlob pContainer) mut => VT.Load(ref this, ref pContainer);
+			public HResult GetPartCount(out uint32 pResult) mut => VT.GetPartCount(ref this, out pResult);
+			public HResult GetPartKind(uint32 idx, out uint32 pResult) mut => VT.GetPartKind(ref this, idx, out pResult);
+			public HResult GetPartContent(uint32 idx, out IDxcBlob* ppResult) mut => VT.GetPartContent(ref this, idx, out ppResult);
+			public HResult FindFirstPartKind(uint32 kind, out uint32 pResult) mut => VT.FindFirstPartKind(ref this, kind, out pResult);
+			public HResult GetPartReflection(uint32 idx, in Guid iid, void** ppvObject) mut => VT.GetPartReflection(ref this, idx, iid, ppvObject);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerReflection self, ref IDxcBlob pContainer) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerReflection self, out uint32 pResult) GetPartCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerReflection self, uint32 idx, out uint32 pResult) GetPartKind;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerReflection self, uint32 idx, out IDxcBlob* ppResult) GetPartContent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerReflection self, uint32 kind, out uint32 pResult) FindFirstPartKind;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcContainerReflection self, uint32 idx, in Guid iid, void** ppvObject) GetPartReflection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerReflection self, ref IDxcBlob pContainer) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerReflection self, out uint32 pResult) GetPartCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerReflection self, uint32 idx, out uint32 pResult) GetPartKind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerReflection self, uint32 idx, out IDxcBlob* ppResult) GetPartContent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerReflection self, uint32 kind, out uint32 pResult) FindFirstPartKind;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcContainerReflection self, uint32 idx, in Guid iid, void** ppvObject) GetPartReflection;
 			}
 		}
 		[CRepr]
@@ -488,20 +491,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetOptionName(out PWSTR ppResult) mut => VT.GetOptionName(ref this, out ppResult);
-			public HRESULT GetDescription(out PWSTR ppResult) mut => VT.GetDescription(ref this, out ppResult);
-			public HRESULT GetOptionArgCount(out uint32 pCount) mut => VT.GetOptionArgCount(ref this, out pCount);
-			public HRESULT GetOptionArgName(uint32 argIndex, out PWSTR ppResult) mut => VT.GetOptionArgName(ref this, argIndex, out ppResult);
-			public HRESULT GetOptionArgDescription(uint32 argIndex, out PWSTR ppResult) mut => VT.GetOptionArgDescription(ref this, argIndex, out ppResult);
+			public HResult GetOptionName(out char16* ppResult) mut => VT.GetOptionName(ref this, out ppResult);
+			public HResult GetDescription(out char16* ppResult) mut => VT.GetDescription(ref this, out ppResult);
+			public HResult GetOptionArgCount(out uint32 pCount) mut => VT.GetOptionArgCount(ref this, out pCount);
+			public HResult GetOptionArgName(uint32 argIndex, out char16* ppResult) mut => VT.GetOptionArgName(ref this, argIndex, out ppResult);
+			public HResult GetOptionArgDescription(uint32 argIndex, out char16* ppResult) mut => VT.GetOptionArgDescription(ref this, argIndex, out ppResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizerPass self, out PWSTR ppResult) GetOptionName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizerPass self, out PWSTR ppResult) GetDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizerPass self, out uint32 pCount) GetOptionArgCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizerPass self, uint32 argIndex, out PWSTR ppResult) GetOptionArgName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizerPass self, uint32 argIndex, out PWSTR ppResult) GetOptionArgDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizerPass self, out char16* ppResult) GetOptionName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizerPass self, out char16* ppResult) GetDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizerPass self, out uint32 pCount) GetOptionArgCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizerPass self, uint32 argIndex, out char16* ppResult) GetOptionArgName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizerPass self, uint32 argIndex, out char16* ppResult) GetOptionArgDescription;
 			}
 		}
 		[CRepr]
@@ -511,16 +514,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetAvailablePassCount(out uint32 pCount) mut => VT.GetAvailablePassCount(ref this, out pCount);
-			public HRESULT GetAvailablePass(uint32 index, out IDxcOptimizerPass* ppResult) mut => VT.GetAvailablePass(ref this, index, out ppResult);
-			public HRESULT RunOptimizer(ref IDxcBlob pBlob, PWSTR* ppOptions, uint32 optionCount, out IDxcBlob* pOutputModule, IDxcBlobEncoding** ppOutputText) mut => VT.RunOptimizer(ref this, ref pBlob, ppOptions, optionCount, out pOutputModule, ppOutputText);
+			public HResult GetAvailablePassCount(out uint32 pCount) mut => VT.GetAvailablePassCount(ref this, out pCount);
+			public HResult GetAvailablePass(uint32 index, out IDxcOptimizerPass* ppResult) mut => VT.GetAvailablePass(ref this, index, out ppResult);
+			public HResult RunOptimizer(ref IDxcBlob pBlob, char16** ppOptions, uint32 optionCount, out IDxcBlob* pOutputModule, IDxcBlobEncoding** ppOutputText) mut => VT.RunOptimizer(ref this, ref pBlob, ppOptions, optionCount, out pOutputModule, ppOutputText);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizer self, out uint32 pCount) GetAvailablePassCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizer self, uint32 index, out IDxcOptimizerPass* ppResult) GetAvailablePass;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcOptimizer self, ref IDxcBlob pBlob, PWSTR* ppOptions, uint32 optionCount, out IDxcBlob* pOutputModule, IDxcBlobEncoding** ppOutputText) RunOptimizer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizer self, out uint32 pCount) GetAvailablePassCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizer self, uint32 index, out IDxcOptimizerPass* ppResult) GetAvailablePass;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcOptimizer self, ref IDxcBlob pBlob, char16** ppOptions, uint32 optionCount, out IDxcBlob* pOutputModule, IDxcBlobEncoding** ppOutputText) RunOptimizer;
 			}
 		}
 		[CRepr]
@@ -530,14 +533,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetVersion(out uint32 pMajor, out uint32 pMinor) mut => VT.GetVersion(ref this, out pMajor, out pMinor);
-			public HRESULT ComGetFlags(out uint32 pFlags) mut => VT.ComGetFlags(ref this, out pFlags);
+			public HResult GetVersion(out uint32 pMajor, out uint32 pMinor) mut => VT._GetVersion(ref this, out pMajor, out pMinor);
+			public HResult ComGetFlags(out uint32 pFlags) mut => VT.ComGetFlags(ref this, out pFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcVersionInfo self, out uint32 pMajor, out uint32 pMinor) GetVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcVersionInfo self, out uint32 pFlags) ComGetFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcVersionInfo self, out uint32 pMajor, out uint32 pMinor) _GetVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcVersionInfo self, out uint32 pFlags) ComGetFlags;
 			}
 		}
 		[CRepr]
@@ -547,12 +550,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCommitInfo(out uint32 pCommitCount, out int8* pCommitHash) mut => VT.GetCommitInfo(ref this, out pCommitCount, out pCommitHash);
+			public HResult GetCommitInfo(out uint32 pCommitCount, out int8* pCommitHash) mut => VT.GetCommitInfo(ref this, out pCommitCount, out pCommitHash);
 
 			[CRepr]
 			public struct VTable : IDxcVersionInfo.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcVersionInfo2 self, out uint32 pCommitCount, out int8* pCommitHash) GetCommitInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcVersionInfo2 self, out uint32 pCommitCount, out int8* pCommitHash) GetCommitInfo;
 			}
 		}
 		[CRepr]
@@ -562,12 +565,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCustomVersionString(out int8* pVersionString) mut => VT.GetCustomVersionString(ref this, out pVersionString);
+			public HResult GetCustomVersionString(out int8* pVersionString) mut => VT.GetCustomVersionString(ref this, out pVersionString);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcVersionInfo3 self, out int8* pVersionString) GetCustomVersionString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcVersionInfo3 self, out int8* pVersionString) GetCustomVersionString;
 			}
 		}
 		[CRepr]
@@ -577,66 +580,66 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Load(ref IDxcBlob pPdbOrDxil) mut => VT.Load(ref this, ref pPdbOrDxil);
-			public HRESULT GetSourceCount(out uint32 pCount) mut => VT.GetSourceCount(ref this, out pCount);
-			public HRESULT GetSource(uint32 uIndex, out IDxcBlobEncoding* ppResult) mut => VT.GetSource(ref this, uIndex, out ppResult);
-			public HRESULT GetSourceName(uint32 uIndex, out BSTR pResult) mut => VT.GetSourceName(ref this, uIndex, out pResult);
-			public HRESULT GetFlagCount(out uint32 pCount) mut => VT.GetFlagCount(ref this, out pCount);
-			public HRESULT GetFlag(uint32 uIndex, out BSTR pResult) mut => VT.GetFlag(ref this, uIndex, out pResult);
-			public HRESULT GetArgCount(out uint32 pCount) mut => VT.GetArgCount(ref this, out pCount);
-			public HRESULT GetArg(uint32 uIndex, out BSTR pResult) mut => VT.GetArg(ref this, uIndex, out pResult);
-			public HRESULT GetArgPairCount(out uint32 pCount) mut => VT.GetArgPairCount(ref this, out pCount);
-			public HRESULT GetArgPair(uint32 uIndex, out BSTR pName, out BSTR pValue) mut => VT.GetArgPair(ref this, uIndex, out pName, out pValue);
-			public HRESULT GetDefineCount(out uint32 pCount) mut => VT.GetDefineCount(ref this, out pCount);
-			public HRESULT GetDefine(uint32 uIndex, out BSTR pResult) mut => VT.GetDefine(ref this, uIndex, out pResult);
-			public HRESULT GetTargetProfile(out BSTR pResult) mut => VT.GetTargetProfile(ref this, out pResult);
-			public HRESULT GetEntryPoint(out BSTR pResult) mut => VT.GetEntryPoint(ref this, out pResult);
-			public HRESULT GetMainFileName(out BSTR pResult) mut => VT.GetMainFileName(ref this, out pResult);
-			public HRESULT GetHash(out IDxcBlob* ppResult) mut => VT.GetHash(ref this, out ppResult);
-			public HRESULT GetName(out BSTR pResult) mut => VT.GetName(ref this, out pResult);
-			public BOOL IsFullPDB() mut => VT.IsFullPDB(ref this);
-			public HRESULT GetFullPDB(out IDxcBlob* ppFullPDB) mut => VT.GetFullPDB(ref this, out ppFullPDB);
-			public HRESULT GetVersionInfo(out IDxcVersionInfo* ppVersionInfo) mut => VT.GetVersionInfo(ref this, out ppVersionInfo);
-			public HRESULT SetCompiler(ref IDxcCompiler3 pCompiler) mut => VT.SetCompiler(ref this, ref pCompiler);
-			public HRESULT CompileForFullPDB(out IDxcResult* ppResult) mut => VT.CompileForFullPDB(ref this, out ppResult);
-			public HRESULT OverrideArgs(ref DxcArgPair pArgPairs, uint32 uNumArgPairs) mut => VT.OverrideArgs(ref this, ref pArgPairs, uNumArgPairs);
-			public HRESULT OverrideRootSignature(PWSTR pRootSignature) mut => VT.OverrideRootSignature(ref this, pRootSignature);
+			public HResult Load(ref IDxcBlob pPdbOrDxil) mut => VT.Load(ref this, ref pPdbOrDxil);
+			public HResult GetSourceCount(out uint32 pCount) mut => VT.GetSourceCount(ref this, out pCount);
+			public HResult GetSource(uint32 uIndex, out IDxcBlobEncoding* ppResult) mut => VT.GetSource(ref this, uIndex, out ppResult);
+			public HResult GetSourceName(uint32 uIndex, out char16* pResult) mut => VT.GetSourceName(ref this, uIndex, out pResult);
+			public HResult GetFlagCount(out uint32 pCount) mut => VT.GetFlagCount(ref this, out pCount);
+			public HResult GetFlag(uint32 uIndex, out char16* pResult) mut => VT.GetFlag(ref this, uIndex, out pResult);
+			public HResult GetArgCount(out uint32 pCount) mut => VT.GetArgCount(ref this, out pCount);
+			public HResult GetArg(uint32 uIndex, out char16* pResult) mut => VT.GetArg(ref this, uIndex, out pResult);
+			public HResult GetArgPairCount(out uint32 pCount) mut => VT.GetArgPairCount(ref this, out pCount);
+			public HResult GetArgPair(uint32 uIndex, out char16* pName, out char16* pValue) mut => VT.GetArgPair(ref this, uIndex, out pName, out pValue);
+			public HResult GetDefineCount(out uint32 pCount) mut => VT.GetDefineCount(ref this, out pCount);
+			public HResult GetDefine(uint32 uIndex, out char16* pResult) mut => VT.GetDefine(ref this, uIndex, out pResult);
+			public HResult GetTargetProfile(out char16* pResult) mut => VT.GetTargetProfile(ref this, out pResult);
+			public HResult GetEntryPoint(out char16* pResult) mut => VT.GetEntryPoint(ref this, out pResult);
+			public HResult GetMainFileName(out char16* pResult) mut => VT.GetMainFileName(ref this, out pResult);
+			public HResult GetHash(out IDxcBlob* ppResult) mut => VT.GetHash(ref this, out ppResult);
+			public HResult GetName(out char16* pResult) mut => VT.GetName(ref this, out pResult);
+			public IntBool IsFullPDB() mut => VT.IsFullPDB(ref this);
+			public HResult GetFullPDB(out IDxcBlob* ppFullPDB) mut => VT.GetFullPDB(ref this, out ppFullPDB);
+			public HResult GetVersionInfo(out IDxcVersionInfo* ppVersionInfo) mut => VT.GetVersionInfo(ref this, out ppVersionInfo);
+			public HResult SetCompiler(ref IDxcCompiler3 pCompiler) mut => VT.SetCompiler(ref this, ref pCompiler);
+			public HResult CompileForFullPDB(out IDxcResult* ppResult) mut => VT.CompileForFullPDB(ref this, out ppResult);
+			public HResult OverrideArgs(ref DxcArgPair pArgPairs, uint32 uNumArgPairs) mut => VT.OverrideArgs(ref this, ref pArgPairs, uNumArgPairs);
+			public HResult OverrideRootSignature(char16* pRootSignature) mut => VT.OverrideRootSignature(ref this, pRootSignature);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, ref IDxcBlob pPdbOrDxil) Load;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out uint32 pCount) GetSourceCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, uint32 uIndex, out IDxcBlobEncoding* ppResult) GetSource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, uint32 uIndex, out BSTR pResult) GetSourceName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out uint32 pCount) GetFlagCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, uint32 uIndex, out BSTR pResult) GetFlag;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out uint32 pCount) GetArgCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, uint32 uIndex, out BSTR pResult) GetArg;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out uint32 pCount) GetArgPairCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, uint32 uIndex, out BSTR pName, out BSTR pValue) GetArgPair;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out uint32 pCount) GetDefineCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, uint32 uIndex, out BSTR pResult) GetDefine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out BSTR pResult) GetTargetProfile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out BSTR pResult) GetEntryPoint;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out BSTR pResult) GetMainFileName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out IDxcBlob* ppResult) GetHash;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out BSTR pResult) GetName;
-				public new function [CallingConvention(.Stdcall)] BOOL(ref IDxcPdbUtils self) IsFullPDB;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out IDxcBlob* ppFullPDB) GetFullPDB;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out IDxcVersionInfo* ppVersionInfo) GetVersionInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, ref IDxcCompiler3 pCompiler) SetCompiler;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, out IDxcResult* ppResult) CompileForFullPDB;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, ref DxcArgPair pArgPairs, uint32 uNumArgPairs) OverrideArgs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDxcPdbUtils self, PWSTR pRootSignature) OverrideRootSignature;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, ref IDxcBlob pPdbOrDxil) Load;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out uint32 pCount) GetSourceCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, uint32 uIndex, out IDxcBlobEncoding* ppResult) GetSource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, uint32 uIndex, out char16* pResult) GetSourceName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out uint32 pCount) GetFlagCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, uint32 uIndex, out char16* pResult) GetFlag;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out uint32 pCount) GetArgCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, uint32 uIndex, out char16* pResult) GetArg;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out uint32 pCount) GetArgPairCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, uint32 uIndex, out char16* pName, out char16* pValue) GetArgPair;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out uint32 pCount) GetDefineCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, uint32 uIndex, out char16* pResult) GetDefine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out char16* pResult) GetTargetProfile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out char16* pResult) GetEntryPoint;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out char16* pResult) GetMainFileName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out IDxcBlob* ppResult) GetHash;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out char16* pResult) GetName;
+				public new function [CallingConvention(.Stdcall)] IntBool(ref IDxcPdbUtils self) IsFullPDB;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out IDxcBlob* ppFullPDB) GetFullPDB;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out IDxcVersionInfo* ppVersionInfo) GetVersionInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, ref IDxcCompiler3 pCompiler) SetCompiler;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, out IDxcResult* ppResult) CompileForFullPDB;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, ref DxcArgPair pArgPairs, uint32 uNumArgPairs) OverrideArgs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDxcPdbUtils self, char16* pRootSignature) OverrideRootSignature;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("dxcompiler.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DxcCreateInstance(in Guid rclsid, in Guid riid, void** ppv);
+		public static extern HResult DxcCreateInstance(in Guid rclsid, in Guid riid, void** ppv);
 		[Import("dxcompiler.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DxcCreateInstance2(ref IMalloc pMalloc, in Guid rclsid, in Guid riid, void** ppv);
+		public static extern HResult DxcCreateInstance2(ref IMalloc pMalloc, in Guid rclsid, in Guid riid, void** ppv);
 	}
 }

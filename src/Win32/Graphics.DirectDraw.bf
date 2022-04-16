@@ -1,9 +1,14 @@
 using System;
+using static Win32.Graphics.Gdi;
+using static Win32.Win32;
+using static Win32.System.Com;
+using static System.Windows;
+using static System.Windows.COM_IUnknown;
 
 // namespace Graphics.DirectDraw
-namespace Win32
+namespace Win32.Graphics
 {
-	extension Win32
+	public static class DirectDraw
 	{
 		// --- Constants ---
 		
@@ -943,21 +948,21 @@ namespace Win32
 		
 		// --- Function Pointers ---
 		
-		public function BOOL LPDDENUMCALLBACKA(out Guid param0, PSTR param1, PSTR param2, void* param3);
-		public function BOOL LPDDENUMCALLBACKW(out Guid param0, PWSTR param1, PWSTR param2, void* param3);
-		public function BOOL LPDDENUMCALLBACKEXA(out Guid param0, PSTR param1, PSTR param2, void* param3, HMONITOR param4);
-		public function BOOL LPDDENUMCALLBACKEXW(out Guid param0, PWSTR param1, PWSTR param2, void* param3, HMONITOR param4);
-		public function HRESULT LPDIRECTDRAWENUMERATEEXA(LPDDENUMCALLBACKEXA lpCallback, void* lpContext, uint32 dwFlags);
-		public function HRESULT LPDIRECTDRAWENUMERATEEXW(LPDDENUMCALLBACKEXW lpCallback, void* lpContext, uint32 dwFlags);
-		public function HRESULT LPDDENUMMODESCALLBACK(out DDSURFACEDESC param0, void* param1);
-		public function HRESULT LPDDENUMMODESCALLBACK2(out DDSURFACEDESC2 param0, void* param1);
-		public function HRESULT LPDDENUMSURFACESCALLBACK(ref IDirectDrawSurface param0, out DDSURFACEDESC param1, void* param2);
-		public function HRESULT LPDDENUMSURFACESCALLBACK2(ref IDirectDrawSurface4 param0, out DDSURFACEDESC2 param1, void* param2);
-		public function HRESULT LPDDENUMSURFACESCALLBACK7(ref IDirectDrawSurface7 param0, out DDSURFACEDESC2 param1, void* param2);
-		public function uint32 LPCLIPPERCALLBACK(ref IDirectDrawClipper lpDDClipper, HWND hWnd, uint32 code, void* lpContext);
-		public function HRESULT LPDDENUMVIDEOCALLBACK(out DDVIDEOPORTCAPS param0, void* param1);
+		public function IntBool LPDDENUMCALLBACKA(out Guid param0, char8* param1, char8* param2, void* param3);
+		public function IntBool LPDDENUMCALLBACKW(out Guid param0, char16* param1, char16* param2, void* param3);
+		public function IntBool LPDDENUMCALLBACKEXA(out Guid param0, char8* param1, char8* param2, void* param3, HMONITOR param4);
+		public function IntBool LPDDENUMCALLBACKEXW(out Guid param0, char16* param1, char16* param2, void* param3, HMONITOR param4);
+		public function HResult LPDIRECTDRAWENUMERATEEXA(LPDDENUMCALLBACKEXA lpCallback, void* lpContext, uint32 dwFlags);
+		public function HResult LPDIRECTDRAWENUMERATEEXW(LPDDENUMCALLBACKEXW lpCallback, void* lpContext, uint32 dwFlags);
+		public function HResult LPDDENUMMODESCALLBACK(out DDSURFACEDESC param0, void* param1);
+		public function HResult LPDDENUMMODESCALLBACK2(out DDSURFACEDESC2 param0, void* param1);
+		public function HResult LPDDENUMSURFACESCALLBACK(ref IDirectDrawSurface param0, out DDSURFACEDESC param1, void* param2);
+		public function HResult LPDDENUMSURFACESCALLBACK2(ref IDirectDrawSurface4 param0, out DDSURFACEDESC2 param1, void* param2);
+		public function HResult LPDDENUMSURFACESCALLBACK7(ref IDirectDrawSurface7 param0, out DDSURFACEDESC2 param1, void* param2);
+		public function uint32 LPCLIPPERCALLBACK(ref IDirectDrawClipper lpDDClipper, HWnd hWnd, uint32 code, void* lpContext);
+		public function HResult LPDDENUMVIDEOCALLBACK(out DDVIDEOPORTCAPS param0, void* param1);
 		public function uint32 LPDD32BITDRIVERINIT(uint32 dwContext);
-		public function BOOL LPDDHEL_INIT(out DDRAWI_DIRECTDRAW_GBL param0, BOOL param1);
+		public function IntBool LPDDHEL_INIT(out DDRAWI_DIRECTDRAW_GBL param0, IntBool param1);
 		public function uint32 LPDDHAL_SETCOLORKEY(out DDHAL_DRVSETCOLORKEYDATA param0);
 		public function uint32 LPDDHAL_CANCREATESURFACE(out DDHAL_CANCREATESURFACEDATA param0);
 		public function uint32 LPDDHAL_WAITFORVERTICALBLANK(out DDHAL_WAITFORVERTICALBLANKDATA param0);
@@ -1013,7 +1018,7 @@ namespace Win32
 		public function uint32 LPDDHALCOLORCB_COLORCONTROL(out DDHAL_COLORCONTROLDATA param0);
 		public function uint32 LPDDHALKERNELCB_SYNCSURFACE(out DDHAL_SYNCSURFACEDATA param0);
 		public function uint32 LPDDHALKERNELCB_SYNCVIDEOPORT(out DDHAL_SYNCVIDEOPORTDATA param0);
-		public function HRESULT LPDDGAMMACALIBRATORPROC(out DDGAMMARAMP param0, out uint8 param1);
+		public function HResult LPDDGAMMACALIBRATORPROC(out DDGAMMARAMP param0, out uint8 param1);
 		public function uint32 LPDDHALMOCOMPCB_GETGUIDS(out DDHAL_GETMOCOMPGUIDSDATA param0);
 		public function uint32 LPDDHALMOCOMPCB_GETFORMATS(out DDHAL_GETMOCOMPFORMATSDATA param0);
 		public function uint32 LPDDHALMOCOMPCB_CREATE(out DDHAL_CREATEMOCOMPDATA param0);
@@ -1024,7 +1029,7 @@ namespace Win32
 		public function uint32 LPDDHALMOCOMPCB_RENDER(out DDHAL_RENDERMOCOMPDATA param0);
 		public function uint32 LPDDHALMOCOMPCB_QUERYSTATUS(out DDHAL_QUERYMOCOMPSTATUSDATA param0);
 		public function uint32 LPDDHALMOCOMPCB_DESTROY(out DDHAL_DESTROYMOCOMPDATA param0);
-		public function BOOL LPDDHAL_SETINFO(out DDHALINFO lpDDHalInfo, BOOL reset);
+		public function IntBool LPDDHAL_SETINFO(out DDHALINFO lpDDHalInfo, IntBool reset);
 		public function uint LPDDHAL_VIDMEMALLOC(out DDRAWI_DIRECTDRAW_GBL lpDD, int32 heap, uint32 dwWidth, uint32 dwHeight);
 		public function void LPDDHAL_VIDMEMFREE(out DDRAWI_DIRECTDRAW_GBL lpDD, int32 heap, uint fpMem);
 		public function uint32 PDD_SETCOLORKEY(out DD_DRVSETCOLORKEYDATA param0);
@@ -1605,9 +1610,9 @@ namespace Win32
 		[CRepr]
 		public struct DDBLTBATCH
 		{
-			public RECT* lprDest;
+			public RectI* lprDest;
 			public IDirectDrawSurface* lpDDSSrc;
-			public RECT* lprSrc;
+			public RectI* lprSrc;
 			public uint32 dwFlags;
 			public DDBLTFX* lpDDBltFx;
 		}
@@ -1621,8 +1626,8 @@ namespace Win32
 		[CRepr]
 		public struct DDDEVICEIDENTIFIER
 		{
-			public CHAR[512] szDriver;
-			public CHAR[512] szDescription;
+			public char8[512] szDriver;
+			public char8[512] szDescription;
 			public LARGE_INTEGER liDriverVersion;
 			public uint32 dwVendorId;
 			public uint32 dwDeviceId;
@@ -1633,8 +1638,8 @@ namespace Win32
 		[CRepr]
 		public struct DDDEVICEIDENTIFIER2
 		{
-			public CHAR[512] szDriver;
-			public CHAR[512] szDescription;
+			public char8[512] szDriver;
+			public char8[512] szDescription;
 			public LARGE_INTEGER liDriverVersion;
 			public uint32 dwVendorId;
 			public uint32 dwDeviceId;
@@ -1814,7 +1819,7 @@ namespace Win32
 			public uint32 dwOriginX;
 			public uint32 dwOriginY;
 			public uint32 dwVPFlags;
-			public RECT rCrop;
+			public RectI rCrop;
 			public uint32 dwPrescaleWidth;
 			public uint32 dwPrescaleHeight;
 			public DDPIXELFORMAT* lpddpfInputFormat;
@@ -1840,7 +1845,7 @@ namespace Win32
 		public struct DDVIDEOPORTSTATUS
 		{
 			public uint32 dwSize;
-			public BOOL bInUse;
+			public IntBool bInUse;
 			public uint32 dwFlags;
 			public uint32 dwReserved1;
 			public DDVIDEOPORTCONNECT VideoPortType;
@@ -1910,7 +1915,7 @@ namespace Win32
 		{
 			public uint dwInstance;
 			public uint32 dwHeap;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetHeapAlignment;
 			public HEAPALIGNMENT Alignment;
 		}
@@ -1920,7 +1925,7 @@ namespace Win32
 			public VMEML* next;
 			public uint ptr;
 			public uint32 size;
-			public BOOL bDiscardable;
+			public IntBool bDiscardable;
 		}
 		[CRepr]
 		public struct VMEMR
@@ -1939,7 +1944,7 @@ namespace Win32
 			public uint32 cy;
 			public uint32 flags;
 			public uint pBits;
-			public BOOL bDiscardable;
+			public IntBool bDiscardable;
 		}
 		[CRepr]
 		public struct VMEMHEAP
@@ -1957,7 +1962,7 @@ namespace Win32
 			public DDSCAPSEX ddsCapsEx;
 			public DDSCAPSEX ddsCapsExAlt;
 			public LARGE_INTEGER liPhysAGPBase;
-			public HANDLE hdevAGP;
+			public Handle hdevAGP;
 			public void* pvPhysRsrv;
 			public uint8* pAgpCommitMask;
 			public uint32 dwAgpCommitMaskSize;
@@ -2020,8 +2025,8 @@ namespace Win32
 		[CRepr]
 		public struct DD32BITDRIVERDATA
 		{
-			public CHAR[260] szName;
-			public CHAR[64] szEntryPoint;
+			public char8[260] szName;
+			public char8[64] szEntryPoint;
 			public uint32 dwContext;
 		}
 		[CRepr]
@@ -2253,7 +2258,7 @@ namespace Win32
 			public uint32 dwWidth;
 			public uint32 dwBpp;
 			public uint32 dwRefreshRate;
-			public BOOL bSupported;
+			public IntBool bSupported;
 		}
 		[CRepr]
 		public struct DDRAWI_DDRAWPALETTE_INT
@@ -2349,7 +2354,7 @@ namespace Win32
 		public struct ACCESSRECTLIST
 		{
 			public ACCESSRECTLIST* lpLink;
-			public RECT rDest;
+			public RectI rDest;
 			public DDRAWI_DIRECTDRAW_LCL* lpOwner;
 			public void* lpSurfaceData;
 			public uint32 dwFlags;
@@ -2494,8 +2499,8 @@ namespace Win32
 			public DDCOLORKEY ddckCKDestOverlay;
 			public DDRAWI_DDRAWSURFACE_INT* lpSurfaceOverlaying;
 			public DBLNODE dbnOverlayNode;
-			public RECT rcOverlaySrc;
-			public RECT rcOverlayDest;
+			public RectI rcOverlaySrc;
+			public RectI rcOverlayDest;
 			public uint32 dwClrXparent;
 			public uint32 dwAlpha;
 			public int32 lOverlayX;
@@ -2652,7 +2657,7 @@ namespace Win32
 			public uint32 dwAliasedLockCnt;
 			public uint dwReserved3;
 			public uint hDD;
-			public CHAR[12] cObsolete;
+			public char8[12] cObsolete;
 			public uint32 dwReserved1;
 			public uint32 dwReserved2;
 			public DBLNODE dbnOverlayRoot;
@@ -2669,7 +2674,7 @@ namespace Win32
 			public DDVIDEOPORTCAPS* lpDDVideoPortCaps;
 			public DDRAWI_DDVIDEOPORT_INT* dvpList;
 			public uint lpD3DHALCallbacks2;
-			public RECT rectDevice;
+			public RectI rectDevice;
 			public uint32 cMonitors;
 			public void* gpbmiSrc;
 			public void* gpbmiDest;
@@ -2682,8 +2687,8 @@ namespace Win32
 			public DDNONLOCALVIDMEMCAPS* lpddNLVBothCaps;
 			public uint lpD3DExtendedCaps;
 			public uint32 dwDOSBoxEvent;
-			public RECT rectDesktop;
-			public CHAR[32] cDriverName;
+			public RectI rectDesktop;
+			public char8[32] cDriverName;
 			public uint lpD3DHALCallbacks3;
 			public uint32 dwNumZPixelFormats;
 			public DDPIXELFORMAT* lpZPixelFormats;
@@ -2708,7 +2713,7 @@ namespace Win32
 			public DDRAWI_DDRAWSURFACE_INT* lpPrimary;
 			public DDRAWI_DDRAWSURFACE_INT* lpCB;
 			public uint32 dwPreferredMode;
-			public HINSTANCE hD3DInstance;
+			public HInstance hD3DInstance;
 			public IUnknown* pD3DIUnknown;
 			public DDHAL_CALLBACKS* lpDDCB;
 			public uint hDDVxd;
@@ -2747,7 +2752,7 @@ namespace Win32
 			public uint fpLastFlip;
 			public uint dwReserved1;
 			public uint dwReserved2;
-			public HANDLE hDDVideoPort;
+			public Handle hDDVideoPort;
 			public uint32 dwNumVBIAutoflip;
 			public DDVIDEOPORTDESC* lpVBIDesc;
 			public DDVIDEOPORTDESC* lpVideoDesc;
@@ -2775,7 +2780,7 @@ namespace Win32
 			public uint32 dwInternalFlags;
 			public uint32 dwRefCnt;
 			public uint32 dwProcessId;
-			public HANDLE hMoComp;
+			public Handle hMoComp;
 			public uint32 dwDriverReserved1;
 			public uint32 dwDriverReserved2;
 			public uint32 dwDriverReserved3;
@@ -2824,13 +2829,13 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwROPFlags;
 			public DDBLTFX bltFX;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_BLT Blt;
-			public BOOL IsClipped;
+			public IntBool IsClipped;
 			public RECTL rOrigDest;
 			public RECTL rOrigSrc;
 			public uint32 dwRectCnt;
-			public RECT* prDestRects;
+			public RectI* prDestRects;
 		}
 		[CRepr]
 		public struct DDHAL_LOCKDATA
@@ -2840,7 +2845,7 @@ namespace Win32
 			public uint32 bHasRect;
 			public RECTL rArea;
 			public void* lpSurfData;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_LOCK Lock;
 			public uint32 dwFlags;
 		}
@@ -2849,7 +2854,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_UNLOCK Unlock;
 		}
 		[CRepr]
@@ -2862,7 +2867,7 @@ namespace Win32
 			public RECTL rSrc;
 			public uint32 dwFlags;
 			public DDOVERLAYFX overlayFX;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_UPDATEOVERLAY UpdateOverlay;
 		}
 		[CRepr]
@@ -2873,7 +2878,7 @@ namespace Win32
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDDestSurface;
 			public int32 lXPos;
 			public int32 lYPos;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_SETOVERLAYPOSITION SetOverlayPosition;
 		}
 		[CRepr]
@@ -2882,9 +2887,9 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public DDRAWI_DDRAWPALETTE_GBL* lpDDPalette;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_SETPALETTE SetPalette;
-			public BOOL Attach;
+			public IntBool Attach;
 		}
 		[CRepr]
 		public struct DDHAL_FLIPDATA
@@ -2893,7 +2898,7 @@ namespace Win32
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfCurr;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfTarg;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_FLIP Flip;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfCurrLeft;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfTargLeft;
@@ -2903,7 +2908,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_DESTROYSURFACE DestroySurface;
 		}
 		[CRepr]
@@ -2911,7 +2916,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_SETCLIPLIST SetClipList;
 		}
 		[CRepr]
@@ -2920,7 +2925,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfAttached;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_ADDATTACHEDSURFACE AddAttachedSurface;
 		}
 		[CRepr]
@@ -2930,7 +2935,7 @@ namespace Win32
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public uint32 dwFlags;
 			public DDCOLORKEY ckNew;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_SETCOLORKEY SetColorKey;
 		}
 		[CRepr]
@@ -2939,7 +2944,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_GETBLTSTATUS GetBltStatus;
 		}
 		[CRepr]
@@ -2948,7 +2953,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALSURFCB_GETFLIPSTATUS GetFlipStatus;
 		}
 		[CRepr]
@@ -2956,7 +2961,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWPALETTE_GBL* lpDDPalette;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALPALCB_DESTROYPALETTE DestroyPalette;
 		}
 		[CRepr]
@@ -2967,7 +2972,7 @@ namespace Win32
 			public uint32 dwBase;
 			public uint32 dwNumEntries;
 			public PALETTEENTRY* lpEntries;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALPALCB_SETENTRIES SetEntries;
 		}
 		[CRepr]
@@ -2977,7 +2982,7 @@ namespace Win32
 			public DDSURFACEDESC* lpDDSurfaceDesc;
 			public DDRAWI_DDRAWSURFACE_LCL** lplpSList;
 			public uint32 dwSCnt;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_CREATESURFACE CreateSurface;
 		}
 		[CRepr]
@@ -2986,7 +2991,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDSURFACEDESC* lpDDSurfaceDesc;
 			public uint32 bIsDifferentPixelFormat;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_CANCREATESURFACE CanCreateSurface;
 		}
 		[CRepr]
@@ -2995,9 +3000,9 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public DDRAWI_DDRAWPALETTE_GBL* lpDDPalette;
 			public PALETTEENTRY* lpColorTable;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_CREATEPALETTE CreatePalette;
-			public BOOL is_excl;
+			public IntBool is_excl;
 		}
 		[CRepr]
 		public struct DDHAL_WAITFORVERTICALBLANKDATA
@@ -3006,14 +3011,14 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 bIsInVB;
 			public uint hEvent;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_WAITFORVERTICALBLANK WaitForVerticalBlank;
 		}
 		[CRepr]
 		public struct DDHAL_DESTROYDRIVERDATA
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_DESTROYDRIVER DestroyDriver;
 		}
 		[CRepr]
@@ -3021,10 +3026,10 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public uint32 dwModeIndex;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_SETMODE SetMode;
-			public BOOL inexcl;
-			public BOOL useRefreshRate;
+			public IntBool inexcl;
+			public IntBool useRefreshRate;
 		}
 		[CRepr]
 		public struct DDHAL_DRVSETCOLORKEYDATA
@@ -3032,7 +3037,7 @@ namespace Win32
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public uint32 dwFlags;
 			public DDCOLORKEY ckNew;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_SETCOLORKEY SetColorKey;
 		}
 		[CRepr]
@@ -3040,7 +3045,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public uint32 dwScanLine;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_GETSCANLINE GetScanLine;
 		}
 		[CRepr]
@@ -3049,7 +3054,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public uint32 dwEnterExcl;
 			public uint32 dwReserved;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_SETEXCLUSIVEMODE SetExclusiveMode;
 		}
 		[CRepr]
@@ -3058,7 +3063,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_GBL* lpDD;
 			public uint32 dwToGDI;
 			public uint32 dwReserved;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_FLIPTOGDISURFACE FlipToGDISurface;
 		}
 		[CRepr]
@@ -3066,7 +3071,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDVIDEOPORTDESC* lpDDVideoPortDesc;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_CANCREATEVIDEOPORT CanCreateVideoPort;
 		}
 		[CRepr]
@@ -3075,7 +3080,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDVIDEOPORTDESC* lpDDVideoPortDesc;
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_CREATEVIDEOPORT CreateVideoPort;
 		}
 		[CRepr]
@@ -3085,7 +3090,7 @@ namespace Win32
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfCurr;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurfTarg;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_FLIP FlipVideoPort;
 		}
 		[CRepr]
@@ -3098,7 +3103,7 @@ namespace Win32
 			public uint32 dwHeight;
 			public uint32 dwFlags;
 			public DDVIDEOPORTBANDWIDTH* lpBandwidth;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETBANDWIDTH GetVideoPortBandwidth;
 		}
 		[CRepr]
@@ -3109,7 +3114,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public DDPIXELFORMAT* lpddpfFormat;
 			public uint32 dwNumFormats;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETINPUTFORMATS GetVideoPortInputFormats;
 		}
 		[CRepr]
@@ -3121,7 +3126,7 @@ namespace Win32
 			public DDPIXELFORMAT* lpddpfInputFormat;
 			public DDPIXELFORMAT* lpddpfOutputFormats;
 			public uint32 dwNumFormats;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETOUTPUTFORMATS GetVideoPortOutputFormats;
 		}
 		[CRepr]
@@ -3129,8 +3134,8 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
-			public BOOL bField;
-			public HRESULT ddRVal;
+			public IntBool bField;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETFIELD GetVideoPortField;
 		}
 		[CRepr]
@@ -3139,7 +3144,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
 			public uint32 dwLine;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETLINE GetVideoPortLine;
 		}
 		[CRepr]
@@ -3149,7 +3154,7 @@ namespace Win32
 			public uint32 dwPortId;
 			public DDVIDEOPORTCONNECT* lpConnect;
 			public uint32 dwNumEntries;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETVPORTCONNECT GetVideoPortConnectInfo;
 		}
 		[CRepr]
@@ -3157,7 +3162,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_DESTROYVPORT DestroyVideoPort;
 		}
 		[CRepr]
@@ -3165,7 +3170,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public uint fpSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETFLIPSTATUS GetVideoPortFlipStatus;
 		}
 		[CRepr]
@@ -3179,7 +3184,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwNumAutoflip;
 			public uint32 dwNumVBIAutoflip;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_UPDATE UpdateVideoPort;
 		}
 		[CRepr]
@@ -3190,7 +3195,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwLine;
 			public uint32 dwTimeOut;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_WAITFORSYNC WaitForVideoPortSync;
 		}
 		[CRepr]
@@ -3199,7 +3204,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
 			public uint32 dwStatus;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_GETSIGNALSTATUS GetVideoSignalStatus;
 		}
 		[CRepr]
@@ -3209,7 +3214,7 @@ namespace Win32
 			public DDRAWI_DDVIDEOPORT_LCL* lpVideoPort;
 			public uint32 dwFlags;
 			public DDCOLORCONTROL* lpColorData;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALVPORTCB_COLORCONTROL ColorControl;
 		}
 		[CRepr]
@@ -3219,7 +3224,7 @@ namespace Win32
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSurface;
 			public DDCOLORCONTROL* lpColorData;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALCOLORCB_COLORCONTROL ColorControl;
 		}
 		[CRepr]
@@ -3231,7 +3236,7 @@ namespace Win32
 			public uint32 dwExpectedSize;
 			public void* lpvData;
 			public uint32 dwActualSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public uint dwContext;
 		}
 		[CRepr]
@@ -3241,7 +3246,7 @@ namespace Win32
 			public DDSCAPS DDSCaps;
 			public uint32 dwTotal;
 			public uint32 dwFree;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_GETAVAILDRIVERMEMORY GetAvailDriverMemory;
 			public DDSCAPSEX ddsCapsEx;
 		}
@@ -3253,7 +3258,7 @@ namespace Win32
 			public uint fpGARTLin;
 			public uint fpGARTDev;
 			public uint ulPolicyMaxBytes;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_UPDATENONLOCALHEAP UpdateNonLocalHeap;
 		}
 		[CRepr]
@@ -3261,7 +3266,7 @@ namespace Win32
 		{
 			public uint dwInstance;
 			public uint32 dwHeap;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHAL_GETHEAPALIGNMENT GetHeapAlignment;
 			public HEAPALIGNMENT Alignment;
 		}
@@ -3271,7 +3276,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public DDRAWI_DIRECTDRAW_LCL* lpDDLcl;
 			public DDRAWI_DDRAWSURFACE_LCL* lpDDSLcl;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DDHAL_GETDRIVERSTATEDATA
@@ -3280,7 +3285,7 @@ namespace Win32
 			public _Anonymous_e__Union Anonymous;
 			public uint32* lpdwStates;
 			public uint32 dwLength;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
@@ -3293,7 +3298,7 @@ namespace Win32
 		{
 			public uint32 dwFlags;
 			public DDRAWI_DIRECTDRAW_LCL* pDDLcl;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DDHAL_SYNCSURFACEDATA
@@ -3312,7 +3317,7 @@ namespace Win32
 			public uint dwDriverReserved1;
 			public uint dwDriverReserved2;
 			public uint dwDriverReserved3;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DDHAL_SYNCVIDEOPORTDATA
@@ -3326,7 +3331,7 @@ namespace Win32
 			public uint dwDriverReserved1;
 			public uint dwDriverReserved2;
 			public uint dwDriverReserved3;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DDHAL_GETMOCOMPGUIDSDATA
@@ -3334,7 +3339,7 @@ namespace Win32
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public uint32 dwNumGuids;
 			public Guid* lpGuids;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_GETGUIDS GetMoCompGuids;
 		}
 		[CRepr]
@@ -3344,7 +3349,7 @@ namespace Win32
 			public Guid* lpGuid;
 			public uint32 dwNumFormats;
 			public DDPIXELFORMAT* lpFormats;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_GETFORMATS GetMoCompFormats;
 		}
 		[CRepr]
@@ -3358,7 +3363,7 @@ namespace Win32
 			public DDPIXELFORMAT ddUncompPixelFormat;
 			public void* lpData;
 			public uint32 dwDataSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_CREATE CreateMoComp;
 		}
 		[CRepr]
@@ -3382,7 +3387,7 @@ namespace Win32
 			public DDPIXELFORMAT ddPixelFormat;
 			public uint32 dwNumTypesCompBuffs;
 			public DDMCCOMPBUFFERINFO* lpCompBuffInfo;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_GETCOMPBUFFINFO GetMoCompBuffInfo;
 		}
 		[CRepr]
@@ -3394,7 +3399,7 @@ namespace Win32
 			public uint32 dwHeight;
 			public DDPIXELFORMAT ddPixelFormat;
 			public uint32 dwScratchMemAlloc;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_GETINTERNALINFO GetInternalMoCompInfo;
 		}
 		[CRepr]
@@ -3407,7 +3412,7 @@ namespace Win32
 			public void* lpInputData;
 			public uint32 dwOutputDataSize;
 			public void* lpOutputData;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_BEGINFRAME BeginMoCompFrame;
 		}
 		[CRepr]
@@ -3417,7 +3422,7 @@ namespace Win32
 			public DDRAWI_DDMOTIONCOMP_LCL* lpMoComp;
 			public void* lpInputData;
 			public uint32 dwInputDataSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_ENDFRAME EndMoCompFrame;
 		}
 		[CRepr]
@@ -3441,7 +3446,7 @@ namespace Win32
 			public uint32 dwInputDataSize;
 			public void* lpOutputData;
 			public uint32 dwOutputDataSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_RENDER RenderMoComp;
 		}
 		[CRepr]
@@ -3451,7 +3456,7 @@ namespace Win32
 			public DDRAWI_DDMOTIONCOMP_LCL* lpMoComp;
 			public DDRAWI_DDRAWSURFACE_LCL* lpSurface;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_QUERYSTATUS QueryMoCompStatus;
 		}
 		[CRepr]
@@ -3459,7 +3464,7 @@ namespace Win32
 		{
 			public DDRAWI_DIRECTDRAW_LCL* lpDD;
 			public DDRAWI_DDMOTIONCOMP_LCL* lpMoComp;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public LPDDHALMOCOMPCB_DESTROY DestroyMoComp;
 		}
 		[CRepr]
@@ -3685,7 +3690,7 @@ namespace Win32
 			public uint dwReserved1;
 			public DDPIXELFORMAT ddpfSurface;
 			public uint fpHeapOffset;
-			public HANDLE hCreatorProcess;
+			public Handle hCreatorProcess;
 			
 			[CRepr, Union]
 			public struct _Anonymous3_e__Union
@@ -3728,7 +3733,7 @@ namespace Win32
 			public DD_SURFACE_MORE* lpSurfMore;
 			public DD_ATTACHLIST* lpAttachList;
 			public DD_ATTACHLIST* lpAttachListFrom;
-			public RECT rcOverlaySrc;
+			public RectI rcOverlaySrc;
 			
 			[CRepr, Union]
 			public struct _Anonymous2_e__Union
@@ -3907,7 +3912,7 @@ namespace Win32
 			public uint32 dwWidth;
 			public uint32 dwBpp;
 			public uint32 dwRefreshRate;
-			public BOOL bSupported;
+			public IntBool bSupported;
 		}
 		[CRepr]
 		public struct DD_UPDATENONLOCALHEAPDATA
@@ -3917,7 +3922,7 @@ namespace Win32
 			public uint fpGARTLin;
 			public uint fpGARTDev;
 			public uint ulPolicyMaxBytes;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* UpdateNonLocalHeap;
 		}
 		[CRepr]
@@ -3937,13 +3942,13 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwROPFlags;
 			public DDBLTFX bltFX;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* Blt;
-			public BOOL IsClipped;
+			public IntBool IsClipped;
 			public RECTL rOrigDest;
 			public RECTL rOrigSrc;
 			public uint32 dwRectCnt;
-			public RECT* prDestRects;
+			public RectI* prDestRects;
 			public uint32 dwAFlags;
 			public DDARGB ddargbScaleFactors;
 		}
@@ -3955,7 +3960,7 @@ namespace Win32
 			public uint32 bHasRect;
 			public RECTL rArea;
 			public void* lpSurfData;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* Lock;
 			public uint32 dwFlags;
 			public uint fpProcess;
@@ -3965,7 +3970,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* Unlock;
 		}
 		[CRepr]
@@ -3978,7 +3983,7 @@ namespace Win32
 			public RECTL rSrc;
 			public uint32 dwFlags;
 			public DDOVERLAYFX overlayFX;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* UpdateOverlay;
 		}
 		[CRepr]
@@ -3989,7 +3994,7 @@ namespace Win32
 			public DD_SURFACE_LOCAL* lpDDDestSurface;
 			public int32 lXPos;
 			public int32 lYPos;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetOverlayPosition;
 		}
 		[CRepr]
@@ -3998,9 +4003,9 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public DD_PALETTE_GLOBAL* lpDDPalette;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetPalette;
-			public BOOL Attach;
+			public IntBool Attach;
 		}
 		[CRepr]
 		public struct DD_FLIPDATA
@@ -4009,7 +4014,7 @@ namespace Win32
 			public DD_SURFACE_LOCAL* lpSurfCurr;
 			public DD_SURFACE_LOCAL* lpSurfTarg;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* Flip;
 			public DD_SURFACE_LOCAL* lpSurfCurrLeft;
 			public DD_SURFACE_LOCAL* lpSurfTargLeft;
@@ -4019,7 +4024,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* DestroySurface;
 		}
 		[CRepr]
@@ -4027,7 +4032,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetClipList;
 		}
 		[CRepr]
@@ -4036,7 +4041,7 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public DD_SURFACE_LOCAL* lpSurfAttached;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* AddAttachedSurface;
 		}
 		[CRepr]
@@ -4046,7 +4051,7 @@ namespace Win32
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public uint32 dwFlags;
 			public DDCOLORKEY ckNew;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetColorKey;
 		}
 		[CRepr]
@@ -4055,7 +4060,7 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetBltStatus;
 		}
 		[CRepr]
@@ -4064,7 +4069,7 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetFlipStatus;
 		}
 		[CRepr]
@@ -4072,7 +4077,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_PALETTE_GLOBAL* lpDDPalette;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* DestroyPalette;
 		}
 		[CRepr]
@@ -4083,7 +4088,7 @@ namespace Win32
 			public uint32 dwBase;
 			public uint32 dwNumEntries;
 			public PALETTEENTRY* lpEntries;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetEntries;
 		}
 		[CRepr]
@@ -4093,7 +4098,7 @@ namespace Win32
 			public DDSURFACEDESC* lpDDSurfaceDesc;
 			public DD_SURFACE_LOCAL** lplpSList;
 			public uint32 dwSCnt;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* CreateSurface;
 		}
 		[CRepr]
@@ -4102,7 +4107,7 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DDSURFACEDESC* lpDDSurfaceDesc;
 			public uint32 bIsDifferentPixelFormat;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* CanCreateSurface;
 		}
 		[CRepr]
@@ -4111,9 +4116,9 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_PALETTE_GLOBAL* lpDDPalette;
 			public PALETTEENTRY* lpColorTable;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* CreatePalette;
-			public BOOL is_excl;
+			public IntBool is_excl;
 		}
 		[CRepr]
 		public struct DD_WAITFORVERTICALBLANKDATA
@@ -4122,7 +4127,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 bIsInVB;
 			public uint hEvent;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* WaitForVerticalBlank;
 		}
 		[CRepr]
@@ -4131,7 +4136,7 @@ namespace Win32
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public uint32 dwFlags;
 			public DDCOLORKEY ckNew;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetColorKey;
 		}
 		[CRepr]
@@ -4139,24 +4144,24 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public uint32 dwScanLine;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetScanLine;
 		}
 		[CRepr]
 		public struct DD_MAPMEMORYDATA
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
-			public BOOL bMap;
-			public HANDLE hProcess;
+			public IntBool bMap;
+			public Handle hProcess;
 			public uint fpProcess;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_CANCREATEVPORTDATA
 		{
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DDVIDEOPORTDESC* lpDDVideoPortDesc;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* CanCreateVideoPort;
 		}
 		[CRepr]
@@ -4165,7 +4170,7 @@ namespace Win32
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DDVIDEOPORTDESC* lpDDVideoPortDesc;
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* CreateVideoPort;
 		}
 		[CRepr]
@@ -4175,7 +4180,7 @@ namespace Win32
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
 			public DD_SURFACE_LOCAL* lpSurfCurr;
 			public DD_SURFACE_LOCAL* lpSurfTarg;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* FlipVideoPort;
 		}
 		[CRepr]
@@ -4188,7 +4193,7 @@ namespace Win32
 			public uint32 dwHeight;
 			public uint32 dwFlags;
 			public DDVIDEOPORTBANDWIDTH* lpBandwidth;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoPortBandwidth;
 		}
 		[CRepr]
@@ -4199,7 +4204,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public DDPIXELFORMAT* lpddpfFormat;
 			public uint32 dwNumFormats;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoPortInputFormats;
 		}
 		[CRepr]
@@ -4211,7 +4216,7 @@ namespace Win32
 			public DDPIXELFORMAT* lpddpfInputFormat;
 			public DDPIXELFORMAT* lpddpfOutputFormats;
 			public uint32 dwNumFormats;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoPortInputFormats;
 		}
 		[CRepr]
@@ -4219,8 +4224,8 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
-			public BOOL bField;
-			public HRESULT ddRVal;
+			public IntBool bField;
+			public HResult ddRVal;
 			public void* GetVideoPortField;
 		}
 		[CRepr]
@@ -4229,7 +4234,7 @@ namespace Win32
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
 			public uint32 dwLine;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoPortLine;
 		}
 		[CRepr]
@@ -4239,7 +4244,7 @@ namespace Win32
 			public uint32 dwPortId;
 			public DDVIDEOPORTCONNECT* lpConnect;
 			public uint32 dwNumEntries;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoPortConnectInfo;
 		}
 		[CRepr]
@@ -4247,7 +4252,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* DestroyVideoPort;
 		}
 		[CRepr]
@@ -4255,7 +4260,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public uint fpSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoPortFlipStatus;
 		}
 		[CRepr]
@@ -4269,7 +4274,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwNumAutoflip;
 			public uint32 dwNumVBIAutoflip;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* UpdateVideoPort;
 		}
 		[CRepr]
@@ -4280,7 +4285,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public uint32 dwLine;
 			public uint32 dwTimeOut;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* UpdateVideoPort;
 		}
 		[CRepr]
@@ -4289,7 +4294,7 @@ namespace Win32
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
 			public uint32 dwStatus;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetVideoSignalStatus;
 		}
 		[CRepr]
@@ -4299,7 +4304,7 @@ namespace Win32
 			public DD_VIDEOPORT_LOCAL* lpVideoPort;
 			public uint32 dwFlags;
 			public DDCOLORCONTROL* lpColorData;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* ColorControl;
 		}
 		[CRepr]
@@ -4309,7 +4314,7 @@ namespace Win32
 			public DD_SURFACE_LOCAL* lpDDSurface;
 			public DDCOLORCONTROL* lpColorData;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* ColorControl;
 		}
 		[CRepr]
@@ -4322,7 +4327,7 @@ namespace Win32
 			public uint32 dwExpectedSize;
 			public void* lpvData;
 			public uint32 dwActualSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_GETAVAILDRIVERMEMORYDATA
@@ -4331,7 +4336,7 @@ namespace Win32
 			public DDSCAPS DDSCaps;
 			public uint32 dwTotal;
 			public uint32 dwFree;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* GetAvailDriverMemory;
 		}
 		[CRepr]
@@ -4339,7 +4344,7 @@ namespace Win32
 		{
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public DD_SURFACE_LOCAL* lpDDSurface;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* FreeDriverMemory;
 		}
 		[CRepr]
@@ -4348,7 +4353,7 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public uint32 dwEnterExcl;
 			public uint32 dwReserved;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* SetExclusiveMode;
 		}
 		[CRepr]
@@ -4357,7 +4362,7 @@ namespace Win32
 			public DD_DIRECTDRAW_GLOBAL* lpDD;
 			public uint32 dwToGDI;
 			public uint32 dwReserved;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			public void* FlipToGDISurface;
 		}
 		[CRepr]
@@ -4373,7 +4378,7 @@ namespace Win32
 			public uint32 dwDriverReserved2;
 			public uint32 dwDriverReserved3;
 			public uint32 dwDriverReserved4;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_SYNCVIDEOPORTDATA
@@ -4386,7 +4391,7 @@ namespace Win32
 			public uint32 dwDriverReserved1;
 			public uint32 dwDriverReserved2;
 			public uint32 dwDriverReserved3;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_GETMOCOMPGUIDSDATA
@@ -4394,7 +4399,7 @@ namespace Win32
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public uint32 dwNumGuids;
 			public Guid* lpGuids;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_GETMOCOMPFORMATSDATA
@@ -4403,7 +4408,7 @@ namespace Win32
 			public Guid* lpGuid;
 			public uint32 dwNumFormats;
 			public DDPIXELFORMAT* lpFormats;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_CREATEMOCOMPDATA
@@ -4416,7 +4421,7 @@ namespace Win32
 			public DDPIXELFORMAT ddUncompPixelFormat;
 			public void* lpData;
 			public uint32 dwDataSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DDCOMPBUFFERINFO
@@ -4439,7 +4444,7 @@ namespace Win32
 			public DDPIXELFORMAT ddPixelFormat;
 			public uint32 dwNumTypesCompBuffs;
 			public DDCOMPBUFFERINFO* lpCompBuffInfo;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_GETINTERNALMOCOMPDATA
@@ -4450,7 +4455,7 @@ namespace Win32
 			public uint32 dwHeight;
 			public DDPIXELFORMAT ddPixelFormat;
 			public uint32 dwScratchMemAlloc;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_BEGINMOCOMPFRAMEDATA
@@ -4462,7 +4467,7 @@ namespace Win32
 			public void* lpInputData;
 			public uint32 dwOutputDataSize;
 			public void* lpOutputData;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_ENDMOCOMPFRAMEDATA
@@ -4471,7 +4476,7 @@ namespace Win32
 			public DD_MOTIONCOMP_LOCAL* lpMoComp;
 			public void* lpInputData;
 			public uint32 dwInputDataSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DDMOCOMPBUFFERINFO
@@ -4494,7 +4499,7 @@ namespace Win32
 			public uint32 dwInputDataSize;
 			public void* lpOutputData;
 			public uint32 dwOutputDataSize;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_QUERYMOCOMPSTATUSDATA
@@ -4503,14 +4508,14 @@ namespace Win32
 			public DD_MOTIONCOMP_LOCAL* lpMoComp;
 			public DD_SURFACE_LOCAL* lpSurface;
 			public uint32 dwFlags;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_DESTROYMOCOMPDATA
 		{
 			public DD_DIRECTDRAW_LOCAL* lpDD;
 			public DD_MOTIONCOMP_LOCAL* lpMoComp;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_CREATESURFACEEXDATA
@@ -4518,7 +4523,7 @@ namespace Win32
 			public uint32 dwFlags;
 			public DD_DIRECTDRAW_LOCAL* lpDDLcl;
 			public DD_SURFACE_LOCAL* lpDDSLcl;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct DD_GETDRIVERSTATEDATA
@@ -4527,7 +4532,7 @@ namespace Win32
 			public _Anonymous_e__Union Anonymous;
 			public uint32* lpdwStates;
 			public uint32 dwLength;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 			
 			[CRepr, Union]
 			public struct _Anonymous_e__Union
@@ -4541,7 +4546,7 @@ namespace Win32
 		{
 			public uint32 dwFlags;
 			public DD_DIRECTDRAW_LOCAL* pDDLcl;
-			public HRESULT ddRVal;
+			public HResult ddRVal;
 		}
 		[CRepr]
 		public struct MDL
@@ -4635,7 +4640,7 @@ namespace Win32
 		[CRepr]
 		public struct DDSETSTATEOUTINFO
 		{
-			public BOOL bSoftwareAutoflip;
+			public IntBool bSoftwareAutoflip;
 			public uint32 dwSurfaceIndex;
 			public uint32 dwVBISurfaceIndex;
 		}
@@ -4748,50 +4753,50 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compact() mut => VT.Compact(ref this);
-			public HRESULT CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
-			public HRESULT CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT.CreatePalette(ref this, param0, out param1, out param2, ref param3);
-			public HRESULT CreateSurface(out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
-			public HRESULT DuplicateSurface(ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
-			public HRESULT EnumDisplayModes(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
-			public HRESULT EnumSurfaces(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
-			public HRESULT FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
-			public HRESULT GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
-			public HRESULT GetDisplayMode(out DDSURFACEDESC param0) mut => VT.GetDisplayMode(ref this, out param0);
-			public HRESULT GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
-			public HRESULT GetGDISurface(out IDirectDrawSurface* param0) mut => VT.GetGDISurface(ref this, out param0);
-			public HRESULT GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
-			public HRESULT GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
-			public HRESULT GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
-			public HRESULT Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
-			public HRESULT RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
-			public HRESULT SetCooperativeLevel(HWND param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
-			public HRESULT SetDisplayMode(uint32 param0, uint32 param1, uint32 param2) mut => VT.SetDisplayMode(ref this, param0, param1, param2);
-			public HRESULT WaitForVerticalBlank(uint32 param0, HANDLE param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
+			public HResult Compact() mut => VT.Compact(ref this);
+			public HResult CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
+			public HResult CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT._CreatePalette(ref this, param0, out param1, out param2, ref param3);
+			public HResult CreateSurface(out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
+			public HResult DuplicateSurface(ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
+			public HResult EnumDisplayModes(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
+			public HResult EnumSurfaces(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
+			public HResult FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
+			public HResult GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
+			public HResult GetDisplayMode(out DDSURFACEDESC param0) mut => VT.GetDisplayMode(ref this, out param0);
+			public HResult GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
+			public HResult GetGDISurface(out IDirectDrawSurface* param0) mut => VT.GetGDISurface(ref this, out param0);
+			public HResult GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
+			public HResult GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
+			public HResult GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
+			public HResult Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
+			public HResult RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
+			public HResult SetCooperativeLevel(HWnd param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
+			public HResult SetDisplayMode(uint32 param0, uint32 param1, uint32 param2) mut => VT.SetDisplayMode(ref this, param0, param1, param2);
+			public HResult WaitForVerticalBlank(uint32 param0, Handle param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self) Compact;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) CreatePalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) CreateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) DuplicateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) EnumDisplayModes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) EnumSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self) FlipToGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out DDSURFACEDESC param0) GetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out uint32 param0, out uint32 param1) GetFourCCCodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out IDirectDrawSurface* param0) GetGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out uint32 param0) GetMonitorFrequency;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out uint32 param0) GetScanLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out int32 param0) GetVerticalBlankStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, out Guid param0) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self) RestoreDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, HWND param0, uint32 param1) SetCooperativeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, uint32 param0, uint32 param1, uint32 param2) SetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw self, uint32 param0, HANDLE param1) WaitForVerticalBlank;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self) Compact;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) _CreatePalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) CreateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) DuplicateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) EnumDisplayModes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) EnumSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self) FlipToGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out DDSURFACEDESC param0) GetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out uint32 param0, out uint32 param1) GetFourCCCodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out IDirectDrawSurface* param0) GetGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out uint32 param0) GetMonitorFrequency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out uint32 param0) GetScanLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out int32 param0) GetVerticalBlankStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, out Guid param0) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self) RestoreDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, HWnd param0, uint32 param1) SetCooperativeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, uint32 param0, uint32 param1, uint32 param2) SetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw self, uint32 param0, Handle param1) WaitForVerticalBlank;
 			}
 		}
 		[CRepr]
@@ -4801,52 +4806,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compact() mut => VT.Compact(ref this);
-			public HRESULT CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
-			public HRESULT CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT.CreatePalette(ref this, param0, out param1, out param2, ref param3);
-			public HRESULT CreateSurface(out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
-			public HRESULT DuplicateSurface(ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
-			public HRESULT EnumDisplayModes(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
-			public HRESULT EnumSurfaces(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
-			public HRESULT FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
-			public HRESULT GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
-			public HRESULT GetDisplayMode(out DDSURFACEDESC param0) mut => VT.GetDisplayMode(ref this, out param0);
-			public HRESULT GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
-			public HRESULT GetGDISurface(out IDirectDrawSurface* param0) mut => VT.GetGDISurface(ref this, out param0);
-			public HRESULT GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
-			public HRESULT GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
-			public HRESULT GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
-			public HRESULT Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
-			public HRESULT RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
-			public HRESULT SetCooperativeLevel(HWND param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
-			public HRESULT SetDisplayMode(uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) mut => VT.SetDisplayMode(ref this, param0, param1, param2, param3, param4);
-			public HRESULT WaitForVerticalBlank(uint32 param0, HANDLE param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
-			public HRESULT GetAvailableVidMem(out DDSCAPS param0, out uint32 param1, out uint32 param2) mut => VT.GetAvailableVidMem(ref this, out param0, out param1, out param2);
+			public HResult Compact() mut => VT.Compact(ref this);
+			public HResult CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
+			public HResult CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT._CreatePalette(ref this, param0, out param1, out param2, ref param3);
+			public HResult CreateSurface(out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
+			public HResult DuplicateSurface(ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
+			public HResult EnumDisplayModes(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
+			public HResult EnumSurfaces(uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
+			public HResult FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
+			public HResult GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
+			public HResult GetDisplayMode(out DDSURFACEDESC param0) mut => VT.GetDisplayMode(ref this, out param0);
+			public HResult GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
+			public HResult GetGDISurface(out IDirectDrawSurface* param0) mut => VT.GetGDISurface(ref this, out param0);
+			public HResult GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
+			public HResult GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
+			public HResult GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
+			public HResult Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
+			public HResult RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
+			public HResult SetCooperativeLevel(HWnd param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
+			public HResult SetDisplayMode(uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) mut => VT.SetDisplayMode(ref this, param0, param1, param2, param3, param4);
+			public HResult WaitForVerticalBlank(uint32 param0, Handle param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
+			public HResult GetAvailableVidMem(out DDSCAPS param0, out uint32 param1, out uint32 param2) mut => VT.GetAvailableVidMem(ref this, out param0, out param1, out param2);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self) Compact;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) CreatePalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) CreateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) DuplicateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) EnumDisplayModes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) EnumSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self) FlipToGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out DDSURFACEDESC param0) GetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out uint32 param0, out uint32 param1) GetFourCCCodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out IDirectDrawSurface* param0) GetGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out uint32 param0) GetMonitorFrequency;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out uint32 param0) GetScanLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out int32 param0) GetVerticalBlankStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out Guid param0) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self) RestoreDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, HWND param0, uint32 param1) SetCooperativeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) SetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, uint32 param0, HANDLE param1) WaitForVerticalBlank;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw2 self, out DDSCAPS param0, out uint32 param1, out uint32 param2) GetAvailableVidMem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self) Compact;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) _CreatePalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out DDSURFACEDESC param0, out IDirectDrawSurface* param1, ref IUnknown param2) CreateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, ref IDirectDrawSurface param0, out IDirectDrawSurface* param1) DuplicateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMMODESCALLBACK param3) EnumDisplayModes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, uint32 param0, out DDSURFACEDESC param1, void* param2, LPDDENUMSURFACESCALLBACK param3) EnumSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self) FlipToGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out DDSURFACEDESC param0) GetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out uint32 param0, out uint32 param1) GetFourCCCodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out IDirectDrawSurface* param0) GetGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out uint32 param0) GetMonitorFrequency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out uint32 param0) GetScanLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out int32 param0) GetVerticalBlankStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out Guid param0) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self) RestoreDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, HWnd param0, uint32 param1) SetCooperativeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) SetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, uint32 param0, Handle param1) WaitForVerticalBlank;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw2 self, out DDSCAPS param0, out uint32 param1, out uint32 param2) GetAvailableVidMem;
 			}
 		}
 		[CRepr]
@@ -4856,60 +4861,60 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compact() mut => VT.Compact(ref this);
-			public HRESULT CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
-			public HRESULT CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT.CreatePalette(ref this, param0, out param1, out param2, ref param3);
-			public HRESULT CreateSurface(out DDSURFACEDESC2 param0, out IDirectDrawSurface4* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
-			public HRESULT DuplicateSurface(ref IDirectDrawSurface4 param0, out IDirectDrawSurface4* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
-			public HRESULT EnumDisplayModes(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
-			public HRESULT EnumSurfaces(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK2 param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
-			public HRESULT FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
-			public HRESULT GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
-			public HRESULT GetDisplayMode(out DDSURFACEDESC2 param0) mut => VT.GetDisplayMode(ref this, out param0);
-			public HRESULT GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
-			public HRESULT GetGDISurface(out IDirectDrawSurface4* param0) mut => VT.GetGDISurface(ref this, out param0);
-			public HRESULT GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
-			public HRESULT GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
-			public HRESULT GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
-			public HRESULT Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
-			public HRESULT RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
-			public HRESULT SetCooperativeLevel(HWND param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
-			public HRESULT SetDisplayMode(uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) mut => VT.SetDisplayMode(ref this, param0, param1, param2, param3, param4);
-			public HRESULT WaitForVerticalBlank(uint32 param0, HANDLE param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
-			public HRESULT GetAvailableVidMem(out DDSCAPS2 param0, out uint32 param1, out uint32 param2) mut => VT.GetAvailableVidMem(ref this, out param0, out param1, out param2);
-			public HRESULT GetSurfaceFromDC(HDC param0, out IDirectDrawSurface4* param1) mut => VT.GetSurfaceFromDC(ref this, param0, out param1);
-			public HRESULT RestoreAllSurfaces() mut => VT.RestoreAllSurfaces(ref this);
-			public HRESULT TestCooperativeLevel() mut => VT.TestCooperativeLevel(ref this);
-			public HRESULT GetDeviceIdentifier(out DDDEVICEIDENTIFIER param0, uint32 param1) mut => VT.GetDeviceIdentifier(ref this, out param0, param1);
+			public HResult Compact() mut => VT.Compact(ref this);
+			public HResult CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
+			public HResult CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT._CreatePalette(ref this, param0, out param1, out param2, ref param3);
+			public HResult CreateSurface(out DDSURFACEDESC2 param0, out IDirectDrawSurface4* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
+			public HResult DuplicateSurface(ref IDirectDrawSurface4 param0, out IDirectDrawSurface4* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
+			public HResult EnumDisplayModes(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
+			public HResult EnumSurfaces(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK2 param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
+			public HResult FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
+			public HResult GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
+			public HResult GetDisplayMode(out DDSURFACEDESC2 param0) mut => VT.GetDisplayMode(ref this, out param0);
+			public HResult GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
+			public HResult GetGDISurface(out IDirectDrawSurface4* param0) mut => VT.GetGDISurface(ref this, out param0);
+			public HResult GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
+			public HResult GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
+			public HResult GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
+			public HResult Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
+			public HResult RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
+			public HResult SetCooperativeLevel(HWnd param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
+			public HResult SetDisplayMode(uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) mut => VT.SetDisplayMode(ref this, param0, param1, param2, param3, param4);
+			public HResult WaitForVerticalBlank(uint32 param0, Handle param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
+			public HResult GetAvailableVidMem(out DDSCAPS2 param0, out uint32 param1, out uint32 param2) mut => VT.GetAvailableVidMem(ref this, out param0, out param1, out param2);
+			public HResult GetSurfaceFromDC(HDC param0, out IDirectDrawSurface4* param1) mut => VT.GetSurfaceFromDC(ref this, param0, out param1);
+			public HResult RestoreAllSurfaces() mut => VT.RestoreAllSurfaces(ref this);
+			public HResult TestCooperativeLevel() mut => VT.TestCooperativeLevel(ref this);
+			public HResult GetDeviceIdentifier(out DDDEVICEIDENTIFIER param0, uint32 param1) mut => VT.GetDeviceIdentifier(ref this, out param0, param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self) Compact;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) CreatePalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out DDSURFACEDESC2 param0, out IDirectDrawSurface4* param1, ref IUnknown param2) CreateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, ref IDirectDrawSurface4 param0, out IDirectDrawSurface4* param1) DuplicateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) EnumDisplayModes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK2 param3) EnumSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self) FlipToGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out DDSURFACEDESC2 param0) GetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out uint32 param0, out uint32 param1) GetFourCCCodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out IDirectDrawSurface4* param0) GetGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out uint32 param0) GetMonitorFrequency;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out uint32 param0) GetScanLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out int32 param0) GetVerticalBlankStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out Guid param0) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self) RestoreDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, HWND param0, uint32 param1) SetCooperativeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) SetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, uint32 param0, HANDLE param1) WaitForVerticalBlank;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out DDSCAPS2 param0, out uint32 param1, out uint32 param2) GetAvailableVidMem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, HDC param0, out IDirectDrawSurface4* param1) GetSurfaceFromDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self) RestoreAllSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self) TestCooperativeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw4 self, out DDDEVICEIDENTIFIER param0, uint32 param1) GetDeviceIdentifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self) Compact;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) _CreatePalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out DDSURFACEDESC2 param0, out IDirectDrawSurface4* param1, ref IUnknown param2) CreateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, ref IDirectDrawSurface4 param0, out IDirectDrawSurface4* param1) DuplicateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) EnumDisplayModes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK2 param3) EnumSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self) FlipToGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out DDSURFACEDESC2 param0) GetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out uint32 param0, out uint32 param1) GetFourCCCodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out IDirectDrawSurface4* param0) GetGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out uint32 param0) GetMonitorFrequency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out uint32 param0) GetScanLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out int32 param0) GetVerticalBlankStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out Guid param0) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self) RestoreDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, HWnd param0, uint32 param1) SetCooperativeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) SetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, uint32 param0, Handle param1) WaitForVerticalBlank;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out DDSCAPS2 param0, out uint32 param1, out uint32 param2) GetAvailableVidMem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, HDC param0, out IDirectDrawSurface4* param1) GetSurfaceFromDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self) RestoreAllSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self) TestCooperativeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw4 self, out DDDEVICEIDENTIFIER param0, uint32 param1) GetDeviceIdentifier;
 			}
 		}
 		[CRepr]
@@ -4919,64 +4924,64 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Compact() mut => VT.Compact(ref this);
-			public HRESULT CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
-			public HRESULT CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT.CreatePalette(ref this, param0, out param1, out param2, ref param3);
-			public HRESULT CreateSurface(out DDSURFACEDESC2 param0, out IDirectDrawSurface7* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
-			public HRESULT DuplicateSurface(ref IDirectDrawSurface7 param0, out IDirectDrawSurface7* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
-			public HRESULT EnumDisplayModes(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
-			public HRESULT EnumSurfaces(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK7 param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
-			public HRESULT FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
-			public HRESULT GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
-			public HRESULT GetDisplayMode(out DDSURFACEDESC2 param0) mut => VT.GetDisplayMode(ref this, out param0);
-			public HRESULT GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
-			public HRESULT GetGDISurface(out IDirectDrawSurface7* param0) mut => VT.GetGDISurface(ref this, out param0);
-			public HRESULT GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
-			public HRESULT GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
-			public HRESULT GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
-			public HRESULT Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
-			public HRESULT RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
-			public HRESULT SetCooperativeLevel(HWND param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
-			public HRESULT SetDisplayMode(uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) mut => VT.SetDisplayMode(ref this, param0, param1, param2, param3, param4);
-			public HRESULT WaitForVerticalBlank(uint32 param0, HANDLE param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
-			public HRESULT GetAvailableVidMem(out DDSCAPS2 param0, out uint32 param1, out uint32 param2) mut => VT.GetAvailableVidMem(ref this, out param0, out param1, out param2);
-			public HRESULT GetSurfaceFromDC(HDC param0, out IDirectDrawSurface7* param1) mut => VT.GetSurfaceFromDC(ref this, param0, out param1);
-			public HRESULT RestoreAllSurfaces() mut => VT.RestoreAllSurfaces(ref this);
-			public HRESULT TestCooperativeLevel() mut => VT.TestCooperativeLevel(ref this);
-			public HRESULT GetDeviceIdentifier(out DDDEVICEIDENTIFIER2 param0, uint32 param1) mut => VT.GetDeviceIdentifier(ref this, out param0, param1);
-			public HRESULT StartModeTest(out SIZE param0, uint32 param1, uint32 param2) mut => VT.StartModeTest(ref this, out param0, param1, param2);
-			public HRESULT EvaluateMode(uint32 param0, out uint32 param1) mut => VT.EvaluateMode(ref this, param0, out param1);
+			public HResult Compact() mut => VT.Compact(ref this);
+			public HResult CreateClipper(uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) mut => VT.CreateClipper(ref this, param0, out param1, ref param2);
+			public HResult CreatePalette(uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) mut => VT._CreatePalette(ref this, param0, out param1, out param2, ref param3);
+			public HResult CreateSurface(out DDSURFACEDESC2 param0, out IDirectDrawSurface7* param1, ref IUnknown param2) mut => VT.CreateSurface(ref this, out param0, out param1, ref param2);
+			public HResult DuplicateSurface(ref IDirectDrawSurface7 param0, out IDirectDrawSurface7* param1) mut => VT.DuplicateSurface(ref this, ref param0, out param1);
+			public HResult EnumDisplayModes(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) mut => VT.EnumDisplayModes(ref this, param0, out param1, param2, param3);
+			public HResult EnumSurfaces(uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK7 param3) mut => VT.EnumSurfaces(ref this, param0, out param1, param2, param3);
+			public HResult FlipToGDISurface() mut => VT.FlipToGDISurface(ref this);
+			public HResult GetCaps(out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) mut => VT.GetCaps(ref this, out param0, out param1);
+			public HResult GetDisplayMode(out DDSURFACEDESC2 param0) mut => VT.GetDisplayMode(ref this, out param0);
+			public HResult GetFourCCCodes(out uint32 param0, out uint32 param1) mut => VT.GetFourCCCodes(ref this, out param0, out param1);
+			public HResult GetGDISurface(out IDirectDrawSurface7* param0) mut => VT.GetGDISurface(ref this, out param0);
+			public HResult GetMonitorFrequency(out uint32 param0) mut => VT.GetMonitorFrequency(ref this, out param0);
+			public HResult GetScanLine(out uint32 param0) mut => VT.GetScanLine(ref this, out param0);
+			public HResult GetVerticalBlankStatus(out int32 param0) mut => VT.GetVerticalBlankStatus(ref this, out param0);
+			public HResult Initialize(out Guid param0) mut => VT.Initialize(ref this, out param0);
+			public HResult RestoreDisplayMode() mut => VT.RestoreDisplayMode(ref this);
+			public HResult SetCooperativeLevel(HWnd param0, uint32 param1) mut => VT.SetCooperativeLevel(ref this, param0, param1);
+			public HResult SetDisplayMode(uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) mut => VT.SetDisplayMode(ref this, param0, param1, param2, param3, param4);
+			public HResult WaitForVerticalBlank(uint32 param0, Handle param1) mut => VT.WaitForVerticalBlank(ref this, param0, param1);
+			public HResult GetAvailableVidMem(out DDSCAPS2 param0, out uint32 param1, out uint32 param2) mut => VT.GetAvailableVidMem(ref this, out param0, out param1, out param2);
+			public HResult GetSurfaceFromDC(HDC param0, out IDirectDrawSurface7* param1) mut => VT.GetSurfaceFromDC(ref this, param0, out param1);
+			public HResult RestoreAllSurfaces() mut => VT.RestoreAllSurfaces(ref this);
+			public HResult TestCooperativeLevel() mut => VT.TestCooperativeLevel(ref this);
+			public HResult GetDeviceIdentifier(out DDDEVICEIDENTIFIER2 param0, uint32 param1) mut => VT.GetDeviceIdentifier(ref this, out param0, param1);
+			public HResult StartModeTest(out SIZE param0, uint32 param1, uint32 param2) mut => VT.StartModeTest(ref this, out param0, param1, param2);
+			public HResult EvaluateMode(uint32 param0, out uint32 param1) mut => VT.EvaluateMode(ref this, param0, out param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self) Compact;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) CreatePalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out DDSURFACEDESC2 param0, out IDirectDrawSurface7* param1, ref IUnknown param2) CreateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, ref IDirectDrawSurface7 param0, out IDirectDrawSurface7* param1) DuplicateSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) EnumDisplayModes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK7 param3) EnumSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self) FlipToGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out DDSURFACEDESC2 param0) GetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out uint32 param0, out uint32 param1) GetFourCCCodes;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out IDirectDrawSurface7* param0) GetGDISurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out uint32 param0) GetMonitorFrequency;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out uint32 param0) GetScanLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out int32 param0) GetVerticalBlankStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out Guid param0) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self) RestoreDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, HWND param0, uint32 param1) SetCooperativeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) SetDisplayMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, HANDLE param1) WaitForVerticalBlank;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out DDSCAPS2 param0, out uint32 param1, out uint32 param2) GetAvailableVidMem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, HDC param0, out IDirectDrawSurface7* param1) GetSurfaceFromDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self) RestoreAllSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self) TestCooperativeLevel;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out DDDEVICEIDENTIFIER2 param0, uint32 param1) GetDeviceIdentifier;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, out SIZE param0, uint32 param1, uint32 param2) StartModeTest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDraw7 self, uint32 param0, out uint32 param1) EvaluateMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self) Compact;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, out IDirectDrawClipper* param1, ref IUnknown param2) CreateClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, out PALETTEENTRY param1, out IDirectDrawPalette* param2, ref IUnknown param3) _CreatePalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out DDSURFACEDESC2 param0, out IDirectDrawSurface7* param1, ref IUnknown param2) CreateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, ref IDirectDrawSurface7 param0, out IDirectDrawSurface7* param1) DuplicateSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMMODESCALLBACK2 param3) EnumDisplayModes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, out DDSURFACEDESC2 param1, void* param2, LPDDENUMSURFACESCALLBACK7 param3) EnumSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self) FlipToGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out DDCAPS_DX7 param0, out DDCAPS_DX7 param1) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out DDSURFACEDESC2 param0) GetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out uint32 param0, out uint32 param1) GetFourCCCodes;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out IDirectDrawSurface7* param0) GetGDISurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out uint32 param0) GetMonitorFrequency;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out uint32 param0) GetScanLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out int32 param0) GetVerticalBlankStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out Guid param0) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self) RestoreDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, HWnd param0, uint32 param1) SetCooperativeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, uint32 param1, uint32 param2, uint32 param3, uint32 param4) SetDisplayMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, Handle param1) WaitForVerticalBlank;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out DDSCAPS2 param0, out uint32 param1, out uint32 param2) GetAvailableVidMem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, HDC param0, out IDirectDrawSurface7* param1) GetSurfaceFromDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self) RestoreAllSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self) TestCooperativeLevel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out DDDEVICEIDENTIFIER2 param0, uint32 param1) GetDeviceIdentifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, out SIZE param0, uint32 param1, uint32 param2) StartModeTest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDraw7 self, uint32 param0, out uint32 param1) EvaluateMode;
 			}
 		}
 		[CRepr]
@@ -4986,18 +4991,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCaps(out uint32 param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetEntries(uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) mut => VT.GetEntries(ref this, param0, param1, param2, out param3);
-			public HRESULT Initialize(ref IDirectDraw param0, uint32 param1, out PALETTEENTRY param2) mut => VT.Initialize(ref this, ref param0, param1, out param2);
-			public HRESULT SetEntries(uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) mut => VT.SetEntries(ref this, param0, param1, param2, out param3);
+			public HResult GetCaps(out uint32 param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetEntries(uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) mut => VT.GetEntries(ref this, param0, param1, param2, out param3);
+			public HResult Initialize(ref IDirectDraw param0, uint32 param1, out PALETTEENTRY param2) mut => VT.Initialize(ref this, ref param0, param1, out param2);
+			public HResult SetEntries(uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) mut => VT.SetEntries(ref this, param0, param1, param2, out param3);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawPalette self, out uint32 param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawPalette self, uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) GetEntries;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawPalette self, ref IDirectDraw param0, uint32 param1, out PALETTEENTRY param2) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawPalette self, uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) SetEntries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawPalette self, out uint32 param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawPalette self, uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) GetEntries;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawPalette self, ref IDirectDraw param0, uint32 param1, out PALETTEENTRY param2) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawPalette self, uint32 param0, uint32 param1, uint32 param2, out PALETTEENTRY param3) SetEntries;
 			}
 		}
 		[CRepr]
@@ -5007,22 +5012,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetClipList(out RECT param0, out RGNDATA param1, out uint32 param2) mut => VT.GetClipList(ref this, out param0, out param1, out param2);
-			public HRESULT GetHWnd(out HWND param0) mut => VT.GetHWnd(ref this, out param0);
-			public HRESULT Initialize(ref IDirectDraw param0, uint32 param1) mut => VT.Initialize(ref this, ref param0, param1);
-			public HRESULT IsClipListChanged(out BOOL param0) mut => VT.IsClipListChanged(ref this, out param0);
-			public HRESULT SetClipList(out RGNDATA param0, uint32 param1) mut => VT.SetClipList(ref this, out param0, param1);
-			public HRESULT SetHWnd(uint32 param0, HWND param1) mut => VT.SetHWnd(ref this, param0, param1);
+			public HResult GetClipList(out RectI param0, out RGNDATA param1, out uint32 param2) mut => VT.GetClipList(ref this, out param0, out param1, out param2);
+			public HResult GetHWnd(out HWnd param0) mut => VT.GetHWnd(ref this, out param0);
+			public HResult Initialize(ref IDirectDraw param0, uint32 param1) mut => VT.Initialize(ref this, ref param0, param1);
+			public HResult IsClipListChanged(out IntBool param0) mut => VT.IsClipListChanged(ref this, out param0);
+			public HResult SetClipList(out RGNDATA param0, uint32 param1) mut => VT.SetClipList(ref this, out param0, param1);
+			public HResult SetHWnd(uint32 param0, HWnd param1) mut => VT.SetHWnd(ref this, param0, param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawClipper self, out RECT param0, out RGNDATA param1, out uint32 param2) GetClipList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawClipper self, out HWND param0) GetHWnd;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawClipper self, ref IDirectDraw param0, uint32 param1) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawClipper self, out BOOL param0) IsClipListChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawClipper self, out RGNDATA param0, uint32 param1) SetClipList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawClipper self, uint32 param0, HWND param1) SetHWnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawClipper self, out RectI param0, out RGNDATA param1, out uint32 param2) GetClipList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawClipper self, out HWnd param0) GetHWnd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawClipper self, ref IDirectDraw param0, uint32 param1) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawClipper self, out IntBool param0) IsClipListChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawClipper self, out RGNDATA param0, uint32 param1) SetClipList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawClipper self, uint32 param0, HWnd param1) SetHWnd;
 			}
 		}
 		[CRepr]
@@ -5032,76 +5037,76 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddAttachedSurface(ref IDirectDrawSurface param0) mut => VT.AddAttachedSurface(ref this, ref param0);
-			public HRESULT AddOverlayDirtyRect(out RECT param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
-			public HRESULT Blt(out RECT param0, ref IDirectDrawSurface param1, out RECT param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
-			public HRESULT BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface param2, out RECT param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
-			public HRESULT DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
-			public HRESULT EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
-			public HRESULT EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
-			public HRESULT Flip(ref IDirectDrawSurface param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
-			public HRESULT GetAttachedSurface(out DDSCAPS param0, out IDirectDrawSurface* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
-			public HRESULT GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
-			public HRESULT GetCaps(out DDSCAPS param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
-			public HRESULT GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
-			public HRESULT GetDC(out HDC param0) mut => VT.GetDC(ref this, out param0);
-			public HRESULT GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
-			public HRESULT GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
-			public HRESULT GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
-			public HRESULT GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
-			public HRESULT GetSurfaceDesc(out DDSURFACEDESC param0) mut => VT.GetSurfaceDesc(ref this, out param0);
-			public HRESULT Initialize(ref IDirectDraw param0, out DDSURFACEDESC param1) mut => VT.Initialize(ref this, ref param0, out param1);
-			public HRESULT IsLost() mut => VT.IsLost(ref this);
-			public HRESULT Lock(out RECT param0, out DDSURFACEDESC param1, uint32 param2, HANDLE param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
-			public HRESULT ReleaseDC(HDC param0) mut => VT.ReleaseDC(ref this, param0);
-			public HRESULT Restore() mut => VT.Restore(ref this);
-			public HRESULT SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
-			public HRESULT SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
-			public HRESULT SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
-			public HRESULT SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
-			public HRESULT Unlock(void* param0) mut => VT.Unlock(ref this, param0);
-			public HRESULT UpdateOverlay(out RECT param0, ref IDirectDrawSurface param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
-			public HRESULT UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
+			public HResult AddAttachedSurface(ref IDirectDrawSurface param0) mut => VT.AddAttachedSurface(ref this, ref param0);
+			public HResult AddOverlayDirtyRect(out RectI param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
+			public HResult Blt(out RectI param0, ref IDirectDrawSurface param1, out RectI param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
+			public HResult BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface param2, out RectI param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
+			public HResult DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
+			public HResult EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
+			public HResult EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
+			public HResult Flip(ref IDirectDrawSurface param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
+			public HResult GetAttachedSurface(out DDSCAPS param0, out IDirectDrawSurface* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
+			public HResult GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
+			public HResult GetCaps(out DDSCAPS param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
+			public HResult GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
+			public HResult GetDC(out HDC param0) mut => VT._GetDC(ref this, out param0);
+			public HResult GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
+			public HResult GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
+			public HResult GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
+			public HResult GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
+			public HResult GetSurfaceDesc(out DDSURFACEDESC param0) mut => VT.GetSurfaceDesc(ref this, out param0);
+			public HResult Initialize(ref IDirectDraw param0, out DDSURFACEDESC param1) mut => VT.Initialize(ref this, ref param0, out param1);
+			public HResult IsLost() mut => VT.IsLost(ref this);
+			public HResult Lock(out RectI param0, out DDSURFACEDESC param1, uint32 param2, Handle param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
+			public HResult ReleaseDC(HDC param0) mut => VT._ReleaseDC(ref this, param0);
+			public HResult Restore() mut => VT.Restore(ref this);
+			public HResult SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
+			public HResult SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
+			public HResult SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
+			public HResult SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
+			public HResult Unlock(void* param0) mut => VT.Unlock(ref this, param0);
+			public HResult UpdateOverlay(out RectI param0, ref IDirectDrawSurface param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
+			public HResult UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, ref IDirectDrawSurface param0) AddAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out RECT param0) AddOverlayDirtyRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out RECT param0, ref IDirectDrawSurface param1, out RECT param2, uint32 param3, out DDBLTFX param4) Blt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0, uint32 param1, ref IDirectDrawSurface param2, out RECT param3, uint32 param4) BltFast;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0, ref IDirectDrawSurface param1) DeleteAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, void* param0, LPDDENUMSURFACESCALLBACK param1) EnumAttachedSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) EnumOverlayZOrders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, ref IDirectDrawSurface param0, uint32 param1) Flip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out DDSCAPS param0, out IDirectDrawSurface* param1) GetAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0) GetBltStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out DDSCAPS param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out IDirectDrawClipper* param0) GetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out HDC param0) GetDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0) GetFlipStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out int32 param0, out int32 param1) GetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out IDirectDrawPalette* param0) GetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out DDPIXELFORMAT param0) GetPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out DDSURFACEDESC param0) GetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, ref IDirectDraw param0, out DDSURFACEDESC param1) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self) IsLost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out RECT param0, out DDSURFACEDESC param1, uint32 param2, HANDLE param3) Lock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, HDC param0) ReleaseDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self) Restore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, ref IDirectDrawClipper param0) SetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, int32 param0, int32 param1) SetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, ref IDirectDrawPalette param0) SetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, void* param0) Unlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, out RECT param0, ref IDirectDrawSurface param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0) UpdateOverlayDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface self, uint32 param0, ref IDirectDrawSurface param1) UpdateOverlayZOrder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, ref IDirectDrawSurface param0) AddAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out RectI param0) AddOverlayDirtyRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out RectI param0, ref IDirectDrawSurface param1, out RectI param2, uint32 param3, out DDBLTFX param4) Blt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0, uint32 param1, ref IDirectDrawSurface param2, out RectI param3, uint32 param4) BltFast;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0, ref IDirectDrawSurface param1) DeleteAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, void* param0, LPDDENUMSURFACESCALLBACK param1) EnumAttachedSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) EnumOverlayZOrders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, ref IDirectDrawSurface param0, uint32 param1) Flip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out DDSCAPS param0, out IDirectDrawSurface* param1) GetAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0) GetBltStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out DDSCAPS param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out IDirectDrawClipper* param0) GetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out HDC param0) _GetDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0) GetFlipStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out int32 param0, out int32 param1) GetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out IDirectDrawPalette* param0) GetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out DDPIXELFORMAT param0) GetPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out DDSURFACEDESC param0) GetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, ref IDirectDraw param0, out DDSURFACEDESC param1) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self) IsLost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out RectI param0, out DDSURFACEDESC param1, uint32 param2, Handle param3) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, HDC param0) _ReleaseDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self) Restore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, ref IDirectDrawClipper param0) SetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, int32 param0, int32 param1) SetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, ref IDirectDrawPalette param0) SetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, void* param0) Unlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, out RectI param0, ref IDirectDrawSurface param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0) UpdateOverlayDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface self, uint32 param0, ref IDirectDrawSurface param1) UpdateOverlayZOrder;
 			}
 		}
 		[CRepr]
@@ -5111,82 +5116,82 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddAttachedSurface(ref IDirectDrawSurface2 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
-			public HRESULT AddOverlayDirtyRect(out RECT param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
-			public HRESULT Blt(out RECT param0, ref IDirectDrawSurface2 param1, out RECT param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
-			public HRESULT BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface2 param2, out RECT param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
-			public HRESULT DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface2 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
-			public HRESULT EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
-			public HRESULT EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
-			public HRESULT Flip(ref IDirectDrawSurface2 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
-			public HRESULT GetAttachedSurface(out DDSCAPS param0, out IDirectDrawSurface2* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
-			public HRESULT GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
-			public HRESULT GetCaps(out DDSCAPS param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
-			public HRESULT GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
-			public HRESULT GetDC(out HDC param0) mut => VT.GetDC(ref this, out param0);
-			public HRESULT GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
-			public HRESULT GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
-			public HRESULT GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
-			public HRESULT GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
-			public HRESULT GetSurfaceDesc(out DDSURFACEDESC param0) mut => VT.GetSurfaceDesc(ref this, out param0);
-			public HRESULT Initialize(ref IDirectDraw param0, out DDSURFACEDESC param1) mut => VT.Initialize(ref this, ref param0, out param1);
-			public HRESULT IsLost() mut => VT.IsLost(ref this);
-			public HRESULT Lock(out RECT param0, out DDSURFACEDESC param1, uint32 param2, HANDLE param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
-			public HRESULT ReleaseDC(HDC param0) mut => VT.ReleaseDC(ref this, param0);
-			public HRESULT Restore() mut => VT.Restore(ref this);
-			public HRESULT SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
-			public HRESULT SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
-			public HRESULT SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
-			public HRESULT SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
-			public HRESULT Unlock(void* param0) mut => VT.Unlock(ref this, param0);
-			public HRESULT UpdateOverlay(out RECT param0, ref IDirectDrawSurface2 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
-			public HRESULT UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface2 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
-			public HRESULT GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
-			public HRESULT PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
-			public HRESULT PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
+			public HResult AddAttachedSurface(ref IDirectDrawSurface2 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
+			public HResult AddOverlayDirtyRect(out RectI param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
+			public HResult Blt(out RectI param0, ref IDirectDrawSurface2 param1, out RectI param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
+			public HResult BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface2 param2, out RectI param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
+			public HResult DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface2 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
+			public HResult EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
+			public HResult EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
+			public HResult Flip(ref IDirectDrawSurface2 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
+			public HResult GetAttachedSurface(out DDSCAPS param0, out IDirectDrawSurface2* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
+			public HResult GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
+			public HResult GetCaps(out DDSCAPS param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
+			public HResult GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
+			public HResult GetDC(out HDC param0) mut => VT._GetDC(ref this, out param0);
+			public HResult GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
+			public HResult GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
+			public HResult GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
+			public HResult GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
+			public HResult GetSurfaceDesc(out DDSURFACEDESC param0) mut => VT.GetSurfaceDesc(ref this, out param0);
+			public HResult Initialize(ref IDirectDraw param0, out DDSURFACEDESC param1) mut => VT.Initialize(ref this, ref param0, out param1);
+			public HResult IsLost() mut => VT.IsLost(ref this);
+			public HResult Lock(out RectI param0, out DDSURFACEDESC param1, uint32 param2, Handle param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
+			public HResult ReleaseDC(HDC param0) mut => VT._ReleaseDC(ref this, param0);
+			public HResult Restore() mut => VT.Restore(ref this);
+			public HResult SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
+			public HResult SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
+			public HResult SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
+			public HResult SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
+			public HResult Unlock(void* param0) mut => VT.Unlock(ref this, param0);
+			public HResult UpdateOverlay(out RectI param0, ref IDirectDrawSurface2 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
+			public HResult UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface2 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
+			public HResult GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
+			public HResult PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
+			public HResult PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, ref IDirectDrawSurface2 param0) AddAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out RECT param0) AddOverlayDirtyRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out RECT param0, ref IDirectDrawSurface2 param1, out RECT param2, uint32 param3, out DDBLTFX param4) Blt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0, uint32 param1, ref IDirectDrawSurface2 param2, out RECT param3, uint32 param4) BltFast;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0, ref IDirectDrawSurface2 param1) DeleteAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, void* param0, LPDDENUMSURFACESCALLBACK param1) EnumAttachedSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) EnumOverlayZOrders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, ref IDirectDrawSurface2 param0, uint32 param1) Flip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out DDSCAPS param0, out IDirectDrawSurface2* param1) GetAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0) GetBltStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out DDSCAPS param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out IDirectDrawClipper* param0) GetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out HDC param0) GetDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0) GetFlipStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out int32 param0, out int32 param1) GetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out IDirectDrawPalette* param0) GetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out DDPIXELFORMAT param0) GetPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out DDSURFACEDESC param0) GetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, ref IDirectDraw param0, out DDSURFACEDESC param1) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self) IsLost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out RECT param0, out DDSURFACEDESC param1, uint32 param2, HANDLE param3) Lock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, HDC param0) ReleaseDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self) Restore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, ref IDirectDrawClipper param0) SetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, int32 param0, int32 param1) SetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, ref IDirectDrawPalette param0) SetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, void* param0) Unlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, out RECT param0, ref IDirectDrawSurface2 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0) UpdateOverlayDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0, ref IDirectDrawSurface2 param1) UpdateOverlayZOrder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, void** param0) GetDDInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0) PageLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface2 self, uint32 param0) PageUnlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, ref IDirectDrawSurface2 param0) AddAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out RectI param0) AddOverlayDirtyRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out RectI param0, ref IDirectDrawSurface2 param1, out RectI param2, uint32 param3, out DDBLTFX param4) Blt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0, uint32 param1, ref IDirectDrawSurface2 param2, out RectI param3, uint32 param4) BltFast;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0, ref IDirectDrawSurface2 param1) DeleteAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, void* param0, LPDDENUMSURFACESCALLBACK param1) EnumAttachedSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) EnumOverlayZOrders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, ref IDirectDrawSurface2 param0, uint32 param1) Flip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out DDSCAPS param0, out IDirectDrawSurface2* param1) GetAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0) GetBltStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out DDSCAPS param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out IDirectDrawClipper* param0) GetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out HDC param0) _GetDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0) GetFlipStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out int32 param0, out int32 param1) GetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out IDirectDrawPalette* param0) GetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out DDPIXELFORMAT param0) GetPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out DDSURFACEDESC param0) GetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, ref IDirectDraw param0, out DDSURFACEDESC param1) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self) IsLost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out RectI param0, out DDSURFACEDESC param1, uint32 param2, Handle param3) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, HDC param0) _ReleaseDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self) Restore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, ref IDirectDrawClipper param0) SetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, int32 param0, int32 param1) SetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, ref IDirectDrawPalette param0) SetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, void* param0) Unlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, out RectI param0, ref IDirectDrawSurface2 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0) UpdateOverlayDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0, ref IDirectDrawSurface2 param1) UpdateOverlayZOrder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, void** param0) GetDDInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0) PageLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface2 self, uint32 param0) PageUnlock;
 			}
 		}
 		[CRepr]
@@ -5196,84 +5201,84 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddAttachedSurface(ref IDirectDrawSurface3 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
-			public HRESULT AddOverlayDirtyRect(out RECT param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
-			public HRESULT Blt(out RECT param0, ref IDirectDrawSurface3 param1, out RECT param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
-			public HRESULT BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface3 param2, out RECT param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
-			public HRESULT DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface3 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
-			public HRESULT EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
-			public HRESULT EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
-			public HRESULT Flip(ref IDirectDrawSurface3 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
-			public HRESULT GetAttachedSurface(out DDSCAPS param0, out IDirectDrawSurface3* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
-			public HRESULT GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
-			public HRESULT GetCaps(out DDSCAPS param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
-			public HRESULT GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
-			public HRESULT GetDC(out HDC param0) mut => VT.GetDC(ref this, out param0);
-			public HRESULT GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
-			public HRESULT GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
-			public HRESULT GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
-			public HRESULT GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
-			public HRESULT GetSurfaceDesc(out DDSURFACEDESC param0) mut => VT.GetSurfaceDesc(ref this, out param0);
-			public HRESULT Initialize(ref IDirectDraw param0, out DDSURFACEDESC param1) mut => VT.Initialize(ref this, ref param0, out param1);
-			public HRESULT IsLost() mut => VT.IsLost(ref this);
-			public HRESULT Lock(out RECT param0, out DDSURFACEDESC param1, uint32 param2, HANDLE param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
-			public HRESULT ReleaseDC(HDC param0) mut => VT.ReleaseDC(ref this, param0);
-			public HRESULT Restore() mut => VT.Restore(ref this);
-			public HRESULT SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
-			public HRESULT SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
-			public HRESULT SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
-			public HRESULT SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
-			public HRESULT Unlock(void* param0) mut => VT.Unlock(ref this, param0);
-			public HRESULT UpdateOverlay(out RECT param0, ref IDirectDrawSurface3 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
-			public HRESULT UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface3 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
-			public HRESULT GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
-			public HRESULT PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
-			public HRESULT PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
-			public HRESULT SetSurfaceDesc(out DDSURFACEDESC param0, uint32 param1) mut => VT.SetSurfaceDesc(ref this, out param0, param1);
+			public HResult AddAttachedSurface(ref IDirectDrawSurface3 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
+			public HResult AddOverlayDirtyRect(out RectI param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
+			public HResult Blt(out RectI param0, ref IDirectDrawSurface3 param1, out RectI param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
+			public HResult BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface3 param2, out RectI param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
+			public HResult DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface3 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
+			public HResult EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
+			public HResult EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
+			public HResult Flip(ref IDirectDrawSurface3 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
+			public HResult GetAttachedSurface(out DDSCAPS param0, out IDirectDrawSurface3* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
+			public HResult GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
+			public HResult GetCaps(out DDSCAPS param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
+			public HResult GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
+			public HResult GetDC(out HDC param0) mut => VT._GetDC(ref this, out param0);
+			public HResult GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
+			public HResult GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
+			public HResult GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
+			public HResult GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
+			public HResult GetSurfaceDesc(out DDSURFACEDESC param0) mut => VT.GetSurfaceDesc(ref this, out param0);
+			public HResult Initialize(ref IDirectDraw param0, out DDSURFACEDESC param1) mut => VT.Initialize(ref this, ref param0, out param1);
+			public HResult IsLost() mut => VT.IsLost(ref this);
+			public HResult Lock(out RectI param0, out DDSURFACEDESC param1, uint32 param2, Handle param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
+			public HResult ReleaseDC(HDC param0) mut => VT._ReleaseDC(ref this, param0);
+			public HResult Restore() mut => VT.Restore(ref this);
+			public HResult SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
+			public HResult SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
+			public HResult SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
+			public HResult SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
+			public HResult Unlock(void* param0) mut => VT.Unlock(ref this, param0);
+			public HResult UpdateOverlay(out RectI param0, ref IDirectDrawSurface3 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
+			public HResult UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface3 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
+			public HResult GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
+			public HResult PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
+			public HResult PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
+			public HResult SetSurfaceDesc(out DDSURFACEDESC param0, uint32 param1) mut => VT.SetSurfaceDesc(ref this, out param0, param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, ref IDirectDrawSurface3 param0) AddAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out RECT param0) AddOverlayDirtyRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out RECT param0, ref IDirectDrawSurface3 param1, out RECT param2, uint32 param3, out DDBLTFX param4) Blt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0, uint32 param1, ref IDirectDrawSurface3 param2, out RECT param3, uint32 param4) BltFast;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0, ref IDirectDrawSurface3 param1) DeleteAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, void* param0, LPDDENUMSURFACESCALLBACK param1) EnumAttachedSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) EnumOverlayZOrders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, ref IDirectDrawSurface3 param0, uint32 param1) Flip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out DDSCAPS param0, out IDirectDrawSurface3* param1) GetAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0) GetBltStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out DDSCAPS param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out IDirectDrawClipper* param0) GetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out HDC param0) GetDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0) GetFlipStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out int32 param0, out int32 param1) GetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out IDirectDrawPalette* param0) GetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out DDPIXELFORMAT param0) GetPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out DDSURFACEDESC param0) GetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, ref IDirectDraw param0, out DDSURFACEDESC param1) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self) IsLost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out RECT param0, out DDSURFACEDESC param1, uint32 param2, HANDLE param3) Lock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, HDC param0) ReleaseDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self) Restore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, ref IDirectDrawClipper param0) SetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, int32 param0, int32 param1) SetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, ref IDirectDrawPalette param0) SetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, void* param0) Unlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out RECT param0, ref IDirectDrawSurface3 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0) UpdateOverlayDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0, ref IDirectDrawSurface3 param1) UpdateOverlayZOrder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, void** param0) GetDDInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0) PageLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, uint32 param0) PageUnlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface3 self, out DDSURFACEDESC param0, uint32 param1) SetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, ref IDirectDrawSurface3 param0) AddAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out RectI param0) AddOverlayDirtyRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out RectI param0, ref IDirectDrawSurface3 param1, out RectI param2, uint32 param3, out DDBLTFX param4) Blt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0, uint32 param1, ref IDirectDrawSurface3 param2, out RectI param3, uint32 param4) BltFast;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0, ref IDirectDrawSurface3 param1) DeleteAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, void* param0, LPDDENUMSURFACESCALLBACK param1) EnumAttachedSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK param2) EnumOverlayZOrders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, ref IDirectDrawSurface3 param0, uint32 param1) Flip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out DDSCAPS param0, out IDirectDrawSurface3* param1) GetAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0) GetBltStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out DDSCAPS param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out IDirectDrawClipper* param0) GetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out HDC param0) _GetDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0) GetFlipStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out int32 param0, out int32 param1) GetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out IDirectDrawPalette* param0) GetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out DDPIXELFORMAT param0) GetPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out DDSURFACEDESC param0) GetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, ref IDirectDraw param0, out DDSURFACEDESC param1) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self) IsLost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out RectI param0, out DDSURFACEDESC param1, uint32 param2, Handle param3) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, HDC param0) _ReleaseDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self) Restore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, ref IDirectDrawClipper param0) SetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, int32 param0, int32 param1) SetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, ref IDirectDrawPalette param0) SetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, void* param0) Unlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out RectI param0, ref IDirectDrawSurface3 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0) UpdateOverlayDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0, ref IDirectDrawSurface3 param1) UpdateOverlayZOrder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, void** param0) GetDDInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0) PageLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, uint32 param0) PageUnlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface3 self, out DDSURFACEDESC param0, uint32 param1) SetSurfaceDesc;
 			}
 		}
 		[CRepr]
@@ -5283,94 +5288,94 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddAttachedSurface(ref IDirectDrawSurface4 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
-			public HRESULT AddOverlayDirtyRect(out RECT param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
-			public HRESULT Blt(out RECT param0, ref IDirectDrawSurface4 param1, out RECT param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
-			public HRESULT BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface4 param2, out RECT param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
-			public HRESULT DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface4 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
-			public HRESULT EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK2 param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
-			public HRESULT EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK2 param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
-			public HRESULT Flip(ref IDirectDrawSurface4 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
-			public HRESULT GetAttachedSurface(out DDSCAPS2 param0, out IDirectDrawSurface4* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
-			public HRESULT GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
-			public HRESULT GetCaps(out DDSCAPS2 param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
-			public HRESULT GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
-			public HRESULT GetDC(out HDC param0) mut => VT.GetDC(ref this, out param0);
-			public HRESULT GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
-			public HRESULT GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
-			public HRESULT GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
-			public HRESULT GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
-			public HRESULT GetSurfaceDesc(out DDSURFACEDESC2 param0) mut => VT.GetSurfaceDesc(ref this, out param0);
-			public HRESULT Initialize(ref IDirectDraw param0, out DDSURFACEDESC2 param1) mut => VT.Initialize(ref this, ref param0, out param1);
-			public HRESULT IsLost() mut => VT.IsLost(ref this);
-			public HRESULT Lock(out RECT param0, out DDSURFACEDESC2 param1, uint32 param2, HANDLE param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
-			public HRESULT ReleaseDC(HDC param0) mut => VT.ReleaseDC(ref this, param0);
-			public HRESULT Restore() mut => VT.Restore(ref this);
-			public HRESULT SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
-			public HRESULT SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
-			public HRESULT SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
-			public HRESULT SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
-			public HRESULT Unlock(out RECT param0) mut => VT.Unlock(ref this, out param0);
-			public HRESULT UpdateOverlay(out RECT param0, ref IDirectDrawSurface4 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
-			public HRESULT UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface4 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
-			public HRESULT GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
-			public HRESULT PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
-			public HRESULT PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
-			public HRESULT SetSurfaceDesc(out DDSURFACEDESC2 param0, uint32 param1) mut => VT.SetSurfaceDesc(ref this, out param0, param1);
-			public HRESULT SetPrivateData(in Guid param0, void* param1, uint32 param2, uint32 param3) mut => VT.SetPrivateData(ref this, param0, param1, param2, param3);
-			public HRESULT GetPrivateData(in Guid param0, void* param1, out uint32 param2) mut => VT.GetPrivateData(ref this, param0, param1, out param2);
-			public HRESULT FreePrivateData(in Guid param0) mut => VT.FreePrivateData(ref this, param0);
-			public HRESULT GetUniquenessValue(out uint32 param0) mut => VT.GetUniquenessValue(ref this, out param0);
-			public HRESULT ChangeUniquenessValue() mut => VT.ChangeUniquenessValue(ref this);
+			public HResult AddAttachedSurface(ref IDirectDrawSurface4 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
+			public HResult AddOverlayDirtyRect(out RectI param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
+			public HResult Blt(out RectI param0, ref IDirectDrawSurface4 param1, out RectI param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
+			public HResult BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface4 param2, out RectI param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
+			public HResult DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface4 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
+			public HResult EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK2 param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
+			public HResult EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK2 param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
+			public HResult Flip(ref IDirectDrawSurface4 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
+			public HResult GetAttachedSurface(out DDSCAPS2 param0, out IDirectDrawSurface4* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
+			public HResult GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
+			public HResult GetCaps(out DDSCAPS2 param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
+			public HResult GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
+			public HResult GetDC(out HDC param0) mut => VT._GetDC(ref this, out param0);
+			public HResult GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
+			public HResult GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
+			public HResult GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
+			public HResult GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
+			public HResult GetSurfaceDesc(out DDSURFACEDESC2 param0) mut => VT.GetSurfaceDesc(ref this, out param0);
+			public HResult Initialize(ref IDirectDraw param0, out DDSURFACEDESC2 param1) mut => VT.Initialize(ref this, ref param0, out param1);
+			public HResult IsLost() mut => VT.IsLost(ref this);
+			public HResult Lock(out RectI param0, out DDSURFACEDESC2 param1, uint32 param2, Handle param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
+			public HResult ReleaseDC(HDC param0) mut => VT._ReleaseDC(ref this, param0);
+			public HResult Restore() mut => VT.Restore(ref this);
+			public HResult SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
+			public HResult SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
+			public HResult SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
+			public HResult SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
+			public HResult Unlock(out RectI param0) mut => VT.Unlock(ref this, out param0);
+			public HResult UpdateOverlay(out RectI param0, ref IDirectDrawSurface4 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
+			public HResult UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface4 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
+			public HResult GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
+			public HResult PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
+			public HResult PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
+			public HResult SetSurfaceDesc(out DDSURFACEDESC2 param0, uint32 param1) mut => VT.SetSurfaceDesc(ref this, out param0, param1);
+			public HResult SetPrivateData(in Guid param0, void* param1, uint32 param2, uint32 param3) mut => VT.SetPrivateData(ref this, param0, param1, param2, param3);
+			public HResult GetPrivateData(in Guid param0, void* param1, out uint32 param2) mut => VT.GetPrivateData(ref this, param0, param1, out param2);
+			public HResult FreePrivateData(in Guid param0) mut => VT.FreePrivateData(ref this, param0);
+			public HResult GetUniquenessValue(out uint32 param0) mut => VT.GetUniquenessValue(ref this, out param0);
+			public HResult ChangeUniquenessValue() mut => VT.ChangeUniquenessValue(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, ref IDirectDrawSurface4 param0) AddAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out RECT param0) AddOverlayDirtyRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out RECT param0, ref IDirectDrawSurface4 param1, out RECT param2, uint32 param3, out DDBLTFX param4) Blt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0, uint32 param1, ref IDirectDrawSurface4 param2, out RECT param3, uint32 param4) BltFast;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0, ref IDirectDrawSurface4 param1) DeleteAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, void* param0, LPDDENUMSURFACESCALLBACK2 param1) EnumAttachedSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK2 param2) EnumOverlayZOrders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, ref IDirectDrawSurface4 param0, uint32 param1) Flip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out DDSCAPS2 param0, out IDirectDrawSurface4* param1) GetAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0) GetBltStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out DDSCAPS2 param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out IDirectDrawClipper* param0) GetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out HDC param0) GetDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0) GetFlipStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out int32 param0, out int32 param1) GetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out IDirectDrawPalette* param0) GetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out DDPIXELFORMAT param0) GetPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out DDSURFACEDESC2 param0) GetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, ref IDirectDraw param0, out DDSURFACEDESC2 param1) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self) IsLost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out RECT param0, out DDSURFACEDESC2 param1, uint32 param2, HANDLE param3) Lock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, HDC param0) ReleaseDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self) Restore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, ref IDirectDrawClipper param0) SetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, int32 param0, int32 param1) SetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, ref IDirectDrawPalette param0) SetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out RECT param0) Unlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out RECT param0, ref IDirectDrawSurface4 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0) UpdateOverlayDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0, ref IDirectDrawSurface4 param1) UpdateOverlayZOrder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, void** param0) GetDDInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0) PageLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, uint32 param0) PageUnlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out DDSURFACEDESC2 param0, uint32 param1) SetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, in Guid param0, void* param1, uint32 param2, uint32 param3) SetPrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, in Guid param0, void* param1, out uint32 param2) GetPrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, in Guid param0) FreePrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self, out uint32 param0) GetUniquenessValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface4 self) ChangeUniquenessValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, ref IDirectDrawSurface4 param0) AddAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out RectI param0) AddOverlayDirtyRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out RectI param0, ref IDirectDrawSurface4 param1, out RectI param2, uint32 param3, out DDBLTFX param4) Blt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0, uint32 param1, ref IDirectDrawSurface4 param2, out RectI param3, uint32 param4) BltFast;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0, ref IDirectDrawSurface4 param1) DeleteAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, void* param0, LPDDENUMSURFACESCALLBACK2 param1) EnumAttachedSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK2 param2) EnumOverlayZOrders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, ref IDirectDrawSurface4 param0, uint32 param1) Flip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out DDSCAPS2 param0, out IDirectDrawSurface4* param1) GetAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0) GetBltStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out DDSCAPS2 param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out IDirectDrawClipper* param0) GetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out HDC param0) _GetDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0) GetFlipStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out int32 param0, out int32 param1) GetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out IDirectDrawPalette* param0) GetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out DDPIXELFORMAT param0) GetPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out DDSURFACEDESC2 param0) GetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, ref IDirectDraw param0, out DDSURFACEDESC2 param1) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self) IsLost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out RectI param0, out DDSURFACEDESC2 param1, uint32 param2, Handle param3) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, HDC param0) _ReleaseDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self) Restore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, ref IDirectDrawClipper param0) SetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, int32 param0, int32 param1) SetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, ref IDirectDrawPalette param0) SetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out RectI param0) Unlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out RectI param0, ref IDirectDrawSurface4 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0) UpdateOverlayDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0, ref IDirectDrawSurface4 param1) UpdateOverlayZOrder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, void** param0) GetDDInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0) PageLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, uint32 param0) PageUnlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out DDSURFACEDESC2 param0, uint32 param1) SetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, in Guid param0, void* param1, uint32 param2, uint32 param3) SetPrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, in Guid param0, void* param1, out uint32 param2) GetPrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, in Guid param0) FreePrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self, out uint32 param0) GetUniquenessValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface4 self) ChangeUniquenessValue;
 			}
 		}
 		[CRepr]
@@ -5380,102 +5385,102 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AddAttachedSurface(ref IDirectDrawSurface7 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
-			public HRESULT AddOverlayDirtyRect(out RECT param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
-			public HRESULT Blt(out RECT param0, ref IDirectDrawSurface7 param1, out RECT param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
-			public HRESULT BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface7 param2, out RECT param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
-			public HRESULT DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface7 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
-			public HRESULT EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK7 param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
-			public HRESULT EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK7 param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
-			public HRESULT Flip(ref IDirectDrawSurface7 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
-			public HRESULT GetAttachedSurface(out DDSCAPS2 param0, out IDirectDrawSurface7* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
-			public HRESULT GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
-			public HRESULT GetCaps(out DDSCAPS2 param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
-			public HRESULT GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
-			public HRESULT GetDC(out HDC param0) mut => VT.GetDC(ref this, out param0);
-			public HRESULT GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
-			public HRESULT GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
-			public HRESULT GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
-			public HRESULT GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
-			public HRESULT GetSurfaceDesc(out DDSURFACEDESC2 param0) mut => VT.GetSurfaceDesc(ref this, out param0);
-			public HRESULT Initialize(ref IDirectDraw param0, out DDSURFACEDESC2 param1) mut => VT.Initialize(ref this, ref param0, out param1);
-			public HRESULT IsLost() mut => VT.IsLost(ref this);
-			public HRESULT Lock(out RECT param0, out DDSURFACEDESC2 param1, uint32 param2, HANDLE param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
-			public HRESULT ReleaseDC(HDC param0) mut => VT.ReleaseDC(ref this, param0);
-			public HRESULT Restore() mut => VT.Restore(ref this);
-			public HRESULT SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
-			public HRESULT SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
-			public HRESULT SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
-			public HRESULT SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
-			public HRESULT Unlock(out RECT param0) mut => VT.Unlock(ref this, out param0);
-			public HRESULT UpdateOverlay(out RECT param0, ref IDirectDrawSurface7 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
-			public HRESULT UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
-			public HRESULT UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface7 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
-			public HRESULT GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
-			public HRESULT PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
-			public HRESULT PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
-			public HRESULT SetSurfaceDesc(out DDSURFACEDESC2 param0, uint32 param1) mut => VT.SetSurfaceDesc(ref this, out param0, param1);
-			public HRESULT SetPrivateData(in Guid param0, void* param1, uint32 param2, uint32 param3) mut => VT.SetPrivateData(ref this, param0, param1, param2, param3);
-			public HRESULT GetPrivateData(in Guid param0, void* param1, out uint32 param2) mut => VT.GetPrivateData(ref this, param0, param1, out param2);
-			public HRESULT FreePrivateData(in Guid param0) mut => VT.FreePrivateData(ref this, param0);
-			public HRESULT GetUniquenessValue(out uint32 param0) mut => VT.GetUniquenessValue(ref this, out param0);
-			public HRESULT ChangeUniquenessValue() mut => VT.ChangeUniquenessValue(ref this);
-			public HRESULT SetPriority(uint32 param0) mut => VT.SetPriority(ref this, param0);
-			public HRESULT GetPriority(out uint32 param0) mut => VT.GetPriority(ref this, out param0);
-			public HRESULT SetLOD(uint32 param0) mut => VT.SetLOD(ref this, param0);
-			public HRESULT GetLOD(out uint32 param0) mut => VT.GetLOD(ref this, out param0);
+			public HResult AddAttachedSurface(ref IDirectDrawSurface7 param0) mut => VT.AddAttachedSurface(ref this, ref param0);
+			public HResult AddOverlayDirtyRect(out RectI param0) mut => VT.AddOverlayDirtyRect(ref this, out param0);
+			public HResult Blt(out RectI param0, ref IDirectDrawSurface7 param1, out RectI param2, uint32 param3, out DDBLTFX param4) mut => VT.Blt(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult BltBatch(out DDBLTBATCH param0, uint32 param1, uint32 param2) mut => VT.BltBatch(ref this, out param0, param1, param2);
+			public HResult BltFast(uint32 param0, uint32 param1, ref IDirectDrawSurface7 param2, out RectI param3, uint32 param4) mut => VT.BltFast(ref this, param0, param1, ref param2, out param3, param4);
+			public HResult DeleteAttachedSurface(uint32 param0, ref IDirectDrawSurface7 param1) mut => VT.DeleteAttachedSurface(ref this, param0, ref param1);
+			public HResult EnumAttachedSurfaces(void* param0, LPDDENUMSURFACESCALLBACK7 param1) mut => VT.EnumAttachedSurfaces(ref this, param0, param1);
+			public HResult EnumOverlayZOrders(uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK7 param2) mut => VT.EnumOverlayZOrders(ref this, param0, param1, param2);
+			public HResult Flip(ref IDirectDrawSurface7 param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
+			public HResult GetAttachedSurface(out DDSCAPS2 param0, out IDirectDrawSurface7* param1) mut => VT.GetAttachedSurface(ref this, out param0, out param1);
+			public HResult GetBltStatus(uint32 param0) mut => VT.GetBltStatus(ref this, param0);
+			public HResult GetCaps(out DDSCAPS2 param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetClipper(out IDirectDrawClipper* param0) mut => VT.GetClipper(ref this, out param0);
+			public HResult GetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.GetColorKey(ref this, param0, out param1);
+			public HResult GetDC(out HDC param0) mut => VT._GetDC(ref this, out param0);
+			public HResult GetFlipStatus(uint32 param0) mut => VT.GetFlipStatus(ref this, param0);
+			public HResult GetOverlayPosition(out int32 param0, out int32 param1) mut => VT.GetOverlayPosition(ref this, out param0, out param1);
+			public HResult GetPalette(out IDirectDrawPalette* param0) mut => VT.GetPalette(ref this, out param0);
+			public HResult GetPixelFormat(out DDPIXELFORMAT param0) mut => VT.GetPixelFormat(ref this, out param0);
+			public HResult GetSurfaceDesc(out DDSURFACEDESC2 param0) mut => VT.GetSurfaceDesc(ref this, out param0);
+			public HResult Initialize(ref IDirectDraw param0, out DDSURFACEDESC2 param1) mut => VT.Initialize(ref this, ref param0, out param1);
+			public HResult IsLost() mut => VT.IsLost(ref this);
+			public HResult Lock(out RectI param0, out DDSURFACEDESC2 param1, uint32 param2, Handle param3) mut => VT.Lock(ref this, out param0, out param1, param2, param3);
+			public HResult ReleaseDC(HDC param0) mut => VT._ReleaseDC(ref this, param0);
+			public HResult Restore() mut => VT.Restore(ref this);
+			public HResult SetClipper(ref IDirectDrawClipper param0) mut => VT.SetClipper(ref this, ref param0);
+			public HResult SetColorKey(uint32 param0, out DDCOLORKEY param1) mut => VT.SetColorKey(ref this, param0, out param1);
+			public HResult SetOverlayPosition(int32 param0, int32 param1) mut => VT.SetOverlayPosition(ref this, param0, param1);
+			public HResult SetPalette(ref IDirectDrawPalette param0) mut => VT.SetPalette(ref this, ref param0);
+			public HResult Unlock(out RectI param0) mut => VT.Unlock(ref this, out param0);
+			public HResult UpdateOverlay(out RectI param0, ref IDirectDrawSurface7 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) mut => VT.UpdateOverlay(ref this, out param0, ref param1, out param2, param3, out param4);
+			public HResult UpdateOverlayDisplay(uint32 param0) mut => VT.UpdateOverlayDisplay(ref this, param0);
+			public HResult UpdateOverlayZOrder(uint32 param0, ref IDirectDrawSurface7 param1) mut => VT.UpdateOverlayZOrder(ref this, param0, ref param1);
+			public HResult GetDDInterface(void** param0) mut => VT.GetDDInterface(ref this, param0);
+			public HResult PageLock(uint32 param0) mut => VT.PageLock(ref this, param0);
+			public HResult PageUnlock(uint32 param0) mut => VT.PageUnlock(ref this, param0);
+			public HResult SetSurfaceDesc(out DDSURFACEDESC2 param0, uint32 param1) mut => VT.SetSurfaceDesc(ref this, out param0, param1);
+			public HResult SetPrivateData(in Guid param0, void* param1, uint32 param2, uint32 param3) mut => VT.SetPrivateData(ref this, param0, param1, param2, param3);
+			public HResult GetPrivateData(in Guid param0, void* param1, out uint32 param2) mut => VT.GetPrivateData(ref this, param0, param1, out param2);
+			public HResult FreePrivateData(in Guid param0) mut => VT.FreePrivateData(ref this, param0);
+			public HResult GetUniquenessValue(out uint32 param0) mut => VT.GetUniquenessValue(ref this, out param0);
+			public HResult ChangeUniquenessValue() mut => VT.ChangeUniquenessValue(ref this);
+			public HResult SetPriority(uint32 param0) mut => VT.SetPriority(ref this, param0);
+			public HResult GetPriority(out uint32 param0) mut => VT.GetPriority(ref this, out param0);
+			public HResult SetLOD(uint32 param0) mut => VT.SetLOD(ref this, param0);
+			public HResult GetLOD(out uint32 param0) mut => VT.GetLOD(ref this, out param0);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, ref IDirectDrawSurface7 param0) AddAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out RECT param0) AddOverlayDirtyRect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out RECT param0, ref IDirectDrawSurface7 param1, out RECT param2, uint32 param3, out DDBLTFX param4) Blt;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0, uint32 param1, ref IDirectDrawSurface7 param2, out RECT param3, uint32 param4) BltFast;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0, ref IDirectDrawSurface7 param1) DeleteAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, void* param0, LPDDENUMSURFACESCALLBACK7 param1) EnumAttachedSurfaces;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK7 param2) EnumOverlayZOrders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, ref IDirectDrawSurface7 param0, uint32 param1) Flip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out DDSCAPS2 param0, out IDirectDrawSurface7* param1) GetAttachedSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) GetBltStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out DDSCAPS2 param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out IDirectDrawClipper* param0) GetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out HDC param0) GetDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) GetFlipStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out int32 param0, out int32 param1) GetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out IDirectDrawPalette* param0) GetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out DDPIXELFORMAT param0) GetPixelFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out DDSURFACEDESC2 param0) GetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, ref IDirectDraw param0, out DDSURFACEDESC2 param1) Initialize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self) IsLost;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out RECT param0, out DDSURFACEDESC2 param1, uint32 param2, HANDLE param3) Lock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, HDC param0) ReleaseDC;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self) Restore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, ref IDirectDrawClipper param0) SetClipper;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, int32 param0, int32 param1) SetOverlayPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, ref IDirectDrawPalette param0) SetPalette;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out RECT param0) Unlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out RECT param0, ref IDirectDrawSurface7 param1, out RECT param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) UpdateOverlayDisplay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0, ref IDirectDrawSurface7 param1) UpdateOverlayZOrder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, void** param0) GetDDInterface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) PageLock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) PageUnlock;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out DDSURFACEDESC2 param0, uint32 param1) SetSurfaceDesc;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, in Guid param0, void* param1, uint32 param2, uint32 param3) SetPrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, in Guid param0, void* param1, out uint32 param2) GetPrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, in Guid param0) FreePrivateData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out uint32 param0) GetUniquenessValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self) ChangeUniquenessValue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) SetPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out uint32 param0) GetPriority;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, uint32 param0) SetLOD;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurface7 self, out uint32 param0) GetLOD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, ref IDirectDrawSurface7 param0) AddAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out RectI param0) AddOverlayDirtyRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out RectI param0, ref IDirectDrawSurface7 param1, out RectI param2, uint32 param3, out DDBLTFX param4) Blt;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out DDBLTBATCH param0, uint32 param1, uint32 param2) BltBatch;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0, uint32 param1, ref IDirectDrawSurface7 param2, out RectI param3, uint32 param4) BltFast;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0, ref IDirectDrawSurface7 param1) DeleteAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, void* param0, LPDDENUMSURFACESCALLBACK7 param1) EnumAttachedSurfaces;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0, void* param1, LPDDENUMSURFACESCALLBACK7 param2) EnumOverlayZOrders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, ref IDirectDrawSurface7 param0, uint32 param1) Flip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out DDSCAPS2 param0, out IDirectDrawSurface7* param1) GetAttachedSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) GetBltStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out DDSCAPS2 param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out IDirectDrawClipper* param0) GetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0, out DDCOLORKEY param1) GetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out HDC param0) _GetDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) GetFlipStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out int32 param0, out int32 param1) GetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out IDirectDrawPalette* param0) GetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out DDPIXELFORMAT param0) GetPixelFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out DDSURFACEDESC2 param0) GetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, ref IDirectDraw param0, out DDSURFACEDESC2 param1) Initialize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self) IsLost;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out RectI param0, out DDSURFACEDESC2 param1, uint32 param2, Handle param3) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, HDC param0) _ReleaseDC;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self) Restore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, ref IDirectDrawClipper param0) SetClipper;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0, out DDCOLORKEY param1) SetColorKey;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, int32 param0, int32 param1) SetOverlayPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, ref IDirectDrawPalette param0) SetPalette;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out RectI param0) Unlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out RectI param0, ref IDirectDrawSurface7 param1, out RectI param2, uint32 param3, out DDOVERLAYFX param4) UpdateOverlay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) UpdateOverlayDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0, ref IDirectDrawSurface7 param1) UpdateOverlayZOrder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, void** param0) GetDDInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) PageLock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) PageUnlock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out DDSURFACEDESC2 param0, uint32 param1) SetSurfaceDesc;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, in Guid param0, void* param1, uint32 param2, uint32 param3) SetPrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, in Guid param0, void* param1, out uint32 param2) GetPrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, in Guid param0) FreePrivateData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out uint32 param0) GetUniquenessValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self) ChangeUniquenessValue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) SetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out uint32 param0) GetPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, uint32 param0) SetLOD;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurface7 self, out uint32 param0) GetLOD;
 			}
 		}
 		[CRepr]
@@ -5485,14 +5490,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetColorControls(out DDCOLORCONTROL param0) mut => VT.GetColorControls(ref this, out param0);
-			public HRESULT SetColorControls(out DDCOLORCONTROL param0) mut => VT.SetColorControls(ref this, out param0);
+			public HResult GetColorControls(out DDCOLORCONTROL param0) mut => VT.GetColorControls(ref this, out param0);
+			public HResult SetColorControls(out DDCOLORCONTROL param0) mut => VT.SetColorControls(ref this, out param0);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawColorControl self, out DDCOLORCONTROL param0) GetColorControls;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawColorControl self, out DDCOLORCONTROL param0) SetColorControls;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawColorControl self, out DDCOLORCONTROL param0) GetColorControls;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawColorControl self, out DDCOLORCONTROL param0) SetColorControls;
 			}
 		}
 		[CRepr]
@@ -5502,14 +5507,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetGammaRamp(uint32 param0, out DDGAMMARAMP param1) mut => VT.GetGammaRamp(ref this, param0, out param1);
-			public HRESULT SetGammaRamp(uint32 param0, out DDGAMMARAMP param1) mut => VT.SetGammaRamp(ref this, param0, out param1);
+			public HResult GetGammaRamp(uint32 param0, out DDGAMMARAMP param1) mut => VT.GetGammaRamp(ref this, param0, out param1);
+			public HResult SetGammaRamp(uint32 param0, out DDGAMMARAMP param1) mut => VT.SetGammaRamp(ref this, param0, out param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawGammaControl self, uint32 param0, out DDGAMMARAMP param1) GetGammaRamp;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawGammaControl self, uint32 param0, out DDGAMMARAMP param1) SetGammaRamp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawGammaControl self, uint32 param0, out DDGAMMARAMP param1) GetGammaRamp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawGammaControl self, uint32 param0, out DDGAMMARAMP param1) SetGammaRamp;
 			}
 		}
 		[CRepr]
@@ -5519,18 +5524,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CreateVideoPort(uint32 param0, out DDVIDEOPORTDESC param1, out IDirectDrawVideoPort* param2, ref IUnknown param3) mut => VT.CreateVideoPort(ref this, param0, out param1, out param2, ref param3);
-			public HRESULT EnumVideoPorts(uint32 param0, out DDVIDEOPORTCAPS param1, void* param2, LPDDENUMVIDEOCALLBACK param3) mut => VT.EnumVideoPorts(ref this, param0, out param1, param2, param3);
-			public HRESULT GetVideoPortConnectInfo(uint32 param0, out uint32 pcInfo, DDVIDEOPORTCONNECT* param2) mut => VT.GetVideoPortConnectInfo(ref this, param0, out pcInfo, param2);
-			public HRESULT QueryVideoPortStatus(uint32 param0, out DDVIDEOPORTSTATUS param1) mut => VT.QueryVideoPortStatus(ref this, param0, out param1);
+			public HResult CreateVideoPort(uint32 param0, out DDVIDEOPORTDESC param1, out IDirectDrawVideoPort* param2, ref IUnknown param3) mut => VT.CreateVideoPort(ref this, param0, out param1, out param2, ref param3);
+			public HResult EnumVideoPorts(uint32 param0, out DDVIDEOPORTCAPS param1, void* param2, LPDDENUMVIDEOCALLBACK param3) mut => VT.EnumVideoPorts(ref this, param0, out param1, param2, param3);
+			public HResult GetVideoPortConnectInfo(uint32 param0, out uint32 pcInfo, DDVIDEOPORTCONNECT* param2) mut => VT.GetVideoPortConnectInfo(ref this, param0, out pcInfo, param2);
+			public HResult QueryVideoPortStatus(uint32 param0, out DDVIDEOPORTSTATUS param1) mut => VT.QueryVideoPortStatus(ref this, param0, out param1);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDDVideoPortContainer self, uint32 param0, out DDVIDEOPORTDESC param1, out IDirectDrawVideoPort* param2, ref IUnknown param3) CreateVideoPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDDVideoPortContainer self, uint32 param0, out DDVIDEOPORTCAPS param1, void* param2, LPDDENUMVIDEOCALLBACK param3) EnumVideoPorts;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDDVideoPortContainer self, uint32 param0, out uint32 pcInfo, DDVIDEOPORTCONNECT* param2) GetVideoPortConnectInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDDVideoPortContainer self, uint32 param0, out DDVIDEOPORTSTATUS param1) QueryVideoPortStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDDVideoPortContainer self, uint32 param0, out DDVIDEOPORTDESC param1, out IDirectDrawVideoPort* param2, ref IUnknown param3) CreateVideoPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDDVideoPortContainer self, uint32 param0, out DDVIDEOPORTCAPS param1, void* param2, LPDDENUMVIDEOCALLBACK param3) EnumVideoPorts;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDDVideoPortContainer self, uint32 param0, out uint32 pcInfo, DDVIDEOPORTCONNECT* param2) GetVideoPortConnectInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDDVideoPortContainer self, uint32 param0, out DDVIDEOPORTSTATUS param1) QueryVideoPortStatus;
 			}
 		}
 		[CRepr]
@@ -5540,38 +5545,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Flip(ref IDirectDrawSurface param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
-			public HRESULT GetBandwidthInfo(out DDPIXELFORMAT param0, uint32 param1, uint32 param2, uint32 param3, out DDVIDEOPORTBANDWIDTH param4) mut => VT.GetBandwidthInfo(ref this, out param0, param1, param2, param3, out param4);
-			public HRESULT GetColorControls(out DDCOLORCONTROL param0) mut => VT.GetColorControls(ref this, out param0);
-			public HRESULT GetInputFormats(out uint32 lpNumFormats, DDPIXELFORMAT* param1, uint32 param2) mut => VT.GetInputFormats(ref this, out lpNumFormats, param1, param2);
-			public HRESULT GetOutputFormats(out DDPIXELFORMAT param0, out uint32 lpNumFormats, DDPIXELFORMAT* param2, uint32 param3) mut => VT.GetOutputFormats(ref this, out param0, out lpNumFormats, param2, param3);
-			public HRESULT GetFieldPolarity(out int32 param0) mut => VT.GetFieldPolarity(ref this, out param0);
-			public HRESULT GetVideoLine(out uint32 param0) mut => VT.GetVideoLine(ref this, out param0);
-			public HRESULT GetVideoSignalStatus(out uint32 param0) mut => VT.GetVideoSignalStatus(ref this, out param0);
-			public HRESULT SetColorControls(out DDCOLORCONTROL param0) mut => VT.SetColorControls(ref this, out param0);
-			public HRESULT SetTargetSurface(ref IDirectDrawSurface param0, uint32 param1) mut => VT.SetTargetSurface(ref this, ref param0, param1);
-			public HRESULT StartVideo(out DDVIDEOPORTINFO param0) mut => VT.StartVideo(ref this, out param0);
-			public HRESULT StopVideo() mut => VT.StopVideo(ref this);
-			public HRESULT UpdateVideo(out DDVIDEOPORTINFO param0) mut => VT.UpdateVideo(ref this, out param0);
-			public HRESULT WaitForSync(uint32 param0, uint32 param1, uint32 param2) mut => VT.WaitForSync(ref this, param0, param1, param2);
+			public HResult Flip(ref IDirectDrawSurface param0, uint32 param1) mut => VT.Flip(ref this, ref param0, param1);
+			public HResult GetBandwidthInfo(out DDPIXELFORMAT param0, uint32 param1, uint32 param2, uint32 param3, out DDVIDEOPORTBANDWIDTH param4) mut => VT.GetBandwidthInfo(ref this, out param0, param1, param2, param3, out param4);
+			public HResult GetColorControls(out DDCOLORCONTROL param0) mut => VT.GetColorControls(ref this, out param0);
+			public HResult GetInputFormats(out uint32 lpNumFormats, DDPIXELFORMAT* param1, uint32 param2) mut => VT.GetInputFormats(ref this, out lpNumFormats, param1, param2);
+			public HResult GetOutputFormats(out DDPIXELFORMAT param0, out uint32 lpNumFormats, DDPIXELFORMAT* param2, uint32 param3) mut => VT.GetOutputFormats(ref this, out param0, out lpNumFormats, param2, param3);
+			public HResult GetFieldPolarity(out int32 param0) mut => VT.GetFieldPolarity(ref this, out param0);
+			public HResult GetVideoLine(out uint32 param0) mut => VT.GetVideoLine(ref this, out param0);
+			public HResult GetVideoSignalStatus(out uint32 param0) mut => VT.GetVideoSignalStatus(ref this, out param0);
+			public HResult SetColorControls(out DDCOLORCONTROL param0) mut => VT.SetColorControls(ref this, out param0);
+			public HResult SetTargetSurface(ref IDirectDrawSurface param0, uint32 param1) mut => VT.SetTargetSurface(ref this, ref param0, param1);
+			public HResult StartVideo(out DDVIDEOPORTINFO param0) mut => VT.StartVideo(ref this, out param0);
+			public HResult StopVideo() mut => VT.StopVideo(ref this);
+			public HResult UpdateVideo(out DDVIDEOPORTINFO param0) mut => VT.UpdateVideo(ref this, out param0);
+			public HResult WaitForSync(uint32 param0, uint32 param1, uint32 param2) mut => VT.WaitForSync(ref this, param0, param1, param2);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, ref IDirectDrawSurface param0, uint32 param1) Flip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out DDPIXELFORMAT param0, uint32 param1, uint32 param2, uint32 param3, out DDVIDEOPORTBANDWIDTH param4) GetBandwidthInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out DDCOLORCONTROL param0) GetColorControls;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out uint32 lpNumFormats, DDPIXELFORMAT* param1, uint32 param2) GetInputFormats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out DDPIXELFORMAT param0, out uint32 lpNumFormats, DDPIXELFORMAT* param2, uint32 param3) GetOutputFormats;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out int32 param0) GetFieldPolarity;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out uint32 param0) GetVideoLine;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out uint32 param0) GetVideoSignalStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out DDCOLORCONTROL param0) SetColorControls;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, ref IDirectDrawSurface param0, uint32 param1) SetTargetSurface;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out DDVIDEOPORTINFO param0) StartVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self) StopVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, out DDVIDEOPORTINFO param0) UpdateVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPort self, uint32 param0, uint32 param1, uint32 param2) WaitForSync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, ref IDirectDrawSurface param0, uint32 param1) Flip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out DDPIXELFORMAT param0, uint32 param1, uint32 param2, uint32 param3, out DDVIDEOPORTBANDWIDTH param4) GetBandwidthInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out DDCOLORCONTROL param0) GetColorControls;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out uint32 lpNumFormats, DDPIXELFORMAT* param1, uint32 param2) GetInputFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out DDPIXELFORMAT param0, out uint32 lpNumFormats, DDPIXELFORMAT* param2, uint32 param3) GetOutputFormats;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out int32 param0) GetFieldPolarity;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out uint32 param0) GetVideoLine;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out uint32 param0) GetVideoSignalStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out DDCOLORCONTROL param0) SetColorControls;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, ref IDirectDrawSurface param0, uint32 param1) SetTargetSurface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out DDVIDEOPORTINFO param0) StartVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self) StopVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, out DDVIDEOPORTINFO param0) UpdateVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPort self, uint32 param0, uint32 param1, uint32 param2) WaitForSync;
 			}
 		}
 		[CRepr]
@@ -5581,14 +5586,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AcquireNotification(out HANDLE param0, out DDVIDEOPORTNOTIFY param1) mut => VT.AcquireNotification(ref this, out param0, out param1);
-			public HRESULT ReleaseNotification(HANDLE param0) mut => VT.ReleaseNotification(ref this, param0);
+			public HResult AcquireNotification(out Handle param0, out DDVIDEOPORTNOTIFY param1) mut => VT.AcquireNotification(ref this, out param0, out param1);
+			public HResult ReleaseNotification(Handle param0) mut => VT.ReleaseNotification(ref this, param0);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPortNotify self, out HANDLE param0, out DDVIDEOPORTNOTIFY param1) AcquireNotification;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawVideoPortNotify self, HANDLE param0) ReleaseNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPortNotify self, out Handle param0, out DDVIDEOPORTNOTIFY param1) AcquireNotification;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawVideoPortNotify self, Handle param0) ReleaseNotification;
 			}
 		}
 		[CRepr]
@@ -5598,16 +5603,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCaps(out DDKERNELCAPS param0) mut => VT.GetCaps(ref this, out param0);
-			public HRESULT GetKernelHandle(out uint param0) mut => VT.GetKernelHandle(ref this, out param0);
-			public HRESULT ReleaseKernelHandle() mut => VT.ReleaseKernelHandle(ref this);
+			public HResult GetCaps(out DDKERNELCAPS param0) mut => VT.GetCaps(ref this, out param0);
+			public HResult GetKernelHandle(out uint param0) mut => VT.GetKernelHandle(ref this, out param0);
+			public HResult ReleaseKernelHandle() mut => VT.ReleaseKernelHandle(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawKernel self, out DDKERNELCAPS param0) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawKernel self, out uint param0) GetKernelHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawKernel self) ReleaseKernelHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawKernel self, out DDKERNELCAPS param0) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawKernel self, out uint param0) GetKernelHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawKernel self) ReleaseKernelHandle;
 			}
 		}
 		[CRepr]
@@ -5617,32 +5622,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetKernelHandle(out uint param0) mut => VT.GetKernelHandle(ref this, out param0);
-			public HRESULT ReleaseKernelHandle() mut => VT.ReleaseKernelHandle(ref this);
+			public HResult GetKernelHandle(out uint param0) mut => VT.GetKernelHandle(ref this, out param0);
+			public HResult ReleaseKernelHandle() mut => VT.ReleaseKernelHandle(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurfaceKernel self, out uint param0) GetKernelHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IDirectDrawSurfaceKernel self) ReleaseKernelHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurfaceKernel self, out uint param0) GetKernelHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IDirectDrawSurfaceKernel self) ReleaseKernelHandle;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawEnumerateW(LPDDENUMCALLBACKW lpCallback, void* lpContext);
+		public static extern HResult DirectDrawEnumerateW(LPDDENUMCALLBACKW lpCallback, void* lpContext);
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawEnumerateA(LPDDENUMCALLBACKA lpCallback, void* lpContext);
+		public static extern HResult DirectDrawEnumerateA(LPDDENUMCALLBACKA lpCallback, void* lpContext);
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawEnumerateExW(LPDDENUMCALLBACKEXW lpCallback, void* lpContext, uint32 dwFlags);
+		public static extern HResult DirectDrawEnumerateExW(LPDDENUMCALLBACKEXW lpCallback, void* lpContext, uint32 dwFlags);
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawEnumerateExA(LPDDENUMCALLBACKEXA lpCallback, void* lpContext, uint32 dwFlags);
+		public static extern HResult DirectDrawEnumerateExA(LPDDENUMCALLBACKEXA lpCallback, void* lpContext, uint32 dwFlags);
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawCreate(out Guid lpGUID, out IDirectDraw* lplpDD, ref IUnknown pUnkOuter);
+		public static extern HResult DirectDrawCreate(out Guid lpGUID, out IDirectDraw* lplpDD, ref IUnknown pUnkOuter);
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawCreateEx(out Guid lpGuid, void** lplpDD, in Guid iid, ref IUnknown pUnkOuter);
+		public static extern HResult DirectDrawCreateEx(out Guid lpGuid, void** lplpDD, in Guid iid, ref IUnknown pUnkOuter);
 		[Import("ddraw.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT DirectDrawCreateClipper(uint32 dwFlags, out IDirectDrawClipper* lplpDDClipper, ref IUnknown pUnkOuter);
+		public static extern HResult DirectDrawCreateClipper(uint32 dwFlags, out IDirectDrawClipper* lplpDDClipper, ref IUnknown pUnkOuter);
 	}
 }

@@ -150,7 +150,7 @@ namespace BfEngine
 			GL.CompileShader(shader);
 			int32 success = 0;
 			GL.GetShaderiv(shader, .COMPILE_STATUS, &success);
-			Console.WriteLine(success);
+			//Console.WriteLine(success);
 			if(success == 0)  {
 				Console.WriteLine(GetShaderInfoLog(shader, ..scope String()));
 				return .Err(shader);

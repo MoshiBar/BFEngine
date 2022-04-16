@@ -27,14 +27,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT get_Value(out VARIANT value) mut => VT.get_Value(ref this, out value);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult get_Value(out VARIANT value) mut => VT.get_Value(ref this, out value);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDeviceProperty self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDeviceProperty self, out VARIANT value) get_Value;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDeviceProperty self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDeviceProperty self, out VARIANT value) get_Value;
 			}
 		}
 		[CRepr]
@@ -44,16 +44,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Item(int32 index, out IWindowsMediaLibrarySharingDeviceProperty* property) mut => VT.get_Item(ref this, index, out property);
-			public HRESULT get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
-			public HRESULT GetProperty(BSTR name, out IWindowsMediaLibrarySharingDeviceProperty* property) mut => VT.GetProperty(ref this, name, out property);
+			public HResult get_Item(int32 index, out IWindowsMediaLibrarySharingDeviceProperty* property) mut => VT.get_Item(ref this, index, out property);
+			public HResult get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
+			public HResult GetProperty(BSTR name, out IWindowsMediaLibrarySharingDeviceProperty* property) mut => VT.GetProperty(ref this, name, out property);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDeviceProperties self, int32 index, out IWindowsMediaLibrarySharingDeviceProperty* property) get_Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDeviceProperties self, out int32 count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDeviceProperties self, BSTR name, out IWindowsMediaLibrarySharingDeviceProperty* property) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDeviceProperties self, int32 index, out IWindowsMediaLibrarySharingDeviceProperty* property) get_Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDeviceProperties self, out int32 count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDeviceProperties self, BSTR name, out IWindowsMediaLibrarySharingDeviceProperty* property) GetProperty;
 			}
 		}
 		[CRepr]
@@ -63,18 +63,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_DeviceID(out BSTR deviceID) mut => VT.get_DeviceID(ref this, out deviceID);
-			public HRESULT get_Authorization(out WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) mut => VT.get_Authorization(ref this, out authorization);
-			public HRESULT put_Authorization(WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) mut => VT.put_Authorization(ref this, authorization);
-			public HRESULT get_Properties(out IWindowsMediaLibrarySharingDeviceProperties* deviceProperties) mut => VT.get_Properties(ref this, out deviceProperties);
+			public HResult get_DeviceID(out BSTR deviceID) mut => VT.get_DeviceID(ref this, out deviceID);
+			public HResult get_Authorization(out WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) mut => VT.get_Authorization(ref this, out authorization);
+			public HResult put_Authorization(WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) mut => VT.put_Authorization(ref this, authorization);
+			public HResult get_Properties(out IWindowsMediaLibrarySharingDeviceProperties* deviceProperties) mut => VT.get_Properties(ref this, out deviceProperties);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevice self, out BSTR deviceID) get_DeviceID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevice self, out WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) get_Authorization;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevice self, WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) put_Authorization;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevice self, out IWindowsMediaLibrarySharingDeviceProperties* deviceProperties) get_Properties;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevice self, out BSTR deviceID) get_DeviceID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevice self, out WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) get_Authorization;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevice self, WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) put_Authorization;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevice self, out IWindowsMediaLibrarySharingDeviceProperties* deviceProperties) get_Properties;
 			}
 		}
 		[CRepr]
@@ -84,16 +84,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Item(int32 index, out IWindowsMediaLibrarySharingDevice* device) mut => VT.get_Item(ref this, index, out device);
-			public HRESULT get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
-			public HRESULT GetDevice(BSTR deviceID, out IWindowsMediaLibrarySharingDevice* device) mut => VT.GetDevice(ref this, deviceID, out device);
+			public HResult get_Item(int32 index, out IWindowsMediaLibrarySharingDevice* device) mut => VT.get_Item(ref this, index, out device);
+			public HResult get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
+			public HResult GetDevice(BSTR deviceID, out IWindowsMediaLibrarySharingDevice* device) mut => VT.GetDevice(ref this, deviceID, out device);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevices self, int32 index, out IWindowsMediaLibrarySharingDevice* device) get_Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevices self, out int32 count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingDevices self, BSTR deviceID, out IWindowsMediaLibrarySharingDevice* device) GetDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevices self, int32 index, out IWindowsMediaLibrarySharingDevice* device) get_Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevices self, out int32 count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingDevices self, BSTR deviceID, out IWindowsMediaLibrarySharingDevice* device) GetDevice;
 			}
 		}
 		[CRepr]
@@ -103,48 +103,48 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT showShareMediaCPL(BSTR device) mut => VT.showShareMediaCPL(ref this, device);
-			public HRESULT get_userHomeMediaSharingState(out int16 sharingEnabled) mut => VT.get_userHomeMediaSharingState(ref this, out sharingEnabled);
-			public HRESULT put_userHomeMediaSharingState(int16 sharingEnabled) mut => VT.put_userHomeMediaSharingState(ref this, sharingEnabled);
-			public HRESULT get_userHomeMediaSharingLibraryName(out BSTR libraryName) mut => VT.get_userHomeMediaSharingLibraryName(ref this, out libraryName);
-			public HRESULT put_userHomeMediaSharingLibraryName(BSTR libraryName) mut => VT.put_userHomeMediaSharingLibraryName(ref this, libraryName);
-			public HRESULT get_computerHomeMediaSharingAllowedState(out int16 sharingAllowed) mut => VT.get_computerHomeMediaSharingAllowedState(ref this, out sharingAllowed);
-			public HRESULT put_computerHomeMediaSharingAllowedState(int16 sharingAllowed) mut => VT.put_computerHomeMediaSharingAllowedState(ref this, sharingAllowed);
-			public HRESULT get_userInternetMediaSharingState(out int16 sharingEnabled) mut => VT.get_userInternetMediaSharingState(ref this, out sharingEnabled);
-			public HRESULT put_userInternetMediaSharingState(int16 sharingEnabled) mut => VT.put_userInternetMediaSharingState(ref this, sharingEnabled);
-			public HRESULT get_computerInternetMediaSharingAllowedState(out int16 sharingAllowed) mut => VT.get_computerInternetMediaSharingAllowedState(ref this, out sharingAllowed);
-			public HRESULT put_computerInternetMediaSharingAllowedState(int16 sharingAllowed) mut => VT.put_computerInternetMediaSharingAllowedState(ref this, sharingAllowed);
-			public HRESULT get_internetMediaSharingSecurityGroup(out BSTR securityGroup) mut => VT.get_internetMediaSharingSecurityGroup(ref this, out securityGroup);
-			public HRESULT put_internetMediaSharingSecurityGroup(BSTR securityGroup) mut => VT.put_internetMediaSharingSecurityGroup(ref this, securityGroup);
-			public HRESULT get_allowSharingToAllDevices(out int16 sharingEnabled) mut => VT.get_allowSharingToAllDevices(ref this, out sharingEnabled);
-			public HRESULT put_allowSharingToAllDevices(int16 sharingEnabled) mut => VT.put_allowSharingToAllDevices(ref this, sharingEnabled);
-			public HRESULT setDefaultAuthorization(BSTR MACAddresses, BSTR friendlyName, int16 authorization) mut => VT.setDefaultAuthorization(ref this, MACAddresses, friendlyName, authorization);
-			public HRESULT setAuthorizationState(BSTR MACAddress, int16 authorizationState) mut => VT.setAuthorizationState(ref this, MACAddress, authorizationState);
-			public HRESULT getAllDevices(out IWindowsMediaLibrarySharingDevices* devices) mut => VT.getAllDevices(ref this, out devices);
-			public HRESULT get_customSettingsApplied(out int16 customSettingsApplied) mut => VT.get_customSettingsApplied(ref this, out customSettingsApplied);
+			public HResult showShareMediaCPL(BSTR device) mut => VT.showShareMediaCPL(ref this, device);
+			public HResult get_userHomeMediaSharingState(out int16 sharingEnabled) mut => VT.get_userHomeMediaSharingState(ref this, out sharingEnabled);
+			public HResult put_userHomeMediaSharingState(int16 sharingEnabled) mut => VT.put_userHomeMediaSharingState(ref this, sharingEnabled);
+			public HResult get_userHomeMediaSharingLibraryName(out BSTR libraryName) mut => VT.get_userHomeMediaSharingLibraryName(ref this, out libraryName);
+			public HResult put_userHomeMediaSharingLibraryName(BSTR libraryName) mut => VT.put_userHomeMediaSharingLibraryName(ref this, libraryName);
+			public HResult get_computerHomeMediaSharingAllowedState(out int16 sharingAllowed) mut => VT.get_computerHomeMediaSharingAllowedState(ref this, out sharingAllowed);
+			public HResult put_computerHomeMediaSharingAllowedState(int16 sharingAllowed) mut => VT.put_computerHomeMediaSharingAllowedState(ref this, sharingAllowed);
+			public HResult get_userInternetMediaSharingState(out int16 sharingEnabled) mut => VT.get_userInternetMediaSharingState(ref this, out sharingEnabled);
+			public HResult put_userInternetMediaSharingState(int16 sharingEnabled) mut => VT.put_userInternetMediaSharingState(ref this, sharingEnabled);
+			public HResult get_computerInternetMediaSharingAllowedState(out int16 sharingAllowed) mut => VT.get_computerInternetMediaSharingAllowedState(ref this, out sharingAllowed);
+			public HResult put_computerInternetMediaSharingAllowedState(int16 sharingAllowed) mut => VT.put_computerInternetMediaSharingAllowedState(ref this, sharingAllowed);
+			public HResult get_internetMediaSharingSecurityGroup(out BSTR securityGroup) mut => VT.get_internetMediaSharingSecurityGroup(ref this, out securityGroup);
+			public HResult put_internetMediaSharingSecurityGroup(BSTR securityGroup) mut => VT.put_internetMediaSharingSecurityGroup(ref this, securityGroup);
+			public HResult get_allowSharingToAllDevices(out int16 sharingEnabled) mut => VT.get_allowSharingToAllDevices(ref this, out sharingEnabled);
+			public HResult put_allowSharingToAllDevices(int16 sharingEnabled) mut => VT.put_allowSharingToAllDevices(ref this, sharingEnabled);
+			public HResult setDefaultAuthorization(BSTR MACAddresses, BSTR friendlyName, int16 authorization) mut => VT.setDefaultAuthorization(ref this, MACAddresses, friendlyName, authorization);
+			public HResult setAuthorizationState(BSTR MACAddress, int16 authorizationState) mut => VT.setAuthorizationState(ref this, MACAddress, authorizationState);
+			public HResult getAllDevices(out IWindowsMediaLibrarySharingDevices* devices) mut => VT.getAllDevices(ref this, out devices);
+			public HResult get_customSettingsApplied(out int16 customSettingsApplied) mut => VT.get_customSettingsApplied(ref this, out customSettingsApplied);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, BSTR device) showShareMediaCPL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out int16 sharingEnabled) get_userHomeMediaSharingState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, int16 sharingEnabled) put_userHomeMediaSharingState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out BSTR libraryName) get_userHomeMediaSharingLibraryName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, BSTR libraryName) put_userHomeMediaSharingLibraryName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out int16 sharingAllowed) get_computerHomeMediaSharingAllowedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, int16 sharingAllowed) put_computerHomeMediaSharingAllowedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out int16 sharingEnabled) get_userInternetMediaSharingState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, int16 sharingEnabled) put_userInternetMediaSharingState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out int16 sharingAllowed) get_computerInternetMediaSharingAllowedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, int16 sharingAllowed) put_computerInternetMediaSharingAllowedState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out BSTR securityGroup) get_internetMediaSharingSecurityGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, BSTR securityGroup) put_internetMediaSharingSecurityGroup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out int16 sharingEnabled) get_allowSharingToAllDevices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, int16 sharingEnabled) put_allowSharingToAllDevices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, BSTR MACAddresses, BSTR friendlyName, int16 authorization) setDefaultAuthorization;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, BSTR MACAddress, int16 authorizationState) setAuthorizationState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out IWindowsMediaLibrarySharingDevices* devices) getAllDevices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWindowsMediaLibrarySharingServices self, out int16 customSettingsApplied) get_customSettingsApplied;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, BSTR device) showShareMediaCPL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out int16 sharingEnabled) get_userHomeMediaSharingState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, int16 sharingEnabled) put_userHomeMediaSharingState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out BSTR libraryName) get_userHomeMediaSharingLibraryName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, BSTR libraryName) put_userHomeMediaSharingLibraryName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out int16 sharingAllowed) get_computerHomeMediaSharingAllowedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, int16 sharingAllowed) put_computerHomeMediaSharingAllowedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out int16 sharingEnabled) get_userInternetMediaSharingState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, int16 sharingEnabled) put_userInternetMediaSharingState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out int16 sharingAllowed) get_computerInternetMediaSharingAllowedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, int16 sharingAllowed) put_computerInternetMediaSharingAllowedState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out BSTR securityGroup) get_internetMediaSharingSecurityGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, BSTR securityGroup) put_internetMediaSharingSecurityGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out int16 sharingEnabled) get_allowSharingToAllDevices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, int16 sharingEnabled) put_allowSharingToAllDevices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, BSTR MACAddresses, BSTR friendlyName, int16 authorization) setDefaultAuthorization;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, BSTR MACAddress, int16 authorizationState) setAuthorizationState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out IWindowsMediaLibrarySharingDevices* devices) getAllDevices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWindowsMediaLibrarySharingServices self, out int16 customSettingsApplied) get_customSettingsApplied;
 			}
 		}
 		

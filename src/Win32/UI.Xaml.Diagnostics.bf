@@ -7,7 +7,7 @@ namespace Win32
 	{
 		// --- Constants ---
 		
-		public const HRESULT E_UNKNOWNTYPE = -2144665560;
+		public const HResult E_UNKNOWNTYPE = -2144665560;
 		
 		// --- Enums ---
 		
@@ -107,7 +107,7 @@ namespace Win32
 			public BSTR ValueType;
 			public BSTR ItemType;
 			public BSTR Value;
-			public BOOL Overridden;
+			public IntBool Overridden;
 			public int64 MetadataBits;
 			public BSTR PropertyName;
 			public uint32 PropertyChainIndex;
@@ -132,7 +132,7 @@ namespace Win32
 		{
 			public uint32 Width;
 			public uint32 Height;
-			public DXGI_FORMAT Format;
+			public DXGIFormat Format;
 			public DXGI_ALPHA_MODE AlphaMode;
 		}
 		
@@ -145,12 +145,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnVisualTreeChange(ParentChildRelation relation, VisualElement element, VisualMutationType mutationType) mut => VT.OnVisualTreeChange(ref this, relation, element, mutationType);
+			public HResult OnVisualTreeChange(ParentChildRelation relation, VisualElement element, VisualMutationType mutationType) mut => VT.OnVisualTreeChange(ref this, relation, element, mutationType);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeServiceCallback self, ParentChildRelation relation, VisualElement element, VisualMutationType mutationType) OnVisualTreeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeServiceCallback self, ParentChildRelation relation, VisualElement element, VisualMutationType mutationType) OnVisualTreeChange;
 			}
 		}
 		[CRepr]
@@ -160,12 +160,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnElementStateChanged(uint64 element, VisualElementState elementState, PWSTR context) mut => VT.OnElementStateChanged(ref this, element, elementState, context);
+			public HResult OnElementStateChanged(uint64 element, VisualElementState elementState, char16* context) mut => VT.OnElementStateChanged(ref this, element, elementState, context);
 
 			[CRepr]
 			public struct VTable : IVisualTreeServiceCallback.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeServiceCallback2 self, uint64 element, VisualElementState elementState, PWSTR context) OnElementStateChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeServiceCallback2 self, uint64 element, VisualElementState elementState, char16* context) OnElementStateChanged;
 			}
 		}
 		[CRepr]
@@ -175,34 +175,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AdviseVisualTreeChange(ref IVisualTreeServiceCallback pCallback) mut => VT.AdviseVisualTreeChange(ref this, ref pCallback);
-			public HRESULT UnadviseVisualTreeChange(ref IVisualTreeServiceCallback pCallback) mut => VT.UnadviseVisualTreeChange(ref this, ref pCallback);
-			public HRESULT GetEnums(out uint32 pCount, EnumType** ppEnums) mut => VT.GetEnums(ref this, out pCount, ppEnums);
-			public HRESULT CreateInstance(BSTR typeName, BSTR value, out uint64 pInstanceHandle) mut => VT.CreateInstance(ref this, typeName, value, out pInstanceHandle);
-			public HRESULT GetPropertyValuesChain(uint64 instanceHandle, out uint32 pSourceCount, PropertyChainSource** ppPropertySources, out uint32 pPropertyCount, PropertyChainValue** ppPropertyValues) mut => VT.GetPropertyValuesChain(ref this, instanceHandle, out pSourceCount, ppPropertySources, out pPropertyCount, ppPropertyValues);
-			public HRESULT SetProperty(uint64 instanceHandle, uint64 value, uint32 propertyIndex) mut => VT.SetProperty(ref this, instanceHandle, value, propertyIndex);
-			public HRESULT ClearProperty(uint64 instanceHandle, uint32 propertyIndex) mut => VT.ClearProperty(ref this, instanceHandle, propertyIndex);
-			public HRESULT GetCollectionCount(uint64 instanceHandle, out uint32 pCollectionSize) mut => VT.GetCollectionCount(ref this, instanceHandle, out pCollectionSize);
-			public HRESULT GetCollectionElements(uint64 instanceHandle, uint32 startIndex, out uint32 pElementCount, CollectionElementValue** ppElementValues) mut => VT.GetCollectionElements(ref this, instanceHandle, startIndex, out pElementCount, ppElementValues);
-			public HRESULT AddChild(uint64 parent, uint64 child, uint32 index) mut => VT.AddChild(ref this, parent, child, index);
-			public HRESULT RemoveChild(uint64 parent, uint32 index) mut => VT.RemoveChild(ref this, parent, index);
-			public HRESULT ClearChildren(uint64 parent) mut => VT.ClearChildren(ref this, parent);
+			public HResult AdviseVisualTreeChange(ref IVisualTreeServiceCallback pCallback) mut => VT.AdviseVisualTreeChange(ref this, ref pCallback);
+			public HResult UnadviseVisualTreeChange(ref IVisualTreeServiceCallback pCallback) mut => VT.UnadviseVisualTreeChange(ref this, ref pCallback);
+			public HResult GetEnums(out uint32 pCount, EnumType** ppEnums) mut => VT.GetEnums(ref this, out pCount, ppEnums);
+			public HResult CreateInstance(BSTR typeName, BSTR value, out uint64 pInstanceHandle) mut => VT.CreateInstance(ref this, typeName, value, out pInstanceHandle);
+			public HResult GetPropertyValuesChain(uint64 instanceHandle, out uint32 pSourceCount, PropertyChainSource** ppPropertySources, out uint32 pPropertyCount, PropertyChainValue** ppPropertyValues) mut => VT.GetPropertyValuesChain(ref this, instanceHandle, out pSourceCount, ppPropertySources, out pPropertyCount, ppPropertyValues);
+			public HResult SetProperty(uint64 instanceHandle, uint64 value, uint32 propertyIndex) mut => VT.SetProperty(ref this, instanceHandle, value, propertyIndex);
+			public HResult ClearProperty(uint64 instanceHandle, uint32 propertyIndex) mut => VT.ClearProperty(ref this, instanceHandle, propertyIndex);
+			public HResult GetCollectionCount(uint64 instanceHandle, out uint32 pCollectionSize) mut => VT.GetCollectionCount(ref this, instanceHandle, out pCollectionSize);
+			public HResult GetCollectionElements(uint64 instanceHandle, uint32 startIndex, out uint32 pElementCount, CollectionElementValue** ppElementValues) mut => VT.GetCollectionElements(ref this, instanceHandle, startIndex, out pElementCount, ppElementValues);
+			public HResult AddChild(uint64 parent, uint64 child, uint32 index) mut => VT.AddChild(ref this, parent, child, index);
+			public HResult RemoveChild(uint64 parent, uint32 index) mut => VT.RemoveChild(ref this, parent, index);
+			public HResult ClearChildren(uint64 parent) mut => VT.ClearChildren(ref this, parent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, ref IVisualTreeServiceCallback pCallback) AdviseVisualTreeChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, ref IVisualTreeServiceCallback pCallback) UnadviseVisualTreeChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, out uint32 pCount, EnumType** ppEnums) GetEnums;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, BSTR typeName, BSTR value, out uint64 pInstanceHandle) CreateInstance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 instanceHandle, out uint32 pSourceCount, PropertyChainSource** ppPropertySources, out uint32 pPropertyCount, PropertyChainValue** ppPropertyValues) GetPropertyValuesChain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 instanceHandle, uint64 value, uint32 propertyIndex) SetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 instanceHandle, uint32 propertyIndex) ClearProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 instanceHandle, out uint32 pCollectionSize) GetCollectionCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 instanceHandle, uint32 startIndex, out uint32 pElementCount, CollectionElementValue** ppElementValues) GetCollectionElements;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 parent, uint64 child, uint32 index) AddChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 parent, uint32 index) RemoveChild;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService self, uint64 parent) ClearChildren;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, ref IVisualTreeServiceCallback pCallback) AdviseVisualTreeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, ref IVisualTreeServiceCallback pCallback) UnadviseVisualTreeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, out uint32 pCount, EnumType** ppEnums) GetEnums;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, BSTR typeName, BSTR value, out uint64 pInstanceHandle) CreateInstance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 instanceHandle, out uint32 pSourceCount, PropertyChainSource** ppPropertySources, out uint32 pPropertyCount, PropertyChainValue** ppPropertyValues) GetPropertyValuesChain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 instanceHandle, uint64 value, uint32 propertyIndex) SetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 instanceHandle, uint32 propertyIndex) ClearProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 instanceHandle, out uint32 pCollectionSize) GetCollectionCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 instanceHandle, uint32 startIndex, out uint32 pElementCount, CollectionElementValue** ppElementValues) GetCollectionElements;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 parent, uint64 child, uint32 index) AddChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 parent, uint32 index) RemoveChild;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService self, uint64 parent) ClearChildren;
 			}
 		}
 		[CRepr]
@@ -212,26 +212,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDispatcher(out IInspectable* ppDispatcher) mut => VT.GetDispatcher(ref this, out ppDispatcher);
-			public HRESULT GetUiLayer(out IInspectable* ppLayer) mut => VT.GetUiLayer(ref this, out ppLayer);
-			public HRESULT GetApplication(out IInspectable* ppApplication) mut => VT.GetApplication(ref this, out ppApplication);
-			public HRESULT GetIInspectableFromHandle(uint64 instanceHandle, out IInspectable* ppInstance) mut => VT.GetIInspectableFromHandle(ref this, instanceHandle, out ppInstance);
-			public HRESULT GetHandleFromIInspectable(ref IInspectable pInstance, out uint64 pHandle) mut => VT.GetHandleFromIInspectable(ref this, ref pInstance, out pHandle);
-			public HRESULT HitTest(RECT rect, out uint32 pCount, uint64** ppInstanceHandles) mut => VT.HitTest(ref this, rect, out pCount, ppInstanceHandles);
-			public HRESULT RegisterInstance(ref IInspectable pInstance, out uint64 pInstanceHandle) mut => VT.RegisterInstance(ref this, ref pInstance, out pInstanceHandle);
-			public HRESULT GetInitializationData(out BSTR pInitializationData) mut => VT.GetInitializationData(ref this, out pInitializationData);
+			public HResult GetDispatcher(out IInspectable* ppDispatcher) mut => VT.GetDispatcher(ref this, out ppDispatcher);
+			public HResult GetUiLayer(out IInspectable* ppLayer) mut => VT.GetUiLayer(ref this, out ppLayer);
+			public HResult GetApplication(out IInspectable* ppApplication) mut => VT.GetApplication(ref this, out ppApplication);
+			public HResult GetIInspectableFromHandle(uint64 instanceHandle, out IInspectable* ppInstance) mut => VT.GetIInspectableFromHandle(ref this, instanceHandle, out ppInstance);
+			public HResult GetHandleFromIInspectable(ref IInspectable pInstance, out uint64 pHandle) mut => VT.GetHandleFromIInspectable(ref this, ref pInstance, out pHandle);
+			public HResult HitTest(RectI rect, out uint32 pCount, uint64** ppInstanceHandles) mut => VT.HitTest(ref this, rect, out pCount, ppInstanceHandles);
+			public HResult RegisterInstance(ref IInspectable pInstance, out uint64 pInstanceHandle) mut => VT.RegisterInstance(ref this, ref pInstance, out pInstanceHandle);
+			public HResult GetInitializationData(out BSTR pInitializationData) mut => VT.GetInitializationData(ref this, out pInitializationData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, out IInspectable* ppDispatcher) GetDispatcher;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, out IInspectable* ppLayer) GetUiLayer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, out IInspectable* ppApplication) GetApplication;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, uint64 instanceHandle, out IInspectable* ppInstance) GetIInspectableFromHandle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, ref IInspectable pInstance, out uint64 pHandle) GetHandleFromIInspectable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, RECT rect, out uint32 pCount, uint64** ppInstanceHandles) HitTest;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, ref IInspectable pInstance, out uint64 pInstanceHandle) RegisterInstance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXamlDiagnostics self, out BSTR pInitializationData) GetInitializationData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, out IInspectable* ppDispatcher) GetDispatcher;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, out IInspectable* ppLayer) GetUiLayer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, out IInspectable* ppApplication) GetApplication;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, uint64 instanceHandle, out IInspectable* ppInstance) GetIInspectableFromHandle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, ref IInspectable pInstance, out uint64 pHandle) GetHandleFromIInspectable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, RectI rect, out uint32 pCount, uint64** ppInstanceHandles) HitTest;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, ref IInspectable pInstance, out uint64 pInstanceHandle) RegisterInstance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXamlDiagnostics self, out BSTR pInitializationData) GetInitializationData;
 			}
 		}
 		[CRepr]
@@ -241,18 +241,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT CopyBytesTo(uint32 sourceOffsetInBytes, uint32 maxBytesToCopy, uint8* pvBytes, out uint32 numberOfBytesCopied) mut => VT.CopyBytesTo(ref this, sourceOffsetInBytes, maxBytesToCopy, pvBytes, out numberOfBytesCopied);
-			public HRESULT GetStride(out uint32 pStride) mut => VT.GetStride(ref this, out pStride);
-			public HRESULT GetBitmapDescription(out BitmapDescription pBitmapDescription) mut => VT.GetBitmapDescription(ref this, out pBitmapDescription);
-			public HRESULT GetSourceBitmapDescription(out BitmapDescription pBitmapDescription) mut => VT.GetSourceBitmapDescription(ref this, out pBitmapDescription);
+			public HResult CopyBytesTo(uint32 sourceOffsetInBytes, uint32 maxBytesToCopy, uint8* pvBytes, out uint32 numberOfBytesCopied) mut => VT.CopyBytesTo(ref this, sourceOffsetInBytes, maxBytesToCopy, pvBytes, out numberOfBytesCopied);
+			public HResult GetStride(out uint32 pStride) mut => VT.GetStride(ref this, out pStride);
+			public HResult GetBitmapDescription(out BitmapDescription pBitmapDescription) mut => VT.GetBitmapDescription(ref this, out pBitmapDescription);
+			public HResult GetSourceBitmapDescription(out BitmapDescription pBitmapDescription) mut => VT.GetSourceBitmapDescription(ref this, out pBitmapDescription);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBitmapData self, uint32 sourceOffsetInBytes, uint32 maxBytesToCopy, uint8* pvBytes, out uint32 numberOfBytesCopied) CopyBytesTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBitmapData self, out uint32 pStride) GetStride;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBitmapData self, out BitmapDescription pBitmapDescription) GetBitmapDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IBitmapData self, out BitmapDescription pBitmapDescription) GetSourceBitmapDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBitmapData self, uint32 sourceOffsetInBytes, uint32 maxBytesToCopy, uint8* pvBytes, out uint32 numberOfBytesCopied) CopyBytesTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBitmapData self, out uint32 pStride) GetStride;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBitmapData self, out BitmapDescription pBitmapDescription) GetBitmapDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IBitmapData self, out BitmapDescription pBitmapDescription) GetSourceBitmapDescription;
 			}
 		}
 		[CRepr]
@@ -262,18 +262,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetPropertyIndex(uint64 object, PWSTR propertyName, out uint32 pPropertyIndex) mut => VT.GetPropertyIndex(ref this, object, propertyName, out pPropertyIndex);
-			public HRESULT GetProperty(uint64 object, uint32 propertyIndex, out uint64 pValue) mut => VT.GetProperty(ref this, object, propertyIndex, out pValue);
-			public HRESULT ReplaceResource(uint64 resourceDictionary, uint64 key, uint64 newValue) mut => VT.ReplaceResource(ref this, resourceDictionary, key, newValue);
-			public HRESULT RenderTargetBitmap(uint64 handle, RenderTargetBitmapOptions options, uint32 maxPixelWidth, uint32 maxPixelHeight, out IBitmapData* ppBitmapData) mut => VT.RenderTargetBitmap(ref this, handle, options, maxPixelWidth, maxPixelHeight, out ppBitmapData);
+			public HResult GetPropertyIndex(uint64 object, char16* propertyName, out uint32 pPropertyIndex) mut => VT.GetPropertyIndex(ref this, object, propertyName, out pPropertyIndex);
+			public HResult GetProperty(uint64 object, uint32 propertyIndex, out uint64 pValue) mut => VT.GetProperty(ref this, object, propertyIndex, out pValue);
+			public HResult ReplaceResource(uint64 resourceDictionary, uint64 key, uint64 newValue) mut => VT.ReplaceResource(ref this, resourceDictionary, key, newValue);
+			public HResult RenderTargetBitmap(uint64 handle, RenderTargetBitmapOptions options, uint32 maxPixelWidth, uint32 maxPixelHeight, out IBitmapData* ppBitmapData) mut => VT.RenderTargetBitmap(ref this, handle, options, maxPixelWidth, maxPixelHeight, out ppBitmapData);
 
 			[CRepr]
 			public struct VTable : IVisualTreeService.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService2 self, uint64 object, PWSTR propertyName, out uint32 pPropertyIndex) GetPropertyIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService2 self, uint64 object, uint32 propertyIndex, out uint64 pValue) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService2 self, uint64 resourceDictionary, uint64 key, uint64 newValue) ReplaceResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService2 self, uint64 handle, RenderTargetBitmapOptions options, uint32 maxPixelWidth, uint32 maxPixelHeight, out IBitmapData* ppBitmapData) RenderTargetBitmap;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService2 self, uint64 object, char16* propertyName, out uint32 pPropertyIndex) GetPropertyIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService2 self, uint64 object, uint32 propertyIndex, out uint64 pValue) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService2 self, uint64 resourceDictionary, uint64 key, uint64 newValue) ReplaceResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService2 self, uint64 handle, RenderTargetBitmapOptions options, uint32 maxPixelWidth, uint32 maxPixelHeight, out IBitmapData* ppBitmapData) RenderTargetBitmap;
 			}
 		}
 		[CRepr]
@@ -283,26 +283,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ResolveResource(uint64 resourceContext, PWSTR resourceName, ResourceType resourceType, uint32 propertyIndex) mut => VT.ResolveResource(ref this, resourceContext, resourceName, resourceType, propertyIndex);
-			public HRESULT GetDictionaryItem(uint64 dictionaryHandle, PWSTR resourceName, BOOL resourceIsImplicitStyle, out uint64 resourceHandle) mut => VT.GetDictionaryItem(ref this, dictionaryHandle, resourceName, resourceIsImplicitStyle, out resourceHandle);
-			public HRESULT AddDictionaryItem(uint64 dictionaryHandle, uint64 resourceKey, uint64 resourceHandle) mut => VT.AddDictionaryItem(ref this, dictionaryHandle, resourceKey, resourceHandle);
-			public HRESULT RemoveDictionaryItem(uint64 dictionaryHandle, uint64 resourceKey) mut => VT.RemoveDictionaryItem(ref this, dictionaryHandle, resourceKey);
+			public HResult ResolveResource(uint64 resourceContext, char16* resourceName, ResourceType resourceType, uint32 propertyIndex) mut => VT.ResolveResource(ref this, resourceContext, resourceName, resourceType, propertyIndex);
+			public HResult GetDictionaryItem(uint64 dictionaryHandle, char16* resourceName, IntBool resourceIsImplicitStyle, out uint64 resourceHandle) mut => VT.GetDictionaryItem(ref this, dictionaryHandle, resourceName, resourceIsImplicitStyle, out resourceHandle);
+			public HResult AddDictionaryItem(uint64 dictionaryHandle, uint64 resourceKey, uint64 resourceHandle) mut => VT.AddDictionaryItem(ref this, dictionaryHandle, resourceKey, resourceHandle);
+			public HResult RemoveDictionaryItem(uint64 dictionaryHandle, uint64 resourceKey) mut => VT.RemoveDictionaryItem(ref this, dictionaryHandle, resourceKey);
 
 			[CRepr]
 			public struct VTable : IVisualTreeService2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService3 self, uint64 resourceContext, PWSTR resourceName, ResourceType resourceType, uint32 propertyIndex) ResolveResource;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService3 self, uint64 dictionaryHandle, PWSTR resourceName, BOOL resourceIsImplicitStyle, out uint64 resourceHandle) GetDictionaryItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService3 self, uint64 dictionaryHandle, uint64 resourceKey, uint64 resourceHandle) AddDictionaryItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IVisualTreeService3 self, uint64 dictionaryHandle, uint64 resourceKey) RemoveDictionaryItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService3 self, uint64 resourceContext, char16* resourceName, ResourceType resourceType, uint32 propertyIndex) ResolveResource;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService3 self, uint64 dictionaryHandle, char16* resourceName, IntBool resourceIsImplicitStyle, out uint64 resourceHandle) GetDictionaryItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService3 self, uint64 dictionaryHandle, uint64 resourceKey, uint64 resourceHandle) AddDictionaryItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IVisualTreeService3 self, uint64 dictionaryHandle, uint64 resourceKey) RemoveDictionaryItem;
 			}
 		}
 		
 		// --- Functions ---
 		
 		[Import("windows.ui.xaml.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitializeXamlDiagnostic(PWSTR endPointName, uint32 pid, PWSTR wszDllXamlDiagnostics, PWSTR wszTAPDllName, Guid tapClsid);
+		public static extern HResult InitializeXamlDiagnostic(char16* endPointName, uint32 pid, char16* wszDllXamlDiagnostics, char16* wszTAPDllName, Guid tapClsid);
 		[Import("windows.ui.xaml.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HRESULT InitializeXamlDiagnosticsEx(PWSTR endPointName, uint32 pid, PWSTR wszDllXamlDiagnostics, PWSTR wszTAPDllName, Guid tapClsid, PWSTR wszInitializationData);
+		public static extern HResult InitializeXamlDiagnosticsEx(char16* endPointName, uint32 pid, char16* wszDllXamlDiagnostics, char16* wszTAPDllName, Guid tapClsid, char16* wszInitializationData);
 	}
 }

@@ -84,18 +84,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetCollection(BSTR bstrCollName, out IDispatch* ppCatalogCollection) mut => VT.GetCollection(ref this, bstrCollName, out ppCatalogCollection);
-			public HRESULT Connect(BSTR bstrConnectString, out IDispatch* ppCatalogCollection) mut => VT.Connect(ref this, bstrConnectString, out ppCatalogCollection);
-			public HRESULT get_MajorVersion(out int32 retval) mut => VT.get_MajorVersion(ref this, out retval);
-			public HRESULT get_MinorVersion(out int32 retval) mut => VT.get_MinorVersion(ref this, out retval);
+			public HResult GetCollection(BSTR bstrCollName, out IDispatch* ppCatalogCollection) mut => VT.GetCollection(ref this, bstrCollName, out ppCatalogCollection);
+			public HResult Connect(BSTR bstrConnectString, out IDispatch* ppCatalogCollection) mut => VT.Connect(ref this, bstrConnectString, out ppCatalogCollection);
+			public HResult get_MajorVersion(out int32 retval) mut => VT.get_MajorVersion(ref this, out retval);
+			public HResult get_MinorVersion(out int32 retval) mut => VT.get_MinorVersion(ref this, out retval);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatalog self, BSTR bstrCollName, out IDispatch* ppCatalogCollection) GetCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatalog self, BSTR bstrConnectString, out IDispatch* ppCatalogCollection) Connect;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatalog self, out int32 retval) get_MajorVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref ICatalog self, out int32 retval) get_MinorVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatalog self, BSTR bstrCollName, out IDispatch* ppCatalogCollection) GetCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatalog self, BSTR bstrConnectString, out IDispatch* ppCatalogCollection) Connect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatalog self, out int32 retval) get_MajorVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref ICatalog self, out int32 retval) get_MinorVersion;
 			}
 		}
 		[CRepr]
@@ -105,18 +105,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InstallComponent(BSTR bstrDLLFile, BSTR bstrTypelibFile, BSTR bstrProxyStubDLLFile) mut => VT.InstallComponent(ref this, bstrDLLFile, bstrTypelibFile, bstrProxyStubDLLFile);
-			public HRESULT ImportComponent(BSTR bstrCLSID) mut => VT.ImportComponent(ref this, bstrCLSID);
-			public HRESULT ImportComponentByName(BSTR bstrProgID) mut => VT.ImportComponentByName(ref this, bstrProgID);
-			public HRESULT GetCLSIDs(BSTR bstrDLLFile, BSTR bstrTypelibFile, out SAFEARRAY* aCLSIDs) mut => VT.GetCLSIDs(ref this, bstrDLLFile, bstrTypelibFile, out aCLSIDs);
+			public HResult InstallComponent(BSTR bstrDLLFile, BSTR bstrTypelibFile, BSTR bstrProxyStubDLLFile) mut => VT.InstallComponent(ref this, bstrDLLFile, bstrTypelibFile, bstrProxyStubDLLFile);
+			public HResult ImportComponent(BSTR bstrCLSID) mut => VT.ImportComponent(ref this, bstrCLSID);
+			public HResult ImportComponentByName(BSTR bstrProgID) mut => VT.ImportComponentByName(ref this, bstrProgID);
+			public HResult GetCLSIDs(BSTR bstrDLLFile, BSTR bstrTypelibFile, out SAFEARRAY* aCLSIDs) mut => VT.GetCLSIDs(ref this, bstrDLLFile, bstrTypelibFile, out aCLSIDs);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComponentUtil self, BSTR bstrDLLFile, BSTR bstrTypelibFile, BSTR bstrProxyStubDLLFile) InstallComponent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComponentUtil self, BSTR bstrCLSID) ImportComponent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComponentUtil self, BSTR bstrProgID) ImportComponentByName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IComponentUtil self, BSTR bstrDLLFile, BSTR bstrTypelibFile, out SAFEARRAY* aCLSIDs) GetCLSIDs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComponentUtil self, BSTR bstrDLLFile, BSTR bstrTypelibFile, BSTR bstrProxyStubDLLFile) InstallComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComponentUtil self, BSTR bstrCLSID) ImportComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComponentUtil self, BSTR bstrProgID) ImportComponentByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IComponentUtil self, BSTR bstrDLLFile, BSTR bstrTypelibFile, out SAFEARRAY* aCLSIDs) GetCLSIDs;
 			}
 		}
 		[CRepr]
@@ -126,16 +126,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InstallPackage(BSTR bstrPackageFile, BSTR bstrInstallPath, int32 lOptions) mut => VT.InstallPackage(ref this, bstrPackageFile, bstrInstallPath, lOptions);
-			public HRESULT ExportPackage(BSTR bstrPackageID, BSTR bstrPackageFile, int32 lOptions) mut => VT.ExportPackage(ref this, bstrPackageID, bstrPackageFile, lOptions);
-			public HRESULT ShutdownPackage(BSTR bstrPackageID) mut => VT.ShutdownPackage(ref this, bstrPackageID);
+			public HResult InstallPackage(BSTR bstrPackageFile, BSTR bstrInstallPath, int32 lOptions) mut => VT.InstallPackage(ref this, bstrPackageFile, bstrInstallPath, lOptions);
+			public HResult ExportPackage(BSTR bstrPackageID, BSTR bstrPackageFile, int32 lOptions) mut => VT.ExportPackage(ref this, bstrPackageID, bstrPackageFile, lOptions);
+			public HResult ShutdownPackage(BSTR bstrPackageID) mut => VT.ShutdownPackage(ref this, bstrPackageID);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPackageUtil self, BSTR bstrPackageFile, BSTR bstrInstallPath, int32 lOptions) InstallPackage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPackageUtil self, BSTR bstrPackageID, BSTR bstrPackageFile, int32 lOptions) ExportPackage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IPackageUtil self, BSTR bstrPackageID) ShutdownPackage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPackageUtil self, BSTR bstrPackageFile, BSTR bstrInstallPath, int32 lOptions) InstallPackage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPackageUtil self, BSTR bstrPackageID, BSTR bstrPackageFile, int32 lOptions) ExportPackage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IPackageUtil self, BSTR bstrPackageID) ShutdownPackage;
 			}
 		}
 		[CRepr]
@@ -145,14 +145,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InstallRemoteComponent(BSTR bstrServer, BSTR bstrPackageID, BSTR bstrCLSID) mut => VT.InstallRemoteComponent(ref this, bstrServer, bstrPackageID, bstrCLSID);
-			public HRESULT InstallRemoteComponentByName(BSTR bstrServer, BSTR bstrPackageName, BSTR bstrProgID) mut => VT.InstallRemoteComponentByName(ref this, bstrServer, bstrPackageName, bstrProgID);
+			public HResult InstallRemoteComponent(BSTR bstrServer, BSTR bstrPackageID, BSTR bstrCLSID) mut => VT.InstallRemoteComponent(ref this, bstrServer, bstrPackageID, bstrCLSID);
+			public HResult InstallRemoteComponentByName(BSTR bstrServer, BSTR bstrPackageName, BSTR bstrProgID) mut => VT.InstallRemoteComponentByName(ref this, bstrServer, bstrPackageName, bstrProgID);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteComponentUtil self, BSTR bstrServer, BSTR bstrPackageID, BSTR bstrCLSID) InstallRemoteComponent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRemoteComponentUtil self, BSTR bstrServer, BSTR bstrPackageName, BSTR bstrProgID) InstallRemoteComponentByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteComponentUtil self, BSTR bstrServer, BSTR bstrPackageID, BSTR bstrCLSID) InstallRemoteComponent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRemoteComponentUtil self, BSTR bstrServer, BSTR bstrPackageName, BSTR bstrProgID) InstallRemoteComponentByName;
 			}
 		}
 		[CRepr]
@@ -162,14 +162,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT AssociateRole(BSTR bstrRoleID) mut => VT.AssociateRole(ref this, bstrRoleID);
-			public HRESULT AssociateRoleByName(BSTR bstrRoleName) mut => VT.AssociateRoleByName(ref this, bstrRoleName);
+			public HResult AssociateRole(BSTR bstrRoleID) mut => VT.AssociateRole(ref this, bstrRoleID);
+			public HResult AssociateRoleByName(BSTR bstrRoleName) mut => VT.AssociateRoleByName(ref this, bstrRoleName);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRoleAssociationUtil self, BSTR bstrRoleID) AssociateRole;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRoleAssociationUtil self, BSTR bstrRoleName) AssociateRoleByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRoleAssociationUtil self, BSTR bstrRoleID) AssociateRole;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRoleAssociationUtil self, BSTR bstrRoleName) AssociateRoleByName;
 			}
 		}
 		

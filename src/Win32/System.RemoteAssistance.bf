@@ -48,20 +48,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_State(out RENDEZVOUS_SESSION_STATE pSessionState) mut => VT.get_State(ref this, out pSessionState);
-			public HRESULT get_RemoteUser(BSTR* bstrUserName) mut => VT.get_RemoteUser(ref this, bstrUserName);
-			public HRESULT get_Flags(out int32 pFlags) mut => VT.get_Flags(ref this, out pFlags);
-			public HRESULT SendContextData(BSTR bstrData) mut => VT.SendContextData(ref this, bstrData);
-			public HRESULT Terminate(HRESULT hr, BSTR bstrAppData) mut => VT.Terminate(ref this, hr, bstrAppData);
+			public HResult get_State(out RENDEZVOUS_SESSION_STATE pSessionState) mut => VT.get_State(ref this, out pSessionState);
+			public HResult get_RemoteUser(BSTR* bstrUserName) mut => VT.get_RemoteUser(ref this, bstrUserName);
+			public HResult get_Flags(out int32 pFlags) mut => VT.get_Flags(ref this, out pFlags);
+			public HResult SendContextData(BSTR bstrData) mut => VT.SendContextData(ref this, bstrData);
+			public HResult Terminate(HResult hr, BSTR bstrAppData) mut => VT.Terminate(ref this, hr, bstrAppData);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRendezvousSession self, out RENDEZVOUS_SESSION_STATE pSessionState) get_State;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRendezvousSession self, BSTR* bstrUserName) get_RemoteUser;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRendezvousSession self, out int32 pFlags) get_Flags;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRendezvousSession self, BSTR bstrData) SendContextData;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRendezvousSession self, HRESULT hr, BSTR bstrAppData) Terminate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRendezvousSession self, out RENDEZVOUS_SESSION_STATE pSessionState) get_State;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRendezvousSession self, BSTR* bstrUserName) get_RemoteUser;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRendezvousSession self, out int32 pFlags) get_Flags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRendezvousSession self, BSTR bstrData) SendContextData;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRendezvousSession self, HResult hr, BSTR bstrAppData) Terminate;
 			}
 		}
 		[CRepr]
@@ -81,12 +81,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetRendezvousSession(IUnknown* pRendezvousSession) mut => VT.SetRendezvousSession(ref this, pRendezvousSession);
+			public HResult SetRendezvousSession(IUnknown* pRendezvousSession) mut => VT.SetRendezvousSession(ref this, pRendezvousSession);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IRendezvousApplication self, IUnknown* pRendezvousSession) SetRendezvousSession;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IRendezvousApplication self, IUnknown* pRendezvousSession) SetRendezvousSession;
 			}
 		}
 		

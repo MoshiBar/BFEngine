@@ -929,7 +929,7 @@ namespace Win32
 		public enum WMPCallbackNotification : int32
 		{
 			LoginStateChange = 1,
-			AuthResult = 2,
+			AutHResult = 2,
 			LicenseUpdated = 3,
 			NewCatalogAvailable = 4,
 			NewPluginAvailable = 5,
@@ -1035,20 +1035,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_errorCode(out int32 phr) mut => VT.get_errorCode(ref this, out phr);
-			public HRESULT get_errorDescription(out BSTR pbstrDescription) mut => VT.get_errorDescription(ref this, out pbstrDescription);
-			public HRESULT get_errorContext(out VARIANT pvarContext) mut => VT.get_errorContext(ref this, out pvarContext);
-			public HRESULT get_remedy(out int32 plRemedy) mut => VT.get_remedy(ref this, out plRemedy);
-			public HRESULT get_customUrl(out BSTR pbstrCustomUrl) mut => VT.get_customUrl(ref this, out pbstrCustomUrl);
+			public HResult get_errorCode(out int32 phr) mut => VT.get_errorCode(ref this, out phr);
+			public HResult get_errorDescription(out BSTR pbstrDescription) mut => VT.get_errorDescription(ref this, out pbstrDescription);
+			public HResult get_errorContext(out VARIANT pvarContext) mut => VT.get_errorContext(ref this, out pvarContext);
+			public HResult get_remedy(out int32 plRemedy) mut => VT.get_remedy(ref this, out plRemedy);
+			public HResult get_customUrl(out BSTR pbstrCustomUrl) mut => VT.get_customUrl(ref this, out pbstrCustomUrl);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPErrorItem self, out int32 phr) get_errorCode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPErrorItem self, out BSTR pbstrDescription) get_errorDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPErrorItem self, out VARIANT pvarContext) get_errorContext;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPErrorItem self, out int32 plRemedy) get_remedy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPErrorItem self, out BSTR pbstrCustomUrl) get_customUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPErrorItem self, out int32 phr) get_errorCode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPErrorItem self, out BSTR pbstrDescription) get_errorDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPErrorItem self, out VARIANT pvarContext) get_errorContext;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPErrorItem self, out int32 plRemedy) get_remedy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPErrorItem self, out BSTR pbstrCustomUrl) get_customUrl;
 			}
 		}
 		[CRepr]
@@ -1058,18 +1058,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT clearErrorQueue() mut => VT.clearErrorQueue(ref this);
-			public HRESULT get_errorCount(out int32 plNumErrors) mut => VT.get_errorCount(ref this, out plNumErrors);
-			public HRESULT get_item(int32 dwIndex, out IWMPErrorItem* ppErrorItem) mut => VT.get_item(ref this, dwIndex, out ppErrorItem);
-			public HRESULT webHelp() mut => VT.webHelp(ref this);
+			public HResult clearErrorQueue() mut => VT.clearErrorQueue(ref this);
+			public HResult get_errorCount(out int32 plNumErrors) mut => VT.get_errorCount(ref this, out plNumErrors);
+			public HResult get_item(int32 dwIndex, out IWMPErrorItem* ppErrorItem) mut => VT.get_item(ref this, dwIndex, out ppErrorItem);
+			public HResult webHelp() mut => VT.webHelp(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPError self) clearErrorQueue;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPError self, out int32 plNumErrors) get_errorCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPError self, int32 dwIndex, out IWMPErrorItem* ppErrorItem) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPError self) webHelp;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPError self) clearErrorQueue;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPError self, out int32 plNumErrors) get_errorCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPError self, int32 dwIndex, out IWMPErrorItem* ppErrorItem) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPError self) webHelp;
 			}
 		}
 		[CRepr]
@@ -1079,46 +1079,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_isIdentical(ref IWMPMedia pIWMPMedia, out int16 pvbool) mut => VT.get_isIdentical(ref this, ref pIWMPMedia, out pvbool);
-			public HRESULT get_sourceURL(out BSTR pbstrSourceURL) mut => VT.get_sourceURL(ref this, out pbstrSourceURL);
-			public HRESULT get_name(out BSTR pbstrName) mut => VT.get_name(ref this, out pbstrName);
-			public HRESULT put_name(BSTR bstrName) mut => VT.put_name(ref this, bstrName);
-			public HRESULT get_imageSourceWidth(out int32 pWidth) mut => VT.get_imageSourceWidth(ref this, out pWidth);
-			public HRESULT get_imageSourceHeight(out int32 pHeight) mut => VT.get_imageSourceHeight(ref this, out pHeight);
-			public HRESULT get_markerCount(out int32 pMarkerCount) mut => VT.get_markerCount(ref this, out pMarkerCount);
-			public HRESULT getMarkerTime(int32 MarkerNum, out double pMarkerTime) mut => VT.getMarkerTime(ref this, MarkerNum, out pMarkerTime);
-			public HRESULT getMarkerName(int32 MarkerNum, out BSTR pbstrMarkerName) mut => VT.getMarkerName(ref this, MarkerNum, out pbstrMarkerName);
-			public HRESULT get_duration(out double pDuration) mut => VT.get_duration(ref this, out pDuration);
-			public HRESULT get_durationString(out BSTR pbstrDuration) mut => VT.get_durationString(ref this, out pbstrDuration);
-			public HRESULT get_attributeCount(out int32 plCount) mut => VT.get_attributeCount(ref this, out plCount);
-			public HRESULT getAttributeName(int32 lIndex, out BSTR pbstrItemName) mut => VT.getAttributeName(ref this, lIndex, out pbstrItemName);
-			public HRESULT getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
-			public HRESULT setItemInfo(BSTR bstrItemName, BSTR bstrVal) mut => VT.setItemInfo(ref this, bstrItemName, bstrVal);
-			public HRESULT getItemInfoByAtom(int32 lAtom, out BSTR pbstrVal) mut => VT.getItemInfoByAtom(ref this, lAtom, out pbstrVal);
-			public HRESULT isMemberOf(ref IWMPPlaylist pPlaylist, out int16 pvarfIsMemberOf) mut => VT.isMemberOf(ref this, ref pPlaylist, out pvarfIsMemberOf);
-			public HRESULT isReadOnlyItem(BSTR bstrItemName, out int16 pvarfIsReadOnly) mut => VT.isReadOnlyItem(ref this, bstrItemName, out pvarfIsReadOnly);
+			public HResult get_isIdentical(ref IWMPMedia pIWMPMedia, out int16 pvbool) mut => VT.get_isIdentical(ref this, ref pIWMPMedia, out pvbool);
+			public HResult get_sourceURL(out BSTR pbstrSourceURL) mut => VT.get_sourceURL(ref this, out pbstrSourceURL);
+			public HResult get_name(out BSTR pbstrName) mut => VT.get_name(ref this, out pbstrName);
+			public HResult put_name(BSTR bstrName) mut => VT.put_name(ref this, bstrName);
+			public HResult get_imageSourceWidth(out int32 pWidth) mut => VT.get_imageSourceWidth(ref this, out pWidth);
+			public HResult get_imageSourceHeight(out int32 pHeight) mut => VT.get_imageSourceHeight(ref this, out pHeight);
+			public HResult get_markerCount(out int32 pMarkerCount) mut => VT.get_markerCount(ref this, out pMarkerCount);
+			public HResult getMarkerTime(int32 MarkerNum, out double pMarkerTime) mut => VT.getMarkerTime(ref this, MarkerNum, out pMarkerTime);
+			public HResult getMarkerName(int32 MarkerNum, out BSTR pbstrMarkerName) mut => VT.getMarkerName(ref this, MarkerNum, out pbstrMarkerName);
+			public HResult get_duration(out double pDuration) mut => VT.get_duration(ref this, out pDuration);
+			public HResult get_durationString(out BSTR pbstrDuration) mut => VT.get_durationString(ref this, out pbstrDuration);
+			public HResult get_attributeCount(out int32 plCount) mut => VT.get_attributeCount(ref this, out plCount);
+			public HResult getAttributeName(int32 lIndex, out BSTR pbstrItemName) mut => VT.getAttributeName(ref this, lIndex, out pbstrItemName);
+			public HResult getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
+			public HResult setItemInfo(BSTR bstrItemName, BSTR bstrVal) mut => VT.setItemInfo(ref this, bstrItemName, bstrVal);
+			public HResult getItemInfoByAtom(int32 lAtom, out BSTR pbstrVal) mut => VT.getItemInfoByAtom(ref this, lAtom, out pbstrVal);
+			public HResult isMemberOf(ref IWMPPlaylist pPlaylist, out int16 pvarfIsMemberOf) mut => VT.isMemberOf(ref this, ref pPlaylist, out pvarfIsMemberOf);
+			public HResult isReadOnlyItem(BSTR bstrItemName, out int16 pvarfIsReadOnly) mut => VT.isReadOnlyItem(ref this, bstrItemName, out pvarfIsReadOnly);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, ref IWMPMedia pIWMPMedia, out int16 pvbool) get_isIdentical;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out BSTR pbstrSourceURL) get_sourceURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out BSTR pbstrName) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, BSTR bstrName) put_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out int32 pWidth) get_imageSourceWidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out int32 pHeight) get_imageSourceHeight;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out int32 pMarkerCount) get_markerCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, int32 MarkerNum, out double pMarkerTime) getMarkerTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, int32 MarkerNum, out BSTR pbstrMarkerName) getMarkerName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out double pDuration) get_duration;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out BSTR pbstrDuration) get_durationString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, out int32 plCount) get_attributeCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, int32 lIndex, out BSTR pbstrItemName) getAttributeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, BSTR bstrItemName, BSTR bstrVal) setItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, int32 lAtom, out BSTR pbstrVal) getItemInfoByAtom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, ref IWMPPlaylist pPlaylist, out int16 pvarfIsMemberOf) isMemberOf;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia self, BSTR bstrItemName, out int16 pvarfIsReadOnly) isReadOnlyItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, ref IWMPMedia pIWMPMedia, out int16 pvbool) get_isIdentical;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out BSTR pbstrSourceURL) get_sourceURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out BSTR pbstrName) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, BSTR bstrName) put_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out int32 pWidth) get_imageSourceWidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out int32 pHeight) get_imageSourceHeight;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out int32 pMarkerCount) get_markerCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, int32 MarkerNum, out double pMarkerTime) getMarkerTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, int32 MarkerNum, out BSTR pbstrMarkerName) getMarkerName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out double pDuration) get_duration;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out BSTR pbstrDuration) get_durationString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, out int32 plCount) get_attributeCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, int32 lIndex, out BSTR pbstrItemName) getAttributeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, BSTR bstrItemName, BSTR bstrVal) setItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, int32 lAtom, out BSTR pbstrVal) getItemInfoByAtom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, ref IWMPPlaylist pPlaylist, out int16 pvarfIsMemberOf) isMemberOf;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia self, BSTR bstrItemName, out int16 pvarfIsReadOnly) isReadOnlyItem;
 			}
 		}
 		[CRepr]
@@ -1128,42 +1128,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.get_isAvailable(ref this, bstrItem, out pIsAvailable);
-			public HRESULT play() mut => VT.play(ref this);
-			public HRESULT stop() mut => VT.stop(ref this);
-			public HRESULT pause() mut => VT.pause(ref this);
-			public HRESULT fastForward() mut => VT.fastForward(ref this);
-			public HRESULT fastReverse() mut => VT.fastReverse(ref this);
-			public HRESULT get_currentPosition(out double pdCurrentPosition) mut => VT.get_currentPosition(ref this, out pdCurrentPosition);
-			public HRESULT put_currentPosition(double dCurrentPosition) mut => VT.put_currentPosition(ref this, dCurrentPosition);
-			public HRESULT get_currentPositionString(out BSTR pbstrCurrentPosition) mut => VT.get_currentPositionString(ref this, out pbstrCurrentPosition);
-			public HRESULT next() mut => VT.next(ref this);
-			public HRESULT previous() mut => VT.previous(ref this);
-			public HRESULT get_currentItem(out IWMPMedia* ppIWMPMedia) mut => VT.get_currentItem(ref this, out ppIWMPMedia);
-			public HRESULT put_currentItem(ref IWMPMedia pIWMPMedia) mut => VT.put_currentItem(ref this, ref pIWMPMedia);
-			public HRESULT get_currentMarker(out int32 plMarker) mut => VT.get_currentMarker(ref this, out plMarker);
-			public HRESULT put_currentMarker(int32 lMarker) mut => VT.put_currentMarker(ref this, lMarker);
-			public HRESULT playItem(ref IWMPMedia pIWMPMedia) mut => VT.playItem(ref this, ref pIWMPMedia);
+			public HResult get_isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.get_isAvailable(ref this, bstrItem, out pIsAvailable);
+			public HResult play() mut => VT.play(ref this);
+			public HResult stop() mut => VT.stop(ref this);
+			public HResult pause() mut => VT.pause(ref this);
+			public HResult fastForward() mut => VT.fastForward(ref this);
+			public HResult fastReverse() mut => VT.fastReverse(ref this);
+			public HResult get_currentPosition(out double pdCurrentPosition) mut => VT.get_currentPosition(ref this, out pdCurrentPosition);
+			public HResult put_currentPosition(double dCurrentPosition) mut => VT.put_currentPosition(ref this, dCurrentPosition);
+			public HResult get_currentPositionString(out BSTR pbstrCurrentPosition) mut => VT.get_currentPositionString(ref this, out pbstrCurrentPosition);
+			public HResult next() mut => VT.next(ref this);
+			public HResult previous() mut => VT.previous(ref this);
+			public HResult get_currentItem(out IWMPMedia* ppIWMPMedia) mut => VT.get_currentItem(ref this, out ppIWMPMedia);
+			public HResult put_currentItem(ref IWMPMedia pIWMPMedia) mut => VT.put_currentItem(ref this, ref pIWMPMedia);
+			public HResult get_currentMarker(out int32 plMarker) mut => VT.get_currentMarker(ref this, out plMarker);
+			public HResult put_currentMarker(int32 lMarker) mut => VT.put_currentMarker(ref this, lMarker);
+			public HResult playItem(ref IWMPMedia pIWMPMedia) mut => VT.playItem(ref this, ref pIWMPMedia);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, BSTR bstrItem, out int16 pIsAvailable) get_isAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) play;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) stop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) pause;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) fastForward;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) fastReverse;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, out double pdCurrentPosition) get_currentPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, double dCurrentPosition) put_currentPosition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, out BSTR pbstrCurrentPosition) get_currentPositionString;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) next;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self) previous;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, out IWMPMedia* ppIWMPMedia) get_currentItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, ref IWMPMedia pIWMPMedia) put_currentItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, out int32 plMarker) get_currentMarker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, int32 lMarker) put_currentMarker;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls self, ref IWMPMedia pIWMPMedia) playItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, BSTR bstrItem, out int16 pIsAvailable) get_isAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) play;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) stop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) pause;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) fastForward;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) fastReverse;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, out double pdCurrentPosition) get_currentPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, double dCurrentPosition) put_currentPosition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, out BSTR pbstrCurrentPosition) get_currentPositionString;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) next;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self) previous;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, out IWMPMedia* ppIWMPMedia) get_currentItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, ref IWMPMedia pIWMPMedia) put_currentItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, out int32 plMarker) get_currentMarker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, int32 lMarker) put_currentMarker;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls self, ref IWMPMedia pIWMPMedia) playItem;
 			}
 		}
 		[CRepr]
@@ -1173,56 +1173,56 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.get_isAvailable(ref this, bstrItem, out pIsAvailable);
-			public HRESULT get_autoStart(out int16 pfAutoStart) mut => VT.get_autoStart(ref this, out pfAutoStart);
-			public HRESULT put_autoStart(int16 fAutoStart) mut => VT.put_autoStart(ref this, fAutoStart);
-			public HRESULT get_baseURL(out BSTR pbstrBaseURL) mut => VT.get_baseURL(ref this, out pbstrBaseURL);
-			public HRESULT put_baseURL(BSTR bstrBaseURL) mut => VT.put_baseURL(ref this, bstrBaseURL);
-			public HRESULT get_defaultFrame(out BSTR pbstrDefaultFrame) mut => VT.get_defaultFrame(ref this, out pbstrDefaultFrame);
-			public HRESULT put_defaultFrame(BSTR bstrDefaultFrame) mut => VT.put_defaultFrame(ref this, bstrDefaultFrame);
-			public HRESULT get_invokeURLs(out int16 pfInvokeURLs) mut => VT.get_invokeURLs(ref this, out pfInvokeURLs);
-			public HRESULT put_invokeURLs(int16 fInvokeURLs) mut => VT.put_invokeURLs(ref this, fInvokeURLs);
-			public HRESULT get_mute(out int16 pfMute) mut => VT.get_mute(ref this, out pfMute);
-			public HRESULT put_mute(int16 fMute) mut => VT.put_mute(ref this, fMute);
-			public HRESULT get_playCount(out int32 plCount) mut => VT.get_playCount(ref this, out plCount);
-			public HRESULT put_playCount(int32 lCount) mut => VT.put_playCount(ref this, lCount);
-			public HRESULT get_rate(out double pdRate) mut => VT.get_rate(ref this, out pdRate);
-			public HRESULT put_rate(double dRate) mut => VT.put_rate(ref this, dRate);
-			public HRESULT get_balance(out int32 plBalance) mut => VT.get_balance(ref this, out plBalance);
-			public HRESULT put_balance(int32 lBalance) mut => VT.put_balance(ref this, lBalance);
-			public HRESULT get_volume(out int32 plVolume) mut => VT.get_volume(ref this, out plVolume);
-			public HRESULT put_volume(int32 lVolume) mut => VT.put_volume(ref this, lVolume);
-			public HRESULT getMode(BSTR bstrMode, out int16 pvarfMode) mut => VT.getMode(ref this, bstrMode, out pvarfMode);
-			public HRESULT setMode(BSTR bstrMode, int16 varfMode) mut => VT.setMode(ref this, bstrMode, varfMode);
-			public HRESULT get_enableErrorDialogs(out int16 pfEnableErrorDialogs) mut => VT.get_enableErrorDialogs(ref this, out pfEnableErrorDialogs);
-			public HRESULT put_enableErrorDialogs(int16 fEnableErrorDialogs) mut => VT.put_enableErrorDialogs(ref this, fEnableErrorDialogs);
+			public HResult get_isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.get_isAvailable(ref this, bstrItem, out pIsAvailable);
+			public HResult get_autoStart(out int16 pfAutoStart) mut => VT.get_autoStart(ref this, out pfAutoStart);
+			public HResult put_autoStart(int16 fAutoStart) mut => VT.put_autoStart(ref this, fAutoStart);
+			public HResult get_baseURL(out BSTR pbstrBaseURL) mut => VT.get_baseURL(ref this, out pbstrBaseURL);
+			public HResult put_baseURL(BSTR bstrBaseURL) mut => VT.put_baseURL(ref this, bstrBaseURL);
+			public HResult get_defaultFrame(out BSTR pbstrDefaultFrame) mut => VT.get_defaultFrame(ref this, out pbstrDefaultFrame);
+			public HResult put_defaultFrame(BSTR bstrDefaultFrame) mut => VT.put_defaultFrame(ref this, bstrDefaultFrame);
+			public HResult get_invokeURLs(out int16 pfInvokeURLs) mut => VT.get_invokeURLs(ref this, out pfInvokeURLs);
+			public HResult put_invokeURLs(int16 fInvokeURLs) mut => VT.put_invokeURLs(ref this, fInvokeURLs);
+			public HResult get_mute(out int16 pfMute) mut => VT.get_mute(ref this, out pfMute);
+			public HResult put_mute(int16 fMute) mut => VT.put_mute(ref this, fMute);
+			public HResult get_playCount(out int32 plCount) mut => VT.get_playCount(ref this, out plCount);
+			public HResult put_playCount(int32 lCount) mut => VT.put_playCount(ref this, lCount);
+			public HResult get_rate(out double pdRate) mut => VT.get_rate(ref this, out pdRate);
+			public HResult put_rate(double dRate) mut => VT.put_rate(ref this, dRate);
+			public HResult get_balance(out int32 plBalance) mut => VT.get_balance(ref this, out plBalance);
+			public HResult put_balance(int32 lBalance) mut => VT.put_balance(ref this, lBalance);
+			public HResult get_volume(out int32 plVolume) mut => VT.get_volume(ref this, out plVolume);
+			public HResult put_volume(int32 lVolume) mut => VT.put_volume(ref this, lVolume);
+			public HResult getMode(BSTR bstrMode, out int16 pvarfMode) mut => VT.getMode(ref this, bstrMode, out pvarfMode);
+			public HResult setMode(BSTR bstrMode, int16 varfMode) mut => VT.setMode(ref this, bstrMode, varfMode);
+			public HResult get_enableErrorDialogs(out int16 pfEnableErrorDialogs) mut => VT.get_enableErrorDialogs(ref this, out pfEnableErrorDialogs);
+			public HResult put_enableErrorDialogs(int16 fEnableErrorDialogs) mut => VT.put_enableErrorDialogs(ref this, fEnableErrorDialogs);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, BSTR bstrItem, out int16 pIsAvailable) get_isAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int16 pfAutoStart) get_autoStart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int16 fAutoStart) put_autoStart;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out BSTR pbstrBaseURL) get_baseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, BSTR bstrBaseURL) put_baseURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out BSTR pbstrDefaultFrame) get_defaultFrame;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, BSTR bstrDefaultFrame) put_defaultFrame;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int16 pfInvokeURLs) get_invokeURLs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int16 fInvokeURLs) put_invokeURLs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int16 pfMute) get_mute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int16 fMute) put_mute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int32 plCount) get_playCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int32 lCount) put_playCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out double pdRate) get_rate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, double dRate) put_rate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int32 plBalance) get_balance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int32 lBalance) put_balance;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int32 plVolume) get_volume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int32 lVolume) put_volume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, BSTR bstrMode, out int16 pvarfMode) getMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, BSTR bstrMode, int16 varfMode) setMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, out int16 pfEnableErrorDialogs) get_enableErrorDialogs;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings self, int16 fEnableErrorDialogs) put_enableErrorDialogs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, BSTR bstrItem, out int16 pIsAvailable) get_isAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int16 pfAutoStart) get_autoStart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int16 fAutoStart) put_autoStart;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out BSTR pbstrBaseURL) get_baseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, BSTR bstrBaseURL) put_baseURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out BSTR pbstrDefaultFrame) get_defaultFrame;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, BSTR bstrDefaultFrame) put_defaultFrame;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int16 pfInvokeURLs) get_invokeURLs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int16 fInvokeURLs) put_invokeURLs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int16 pfMute) get_mute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int16 fMute) put_mute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int32 plCount) get_playCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int32 lCount) put_playCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out double pdRate) get_rate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, double dRate) put_rate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int32 plBalance) get_balance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int32 lBalance) put_balance;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int32 plVolume) get_volume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int32 lVolume) put_volume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, BSTR bstrMode, out int16 pvarfMode) getMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, BSTR bstrMode, int16 varfMode) setMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, out int16 pfEnableErrorDialogs) get_enableErrorDialogs;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings self, int16 fEnableErrorDialogs) put_enableErrorDialogs;
 			}
 		}
 		[CRepr]
@@ -1232,26 +1232,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SAMIStyle(out BSTR pbstrSAMIStyle) mut => VT.get_SAMIStyle(ref this, out pbstrSAMIStyle);
-			public HRESULT put_SAMIStyle(BSTR bstrSAMIStyle) mut => VT.put_SAMIStyle(ref this, bstrSAMIStyle);
-			public HRESULT get_SAMILang(out BSTR pbstrSAMILang) mut => VT.get_SAMILang(ref this, out pbstrSAMILang);
-			public HRESULT put_SAMILang(BSTR bstrSAMILang) mut => VT.put_SAMILang(ref this, bstrSAMILang);
-			public HRESULT get_SAMIFileName(out BSTR pbstrSAMIFileName) mut => VT.get_SAMIFileName(ref this, out pbstrSAMIFileName);
-			public HRESULT put_SAMIFileName(BSTR bstrSAMIFileName) mut => VT.put_SAMIFileName(ref this, bstrSAMIFileName);
-			public HRESULT get_captioningId(out BSTR pbstrCaptioningID) mut => VT.get_captioningId(ref this, out pbstrCaptioningID);
-			public HRESULT put_captioningId(BSTR bstrCaptioningID) mut => VT.put_captioningId(ref this, bstrCaptioningID);
+			public HResult get_SAMIStyle(out BSTR pbstrSAMIStyle) mut => VT.get_SAMIStyle(ref this, out pbstrSAMIStyle);
+			public HResult put_SAMIStyle(BSTR bstrSAMIStyle) mut => VT.put_SAMIStyle(ref this, bstrSAMIStyle);
+			public HResult get_SAMILang(out BSTR pbstrSAMILang) mut => VT.get_SAMILang(ref this, out pbstrSAMILang);
+			public HResult put_SAMILang(BSTR bstrSAMILang) mut => VT.put_SAMILang(ref this, bstrSAMILang);
+			public HResult get_SAMIFileName(out BSTR pbstrSAMIFileName) mut => VT.get_SAMIFileName(ref this, out pbstrSAMIFileName);
+			public HResult put_SAMIFileName(BSTR bstrSAMIFileName) mut => VT.put_SAMIFileName(ref this, bstrSAMIFileName);
+			public HResult get_captioningId(out BSTR pbstrCaptioningID) mut => VT.get_captioningId(ref this, out pbstrCaptioningID);
+			public HResult put_captioningId(BSTR bstrCaptioningID) mut => VT.put_captioningId(ref this, bstrCaptioningID);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, out BSTR pbstrSAMIStyle) get_SAMIStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, BSTR bstrSAMIStyle) put_SAMIStyle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, out BSTR pbstrSAMILang) get_SAMILang;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, BSTR bstrSAMILang) put_SAMILang;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, out BSTR pbstrSAMIFileName) get_SAMIFileName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, BSTR bstrSAMIFileName) put_SAMIFileName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, out BSTR pbstrCaptioningID) get_captioningId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption self, BSTR bstrCaptioningID) put_captioningId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, out BSTR pbstrSAMIStyle) get_SAMIStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, BSTR bstrSAMIStyle) put_SAMIStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, out BSTR pbstrSAMILang) get_SAMILang;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, BSTR bstrSAMILang) put_SAMILang;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, out BSTR pbstrSAMIFileName) get_SAMIFileName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, BSTR bstrSAMIFileName) put_SAMIFileName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, out BSTR pbstrCaptioningID) get_captioningId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption self, BSTR bstrCaptioningID) put_captioningId;
 			}
 		}
 		[CRepr]
@@ -1261,38 +1261,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
-			public HRESULT get_name(out BSTR pbstrName) mut => VT.get_name(ref this, out pbstrName);
-			public HRESULT put_name(BSTR bstrName) mut => VT.put_name(ref this, bstrName);
-			public HRESULT get_attributeCount(out int32 plCount) mut => VT.get_attributeCount(ref this, out plCount);
-			public HRESULT get_attributeName(int32 lIndex, out BSTR pbstrAttributeName) mut => VT.get_attributeName(ref this, lIndex, out pbstrAttributeName);
-			public HRESULT get_item(int32 lIndex, out IWMPMedia* ppIWMPMedia) mut => VT.get_item(ref this, lIndex, out ppIWMPMedia);
-			public HRESULT getItemInfo(BSTR bstrName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrName, out pbstrVal);
-			public HRESULT setItemInfo(BSTR bstrName, BSTR bstrValue) mut => VT.setItemInfo(ref this, bstrName, bstrValue);
-			public HRESULT get_isIdentical(ref IWMPPlaylist pIWMPPlaylist, out int16 pvbool) mut => VT.get_isIdentical(ref this, ref pIWMPPlaylist, out pvbool);
-			public HRESULT clear() mut => VT.clear(ref this);
-			public HRESULT insertItem(int32 lIndex, ref IWMPMedia pIWMPMedia) mut => VT.insertItem(ref this, lIndex, ref pIWMPMedia);
-			public HRESULT appendItem(ref IWMPMedia pIWMPMedia) mut => VT.appendItem(ref this, ref pIWMPMedia);
-			public HRESULT removeItem(ref IWMPMedia pIWMPMedia) mut => VT.removeItem(ref this, ref pIWMPMedia);
-			public HRESULT moveItem(int32 lIndexOld, int32 lIndexNew) mut => VT.moveItem(ref this, lIndexOld, lIndexNew);
+			public HResult get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
+			public HResult get_name(out BSTR pbstrName) mut => VT.get_name(ref this, out pbstrName);
+			public HResult put_name(BSTR bstrName) mut => VT.put_name(ref this, bstrName);
+			public HResult get_attributeCount(out int32 plCount) mut => VT.get_attributeCount(ref this, out plCount);
+			public HResult get_attributeName(int32 lIndex, out BSTR pbstrAttributeName) mut => VT.get_attributeName(ref this, lIndex, out pbstrAttributeName);
+			public HResult get_item(int32 lIndex, out IWMPMedia* ppIWMPMedia) mut => VT.get_item(ref this, lIndex, out ppIWMPMedia);
+			public HResult getItemInfo(BSTR bstrName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrName, out pbstrVal);
+			public HResult setItemInfo(BSTR bstrName, BSTR bstrValue) mut => VT.setItemInfo(ref this, bstrName, bstrValue);
+			public HResult get_isIdentical(ref IWMPPlaylist pIWMPPlaylist, out int16 pvbool) mut => VT.get_isIdentical(ref this, ref pIWMPPlaylist, out pvbool);
+			public HResult clear() mut => VT.clear(ref this);
+			public HResult insertItem(int32 lIndex, ref IWMPMedia pIWMPMedia) mut => VT.insertItem(ref this, lIndex, ref pIWMPMedia);
+			public HResult appendItem(ref IWMPMedia pIWMPMedia) mut => VT.appendItem(ref this, ref pIWMPMedia);
+			public HResult removeItem(ref IWMPMedia pIWMPMedia) mut => VT.removeItem(ref this, ref pIWMPMedia);
+			public HResult moveItem(int32 lIndexOld, int32 lIndexNew) mut => VT.moveItem(ref this, lIndexOld, lIndexNew);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, out int32 plCount) get_count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, out BSTR pbstrName) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, BSTR bstrName) put_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, out int32 plCount) get_attributeCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, int32 lIndex, out BSTR pbstrAttributeName) get_attributeName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, int32 lIndex, out IWMPMedia* ppIWMPMedia) get_item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, BSTR bstrName, out BSTR pbstrVal) getItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, BSTR bstrName, BSTR bstrValue) setItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, ref IWMPPlaylist pIWMPPlaylist, out int16 pvbool) get_isIdentical;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self) clear;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, int32 lIndex, ref IWMPMedia pIWMPMedia) insertItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, ref IWMPMedia pIWMPMedia) appendItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, ref IWMPMedia pIWMPMedia) removeItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylist self, int32 lIndexOld, int32 lIndexNew) moveItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, out int32 plCount) get_count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, out BSTR pbstrName) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, BSTR bstrName) put_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, out int32 plCount) get_attributeCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, int32 lIndex, out BSTR pbstrAttributeName) get_attributeName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, int32 lIndex, out IWMPMedia* ppIWMPMedia) get_item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, BSTR bstrName, out BSTR pbstrVal) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, BSTR bstrName, BSTR bstrValue) setItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, ref IWMPPlaylist pIWMPPlaylist, out int16 pvbool) get_isIdentical;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self) clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, int32 lIndex, ref IWMPMedia pIWMPMedia) insertItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, ref IWMPMedia pIWMPMedia) appendItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, ref IWMPMedia pIWMPMedia) removeItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylist self, int32 lIndexOld, int32 lIndexNew) moveItem;
 			}
 		}
 		[CRepr]
@@ -1302,16 +1302,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_driveSpecifier(out BSTR pbstrDrive) mut => VT.get_driveSpecifier(ref this, out pbstrDrive);
-			public HRESULT get_playlist(out IWMPPlaylist* ppPlaylist) mut => VT.get_playlist(ref this, out ppPlaylist);
-			public HRESULT eject() mut => VT.eject(ref this);
+			public HResult get_driveSpecifier(out BSTR pbstrDrive) mut => VT.get_driveSpecifier(ref this, out pbstrDrive);
+			public HResult get_playlist(out IWMPPlaylist* ppPlaylist) mut => VT.get_playlist(ref this, out ppPlaylist);
+			public HResult eject() mut => VT.eject(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdrom self, out BSTR pbstrDrive) get_driveSpecifier;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdrom self, out IWMPPlaylist* ppPlaylist) get_playlist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdrom self) eject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdrom self, out BSTR pbstrDrive) get_driveSpecifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdrom self, out IWMPPlaylist* ppPlaylist) get_playlist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdrom self) eject;
 			}
 		}
 		[CRepr]
@@ -1321,16 +1321,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
-			public HRESULT item(int32 lIndex, out IWMPCdrom* ppItem) mut => VT.item(ref this, lIndex, out ppItem);
-			public HRESULT getByDriveSpecifier(BSTR bstrDriveSpecifier, out IWMPCdrom* ppCdrom) mut => VT.getByDriveSpecifier(ref this, bstrDriveSpecifier, out ppCdrom);
+			public HResult get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
+			public HResult item(int32 lIndex, out IWMPCdrom* ppItem) mut => VT.item(ref this, lIndex, out ppItem);
+			public HResult getByDriveSpecifier(BSTR bstrDriveSpecifier, out IWMPCdrom* ppCdrom) mut => VT.getByDriveSpecifier(ref this, bstrDriveSpecifier, out ppCdrom);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromCollection self, out int32 plCount) get_count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromCollection self, int32 lIndex, out IWMPCdrom* ppItem) item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromCollection self, BSTR bstrDriveSpecifier, out IWMPCdrom* ppCdrom) getByDriveSpecifier;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromCollection self, out int32 plCount) get_count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromCollection self, int32 lIndex, out IWMPCdrom* ppItem) item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromCollection self, BSTR bstrDriveSpecifier, out IWMPCdrom* ppCdrom) getByDriveSpecifier;
 			}
 		}
 		[CRepr]
@@ -1340,14 +1340,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
-			public HRESULT item(int32 lIndex, out BSTR pbstrString) mut => VT.item(ref this, lIndex, out pbstrString);
+			public HResult get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
+			public HResult item(int32 lIndex, out BSTR pbstrString) mut => VT.item(ref this, lIndex, out pbstrString);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPStringCollection self, out int32 plCount) get_count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPStringCollection self, int32 lIndex, out BSTR pbstrString) item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPStringCollection self, out int32 plCount) get_count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPStringCollection self, int32 lIndex, out BSTR pbstrString) item;
 			}
 		}
 		[CRepr]
@@ -1357,34 +1357,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT add(BSTR bstrURL, out IWMPMedia* ppItem) mut => VT.add(ref this, bstrURL, out ppItem);
-			public HRESULT getAll(out IWMPPlaylist* ppMediaItems) mut => VT.getAll(ref this, out ppMediaItems);
-			public HRESULT getByName(BSTR bstrName, out IWMPPlaylist* ppMediaItems) mut => VT.getByName(ref this, bstrName, out ppMediaItems);
-			public HRESULT getByGenre(BSTR bstrGenre, out IWMPPlaylist* ppMediaItems) mut => VT.getByGenre(ref this, bstrGenre, out ppMediaItems);
-			public HRESULT getByAuthor(BSTR bstrAuthor, out IWMPPlaylist* ppMediaItems) mut => VT.getByAuthor(ref this, bstrAuthor, out ppMediaItems);
-			public HRESULT getByAlbum(BSTR bstrAlbum, out IWMPPlaylist* ppMediaItems) mut => VT.getByAlbum(ref this, bstrAlbum, out ppMediaItems);
-			public HRESULT getByAttribute(BSTR bstrAttribute, BSTR bstrValue, out IWMPPlaylist* ppMediaItems) mut => VT.getByAttribute(ref this, bstrAttribute, bstrValue, out ppMediaItems);
-			public HRESULT remove(ref IWMPMedia pItem, int16 varfDeleteFile) mut => VT.remove(ref this, ref pItem, varfDeleteFile);
-			public HRESULT getAttributeStringCollection(BSTR bstrAttribute, BSTR bstrMediaType, out IWMPStringCollection* ppStringCollection) mut => VT.getAttributeStringCollection(ref this, bstrAttribute, bstrMediaType, out ppStringCollection);
-			public HRESULT getMediaAtom(BSTR bstrItemName, out int32 plAtom) mut => VT.getMediaAtom(ref this, bstrItemName, out plAtom);
-			public HRESULT setDeleted(ref IWMPMedia pItem, int16 varfIsDeleted) mut => VT.setDeleted(ref this, ref pItem, varfIsDeleted);
-			public HRESULT isDeleted(ref IWMPMedia pItem, out int16 pvarfIsDeleted) mut => VT.isDeleted(ref this, ref pItem, out pvarfIsDeleted);
+			public HResult add(BSTR bstrURL, out IWMPMedia* ppItem) mut => VT.add(ref this, bstrURL, out ppItem);
+			public HResult getAll(out IWMPPlaylist* ppMediaItems) mut => VT.getAll(ref this, out ppMediaItems);
+			public HResult getByName(BSTR bstrName, out IWMPPlaylist* ppMediaItems) mut => VT.getByName(ref this, bstrName, out ppMediaItems);
+			public HResult getByGenre(BSTR bstrGenre, out IWMPPlaylist* ppMediaItems) mut => VT.getByGenre(ref this, bstrGenre, out ppMediaItems);
+			public HResult getByAuthor(BSTR bstrAuthor, out IWMPPlaylist* ppMediaItems) mut => VT.getByAuthor(ref this, bstrAuthor, out ppMediaItems);
+			public HResult getByAlbum(BSTR bstrAlbum, out IWMPPlaylist* ppMediaItems) mut => VT.getByAlbum(ref this, bstrAlbum, out ppMediaItems);
+			public HResult getByAttribute(BSTR bstrAttribute, BSTR bstrValue, out IWMPPlaylist* ppMediaItems) mut => VT.getByAttribute(ref this, bstrAttribute, bstrValue, out ppMediaItems);
+			public HResult remove(ref IWMPMedia pItem, int16 varfDeleteFile) mut => VT.remove(ref this, ref pItem, varfDeleteFile);
+			public HResult getAttributeStringCollection(BSTR bstrAttribute, BSTR bstrMediaType, out IWMPStringCollection* ppStringCollection) mut => VT.getAttributeStringCollection(ref this, bstrAttribute, bstrMediaType, out ppStringCollection);
+			public HResult getMediaAtom(BSTR bstrItemName, out int32 plAtom) mut => VT.getMediaAtom(ref this, bstrItemName, out plAtom);
+			public HResult setDeleted(ref IWMPMedia pItem, int16 varfIsDeleted) mut => VT.setDeleted(ref this, ref pItem, varfIsDeleted);
+			public HResult isDeleted(ref IWMPMedia pItem, out int16 pvarfIsDeleted) mut => VT.isDeleted(ref this, ref pItem, out pvarfIsDeleted);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrURL, out IWMPMedia* ppItem) add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, out IWMPPlaylist* ppMediaItems) getAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrName, out IWMPPlaylist* ppMediaItems) getByName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrGenre, out IWMPPlaylist* ppMediaItems) getByGenre;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrAuthor, out IWMPPlaylist* ppMediaItems) getByAuthor;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrAlbum, out IWMPPlaylist* ppMediaItems) getByAlbum;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrAttribute, BSTR bstrValue, out IWMPPlaylist* ppMediaItems) getByAttribute;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, ref IWMPMedia pItem, int16 varfDeleteFile) remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrAttribute, BSTR bstrMediaType, out IWMPStringCollection* ppStringCollection) getAttributeStringCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, BSTR bstrItemName, out int32 plAtom) getMediaAtom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, ref IWMPMedia pItem, int16 varfIsDeleted) setDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection self, ref IWMPMedia pItem, out int16 pvarfIsDeleted) isDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrURL, out IWMPMedia* ppItem) add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, out IWMPPlaylist* ppMediaItems) getAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrName, out IWMPPlaylist* ppMediaItems) getByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrGenre, out IWMPPlaylist* ppMediaItems) getByGenre;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrAuthor, out IWMPPlaylist* ppMediaItems) getByAuthor;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrAlbum, out IWMPPlaylist* ppMediaItems) getByAlbum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrAttribute, BSTR bstrValue, out IWMPPlaylist* ppMediaItems) getByAttribute;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, ref IWMPMedia pItem, int16 varfDeleteFile) remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrAttribute, BSTR bstrMediaType, out IWMPStringCollection* ppStringCollection) getAttributeStringCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, BSTR bstrItemName, out int32 plAtom) getMediaAtom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, ref IWMPMedia pItem, int16 varfIsDeleted) setDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection self, ref IWMPMedia pItem, out int16 pvarfIsDeleted) isDeleted;
 			}
 		}
 		[CRepr]
@@ -1394,14 +1394,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
-			public HRESULT item(int32 lIndex, out IWMPPlaylist* ppItem) mut => VT.item(ref this, lIndex, out ppItem);
+			public HResult get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
+			public HResult item(int32 lIndex, out IWMPPlaylist* ppItem) mut => VT.item(ref this, lIndex, out ppItem);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistArray self, out int32 plCount) get_count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistArray self, int32 lIndex, out IWMPPlaylist* ppItem) item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistArray self, out int32 plCount) get_count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistArray self, int32 lIndex, out IWMPPlaylist* ppItem) item;
 			}
 		}
 		[CRepr]
@@ -1411,24 +1411,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT newPlaylist(BSTR bstrName, out IWMPPlaylist* ppItem) mut => VT.newPlaylist(ref this, bstrName, out ppItem);
-			public HRESULT getAll(out IWMPPlaylistArray* ppPlaylistArray) mut => VT.getAll(ref this, out ppPlaylistArray);
-			public HRESULT getByName(BSTR bstrName, out IWMPPlaylistArray* ppPlaylistArray) mut => VT.getByName(ref this, bstrName, out ppPlaylistArray);
-			public HRESULT remove(ref IWMPPlaylist pItem) mut => VT.remove(ref this, ref pItem);
-			public HRESULT setDeleted(ref IWMPPlaylist pItem, int16 varfIsDeleted) mut => VT.setDeleted(ref this, ref pItem, varfIsDeleted);
-			public HRESULT isDeleted(ref IWMPPlaylist pItem, out int16 pvarfIsDeleted) mut => VT.isDeleted(ref this, ref pItem, out pvarfIsDeleted);
-			public HRESULT importPlaylist(ref IWMPPlaylist pItem, out IWMPPlaylist* ppImportedItem) mut => VT.importPlaylist(ref this, ref pItem, out ppImportedItem);
+			public HResult newPlaylist(BSTR bstrName, out IWMPPlaylist* ppItem) mut => VT.newPlaylist(ref this, bstrName, out ppItem);
+			public HResult getAll(out IWMPPlaylistArray* ppPlaylistArray) mut => VT.getAll(ref this, out ppPlaylistArray);
+			public HResult getByName(BSTR bstrName, out IWMPPlaylistArray* ppPlaylistArray) mut => VT.getByName(ref this, bstrName, out ppPlaylistArray);
+			public HResult remove(ref IWMPPlaylist pItem) mut => VT.remove(ref this, ref pItem);
+			public HResult setDeleted(ref IWMPPlaylist pItem, int16 varfIsDeleted) mut => VT.setDeleted(ref this, ref pItem, varfIsDeleted);
+			public HResult isDeleted(ref IWMPPlaylist pItem, out int16 pvarfIsDeleted) mut => VT.isDeleted(ref this, ref pItem, out pvarfIsDeleted);
+			public HResult importPlaylist(ref IWMPPlaylist pItem, out IWMPPlaylist* ppImportedItem) mut => VT.importPlaylist(ref this, ref pItem, out ppImportedItem);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, BSTR bstrName, out IWMPPlaylist* ppItem) newPlaylist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, out IWMPPlaylistArray* ppPlaylistArray) getAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, BSTR bstrName, out IWMPPlaylistArray* ppPlaylistArray) getByName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem) remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem, int16 varfIsDeleted) setDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem, out int16 pvarfIsDeleted) isDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem, out IWMPPlaylist* ppImportedItem) importPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, BSTR bstrName, out IWMPPlaylist* ppItem) newPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, out IWMPPlaylistArray* ppPlaylistArray) getAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, BSTR bstrName, out IWMPPlaylistArray* ppPlaylistArray) getByName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem) remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem, int16 varfIsDeleted) setDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem, out int16 pvarfIsDeleted) isDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlaylistCollection self, ref IWMPPlaylist pItem, out IWMPPlaylist* ppImportedItem) importPlaylist;
 			}
 		}
 		[CRepr]
@@ -1438,66 +1438,66 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_bandWidth(out int32 plBandwidth) mut => VT.get_bandWidth(ref this, out plBandwidth);
-			public HRESULT get_recoveredPackets(out int32 plRecoveredPackets) mut => VT.get_recoveredPackets(ref this, out plRecoveredPackets);
-			public HRESULT get_sourceProtocol(out BSTR pbstrSourceProtocol) mut => VT.get_sourceProtocol(ref this, out pbstrSourceProtocol);
-			public HRESULT get_receivedPackets(out int32 plReceivedPackets) mut => VT.get_receivedPackets(ref this, out plReceivedPackets);
-			public HRESULT get_lostPackets(out int32 plLostPackets) mut => VT.get_lostPackets(ref this, out plLostPackets);
-			public HRESULT get_receptionQuality(out int32 plReceptionQuality) mut => VT.get_receptionQuality(ref this, out plReceptionQuality);
-			public HRESULT get_bufferingCount(out int32 plBufferingCount) mut => VT.get_bufferingCount(ref this, out plBufferingCount);
-			public HRESULT get_bufferingProgress(out int32 plBufferingProgress) mut => VT.get_bufferingProgress(ref this, out plBufferingProgress);
-			public HRESULT get_bufferingTime(out int32 plBufferingTime) mut => VT.get_bufferingTime(ref this, out plBufferingTime);
-			public HRESULT put_bufferingTime(int32 lBufferingTime) mut => VT.put_bufferingTime(ref this, lBufferingTime);
-			public HRESULT get_frameRate(out int32 plFrameRate) mut => VT.get_frameRate(ref this, out plFrameRate);
-			public HRESULT get_maxBitRate(out int32 plBitRate) mut => VT.get_maxBitRate(ref this, out plBitRate);
-			public HRESULT get_bitRate(out int32 plBitRate) mut => VT.get_bitRate(ref this, out plBitRate);
-			public HRESULT getProxySettings(BSTR bstrProtocol, out int32 plProxySetting) mut => VT.getProxySettings(ref this, bstrProtocol, out plProxySetting);
-			public HRESULT setProxySettings(BSTR bstrProtocol, int32 lProxySetting) mut => VT.setProxySettings(ref this, bstrProtocol, lProxySetting);
-			public HRESULT getProxyName(BSTR bstrProtocol, out BSTR pbstrProxyName) mut => VT.getProxyName(ref this, bstrProtocol, out pbstrProxyName);
-			public HRESULT setProxyName(BSTR bstrProtocol, BSTR bstrProxyName) mut => VT.setProxyName(ref this, bstrProtocol, bstrProxyName);
-			public HRESULT getProxyPort(BSTR bstrProtocol, out int32 lProxyPort) mut => VT.getProxyPort(ref this, bstrProtocol, out lProxyPort);
-			public HRESULT setProxyPort(BSTR bstrProtocol, int32 lProxyPort) mut => VT.setProxyPort(ref this, bstrProtocol, lProxyPort);
-			public HRESULT getProxyExceptionList(BSTR bstrProtocol, out BSTR pbstrExceptionList) mut => VT.getProxyExceptionList(ref this, bstrProtocol, out pbstrExceptionList);
-			public HRESULT setProxyExceptionList(BSTR bstrProtocol, BSTR pbstrExceptionList) mut => VT.setProxyExceptionList(ref this, bstrProtocol, pbstrExceptionList);
-			public HRESULT getProxyBypassForLocal(BSTR bstrProtocol, out int16 pfBypassForLocal) mut => VT.getProxyBypassForLocal(ref this, bstrProtocol, out pfBypassForLocal);
-			public HRESULT setProxyBypassForLocal(BSTR bstrProtocol, int16 fBypassForLocal) mut => VT.setProxyBypassForLocal(ref this, bstrProtocol, fBypassForLocal);
-			public HRESULT get_maxBandwidth(out int32 lMaxBandwidth) mut => VT.get_maxBandwidth(ref this, out lMaxBandwidth);
-			public HRESULT put_maxBandwidth(int32 lMaxBandwidth) mut => VT.put_maxBandwidth(ref this, lMaxBandwidth);
-			public HRESULT get_downloadProgress(out int32 plDownloadProgress) mut => VT.get_downloadProgress(ref this, out plDownloadProgress);
-			public HRESULT get_encodedFrameRate(out int32 plFrameRate) mut => VT.get_encodedFrameRate(ref this, out plFrameRate);
-			public HRESULT get_framesSkipped(out int32 plFrames) mut => VT.get_framesSkipped(ref this, out plFrames);
+			public HResult get_bandWidth(out int32 plBandwidth) mut => VT.get_bandWidth(ref this, out plBandwidth);
+			public HResult get_recoveredPackets(out int32 plRecoveredPackets) mut => VT.get_recoveredPackets(ref this, out plRecoveredPackets);
+			public HResult get_sourceProtocol(out BSTR pbstrSourceProtocol) mut => VT.get_sourceProtocol(ref this, out pbstrSourceProtocol);
+			public HResult get_receivedPackets(out int32 plReceivedPackets) mut => VT.get_receivedPackets(ref this, out plReceivedPackets);
+			public HResult get_lostPackets(out int32 plLostPackets) mut => VT.get_lostPackets(ref this, out plLostPackets);
+			public HResult get_receptionQuality(out int32 plReceptionQuality) mut => VT.get_receptionQuality(ref this, out plReceptionQuality);
+			public HResult get_bufferingCount(out int32 plBufferingCount) mut => VT.get_bufferingCount(ref this, out plBufferingCount);
+			public HResult get_bufferingProgress(out int32 plBufferingProgress) mut => VT.get_bufferingProgress(ref this, out plBufferingProgress);
+			public HResult get_bufferingTime(out int32 plBufferingTime) mut => VT.get_bufferingTime(ref this, out plBufferingTime);
+			public HResult put_bufferingTime(int32 lBufferingTime) mut => VT.put_bufferingTime(ref this, lBufferingTime);
+			public HResult get_frameRate(out int32 plFrameRate) mut => VT.get_frameRate(ref this, out plFrameRate);
+			public HResult get_maxBitRate(out int32 plBitRate) mut => VT.get_maxBitRate(ref this, out plBitRate);
+			public HResult get_bitRate(out int32 plBitRate) mut => VT.get_bitRate(ref this, out plBitRate);
+			public HResult getProxySettings(BSTR bstrProtocol, out int32 plProxySetting) mut => VT.getProxySettings(ref this, bstrProtocol, out plProxySetting);
+			public HResult setProxySettings(BSTR bstrProtocol, int32 lProxySetting) mut => VT.setProxySettings(ref this, bstrProtocol, lProxySetting);
+			public HResult getProxyName(BSTR bstrProtocol, out BSTR pbstrProxyName) mut => VT.getProxyName(ref this, bstrProtocol, out pbstrProxyName);
+			public HResult setProxyName(BSTR bstrProtocol, BSTR bstrProxyName) mut => VT.setProxyName(ref this, bstrProtocol, bstrProxyName);
+			public HResult getProxyPort(BSTR bstrProtocol, out int32 lProxyPort) mut => VT.getProxyPort(ref this, bstrProtocol, out lProxyPort);
+			public HResult setProxyPort(BSTR bstrProtocol, int32 lProxyPort) mut => VT.setProxyPort(ref this, bstrProtocol, lProxyPort);
+			public HResult getProxyExceptionList(BSTR bstrProtocol, out BSTR pbstrExceptionList) mut => VT.getProxyExceptionList(ref this, bstrProtocol, out pbstrExceptionList);
+			public HResult setProxyExceptionList(BSTR bstrProtocol, BSTR pbstrExceptionList) mut => VT.setProxyExceptionList(ref this, bstrProtocol, pbstrExceptionList);
+			public HResult getProxyBypassForLocal(BSTR bstrProtocol, out int16 pfBypassForLocal) mut => VT.getProxyBypassForLocal(ref this, bstrProtocol, out pfBypassForLocal);
+			public HResult setProxyBypassForLocal(BSTR bstrProtocol, int16 fBypassForLocal) mut => VT.setProxyBypassForLocal(ref this, bstrProtocol, fBypassForLocal);
+			public HResult get_maxBandwidth(out int32 lMaxBandwidth) mut => VT.get_maxBandwidth(ref this, out lMaxBandwidth);
+			public HResult put_maxBandwidth(int32 lMaxBandwidth) mut => VT.put_maxBandwidth(ref this, lMaxBandwidth);
+			public HResult get_downloadProgress(out int32 plDownloadProgress) mut => VT.get_downloadProgress(ref this, out plDownloadProgress);
+			public HResult get_encodedFrameRate(out int32 plFrameRate) mut => VT.get_encodedFrameRate(ref this, out plFrameRate);
+			public HResult get_framesSkipped(out int32 plFrames) mut => VT.get_framesSkipped(ref this, out plFrames);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plBandwidth) get_bandWidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plRecoveredPackets) get_recoveredPackets;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out BSTR pbstrSourceProtocol) get_sourceProtocol;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plReceivedPackets) get_receivedPackets;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plLostPackets) get_lostPackets;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plReceptionQuality) get_receptionQuality;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plBufferingCount) get_bufferingCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plBufferingProgress) get_bufferingProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plBufferingTime) get_bufferingTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, int32 lBufferingTime) put_bufferingTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plFrameRate) get_frameRate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plBitRate) get_maxBitRate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plBitRate) get_bitRate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, out int32 plProxySetting) getProxySettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, int32 lProxySetting) setProxySettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, out BSTR pbstrProxyName) getProxyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, BSTR bstrProxyName) setProxyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, out int32 lProxyPort) getProxyPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, int32 lProxyPort) setProxyPort;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, out BSTR pbstrExceptionList) getProxyExceptionList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, BSTR pbstrExceptionList) setProxyExceptionList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, out int16 pfBypassForLocal) getProxyBypassForLocal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, BSTR bstrProtocol, int16 fBypassForLocal) setProxyBypassForLocal;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 lMaxBandwidth) get_maxBandwidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, int32 lMaxBandwidth) put_maxBandwidth;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plDownloadProgress) get_downloadProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plFrameRate) get_encodedFrameRate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNetwork self, out int32 plFrames) get_framesSkipped;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plBandwidth) get_bandWidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plRecoveredPackets) get_recoveredPackets;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out BSTR pbstrSourceProtocol) get_sourceProtocol;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plReceivedPackets) get_receivedPackets;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plLostPackets) get_lostPackets;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plReceptionQuality) get_receptionQuality;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plBufferingCount) get_bufferingCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plBufferingProgress) get_bufferingProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plBufferingTime) get_bufferingTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, int32 lBufferingTime) put_bufferingTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plFrameRate) get_frameRate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plBitRate) get_maxBitRate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plBitRate) get_bitRate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, out int32 plProxySetting) getProxySettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, int32 lProxySetting) setProxySettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, out BSTR pbstrProxyName) getProxyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, BSTR bstrProxyName) setProxyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, out int32 lProxyPort) getProxyPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, int32 lProxyPort) setProxyPort;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, out BSTR pbstrExceptionList) getProxyExceptionList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, BSTR pbstrExceptionList) setProxyExceptionList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, out int16 pfBypassForLocal) getProxyBypassForLocal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, BSTR bstrProtocol, int16 fBypassForLocal) setProxyBypassForLocal;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 lMaxBandwidth) get_maxBandwidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, int32 lMaxBandwidth) put_maxBandwidth;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plDownloadProgress) get_downloadProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plFrameRate) get_encodedFrameRate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNetwork self, out int32 plFrames) get_framesSkipped;
 			}
 		}
 		[CRepr]
@@ -1507,52 +1507,52 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT close() mut => VT.close(ref this);
-			public HRESULT get_URL(out BSTR pbstrURL) mut => VT.get_URL(ref this, out pbstrURL);
-			public HRESULT put_URL(BSTR bstrURL) mut => VT.put_URL(ref this, bstrURL);
-			public HRESULT get_openState(out WMPOpenState pwmpos) mut => VT.get_openState(ref this, out pwmpos);
-			public HRESULT get_playState(out WMPPlayState pwmpps) mut => VT.get_playState(ref this, out pwmpps);
-			public HRESULT get_controls(out IWMPControls* ppControl) mut => VT.get_controls(ref this, out ppControl);
-			public HRESULT get_settings(out IWMPSettings* ppSettings) mut => VT.get_settings(ref this, out ppSettings);
-			public HRESULT get_currentMedia(out IWMPMedia* ppMedia) mut => VT.get_currentMedia(ref this, out ppMedia);
-			public HRESULT put_currentMedia(ref IWMPMedia pMedia) mut => VT.put_currentMedia(ref this, ref pMedia);
-			public HRESULT get_mediaCollection(out IWMPMediaCollection* ppMediaCollection) mut => VT.get_mediaCollection(ref this, out ppMediaCollection);
-			public HRESULT get_playlistCollection(out IWMPPlaylistCollection* ppPlaylistCollection) mut => VT.get_playlistCollection(ref this, out ppPlaylistCollection);
-			public HRESULT get_versionInfo(out BSTR pbstrVersionInfo) mut => VT.get_versionInfo(ref this, out pbstrVersionInfo);
-			public HRESULT launchURL(BSTR bstrURL) mut => VT.launchURL(ref this, bstrURL);
-			public HRESULT get_network(out IWMPNetwork* ppQNI) mut => VT.get_network(ref this, out ppQNI);
-			public HRESULT get_currentPlaylist(out IWMPPlaylist* ppPL) mut => VT.get_currentPlaylist(ref this, out ppPL);
-			public HRESULT put_currentPlaylist(ref IWMPPlaylist pPL) mut => VT.put_currentPlaylist(ref this, ref pPL);
-			public HRESULT get_cdromCollection(out IWMPCdromCollection* ppCdromCollection) mut => VT.get_cdromCollection(ref this, out ppCdromCollection);
-			public HRESULT get_closedCaption(out IWMPClosedCaption* ppClosedCaption) mut => VT.get_closedCaption(ref this, out ppClosedCaption);
-			public HRESULT get_isOnline(out int16 pfOnline) mut => VT.get_isOnline(ref this, out pfOnline);
-			public HRESULT get_error(out IWMPError* ppError) mut => VT.get_error(ref this, out ppError);
-			public HRESULT get_status(out BSTR pbstrStatus) mut => VT.get_status(ref this, out pbstrStatus);
+			public HResult close() mut => VT.close(ref this);
+			public HResult get_URL(out BSTR pbstrURL) mut => VT.get_URL(ref this, out pbstrURL);
+			public HResult put_URL(BSTR bstrURL) mut => VT.put_URL(ref this, bstrURL);
+			public HResult get_openState(out WMPOpenState pwmpos) mut => VT.get_openState(ref this, out pwmpos);
+			public HResult get_playState(out WMPPlayState pwmpps) mut => VT.get_playState(ref this, out pwmpps);
+			public HResult get_controls(out IWMPControls* ppControl) mut => VT.get_controls(ref this, out ppControl);
+			public HResult get_settings(out IWMPSettings* ppSettings) mut => VT.get_settings(ref this, out ppSettings);
+			public HResult get_currentMedia(out IWMPMedia* ppMedia) mut => VT.get_currentMedia(ref this, out ppMedia);
+			public HResult put_currentMedia(ref IWMPMedia pMedia) mut => VT.put_currentMedia(ref this, ref pMedia);
+			public HResult get_mediaCollection(out IWMPMediaCollection* ppMediaCollection) mut => VT.get_mediaCollection(ref this, out ppMediaCollection);
+			public HResult get_playlistCollection(out IWMPPlaylistCollection* ppPlaylistCollection) mut => VT.get_playlistCollection(ref this, out ppPlaylistCollection);
+			public HResult get_versionInfo(out BSTR pbstrVersionInfo) mut => VT.get_versionInfo(ref this, out pbstrVersionInfo);
+			public HResult launchURL(BSTR bstrURL) mut => VT.launchURL(ref this, bstrURL);
+			public HResult get_network(out IWMPNetwork* ppQNI) mut => VT.get_network(ref this, out ppQNI);
+			public HResult get_currentPlaylist(out IWMPPlaylist* ppPL) mut => VT.get_currentPlaylist(ref this, out ppPL);
+			public HResult put_currentPlaylist(ref IWMPPlaylist pPL) mut => VT.put_currentPlaylist(ref this, ref pPL);
+			public HResult get_cdromCollection(out IWMPCdromCollection* ppCdromCollection) mut => VT.get_cdromCollection(ref this, out ppCdromCollection);
+			public HResult get_closedCaption(out IWMPClosedCaption* ppClosedCaption) mut => VT.get_closedCaption(ref this, out ppClosedCaption);
+			public HResult get_isOnline(out int16 pfOnline) mut => VT.get_isOnline(ref this, out pfOnline);
+			public HResult get_error(out IWMPError* ppError) mut => VT.get_error(ref this, out ppError);
+			public HResult get_status(out BSTR pbstrStatus) mut => VT.get_status(ref this, out pbstrStatus);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self) close;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out BSTR pbstrURL) get_URL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, BSTR bstrURL) put_URL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out WMPOpenState pwmpos) get_openState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out WMPPlayState pwmpps) get_playState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPControls* ppControl) get_controls;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPSettings* ppSettings) get_settings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPMedia* ppMedia) get_currentMedia;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, ref IWMPMedia pMedia) put_currentMedia;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPMediaCollection* ppMediaCollection) get_mediaCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPPlaylistCollection* ppPlaylistCollection) get_playlistCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out BSTR pbstrVersionInfo) get_versionInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, BSTR bstrURL) launchURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPNetwork* ppQNI) get_network;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPPlaylist* ppPL) get_currentPlaylist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, ref IWMPPlaylist pPL) put_currentPlaylist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPCdromCollection* ppCdromCollection) get_cdromCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPClosedCaption* ppClosedCaption) get_closedCaption;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out int16 pfOnline) get_isOnline;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out IWMPError* ppError) get_error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore self, out BSTR pbstrStatus) get_status;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self) close;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out BSTR pbstrURL) get_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, BSTR bstrURL) put_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out WMPOpenState pwmpos) get_openState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out WMPPlayState pwmpps) get_playState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPControls* ppControl) get_controls;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPSettings* ppSettings) get_settings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPMedia* ppMedia) get_currentMedia;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, ref IWMPMedia pMedia) put_currentMedia;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPMediaCollection* ppMediaCollection) get_mediaCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPPlaylistCollection* ppPlaylistCollection) get_playlistCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out BSTR pbstrVersionInfo) get_versionInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, BSTR bstrURL) launchURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPNetwork* ppQNI) get_network;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPPlaylist* ppPL) get_currentPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, ref IWMPPlaylist pPL) put_currentPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPCdromCollection* ppCdromCollection) get_cdromCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPClosedCaption* ppClosedCaption) get_closedCaption;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out int16 pfOnline) get_isOnline;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out IWMPError* ppError) get_error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore self, out BSTR pbstrStatus) get_status;
 			}
 		}
 		[CRepr]
@@ -1562,26 +1562,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
-			public HRESULT put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
-			public HRESULT get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
-			public HRESULT put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
-			public HRESULT get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
-			public HRESULT put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
-			public HRESULT put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
-			public HRESULT get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
+			public HResult get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
+			public HResult put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
+			public HResult get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
+			public HResult put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
+			public HResult get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
+			public HResult put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
+			public HResult put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
+			public HResult get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
 
 			[CRepr]
 			public struct VTable : IWMPCore.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, out int16 pbEnabled) get_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, int16 bEnabled) put_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, out int16 pbFullScreen) get_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, int16 bFullScreen) put_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, out int16 pbEnableContextMenu) get_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, int16 bEnableContextMenu) put_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, BSTR bstrMode) put_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer self, out BSTR pbstrMode) get_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, out int16 pbEnabled) get_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, int16 bEnabled) put_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, out int16 pbFullScreen) get_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, int16 bFullScreen) put_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, out int16 pbEnableContextMenu) get_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, int16 bEnableContextMenu) put_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, BSTR bstrMode) put_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer self, out BSTR pbstrMode) get_uiMode;
 			}
 		}
 		[CRepr]
@@ -1591,34 +1591,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
-			public HRESULT put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
-			public HRESULT get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
-			public HRESULT put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
-			public HRESULT get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
-			public HRESULT put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
-			public HRESULT put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
-			public HRESULT get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
-			public HRESULT get_stretchToFit(out int16 pbEnabled) mut => VT.get_stretchToFit(ref this, out pbEnabled);
-			public HRESULT put_stretchToFit(int16 bEnabled) mut => VT.put_stretchToFit(ref this, bEnabled);
-			public HRESULT get_windowlessVideo(out int16 pbEnabled) mut => VT.get_windowlessVideo(ref this, out pbEnabled);
-			public HRESULT put_windowlessVideo(int16 bEnabled) mut => VT.put_windowlessVideo(ref this, bEnabled);
+			public HResult get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
+			public HResult put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
+			public HResult get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
+			public HResult put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
+			public HResult get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
+			public HResult put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
+			public HResult put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
+			public HResult get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
+			public HResult get_stretchToFit(out int16 pbEnabled) mut => VT.get_stretchToFit(ref this, out pbEnabled);
+			public HResult put_stretchToFit(int16 bEnabled) mut => VT.put_stretchToFit(ref this, bEnabled);
+			public HResult get_windowlessVideo(out int16 pbEnabled) mut => VT.get_windowlessVideo(ref this, out pbEnabled);
+			public HResult put_windowlessVideo(int16 bEnabled) mut => VT.put_windowlessVideo(ref this, bEnabled);
 
 			[CRepr]
 			public struct VTable : IWMPCore.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, out int16 pbEnabled) get_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, int16 bEnabled) put_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, out int16 pbFullScreen) get_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, int16 bFullScreen) put_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, out int16 pbEnableContextMenu) get_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, int16 bEnableContextMenu) put_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, BSTR bstrMode) put_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, out BSTR pbstrMode) get_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, out int16 pbEnabled) get_stretchToFit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, int16 bEnabled) put_stretchToFit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, out int16 pbEnabled) get_windowlessVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer2 self, int16 bEnabled) put_windowlessVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, out int16 pbEnabled) get_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, int16 bEnabled) put_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, out int16 pbFullScreen) get_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, int16 bFullScreen) put_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, out int16 pbEnableContextMenu) get_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, int16 bEnableContextMenu) put_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, BSTR bstrMode) put_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, out BSTR pbstrMode) get_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, out int16 pbEnabled) get_stretchToFit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, int16 bEnabled) put_stretchToFit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, out int16 pbEnabled) get_windowlessVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer2 self, int16 bEnabled) put_windowlessVideo;
 			}
 		}
 		[CRepr]
@@ -1628,12 +1628,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_error(out IWMPErrorItem* ppIWMPErrorItem) mut => VT.get_error(ref this, out ppIWMPErrorItem);
+			public HResult get_error(out IWMPErrorItem* ppIWMPErrorItem) mut => VT.get_error(ref this, out ppIWMPErrorItem);
 
 			[CRepr]
 			public struct VTable : IWMPMedia.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia2 self, out IWMPErrorItem* ppIWMPErrorItem) get_error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia2 self, out IWMPErrorItem* ppIWMPErrorItem) get_error;
 			}
 		}
 		[CRepr]
@@ -1643,12 +1643,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT step(int32 lStep) mut => VT.step(ref this, lStep);
+			public HResult step(int32 lStep) mut => VT.step(ref this, lStep);
 
 			[CRepr]
 			public struct VTable : IWMPControls.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls2 self, int32 lStep) step;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls2 self, int32 lStep) step;
 			}
 		}
 		[CRepr]
@@ -1658,22 +1658,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.get_isAvailable(ref this, bstrItem, out pIsAvailable);
-			public HRESULT get_domain(out BSTR strDomain) mut => VT.get_domain(ref this, out strDomain);
-			public HRESULT topMenu() mut => VT.topMenu(ref this);
-			public HRESULT titleMenu() mut => VT.titleMenu(ref this);
-			public HRESULT back() mut => VT.back(ref this);
-			public HRESULT resume() mut => VT.resume(ref this);
+			public HResult get_isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.get_isAvailable(ref this, bstrItem, out pIsAvailable);
+			public HResult get_domain(out BSTR strDomain) mut => VT.get_domain(ref this, out strDomain);
+			public HResult topMenu() mut => VT.topMenu(ref this);
+			public HResult titleMenu() mut => VT.titleMenu(ref this);
+			public HResult back() mut => VT.back(ref this);
+			public HResult resume() mut => VT.resume(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDVD self, BSTR bstrItem, out int16 pIsAvailable) get_isAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDVD self, out BSTR strDomain) get_domain;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDVD self) topMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDVD self) titleMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDVD self) back;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDVD self) resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDVD self, BSTR bstrItem, out int16 pIsAvailable) get_isAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDVD self, out BSTR strDomain) get_domain;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDVD self) topMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDVD self) titleMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDVD self) back;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDVD self) resume;
 			}
 		}
 		[CRepr]
@@ -1683,12 +1683,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_dvd(out IWMPDVD* ppDVD) mut => VT.get_dvd(ref this, out ppDVD);
+			public HResult get_dvd(out IWMPDVD* ppDVD) mut => VT.get_dvd(ref this, out ppDVD);
 
 			[CRepr]
 			public struct VTable : IWMPCore.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore2 self, out IWMPDVD* ppDVD) get_dvd;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore2 self, out IWMPDVD* ppDVD) get_dvd;
 			}
 		}
 		[CRepr]
@@ -1698,34 +1698,34 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
-			public HRESULT put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
-			public HRESULT get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
-			public HRESULT put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
-			public HRESULT get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
-			public HRESULT put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
-			public HRESULT put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
-			public HRESULT get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
-			public HRESULT get_stretchToFit(out int16 pbEnabled) mut => VT.get_stretchToFit(ref this, out pbEnabled);
-			public HRESULT put_stretchToFit(int16 bEnabled) mut => VT.put_stretchToFit(ref this, bEnabled);
-			public HRESULT get_windowlessVideo(out int16 pbEnabled) mut => VT.get_windowlessVideo(ref this, out pbEnabled);
-			public HRESULT put_windowlessVideo(int16 bEnabled) mut => VT.put_windowlessVideo(ref this, bEnabled);
+			public HResult get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
+			public HResult put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
+			public HResult get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
+			public HResult put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
+			public HResult get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
+			public HResult put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
+			public HResult put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
+			public HResult get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
+			public HResult get_stretchToFit(out int16 pbEnabled) mut => VT.get_stretchToFit(ref this, out pbEnabled);
+			public HResult put_stretchToFit(int16 bEnabled) mut => VT.put_stretchToFit(ref this, bEnabled);
+			public HResult get_windowlessVideo(out int16 pbEnabled) mut => VT.get_windowlessVideo(ref this, out pbEnabled);
+			public HResult put_windowlessVideo(int16 bEnabled) mut => VT.put_windowlessVideo(ref this, bEnabled);
 
 			[CRepr]
 			public struct VTable : IWMPCore2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, out int16 pbEnabled) get_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, int16 bEnabled) put_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, out int16 pbFullScreen) get_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, int16 bFullScreen) put_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, out int16 pbEnableContextMenu) get_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, int16 bEnableContextMenu) put_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, BSTR bstrMode) put_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, out BSTR pbstrMode) get_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, out int16 pbEnabled) get_stretchToFit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, int16 bEnabled) put_stretchToFit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, out int16 pbEnabled) get_windowlessVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer3 self, int16 bEnabled) put_windowlessVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, out int16 pbEnabled) get_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, int16 bEnabled) put_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, out int16 pbFullScreen) get_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, int16 bFullScreen) put_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, out int16 pbEnableContextMenu) get_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, int16 bEnableContextMenu) put_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, BSTR bstrMode) put_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, out BSTR pbstrMode) get_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, out int16 pbEnabled) get_stretchToFit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, int16 bEnabled) put_stretchToFit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, out int16 pbEnabled) get_windowlessVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer3 self, int16 bEnabled) put_windowlessVideo;
 			}
 		}
 		[CRepr]
@@ -1735,12 +1735,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_condition(out int32 plCondition) mut => VT.get_condition(ref this, out plCondition);
+			public HResult get_condition(out int32 plCondition) mut => VT.get_condition(ref this, out plCondition);
 
 			[CRepr]
 			public struct VTable : IWMPErrorItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPErrorItem2 self, out int32 plCondition) get_condition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPErrorItem2 self, out int32 plCondition) get_condition;
 			}
 		}
 		[CRepr]
@@ -1750,18 +1750,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetServiceType(out BSTR pbstrType) mut => VT.GetServiceType(ref this, out pbstrType);
-			public HRESULT GetApplicationName(out BSTR pbstrName) mut => VT.GetApplicationName(ref this, out pbstrName);
-			public HRESULT GetScriptableObject(out BSTR pbstrName, out IDispatch* ppDispatch) mut => VT.GetScriptableObject(ref this, out pbstrName, out ppDispatch);
-			public HRESULT GetCustomUIMode(out BSTR pbstrFile) mut => VT.GetCustomUIMode(ref this, out pbstrFile);
+			public HResult GetServiceType(out BSTR pbstrType) mut => VT.GetServiceType(ref this, out pbstrType);
+			public HResult GetApplicationName(out BSTR pbstrName) mut => VT.GetApplicationName(ref this, out pbstrName);
+			public HResult GetScriptableObject(out BSTR pbstrName, out IDispatch* ppDispatch) mut => VT.GetScriptableObject(ref this, out pbstrName, out ppDispatch);
+			public HResult GetCustomUIMode(out BSTR pbstrFile) mut => VT.GetCustomUIMode(ref this, out pbstrFile);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPRemoteMediaServices self, out BSTR pbstrType) GetServiceType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPRemoteMediaServices self, out BSTR pbstrName) GetApplicationName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPRemoteMediaServices self, out BSTR pbstrName, out IDispatch* ppDispatch) GetScriptableObject;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPRemoteMediaServices self, out BSTR pbstrFile) GetCustomUIMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPRemoteMediaServices self, out BSTR pbstrType) GetServiceType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPRemoteMediaServices self, out BSTR pbstrName) GetApplicationName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPRemoteMediaServices self, out BSTR pbstrName, out IDispatch* ppDispatch) GetScriptableObject;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPRemoteMediaServices self, out BSTR pbstrFile) GetCustomUIMode;
 			}
 		}
 		[CRepr]
@@ -1771,12 +1771,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetVisualStyle(BSTR bstrPath) mut => VT.SetVisualStyle(ref this, bstrPath);
+			public HResult SetVisualStyle(BSTR bstrPath) mut => VT.SetVisualStyle(ref this, bstrPath);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSkinManager self, BSTR bstrPath) SetVisualStyle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSkinManager self, BSTR bstrPath) SetVisualStyle;
 			}
 		}
 		[CRepr]
@@ -1786,18 +1786,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_mimeType(out BSTR pbstrMimeType) mut => VT.get_mimeType(ref this, out pbstrMimeType);
-			public HRESULT get_pictureType(out BSTR pbstrPictureType) mut => VT.get_pictureType(ref this, out pbstrPictureType);
-			public HRESULT get_description(out BSTR pbstrDescription) mut => VT.get_description(ref this, out pbstrDescription);
-			public HRESULT get_URL(out BSTR pbstrURL) mut => VT.get_URL(ref this, out pbstrURL);
+			public HResult get_mimeType(out BSTR pbstrMimeType) mut => VT.get_mimeType(ref this, out pbstrMimeType);
+			public HResult get_pictureType(out BSTR pbstrPictureType) mut => VT.get_pictureType(ref this, out pbstrPictureType);
+			public HResult get_description(out BSTR pbstrDescription) mut => VT.get_description(ref this, out pbstrDescription);
+			public HResult get_URL(out BSTR pbstrURL) mut => VT.get_URL(ref this, out pbstrURL);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMetadataPicture self, out BSTR pbstrMimeType) get_mimeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMetadataPicture self, out BSTR pbstrPictureType) get_pictureType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMetadataPicture self, out BSTR pbstrDescription) get_description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMetadataPicture self, out BSTR pbstrURL) get_URL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMetadataPicture self, out BSTR pbstrMimeType) get_mimeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMetadataPicture self, out BSTR pbstrPictureType) get_pictureType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMetadataPicture self, out BSTR pbstrDescription) get_description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMetadataPicture self, out BSTR pbstrURL) get_URL;
 			}
 		}
 		[CRepr]
@@ -1807,14 +1807,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_description(out BSTR pbstrDescription) mut => VT.get_description(ref this, out pbstrDescription);
-			public HRESULT get_text(out BSTR pbstrText) mut => VT.get_text(ref this, out pbstrText);
+			public HResult get_description(out BSTR pbstrDescription) mut => VT.get_description(ref this, out pbstrDescription);
+			public HResult get_text(out BSTR pbstrText) mut => VT.get_text(ref this, out pbstrText);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMetadataText self, out BSTR pbstrDescription) get_description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMetadataText self, out BSTR pbstrText) get_text;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMetadataText self, out BSTR pbstrDescription) get_description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMetadataText self, out BSTR pbstrText) get_text;
 			}
 		}
 		[CRepr]
@@ -1824,14 +1824,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getAttributeCountByType(BSTR bstrType, BSTR bstrLanguage, out int32 plCount) mut => VT.getAttributeCountByType(ref this, bstrType, bstrLanguage, out plCount);
-			public HRESULT getItemInfoByType(BSTR bstrType, BSTR bstrLanguage, int32 lIndex, out VARIANT pvarValue) mut => VT.getItemInfoByType(ref this, bstrType, bstrLanguage, lIndex, out pvarValue);
+			public HResult getAttributeCountByType(BSTR bstrType, BSTR bstrLanguage, out int32 plCount) mut => VT.getAttributeCountByType(ref this, bstrType, bstrLanguage, out plCount);
+			public HResult getItemInfoByType(BSTR bstrType, BSTR bstrLanguage, int32 lIndex, out VARIANT pvarValue) mut => VT.getItemInfoByType(ref this, bstrType, bstrLanguage, lIndex, out pvarValue);
 
 			[CRepr]
 			public struct VTable : IWMPMedia2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia3 self, BSTR bstrType, BSTR bstrLanguage, out int32 plCount) getAttributeCountByType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMedia3 self, BSTR bstrType, BSTR bstrLanguage, int32 lIndex, out VARIANT pvarValue) getItemInfoByType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia3 self, BSTR bstrType, BSTR bstrLanguage, out int32 plCount) getAttributeCountByType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMedia3 self, BSTR bstrType, BSTR bstrLanguage, int32 lIndex, out VARIANT pvarValue) getItemInfoByType;
 			}
 		}
 		[CRepr]
@@ -1841,16 +1841,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_defaultAudioLanguage(out int32 plLangID) mut => VT.get_defaultAudioLanguage(ref this, out plLangID);
-			public HRESULT get_mediaAccessRights(out BSTR pbstrRights) mut => VT.get_mediaAccessRights(ref this, out pbstrRights);
-			public HRESULT requestMediaAccessRights(BSTR bstrDesiredAccess, out int16 pvbAccepted) mut => VT.requestMediaAccessRights(ref this, bstrDesiredAccess, out pvbAccepted);
+			public HResult get_defaultAudioLanguage(out int32 plLangID) mut => VT.get_defaultAudioLanguage(ref this, out plLangID);
+			public HResult get_mediaAccessRights(out BSTR pbstrRights) mut => VT.get_mediaAccessRights(ref this, out pbstrRights);
+			public HResult requestMediaAccessRights(BSTR bstrDesiredAccess, out int16 pvbAccepted) mut => VT.requestMediaAccessRights(ref this, bstrDesiredAccess, out pvbAccepted);
 
 			[CRepr]
 			public struct VTable : IWMPSettings.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings2 self, out int32 plLangID) get_defaultAudioLanguage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings2 self, out BSTR pbstrRights) get_mediaAccessRights;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSettings2 self, BSTR bstrDesiredAccess, out int16 pvbAccepted) requestMediaAccessRights;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings2 self, out int32 plLangID) get_defaultAudioLanguage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings2 self, out BSTR pbstrRights) get_mediaAccessRights;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSettings2 self, BSTR bstrDesiredAccess, out int16 pvbAccepted) requestMediaAccessRights;
 			}
 		}
 		[CRepr]
@@ -1860,30 +1860,30 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_audioLanguageCount(out int32 plCount) mut => VT.get_audioLanguageCount(ref this, out plCount);
-			public HRESULT getAudioLanguageID(int32 lIndex, out int32 plLangID) mut => VT.getAudioLanguageID(ref this, lIndex, out plLangID);
-			public HRESULT getAudioLanguageDescription(int32 lIndex, out BSTR pbstrLangDesc) mut => VT.getAudioLanguageDescription(ref this, lIndex, out pbstrLangDesc);
-			public HRESULT get_currentAudioLanguage(out int32 plLangID) mut => VT.get_currentAudioLanguage(ref this, out plLangID);
-			public HRESULT put_currentAudioLanguage(int32 lLangID) mut => VT.put_currentAudioLanguage(ref this, lLangID);
-			public HRESULT get_currentAudioLanguageIndex(out int32 plIndex) mut => VT.get_currentAudioLanguageIndex(ref this, out plIndex);
-			public HRESULT put_currentAudioLanguageIndex(int32 lIndex) mut => VT.put_currentAudioLanguageIndex(ref this, lIndex);
-			public HRESULT getLanguageName(int32 lLangID, out BSTR pbstrLangName) mut => VT.getLanguageName(ref this, lLangID, out pbstrLangName);
-			public HRESULT get_currentPositionTimecode(out BSTR bstrTimecode) mut => VT.get_currentPositionTimecode(ref this, out bstrTimecode);
-			public HRESULT put_currentPositionTimecode(BSTR bstrTimecode) mut => VT.put_currentPositionTimecode(ref this, bstrTimecode);
+			public HResult get_audioLanguageCount(out int32 plCount) mut => VT.get_audioLanguageCount(ref this, out plCount);
+			public HResult getAudioLanguageID(int32 lIndex, out int32 plLangID) mut => VT.getAudioLanguageID(ref this, lIndex, out plLangID);
+			public HResult getAudioLanguageDescription(int32 lIndex, out BSTR pbstrLangDesc) mut => VT.getAudioLanguageDescription(ref this, lIndex, out pbstrLangDesc);
+			public HResult get_currentAudioLanguage(out int32 plLangID) mut => VT.get_currentAudioLanguage(ref this, out plLangID);
+			public HResult put_currentAudioLanguage(int32 lLangID) mut => VT.put_currentAudioLanguage(ref this, lLangID);
+			public HResult get_currentAudioLanguageIndex(out int32 plIndex) mut => VT.get_currentAudioLanguageIndex(ref this, out plIndex);
+			public HResult put_currentAudioLanguageIndex(int32 lIndex) mut => VT.put_currentAudioLanguageIndex(ref this, lIndex);
+			public HResult getLanguageName(int32 lLangID, out BSTR pbstrLangName) mut => VT.getLanguageName(ref this, lLangID, out pbstrLangName);
+			public HResult get_currentPositionTimecode(out BSTR bstrTimecode) mut => VT.get_currentPositionTimecode(ref this, out bstrTimecode);
+			public HResult put_currentPositionTimecode(BSTR bstrTimecode) mut => VT.put_currentPositionTimecode(ref this, bstrTimecode);
 
 			[CRepr]
 			public struct VTable : IWMPControls2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, out int32 plCount) get_audioLanguageCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, int32 lIndex, out int32 plLangID) getAudioLanguageID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, int32 lIndex, out BSTR pbstrLangDesc) getAudioLanguageDescription;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, out int32 plLangID) get_currentAudioLanguage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, int32 lLangID) put_currentAudioLanguage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, out int32 plIndex) get_currentAudioLanguageIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, int32 lIndex) put_currentAudioLanguageIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, int32 lLangID, out BSTR pbstrLangName) getLanguageName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, out BSTR bstrTimecode) get_currentPositionTimecode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPControls3 self, BSTR bstrTimecode) put_currentPositionTimecode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, out int32 plCount) get_audioLanguageCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, int32 lIndex, out int32 plLangID) getAudioLanguageID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, int32 lIndex, out BSTR pbstrLangDesc) getAudioLanguageDescription;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, out int32 plLangID) get_currentAudioLanguage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, int32 lLangID) put_currentAudioLanguage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, out int32 plIndex) get_currentAudioLanguageIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, int32 lIndex) put_currentAudioLanguageIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, int32 lLangID, out BSTR pbstrLangName) getLanguageName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, out BSTR bstrTimecode) get_currentPositionTimecode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPControls3 self, BSTR bstrTimecode) put_currentPositionTimecode;
 			}
 		}
 		[CRepr]
@@ -1893,20 +1893,20 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_SAMILangCount(out int32 plCount) mut => VT.get_SAMILangCount(ref this, out plCount);
-			public HRESULT getSAMILangName(int32 nIndex, out BSTR pbstrName) mut => VT.getSAMILangName(ref this, nIndex, out pbstrName);
-			public HRESULT getSAMILangID(int32 nIndex, out int32 plLangID) mut => VT.getSAMILangID(ref this, nIndex, out plLangID);
-			public HRESULT get_SAMIStyleCount(out int32 plCount) mut => VT.get_SAMIStyleCount(ref this, out plCount);
-			public HRESULT getSAMIStyleName(int32 nIndex, out BSTR pbstrName) mut => VT.getSAMIStyleName(ref this, nIndex, out pbstrName);
+			public HResult get_SAMILangCount(out int32 plCount) mut => VT.get_SAMILangCount(ref this, out plCount);
+			public HResult getSAMILangName(int32 nIndex, out BSTR pbstrName) mut => VT.getSAMILangName(ref this, nIndex, out pbstrName);
+			public HResult getSAMILangID(int32 nIndex, out int32 plLangID) mut => VT.getSAMILangID(ref this, nIndex, out plLangID);
+			public HResult get_SAMIStyleCount(out int32 plCount) mut => VT.get_SAMIStyleCount(ref this, out plCount);
+			public HResult getSAMIStyleName(int32 nIndex, out BSTR pbstrName) mut => VT.getSAMIStyleName(ref this, nIndex, out pbstrName);
 
 			[CRepr]
 			public struct VTable : IWMPClosedCaption.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption2 self, out int32 plCount) get_SAMILangCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption2 self, int32 nIndex, out BSTR pbstrName) getSAMILangName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption2 self, int32 nIndex, out int32 plLangID) getSAMILangID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption2 self, out int32 plCount) get_SAMIStyleCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPClosedCaption2 self, int32 nIndex, out BSTR pbstrName) getSAMIStyleName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption2 self, out int32 plCount) get_SAMILangCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption2 self, int32 nIndex, out BSTR pbstrName) getSAMILangName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption2 self, int32 nIndex, out int32 plLangID) getSAMILangID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption2 self, out int32 plCount) get_SAMIStyleCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPClosedCaption2 self, int32 nIndex, out BSTR pbstrName) getSAMIStyleName;
 			}
 		}
 		[CRepr]
@@ -1916,18 +1916,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT switchToPlayerApplication() mut => VT.switchToPlayerApplication(ref this);
-			public HRESULT switchToControl() mut => VT.switchToControl(ref this);
-			public HRESULT get_playerDocked(out int16 pbPlayerDocked) mut => VT.get_playerDocked(ref this, out pbPlayerDocked);
-			public HRESULT get_hasDisplay(out int16 pbHasDisplay) mut => VT.get_hasDisplay(ref this, out pbHasDisplay);
+			public HResult switchToPlayerApplication() mut => VT.switchToPlayerApplication(ref this);
+			public HResult switchToControl() mut => VT.switchToControl(ref this);
+			public HResult get_playerDocked(out int16 pbPlayerDocked) mut => VT.get_playerDocked(ref this, out pbPlayerDocked);
+			public HResult get_hasDisplay(out int16 pbHasDisplay) mut => VT.get_hasDisplay(ref this, out pbHasDisplay);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerApplication self) switchToPlayerApplication;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerApplication self) switchToControl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerApplication self, out int16 pbPlayerDocked) get_playerDocked;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerApplication self, out int16 pbHasDisplay) get_hasDisplay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerApplication self) switchToPlayerApplication;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerApplication self) switchToControl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerApplication self, out int16 pbPlayerDocked) get_playerDocked;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerApplication self, out int16 pbHasDisplay) get_hasDisplay;
 			}
 		}
 		[CRepr]
@@ -1937,14 +1937,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT newPlaylist(BSTR bstrName, BSTR bstrURL, out IWMPPlaylist* ppPlaylist) mut => VT.newPlaylist(ref this, bstrName, bstrURL, out ppPlaylist);
-			public HRESULT newMedia(BSTR bstrURL, out IWMPMedia* ppMedia) mut => VT.newMedia(ref this, bstrURL, out ppMedia);
+			public HResult newPlaylist(BSTR bstrName, BSTR bstrURL, out IWMPPlaylist* ppPlaylist) mut => VT.newPlaylist(ref this, bstrName, bstrURL, out ppPlaylist);
+			public HResult newMedia(BSTR bstrURL, out IWMPMedia* ppMedia) mut => VT.newMedia(ref this, bstrURL, out ppMedia);
 
 			[CRepr]
 			public struct VTable : IWMPCore2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore3 self, BSTR bstrName, BSTR bstrURL, out IWMPPlaylist* ppPlaylist) newPlaylist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCore3 self, BSTR bstrURL, out IWMPMedia* ppMedia) newMedia;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore3 self, BSTR bstrName, BSTR bstrURL, out IWMPPlaylist* ppPlaylist) newPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCore3 self, BSTR bstrURL, out IWMPMedia* ppMedia) newMedia;
 			}
 		}
 		[CRepr]
@@ -1954,40 +1954,40 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
-			public HRESULT put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
-			public HRESULT get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
-			public HRESULT put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
-			public HRESULT get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
-			public HRESULT put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
-			public HRESULT put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
-			public HRESULT get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
-			public HRESULT get_stretchToFit(out int16 pbEnabled) mut => VT.get_stretchToFit(ref this, out pbEnabled);
-			public HRESULT put_stretchToFit(int16 bEnabled) mut => VT.put_stretchToFit(ref this, bEnabled);
-			public HRESULT get_windowlessVideo(out int16 pbEnabled) mut => VT.get_windowlessVideo(ref this, out pbEnabled);
-			public HRESULT put_windowlessVideo(int16 bEnabled) mut => VT.put_windowlessVideo(ref this, bEnabled);
-			public HRESULT get_isRemote(out int16 pvarfIsRemote) mut => VT.get_isRemote(ref this, out pvarfIsRemote);
-			public HRESULT get_playerApplication(out IWMPPlayerApplication* ppIWMPPlayerApplication) mut => VT.get_playerApplication(ref this, out ppIWMPPlayerApplication);
-			public HRESULT openPlayer(BSTR bstrURL) mut => VT.openPlayer(ref this, bstrURL);
+			public HResult get_enabled(out int16 pbEnabled) mut => VT.get_enabled(ref this, out pbEnabled);
+			public HResult put_enabled(int16 bEnabled) mut => VT.put_enabled(ref this, bEnabled);
+			public HResult get_fullScreen(out int16 pbFullScreen) mut => VT.get_fullScreen(ref this, out pbFullScreen);
+			public HResult put_fullScreen(int16 bFullScreen) mut => VT.put_fullScreen(ref this, bFullScreen);
+			public HResult get_enableContextMenu(out int16 pbEnableContextMenu) mut => VT.get_enableContextMenu(ref this, out pbEnableContextMenu);
+			public HResult put_enableContextMenu(int16 bEnableContextMenu) mut => VT.put_enableContextMenu(ref this, bEnableContextMenu);
+			public HResult put_uiMode(BSTR bstrMode) mut => VT.put_uiMode(ref this, bstrMode);
+			public HResult get_uiMode(out BSTR pbstrMode) mut => VT.get_uiMode(ref this, out pbstrMode);
+			public HResult get_stretchToFit(out int16 pbEnabled) mut => VT.get_stretchToFit(ref this, out pbEnabled);
+			public HResult put_stretchToFit(int16 bEnabled) mut => VT.put_stretchToFit(ref this, bEnabled);
+			public HResult get_windowlessVideo(out int16 pbEnabled) mut => VT.get_windowlessVideo(ref this, out pbEnabled);
+			public HResult put_windowlessVideo(int16 bEnabled) mut => VT.put_windowlessVideo(ref this, bEnabled);
+			public HResult get_isRemote(out int16 pvarfIsRemote) mut => VT.get_isRemote(ref this, out pvarfIsRemote);
+			public HResult get_playerApplication(out IWMPPlayerApplication* ppIWMPPlayerApplication) mut => VT.get_playerApplication(ref this, out ppIWMPPlayerApplication);
+			public HResult openPlayer(BSTR bstrURL) mut => VT.openPlayer(ref this, bstrURL);
 
 			[CRepr]
 			public struct VTable : IWMPCore3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out int16 pbEnabled) get_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, int16 bEnabled) put_enabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out int16 pbFullScreen) get_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, int16 bFullScreen) put_fullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out int16 pbEnableContextMenu) get_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, int16 bEnableContextMenu) put_enableContextMenu;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, BSTR bstrMode) put_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out BSTR pbstrMode) get_uiMode;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out int16 pbEnabled) get_stretchToFit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, int16 bEnabled) put_stretchToFit;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out int16 pbEnabled) get_windowlessVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, int16 bEnabled) put_windowlessVideo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out int16 pvarfIsRemote) get_isRemote;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, out IWMPPlayerApplication* ppIWMPPlayerApplication) get_playerApplication;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayer4 self, BSTR bstrURL) openPlayer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out int16 pbEnabled) get_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, int16 bEnabled) put_enabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out int16 pbFullScreen) get_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, int16 bFullScreen) put_fullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out int16 pbEnableContextMenu) get_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, int16 bEnableContextMenu) put_enableContextMenu;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, BSTR bstrMode) put_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out BSTR pbstrMode) get_uiMode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out int16 pbEnabled) get_stretchToFit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, int16 bEnabled) put_stretchToFit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out int16 pbEnabled) get_windowlessVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, int16 bEnabled) put_windowlessVideo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out int16 pvarfIsRemote) get_isRemote;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, out IWMPPlayerApplication* ppIWMPPlayerApplication) get_playerApplication;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayer4 self, BSTR bstrURL) openPlayer;
 			}
 		}
 		[CRepr]
@@ -1997,16 +1997,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT activateUIPlugin(BSTR bstrPlugin) mut => VT.activateUIPlugin(ref this, bstrPlugin);
-			public HRESULT setTaskPane(BSTR bstrTaskPane) mut => VT.setTaskPane(ref this, bstrTaskPane);
-			public HRESULT setTaskPaneURL(BSTR bstrTaskPane, BSTR bstrURL, BSTR bstrFriendlyName) mut => VT.setTaskPaneURL(ref this, bstrTaskPane, bstrURL, bstrFriendlyName);
+			public HResult activateUIPlugin(BSTR bstrPlugin) mut => VT.activateUIPlugin(ref this, bstrPlugin);
+			public HResult setTaskPane(BSTR bstrTaskPane) mut => VT.setTaskPane(ref this, bstrTaskPane);
+			public HResult setTaskPaneURL(BSTR bstrTaskPane, BSTR bstrURL, BSTR bstrFriendlyName) mut => VT.setTaskPaneURL(ref this, bstrTaskPane, bstrURL, bstrFriendlyName);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerServices self, BSTR bstrPlugin) activateUIPlugin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerServices self, BSTR bstrTaskPane) setTaskPane;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerServices self, BSTR bstrTaskPane, BSTR bstrURL, BSTR bstrFriendlyName) setTaskPaneURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerServices self, BSTR bstrPlugin) activateUIPlugin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerServices self, BSTR bstrTaskPane) setTaskPane;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerServices self, BSTR bstrTaskPane, BSTR bstrURL, BSTR bstrFriendlyName) setTaskPaneURL;
 			}
 		}
 		[CRepr]
@@ -2016,42 +2016,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_friendlyName(out BSTR pbstrName) mut => VT.get_friendlyName(ref this, out pbstrName);
-			public HRESULT put_friendlyName(BSTR bstrName) mut => VT.put_friendlyName(ref this, bstrName);
-			public HRESULT get_deviceName(out BSTR pbstrName) mut => VT.get_deviceName(ref this, out pbstrName);
-			public HRESULT get_deviceId(out BSTR pbstrDeviceId) mut => VT.get_deviceId(ref this, out pbstrDeviceId);
-			public HRESULT get_partnershipIndex(out int32 plIndex) mut => VT.get_partnershipIndex(ref this, out plIndex);
-			public HRESULT get_connected(out int16 pvbConnected) mut => VT.get_connected(ref this, out pvbConnected);
-			public HRESULT get_status(out WMPDeviceStatus pwmpds) mut => VT.get_status(ref this, out pwmpds);
-			public HRESULT get_syncState(out WMPSyncState pwmpss) mut => VT.get_syncState(ref this, out pwmpss);
-			public HRESULT get_progress(out int32 plProgress) mut => VT.get_progress(ref this, out plProgress);
-			public HRESULT getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
-			public HRESULT createPartnership(int16 vbShowUI) mut => VT.createPartnership(ref this, vbShowUI);
-			public HRESULT deletePartnership() mut => VT.deletePartnership(ref this);
-			public HRESULT start() mut => VT.start(ref this);
-			public HRESULT stop() mut => VT.stop(ref this);
-			public HRESULT showSettings() mut => VT.showSettings(ref this);
-			public HRESULT isIdentical(ref IWMPSyncDevice pDevice, out int16 pvbool) mut => VT.isIdentical(ref this, ref pDevice, out pvbool);
+			public HResult get_friendlyName(out BSTR pbstrName) mut => VT.get_friendlyName(ref this, out pbstrName);
+			public HResult put_friendlyName(BSTR bstrName) mut => VT.put_friendlyName(ref this, bstrName);
+			public HResult get_deviceName(out BSTR pbstrName) mut => VT.get_deviceName(ref this, out pbstrName);
+			public HResult get_deviceId(out BSTR pbstrDeviceId) mut => VT.get_deviceId(ref this, out pbstrDeviceId);
+			public HResult get_partnershipIndex(out int32 plIndex) mut => VT.get_partnershipIndex(ref this, out plIndex);
+			public HResult get_connected(out int16 pvbConnected) mut => VT.get_connected(ref this, out pvbConnected);
+			public HResult get_status(out WMPDeviceStatus pwmpds) mut => VT.get_status(ref this, out pwmpds);
+			public HResult get_syncState(out WMPSyncState pwmpss) mut => VT.get_syncState(ref this, out pwmpss);
+			public HResult get_progress(out int32 plProgress) mut => VT.get_progress(ref this, out plProgress);
+			public HResult getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
+			public HResult createPartnership(int16 vbShowUI) mut => VT.createPartnership(ref this, vbShowUI);
+			public HResult deletePartnership() mut => VT.deletePartnership(ref this);
+			public HResult start() mut => VT.start(ref this);
+			public HResult stop() mut => VT.stop(ref this);
+			public HResult showSettings() mut => VT.showSettings(ref this);
+			public HResult isIdentical(ref IWMPSyncDevice pDevice, out int16 pvbool) mut => VT.isIdentical(ref this, ref pDevice, out pvbool);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out BSTR pbstrName) get_friendlyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, BSTR bstrName) put_friendlyName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out BSTR pbstrName) get_deviceName;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out BSTR pbstrDeviceId) get_deviceId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out int32 plIndex) get_partnershipIndex;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out int16 pvbConnected) get_connected;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out WMPDeviceStatus pwmpds) get_status;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out WMPSyncState pwmpss) get_syncState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, out int32 plProgress) get_progress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, int16 vbShowUI) createPartnership;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self) deletePartnership;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self) start;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self) stop;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self) showSettings;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice self, ref IWMPSyncDevice pDevice, out int16 pvbool) isIdentical;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out BSTR pbstrName) get_friendlyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, BSTR bstrName) put_friendlyName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out BSTR pbstrName) get_deviceName;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out BSTR pbstrDeviceId) get_deviceId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out int32 plIndex) get_partnershipIndex;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out int16 pvbConnected) get_connected;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out WMPDeviceStatus pwmpds) get_status;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out WMPSyncState pwmpss) get_syncState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, out int32 plProgress) get_progress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, int16 vbShowUI) createPartnership;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self) deletePartnership;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self) start;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self) stop;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self) showSettings;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice self, ref IWMPSyncDevice pDevice, out int16 pvbool) isIdentical;
 			}
 		}
 		[CRepr]
@@ -2061,14 +2061,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_deviceCount(out int32 plCount) mut => VT.get_deviceCount(ref this, out plCount);
-			public HRESULT getDevice(int32 lIndex, out IWMPSyncDevice* ppDevice) mut => VT.getDevice(ref this, lIndex, out ppDevice);
+			public HResult get_deviceCount(out int32 plCount) mut => VT.get_deviceCount(ref this, out plCount);
+			public HResult getDevice(int32 lIndex, out IWMPSyncDevice* ppDevice) mut => VT.getDevice(ref this, lIndex, out ppDevice);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncServices self, out int32 plCount) get_deviceCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncServices self, int32 lIndex, out IWMPSyncDevice* ppDevice) getDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncServices self, out int32 plCount) get_deviceCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncServices self, int32 lIndex, out IWMPSyncDevice* ppDevice) getDevice;
 			}
 		}
 		[CRepr]
@@ -2078,12 +2078,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT setBackgroundProcessingPriority(BSTR bstrPriority) mut => VT.setBackgroundProcessingPriority(ref this, bstrPriority);
+			public HResult setBackgroundProcessingPriority(BSTR bstrPriority) mut => VT.setBackgroundProcessingPriority(ref this, bstrPriority);
 
 			[CRepr]
 			public struct VTable : IWMPPlayerServices.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlayerServices2 self, BSTR bstrPriority) setBackgroundProcessingPriority;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlayerServices2 self, BSTR bstrPriority) setBackgroundProcessingPriority;
 			}
 		}
 		[CRepr]
@@ -2093,18 +2093,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_ripState(out WMPRipState pwmprs) mut => VT.get_ripState(ref this, out pwmprs);
-			public HRESULT get_ripProgress(out int32 plProgress) mut => VT.get_ripProgress(ref this, out plProgress);
-			public HRESULT startRip() mut => VT.startRip(ref this);
-			public HRESULT stopRip() mut => VT.stopRip(ref this);
+			public HResult get_ripState(out WMPRipState pwmprs) mut => VT.get_ripState(ref this, out pwmprs);
+			public HResult get_ripProgress(out int32 plProgress) mut => VT.get_ripProgress(ref this, out plProgress);
+			public HResult startRip() mut => VT.startRip(ref this);
+			public HResult stopRip() mut => VT.stopRip(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromRip self, out WMPRipState pwmprs) get_ripState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromRip self, out int32 plProgress) get_ripProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromRip self) startRip;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromRip self) stopRip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromRip self, out WMPRipState pwmprs) get_ripState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromRip self, out int32 plProgress) get_ripProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromRip self) startRip;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromRip self) stopRip;
 			}
 		}
 		[CRepr]
@@ -2114,38 +2114,38 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.isAvailable(ref this, bstrItem, out pIsAvailable);
-			public HRESULT getItemInfo(BSTR bstrItem, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItem, out pbstrVal);
-			public HRESULT get_label(out BSTR pbstrLabel) mut => VT.get_label(ref this, out pbstrLabel);
-			public HRESULT put_label(BSTR bstrLabel) mut => VT.put_label(ref this, bstrLabel);
-			public HRESULT get_burnFormat(out WMPBurnFormat pwmpbf) mut => VT.get_burnFormat(ref this, out pwmpbf);
-			public HRESULT put_burnFormat(WMPBurnFormat wmpbf) mut => VT.put_burnFormat(ref this, wmpbf);
-			public HRESULT get_burnPlaylist(out IWMPPlaylist* ppPlaylist) mut => VT.get_burnPlaylist(ref this, out ppPlaylist);
-			public HRESULT put_burnPlaylist(ref IWMPPlaylist pPlaylist) mut => VT.put_burnPlaylist(ref this, ref pPlaylist);
-			public HRESULT refreshStatus() mut => VT.refreshStatus(ref this);
-			public HRESULT get_burnState(out WMPBurnState pwmpbs) mut => VT.get_burnState(ref this, out pwmpbs);
-			public HRESULT get_burnProgress(out int32 plProgress) mut => VT.get_burnProgress(ref this, out plProgress);
-			public HRESULT startBurn() mut => VT.startBurn(ref this);
-			public HRESULT stopBurn() mut => VT.stopBurn(ref this);
-			public HRESULT erase() mut => VT.erase(ref this);
+			public HResult isAvailable(BSTR bstrItem, out int16 pIsAvailable) mut => VT.isAvailable(ref this, bstrItem, out pIsAvailable);
+			public HResult getItemInfo(BSTR bstrItem, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItem, out pbstrVal);
+			public HResult get_label(out BSTR pbstrLabel) mut => VT.get_label(ref this, out pbstrLabel);
+			public HResult put_label(BSTR bstrLabel) mut => VT.put_label(ref this, bstrLabel);
+			public HResult get_burnFormat(out WMPBurnFormat pwmpbf) mut => VT.get_burnFormat(ref this, out pwmpbf);
+			public HResult put_burnFormat(WMPBurnFormat wmpbf) mut => VT.put_burnFormat(ref this, wmpbf);
+			public HResult get_burnPlaylist(out IWMPPlaylist* ppPlaylist) mut => VT.get_burnPlaylist(ref this, out ppPlaylist);
+			public HResult put_burnPlaylist(ref IWMPPlaylist pPlaylist) mut => VT.put_burnPlaylist(ref this, ref pPlaylist);
+			public HResult refreshStatus() mut => VT.refreshStatus(ref this);
+			public HResult get_burnState(out WMPBurnState pwmpbs) mut => VT.get_burnState(ref this, out pwmpbs);
+			public HResult get_burnProgress(out int32 plProgress) mut => VT.get_burnProgress(ref this, out plProgress);
+			public HResult startBurn() mut => VT.startBurn(ref this);
+			public HResult stopBurn() mut => VT.stopBurn(ref this);
+			public HResult erase() mut => VT.erase(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, BSTR bstrItem, out int16 pIsAvailable) isAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, BSTR bstrItem, out BSTR pbstrVal) getItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, out BSTR pbstrLabel) get_label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, BSTR bstrLabel) put_label;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, out WMPBurnFormat pwmpbf) get_burnFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, WMPBurnFormat wmpbf) put_burnFormat;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, out IWMPPlaylist* ppPlaylist) get_burnPlaylist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, ref IWMPPlaylist pPlaylist) put_burnPlaylist;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self) refreshStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, out WMPBurnState pwmpbs) get_burnState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self, out int32 plProgress) get_burnProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self) startBurn;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self) stopBurn;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPCdromBurn self) erase;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, BSTR bstrItem, out int16 pIsAvailable) isAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, BSTR bstrItem, out BSTR pbstrVal) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, out BSTR pbstrLabel) get_label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, BSTR bstrLabel) put_label;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, out WMPBurnFormat pwmpbf) get_burnFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, WMPBurnFormat wmpbf) put_burnFormat;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, out IWMPPlaylist* ppPlaylist) get_burnPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, ref IWMPPlaylist pPlaylist) put_burnPlaylist;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self) refreshStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, out WMPBurnState pwmpbs) get_burnState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self, out int32 plProgress) get_burnProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self) startBurn;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self) stopBurn;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPCdromBurn self) erase;
 			}
 		}
 		[CRepr]
@@ -2155,14 +2155,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT addCondition(BSTR bstrAttribute, BSTR bstrOperator, BSTR bstrValue) mut => VT.addCondition(ref this, bstrAttribute, bstrOperator, bstrValue);
-			public HRESULT beginNextGroup() mut => VT.beginNextGroup(ref this);
+			public HResult addCondition(BSTR bstrAttribute, BSTR bstrOperator, BSTR bstrValue) mut => VT.addCondition(ref this, bstrAttribute, bstrOperator, bstrValue);
+			public HResult beginNextGroup() mut => VT.beginNextGroup(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPQuery self, BSTR bstrAttribute, BSTR bstrOperator, BSTR bstrValue) addCondition;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPQuery self) beginNextGroup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPQuery self, BSTR bstrAttribute, BSTR bstrOperator, BSTR bstrValue) addCondition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPQuery self) beginNextGroup;
 			}
 		}
 		[CRepr]
@@ -2172,18 +2172,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT createQuery(out IWMPQuery* ppQuery) mut => VT.createQuery(ref this, out ppQuery);
-			public HRESULT getPlaylistByQuery(ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPPlaylist* ppPlaylist) mut => VT.getPlaylistByQuery(ref this, ref pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, out ppPlaylist);
-			public HRESULT getStringCollectionByQuery(BSTR bstrAttribute, ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPStringCollection* ppStringCollection) mut => VT.getStringCollectionByQuery(ref this, bstrAttribute, ref pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, out ppStringCollection);
-			public HRESULT getByAttributeAndMediaType(BSTR bstrAttribute, BSTR bstrValue, BSTR bstrMediaType, out IWMPPlaylist* ppMediaItems) mut => VT.getByAttributeAndMediaType(ref this, bstrAttribute, bstrValue, bstrMediaType, out ppMediaItems);
+			public HResult createQuery(out IWMPQuery* ppQuery) mut => VT.createQuery(ref this, out ppQuery);
+			public HResult getPlaylistByQuery(ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPPlaylist* ppPlaylist) mut => VT.getPlaylistByQuery(ref this, ref pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, out ppPlaylist);
+			public HResult getStringCollectionByQuery(BSTR bstrAttribute, ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPStringCollection* ppStringCollection) mut => VT.getStringCollectionByQuery(ref this, bstrAttribute, ref pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, out ppStringCollection);
+			public HResult getByAttributeAndMediaType(BSTR bstrAttribute, BSTR bstrValue, BSTR bstrMediaType, out IWMPPlaylist* ppMediaItems) mut => VT.getByAttributeAndMediaType(ref this, bstrAttribute, bstrValue, bstrMediaType, out ppMediaItems);
 
 			[CRepr]
 			public struct VTable : IWMPMediaCollection.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection2 self, out IWMPQuery* ppQuery) createQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection2 self, ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPPlaylist* ppPlaylist) getPlaylistByQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection2 self, BSTR bstrAttribute, ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPStringCollection* ppStringCollection) getStringCollectionByQuery;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaCollection2 self, BSTR bstrAttribute, BSTR bstrValue, BSTR bstrMediaType, out IWMPPlaylist* ppMediaItems) getByAttributeAndMediaType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection2 self, out IWMPQuery* ppQuery) createQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection2 self, ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPPlaylist* ppPlaylist) getPlaylistByQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection2 self, BSTR bstrAttribute, ref IWMPQuery pQuery, BSTR bstrMediaType, BSTR bstrSortAttribute, int16 fSortAscending, out IWMPStringCollection* ppStringCollection) getStringCollectionByQuery;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaCollection2 self, BSTR bstrAttribute, BSTR bstrValue, BSTR bstrMediaType, out IWMPPlaylist* ppMediaItems) getByAttributeAndMediaType;
 			}
 		}
 		[CRepr]
@@ -2193,18 +2193,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT isIdentical(ref IWMPStringCollection2 pIWMPStringCollection2, out int16 pvbool) mut => VT.isIdentical(ref this, ref pIWMPStringCollection2, out pvbool);
-			public HRESULT getItemInfo(int32 lCollectionIndex, BSTR bstrItemName, out BSTR pbstrValue) mut => VT.getItemInfo(ref this, lCollectionIndex, bstrItemName, out pbstrValue);
-			public HRESULT getAttributeCountByType(int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, out int32 plCount) mut => VT.getAttributeCountByType(ref this, lCollectionIndex, bstrType, bstrLanguage, out plCount);
-			public HRESULT getItemInfoByType(int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, int32 lAttributeIndex, out VARIANT pvarValue) mut => VT.getItemInfoByType(ref this, lCollectionIndex, bstrType, bstrLanguage, lAttributeIndex, out pvarValue);
+			public HResult isIdentical(ref IWMPStringCollection2 pIWMPStringCollection2, out int16 pvbool) mut => VT.isIdentical(ref this, ref pIWMPStringCollection2, out pvbool);
+			public HResult getItemInfo(int32 lCollectionIndex, BSTR bstrItemName, out BSTR pbstrValue) mut => VT.getItemInfo(ref this, lCollectionIndex, bstrItemName, out pbstrValue);
+			public HResult getAttributeCountByType(int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, out int32 plCount) mut => VT.getAttributeCountByType(ref this, lCollectionIndex, bstrType, bstrLanguage, out plCount);
+			public HResult getItemInfoByType(int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, int32 lAttributeIndex, out VARIANT pvarValue) mut => VT.getItemInfoByType(ref this, lCollectionIndex, bstrType, bstrLanguage, lAttributeIndex, out pvarValue);
 
 			[CRepr]
 			public struct VTable : IWMPStringCollection.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPStringCollection2 self, ref IWMPStringCollection2 pIWMPStringCollection2, out int16 pvbool) isIdentical;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPStringCollection2 self, int32 lCollectionIndex, BSTR bstrItemName, out BSTR pbstrValue) getItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPStringCollection2 self, int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, out int32 plCount) getAttributeCountByType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPStringCollection2 self, int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, int32 lAttributeIndex, out VARIANT pvarValue) getItemInfoByType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPStringCollection2 self, ref IWMPStringCollection2 pIWMPStringCollection2, out int16 pvbool) isIdentical;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPStringCollection2 self, int32 lCollectionIndex, BSTR bstrItemName, out BSTR pbstrValue) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPStringCollection2 self, int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, out int32 plCount) getAttributeCountByType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPStringCollection2 self, int32 lCollectionIndex, BSTR bstrType, BSTR bstrLanguage, int32 lAttributeIndex, out VARIANT pvarValue) getItemInfoByType;
 			}
 		}
 		[CRepr]
@@ -2214,18 +2214,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_name(out BSTR pbstrName) mut => VT.get_name(ref this, out pbstrName);
-			public HRESULT get_type(out WMPLibraryType pwmplt) mut => VT.get_type(ref this, out pwmplt);
-			public HRESULT get_mediaCollection(out IWMPMediaCollection* ppIWMPMediaCollection) mut => VT.get_mediaCollection(ref this, out ppIWMPMediaCollection);
-			public HRESULT isIdentical(ref IWMPLibrary pIWMPLibrary, out int16 pvbool) mut => VT.isIdentical(ref this, ref pIWMPLibrary, out pvbool);
+			public HResult get_name(out BSTR pbstrName) mut => VT.get_name(ref this, out pbstrName);
+			public HResult get_type(out WMPLibraryType pwmplt) mut => VT.get_type(ref this, out pwmplt);
+			public HResult get_mediaCollection(out IWMPMediaCollection* ppIWMPMediaCollection) mut => VT.get_mediaCollection(ref this, out ppIWMPMediaCollection);
+			public HResult isIdentical(ref IWMPLibrary pIWMPLibrary, out int16 pvbool) mut => VT.isIdentical(ref this, ref pIWMPLibrary, out pvbool);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrary self, out BSTR pbstrName) get_name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrary self, out WMPLibraryType pwmplt) get_type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrary self, out IWMPMediaCollection* ppIWMPMediaCollection) get_mediaCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrary self, ref IWMPLibrary pIWMPLibrary, out int16 pvbool) isIdentical;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrary self, out BSTR pbstrName) get_name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrary self, out WMPLibraryType pwmplt) get_type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrary self, out IWMPMediaCollection* ppIWMPMediaCollection) get_mediaCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrary self, ref IWMPLibrary pIWMPLibrary, out int16 pvbool) isIdentical;
 			}
 		}
 		[CRepr]
@@ -2235,14 +2235,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getCountByType(WMPLibraryType wmplt, out int32 plCount) mut => VT.getCountByType(ref this, wmplt, out plCount);
-			public HRESULT getLibraryByType(WMPLibraryType wmplt, int32 lIndex, out IWMPLibrary* ppIWMPLibrary) mut => VT.getLibraryByType(ref this, wmplt, lIndex, out ppIWMPLibrary);
+			public HResult getCountByType(WMPLibraryType wmplt, out int32 plCount) mut => VT.getCountByType(ref this, wmplt, out plCount);
+			public HResult getLibraryByType(WMPLibraryType wmplt, int32 lIndex, out IWMPLibrary* ppIWMPLibrary) mut => VT.getLibraryByType(ref this, wmplt, lIndex, out ppIWMPLibrary);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibraryServices self, WMPLibraryType wmplt, out int32 plCount) getCountByType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibraryServices self, WMPLibraryType wmplt, int32 lIndex, out IWMPLibrary* ppIWMPLibrary) getLibraryByType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibraryServices self, WMPLibraryType wmplt, out int32 plCount) getCountByType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibraryServices self, WMPLibraryType wmplt, int32 lIndex, out IWMPLibrary* ppIWMPLibrary) getLibraryByType;
 			}
 		}
 		[CRepr]
@@ -2252,16 +2252,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT isLibraryShared(out int16 pvbShared) mut => VT.isLibraryShared(ref this, out pvbShared);
-			public HRESULT isLibrarySharingEnabled(out int16 pvbEnabled) mut => VT.isLibrarySharingEnabled(ref this, out pvbEnabled);
-			public HRESULT showLibrarySharing() mut => VT.showLibrarySharing(ref this);
+			public HResult isLibraryShared(out int16 pvbShared) mut => VT.isLibraryShared(ref this, out pvbShared);
+			public HResult isLibrarySharingEnabled(out int16 pvbEnabled) mut => VT.isLibrarySharingEnabled(ref this, out pvbEnabled);
+			public HResult showLibrarySharing() mut => VT.showLibrarySharing(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrarySharingServices self, out int16 pvbShared) isLibraryShared;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrarySharingServices self, out int16 pvbEnabled) isLibrarySharingEnabled;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrarySharingServices self) showLibrarySharing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrarySharingServices self, out int16 pvbShared) isLibraryShared;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrarySharingServices self, out int16 pvbEnabled) isLibrarySharingEnabled;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrarySharingServices self) showLibrarySharing;
 			}
 		}
 		[CRepr]
@@ -2271,32 +2271,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
-			public HRESULT item(int32 lIndex, out BSTR pbstrFolder) mut => VT.item(ref this, lIndex, out pbstrFolder);
-			public HRESULT add(BSTR bstrFolder) mut => VT.add(ref this, bstrFolder);
-			public HRESULT remove(int32 lIndex) mut => VT.remove(ref this, lIndex);
-			public HRESULT get_scanState(out WMPFolderScanState pwmpfss) mut => VT.get_scanState(ref this, out pwmpfss);
-			public HRESULT get_currentFolder(out BSTR pbstrFolder) mut => VT.get_currentFolder(ref this, out pbstrFolder);
-			public HRESULT get_scannedFilesCount(out int32 plCount) mut => VT.get_scannedFilesCount(ref this, out plCount);
-			public HRESULT get_addedFilesCount(out int32 plCount) mut => VT.get_addedFilesCount(ref this, out plCount);
-			public HRESULT get_updateProgress(out int32 plProgress) mut => VT.get_updateProgress(ref this, out plProgress);
-			public HRESULT startScan() mut => VT.startScan(ref this);
-			public HRESULT stopScan() mut => VT.stopScan(ref this);
+			public HResult get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
+			public HResult item(int32 lIndex, out BSTR pbstrFolder) mut => VT.item(ref this, lIndex, out pbstrFolder);
+			public HResult add(BSTR bstrFolder) mut => VT.add(ref this, bstrFolder);
+			public HResult remove(int32 lIndex) mut => VT.remove(ref this, lIndex);
+			public HResult get_scanState(out WMPFolderScanState pwmpfss) mut => VT.get_scanState(ref this, out pwmpfss);
+			public HResult get_currentFolder(out BSTR pbstrFolder) mut => VT.get_currentFolder(ref this, out pbstrFolder);
+			public HResult get_scannedFilesCount(out int32 plCount) mut => VT.get_scannedFilesCount(ref this, out plCount);
+			public HResult get_addedFilesCount(out int32 plCount) mut => VT.get_addedFilesCount(ref this, out plCount);
+			public HResult get_updateProgress(out int32 plProgress) mut => VT.get_updateProgress(ref this, out plProgress);
+			public HResult startScan() mut => VT.startScan(ref this);
+			public HResult stopScan() mut => VT.stopScan(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, out int32 plCount) get_count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, int32 lIndex, out BSTR pbstrFolder) item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, BSTR bstrFolder) add;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, int32 lIndex) remove;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, out WMPFolderScanState pwmpfss) get_scanState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, out BSTR pbstrFolder) get_currentFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, out int32 plCount) get_scannedFilesCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, out int32 plCount) get_addedFilesCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self, out int32 plProgress) get_updateProgress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self) startScan;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPFolderMonitorServices self) stopScan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, out int32 plCount) get_count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, int32 lIndex, out BSTR pbstrFolder) item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, BSTR bstrFolder) add;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, int32 lIndex) remove;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, out WMPFolderScanState pwmpfss) get_scanState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, out BSTR pbstrFolder) get_currentFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, out int32 plCount) get_scannedFilesCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, out int32 plCount) get_addedFilesCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self, out int32 plProgress) get_updateProgress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self) startScan;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPFolderMonitorServices self) stopScan;
 			}
 		}
 		[CRepr]
@@ -2306,12 +2306,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT setItemInfo(BSTR bstrItemName, BSTR bstrVal) mut => VT.setItemInfo(ref this, bstrItemName, bstrVal);
+			public HResult setItemInfo(BSTR bstrItemName, BSTR bstrVal) mut => VT.setItemInfo(ref this, bstrItemName, bstrVal);
 
 			[CRepr]
 			public struct VTable : IWMPSyncDevice.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice2 self, BSTR bstrItemName, BSTR bstrVal) setItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice2 self, BSTR bstrItemName, BSTR bstrVal) setItemInfo;
 			}
 		}
 		[CRepr]
@@ -2321,14 +2321,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT estimateSyncSize(ref IWMPPlaylist pNonRulePlaylist, ref IWMPPlaylist pRulesPlaylist) mut => VT.estimateSyncSize(ref this, ref pNonRulePlaylist, ref pRulesPlaylist);
-			public HRESULT cancelEstimation() mut => VT.cancelEstimation(ref this);
+			public HResult estimateSyncSize(ref IWMPPlaylist pNonRulePlaylist, ref IWMPPlaylist pRulesPlaylist) mut => VT.estimateSyncSize(ref this, ref pNonRulePlaylist, ref pRulesPlaylist);
+			public HResult cancelEstimation() mut => VT.cancelEstimation(ref this);
 
 			[CRepr]
 			public struct VTable : IWMPSyncDevice2.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice3 self, ref IWMPPlaylist pNonRulePlaylist, ref IWMPPlaylist pRulesPlaylist) estimateSyncSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSyncDevice3 self) cancelEstimation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice3 self, ref IWMPPlaylist pNonRulePlaylist, ref IWMPPlaylist pRulesPlaylist) estimateSyncSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSyncDevice3 self) cancelEstimation;
 			}
 		}
 		[CRepr]
@@ -2338,12 +2338,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
+			public HResult getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
 
 			[CRepr]
 			public struct VTable : IWMPLibrary.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPLibrary2 self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPLibrary2 self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
 			}
 		}
 		[CRepr]
@@ -2461,7 +2461,7 @@ namespace Win32
 			public void DeviceStatusChange(ref IWMPSyncDevice pDevice, WMPDeviceStatus NewStatus) mut => VT.DeviceStatusChange(ref this, ref pDevice, NewStatus);
 			public void DeviceSyncStateChange(ref IWMPSyncDevice pDevice, WMPSyncState NewState) mut => VT.DeviceSyncStateChange(ref this, ref pDevice, NewState);
 			public void DeviceSyncError(ref IWMPSyncDevice pDevice, ref IDispatch pMedia) mut => VT.DeviceSyncError(ref this, ref pDevice, ref pMedia);
-			public void CreatePartnershipComplete(ref IWMPSyncDevice pDevice, HRESULT hrResult) mut => VT.CreatePartnershipComplete(ref this, ref pDevice, hrResult);
+			public void CreatePartnershipComplete(ref IWMPSyncDevice pDevice, HResult hrResult) mut => VT.CreatePartnershipComplete(ref this, ref pDevice, hrResult);
 
 			[CRepr]
 			public struct VTable : IWMPEvents.VTable
@@ -2471,7 +2471,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents2 self, ref IWMPSyncDevice pDevice, WMPDeviceStatus NewStatus) DeviceStatusChange;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents2 self, ref IWMPSyncDevice pDevice, WMPSyncState NewState) DeviceSyncStateChange;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents2 self, ref IWMPSyncDevice pDevice, ref IDispatch pMedia) DeviceSyncError;
-				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents2 self, ref IWMPSyncDevice pDevice, HRESULT hrResult) CreatePartnershipComplete;
+				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents2 self, ref IWMPSyncDevice pDevice, HResult hrResult) CreatePartnershipComplete;
 			}
 		}
 		[CRepr]
@@ -2485,7 +2485,7 @@ namespace Win32
 			public void CdromRipMediaError(ref IWMPCdromRip pCdromRip, ref IDispatch pMedia) mut => VT.CdromRipMediaError(ref this, ref pCdromRip, ref pMedia);
 			public void CdromBurnStateChange(ref IWMPCdromBurn pCdromBurn, WMPBurnState wmpbs) mut => VT.CdromBurnStateChange(ref this, ref pCdromBurn, wmpbs);
 			public void CdromBurnMediaError(ref IWMPCdromBurn pCdromBurn, ref IDispatch pMedia) mut => VT.CdromBurnMediaError(ref this, ref pCdromBurn, ref pMedia);
-			public void CdromBurnError(ref IWMPCdromBurn pCdromBurn, HRESULT hrError) mut => VT.CdromBurnError(ref this, ref pCdromBurn, hrError);
+			public void CdromBurnError(ref IWMPCdromBurn pCdromBurn, HResult hrError) mut => VT.CdromBurnError(ref this, ref pCdromBurn, hrError);
 			public void LibraryConnect(ref IWMPLibrary pLibrary) mut => VT.LibraryConnect(ref this, ref pLibrary);
 			public void LibraryDisconnect(ref IWMPLibrary pLibrary) mut => VT.LibraryDisconnect(ref this, ref pLibrary);
 			public void FolderScanStateChange(WMPFolderScanState wmpfss) mut => VT.FolderScanStateChange(ref this, wmpfss);
@@ -2500,7 +2500,7 @@ namespace Win32
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPCdromRip pCdromRip, ref IDispatch pMedia) CdromRipMediaError;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPCdromBurn pCdromBurn, WMPBurnState wmpbs) CdromBurnStateChange;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPCdromBurn pCdromBurn, ref IDispatch pMedia) CdromBurnMediaError;
-				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPCdromBurn pCdromBurn, HRESULT hrError) CdromBurnError;
+				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPCdromBurn pCdromBurn, HResult hrError) CdromBurnError;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPLibrary pLibrary) LibraryConnect;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, ref IWMPLibrary pLibrary) LibraryDisconnect;
 				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents3 self, WMPFolderScanState wmpfss) FolderScanStateChange;
@@ -2516,12 +2516,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public void DeviceEstimation(ref IWMPSyncDevice pDevice, HRESULT hrResult, int64 qwEstimatedUsedSpace, int64 qwEstimatedSpace) mut => VT.DeviceEstimation(ref this, ref pDevice, hrResult, qwEstimatedUsedSpace, qwEstimatedSpace);
+			public void DeviceEstimation(ref IWMPSyncDevice pDevice, HResult hrResult, int64 qwEstimatedUsedSpace, int64 qwEstimatedSpace) mut => VT.DeviceEstimation(ref this, ref pDevice, hrResult, qwEstimatedUsedSpace, qwEstimatedSpace);
 
 			[CRepr]
 			public struct VTable : IWMPEvents3.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents4 self, ref IWMPSyncDevice pDevice, HRESULT hrResult, int64 qwEstimatedUsedSpace, int64 qwEstimatedSpace) DeviceEstimation;
+				public new function [CallingConvention(.Stdcall)] void(ref IWMPEvents4 self, ref IWMPSyncDevice pDevice, HResult hrResult, int64 qwEstimatedUsedSpace, int64 qwEstimatedSpace) DeviceEstimation;
 			}
 		}
 		[CRepr]
@@ -2541,24 +2541,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetDesiredSize(out SIZE pSize) mut => VT.GetDesiredSize(ref this, out pSize);
-			public HRESULT SetRects(in RECT pSrc, in RECT pDest, in RECT pClip) mut => VT.SetRects(ref this, pSrc, pDest, pClip);
-			public HRESULT GetRects(out RECT pSrc, out RECT pDest, out RECT pClip) mut => VT.GetRects(ref this, out pSrc, out pDest, out pClip);
-			public HRESULT SetWindowless(BOOL fWindowless) mut => VT.SetWindowless(ref this, fWindowless);
-			public HRESULT GetWindowless(out BOOL pfWindowless) mut => VT.GetWindowless(ref this, out pfWindowless);
-			public HRESULT SetFullScreen(BOOL fFullScreen) mut => VT.SetFullScreen(ref this, fFullScreen);
-			public HRESULT GetFullScreen(out BOOL pfFullScreen) mut => VT.GetFullScreen(ref this, out pfFullScreen);
+			public HResult GetDesiredSize(out SIZE pSize) mut => VT.GetDesiredSize(ref this, out pSize);
+			public HResult SetRects(in RectI pSrc, in RectI pDest, in RectI pClip) mut => VT.SetRects(ref this, pSrc, pDest, pClip);
+			public HResult GetRects(out RectI pSrc, out RectI pDest, out RectI pClip) mut => VT.GetRects(ref this, out pSrc, out pDest, out pClip);
+			public HResult SetWindowless(IntBool fWindowless) mut => VT.SetWindowless(ref this, fWindowless);
+			public HResult GetWindowless(out IntBool pfWindowless) mut => VT.GetWindowless(ref this, out pfWindowless);
+			public HResult SetFullScreen(IntBool fFullScreen) mut => VT.SetFullScreen(ref this, fFullScreen);
+			public HResult GetFullScreen(out IntBool pfFullScreen) mut => VT.GetFullScreen(ref this, out pfFullScreen);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, out SIZE pSize) GetDesiredSize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, in RECT pSrc, in RECT pDest, in RECT pClip) SetRects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, out RECT pSrc, out RECT pDest, out RECT pClip) GetRects;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, BOOL fWindowless) SetWindowless;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, out BOOL pfWindowless) GetWindowless;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, BOOL fFullScreen) SetFullScreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstate self, out BOOL pfFullScreen) GetFullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, out SIZE pSize) GetDesiredSize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, in RectI pSrc, in RectI pDest, in RectI pClip) SetRects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, out RectI pSrc, out RectI pDest, out RectI pClip) GetRects;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, IntBool fWindowless) SetWindowless;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, out IntBool pfWindowless) GetWindowless;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, IntBool fFullScreen) SetFullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstate self, out IntBool pfFullScreen) GetFullScreen;
 			}
 		}
 		[CRepr]
@@ -2568,14 +2568,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnDesiredSizeChange(out SIZE pSize) mut => VT.OnDesiredSizeChange(ref this, out pSize);
-			public HRESULT OnFullScreenTransition(BOOL fFullScreen) mut => VT.OnFullScreenTransition(ref this, fFullScreen);
+			public HResult OnDesiredSizeChange(out SIZE pSize) mut => VT.OnDesiredSizeChange(ref this, out pSize);
+			public HResult OnFullScreenTransition(IntBool fFullScreen) mut => VT.OnFullScreenTransition(ref this, fFullScreen);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstateHost self, out SIZE pSize) OnDesiredSizeChange;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeRealEstateHost self, BOOL fFullScreen) OnFullScreenTransition;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstateHost self, out SIZE pSize) OnDesiredSizeChange;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeRealEstateHost self, IntBool fFullScreen) OnFullScreenTransition;
 			}
 		}
 		[CRepr]
@@ -2585,14 +2585,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetOwnerWindow(int hwnd) mut => VT.SetOwnerWindow(ref this, hwnd);
-			public HRESULT GetOwnerWindow(out int phwnd) mut => VT.GetOwnerWindow(ref this, out phwnd);
+			public HResult SetOwnerWindow(int hwnd) mut => VT.SetOwnerWindow(ref this, hwnd);
+			public HResult GetOwnerWindow(out int phwnd) mut => VT.GetOwnerWindow(ref this, out phwnd);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeWindowed self, int hwnd) SetOwnerWindow;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeWindowed self, out int phwnd) GetOwnerWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeWindowed self, int hwnd) SetOwnerWindow;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeWindowed self, out int phwnd) GetOwnerWindow;
 			}
 		}
 		[CRepr]
@@ -2602,12 +2602,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnWindowMessageFromRenderer(uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out BOOL pfHandled) mut => VT.OnWindowMessageFromRenderer(ref this, uMsg, wparam, lparam, out plRet, out pfHandled);
+			public HResult OnWindowMessageFromRenderer(uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out IntBool pfHandled) mut => VT.OnWindowMessageFromRenderer(ref this, uMsg, wparam, lparam, out plRet, out pfHandled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeWindowedHost self, uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out BOOL pfHandled) OnWindowMessageFromRenderer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeWindowedHost self, uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out IntBool pfHandled) OnWindowMessageFromRenderer;
 			}
 		}
 		[CRepr]
@@ -2617,12 +2617,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnWindowMessage(uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out BOOL pfHandled) mut => VT.OnWindowMessage(ref this, uMsg, wparam, lparam, out plRet, out pfHandled);
+			public HResult OnWindowMessage(uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out IntBool pfHandled) mut => VT.OnWindowMessage(ref this, uMsg, wparam, lparam, out plRet, out pfHandled);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPWindowMessageSink self, uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out BOOL pfHandled) OnWindowMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPWindowMessageSink self, uint32 uMsg, WPARAM wparam, LPARAM lparam, out LRESULT plRet, out IntBool pfHandled) OnWindowMessage;
 			}
 		}
 		[CRepr]
@@ -2632,12 +2632,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT OnDraw(int hdc, in RECT prcDraw) mut => VT.OnDraw(ref this, hdc, prcDraw);
+			public HResult OnDraw(int hdc, in RectI prcDraw) mut => VT.OnDraw(ref this, hdc, prcDraw);
 
 			[CRepr]
 			public struct VTable : IWMPWindowMessageSink.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeWindowless self, int hdc, in RECT prcDraw) OnDraw;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeWindowless self, int hdc, in RectI prcDraw) OnDraw;
 			}
 		}
 		[CRepr]
@@ -2647,12 +2647,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT InvalidateRect(in RECT prc, BOOL fErase) mut => VT.InvalidateRect(ref this, prc, fErase);
+			public HResult InvalidateRect(in RectI prc, IntBool fErase) mut => VT.InvalidateRect(ref this, prc, fErase);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPNodeWindowlessHost self, in RECT prc, BOOL fErase) InvalidateRect;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPNodeWindowlessHost self, in RectI prc, IntBool fErase) InvalidateRect;
 			}
 		}
 		[CRepr]
@@ -2662,12 +2662,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_presenterActivate(ref IMFActivate pActivate) mut => VT.put_presenterActivate(ref this, ref pActivate);
+			public HResult put_presenterActivate(ref IMFActivate pActivate) mut => VT.put_presenterActivate(ref this, ref pActivate);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPVideoRenderConfig self, ref IMFActivate pActivate) put_presenterActivate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPVideoRenderConfig self, ref IMFActivate pActivate) put_presenterActivate;
 			}
 		}
 		[CRepr]
@@ -2677,14 +2677,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_audioOutputDevice(out BSTR pbstrOutputDevice) mut => VT.get_audioOutputDevice(ref this, out pbstrOutputDevice);
-			public HRESULT put_audioOutputDevice(BSTR bstrOutputDevice) mut => VT.put_audioOutputDevice(ref this, bstrOutputDevice);
+			public HResult get_audioOutputDevice(out BSTR pbstrOutputDevice) mut => VT.get_audioOutputDevice(ref this, out pbstrOutputDevice);
+			public HResult put_audioOutputDevice(BSTR bstrOutputDevice) mut => VT.put_audioOutputDevice(ref this, bstrOutputDevice);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPAudioRenderConfig self, out BSTR pbstrOutputDevice) get_audioOutputDevice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPAudioRenderConfig self, BSTR bstrOutputDevice) put_audioOutputDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPAudioRenderConfig self, out BSTR pbstrOutputDevice) get_audioOutputDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPAudioRenderConfig self, BSTR bstrOutputDevice) put_audioOutputDevice;
 			}
 		}
 		[CRepr]
@@ -2694,14 +2694,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT put_inProcOnly(BOOL fInProc) mut => VT.put_inProcOnly(ref this, fInProc);
-			public HRESULT get_inProcOnly(out BOOL pfInProc) mut => VT.get_inProcOnly(ref this, out pfInProc);
+			public HResult put_inProcOnly(IntBool fInProc) mut => VT.put_inProcOnly(ref this, fInProc);
+			public HResult get_inProcOnly(out IntBool pfInProc) mut => VT.get_inProcOnly(ref this, out pfInProc);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPRenderConfig self, BOOL fInProc) put_inProcOnly;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPRenderConfig self, out BOOL pfInProc) get_inProcOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPRenderConfig self, IntBool fInProc) put_inProcOnly;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPRenderConfig self, out IntBool pfInProc) get_inProcOnly;
 			}
 		}
 		[CRepr]
@@ -2711,14 +2711,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetStreamTime(out int64 prt) mut => VT.GetStreamTime(ref this, out prt);
-			public HRESULT GetStreamState(out WMPServices_StreamState pState) mut => VT.GetStreamState(ref this, out pState);
+			public HResult GetStreamTime(out int64 prt) mut => VT.GetStreamTime(ref this, out prt);
+			public HResult GetStreamState(out WMPServices_StreamState pState) mut => VT.GetStreamState(ref this, out pState);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPServices self, out int64 prt) GetStreamTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPServices self, out WMPServices_StreamState pState) GetStreamState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPServices self, out int64 prt) GetStreamTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPServices self, out WMPServices_StreamState pState) GetStreamState;
 			}
 		}
 		[CRepr]
@@ -2728,14 +2728,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT WMPRegisterPlayerPlugin(PWSTR pwszFriendlyName, PWSTR pwszDescription, PWSTR pwszUninstallString, uint32 dwPriority, Guid guidPluginType, Guid clsid, uint32 cMediaTypes, void* pMediaTypes) mut => VT.WMPRegisterPlayerPlugin(ref this, pwszFriendlyName, pwszDescription, pwszUninstallString, dwPriority, guidPluginType, clsid, cMediaTypes, pMediaTypes);
-			public HRESULT WMPUnRegisterPlayerPlugin(Guid guidPluginType, Guid clsid) mut => VT.WMPUnRegisterPlayerPlugin(ref this, guidPluginType, clsid);
+			public HResult WMPRegisterPlayerPlugin(char16* pwszFriendlyName, char16* pwszDescription, char16* pwszUninstallString, uint32 dwPriority, Guid guidPluginType, Guid clsid, uint32 cMediaTypes, void* pMediaTypes) mut => VT.WMPRegisterPlayerPlugin(ref this, pwszFriendlyName, pwszDescription, pwszUninstallString, dwPriority, guidPluginType, clsid, cMediaTypes, pMediaTypes);
+			public HResult WMPUnRegisterPlayerPlugin(Guid guidPluginType, Guid clsid) mut => VT.WMPUnRegisterPlayerPlugin(ref this, guidPluginType, clsid);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaPluginRegistrar self, PWSTR pwszFriendlyName, PWSTR pwszDescription, PWSTR pwszUninstallString, uint32 dwPriority, Guid guidPluginType, Guid clsid, uint32 cMediaTypes, void* pMediaTypes) WMPRegisterPlayerPlugin;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPMediaPluginRegistrar self, Guid guidPluginType, Guid clsid) WMPUnRegisterPlayerPlugin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaPluginRegistrar self, char16* pwszFriendlyName, char16* pwszDescription, char16* pwszUninstallString, uint32 dwPriority, Guid guidPluginType, Guid clsid, uint32 cMediaTypes, void* pMediaTypes) WMPRegisterPlayerPlugin;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPMediaPluginRegistrar self, Guid guidPluginType, Guid clsid) WMPUnRegisterPlayerPlugin;
 			}
 		}
 		[CRepr]
@@ -2745,22 +2745,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Init(uint dwPlaybackContext) mut => VT.Init(ref this, dwPlaybackContext);
-			public HRESULT Shutdown() mut => VT.Shutdown(ref this);
-			public HRESULT GetID(out Guid pGUID) mut => VT.GetID(ref this, out pGUID);
-			public HRESULT GetCaps(out uint32 pdwFlags) mut => VT.GetCaps(ref this, out pdwFlags);
-			public HRESULT AdviseWMPServices(ref IWMPServices pWMPServices) mut => VT.AdviseWMPServices(ref this, ref pWMPServices);
-			public HRESULT UnAdviseWMPServices() mut => VT.UnAdviseWMPServices(ref this);
+			public HResult Init(uint dwPlaybackContext) mut => VT.Init(ref this, dwPlaybackContext);
+			public HResult Shutdown() mut => VT.Shutdown(ref this);
+			public HResult GetID(out Guid pGUID) mut => VT.GetID(ref this, out pGUID);
+			public HResult GetCaps(out uint32 pdwFlags) mut => VT.GetCaps(ref this, out pdwFlags);
+			public HResult AdviseWMPServices(ref IWMPServices pWMPServices) mut => VT.AdviseWMPServices(ref this, ref pWMPServices);
+			public HResult UnAdviseWMPServices() mut => VT.UnAdviseWMPServices(ref this);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlugin self, uint dwPlaybackContext) Init;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlugin self) Shutdown;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlugin self, out Guid pGUID) GetID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlugin self, out uint32 pdwFlags) GetCaps;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlugin self, ref IWMPServices pWMPServices) AdviseWMPServices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPlugin self) UnAdviseWMPServices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlugin self, uint dwPlaybackContext) Init;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlugin self) Shutdown;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlugin self, out Guid pGUID) GetID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlugin self, out uint32 pdwFlags) GetCaps;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlugin self, ref IWMPServices pWMPServices) AdviseWMPServices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPlugin self) UnAdviseWMPServices;
 			}
 		}
 		[CRepr]
@@ -2770,14 +2770,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetEnable(BOOL fEnable) mut => VT.SetEnable(ref this, fEnable);
-			public HRESULT GetEnable(out BOOL pfEnable) mut => VT.GetEnable(ref this, out pfEnable);
+			public HResult SetEnable(IntBool fEnable) mut => VT.SetEnable(ref this, fEnable);
+			public HResult GetEnable(out IntBool pfEnable) mut => VT.GetEnable(ref this, out pfEnable);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginEnable self, BOOL fEnable) SetEnable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginEnable self, out BOOL pfEnable) GetEnable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginEnable self, IntBool fEnable) SetEnable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginEnable self, out IntBool pfEnable) GetEnable;
 			}
 		}
 		[CRepr]
@@ -2787,16 +2787,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GraphCreationPreRender(ref IUnknown pFilterGraph, ref IUnknown pReserved) mut => VT.GraphCreationPreRender(ref this, ref pFilterGraph, ref pReserved);
-			public HRESULT GraphCreationPostRender(ref IUnknown pFilterGraph) mut => VT.GraphCreationPostRender(ref this, ref pFilterGraph);
-			public HRESULT GetGraphCreationFlags(out uint32 pdwFlags) mut => VT.GetGraphCreationFlags(ref this, out pdwFlags);
+			public HResult GraphCreationPreRender(ref IUnknown pFilterGraph, ref IUnknown pReserved) mut => VT.GraphCreationPreRender(ref this, ref pFilterGraph, ref pReserved);
+			public HResult GraphCreationPostRender(ref IUnknown pFilterGraph) mut => VT.GraphCreationPostRender(ref this, ref pFilterGraph);
+			public HResult GetGraphCreationFlags(out uint32 pdwFlags) mut => VT.GetGraphCreationFlags(ref this, out pdwFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPGraphCreation self, ref IUnknown pFilterGraph, ref IUnknown pReserved) GraphCreationPreRender;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPGraphCreation self, ref IUnknown pFilterGraph) GraphCreationPostRender;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPGraphCreation self, out uint32 pdwFlags) GetGraphCreationFlags;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPGraphCreation self, ref IUnknown pFilterGraph, ref IUnknown pReserved) GraphCreationPreRender;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPGraphCreation self, ref IUnknown pFilterGraph) GraphCreationPostRender;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPGraphCreation self, out uint32 pdwFlags) GetGraphCreationFlags;
 			}
 		}
 		[CRepr]
@@ -2806,14 +2806,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT ConvertFile(BSTR bstrInputFile, BSTR bstrDestinationFolder, out BSTR pbstrOutputFile) mut => VT.ConvertFile(ref this, bstrInputFile, bstrDestinationFolder, out pbstrOutputFile);
-			public HRESULT GetErrorURL(out BSTR pbstrURL) mut => VT.GetErrorURL(ref this, out pbstrURL);
+			public HResult ConvertFile(BSTR bstrInputFile, BSTR bstrDestinationFolder, out BSTR pbstrOutputFile) mut => VT.ConvertFile(ref this, bstrInputFile, bstrDestinationFolder, out pbstrOutputFile);
+			public HResult GetErrorURL(out BSTR pbstrURL) mut => VT.GetErrorURL(ref this, out pbstrURL);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPConvert self, BSTR bstrInputFile, BSTR bstrDestinationFolder, out BSTR pbstrOutputFile) ConvertFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPConvert self, out BSTR pbstrURL) GetErrorURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPConvert self, BSTR bstrInputFile, BSTR bstrDestinationFolder, out BSTR pbstrOutputFile) ConvertFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPConvert self, out BSTR pbstrURL) GetErrorURL;
 			}
 		}
 		[CRepr]
@@ -2823,12 +2823,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT allowTranscode(out int16 pvbAllow) mut => VT.allowTranscode(ref this, out pvbAllow);
+			public HResult allowTranscode(out int16 pvbAllow) mut => VT.allowTranscode(ref this, out pvbAllow);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPTranscodePolicy self, out int16 pvbAllow) allowTranscode;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPTranscodePolicy self, out int16 pvbAllow) allowTranscode;
 			}
 		}
 		[CRepr]
@@ -2838,12 +2838,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT NotifyUserEvent(int32 EventCode) mut => VT.NotifyUserEvent(ref this, EventCode);
+			public HResult NotifyUserEvent(int32 EventCode) mut => VT.NotifyUserEvent(ref this, EventCode);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPUserEventSink self, int32 EventCode) NotifyUserEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPUserEventSink self, int32 EventCode) NotifyUserEvent;
 			}
 		}
 		[CRepr]
@@ -2853,42 +2853,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT RootFolder(in Guid riid, void** ppv) mut => VT.RootFolder(ref this, riid, ppv);
-			public HRESULT IsSubscribed(PWSTR pszUrl, out BOOL pbSubscribed) mut => VT.IsSubscribed(ref this, pszUrl, out pbSubscribed);
-			public HRESULT ExistsFeed(PWSTR pszPath, out BOOL pbFeedExists) mut => VT.ExistsFeed(ref this, pszPath, out pbFeedExists);
-			public HRESULT GetFeed(PWSTR pszPath, in Guid riid, void** ppv) mut => VT.GetFeed(ref this, pszPath, riid, ppv);
-			public HRESULT GetFeedByUrl(PWSTR pszUrl, in Guid riid, void** ppv) mut => VT.GetFeedByUrl(ref this, pszUrl, riid, ppv);
-			public HRESULT ExistsFolder(PWSTR pszPath, out BOOL pbFolderExists) mut => VT.ExistsFolder(ref this, pszPath, out pbFolderExists);
-			public HRESULT GetFolder(PWSTR pszPath, in Guid riid, void** ppv) mut => VT.GetFolder(ref this, pszPath, riid, ppv);
-			public HRESULT DeleteFeed(PWSTR pszPath) mut => VT.DeleteFeed(ref this, pszPath);
-			public HRESULT DeleteFolder(PWSTR pszPath) mut => VT.DeleteFolder(ref this, pszPath);
-			public HRESULT BackgroundSync(FEEDS_BACKGROUNDSYNC_ACTION fbsa) mut => VT.BackgroundSync(ref this, fbsa);
-			public HRESULT BackgroundSyncStatus(out FEEDS_BACKGROUNDSYNC_STATUS pfbss) mut => VT.BackgroundSyncStatus(ref this, out pfbss);
-			public HRESULT DefaultInterval(out uint32 puiInterval) mut => VT.DefaultInterval(ref this, out puiInterval);
-			public HRESULT SetDefaultInterval(uint32 uiInterval) mut => VT.SetDefaultInterval(ref this, uiInterval);
-			public HRESULT AsyncSyncAll() mut => VT.AsyncSyncAll(ref this);
-			public HRESULT Normalize(ref IStream pStreamIn, out IStream* ppStreamOut) mut => VT.Normalize(ref this, ref pStreamIn, out ppStreamOut);
-			public HRESULT ItemCountLimit(out uint32 puiItemCountLimit) mut => VT.ItemCountLimit(ref this, out puiItemCountLimit);
+			public HResult RootFolder(in Guid riid, void** ppv) mut => VT.RootFolder(ref this, riid, ppv);
+			public HResult IsSubscribed(char16* pszUrl, out IntBool pbSubscribed) mut => VT.IsSubscribed(ref this, pszUrl, out pbSubscribed);
+			public HResult ExistsFeed(char16* pszPath, out IntBool pbFeedExists) mut => VT.ExistsFeed(ref this, pszPath, out pbFeedExists);
+			public HResult GetFeed(char16* pszPath, in Guid riid, void** ppv) mut => VT.GetFeed(ref this, pszPath, riid, ppv);
+			public HResult GetFeedByUrl(char16* pszUrl, in Guid riid, void** ppv) mut => VT.GetFeedByUrl(ref this, pszUrl, riid, ppv);
+			public HResult ExistsFolder(char16* pszPath, out IntBool pbFolderExists) mut => VT.ExistsFolder(ref this, pszPath, out pbFolderExists);
+			public HResult GetFolder(char16* pszPath, in Guid riid, void** ppv) mut => VT.GetFolder(ref this, pszPath, riid, ppv);
+			public HResult DeleteFeed(char16* pszPath) mut => VT.DeleteFeed(ref this, pszPath);
+			public HResult DeleteFolder(char16* pszPath) mut => VT.DeleteFolder(ref this, pszPath);
+			public HResult BackgroundSync(FEEDS_BACKGROUNDSYNC_ACTION fbsa) mut => VT.BackgroundSync(ref this, fbsa);
+			public HResult BackgroundSyncStatus(out FEEDS_BACKGROUNDSYNC_STATUS pfbss) mut => VT.BackgroundSyncStatus(ref this, out pfbss);
+			public HResult DefaultInterval(out uint32 puiInterval) mut => VT.DefaultInterval(ref this, out puiInterval);
+			public HResult SetDefaultInterval(uint32 uiInterval) mut => VT.SetDefaultInterval(ref this, uiInterval);
+			public HResult AsyncSyncAll() mut => VT.AsyncSyncAll(ref this);
+			public HResult Normalize(ref IStream pStreamIn, out IStream* ppStreamOut) mut => VT.Normalize(ref this, ref pStreamIn, out ppStreamOut);
+			public HResult ItemCountLimit(out uint32 puiItemCountLimit) mut => VT.ItemCountLimit(ref this, out puiItemCountLimit);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, in Guid riid, void** ppv) RootFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszUrl, out BOOL pbSubscribed) IsSubscribed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszPath, out BOOL pbFeedExists) ExistsFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszPath, in Guid riid, void** ppv) GetFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszUrl, in Guid riid, void** ppv) GetFeedByUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszPath, out BOOL pbFolderExists) ExistsFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszPath, in Guid riid, void** ppv) GetFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszPath) DeleteFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, PWSTR pszPath) DeleteFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, FEEDS_BACKGROUNDSYNC_ACTION fbsa) BackgroundSync;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, out FEEDS_BACKGROUNDSYNC_STATUS pfbss) BackgroundSyncStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, out uint32 puiInterval) DefaultInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, uint32 uiInterval) SetDefaultInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self) AsyncSyncAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, ref IStream pStreamIn, out IStream* ppStreamOut) Normalize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsManager self, out uint32 puiItemCountLimit) ItemCountLimit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, in Guid riid, void** ppv) RootFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszUrl, out IntBool pbSubscribed) IsSubscribed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszPath, out IntBool pbFeedExists) ExistsFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszPath, in Guid riid, void** ppv) GetFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszUrl, in Guid riid, void** ppv) GetFeedByUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszPath, out IntBool pbFolderExists) ExistsFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszPath, in Guid riid, void** ppv) GetFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszPath) DeleteFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, char16* pszPath) DeleteFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, FEEDS_BACKGROUNDSYNC_ACTION fbsa) BackgroundSync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, out FEEDS_BACKGROUNDSYNC_STATUS pfbss) BackgroundSyncStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, out uint32 puiInterval) DefaultInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, uint32 uiInterval) SetDefaultInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self) AsyncSyncAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, ref IStream pStreamIn, out IStream* ppStreamOut) Normalize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsManager self, out uint32 puiItemCountLimit) ItemCountLimit;
 			}
 		}
 		[CRepr]
@@ -2898,14 +2898,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Count(out uint32 puiCount) mut => VT.Count(ref this, out puiCount);
-			public HRESULT Item(uint32 uiIndex, in Guid riid, void** ppv) mut => VT.Item(ref this, uiIndex, riid, ppv);
+			public HResult Count(out uint32 puiCount) mut => VT.Count(ref this, out puiCount);
+			public HResult Item(uint32 uiIndex, in Guid riid, void** ppv) mut => VT.Item(ref this, uiIndex, riid, ppv);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsEnum self, out uint32 puiCount) Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedsEnum self, uint32 uiIndex, in Guid riid, void** ppv) Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsEnum self, out uint32 puiCount) Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedsEnum self, uint32 uiIndex, in Guid riid, void** ppv) Item;
 			}
 		}
 		[CRepr]
@@ -2915,46 +2915,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Feeds(out IXFeedsEnum* ppfe) mut => VT.Feeds(ref this, out ppfe);
-			public HRESULT Subfolders(out IXFeedsEnum* ppfe) mut => VT.Subfolders(ref this, out ppfe);
-			public HRESULT CreateFeed(PWSTR pszName, PWSTR pszUrl, in Guid riid, void** ppv) mut => VT.CreateFeed(ref this, pszName, pszUrl, riid, ppv);
-			public HRESULT CreateSubfolder(PWSTR pszName, in Guid riid, void** ppv) mut => VT.CreateSubfolder(ref this, pszName, riid, ppv);
-			public HRESULT ExistsFeed(PWSTR pszName, ref BOOL pbFeedExists) mut => VT.ExistsFeed(ref this, pszName, ref pbFeedExists);
-			public HRESULT ExistsSubfolder(PWSTR pszName, ref BOOL pbSubfolderExists) mut => VT.ExistsSubfolder(ref this, pszName, ref pbSubfolderExists);
-			public HRESULT GetFeed(PWSTR pszName, in Guid riid, void** ppv) mut => VT.GetFeed(ref this, pszName, riid, ppv);
-			public HRESULT GetSubfolder(PWSTR pszName, in Guid riid, void** ppv) mut => VT.GetSubfolder(ref this, pszName, riid, ppv);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Name(out PWSTR ppszName) mut => VT.Name(ref this, out ppszName);
-			public HRESULT Rename(PWSTR pszName) mut => VT.Rename(ref this, pszName);
-			public HRESULT Path(out PWSTR ppszPath) mut => VT.Path(ref this, out ppszPath);
-			public HRESULT Move(PWSTR pszPath) mut => VT.Move(ref this, pszPath);
-			public HRESULT Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
-			public HRESULT IsRoot(out BOOL pbIsRootFeedFolder) mut => VT.IsRoot(ref this, out pbIsRootFeedFolder);
-			public HRESULT GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) mut => VT.GetWatcher(ref this, @scope, mask, riid, ppv);
-			public HRESULT TotalUnreadItemCount(out uint32 puiTotalUnreadItemCount) mut => VT.TotalUnreadItemCount(ref this, out puiTotalUnreadItemCount);
-			public HRESULT TotalItemCount(out uint32 puiTotalItemCount) mut => VT.TotalItemCount(ref this, out puiTotalItemCount);
+			public HResult Feeds(out IXFeedsEnum* ppfe) mut => VT.Feeds(ref this, out ppfe);
+			public HResult Subfolders(out IXFeedsEnum* ppfe) mut => VT.Subfolders(ref this, out ppfe);
+			public HResult CreateFeed(char16* pszName, char16* pszUrl, in Guid riid, void** ppv) mut => VT.CreateFeed(ref this, pszName, pszUrl, riid, ppv);
+			public HResult CreateSubfolder(char16* pszName, in Guid riid, void** ppv) mut => VT.CreateSubfolder(ref this, pszName, riid, ppv);
+			public HResult ExistsFeed(char16* pszName, ref IntBool pbFeedExists) mut => VT.ExistsFeed(ref this, pszName, ref pbFeedExists);
+			public HResult ExistsSubfolder(char16* pszName, ref IntBool pbSubfolderExists) mut => VT.ExistsSubfolder(ref this, pszName, ref pbSubfolderExists);
+			public HResult GetFeed(char16* pszName, in Guid riid, void** ppv) mut => VT.GetFeed(ref this, pszName, riid, ppv);
+			public HResult GetSubfolder(char16* pszName, in Guid riid, void** ppv) mut => VT.GetSubfolder(ref this, pszName, riid, ppv);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Name(out char16* ppszName) mut => VT.Name(ref this, out ppszName);
+			public HResult Rename(char16* pszName) mut => VT.Rename(ref this, pszName);
+			public HResult Path(out char16* ppszPath) mut => VT.Path(ref this, out ppszPath);
+			public HResult Move(char16* pszPath) mut => VT.Move(ref this, pszPath);
+			public HResult Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
+			public HResult IsRoot(out IntBool pbIsRootFeedFolder) mut => VT.IsRoot(ref this, out pbIsRootFeedFolder);
+			public HResult GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) mut => VT.GetWatcher(ref this, @scope, mask, riid, ppv);
+			public HResult TotalUnreadItemCount(out uint32 puiTotalUnreadItemCount) mut => VT.TotalUnreadItemCount(ref this, out puiTotalUnreadItemCount);
+			public HResult TotalItemCount(out uint32 puiTotalItemCount) mut => VT.TotalItemCount(ref this, out puiTotalItemCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out IXFeedsEnum* ppfe) Feeds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out IXFeedsEnum* ppfe) Subfolders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName, PWSTR pszUrl, in Guid riid, void** ppv) CreateFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName, in Guid riid, void** ppv) CreateSubfolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName, ref BOOL pbFeedExists) ExistsFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName, ref BOOL pbSubfolderExists) ExistsSubfolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName, in Guid riid, void** ppv) GetFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName, in Guid riid, void** ppv) GetSubfolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out PWSTR ppszName) Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszName) Rename;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out PWSTR ppszPath) Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, PWSTR pszPath) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, in Guid riid, void** ppv) Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out BOOL pbIsRootFeedFolder) IsRoot;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) GetWatcher;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out uint32 puiTotalUnreadItemCount) TotalUnreadItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolder self, out uint32 puiTotalItemCount) TotalItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out IXFeedsEnum* ppfe) Feeds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out IXFeedsEnum* ppfe) Subfolders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName, char16* pszUrl, in Guid riid, void** ppv) CreateFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName, in Guid riid, void** ppv) CreateSubfolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName, ref IntBool pbFeedExists) ExistsFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName, ref IntBool pbSubfolderExists) ExistsSubfolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName, in Guid riid, void** ppv) GetFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName, in Guid riid, void** ppv) GetSubfolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out char16* ppszName) Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszName) Rename;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out char16* ppszPath) Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, char16* pszPath) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, in Guid riid, void** ppv) Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out IntBool pbIsRootFeedFolder) IsRoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) GetWatcher;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out uint32 puiTotalUnreadItemCount) TotalUnreadItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolder self, out uint32 puiTotalItemCount) TotalItemCount;
 			}
 		}
 		[CRepr]
@@ -2964,42 +2964,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Error() mut => VT.Error(ref this);
-			public HRESULT FolderAdded(PWSTR pszPath) mut => VT.FolderAdded(ref this, pszPath);
-			public HRESULT FolderDeleted(PWSTR pszPath) mut => VT.FolderDeleted(ref this, pszPath);
-			public HRESULT FolderRenamed(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FolderRenamed(ref this, pszPath, pszOldPath);
-			public HRESULT FolderMovedFrom(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FolderMovedFrom(ref this, pszPath, pszOldPath);
-			public HRESULT FolderMovedTo(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FolderMovedTo(ref this, pszPath, pszOldPath);
-			public HRESULT FolderItemCountChanged(PWSTR pszPath, int32 feicfFlags) mut => VT.FolderItemCountChanged(ref this, pszPath, feicfFlags);
-			public HRESULT FeedAdded(PWSTR pszPath) mut => VT.FeedAdded(ref this, pszPath);
-			public HRESULT FeedDeleted(PWSTR pszPath) mut => VT.FeedDeleted(ref this, pszPath);
-			public HRESULT FeedRenamed(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FeedRenamed(ref this, pszPath, pszOldPath);
-			public HRESULT FeedUrlChanged(PWSTR pszPath) mut => VT.FeedUrlChanged(ref this, pszPath);
-			public HRESULT FeedMovedFrom(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FeedMovedFrom(ref this, pszPath, pszOldPath);
-			public HRESULT FeedMovedTo(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FeedMovedTo(ref this, pszPath, pszOldPath);
-			public HRESULT FeedDownloading(PWSTR pszPath) mut => VT.FeedDownloading(ref this, pszPath);
-			public HRESULT FeedDownloadCompleted(PWSTR pszPath, FEEDS_DOWNLOAD_ERROR fde) mut => VT.FeedDownloadCompleted(ref this, pszPath, fde);
-			public HRESULT FeedItemCountChanged(PWSTR pszPath, int32 feicfFlags) mut => VT.FeedItemCountChanged(ref this, pszPath, feicfFlags);
+			public HResult Error() mut => VT.Error(ref this);
+			public HResult FolderAdded(char16* pszPath) mut => VT.FolderAdded(ref this, pszPath);
+			public HResult FolderDeleted(char16* pszPath) mut => VT.FolderDeleted(ref this, pszPath);
+			public HResult FolderRenamed(char16* pszPath, char16* pszOldPath) mut => VT.FolderRenamed(ref this, pszPath, pszOldPath);
+			public HResult FolderMovedFrom(char16* pszPath, char16* pszOldPath) mut => VT.FolderMovedFrom(ref this, pszPath, pszOldPath);
+			public HResult FolderMovedTo(char16* pszPath, char16* pszOldPath) mut => VT.FolderMovedTo(ref this, pszPath, pszOldPath);
+			public HResult FolderItemCountChanged(char16* pszPath, int32 feicfFlags) mut => VT.FolderItemCountChanged(ref this, pszPath, feicfFlags);
+			public HResult FeedAdded(char16* pszPath) mut => VT.FeedAdded(ref this, pszPath);
+			public HResult FeedDeleted(char16* pszPath) mut => VT.FeedDeleted(ref this, pszPath);
+			public HResult FeedRenamed(char16* pszPath, char16* pszOldPath) mut => VT.FeedRenamed(ref this, pszPath, pszOldPath);
+			public HResult FeedUrlChanged(char16* pszPath) mut => VT.FeedUrlChanged(ref this, pszPath);
+			public HResult FeedMovedFrom(char16* pszPath, char16* pszOldPath) mut => VT.FeedMovedFrom(ref this, pszPath, pszOldPath);
+			public HResult FeedMovedTo(char16* pszPath, char16* pszOldPath) mut => VT.FeedMovedTo(ref this, pszPath, pszOldPath);
+			public HResult FeedDownloading(char16* pszPath) mut => VT.FeedDownloading(ref this, pszPath);
+			public HResult FeedDownloadCompleted(char16* pszPath, FEEDS_DOWNLOAD_ERROR fde) mut => VT.FeedDownloadCompleted(ref this, pszPath, fde);
+			public HResult FeedItemCountChanged(char16* pszPath, int32 feicfFlags) mut => VT.FeedItemCountChanged(ref this, pszPath, feicfFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self) Error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath) FolderAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath) FolderDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, PWSTR pszOldPath) FolderRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, PWSTR pszOldPath) FolderMovedFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, PWSTR pszOldPath) FolderMovedTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, int32 feicfFlags) FolderItemCountChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath) FeedAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath) FeedDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, PWSTR pszOldPath) FeedRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath) FeedUrlChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, PWSTR pszOldPath) FeedMovedFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, PWSTR pszOldPath) FeedMovedTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath) FeedDownloading;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, FEEDS_DOWNLOAD_ERROR fde) FeedDownloadCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedFolderEvents self, PWSTR pszPath, int32 feicfFlags) FeedItemCountChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self) Error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath) FolderAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath) FolderDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, char16* pszOldPath) FolderRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, char16* pszOldPath) FolderMovedFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, char16* pszOldPath) FolderMovedTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, int32 feicfFlags) FolderItemCountChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath) FeedAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath) FeedDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, char16* pszOldPath) FeedRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath) FeedUrlChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, char16* pszOldPath) FeedMovedFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, char16* pszOldPath) FeedMovedTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath) FeedDownloading;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, FEEDS_DOWNLOAD_ERROR fde) FeedDownloadCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedFolderEvents self, char16* pszPath, int32 feicfFlags) FeedItemCountChanged;
 			}
 		}
 		[CRepr]
@@ -3009,98 +3009,98 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Xml(uint32 uiItemCount, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out IStream* pps) mut => VT.Xml(ref this, uiItemCount, sortProperty, sortOrder, filterFlags, includeFlags, out pps);
-			public HRESULT Name(out PWSTR ppszName) mut => VT.Name(ref this, out ppszName);
-			public HRESULT Rename(PWSTR pszName) mut => VT.Rename(ref this, pszName);
-			public HRESULT Url(out PWSTR ppszUrl) mut => VT.Url(ref this, out ppszUrl);
-			public HRESULT SetUrl(PWSTR pszUrl) mut => VT.SetUrl(ref this, pszUrl);
-			public HRESULT LocalId(out Guid pguid) mut => VT.LocalId(ref this, out pguid);
-			public HRESULT Path(out PWSTR ppszPath) mut => VT.Path(ref this, out ppszPath);
-			public HRESULT Move(PWSTR pszPath) mut => VT.Move(ref this, pszPath);
-			public HRESULT Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
-			public HRESULT LastWriteTime(out SYSTEMTIME pstLastWriteTime) mut => VT.LastWriteTime(ref this, out pstLastWriteTime);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Download() mut => VT.Download(ref this);
-			public HRESULT AsyncDownload() mut => VT.AsyncDownload(ref this);
-			public HRESULT CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
-			public HRESULT SyncSetting(out FEEDS_SYNC_SETTING pfss) mut => VT.SyncSetting(ref this, out pfss);
-			public HRESULT SetSyncSetting(FEEDS_SYNC_SETTING fss) mut => VT.SetSyncSetting(ref this, fss);
-			public HRESULT Interval(out uint32 puiInterval) mut => VT.Interval(ref this, out puiInterval);
-			public HRESULT SetInterval(uint32 uiInterval) mut => VT.SetInterval(ref this, uiInterval);
-			public HRESULT LastDownloadTime(out SYSTEMTIME pstLastDownloadTime) mut => VT.LastDownloadTime(ref this, out pstLastDownloadTime);
-			public HRESULT LocalEnclosurePath(out PWSTR ppszPath) mut => VT.LocalEnclosurePath(ref this, out ppszPath);
-			public HRESULT Items(out IXFeedsEnum* ppfe) mut => VT.Items(ref this, out ppfe);
-			public HRESULT GetItem(uint32 uiId, in Guid riid, void** ppv) mut => VT.GetItem(ref this, uiId, riid, ppv);
-			public HRESULT MarkAllItemsRead() mut => VT.MarkAllItemsRead(ref this);
-			public HRESULT MaxItemCount(out uint32 puiMaxItemCount) mut => VT.MaxItemCount(ref this, out puiMaxItemCount);
-			public HRESULT SetMaxItemCount(uint32 uiMaxItemCount) mut => VT.SetMaxItemCount(ref this, uiMaxItemCount);
-			public HRESULT DownloadEnclosuresAutomatically(out BOOL pbDownloadEnclosuresAutomatically) mut => VT.DownloadEnclosuresAutomatically(ref this, out pbDownloadEnclosuresAutomatically);
-			public HRESULT SetDownloadEnclosuresAutomatically(BOOL bDownloadEnclosuresAutomatically) mut => VT.SetDownloadEnclosuresAutomatically(ref this, bDownloadEnclosuresAutomatically);
-			public HRESULT DownloadStatus(out FEEDS_DOWNLOAD_STATUS pfds) mut => VT.DownloadStatus(ref this, out pfds);
-			public HRESULT LastDownloadError(out FEEDS_DOWNLOAD_ERROR pfde) mut => VT.LastDownloadError(ref this, out pfde);
-			public HRESULT Merge(ref IStream pStream, PWSTR pszUrl) mut => VT.Merge(ref this, ref pStream, pszUrl);
-			public HRESULT DownloadUrl(out PWSTR ppszUrl) mut => VT.DownloadUrl(ref this, out ppszUrl);
-			public HRESULT Title(out PWSTR ppszTitle) mut => VT.Title(ref this, out ppszTitle);
-			public HRESULT Description(out PWSTR ppszDescription) mut => VT.Description(ref this, out ppszDescription);
-			public HRESULT Link(out PWSTR ppszHomePage) mut => VT.Link(ref this, out ppszHomePage);
-			public HRESULT Image(out PWSTR ppszImageUrl) mut => VT.Image(ref this, out ppszImageUrl);
-			public HRESULT LastBuildDate(out SYSTEMTIME pstLastBuildDate) mut => VT.LastBuildDate(ref this, out pstLastBuildDate);
-			public HRESULT PubDate(out SYSTEMTIME pstPubDate) mut => VT.PubDate(ref this, out pstPubDate);
-			public HRESULT Ttl(out uint32 puiTtl) mut => VT.Ttl(ref this, out puiTtl);
-			public HRESULT Language(out PWSTR ppszLanguage) mut => VT.Language(ref this, out ppszLanguage);
-			public HRESULT Copyright(out PWSTR ppszCopyright) mut => VT.Copyright(ref this, out ppszCopyright);
-			public HRESULT IsList(out BOOL pbIsList) mut => VT.IsList(ref this, out pbIsList);
-			public HRESULT GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) mut => VT.GetWatcher(ref this, @scope, mask, riid, ppv);
-			public HRESULT UnreadItemCount(out uint32 puiUnreadItemCount) mut => VT.UnreadItemCount(ref this, out puiUnreadItemCount);
-			public HRESULT ItemCount(out uint32 puiItemCount) mut => VT.ItemCount(ref this, out puiItemCount);
+			public HResult Xml(uint32 uiItemCount, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out IStream* pps) mut => VT.Xml(ref this, uiItemCount, sortProperty, sortOrder, filterFlags, includeFlags, out pps);
+			public HResult Name(out char16* ppszName) mut => VT.Name(ref this, out ppszName);
+			public HResult Rename(char16* pszName) mut => VT.Rename(ref this, pszName);
+			public HResult Url(out char16* ppszUrl) mut => VT.Url(ref this, out ppszUrl);
+			public HResult SetUrl(char16* pszUrl) mut => VT.SetUrl(ref this, pszUrl);
+			public HResult LocalId(out Guid pguid) mut => VT.LocalId(ref this, out pguid);
+			public HResult Path(out char16* ppszPath) mut => VT.Path(ref this, out ppszPath);
+			public HResult Move(char16* pszPath) mut => VT.Move(ref this, pszPath);
+			public HResult Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
+			public HResult LastWriteTime(out SYSTEMTIME pstLastWriteTime) mut => VT.LastWriteTime(ref this, out pstLastWriteTime);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Download() mut => VT.Download(ref this);
+			public HResult AsyncDownload() mut => VT.AsyncDownload(ref this);
+			public HResult CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
+			public HResult SyncSetting(out FEEDS_SYNC_SETTING pfss) mut => VT.SyncSetting(ref this, out pfss);
+			public HResult SetSyncSetting(FEEDS_SYNC_SETTING fss) mut => VT.SetSyncSetting(ref this, fss);
+			public HResult Interval(out uint32 puiInterval) mut => VT.Interval(ref this, out puiInterval);
+			public HResult SetInterval(uint32 uiInterval) mut => VT.SetInterval(ref this, uiInterval);
+			public HResult LastDownloadTime(out SYSTEMTIME pstLastDownloadTime) mut => VT.LastDownloadTime(ref this, out pstLastDownloadTime);
+			public HResult LocalEnclosurePath(out char16* ppszPath) mut => VT.LocalEnclosurePath(ref this, out ppszPath);
+			public HResult Items(out IXFeedsEnum* ppfe) mut => VT.Items(ref this, out ppfe);
+			public HResult GetItem(uint32 uiId, in Guid riid, void** ppv) mut => VT.GetItem(ref this, uiId, riid, ppv);
+			public HResult MarkAllItemsRead() mut => VT.MarkAllItemsRead(ref this);
+			public HResult MaxItemCount(out uint32 puiMaxItemCount) mut => VT.MaxItemCount(ref this, out puiMaxItemCount);
+			public HResult SetMaxItemCount(uint32 uiMaxItemCount) mut => VT.SetMaxItemCount(ref this, uiMaxItemCount);
+			public HResult DownloadEnclosuresAutomatically(out IntBool pbDownloadEnclosuresAutomatically) mut => VT.DownloadEnclosuresAutomatically(ref this, out pbDownloadEnclosuresAutomatically);
+			public HResult SetDownloadEnclosuresAutomatically(IntBool bDownloadEnclosuresAutomatically) mut => VT.SetDownloadEnclosuresAutomatically(ref this, bDownloadEnclosuresAutomatically);
+			public HResult DownloadStatus(out FEEDS_DOWNLOAD_STATUS pfds) mut => VT.DownloadStatus(ref this, out pfds);
+			public HResult LastDownloadError(out FEEDS_DOWNLOAD_ERROR pfde) mut => VT.LastDownloadError(ref this, out pfde);
+			public HResult Merge(ref IStream pStream, char16* pszUrl) mut => VT.Merge(ref this, ref pStream, pszUrl);
+			public HResult DownloadUrl(out char16* ppszUrl) mut => VT.DownloadUrl(ref this, out ppszUrl);
+			public HResult Title(out char16* ppszTitle) mut => VT.Title(ref this, out ppszTitle);
+			public HResult Description(out char16* ppszDescription) mut => VT.Description(ref this, out ppszDescription);
+			public HResult Link(out char16* ppszHomePage) mut => VT.Link(ref this, out ppszHomePage);
+			public HResult Image(out char16* ppszImageUrl) mut => VT.Image(ref this, out ppszImageUrl);
+			public HResult LastBuildDate(out SYSTEMTIME pstLastBuildDate) mut => VT.LastBuildDate(ref this, out pstLastBuildDate);
+			public HResult PubDate(out SYSTEMTIME pstPubDate) mut => VT.PubDate(ref this, out pstPubDate);
+			public HResult Ttl(out uint32 puiTtl) mut => VT.Ttl(ref this, out puiTtl);
+			public HResult Language(out char16* ppszLanguage) mut => VT.Language(ref this, out ppszLanguage);
+			public HResult Copyright(out char16* ppszCopyright) mut => VT.Copyright(ref this, out ppszCopyright);
+			public HResult IsList(out IntBool pbIsList) mut => VT.IsList(ref this, out pbIsList);
+			public HResult GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) mut => VT.GetWatcher(ref this, @scope, mask, riid, ppv);
+			public HResult UnreadItemCount(out uint32 puiUnreadItemCount) mut => VT.UnreadItemCount(ref this, out puiUnreadItemCount);
+			public HResult ItemCount(out uint32 puiItemCount) mut => VT.ItemCount(ref this, out puiItemCount);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, uint32 uiItemCount, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out IStream* pps) Xml;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszName) Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, PWSTR pszName) Rename;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszUrl) Url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, PWSTR pszUrl) SetUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out Guid pguid) LocalId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszPath) Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, PWSTR pszPath) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, in Guid riid, void** ppv) Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out SYSTEMTIME pstLastWriteTime) LastWriteTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self) Download;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self) AsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self) CancelAsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out FEEDS_SYNC_SETTING pfss) SyncSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, FEEDS_SYNC_SETTING fss) SetSyncSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out uint32 puiInterval) Interval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, uint32 uiInterval) SetInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out SYSTEMTIME pstLastDownloadTime) LastDownloadTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszPath) LocalEnclosurePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out IXFeedsEnum* ppfe) Items;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, uint32 uiId, in Guid riid, void** ppv) GetItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self) MarkAllItemsRead;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out uint32 puiMaxItemCount) MaxItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, uint32 uiMaxItemCount) SetMaxItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out BOOL pbDownloadEnclosuresAutomatically) DownloadEnclosuresAutomatically;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, BOOL bDownloadEnclosuresAutomatically) SetDownloadEnclosuresAutomatically;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out FEEDS_DOWNLOAD_STATUS pfds) DownloadStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out FEEDS_DOWNLOAD_ERROR pfde) LastDownloadError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, ref IStream pStream, PWSTR pszUrl) Merge;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszUrl) DownloadUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszTitle) Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszDescription) Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszHomePage) Link;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszImageUrl) Image;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out SYSTEMTIME pstLastBuildDate) LastBuildDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out SYSTEMTIME pstPubDate) PubDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out uint32 puiTtl) Ttl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszLanguage) Language;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out PWSTR ppszCopyright) Copyright;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out BOOL pbIsList) IsList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) GetWatcher;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out uint32 puiUnreadItemCount) UnreadItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed self, out uint32 puiItemCount) ItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, uint32 uiItemCount, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out IStream* pps) Xml;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszName) Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, char16* pszName) Rename;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszUrl) Url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, char16* pszUrl) SetUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out Guid pguid) LocalId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszPath) Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, char16* pszPath) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, in Guid riid, void** ppv) Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out SYSTEMTIME pstLastWriteTime) LastWriteTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self) Download;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self) AsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self) CancelAsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out FEEDS_SYNC_SETTING pfss) SyncSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, FEEDS_SYNC_SETTING fss) SetSyncSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out uint32 puiInterval) Interval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, uint32 uiInterval) SetInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out SYSTEMTIME pstLastDownloadTime) LastDownloadTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszPath) LocalEnclosurePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out IXFeedsEnum* ppfe) Items;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, uint32 uiId, in Guid riid, void** ppv) GetItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self) MarkAllItemsRead;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out uint32 puiMaxItemCount) MaxItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, uint32 uiMaxItemCount) SetMaxItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out IntBool pbDownloadEnclosuresAutomatically) DownloadEnclosuresAutomatically;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, IntBool bDownloadEnclosuresAutomatically) SetDownloadEnclosuresAutomatically;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out FEEDS_DOWNLOAD_STATUS pfds) DownloadStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out FEEDS_DOWNLOAD_ERROR pfde) LastDownloadError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, ref IStream pStream, char16* pszUrl) Merge;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszUrl) DownloadUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszTitle) Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszDescription) Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszHomePage) Link;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszImageUrl) Image;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out SYSTEMTIME pstLastBuildDate) LastBuildDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out SYSTEMTIME pstPubDate) PubDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out uint32 puiTtl) Ttl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszLanguage) Language;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out char16* ppszCopyright) Copyright;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out IntBool pbIsList) IsList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, in Guid riid, void** ppv) GetWatcher;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out uint32 puiUnreadItemCount) UnreadItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed self, out uint32 puiItemCount) ItemCount;
 			}
 		}
 		[CRepr]
@@ -3110,22 +3110,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItemByEffectiveId(uint32 uiEffectiveId, in Guid riid, void** ppv) mut => VT.GetItemByEffectiveId(ref this, uiEffectiveId, riid, ppv);
-			public HRESULT LastItemDownloadTime(out SYSTEMTIME pstLastItemDownloadTime) mut => VT.LastItemDownloadTime(ref this, out pstLastItemDownloadTime);
-			public HRESULT Username(out PWSTR ppszUsername) mut => VT.Username(ref this, out ppszUsername);
-			public HRESULT Password(out PWSTR ppszPassword) mut => VT.Password(ref this, out ppszPassword);
-			public HRESULT SetCredentials(PWSTR pszUsername, PWSTR pszPassword) mut => VT.SetCredentials(ref this, pszUsername, pszPassword);
-			public HRESULT ClearCredentials() mut => VT.ClearCredentials(ref this);
+			public HResult GetItemByEffectiveId(uint32 uiEffectiveId, in Guid riid, void** ppv) mut => VT.GetItemByEffectiveId(ref this, uiEffectiveId, riid, ppv);
+			public HResult LastItemDownloadTime(out SYSTEMTIME pstLastItemDownloadTime) mut => VT.LastItemDownloadTime(ref this, out pstLastItemDownloadTime);
+			public HResult Username(out char16* ppszUsername) mut => VT.Username(ref this, out ppszUsername);
+			public HResult Password(out char16* ppszPassword) mut => VT.Password(ref this, out ppszPassword);
+			public HResult SetCredentials(char16* pszUsername, char16* pszPassword) mut => VT.SetCredentials(ref this, pszUsername, pszPassword);
+			public HResult ClearCredentials() mut => VT.ClearCredentials(ref this);
 
 			[CRepr]
 			public struct VTable : IXFeed.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed2 self, uint32 uiEffectiveId, in Guid riid, void** ppv) GetItemByEffectiveId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed2 self, out SYSTEMTIME pstLastItemDownloadTime) LastItemDownloadTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed2 self, out PWSTR ppszUsername) Username;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed2 self, out PWSTR ppszPassword) Password;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed2 self, PWSTR pszUsername, PWSTR pszPassword) SetCredentials;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeed2 self) ClearCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed2 self, uint32 uiEffectiveId, in Guid riid, void** ppv) GetItemByEffectiveId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed2 self, out SYSTEMTIME pstLastItemDownloadTime) LastItemDownloadTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed2 self, out char16* ppszUsername) Username;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed2 self, out char16* ppszPassword) Password;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed2 self, char16* pszUsername, char16* pszPassword) SetCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeed2 self) ClearCredentials;
 			}
 		}
 		[CRepr]
@@ -3135,26 +3135,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Error() mut => VT.Error(ref this);
-			public HRESULT FeedDeleted(PWSTR pszPath) mut => VT.FeedDeleted(ref this, pszPath);
-			public HRESULT FeedRenamed(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FeedRenamed(ref this, pszPath, pszOldPath);
-			public HRESULT FeedUrlChanged(PWSTR pszPath) mut => VT.FeedUrlChanged(ref this, pszPath);
-			public HRESULT FeedMoved(PWSTR pszPath, PWSTR pszOldPath) mut => VT.FeedMoved(ref this, pszPath, pszOldPath);
-			public HRESULT FeedDownloading(PWSTR pszPath) mut => VT.FeedDownloading(ref this, pszPath);
-			public HRESULT FeedDownloadCompleted(PWSTR pszPath, FEEDS_DOWNLOAD_ERROR fde) mut => VT.FeedDownloadCompleted(ref this, pszPath, fde);
-			public HRESULT FeedItemCountChanged(PWSTR pszPath, int32 feicfFlags) mut => VT.FeedItemCountChanged(ref this, pszPath, feicfFlags);
+			public HResult Error() mut => VT.Error(ref this);
+			public HResult FeedDeleted(char16* pszPath) mut => VT.FeedDeleted(ref this, pszPath);
+			public HResult FeedRenamed(char16* pszPath, char16* pszOldPath) mut => VT.FeedRenamed(ref this, pszPath, pszOldPath);
+			public HResult FeedUrlChanged(char16* pszPath) mut => VT.FeedUrlChanged(ref this, pszPath);
+			public HResult FeedMoved(char16* pszPath, char16* pszOldPath) mut => VT.FeedMoved(ref this, pszPath, pszOldPath);
+			public HResult FeedDownloading(char16* pszPath) mut => VT.FeedDownloading(ref this, pszPath);
+			public HResult FeedDownloadCompleted(char16* pszPath, FEEDS_DOWNLOAD_ERROR fde) mut => VT.FeedDownloadCompleted(ref this, pszPath, fde);
+			public HResult FeedItemCountChanged(char16* pszPath, int32 feicfFlags) mut => VT.FeedItemCountChanged(ref this, pszPath, feicfFlags);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self) Error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath) FeedDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath, PWSTR pszOldPath) FeedRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath) FeedUrlChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath, PWSTR pszOldPath) FeedMoved;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath) FeedDownloading;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath, FEEDS_DOWNLOAD_ERROR fde) FeedDownloadCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEvents self, PWSTR pszPath, int32 feicfFlags) FeedItemCountChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self) Error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath) FeedDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath, char16* pszOldPath) FeedRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath) FeedUrlChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath, char16* pszOldPath) FeedMoved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath) FeedDownloading;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath, FEEDS_DOWNLOAD_ERROR fde) FeedDownloadCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEvents self, char16* pszPath, int32 feicfFlags) FeedItemCountChanged;
 			}
 		}
 		[CRepr]
@@ -3164,44 +3164,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Xml(FEEDS_XML_INCLUDE_FLAGS fxif, out IStream* pps) mut => VT.Xml(ref this, fxif, out pps);
-			public HRESULT Title(out PWSTR ppszTitle) mut => VT.Title(ref this, out ppszTitle);
-			public HRESULT Link(out PWSTR ppszUrl) mut => VT.Link(ref this, out ppszUrl);
-			public HRESULT Guid(out PWSTR ppszGuid) mut => VT.Guid(ref this, out ppszGuid);
-			public HRESULT Description(out PWSTR ppszDescription) mut => VT.Description(ref this, out ppszDescription);
-			public HRESULT PubDate(out SYSTEMTIME pstPubDate) mut => VT.PubDate(ref this, out pstPubDate);
-			public HRESULT Comments(out PWSTR ppszUrl) mut => VT.Comments(ref this, out ppszUrl);
-			public HRESULT Author(out PWSTR ppszAuthor) mut => VT.Author(ref this, out ppszAuthor);
-			public HRESULT Enclosure(in Guid riid, void** ppv) mut => VT.Enclosure(ref this, riid, ppv);
-			public HRESULT IsRead(out BOOL pbIsRead) mut => VT.IsRead(ref this, out pbIsRead);
-			public HRESULT SetIsRead(BOOL bIsRead) mut => VT.SetIsRead(ref this, bIsRead);
-			public HRESULT LocalId(out uint32 puiId) mut => VT.LocalId(ref this, out puiId);
-			public HRESULT Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT DownloadUrl(out PWSTR ppszUrl) mut => VT.DownloadUrl(ref this, out ppszUrl);
-			public HRESULT LastDownloadTime(out SYSTEMTIME pstLastDownloadTime) mut => VT.LastDownloadTime(ref this, out pstLastDownloadTime);
-			public HRESULT Modified(out SYSTEMTIME pstModifiedTime) mut => VT.Modified(ref this, out pstModifiedTime);
+			public HResult Xml(FEEDS_XML_INCLUDE_FLAGS fxif, out IStream* pps) mut => VT.Xml(ref this, fxif, out pps);
+			public HResult Title(out char16* ppszTitle) mut => VT.Title(ref this, out ppszTitle);
+			public HResult Link(out char16* ppszUrl) mut => VT.Link(ref this, out ppszUrl);
+			public HResult Guid(out char16* ppszGuid) mut => VT.Guid(ref this, out ppszGuid);
+			public HResult Description(out char16* ppszDescription) mut => VT.Description(ref this, out ppszDescription);
+			public HResult PubDate(out SYSTEMTIME pstPubDate) mut => VT.PubDate(ref this, out pstPubDate);
+			public HResult Comments(out char16* ppszUrl) mut => VT.Comments(ref this, out ppszUrl);
+			public HResult Author(out char16* ppszAuthor) mut => VT.Author(ref this, out ppszAuthor);
+			public HResult Enclosure(in Guid riid, void** ppv) mut => VT.Enclosure(ref this, riid, ppv);
+			public HResult IsRead(out IntBool pbIsRead) mut => VT.IsRead(ref this, out pbIsRead);
+			public HResult SetIsRead(IntBool bIsRead) mut => VT.SetIsRead(ref this, bIsRead);
+			public HResult LocalId(out uint32 puiId) mut => VT.LocalId(ref this, out puiId);
+			public HResult Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult DownloadUrl(out char16* ppszUrl) mut => VT.DownloadUrl(ref this, out ppszUrl);
+			public HResult LastDownloadTime(out SYSTEMTIME pstLastDownloadTime) mut => VT.LastDownloadTime(ref this, out pstLastDownloadTime);
+			public HResult Modified(out SYSTEMTIME pstModifiedTime) mut => VT.Modified(ref this, out pstModifiedTime);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, FEEDS_XML_INCLUDE_FLAGS fxif, out IStream* pps) Xml;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszTitle) Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszUrl) Link;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszGuid) Guid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszDescription) Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out SYSTEMTIME pstPubDate) PubDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszUrl) Comments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszAuthor) Author;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, in Guid riid, void** ppv) Enclosure;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out BOOL pbIsRead) IsRead;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, BOOL bIsRead) SetIsRead;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out uint32 puiId) LocalId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, in Guid riid, void** ppv) Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out PWSTR ppszUrl) DownloadUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out SYSTEMTIME pstLastDownloadTime) LastDownloadTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem self, out SYSTEMTIME pstModifiedTime) Modified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, FEEDS_XML_INCLUDE_FLAGS fxif, out IStream* pps) Xml;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszTitle) Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszUrl) Link;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszGuid) Guid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszDescription) Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out SYSTEMTIME pstPubDate) PubDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszUrl) Comments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszAuthor) Author;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, in Guid riid, void** ppv) Enclosure;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out IntBool pbIsRead) IsRead;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, IntBool bIsRead) SetIsRead;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out uint32 puiId) LocalId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, in Guid riid, void** ppv) Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out char16* ppszUrl) DownloadUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out SYSTEMTIME pstLastDownloadTime) LastDownloadTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem self, out SYSTEMTIME pstModifiedTime) Modified;
 			}
 		}
 		[CRepr]
@@ -3211,12 +3211,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT EffectiveId(out uint32 puiEffectiveId) mut => VT.EffectiveId(ref this, out puiEffectiveId);
+			public HResult EffectiveId(out uint32 puiEffectiveId) mut => VT.EffectiveId(ref this, out puiEffectiveId);
 
 			[CRepr]
 			public struct VTable : IXFeedItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedItem2 self, out uint32 puiEffectiveId) EffectiveId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedItem2 self, out uint32 puiEffectiveId) EffectiveId;
 			}
 		}
 		[CRepr]
@@ -3226,36 +3226,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Url(out PWSTR ppszUrl) mut => VT.Url(ref this, out ppszUrl);
-			public HRESULT Type(out PWSTR ppszMimeType) mut => VT.Type(ref this, out ppszMimeType);
-			public HRESULT Length(out uint32 puiLength) mut => VT.Length(ref this, out puiLength);
-			public HRESULT AsyncDownload() mut => VT.AsyncDownload(ref this);
-			public HRESULT CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
-			public HRESULT DownloadStatus(out FEEDS_DOWNLOAD_STATUS pfds) mut => VT.DownloadStatus(ref this, out pfds);
-			public HRESULT LastDownloadError(out FEEDS_DOWNLOAD_ERROR pfde) mut => VT.LastDownloadError(ref this, out pfde);
-			public HRESULT LocalPath(out PWSTR ppszPath) mut => VT.LocalPath(ref this, out ppszPath);
-			public HRESULT Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
-			public HRESULT DownloadUrl(out PWSTR ppszUrl) mut => VT.DownloadUrl(ref this, out ppszUrl);
-			public HRESULT DownloadMimeType(out PWSTR ppszMimeType) mut => VT.DownloadMimeType(ref this, out ppszMimeType);
-			public HRESULT RemoveFile() mut => VT.RemoveFile(ref this);
-			public HRESULT SetFile(PWSTR pszDownloadUrl, PWSTR pszDownloadFilePath, PWSTR pszDownloadMimeType, PWSTR pszEnclosureFilename) mut => VT.SetFile(ref this, pszDownloadUrl, pszDownloadFilePath, pszDownloadMimeType, pszEnclosureFilename);
+			public HResult Url(out char16* ppszUrl) mut => VT.Url(ref this, out ppszUrl);
+			public HResult Type(out char16* ppszMimeType) mut => VT.Type(ref this, out ppszMimeType);
+			public HResult Length(out uint32 puiLength) mut => VT.Length(ref this, out puiLength);
+			public HResult AsyncDownload() mut => VT.AsyncDownload(ref this);
+			public HResult CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
+			public HResult DownloadStatus(out FEEDS_DOWNLOAD_STATUS pfds) mut => VT.DownloadStatus(ref this, out pfds);
+			public HResult LastDownloadError(out FEEDS_DOWNLOAD_ERROR pfde) mut => VT.LastDownloadError(ref this, out pfde);
+			public HResult LocalPath(out char16* ppszPath) mut => VT.LocalPath(ref this, out ppszPath);
+			public HResult Parent(in Guid riid, void** ppv) mut => VT.Parent(ref this, riid, ppv);
+			public HResult DownloadUrl(out char16* ppszUrl) mut => VT.DownloadUrl(ref this, out ppszUrl);
+			public HResult DownloadMimeType(out char16* ppszMimeType) mut => VT.DownloadMimeType(ref this, out ppszMimeType);
+			public HResult RemoveFile() mut => VT.RemoveFile(ref this);
+			public HResult SetFile(char16* pszDownloadUrl, char16* pszDownloadFilePath, char16* pszDownloadMimeType, char16* pszEnclosureFilename) mut => VT.SetFile(ref this, pszDownloadUrl, pszDownloadFilePath, pszDownloadMimeType, pszEnclosureFilename);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out PWSTR ppszUrl) Url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out PWSTR ppszMimeType) Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out uint32 puiLength) Length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self) AsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self) CancelAsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out FEEDS_DOWNLOAD_STATUS pfds) DownloadStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out FEEDS_DOWNLOAD_ERROR pfde) LastDownloadError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out PWSTR ppszPath) LocalPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, in Guid riid, void** ppv) Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out PWSTR ppszUrl) DownloadUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, out PWSTR ppszMimeType) DownloadMimeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self) RemoveFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IXFeedEnclosure self, PWSTR pszDownloadUrl, PWSTR pszDownloadFilePath, PWSTR pszDownloadMimeType, PWSTR pszEnclosureFilename) SetFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out char16* ppszUrl) Url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out char16* ppszMimeType) Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out uint32 puiLength) Length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self) AsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self) CancelAsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out FEEDS_DOWNLOAD_STATUS pfds) DownloadStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out FEEDS_DOWNLOAD_ERROR pfde) LastDownloadError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out char16* ppszPath) LocalPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, in Guid riid, void** ppv) Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out char16* ppszUrl) DownloadUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, out char16* ppszMimeType) DownloadMimeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self) RemoveFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IXFeedEnclosure self, char16* pszDownloadUrl, char16* pszDownloadFilePath, char16* pszDownloadMimeType, char16* pszEnclosureFilename) SetFile;
 			}
 		}
 		[CRepr]
@@ -3265,42 +3265,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_RootFolder(out IDispatch* disp) mut => VT.get_RootFolder(ref this, out disp);
-			public HRESULT IsSubscribed(BSTR feedUrl, out int16 subscribed) mut => VT.IsSubscribed(ref this, feedUrl, out subscribed);
-			public HRESULT ExistsFeed(BSTR feedPath, out int16 exists) mut => VT.ExistsFeed(ref this, feedPath, out exists);
-			public HRESULT GetFeed(BSTR feedPath, out IDispatch* disp) mut => VT.GetFeed(ref this, feedPath, out disp);
-			public HRESULT GetFeedByUrl(BSTR feedUrl, out IDispatch* disp) mut => VT.GetFeedByUrl(ref this, feedUrl, out disp);
-			public HRESULT ExistsFolder(BSTR folderPath, out int16 exists) mut => VT.ExistsFolder(ref this, folderPath, out exists);
-			public HRESULT GetFolder(BSTR folderPath, out IDispatch* disp) mut => VT.GetFolder(ref this, folderPath, out disp);
-			public HRESULT DeleteFeed(BSTR feedPath) mut => VT.DeleteFeed(ref this, feedPath);
-			public HRESULT DeleteFolder(BSTR folderPath) mut => VT.DeleteFolder(ref this, folderPath);
-			public HRESULT BackgroundSync(FEEDS_BACKGROUNDSYNC_ACTION action) mut => VT.BackgroundSync(ref this, action);
-			public HRESULT get_BackgroundSyncStatus(out FEEDS_BACKGROUNDSYNC_STATUS status) mut => VT.get_BackgroundSyncStatus(ref this, out status);
-			public HRESULT get_DefaultInterval(out int32 minutes) mut => VT.get_DefaultInterval(ref this, out minutes);
-			public HRESULT put_DefaultInterval(int32 minutes) mut => VT.put_DefaultInterval(ref this, minutes);
-			public HRESULT AsyncSyncAll() mut => VT.AsyncSyncAll(ref this);
-			public HRESULT Normalize(BSTR feedXmlIn, out BSTR feedXmlOut) mut => VT.Normalize(ref this, feedXmlIn, out feedXmlOut);
-			public HRESULT get_ItemCountLimit(out int32 itemCountLimit) mut => VT.get_ItemCountLimit(ref this, out itemCountLimit);
+			public HResult get_RootFolder(out IDispatch* disp) mut => VT.get_RootFolder(ref this, out disp);
+			public HResult IsSubscribed(BSTR feedUrl, out int16 subscribed) mut => VT.IsSubscribed(ref this, feedUrl, out subscribed);
+			public HResult ExistsFeed(BSTR feedPath, out int16 exists) mut => VT.ExistsFeed(ref this, feedPath, out exists);
+			public HResult GetFeed(BSTR feedPath, out IDispatch* disp) mut => VT.GetFeed(ref this, feedPath, out disp);
+			public HResult GetFeedByUrl(BSTR feedUrl, out IDispatch* disp) mut => VT.GetFeedByUrl(ref this, feedUrl, out disp);
+			public HResult ExistsFolder(BSTR folderPath, out int16 exists) mut => VT.ExistsFolder(ref this, folderPath, out exists);
+			public HResult GetFolder(BSTR folderPath, out IDispatch* disp) mut => VT.GetFolder(ref this, folderPath, out disp);
+			public HResult DeleteFeed(BSTR feedPath) mut => VT.DeleteFeed(ref this, feedPath);
+			public HResult DeleteFolder(BSTR folderPath) mut => VT.DeleteFolder(ref this, folderPath);
+			public HResult BackgroundSync(FEEDS_BACKGROUNDSYNC_ACTION action) mut => VT.BackgroundSync(ref this, action);
+			public HResult get_BackgroundSyncStatus(out FEEDS_BACKGROUNDSYNC_STATUS status) mut => VT.get_BackgroundSyncStatus(ref this, out status);
+			public HResult get_DefaultInterval(out int32 minutes) mut => VT.get_DefaultInterval(ref this, out minutes);
+			public HResult put_DefaultInterval(int32 minutes) mut => VT.put_DefaultInterval(ref this, minutes);
+			public HResult AsyncSyncAll() mut => VT.AsyncSyncAll(ref this);
+			public HResult Normalize(BSTR feedXmlIn, out BSTR feedXmlOut) mut => VT.Normalize(ref this, feedXmlIn, out feedXmlOut);
+			public HResult get_ItemCountLimit(out int32 itemCountLimit) mut => VT.get_ItemCountLimit(ref this, out itemCountLimit);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, out IDispatch* disp) get_RootFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR feedUrl, out int16 subscribed) IsSubscribed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR feedPath, out int16 exists) ExistsFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR feedPath, out IDispatch* disp) GetFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR feedUrl, out IDispatch* disp) GetFeedByUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR folderPath, out int16 exists) ExistsFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR folderPath, out IDispatch* disp) GetFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR feedPath) DeleteFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR folderPath) DeleteFolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, FEEDS_BACKGROUNDSYNC_ACTION action) BackgroundSync;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, out FEEDS_BACKGROUNDSYNC_STATUS status) get_BackgroundSyncStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, out int32 minutes) get_DefaultInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, int32 minutes) put_DefaultInterval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self) AsyncSyncAll;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, BSTR feedXmlIn, out BSTR feedXmlOut) Normalize;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsManager self, out int32 itemCountLimit) get_ItemCountLimit;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, out IDispatch* disp) get_RootFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR feedUrl, out int16 subscribed) IsSubscribed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR feedPath, out int16 exists) ExistsFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR feedPath, out IDispatch* disp) GetFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR feedUrl, out IDispatch* disp) GetFeedByUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR folderPath, out int16 exists) ExistsFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR folderPath, out IDispatch* disp) GetFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR feedPath) DeleteFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR folderPath) DeleteFolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, FEEDS_BACKGROUNDSYNC_ACTION action) BackgroundSync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, out FEEDS_BACKGROUNDSYNC_STATUS status) get_BackgroundSyncStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, out int32 minutes) get_DefaultInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, int32 minutes) put_DefaultInterval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self) AsyncSyncAll;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, BSTR feedXmlIn, out BSTR feedXmlOut) Normalize;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsManager self, out int32 itemCountLimit) get_ItemCountLimit;
 			}
 		}
 		[CRepr]
@@ -3310,16 +3310,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
-			public HRESULT Item(int32 index, out IDispatch* disp) mut => VT.Item(ref this, index, out disp);
-			public HRESULT get__NewEnum(out IEnumVARIANT* enumVar) mut => VT.get__NewEnum(ref this, out enumVar);
+			public HResult get_Count(out int32 count) mut => VT.get_Count(ref this, out count);
+			public HResult Item(int32 index, out IDispatch* disp) mut => VT.Item(ref this, index, out disp);
+			public HResult get__NewEnum(out IEnumVARIANT* enumVar) mut => VT.get__NewEnum(ref this, out enumVar);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsEnum self, out int32 count) get_Count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsEnum self, int32 index, out IDispatch* disp) Item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedsEnum self, out IEnumVARIANT* enumVar) get__NewEnum;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsEnum self, out int32 count) get_Count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsEnum self, int32 index, out IDispatch* disp) Item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedsEnum self, out IEnumVARIANT* enumVar) get__NewEnum;
 			}
 		}
 		[CRepr]
@@ -3329,46 +3329,46 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Feeds(out IDispatch* disp) mut => VT.get_Feeds(ref this, out disp);
-			public HRESULT get_Subfolders(out IDispatch* disp) mut => VT.get_Subfolders(ref this, out disp);
-			public HRESULT CreateFeed(BSTR feedName, BSTR feedUrl, out IDispatch* disp) mut => VT.CreateFeed(ref this, feedName, feedUrl, out disp);
-			public HRESULT CreateSubfolder(BSTR folderName, out IDispatch* disp) mut => VT.CreateSubfolder(ref this, folderName, out disp);
-			public HRESULT ExistsFeed(BSTR feedName, out int16 exists) mut => VT.ExistsFeed(ref this, feedName, out exists);
-			public HRESULT GetFeed(BSTR feedName, out IDispatch* disp) mut => VT.GetFeed(ref this, feedName, out disp);
-			public HRESULT ExistsSubfolder(BSTR folderName, out int16 exists) mut => VT.ExistsSubfolder(ref this, folderName, out exists);
-			public HRESULT GetSubfolder(BSTR folderName, out IDispatch* disp) mut => VT.GetSubfolder(ref this, folderName, out disp);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT get_Name(out BSTR folderName) mut => VT.get_Name(ref this, out folderName);
-			public HRESULT Rename(BSTR folderName) mut => VT.Rename(ref this, folderName);
-			public HRESULT get_Path(out BSTR folderPath) mut => VT.get_Path(ref this, out folderPath);
-			public HRESULT Move(BSTR newParentPath) mut => VT.Move(ref this, newParentPath);
-			public HRESULT get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
-			public HRESULT get_IsRoot(out int16 isRoot) mut => VT.get_IsRoot(ref this, out isRoot);
-			public HRESULT get_TotalUnreadItemCount(out int32 count) mut => VT.get_TotalUnreadItemCount(ref this, out count);
-			public HRESULT get_TotalItemCount(out int32 count) mut => VT.get_TotalItemCount(ref this, out count);
-			public HRESULT GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) mut => VT.GetWatcher(ref this, @scope, mask, out disp);
+			public HResult get_Feeds(out IDispatch* disp) mut => VT.get_Feeds(ref this, out disp);
+			public HResult get_Subfolders(out IDispatch* disp) mut => VT.get_Subfolders(ref this, out disp);
+			public HResult CreateFeed(BSTR feedName, BSTR feedUrl, out IDispatch* disp) mut => VT.CreateFeed(ref this, feedName, feedUrl, out disp);
+			public HResult CreateSubfolder(BSTR folderName, out IDispatch* disp) mut => VT.CreateSubfolder(ref this, folderName, out disp);
+			public HResult ExistsFeed(BSTR feedName, out int16 exists) mut => VT.ExistsFeed(ref this, feedName, out exists);
+			public HResult GetFeed(BSTR feedName, out IDispatch* disp) mut => VT.GetFeed(ref this, feedName, out disp);
+			public HResult ExistsSubfolder(BSTR folderName, out int16 exists) mut => VT.ExistsSubfolder(ref this, folderName, out exists);
+			public HResult GetSubfolder(BSTR folderName, out IDispatch* disp) mut => VT.GetSubfolder(ref this, folderName, out disp);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult get_Name(out BSTR folderName) mut => VT.get_Name(ref this, out folderName);
+			public HResult Rename(BSTR folderName) mut => VT.Rename(ref this, folderName);
+			public HResult get_Path(out BSTR folderPath) mut => VT.get_Path(ref this, out folderPath);
+			public HResult Move(BSTR newParentPath) mut => VT.Move(ref this, newParentPath);
+			public HResult get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
+			public HResult get_IsRoot(out int16 isRoot) mut => VT.get_IsRoot(ref this, out isRoot);
+			public HResult get_TotalUnreadItemCount(out int32 count) mut => VT.get_TotalUnreadItemCount(ref this, out count);
+			public HResult get_TotalItemCount(out int32 count) mut => VT.get_TotalItemCount(ref this, out count);
+			public HResult GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) mut => VT.GetWatcher(ref this, @scope, mask, out disp);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out IDispatch* disp) get_Feeds;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out IDispatch* disp) get_Subfolders;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR feedName, BSTR feedUrl, out IDispatch* disp) CreateFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR folderName, out IDispatch* disp) CreateSubfolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR feedName, out int16 exists) ExistsFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR feedName, out IDispatch* disp) GetFeed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR folderName, out int16 exists) ExistsSubfolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR folderName, out IDispatch* disp) GetSubfolder;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out BSTR folderName) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR folderName) Rename;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out BSTR folderPath) get_Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, BSTR newParentPath) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out IDispatch* disp) get_Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out int16 isRoot) get_IsRoot;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out int32 count) get_TotalUnreadItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, out int32 count) get_TotalItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolder self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) GetWatcher;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out IDispatch* disp) get_Feeds;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out IDispatch* disp) get_Subfolders;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR feedName, BSTR feedUrl, out IDispatch* disp) CreateFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR folderName, out IDispatch* disp) CreateSubfolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR feedName, out int16 exists) ExistsFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR feedName, out IDispatch* disp) GetFeed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR folderName, out int16 exists) ExistsSubfolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR folderName, out IDispatch* disp) GetSubfolder;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out BSTR folderName) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR folderName) Rename;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out BSTR folderPath) get_Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, BSTR newParentPath) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out IDispatch* disp) get_Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out int16 isRoot) get_IsRoot;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out int32 count) get_TotalUnreadItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, out int32 count) get_TotalItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolder self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) GetWatcher;
 			}
 		}
 		[CRepr]
@@ -3378,42 +3378,42 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Error() mut => VT.Error(ref this);
-			public HRESULT FolderAdded(BSTR path) mut => VT.FolderAdded(ref this, path);
-			public HRESULT FolderDeleted(BSTR path) mut => VT.FolderDeleted(ref this, path);
-			public HRESULT FolderRenamed(BSTR path, BSTR oldPath) mut => VT.FolderRenamed(ref this, path, oldPath);
-			public HRESULT FolderMovedFrom(BSTR path, BSTR oldPath) mut => VT.FolderMovedFrom(ref this, path, oldPath);
-			public HRESULT FolderMovedTo(BSTR path, BSTR oldPath) mut => VT.FolderMovedTo(ref this, path, oldPath);
-			public HRESULT FolderItemCountChanged(BSTR path, int32 itemCountType) mut => VT.FolderItemCountChanged(ref this, path, itemCountType);
-			public HRESULT FeedAdded(BSTR path) mut => VT.FeedAdded(ref this, path);
-			public HRESULT FeedDeleted(BSTR path) mut => VT.FeedDeleted(ref this, path);
-			public HRESULT FeedRenamed(BSTR path, BSTR oldPath) mut => VT.FeedRenamed(ref this, path, oldPath);
-			public HRESULT FeedUrlChanged(BSTR path) mut => VT.FeedUrlChanged(ref this, path);
-			public HRESULT FeedMovedFrom(BSTR path, BSTR oldPath) mut => VT.FeedMovedFrom(ref this, path, oldPath);
-			public HRESULT FeedMovedTo(BSTR path, BSTR oldPath) mut => VT.FeedMovedTo(ref this, path, oldPath);
-			public HRESULT FeedDownloading(BSTR path) mut => VT.FeedDownloading(ref this, path);
-			public HRESULT FeedDownloadCompleted(BSTR path, FEEDS_DOWNLOAD_ERROR error) mut => VT.FeedDownloadCompleted(ref this, path, error);
-			public HRESULT FeedItemCountChanged(BSTR path, int32 itemCountType) mut => VT.FeedItemCountChanged(ref this, path, itemCountType);
+			public HResult Error() mut => VT.Error(ref this);
+			public HResult FolderAdded(BSTR path) mut => VT.FolderAdded(ref this, path);
+			public HResult FolderDeleted(BSTR path) mut => VT.FolderDeleted(ref this, path);
+			public HResult FolderRenamed(BSTR path, BSTR oldPath) mut => VT.FolderRenamed(ref this, path, oldPath);
+			public HResult FolderMovedFrom(BSTR path, BSTR oldPath) mut => VT.FolderMovedFrom(ref this, path, oldPath);
+			public HResult FolderMovedTo(BSTR path, BSTR oldPath) mut => VT.FolderMovedTo(ref this, path, oldPath);
+			public HResult FolderItemCountChanged(BSTR path, int32 itemCountType) mut => VT.FolderItemCountChanged(ref this, path, itemCountType);
+			public HResult FeedAdded(BSTR path) mut => VT.FeedAdded(ref this, path);
+			public HResult FeedDeleted(BSTR path) mut => VT.FeedDeleted(ref this, path);
+			public HResult FeedRenamed(BSTR path, BSTR oldPath) mut => VT.FeedRenamed(ref this, path, oldPath);
+			public HResult FeedUrlChanged(BSTR path) mut => VT.FeedUrlChanged(ref this, path);
+			public HResult FeedMovedFrom(BSTR path, BSTR oldPath) mut => VT.FeedMovedFrom(ref this, path, oldPath);
+			public HResult FeedMovedTo(BSTR path, BSTR oldPath) mut => VT.FeedMovedTo(ref this, path, oldPath);
+			public HResult FeedDownloading(BSTR path) mut => VT.FeedDownloading(ref this, path);
+			public HResult FeedDownloadCompleted(BSTR path, FEEDS_DOWNLOAD_ERROR error) mut => VT.FeedDownloadCompleted(ref this, path, error);
+			public HResult FeedItemCountChanged(BSTR path, int32 itemCountType) mut => VT.FeedItemCountChanged(ref this, path, itemCountType);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self) Error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path) FolderAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path) FolderDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FolderRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FolderMovedFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FolderMovedTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, int32 itemCountType) FolderItemCountChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path) FeedAdded;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path) FeedDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FeedRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path) FeedUrlChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FeedMovedFrom;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FeedMovedTo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path) FeedDownloading;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, FEEDS_DOWNLOAD_ERROR error) FeedDownloadCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedFolderEvents self, BSTR path, int32 itemCountType) FeedItemCountChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self) Error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path) FolderAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path) FolderDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FolderRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FolderMovedFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FolderMovedTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, int32 itemCountType) FolderItemCountChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path) FeedAdded;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path) FeedDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FeedRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path) FeedUrlChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FeedMovedFrom;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, BSTR oldPath) FeedMovedTo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path) FeedDownloading;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, FEEDS_DOWNLOAD_ERROR error) FeedDownloadCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedFolderEvents self, BSTR path, int32 itemCountType) FeedItemCountChanged;
 			}
 		}
 		[CRepr]
@@ -3423,98 +3423,98 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Xml(int32 count, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) mut => VT.Xml(ref this, count, sortProperty, sortOrder, filterFlags, includeFlags, out xml);
-			public HRESULT get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
-			public HRESULT Rename(BSTR name) mut => VT.Rename(ref this, name);
-			public HRESULT get_Url(out BSTR feedUrl) mut => VT.get_Url(ref this, out feedUrl);
-			public HRESULT put_Url(BSTR feedUrl) mut => VT.put_Url(ref this, feedUrl);
-			public HRESULT get_LocalId(out BSTR feedGuid) mut => VT.get_LocalId(ref this, out feedGuid);
-			public HRESULT get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
-			public HRESULT Move(BSTR newParentPath) mut => VT.Move(ref this, newParentPath);
-			public HRESULT get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
-			public HRESULT get_LastWriteTime(out double lastWrite) mut => VT.get_LastWriteTime(ref this, out lastWrite);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT Download() mut => VT.Download(ref this);
-			public HRESULT AsyncDownload() mut => VT.AsyncDownload(ref this);
-			public HRESULT CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
-			public HRESULT get_SyncSetting(out FEEDS_SYNC_SETTING syncSetting) mut => VT.get_SyncSetting(ref this, out syncSetting);
-			public HRESULT put_SyncSetting(FEEDS_SYNC_SETTING syncSetting) mut => VT.put_SyncSetting(ref this, syncSetting);
-			public HRESULT get_Interval(out int32 minutes) mut => VT.get_Interval(ref this, out minutes);
-			public HRESULT put_Interval(int32 minutes) mut => VT.put_Interval(ref this, minutes);
-			public HRESULT get_LastDownloadTime(out double lastDownload) mut => VT.get_LastDownloadTime(ref this, out lastDownload);
-			public HRESULT get_LocalEnclosurePath(out BSTR path) mut => VT.get_LocalEnclosurePath(ref this, out path);
-			public HRESULT get_Items(out IDispatch* disp) mut => VT.get_Items(ref this, out disp);
-			public HRESULT GetItem(int32 itemId, out IDispatch* disp) mut => VT.GetItem(ref this, itemId, out disp);
-			public HRESULT get_Title(out BSTR title) mut => VT.get_Title(ref this, out title);
-			public HRESULT get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
-			public HRESULT get_Link(out BSTR homePage) mut => VT.get_Link(ref this, out homePage);
-			public HRESULT get_Image(out BSTR imageUrl) mut => VT.get_Image(ref this, out imageUrl);
-			public HRESULT get_LastBuildDate(out double lastBuildDate) mut => VT.get_LastBuildDate(ref this, out lastBuildDate);
-			public HRESULT get_PubDate(out double lastPopulateDate) mut => VT.get_PubDate(ref this, out lastPopulateDate);
-			public HRESULT get_Ttl(out int32 ttl) mut => VT.get_Ttl(ref this, out ttl);
-			public HRESULT get_Language(out BSTR language) mut => VT.get_Language(ref this, out language);
-			public HRESULT get_Copyright(out BSTR copyright) mut => VT.get_Copyright(ref this, out copyright);
-			public HRESULT get_MaxItemCount(out int32 count) mut => VT.get_MaxItemCount(ref this, out count);
-			public HRESULT put_MaxItemCount(int32 count) mut => VT.put_MaxItemCount(ref this, count);
-			public HRESULT get_DownloadEnclosuresAutomatically(out int16 downloadEnclosuresAutomatically) mut => VT.get_DownloadEnclosuresAutomatically(ref this, out downloadEnclosuresAutomatically);
-			public HRESULT put_DownloadEnclosuresAutomatically(int16 downloadEnclosuresAutomatically) mut => VT.put_DownloadEnclosuresAutomatically(ref this, downloadEnclosuresAutomatically);
-			public HRESULT get_DownloadStatus(out FEEDS_DOWNLOAD_STATUS status) mut => VT.get_DownloadStatus(ref this, out status);
-			public HRESULT get_LastDownloadError(out FEEDS_DOWNLOAD_ERROR error) mut => VT.get_LastDownloadError(ref this, out error);
-			public HRESULT Merge(BSTR feedXml, BSTR feedUrl) mut => VT.Merge(ref this, feedXml, feedUrl);
-			public HRESULT get_DownloadUrl(out BSTR feedUrl) mut => VT.get_DownloadUrl(ref this, out feedUrl);
-			public HRESULT get_IsList(out int16 isList) mut => VT.get_IsList(ref this, out isList);
-			public HRESULT MarkAllItemsRead() mut => VT.MarkAllItemsRead(ref this);
-			public HRESULT GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) mut => VT.GetWatcher(ref this, @scope, mask, out disp);
-			public HRESULT get_UnreadItemCount(out int32 count) mut => VT.get_UnreadItemCount(ref this, out count);
-			public HRESULT get_ItemCount(out int32 count) mut => VT.get_ItemCount(ref this, out count);
+			public HResult Xml(int32 count, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) mut => VT.Xml(ref this, count, sortProperty, sortOrder, filterFlags, includeFlags, out xml);
+			public HResult get_Name(out BSTR name) mut => VT.get_Name(ref this, out name);
+			public HResult Rename(BSTR name) mut => VT.Rename(ref this, name);
+			public HResult get_Url(out BSTR feedUrl) mut => VT.get_Url(ref this, out feedUrl);
+			public HResult put_Url(BSTR feedUrl) mut => VT.put_Url(ref this, feedUrl);
+			public HResult get_LocalId(out BSTR feedGuid) mut => VT.get_LocalId(ref this, out feedGuid);
+			public HResult get_Path(out BSTR path) mut => VT.get_Path(ref this, out path);
+			public HResult Move(BSTR newParentPath) mut => VT.Move(ref this, newParentPath);
+			public HResult get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
+			public HResult get_LastWriteTime(out double lastWrite) mut => VT.get_LastWriteTime(ref this, out lastWrite);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult Download() mut => VT.Download(ref this);
+			public HResult AsyncDownload() mut => VT.AsyncDownload(ref this);
+			public HResult CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
+			public HResult get_SyncSetting(out FEEDS_SYNC_SETTING syncSetting) mut => VT.get_SyncSetting(ref this, out syncSetting);
+			public HResult put_SyncSetting(FEEDS_SYNC_SETTING syncSetting) mut => VT.put_SyncSetting(ref this, syncSetting);
+			public HResult get_Interval(out int32 minutes) mut => VT.get_Interval(ref this, out minutes);
+			public HResult put_Interval(int32 minutes) mut => VT.put_Interval(ref this, minutes);
+			public HResult get_LastDownloadTime(out double lastDownload) mut => VT.get_LastDownloadTime(ref this, out lastDownload);
+			public HResult get_LocalEnclosurePath(out BSTR path) mut => VT.get_LocalEnclosurePath(ref this, out path);
+			public HResult get_Items(out IDispatch* disp) mut => VT.get_Items(ref this, out disp);
+			public HResult GetItem(int32 itemId, out IDispatch* disp) mut => VT.GetItem(ref this, itemId, out disp);
+			public HResult get_Title(out BSTR title) mut => VT.get_Title(ref this, out title);
+			public HResult get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
+			public HResult get_Link(out BSTR homePage) mut => VT.get_Link(ref this, out homePage);
+			public HResult get_Image(out BSTR imageUrl) mut => VT.get_Image(ref this, out imageUrl);
+			public HResult get_LastBuildDate(out double lastBuildDate) mut => VT.get_LastBuildDate(ref this, out lastBuildDate);
+			public HResult get_PubDate(out double lastPopulateDate) mut => VT.get_PubDate(ref this, out lastPopulateDate);
+			public HResult get_Ttl(out int32 ttl) mut => VT.get_Ttl(ref this, out ttl);
+			public HResult get_Language(out BSTR language) mut => VT.get_Language(ref this, out language);
+			public HResult get_Copyright(out BSTR copyright) mut => VT.get_Copyright(ref this, out copyright);
+			public HResult get_MaxItemCount(out int32 count) mut => VT.get_MaxItemCount(ref this, out count);
+			public HResult put_MaxItemCount(int32 count) mut => VT.put_MaxItemCount(ref this, count);
+			public HResult get_DownloadEnclosuresAutomatically(out int16 downloadEnclosuresAutomatically) mut => VT.get_DownloadEnclosuresAutomatically(ref this, out downloadEnclosuresAutomatically);
+			public HResult put_DownloadEnclosuresAutomatically(int16 downloadEnclosuresAutomatically) mut => VT.put_DownloadEnclosuresAutomatically(ref this, downloadEnclosuresAutomatically);
+			public HResult get_DownloadStatus(out FEEDS_DOWNLOAD_STATUS status) mut => VT.get_DownloadStatus(ref this, out status);
+			public HResult get_LastDownloadError(out FEEDS_DOWNLOAD_ERROR error) mut => VT.get_LastDownloadError(ref this, out error);
+			public HResult Merge(BSTR feedXml, BSTR feedUrl) mut => VT.Merge(ref this, feedXml, feedUrl);
+			public HResult get_DownloadUrl(out BSTR feedUrl) mut => VT.get_DownloadUrl(ref this, out feedUrl);
+			public HResult get_IsList(out int16 isList) mut => VT.get_IsList(ref this, out isList);
+			public HResult MarkAllItemsRead() mut => VT.MarkAllItemsRead(ref this);
+			public HResult GetWatcher(FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) mut => VT.GetWatcher(ref this, @scope, mask, out disp);
+			public HResult get_UnreadItemCount(out int32 count) mut => VT.get_UnreadItemCount(ref this, out count);
+			public HResult get_ItemCount(out int32 count) mut => VT.get_ItemCount(ref this, out count);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, int32 count, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) Xml;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR name) get_Name;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, BSTR name) Rename;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR feedUrl) get_Url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, BSTR feedUrl) put_Url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR feedGuid) get_LocalId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR path) get_Path;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, BSTR newParentPath) Move;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out IDispatch* disp) get_Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out double lastWrite) get_LastWriteTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self) Download;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self) AsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self) CancelAsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out FEEDS_SYNC_SETTING syncSetting) get_SyncSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, FEEDS_SYNC_SETTING syncSetting) put_SyncSetting;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int32 minutes) get_Interval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, int32 minutes) put_Interval;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out double lastDownload) get_LastDownloadTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR path) get_LocalEnclosurePath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out IDispatch* disp) get_Items;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, int32 itemId, out IDispatch* disp) GetItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR title) get_Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR description) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR homePage) get_Link;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR imageUrl) get_Image;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out double lastBuildDate) get_LastBuildDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out double lastPopulateDate) get_PubDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int32 ttl) get_Ttl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR language) get_Language;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR copyright) get_Copyright;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int32 count) get_MaxItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, int32 count) put_MaxItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int16 downloadEnclosuresAutomatically) get_DownloadEnclosuresAutomatically;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, int16 downloadEnclosuresAutomatically) put_DownloadEnclosuresAutomatically;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out FEEDS_DOWNLOAD_STATUS status) get_DownloadStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out FEEDS_DOWNLOAD_ERROR error) get_LastDownloadError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, BSTR feedXml, BSTR feedUrl) Merge;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out BSTR feedUrl) get_DownloadUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int16 isList) get_IsList;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self) MarkAllItemsRead;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) GetWatcher;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int32 count) get_UnreadItemCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed self, out int32 count) get_ItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, int32 count, FEEDS_XML_SORT_PROPERTY sortProperty, FEEDS_XML_SORT_ORDER sortOrder, FEEDS_XML_FILTER_FLAGS filterFlags, FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) Xml;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR name) get_Name;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, BSTR name) Rename;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR feedUrl) get_Url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, BSTR feedUrl) put_Url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR feedGuid) get_LocalId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR path) get_Path;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, BSTR newParentPath) Move;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out IDispatch* disp) get_Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out double lastWrite) get_LastWriteTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self) Download;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self) AsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self) CancelAsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out FEEDS_SYNC_SETTING syncSetting) get_SyncSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, FEEDS_SYNC_SETTING syncSetting) put_SyncSetting;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int32 minutes) get_Interval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, int32 minutes) put_Interval;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out double lastDownload) get_LastDownloadTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR path) get_LocalEnclosurePath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out IDispatch* disp) get_Items;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, int32 itemId, out IDispatch* disp) GetItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR title) get_Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR description) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR homePage) get_Link;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR imageUrl) get_Image;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out double lastBuildDate) get_LastBuildDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out double lastPopulateDate) get_PubDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int32 ttl) get_Ttl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR language) get_Language;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR copyright) get_Copyright;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int32 count) get_MaxItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, int32 count) put_MaxItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int16 downloadEnclosuresAutomatically) get_DownloadEnclosuresAutomatically;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, int16 downloadEnclosuresAutomatically) put_DownloadEnclosuresAutomatically;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out FEEDS_DOWNLOAD_STATUS status) get_DownloadStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out FEEDS_DOWNLOAD_ERROR error) get_LastDownloadError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, BSTR feedXml, BSTR feedUrl) Merge;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out BSTR feedUrl) get_DownloadUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int16 isList) get_IsList;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self) MarkAllItemsRead;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, FEEDS_EVENTS_SCOPE @scope, FEEDS_EVENTS_MASK mask, out IDispatch* disp) GetWatcher;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int32 count) get_UnreadItemCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed self, out int32 count) get_ItemCount;
 			}
 		}
 		[CRepr]
@@ -3524,22 +3524,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetItemByEffectiveId(int32 itemEffectiveId, out IDispatch* disp) mut => VT.GetItemByEffectiveId(ref this, itemEffectiveId, out disp);
-			public HRESULT get_LastItemDownloadTime(out double lastItemDownloadTime) mut => VT.get_LastItemDownloadTime(ref this, out lastItemDownloadTime);
-			public HRESULT get_Username(out BSTR username) mut => VT.get_Username(ref this, out username);
-			public HRESULT get_Password(out BSTR password) mut => VT.get_Password(ref this, out password);
-			public HRESULT SetCredentials(BSTR username, BSTR password) mut => VT.SetCredentials(ref this, username, password);
-			public HRESULT ClearCredentials() mut => VT.ClearCredentials(ref this);
+			public HResult GetItemByEffectiveId(int32 itemEffectiveId, out IDispatch* disp) mut => VT.GetItemByEffectiveId(ref this, itemEffectiveId, out disp);
+			public HResult get_LastItemDownloadTime(out double lastItemDownloadTime) mut => VT.get_LastItemDownloadTime(ref this, out lastItemDownloadTime);
+			public HResult get_Username(out BSTR username) mut => VT.get_Username(ref this, out username);
+			public HResult get_Password(out BSTR password) mut => VT.get_Password(ref this, out password);
+			public HResult SetCredentials(BSTR username, BSTR password) mut => VT.SetCredentials(ref this, username, password);
+			public HResult ClearCredentials() mut => VT.ClearCredentials(ref this);
 
 			[CRepr]
 			public struct VTable : IFeed.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed2 self, int32 itemEffectiveId, out IDispatch* disp) GetItemByEffectiveId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed2 self, out double lastItemDownloadTime) get_LastItemDownloadTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed2 self, out BSTR username) get_Username;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed2 self, out BSTR password) get_Password;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed2 self, BSTR username, BSTR password) SetCredentials;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeed2 self) ClearCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed2 self, int32 itemEffectiveId, out IDispatch* disp) GetItemByEffectiveId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed2 self, out double lastItemDownloadTime) get_LastItemDownloadTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed2 self, out BSTR username) get_Username;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed2 self, out BSTR password) get_Password;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed2 self, BSTR username, BSTR password) SetCredentials;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeed2 self) ClearCredentials;
 			}
 		}
 		[CRepr]
@@ -3549,26 +3549,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Error() mut => VT.Error(ref this);
-			public HRESULT FeedDeleted(BSTR path) mut => VT.FeedDeleted(ref this, path);
-			public HRESULT FeedRenamed(BSTR path, BSTR oldPath) mut => VT.FeedRenamed(ref this, path, oldPath);
-			public HRESULT FeedUrlChanged(BSTR path) mut => VT.FeedUrlChanged(ref this, path);
-			public HRESULT FeedMoved(BSTR path, BSTR oldPath) mut => VT.FeedMoved(ref this, path, oldPath);
-			public HRESULT FeedDownloading(BSTR path) mut => VT.FeedDownloading(ref this, path);
-			public HRESULT FeedDownloadCompleted(BSTR path, FEEDS_DOWNLOAD_ERROR error) mut => VT.FeedDownloadCompleted(ref this, path, error);
-			public HRESULT FeedItemCountChanged(BSTR path, int32 itemCountType) mut => VT.FeedItemCountChanged(ref this, path, itemCountType);
+			public HResult Error() mut => VT.Error(ref this);
+			public HResult FeedDeleted(BSTR path) mut => VT.FeedDeleted(ref this, path);
+			public HResult FeedRenamed(BSTR path, BSTR oldPath) mut => VT.FeedRenamed(ref this, path, oldPath);
+			public HResult FeedUrlChanged(BSTR path) mut => VT.FeedUrlChanged(ref this, path);
+			public HResult FeedMoved(BSTR path, BSTR oldPath) mut => VT.FeedMoved(ref this, path, oldPath);
+			public HResult FeedDownloading(BSTR path) mut => VT.FeedDownloading(ref this, path);
+			public HResult FeedDownloadCompleted(BSTR path, FEEDS_DOWNLOAD_ERROR error) mut => VT.FeedDownloadCompleted(ref this, path, error);
+			public HResult FeedItemCountChanged(BSTR path, int32 itemCountType) mut => VT.FeedItemCountChanged(ref this, path, itemCountType);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self) Error;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path) FeedDeleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path, BSTR oldPath) FeedRenamed;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path) FeedUrlChanged;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path, BSTR oldPath) FeedMoved;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path) FeedDownloading;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path, FEEDS_DOWNLOAD_ERROR error) FeedDownloadCompleted;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEvents self, BSTR path, int32 itemCountType) FeedItemCountChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self) Error;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path) FeedDeleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path, BSTR oldPath) FeedRenamed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path) FeedUrlChanged;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path, BSTR oldPath) FeedMoved;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path) FeedDownloading;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path, FEEDS_DOWNLOAD_ERROR error) FeedDownloadCompleted;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEvents self, BSTR path, int32 itemCountType) FeedItemCountChanged;
 			}
 		}
 		[CRepr]
@@ -3578,44 +3578,44 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Xml(FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) mut => VT.Xml(ref this, includeFlags, out xml);
-			public HRESULT get_Title(out BSTR title) mut => VT.get_Title(ref this, out title);
-			public HRESULT get_Link(out BSTR linkUrl) mut => VT.get_Link(ref this, out linkUrl);
-			public HRESULT get_Guid(out BSTR itemGuid) mut => VT.get_Guid(ref this, out itemGuid);
-			public HRESULT get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
-			public HRESULT get_PubDate(out double pubDate) mut => VT.get_PubDate(ref this, out pubDate);
-			public HRESULT get_Comments(out BSTR comments) mut => VT.get_Comments(ref this, out comments);
-			public HRESULT get_Author(out BSTR author) mut => VT.get_Author(ref this, out author);
-			public HRESULT get_Enclosure(out IDispatch* disp) mut => VT.get_Enclosure(ref this, out disp);
-			public HRESULT get_IsRead(out int16 isRead) mut => VT.get_IsRead(ref this, out isRead);
-			public HRESULT put_IsRead(int16 isRead) mut => VT.put_IsRead(ref this, isRead);
-			public HRESULT get_LocalId(out int32 itemId) mut => VT.get_LocalId(ref this, out itemId);
-			public HRESULT get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
-			public HRESULT Delete() mut => VT.Delete(ref this);
-			public HRESULT get_DownloadUrl(out BSTR itemUrl) mut => VT.get_DownloadUrl(ref this, out itemUrl);
-			public HRESULT get_LastDownloadTime(out double lastDownload) mut => VT.get_LastDownloadTime(ref this, out lastDownload);
-			public HRESULT get_Modified(out double modified) mut => VT.get_Modified(ref this, out modified);
+			public HResult Xml(FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) mut => VT.Xml(ref this, includeFlags, out xml);
+			public HResult get_Title(out BSTR title) mut => VT.get_Title(ref this, out title);
+			public HResult get_Link(out BSTR linkUrl) mut => VT.get_Link(ref this, out linkUrl);
+			public HResult get_Guid(out BSTR itemGuid) mut => VT.get_Guid(ref this, out itemGuid);
+			public HResult get_Description(out BSTR description) mut => VT.get_Description(ref this, out description);
+			public HResult get_PubDate(out double pubDate) mut => VT.get_PubDate(ref this, out pubDate);
+			public HResult get_Comments(out BSTR comments) mut => VT.get_Comments(ref this, out comments);
+			public HResult get_Author(out BSTR author) mut => VT.get_Author(ref this, out author);
+			public HResult get_Enclosure(out IDispatch* disp) mut => VT.get_Enclosure(ref this, out disp);
+			public HResult get_IsRead(out int16 isRead) mut => VT.get_IsRead(ref this, out isRead);
+			public HResult put_IsRead(int16 isRead) mut => VT.put_IsRead(ref this, isRead);
+			public HResult get_LocalId(out int32 itemId) mut => VT.get_LocalId(ref this, out itemId);
+			public HResult get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
+			public HResult Delete() mut => VT.Delete(ref this);
+			public HResult get_DownloadUrl(out BSTR itemUrl) mut => VT.get_DownloadUrl(ref this, out itemUrl);
+			public HResult get_LastDownloadTime(out double lastDownload) mut => VT.get_LastDownloadTime(ref this, out lastDownload);
+			public HResult get_Modified(out double modified) mut => VT.get_Modified(ref this, out modified);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) Xml;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR title) get_Title;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR linkUrl) get_Link;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR itemGuid) get_Guid;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR description) get_Description;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out double pubDate) get_PubDate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR comments) get_Comments;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR author) get_Author;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out IDispatch* disp) get_Enclosure;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out int16 isRead) get_IsRead;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, int16 isRead) put_IsRead;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out int32 itemId) get_LocalId;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out IDispatch* disp) get_Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self) Delete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out BSTR itemUrl) get_DownloadUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out double lastDownload) get_LastDownloadTime;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem self, out double modified) get_Modified;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, FEEDS_XML_INCLUDE_FLAGS includeFlags, out BSTR xml) Xml;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR title) get_Title;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR linkUrl) get_Link;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR itemGuid) get_Guid;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR description) get_Description;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out double pubDate) get_PubDate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR comments) get_Comments;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR author) get_Author;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out IDispatch* disp) get_Enclosure;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out int16 isRead) get_IsRead;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, int16 isRead) put_IsRead;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out int32 itemId) get_LocalId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out IDispatch* disp) get_Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self) Delete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out BSTR itemUrl) get_DownloadUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out double lastDownload) get_LastDownloadTime;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem self, out double modified) get_Modified;
 			}
 		}
 		[CRepr]
@@ -3625,12 +3625,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_EffectiveId(out int32 effectiveId) mut => VT.get_EffectiveId(ref this, out effectiveId);
+			public HResult get_EffectiveId(out int32 effectiveId) mut => VT.get_EffectiveId(ref this, out effectiveId);
 
 			[CRepr]
 			public struct VTable : IFeedItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedItem2 self, out int32 effectiveId) get_EffectiveId;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedItem2 self, out int32 effectiveId) get_EffectiveId;
 			}
 		}
 		[CRepr]
@@ -3640,36 +3640,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_Url(out BSTR enclosureUrl) mut => VT.get_Url(ref this, out enclosureUrl);
-			public HRESULT get_Type(out BSTR mimeType) mut => VT.get_Type(ref this, out mimeType);
-			public HRESULT get_Length(out int32 length) mut => VT.get_Length(ref this, out length);
-			public HRESULT AsyncDownload() mut => VT.AsyncDownload(ref this);
-			public HRESULT CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
-			public HRESULT get_DownloadStatus(out FEEDS_DOWNLOAD_STATUS status) mut => VT.get_DownloadStatus(ref this, out status);
-			public HRESULT get_LastDownloadError(out FEEDS_DOWNLOAD_ERROR error) mut => VT.get_LastDownloadError(ref this, out error);
-			public HRESULT get_LocalPath(out BSTR localPath) mut => VT.get_LocalPath(ref this, out localPath);
-			public HRESULT get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
-			public HRESULT get_DownloadUrl(out BSTR enclosureUrl) mut => VT.get_DownloadUrl(ref this, out enclosureUrl);
-			public HRESULT get_DownloadMimeType(out BSTR mimeType) mut => VT.get_DownloadMimeType(ref this, out mimeType);
-			public HRESULT RemoveFile() mut => VT.RemoveFile(ref this);
-			public HRESULT SetFile(BSTR downloadUrl, BSTR downloadFilePath, BSTR downloadMimeType, BSTR enclosureFilename) mut => VT.SetFile(ref this, downloadUrl, downloadFilePath, downloadMimeType, enclosureFilename);
+			public HResult get_Url(out BSTR enclosureUrl) mut => VT.get_Url(ref this, out enclosureUrl);
+			public HResult get_Type(out BSTR mimeType) mut => VT.get_Type(ref this, out mimeType);
+			public HResult get_Length(out int32 length) mut => VT.get_Length(ref this, out length);
+			public HResult AsyncDownload() mut => VT.AsyncDownload(ref this);
+			public HResult CancelAsyncDownload() mut => VT.CancelAsyncDownload(ref this);
+			public HResult get_DownloadStatus(out FEEDS_DOWNLOAD_STATUS status) mut => VT.get_DownloadStatus(ref this, out status);
+			public HResult get_LastDownloadError(out FEEDS_DOWNLOAD_ERROR error) mut => VT.get_LastDownloadError(ref this, out error);
+			public HResult get_LocalPath(out BSTR localPath) mut => VT.get_LocalPath(ref this, out localPath);
+			public HResult get_Parent(out IDispatch* disp) mut => VT.get_Parent(ref this, out disp);
+			public HResult get_DownloadUrl(out BSTR enclosureUrl) mut => VT.get_DownloadUrl(ref this, out enclosureUrl);
+			public HResult get_DownloadMimeType(out BSTR mimeType) mut => VT.get_DownloadMimeType(ref this, out mimeType);
+			public HResult RemoveFile() mut => VT.RemoveFile(ref this);
+			public HResult SetFile(BSTR downloadUrl, BSTR downloadFilePath, BSTR downloadMimeType, BSTR enclosureFilename) mut => VT.SetFile(ref this, downloadUrl, downloadFilePath, downloadMimeType, enclosureFilename);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out BSTR enclosureUrl) get_Url;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out BSTR mimeType) get_Type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out int32 length) get_Length;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self) AsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self) CancelAsyncDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out FEEDS_DOWNLOAD_STATUS status) get_DownloadStatus;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out FEEDS_DOWNLOAD_ERROR error) get_LastDownloadError;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out BSTR localPath) get_LocalPath;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out IDispatch* disp) get_Parent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out BSTR enclosureUrl) get_DownloadUrl;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, out BSTR mimeType) get_DownloadMimeType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self) RemoveFile;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IFeedEnclosure self, BSTR downloadUrl, BSTR downloadFilePath, BSTR downloadMimeType, BSTR enclosureFilename) SetFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out BSTR enclosureUrl) get_Url;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out BSTR mimeType) get_Type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out int32 length) get_Length;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self) AsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self) CancelAsyncDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out FEEDS_DOWNLOAD_STATUS status) get_DownloadStatus;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out FEEDS_DOWNLOAD_ERROR error) get_LastDownloadError;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out BSTR localPath) get_LocalPath;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out IDispatch* disp) get_Parent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out BSTR enclosureUrl) get_DownloadUrl;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, out BSTR mimeType) get_DownloadMimeType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self) RemoveFile;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IFeedEnclosure self, BSTR downloadUrl, BSTR downloadFilePath, BSTR downloadMimeType, BSTR enclosureFilename) SetFile;
 			}
 		}
 		[CRepr]
@@ -3679,32 +3679,32 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Render(out TimedLevel pLevels, HDC hdc, out RECT prc) mut => VT.Render(ref this, out pLevels, hdc, out prc);
-			public HRESULT MediaInfo(int32 lChannelCount, int32 lSampleRate, BSTR bstrTitle) mut => VT.MediaInfo(ref this, lChannelCount, lSampleRate, bstrTitle);
-			public HRESULT GetCapabilities(out uint32 pdwCapabilities) mut => VT.GetCapabilities(ref this, out pdwCapabilities);
-			public HRESULT GetTitle(out BSTR bstrTitle) mut => VT.GetTitle(ref this, out bstrTitle);
-			public HRESULT GetPresetTitle(int32 nPreset, out BSTR bstrPresetTitle) mut => VT.GetPresetTitle(ref this, nPreset, out bstrPresetTitle);
-			public HRESULT GetPresetCount(out int32 pnPresetCount) mut => VT.GetPresetCount(ref this, out pnPresetCount);
-			public HRESULT SetCurrentPreset(int32 nPreset) mut => VT.SetCurrentPreset(ref this, nPreset);
-			public HRESULT GetCurrentPreset(out int32 pnPreset) mut => VT.GetCurrentPreset(ref this, out pnPreset);
-			public HRESULT DisplayPropertyPage(HWND hwndOwner) mut => VT.DisplayPropertyPage(ref this, hwndOwner);
-			public HRESULT GoFullscreen(BOOL fFullScreen) mut => VT.GoFullscreen(ref this, fFullScreen);
-			public HRESULT RenderFullScreen(out TimedLevel pLevels) mut => VT.RenderFullScreen(ref this, out pLevels);
+			public HResult Render(out TimedLevel pLevels, HDC hdc, out RectI prc) mut => VT.Render(ref this, out pLevels, hdc, out prc);
+			public HResult MediaInfo(int32 lChannelCount, int32 lSampleRate, BSTR bstrTitle) mut => VT.MediaInfo(ref this, lChannelCount, lSampleRate, bstrTitle);
+			public HResult GetCapabilities(out uint32 pdwCapabilities) mut => VT.GetCapabilities(ref this, out pdwCapabilities);
+			public HResult GetTitle(out BSTR bstrTitle) mut => VT.GetTitle(ref this, out bstrTitle);
+			public HResult GetPresetTitle(int32 nPreset, out BSTR bstrPresetTitle) mut => VT.GetPresetTitle(ref this, nPreset, out bstrPresetTitle);
+			public HResult GetPresetCount(out int32 pnPresetCount) mut => VT.GetPresetCount(ref this, out pnPresetCount);
+			public HResult SetCurrentPreset(int32 nPreset) mut => VT.SetCurrentPreset(ref this, nPreset);
+			public HResult GetCurrentPreset(out int32 pnPreset) mut => VT.GetCurrentPreset(ref this, out pnPreset);
+			public HResult DisplayPropertyPage(HWnd hwndOwner) mut => VT.DisplayPropertyPage(ref this, hwndOwner);
+			public HResult GoFullscreen(IntBool fFullScreen) mut => VT.GoFullscreen(ref this, fFullScreen);
+			public HResult RenderFullScreen(out TimedLevel pLevels) mut => VT.RenderFullScreen(ref this, out pLevels);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, out TimedLevel pLevels, HDC hdc, out RECT prc) Render;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, int32 lChannelCount, int32 lSampleRate, BSTR bstrTitle) MediaInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, out uint32 pdwCapabilities) GetCapabilities;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, out BSTR bstrTitle) GetTitle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, int32 nPreset, out BSTR bstrPresetTitle) GetPresetTitle;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, out int32 pnPresetCount) GetPresetCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, int32 nPreset) SetCurrentPreset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, out int32 pnPreset) GetCurrentPreset;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, HWND hwndOwner) DisplayPropertyPage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, BOOL fFullScreen) GoFullscreen;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects self, out TimedLevel pLevels) RenderFullScreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, out TimedLevel pLevels, HDC hdc, out RectI prc) Render;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, int32 lChannelCount, int32 lSampleRate, BSTR bstrTitle) MediaInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, out uint32 pdwCapabilities) GetCapabilities;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, out BSTR bstrTitle) GetTitle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, int32 nPreset, out BSTR bstrPresetTitle) GetPresetTitle;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, out int32 pnPresetCount) GetPresetCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, int32 nPreset) SetCurrentPreset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, out int32 pnPreset) GetCurrentPreset;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, HWnd hwndOwner) DisplayPropertyPage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, IntBool fFullScreen) GoFullscreen;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects self, out TimedLevel pLevels) RenderFullScreen;
 			}
 		}
 		[CRepr]
@@ -3714,22 +3714,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetCore(ref IWMPCore pPlayer) mut => VT.SetCore(ref this, ref pPlayer);
-			public HRESULT Create(HWND hwndParent) mut => VT.Create(ref this, hwndParent);
-			public HRESULT Destroy() mut => VT.Destroy(ref this);
-			public HRESULT NotifyNewMedia(ref IWMPMedia pMedia) mut => VT.NotifyNewMedia(ref this, ref pMedia);
-			public HRESULT OnWindowMessage(uint32 msg, WPARAM WParam, LPARAM LParam, out LRESULT plResultParam) mut => VT.OnWindowMessage(ref this, msg, WParam, LParam, out plResultParam);
-			public HRESULT RenderWindowed(out TimedLevel pData, BOOL fRequiredRender) mut => VT.RenderWindowed(ref this, out pData, fRequiredRender);
+			public HResult SetCore(ref IWMPCore pPlayer) mut => VT.SetCore(ref this, ref pPlayer);
+			public HResult Create(HWnd hwndParent) mut => VT.Create(ref this, hwndParent);
+			public HResult Destroy() mut => VT.Destroy(ref this);
+			public HResult NotifyNewMedia(ref IWMPMedia pMedia) mut => VT.NotifyNewMedia(ref this, ref pMedia);
+			public HResult OnWindowMessage(uint32 msg, WPARAM WParam, LPARAM LParam, out LRESULT plResultParam) mut => VT.OnWindowMessage(ref this, msg, WParam, LParam, out plResultParam);
+			public HResult RenderWindowed(out TimedLevel pData, IntBool fRequiredRender) mut => VT.RenderWindowed(ref this, out pData, fRequiredRender);
 
 			[CRepr]
 			public struct VTable : IWMPEffects.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects2 self, ref IWMPCore pPlayer) SetCore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects2 self, HWND hwndParent) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects2 self) Destroy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects2 self, ref IWMPMedia pMedia) NotifyNewMedia;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects2 self, uint32 msg, WPARAM WParam, LPARAM LParam, out LRESULT plResultParam) OnWindowMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPEffects2 self, out TimedLevel pData, BOOL fRequiredRender) RenderWindowed;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects2 self, ref IWMPCore pPlayer) SetCore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects2 self, HWnd hwndParent) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects2 self) Destroy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects2 self, ref IWMPMedia pMedia) NotifyNewMedia;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects2 self, uint32 msg, WPARAM WParam, LPARAM LParam, out LRESULT plResultParam) OnWindowMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPEffects2 self, out TimedLevel pData, IntBool fRequiredRender) RenderWindowed;
 			}
 		}
 		[CRepr]
@@ -3739,24 +3739,24 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetCore(ref IWMPCore pCore) mut => VT.SetCore(ref this, ref pCore);
-			public HRESULT Create(HWND hwndParent, out HWND phwndWindow) mut => VT.Create(ref this, hwndParent, out phwndWindow);
-			public HRESULT Destroy() mut => VT.Destroy(ref this);
-			public HRESULT DisplayPropertyPage(HWND hwndParent) mut => VT.DisplayPropertyPage(ref this, hwndParent);
-			public HRESULT GetProperty(PWSTR pwszName, out VARIANT pvarProperty) mut => VT.GetProperty(ref this, pwszName, out pvarProperty);
-			public HRESULT SetProperty(PWSTR pwszName, in VARIANT pvarProperty) mut => VT.SetProperty(ref this, pwszName, pvarProperty);
-			public HRESULT TranslateAccelerator(out MSG lpmsg) mut => VT.TranslateAccelerator(ref this, out lpmsg);
+			public HResult SetCore(ref IWMPCore pCore) mut => VT.SetCore(ref this, ref pCore);
+			public HResult Create(HWnd hwndParent, out HWnd phwndWindow) mut => VT.Create(ref this, hwndParent, out phwndWindow);
+			public HResult Destroy() mut => VT.Destroy(ref this);
+			public HResult DisplayPropertyPage(HWnd hwndParent) mut => VT.DisplayPropertyPage(ref this, hwndParent);
+			public HResult GetProperty(char16* pwszName, out VARIANT pvarProperty) mut => VT.GetProperty(ref this, pwszName, out pvarProperty);
+			public HResult SetProperty(char16* pwszName, in VARIANT pvarProperty) mut => VT.SetProperty(ref this, pwszName, pvarProperty);
+			public HResult TranslateAccelerator(out MSG lpmsg) mut => VT.TranslateAccelerator(ref this, out lpmsg);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self, ref IWMPCore pCore) SetCore;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self, HWND hwndParent, out HWND phwndWindow) Create;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self) Destroy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self, HWND hwndParent) DisplayPropertyPage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self, PWSTR pwszName, out VARIANT pvarProperty) GetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self, PWSTR pwszName, in VARIANT pvarProperty) SetProperty;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPPluginUI self, out MSG lpmsg) TranslateAccelerator;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self, ref IWMPCore pCore) SetCore;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self, HWnd hwndParent, out HWnd phwndWindow) Create;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self) Destroy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self, HWnd hwndParent) DisplayPropertyPage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self, char16* pwszName, out VARIANT pvarProperty) GetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self, char16* pwszName, in VARIANT pvarProperty) SetProperty;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPPluginUI self, out MSG lpmsg) TranslateAccelerator;
 			}
 		}
 		[CRepr]
@@ -3766,22 +3766,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetID(out uint32 pContentID) mut => VT.GetID(ref this, out pContentID);
-			public HRESULT GetPrice(BSTR* pbstrPrice) mut => VT.GetPrice(ref this, pbstrPrice);
-			public HRESULT ComGetType(BSTR* pbstrType) mut => VT.ComGetType(ref this, pbstrType);
-			public HRESULT GetContentCount(out uint32 pcContent) mut => VT.GetContentCount(ref this, out pcContent);
-			public HRESULT GetContentPrice(uint32 idxContent, BSTR* pbstrPrice) mut => VT.GetContentPrice(ref this, idxContent, pbstrPrice);
-			public HRESULT GetContentID(uint32 idxContent, out uint32 pContentID) mut => VT.GetContentID(ref this, idxContent, out pContentID);
+			public HResult GetID(out uint32 pContentID) mut => VT.GetID(ref this, out pContentID);
+			public HResult GetPrice(BSTR* pbstrPrice) mut => VT.GetPrice(ref this, pbstrPrice);
+			public HResult ComGetType(BSTR* pbstrType) mut => VT.ComGetType(ref this, pbstrType);
+			public HResult GetContentCount(out uint32 pcContent) mut => VT.GetContentCount(ref this, out pcContent);
+			public HResult GetContentPrice(uint32 idxContent, BSTR* pbstrPrice) mut => VT.GetContentPrice(ref this, idxContent, pbstrPrice);
+			public HResult GetContentID(uint32 idxContent, out uint32 pContentID) mut => VT.GetContentID(ref this, idxContent, out pContentID);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainer self, out uint32 pContentID) GetID;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainer self, BSTR* pbstrPrice) GetPrice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainer self, BSTR* pbstrType) ComGetType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainer self, out uint32 pcContent) GetContentCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainer self, uint32 idxContent, BSTR* pbstrPrice) GetContentPrice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainer self, uint32 idxContent, out uint32 pContentID) GetContentID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainer self, out uint32 pContentID) GetID;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainer self, BSTR* pbstrPrice) GetPrice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainer self, BSTR* pbstrType) ComGetType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainer self, out uint32 pcContent) GetContentCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainer self, uint32 idxContent, BSTR* pbstrPrice) GetContentPrice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainer self, uint32 idxContent, out uint32 pContentID) GetContentID;
 			}
 		}
 		[CRepr]
@@ -3791,16 +3791,16 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT GetTransactionType(out WMPTransactionType pwmptt) mut => VT.GetTransactionType(ref this, out pwmptt);
-			public HRESULT GetContainerCount(out uint32 pcContainer) mut => VT.GetContainerCount(ref this, out pcContainer);
-			public HRESULT GetContainer(uint32 idxContainer, IWMPContentContainer** ppContent) mut => VT.GetContainer(ref this, idxContainer, ppContent);
+			public HResult GetTransactionType(out WMPTransactionType pwmptt) mut => VT.GetTransactionType(ref this, out pwmptt);
+			public HResult GetContainerCount(out uint32 pcContainer) mut => VT.GetContainerCount(ref this, out pcContainer);
+			public HResult GetContainer(uint32 idxContainer, IWMPContentContainer** ppContent) mut => VT.GetContainer(ref this, idxContainer, ppContent);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainerList self, out WMPTransactionType pwmptt) GetTransactionType;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainerList self, out uint32 pcContainer) GetContainerCount;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentContainerList self, uint32 idxContainer, IWMPContentContainer** ppContent) GetContainer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainerList self, out WMPTransactionType pwmptt) GetTransactionType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainerList self, out uint32 pcContainer) GetContainerCount;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentContainerList self, uint32 idxContainer, IWMPContentContainer** ppContent) GetContainer;
 			}
 		}
 		[CRepr]
@@ -3810,36 +3810,36 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT Notify(WMPCallbackNotification type, ref VARIANT pContext) mut => VT.Notify(ref this, type, ref pContext);
-			public HRESULT BuyComplete(HRESULT hrResult, uint32 dwBuyCookie) mut => VT.BuyComplete(ref this, hrResult, dwBuyCookie);
-			public HRESULT DownloadTrack(uint32 cookie, BSTR bstrTrackURL, uint32 dwServiceTrackID, BSTR bstrDownloadParams, HRESULT hrDownload) mut => VT.DownloadTrack(ref this, cookie, bstrTrackURL, dwServiceTrackID, bstrDownloadParams, hrDownload);
-			public HRESULT GetCatalogVersion(out uint32 pdwVersion, out uint32 pdwSchemaVersion, out uint32 plcid) mut => VT.GetCatalogVersion(ref this, out pdwVersion, out pdwSchemaVersion, out plcid);
-			public HRESULT UpdateDeviceComplete(BSTR bstrDeviceName) mut => VT.UpdateDeviceComplete(ref this, bstrDeviceName);
-			public HRESULT ChangeView(BSTR bstrType, BSTR bstrID, BSTR bstrFilter) mut => VT.ChangeView(ref this, bstrType, bstrID, bstrFilter);
-			public HRESULT AddListContents(uint32 dwListCookie, uint32 cItems, uint32* prgItems) mut => VT.AddListContents(ref this, dwListCookie, cItems, prgItems);
-			public HRESULT ListContentsComplete(uint32 dwListCookie, HRESULT hrSuccess) mut => VT.ListContentsComplete(ref this, dwListCookie, hrSuccess);
-			public HRESULT SendMessageComplete(BSTR bstrMsg, BSTR bstrParam, BSTR bstrResult) mut => VT.SendMessageComplete(ref this, bstrMsg, bstrParam, bstrResult);
-			public HRESULT GetContentIDsInLibrary(out uint32 pcContentIDs, uint32** pprgIDs) mut => VT.GetContentIDsInLibrary(ref this, out pcContentIDs, pprgIDs);
-			public HRESULT RefreshLicenseComplete(uint32 dwCookie, uint32 contentID, HRESULT hrRefresh) mut => VT.RefreshLicenseComplete(ref this, dwCookie, contentID, hrRefresh);
-			public HRESULT ShowPopup(int32 lIndex, BSTR bstrParameters) mut => VT.ShowPopup(ref this, lIndex, bstrParameters);
-			public HRESULT VerifyPermissionComplete(BSTR bstrPermission, ref VARIANT pContext, HRESULT hrPermission) mut => VT.VerifyPermissionComplete(ref this, bstrPermission, ref pContext, hrPermission);
+			public HResult Notify(WMPCallbackNotification type, ref VARIANT pContext) mut => VT.Notify(ref this, type, ref pContext);
+			public HResult BuyComplete(HResult hrResult, uint32 dwBuyCookie) mut => VT.BuyComplete(ref this, hrResult, dwBuyCookie);
+			public HResult DownloadTrack(uint32 cookie, BSTR bstrTrackURL, uint32 dwServiceTrackID, BSTR bstrDownloadParams, HResult hrDownload) mut => VT.DownloadTrack(ref this, cookie, bstrTrackURL, dwServiceTrackID, bstrDownloadParams, hrDownload);
+			public HResult GetCatalogVersion(out uint32 pdwVersion, out uint32 pdwSchemaVersion, out uint32 plcid) mut => VT.GetCatalogVersion(ref this, out pdwVersion, out pdwSchemaVersion, out plcid);
+			public HResult UpdateDeviceComplete(BSTR bstrDeviceName) mut => VT.UpdateDeviceComplete(ref this, bstrDeviceName);
+			public HResult ChangeView(BSTR bstrType, BSTR bstrID, BSTR bstrFilter) mut => VT.ChangeView(ref this, bstrType, bstrID, bstrFilter);
+			public HResult AddListContents(uint32 dwListCookie, uint32 cItems, uint32* prgItems) mut => VT.AddListContents(ref this, dwListCookie, cItems, prgItems);
+			public HResult ListContentsComplete(uint32 dwListCookie, HResult hrSuccess) mut => VT.ListContentsComplete(ref this, dwListCookie, hrSuccess);
+			public HResult SendMessageComplete(BSTR bstrMsg, BSTR bstrParam, BSTR bstrResult) mut => VT.SendMessageComplete(ref this, bstrMsg, bstrParam, bstrResult);
+			public HResult GetContentIDsInLibrary(out uint32 pcContentIDs, uint32** pprgIDs) mut => VT.GetContentIDsInLibrary(ref this, out pcContentIDs, pprgIDs);
+			public HResult RefreshLicenseComplete(uint32 dwCookie, uint32 contentID, HResult hrRefresh) mut => VT.RefreshLicenseComplete(ref this, dwCookie, contentID, hrRefresh);
+			public HResult ShowPopup(int32 lIndex, BSTR bstrParameters) mut => VT.ShowPopup(ref this, lIndex, bstrParameters);
+			public HResult VerifyPermissionComplete(BSTR bstrPermission, ref VARIANT pContext, HResult hrPermission) mut => VT.VerifyPermissionComplete(ref this, bstrPermission, ref pContext, hrPermission);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, WMPCallbackNotification type, ref VARIANT pContext) Notify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, HRESULT hrResult, uint32 dwBuyCookie) BuyComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, uint32 cookie, BSTR bstrTrackURL, uint32 dwServiceTrackID, BSTR bstrDownloadParams, HRESULT hrDownload) DownloadTrack;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, out uint32 pdwVersion, out uint32 pdwSchemaVersion, out uint32 plcid) GetCatalogVersion;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, BSTR bstrDeviceName) UpdateDeviceComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, BSTR bstrType, BSTR bstrID, BSTR bstrFilter) ChangeView;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, uint32 dwListCookie, uint32 cItems, uint32* prgItems) AddListContents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, uint32 dwListCookie, HRESULT hrSuccess) ListContentsComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, BSTR bstrMsg, BSTR bstrParam, BSTR bstrResult) SendMessageComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, out uint32 pcContentIDs, uint32** pprgIDs) GetContentIDsInLibrary;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, uint32 dwCookie, uint32 contentID, HRESULT hrRefresh) RefreshLicenseComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, int32 lIndex, BSTR bstrParameters) ShowPopup;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartnerCallback self, BSTR bstrPermission, ref VARIANT pContext, HRESULT hrPermission) VerifyPermissionComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, WMPCallbackNotification type, ref VARIANT pContext) Notify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, HResult hrResult, uint32 dwBuyCookie) BuyComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, uint32 cookie, BSTR bstrTrackURL, uint32 dwServiceTrackID, BSTR bstrDownloadParams, HResult hrDownload) DownloadTrack;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, out uint32 pdwVersion, out uint32 pdwSchemaVersion, out uint32 plcid) GetCatalogVersion;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, BSTR bstrDeviceName) UpdateDeviceComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, BSTR bstrType, BSTR bstrID, BSTR bstrFilter) ChangeView;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, uint32 dwListCookie, uint32 cItems, uint32* prgItems) AddListContents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, uint32 dwListCookie, HResult hrSuccess) ListContentsComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, BSTR bstrMsg, BSTR bstrParam, BSTR bstrResult) SendMessageComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, out uint32 pcContentIDs, uint32** pprgIDs) GetContentIDsInLibrary;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, uint32 dwCookie, uint32 contentID, HResult hrRefresh) RefreshLicenseComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, int32 lIndex, BSTR bstrParameters) ShowPopup;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartnerCallback self, BSTR bstrPermission, ref VARIANT pContext, HResult hrPermission) VerifyPermissionComplete;
 			}
 		}
 		[CRepr]
@@ -3849,56 +3849,56 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT SetCallback(IWMPContentPartnerCallback* pCallback) mut => VT.SetCallback(ref this, pCallback);
-			public HRESULT Notify(WMPPartnerNotification type, ref VARIANT pContext) mut => VT.Notify(ref this, type, ref pContext);
-			public HRESULT GetItemInfo(BSTR bstrInfoName, ref VARIANT pContext, out VARIANT pData) mut => VT.GetItemInfo(ref this, bstrInfoName, ref pContext, out pData);
-			public HRESULT GetContentPartnerInfo(BSTR bstrInfoName, out VARIANT pData) mut => VT.GetContentPartnerInfo(ref this, bstrInfoName, out pData);
-			public HRESULT GetCommands(BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* prgItemIDs, out uint32 pcItemIDs, WMPContextMenuInfo** pprgItems) mut => VT.GetCommands(ref this, location, ref pLocationContext, itemLocation, cItemIDs, prgItemIDs, out pcItemIDs, pprgItems);
-			public HRESULT InvokeCommand(uint32 dwCommandID, BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* rgItemIDs) mut => VT.InvokeCommand(ref this, dwCommandID, location, ref pLocationContext, itemLocation, cItemIDs, rgItemIDs);
-			public HRESULT CanBuySilent(IWMPContentContainerList* pInfo, BSTR* pbstrTotalPrice, out int16 pSilentOK) mut => VT.CanBuySilent(ref this, pInfo, pbstrTotalPrice, out pSilentOK);
-			public HRESULT Buy(IWMPContentContainerList* pInfo, uint32 cookie) mut => VT.Buy(ref this, pInfo, cookie);
-			public HRESULT GetStreamingURL(WMPStreamingType st, ref VARIANT pStreamContext, BSTR* pbstrURL) mut => VT.GetStreamingURL(ref this, st, ref pStreamContext, pbstrURL);
-			public HRESULT Download(IWMPContentContainerList* pInfo, uint32 cookie) mut => VT.Download(ref this, pInfo, cookie);
-			public HRESULT DownloadTrackComplete(HRESULT hrResult, uint32 contentID, BSTR downloadTrackParam) mut => VT.DownloadTrackComplete(ref this, hrResult, contentID, downloadTrackParam);
-			public HRESULT RefreshLicense(uint32 dwCookie, int16 fLocal, BSTR bstrURL, WMPStreamingType type, uint32 contentID, BSTR bstrRefreshReason, ref VARIANT pReasonContext) mut => VT.RefreshLicense(ref this, dwCookie, fLocal, bstrURL, type, contentID, bstrRefreshReason, ref pReasonContext);
-			public HRESULT GetCatalogURL(uint32 dwCatalogVersion, uint32 dwCatalogSchemaVersion, uint32 catalogLCID, out uint32 pdwNewCatalogVersion, BSTR* pbstrCatalogURL, out VARIANT pExpirationDate) mut => VT.GetCatalogURL(ref this, dwCatalogVersion, dwCatalogSchemaVersion, catalogLCID, out pdwNewCatalogVersion, pbstrCatalogURL, out pExpirationDate);
-			public HRESULT GetTemplate(WMPTaskType task, BSTR location, ref VARIANT pContext, BSTR clickLocation, ref VARIANT pClickContext, BSTR bstrFilter, BSTR bstrViewParams, BSTR* pbstrTemplateURL, out WMPTemplateSize pTemplateSize) mut => VT.GetTemplate(ref this, task, location, ref pContext, clickLocation, ref pClickContext, bstrFilter, bstrViewParams, pbstrTemplateURL, out pTemplateSize);
-			public HRESULT UpdateDevice(BSTR bstrDeviceName) mut => VT.UpdateDevice(ref this, bstrDeviceName);
-			public HRESULT GetListContents(BSTR location, ref VARIANT pContext, BSTR bstrListType, BSTR bstrParams, uint32 dwListCookie) mut => VT.GetListContents(ref this, location, ref pContext, bstrListType, bstrParams, dwListCookie);
-			public HRESULT Login(BLOB userInfo, BLOB pwdInfo, int16 fUsedCachedCreds, int16 fOkToCache) mut => VT.Login(ref this, userInfo, pwdInfo, fUsedCachedCreds, fOkToCache);
-			public HRESULT Authenticate(BLOB userInfo, BLOB pwdInfo) mut => VT.Authenticate(ref this, userInfo, pwdInfo);
-			public HRESULT Logout() mut => VT.Logout(ref this);
-			public HRESULT SendMessage(BSTR bstrMsg, BSTR bstrParam) mut => VT.SendMessage(ref this, bstrMsg, bstrParam);
-			public HRESULT StationEvent(BSTR bstrStationEventType, uint32 StationId, uint32 PlaylistIndex, uint32 TrackID, BSTR TrackData, uint32 dwSecondsPlayed) mut => VT.StationEvent(ref this, bstrStationEventType, StationId, PlaylistIndex, TrackID, TrackData, dwSecondsPlayed);
-			public HRESULT CompareContainerListPrices(IWMPContentContainerList* pListBase, IWMPContentContainerList* pListCompare, out int32 pResult) mut => VT.CompareContainerListPrices(ref this, pListBase, pListCompare, out pResult);
-			public HRESULT VerifyPermission(BSTR bstrPermission, ref VARIANT pContext) mut => VT.VerifyPermission(ref this, bstrPermission, ref pContext);
+			public HResult SetCallback(IWMPContentPartnerCallback* pCallback) mut => VT.SetCallback(ref this, pCallback);
+			public HResult Notify(WMPPartnerNotification type, ref VARIANT pContext) mut => VT.Notify(ref this, type, ref pContext);
+			public HResult GetItemInfo(BSTR bstrInfoName, ref VARIANT pContext, out VARIANT pData) mut => VT.GetItemInfo(ref this, bstrInfoName, ref pContext, out pData);
+			public HResult GetContentPartnerInfo(BSTR bstrInfoName, out VARIANT pData) mut => VT.GetContentPartnerInfo(ref this, bstrInfoName, out pData);
+			public HResult GetCommands(BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* prgItemIDs, out uint32 pcItemIDs, WMPContextMenuInfo** pprgItems) mut => VT.GetCommands(ref this, location, ref pLocationContext, itemLocation, cItemIDs, prgItemIDs, out pcItemIDs, pprgItems);
+			public HResult InvokeCommand(uint32 dwCommandID, BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* rgItemIDs) mut => VT.InvokeCommand(ref this, dwCommandID, location, ref pLocationContext, itemLocation, cItemIDs, rgItemIDs);
+			public HResult CanBuySilent(IWMPContentContainerList* pInfo, BSTR* pbstrTotalPrice, out int16 pSilentOK) mut => VT.CanBuySilent(ref this, pInfo, pbstrTotalPrice, out pSilentOK);
+			public HResult Buy(IWMPContentContainerList* pInfo, uint32 cookie) mut => VT.Buy(ref this, pInfo, cookie);
+			public HResult GetStreamingURL(WMPStreamingType st, ref VARIANT pStreamContext, BSTR* pbstrURL) mut => VT.GetStreamingURL(ref this, st, ref pStreamContext, pbstrURL);
+			public HResult Download(IWMPContentContainerList* pInfo, uint32 cookie) mut => VT.Download(ref this, pInfo, cookie);
+			public HResult DownloadTrackComplete(HResult hrResult, uint32 contentID, BSTR downloadTrackParam) mut => VT.DownloadTrackComplete(ref this, hrResult, contentID, downloadTrackParam);
+			public HResult RefreshLicense(uint32 dwCookie, int16 fLocal, BSTR bstrURL, WMPStreamingType type, uint32 contentID, BSTR bstrRefreshReason, ref VARIANT pReasonContext) mut => VT.RefreshLicense(ref this, dwCookie, fLocal, bstrURL, type, contentID, bstrRefreshReason, ref pReasonContext);
+			public HResult GetCatalogURL(uint32 dwCatalogVersion, uint32 dwCatalogSchemaVersion, uint32 catalogLCID, out uint32 pdwNewCatalogVersion, BSTR* pbstrCatalogURL, out VARIANT pExpirationDate) mut => VT.GetCatalogURL(ref this, dwCatalogVersion, dwCatalogSchemaVersion, catalogLCID, out pdwNewCatalogVersion, pbstrCatalogURL, out pExpirationDate);
+			public HResult GetTemplate(WMPTaskType task, BSTR location, ref VARIANT pContext, BSTR clickLocation, ref VARIANT pClickContext, BSTR bstrFilter, BSTR bstrViewParams, BSTR* pbstrTemplateURL, out WMPTemplateSize pTemplateSize) mut => VT.GetTemplate(ref this, task, location, ref pContext, clickLocation, ref pClickContext, bstrFilter, bstrViewParams, pbstrTemplateURL, out pTemplateSize);
+			public HResult UpdateDevice(BSTR bstrDeviceName) mut => VT.UpdateDevice(ref this, bstrDeviceName);
+			public HResult GetListContents(BSTR location, ref VARIANT pContext, BSTR bstrListType, BSTR bstrParams, uint32 dwListCookie) mut => VT.GetListContents(ref this, location, ref pContext, bstrListType, bstrParams, dwListCookie);
+			public HResult Login(BLOB userInfo, BLOB pwdInfo, int16 fUsedCachedCreds, int16 fOkToCache) mut => VT.Login(ref this, userInfo, pwdInfo, fUsedCachedCreds, fOkToCache);
+			public HResult Authenticate(BLOB userInfo, BLOB pwdInfo) mut => VT.Authenticate(ref this, userInfo, pwdInfo);
+			public HResult Logout() mut => VT.Logout(ref this);
+			public HResult SendMessage(BSTR bstrMsg, BSTR bstrParam) mut => VT.SendMessage(ref this, bstrMsg, bstrParam);
+			public HResult StationEvent(BSTR bstrStationEventType, uint32 StationId, uint32 PlaylistIndex, uint32 TrackID, BSTR TrackData, uint32 dwSecondsPlayed) mut => VT.StationEvent(ref this, bstrStationEventType, StationId, PlaylistIndex, TrackID, TrackData, dwSecondsPlayed);
+			public HResult CompareContainerListPrices(IWMPContentContainerList* pListBase, IWMPContentContainerList* pListCompare, out int32 pResult) mut => VT.CompareContainerListPrices(ref this, pListBase, pListCompare, out pResult);
+			public HResult VerifyPermission(BSTR bstrPermission, ref VARIANT pContext) mut => VT.VerifyPermission(ref this, bstrPermission, ref pContext);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, IWMPContentPartnerCallback* pCallback) SetCallback;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, WMPPartnerNotification type, ref VARIANT pContext) Notify;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR bstrInfoName, ref VARIANT pContext, out VARIANT pData) GetItemInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR bstrInfoName, out VARIANT pData) GetContentPartnerInfo;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* prgItemIDs, out uint32 pcItemIDs, WMPContextMenuInfo** pprgItems) GetCommands;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, uint32 dwCommandID, BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* rgItemIDs) InvokeCommand;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, IWMPContentContainerList* pInfo, BSTR* pbstrTotalPrice, out int16 pSilentOK) CanBuySilent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, IWMPContentContainerList* pInfo, uint32 cookie) Buy;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, WMPStreamingType st, ref VARIANT pStreamContext, BSTR* pbstrURL) GetStreamingURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, IWMPContentContainerList* pInfo, uint32 cookie) Download;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, HRESULT hrResult, uint32 contentID, BSTR downloadTrackParam) DownloadTrackComplete;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, uint32 dwCookie, int16 fLocal, BSTR bstrURL, WMPStreamingType type, uint32 contentID, BSTR bstrRefreshReason, ref VARIANT pReasonContext) RefreshLicense;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, uint32 dwCatalogVersion, uint32 dwCatalogSchemaVersion, uint32 catalogLCID, out uint32 pdwNewCatalogVersion, BSTR* pbstrCatalogURL, out VARIANT pExpirationDate) GetCatalogURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, WMPTaskType task, BSTR location, ref VARIANT pContext, BSTR clickLocation, ref VARIANT pClickContext, BSTR bstrFilter, BSTR bstrViewParams, BSTR* pbstrTemplateURL, out WMPTemplateSize pTemplateSize) GetTemplate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR bstrDeviceName) UpdateDevice;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR location, ref VARIANT pContext, BSTR bstrListType, BSTR bstrParams, uint32 dwListCookie) GetListContents;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BLOB userInfo, BLOB pwdInfo, int16 fUsedCachedCreds, int16 fOkToCache) Login;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BLOB userInfo, BLOB pwdInfo) Authenticate;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self) Logout;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR bstrMsg, BSTR bstrParam) SendMessage;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR bstrStationEventType, uint32 StationId, uint32 PlaylistIndex, uint32 TrackID, BSTR TrackData, uint32 dwSecondsPlayed) StationEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, IWMPContentContainerList* pListBase, IWMPContentContainerList* pListCompare, out int32 pResult) CompareContainerListPrices;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPContentPartner self, BSTR bstrPermission, ref VARIANT pContext) VerifyPermission;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, IWMPContentPartnerCallback* pCallback) SetCallback;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, WMPPartnerNotification type, ref VARIANT pContext) Notify;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR bstrInfoName, ref VARIANT pContext, out VARIANT pData) GetItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR bstrInfoName, out VARIANT pData) GetContentPartnerInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* prgItemIDs, out uint32 pcItemIDs, WMPContextMenuInfo** pprgItems) GetCommands;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, uint32 dwCommandID, BSTR location, ref VARIANT pLocationContext, BSTR itemLocation, uint32 cItemIDs, uint32* rgItemIDs) InvokeCommand;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, IWMPContentContainerList* pInfo, BSTR* pbstrTotalPrice, out int16 pSilentOK) CanBuySilent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, IWMPContentContainerList* pInfo, uint32 cookie) Buy;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, WMPStreamingType st, ref VARIANT pStreamContext, BSTR* pbstrURL) GetStreamingURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, IWMPContentContainerList* pInfo, uint32 cookie) Download;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, HResult hrResult, uint32 contentID, BSTR downloadTrackParam) DownloadTrackComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, uint32 dwCookie, int16 fLocal, BSTR bstrURL, WMPStreamingType type, uint32 contentID, BSTR bstrRefreshReason, ref VARIANT pReasonContext) RefreshLicense;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, uint32 dwCatalogVersion, uint32 dwCatalogSchemaVersion, uint32 catalogLCID, out uint32 pdwNewCatalogVersion, BSTR* pbstrCatalogURL, out VARIANT pExpirationDate) GetCatalogURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, WMPTaskType task, BSTR location, ref VARIANT pContext, BSTR clickLocation, ref VARIANT pClickContext, BSTR bstrFilter, BSTR bstrViewParams, BSTR* pbstrTemplateURL, out WMPTemplateSize pTemplateSize) GetTemplate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR bstrDeviceName) UpdateDevice;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR location, ref VARIANT pContext, BSTR bstrListType, BSTR bstrParams, uint32 dwListCookie) GetListContents;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BLOB userInfo, BLOB pwdInfo, int16 fUsedCachedCreds, int16 fOkToCache) Login;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BLOB userInfo, BLOB pwdInfo) Authenticate;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self) Logout;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR bstrMsg, BSTR bstrParam) SendMessage;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR bstrStationEventType, uint32 StationId, uint32 PlaylistIndex, uint32 TrackID, BSTR TrackData, uint32 dwSecondsPlayed) StationEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, IWMPContentContainerList* pListBase, IWMPContentContainerList* pListCompare, out int32 pResult) CompareContainerListPrices;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPContentPartner self, BSTR bstrPermission, ref VARIANT pContext) VerifyPermission;
 			}
 		}
 		[CRepr]
@@ -3908,18 +3908,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT allowPlay(HWND hwnd, ref IWMPMedia pMedia, out BOOL pfAllowPlay) mut => VT.allowPlay(ref this, hwnd, ref pMedia, out pfAllowPlay);
-			public HRESULT allowCDBurn(HWND hwnd, ref IWMPPlaylist pPlaylist, out BOOL pfAllowBurn) mut => VT.allowCDBurn(ref this, hwnd, ref pPlaylist, out pfAllowBurn);
-			public HRESULT allowPDATransfer(HWND hwnd, ref IWMPPlaylist pPlaylist, out BOOL pfAllowTransfer) mut => VT.allowPDATransfer(ref this, hwnd, ref pPlaylist, out pfAllowTransfer);
-			public HRESULT startBackgroundProcessing(HWND hwnd) mut => VT.startBackgroundProcessing(ref this, hwnd);
+			public HResult allowPlay(HWnd hwnd, ref IWMPMedia pMedia, out IntBool pfAllowPlay) mut => VT.allowPlay(ref this, hwnd, ref pMedia, out pfAllowPlay);
+			public HResult allowCDBurn(HWnd hwnd, ref IWMPPlaylist pPlaylist, out IntBool pfAllowBurn) mut => VT.allowCDBurn(ref this, hwnd, ref pPlaylist, out pfAllowBurn);
+			public HResult allowPDATransfer(HWnd hwnd, ref IWMPPlaylist pPlaylist, out IntBool pfAllowTransfer) mut => VT.allowPDATransfer(ref this, hwnd, ref pPlaylist, out pfAllowTransfer);
+			public HResult startBackgroundProcessing(HWnd hwnd) mut => VT.startBackgroundProcessing(ref this, hwnd);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService self, HWND hwnd, ref IWMPMedia pMedia, out BOOL pfAllowPlay) allowPlay;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService self, HWND hwnd, ref IWMPPlaylist pPlaylist, out BOOL pfAllowBurn) allowCDBurn;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService self, HWND hwnd, ref IWMPPlaylist pPlaylist, out BOOL pfAllowTransfer) allowPDATransfer;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService self, HWND hwnd) startBackgroundProcessing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService self, HWnd hwnd, ref IWMPMedia pMedia, out IntBool pfAllowPlay) allowPlay;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService self, HWnd hwnd, ref IWMPPlaylist pPlaylist, out IntBool pfAllowBurn) allowCDBurn;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService self, HWnd hwnd, ref IWMPPlaylist pPlaylist, out IntBool pfAllowTransfer) allowPDATransfer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService self, HWnd hwnd) startBackgroundProcessing;
 			}
 		}
 		[CRepr]
@@ -3929,12 +3929,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT onComplete(HRESULT hrResult) mut => VT.onComplete(ref this, hrResult);
+			public HResult onComplete(HResult hrResult) mut => VT.onComplete(ref this, hrResult);
 
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionServiceCallback self, HRESULT hrResult) onComplete;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionServiceCallback self, HResult hrResult) onComplete;
 			}
 		}
 		[CRepr]
@@ -3944,18 +3944,18 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT stopBackgroundProcessing() mut => VT.stopBackgroundProcessing(ref this);
-			public HRESULT serviceEvent(WMPSubscriptionServiceEvent event) mut => VT.serviceEvent(ref this, event);
-			public HRESULT deviceAvailable(BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) mut => VT.deviceAvailable(ref this, bstrDeviceName, ref pCB);
-			public HRESULT prepareForSync(BSTR bstrFilename, BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) mut => VT.prepareForSync(ref this, bstrFilename, bstrDeviceName, ref pCB);
+			public HResult stopBackgroundProcessing() mut => VT.stopBackgroundProcessing(ref this);
+			public HResult serviceEvent(WMPSubscriptionServiceEvent event) mut => VT.serviceEvent(ref this, event);
+			public HResult deviceAvailable(BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) mut => VT.deviceAvailable(ref this, bstrDeviceName, ref pCB);
+			public HResult prepareForSync(BSTR bstrFilename, BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) mut => VT.prepareForSync(ref this, bstrFilename, bstrDeviceName, ref pCB);
 
 			[CRepr]
 			public struct VTable : IWMPSubscriptionService.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService2 self) stopBackgroundProcessing;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService2 self, WMPSubscriptionServiceEvent event) serviceEvent;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService2 self, BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) deviceAvailable;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPSubscriptionService2 self, BSTR bstrFilename, BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) prepareForSync;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService2 self) stopBackgroundProcessing;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService2 self, WMPSubscriptionServiceEvent event) serviceEvent;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService2 self, BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) deviceAvailable;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPSubscriptionService2 self, BSTR bstrFilename, BSTR bstrDeviceName, ref IWMPSubscriptionServiceCallback pCB) prepareForSync;
 			}
 		}
 		[CRepr]
@@ -3965,26 +3965,26 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_sourceURL(out BSTR pbstrURL) mut => VT.get_sourceURL(ref this, out pbstrURL);
-			public HRESULT get_size(out int32 plSize) mut => VT.get_size(ref this, out plSize);
-			public HRESULT get_type(out BSTR pbstrType) mut => VT.get_type(ref this, out pbstrType);
-			public HRESULT get_progress(out int32 plProgress) mut => VT.get_progress(ref this, out plProgress);
-			public HRESULT get_downloadState(out WMPSubscriptionDownloadState pwmpsdls) mut => VT.get_downloadState(ref this, out pwmpsdls);
-			public HRESULT pause() mut => VT.pause(ref this);
-			public HRESULT resume() mut => VT.resume(ref this);
-			public HRESULT cancel() mut => VT.cancel(ref this);
+			public HResult get_sourceURL(out BSTR pbstrURL) mut => VT.get_sourceURL(ref this, out pbstrURL);
+			public HResult get_size(out int32 plSize) mut => VT.get_size(ref this, out plSize);
+			public HResult get_type(out BSTR pbstrType) mut => VT.get_type(ref this, out pbstrType);
+			public HResult get_progress(out int32 plProgress) mut => VT.get_progress(ref this, out plProgress);
+			public HResult get_downloadState(out WMPSubscriptionDownloadState pwmpsdls) mut => VT.get_downloadState(ref this, out pwmpsdls);
+			public HResult pause() mut => VT.pause(ref this);
+			public HResult resume() mut => VT.resume(ref this);
+			public HResult cancel() mut => VT.cancel(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self, out BSTR pbstrURL) get_sourceURL;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self, out int32 plSize) get_size;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self, out BSTR pbstrType) get_type;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self, out int32 plProgress) get_progress;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self, out WMPSubscriptionDownloadState pwmpsdls) get_downloadState;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self) pause;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self) resume;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem self) cancel;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self, out BSTR pbstrURL) get_sourceURL;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self, out int32 plSize) get_size;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self, out BSTR pbstrType) get_type;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self, out int32 plProgress) get_progress;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self, out WMPSubscriptionDownloadState pwmpsdls) get_downloadState;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self) pause;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self) resume;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem self) cancel;
 			}
 		}
 		[CRepr]
@@ -3994,12 +3994,12 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
+			public HResult getItemInfo(BSTR bstrItemName, out BSTR pbstrVal) mut => VT.getItemInfo(ref this, bstrItemName, out pbstrVal);
 
 			[CRepr]
 			public struct VTable : IWMPDownloadItem.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadItem2 self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadItem2 self, BSTR bstrItemName, out BSTR pbstrVal) getItemInfo;
 			}
 		}
 		[CRepr]
@@ -4009,22 +4009,22 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT get_id(out int32 plId) mut => VT.get_id(ref this, out plId);
-			public HRESULT get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
-			public HRESULT item(int32 lItem, out IWMPDownloadItem2* ppDownload) mut => VT.item(ref this, lItem, out ppDownload);
-			public HRESULT startDownload(BSTR bstrSourceURL, BSTR bstrType, out IWMPDownloadItem2* ppDownload) mut => VT.startDownload(ref this, bstrSourceURL, bstrType, out ppDownload);
-			public HRESULT removeItem(int32 lItem) mut => VT.removeItem(ref this, lItem);
-			public HRESULT Clear() mut => VT.Clear(ref this);
+			public HResult get_id(out int32 plId) mut => VT.get_id(ref this, out plId);
+			public HResult get_count(out int32 plCount) mut => VT.get_count(ref this, out plCount);
+			public HResult item(int32 lItem, out IWMPDownloadItem2* ppDownload) mut => VT.item(ref this, lItem, out ppDownload);
+			public HResult startDownload(BSTR bstrSourceURL, BSTR bstrType, out IWMPDownloadItem2* ppDownload) mut => VT.startDownload(ref this, bstrSourceURL, bstrType, out ppDownload);
+			public HResult removeItem(int32 lItem) mut => VT.removeItem(ref this, lItem);
+			public HResult Clear() mut => VT.Clear(ref this);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadCollection self, out int32 plId) get_id;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadCollection self, out int32 plCount) get_count;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadCollection self, int32 lItem, out IWMPDownloadItem2* ppDownload) item;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadCollection self, BSTR bstrSourceURL, BSTR bstrType, out IWMPDownloadItem2* ppDownload) startDownload;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadCollection self, int32 lItem) removeItem;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadCollection self) Clear;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadCollection self, out int32 plId) get_id;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadCollection self, out int32 plCount) get_count;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadCollection self, int32 lItem, out IWMPDownloadItem2* ppDownload) item;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadCollection self, BSTR bstrSourceURL, BSTR bstrType, out IWMPDownloadItem2* ppDownload) startDownload;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadCollection self, int32 lItem) removeItem;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadCollection self) Clear;
 			}
 		}
 		[CRepr]
@@ -4034,14 +4034,14 @@ namespace Win32
 			
 			public new VTable* VT { get => (.)vt; }
 			
-			public HRESULT getDownloadCollection(int32 lCollectionId, out IWMPDownloadCollection* ppCollection) mut => VT.getDownloadCollection(ref this, lCollectionId, out ppCollection);
-			public HRESULT createDownloadCollection(out IWMPDownloadCollection* ppCollection) mut => VT.createDownloadCollection(ref this, out ppCollection);
+			public HResult getDownloadCollection(int32 lCollectionId, out IWMPDownloadCollection* ppCollection) mut => VT.getDownloadCollection(ref this, lCollectionId, out ppCollection);
+			public HResult createDownloadCollection(out IWMPDownloadCollection* ppCollection) mut => VT.createDownloadCollection(ref this, out ppCollection);
 
 			[CRepr]
 			public struct VTable : IDispatch.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadManager self, int32 lCollectionId, out IWMPDownloadCollection* ppCollection) getDownloadCollection;
-				public new function [CallingConvention(.Stdcall)] HRESULT(ref IWMPDownloadManager self, out IWMPDownloadCollection* ppCollection) createDownloadCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadManager self, int32 lCollectionId, out IWMPDownloadCollection* ppCollection) getDownloadCollection;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IWMPDownloadManager self, out IWMPDownloadCollection* ppCollection) createDownloadCollection;
 			}
 		}
 		

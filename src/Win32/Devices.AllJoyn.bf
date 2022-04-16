@@ -486,7 +486,7 @@ namespace Win32
 		{
 			INVALID = 0,
 			ARRAY = 97,
-			BOOLEAN = 98,
+			Boolean = 98,
 			DOUBLE = 100,
 			DICT_ENTRY = 101,
 			SIGNATURE = 103,
@@ -506,7 +506,7 @@ namespace Win32
 			STRUCT_CLOSE = 41,
 			DICT_ENTRY_OPEN = 123,
 			DICT_ENTRY_CLOSE = 125,
-			BOOLEAN_ARRAY = 25185,
+			Boolean_ARRAY = 25185,
 			DOUBLE_ARRAY = 25697,
 			INT32_ARRAY = 26977,
 			INT16_ARRAY = 28257,
@@ -566,48 +566,48 @@ namespace Win32
 		public function QStatus alljoyn_keystorelistener_storerequest_ptr(void* context, alljoyn_keystorelistener listener, alljoyn_keystore keyStore);
 		public function QStatus alljoyn_keystorelistener_acquireexclusivelock_ptr(void* context, alljoyn_keystorelistener listener);
 		public function void alljoyn_keystorelistener_releaseexclusivelock_ptr(void* context, alljoyn_keystorelistener listener);
-		public function int32 alljoyn_authlistener_requestcredentials_ptr(void* context, PSTR authMechanism, PSTR peerName, uint16 authCount, PSTR userName, uint16 credMask, alljoyn_credentials credentials);
-		public function QStatus alljoyn_authlistener_requestcredentialsasync_ptr(void* context, alljoyn_authlistener listener, PSTR authMechanism, PSTR peerName, uint16 authCount, PSTR userName, uint16 credMask, void* authContext);
-		public function int32 alljoyn_authlistener_verifycredentials_ptr(void* context, PSTR authMechanism, PSTR peerName, alljoyn_credentials credentials);
-		public function QStatus alljoyn_authlistener_verifycredentialsasync_ptr(void* context, alljoyn_authlistener listener, PSTR authMechanism, PSTR peerName, alljoyn_credentials credentials, void* authContext);
+		public function int32 alljoyn_authlistener_requestcredentials_ptr(void* context, char8* authMechanism, char8* peerName, uint16 authCount, char8* userName, uint16 credMask, alljoyn_credentials credentials);
+		public function QStatus alljoyn_authlistener_requestcredentialsasync_ptr(void* context, alljoyn_authlistener listener, char8* authMechanism, char8* peerName, uint16 authCount, char8* userName, uint16 credMask, void* authContext);
+		public function int32 alljoyn_authlistener_verifycredentials_ptr(void* context, char8* authMechanism, char8* peerName, alljoyn_credentials credentials);
+		public function QStatus alljoyn_authlistener_verifycredentialsasync_ptr(void* context, alljoyn_authlistener listener, char8* authMechanism, char8* peerName, alljoyn_credentials credentials, void* authContext);
 		public function void alljoyn_authlistener_securityviolation_ptr(void* context, QStatus status, alljoyn_message msg);
-		public function void alljoyn_authlistener_authenticationcomplete_ptr(void* context, PSTR authMechanism, PSTR peerName, int32 success);
+		public function void alljoyn_authlistener_authenticationcomplete_ptr(void* context, char8* authMechanism, char8* peerName, int32 success);
 		public function void alljoyn_buslistener_listener_registered_ptr(void* context, alljoyn_busattachment bus);
 		public function void alljoyn_buslistener_listener_unregistered_ptr(void* context);
-		public function void alljoyn_buslistener_found_advertised_name_ptr(void* context, PSTR name, uint16 transport, PSTR namePrefix);
-		public function void alljoyn_buslistener_lost_advertised_name_ptr(void* context, PSTR name, uint16 transport, PSTR namePrefix);
-		public function void alljoyn_buslistener_name_owner_changed_ptr(void* context, PSTR busName, PSTR previousOwner, PSTR newOwner);
+		public function void alljoyn_buslistener_found_advertised_name_ptr(void* context, char8* name, uint16 transport, char8* namePrefix);
+		public function void alljoyn_buslistener_lost_advertised_name_ptr(void* context, char8* name, uint16 transport, char8* namePrefix);
+		public function void alljoyn_buslistener_name_owner_changed_ptr(void* context, char8* busName, char8* previousOwner, char8* newOwner);
 		public function void alljoyn_buslistener_bus_stopping_ptr(void* context);
 		public function void alljoyn_buslistener_bus_disconnected_ptr(void* context);
-		public function void alljoyn_buslistener_bus_prop_changed_ptr(void* context, PSTR prop_name, alljoyn_msgarg prop_value);
-		public function PSTR alljoyn_interfacedescription_translation_callback_ptr(PSTR sourceLanguage, PSTR targetLanguage, PSTR sourceText);
+		public function void alljoyn_buslistener_bus_prop_changed_ptr(void* context, char8* prop_name, alljoyn_msgarg prop_value);
+		public function char8* alljoyn_interfacedescription_translation_callback_ptr(char8* sourceLanguage, char8* targetLanguage, char8* sourceText);
 		public function void alljoyn_messagereceiver_methodhandler_ptr(alljoyn_busobject bus, in alljoyn_interfacedescription_member member, alljoyn_message message);
 		public function void alljoyn_messagereceiver_replyhandler_ptr(alljoyn_message message, void* context);
-		public function void alljoyn_messagereceiver_signalhandler_ptr(in alljoyn_interfacedescription_member member, PSTR srcPath, alljoyn_message message);
-		public function QStatus alljoyn_busobject_prop_get_ptr(void* context, PSTR ifcName, PSTR propName, alljoyn_msgarg val);
-		public function QStatus alljoyn_busobject_prop_set_ptr(void* context, PSTR ifcName, PSTR propName, alljoyn_msgarg val);
+		public function void alljoyn_messagereceiver_signalhandler_ptr(in alljoyn_interfacedescription_member member, char8* srcPath, alljoyn_message message);
+		public function QStatus alljoyn_busobject_prop_get_ptr(void* context, char8* ifcName, char8* propName, alljoyn_msgarg val);
+		public function QStatus alljoyn_busobject_prop_set_ptr(void* context, char8* ifcName, char8* propName, alljoyn_msgarg val);
 		public function void alljoyn_busobject_object_registration_ptr(void* context);
 		public function void alljoyn_proxybusobject_listener_introspectcb_ptr(QStatus status, alljoyn_proxybusobject obj, void* context);
 		public function void alljoyn_proxybusobject_listener_getpropertycb_ptr(QStatus status, alljoyn_proxybusobject obj, alljoyn_msgarg value, void* context);
 		public function void alljoyn_proxybusobject_listener_getallpropertiescb_ptr(QStatus status, alljoyn_proxybusobject obj, alljoyn_msgarg values, void* context);
 		public function void alljoyn_proxybusobject_listener_setpropertycb_ptr(QStatus status, alljoyn_proxybusobject obj, void* context);
-		public function void alljoyn_proxybusobject_listener_propertieschanged_ptr(alljoyn_proxybusobject obj, PSTR ifaceName, alljoyn_msgarg changed, alljoyn_msgarg invalidated, void* context);
+		public function void alljoyn_proxybusobject_listener_propertieschanged_ptr(alljoyn_proxybusobject obj, char8* ifaceName, alljoyn_msgarg changed, alljoyn_msgarg invalidated, void* context);
 		public function QStatus alljoyn_permissionconfigurationlistener_factoryreset_ptr(void* context);
 		public function void alljoyn_permissionconfigurationlistener_policychanged_ptr(void* context);
 		public function void alljoyn_permissionconfigurationlistener_startmanagement_ptr(void* context);
 		public function void alljoyn_permissionconfigurationlistener_endmanagement_ptr(void* context);
 		public function void alljoyn_sessionlistener_sessionlost_ptr(void* context, uint32 sessionId, alljoyn_sessionlostreason reason);
-		public function void alljoyn_sessionlistener_sessionmemberadded_ptr(void* context, uint32 sessionId, PSTR uniqueName);
-		public function void alljoyn_sessionlistener_sessionmemberremoved_ptr(void* context, uint32 sessionId, PSTR uniqueName);
-		public function int32 alljoyn_sessionportlistener_acceptsessionjoiner_ptr(void* context, uint16 sessionPort, PSTR joiner, alljoyn_sessionopts opts);
-		public function void alljoyn_sessionportlistener_sessionjoined_ptr(void* context, uint16 sessionPort, uint32 id, PSTR joiner);
-		public function void alljoyn_about_announced_ptr(void* context, PSTR busName, uint16 version, uint16 port, alljoyn_msgarg objectDescriptionArg, alljoyn_msgarg aboutDataArg);
+		public function void alljoyn_sessionlistener_sessionmemberadded_ptr(void* context, uint32 sessionId, char8* uniqueName);
+		public function void alljoyn_sessionlistener_sessionmemberremoved_ptr(void* context, uint32 sessionId, char8* uniqueName);
+		public function int32 alljoyn_sessionportlistener_acceptsessionjoiner_ptr(void* context, uint16 sessionPort, char8* joiner, alljoyn_sessionopts opts);
+		public function void alljoyn_sessionportlistener_sessionjoined_ptr(void* context, uint16 sessionPort, uint32 id, char8* joiner);
+		public function void alljoyn_about_announced_ptr(void* context, char8* busName, uint16 version, uint16 port, alljoyn_msgarg objectDescriptionArg, alljoyn_msgarg aboutDataArg);
 		public function void alljoyn_busattachment_joinsessioncb_ptr(QStatus status, uint32 sessionId, alljoyn_sessionopts opts, void* context);
 		public function void alljoyn_busattachment_setlinktimeoutcb_ptr(QStatus status, uint32 timeout, void* context);
-		public function QStatus alljoyn_aboutdatalistener_getaboutdata_ptr(void* context, alljoyn_msgarg msgArg, PSTR language);
+		public function QStatus alljoyn_aboutdatalistener_getaboutdata_ptr(void* context, alljoyn_msgarg msgArg, char8* language);
 		public function QStatus alljoyn_aboutdatalistener_getannouncedaboutdata_ptr(void* context, alljoyn_msgarg msgArg);
-		public function void alljoyn_autopinger_destination_lost_ptr(void* context, PSTR group, PSTR destination);
-		public function void alljoyn_autopinger_destination_found_ptr(void* context, PSTR group, PSTR destination);
+		public function void alljoyn_autopinger_destination_lost_ptr(void* context, char8* group, char8* destination);
+		public function void alljoyn_autopinger_destination_found_ptr(void* context, char8* group, char8* destination);
 		public function void alljoyn_observer_object_discovered_ptr(void* context, alljoyn_proxybusobject_ref proxyref);
 		public function void alljoyn_observer_object_lost_ptr(void* context, alljoyn_proxybusobject_ref proxyref);
 		
@@ -688,17 +688,17 @@ namespace Win32
 		{
 			public alljoyn_interfacedescription iface;
 			public alljoyn_messagetype memberType;
-			public PSTR name;
-			public PSTR signature;
-			public PSTR returnSignature;
-			public PSTR argNames;
+			public char8* name;
+			public char8* signature;
+			public char8* returnSignature;
+			public char8* argNames;
 			public void* internal_member;
 		}
 		[CRepr]
 		public struct alljoyn_interfacedescription_property
 		{
-			public PSTR name;
-			public PSTR signature;
+			public char8* name;
+			public char8* signature;
 			public uint8 access;
 			public void* internal_property;
 		}
@@ -768,31 +768,31 @@ namespace Win32
 		// --- Functions ---
 		
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE AllJoynConnectToBus(PWSTR connectionSpec);
+		public static extern Handle AllJoynConnectToBus(char16* connectionSpec);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AllJoynCloseBusHandle(HANDLE busHandle);
+		public static extern IntBool AllJoynCloseBusHandle(Handle busHandle);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AllJoynSendToBus(HANDLE connectedBusHandle, void* buffer, uint32 bytesToWrite, uint32* bytesTransferred, void* reserved);
+		public static extern IntBool AllJoynSendToBus(Handle connectedBusHandle, void* buffer, uint32 bytesToWrite, uint32* bytesTransferred, void* reserved);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AllJoynReceiveFromBus(HANDLE connectedBusHandle, void* buffer, uint32 bytesToRead, uint32* bytesTransferred, void* reserved);
+		public static extern IntBool AllJoynReceiveFromBus(Handle connectedBusHandle, void* buffer, uint32 bytesToRead, uint32* bytesTransferred, void* reserved);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AllJoynEventSelect(HANDLE connectedBusHandle, HANDLE eventHandle, uint32 eventTypes);
+		public static extern IntBool AllJoynEventSelect(Handle connectedBusHandle, Handle eventHandle, uint32 eventTypes);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern BOOL AllJoynEnumEvents(HANDLE connectedBusHandle, HANDLE eventToReset, out uint32 eventTypes);
+		public static extern IntBool AllJoynEnumEvents(Handle connectedBusHandle, Handle eventToReset, out uint32 eventTypes);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HANDLE AllJoynCreateBus(uint32 outBufferSize, uint32 inBufferSize, SECURITY_ATTRIBUTES* lpSecurityAttributes);
+		public static extern Handle AllJoynCreateBus(uint32 outBufferSize, uint32 inBufferSize, SECURITY_ATTRIBUTES* lpSecurityAttributes);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint32 AllJoynAcceptBusConnection(HANDLE serverBusHandle, HANDLE abortEvent);
+		public static extern uint32 AllJoynAcceptBusConnection(Handle serverBusHandle, Handle abortEvent);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_unity_deferred_callbacks_process();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_unity_set_deferred_callback_mainthread_only(int32 mainthread_only);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR QCC_StatusText(QStatus status);
+		public static extern char8* QCC_StatusText(QStatus status);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_msgarg alljoyn_msgarg_create();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_msgarg alljoyn_msgarg_create_and_set(PSTR signature);
+		public static extern alljoyn_msgarg alljoyn_msgarg_create_and_set(char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_msgarg_destroy(alljoyn_msgarg arg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -800,9 +800,9 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_msgarg alljoyn_msgarg_array_element(alljoyn_msgarg arg, uint index);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_set(alljoyn_msgarg arg, PSTR signature);
+		public static extern QStatus alljoyn_msgarg_set(alljoyn_msgarg arg, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_get(alljoyn_msgarg arg, PSTR signature);
+		public static extern QStatus alljoyn_msgarg_get(alljoyn_msgarg arg, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_msgarg alljoyn_msgarg_copy(alljoyn_msgarg source);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -810,21 +810,21 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_msgarg_equal(alljoyn_msgarg lhv, alljoyn_msgarg rhv);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_array_set(alljoyn_msgarg args, out uint numArgs, PSTR signature);
+		public static extern QStatus alljoyn_msgarg_array_set(alljoyn_msgarg args, out uint numArgs, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_array_get(alljoyn_msgarg args, uint numArgs, PSTR signature);
+		public static extern QStatus alljoyn_msgarg_array_get(alljoyn_msgarg args, uint numArgs, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_msgarg_tostring(alljoyn_msgarg arg, PSTR str, uint buf, uint indent);
+		public static extern uint alljoyn_msgarg_tostring(alljoyn_msgarg arg, char8* str, uint buf, uint indent);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_msgarg_array_tostring(alljoyn_msgarg args, uint numArgs, PSTR str, uint buf, uint indent);
+		public static extern uint alljoyn_msgarg_array_tostring(alljoyn_msgarg args, uint numArgs, char8* str, uint buf, uint indent);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_msgarg_signature(alljoyn_msgarg arg, PSTR str, uint buf);
+		public static extern uint alljoyn_msgarg_signature(alljoyn_msgarg arg, char8* str, uint buf);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_msgarg_array_signature(alljoyn_msgarg values, uint numValues, PSTR str, uint buf);
+		public static extern uint alljoyn_msgarg_array_signature(alljoyn_msgarg values, uint numValues, char8* str, uint buf);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_msgarg_hassignature(alljoyn_msgarg arg, PSTR signature);
+		public static extern int32 alljoyn_msgarg_hassignature(alljoyn_msgarg arg, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_getdictelement(alljoyn_msgarg arg, PSTR elemSig);
+		public static extern QStatus alljoyn_msgarg_getdictelement(alljoyn_msgarg arg, char8* elemSig);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_typeid alljoyn_msgarg_gettype(alljoyn_msgarg arg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -832,9 +832,9 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_msgarg_stabilize(alljoyn_msgarg arg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_array_set_offset(alljoyn_msgarg args, uint argOffset, out uint numArgs, PSTR signature);
+		public static extern QStatus alljoyn_msgarg_array_set_offset(alljoyn_msgarg args, uint argOffset, out uint numArgs, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg arg, PSTR signature);
+		public static extern QStatus alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg arg, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_msgarg_set_uint8(alljoyn_msgarg arg, uint8 y);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -854,11 +854,11 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_msgarg_set_double(alljoyn_msgarg arg, double d);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_set_string(alljoyn_msgarg arg, PSTR s);
+		public static extern QStatus alljoyn_msgarg_set_string(alljoyn_msgarg arg, char8* s);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_set_objectpath(alljoyn_msgarg arg, PSTR o);
+		public static extern QStatus alljoyn_msgarg_set_objectpath(alljoyn_msgarg arg, char8* o);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_set_signature(alljoyn_msgarg arg, PSTR g);
+		public static extern QStatus alljoyn_msgarg_set_signature(alljoyn_msgarg arg, char8* g);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_msgarg_get_uint8(alljoyn_msgarg arg, out uint8 y);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -928,13 +928,13 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_msgarg_get_double_array(alljoyn_msgarg arg, out uint length, out double ad);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_msgarg_get_variant_array(alljoyn_msgarg arg, PSTR signature, out uint length, out alljoyn_msgarg av);
+		public static extern QStatus alljoyn_msgarg_get_variant_array(alljoyn_msgarg arg, char8* signature, out uint length, out alljoyn_msgarg av);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_msgarg_get_array_numberofelements(alljoyn_msgarg arg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_msgarg_get_array_element(alljoyn_msgarg arg, uint index, out alljoyn_msgarg element);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_msgarg_get_array_elementsignature(alljoyn_msgarg arg, uint index);
+		public static extern char8* alljoyn_msgarg_get_array_elementsignature(alljoyn_msgarg arg, uint index);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_msgarg alljoyn_msgarg_getkey(alljoyn_msgarg arg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -950,91 +950,91 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_aboutdata alljoyn_aboutdata_create_empty();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_aboutdata alljoyn_aboutdata_create(PSTR defaultLanguage);
+		public static extern alljoyn_aboutdata alljoyn_aboutdata_create(char8* defaultLanguage);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_aboutdata alljoyn_aboutdata_create_full(alljoyn_msgarg arg, PSTR language);
+		public static extern alljoyn_aboutdata alljoyn_aboutdata_create_full(alljoyn_msgarg arg, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_aboutdata_destroy(alljoyn_aboutdata data);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_createfromxml(alljoyn_aboutdata data, PSTR aboutDataXml);
+		public static extern QStatus alljoyn_aboutdata_createfromxml(alljoyn_aboutdata data, char8* aboutDataXml);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutdata_isvalid(alljoyn_aboutdata data, PSTR language);
+		public static extern uint8 alljoyn_aboutdata_isvalid(alljoyn_aboutdata data, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_createfrommsgarg(alljoyn_aboutdata data, alljoyn_msgarg arg, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_createfrommsgarg(alljoyn_aboutdata data, alljoyn_msgarg arg, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_setappid(alljoyn_aboutdata data, in uint8 appId, uint num);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setappid_fromstring(alljoyn_aboutdata data, PSTR appId);
+		public static extern QStatus alljoyn_aboutdata_setappid_fromstring(alljoyn_aboutdata data, char8* appId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getappid(alljoyn_aboutdata data, out uint8* appId, out uint num);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setdefaultlanguage(alljoyn_aboutdata data, PSTR defaultLanguage);
+		public static extern QStatus alljoyn_aboutdata_setdefaultlanguage(alljoyn_aboutdata data, char8* defaultLanguage);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getdefaultlanguage(alljoyn_aboutdata data, out int8* defaultLanguage);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setdevicename(alljoyn_aboutdata data, PSTR deviceName, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_setdevicename(alljoyn_aboutdata data, char8* deviceName, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_getdevicename(alljoyn_aboutdata data, out int8* deviceName, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_getdevicename(alljoyn_aboutdata data, out int8* deviceName, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setdeviceid(alljoyn_aboutdata data, PSTR deviceId);
+		public static extern QStatus alljoyn_aboutdata_setdeviceid(alljoyn_aboutdata data, char8* deviceId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getdeviceid(alljoyn_aboutdata data, out int8* deviceId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setappname(alljoyn_aboutdata data, PSTR appName, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_setappname(alljoyn_aboutdata data, char8* appName, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_getappname(alljoyn_aboutdata data, out int8* appName, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_getappname(alljoyn_aboutdata data, out int8* appName, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setmanufacturer(alljoyn_aboutdata data, PSTR manufacturer, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_setmanufacturer(alljoyn_aboutdata data, char8* manufacturer, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_getmanufacturer(alljoyn_aboutdata data, out int8* manufacturer, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_getmanufacturer(alljoyn_aboutdata data, out int8* manufacturer, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setmodelnumber(alljoyn_aboutdata data, PSTR modelNumber);
+		public static extern QStatus alljoyn_aboutdata_setmodelnumber(alljoyn_aboutdata data, char8* modelNumber);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getmodelnumber(alljoyn_aboutdata data, out int8* modelNumber);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setsupportedlanguage(alljoyn_aboutdata data, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_setsupportedlanguage(alljoyn_aboutdata data, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_aboutdata_getsupportedlanguages(alljoyn_aboutdata data, in int8* languageTags, uint num);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setdescription(alljoyn_aboutdata data, PSTR description, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_setdescription(alljoyn_aboutdata data, char8* description, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_getdescription(alljoyn_aboutdata data, out int8* description, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_getdescription(alljoyn_aboutdata data, out int8* description, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setdateofmanufacture(alljoyn_aboutdata data, PSTR dateOfManufacture);
+		public static extern QStatus alljoyn_aboutdata_setdateofmanufacture(alljoyn_aboutdata data, char8* dateOfManufacture);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getdateofmanufacture(alljoyn_aboutdata data, out int8* dateOfManufacture);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setsoftwareversion(alljoyn_aboutdata data, PSTR softwareVersion);
+		public static extern QStatus alljoyn_aboutdata_setsoftwareversion(alljoyn_aboutdata data, char8* softwareVersion);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getsoftwareversion(alljoyn_aboutdata data, out int8* softwareVersion);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getajsoftwareversion(alljoyn_aboutdata data, out int8* ajSoftwareVersion);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_sethardwareversion(alljoyn_aboutdata data, PSTR hardwareVersion);
+		public static extern QStatus alljoyn_aboutdata_sethardwareversion(alljoyn_aboutdata data, char8* hardwareVersion);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_gethardwareversion(alljoyn_aboutdata data, out int8* hardwareVersion);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setsupporturl(alljoyn_aboutdata data, PSTR supportUrl);
+		public static extern QStatus alljoyn_aboutdata_setsupporturl(alljoyn_aboutdata data, char8* supportUrl);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getsupporturl(alljoyn_aboutdata data, out int8* supportUrl);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_setfield(alljoyn_aboutdata data, PSTR name, alljoyn_msgarg value, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_setfield(alljoyn_aboutdata data, char8* name, alljoyn_msgarg value, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_getfield(alljoyn_aboutdata data, PSTR name, out alljoyn_msgarg value, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_getfield(alljoyn_aboutdata data, char8* name, out alljoyn_msgarg value, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_aboutdata_getfields(alljoyn_aboutdata data, in int8* fields, uint num_fields);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutdata_getaboutdata(alljoyn_aboutdata data, alljoyn_msgarg msgArg, PSTR language);
+		public static extern QStatus alljoyn_aboutdata_getaboutdata(alljoyn_aboutdata data, alljoyn_msgarg msgArg, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutdata_getannouncedaboutdata(alljoyn_aboutdata data, alljoyn_msgarg msgArg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutdata_isfieldrequired(alljoyn_aboutdata data, PSTR fieldName);
+		public static extern uint8 alljoyn_aboutdata_isfieldrequired(alljoyn_aboutdata data, char8* fieldName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutdata_isfieldannounced(alljoyn_aboutdata data, PSTR fieldName);
+		public static extern uint8 alljoyn_aboutdata_isfieldannounced(alljoyn_aboutdata data, char8* fieldName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutdata_isfieldlocalized(alljoyn_aboutdata data, PSTR fieldName);
+		public static extern uint8 alljoyn_aboutdata_isfieldlocalized(alljoyn_aboutdata data, char8* fieldName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_aboutdata_getfieldsignature(alljoyn_aboutdata data, PSTR fieldName);
+		public static extern char8* alljoyn_aboutdata_getfieldsignature(alljoyn_aboutdata data, char8* fieldName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern _alljoyn_abouticon_handle* alljoyn_abouticon_create();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1042,11 +1042,11 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_abouticon_getcontent(out _alljoyn_abouticon_handle icon, in uint8* data, out uint size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_abouticon_setcontent(out _alljoyn_abouticon_handle icon, PSTR type, out uint8 data, uint csize, uint8 ownsData);
+		public static extern QStatus alljoyn_abouticon_setcontent(out _alljoyn_abouticon_handle icon, char8* type, out uint8 data, uint csize, uint8 ownsData);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_abouticon_geturl(out _alljoyn_abouticon_handle icon, in int8* type, in int8* url);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_abouticon_seturl(out _alljoyn_abouticon_handle icon, PSTR type, PSTR url);
+		public static extern QStatus alljoyn_abouticon_seturl(out _alljoyn_abouticon_handle icon, char8* type, char8* url);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_abouticon_clear(out _alljoyn_abouticon_handle icon);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1128,9 +1128,9 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_keystorelistener_destroy(alljoyn_keystorelistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_keystorelistener_putkeys(alljoyn_keystorelistener listener, alljoyn_keystore keyStore, PSTR source, PSTR password);
+		public static extern QStatus alljoyn_keystorelistener_putkeys(alljoyn_keystorelistener listener, alljoyn_keystore keyStore, char8* source, char8* password);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_keystorelistener_getkeys(alljoyn_keystorelistener listener, alljoyn_keystore keyStore, PSTR sink, out uint sink_sz);
+		public static extern QStatus alljoyn_keystorelistener_getkeys(alljoyn_keystorelistener listener, alljoyn_keystore keyStore, char8* sink, out uint sink_sz);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_sessionopts alljoyn_sessionopts_create(uint8 traffic, int32 isMultipoint, uint8 proximity, uint16 transports);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1174,7 +1174,7 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_message_isencrypted(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getauthmechanism(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getauthmechanism(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_messagetype alljoyn_message_gettype(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1182,35 +1182,35 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_msgarg alljoyn_message_getarg(alljoyn_message msg, uint argN);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_message_parseargs(alljoyn_message msg, PSTR signature);
+		public static extern QStatus alljoyn_message_parseargs(alljoyn_message msg, char8* signature);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_message_getcallserial(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getsignature(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getsignature(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getobjectpath(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getobjectpath(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getinterface(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getinterface(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getmembername(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getmembername(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_message_getreplyserial(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getsender(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getsender(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getreceiveendpointname(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getreceiveendpointname(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_getdestination(alljoyn_message msg);
+		public static extern char8* alljoyn_message_getdestination(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_message_getcompressiontoken(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_message_getsessionid(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_message_geterrorname(alljoyn_message msg, PSTR errorMessage, out uint errorMessage_size);
+		public static extern char8* alljoyn_message_geterrorname(alljoyn_message msg, char8* errorMessage, out uint errorMessage_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_message_tostring(alljoyn_message msg, PSTR str, uint buf);
+		public static extern uint alljoyn_message_tostring(alljoyn_message msg, char8* str, uint buf);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_message_description(alljoyn_message msg, PSTR str, uint buf);
+		public static extern uint alljoyn_message_description(alljoyn_message msg, char8* str, uint buf);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_message_gettimestamp(alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1238,27 +1238,27 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_credentials_isset(alljoyn_credentials cred, uint16 creds);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_credentials_setpassword(alljoyn_credentials cred, PSTR pwd);
+		public static extern void alljoyn_credentials_setpassword(alljoyn_credentials cred, char8* pwd);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_credentials_setusername(alljoyn_credentials cred, PSTR userName);
+		public static extern void alljoyn_credentials_setusername(alljoyn_credentials cred, char8* userName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_credentials_setcertchain(alljoyn_credentials cred, PSTR certChain);
+		public static extern void alljoyn_credentials_setcertchain(alljoyn_credentials cred, char8* certChain);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_credentials_setprivatekey(alljoyn_credentials cred, PSTR pk);
+		public static extern void alljoyn_credentials_setprivatekey(alljoyn_credentials cred, char8* pk);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_credentials_setlogonentry(alljoyn_credentials cred, PSTR logonEntry);
+		public static extern void alljoyn_credentials_setlogonentry(alljoyn_credentials cred, char8* logonEntry);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_credentials_setexpiration(alljoyn_credentials cred, uint32 expiration);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_credentials_getpassword(alljoyn_credentials cred);
+		public static extern char8* alljoyn_credentials_getpassword(alljoyn_credentials cred);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_credentials_getusername(alljoyn_credentials cred);
+		public static extern char8* alljoyn_credentials_getusername(alljoyn_credentials cred);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_credentials_getcertchain(alljoyn_credentials cred);
+		public static extern char8* alljoyn_credentials_getcertchain(alljoyn_credentials cred);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_credentials_getprivateKey(alljoyn_credentials cred);
+		public static extern char8* alljoyn_credentials_getprivateKey(alljoyn_credentials cred);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_credentials_getlogonentry(alljoyn_credentials cred);
+		public static extern char8* alljoyn_credentials_getlogonentry(alljoyn_credentials cred);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_credentials_getexpiration(alljoyn_credentials cred);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1270,103 +1270,103 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_interfacedescription_member_getannotationscount(alljoyn_interfacedescription_member member);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_interfacedescription_member_getannotationatindex(alljoyn_interfacedescription_member member, uint index, PSTR name, out uint name_size, PSTR value, out uint value_size);
+		public static extern void alljoyn_interfacedescription_member_getannotationatindex(alljoyn_interfacedescription_member member, uint index, char8* name, out uint name_size, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_member_getannotation(alljoyn_interfacedescription_member member, PSTR name, PSTR value, out uint value_size);
+		public static extern int32 alljoyn_interfacedescription_member_getannotation(alljoyn_interfacedescription_member member, char8* name, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_member_getargannotationscount(alljoyn_interfacedescription_member member, PSTR argName);
+		public static extern uint alljoyn_interfacedescription_member_getargannotationscount(alljoyn_interfacedescription_member member, char8* argName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_interfacedescription_member_getargannotationatindex(alljoyn_interfacedescription_member member, PSTR argName, uint index, PSTR name, out uint name_size, PSTR value, out uint value_size);
+		public static extern void alljoyn_interfacedescription_member_getargannotationatindex(alljoyn_interfacedescription_member member, char8* argName, uint index, char8* name, out uint name_size, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_member_getargannotation(alljoyn_interfacedescription_member member, PSTR argName, PSTR name, PSTR value, out uint value_size);
+		public static extern int32 alljoyn_interfacedescription_member_getargannotation(alljoyn_interfacedescription_member member, char8* argName, char8* name, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_interfacedescription_property_getannotationscount(alljoyn_interfacedescription_property property);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_interfacedescription_property_getannotationatindex(alljoyn_interfacedescription_property property, uint index, PSTR name, out uint name_size, PSTR value, out uint value_size);
+		public static extern void alljoyn_interfacedescription_property_getannotationatindex(alljoyn_interfacedescription_property property, uint index, char8* name, out uint name_size, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_property_getannotation(alljoyn_interfacedescription_property property, PSTR name, PSTR value, out uint value_size);
+		public static extern int32 alljoyn_interfacedescription_property_getannotation(alljoyn_interfacedescription_property property, char8* name, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_interfacedescription_activate(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addannotation(alljoyn_interfacedescription iface, PSTR name, PSTR value);
+		public static extern QStatus alljoyn_interfacedescription_addannotation(alljoyn_interfacedescription iface, char8* name, char8* value);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getannotation(alljoyn_interfacedescription iface, PSTR name, PSTR value, out uint value_size);
+		public static extern int32 alljoyn_interfacedescription_getannotation(alljoyn_interfacedescription iface, char8* name, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_interfacedescription_getannotationscount(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_interfacedescription_getannotationatindex(alljoyn_interfacedescription iface, uint index, PSTR name, out uint name_size, PSTR value, out uint value_size);
+		public static extern void alljoyn_interfacedescription_getannotationatindex(alljoyn_interfacedescription iface, uint index, char8* name, out uint name_size, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getmember(alljoyn_interfacedescription iface, PSTR name, out alljoyn_interfacedescription_member member);
+		public static extern int32 alljoyn_interfacedescription_getmember(alljoyn_interfacedescription iface, char8* name, out alljoyn_interfacedescription_member member);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addmember(alljoyn_interfacedescription iface, alljoyn_messagetype type, PSTR name, PSTR inputSig, PSTR outSig, PSTR argNames, uint8 annotation);
+		public static extern QStatus alljoyn_interfacedescription_addmember(alljoyn_interfacedescription iface, alljoyn_messagetype type, char8* name, char8* inputSig, char8* outSig, char8* argNames, uint8 annotation);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addmemberannotation(alljoyn_interfacedescription iface, PSTR member, PSTR name, PSTR value);
+		public static extern QStatus alljoyn_interfacedescription_addmemberannotation(alljoyn_interfacedescription iface, char8* member, char8* name, char8* value);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getmemberannotation(alljoyn_interfacedescription iface, PSTR member, PSTR name, PSTR value, out uint value_size);
+		public static extern int32 alljoyn_interfacedescription_getmemberannotation(alljoyn_interfacedescription iface, char8* member, char8* name, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_interfacedescription_getmembers(alljoyn_interfacedescription iface, out alljoyn_interfacedescription_member members, uint numMembers);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_hasmember(alljoyn_interfacedescription iface, PSTR name, PSTR inSig, PSTR outSig);
+		public static extern int32 alljoyn_interfacedescription_hasmember(alljoyn_interfacedescription iface, char8* name, char8* inSig, char8* outSig);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addmethod(alljoyn_interfacedescription iface, PSTR name, PSTR inputSig, PSTR outSig, PSTR argNames, uint8 annotation, PSTR accessPerms);
+		public static extern QStatus alljoyn_interfacedescription_addmethod(alljoyn_interfacedescription iface, char8* name, char8* inputSig, char8* outSig, char8* argNames, uint8 annotation, char8* accessPerms);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getmethod(alljoyn_interfacedescription iface, PSTR name, out alljoyn_interfacedescription_member member);
+		public static extern int32 alljoyn_interfacedescription_getmethod(alljoyn_interfacedescription iface, char8* name, out alljoyn_interfacedescription_member member);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addsignal(alljoyn_interfacedescription iface, PSTR name, PSTR sig, PSTR argNames, uint8 annotation, PSTR accessPerms);
+		public static extern QStatus alljoyn_interfacedescription_addsignal(alljoyn_interfacedescription iface, char8* name, char8* sig, char8* argNames, uint8 annotation, char8* accessPerms);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getsignal(alljoyn_interfacedescription iface, PSTR name, out alljoyn_interfacedescription_member member);
+		public static extern int32 alljoyn_interfacedescription_getsignal(alljoyn_interfacedescription iface, char8* name, out alljoyn_interfacedescription_member member);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getproperty(alljoyn_interfacedescription iface, PSTR name, out alljoyn_interfacedescription_property property);
+		public static extern int32 alljoyn_interfacedescription_getproperty(alljoyn_interfacedescription iface, char8* name, out alljoyn_interfacedescription_property property);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_interfacedescription_getproperties(alljoyn_interfacedescription iface, out alljoyn_interfacedescription_property props, uint numProps);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addproperty(alljoyn_interfacedescription iface, PSTR name, PSTR signature, uint8 access);
+		public static extern QStatus alljoyn_interfacedescription_addproperty(alljoyn_interfacedescription iface, char8* name, char8* signature, uint8 access);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addpropertyannotation(alljoyn_interfacedescription iface, PSTR property, PSTR name, PSTR value);
+		public static extern QStatus alljoyn_interfacedescription_addpropertyannotation(alljoyn_interfacedescription iface, char8* property, char8* name, char8* value);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getpropertyannotation(alljoyn_interfacedescription iface, PSTR property, PSTR name, PSTR value, out uint str_size);
+		public static extern int32 alljoyn_interfacedescription_getpropertyannotation(alljoyn_interfacedescription iface, char8* property, char8* name, char8* value, out uint str_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_hasproperty(alljoyn_interfacedescription iface, PSTR name);
+		public static extern int32 alljoyn_interfacedescription_hasproperty(alljoyn_interfacedescription iface, char8* name);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_interfacedescription_hasproperties(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_interfacedescription_getname(alljoyn_interfacedescription iface);
+		public static extern char8* alljoyn_interfacedescription_getname(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_introspect(alljoyn_interfacedescription iface, PSTR str, uint buf, uint indent);
+		public static extern uint alljoyn_interfacedescription_introspect(alljoyn_interfacedescription iface, char8* str, uint buf, uint indent);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_interfacedescription_issecure(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_interfacedescription_securitypolicy alljoyn_interfacedescription_getsecuritypolicy(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_interfacedescription_setdescriptionlanguage(alljoyn_interfacedescription iface, PSTR language);
+		public static extern void alljoyn_interfacedescription_setdescriptionlanguage(alljoyn_interfacedescription iface, char8* language);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_interfacedescription_getdescriptionlanguages(alljoyn_interfacedescription iface, in int8* languages, uint size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_getdescriptionlanguages2(alljoyn_interfacedescription iface, PSTR languages, uint languagesSize);
+		public static extern uint alljoyn_interfacedescription_getdescriptionlanguages2(alljoyn_interfacedescription iface, char8* languages, uint languagesSize);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_interfacedescription_setdescription(alljoyn_interfacedescription iface, PSTR description);
+		public static extern void alljoyn_interfacedescription_setdescription(alljoyn_interfacedescription iface, char8* description);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setdescriptionforlanguage(alljoyn_interfacedescription iface, PSTR description, PSTR languageTag);
+		public static extern QStatus alljoyn_interfacedescription_setdescriptionforlanguage(alljoyn_interfacedescription iface, char8* description, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_getdescriptionforlanguage(alljoyn_interfacedescription iface, PSTR description, uint maxLanguageLength, PSTR languageTag);
+		public static extern uint alljoyn_interfacedescription_getdescriptionforlanguage(alljoyn_interfacedescription iface, char8* description, uint maxLanguageLength, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setmemberdescription(alljoyn_interfacedescription iface, PSTR member, PSTR description);
+		public static extern QStatus alljoyn_interfacedescription_setmemberdescription(alljoyn_interfacedescription iface, char8* member, char8* description);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setmemberdescriptionforlanguage(alljoyn_interfacedescription iface, PSTR member, PSTR description, PSTR languageTag);
+		public static extern QStatus alljoyn_interfacedescription_setmemberdescriptionforlanguage(alljoyn_interfacedescription iface, char8* member, char8* description, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_getmemberdescriptionforlanguage(alljoyn_interfacedescription iface, PSTR member, PSTR description, uint maxLanguageLength, PSTR languageTag);
+		public static extern uint alljoyn_interfacedescription_getmemberdescriptionforlanguage(alljoyn_interfacedescription iface, char8* member, char8* description, uint maxLanguageLength, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setargdescription(alljoyn_interfacedescription iface, PSTR member, PSTR argName, PSTR description);
+		public static extern QStatus alljoyn_interfacedescription_setargdescription(alljoyn_interfacedescription iface, char8* member, char8* argName, char8* description);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setargdescriptionforlanguage(alljoyn_interfacedescription iface, PSTR member, PSTR arg, PSTR description, PSTR languageTag);
+		public static extern QStatus alljoyn_interfacedescription_setargdescriptionforlanguage(alljoyn_interfacedescription iface, char8* member, char8* arg, char8* description, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_getargdescriptionforlanguage(alljoyn_interfacedescription iface, PSTR member, PSTR arg, PSTR description, uint maxLanguageLength, PSTR languageTag);
+		public static extern uint alljoyn_interfacedescription_getargdescriptionforlanguage(alljoyn_interfacedescription iface, char8* member, char8* arg, char8* description, uint maxLanguageLength, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setpropertydescription(alljoyn_interfacedescription iface, PSTR name, PSTR description);
+		public static extern QStatus alljoyn_interfacedescription_setpropertydescription(alljoyn_interfacedescription iface, char8* name, char8* description);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_setpropertydescriptionforlanguage(alljoyn_interfacedescription iface, PSTR name, PSTR description, PSTR languageTag);
+		public static extern QStatus alljoyn_interfacedescription_setpropertydescriptionforlanguage(alljoyn_interfacedescription iface, char8* name, char8* description, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_interfacedescription_getpropertydescriptionforlanguage(alljoyn_interfacedescription iface, PSTR property, PSTR description, uint maxLanguageLength, PSTR languageTag);
+		public static extern uint alljoyn_interfacedescription_getpropertydescriptionforlanguage(alljoyn_interfacedescription iface, char8* property, char8* description, uint maxLanguageLength, char8* languageTag);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_interfacedescription_setdescriptiontranslationcallback(alljoyn_interfacedescription iface, alljoyn_interfacedescription_translation_callback_ptr translationCallback);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1374,9 +1374,9 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_interfacedescription_hasdescription(alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_interfacedescription_addargannotation(alljoyn_interfacedescription iface, PSTR member, PSTR argName, PSTR name, PSTR value);
+		public static extern QStatus alljoyn_interfacedescription_addargannotation(alljoyn_interfacedescription iface, char8* member, char8* argName, char8* name, char8* value);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_interfacedescription_getmemberargannotation(alljoyn_interfacedescription iface, PSTR member, PSTR argName, PSTR name, PSTR value, out uint value_size);
+		public static extern int32 alljoyn_interfacedescription_getmemberargannotation(alljoyn_interfacedescription iface, char8* member, char8* argName, char8* name, char8* value, out uint value_size);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_interfacedescription_eql(alljoyn_interfacedescription one, alljoyn_interfacedescription other);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1384,17 +1384,17 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_interfacedescription_property_eql(alljoyn_interfacedescription_property one, alljoyn_interfacedescription_property other);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_busobject alljoyn_busobject_create(PSTR path, int32 isPlaceholder, in alljoyn_busobject_callbacks callbacks_in, void* context_in);
+		public static extern alljoyn_busobject alljoyn_busobject_create(char8* path, int32 isPlaceholder, in alljoyn_busobject_callbacks callbacks_in, void* context_in);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busobject_destroy(alljoyn_busobject bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_busobject_getpath(alljoyn_busobject bus);
+		public static extern char8* alljoyn_busobject_getpath(alljoyn_busobject bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_busobject_emitpropertychanged(alljoyn_busobject bus, PSTR ifcName, PSTR propName, alljoyn_msgarg val, uint32 id);
+		public static extern void alljoyn_busobject_emitpropertychanged(alljoyn_busobject bus, char8* ifcName, char8* propName, alljoyn_msgarg val, uint32 id);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_busobject_emitpropertieschanged(alljoyn_busobject bus, PSTR ifcName, in int8* propNames, uint numProps, uint32 id);
+		public static extern void alljoyn_busobject_emitpropertieschanged(alljoyn_busobject bus, char8* ifcName, in int8* propNames, uint numProps, uint32 id);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_busobject_getname(alljoyn_busobject bus, PSTR buffer, uint bufferSz);
+		public static extern uint alljoyn_busobject_getname(alljoyn_busobject bus, char8* buffer, uint bufferSz);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busobject_addinterface(alljoyn_busobject bus, alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1404,13 +1404,13 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busobject_methodreply_args(alljoyn_busobject bus, alljoyn_message msg, alljoyn_msgarg args, uint numArgs);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busobject_methodreply_err(alljoyn_busobject bus, alljoyn_message msg, PSTR error, PSTR errorMessage);
+		public static extern QStatus alljoyn_busobject_methodreply_err(alljoyn_busobject bus, alljoyn_message msg, char8* error, char8* errorMessage);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busobject_methodreply_status(alljoyn_busobject bus, alljoyn_message msg, QStatus status);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_busattachment alljoyn_busobject_getbusattachment(alljoyn_busobject bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busobject_signal(alljoyn_busobject bus, PSTR destination, uint32 sessionId, alljoyn_interfacedescription_member signal, alljoyn_msgarg args, uint numArgs, uint16 timeToLive, uint8 flags, alljoyn_message msg);
+		public static extern QStatus alljoyn_busobject_signal(alljoyn_busobject bus, char8* destination, uint32 sessionId, alljoyn_interfacedescription_member signal, alljoyn_msgarg args, uint numArgs, uint16 timeToLive, uint8 flags, alljoyn_message msg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busobject_cancelsessionlessmessage_serial(alljoyn_busobject bus, uint32 serialNumber);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1424,75 +1424,75 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busobject_addinterface_announced(alljoyn_busobject bus, alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_create(alljoyn_busattachment bus, PSTR service, PSTR path, uint32 sessionId);
+		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_create(alljoyn_busattachment bus, char8* service, char8* path, uint32 sessionId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_create_secure(alljoyn_busattachment bus, PSTR service, PSTR path, uint32 sessionId);
+		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_create_secure(alljoyn_busattachment bus, char8* service, char8* path, uint32 sessionId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_proxybusobject_destroy(alljoyn_proxybusobject proxyObj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_addinterface(alljoyn_proxybusobject proxyObj, alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_addinterface_by_name(alljoyn_proxybusobject proxyObj, PSTR name);
+		public static extern QStatus alljoyn_proxybusobject_addinterface_by_name(alljoyn_proxybusobject proxyObj, char8* name);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_proxybusobject_getchildren(alljoyn_proxybusobject proxyObj, out alljoyn_proxybusobject children, uint numChildren);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_getchild(alljoyn_proxybusobject proxyObj, PSTR path);
+		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_getchild(alljoyn_proxybusobject proxyObj, char8* path);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_addchild(alljoyn_proxybusobject proxyObj, alljoyn_proxybusobject child);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_removechild(alljoyn_proxybusobject proxyObj, PSTR path);
+		public static extern QStatus alljoyn_proxybusobject_removechild(alljoyn_proxybusobject proxyObj, char8* path);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_introspectremoteobject(alljoyn_proxybusobject proxyObj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_introspectremoteobjectasync(alljoyn_proxybusobject proxyObj, alljoyn_proxybusobject_listener_introspectcb_ptr callback, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_getproperty(alljoyn_proxybusobject proxyObj, PSTR iface, PSTR property, alljoyn_msgarg value);
+		public static extern QStatus alljoyn_proxybusobject_getproperty(alljoyn_proxybusobject proxyObj, char8* iface, char8* property, alljoyn_msgarg value);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_getpropertyasync(alljoyn_proxybusobject proxyObj, PSTR iface, PSTR property, alljoyn_proxybusobject_listener_getpropertycb_ptr callback, uint32 timeout, void* context);
+		public static extern QStatus alljoyn_proxybusobject_getpropertyasync(alljoyn_proxybusobject proxyObj, char8* iface, char8* property, alljoyn_proxybusobject_listener_getpropertycb_ptr callback, uint32 timeout, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_getallproperties(alljoyn_proxybusobject proxyObj, PSTR iface, alljoyn_msgarg values);
+		public static extern QStatus alljoyn_proxybusobject_getallproperties(alljoyn_proxybusobject proxyObj, char8* iface, alljoyn_msgarg values);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_getallpropertiesasync(alljoyn_proxybusobject proxyObj, PSTR iface, alljoyn_proxybusobject_listener_getallpropertiescb_ptr callback, uint32 timeout, void* context);
+		public static extern QStatus alljoyn_proxybusobject_getallpropertiesasync(alljoyn_proxybusobject proxyObj, char8* iface, alljoyn_proxybusobject_listener_getallpropertiescb_ptr callback, uint32 timeout, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_setproperty(alljoyn_proxybusobject proxyObj, PSTR iface, PSTR property, alljoyn_msgarg value);
+		public static extern QStatus alljoyn_proxybusobject_setproperty(alljoyn_proxybusobject proxyObj, char8* iface, char8* property, alljoyn_msgarg value);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_registerpropertieschangedlistener(alljoyn_proxybusobject proxyObj, PSTR iface, in int8* properties, uint numProperties, alljoyn_proxybusobject_listener_propertieschanged_ptr callback, void* context);
+		public static extern QStatus alljoyn_proxybusobject_registerpropertieschangedlistener(alljoyn_proxybusobject proxyObj, char8* iface, in int8* properties, uint numProperties, alljoyn_proxybusobject_listener_propertieschanged_ptr callback, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_unregisterpropertieschangedlistener(alljoyn_proxybusobject proxyObj, PSTR iface, alljoyn_proxybusobject_listener_propertieschanged_ptr callback);
+		public static extern QStatus alljoyn_proxybusobject_unregisterpropertieschangedlistener(alljoyn_proxybusobject proxyObj, char8* iface, alljoyn_proxybusobject_listener_propertieschanged_ptr callback);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_setpropertyasync(alljoyn_proxybusobject proxyObj, PSTR iface, PSTR property, alljoyn_msgarg value, alljoyn_proxybusobject_listener_setpropertycb_ptr callback, uint32 timeout, void* context);
+		public static extern QStatus alljoyn_proxybusobject_setpropertyasync(alljoyn_proxybusobject proxyObj, char8* iface, char8* property, alljoyn_msgarg value, alljoyn_proxybusobject_listener_setpropertycb_ptr callback, uint32 timeout, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_methodcall(alljoyn_proxybusobject proxyObj, PSTR ifaceName, PSTR methodName, alljoyn_msgarg args, uint numArgs, alljoyn_message replyMsg, uint32 timeout, uint8 flags);
+		public static extern QStatus alljoyn_proxybusobject_methodcall(alljoyn_proxybusobject proxyObj, char8* ifaceName, char8* methodName, alljoyn_msgarg args, uint numArgs, alljoyn_message replyMsg, uint32 timeout, uint8 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_methodcall_member(alljoyn_proxybusobject proxyObj, alljoyn_interfacedescription_member method, alljoyn_msgarg args, uint numArgs, alljoyn_message replyMsg, uint32 timeout, uint8 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_methodcall_noreply(alljoyn_proxybusobject proxyObj, PSTR ifaceName, PSTR methodName, alljoyn_msgarg args, uint numArgs, uint8 flags);
+		public static extern QStatus alljoyn_proxybusobject_methodcall_noreply(alljoyn_proxybusobject proxyObj, char8* ifaceName, char8* methodName, alljoyn_msgarg args, uint numArgs, uint8 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_methodcall_member_noreply(alljoyn_proxybusobject proxyObj, alljoyn_interfacedescription_member method, alljoyn_msgarg args, uint numArgs, uint8 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_methodcallasync(alljoyn_proxybusobject proxyObj, PSTR ifaceName, PSTR methodName, alljoyn_messagereceiver_replyhandler_ptr replyFunc, alljoyn_msgarg args, uint numArgs, void* context, uint32 timeout, uint8 flags);
+		public static extern QStatus alljoyn_proxybusobject_methodcallasync(alljoyn_proxybusobject proxyObj, char8* ifaceName, char8* methodName, alljoyn_messagereceiver_replyhandler_ptr replyFunc, alljoyn_msgarg args, uint numArgs, void* context, uint32 timeout, uint8 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_methodcallasync_member(alljoyn_proxybusobject proxyObj, alljoyn_interfacedescription_member method, alljoyn_messagereceiver_replyhandler_ptr replyFunc, alljoyn_msgarg args, uint numArgs, void* context, uint32 timeout, uint8 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_proxybusobject_parsexml(alljoyn_proxybusobject proxyObj, PSTR xml, PSTR identifier);
+		public static extern QStatus alljoyn_proxybusobject_parsexml(alljoyn_proxybusobject proxyObj, char8* xml, char8* identifier);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_secureconnection(alljoyn_proxybusobject proxyObj, int32 forceAuth);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_proxybusobject_secureconnectionasync(alljoyn_proxybusobject proxyObj, int32 forceAuth);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_interfacedescription alljoyn_proxybusobject_getinterface(alljoyn_proxybusobject proxyObj, PSTR iface);
+		public static extern alljoyn_interfacedescription alljoyn_proxybusobject_getinterface(alljoyn_proxybusobject proxyObj, char8* iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_proxybusobject_getinterfaces(alljoyn_proxybusobject proxyObj, in alljoyn_interfacedescription ifaces, uint numIfaces);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_proxybusobject_getpath(alljoyn_proxybusobject proxyObj);
+		public static extern char8* alljoyn_proxybusobject_getpath(alljoyn_proxybusobject proxyObj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_proxybusobject_getservicename(alljoyn_proxybusobject proxyObj);
+		public static extern char8* alljoyn_proxybusobject_getservicename(alljoyn_proxybusobject proxyObj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_proxybusobject_getuniquename(alljoyn_proxybusobject proxyObj);
+		public static extern char8* alljoyn_proxybusobject_getuniquename(alljoyn_proxybusobject proxyObj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_proxybusobject_getsessionid(alljoyn_proxybusobject proxyObj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern int32 alljoyn_proxybusobject_implementsinterface(alljoyn_proxybusobject proxyObj, PSTR iface);
+		public static extern int32 alljoyn_proxybusobject_implementsinterface(alljoyn_proxybusobject proxyObj, char8* iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_proxybusobject alljoyn_proxybusobject_copy(alljoyn_proxybusobject source);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1518,9 +1518,9 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_aboutlistener_destroy(alljoyn_aboutlistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_busattachment alljoyn_busattachment_create(PSTR applicationName, int32 allowRemoteMessages);
+		public static extern alljoyn_busattachment alljoyn_busattachment_create(char8* applicationName, int32 allowRemoteMessages);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_busattachment alljoyn_busattachment_create_concurrency(PSTR applicationName, int32 allowRemoteMessages, uint32 concurrency);
+		public static extern alljoyn_busattachment alljoyn_busattachment_create_concurrency(char8* applicationName, int32 allowRemoteMessages, uint32 concurrency);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_destroy(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1532,37 +1532,37 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_busattachment_getconcurrency(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_busattachment_getconnectspec(alljoyn_busattachment bus);
+		public static extern char8* alljoyn_busattachment_getconnectspec(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_enableconcurrentcallbacks(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_createinterface(alljoyn_busattachment bus, PSTR name, out alljoyn_interfacedescription iface);
+		public static extern QStatus alljoyn_busattachment_createinterface(alljoyn_busattachment bus, char8* name, out alljoyn_interfacedescription iface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_createinterface_secure(alljoyn_busattachment bus, PSTR name, out alljoyn_interfacedescription iface, alljoyn_interfacedescription_securitypolicy secPolicy);
+		public static extern QStatus alljoyn_busattachment_createinterface_secure(alljoyn_busattachment bus, char8* name, out alljoyn_interfacedescription iface, alljoyn_interfacedescription_securitypolicy secPolicy);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_connect(alljoyn_busattachment bus, PSTR connectSpec);
+		public static extern QStatus alljoyn_busattachment_connect(alljoyn_busattachment bus, char8* connectSpec);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_registerbuslistener(alljoyn_busattachment bus, alljoyn_buslistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_unregisterbuslistener(alljoyn_busattachment bus, alljoyn_buslistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_findadvertisedname(alljoyn_busattachment bus, PSTR namePrefix);
+		public static extern QStatus alljoyn_busattachment_findadvertisedname(alljoyn_busattachment bus, char8* namePrefix);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_findadvertisednamebytransport(alljoyn_busattachment bus, PSTR namePrefix, uint16 transports);
+		public static extern QStatus alljoyn_busattachment_findadvertisednamebytransport(alljoyn_busattachment bus, char8* namePrefix, uint16 transports);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_cancelfindadvertisedname(alljoyn_busattachment bus, PSTR namePrefix);
+		public static extern QStatus alljoyn_busattachment_cancelfindadvertisedname(alljoyn_busattachment bus, char8* namePrefix);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_cancelfindadvertisednamebytransport(alljoyn_busattachment bus, PSTR namePrefix, uint16 transports);
+		public static extern QStatus alljoyn_busattachment_cancelfindadvertisednamebytransport(alljoyn_busattachment bus, char8* namePrefix, uint16 transports);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_advertisename(alljoyn_busattachment bus, PSTR name, uint16 transports);
+		public static extern QStatus alljoyn_busattachment_advertisename(alljoyn_busattachment bus, char8* name, uint16 transports);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_canceladvertisename(alljoyn_busattachment bus, PSTR name, uint16 transports);
+		public static extern QStatus alljoyn_busattachment_canceladvertisename(alljoyn_busattachment bus, char8* name, uint16 transports);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_interfacedescription alljoyn_busattachment_getinterface(alljoyn_busattachment bus, PSTR name);
+		public static extern alljoyn_interfacedescription alljoyn_busattachment_getinterface(alljoyn_busattachment bus, char8* name);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_joinsession(alljoyn_busattachment bus, PSTR sessionHost, uint16 sessionPort, alljoyn_sessionlistener listener, out uint32 sessionId, alljoyn_sessionopts opts);
+		public static extern QStatus alljoyn_busattachment_joinsession(alljoyn_busattachment bus, char8* sessionHost, uint16 sessionPort, alljoyn_sessionlistener listener, out uint32 sessionId, alljoyn_sessionopts opts);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_joinsessionasync(alljoyn_busattachment bus, PSTR sessionHost, uint16 sessionPort, alljoyn_sessionlistener listener, alljoyn_sessionopts opts, alljoyn_busattachment_joinsessioncb_ptr callback, void* context);
+		public static extern QStatus alljoyn_busattachment_joinsessionasync(alljoyn_busattachment bus, char8* sessionHost, uint16 sessionPort, alljoyn_sessionlistener listener, alljoyn_sessionopts opts, alljoyn_busattachment_joinsessioncb_ptr callback, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_registerbusobject(alljoyn_busattachment bus, alljoyn_busobject obj);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1570,21 +1570,21 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_unregisterbusobject(alljoyn_busattachment bus, alljoyn_busobject object);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_requestname(alljoyn_busattachment bus, PSTR requestedName, uint32 flags);
+		public static extern QStatus alljoyn_busattachment_requestname(alljoyn_busattachment bus, char8* requestedName, uint32 flags);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_releasename(alljoyn_busattachment bus, PSTR name);
+		public static extern QStatus alljoyn_busattachment_releasename(alljoyn_busattachment bus, char8* name);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_bindsessionport(alljoyn_busattachment bus, out uint16 sessionPort, alljoyn_sessionopts opts, alljoyn_sessionportlistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_unbindsessionport(alljoyn_busattachment bus, uint16 sessionPort);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_enablepeersecurity(alljoyn_busattachment bus, PSTR authMechanisms, alljoyn_authlistener listener, PSTR keyStoreFileName, int32 isShared);
+		public static extern QStatus alljoyn_busattachment_enablepeersecurity(alljoyn_busattachment bus, char8* authMechanisms, alljoyn_authlistener listener, char8* keyStoreFileName, int32 isShared);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(alljoyn_busattachment bus, PSTR authMechanisms, alljoyn_authlistener authListener, PSTR keyStoreFileName, int32 isShared, alljoyn_permissionconfigurationlistener permissionConfigurationListener);
+		public static extern QStatus alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(alljoyn_busattachment bus, char8* authMechanisms, alljoyn_authlistener authListener, char8* keyStoreFileName, int32 isShared, alljoyn_permissionconfigurationlistener permissionConfigurationListener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_busattachment_ispeersecurityenabled(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_createinterfacesfromxml(alljoyn_busattachment bus, PSTR xml);
+		public static extern QStatus alljoyn_busattachment_createinterfacesfromxml(alljoyn_busattachment bus, char8* xml);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_busattachment_getinterfaces(alljoyn_busattachment bus, in alljoyn_interfacedescription ifaces, uint numIfaces);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1596,7 +1596,7 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern int32 alljoyn_busattachment_isconnected(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_disconnect(alljoyn_busattachment bus, PSTR unused);
+		public static extern QStatus alljoyn_busattachment_disconnect(alljoyn_busattachment bus, char8* unused);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_proxybusobject alljoyn_busattachment_getdbusproxyobj(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1604,17 +1604,17 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_proxybusobject alljoyn_busattachment_getalljoyndebugobj(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_busattachment_getuniquename(alljoyn_busattachment bus);
+		public static extern char8* alljoyn_busattachment_getuniquename(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_busattachment_getglobalguidstring(alljoyn_busattachment bus);
+		public static extern char8* alljoyn_busattachment_getglobalguidstring(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_registersignalhandler(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, PSTR srcPath);
+		public static extern QStatus alljoyn_busattachment_registersignalhandler(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, char8* srcPath);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_registersignalhandlerwithrule(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, PSTR matchRule);
+		public static extern QStatus alljoyn_busattachment_registersignalhandlerwithrule(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, char8* matchRule);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_unregistersignalhandler(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, PSTR srcPath);
+		public static extern QStatus alljoyn_busattachment_unregistersignalhandler(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, char8* srcPath);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_unregistersignalhandlerwithrule(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, PSTR matchRule);
+		public static extern QStatus alljoyn_busattachment_unregistersignalhandlerwithrule(alljoyn_busattachment bus, alljoyn_messagereceiver_signalhandler_ptr signal_handler, alljoyn_interfacedescription_member member, char8* matchRule);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_unregisterallhandlers(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1624,41 +1624,41 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_clearkeystore(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_clearkeys(alljoyn_busattachment bus, PSTR guid);
+		public static extern QStatus alljoyn_busattachment_clearkeys(alljoyn_busattachment bus, char8* guid);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_setkeyexpiration(alljoyn_busattachment bus, PSTR guid, uint32 timeout);
+		public static extern QStatus alljoyn_busattachment_setkeyexpiration(alljoyn_busattachment bus, char8* guid, uint32 timeout);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_getkeyexpiration(alljoyn_busattachment bus, PSTR guid, out uint32 timeout);
+		public static extern QStatus alljoyn_busattachment_getkeyexpiration(alljoyn_busattachment bus, char8* guid, out uint32 timeout);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_addlogonentry(alljoyn_busattachment bus, PSTR authMechanism, PSTR userName, PSTR password);
+		public static extern QStatus alljoyn_busattachment_addlogonentry(alljoyn_busattachment bus, char8* authMechanism, char8* userName, char8* password);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_addmatch(alljoyn_busattachment bus, PSTR rule);
+		public static extern QStatus alljoyn_busattachment_addmatch(alljoyn_busattachment bus, char8* rule);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_removematch(alljoyn_busattachment bus, PSTR rule);
+		public static extern QStatus alljoyn_busattachment_removematch(alljoyn_busattachment bus, char8* rule);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_setsessionlistener(alljoyn_busattachment bus, uint32 sessionId, alljoyn_sessionlistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_leavesession(alljoyn_busattachment bus, uint32 sessionId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_secureconnection(alljoyn_busattachment bus, PSTR name, int32 forceAuth);
+		public static extern QStatus alljoyn_busattachment_secureconnection(alljoyn_busattachment bus, char8* name, int32 forceAuth);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_secureconnectionasync(alljoyn_busattachment bus, PSTR name, int32 forceAuth);
+		public static extern QStatus alljoyn_busattachment_secureconnectionasync(alljoyn_busattachment bus, char8* name, int32 forceAuth);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_removesessionmember(alljoyn_busattachment bus, uint32 sessionId, PSTR memberName);
+		public static extern QStatus alljoyn_busattachment_removesessionmember(alljoyn_busattachment bus, uint32 sessionId, char8* memberName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_setlinktimeout(alljoyn_busattachment bus, uint32 sessionid, out uint32 linkTimeout);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_setlinktimeoutasync(alljoyn_busattachment bus, uint32 sessionid, uint32 linkTimeout, alljoyn_busattachment_setlinktimeoutcb_ptr callback, void* context);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_namehasowner(alljoyn_busattachment bus, PSTR name, out int32 hasOwner);
+		public static extern QStatus alljoyn_busattachment_namehasowner(alljoyn_busattachment bus, char8* name, out int32 hasOwner);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_getpeerguid(alljoyn_busattachment bus, PSTR name, PSTR guid, out uint guidSz);
+		public static extern QStatus alljoyn_busattachment_getpeerguid(alljoyn_busattachment bus, char8* name, char8* guid, out uint guidSz);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_setdaemondebug(alljoyn_busattachment bus, PSTR module, uint32 level);
+		public static extern QStatus alljoyn_busattachment_setdaemondebug(alljoyn_busattachment bus, char8* module, uint32 level);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_busattachment_gettimestamp();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_ping(alljoyn_busattachment bus, PSTR name, uint32 timeout);
+		public static extern QStatus alljoyn_busattachment_ping(alljoyn_busattachment bus, char8* name, uint32 timeout);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_busattachment_registeraboutlistener(alljoyn_busattachment bus, alljoyn_aboutlistener aboutListener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1668,11 +1668,11 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_whoimplements_interfaces(alljoyn_busattachment bus, in int8* implementsInterfaces, uint numberInterfaces);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_whoimplements_interface(alljoyn_busattachment bus, PSTR implementsInterface);
+		public static extern QStatus alljoyn_busattachment_whoimplements_interface(alljoyn_busattachment bus, char8* implementsInterface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_cancelwhoimplements_interfaces(alljoyn_busattachment bus, in int8* implementsInterfaces, uint numberInterfaces);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_cancelwhoimplements_interface(alljoyn_busattachment bus, PSTR implementsInterface);
+		public static extern QStatus alljoyn_busattachment_cancelwhoimplements_interface(alljoyn_busattachment bus, char8* implementsInterface);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_permissionconfigurator alljoyn_busattachment_getpermissionconfigurator(alljoyn_busattachment bus);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1680,13 +1680,13 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_busattachment_unregisterapplicationstatelistener(alljoyn_busattachment bus, alljoyn_applicationstatelistener listener);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_busattachment_deletedefaultkeystore(PSTR applicationName);
+		public static extern QStatus alljoyn_busattachment_deletedefaultkeystore(char8* applicationName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern _alljoyn_abouticonobj_handle* alljoyn_abouticonobj_create(alljoyn_busattachment bus, out _alljoyn_abouticon_handle icon);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_abouticonobj_destroy(out _alljoyn_abouticonobj_handle icon);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern _alljoyn_abouticonproxy_handle* alljoyn_abouticonproxy_create(alljoyn_busattachment bus, PSTR busName, uint32 sessionId);
+		public static extern _alljoyn_abouticonproxy_handle* alljoyn_abouticonproxy_create(alljoyn_busattachment bus, char8* busName, uint32 sessionId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_abouticonproxy_destroy(out _alljoyn_abouticonproxy_handle proxy);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1718,27 +1718,27 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint alljoyn_aboutobjectdescription_getpaths(alljoyn_aboutobjectdescription description, in int8* paths, uint numPaths);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_aboutobjectdescription_getinterfaces(alljoyn_aboutobjectdescription description, PSTR path, in int8* interfaces, uint numInterfaces);
+		public static extern uint alljoyn_aboutobjectdescription_getinterfaces(alljoyn_aboutobjectdescription description, char8* path, in int8* interfaces, uint numInterfaces);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint alljoyn_aboutobjectdescription_getinterfacepaths(alljoyn_aboutobjectdescription description, PSTR interfaceName, in int8* paths, uint numPaths);
+		public static extern uint alljoyn_aboutobjectdescription_getinterfacepaths(alljoyn_aboutobjectdescription description, char8* interfaceName, in int8* paths, uint numPaths);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_aboutobjectdescription_clear(alljoyn_aboutobjectdescription description);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutobjectdescription_haspath(alljoyn_aboutobjectdescription description, PSTR path);
+		public static extern uint8 alljoyn_aboutobjectdescription_haspath(alljoyn_aboutobjectdescription description, char8* path);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutobjectdescription_hasinterface(alljoyn_aboutobjectdescription description, PSTR interfaceName);
+		public static extern uint8 alljoyn_aboutobjectdescription_hasinterface(alljoyn_aboutobjectdescription description, char8* interfaceName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern uint8 alljoyn_aboutobjectdescription_hasinterfaceatpath(alljoyn_aboutobjectdescription description, PSTR path, PSTR interfaceName);
+		public static extern uint8 alljoyn_aboutobjectdescription_hasinterfaceatpath(alljoyn_aboutobjectdescription description, char8* path, char8* interfaceName);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutobjectdescription_getmsgarg(alljoyn_aboutobjectdescription description, alljoyn_msgarg msgArg);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_aboutproxy alljoyn_aboutproxy_create(alljoyn_busattachment bus, PSTR busName, uint32 sessionId);
+		public static extern alljoyn_aboutproxy alljoyn_aboutproxy_create(alljoyn_busattachment bus, char8* busName, uint32 sessionId);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_aboutproxy_destroy(alljoyn_aboutproxy proxy);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutproxy_getobjectdescription(alljoyn_aboutproxy proxy, alljoyn_msgarg objectDesc);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_aboutproxy_getaboutdata(alljoyn_aboutproxy proxy, PSTR language, alljoyn_msgarg data);
+		public static extern QStatus alljoyn_aboutproxy_getaboutdata(alljoyn_aboutproxy proxy, char8* language, alljoyn_msgarg data);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern QStatus alljoyn_aboutproxy_getversion(alljoyn_aboutproxy proxy, out uint16 version);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1754,19 +1754,19 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_autopinger_resume(alljoyn_autopinger autopinger);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_autopinger_addpinggroup(alljoyn_autopinger autopinger, PSTR group, alljoyn_pinglistener listener, uint32 pinginterval);
+		public static extern void alljoyn_autopinger_addpinggroup(alljoyn_autopinger autopinger, char8* group, alljoyn_pinglistener listener, uint32 pinginterval);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern void alljoyn_autopinger_removepinggroup(alljoyn_autopinger autopinger, PSTR group);
+		public static extern void alljoyn_autopinger_removepinggroup(alljoyn_autopinger autopinger, char8* group);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_autopinger_setpinginterval(alljoyn_autopinger autopinger, PSTR group, uint32 pinginterval);
+		public static extern QStatus alljoyn_autopinger_setpinginterval(alljoyn_autopinger autopinger, char8* group, uint32 pinginterval);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_autopinger_adddestination(alljoyn_autopinger autopinger, PSTR group, PSTR destination);
+		public static extern QStatus alljoyn_autopinger_adddestination(alljoyn_autopinger autopinger, char8* group, char8* destination);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_autopinger_removedestination(alljoyn_autopinger autopinger, PSTR group, PSTR destination, int32 removeall);
+		public static extern QStatus alljoyn_autopinger_removedestination(alljoyn_autopinger autopinger, char8* group, char8* destination, int32 removeall);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_getversion();
+		public static extern char8* alljoyn_getversion();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern PSTR alljoyn_getbuildinfo();
+		public static extern char8* alljoyn_getbuildinfo();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint32 alljoyn_getnumericversion();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
@@ -1802,13 +1802,13 @@ namespace Win32
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern void alljoyn_observer_unregisteralllisteners(alljoyn_observer observer);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern alljoyn_proxybusobject_ref alljoyn_observer_get(alljoyn_observer observer, PSTR uniqueBusName, PSTR objectPath);
+		public static extern alljoyn_proxybusobject_ref alljoyn_observer_get(alljoyn_observer observer, char8* uniqueBusName, char8* objectPath);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_proxybusobject_ref alljoyn_observer_getfirst(alljoyn_observer observer);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern alljoyn_proxybusobject_ref alljoyn_observer_getnext(alljoyn_observer observer, alljoyn_proxybusobject_ref proxyref);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern QStatus alljoyn_passwordmanager_setcredentials(PSTR authMechanism, PSTR password);
+		public static extern QStatus alljoyn_passwordmanager_setcredentials(char8* authMechanism, char8* password);
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern uint16 alljoyn_securityapplicationproxy_getpermissionmanagementsessionport();
 		[Import("msajapi.dll"), CLink, CallingConvention(.Stdcall)]
