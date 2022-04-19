@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-namespace BfEngine.Audio
+namespace BfEngine
 {
-	class NyquistCommon
+	extension Audio{
+	public class NyquistCommon
 	{
 		/*
 		Copyright (c) 2019, Dimitri Diakopoulos All rights reserved.
@@ -887,5 +888,5 @@ static int32 float32_to_int32(float s) => (.) (float) (s * NQR_INT32_MAX);
 		}
 
 	} // end namespace nqr
-
+	}
 }

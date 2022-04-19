@@ -178,7 +178,7 @@ namespace Win32.Media
 		public enum WaveFormatTag : uint16
 		{
 			Invalid = 0,
-			_1M08 = 1,
+			//_1M08 = 1,
 			_1S08 = 2,
 			_1M16 = 4,
 			_1S16 = 8,
@@ -202,7 +202,26 @@ namespace Win32.Media
 			_96S08 = 131072,
 			_96M16 = 262144,
 			_96S16 = 524288,*/
-			PCM = 1,
+			PCM = 1,				//PCM format (8 or 16 bit), Microsoft Corporation 
+			ADPCM = 2,				//AD PCM Format, Microsoft Corporation
+			IEEE_FLOAT = 3,			//IEEE PCM Float format (32 bit)
+			DOLBY_AC2 = 48,			//AC2, Dolby Laboratories
+			GSM610 = 49,			//GSM 6.10, Microsoft Corporation
+			MSNAUDIO = 50,			//MSN Audio, Microsoft Corporation
+			MPEG = 80,				//MPEG format
+			MPEGLAYER3 = 85,		//ISO/MPEG Layer3 Format
+			DOLBY_AC3_SPDIF = 146,	//AC3 Digital, Sonic Foundry
+			RAW_AAC1 = 255,			//Raw AAC
+			MSAUDIO1 = 352,			//Microsoft Corporation
+			WMA = 353,				//Windows Media Audio. This format is valid for versions 2 through 9
+			WMA_PRO = 354,			//Windows Media Audio 9 Professional
+			WMA_LOSSLESS = 355,		//Windows Media Audio 9 Lossless
+			WMA_SPDIF = 356,		//Windows Media SPDIF Digital Audio
+			MPEG_ADTS_AAC = 5632,	//ADTS AAC Audio
+			MPEG_RAW_AAC = 5633,	//Raw AAC
+			MPEG_LOAS = 5634,		//MPEG-4 audio transport stream with a synchronization layer (LOAS) and a multiplex layer (LATM)
+			MPEG_HEAAC = 5648,		//High-Efficiency Advanced Audio Coding (HE-AAC) stream
+			EXTENSIBLE = (.)-2,		//Extensible Format (user defined) 
 		}
 		public const uint32 MIDIERR_UNPREPARED = 64;
 		public const uint32 MIDIERR_STILLPLAYING = 65;
@@ -952,7 +971,9 @@ namespace Win32.Media
 			uint16 nBlockAlign,
 			uint16 wBitsPerSample,
 			uint16 cbSize
-		){}
+		){
+
+		}
 		[CRepr, Packed(1)]
 		public struct MIDIOUTCAPSA
 		{

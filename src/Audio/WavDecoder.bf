@@ -1,12 +1,11 @@
 using System;
 using System.IO;
 using System.Collections;
-
-using BfEngine.Audio;
 using System.Diagnostics;
 using static BfEngine.Audio.NyquistCommon;
-namespace BfEngine.Audio
+namespace BfEngine
 {
+	extension Audio{
 	class WavDecoder
 	{
 		/*
@@ -336,5 +335,6 @@ namespace BfEngine.Audio
 		{
 		    return {"wav", "wave"};
 		}*/
+	}
 	}
 }

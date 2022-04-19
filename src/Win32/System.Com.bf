@@ -1223,14 +1223,20 @@ namespace Win32.System
 			protected VTable* vt;
 			public new VTable* VT { get => (.)vt; }
 			
-			public HResult QueryInterface(in Guid riid, void** ppvObject) mut => VT.QueryInterface(ref this, riid, ppvObject);
+			//public HResult QueryInterface(in Guid riid, void** ppvObject) mut => VT.QueryInterface(ref this, riid, ppvObject);
+			public HResult QueryInterface<T>(in Guid riid, out T* ppvObject) mut
+			{
+				var hr = VT.QueryInterface(ref this, riid, var obj);
+				ppvObject = (.)obj;
+				return hr;
+			};
 			public uint32 AddRef() mut => VT.AddRef(ref this);
 			public uint32 Release() mut => VT.Release(ref this);
 
 			[CRepr]
 			public struct VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HResult(ref IUnknown self, in Guid riid, void** ppvObject) QueryInterface;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IUnknown self, in Guid riid, out void* ppvObject) QueryInterface;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IUnknown self) AddRef;
 				public new function [CallingConvention(.Stdcall)] uint32(ref IUnknown self) Release;
 			}

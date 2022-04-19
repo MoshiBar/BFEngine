@@ -110,11 +110,18 @@ namespace Win32.Media
 		public const Guid MR_BUFFER_SERVICE										= .(0xa562248c, 0x9ac6, 0x4ffc, 0x9f, 0xba, 0x3a, 0xf8, 0xf8, 0xad, 0x1a, 0x4d);
 		public const Guid VIDEO_ZOOM_RECT										= .(0x7aaa1638, 0x1b7f, 0x4c93, 0xbd, 0x89, 0x5b, 0x9c, 0x9f, 0xb6, 0xfc, 0xf0);
 		public const uint32 MFEVRDLL			= 0;
+
 		public const uint32 MF_SDK_VERSION		= 2;
 		public const uint32 MF_API_VERSION		= 112;
-		public const uint32 MFSTARTUP_NOSOCKET	= 1;
-		public const uint32 MFSTARTUP_LITE		= 1;
-		public const uint32 MFSTARTUP_FULL		= 0;
+		public const uint32 MF_VERSION = (MF_SDK_VERSION << 16 | MF_API_VERSION);
+
+		[AllowDuplicates]
+		public enum StartupFlags : uint32{
+			NOSOCKET	= 1,
+			LITE		= 1,
+			FULL		= 0
+		}
+
 		public const HResult MF_E_DXGI_DEVICE_NOT_INITIALIZED	= (.)-2147217408;
 		public const HResult MF_E_DXGI_NEW_VIDEO_DEVICE			= (.)-2147217407;
 		public const HResult MF_E_DXGI_VIDEO_DEVICE_LOCKED		= (.)-2147217406;
@@ -4880,17 +4887,18 @@ namespace Win32.Media
 		}
 		public enum MF_SOURCE_READER_CONTROL_FLAG : int32
 		{
+			Default = 0,
 			CONTROLF_DRAIN = 1,
 		}
 		[AllowDuplicates]
 		public enum MF_SOURCE_READER_CONSTANTS : int32
 		{
-			INVALID_STREAM_INDEX	= -1,
-			ALL_STREAMS				= -2,
-			ANY_STREAM				= -2,
-			FIRST_AUDIO_STREAM		= -3,
-			FIRST_VIDEO_STREAM		= -4,
-			MEDIASOURCE				= -1,
+			InvalidStreamIndex	= -1,
+			AllStreams			= -2,
+			AnyStream			= -2,
+			FirstAudioStream	= -3,
+			FirstVideoStream	= -4,
+			MediaSource			= -1,
 		}
 		public enum MF_SOURCE_READER_CURRENT_TYPE_CONSTANTS : int32
 		{
@@ -9835,7 +9843,7 @@ namespace Win32.Media
 			
 			public new VTable* VT { get	=> (.)vt; }
 			
-			public HResult Lock(out uint8* ppbBuffer, uint32* pcbMaxLength, uint32* pcbCurrentLength) mut	=> VT.Lock(ref this, out ppbBuffer, pcbMaxLength, pcbCurrentLength);
+			public HResult Lock(out uint8* ppbBuffer, out uint32 pcbMaxLength, out uint32 pcbCurrentLength) mut	=> VT.Lock(ref this, out ppbBuffer, out pcbMaxLength, out pcbCurrentLength);
 			public HResult Unlock() mut	=> VT.Unlock(ref this);
 			public HResult GetCurrentLength(out uint32 pcbCurrentLength) mut	=> VT.GetCurrentLength(ref this, out pcbCurrentLength);
 			public HResult SetCurrentLength(uint32 cbCurrentLength) mut	=> VT.SetCurrentLength(ref this, cbCurrentLength);
@@ -9844,7 +9852,7 @@ namespace Win32.Media
 			[CRepr]
 			public struct VTable : IUnknown.VTable
 			{
-				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaBuffer self, out uint8* ppbBuffer, uint32* pcbMaxLength, uint32* pcbCurrentLength) Lock;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaBuffer self, out uint8* ppbBuffer, out uint32 pcbMaxLength, out uint32 pcbCurrentLength) Lock;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaBuffer self) Unlock;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaBuffer self, out uint32 pcbCurrentLength) GetCurrentLength;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaBuffer self, uint32 cbCurrentLength) SetCurrentLength;
@@ -9860,18 +9868,35 @@ namespace Win32.Media
 			
 			public HResult GetSampleFlags(out uint32 pdwSampleFlags) mut	=> VT.GetSampleFlags(ref this, out pdwSampleFlags);
 			public HResult SetSampleFlags(uint32 dwSampleFlags) mut	=> VT.SetSampleFlags(ref this, dwSampleFlags);
+
 			public HResult GetSampleTime(out int64 phnsSampleTime) mut	=> VT.GetSampleTime(ref this, out phnsSampleTime);
 			public HResult SetSampleTime(int64 hnsSampleTime) mut	=> VT.SetSampleTime(ref this, hnsSampleTime);
+
 			public HResult GetSampleDuration(out int64 phnsSampleDuration) mut	=> VT.GetSampleDuration(ref this, out phnsSampleDuration);
 			public HResult SetSampleDuration(int64 hnsSampleDuration) mut	=> VT.SetSampleDuration(ref this, hnsSampleDuration);
+
 			public HResult GetBufferCount(out uint32 pdwBufferCount) mut	=> VT.GetBufferCount(ref this, out pdwBufferCount);
+
 			public HResult GetBufferByIndex(uint32 dwIndex, out IMFMediaBuffer* ppBuffer) mut	=> VT.GetBufferByIndex(ref this, dwIndex, out ppBuffer);
 			public HResult ConvertToContiguousBuffer(out IMFMediaBuffer* ppBuffer) mut	=> VT.ConvertToContiguousBuffer(ref this, out ppBuffer);
 			public HResult AddBuffer(ref IMFMediaBuffer pBuffer) mut	=> VT.AddBuffer(ref this, ref pBuffer);
 			public HResult RemoveBufferByIndex(uint32 dwIndex) mut	=> VT.RemoveBufferByIndex(ref this, dwIndex);
 			public HResult RemoveAllBuffers() mut	=> VT.RemoveAllBuffers(ref this);
 			public HResult GetTotalLength(out uint32 pcbTotalLength) mut	=> VT.GetTotalLength(ref this, out pcbTotalLength);
-			public HResult CopyToBuffer(ref IMFMediaBuffer pBuffer) mut	=> VT.CopyToBuffer(ref this, ref pBuffer);
+			public HResult CopyToBuffer(IMFMediaBuffer* pBuffer) mut	=> VT.CopyToBuffer(ref this, pBuffer);
+
+			public int64 SampleTime{
+				get mut => GetSampleTime(..var _);
+				set mut => SetSampleTime(value);
+			}
+
+			public int64 SampleDuration{
+				get mut => GetSampleDuration(..var _);
+				set mut => SetSampleDuration(value);
+			}
+
+			public uint32 TotalLength mut => GetTotalLength(..var _);
+			public uint32 BufferCount mut => GetBufferCount(..var _);
 
 			[CRepr]
 			public struct VTable : IMFAttributes.VTable
@@ -9889,7 +9914,7 @@ namespace Win32.Media
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSample self, uint32 dwIndex) RemoveBufferByIndex;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSample self) RemoveAllBuffers;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSample self, out uint32 pcbTotalLength) GetTotalLength;
-				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSample self, ref IMFMediaBuffer pBuffer) CopyToBuffer;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSample self, IMFMediaBuffer* pBuffer) CopyToBuffer;
 			}
 		}
 		[CRepr]
@@ -9967,7 +9992,7 @@ namespace Win32.Media
 			public HResult GetMajorType(out Guid pguidMajorType) mut	=> VT.GetMajorType(ref this, out pguidMajorType);
 			public HResult IsCompressedFormat(out IntBool pfCompressed) mut	=> VT.IsCompressedFormat(ref this, out pfCompressed);
 			public HResult IsEqual(ref IMFMediaType pIMediaType, out uint32 pdwFlags) mut	=> VT.IsEqual(ref this, ref pIMediaType, out pdwFlags);
-			public HResult GetRepresentation(Guid guidRepresentation, void** ppvRepresentation) mut	=> VT.GetRepresentation(ref this, guidRepresentation, ppvRepresentation);
+			public HResult GetRepresentation(Guid guidRepresentation, out AM_MEDIA_TYPE* ppvRepresentation) mut	=> VT.GetRepresentation(ref this, guidRepresentation, out ppvRepresentation);
 			public HResult FreeRepresentation(Guid guidRepresentation, void* pvRepresentation) mut	=> VT.FreeRepresentation(ref this, guidRepresentation, pvRepresentation);
 
 			[CRepr]
@@ -9976,7 +10001,7 @@ namespace Win32.Media
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaType self, out Guid pguidMajorType) GetMajorType;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaType self, out IntBool pfCompressed) IsCompressedFormat;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaType self, ref IMFMediaType pIMediaType, out uint32 pdwFlags) IsEqual;
-				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaType self, Guid guidRepresentation, void** ppvRepresentation) GetRepresentation;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaType self, Guid guidRepresentation, out AM_MEDIA_TYPE* ppvRepresentation) GetRepresentation;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFMediaType self, Guid guidRepresentation, void* pvRepresentation) FreeRepresentation;
 			}
 		}
@@ -15070,9 +15095,9 @@ namespace Win32.Media
 			public HResult SetStreamSelection(uint32 dwStreamIndex, IntBool fSelected) mut	=> VT.SetStreamSelection(ref this, dwStreamIndex, fSelected);
 			public HResult GetNativeMediaType(uint32 dwStreamIndex, uint32 dwMediaTypeIndex, out IMFMediaType* ppMediaType) mut	=> VT.GetNativeMediaType(ref this, dwStreamIndex, dwMediaTypeIndex, out ppMediaType);
 			public HResult GetCurrentMediaType(uint32 dwStreamIndex, out IMFMediaType* ppMediaType) mut	=> VT.GetCurrentMediaType(ref this, dwStreamIndex, out ppMediaType);
-			public HResult SetCurrentMediaType(uint32 dwStreamIndex, out uint32 pdwReserved, ref IMFMediaType pMediaType) mut	=> VT.SetCurrentMediaType(ref this, dwStreamIndex, out pdwReserved, ref pMediaType);
+			public HResult SetCurrentMediaType(uint32 dwStreamIndex, /*out uint32 pdwReserved,*/ IMFMediaType* pMediaType) mut	=> VT.SetCurrentMediaType(ref this, dwStreamIndex, /*out pdwReserved*/null, pMediaType);
 			public HResult SetCurrentPosition(in Guid guidTimeFormat, in PROPVARIANT varPosition) mut	=> VT.SetCurrentPosition(ref this, guidTimeFormat, varPosition);
-			public HResult ReadSample(uint32 dwStreamIndex, uint32 dwControlFlags, uint32* pdwActualStreamIndex, uint32* pdwStreamFlags, int64* pllTimestamp, IMFSample** ppSample) mut	=> VT.ReadSample(ref this, dwStreamIndex, dwControlFlags, pdwActualStreamIndex, pdwStreamFlags, pllTimestamp, ppSample);
+			public HResult ReadSample(uint32 dwStreamIndex, MF_SOURCE_READER_CONTROL_FLAG dwControlFlags, out uint32 pdwActualStreamIndex, out MF_SOURCE_READER_FLAG pdwStreamFlags, out int64 pllTimestamp, out IMFSample* ppSample) mut	=> VT.ReadSample(ref this, dwStreamIndex, dwControlFlags, out pdwActualStreamIndex, out pdwStreamFlags, out pllTimestamp, out ppSample);
 			public HResult Flush(uint32 dwStreamIndex) mut	=> VT.Flush(ref this, dwStreamIndex);
 			public HResult GetServiceForStream(uint32 dwStreamIndex, in Guid guidService, in Guid riid, void** ppvObject) mut	=> VT.GetServiceForStream(ref this, dwStreamIndex, guidService, riid, ppvObject);
 			public HResult GetPresentationAttribute(uint32 dwStreamIndex, in Guid guidAttribute, out PROPVARIANT pvarAttribute) mut	=> VT.GetPresentationAttribute(ref this, dwStreamIndex, guidAttribute, out pvarAttribute);
@@ -15084,9 +15109,9 @@ namespace Win32.Media
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, IntBool fSelected) SetStreamSelection;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, uint32 dwMediaTypeIndex, out IMFMediaType* ppMediaType) GetNativeMediaType;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, out IMFMediaType* ppMediaType) GetCurrentMediaType;
-				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, out uint32 pdwReserved, ref IMFMediaType pMediaType) SetCurrentMediaType;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, uint32* pdwReserved, IMFMediaType* pMediaType) SetCurrentMediaType;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, in Guid guidTimeFormat, in PROPVARIANT varPosition) SetCurrentPosition;
-				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, uint32 dwControlFlags, uint32* pdwActualStreamIndex, uint32* pdwStreamFlags, int64* pllTimestamp, IMFSample** ppSample) ReadSample;
+				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, MF_SOURCE_READER_CONTROL_FLAG dwControlFlags, out uint32 pdwActualStreamIndex, out MF_SOURCE_READER_FLAG pdwStreamFlags, out int64 pllTimestamp, out IMFSample* ppSample) ReadSample;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex) Flush;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, in Guid guidService, in Guid riid, void** ppvObject) GetServiceForStream;
 				public new function [CallingConvention(.Stdcall)] HResult(ref IMFSourceReader self, uint32 dwStreamIndex, in Guid guidAttribute, out PROPVARIANT pvarAttribute) GetPresentationAttribute;
@@ -16307,7 +16332,7 @@ namespace Win32.Media
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HResult MFCreateD3D12SynchronizationObject(ref ID3D12Device pDevice, in Guid riid, void** ppvSyncObject);
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HResult MFStartup(uint32 Version, uint32 dwFlags);
+		public static extern HResult MFStartup(uint32 Version = MF_VERSION, StartupFlags dwFlags = .FULL);
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HResult MFShutdown();
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
@@ -16537,7 +16562,7 @@ namespace Win32.Media
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HResult MFCreate2DMediaBuffer(uint32 dwWidth, uint32 dwHeight, uint32 dwFourCC, IntBool fBottomUp, out IMFMediaBuffer* ppBuffer);
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
-		public static extern HResult MFCreateMediaBufferFromMediaType(ref IMFMediaType pMediaType, int64 llDuration, uint32 dwMinLength, uint32 dwMinAlignment, out IMFMediaBuffer* ppBuffer);
+		public static extern HResult MFCreateMediaBufferFromMediaType(IMFMediaType* pMediaType, int64 llDuration, uint32 dwMinLength, uint32 dwMinAlignment, out IMFMediaBuffer* ppBuffer);
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]
 		public static extern HResult MFCreateCollection(out IMFCollection* ppIMFCollection);
 		[Import("mfplat.dll"), CLink, CallingConvention(.Stdcall)]

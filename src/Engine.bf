@@ -335,6 +335,7 @@ namespace BfEngine
 
 			UI.Init();
 
+			Audio.[Friend]Init();
 
 			Running = true;
 
@@ -389,6 +390,7 @@ namespace BfEngine
 			Time.Update();
 			Events.Update();
 			Input.Update();
+			Audio.[Friend]Update();
 			Camera.[Friend]Update();
 
 			sw.Stop();
